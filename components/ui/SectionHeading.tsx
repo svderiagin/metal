@@ -1,1 +1,10 @@
-export function SectionHeading({ eyebrow, title, description }: { eyebrow?: string; title: string; description?: string }) { return <div className="mb-6 max-w-3xl">{eyebrow&&<p className="mb-2 text-xs font-bold uppercase tracking-[.18em] text-red-700">{eyebrow}</p>}<h2 className="text-2xl font-black tracking-tight text-slate-950 md:text-3xl">{title}</h2>{description&&<p className="mt-2 text-slate-600">{description}</p>}</div>; }
+export function SectionHeading({eyebrow, title, description}: {
+  eyebrow?: string;
+  title: string;
+  description?: string
+}) {
+  return <div className="mb-6 max-w-3xl">{eyebrow &&
+    <p className="mb-2 text-xs font-bold uppercase tracking-[.18em] text-red-700">{eyebrow}</p>}<h2
+    className="text-2xl font-black tracking-tight text-slate-950 md:text-3xl">{title}</h2>{description &&
+    <p className="mt-2 text-slate-600">{description}</p>}</div>;
+}

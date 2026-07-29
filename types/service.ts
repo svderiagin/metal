@@ -1,1 +1,6 @@
-export interface Service { id: string; name: string; description: string; marker: string; }
+export interface Service {
+  id: string;
+  name: string;
+  description: string;
+  marker: string;
+}

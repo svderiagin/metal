@@ -1,2 +1,14 @@
-import Link from "next/link";import { services } from "@/data/services";import { SectionHeading } from "@/components/ui/SectionHeading";
-export function ServicesSection(){return <section><SectionHeading eyebrow="Обработка и логистика" title="Услуги для комплектного заказа"/><div className="grid gap-4 md:grid-cols-2">{services.map(s=><article key={s.id} className="flex gap-5 rounded-lg border border-slate-200 bg-white p-5"><span className="text-2xl font-black text-red-700">{s.marker}</span><div><h3 className="font-bold">{s.name}</h3><p className="mt-1 text-sm text-slate-600">{s.description}</p></div></article>)}</div><Link href="/services" className="mt-4 inline-block font-bold text-red-700">Все услуги →</Link></section>}
+import Link from "next/link";
+import {services} from "@/data/services";
+import {SectionHeading} from "@/components/ui/SectionHeading";
+
+export function ServicesSection() {
+  return <section><SectionHeading eyebrow="Обработка и логистика" title="Услуги для комплектного заказа"/>
+    <div className="grid gap-4 md:grid-cols-2">{services.map(s => <article key={s.id}
+                                                                           className="flex gap-5 rounded-lg border border-slate-200 bg-white p-5">
+      <span className="text-2xl font-black text-red-700">{s.marker}</span>
+      <div><h3 className="font-bold">{s.name}</h3><p className="mt-1 text-sm text-slate-600">{s.description}</p>
+      </div>
+    </article>)}</div>
+    <Link href="/services" className="mt-4 inline-block font-bold text-red-700">Все услуги →</Link></section>
+}

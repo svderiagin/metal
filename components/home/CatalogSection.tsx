@@ -1,2 +1,9 @@
-import { getAllCategories } from "@/lib/catalog"; import { CategoryGrid } from "@/components/catalog/CategoryGrid"; import { SectionHeading } from "@/components/ui/SectionHeading";
-export function CatalogSection(){return <section><SectionHeading eyebrow="Основные группы" title="Каталог металлопроката" description="Быстрый переход к нужной товарной группе и доступным позициям."/><CategoryGrid categories={getAllCategories()}/></section>}
+import {getAllCategories} from "@/lib/catalog";
+import {CategoryGrid} from "@/components/catalog/CategoryGrid";
+import {SectionHeading} from "@/components/ui/SectionHeading";
+
+export function CatalogSection() {
+  return <section><SectionHeading eyebrow="Основные группы" title="Каталог металлопроката"
+                                  description="Быстрый переход к нужной товарной группе и доступным позициям."/><CategoryGrid
+    categories={getAllCategories()}/></section>
+}

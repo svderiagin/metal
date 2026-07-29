@@ -1,7 +1,10 @@
 import Link from "next/link";
-import type { Subcategory } from "@/types/category";
+import type {Subcategory} from "@/types/category";
 
-export function SubcategoryNavigation({ categorySlug, subcategories }: { categorySlug: string; subcategories: Subcategory[] }) {
+export function SubcategoryNavigation({categorySlug, subcategories}: {
+  categorySlug: string;
+  subcategories: Subcategory[]
+}) {
   return (
     <section className="mt-7" aria-labelledby="subcategory-heading">
       <h2 id="subcategory-heading" className="text-xl font-black">Подкатегории</h2>

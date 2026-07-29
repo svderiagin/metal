@@ -1,4 +1,4 @@
-import type { Subcategory } from "@/types/category";
+import type {Subcategory} from "@/types/category";
 
 export const subcategories: Subcategory[] = [
   {

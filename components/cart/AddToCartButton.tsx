@@ -1,3 +1,26 @@
 "use client";
-import { useState } from "react"; import { useCart } from "@/hooks/useCart"; import { Button } from "@/components/ui/Button"; import { QuantitySelector } from "./QuantitySelector";
-export function AddToCartButton({productId,compact=false,disabled=false}:{productId:string;compact?:boolean;disabled?:boolean}){const [q,setQ]=useState(1);const [added,setAdded]=useState(false);const {addItem}=useCart();const add=()=>{addItem(productId,q);setAdded(true);window.setTimeout(()=>setAdded(false),1500)};if(compact)return <Button type="button" onClick={add} disabled={disabled} className="min-h-9 px-3 py-1.5 text-xs">{disabled?"Под заказ":added?"Добавлено":"В корзину"}</Button>;return <div className="flex flex-wrap gap-3"><QuantitySelector value={q} onChange={setQ}/><Button type="button" onClick={add} disabled={disabled}>{disabled?"Уточнить наличие":added?"Добавлено в корзину":"Добавить в корзину"}</Button></div>}
+import {useState} from "react";
+import {useCart} from "@/hooks/useCart";
+import {Button} from "@/components/ui/Button";
+import {QuantitySelector} from "./QuantitySelector";
+
+export function AddToCartButton({productId, compact = false, disabled = false}: {
+  productId: string;
+  compact?: boolean;
+  disabled?: boolean
+}) {
+  const [q, setQ] = useState(1);
+  const [added, setAdded] = useState(false);
+  const {addItem} = useCart();
+  const add = () => {
+    addItem(productId, q);
+    setAdded(true);
+    window.setTimeout(() => setAdded(false), 1500)
+  };
+  if (compact) return <Button type="button" onClick={add} disabled={disabled}
+                              className="min-h-9 px-3 py-1.5 text-xs">{disabled ? "Под заказ" : added ? "Добавлено" : "В корзину"}</Button>;
+  return <div className="flex flex-wrap gap-3"><QuantitySelector value={q} onChange={setQ}/><Button type="button"
+                                                                                                    onClick={add}
+                                                                                                    disabled={disabled}>{disabled ? "Уточнить наличие" : added ? "Добавлено в корзину" : "Добавить в корзину"}</Button>
+  </div>
+}

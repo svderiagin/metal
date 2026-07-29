@@ -1,6 +1,6 @@
-import { categories } from "@/data/categories";
-import { subcategories } from "@/data/subcategories";
-import { products } from "@/data/products";
+import {categories} from "@/data/categories";
+import {subcategories} from "@/data/subcategories";
+import {products} from "@/data/products";
 
 export const getAllCategories = () => categories;
 export const getCategoryBySlug = (slug: string) => categories.find((item) => item.slug === slug);

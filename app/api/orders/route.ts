@@ -1,9 +1,9 @@
-import { notificationService } from "@/lib/server/notifications";
-import { createTrustedOrder, orderRepository } from "@/lib/server/orders";
-import { parseCreateOrderInput } from "@/lib/server/validation";
+import {notificationService} from "@/lib/server/notifications";
+import {createTrustedOrder, orderRepository} from "@/lib/server/orders";
+import {parseCreateOrderInput} from "@/lib/server/validation";
 
 const error = (message: string, status: number) =>
-  Response.json({ ok: false, error: message }, { status });
+  Response.json({ok: false, error: message}, {status});
 
 export async function POST(request: Request) {
   let body: unknown;
@@ -24,6 +24,6 @@ export async function POST(request: Request) {
   }
   return Response.json({
     ok: true,
-    order: { reference: order.reference, totalAmount: order.totalAmount, paymentMethod: order.paymentMethod },
-  }, { status: 201 });
+    order: {reference: order.reference, totalAmount: order.totalAmount, paymentMethod: order.paymentMethod},
+  }, {status: 201});
 }

@@ -1,2 +1,30 @@
-import Link from "next/link"; import type { Product } from "@/types/product"; import { getCategoryById, getSubcategoryById } from "@/lib/catalog"; import { formatCurrency } from "@/lib/currency"; import { AddToCartButton } from "@/components/cart/AddToCartButton";
-export function ProductCard({product}:{product:Product}){const category=getCategoryById(product.categoryId);const subcategory=getSubcategoryById(product.subcategoryId);return <article className="flex flex-col overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm"><div className="flex h-36 items-center justify-center border-b border-slate-200 bg-[linear-gradient(135deg,#f8fafc_25%,#e2e8f0_25%,#e2e8f0_50%,#f8fafc_50%,#f8fafc_75%,#e2e8f0_75%)] bg-[length:20px_20px]"><span className="rounded bg-slate-900/90 px-4 py-2 text-center text-sm font-bold text-white">{subcategory?.name}</span></div><div className="flex flex-1 flex-col p-4"><p className="text-xs font-semibold uppercase tracking-wide text-slate-500">{product.sku}</p><h3 className="mt-1 font-bold text-slate-950"><Link href={`/catalog/${category?.slug}/${product.slug}`} className="hover:text-red-700">{product.name}</Link></h3><p className="mt-2 flex-1 text-sm leading-5 text-slate-600">{product.shortDescription}</p><div className="mt-3 flex flex-wrap gap-1">{product.attributes.slice(0,2).map(attribute=><span key={attribute.key} className="rounded bg-slate-100 px-2 py-1 text-xs text-slate-600">{attribute.value}</span>)}</div><div className="mt-4 flex items-end justify-between gap-3"><div><strong className="block text-lg">{formatCurrency(product.price)}</strong><span className="text-xs text-slate-500">{product.priceUnit}</span></div><AddToCartButton productId={product.id} compact disabled={!product.inStock}/></div></div></article>}
+import Link from "next/link";
+import type {Product} from "@/types/product";
+import {getCategoryById, getSubcategoryById} from "@/lib/catalog";
+import {formatCurrency} from "@/lib/currency";
+import {AddToCartButton} from "@/components/cart/AddToCartButton";
+
+export function ProductCard({product}: { product: Product }) {
+  const category = getCategoryById(product.categoryId);
+  const subcategory = getSubcategoryById(product.subcategoryId);
+  return <article className="flex flex-col overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
+    <div
+      className="flex h-36 items-center justify-center border-b border-slate-200 bg-[linear-gradient(135deg,#f8fafc_25%,#e2e8f0_25%,#e2e8f0_50%,#f8fafc_50%,#f8fafc_75%,#e2e8f0_75%)] bg-[length:20px_20px]">
+            <span
+              className="rounded bg-slate-900/90 px-4 py-2 text-center text-sm font-bold text-white">{subcategory?.name}</span>
+    </div>
+    <div className="flex flex-1 flex-col p-4"><p
+      className="text-xs font-semibold uppercase tracking-wide text-slate-500">{product.sku}</p><h3
+      className="mt-1 font-bold text-slate-950"><Link href={`/catalog/${category?.slug}/${product.slug}`}
+                                                      className="hover:text-red-700">{product.name}</Link></h3><p
+      className="mt-2 flex-1 text-sm leading-5 text-slate-600">{product.shortDescription}</p>
+      <div className="mt-3 flex flex-wrap gap-1">{product.attributes.slice(0, 2).map(attribute => <span
+        key={attribute.key}
+        className="rounded bg-slate-100 px-2 py-1 text-xs text-slate-600">{attribute.value}</span>)}</div>
+      <div className="mt-4 flex items-end justify-between gap-3">
+        <div><strong className="block text-lg">{formatCurrency(product.price)}</strong><span
+          className="text-xs text-slate-500">{product.priceUnit}</span></div>
+        <AddToCartButton productId={product.id} compact disabled={!product.inStock}/></div>
+    </div>
+  </article>
+}

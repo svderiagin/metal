@@ -64,9 +64,24 @@ export interface CreatePaymentResponse {
   ok: true;
   redirectUrl: string;
 }
+
 export interface CheckoutFormData {
-  customerType: CustomerType; fullName: string; email: string; phone: string;
-  companyName: string; taxNumber: string; legalAddress: string; deliveryAddress: string;
-  comment: string; paymentMethod: PaymentMethod; consentAccepted: boolean;
+  customerType: CustomerType;
+  fullName: string;
+  email: string;
+  phone: string;
+  companyName: string;
+  taxNumber: string;
+  legalAddress: string;
+  deliveryAddress: string;
+  comment: string;
+  paymentMethod: PaymentMethod;
+  consentAccepted: boolean;
 }
-export interface OrderConfirmation { orderNumber: string; paymentMethod: PaymentMethod; email: string; paymentPending: boolean; }
+
+export interface OrderConfirmation {
+  orderNumber: string;
+  paymentMethod: PaymentMethod;
+  email: string;
+  paymentPending: boolean;
+}

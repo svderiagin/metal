@@ -1,2 +1,12 @@
-import type { Product } from "@/types/product";
-export function ProductGallery({product}:{product:Product}){return <section aria-label="Изображения товара"><div className="flex aspect-[4/3] items-center justify-center rounded-lg border border-slate-200 bg-[linear-gradient(135deg,#f8fafc_25%,#e2e8f0_25%,#e2e8f0_50%,#f8fafc_50%,#f8fafc_75%,#e2e8f0_75%)] bg-[length:28px_28px]"><div className="max-w-[70%] rounded-md border-2 border-slate-700 bg-slate-900 p-6 text-center text-xl font-black text-white shadow-xl">{product.name}<span className="mt-2 block text-xs font-normal text-slate-300">Визуальный макет товара</span></div></div></section>}
+import type {Product} from "@/types/product";
+
+export function ProductGallery({product}: { product: Product }) {
+  return <section aria-label="Изображения товара">
+    <div
+      className="flex aspect-[4/3] items-center justify-center rounded-lg border border-slate-200 bg-[linear-gradient(135deg,#f8fafc_25%,#e2e8f0_25%,#e2e8f0_50%,#f8fafc_50%,#f8fafc_75%,#e2e8f0_75%)] bg-[length:28px_28px]">
+      <div
+        className="max-w-[70%] rounded-md border-2 border-slate-700 bg-slate-900 p-6 text-center text-xl font-black text-white shadow-xl">{product.name}<span
+        className="mt-2 block text-xs font-normal text-slate-300">Визуальный макет товара</span></div>
+    </div>
+  </section>
+}

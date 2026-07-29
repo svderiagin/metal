@@ -1,2 +1,10 @@
-import Link from "next/link"; import { mainNavigation } from "@/lib/constants";
-export function DesktopNavigation(){return <nav aria-label="Основная навигация" className="hidden border-t border-slate-700 bg-slate-900 md:block"><div className="mx-auto flex max-w-7xl items-center px-6 lg:px-8">{mainNavigation.map(item=><Link key={item.href} href={item.href} className="border-r border-slate-700 px-3 py-3 text-sm font-semibold text-slate-200 first:border-l hover:bg-red-700 hover:text-white lg:px-4">{item.label}</Link>)}</div></nav>}
+import Link from "next/link";
+import {mainNavigation} from "@/lib/constants";
+
+export function DesktopNavigation() {
+  return <nav aria-label="Основная навигация" className="hidden border-t border-slate-700 bg-slate-900 md:block">
+    <div className="mx-auto flex max-w-7xl items-center px-6 lg:px-8">{mainNavigation.map(item => <Link
+      key={item.href} href={item.href}
+      className="border-r border-slate-700 px-3 py-3 text-sm font-semibold text-slate-200 first:border-l hover:bg-red-700 hover:text-white lg:px-4">{item.label}</Link>)}</div>
+  </nav>
+}

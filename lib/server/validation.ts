@@ -1,5 +1,5 @@
-import type { ContactRequest, QuoteRequest } from "@/types/forms";
-import type { CreateOrderInput, CustomerType, PaymentMethod } from "@/types/order";
+import type {ContactRequest, QuoteRequest} from "@/types/forms";
+import type {CreateOrderInput, CustomerType, PaymentMethod} from "@/types/order";
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const phonePattern = /^\+?[\d\s()-]{10,24}$/;
@@ -31,7 +31,7 @@ export function parseCreateOrderInput(value: unknown): CreateOrderInput | null {
   const items = value.items.flatMap((item) => {
     if (!isRecord(item) || typeof item.productId !== "string" || !productIdPattern.test(item.productId)) return [];
     if (typeof item.quantity !== "number" || !Number.isInteger(item.quantity) || item.quantity < 1 || item.quantity > 999) return [];
-    return [{ productId: item.productId, quantity: item.quantity }];
+    return [{productId: item.productId, quantity: item.quantity}];
   });
   if (items.length !== value.items.length || !isCustomerType(value.customer.type) || !isPaymentMethod(value.paymentMethod)) return null;
   const fullName = text(value.customer.fullName, 120);
@@ -46,8 +46,16 @@ export function parseCreateOrderInput(value: unknown): CreateOrderInput | null {
   if (value.customer.type === "COMPANY" && (!companyName || !taxNumber || !legalAddress)) return null;
   return {
     items,
-    customer: { type: value.customer.type, fullName, email: email.toLowerCase(), phone, companyName, taxNumber, legalAddress },
-    delivery: { address, comment },
+    customer: {
+      type: value.customer.type,
+      fullName,
+      email: email.toLowerCase(),
+      phone,
+      companyName,
+      taxNumber,
+      legalAddress
+    },
+    delivery: {address, comment},
     paymentMethod: value.paymentMethod,
   };
 }
@@ -61,7 +69,7 @@ export function parseContactRequest(value: unknown): ContactRequest | null {
   const website = optionalText(value.website, 200);
   if (!name || !email || !emailPattern.test(email) || !message || phone === null || website === null) return null;
   if (phone && !phonePattern.test(phone)) return null;
-  return { name, email: email.toLowerCase(), phone, message, website };
+  return {name, email: email.toLowerCase(), phone, message, website};
 }
 
 export function parseQuoteRequest(value: unknown): QuoteRequest | null {
@@ -73,5 +81,5 @@ export function parseQuoteRequest(value: unknown): QuoteRequest | null {
   const message = text(value.message, 3000);
   const website = optionalText(value.website, 200);
   if (!name || !phone || !phonePattern.test(phone) || !email || !emailPattern.test(email) || !message || value.consent !== true || company === null || website === null) return null;
-  return { name, phone, email: email.toLowerCase(), company, message, consent: true, website };
+  return {name, phone, email: email.toLowerCase(), company, message, consent: true, website};
 }

@@ -1,4 +1,4 @@
-import type { Order, PaymentStatus } from "@/types/order";
+import type {Order, PaymentStatus} from "@/types/order";
 
 export interface VerifiedPaymentEvent {
   eventId: string;
@@ -8,6 +8,7 @@ export interface VerifiedPaymentEvent {
 
 export interface PaymentProvider {
   createPayment(order: Order): Promise<{ paymentId: string; redirectUrl: string }>;
+
   verifyWebhook(request: Request): Promise<VerifiedPaymentEvent>;
 }
 
@@ -16,6 +17,7 @@ class UnconfiguredPaymentProvider implements PaymentProvider {
     void order;
     throw new Error("PAYMENT_PROVIDER_NOT_CONFIGURED");
   }
+
   async verifyWebhook(request: Request): Promise<VerifiedPaymentEvent> {
     void request;
     throw new Error("PAYMENT_PROVIDER_NOT_CONFIGURED");

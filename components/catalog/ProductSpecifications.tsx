@@ -1,2 +1,14 @@
-import type { ProductSpecification } from "@/types/product";
-export function ProductSpecifications({specifications}:{specifications:ProductSpecification[]}){return <div className="overflow-x-auto rounded-lg border border-slate-200"><table className="w-full min-w-md border-collapse text-left text-sm"><caption className="sr-only">Технические характеристики</caption><tbody>{specifications.map((s,i)=><tr key={s.name} className={i%2?"bg-slate-50":"bg-white"}><th scope="row" className="w-2/5 border-r border-slate-200 px-4 py-3 font-semibold text-slate-700">{s.name}</th><td className="px-4 py-3 text-slate-950">{s.value}</td></tr>)}</tbody></table></div>}
+import type {ProductSpecification} from "@/types/product";
+
+export function ProductSpecifications({specifications}: { specifications: ProductSpecification[] }) {
+  return <div className="overflow-x-auto rounded-lg border border-slate-200">
+    <table className="w-full min-w-md border-collapse text-left text-sm">
+      <caption className="sr-only">Технические характеристики</caption>
+      <tbody>{specifications.map((s, i) => <tr key={s.name} className={i % 2 ? "bg-slate-50" : "bg-white"}>
+        <th scope="row"
+            className="w-2/5 border-r border-slate-200 px-4 py-3 font-semibold text-slate-700">{s.name}</th>
+        <td className="px-4 py-3 text-slate-950">{s.value}</td>
+      </tr>)}</tbody>
+    </table>
+  </div>
+}

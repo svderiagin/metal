@@ -1,2 +1,7 @@
-import { ButtonLink } from "./Button";
-export function EmptyState({ title, description }: {title:string;description:string}) { return <div className="rounded-lg border border-dashed border-slate-300 bg-white p-8 text-center"><h2 className="text-xl font-bold">{title}</h2><p className="mx-auto mt-2 max-w-lg text-slate-600">{description}</p><ButtonLink href="/catalog" className="mt-5">Перейти в каталог</ButtonLink></div>; }
+import {ButtonLink} from "./Button";
+
+export function EmptyState({title, description}: { title: string; description: string }) {
+  return <div className="rounded-lg border border-dashed border-slate-300 bg-white p-8 text-center"><h2
+    className="text-xl font-bold">{title}</h2><p className="mx-auto mt-2 max-w-lg text-slate-600">{description}</p>
+    <ButtonLink href="/catalog" className="mt-5">Перейти в каталог</ButtonLink></div>;
+}

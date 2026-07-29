@@ -1,8 +1,8 @@
-import { orderRepository } from "@/lib/server/orders";
-import { paymentProvider } from "@/lib/server/payments";
+import {orderRepository} from "@/lib/server/orders";
+import {paymentProvider} from "@/lib/server/payments";
 
 const error = (message: string, status: number) =>
-  Response.json({ ok: false, error: message }, { status });
+  Response.json({ok: false, error: message}, {status});
 
 export async function POST(request: Request) {
   let body: unknown;
@@ -20,7 +20,7 @@ export async function POST(request: Request) {
     const verifiedAmount = order.items.reduce((sum, item) => sum + item.unitPrice * item.quantity, 0);
     if (verifiedAmount !== order.totalAmount) return error("Не удалось проверить сумму заказа.", 409);
     const session = await paymentProvider.createPayment(order);
-    return Response.json({ ok: true, redirectUrl: session.redirectUrl });
+    return Response.json({ok: true, redirectUrl: session.redirectUrl});
   } catch {
     return error("Онлайн-оплата пока не настроена.", 503);
   }

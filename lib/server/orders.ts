@@ -1,28 +1,52 @@
-import { randomBytes } from "node:crypto";
-import { getProductById } from "@/lib/catalog";
-import type { CreateOrderInput, Order, OrderItem, PaymentStatus } from "@/types/order";
+import {randomBytes} from "node:crypto";
+import {getProductById} from "@/lib/catalog";
+import type {CreateOrderInput, Order, OrderItem, PaymentStatus} from "@/types/order";
 
 export interface OrderRepository {
   save(order: Order): Promise<void>;
+
   findByReference(reference: string): Promise<Order | null>;
+
   updatePaymentStatus(reference: string, status: PaymentStatus): Promise<void>;
 }
 
 class DevelopmentOrderRepository implements OrderRepository {
   private readonly orders = new Map<string, Order>();
-  async save(order: Order) { this.orders.set(order.reference, order); }
-  async findByReference(reference: string) { return this.orders.get(reference) ?? null; }
+
+  async save(order: Order) {
+    this.orders.set(order.reference, order);
+  }
+
+  async findByReference(reference: string) {
+    return this.orders.get(reference) ?? null;
+  }
+
   async updatePaymentStatus(reference: string, status: PaymentStatus) {
     const order = this.orders.get(reference);
-    if (order) this.orders.set(reference, { ...order, paymentStatus: status });
+    if (order) this.orders.set(reference, {...order, paymentStatus: status});
   }
 }
 
 class UnconfiguredOrderRepository implements OrderRepository {
-  private unavailable(): never { throw new Error("ORDER_STORAGE_NOT_CONFIGURED"); }
-  async save(order: Order) { void order; this.unavailable(); }
-  async findByReference(reference: string): Promise<Order | null> { void reference; return this.unavailable(); }
-  async updatePaymentStatus(reference: string, status: PaymentStatus) { void reference; void status; this.unavailable(); }
+  async save(order: Order) {
+    void order;
+    this.unavailable();
+  }
+
+  async findByReference(reference: string): Promise<Order | null> {
+    void reference;
+    return this.unavailable();
+  }
+
+  async updatePaymentStatus(reference: string, status: PaymentStatus) {
+    void reference;
+    void status;
+    this.unavailable();
+  }
+
+  private unavailable(): never {
+    throw new Error("ORDER_STORAGE_NOT_CONFIGURED");
+  }
 }
 
 const developmentRepository = new DevelopmentOrderRepository();

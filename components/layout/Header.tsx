@@ -1,2 +1,21 @@
-import Link from "next/link"; import { PageContainer } from "./PageContainer"; import { DesktopNavigation } from "./DesktopNavigation"; import { MobileNavigation } from "./MobileNavigation"; import { CartButton } from "@/components/cart/CartButton";
-export function Header(){return <header className="bg-slate-950 text-white"><div className="border-b border-slate-800 text-xs text-slate-300"><PageContainer className="flex flex-wrap items-center gap-x-5 gap-y-1 py-2"><strong className="text-white">Отдел продаж</strong><a href="tel:+78000000000">+7 (800) 000-00-00</a><a href="tel:+74950000000">+7 (495) 000-00-00</a><a href="mailto:sales@metal-store.ru">sales@metal-store.ru</a><span className="ml-auto hidden sm:block">Пн–Пт: 08:00–18:00</span></PageContainer></div><PageContainer className="flex items-center gap-4 py-4"><Link href="/" className="shrink-0"><span className="block text-xl font-black tracking-wider sm:text-2xl">METAL <span className="text-red-600">STORE</span></span><span className="hidden text-xs text-slate-400 sm:block">Металлопрокат и стальные трубы</span></Link><div className="ml-auto flex items-center gap-2"><Link href="/#request" className="hidden min-h-11 items-center rounded-md bg-red-700 px-4 text-sm font-bold hover:bg-red-800 sm:inline-flex">Отправить заявку</Link><CartButton/></div></PageContainer><DesktopNavigation/><MobileNavigation/></header>}
+import Link from "next/link";
+import {PageContainer} from "./PageContainer";
+import {DesktopNavigation} from "./DesktopNavigation";
+import {MobileNavigation} from "./MobileNavigation";
+import {CartButton} from "@/components/cart/CartButton";
+
+export function Header() {
+  return <header className="bg-slate-950 text-white">
+    <div className="border-b border-slate-800 text-xs text-slate-300"><PageContainer
+      className="flex flex-wrap items-center gap-x-5 gap-y-1 py-2"><strong className="text-white">Отдел
+      продаж</strong><a href="tel:+78000000000">+7 (800) 000-00-00</a><a href="tel:+74950000000">+7 (495)
+      000-00-00</a><a href="mailto:sales@metal-store.ru">sales@metal-store.ru</a><span
+      className="ml-auto hidden sm:block">Пн–Пт: 08:00–18:00</span></PageContainer></div>
+    <PageContainer className="flex items-center gap-4 py-4"><Link href="/" className="shrink-0"><span
+      className="block text-xl font-black tracking-wider sm:text-2xl">METAL <span
+      className="text-red-600">STORE</span></span><span className="hidden text-xs text-slate-400 sm:block">Металлопрокат и стальные трубы</span></Link>
+      <div className="ml-auto flex items-center gap-2"><Link href="/#request"
+                                                             className="hidden min-h-11 items-center rounded-md bg-red-700 px-4 text-sm font-bold hover:bg-red-800 sm:inline-flex">Отправить
+        заявку</Link><CartButton/></div>
+    </PageContainer><DesktopNavigation/><MobileNavigation/></header>
+}
