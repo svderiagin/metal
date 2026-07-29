@@ -9,11 +9,18 @@ const items = [{
 }, {t: "Доставка по России", d: "Подбираем транспорт с учётом массы и длины проката."}];
 
 export function AdvantagesSection() {
-  return <section><SectionHeading eyebrow="Почему мы" title="Поставка без лишних операций"/>
-    <div
-      className="grid gap-px overflow-hidden rounded-lg border border-slate-200 bg-slate-200 sm:grid-cols-2 lg:grid-cols-4">{items.map((x, i) =>
-      <article key={x.t} className="bg-white p-5"><span
-        className="text-sm font-black text-red-700">0{i + 1}</span><h3 className="mt-5 font-bold">{x.t}</h3><p
-        className="mt-2 text-sm leading-6 text-slate-600">{x.d}</p></article>)}</div>
-  </section>
+  return (
+    <section>
+      <SectionHeading eyebrow="Почему мы" title="Поставка без лишних операций"/>
+      <div className="grid gap-px overflow-hidden rounded-xl border border-slate-200 bg-slate-200 shadow-sm sm:grid-cols-2 lg:grid-cols-4">
+        {items.map((item, index) => (
+          <article key={item.t} className="bg-white p-5 sm:p-6">
+            <span className="text-sm font-black text-red-700">0{index + 1}</span>
+            <h3 className="mt-5 font-bold">{item.t}</h3>
+            <p className="mt-2 text-sm leading-6 text-slate-600">{item.d}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
 }

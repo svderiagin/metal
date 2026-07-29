@@ -17,7 +17,7 @@ const items = [{
   d: "Производство несложных сварных металлоконструкций по согласованным чертежам."
 }, {t: "Доставка", d: "Подбор транспорта, крепление груза и доставка с документами на объект."}];
 export default function ServicesPage() {
-  return <PageContainer className="py-8"><Breadcrumbs items={[{label: "Услуги"}]}/><h1
+  return <PageContainer className="py-8 sm:py-10 lg:py-12"><Breadcrumbs items={[{label: "Услуги"}]}/><h1
     className="text-3xl font-black">Услуги металлообработки</h1><p
     className="mt-3 max-w-3xl text-slate-600">Комплектуйте заказ готовыми заготовками, чтобы сократить операции на
     своей площадке.</p>

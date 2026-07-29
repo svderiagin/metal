@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description: "Фиктивные контакты отдела продаж и склада Metal Store."
 };
 export default function ContactsPage() {
-  return <PageContainer className="py-8"><Breadcrumbs items={[{label: "Контакты"}]}/><h1
+  return <PageContainer className="py-8 sm:py-10 lg:py-12"><Breadcrumbs items={[{label: "Контакты"}]}/><h1
     className="text-3xl font-black">Контакты</h1>
     <div className="mt-7 grid gap-7 lg:grid-cols-2">
       <div className="space-y-4">

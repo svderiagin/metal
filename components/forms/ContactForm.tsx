@@ -38,7 +38,7 @@ export function ContactForm() {
     }
   }
 
-  return <form onSubmit={submit} className="space-y-4 rounded-lg border border-slate-200 bg-white p-5"><h2
+  return <form onSubmit={submit} className="space-y-5 rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6"><h2
     className="text-xl font-bold">Написать нам</h2><label className="block text-sm font-semibold">Имя<Input required
                                                                                                             name="name"
                                                                                                             className="mt-1"/></label><label

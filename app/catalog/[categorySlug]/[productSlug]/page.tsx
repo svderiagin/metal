@@ -34,7 +34,7 @@ export default async function ProductPage({params}: Props) {
   const product = getProductBySlug(productSlug);
   if (!category || !product || product.categoryId !== category.id) notFound();
   const related = getRelatedProducts(product.id, category.id);
-  return <PageContainer className="py-8"><Breadcrumbs items={[{label: "Каталог", href: "/catalog"}, {
+  return <PageContainer className="py-8 sm:py-10 lg:py-12"><Breadcrumbs items={[{label: "Каталог", href: "/catalog"}, {
     label: category.name,
     href: `/catalog/${category.slug}`
   }, {label: product.name}]}/>

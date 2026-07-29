@@ -37,7 +37,7 @@ export default async function CategoryPage({params}: Props) {
   const subcategories = getSubcategoriesByCategoryId(category.id);
 
   return (
-    <PageContainer className="py-8">
+    <PageContainer className="py-8 sm:py-10 lg:py-12">
       <Breadcrumbs items={[{label: "Каталог", href: "/catalog"}, {label: category.name}]}/>
       <div className="grid gap-7 lg:grid-cols-[280px_1fr]">
         <CatalogSidebar activeSlug={category.slug}/>

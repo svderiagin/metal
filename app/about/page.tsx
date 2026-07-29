@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description: "Принципы работы демонстрационной компании Metal Store."
 };
 export default function AboutPage() {
-  return <PageContainer className="py-8"><Breadcrumbs items={[{label: "О компании"}]}/>
+  return <PageContainer className="py-8 sm:py-10 lg:py-12"><Breadcrumbs items={[{label: "О компании"}]}/>
     <div className="grid gap-8 lg:grid-cols-[1.2fr_.8fr]">
       <article className="rounded-lg border border-slate-200 bg-white p-6 md:p-8"><h1
         className="text-3xl font-black">О компании METAL STORE</h1><p

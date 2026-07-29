@@ -20,7 +20,7 @@ const sections = [{
   d: "Сообщите заранее о наличии крана, погрузчика, ограничении высоты и возможности подъезда длинномерного транспорта."
 }];
 export default function DeliveryPage() {
-  return <PageContainer className="py-8"><Breadcrumbs items={[{label: "Доставка"}]}/><h1
+  return <PageContainer className="py-8 sm:py-10 lg:py-12"><Breadcrumbs items={[{label: "Доставка"}]}/><h1
     className="text-3xl font-black">Доставка и самовывоз</h1><p className="mt-3 max-w-3xl text-slate-600">Организуем
     перевозку с учётом габаритов металлопроката и условий на площадке.</p>
     <div className="mt-8 grid gap-4 md:grid-cols-2">{sections.map((s, i) => <section key={s.t}

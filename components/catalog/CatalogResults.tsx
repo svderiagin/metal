@@ -57,8 +57,8 @@ export function CatalogResults({products, subcategories}: { products: Product[];
 
   return (
     <section className="mt-8" aria-labelledby="products-heading">
-      <div className="rounded-lg border border-slate-200 bg-white p-4">
-        <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+      <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           <label className="text-sm font-semibold">Поиск<Input value={query} onChange={(event) => {
             setQuery(event.target.value);
             setLimit(12);
@@ -82,7 +82,7 @@ export function CatalogResults({products, subcategories}: { products: Product[];
             <option value="">Все стандарты</option>
             {standards.map((item) => <option key={item} value={item}>{item}</option>)}</Select></label>
         </div>
-        <div className="mt-3 flex flex-wrap items-end gap-4">
+        <div className="mt-5 flex flex-wrap items-end gap-4">
           <label className="min-w-52 text-sm font-semibold">Сортировка<Select value={sort}
                                                                               onChange={(event) => setSort(event.target.value as SortMode)}
                                                                               className="mt-1">
