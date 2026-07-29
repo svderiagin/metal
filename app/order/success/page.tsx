@@ -1,0 +1,2 @@
+import type { Metadata } from "next";import { PageContainer } from "@/components/layout/PageContainer";import { OrderSuccessContent } from "@/components/checkout/OrderSuccessContent";
+export const metadata:Metadata={title:"Заказ создан",description:"Подтверждение создания демонстрационного заказа.",robots:{index:false,follow:false}};export default function SuccessPage(){return <PageContainer className="py-12"><OrderSuccessContent/></PageContainer>}
