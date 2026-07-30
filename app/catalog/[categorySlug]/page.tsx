@@ -4,7 +4,6 @@ import {notFound} from "next/navigation";
 import {Breadcrumbs} from "@/components/catalog/Breadcrumbs";
 import {CatalogResults} from "@/components/catalog/CatalogResults";
 import {CatalogSidebar} from "@/components/catalog/CatalogSidebar";
-import {SubcategoryNavigation} from "@/components/catalog/SubcategoryNavigation";
 import {PageContainer} from "@/components/layout/PageContainer";
 import {ButtonLink} from "@/components/ui/Button";
 import {
@@ -40,11 +39,12 @@ export default async function CategoryPage({params}: Props) {
     <PageContainer className="py-8 sm:py-10 lg:py-12">
       <Breadcrumbs items={[{label: "Каталог", href: "/catalog"}, {label: category.name}]}/>
       <div className="grid gap-7 lg:grid-cols-[280px_1fr]">
-        <CatalogSidebar activeSlug={category.slug}/>
+        <Suspense fallback={<div className="h-96 animate-pulse rounded-xl bg-slate-200"/>}>
+          <CatalogSidebar activeSlug={category.slug}/>
+        </Suspense>
         <div>
           <h1 className="text-3xl font-black">{category.name}</h1>
           <p className="mt-3 max-w-3xl leading-7 text-slate-600">{category.description}</p>
-          <SubcategoryNavigation categorySlug={category.slug} subcategories={subcategories}/>
           <Suspense
             fallback={<div className="mt-8 h-80 animate-pulse rounded-lg bg-slate-200"/>}><CatalogResults
             products={products} subcategories={subcategories}/></Suspense>

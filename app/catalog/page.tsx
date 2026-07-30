@@ -1,10 +1,12 @@
 import type {Metadata} from "next";
+import {Suspense} from "react";
 import {PageContainer} from "@/components/layout/PageContainer";
 import {Breadcrumbs} from "@/components/catalog/Breadcrumbs";
 import {CatalogSidebar} from "@/components/catalog/CatalogSidebar";
 import {CategoryGrid} from "@/components/catalog/CategoryGrid";
 import {ProductGrid} from "@/components/catalog/ProductGrid";
 import {SectionHeading} from "@/components/ui/SectionHeading";
+import {CatalogSearch} from "@/components/catalog/CatalogSearch";
 import {getAllCategories, getAllProducts} from "@/lib/catalog";
 
 export const metadata: Metadata = {
@@ -16,7 +18,13 @@ export default function CatalogPage() {
     className="text-3xl font-black">Каталог металлопроката</h1><p className="mt-3 max-w-3xl text-slate-600">Выберите
     раздел или просмотрите доступные складские позиции. Итоговые условия поставки зависят от объёма и обработки.</p>
     <div className="mt-7 grid gap-7 lg:grid-cols-[250px_1fr]"><CatalogSidebar/>
-      <div><CategoryGrid categories={getAllCategories()}/>
+      <div>
+        <Suspense fallback={<div className="h-40 animate-pulse rounded-xl bg-slate-200"/>}>
+          <CatalogSearch products={getAllProducts()}/>
+        </Suspense>
+        <div className="mt-8">
+          <CategoryGrid categories={getAllCategories()}/>
+        </div>
         <section className="mt-10"><SectionHeading title="Товары со склада"
                                                    description="Популярные позиции из разных разделов каталога."/><ProductGrid
           products={getAllProducts().slice(0, 6)}/></section>

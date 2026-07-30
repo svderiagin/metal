@@ -1,6 +1,6 @@
-import Link from "next/link";
 import {getAllCategories, getProductCountByCategoryId, getSubcategoriesByCategoryId} from "@/lib/catalog";
 import {CatalogCategoryLink} from "./CatalogCategoryLink";
+import {CatalogSubcategoryLink} from "./CatalogSubcategoryLink";
 
 export function CatalogSidebar({activeSlug}: { activeSlug?: string }) {
   return (
@@ -23,10 +23,10 @@ export function CatalogSidebar({activeSlug}: { activeSlug?: string }) {
                 {active &&
                   <ul
                     className="border-t border-slate-100 bg-slate-50 py-1">{getSubcategoriesByCategoryId(category.id).map((subcategory) =>
-                    <li key={subcategory.id}><Link
+                    <li key={subcategory.id}><CatalogSubcategoryLink
                       href={`/catalog/${category.slug}?subcategory=${subcategory.slug}`}
-                      scroll={false}
-                      className="block px-5 py-2 text-sm leading-5 text-slate-600 hover:text-red-700">{subcategory.name}</Link>
+                      slug={subcategory.slug}
+                      label={subcategory.name}/>
                     </li>)}</ul>}
               </li>
             );

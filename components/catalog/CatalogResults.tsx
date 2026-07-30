@@ -1,10 +1,9 @@
 "use client";
 
 import {useMemo, useState} from "react";
-import {useSearchParams} from "next/navigation";
+import {usePathname, useRouter, useSearchParams} from "next/navigation";
 import {ProductGrid} from "@/components/catalog/ProductGrid";
 import {Button} from "@/components/ui/Button";
-import {Input} from "@/components/ui/Input";
 import {Select} from "@/components/ui/Select";
 import type {Product} from "@/types/product";
 import type {Subcategory} from "@/types/category";
@@ -12,11 +11,13 @@ import type {Subcategory} from "@/types/category";
 type SortMode = "popular" | "price-asc" | "price-desc" | "name";
 
 export function CatalogResults({products, subcategories}: { products: Product[]; subcategories: Subcategory[] }) {
+  const pathname = usePathname();
+  const router = useRouter();
   const searchParams = useSearchParams();
-  const [query, setQuery] = useState("");
-  const [selectedSubcategory, setSelectedSubcategory] = useState<string | null>(null);
   const requestedSubcategory = searchParams.get("subcategory") ?? "";
-  const subcategorySlug = selectedSubcategory ?? (subcategories.some((item) => item.slug === requestedSubcategory) ? requestedSubcategory : "");
+  const subcategorySlug = subcategories.some((item) => item.slug === requestedSubcategory)
+    ? requestedSubcategory
+    : "";
   const [material, setMaterial] = useState("");
   const [standard, setStandard] = useState("");
   const [stockOnly, setStockOnly] = useState(false);
@@ -27,12 +28,9 @@ export function CatalogResults({products, subcategories}: { products: Product[];
   const standards = useMemo(() => uniqueAttributeValues(products, "standard"), [products]);
   const subcategoryBySlug = useMemo(() => new Map(subcategories.map((item) => [item.slug, item.id])), [subcategories]);
   const result = useMemo(() => {
-    const normalizedQuery = query.trim().toLocaleLowerCase("ru");
     const subcategoryId = subcategoryBySlug.get(subcategorySlug);
     const filtered = products.filter((product) => {
-      const searchable = `${product.name} ${product.sku} ${product.attributes.map((item) => item.value).join(" ")}`.toLocaleLowerCase("ru");
-      return (!normalizedQuery || searchable.includes(normalizedQuery))
-        && (!subcategoryId || product.subcategoryId === subcategoryId)
+      return (!subcategoryId || product.subcategoryId === subcategoryId)
         && (!material || hasAttribute(product, "material", material))
         && (!standard || hasAttribute(product, "standard", standard))
         && (!stockOnly || product.inStock);
@@ -43,34 +41,21 @@ export function CatalogResults({products, subcategories}: { products: Product[];
       if (sort === "name") return a.name.localeCompare(b.name, "ru");
       return Number(b.inStock) - Number(a.inStock);
     });
-  }, [material, products, query, sort, standard, stockOnly, subcategoryBySlug, subcategorySlug]);
+  }, [material, products, sort, standard, stockOnly, subcategoryBySlug, subcategorySlug]);
 
   const reset = () => {
-    setQuery("");
-    setSelectedSubcategory("");
     setMaterial("");
     setStandard("");
     setStockOnly(false);
     setSort("popular");
     setLimit(12);
+    router.replace(pathname, {scroll: false});
   };
 
   return (
     <section className="mt-8" aria-labelledby="products-heading">
       <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-          <label className="text-sm font-semibold">Поиск<Input value={query} onChange={(event) => {
-            setQuery(event.target.value);
-            setLimit(12);
-          }} placeholder="Название, артикул, размер" className="mt-1"/></label>
-          <label className="text-sm font-semibold">Подкатегория<Select value={subcategorySlug}
-                                                                       onChange={(event) => {
-                                                                         setSelectedSubcategory(event.target.value);
-                                                                         setLimit(12);
-                                                                       }} className="mt-1">
-            <option value="">Все подкатегории</option>
-            {subcategories.map((item) => <option key={item.id} value={item.slug}>{item.name}</option>)}
-          </Select></label>
+        <div className="grid gap-4 md:grid-cols-2">
           <label className="text-sm font-semibold">Материал<Select value={material}
                                                                    onChange={(event) => setMaterial(event.target.value)}
                                                                    className="mt-1">
