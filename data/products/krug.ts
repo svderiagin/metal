@@ -1,6 +1,6 @@
-import type {Product} from "@/types/product";
+import type {ProductVariantSource} from "@/types/product";
 
-export const krugProducts: Product[] = [
+export const krugProducts: ProductVariantSource[] = [
   {
     "id": "prd-025",
     "categoryId": "cat-kru",

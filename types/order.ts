@@ -6,6 +6,11 @@ export type PaymentStatus = "PENDING" | "PAID" | "FAILED";
 export interface OrderItemInput {
   productId: string;
   quantity: number;
+  measurement?: {
+    inputMode: "meter" | "ton";
+    meters: number;
+    weightTons: number;
+  };
 }
 
 export interface CreateOrderInput {

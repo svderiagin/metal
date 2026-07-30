@@ -1,6 +1,6 @@
-import type {Product} from "@/types/product";
+import type {ProductVariantSource} from "@/types/product";
 
-export const balkaProducts: Product[] = [
+export const balkaProducts: ProductVariantSource[] = [
   {
     "id": "prd-009",
     "categoryId": "cat-bal",

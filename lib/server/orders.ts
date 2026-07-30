@@ -1,5 +1,6 @@
 import {randomBytes} from "node:crypto";
-import {getProductById} from "@/lib/catalog";
+import {getProductVariantById} from "@/lib/catalog";
+import {calculateLineTotal, metersToTons, tonsToMeters} from "@/lib/orderMeasurement";
 import type {CreateOrderInput, Order, OrderItem, PaymentStatus} from "@/types/order";
 
 export interface OrderRepository {
@@ -56,8 +57,31 @@ export const orderRepository: OrderRepository =
 export function createTrustedOrder(input: CreateOrderInput): Order | null {
   const items: OrderItem[] = [];
   for (const item of input.items) {
-    const product = getProductById(item.productId);
+    const product = getProductVariantById(item.productId);
     if (!product) return null;
+    if (item.measurement) {
+      if (product.pricePerTon === undefined || product.weightPerMeterKg === undefined) return null;
+      const meters = item.measurement.inputMode === "meter"
+        ? item.measurement.meters
+        : tonsToMeters(item.measurement.weightTons, product.weightPerMeterKg);
+      const weightTons = item.measurement.inputMode === "ton"
+        ? item.measurement.weightTons
+        : metersToTons(item.measurement.meters, product.weightPerMeterKg);
+      if (meters === null || weightTons === null) return null;
+      const subtotal = calculateLineTotal(weightTons, product.pricePerTon);
+      if (subtotal === null) return null;
+      items.push({
+        productId: product.id,
+        quantity: item.measurement.inputMode === "meter" ? meters : weightTons,
+        measurement: {inputMode: item.measurement.inputMode, meters, weightTons},
+        name: product.name,
+        sku: product.sku,
+        unitPrice: product.pricePerTon,
+        priceUnit: product.priceUnit,
+        subtotal,
+      });
+      continue;
+    }
     items.push({
       productId: product.id,
       quantity: item.quantity,

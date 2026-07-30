@@ -1,4 +1,9 @@
-import {getAllCategories, getProductCountByCategoryId, getSubcategoriesByCategoryId} from "@/lib/catalog";
+import {
+  getAllCategories,
+  getProductTypeCountByCategoryId,
+  getProductTypesBySubcategoryId,
+  getSubcategoriesByCategoryId,
+} from "@/lib/catalog";
 import {CatalogCategoryLink} from "./CatalogCategoryLink";
 import {CatalogSubcategoryLink} from "./CatalogSubcategoryLink";
 
@@ -17,17 +22,25 @@ export function CatalogSidebar({activeSlug}: { activeSlug?: string }) {
                 <CatalogCategoryLink
                   href={`/catalog/${category.slug}`}
                   label={category.name}
-                  productCount={getProductCountByCategoryId(category.id)}
+                  productCount={getProductTypeCountByCategoryId(category.id)}
                   active={active}
                 />
                 {active &&
-                  <ul
-                    className="border-t border-slate-100 bg-slate-50 py-1">{getSubcategoriesByCategoryId(category.id).map((subcategory) =>
-                    <li key={subcategory.id}><CatalogSubcategoryLink
-                      href={`/catalog/${category.slug}?subcategory=${subcategory.slug}`}
-                      slug={subcategory.slug}
-                      label={subcategory.name}/>
-                    </li>)}</ul>}
+                  <ul className="border-t border-slate-100 bg-slate-50 py-1">
+                    {getSubcategoriesByCategoryId(category.id).flatMap((subcategory) => {
+                      const productType = getProductTypesBySubcategoryId(subcategory.id)[0];
+                      if (!productType) return [];
+
+                      return [
+                        <li key={subcategory.id}>
+                          <CatalogSubcategoryLink
+                            href={`/catalog/${category.slug}/${subcategory.slug}/${productType.slug}`}
+                            label={subcategory.name}
+                          />
+                        </li>,
+                      ];
+                    })}
+                  </ul>}
               </li>
             );
           })}

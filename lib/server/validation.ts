@@ -30,8 +30,15 @@ export function parseCreateOrderInput(value: unknown): CreateOrderInput | null {
   if (value.items.length < 1 || value.items.length > 100) return null;
   const items = value.items.flatMap((item) => {
     if (!isRecord(item) || typeof item.productId !== "string" || !productIdPattern.test(item.productId)) return [];
-    if (typeof item.quantity !== "number" || !Number.isInteger(item.quantity) || item.quantity < 1 || item.quantity > 999) return [];
-    return [{productId: item.productId, quantity: item.quantity}];
+    const measurement = parseMeasurement(item.measurement);
+    if (item.measurement !== undefined && !measurement) return [];
+    if (typeof item.quantity !== "number" || !Number.isFinite(item.quantity) || item.quantity <= 0) return [];
+    if (!measurement && (!Number.isInteger(item.quantity) || item.quantity > 999)) return [];
+    return [{
+      productId: item.productId,
+      quantity: measurement ? item.quantity : Math.floor(item.quantity),
+      ...(measurement ? {measurement} : {}),
+    }];
   });
   if (items.length !== value.items.length || !isCustomerType(value.customer.type) || !isPaymentMethod(value.paymentMethod)) return null;
   const fullName = text(value.customer.fullName, 120);
@@ -58,6 +65,21 @@ export function parseCreateOrderInput(value: unknown): CreateOrderInput | null {
     delivery: {address, comment},
     paymentMethod: value.paymentMethod,
   };
+}
+
+function parseMeasurement(value: unknown): CreateOrderInput["items"][number]["measurement"] | null {
+  if (!isRecord(value)) return null;
+  if (value.inputMode !== "meter" && value.inputMode !== "ton") return null;
+  if (!positiveFinite(value.meters) || !positiveFinite(value.weightTons)) return null;
+  return {
+    inputMode: value.inputMode,
+    meters: value.meters,
+    weightTons: value.weightTons,
+  };
+}
+
+function positiveFinite(value: unknown): value is number {
+  return typeof value === "number" && Number.isFinite(value) && value > 0;
 }
 
 export function parseContactRequest(value: unknown): ContactRequest | null {

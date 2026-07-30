@@ -1,22 +1,34 @@
 "use client";
 
 import Link from "next/link";
-import {useSearchParams} from "next/navigation";
+import {usePathname} from "next/navigation";
+import {useEffect, useRef} from "react";
 
 export function CatalogSubcategoryLink({
   href,
-  slug,
   label,
 }: {
   href: string;
-  slug: string;
   label: string;
 }) {
-  const searchParams = useSearchParams();
-  const active = searchParams.get("subcategory") === slug;
+  const pathname = usePathname();
+  const active = pathname === href;
+  const linkRef = useRef<HTMLAnchorElement>(null);
+
+  useEffect(() => {
+    if (!active || !linkRef.current) return;
+
+    linkRef.current.focus({preventScroll: true});
+    linkRef.current.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+      inline: "nearest",
+    });
+  }, [active]);
 
   return (
     <Link
+      ref={linkRef}
       href={href}
       scroll={false}
       aria-current={active ? "page" : undefined}

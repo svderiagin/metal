@@ -1,6 +1,6 @@
-import type {Product} from "@/types/product";
+import type {ProductVariantSource} from "@/types/product";
 
-export const kvadratProducts: Product[] = [
+export const kvadratProducts: ProductVariantSource[] = [
   {
     "id": "prd-019",
     "categoryId": "cat-kva",

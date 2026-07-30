@@ -4,10 +4,10 @@ import {PageContainer} from "@/components/layout/PageContainer";
 import {Breadcrumbs} from "@/components/catalog/Breadcrumbs";
 import {CatalogSidebar} from "@/components/catalog/CatalogSidebar";
 import {CategoryGrid} from "@/components/catalog/CategoryGrid";
-import {ProductGrid} from "@/components/catalog/ProductGrid";
+import {ProductTypeGrid} from "@/components/catalog/ProductTypeGrid";
 import {SectionHeading} from "@/components/ui/SectionHeading";
 import {CatalogSearch} from "@/components/catalog/CatalogSearch";
-import {getAllCategories, getAllProducts} from "@/lib/catalog";
+import {getAllCategories, getAllProductTypes, getAllProductVariants} from "@/lib/catalog";
 
 export const metadata: Metadata = {
   title: "Каталог металлопроката",
@@ -20,14 +20,18 @@ export default function CatalogPage() {
     <div className="mt-7 grid gap-7 lg:grid-cols-[250px_1fr]"><CatalogSidebar/>
       <div>
         <Suspense fallback={<div className="h-40 animate-pulse rounded-xl bg-slate-200"/>}>
-          <CatalogSearch products={getAllProducts()}/>
+          <CatalogSearch
+            productTypes={getAllProductTypes()}
+            variants={getAllProductVariants()}
+          />
         </Suspense>
         <div className="mt-8">
           <CategoryGrid categories={getAllCategories()}/>
         </div>
         <section className="mt-10"><SectionHeading title="Товары со склада"
-                                                   description="Популярные позиции из разных разделов каталога."/><ProductGrid
-          products={getAllProducts().slice(0, 6)}/></section>
+                                                   description="Популярные типы продукции из разных разделов каталога."/><ProductTypeGrid
+          productTypes={getAllProductTypes().slice(0, 6)}
+          variants={getAllProductVariants()}/></section>
       </div>
     </div>
   </PageContainer>

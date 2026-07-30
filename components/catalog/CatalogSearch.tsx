@@ -4,10 +4,16 @@ import {type FormEvent, useMemo} from "react";
 import {useRouter, useSearchParams} from "next/navigation";
 import {Button} from "@/components/ui/Button";
 import {Input} from "@/components/ui/Input";
-import {ProductGrid} from "./ProductGrid";
-import type {Product} from "@/types/product";
+import {ProductTypeGrid} from "./ProductTypeGrid";
+import type {ProductType, ProductVariant} from "@/types/product";
 
-export function CatalogSearch({products}: { products: Product[] }) {
+export function CatalogSearch({
+  productTypes,
+  variants,
+}: {
+  productTypes: ProductType[];
+  variants: ProductVariant[];
+}) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const query = searchParams.get("q")?.trim() ?? "";
@@ -16,17 +22,19 @@ export function CatalogSearch({products}: { products: Product[] }) {
     if (!query) return [];
 
     const normalizedQuery = query.toLocaleLowerCase("ru");
-    return products.filter((product) => {
-      const searchable = [
-        product.name,
-        product.sku,
-        product.shortDescription,
-        ...product.attributes.map((attribute) => attribute.value),
-      ].join(" ").toLocaleLowerCase("ru");
+    const matchingTypeIds = new Set(
+      variants
+        .filter((variant) => searchableVariant(variant).includes(normalizedQuery))
+        .map((variant) => variant.productTypeId),
+    );
 
-      return searchable.includes(normalizedQuery);
-    });
-  }, [products, query]);
+    return productTypes.filter((productType) =>
+      `${productType.name} ${productType.shortDescription}`
+        .toLocaleLowerCase("ru")
+        .includes(normalizedQuery)
+      || matchingTypeIds.has(productType.id),
+    );
+  }, [productTypes, query, variants]);
 
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -45,11 +53,9 @@ export function CatalogSearch({products}: { products: Product[] }) {
   return (
     <section aria-labelledby="catalog-search-heading">
       <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
-        <h2 id="catalog-search-heading" className="text-xl font-bold">
-          Поиск по каталогу
-        </h2>
+        <h2 id="catalog-search-heading" className="text-xl font-bold">Поиск по каталогу</h2>
         <p className="mt-2 text-sm leading-6 text-slate-600">
-          Найдите товар по названию, артикулу, размеру, материалу или стандарту.
+          Найдите тип продукции по названию, артикулу варианта, размеру, материалу или стандарту.
         </p>
         <form onSubmit={submit} role="search" className="mt-5 flex flex-col gap-3 sm:flex-row">
           <label className="flex-1">
@@ -62,9 +68,7 @@ export function CatalogSearch({products}: { products: Product[] }) {
               placeholder="Например, арматура А500С или MS-0001"
             />
           </label>
-          <Button type="submit" className="sm:min-w-32">
-            Найти
-          </Button>
+          <Button type="submit" className="sm:min-w-32">Найти</Button>
           {query && (
             <Button
               type="button"
@@ -86,10 +90,10 @@ export function CatalogSearch({products}: { products: Product[] }) {
             </p>
           </div>
           {results.length ? (
-            <ProductGrid products={results}/>
+            <ProductTypeGrid productTypes={results} variants={variants}/>
           ) : (
             <div className="rounded-xl border border-dashed border-slate-300 bg-white px-5 py-10 text-center">
-              <strong className="text-lg">Товары не найдены</strong>
+              <strong className="text-lg">Типы продукции не найдены</strong>
               <p className="mt-2 text-sm text-slate-600">
                 Проверьте запрос или попробуйте указать меньше параметров.
               </p>
@@ -99,4 +103,13 @@ export function CatalogSearch({products}: { products: Product[] }) {
       )}
     </section>
   );
+}
+
+function searchableVariant(variant: ProductVariant) {
+  return [
+    variant.name,
+    variant.sku,
+    variant.shortDescription,
+    ...variant.attributes.map((attribute) => attribute.value),
+  ].join(" ").toLocaleLowerCase("ru");
 }

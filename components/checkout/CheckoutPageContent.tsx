@@ -27,9 +27,12 @@ export function CheckoutPageContent() {
           {lines.map((line) => (
             <li key={line.productId} className="flex justify-between gap-4">
               <span className="leading-5 text-slate-700">
-                {line.name} × {line.quantity}
+                {line.name}
+                {line.measurement
+                  ? ` — ${line.measurement.meters} м / ${line.measurement.weightTons} т`
+                  : ` × ${line.quantity}`}
               </span>
-              <strong className="shrink-0">{formatCurrency(line.price * line.quantity)}</strong>
+              <strong className="shrink-0">{formatCurrency(line.estimatedTotal)}</strong>
             </li>
           ))}
         </ul>

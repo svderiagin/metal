@@ -12,7 +12,7 @@ export function CartItemRow({line}: { line: CartLine }) {
       <div>
         <p className="text-xs font-medium text-slate-500">{line.sku}</p>
         <Link
-          href={`/catalog/${line.categorySlug}/${line.slug}`}
+          href={`/catalog/${line.categorySlug}/${line.subcategorySlug}/${line.productTypeSlug}#variant-${line.productId}`}
           className="mt-1 inline-block font-bold transition-colors hover:text-red-700"
         >
           {line.name}
@@ -21,9 +21,18 @@ export function CartItemRow({line}: { line: CartLine }) {
           {formatCurrency(line.price)} {line.priceUnit}
         </p>
       </div>
-      <QuantitySelector value={line.quantity} onChange={(value) => updateQuantity(line.productId, value)}/>
+      {line.measurement ? (
+        <p className="text-sm text-slate-600 md:text-right">
+          <strong className="block text-slate-900">
+            {line.measurement.meters} м / {line.measurement.weightTons} т
+          </strong>
+          Ввод: {line.measurement.inputMode === "meter" ? "метры" : "тонны"}
+        </p>
+      ) : (
+        <QuantitySelector value={line.quantity} onChange={(value) => updateQuantity(line.productId, value)}/>
+      )}
       <div className="flex items-center justify-between gap-5 md:block md:min-w-32 md:text-right">
-        <strong className="text-lg">{formatCurrency(line.price * line.quantity)}</strong>
+        <strong className="text-lg">{formatCurrency(line.estimatedTotal)}</strong>
         <button
           type="button"
           onClick={() => removeItem(line.productId)}

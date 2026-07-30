@@ -1,8 +1,13 @@
 "use client";
 import {createContext, type ReactNode, useCallback, useEffect, useMemo, useState} from "react";
 import {CART_STORAGE_KEY} from "@/lib/constants";
-import {getCategoryById, getProductById} from "@/lib/catalog";
-import type {CartItem, CartLine} from "@/types/cart";
+import {
+  getCategoryById,
+  getProductTypeById,
+  getProductVariantById,
+  getSubcategoryById,
+} from "@/lib/catalog";
+import type {CartItem, CartLine, CartMeasurement} from "@/types/cart";
 
 interface CartContextValue {
   items: CartItem[];
@@ -10,17 +15,23 @@ interface CartContextValue {
   hydrated: boolean;
   totalQuantity: number;
   totalAmount: number;
-  addItem: (id: string, q?: number) => void;
+  addItem: (id: string, q?: number, measurement?: CartMeasurement) => void;
   updateQuantity: (id: string, q: number) => void;
   removeItem: (id: string) => void;
   clearCart: () => void;
 }
 
 export const CartContext = createContext<CartContextValue | undefined>(undefined);
-const normalize = (items: CartItem[]) => items.filter(i => getProductById(i.productId) && Number.isInteger(i.quantity) && i.quantity > 0).map(i => ({
-  ...i,
-  quantity: Math.min(i.quantity, 999)
-}));
+const normalize = (items: CartItem[]) => items.flatMap((item) => {
+  if (!getProductVariantById(item.productId) || !Number.isFinite(item.quantity) || item.quantity <= 0) return [];
+  const measurement = normalizeMeasurement(item.measurement);
+  if (item.measurement && !measurement) return [];
+  return [{
+    productId: item.productId,
+    quantity: measurement ? item.quantity : Math.min(Math.floor(item.quantity), 999),
+    ...(measurement ? {measurement} : {}),
+  }];
+});
 
 export function CartProvider({children}: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
@@ -40,7 +51,19 @@ export function CartProvider({children}: { children: ReactNode }) {
   useEffect(() => {
     if (hydrated) localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(items))
   }, [items, hydrated]);
-  const addItem = useCallback((productId: string, quantity = 1) => setItems(prev => {
+  const addItem = useCallback((
+    productId: string,
+    quantity = 1,
+    measurement?: CartMeasurement,
+  ) => setItems(prev => {
+    const safeMeasurement = normalizeMeasurement(measurement);
+    if (measurement && !safeMeasurement) return prev;
+    if (safeMeasurement) {
+      const next = {productId, quantity, measurement: safeMeasurement};
+      return prev.some((item) => item.productId === productId)
+        ? prev.map((item) => item.productId === productId ? next : item)
+        : [...prev, next];
+    }
     const safe = Math.max(1, Math.min(999, Math.floor(quantity)));
     const found = prev.find(i => i.productId === productId);
     return found ? prev.map(i => i.productId === productId ? {
@@ -58,17 +81,22 @@ export function CartProvider({children}: { children: ReactNode }) {
   const removeItem = useCallback((productId: string) => setItems(prev => prev.filter(i => i.productId !== productId)), []);
   const clearCart = useCallback(() => setItems([]), []);
   const lines = useMemo(() => items.flatMap(item => {
-    const p = getProductById(item.productId);
+    const p = getProductVariantById(item.productId);
     if (!p) return [];
     const c = getCategoryById(p.categoryId);
+    const s = getSubcategoryById(p.subcategoryId);
+    const productType = getProductTypeById(p.productTypeId);
     return [{
       ...item,
       name: p.name,
       slug: p.slug,
       categorySlug: c?.slug ?? "catalog",
+      subcategorySlug: s?.slug ?? "catalog",
+      productTypeSlug: productType?.slug ?? "variants",
       sku: p.sku,
       price: p.price,
-      priceUnit: p.priceUnit
+      priceUnit: p.priceUnit,
+      estimatedTotal: item.measurement?.estimatedTotal ?? p.price * item.quantity,
     }]
   }), [items]);
   const value = useMemo(() => ({
@@ -76,11 +104,20 @@ export function CartProvider({children}: { children: ReactNode }) {
     lines,
     hydrated,
     totalQuantity: items.reduce((s, i) => s + i.quantity, 0),
-    totalAmount: lines.reduce((s, i) => s + i.price * i.quantity, 0),
+    totalAmount: lines.reduce((s, i) => s + i.estimatedTotal, 0),
     addItem,
     updateQuantity,
     removeItem,
     clearCart
   }), [items, lines, hydrated, addItem, updateQuantity, removeItem, clearCart]);
   return <CartContext value={value}>{children}</CartContext>
+}
+
+function normalizeMeasurement(value: CartMeasurement | undefined) {
+  if (!value) return undefined;
+  if (value.inputMode !== "meter" && value.inputMode !== "ton") return null;
+  const numbers = [value.meters, value.weightTons, value.pricePerTon, value.estimatedTotal];
+  if (numbers.some((number) => !Number.isFinite(number) || number < 0)) return null;
+  if (value.meters <= 0 || value.weightTons <= 0) return null;
+  return value;
 }

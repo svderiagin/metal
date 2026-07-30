@@ -5,9 +5,9 @@ import {AdvantagesSection} from "@/components/home/AdvantagesSection";
 import {ServicesSection} from "@/components/home/ServicesSection";
 import {RequestQuoteSection} from "@/components/home/RequestQuoteSection";
 import {PageContainer} from "@/components/layout/PageContainer";
-import {ProductGrid} from "@/components/catalog/ProductGrid";
+import {ProductTypeGrid} from "@/components/catalog/ProductTypeGrid";
 import {SectionHeading} from "@/components/ui/SectionHeading";
-import {getAllProducts} from "@/lib/catalog";
+import {getAllProductTypes, getAllProductVariants} from "@/lib/catalog";
 
 export const metadata: Metadata = {title: {absolute: "Metal Store — металлопрокат и стальные трубы"}};
 export default function Home() {
@@ -22,7 +22,10 @@ export default function Home() {
             title="Популярные позиции"
             description="Базовые позиции для строительства, производства и ремонта."
           />
-          <ProductGrid products={getAllProducts().slice(0, 6)}/>
+          <ProductTypeGrid
+            productTypes={getAllProductTypes().slice(0, 6)}
+            variants={getAllProductVariants()}
+          />
         </section>
         <AdvantagesSection/>
         <ServicesSection/>

@@ -1,6 +1,6 @@
-import type {Product} from "@/types/product";
+import type {ProductVariantSource} from "@/types/product";
 
-export const shvellerProducts: Product[] = [
+export const shvellerProducts: ProductVariantSource[] = [
   {
     "id": "prd-107",
     "categoryId": "cat-shv",

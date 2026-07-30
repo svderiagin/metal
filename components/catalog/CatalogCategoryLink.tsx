@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import {usePathname} from "next/navigation";
 import {useEffect, useRef} from "react";
 
 export function CatalogCategoryLink({
@@ -14,10 +15,11 @@ export function CatalogCategoryLink({
   productCount: number;
   active: boolean;
 }) {
+  const pathname = usePathname();
   const linkRef = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
-    if (!active || !linkRef.current) return;
+    if (!active || pathname !== href || !linkRef.current) return;
 
     linkRef.current.focus({preventScroll: true});
     linkRef.current.scrollIntoView({
@@ -25,7 +27,7 @@ export function CatalogCategoryLink({
       block: "center",
       inline: "nearest",
     });
-  }, [active]);
+  }, [active, href, pathname]);
 
   return (
     <Link

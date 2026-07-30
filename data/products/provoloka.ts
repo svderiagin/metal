@@ -1,6 +1,6 @@
-import type {Product} from "@/types/product";
+import type {ProductVariantSource} from "@/types/product";
 
-export const provolokaProducts: Product[] = [
+export const provolokaProducts: ProductVariantSource[] = [
   {
     "id": "prd-061",
     "categoryId": "cat-pro",

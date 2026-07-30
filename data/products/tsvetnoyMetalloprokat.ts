@@ -1,6 +1,6 @@
-import type {Product} from "@/types/product";
+import type {ProductVariantSource} from "@/types/product";
 
-export const tsvetnoyMetalloprokatProducts: Product[] = [
+export const tsvetnoyMetalloprokatProducts: ProductVariantSource[] = [
   {
     "id": "prd-119",
     "categoryId": "cat-cve",
