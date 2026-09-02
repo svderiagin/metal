@@ -9,7 +9,7 @@ import {ProductTypeGrid} from "@/components/catalog/ProductTypeGrid";
 import {SectionHeading} from "@/components/ui/SectionHeading";
 import {getAllProductTypes, getAllProductVariants} from "@/lib/catalog";
 
-export const metadata: Metadata = {title: {absolute: "Metal Store — металлопрокат и стальные трубы"}};
+export const metadata: Metadata = {title: {absolute: "ООО РВБ — металлопрокат и стальные трубы"}};
 export default function Home() {
   return (
     <>

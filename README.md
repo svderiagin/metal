@@ -1,4 +1,4 @@
-# Разбор архитектуры METAL STORE
+# Разбор архитектуры ООО «РВБ»
 
 Это первая часть подробного разбора проекта: разделы 1–10. Она охватывает общую архитектуру, каталоги, маршрутизацию, React, Server/Client Components, корзину, данные каталога, checkout и все HTTP endpoints.
 
@@ -991,11 +991,8 @@ product.categoryId !== category.id
 - `CART_STORAGE_KEY`;
 - `ORDER_STORAGE_KEY`;
 - `mainNavigation`;
-- `API_BASE_URL`.
 
 `CART_STORAGE_KEY` и `ORDER_STORAGE_KEY` используются реально. `mainNavigation` используется desktop- и mobile-навигацией.
-
-`API_BASE_URL` сейчас нигде не импортируется. Его fallback указывает на `http://localhost:8080/api`, но текущие формы используют относительные Next.js endpoints `/api/...`. Переменная `NEXT_PUBLIC_API_BASE_URL`, из которой читается значение, также отсутствует в `.env.example`. Это не активная часть текущего приложения, а неиспользуемый остаток или заготовка.
 
 ### `lib/currency.ts`
 

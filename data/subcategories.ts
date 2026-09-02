@@ -36,7 +36,7 @@ export const subcategories: Subcategory[] = [
   {
     "id": "cat-bal-sub-1",
     "categoryId": "cat-bal",
-    "name": "Балка нормальная",
+    "name": "Балка обычная",
     "slug": "balka-normalnaya",
     "shortDescription": "Балка нормальная: складские позиции популярных размеров и марок.",
     "description": "Балка нормальная для строительных, производственных и монтажных задач. Доступны подбор размера, резка и комплектная отгрузка."

@@ -49,9 +49,6 @@ export const productVariants: ProductVariant[] = productSources.map((product) =>
     : estimateDemoWeight(product),
 }));
 
-// Compatibility export for modules that are migrated incrementally.
-export const products = productVariants;
-
 function estimateDemoWeight(product: ProductVariantSource): ProductWeight {
   const size = Number.parseFloat(
     product.attributes.find((attribute) => attribute.key === "size")?.value.replace(",", ".") ?? "0",

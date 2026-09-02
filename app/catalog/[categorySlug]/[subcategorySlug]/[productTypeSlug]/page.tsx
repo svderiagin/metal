@@ -79,9 +79,6 @@ export default async function ProductTypePage({params}: Props) {
             </p>
             <h1 className="mt-2 text-3xl font-black sm:text-4xl">{productType.name}</h1>
             <p className="mt-4 max-w-4xl leading-7 text-slate-600">{productType.description}</p>
-            <p className="mt-5 text-sm font-semibold text-slate-700">
-              Доступно вариантов: {variants.length}
-            </p>
           </div>
 
           <ProductVariantCatalog variants={variants} categorySlug={category.slug}/>

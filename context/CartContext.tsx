@@ -22,16 +22,6 @@ interface CartContextValue {
 }
 
 export const CartContext = createContext<CartContextValue | undefined>(undefined);
-const normalize = (items: CartItem[]) => items.flatMap((item) => {
-  if (!getProductVariantById(item.productId) || !Number.isFinite(item.quantity) || item.quantity <= 0) return [];
-  const measurement = normalizeMeasurement(item.measurement);
-  if (item.measurement && !measurement) return [];
-  return [{
-    productId: item.productId,
-    quantity: measurement ? item.quantity : Math.min(Math.floor(item.quantity), 999),
-    ...(measurement ? {measurement} : {}),
-  }];
-});
 
 export function CartProvider({children}: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
@@ -40,7 +30,10 @@ export function CartProvider({children}: { children: ReactNode }) {
     const timer = window.setTimeout(() => {
       try {
         const raw = localStorage.getItem(CART_STORAGE_KEY);
-        if (raw) setItems(normalize(JSON.parse(raw) as CartItem[]));
+        if (raw) {
+          const storedItems = JSON.parse(raw) as CartItem[];
+          setItems(normalizeCartItems(storedItems));
+        }
       } catch {
       } finally {
         setHydrated(true)
@@ -80,37 +73,88 @@ export function CartProvider({children}: { children: ReactNode }) {
   }, []);
   const removeItem = useCallback((productId: string) => setItems(prev => prev.filter(i => i.productId !== productId)), []);
   const clearCart = useCallback(() => setItems([]), []);
-  const lines = useMemo(() => items.flatMap(item => {
-    const p = getProductVariantById(item.productId);
-    if (!p) return [];
-    const c = getCategoryById(p.categoryId);
-    const s = getSubcategoryById(p.subcategoryId);
-    const productType = getProductTypeById(p.productTypeId);
-    return [{
-      ...item,
-      name: p.name,
-      slug: p.slug,
-      categorySlug: c?.slug ?? "catalog",
-      subcategorySlug: s?.slug ?? "catalog",
-      productTypeSlug: productType?.slug ?? "variants",
-      sku: p.sku,
-      price: p.price,
-      priceUnit: p.priceUnit,
-      estimatedTotal: item.measurement?.estimatedTotal ?? p.price * item.quantity,
-    }]
-  }), [items]);
+  const lines = useMemo(() => createCartLines(items), [items]);
+  const totalQuantity = useMemo(() => calculateTotalQuantity(items), [items]);
+  const totalAmount = useMemo(() => calculateTotalAmount(lines), [lines]);
   const value = useMemo(() => ({
     items,
     lines,
     hydrated,
-    totalQuantity: items.reduce((s, i) => s + i.quantity, 0),
-    totalAmount: lines.reduce((s, i) => s + i.estimatedTotal, 0),
+    totalQuantity,
+    totalAmount,
     addItem,
     updateQuantity,
     removeItem,
     clearCart
-  }), [items, lines, hydrated, addItem, updateQuantity, removeItem, clearCart]);
+  }), [items, lines, hydrated, totalQuantity, totalAmount, addItem, updateQuantity, removeItem, clearCart]);
   return <CartContext value={value}>{children}</CartContext>
+}
+
+function normalizeCartItems(items: CartItem[]): CartItem[] {
+  const normalizedItems: CartItem[] = [];
+
+  for (const item of items) {
+    const productExists = getProductVariantById(item.productId) !== undefined;
+    const quantityIsValid = Number.isFinite(item.quantity) && item.quantity > 0;
+    if (!productExists || !quantityIsValid) continue;
+
+    const measurement = normalizeMeasurement(item.measurement);
+    if (item.measurement && !measurement) continue;
+
+    if (measurement) {
+      normalizedItems.push({productId: item.productId, quantity: item.quantity, measurement});
+    } else {
+      normalizedItems.push({
+        productId: item.productId,
+        quantity: Math.min(Math.floor(item.quantity), 999),
+      });
+    }
+  }
+
+  return normalizedItems;
+}
+
+function createCartLines(items: CartItem[]): CartLine[] {
+  const lines: CartLine[] = [];
+
+  for (const item of items) {
+    const product = getProductVariantById(item.productId);
+    if (!product) continue;
+
+    const category = getCategoryById(product.categoryId);
+    const subcategory = getSubcategoryById(product.subcategoryId);
+    const productType = getProductTypeById(product.productTypeId);
+    const estimatedTotal = item.measurement
+      ? item.measurement.estimatedTotal
+      : product.price * item.quantity;
+
+    lines.push({
+      ...item,
+      name: product.name,
+      slug: product.slug,
+      categorySlug: category?.slug ?? "catalog",
+      subcategorySlug: subcategory?.slug ?? "catalog",
+      productTypeSlug: productType?.slug ?? "variants",
+      sku: product.sku,
+      price: product.price,
+      priceUnit: product.priceUnit,
+      estimatedTotal,
+    });
+  }
+
+  return lines;
+}
+
+function calculateTotalQuantity(items: CartItem[]): number {
+  let total = 0;
+  for (const item of items) total += item.quantity;
+  return total;
+}
+
+function calculateTotalAmount(lines: CartLine[]): number {
+  let total = 0;
+  for (const line of lines) total += line.estimatedTotal;
+  return total;
 }
 
 function normalizeMeasurement(value: CartMeasurement | undefined) {

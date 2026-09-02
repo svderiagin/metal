@@ -6,8 +6,8 @@ import {Footer} from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
   title: {
-    default: "Metal Store — металлопрокат и стальные трубы",
-    template: "%s | Metal Store"
+    default: "ООО «РВБ» — металлопрокат и стальные трубы",
+    template: "%s | ООО «РВБ»"
   }, description: "Каталог металлопроката и стальных труб с оформлением заказа, оплатой картой или по счёту."
 };
 export default function RootLayout({children}: Readonly<{ children: React.ReactNode }>) {

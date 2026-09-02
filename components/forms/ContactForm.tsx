@@ -1,5 +1,6 @@
 "use client";
 import {type FormEvent, useState} from "react";
+import Link from "next/link";
 import {Button} from "@/components/ui/Button";
 import {Input} from "@/components/ui/Input";
 import {Textarea} from "@/components/ui/Textarea";
@@ -24,6 +25,7 @@ export function ContactForm() {
           email: data.get("email"),
           phone: data.get("phone"),
           message: data.get("message"),
+          consent: data.get("consent") === "on",
           website: data.get("website")
         })
       });
@@ -38,7 +40,7 @@ export function ContactForm() {
     }
   }
 
-  return <form onSubmit={submit} className="space-y-5 rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6"><h2
+  return <form onSubmit={submit} className="min-w-0 space-y-5"><h2
     className="text-xl font-bold">Написать нам</h2><label className="block text-sm font-semibold">Имя<Input required
                                                                                                             name="name"
                                                                                                             className="mt-1"/></label><label
@@ -49,7 +51,9 @@ export function ContactForm() {
     className="block text-sm font-semibold">Сообщение<Textarea required name="message" rows={5}
                                                                className="mt-1"/></label><label
     className="absolute -left-[10000px]" aria-hidden>Сайт<Input name="website" tabIndex={-1}
-                                                                autoComplete="off"/></label>{sent &&
+                                                                autoComplete="off"/></label><label
+    className="flex items-start gap-2 text-sm"><input name="consent" type="checkbox" required
+                                                       className="mt-1 size-4 shrink-0 accent-red-700"/><span>Я согласен на обработку персональных данных в соответствии с <Link href="/privacy" className="font-semibold text-red-700 underline underline-offset-2">Политикой обработки персональных данных</Link>.</span></label>{sent &&
     <p role="status" className="text-sm font-semibold text-green-700">Сообщение принято.</p>}{error &&
     <p role="alert" className="text-sm font-semibold text-red-700">{error}</p>}<Button type="submit"
                                                                                        disabled={submitting}>{submitting ? "Отправляем…" : "Отправить"}</Button>

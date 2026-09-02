@@ -1,6 +1,7 @@
 import Link from "next/link";
 import {PageContainer} from "./PageContainer";
 import {getAllCategories} from "@/lib/catalog";
+import {companyDetails} from "@/lib/companyDetails";
 
 export function Footer() {
   const footerLinkClass = "inline-flex min-h-8 items-center transition-colors hover:text-white";
@@ -10,11 +11,15 @@ export function Footer() {
       <PageContainer className="grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-12 lg:py-14">
         <div>
           <p className="text-xl font-black text-white">
-            METAL <span className="text-red-600">STORE</span>
+            OOO <span className="text-red-600">РВБ</span>
           </p>
           <p className="mt-4 text-sm leading-6">
             Металлопрокат для производства, строительства и частных проектов. Комплектация,
             обработка и доставка.
+          </p>
+          <p className="mt-4 text-sm leading-6 text-slate-400">
+            {companyDetails.shortName}<br/>
+            ИНН {companyDetails.inn}
           </p>
         </div>
         <div>
@@ -36,23 +41,25 @@ export function Footer() {
             <li><Link href="/services" className={footerLinkClass}>Услуги</Link></li>
             <li><Link href="/delivery" className={footerLinkClass}>Доставка</Link></li>
             <li><Link href="/contacts" className={footerLinkClass}>Контакты</Link></li>
+            <li><Link href="/contacts#details" className={footerLinkClass}>Реквизиты</Link></li>
           </ul>
         </div>
         <div>
-          <h2 className="font-bold text-white">Контакты</h2>
-          <address className="mt-4 space-y-3 text-sm leading-6 not-italic">
-            <p>+7 (800) 000-00-00</p>
-            <p>sales@metal-store.ru</p>
-            <p>Склад: Московская область, г. Северный, Промышленный проезд, 12</p>
-            <p>Пн–Пт: 08:00–18:00</p>
-          </address>
+          <h2 className="font-bold text-white">Юридическая информация</h2>
+          <div className="mt-4 space-y-2 text-sm leading-6 text-slate-300">
+            <p>ОГРН {companyDetails.ogrn}</p>
+            <p>КПП {companyDetails.kpp}</p>
+            <p className="break-words">
+              {companyDetails.legalAddressLines.map(line => <span key={line} className="block">{line}</span>)}
+            </p>
+          </div>
         </div>
       </PageContainer>
       <div className="border-t border-slate-800">
         <PageContainer className="flex flex-col gap-3 py-5 text-xs sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} METAL STORE. Учебная демонстрационная витрина.</p>
+          <p>© {new Date().getFullYear()} ООО РВБ — {companyDetails.shortName}</p>
           <div className="flex flex-wrap gap-x-5 gap-y-2">
-            <a className="transition-colors hover:text-white" href="#">Политика конфиденциальности</a>
+            <Link className="transition-colors hover:text-white" href="/privacy">Политика обработки персональных данных</Link>
             <a className="transition-colors hover:text-white" href="#">Условия продажи</a>
           </div>
         </PageContainer>

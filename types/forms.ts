@@ -3,6 +3,7 @@ export interface ContactRequest {
   email: string;
   phone?: string;
   message: string;
+  consent: boolean;
   website?: string;
 }
 
@@ -14,8 +15,4 @@ export interface QuoteRequest {
   message: string;
   consent: boolean;
   website?: string;
-}
-
-export interface FormSuccessResponse {
-  ok: true;
 }

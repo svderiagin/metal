@@ -28,19 +28,20 @@ const isPaymentMethod = (value: unknown): value is PaymentMethod =>
 export function parseCreateOrderInput(value: unknown): CreateOrderInput | null {
   if (!isRecord(value) || !Array.isArray(value.items) || !isRecord(value.customer) || !isRecord(value.delivery)) return null;
   if (value.items.length < 1 || value.items.length > 100) return null;
-  const items = value.items.flatMap((item) => {
-    if (!isRecord(item) || typeof item.productId !== "string" || !productIdPattern.test(item.productId)) return [];
+  const items: CreateOrderInput["items"] = [];
+  for (const item of value.items) {
+    if (!isRecord(item) || typeof item.productId !== "string" || !productIdPattern.test(item.productId)) return null;
     const measurement = parseMeasurement(item.measurement);
-    if (item.measurement !== undefined && !measurement) return [];
-    if (typeof item.quantity !== "number" || !Number.isFinite(item.quantity) || item.quantity <= 0) return [];
-    if (!measurement && (!Number.isInteger(item.quantity) || item.quantity > 999)) return [];
-    return [{
+    if (item.measurement !== undefined && !measurement) return null;
+    if (typeof item.quantity !== "number" || !Number.isFinite(item.quantity) || item.quantity <= 0) return null;
+    if (!measurement && (!Number.isInteger(item.quantity) || item.quantity > 999)) return null;
+    items.push({
       productId: item.productId,
       quantity: measurement ? item.quantity : Math.floor(item.quantity),
       ...(measurement ? {measurement} : {}),
-    }];
-  });
-  if (items.length !== value.items.length || !isCustomerType(value.customer.type) || !isPaymentMethod(value.paymentMethod)) return null;
+    });
+  }
+  if (!isCustomerType(value.customer.type) || !isPaymentMethod(value.paymentMethod)) return null;
   const fullName = text(value.customer.fullName, 120);
   const email = text(value.customer.email, 254);
   const phone = text(value.customer.phone, 30);
@@ -89,9 +90,9 @@ export function parseContactRequest(value: unknown): ContactRequest | null {
   const phone = optionalText(value.phone, 30);
   const message = text(value.message, 2000);
   const website = optionalText(value.website, 200);
-  if (!name || !email || !emailPattern.test(email) || !message || phone === null || website === null) return null;
+  if (!name || !email || !emailPattern.test(email) || !message || value.consent !== true || phone === null || website === null) return null;
   if (phone && !phonePattern.test(phone)) return null;
-  return {name, email: email.toLowerCase(), phone, message, website};
+  return {name, email: email.toLowerCase(), phone, message, consent: true, website};
 }
 
 export function parseQuoteRequest(value: unknown): QuoteRequest | null {

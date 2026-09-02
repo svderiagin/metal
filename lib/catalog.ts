@@ -9,7 +9,6 @@ export const getCategoryBySlug = (slug: string) =>
 export const getCategoryById = (id: string) =>
   categories.find((item) => item.id === id);
 
-export const getAllSubcategories = () => subcategories;
 export const getSubcategoryById = (id: string) =>
   subcategories.find((item) => item.id === id);
 export const getSubcategoryBySlug = (categoryId: string, slug: string) =>
@@ -38,7 +37,3 @@ export const getProductVariantsByTypeId = (productTypeId: string) =>
   productVariants.filter((item) => item.productTypeId === productTypeId);
 export const getProductVariantsByCategoryId = (categoryId: string) =>
   productVariants.filter((item) => item.categoryId === categoryId);
-export const getProductVariantsBySubcategoryId = (subcategoryId: string) =>
-  productVariants.filter((item) => item.subcategoryId === subcategoryId);
-export const getFeaturedProductVariants = () =>
-  productVariants.filter((item) => item.featured);

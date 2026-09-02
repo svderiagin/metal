@@ -17,7 +17,6 @@ export function ProductTypeCard({
   const standards = uniqueValues(variants, "standard");
   const prices = variants.map((variant) => variant.price);
   const minimumPrice = prices.length ? Math.min(...prices) : null;
-  const availableCount = variants.filter((variant) => variant.inStock).length;
 
   return (
     <article className="h-full">
@@ -40,10 +39,9 @@ export function ProductTypeCard({
           <dl className="mt-4 space-y-2 text-sm">
             <SummaryRow label="Материал" value={materials.join(", ") || "Уточняется"}/>
             <SummaryRow label="Стандарт" value={standards.join(", ") || "Уточняется"}/>
-            <SummaryRow label="Вариантов" value={String(variants.length)}/>
           </dl>
 
-          <div className="mt-5 flex items-end justify-between gap-4 border-t border-slate-100 pt-5">
+          <div className="mt-5 border-t border-slate-100 pt-5">
             <div>
               {minimumPrice !== null && (
                 <>
@@ -52,13 +50,6 @@ export function ProductTypeCard({
                 </>
               )}
             </div>
-            <span className={`rounded-full px-3 py-1 text-xs font-bold ${
-              availableCount
-                ? "bg-green-100 text-green-800"
-                : "bg-amber-100 text-amber-900"
-            }`}>
-              {availableCount ? `В наличии: ${availableCount}` : "Под заказ"}
-            </span>
           </div>
         </div>
       </Link>

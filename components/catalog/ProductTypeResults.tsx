@@ -32,21 +32,14 @@ export function ProductTypeResults({
   const variantsByType = useMemo(() => groupVariantsByType(variants), [variants]);
 
   const result = useMemo(() => {
-    const filtered = productTypes.filter((productType) => {
-      const typeVariants = variantsByType.get(productType.id) ?? [];
-      return (!material || hasAttribute(typeVariants, "material", material))
-        && (!standard || hasAttribute(typeVariants, "standard", standard))
-        && (!stockOnly || typeVariants.some((variant) => variant.inStock));
-    });
-
-    return [...filtered].sort((left, right) => {
-      const leftVariants = variantsByType.get(left.id) ?? [];
-      const rightVariants = variantsByType.get(right.id) ?? [];
-      if (sort === "price-asc") return minimumPrice(leftVariants) - minimumPrice(rightVariants);
-      if (sort === "price-desc") return minimumPrice(rightVariants) - minimumPrice(leftVariants);
-      if (sort === "name") return left.name.localeCompare(right.name, "ru");
-      return availableCount(rightVariants) - availableCount(leftVariants);
-    });
+    return filterAndSortProductTypes(
+      productTypes,
+      variantsByType,
+      material,
+      standard,
+      stockOnly,
+      sort,
+    );
   }, [
     material,
     productTypes,
@@ -161,7 +154,12 @@ function FilterSelect({
 function groupVariantsByType(variants: ProductVariant[]) {
   const groups = new Map<string, ProductVariant[]>();
   for (const variant of variants) {
-    groups.set(variant.productTypeId, [...(groups.get(variant.productTypeId) ?? []), variant]);
+    const group = groups.get(variant.productTypeId);
+    if (group) {
+      group.push(variant);
+    } else {
+      groups.set(variant.productTypeId, [variant]);
+    }
   }
   return groups;
 }
@@ -170,11 +168,13 @@ function uniqueAttributeValues(
   variants: ProductVariant[],
   key: ProductVariant["attributes"][number]["key"],
 ) {
-  return [...new Set(variants.flatMap((variant) =>
-    variant.attributes
-      .filter((attribute) => attribute.key === key)
-      .map((attribute) => attribute.value),
-  ))].sort((left, right) => left.localeCompare(right, "ru"));
+  const values = new Set<string>();
+  for (const variant of variants) {
+    for (const attribute of variant.attributes) {
+      if (attribute.key === key) values.add(attribute.value);
+    }
+  }
+  return [...values].sort((left, right) => left.localeCompare(right, "ru"));
 }
 
 function hasAttribute(
@@ -188,9 +188,47 @@ function hasAttribute(
 }
 
 function minimumPrice(variants: ProductVariant[]) {
-  return variants.length ? Math.min(...variants.map((variant) => variant.price)) : Number.MAX_SAFE_INTEGER;
+  let minimum = Number.MAX_SAFE_INTEGER;
+  for (const variant of variants) {
+    if (variant.price < minimum) minimum = variant.price;
+  }
+  return minimum;
 }
 
 function availableCount(variants: ProductVariant[]) {
-  return variants.filter((variant) => variant.inStock).length;
+  let count = 0;
+  for (const variant of variants) {
+    if (variant.inStock) count += 1;
+  }
+  return count;
+}
+
+function filterAndSortProductTypes(
+  productTypes: ProductType[],
+  variantsByType: Map<string, ProductVariant[]>,
+  material: string,
+  standard: string,
+  stockOnly: boolean,
+  sort: SortMode,
+): ProductType[] {
+  const result: ProductType[] = [];
+
+  for (const productType of productTypes) {
+    const variants = variantsByType.get(productType.id) ?? [];
+    if (material && !hasAttribute(variants, "material", material)) continue;
+    if (standard && !hasAttribute(variants, "standard", standard)) continue;
+    if (stockOnly && availableCount(variants) === 0) continue;
+    result.push(productType);
+  }
+
+  result.sort((left, right) => {
+    const leftVariants = variantsByType.get(left.id) ?? [];
+    const rightVariants = variantsByType.get(right.id) ?? [];
+    if (sort === "price-asc") return minimumPrice(leftVariants) - minimumPrice(rightVariants);
+    if (sort === "price-desc") return minimumPrice(rightVariants) - minimumPrice(leftVariants);
+    if (sort === "name") return left.name.localeCompare(right.name, "ru");
+    return availableCount(rightVariants) - availableCount(leftVariants);
+  });
+
+  return result;
 }

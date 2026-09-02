@@ -1,5 +1,6 @@
 "use client";
 import {type FormEvent, useState} from "react";
+import Link from "next/link";
 import {Button} from "@/components/ui/Button";
 import {Input} from "@/components/ui/Input";
 import {Textarea} from "@/components/ui/Textarea";
@@ -65,8 +66,7 @@ export function QuoteRequestForm() {
     className="absolute -left-[10000px]" aria-hidden>Сайт<Input name="website" tabIndex={-1}
                                                                 autoComplete="off"/></label><label
     className="flex items-start gap-2 text-sm sm:col-span-2"><input name="consent" type="checkbox" required
-                                                                    className="mt-1 size-4 accent-red-700"/>Я
-    согласен на обработку данных для ответа на заявку.</label>{error &&
+                                                                    className="mt-1 size-4 shrink-0 accent-red-700"/><span>Я согласен на обработку персональных данных для ответа на заявку в соответствии с <Link href="/privacy" className="font-semibold text-red-700 underline underline-offset-2">Политикой обработки персональных данных</Link>.</span></label>{error &&
     <p role="alert" className="text-sm font-semibold text-red-700 sm:col-span-2">{error}</p>}<Button type="submit"
                                                                                                      disabled={submitting}
                                                                                                      className="sm:w-fit">{submitting ? "Отправляем…" : "Отправить заявку"}</Button>

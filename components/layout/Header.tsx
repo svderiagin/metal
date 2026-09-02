@@ -3,29 +3,24 @@ import {PageContainer} from "./PageContainer";
 import {DesktopNavigation} from "./DesktopNavigation";
 import {MobileNavigation} from "./MobileNavigation";
 import {CartButton} from "@/components/cart/CartButton";
+import {companyDetails} from "@/lib/companyDetails";
 
 export function Header() {
   return (
     <header className="bg-slate-950 text-white">
       <div className="border-b border-slate-800 text-xs text-slate-300">
         <PageContainer className="flex flex-wrap items-center gap-x-5 gap-y-2 py-2.5">
-          <strong className="text-white">Отдел продаж</strong>
-          <a className="transition-colors hover:text-white" href="tel:+78000000000">
-            +7 (800) 000-00-00
-          </a>
-          <a className="transition-colors hover:text-white" href="tel:+74950000000">
-            +7 (495) 000-00-00
-          </a>
-          <a className="transition-colors hover:text-white" href="mailto:sales@metal-store.ru">
-            sales@metal-store.ru
-          </a>
-          <span className="ml-auto hidden sm:block">Пн–Пт: 08:00–18:00</span>
+          <strong className="text-white">{companyDetails.shortName}</strong>
+          <span>ИНН {companyDetails.inn}</span>
+          <Link className="ml-auto transition-colors hover:text-white" href="/contacts#details">
+            Реквизиты
+          </Link>
         </PageContainer>
       </div>
       <PageContainer className="flex items-center gap-4 py-4 sm:py-5">
         <Link href="/" className="shrink-0 rounded-sm">
           <span className="block text-xl font-black tracking-wider sm:text-2xl">
-            METAL <span className="text-red-600">STORE</span>
+            ООО <span className="text-red-600">РВБ</span>
           </span>
           <span className="hidden text-xs text-slate-400 sm:block">
             Металлопрокат и стальные трубы

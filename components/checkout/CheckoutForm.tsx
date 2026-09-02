@@ -1,10 +1,11 @@
 "use client";
 import {type FormEvent, useState} from "react";
+import Link from "next/link";
 import {useRouter} from "next/navigation";
 import {useCart} from "@/hooks/useCart";
 import {ORDER_STORAGE_KEY} from "@/lib/constants";
 import {isValidEmail, isValidPhone} from "@/lib/validation";
-import type {CheckoutFormData, CustomerType, OrderConfirmation, PaymentMethod} from "@/types/order";
+import type {CheckoutFormData, CreateOrderInput, CustomerType, OrderConfirmation, OrderItemInput, PaymentMethod} from "@/types/order";
 import {Input} from "@/components/ui/Input";
 import {Textarea} from "@/components/ui/Textarea";
 import {Button} from "@/components/ui/Button";
@@ -31,38 +32,21 @@ export function CheckoutForm() {
   const [submitting, setSubmitting] = useState(false);
   const {items, clearCart, totalAmount} = useCart();
   const router = useRouter();
-  const set = (key: keyof CheckoutFormData, value: string | boolean) => setForm(p => ({...p, [key]: value}));
+  function updateField(key: keyof CheckoutFormData, value: string | boolean) {
+    setForm((currentForm) => ({...currentForm, [key]: value}));
+  }
 
-  async function submit(e: FormEvent) {
-    e.preventDefault();
-    const companyOk = form.customerType === "INDIVIDUAL" || (form.companyName.trim() && form.taxNumber.trim() && form.legalAddress.trim());
-    if (!form.fullName.trim() || !isValidEmail(form.email) || !isValidPhone(form.phone) || !form.deliveryAddress.trim() || !form.consentAccepted || !companyOk) {
+  async function submit(event: FormEvent) {
+    event.preventDefault();
+    if (!isCheckoutFormValid(form)) {
       setError("Проверьте обязательные поля, контактные данные и согласие.");
       return
     }
     setSubmitting(true);
     setError("");
     try {
-      const response = await fetch("/api/orders", {
-        method: "POST",
-        headers: {"content-type": "application/json"},
-        body: JSON.stringify({
-          items,
-          customer: {
-            type: form.customerType,
-            fullName: form.fullName,
-            email: form.email,
-            phone: form.phone,
-            companyName: form.companyName || undefined,
-            taxNumber: form.taxNumber || undefined,
-            legalAddress: form.legalAddress || undefined
-          },
-          delivery: {address: form.deliveryAddress, comment: form.comment || undefined},
-          paymentMethod: form.paymentMethod
-        })
-      });
-      const result: unknown = await response.json();
-      if (!response.ok || !isOrderResult(result)) throw new Error(readError(result, "Не удалось создать заказ."));
+      const orderInput = createOrderInput(form, items);
+      const result = await createOrder(orderInput);
       const confirmation: OrderConfirmation = {
         orderNumber: result.order.reference,
         paymentMethod: form.paymentMethod,
@@ -75,13 +59,7 @@ export function CheckoutForm() {
         router.push("/order/success");
         return
       }
-      const paymentResponse = await fetch("/api/payments/create", {
-        method: "POST",
-        headers: {"content-type": "application/json"},
-        body: JSON.stringify({orderReference: result.order.reference})
-      });
-      const payment: unknown = await paymentResponse.json();
-      if (!paymentResponse.ok || !isPaymentResult(payment)) throw new Error(`${readError(payment, "Онлайн-оплата пока не настроена.")} Заказ ${result.order.reference} сохранён; корзина не очищена.`);
+      const payment = await createPayment(result.order.reference);
       clearCart();
       window.location.assign(payment.redirectUrl);
     } catch (caught) {
@@ -92,33 +70,95 @@ export function CheckoutForm() {
   }
 
   return <form onSubmit={submit} noValidate className="space-y-7"><CustomerTypeSelector value={form.customerType}
-                                                                                        onChange={(v: CustomerType) => set("customerType", v)}/>
+                                                                                        onChange={(v: CustomerType) => updateField("customerType", v)}/>
     <div className="grid gap-4 sm:grid-cols-2"><Field label="ФИО *"><Input value={form.fullName}
-                                                                           onChange={e => set("fullName", e.target.value)}
+                                                                           onChange={e => updateField("fullName", e.target.value)}
                                                                            autoComplete="name"/></Field><Field
-      label="Email *"><Input type="email" value={form.email} onChange={e => set("email", e.target.value)}
+      label="Email *"><Input type="email" value={form.email} onChange={e => updateField("email", e.target.value)}
                              autoComplete="email"/></Field><Field label="Телефон *"><Input value={form.phone}
-                                                                                           onChange={e => set("phone", e.target.value)}
+                                                                                           onChange={e => updateField("phone", e.target.value)}
                                                                                            autoComplete="tel"/></Field><Field
       label="Адрес доставки *"><Input value={form.deliveryAddress}
-                                      onChange={e => set("deliveryAddress", e.target.value)}
+                                      onChange={e => updateField("deliveryAddress", e.target.value)}
                                       autoComplete="street-address"/></Field>{form.customerType === "COMPANY" && <>
       <Field label="Название компании *"><Input value={form.companyName}
-                                                onChange={e => set("companyName", e.target.value)}/></Field><Field
-      label="ИНН *"><Input value={form.taxNumber} onChange={e => set("taxNumber", e.target.value)}
+                                                onChange={e => updateField("companyName", e.target.value)}/></Field><Field
+      label="ИНН *"><Input value={form.taxNumber} onChange={e => updateField("taxNumber", e.target.value)}
                            inputMode="numeric"/></Field><Field label="Юридический адрес *" wide><Input
-      value={form.legalAddress} onChange={e => set("legalAddress", e.target.value)}/></Field></>}<Field
+      value={form.legalAddress} onChange={e => updateField("legalAddress", e.target.value)}/></Field></>}<Field
       label="Комментарий" wide><Textarea rows={4} value={form.comment}
-                                         onChange={e => set("comment", e.target.value)}/></Field></div>
+                                         onChange={e => updateField("comment", e.target.value)}/></Field></div>
     <PaymentMethodSelector value={form.paymentMethod}
-                           onChange={(v: PaymentMethod) => set("paymentMethod", v)}/><label
+                           onChange={(v: PaymentMethod) => updateField("paymentMethod", v)}/><label
       className="flex items-start gap-2 text-sm"><input type="checkbox" checked={form.consentAccepted}
-                                                        onChange={e => set("consentAccepted", e.target.checked)}
-                                                        className="mt-1 size-4 accent-red-700"/>Согласен на
-      обработку данных и подтверждаю корректность информации.</label>{error &&
+                                                        onChange={e => updateField("consentAccepted", e.target.checked)}
+                                                        className="mt-1 size-4 shrink-0 accent-red-700"/><span>Согласен на обработку персональных данных в соответствии с <Link href="/privacy" className="font-semibold text-red-700 underline underline-offset-2">Политикой обработки персональных данных</Link> и подтверждаю корректность информации.</span></label>{error &&
       <p role="alert" className="font-semibold text-red-700">{error}</p>}<Button type="submit"
                                                                                  disabled={submitting}>{submitting ? "Создаём заказ…" : `Создать заказ на ${new Intl.NumberFormat("ru-RU").format(totalAmount)} ₽`}</Button>
   </form>
+}
+
+function isCheckoutFormValid(form: CheckoutFormData): boolean {
+  if (!form.fullName.trim()) return false;
+  if (!isValidEmail(form.email)) return false;
+  if (!isValidPhone(form.phone)) return false;
+  if (!form.deliveryAddress.trim()) return false;
+  if (!form.consentAccepted) return false;
+
+  if (form.customerType === "COMPANY") {
+    if (!form.companyName.trim()) return false;
+    if (!form.taxNumber.trim()) return false;
+    if (!form.legalAddress.trim()) return false;
+  }
+
+  return true;
+}
+
+function createOrderInput(form: CheckoutFormData, cartItems: OrderItemInput[]): CreateOrderInput {
+  return {
+    items: cartItems,
+    customer: {
+      type: form.customerType,
+      fullName: form.fullName,
+      email: form.email,
+      phone: form.phone,
+      companyName: form.companyName || undefined,
+      taxNumber: form.taxNumber || undefined,
+      legalAddress: form.legalAddress || undefined,
+    },
+    delivery: {
+      address: form.deliveryAddress,
+      comment: form.comment || undefined,
+    },
+    paymentMethod: form.paymentMethod,
+  };
+}
+
+async function createOrder(input: CreateOrderInput): Promise<{order: {reference: string}}> {
+  const response = await fetch("/api/orders", {
+    method: "POST",
+    headers: {"content-type": "application/json"},
+    body: JSON.stringify(input),
+  });
+  const result: unknown = await response.json();
+  if (!response.ok || !isOrderResult(result)) {
+    throw new Error(readError(result, "Не удалось создать заказ."));
+  }
+  return result;
+}
+
+async function createPayment(orderReference: string): Promise<{redirectUrl: string}> {
+  const response = await fetch("/api/payments/create", {
+    method: "POST",
+    headers: {"content-type": "application/json"},
+    body: JSON.stringify({orderReference}),
+  });
+  const result: unknown = await response.json();
+  if (!response.ok || !isPaymentResult(result)) {
+    const message = readError(result, "Онлайн-оплата пока не настроена.");
+    throw new Error(`${message} Заказ ${orderReference} сохранён; корзина не очищена.`);
+  }
+  return result;
 }
 
 function Field({label, children, wide = false}: { label: string; children: React.ReactNode; wide?: boolean }) {

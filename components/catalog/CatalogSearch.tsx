@@ -20,20 +20,7 @@ export function CatalogSearch({
 
   const results = useMemo(() => {
     if (!query) return [];
-
-    const normalizedQuery = query.toLocaleLowerCase("ru");
-    const matchingTypeIds = new Set(
-      variants
-        .filter((variant) => searchableVariant(variant).includes(normalizedQuery))
-        .map((variant) => variant.productTypeId),
-    );
-
-    return productTypes.filter((productType) =>
-      `${productType.name} ${productType.shortDescription}`
-        .toLocaleLowerCase("ru")
-        .includes(normalizedQuery)
-      || matchingTypeIds.has(productType.id),
-    );
+    return findMatchingProductTypes(query, productTypes, variants);
   }, [productTypes, query, variants]);
 
   function submit(event: FormEvent<HTMLFormElement>) {
@@ -112,4 +99,30 @@ function searchableVariant(variant: ProductVariant) {
     variant.shortDescription,
     ...variant.attributes.map((attribute) => attribute.value),
   ].join(" ").toLocaleLowerCase("ru");
+}
+
+function findMatchingProductTypes(
+  query: string,
+  productTypes: ProductType[],
+  variants: ProductVariant[],
+): ProductType[] {
+  const normalizedQuery = query.toLocaleLowerCase("ru");
+  const matchingProductTypeIds = new Set<string>();
+
+  for (const variant of variants) {
+    if (searchableVariant(variant).includes(normalizedQuery)) {
+      matchingProductTypeIds.add(variant.productTypeId);
+    }
+  }
+
+  const matchingProductTypes: ProductType[] = [];
+  for (const productType of productTypes) {
+    const searchableText = `${productType.name} ${productType.shortDescription}`
+      .toLocaleLowerCase("ru");
+    const typeMatches = searchableText.includes(normalizedQuery);
+    const variantMatches = matchingProductTypeIds.has(productType.id);
+    if (typeMatches || variantMatches) matchingProductTypes.push(productType);
+  }
+
+  return matchingProductTypes;
 }

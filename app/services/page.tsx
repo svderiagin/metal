@@ -24,7 +24,7 @@ export default function ServicesPage() {
     <div
       className="mt-8 divide-y divide-slate-200 overflow-hidden rounded-lg border border-slate-200 bg-white">{items.map((x, i) =>
       <section key={x.t} className="grid gap-3 p-6 md:grid-cols-[80px_260px_1fr]"><span
-        className="font-mono text-2xl font-black text-red-700">0{i + 1}</span><h2
+        className="text-2xl font-black text-red-700">0{i + 1}</span><h2
         className="text-xl font-bold">{x.t}</h2><p className="leading-7 text-slate-600">{x.d}</p>
       </section>)}</div>
   </PageContainer>
