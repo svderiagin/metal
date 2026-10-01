@@ -4,8 +4,10 @@ import {useMemo, useState} from "react";
 import {Button} from "@/components/ui/Button";
 import {Input} from "@/components/ui/Input";
 import {Select} from "@/components/ui/Select";
+import {ResetFiltersButton} from "@/components/catalog/ResetFiltersButton";
 import {useCart} from "@/hooks/useCart";
-import {formatCurrency} from "@/lib/currency";
+import {formatUnitPrice} from "@/lib/currency";
+import {formatNumber} from "@/lib/numberFormat";
 import {
   calculateLineTotal,
   formatDecimal,
@@ -80,7 +82,6 @@ export function RebarVariantCatalog({variants}: {variants: RebarVariant[]}) {
       return left.diameterMm - right.diameterMm;
     });
   }, [availability, diameter, form, length, maximumPrice, minimumPrice, sort, variants]);
-
   function resetFilters() {
     setDiameter("");
     setForm("");
@@ -92,8 +93,8 @@ export function RebarVariantCatalog({variants}: {variants: RebarVariant[]}) {
   }
 
   return (
-    <section className="mt-8" aria-labelledby="variants-heading">
-      <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+    <>
+      <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6 lg:col-start-2">
         <h2 className="text-xl font-bold">Фильтры вариантов</h2>
         <div className="mt-5 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
           <Filter label="Диаметр, мм" value={diameter} onChange={setDiameter}>
@@ -136,56 +137,77 @@ export function RebarVariantCatalog({variants}: {variants: RebarVariant[]}) {
             </Select>
           </label>
         </div>
-        <button type="button" onClick={resetFilters}
-          className="mt-5 min-h-11 text-sm font-semibold text-red-700 underline underline-offset-2">
-          Сбросить фильтры
-        </button>
+        <div className="mt-5">
+          <ResetFiltersButton onClick={resetFilters}/>
+        </div>
       </div>
 
-      <div className="my-6 flex items-center justify-between gap-4">
+      <section className="lg:col-span-2" aria-labelledby="variants-heading">
+      <div className="mb-6 flex items-center justify-between gap-4">
         <h2 id="variants-heading" className="text-2xl font-black">Варианты продукции</h2>
         <p className="text-sm text-slate-600">Найдено: {results.length}</p>
       </div>
 
       {results.length ? (
-        <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm">
-          <table className="w-full border-collapse text-left text-sm">
+        <>
+        <div className="hidden overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm xl:block">
+          <table className="w-full table-fixed border-collapse text-left text-sm">
+            <colgroup>
+              <col style={{width: "9%"}}/>
+              <col style={{width: "11%"}}/>
+              <col style={{width: "11%"}}/>
+              <col style={{width: "14%"}}/>
+              <col style={{width: "10%"}}/>
+              <col style={{width: "8%"}}/>
+              <col style={{width: "11%"}}/>
+              <col style={{width: "11%"}}/>
+              <col style={{width: "15%"}}/>
+            </colgroup>
             <thead className="bg-slate-900 text-white">
               <tr>
                 {[
-                  "Диаметр, мм", "Форма продукции", "Марка стали", "Цена за тонну",
-                  "Вес метра, кг", "Длина, м", "Длина заказа, м", "Вес заказа, т",
+                  "Диаметр, мм", "Форма", "Марка стали", "Цена, ₽/т",
+                  "Вес, кг/м", "Длина, м", "Заказ, м", "Заказ, т",
                 ].map((label) => (
                   <th
                     key={label}
-                    className={`py-3 font-semibold ${
-                      label === "Длина заказа, м" || label === "Вес заказа, т"
-                        ? "w-24 px-2"
-                        : "px-3"
-                    }`}
+                    className="break-words px-2 py-3 font-semibold"
                   >
                     {label}
                   </th>
                 ))}
-                <th className="px-3 py-3"><span className="sr-only">Действие</span></th>
+                <th className="px-2 py-3 text-center"><span className="sr-only">Действие</span></th>
               </tr>
             </thead>
             <tbody>
-              {results.map((variant) => <RebarVariantRow key={variant.id} variant={variant}/>)}
+              {results.map((variant) => <RebarVariantItem key={variant.id} variant={variant} view="table"/>)}
             </tbody>
           </table>
         </div>
+        <div className="grid gap-4 sm:grid-cols-2 xl:hidden">
+          {results.map((variant) => (
+            <RebarVariantItem key={variant.id} variant={variant} view="card"/>
+          ))}
+        </div>
+        </>
       ) : (
         <div className="rounded-xl border border-dashed border-slate-300 bg-white p-8 text-center">
           <strong className="text-lg">Варианты не найдены</strong>
           <p className="mt-2 text-sm text-slate-600">Измените или сбросьте фильтры.</p>
         </div>
       )}
-    </section>
+      </section>
+    </>
   );
 }
 
-function RebarVariantRow({variant}: {variant: RebarVariant}) {
+function RebarVariantItem({
+  variant,
+  view,
+}: {
+  variant: RebarVariant;
+  view: "table" | "card";
+}) {
   const {addItem} = useCart();
   const [meters, setMeters] = useState("");
   const [tons, setTons] = useState("");
@@ -235,23 +257,63 @@ function RebarVariantRow({variant}: {variant: RebarVariant}) {
     setMessage("Добавлено");
   }
 
+  if (view === "card") {
+    return (
+      <article className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+        <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">{variant.sku}</p>
+        <h3 className="mt-1 font-bold">{variant.name}</h3>
+        <dl className="mt-4 grid grid-cols-2 gap-3 text-sm">
+          <VariantDetail label="Диаметр" value={`${formatNumber(variant.diameterMm)} мм`}/>
+          <VariantDetail label="Форма" value={formLabel(variant.form)}/>
+          <VariantDetail label="Марка стали" value={variant.steelGrade}/>
+          <VariantDetail label="Вес" value={`${formatNumber(variant.weightPerMeterKg)} кг/м`}/>
+          <VariantDetail
+            label="Длина"
+            value={variant.lengthMeters === undefined ? "—" : `${formatNumber(variant.lengthMeters)} м`}
+          />
+          <VariantDetail label="Цена" value={formatUnitPrice(variant.pricePerTon, "за тонну")}/>
+        </dl>
+        <div className="mt-4 grid grid-cols-2 gap-3 border-t border-slate-100 pt-4">
+          <OrderInput
+            label={`Длина заказа для ${variant.name}`}
+            visibleLabel="Заказ, м"
+            value={meters}
+            onChange={updateMeters}
+          />
+          <OrderInput
+            label={`Вес заказа для ${variant.name}`}
+            visibleLabel="Заказ, т"
+            value={tons}
+            onChange={updateTons}
+          />
+        </div>
+        <Button type="button" disabled={!variant.inStock} onClick={addToCart} className="mt-4 w-full">
+          {variant.inStock ? "В корзину" : "Под заказ"}
+        </Button>
+        <span aria-live="polite" className={`mt-1 block text-xs ${
+          message === "Добавлено" ? "text-green-700" : "text-red-700"
+        }`}>{message}</span>
+      </article>
+    );
+  }
+
   return (
-    <tr id={`variant-${variant.id}`} className="border-t border-slate-200 align-top">
-      <td className="px-3 py-4 font-bold">{variant.diameterMm}</td>
-      <td className="px-3 py-4">{formLabel(variant.form)}</td>
-      <td className="px-3 py-4">{variant.steelGrade}</td>
-      <td className="px-3 py-4 font-semibold">{formatCurrency(variant.pricePerTon)}</td>
-      <td className="px-3 py-4">{formatDecimal(variant.weightPerMeterKg, 3)}</td>
-      <td className="px-3 py-4">{variant.lengthMeters ?? "—"}</td>
+    <tr id={`variant-${variant.id}`} className="border-t border-slate-200 align-middle">
+      <td className="px-2 py-4 font-bold">{formatNumber(variant.diameterMm)}</td>
+      <td className="px-2 py-4">{formLabel(variant.form)}</td>
+      <td className="px-2 py-4">{variant.steelGrade}</td>
+      <td className="whitespace-nowrap px-2 py-4 font-semibold">{formatUnitPrice(variant.pricePerTon, "за тонну")}</td>
+      <td className="px-2 py-4">{formatNumber(variant.weightPerMeterKg)}</td>
+      <td className="px-2 py-4">{variant.lengthMeters === undefined ? "—" : formatNumber(variant.lengthMeters)}</td>
       <td className="px-2 py-3">
         <OrderInput label={`Длина заказа для ${variant.name}`} value={meters} onChange={updateMeters}/>
       </td>
       <td className="px-2 py-3">
         <OrderInput label={`Вес заказа для ${variant.name}`} value={tons} onChange={updateTons}/>
       </td>
-      <td className="px-3 py-3">
+      <td className="px-2 py-3 text-center">
         <Button type="button" disabled={!variant.inStock} onClick={addToCart}
-          className="whitespace-nowrap">
+          className="whitespace-nowrap px-3">
           {variant.inStock ? "В корзину" : "Под заказ"}
         </Button>
         <span aria-live="polite" className={`mt-1 block max-w-32 text-xs ${
@@ -264,17 +326,31 @@ function RebarVariantRow({variant}: {variant: RebarVariant}) {
 
 function OrderInput({
   label,
+  visibleLabel,
   value,
   onChange,
 }: {
   label: string;
+  visibleLabel?: string;
   value: string;
   onChange: (value: string) => void;
 }) {
   return (
-    <Input aria-label={label} type="number" inputMode="decimal" min={0} step="any"
-      value={value} onChange={(event) => onChange(event.target.value)}
-      className="w-24" placeholder="0"/>
+    <label className="block text-sm font-semibold">
+      {visibleLabel && <span className="mb-1 block">{visibleLabel}</span>}
+      <Input aria-label={label} type="number" inputMode="decimal" min={0} step="any"
+        value={value} onChange={(event) => onChange(event.target.value)}
+        className="w-full min-w-0 px-2" placeholder="0"/>
+    </label>
+  );
+}
+
+function VariantDetail({label, value}: {label: string; value: string}) {
+  return (
+    <div>
+      <dt className="text-slate-500">{label}</dt>
+      <dd className="mt-1 font-medium">{value}</dd>
+    </div>
   );
 }
 

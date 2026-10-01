@@ -13,6 +13,7 @@ interface CartContextValue {
   items: CartItem[];
   lines: CartLine[];
   hydrated: boolean;
+  lineItemCount: number;
   totalQuantity: number;
   totalAmount: number;
   addItem: (id: string, q?: number, measurement?: CartMeasurement) => void;
@@ -74,19 +75,21 @@ export function CartProvider({children}: { children: ReactNode }) {
   const removeItem = useCallback((productId: string) => setItems(prev => prev.filter(i => i.productId !== productId)), []);
   const clearCart = useCallback(() => setItems([]), []);
   const lines = useMemo(() => createCartLines(items), [items]);
+  const lineItemCount = lines.length;
   const totalQuantity = useMemo(() => calculateTotalQuantity(items), [items]);
   const totalAmount = useMemo(() => calculateTotalAmount(lines), [lines]);
   const value = useMemo(() => ({
     items,
     lines,
     hydrated,
+    lineItemCount,
     totalQuantity,
     totalAmount,
     addItem,
     updateQuantity,
     removeItem,
     clearCart
-  }), [items, lines, hydrated, totalQuantity, totalAmount, addItem, updateQuantity, removeItem, clearCart]);
+  }), [items, lines, hydrated, lineItemCount, totalQuantity, totalAmount, addItem, updateQuantity, removeItem, clearCart]);
   return <CartContext value={value}>{children}</CartContext>
 }
 

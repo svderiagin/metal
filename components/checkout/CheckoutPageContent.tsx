@@ -3,6 +3,7 @@ import {useCart} from "@/hooks/useCart";
 import {EmptyState} from "@/components/ui/EmptyState";
 import {CheckoutForm} from "./CheckoutForm";
 import {formatCurrency} from "@/lib/currency";
+import {formatNumber} from "@/lib/numberFormat";
 
 export function CheckoutPageContent() {
   const {lines, totalAmount, hydrated} = useCart();
@@ -29,7 +30,7 @@ export function CheckoutPageContent() {
               <span className="leading-5 text-slate-700">
                 {line.name}
                 {line.measurement
-                  ? ` — ${line.measurement.meters} м / ${line.measurement.weightTons} т`
+                  ? ` — ${formatNumber(line.measurement.meters)} м / ${formatNumber(line.measurement.weightTons)} т`
                   : ` × ${line.quantity}`}
               </span>
               <strong className="shrink-0">{formatCurrency(line.estimatedTotal)}</strong>

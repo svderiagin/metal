@@ -11,7 +11,7 @@ export function HeroSection() {
             Комплектация со склада
           </p>
           <h1 className="mt-4 max-w-3xl text-3xl font-black leading-tight sm:text-4xl lg:text-5xl">
-            Металлопрокат и стальные трубы со склада
+            Металлоконструкции и металлопрокат со склада
           </h1>
           <p className="mt-5 max-w-2xl leading-7 text-slate-300">
             Поставляем металл компаниям и частным клиентам. Принимаем оплату картой и по счёту,

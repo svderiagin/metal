@@ -69,9 +69,11 @@ export default async function ProductTypePage({params}: Props) {
       />
 
       <div className="grid gap-7 lg:grid-cols-[280px_minmax(0,1fr)]">
-        <Suspense fallback={<div className="h-96 animate-pulse rounded-xl bg-slate-200"/>}>
-          <CatalogSidebar activeSlug={category.slug}/>
-        </Suspense>
+        <div className="lg:row-span-2">
+          <Suspense fallback={<div className="h-96 animate-pulse rounded-xl bg-slate-200"/>}>
+            <CatalogSidebar activeSlug={category.slug}/>
+          </Suspense>
+        </div>
         <div className="min-w-0">
           <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6 lg:p-8">
             <p className="text-sm font-bold uppercase tracking-[0.16em] text-red-700">
@@ -80,9 +82,8 @@ export default async function ProductTypePage({params}: Props) {
             <h1 className="mt-2 text-3xl font-black sm:text-4xl">{productType.name}</h1>
             <p className="mt-4 max-w-4xl leading-7 text-slate-600">{productType.description}</p>
           </div>
-
-          <ProductVariantCatalog variants={variants} categorySlug={category.slug}/>
         </div>
+        <ProductVariantCatalog variants={variants} categorySlug={category.slug}/>
       </div>
     </PageContainer>
   );

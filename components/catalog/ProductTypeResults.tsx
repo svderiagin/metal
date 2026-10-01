@@ -4,6 +4,7 @@ import {useMemo, useState} from "react";
 import {Button} from "@/components/ui/Button";
 import {Select} from "@/components/ui/Select";
 import {ProductTypeGrid} from "./ProductTypeGrid";
+import {ResetFiltersButton} from "./ResetFiltersButton";
 import type {ProductType, ProductVariant} from "@/types/product";
 
 type SortMode = "availability" | "price-asc" | "price-desc" | "name";
@@ -48,7 +49,6 @@ export function ProductTypeResults({
     stockOnly,
     variantsByType,
   ]);
-
   function reset() {
     setMaterial("");
     setStandard("");
@@ -90,13 +90,7 @@ export function ProductTypeResults({
             />
             Только в наличии
           </label>
-          <button
-            type="button"
-            onClick={reset}
-            className="min-h-11 text-sm font-semibold text-red-700 underline"
-          >
-            Сбросить фильтры
-          </button>
+          <ResetFiltersButton onClick={reset}/>
         </div>
       </div>
 

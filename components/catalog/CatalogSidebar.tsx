@@ -1,6 +1,5 @@
 import {
   getAllCategories,
-  getProductTypeCountByCategoryId,
   getProductTypesBySubcategoryId,
   getSubcategoriesByCategoryId,
 } from "@/lib/catalog";
@@ -22,7 +21,6 @@ export function CatalogSidebar({activeSlug}: { activeSlug?: string }) {
                 <CatalogCategoryLink
                   href={`/catalog/${category.slug}`}
                   label={category.name}
-                  productCount={getProductTypeCountByCategoryId(category.id)}
                   active={active}
                 />
                 {active &&

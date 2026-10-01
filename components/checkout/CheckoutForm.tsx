@@ -9,6 +9,7 @@ import type {CheckoutFormData, CreateOrderInput, CustomerType, OrderConfirmation
 import {Input} from "@/components/ui/Input";
 import {Textarea} from "@/components/ui/Textarea";
 import {Button} from "@/components/ui/Button";
+import {formatCurrency} from "@/lib/currency";
 import {CustomerTypeSelector} from "./CustomerTypeSelector";
 import {PaymentMethodSelector} from "./PaymentMethodSelector";
 
@@ -74,7 +75,7 @@ export function CheckoutForm() {
     <div className="grid gap-4 sm:grid-cols-2"><Field label="ФИО *"><Input value={form.fullName}
                                                                            onChange={e => updateField("fullName", e.target.value)}
                                                                            autoComplete="name"/></Field><Field
-      label="Email *"><Input type="email" value={form.email} onChange={e => updateField("email", e.target.value)}
+      label="Электронная почта *"><Input type="email" value={form.email} onChange={e => updateField("email", e.target.value)}
                              autoComplete="email"/></Field><Field label="Телефон *"><Input value={form.phone}
                                                                                            onChange={e => updateField("phone", e.target.value)}
                                                                                            autoComplete="tel"/></Field><Field
@@ -94,7 +95,7 @@ export function CheckoutForm() {
                                                         onChange={e => updateField("consentAccepted", e.target.checked)}
                                                         className="mt-1 size-4 shrink-0 accent-red-700"/><span>Согласен на обработку персональных данных в соответствии с <Link href="/privacy" className="font-semibold text-red-700 underline underline-offset-2">Политикой обработки персональных данных</Link> и подтверждаю корректность информации.</span></label>{error &&
       <p role="alert" className="font-semibold text-red-700">{error}</p>}<Button type="submit"
-                                                                                 disabled={submitting}>{submitting ? "Создаём заказ…" : `Создать заказ на ${new Intl.NumberFormat("ru-RU").format(totalAmount)} ₽`}</Button>
+                                                                                 disabled={submitting}>{submitting ? "Создаём заказ…" : `Создать заказ на ${formatCurrency(totalAmount)}`}</Button>
   </form>
 }
 

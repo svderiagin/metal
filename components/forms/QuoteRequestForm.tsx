@@ -56,7 +56,7 @@ export function QuoteRequestForm() {
                                                   autoComplete="name"/></label><label
     className="text-sm font-semibold">Телефон *<Input name="phone" required className="mt-1" autoComplete="tel"
                                                       placeholder="+7 900 000-00-00"/></label><label
-    className="text-sm font-semibold">Email *<Input name="email" type="email" required className="mt-1"
+    className="text-sm font-semibold">Электронная почта *<Input name="email" type="email" required className="mt-1"
                                                     autoComplete="email"/></label><label
     className="text-sm font-semibold">Компания<Input name="company" className="mt-1"
                                                      autoComplete="organization"/></label><label

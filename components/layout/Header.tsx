@@ -23,7 +23,7 @@ export function Header() {
             ООО <span className="text-red-600">РВБ</span>
           </span>
           <span className="hidden text-xs text-slate-400 sm:block">
-            Металлопрокат и стальные трубы
+            Металлоконструкции и металлопрокат
           </span>
         </Link>
         <div className="ml-auto flex items-center gap-3">

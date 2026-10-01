@@ -44,7 +44,7 @@ export function ContactForm() {
     className="text-xl font-bold">Написать нам</h2><label className="block text-sm font-semibold">Имя<Input required
                                                                                                             name="name"
                                                                                                             className="mt-1"/></label><label
-    className="block text-sm font-semibold">Email<Input required type="email" name="email"
+    className="block text-sm font-semibold">Электронная почта<Input required type="email" name="email"
                                                         className="mt-1"/></label><label
     className="block text-sm font-semibold">Телефон<Input name="phone" className="mt-1"
                                                           autoComplete="tel"/></label><label

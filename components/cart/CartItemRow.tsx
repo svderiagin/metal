@@ -2,7 +2,8 @@
 import Link from "next/link";
 import type {CartLine} from "@/types/cart";
 import {useCart} from "@/hooks/useCart";
-import {formatCurrency} from "@/lib/currency";
+import {formatCurrency, formatUnitPrice} from "@/lib/currency";
+import {formatNumber} from "@/lib/numberFormat";
 import {QuantitySelector} from "./QuantitySelector";
 
 export function CartItemRow({line}: { line: CartLine }) {
@@ -18,13 +19,13 @@ export function CartItemRow({line}: { line: CartLine }) {
           {line.name}
         </Link>
         <p className="mt-1 text-sm text-slate-500">
-          {formatCurrency(line.price)} {line.priceUnit}
+          {formatUnitPrice(line.price, line.priceUnit)}
         </p>
       </div>
       {line.measurement ? (
         <p className="text-sm text-slate-600 md:text-right">
           <strong className="block text-slate-900">
-            {line.measurement.meters} м / {line.measurement.weightTons} т
+            {formatNumber(line.measurement.meters)} м / {formatNumber(line.measurement.weightTons)} т
           </strong>
           Ввод: {line.measurement.inputMode === "meter" ? "метры" : "тонны"}
         </p>

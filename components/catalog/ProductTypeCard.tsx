@@ -1,5 +1,5 @@
 import Link from "next/link";
-import {formatCurrency} from "@/lib/currency";
+import {formatUnitPrice} from "@/lib/currency";
 import type {ProductType, ProductVariant} from "@/types/product";
 
 export function ProductTypeCard({
@@ -46,7 +46,7 @@ export function ProductTypeCard({
               {minimumPrice !== null && (
                 <>
                   <span className="block text-xs text-slate-500">от</span>
-                  <strong className="text-xl">{formatCurrency(minimumPrice)}</strong>
+                  <strong className="text-xl">{formatUnitPrice(minimumPrice, variants[0]?.priceUnit ?? "")}</strong>
                 </>
               )}
             </div>

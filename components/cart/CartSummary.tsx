@@ -4,14 +4,14 @@ import {formatCurrency} from "@/lib/currency";
 import {Button, ButtonLink} from "@/components/ui/Button";
 
 export function CartSummary() {
-  const {totalQuantity, totalAmount, clearCart} = useCart();
+  const {lineItemCount, totalAmount, clearCart} = useCart();
   return (
     <aside className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6 lg:sticky lg:top-6">
       <h2 className="text-xl font-bold">Итого</h2>
       <dl className="mt-5 space-y-4 text-sm">
         <div className="flex justify-between gap-4">
-          <dt>Товаров</dt>
-          <dd>{totalQuantity}</dd>
+          <dt>Позиций</dt>
+          <dd>{lineItemCount}</dd>
         </div>
         <div className="flex justify-between gap-4 border-t border-slate-200 pt-4 text-lg font-black">
           <dt>Сумма</dt>

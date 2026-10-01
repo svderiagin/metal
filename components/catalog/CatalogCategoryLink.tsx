@@ -7,12 +7,10 @@ import {useEffect, useRef} from "react";
 export function CatalogCategoryLink({
   href,
   label,
-  productCount,
   active,
 }: {
   href: string;
   label: string;
-  productCount: number;
   active: boolean;
 }) {
   const pathname = usePathname();
@@ -40,7 +38,6 @@ export function CatalogCategoryLink({
       }`}
     >
       {label}
-      <span className="ml-2 text-xs text-slate-400">{productCount}</span>
     </Link>
   );
 }

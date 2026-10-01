@@ -1,5 +1,4 @@
 import Link from "next/link";
-import {getProductTypeCountByCategoryId} from "@/lib/catalog";
 import type {Category} from "@/types/category";
 
 export function CategoryCard({category}: { category: Category }) {
@@ -21,9 +20,6 @@ export function CategoryCard({category}: { category: Category }) {
         <p className="mt-2 flex-1 text-sm leading-6 text-slate-600">
           {category.shortDescription}
         </p>
-        <span className="mt-5 inline-flex min-h-11 items-center text-sm font-bold text-red-700 transition-colors after:ml-1 after:content-['→'] group-hover:text-red-800">
-          {getProductTypeCountByCategoryId(category.id)} тип(ов) продукции
-        </span>
       </Link>
     </article>
   );

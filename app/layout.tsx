@@ -6,9 +6,9 @@ import {Footer} from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
   title: {
-    default: "ООО «РВБ» — металлопрокат и стальные трубы",
+    default: "ООО «РВБ» — Металлоконструкции и металлопрокат",
     template: "%s | ООО «РВБ»"
-  }, description: "Каталог металлопроката и стальных труб с оформлением заказа, оплатой картой или по счёту."
+  }, description: "Каталог металлоконструкций и металлопроката с оформлением заказа, оплатой картой или по счёту."
 };
 export default function RootLayout({children}: Readonly<{ children: React.ReactNode }>) {
   return <html lang="ru">
