@@ -1,10 +1,11 @@
 export const formatCurrency = (value: number) => new Intl.NumberFormat("ru-RU", {
   style: "currency",
   currency: "RUB",
-  maximumFractionDigits: 0
+  maximumFractionDigits: 2
 }).format(value);
 
-export function formatUnitPrice(value: number, priceUnit: string): string {
+export function formatUnitPrice(value: number | null, priceUnit: string): string {
+  if (value === null) return "Цена по запросу";
   const unit = getShortPriceUnit(priceUnit);
   return unit ? `${formatCurrency(value)}/${unit}` : formatCurrency(value);
 }
@@ -15,5 +16,6 @@ function getShortPriceUnit(priceUnit: string): string {
   if (normalizedUnit.includes("метр")) return "м";
   if (normalizedUnit.includes("лист")) return "лист";
   if (normalizedUnit.includes("штук")) return "шт.";
+  if (normalizedUnit.includes("килограмм")) return "кг";
   return "";
 }

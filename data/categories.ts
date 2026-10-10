@@ -1,6 +1,7 @@
 import type {Category} from "@/types/category";
+import importedCatalog from "./imported-catalog.json";
 
-export const categories: Category[] = [
+const originalCategories: Category[] = [
   {
     "id": "cat-arm",
     "name": "Арматура",
@@ -130,3 +131,6 @@ export const categories: Category[] = [
     "imageUrl": "/images/categories/tsvetnoy-metalloprokat.svg"
   }
 ];
+
+export const categories: Category[] = importedCatalog.categories as Category[];
+export {originalCategories};

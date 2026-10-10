@@ -1,11 +1,11 @@
 export function metersToTons(meters: number, weightPerMeterKg: number) {
   if (!isNonNegativeFinite(meters) || !isPositiveFinite(weightPerMeterKg)) return null;
-  return round(meters * weightPerMeterKg / 1000, 3);
+  return meters * weightPerMeterKg / 1000;
 }
 
 export function tonsToMeters(tons: number, weightPerMeterKg: number) {
   if (!isNonNegativeFinite(tons) || !isPositiveFinite(weightPerMeterKg)) return null;
-  return round(tons * 1000 / weightPerMeterKg, 2);
+  return tons * 1000 / weightPerMeterKg;
 }
 
 export function calculateLineTotal(weightTons: number, pricePerTon: number) {

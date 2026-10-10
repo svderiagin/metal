@@ -58,7 +58,7 @@ export function createTrustedOrder(input: CreateOrderInput): Order | null {
   const items: OrderItem[] = [];
   for (const item of input.items) {
     const product = getProductVariantById(item.productId);
-    if (!product) return null;
+    if (!product || product.price === null || product.quoteOnly || product.priceQualifier === "from" || !Number.isFinite(item.quantity) || item.quantity <= 0 || (!item.measurement && item.quantity > 999)) return null;
     if (item.measurement) {
       if (product.pricePerTon === undefined || product.weightPerMeterKg === undefined) return null;
       const meters = item.measurement.inputMode === "meter"
@@ -89,7 +89,7 @@ export function createTrustedOrder(input: CreateOrderInput): Order | null {
       sku: product.sku,
       unitPrice: product.price,
       priceUnit: product.priceUnit,
-      subtotal: product.price * item.quantity,
+      subtotal: calculateLineTotal(item.quantity, product.price) ?? 0,
     });
   }
   return {
@@ -98,7 +98,7 @@ export function createTrustedOrder(input: CreateOrderInput): Order | null {
     customer: input.customer,
     delivery: input.delivery,
     paymentMethod: input.paymentMethod,
-    totalAmount: items.reduce((sum, item) => sum + item.subtotal, 0),
+    totalAmount: items.reduce((sum, item) => sum + Math.round(item.subtotal * 100), 0) / 100,
     status: "SUBMITTED",
     paymentStatus: "PENDING",
     createdAt: new Date().toISOString(),

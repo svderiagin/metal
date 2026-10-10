@@ -5,11 +5,18 @@ import {Button} from "@/components/ui/Button";
 import {Input} from "@/components/ui/Input";
 import {Textarea} from "@/components/ui/Textarea";
 import {isValidEmail, isValidPhone} from "@/lib/validation";
+import {useEffect} from "react";
 
 export function QuoteRequestForm() {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [message, setMessage] = useState("");
+  useEffect(() => {
+    const product = new URLSearchParams(window.location.search).get("product");
+    const timer = window.setTimeout(() => {if (product) setMessage(`Прошу рассчитать поставку: ${product}`);}, 0);
+    return () => window.clearTimeout(timer);
+  }, []);
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -61,7 +68,7 @@ export function QuoteRequestForm() {
     className="text-sm font-semibold">Компания<Input name="company" className="mt-1"
                                                      autoComplete="organization"/></label><label
     className="text-sm font-semibold sm:col-span-2">Что требуется рассчитать? *<Textarea name="message" required
-                                                                                         rows={4}
+                                                                                         rows={4} value={message} onChange={e => setMessage(e.target.value)}
                                                                                          className="mt-1"/></label><label
     className="absolute -left-[10000px]" aria-hidden>Сайт<Input name="website" tabIndex={-1}
                                                                 autoComplete="off"/></label><label

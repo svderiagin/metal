@@ -1,6 +1,7 @@
 import type {Subcategory} from "@/types/category";
+import importedCatalog from "./imported-catalog.json";
 
-export const subcategories: Subcategory[] = [
+const originalSubcategories: Subcategory[] = [
   {
     "id": "cat-arm-sub-1",
     "categoryId": "cat-arm",
@@ -498,3 +499,6 @@ export const subcategories: Subcategory[] = [
     "description": "Латунный прокат для строительных, производственных и монтажных задач. Доступны подбор размера, резка и комплектная отгрузка."
   }
 ];
+
+export const subcategories: Subcategory[] = importedCatalog.families as Subcategory[];
+export {originalSubcategories};

@@ -79,7 +79,7 @@ export default async function ProductTypePage({params}: Props) {
             <p className="text-sm font-bold uppercase tracking-[0.16em] text-red-700">
               Тип продукции
             </p>
-            <h1 className="mt-2 text-3xl font-black sm:text-4xl">{productType.name}</h1>
+            <h1 className="mt-2 break-words text-3xl font-black sm:text-4xl">{productType.name}</h1>
             <p className="mt-4 max-w-4xl leading-7 text-slate-600">{productType.description}</p>
           </div>
         </div>

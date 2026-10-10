@@ -19,8 +19,9 @@ export function CartItemRow({line}: { line: CartLine }) {
           {line.name}
         </Link>
         <p className="mt-1 text-sm text-slate-500">
-          {formatUnitPrice(line.price, line.priceUnit)}
+          {line.invalidReason ? "Цена требует уточнения" : formatUnitPrice(line.price, line.priceUnit)}
         </p>
+        {line.invalidReason && <p role="alert" className="mt-2 text-sm text-amber-900">{line.invalidReason} <Link href="/#request" className="underline">Запросить расчёт</Link></p>}
       </div>
       {line.measurement ? (
         <p className="text-sm text-slate-600 md:text-right">
@@ -33,7 +34,7 @@ export function CartItemRow({line}: { line: CartLine }) {
         <QuantitySelector value={line.quantity} onChange={(value) => updateQuantity(line.productId, value)}/>
       )}
       <div className="flex items-center justify-between gap-5 md:block md:min-w-32 md:text-right">
-        <strong className="text-lg">{formatCurrency(line.estimatedTotal)}</strong>
+        <strong className="text-lg">{line.invalidReason ? "Расчёт недоступен" : formatCurrency(line.estimatedTotal)}</strong>
         <button
           type="button"
           onClick={() => removeItem(line.productId)}

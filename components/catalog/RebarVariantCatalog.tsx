@@ -142,9 +142,9 @@ export function RebarVariantCatalog({variants}: {variants: RebarVariant[]}) {
         </div>
       </div>
 
-      <section className="lg:col-span-2" aria-labelledby="variants-heading">
+      <section className="lg:col-span-2" aria-labelledby="measured-variants-heading">
       <div className="mb-6 flex items-center justify-between gap-4">
-        <h2 id="variants-heading" className="text-2xl font-black">Варианты продукции</h2>
+        <h2 id="measured-variants-heading" className="text-2xl font-black">Варианты с расчётом по массе</h2>
         <p className="text-sm text-slate-600">Найдено: {results.length}</p>
       </div>
 
@@ -235,8 +235,10 @@ function RebarVariantItem({
   }
 
   function addToCart() {
-    const parsedMeters = parseNonNegativeDecimal(meters);
-    const parsedTons = parseNonNegativeDecimal(tons);
+    const enteredMeters = parseNonNegativeDecimal(meters);
+    const enteredTons = parseNonNegativeDecimal(tons);
+    const parsedMeters = inputMode === "meter" ? enteredMeters : enteredTons === null ? null : tonsToMeters(enteredTons, variant.weightPerMeterKg);
+    const parsedTons = inputMode === "ton" ? enteredTons : enteredMeters === null ? null : metersToTons(enteredMeters, variant.weightPerMeterKg);
     if (!parsedMeters || !parsedTons) {
       setMessage("Укажите длину или вес больше нуля.");
       return;

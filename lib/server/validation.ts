@@ -34,10 +34,10 @@ export function parseCreateOrderInput(value: unknown): CreateOrderInput | null {
     const measurement = parseMeasurement(item.measurement);
     if (item.measurement !== undefined && !measurement) return null;
     if (typeof item.quantity !== "number" || !Number.isFinite(item.quantity) || item.quantity <= 0) return null;
-    if (!measurement && (!Number.isInteger(item.quantity) || item.quantity > 999)) return null;
+    if (!measurement && item.quantity > 999) return null;
     items.push({
       productId: item.productId,
-      quantity: measurement ? item.quantity : Math.floor(item.quantity),
+      quantity: item.quantity,
       ...(measurement ? {measurement} : {}),
     });
   }

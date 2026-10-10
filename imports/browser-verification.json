@@ -1,0 +1,94 @@
+{
+  "results": [
+    {
+      "width": 1440,
+      "category": "cat-arm",
+      "title": "Арматура А500С",
+      "rows": 36,
+      "scrollWidth": 1425
+    },
+    {
+      "width": 1440,
+      "category": "cat-bal",
+      "title": "Балка",
+      "rows": 40,
+      "scrollWidth": 1425
+    },
+    {
+      "width": 1440,
+      "category": "cat-trs",
+      "title": "Труба бесшовная горячедеформированная",
+      "rows": 40,
+      "scrollWidth": 1425
+    },
+    {
+      "width": 1440,
+      "category": "cat-lis",
+      "title": "Лист горячекатаный",
+      "rows": 40,
+      "scrollWidth": 1425
+    },
+    {
+      "width": 1440,
+      "category": "cat-trp",
+      "title": "Профильные",
+      "rows": 40,
+      "scrollWidth": 1425
+    },
+    {
+      "width": 1440,
+      "category": "mirror-coils",
+      "title": "Оцинкованный",
+      "rows": 40,
+      "scrollWidth": 1425
+    },
+    {
+      "width": 390,
+      "category": "cat-arm",
+      "title": "Арматура А500С",
+      "rows": 36,
+      "scrollWidth": 390
+    },
+    {
+      "width": 390,
+      "category": "cat-bal",
+      "title": "Балка",
+      "rows": 40,
+      "scrollWidth": 390
+    },
+    {
+      "width": 390,
+      "category": "cat-trs",
+      "title": "Труба бесшовная горячедеформированная",
+      "rows": 40,
+      "scrollWidth": 390
+    },
+    {
+      "width": 390,
+      "category": "cat-lis",
+      "title": "Лист горячекатаный",
+      "rows": 40,
+      "scrollWidth": 390
+    },
+    {
+      "width": 390,
+      "category": "cat-trp",
+      "title": "Профильные",
+      "rows": 40,
+      "scrollWidth": 390
+    },
+    {
+      "width": 390,
+      "category": "mirror-coils",
+      "title": "Оцинкованный",
+      "rows": 40,
+      "scrollWidth": 390
+    }
+  ],
+  "emptyReset": true,
+  "quoteRoute": true,
+  "mockedSubmissionFailure": true,
+  "addToCart": true,
+  "persistedCart": true,
+  "blockedCheckout": true
+}

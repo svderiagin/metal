@@ -4,6 +4,7 @@ import {EmptyState} from "@/components/ui/EmptyState";
 import {CheckoutForm} from "./CheckoutForm";
 import {formatCurrency} from "@/lib/currency";
 import {formatNumber} from "@/lib/numberFormat";
+import {ButtonLink} from "@/components/ui/Button";
 
 export function CheckoutPageContent() {
   const {lines, totalAmount, hydrated} = useCart();
@@ -15,6 +16,9 @@ export function CheckoutPageContent() {
         description="Корзина пуста. Выберите товары, затем вернитесь к оформлению."
       />
     );
+  }
+  if (lines.some(line => line.invalidReason)) {
+    return <div role="alert" className="rounded-xl border border-amber-300 bg-amber-50 p-6"><h2 className="text-xl font-bold">Расчёт заказа требует уточнения</h2><p className="mt-3">В корзине есть позиции без подтверждённой цены или данных для пересчёта. Проверьте их перед оформлением.</p><div className="mt-5 flex flex-wrap gap-3"><ButtonLink href="/cart">Проверить корзину</ButtonLink><ButtonLink href="/#request" variant="secondary">Запросить расчёт</ButtonLink></div></div>;
   }
 
   return (
@@ -31,7 +35,7 @@ export function CheckoutPageContent() {
                 {line.name}
                 {line.measurement
                   ? ` — ${formatNumber(line.measurement.meters)} м / ${formatNumber(line.measurement.weightTons)} т`
-                  : ` × ${line.quantity}`}
+                  : ` × ${line.quantity} (${line.priceUnit})`}
               </span>
               <strong className="shrink-0">{formatCurrency(line.estimatedTotal)}</strong>
             </li>

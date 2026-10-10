@@ -165,7 +165,7 @@ function uniqueAttributeValues(
   const values = new Set<string>();
   for (const variant of variants) {
     for (const attribute of variant.attributes) {
-      if (attribute.key === key) values.add(attribute.value);
+      if (attribute.key === key && attribute.value) values.add(attribute.value);
     }
   }
   return [...values].sort((left, right) => left.localeCompare(right, "ru"));
@@ -184,7 +184,7 @@ function hasAttribute(
 function minimumPrice(variants: ProductVariant[]) {
   let minimum = Number.MAX_SAFE_INTEGER;
   for (const variant of variants) {
-    if (variant.price < minimum) minimum = variant.price;
+    if (!variant.quoteOnly && variant.price !== null && variant.price > 0 && variant.price < minimum) minimum = variant.price;
   }
   return minimum;
 }

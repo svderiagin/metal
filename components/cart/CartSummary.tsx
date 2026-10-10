@@ -4,7 +4,8 @@ import {formatCurrency} from "@/lib/currency";
 import {Button, ButtonLink} from "@/components/ui/Button";
 
 export function CartSummary() {
-  const {lineItemCount, totalAmount, clearCart} = useCart();
+  const {lineItemCount, totalAmount, clearCart, lines} = useCart();
+  const invalid = lines.some(line => line.invalidReason);
   return (
     <aside className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6 lg:sticky lg:top-6">
       <h2 className="text-xl font-bold">Итого</h2>
@@ -15,14 +16,14 @@ export function CartSummary() {
         </div>
         <div className="flex justify-between gap-4 border-t border-slate-200 pt-4 text-lg font-black">
           <dt>Сумма</dt>
-          <dd>{formatCurrency(totalAmount)}</dd>
+          <dd>{invalid ? "Требует уточнения" : formatCurrency(totalAmount)}</dd>
         </div>
       </dl>
       <p className="mt-4 text-xs leading-5 text-slate-500">
         Стоимость доставки и обработки уточняется при подтверждении заказа.
       </p>
-      <ButtonLink href="/checkout" className="mt-6 w-full">
-        Перейти к оформлению
+      <ButtonLink href={invalid ? "/#request" : "/checkout"} className="mt-6 w-full">
+        {invalid ? "Запросить расчёт" : "Перейти к оформлению"}
       </ButtonLink>
       <Button
         type="button"

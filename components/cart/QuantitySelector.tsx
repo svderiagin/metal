@@ -7,9 +7,9 @@ export function QuantitySelector({value, onChange}: { value: number; onChange: (
             disabled={value <= 1}
             className="w-10 rounded-l-md border border-r-0 border-slate-300 bg-slate-100 font-bold disabled:opacity-40">−
     </button>
-    <Input aria-label="Количество товара" type="number" min={1} max={999} value={value} onChange={e => {
+    <Input aria-label="Количество товара" type="number" min={0} step="any" max={999} value={value} onChange={e => {
       const v = e.currentTarget.valueAsNumber;
-      if (Number.isInteger(v) && v > 0) onChange(v)
+      if (Number.isFinite(v) && v > 0 && v <= 999) onChange(v)
     }} className="w-16 rounded-none text-center"/>
     <button type="button" aria-label="Увеличить количество" onClick={() => onChange(Math.min(999, value + 1))}
             className="w-10 rounded-r-md border border-l-0 border-slate-300 bg-slate-100 font-bold">+

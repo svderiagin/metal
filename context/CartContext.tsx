@@ -8,6 +8,7 @@ import {
   getSubcategoryById,
 } from "@/lib/catalog";
 import type {CartItem, CartLine, CartMeasurement} from "@/types/cart";
+import {revalidateCartPrice} from "@/lib/cartPricing";
 
 interface CartContextValue {
   items: CartItem[];
@@ -50,6 +51,8 @@ export function CartProvider({children}: { children: ReactNode }) {
     quantity = 1,
     measurement?: CartMeasurement,
   ) => setItems(prev => {
+    const product = getProductVariantById(productId);
+    if (!product || product.price === null || product.quoteOnly || product.priceQualifier === "from" || !Number.isFinite(quantity) || quantity <= 0 || (!measurement && quantity > 999)) return prev;
     const safeMeasurement = normalizeMeasurement(measurement);
     if (measurement && !safeMeasurement) return prev;
     if (safeMeasurement) {
@@ -58,7 +61,7 @@ export function CartProvider({children}: { children: ReactNode }) {
         ? prev.map((item) => item.productId === productId ? next : item)
         : [...prev, next];
     }
-    const safe = Math.max(1, Math.min(999, Math.floor(quantity)));
+    const safe = quantity;
     const found = prev.find(i => i.productId === productId);
     return found ? prev.map(i => i.productId === productId ? {
       ...i,
@@ -66,10 +69,10 @@ export function CartProvider({children}: { children: ReactNode }) {
     } : i) : [...prev, {productId, quantity: safe}]
   }), []);
   const updateQuantity = useCallback((productId: string, quantity: number) => {
-    if (!Number.isFinite(quantity) || quantity < 1) return;
+    if (!Number.isFinite(quantity) || quantity <= 0 || quantity > 999) return;
     setItems(prev => prev.map(i => i.productId === productId ? {
       ...i,
-      quantity: Math.min(999, Math.floor(quantity))
+      quantity
     } : i))
   }, []);
   const removeItem = useCallback((productId: string) => setItems(prev => prev.filter(i => i.productId !== productId)), []);
@@ -94,12 +97,13 @@ export function CartProvider({children}: { children: ReactNode }) {
 }
 
 function normalizeCartItems(items: CartItem[]): CartItem[] {
+  if (!Array.isArray(items)) return [];
   const normalizedItems: CartItem[] = [];
 
   for (const item of items) {
-    const productExists = getProductVariantById(item.productId) !== undefined;
+    if (!item || typeof item.productId !== "string") continue;
     const quantityIsValid = Number.isFinite(item.quantity) && item.quantity > 0;
-    if (!productExists || !quantityIsValid) continue;
+    if (!quantityIsValid) continue;
 
     const measurement = normalizeMeasurement(item.measurement);
     if (item.measurement && !measurement) continue;
@@ -109,7 +113,7 @@ function normalizeCartItems(items: CartItem[]): CartItem[] {
     } else {
       normalizedItems.push({
         productId: item.productId,
-        quantity: Math.min(Math.floor(item.quantity), 999),
+        quantity: Math.min(item.quantity, 999),
       });
     }
   }
@@ -122,24 +126,27 @@ function createCartLines(items: CartItem[]): CartLine[] {
 
   for (const item of items) {
     const product = getProductVariantById(item.productId);
-    if (!product) continue;
+    if (!product) {
+      lines.push({...item, name: "Позиция больше не доступна в каталоге", slug: "", categorySlug: "", subcategorySlug: "", productTypeSlug: "", sku: item.productId, price: 0, priceUnit: "", estimatedTotal: 0, invalidReason: "Удалите позицию или уточните замену."});
+      continue;
+    }
 
     const category = getCategoryById(product.categoryId);
     const subcategory = getSubcategoryById(product.subcategoryId);
     const productType = getProductTypeById(product.productTypeId);
-    const estimatedTotal = item.measurement
-      ? item.measurement.estimatedTotal
-      : product.price * item.quantity;
+    const {measurement, invalidReason, estimatedTotal} = revalidateCartPrice(product, item);
 
     lines.push({
       ...item,
+      measurement,
+      invalidReason,
       name: product.name,
       slug: product.slug,
       categorySlug: category?.slug ?? "catalog",
       subcategorySlug: subcategory?.slug ?? "catalog",
       productTypeSlug: productType?.slug ?? "variants",
       sku: product.sku,
-      price: product.price,
+      price: product.price ?? 0,
       priceUnit: product.priceUnit,
       estimatedTotal,
     });
@@ -156,8 +163,8 @@ function calculateTotalQuantity(items: CartItem[]): number {
 
 function calculateTotalAmount(lines: CartLine[]): number {
   let total = 0;
-  for (const line of lines) total += line.estimatedTotal;
-  return total;
+  for (const line of lines) total += Math.round(line.estimatedTotal * 100);
+  return total / 100;
 }
 
 function normalizeMeasurement(value: CartMeasurement | undefined) {

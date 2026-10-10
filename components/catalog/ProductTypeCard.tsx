@@ -15,7 +15,9 @@ export function ProductTypeCard({
 }) {
   const materials = uniqueValues(variants, "material");
   const standards = uniqueValues(variants, "standard");
-  const prices = variants.map((variant) => variant.price);
+  const pricedVariants = variants.filter(v => !v.quoteOnly && v.price !== null && v.price > 0);
+  const sameBasis = new Set(pricedVariants.map(v => v.priceUnit)).size === 1;
+  const prices = sameBasis ? pricedVariants.flatMap((variant) => variant.price === null ? [] : [variant.price]) : [];
   const minimumPrice = prices.length ? Math.min(...prices) : null;
 
   return (
@@ -46,9 +48,10 @@ export function ProductTypeCard({
               {minimumPrice !== null && (
                 <>
                   <span className="block text-xs text-slate-500">от</span>
-                  <strong className="text-xl">{formatUnitPrice(minimumPrice, variants[0]?.priceUnit ?? "")}</strong>
+                  <strong className="text-xl">{formatUnitPrice(minimumPrice, pricedVariants[0]?.priceUnit ?? "")}</strong>
                 </>
               )}
+              {minimumPrice === null && <strong>Цена по запросу</strong>}
             </div>
           </div>
         </div>

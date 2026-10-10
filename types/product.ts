@@ -3,6 +3,7 @@ export type ProductAttributeKey =
   | "standard"
   | "size"
   | "grade"
+  | "class"
   | "length";
 
 export interface ProductSpecification {
@@ -44,8 +45,12 @@ export interface ProductVariant {
   sku: string;
   shortDescription: string;
   description: string;
-  price: number;
-  unit: "meter" | "ton" | "sheet" | "piece";
+  price: number | null;
+  quoteOnly?: boolean;
+  priceQualifier?: "from" | "exact";
+  currency?: string;
+  imported?: boolean;
+  unit: "meter" | "ton" | "sheet" | "piece" | "kg";
   priceUnit: string;
   material: string;
   standard: string;
@@ -57,13 +62,13 @@ export interface ProductVariant {
   lengthMeters?: number;
   sourceProductName?: string;
   sourceReference?: string;
-  availability: "IN_STOCK" | "ON_ORDER";
+  availability: "IN_STOCK" | "ON_ORDER" | "UNKNOWN";
   inStock: boolean;
   featured: boolean;
   imageUrls: string[];
   attributes: ProductAttribute[];
   specifications: ProductSpecification[];
-  weight: ProductWeight;
+  weight?: ProductWeight;
 }
 
 /**

@@ -31,7 +31,7 @@ export function CheckoutForm() {
   const [form, setForm] = useState(initial);
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
-  const {items, clearCart, totalAmount} = useCart();
+  const {items, clearCart, totalAmount, lines} = useCart();
   const router = useRouter();
   function updateField(key: keyof CheckoutFormData, value: string | boolean) {
     setForm((currentForm) => ({...currentForm, [key]: value}));
@@ -39,6 +39,10 @@ export function CheckoutForm() {
 
   async function submit(event: FormEvent) {
     event.preventDefault();
+    if (!lines.length || lines.some(line => line.invalidReason)) {
+      setError("Проверьте корзину: часть позиций требует уточнения цены или характеристик.");
+      return;
+    }
     if (!isCheckoutFormValid(form)) {
       setError("Проверьте обязательные поля, контактные данные и согласие.");
       return

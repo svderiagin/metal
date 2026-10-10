@@ -16,6 +16,7 @@ import {shvellerProducts} from "./shveller";
 import {shestigrannikProducts} from "./shestigrannik";
 import {tsvetnoyMetalloprokatProducts} from "./tsvetnoyMetalloprokat";
 import type {ProductVariant, ProductVariantSource, ProductWeight} from "@/types/product";
+import importedCatalog from "../imported-catalog.json";
 
 const productSources: ProductVariantSource[] = [
   ...armaturaProducts.filter((product) => product.subcategoryId !== "cat-arm-sub-1"),
@@ -37,7 +38,7 @@ const productSources: ProductVariantSource[] = [
   ...tsvetnoyMetalloprokatProducts,
 ];
 
-export const productVariants: ProductVariant[] = productSources.map((product) => ({
+export const existingVariants: ProductVariant[] = productSources.map((product) => ({
   ...product,
   productTypeId: `type-${product.subcategoryId}`,
   unit: normalizeUnit(product.priceUnit),
@@ -48,6 +49,11 @@ export const productVariants: ProductVariant[] = productSources.map((product) =>
     ? {value: product.weightPerMeterKg, unit: "кг/м"}
     : estimateDemoWeight(product),
 }));
+
+export const productVariants: ProductVariant[] = [
+  ...existingVariants.filter(p => !(importedCatalog.matchedIds as string[]).includes(p.id)),
+  ...importedCatalog.products as ProductVariant[],
+];
 
 function estimateDemoWeight(product: ProductVariantSource): ProductWeight {
   const size = Number.parseFloat(

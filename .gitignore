@@ -33,4 +33,6 @@ next-env.d.ts
 # Temporary files
 *.tmp
 *.swp
+/.tmp/
+/www.brokinvest.ru/
 *~

@@ -15,6 +15,7 @@ export interface CartItem {
 }
 
 export interface CartLine extends CartItem {
+  invalidReason?: string;
   name: string;
   slug: string;
   categorySlug: string;

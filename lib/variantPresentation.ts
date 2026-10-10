@@ -20,7 +20,7 @@ const presentations: Record<string, VariantPresentation> = {
       {key: "standard", label: "Стандарт"},
       {key: "length", label: "Длина"},
     ],
-    filterKeys: [...commonFilters, "size", "grade", "length"],
+    filterKeys: [...commonFilters, "size", "class", "grade", "length"],
   },
   "listovoy-prokat": {
     columns: [
@@ -62,6 +62,7 @@ export function getQuantityUnit(variant: ProductVariant) {
   if (variant.unit === "meter") return "м";
   if (variant.unit === "ton") return "т";
   if (variant.unit === "sheet") return "лист";
+  if (variant.unit === "kg") return "кг";
   return "шт.";
 }
 
