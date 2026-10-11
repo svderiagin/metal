@@ -75,11 +75,32 @@ const previous=read('data/catalog-images.json');
 const map={fallback:'/images/catalog/image-unavailable.svg',products:{},categories:{},types:{}};
 const records=[],unmatched=[],copied=new Map();
 fs.mkdirSync('public/images/catalog',{recursive:true});
+const imageNames = {
+  "fe8deb267a4b749828a1": "armatura",
+  "92cdf1b4062ea245344c": "armatura-gladkaya",
+  "d2c20143cf5f8c48099d": "balka",
+  "74577fcf7d8a697e7452": "kvadrat",
+  "4029efc2f95894b2878e": "krug",
+  "c49d5dacbff3cd5f6da6": "list-goryachekatanyy",
+  "fb98a0c86d2510b194ce": "polosa",
+  "18fbe6467e7250fa3a8f": "truby-stalnye",
+  "868928d7bd01ddf352a8": "truby-vodogazoprovodnye",
+  "489eeaf9ab3081de62ed": "truby-elektrosvarnye",
+  "c53036d5c556ae9722ec": "profil-zamknutyy-kvadratnyy",
+  "e0b6d4198fd0c19041be": "truby-profilnye",
+  "2d9df90a05ccd079b89f": "ugolok",
+  "c16c8479c1e0bc60ad09": "shveller",
+  "3f5f663cd12db9ee89ec": "list-holodnokatanyy",
+  "a0165433e200f1c1b124": "truby-kvadratnye",
+  "e3c41e4fb5fa093dc10c": "elektrody",
+  "e0316785f068b9e27c0f": "provoloka",
+  "d18e7d12ab01ffbecc18": "rulony"
+};
 function integrate(asset){
  assert(asset&&fs.existsSync(path.join('brokinvest.ru',asset.file)),`Missing reviewed asset ${asset?.file}`);
  const entry=source.images.find(i=>i.file===asset.file);assert(entry);
  if(copied.has(entry.hash))return copied.get(entry.hash);
- const url=`/images/catalog/${entry.hash.slice(0,20)}${path.extname(asset.file).toLowerCase()}`;
+ const url=`/images/catalog/${imageNames[entry.hash.slice(0,20)] ?? entry.hash.slice(0,20)}${path.extname(asset.file).toLowerCase()}`;
  fs.copyFileSync(path.join('brokinvest.ru',asset.file),'public'+url);
  copied.set(entry.hash,url);return url;
 }

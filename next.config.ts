@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
     localPatterns: [
       {pathname: "/images/hero/**"},
+      {pathname: "/images/catalog/**"},
       {pathname: "/**", search: ""},
     ],
   },

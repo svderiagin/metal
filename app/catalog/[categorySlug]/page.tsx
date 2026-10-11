@@ -1,6 +1,7 @@
+import {catalogImageUrl} from "@/lib/catalog-image";
 import type {Metadata} from "next";
 import {Suspense} from "react";
-import {CatalogImage} from "@/components/catalog/CatalogImage";
+import Image from "next/image";
 import {notFound} from "next/navigation";
 import {Breadcrumbs} from "@/components/catalog/Breadcrumbs";
 import {CatalogSidebar} from "@/components/catalog/CatalogSidebar";
@@ -35,6 +36,7 @@ export default async function CategoryPage({params}: Props) {
   if (!category) notFound();
   const productTypes = getProductTypesByCategoryId(category.id);
   const variants = getProductVariantsByCategoryId(category.id);
+  const hasImage = !category.imageUrl.endsWith(".svg");
 
   return (
     <PageContainer className="py-8 sm:py-10 lg:py-12">
@@ -43,10 +45,16 @@ export default async function CategoryPage({params}: Props) {
         <Suspense fallback={<div className="h-96 animate-pulse rounded-xl bg-slate-200"/>}>
           <CatalogSidebar activeSlug={category.slug}/>
         </Suspense>
-        <div>
-          <h1 className="text-3xl font-black">{category.name}</h1>
-          {!category.imageUrl.endsWith(".svg") && <CatalogImage src={category.imageUrl} name={category.name}/>}
-          <p className="mt-3 max-w-3xl leading-7 text-slate-600">{category.description}</p>
+        <div className="min-w-0">
+          <div className={`grid gap-x-6 gap-y-4 ${hasImage ? "md:grid-cols-[minmax(0,1fr)_320px] xl:grid-cols-[minmax(0,1fr)_360px]" : ""}`}>
+            <h1 className="text-3xl font-black">{category.name}</h1>
+            {hasImage && <div className="relative aspect-[2/1] w-full overflow-hidden rounded-xl bg-white md:col-start-2 md:row-span-2 md:row-start-1 md:self-center">
+              <Image src={catalogImageUrl(category.imageUrl)} alt={category.name} fill
+                sizes="(min-width: 1280px) 360px, (min-width: 768px) 320px, calc(100vw - 48px)"
+                className="object-contain"/>
+            </div>}
+            <p className="max-w-3xl leading-7 text-slate-600 md:col-start-1">{category.description}</p>
+          </div>
           <Suspense
             fallback={<div className="mt-8 h-80 animate-pulse rounded-lg bg-slate-200"/>}
           >

@@ -6,11 +6,11 @@
 
 | Файл в проекте | Адрес в браузере |
 | --- | --- |
-| `public/images/hero/1.avif` | `/images/hero/1.avif` |
-| `public/images/hero/2.avif` | `/images/hero/2.avif` |
-| `public/images/hero/3.avif` | `/images/hero/3.avif` |
-| `public/images/hero/4.avif` | `/images/hero/4.avif` |
-| `public/images/hero/5.avif` | `/images/hero/5.avif` |
+| `public/images/hero/1.jpg` | `/images/hero/1.jpg` |
+| `public/images/hero/2.jpg` | `/images/hero/2.jpg` |
+| `public/images/hero/3.jpg` | `/images/hero/3.jpg` |
+| `public/images/hero/4.jpg` | `/images/hero/4.jpg` |
+| `public/images/hero/5.jpg` | `/images/hero/5.jpg` |
 
 Единственный файл настроек — `data/hero-slides.ts`. Список путей хранится в `HERO_SLIDES`, интервал — в `AUTO_ROTATE_MS`:
 
@@ -18,11 +18,11 @@
 export const AUTO_ROTATE_MS = 2000;
 
 export const HERO_SLIDES: HeroSlide[] = [
-  {id: "hero-01", src: "/images/hero/1.avif", desktopPosition: "50% 65%", mobilePosition: "70% 65%"},
-  {id: "hero-02", src: "/images/hero/2.avif", desktopPosition: "50% 25%", mobilePosition: "65% 25%"},
-  {id: "hero-03", src: "/images/hero/3.avif", desktopPosition: "50% 65%", mobilePosition: "52% 65%"},
-  {id: "hero-04", src: "/images/hero/4.avif", desktopPosition: "50% 65%", mobilePosition: "65% 65%"},
-  {id: "hero-05", src: "/images/hero/5.avif", desktopPosition: "50% 75%", mobilePosition: "52% 75%"},
+  {id: "hero-01", src: "/images/hero/1.jpg", desktopPosition: "50% 65%", mobilePosition: "70% 65%"},
+  {id: "hero-02", src: "/images/hero/2.jpg", desktopPosition: "50% 25%", mobilePosition: "65% 25%"},
+  {id: "hero-03", src: "/images/hero/3.jpg", desktopPosition: "50% 65%", mobilePosition: "52% 65%"},
+  {id: "hero-04", src: "/images/hero/4.jpg", desktopPosition: "50% 65%", mobilePosition: "65% 65%"},
+  {id: "hero-05", src: "/images/hero/5.jpg", desktopPosition: "50% 75%", mobilePosition: "52% 75%"},
 ];
 ```
 
@@ -35,7 +35,7 @@ export const HERO_SLIDES: HeroSlide[] = [
 
 ## Обновление фотографий
 
-В `next.config.ts` включены `images.formats: ["image/avif", "image/webp"]`: Next.js выдаёт AVIF поддерживающим его браузерам и WebP — браузерам, запрашивающим WebP. Исходные фотографии карусели теперь ожидаются в формате AVIF. После изменения `next.config.ts` перезапустите сервер разработки, если он не перезапустился автоматически.
+В `next.config.ts` включены `images.formats: ["image/avif", "image/webp"]`: Next.js выдаёт AVIF поддерживающим его браузерам и WebP — браузерам, запрашивающим WebP. Исходные фотографии карусели ожидаются в формате JPG: `1.jpg`–`5.jpg` в `public/images/hero/`. После замены файла в `images/hero/` обновите его публичную копию; сайт использует файлы из `public/images/hero/`. После изменения `next.config.ts` перезапустите сервер разработки, если он не перезапустился автоматически.
 
 В режиме разработки (`npm run dev`) после добавления файлов обновите страницу. Перезапуск обычно не нужен. Изменения файла настроек подхватываются автоматически.
 
@@ -53,7 +53,7 @@ export const HERO_SLIDES: HeroSlide[] = [
 
 ## Проверка
 
-`node scripts/check-hero-images.mjs` проверяет настоящие фотографии владельца без их изменения: формат AVIF, совпадение исходных и публичных файлов, HTTP-адреса, декодирование, оптимизацию AVIF/WebP, отображение на компьютере и телефоне, стрелки, цикл и реальный двухсекундный таймер. Повреждённый и зависший запросы моделируются только в браузере. Нужны сайт на порту 3000 и Chrome CDP на 9223; для другого адреса сайта задайте `HERO_TEST_URL`. Отчёт и снимки экрана сохраняются в `.tmp/hero/`.
+`node scripts/check-hero-images.mjs` проверяет настоящие фотографии владельца без их изменения: формат JPEG, совпадение исходных и публичных файлов, HTTP-адреса, декодирование, оптимизацию AVIF/WebP, отображение на компьютере и телефоне, стрелки, цикл и реальный двухсекундный таймер. Повреждённый и зависший запросы моделируются только в браузере. Нужны сайт на порту 3000 и Chrome CDP на 9223; для другого адреса сайта задайте `HERO_TEST_URL`. Отчёт и снимки экрана сохраняются в `.tmp/hero/`.
 
 `node scripts/check-hero-browser.mjs` проверяет карусель через Chrome с CDP на порту 9223 и сайт на порту 3000. Создаёт временные цветные изображения без фотографий, проверяет варианты с нулём, одним, тремя и четырьмя файлами и удаляет их в `finally`. Не запускайте при уже добавленных фотографиях владельца: проверка намеренно откажется перезаписывать их.
 

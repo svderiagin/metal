@@ -49,3 +49,13 @@ No uncertain matches are automatically assigned. Medium confidence means a revie
 - `npm run lint -- --ignore-pattern 'brokinvest.ru/**'`: application lint. Unscoped lint also scans downloaded donor JavaScript, which contains unrelated lint errors.
 - `npm run build`: production build and TypeScript validation.
 - `node scripts/check-catalog-images-browser.mjs`: running local server on port 3000 and headless Chrome debugging on port 9223; desktop/mobile checks for loaded images, alt text, expected mapping, preserved aspect ratio and horizontal overflow.
+
+## Image filenames
+
+Catalog images in `public/images/catalog/` use descriptive Latin filenames (for example, `armatura.png`, `balka.jpeg`, and `truby-profilnye.jpeg`). Shared product and category references are maintained in `data/catalog-images.json`. The mapping script preserves these names during regeneration. Homepage banner files in `public/images/hero/` are separate.
+
+## Replacing images and cache updates
+
+Replace the image at its existing path. `npm run dev` checks catalog image contents every second and updates `data/catalog-image-versions.json` when files change. Image components and original-image links append a content version to the URL, so a replacement gets a new browser and Next.js image cache entry. Restart the dev server once after installing this workflow; subsequent image replacements need no restart. Refresh an already open page if necessary.
+
+`npm run build` regenerates the versions automatically before building. For production, rebuild and deploy both the application and public images together; copying a file alone does not update pre-rendered pages. Changing a filename or extension still requires updating `data/catalog-images.json`.
