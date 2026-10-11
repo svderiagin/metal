@@ -34,5 +34,5 @@ next-env.d.ts
 *.tmp
 *.swp
 /.tmp/
-/www.brokinvest.ru/
+/brokinvest.ru/
 *~

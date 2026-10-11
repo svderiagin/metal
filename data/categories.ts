@@ -1,5 +1,6 @@
 import type {Category} from "@/types/category";
 import importedCatalog from "./imported-catalog.json";
+import catalogImages from "./catalog-images.json";
 
 const originalCategories: Category[] = [
   {
@@ -132,5 +133,8 @@ const originalCategories: Category[] = [
   }
 ];
 
-export const categories: Category[] = importedCatalog.categories as Category[];
+export const categories: Category[] = (importedCatalog.categories as Category[]).map(category => ({
+  ...category,
+  imageUrl: (catalogImages.categories as Record<string, string>)[category.id] ?? catalogImages.fallback,
+}));
 export {originalCategories};

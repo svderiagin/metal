@@ -1,5 +1,6 @@
 import type {Metadata} from "next";
 import {Suspense} from "react";
+import {CatalogImage} from "@/components/catalog/CatalogImage";
 import {notFound} from "next/navigation";
 import {Breadcrumbs} from "@/components/catalog/Breadcrumbs";
 import {CatalogSidebar} from "@/components/catalog/CatalogSidebar";
@@ -44,6 +45,7 @@ export default async function CategoryPage({params}: Props) {
         </Suspense>
         <div>
           <h1 className="text-3xl font-black">{category.name}</h1>
+          {!category.imageUrl.endsWith(".svg") && <CatalogImage src={category.imageUrl} name={category.name}/>}
           <p className="mt-3 max-w-3xl leading-7 text-slate-600">{category.description}</p>
           <Suspense
             fallback={<div className="mt-8 h-80 animate-pulse rounded-lg bg-slate-200"/>}

@@ -1,6 +1,8 @@
 "use client";
 
-import {useMemo, useState} from "react";
+import {createCatalogSearchIndex} from "@/lib/search";
+import {useDeferredValue, useMemo, useState} from "react";
+import {CatalogImage} from "./CatalogImage";
 import {Button} from "@/components/ui/Button";
 import {Input} from "@/components/ui/Input";
 import {Select} from "@/components/ui/Select";
@@ -24,6 +26,7 @@ type RebarVariant = ProductVariant & Required<Pick<
 >>;
 
 type SortMode =
+  | "relevance"
   | "diameter-asc"
   | "diameter-desc"
   | "price-asc"
@@ -40,6 +43,11 @@ export function isMeasuredRebarVariant(variant: ProductVariant): variant is Reba
 }
 
 export function RebarVariantCatalog({variants}: {variants: RebarVariant[]}) {
+  const [query, setQuery] = useState("");
+  const deferredQuery = useDeferredValue(query);
+  const index = useMemo(() => createCatalogSearchIndex(variants), [variants]);
+  const matched = useMemo(() => new Set(index.search(deferredQuery).hits.map(h => h.product.id)), [index, deferredQuery]);
+  const ranks = useMemo(() => new Map(index.search(deferredQuery).hits.map((h, i) => [h.product.id, i])), [index, deferredQuery]);
   const [diameter, setDiameter] = useState("");
   const [form, setForm] = useState("");
   const [length, setLength] = useState("");
@@ -66,14 +74,16 @@ export function RebarVariantCatalog({variants}: {variants: RebarVariant[]}) {
   const results = useMemo(() => {
     const min = parseOptionalNumber(minimumPrice);
     const max = parseOptionalNumber(maximumPrice);
-    return variants.filter((variant) =>
-      (!diameter || variant.diameterMm === Number(diameter))
+    return (deferredQuery.trim() ? [...variants].sort((a, b) => (ranks.get(a.id) ?? Infinity) - (ranks.get(b.id) ?? Infinity)) : variants).filter((variant) =>
+      (!deferredQuery.trim() || matched.has(variant.id))
+      && (!diameter || variant.diameterMm === Number(diameter))
       && (!form || variant.form === form)
       && (!length || variant.lengthMeters === Number(length))
       && (!availability || variant.availability === availability)
       && (min === null || variant.pricePerTon >= min)
       && (max === null || variant.pricePerTon <= max),
     ).sort((left, right) => {
+      if (sort === "relevance") return 0;
       if (sort === "diameter-desc") return right.diameterMm - left.diameterMm;
       if (sort === "price-asc") return left.pricePerTon - right.pricePerTon;
       if (sort === "price-desc") return right.pricePerTon - left.pricePerTon;
@@ -81,8 +91,9 @@ export function RebarVariantCatalog({variants}: {variants: RebarVariant[]}) {
       if (sort === "weight-desc") return right.weightPerMeterKg - left.weightPerMeterKg;
       return left.diameterMm - right.diameterMm;
     });
-  }, [availability, diameter, form, length, maximumPrice, minimumPrice, sort, variants]);
+  }, [ranks, deferredQuery, matched, availability, diameter, form, length, maximumPrice, minimumPrice, sort, variants]);
   function resetFilters() {
+    setQuery("");
     setDiameter("");
     setForm("");
     setLength("");
@@ -96,6 +107,7 @@ export function RebarVariantCatalog({variants}: {variants: RebarVariant[]}) {
     <>
       <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6 lg:col-start-2">
         <h2 className="text-xl font-bold">Фильтры вариантов</h2>
+        <label className="mt-4 block text-sm font-semibold">Поиск вариантов<Input type="search" value={query} onChange={e => {setQuery(e.target.value);setSort("relevance");}} className="mt-1" placeholder="Арматура ф12 А500С"/></label>
         <div className="mt-5 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
           <Filter label="Диаметр, мм" value={diameter} onChange={setDiameter}>
             {diameters.map((value) => <option key={value} value={value}>{value}</option>)}
@@ -128,6 +140,7 @@ export function RebarVariantCatalog({variants}: {variants: RebarVariant[]}) {
             Сортировка
             <Select value={sort} onChange={(event) => setSort(event.target.value as SortMode)}
               className="mt-1 sm:max-w-sm">
+              <option value="relevance">По релевантности</option>
               <option value="diameter-asc">Диаметр: по возрастанию</option>
               <option value="diameter-desc">Диаметр: по убыванию</option>
               <option value="price-asc">Цена: по возрастанию</option>
@@ -263,6 +276,7 @@ function RebarVariantItem({
     return (
       <article className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
         <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">{variant.sku}</p>
+        <CatalogImage src={variant.imageUrls[0]} name={variant.name}/>
         <h3 className="mt-1 font-bold">{variant.name}</h3>
         <dl className="mt-4 grid grid-cols-2 gap-3 text-sm">
           <VariantDetail label="Диаметр" value={`${formatNumber(variant.diameterMm)} мм`}/>
@@ -301,7 +315,7 @@ function RebarVariantItem({
 
   return (
     <tr id={`variant-${variant.id}`} className="border-t border-slate-200 align-middle">
-      <td className="px-2 py-4 font-bold">{formatNumber(variant.diameterMm)}</td>
+      <td className="px-2 py-4 font-bold"><CatalogImage src={variant.imageUrls[0]} name={variant.name} compact/>{formatNumber(variant.diameterMm)}</td>
       <td className="px-2 py-4">{formLabel(variant.form)}</td>
       <td className="px-2 py-4">{variant.steelGrade}</td>
       <td className="whitespace-nowrap px-2 py-4 font-semibold">{formatUnitPrice(variant.pricePerTon, "за тонну")}</td>

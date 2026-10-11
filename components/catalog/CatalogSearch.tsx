@@ -1,40 +1,56 @@
 "use client";
 
-import {type FormEvent, useMemo} from "react";
+import {type FormEvent, useDeferredValue, useMemo, useState} from "react";
 import {useRouter, useSearchParams} from "next/navigation";
 import {Button} from "@/components/ui/Button";
 import {Input} from "@/components/ui/Input";
+import {createCatalogSearchIndex} from "@/lib/search";
+import Link from "next/link";
 import {ProductTypeGrid} from "./ProductTypeGrid";
 import type {ProductType, ProductVariant} from "@/types/product";
+import type {Category} from "@/types/category";
 
 export function CatalogSearch({
   productTypes,
   variants,
+  categories,
 }: {
   productTypes: ProductType[];
   variants: ProductVariant[];
+  categories: Category[];
 }) {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const query = searchParams.get("q")?.trim() ?? "";
+  const urlQuery = searchParams.get("q")?.trim() ?? "";
+  const [draft, setDraft] = useState({urlQuery, value: urlQuery});
+  const query = draft.urlQuery === urlQuery ? draft.value : urlQuery;
+  const deferredQuery = useDeferredValue(query);
+  const index = useMemo(() => createCatalogSearchIndex(variants, productTypes, categories), [variants, productTypes, categories]);
+  const search = useMemo(() => index.search(deferredQuery), [index, deferredQuery]);
+  const matchingVariants = useMemo(() => search.hits.map(h => h.product), [search]);
+  const [limit, setLimit] = useState(20);
 
   const results = useMemo(() => {
-    if (!query) return [];
-    return findMatchingProductTypes(query, productTypes, variants);
-  }, [productTypes, query, variants]);
+    const byId = new Map(productTypes.map(t => [t.id, t]));
+    return [...new Set(matchingVariants.map(v => v.productTypeId))].map(id => byId.get(id)).filter((t): t is ProductType => Boolean(t));
+  }, [productTypes, matchingVariants]);
+  function navigate(value: string) {
+    const params = new URLSearchParams(searchParams.toString());
+    if (value) params.set("q", value); else params.delete("q");
+    router.replace("/catalog" + (params.size ? "?" + params.toString() : ""), {scroll: false});
+  }
 
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const nextQuery = String(formData.get("query") ?? "").trim();
 
-    router.replace(nextQuery ? `/catalog?q=${encodeURIComponent(nextQuery)}` : "/catalog", {
-      scroll: false,
-    });
+    navigate(nextQuery);
   }
 
   function clear() {
-    router.replace("/catalog", {scroll: false});
+    setDraft({urlQuery, value: ""});
+    navigate("");
   }
 
   return (
@@ -48,10 +64,11 @@ export function CatalogSearch({
           <label className="flex-1">
             <span className="sr-only">Поисковый запрос</span>
             <Input
-              key={query}
               name="query"
               type="search"
-              defaultValue={query}
+              value={query}
+              onChange={e => {setDraft({urlQuery, value: e.target.value});setLimit(20);}}
+              maxLength={250}
               placeholder="Например, арматура А500С или MS-0001"
             />
           </label>
@@ -73,11 +90,19 @@ export function CatalogSearch({
           <div className="mb-5 flex flex-wrap items-baseline justify-between gap-3">
             <h2 className="text-xl font-black">Результаты поиска</h2>
             <p className="text-sm text-slate-600">
-              По запросу «{query}» найдено: {results.length}
+              По запросу «{query}» найдено товаров: {search.total}
             </p>
           </div>
           {results.length ? (
-            <ProductTypeGrid productTypes={results} variants={variants}/>
+            <>
+              {search.correctedQuery && <p className="mb-4 text-sm">Возможно, вы имели в виду: <button type="button" className="font-semibold text-red-700 underline" onClick={() => setDraft({urlQuery, value: search.correctedQuery!})}>{search.correctedQuery}</button></p>}
+              <ul className="mb-6 divide-y divide-slate-200 rounded-xl bg-white">{matchingVariants.slice(0, limit).map(product => {
+                const type = productTypes.find(t => t.id === product.productTypeId);
+                return type && <li key={product.id} className="p-4"><Link className="font-semibold text-red-700 hover:underline" href={"/catalog/" + type.categorySlug + "/" + type.subcategorySlug + "/" + type.slug + "#variant-" + product.id}>{product.name}</Link><p className="mt-1 text-sm text-slate-600">{product.sku}</p></li>;
+              })}</ul>
+              {limit < matchingVariants.length && <Button type="button" className="mb-6" onClick={() => setLimit(n => n + 20)}>Показать ещё</Button>}
+              <ProductTypeGrid productTypes={results} variants={matchingVariants}/>
+            </>
           ) : (
             <div className="rounded-xl border border-dashed border-slate-300 bg-white px-5 py-10 text-center">
               <strong className="text-lg">Типы продукции не найдены</strong>
@@ -90,39 +115,4 @@ export function CatalogSearch({
       )}
     </section>
   );
-}
-
-function searchableVariant(variant: ProductVariant) {
-  return [
-    variant.name,
-    variant.sku,
-    variant.shortDescription,
-    ...variant.attributes.map((attribute) => attribute.value),
-  ].join(" ").toLocaleLowerCase("ru");
-}
-
-function findMatchingProductTypes(
-  query: string,
-  productTypes: ProductType[],
-  variants: ProductVariant[],
-): ProductType[] {
-  const normalizedQuery = query.toLocaleLowerCase("ru");
-  const matchingProductTypeIds = new Set<string>();
-
-  for (const variant of variants) {
-    if (searchableVariant(variant).includes(normalizedQuery)) {
-      matchingProductTypeIds.add(variant.productTypeId);
-    }
-  }
-
-  const matchingProductTypes: ProductType[] = [];
-  for (const productType of productTypes) {
-    const searchableText = `${productType.name} ${productType.shortDescription}`
-      .toLocaleLowerCase("ru");
-    const typeMatches = searchableText.includes(normalizedQuery);
-    const variantMatches = matchingProductTypeIds.has(productType.id);
-    if (typeMatches || variantMatches) matchingProductTypes.push(productType);
-  }
-
-  return matchingProductTypes;
 }

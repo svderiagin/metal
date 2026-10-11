@@ -1,6 +1,7 @@
 import {categories} from "./categories";
 import {subcategories} from "./subcategories";
 import type {ProductType} from "@/types/product";
+import catalogImages from "./catalog-images.json";
 
 export const productTypes: ProductType[] = subcategories.flatMap((subcategory) => {
   const category = categories.find((item) => item.id === subcategory.categoryId);
@@ -16,5 +17,6 @@ export const productTypes: ProductType[] = subcategories.flatMap((subcategory) =
     slug: subcategory.slug,
     shortDescription: subcategory.shortDescription,
     description: subcategory.description,
+    imageUrl: (catalogImages.types as Record<string, string>)[`type-${subcategory.id}`],
   }];
 });

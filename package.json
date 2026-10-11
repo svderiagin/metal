@@ -11,7 +11,8 @@
     "start": "next start",
     "lint": "eslint",
     "catalog:import": "node scripts/inventory-mirror.mjs && node scripts/import-catalog.mjs && node scripts/completeness-mirror.mjs",
-    "catalog:check": "node --test scripts/catalog.test.mjs"
+    "catalog:check": "node --test scripts/catalog.test.mjs",
+    "search:check": "node --test scripts/search.test.mjs"
   },
   "dependencies": {
     "next": "16.2.11",

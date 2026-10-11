@@ -1,13 +1,15 @@
 "use client";
 
-import {useMemo, useState} from "react";
+import {createCatalogSearchIndex} from "@/lib/search";
+import {useDeferredValue, useMemo, useState} from "react";
+import {Input} from "@/components/ui/Input";
 import {Button} from "@/components/ui/Button";
 import {Select} from "@/components/ui/Select";
 import {ProductTypeGrid} from "./ProductTypeGrid";
 import {ResetFiltersButton} from "./ResetFiltersButton";
 import type {ProductType, ProductVariant} from "@/types/product";
 
-type SortMode = "availability" | "price-asc" | "price-desc" | "name";
+type SortMode = "relevance" | "availability" | "price-asc" | "price-desc" | "name";
 
 export function ProductTypeResults({
   productTypes,
@@ -16,6 +18,11 @@ export function ProductTypeResults({
   productTypes: ProductType[];
   variants: ProductVariant[];
 }) {
+  const [query, setQuery] = useState("");
+  const deferredQuery = useDeferredValue(query);
+  const index = useMemo(() => createCatalogSearchIndex(variants, productTypes), [variants, productTypes]);
+  const search = useMemo(() => index.search(deferredQuery), [index, deferredQuery]);
+  const candidates = useMemo(() => deferredQuery.trim() ? search.hits.map(h => h.product) : variants, [deferredQuery, search, variants]);
   const [material, setMaterial] = useState("");
   const [standard, setStandard] = useState("");
   const [stockOnly, setStockOnly] = useState(false);
@@ -30,18 +37,25 @@ export function ProductTypeResults({
     () => uniqueAttributeValues(variants, "standard"),
     [variants],
   );
-  const variantsByType = useMemo(() => groupVariantsByType(variants), [variants]);
+  const variantsByType = useMemo(() => groupVariantsByType(candidates), [candidates]);
 
   const result = useMemo(() => {
-    return filterAndSortProductTypes(
-      productTypes,
+    const filtered = filterAndSortProductTypes(
+      deferredQuery.trim() ? productTypes.filter(t => variantsByType.has(t.id)) : productTypes,
       variantsByType,
       material,
       standard,
       stockOnly,
       sort,
     );
+    if (deferredQuery.trim() && sort === "relevance") {
+      const order = new Map<string, number>();
+      search.hits.forEach((h, i) => {if (!order.has(h.product.productTypeId)) order.set(h.product.productTypeId, i);});
+      return filtered.sort((a, b) => (order.get(a.id) ?? Infinity) - (order.get(b.id) ?? Infinity));
+    }
+    return filtered;
   }, [
+    deferredQuery, search,
     material,
     productTypes,
     sort,
@@ -50,6 +64,7 @@ export function ProductTypeResults({
     variantsByType,
   ]);
   function reset() {
+    setQuery("");
     setMaterial("");
     setStandard("");
     setStockOnly(false);
@@ -60,6 +75,7 @@ export function ProductTypeResults({
   return (
     <section className="mt-8" aria-labelledby="product-types-heading">
       <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+        <label className="mb-4 block text-sm font-semibold">Поиск в категории<Input type="search" value={query} onChange={e => {setQuery(e.target.value);setSort("relevance");setLimit(12);}} className="mt-1" placeholder="Название, размер или марка стали"/></label>
         <div className="grid gap-4 md:grid-cols-3">
           <FilterSelect label="Материал" value={material} onChange={setMaterial}>
             <option value="">Все материалы</option>
@@ -74,6 +90,7 @@ export function ProductTypeResults({
             value={sort}
             onChange={(value) => setSort(value as SortMode)}
           >
+            <option value="relevance">По релевантности</option>
             <option value="availability">Сначала в наличии</option>
             <option value="price-asc">Сначала дешевле</option>
             <option value="price-desc">Сначала дороже</option>
@@ -101,7 +118,7 @@ export function ProductTypeResults({
 
       {result.length ? (
         <>
-          <ProductTypeGrid productTypes={result.slice(0, limit)} variants={variants}/>
+          <ProductTypeGrid productTypes={result.slice(0, limit)} variants={candidates}/>
           {limit < result.length && (
             <div className="mt-6 text-center">
               <Button type="button" onClick={() => setLimit((value) => value + 12)}>

@@ -1,5 +1,6 @@
 import type {Metadata} from "next";
 import {Suspense} from "react";
+import {CatalogImage} from "@/components/catalog/CatalogImage";
 import {notFound} from "next/navigation";
 import {Breadcrumbs} from "@/components/catalog/Breadcrumbs";
 import {CatalogSidebar} from "@/components/catalog/CatalogSidebar";
@@ -80,6 +81,7 @@ export default async function ProductTypePage({params}: Props) {
               Тип продукции
             </p>
             <h1 className="mt-2 break-words text-3xl font-black sm:text-4xl">{productType.name}</h1>
+            <CatalogImage src={productType.imageUrl} name={productType.name}/>
             <p className="mt-4 max-w-4xl leading-7 text-slate-600">{productType.description}</p>
           </div>
         </div>

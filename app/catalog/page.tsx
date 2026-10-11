@@ -21,6 +21,7 @@ export default function CatalogPage() {
       <div>
         <Suspense fallback={<div className="h-40 animate-pulse rounded-xl bg-slate-200"/>}>
           <CatalogSearch
+            categories={getAllCategories()}
             productTypes={getAllProductTypes()}
             variants={getAllProductVariants()}
           />

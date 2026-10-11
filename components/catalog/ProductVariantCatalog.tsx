@@ -1,7 +1,9 @@
 "use client";
 
-import {useEffect, useMemo, useState} from "react";
+import {createCatalogSearchIndex} from "@/lib/search";
+import {useDeferredValue, useEffect, useMemo, useState} from "react";
 import Link from "next/link";
+import {CatalogImage} from "./CatalogImage";
 import {useCart} from "@/hooks/useCart";
 import {formatUnitPrice} from "@/lib/currency";
 import {formatNumber} from "@/lib/numberFormat";
@@ -20,7 +22,7 @@ import {
   RebarVariantCatalog,
 } from "@/components/catalog/RebarVariantCatalog";
 
-type SortMode = "availability" | "price-asc" | "price-desc" | "size" | "name";
+type SortMode = "relevance" | "availability" | "price-asc" | "price-desc" | "size" | "name";
 
 export function ProductVariantCatalog({
   variants,
@@ -55,6 +57,9 @@ function GenericProductVariantCatalog({
   const [addedVariantId, setAddedVariantId] = useState<string | null>(null);
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState("");
+  const deferredQuery = useDeferredValue(query);
+  const index = useMemo(() => createCatalogSearchIndex(variants), [variants]);
+  const search = useMemo(() => index.search(deferredQuery), [index, deferredQuery]);
   const {addItem} = useCart();
   useEffect(() => {
     function revealLinkedVariant() {
@@ -84,19 +89,19 @@ function GenericProductVariantCatalog({
     const minimum = minimumPrice === "" ? null : Number(minimumPrice);
     const maximum = maximumPrice === "" ? null : Number(maximumPrice);
 
-    const filtered = variants.filter((variant) => {
+    const filtered = (deferredQuery.trim() ? search.hits.map(h => h.product) : variants).filter((variant) => {
       const attributesMatch = presentation.filterKeys.every((key) =>
         !filters[key] || getVariantAttribute(variant, key) === filters[key],
       );
 
       return attributesMatch
-        && `${variant.name} ${variant.sku}`.toLocaleLowerCase("ru").includes(query.toLocaleLowerCase("ru"))
         && (!stockOnly || variant.inStock)
         && (minimum === null || (variant.price !== null && variant.price >= minimum))
         && (maximum === null || (variant.price !== null && variant.price <= maximum));
     });
 
     return [...filtered].sort((left, right) => {
+      if (sort === "relevance") return 0;
       if (sort === "name") return left.name.localeCompare(right.name, "ru", {numeric: true});
       if (sort.startsWith("price") && left.quoteOnly !== right.quoteOnly) return left.quoteOnly ? 1 : -1;
       if (sort === "price-asc") return (left.price ?? Infinity) - (right.price ?? Infinity);
@@ -114,7 +119,8 @@ function GenericProductVariantCatalog({
     sort,
     stockOnly,
     variants,
-    query,
+    deferredQuery,
+    search,
   ]);
   const pages = Math.max(1, Math.ceil(results.length / 40));
   const currentPage = Math.min(page, pages);
@@ -157,7 +163,7 @@ function GenericProductVariantCatalog({
       <div className="min-w-0 rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6 lg:col-start-2">
         <h2 className="text-xl font-bold">Фильтры вариантов</h2>
         <div className="mt-5 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-          <label className="text-sm font-semibold">Поиск варианта<Input className="mt-1" type="search" value={query} onChange={e => {setQuery(e.target.value); setPage(1);}} placeholder="Название, размер, марка"/></label>
+          <label className="text-sm font-semibold">Поиск варианта<Input className="mt-1" type="search" value={query} onChange={e => {setQuery(e.target.value); setSort("relevance"); setPage(1);}} placeholder="Название, размер, марка"/></label>
           {presentation.filterKeys.filter(key => (filterOptions.get(key)?.length ?? 0) > 0).map((key) => (
             <label key={key} className="min-w-0 text-sm font-semibold">
               {filterLabel(variants, key)}
@@ -202,6 +208,7 @@ function GenericProductVariantCatalog({
               onChange={(event) => setSort(event.target.value as SortMode)}
               className="mt-1"
             >
+              <option value="relevance">По релевантности</option>
               <option value="name">По обозначению</option>
               <option value="availability">Сначала в наличии</option>
               <option value="price-asc">Сначала дешевле</option>
@@ -248,7 +255,7 @@ function GenericProductVariantCatalog({
               <tbody>
                 {visible.map((variant) => (
                   <tr id={`variant-${variant.id}`} key={variant.id} className="border-t border-slate-200 align-middle">
-                    <td className="break-words p-3"><strong>{variant.name}</strong><p className="mt-2 text-xs text-slate-500">{variant.sku}</p></td>
+                    <td className="break-words p-3"><CatalogImage src={variant.imageUrls[0]} name={variant.name} compact/><strong>{variant.name}</strong><p className="mt-2 text-xs text-slate-500">{variant.sku}</p></td>
                     <td className="break-words p-3"><VariantSpecifications variant={variant}/></td>
                     <td className="break-words px-2 py-3">
                       <strong>{variant.quoteOnly ? "Цена по запросу" : `${variant.priceQualifier === "from" ? "от " : ""}${formatUnitPrice(variant.price, variant.priceUnit)}`}</strong>
@@ -294,6 +301,7 @@ function GenericProductVariantCatalog({
                 <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
                   {variant.sku}
                 </p>
+                <CatalogImage src={variant.imageUrls[0]} name={variant.name}/>
                 <h3 className="mt-1 font-bold">{variant.name}</h3>
                 <div className="mt-4"><VariantSpecifications variant={variant}/></div>
                 <div className="mt-5 flex flex-wrap items-end justify-between gap-4 border-t border-slate-100 pt-4">
