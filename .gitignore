@@ -36,3 +36,6 @@ next-env.d.ts
 /.tmp/
 /brokinvest.ru/
 *~
+
+# Local AI assistant
+/.junie/

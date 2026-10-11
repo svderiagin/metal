@@ -1,0 +1,39 @@
+.hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: #172033;
+  color: white;
+  touch-action: pan-y pinch-zoom;
+}
+
+.photograph {
+  object-fit: cover;
+  object-position: var(--position-desktop, 50% 50%);
+  opacity: 0;
+  transition: opacity 600ms ease;
+}
+
+.photograph[data-active="true"] { opacity: 1; }
+
+.shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgb(10 18 30 / 94%) 0%, rgb(10 18 30 / 82%) 42%, rgb(10 18 30 / 25%) 100%);
+  pointer-events: none;
+}
+
+.control:focus-visible {
+  outline: 3px solid white;
+  outline-offset: 4px;
+  box-shadow: 0 0 0 6px #b91c1c;
+}
+
+@media (max-width: 639px) {
+  .photograph { object-position: var(--position-mobile, 50% 50%); }
+  .shade { background: linear-gradient(90deg, rgb(10 18 30 / 92%), rgb(10 18 30 / 72%) 70%, rgb(10 18 30 / 40%)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .photograph { transition: none; }
+}
