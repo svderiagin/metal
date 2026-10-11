@@ -9,8 +9,9 @@ export interface HeroSlide {
 export const AUTO_ROTATE_MS = 2000;
 
 export const HERO_SLIDES: HeroSlide[] = [
-  {id: "hero-01", src: "/images/hero/hero-01.avif", desktopPosition: "50% 50%", mobilePosition: "60% 50%"},
-  {id: "hero-02", src: "/images/hero/hero-02.avif", desktopPosition: "50% 50%", mobilePosition: "60% 50%"},
-  {id: "hero-03", src: "/images/hero/hero-03.avif", desktopPosition: "50% 50%", mobilePosition: "60% 50%"},
-  {id: "hero-04", src: "/images/hero/hero-04.avif", desktopPosition: "50% 50%", mobilePosition: "60% 50%"},
+  {id: "hero-01", src: "/images/hero/1.avif", desktopPosition: "50% 65%", mobilePosition: "70% 65%"},
+  {id: "hero-02", src: "/images/hero/2.avif", desktopPosition: "50% 25%", mobilePosition: "65% 25%"},
+  {id: "hero-03", src: "/images/hero/3.avif", desktopPosition: "50% 65%", mobilePosition: "52% 65%"},
+  {id: "hero-04", src: "/images/hero/4.avif", desktopPosition: "50% 65%", mobilePosition: "65% 65%"},
+  {id: "hero-05", src: "/images/hero/5.avif", desktopPosition: "50% 75%", mobilePosition: "52% 75%"},
 ];

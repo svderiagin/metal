@@ -19,7 +19,7 @@
 .shade {
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, rgb(10 18 30 / 94%) 0%, rgb(10 18 30 / 82%) 42%, rgb(10 18 30 / 25%) 100%);
+  background: linear-gradient(90deg, rgb(10 18 30 / 84%) 0%, rgb(10 18 30 / 70%) 42%, rgb(10 18 30 / 15%) 100%);
   pointer-events: none;
 }
 
@@ -31,7 +31,7 @@
 
 @media (max-width: 639px) {
   .photograph { object-position: var(--position-mobile, 50% 50%); }
-  .shade { background: linear-gradient(90deg, rgb(10 18 30 / 92%), rgb(10 18 30 / 72%) 70%, rgb(10 18 30 / 40%)); }
+  .shade { background: linear-gradient(90deg, rgb(10 18 30 / 84%), rgb(10 18 30 / 64%) 70%, rgb(10 18 30 / 30%)); }
 }
 
 @media (prefers-reduced-motion: reduce) {

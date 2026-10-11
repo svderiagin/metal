@@ -1,15 +1,16 @@
-﻿# Фотографии главного экрана
+# Фотографии главного экрана
 
 Папка в репозитории: `public/images/hero/`.
 Полный путь на этом компьютере: `C:\Users\Sergei\Projects\metal\public\images\hero`.
-Четыре фотографии владельца находятся в этой папке и используются на главной странице. Исходные копии из `images/hero/` сохранены; эта папка в корне не является публичной и сама по себе не обслуживается Next.js. Четыре информационные плитки удалены. Тестовые изображения не являются фотографиями владельца и в проекте не сохраняются.
+Пять фотографий владельца находятся в этой папке и используются на главной странице. Исходные копии из `images/hero/` сохранены; эта папка в корне не является публичной и сама по себе не обслуживается Next.js. Четыре информационные плитки удалены. Тестовые изображения не являются фотографиями владельца и в проекте не сохраняются.
 
 | Файл в проекте | Адрес в браузере |
 | --- | --- |
-| `public/images/hero/hero-01.avif` | `/images/hero/hero-01.avif` |
-| `public/images/hero/hero-02.avif` | `/images/hero/hero-02.avif` |
-| `public/images/hero/hero-03.avif` | `/images/hero/hero-03.avif` |
-| `public/images/hero/hero-04.avif` | `/images/hero/hero-04.avif` |
+| `public/images/hero/1.avif` | `/images/hero/1.avif` |
+| `public/images/hero/2.avif` | `/images/hero/2.avif` |
+| `public/images/hero/3.avif` | `/images/hero/3.avif` |
+| `public/images/hero/4.avif` | `/images/hero/4.avif` |
+| `public/images/hero/5.avif` | `/images/hero/5.avif` |
 
 Единственный файл настроек — `data/hero-slides.ts`. Список путей хранится в `HERO_SLIDES`, интервал — в `AUTO_ROTATE_MS`:
 
@@ -17,14 +18,15 @@
 export const AUTO_ROTATE_MS = 2000;
 
 export const HERO_SLIDES: HeroSlide[] = [
-  {id: "hero-01", src: "/images/hero/hero-01.avif", desktopPosition: "50% 50%", mobilePosition: "60% 50%"},
-  {id: "hero-02", src: "/images/hero/hero-02.avif", desktopPosition: "50% 50%", mobilePosition: "60% 50%"},
-  {id: "hero-03", src: "/images/hero/hero-03.avif", desktopPosition: "50% 50%", mobilePosition: "60% 50%"},
-  {id: "hero-04", src: "/images/hero/hero-04.avif", desktopPosition: "50% 50%", mobilePosition: "60% 50%"},
+  {id: "hero-01", src: "/images/hero/1.avif", desktopPosition: "50% 65%", mobilePosition: "70% 65%"},
+  {id: "hero-02", src: "/images/hero/2.avif", desktopPosition: "50% 25%", mobilePosition: "65% 25%"},
+  {id: "hero-03", src: "/images/hero/3.avif", desktopPosition: "50% 65%", mobilePosition: "52% 65%"},
+  {id: "hero-04", src: "/images/hero/4.avif", desktopPosition: "50% 65%", mobilePosition: "65% 65%"},
+  {id: "hero-05", src: "/images/hero/5.avif", desktopPosition: "50% 75%", mobilePosition: "52% 75%"},
 ];
 ```
 
-- Для трёх фотографий удалите строку с `id: "hero-04"`. Также отсутствующие файлы автоматически пропускаются.
+- Для трёх фотографий удалите строки с `id: "hero-04"` и `id: "hero-05"`. Также отсутствующие файлы автоматически пропускаются.
 - Для изменения порядка переставьте строки массива. Сохраняйте уникальные `id`.
 - Для JPEG или PNG положите настоящий файл соответствующего формата и измените `src` на его точное имя с фактическим расширением. Поддерживаются `.jpg`, `.jpeg`, `.png`, `.webp`, `.avif`. Простое переименование расширения не конвертирует файл.
 - `desktopPosition` задаёт положение кадра на экранах от 640 пикселей; `mobilePosition` — на телефонах. Проценты работают как `object-position`: `50% 50%` — центр, `70% 50%` смещает область кадрирования вправо. Главный объект лучше располагать в средней или правой части снимка: слева находится текст.
