@@ -14,7 +14,7 @@ export function CategoryCard({category}: { category: Category }) {
         {hasImage && category.imageUrl ? <div className="relative aspect-[2/1] w-full shrink-0 overflow-hidden rounded-t-xl bg-white">
           <Image src={catalogImageUrl(category.imageUrl)} alt={category.name} fill
             sizes="(min-width: 1280px) 390px, (min-width: 640px) calc((100vw - 72px) / 2), calc(100vw - 34px)"
-            className="object-contain"/>
+            className="object-cover object-center"/>
         </div> : <div
           className="ml-5 mt-5 flex size-12 items-center justify-center rounded-lg bg-slate-900 text-xl font-black text-white sm:ml-6 sm:mt-6"
           aria-hidden

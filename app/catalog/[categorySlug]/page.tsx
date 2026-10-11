@@ -51,7 +51,7 @@ export default async function CategoryPage({params}: Props) {
             {hasImage && <div className="relative aspect-[2/1] w-full overflow-hidden rounded-xl bg-white md:col-start-2 md:row-span-2 md:row-start-1 md:self-center">
               <Image src={catalogImageUrl(category.imageUrl)} alt={category.name} fill
                 sizes="(min-width: 1280px) 360px, (min-width: 768px) 320px, calc(100vw - 48px)"
-                className="object-contain"/>
+                className="object-contain object-center"/>
             </div>}
             <p className="max-w-3xl leading-7 text-slate-600 md:col-start-1">{category.description}</p>
           </div>
