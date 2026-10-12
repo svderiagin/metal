@@ -26,7 +26,7 @@ export function ProductTypeCard({
     <article className="h-full">
       <Link
         href={`/catalog/${categorySlug}/${subcategorySlug}/${productType.slug}`}
-        className="group flex h-full min-h-80 cursor-pointer flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-slate-400 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-700"
+        className="group flex h-full min-h-80 cursor-pointer flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-slate-400 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-600"
       >
         {productType.imageUrl ? <div className="relative aspect-[2/1] w-full shrink-0 bg-white">
           <Image src={catalogImageUrl(productType.imageUrl)} alt={productType.name} fill

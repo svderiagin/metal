@@ -19,7 +19,6 @@ export function CatalogCategoryLink({
   useEffect(() => {
     if (!active || pathname !== href || !linkRef.current) return;
 
-    linkRef.current.focus({preventScroll: true});
     linkRef.current.scrollIntoView({
       behavior: "smooth",
       block: "center",

@@ -18,7 +18,6 @@ export function CatalogSubcategoryLink({
   useEffect(() => {
     if (!active || !linkRef.current) return;
 
-    linkRef.current.focus({preventScroll: true});
     linkRef.current.scrollIntoView({
       behavior: "smooth",
       block: "center",

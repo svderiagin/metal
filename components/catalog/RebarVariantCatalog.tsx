@@ -1,6 +1,7 @@
 "use client";
 
 import filterStyles from "./FilterPanel.module.css";
+import {PriceInput} from "./PriceInput";
 
 import {createCatalogSearchIndex} from "@/lib/search";
 import {useDeferredValue, useEffect, useMemo, useState} from "react";
@@ -108,7 +109,7 @@ export function RebarVariantCatalog({variants, simplified = false}: {variants: R
     <>
       <div className={`${filterStyles.panel} rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6 lg:col-start-2`}>
         <h2 className="text-xl font-bold">{simplified ? "Фильтры" : "Фильтры вариантов"}</h2>
-        <label className="mt-4 block text-sm font-semibold">Поиск вариантов<Input type="search" value={query} onChange={e => {setQuery(e.target.value);setSort("relevance");}} className="mt-1" placeholder="Арматура ф12 А500С"/></label>
+        <label className="mt-4 block text-sm font-semibold">Поиск вариантов<Input type="search" value={query} onChange={e => {setQuery(e.target.value);setSort("relevance");}} className="mt-1" placeholder="Арматура А500С"/></label>
         <div className="mt-5 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
           <Filter label="Диаметр, мм" value={diameter} onChange={setDiameter}>
             {diameters.map((value) => <option key={value} value={value}>{value}</option>)}
@@ -123,15 +124,15 @@ export function RebarVariantCatalog({variants, simplified = false}: {variants: R
           </Filter>
           <label className="text-sm font-semibold">
             Минимальная цена за тонну
-            <Input type="number" min={0} value={minimumPrice}
+            <PriceInput type="number" min={0} value={minimumPrice}
               onChange={(event) => setMinimumPrice(event.target.value)}
-              className="mt-1" placeholder="От"/>
+               placeholder="От"/>
           </label>
           <label className="text-sm font-semibold">
             Максимальная цена за тонну
-            <Input type="number" min={0} value={maximumPrice}
+            <PriceInput type="number" min={0} value={maximumPrice}
               onChange={(event) => setMaximumPrice(event.target.value)}
-              className="mt-1" placeholder="До"/>
+               placeholder="До"/>
           </label>
           <Filter label="Наличие" value={availability} onChange={setAvailability}>
             <option value="IN_STOCK">В наличии</option>

@@ -1,6 +1,7 @@
 "use client";
 
 import filterStyles from "./FilterPanel.module.css";
+import {PriceInput} from "./PriceInput";
 
 import {createCatalogSearchIndex} from "@/lib/search";
 import {useDeferredValue, useEffect, useMemo, useState} from "react";
@@ -185,23 +186,23 @@ function GenericProductVariantCatalog({
           ))}
           <label className="text-sm font-semibold">
             Минимальная цена
-            <Input
+            <PriceInput
               type="number"
               min={0}
               value={minimumPrice}
               onChange={(event) => setMinimumPrice(event.target.value)}
-              className="mt-1"
+              
               placeholder="От"
             />
           </label>
           <label className="text-sm font-semibold">
             Максимальная цена
-            <Input
+            <PriceInput
               type="number"
               min={0}
               value={maximumPrice}
               onChange={(event) => setMaximumPrice(event.target.value)}
-              className="mt-1"
+              
               placeholder="До"
             />
           </label>

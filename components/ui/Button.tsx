@@ -6,7 +6,7 @@ const styles = [
   "text-center text-sm font-bold",
   "bg-red-700 text-white shadow-sm",
   "transition-colors hover:bg-red-800",
-  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-700",
+  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-600",
   "disabled:pointer-events-none disabled:opacity-50",
 ].join(" ");
 

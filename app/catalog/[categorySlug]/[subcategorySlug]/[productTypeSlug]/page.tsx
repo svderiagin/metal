@@ -83,7 +83,7 @@ export default async function ProductTypePage({params}: Props) {
             {productType.imageUrl && !productType.imageUrl.endsWith(".svg") && <a
               href={catalogImageUrl(productType.imageUrl)} target="_blank" rel="noopener noreferrer"
               aria-label={`Открыть оригинал изображения: ${productType.name} (в новой вкладке)`}
-              className="group mx-auto mt-6 block w-full max-w-2xl rounded-xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-700"
+              className="group mx-auto mt-6 block w-full max-w-2xl rounded-xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-slate-600"
             >
               <div className="relative aspect-[2/1] overflow-hidden rounded-xl bg-white">
                 <Image src={catalogImageUrl(productType.imageUrl)} alt={productType.name} fill
