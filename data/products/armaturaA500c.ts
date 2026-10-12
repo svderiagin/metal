@@ -11,6 +11,8 @@ type A500cRow = {
   lengthMeters?: number;
 };
 
+// Nominal kg/m: GOST 34028-2016, table 1. Preserve three decimal places.
+// https://files.stroyinf.ru/Data2/1/4293746/4293746568.htm
 const rows: A500cRow[] = [
   {diameterMm: 6, form: "coil", pricePerTon: 73300, weightPerMeterKg: 0.222},
   {diameterMm: 6, form: "bar", lengthMeters: 6, pricePerTon: 73300, weightPerMeterKg: 0.222},
@@ -20,14 +22,14 @@ const rows: A500cRow[] = [
   {diameterMm: 10, form: "bar", lengthMeters: 6, pricePerTon: 71800, weightPerMeterKg: 0.617},
   {diameterMm: 12, form: "coil", pricePerTon: 70400, weightPerMeterKg: 0.888},
   {diameterMm: 12, form: "bar", lengthMeters: 11.7, pricePerTon: 68400, weightPerMeterKg: 0.888},
-  {diameterMm: 14, form: "bar", lengthMeters: 11.7, pricePerTon: 68400, weightPerMeterKg: 1.21},
-  {diameterMm: 16, form: "bar", lengthMeters: 11.7, pricePerTon: 67800, weightPerMeterKg: 1.58},
-  {diameterMm: 18, form: "bar", lengthMeters: 11.7, pricePerTon: 68400, weightPerMeterKg: 2},
-  {diameterMm: 20, form: "bar", lengthMeters: 11.7, pricePerTon: 68400, weightPerMeterKg: 2.47},
-  {diameterMm: 22, form: "bar", lengthMeters: 11.7, pricePerTon: 68400, weightPerMeterKg: 2.98},
-  {diameterMm: 25, form: "bar", lengthMeters: 11.7, pricePerTon: 68400, weightPerMeterKg: 3.85},
-  {diameterMm: 28, form: "bar", lengthMeters: 11.7, pricePerTon: 68400, weightPerMeterKg: 4.83},
-  {diameterMm: 32, form: "bar", lengthMeters: 11.7, pricePerTon: 68400, weightPerMeterKg: 6.31},
+  {diameterMm: 14, form: "bar", lengthMeters: 11.7, pricePerTon: 68400, weightPerMeterKg: 1.208},
+  {diameterMm: 16, form: "bar", lengthMeters: 11.7, pricePerTon: 67800, weightPerMeterKg: 1.578},
+  {diameterMm: 18, form: "bar", lengthMeters: 11.7, pricePerTon: 68400, weightPerMeterKg: 1.998},
+  {diameterMm: 20, form: "bar", lengthMeters: 11.7, pricePerTon: 68400, weightPerMeterKg: 2.466},
+  {diameterMm: 22, form: "bar", lengthMeters: 11.7, pricePerTon: 68400, weightPerMeterKg: 2.984},
+  {diameterMm: 25, form: "bar", lengthMeters: 11.7, pricePerTon: 68400, weightPerMeterKg: 3.853},
+  {diameterMm: 28, form: "bar", lengthMeters: 11.7, pricePerTon: 68400, weightPerMeterKg: 4.834},
+  {diameterMm: 32, form: "bar", lengthMeters: 11.7, pricePerTon: 68400, weightPerMeterKg: 6.313},
   {diameterMm: 36, form: "bar", lengthMeters: 11.7, pricePerTon: 68400, weightPerMeterKg: 7.99},
 ];
 

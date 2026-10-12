@@ -19,7 +19,6 @@ import {
   parseNonNegativeDecimal,
   tonsToMeters,
 } from "@/lib/orderMeasurement";
-import type {OrderInputMode} from "@/types/cart";
 import type {ProductVariant} from "@/types/product";
 
 type RebarVariant = ProductVariant & Required<Pick<
@@ -165,9 +164,6 @@ export function RebarVariantCatalog({variants, simplified = false}: {variants: R
 
       {results.length ? (
         <>
-        <p className="mb-4 text-sm text-slate-500">
-          Укажите метры или тонны — сумма рассчитается автоматически.
-        </p>
         <div className="hidden overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm xl:block">
           <table className="w-full table-fixed border-collapse text-center text-sm">
             <colgroup>
@@ -230,10 +226,10 @@ function RebarVariantItem({
   const {addItem, removeItem, lines, hydrated} = useCart();
   const cartLine = lines.find((line) => line.productId === variant.id);
   const savedMeasurement = cartLine?.measurement;
-  const [draft, setDraft] = useState<{meters: string; tons: string; inputMode: OrderInputMode} | null>(null);
-  const inputMode = draft?.inputMode ?? savedMeasurement?.inputMode ?? "meter";
+  const [draft, setDraft] = useState<{meters: string; tons: string; inputMode: "meter" | "ton"} | null>(null);
+  const inputMode = draft?.inputMode ?? (savedMeasurement?.inputMode ?? "meter");
   const meters = draft?.meters ?? (savedMeasurement ? formatDecimal(savedMeasurement.meters, 2) : "");
-  const tons = draft?.tons ?? (savedMeasurement ? formatDecimal(savedMeasurement.weightTons, 2) : "");
+  const tons = draft?.tons ?? (savedMeasurement ? formatDecimal(savedMeasurement.weightTons, 3) : "");
   const [message, setMessage] = useState("");
   const [removed, setRemoved] = useState(false);
 
@@ -251,7 +247,7 @@ function RebarVariantItem({
   const estimatedTotal = parsedTons === null ? null : calculateLineTotal(parsedTons, variant.pricePerTon);
   const totalLabel = estimatedTotal === null ? "Укажите объём" : formatCurrency(estimatedTotal);
   const totalClassName = estimatedTotal === null
-    ? "text-xs font-normal text-slate-500"
+    ? "text-xs font-normal text-[color-mix(in_oklab,var(--color-slate-300),var(--color-slate-400))]"
     : "whitespace-nowrap font-semibold tabular-nums text-slate-900";
   const isSaved = !!savedMeasurement && !cartLine?.invalidReason && parsedTons !== null && parsedTons > 0
     && Math.abs(parsedTons - savedMeasurement.weightTons) <= Math.max(1, savedMeasurement.weightTons) * 1e-9;
@@ -266,7 +262,7 @@ function RebarVariantItem({
     const parsed = parseNonNegativeDecimal(value);
     if (value !== "" && parsed === null) return;
     const converted = parsed === null ? null : metersToTons(parsed, variant.weightPerMeterKg);
-    setDraft({inputMode: "meter", meters: value, tons: converted === null ? "" : formatDecimal(converted, 2)});
+    setDraft({inputMode: "meter", meters: value, tons: converted === null ? "" : formatDecimal(converted, 3)});
     setMessage("");
   }
 
@@ -332,8 +328,9 @@ function RebarVariantItem({
             onChange={updateMeters}
           />
           <OrderInput
-            label={`Вес заказа для ${variant.name}`}
+            label={`Вес заказа в тоннах для ${variant.name}`}
             visibleLabel="Заказ, т"
+            decimalPlaces={3}
             value={tons}
             onChange={updateTons}
           />
@@ -362,7 +359,7 @@ function RebarVariantItem({
         <OrderInput label={`Длина заказа для ${variant.name}`} value={meters} onChange={updateMeters}/>
       </td>
       <td className="px-2 py-3">
-        <OrderInput label={`Вес заказа для ${variant.name}`} value={tons} onChange={updateTons}/>
+        <OrderInput label={`Вес заказа в тоннах для ${variant.name}`} value={tons} onChange={updateTons} decimalPlaces={3}/>
       </td>
       <td className="px-2 py-3 text-right">
         <output aria-label={`Сумма заказа для ${variant.name}`} aria-live="polite" className={totalClassName}>{totalLabel}</output>
@@ -379,12 +376,14 @@ function RebarVariantItem({
 }
 
 function OrderInput({
+  decimalPlaces = 2,
   label,
   visibleLabel,
   value,
   onChange,
 }: {
   label: string;
+  decimalPlaces?: number;
   visibleLabel?: string;
   value: string;
   onChange: (value: string) => void;
@@ -392,10 +391,10 @@ function OrderInput({
   return (
     <label className="block text-sm font-semibold">
       {visibleLabel && <span className="mb-1 block">{visibleLabel}</span>}
-      <Input aria-label={label} type="number" inputMode="decimal" min={0} step="0.01"
+      <Input aria-label={label} type="number" inputMode="decimal" min={0} step={10 ** -decimalPlaces}
         value={value} onChange={(event) => {
           const next = event.target.value;
-          if (next === "" || /^\d+(?:[.,]\d{0,2})?$/.test(next)) onChange(next);
+          if (next === "" || new RegExp(`^\\d+(?:[.,]\\d{0,${decimalPlaces}})?$`).test(next)) onChange(next);
         }}
         className={`${filterStyles.field} w-full min-w-0 px-2 tabular-nums focus:placeholder:text-transparent ${visibleLabel ? "" : "text-center"}`} placeholder="0"/>
     </label>

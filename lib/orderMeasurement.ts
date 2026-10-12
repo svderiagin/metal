@@ -1,10 +1,12 @@
 export function metersToTons(meters: number, weightPerMeterKg: number) {
   if (!isNonNegativeFinite(meters) || !isPositiveFinite(weightPerMeterKg)) return null;
+  // Length (m) × nominal linear mass (kg/m) / 1000 kg per tonne.
   return meters * weightPerMeterKg / 1000;
 }
 
 export function tonsToMeters(tons: number, weightPerMeterKg: number) {
   if (!isNonNegativeFinite(tons) || !isPositiveFinite(weightPerMeterKg)) return null;
+  // Mass (t) × 1000 kg per tonne / nominal linear mass (kg/m).
   return tons * 1000 / weightPerMeterKg;
 }
 
