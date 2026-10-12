@@ -3,14 +3,14 @@
 import filterStyles from "./FilterPanel.module.css";
 
 import {createCatalogSearchIndex} from "@/lib/search";
-import {useDeferredValue, useMemo, useState} from "react";
+import {useDeferredValue, useEffect, useMemo, useState} from "react";
 import {CatalogImage} from "./CatalogImage";
 import {Button} from "@/components/ui/Button";
 import {Input} from "@/components/ui/Input";
 import {Select} from "@/components/ui/Select";
 import {ResetFiltersButton} from "@/components/catalog/ResetFiltersButton";
 import {useCart} from "@/hooks/useCart";
-import {formatUnitPrice} from "@/lib/currency";
+import {formatCurrency, formatUnitPrice} from "@/lib/currency";
 import {formatNumber} from "@/lib/numberFormat";
 import {
   calculateLineTotal,
@@ -165,28 +165,32 @@ export function RebarVariantCatalog({variants, simplified = false}: {variants: R
 
       {results.length ? (
         <>
+        <p className="mb-4 text-sm text-slate-500">
+          Укажите метры или тонны — сумма рассчитается автоматически.
+        </p>
         <div className="hidden overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm xl:block">
           <table className="w-full table-fixed border-collapse text-center text-sm">
             <colgroup>
+              <col style={{width: "8%"}}/>
+              <col style={{width: "8%"}}/>
               <col style={{width: "9%"}}/>
               <col style={{width: "11%"}}/>
-              <col style={{width: "11%"}}/>
-              <col style={{width: "14%"}}/>
-              <col style={{width: "10%"}}/>
               <col style={{width: "8%"}}/>
+              <col style={{width: "7%"}}/>
               <col style={{width: "11%"}}/>
               <col style={{width: "11%"}}/>
-              <col style={{width: "15%"}}/>
+              <col style={{width: "13%"}}/>
+              <col style={{width: "14%"}}/>
             </colgroup>
             <thead className="bg-slate-900 text-white">
               <tr>
                 {[
                   "Диаметр, мм", "Форма", "Марка стали", "Цена, ₽/т",
-                  "Вес, кг/м", "Длина, м", "Заказ, м", "Заказ, т",
+                  "Вес, кг/м", "Длина, м", "Заказ, м", "Заказ, т", "Сумма",
                 ].map((label) => (
                   <th
                     key={label}
-                    className="break-words px-2 py-3 text-center align-middle font-semibold"
+                    className={`break-words px-2 py-3 align-middle font-semibold ${label === "Сумма" ? "text-right" : "text-center"}`}
                   >
                     {label}
                   </th>
@@ -223,42 +227,70 @@ function RebarVariantItem({
   variant: RebarVariant;
   view: "table" | "card";
 }) {
-  const {addItem} = useCart();
-  const [meters, setMeters] = useState("");
-  const [tons, setTons] = useState("");
-  const [inputMode, setInputMode] = useState<OrderInputMode>("meter");
+  const {addItem, removeItem, lines, hydrated} = useCart();
+  const cartLine = lines.find((line) => line.productId === variant.id);
+  const savedMeasurement = cartLine?.measurement;
+  const [draft, setDraft] = useState<{meters: string; tons: string; inputMode: OrderInputMode} | null>(null);
+  const inputMode = draft?.inputMode ?? savedMeasurement?.inputMode ?? "meter";
+  const meters = draft?.meters ?? (savedMeasurement ? formatDecimal(savedMeasurement.meters, 2) : "");
+  const tons = draft?.tons ?? (savedMeasurement ? formatDecimal(savedMeasurement.weightTons, 2) : "");
   const [message, setMessage] = useState("");
+  const [removed, setRemoved] = useState(false);
+
+  useEffect(() => {
+    if (!removed) return;
+    const timer = window.setTimeout(() => setRemoved(false), 1000);
+    return () => window.clearTimeout(timer);
+  }, [removed]);
+
+  // Calculate from the edited field, preserving precision before display rounding.
+  const enteredMeters = draft === null && savedMeasurement ? savedMeasurement.meters : parseNonNegativeDecimal(meters);
+  const enteredTons = draft === null && savedMeasurement ? savedMeasurement.weightTons : parseNonNegativeDecimal(tons);
+  const parsedMeters = inputMode === "meter" ? enteredMeters : enteredTons === null ? null : tonsToMeters(enteredTons, variant.weightPerMeterKg);
+  const parsedTons = inputMode === "ton" ? enteredTons : enteredMeters === null ? null : metersToTons(enteredMeters, variant.weightPerMeterKg);
+  const estimatedTotal = parsedTons === null ? null : calculateLineTotal(parsedTons, variant.pricePerTon);
+  const totalLabel = estimatedTotal === null ? "Укажите объём" : formatCurrency(estimatedTotal);
+  const totalClassName = estimatedTotal === null
+    ? "text-xs font-normal text-slate-500"
+    : "whitespace-nowrap font-semibold tabular-nums text-slate-900";
+  const isSaved = !!savedMeasurement && !cartLine?.invalidReason && parsedTons !== null && parsedTons > 0
+    && Math.abs(parsedTons - savedMeasurement.weightTons) <= Math.max(1, savedMeasurement.weightTons) * 1e-9;
+  const hasChanges = !!cartLine && !isSaved;
+  const enteredQuantity = inputMode === "meter" ? enteredMeters : enteredTons;
+  const shouldRemove = !!cartLine && enteredQuantity === 0;
+  const buttonLabel = removed ? "Удалено" : !variant.inStock ? "Под заказ" : shouldRemove ? "Удалить" : isSaved ? "✓ В корзине" : hasChanges ? "Обновить" : "В корзину";
+  const buttonClassName = isSaved ? filterStyles.savedCartButton : filterStyles.cartButton;
+  const status = message || (hasChanges ? "Не сохранено" : "");
 
   function updateMeters(value: string) {
     const parsed = parseNonNegativeDecimal(value);
     if (value !== "" && parsed === null) return;
-    setInputMode("meter");
-    setMeters(value);
     const converted = parsed === null ? null : metersToTons(parsed, variant.weightPerMeterKg);
-    setTons(converted === null ? "" : formatDecimal(converted, 3));
+    setDraft({inputMode: "meter", meters: value, tons: converted === null ? "" : formatDecimal(converted, 2)});
     setMessage("");
   }
 
   function updateTons(value: string) {
     const parsed = parseNonNegativeDecimal(value);
     if (value !== "" && parsed === null) return;
-    setInputMode("ton");
-    setTons(value);
     const converted = parsed === null ? null : tonsToMeters(parsed, variant.weightPerMeterKg);
-    setMeters(converted === null ? "" : formatDecimal(converted, 2));
+    setDraft({inputMode: "ton", tons: value, meters: converted === null ? "" : formatDecimal(converted, 2)});
     setMessage("");
   }
 
   function addToCart() {
-    const enteredMeters = parseNonNegativeDecimal(meters);
-    const enteredTons = parseNonNegativeDecimal(tons);
-    const parsedMeters = inputMode === "meter" ? enteredMeters : enteredTons === null ? null : tonsToMeters(enteredTons, variant.weightPerMeterKg);
-    const parsedTons = inputMode === "ton" ? enteredTons : enteredMeters === null ? null : metersToTons(enteredMeters, variant.weightPerMeterKg);
+    if (!hydrated || isSaved || removed || !variant.inStock) return;
+    if (shouldRemove) {
+      removeItem(variant.id);
+      setDraft(null);
+      setMessage("");
+      setRemoved(true);
+      return;
+    }
     if (!parsedMeters || !parsedTons) {
       setMessage("Укажите длину или вес больше нуля.");
       return;
     }
-    const estimatedTotal = calculateLineTotal(parsedTons, variant.pricePerTon);
     if (estimatedTotal === null) return;
     addItem(
       variant.id,
@@ -271,7 +303,8 @@ function RebarVariantItem({
         estimatedTotal,
       },
     );
-    setMessage("Добавлено");
+    setDraft(null);
+    setMessage("");
   }
 
   if (view === "card") {
@@ -305,12 +338,14 @@ function RebarVariantItem({
             onChange={updateTons}
           />
         </div>
-        <Button type="button" disabled={!variant.inStock} onClick={addToCart} className={`${filterStyles.cartButton} mt-4 w-full`}>
-          {variant.inStock ? "В корзину" : "Под заказ"}
+        <p className="mt-4 flex items-baseline justify-between gap-3 text-sm text-slate-900">
+          <span>Сумма:</span>
+          <output aria-label={`Сумма заказа для ${variant.name}`} aria-live="polite" className={totalClassName}>{totalLabel}</output>
+        </p>
+        <Button type="button" disabled={!hydrated || !variant.inStock || isSaved || removed} onClick={addToCart} className={`${buttonClassName} mt-4 w-full`}>
+          {buttonLabel}
         </Button>
-        <span aria-live="polite" className={`mt-1 block text-xs ${
-          message === "Добавлено" ? "text-green-700" : "text-red-700"
-        }`}>{message}</span>
+        <span aria-live="polite" className={`mt-1 block text-xs ${message ? "text-red-700" : "text-slate-500"}`}>{status}</span>
       </article>
     );
   }
@@ -329,14 +364,15 @@ function RebarVariantItem({
       <td className="px-2 py-3">
         <OrderInput label={`Вес заказа для ${variant.name}`} value={tons} onChange={updateTons}/>
       </td>
+      <td className="px-2 py-3 text-right">
+        <output aria-label={`Сумма заказа для ${variant.name}`} aria-live="polite" className={totalClassName}>{totalLabel}</output>
+      </td>
       <td className="px-2 py-3 text-center">
-        <Button type="button" disabled={!variant.inStock} onClick={addToCart}
-          className={`${filterStyles.cartButton} whitespace-nowrap px-3`}>
-          {variant.inStock ? "В корзину" : "Под заказ"}
+        <Button type="button" disabled={!hydrated || !variant.inStock || isSaved || removed} onClick={addToCart}
+          className={`${buttonClassName} whitespace-nowrap px-3`}>
+          {buttonLabel}
         </Button>
-        <span aria-live="polite" className={`mx-auto mt-1 block max-w-32 text-xs ${
-          message === "Добавлено" ? "text-green-700" : "text-red-700"
-        }`}>{message}</span>
+        <span aria-live="polite" className={`mx-auto mt-1 block max-w-32 text-xs ${message ? "text-red-700" : "text-slate-500"}`}>{status}</span>
       </td>
     </tr>
   );
@@ -356,9 +392,12 @@ function OrderInput({
   return (
     <label className="block text-sm font-semibold">
       {visibleLabel && <span className="mb-1 block">{visibleLabel}</span>}
-      <Input aria-label={label} type="number" inputMode="decimal" min={0} step="any"
-        value={value} onChange={(event) => onChange(event.target.value)}
-        className={`${filterStyles.field} w-full min-w-0 px-2 focus:placeholder:text-transparent ${visibleLabel ? "" : "text-center"}`} placeholder="0"/>
+      <Input aria-label={label} type="number" inputMode="decimal" min={0} step="0.01"
+        value={value} onChange={(event) => {
+          const next = event.target.value;
+          if (next === "" || /^\d+(?:[.,]\d{0,2})?$/.test(next)) onChange(next);
+        }}
+        className={`${filterStyles.field} w-full min-w-0 px-2 tabular-nums focus:placeholder:text-transparent ${visibleLabel ? "" : "text-center"}`} placeholder="0"/>
     </label>
   );
 }

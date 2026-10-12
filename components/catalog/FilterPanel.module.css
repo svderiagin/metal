@@ -10,10 +10,28 @@
   background-color: #0f172a;
 }
 
+.field[type="number"] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+.field[type="number"]::-webkit-inner-spin-button,
+.field[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .cartButton:hover {
   background-color: #1e293b;
 }
 
 .cartButton:focus-visible {
   outline-color: #475569;
+}
+
+.savedCartButton,
+.savedCartButton:disabled {
+  background-color: #dcfce7;
+  color: #166534;
+  opacity: 1;
 }
