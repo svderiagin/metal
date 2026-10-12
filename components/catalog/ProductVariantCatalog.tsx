@@ -5,13 +5,11 @@ import {PriceInput} from "./PriceInput";
 
 import {createCatalogSearchIndex} from "@/lib/search";
 import {useDeferredValue, useEffect, useMemo, useState} from "react";
-import Link from "next/link";
+import {ProductOrderControls} from "./ProductOrderControls";
 import {CatalogImage} from "./CatalogImage";
-import {useCart} from "@/hooks/useCart";
 import {formatUnitPrice} from "@/lib/currency";
 import {formatNumber} from "@/lib/numberFormat";
 import {
-  getQuantityUnit,
   getVariantAttribute,
   getVariantPresentation,
 } from "@/lib/variantPresentation";
@@ -61,14 +59,11 @@ function GenericProductVariantCatalog({
   const [minimumPrice, setMinimumPrice] = useState("");
   const [maximumPrice, setMaximumPrice] = useState("");
   const [sort, setSort] = useState<SortMode>("name");
-  const [quantities, setQuantities] = useState<Record<string, number>>({});
-  const [addedVariantId, setAddedVariantId] = useState<string | null>(null);
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState("");
   const deferredQuery = useDeferredValue(query);
   const index = useMemo(() => createCatalogSearchIndex(variants), [variants]);
   const search = useMemo(() => index.search(deferredQuery), [index, deferredQuery]);
-  const {addItem} = useCart();
   useEffect(() => {
     function revealLinkedVariant() {
       const id = window.location.hash.replace(/^#variant-/, "");
@@ -148,24 +143,6 @@ function GenericProductVariantCatalog({
     setQuery("");
   }
 
-  function quantityFor(variantId: string) {
-    return quantities[variantId] ?? 1;
-  }
-
-  function setQuantity(variantId: string, quantity: number) {
-    if (!Number.isFinite(quantity) || quantity <= 0 || quantity > 999) return;
-    setQuantities((current) => ({
-      ...current,
-      [variantId]: quantity,
-    }));
-  }
-
-  function addVariant(variant: ProductVariant) {
-    addItem(variant.id, quantityFor(variant.id));
-    setAddedVariantId(variant.id);
-    window.setTimeout(() => setAddedVariantId(null), 1500);
-  }
-
   return (
     <>
       <div className={`${filterStyles.panel} min-w-0 rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6 lg:col-start-2`}>
@@ -194,7 +171,7 @@ function GenericProductVariantCatalog({
               min={0}
               value={minimumPrice}
               onChange={(event) => setMinimumPrice(event.target.value)}
-              
+
               placeholder="От"
             />
           </label>
@@ -205,7 +182,7 @@ function GenericProductVariantCatalog({
               min={0}
               value={maximumPrice}
               onChange={(event) => setMaximumPrice(event.target.value)}
-              
+
               placeholder="До"
             />
           </label>
@@ -249,7 +226,7 @@ function GenericProductVariantCatalog({
         <>
           <div className="hidden overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm xl:block">
             <table className="w-full table-fixed border-collapse text-left text-sm">
-              <colgroup><col style={{width:"27%"}}/><col style={{width:"29%"}}/><col style={{width:"15%"}}/><col style={{width:"10%"}}/><col style={{width:"7%"}}/><col style={{width:"12%"}}/></colgroup>
+              <colgroup><col style={{width:"25%"}}/><col style={{width:"27%"}}/><col style={{width:"15%"}}/><col style={{width:"10%"}}/><col style={{width:"9%"}}/><col style={{width:"14%"}}/></colgroup>
               <thead className="bg-slate-900 text-white">
                 <tr>
                   <th className="p-3 font-semibold">Полное обозначение</th>
@@ -271,28 +248,7 @@ function GenericProductVariantCatalog({
                     <td className="px-1.5 py-3">
                       {!variant.imported && <Availability inStock={variant.inStock}/>}
                     </td>
-                    <td className="px-2 py-3 text-center">
-                      <QuantityInput
-                        value={quantityFor(variant.id)}
-                        unit={getQuantityUnit(variant)}
-                        onChange={(quantity) => setQuantity(variant.id, quantity)}
-                      />
-                    </td>
-                    <td className="px-2 py-3">
-                      <Button
-                        type="button"
-                        disabled={variant.quoteOnly || variant.priceQualifier === "from" || (!variant.imported && !variant.inStock)}
-                        onClick={() => addVariant(variant)}
-                        className="px-2"
-                      >
-                        {!variant.imported && !variant.inStock
-                          ? "Под заказ"
-                          : addedVariantId === variant.id
-                            ? "Добавлено"
-                            : "В корзину"}
-                      </Button>
-                      {(variant.quoteOnly || variant.priceQualifier === "from") && <Link className="mt-2 inline-flex min-h-11 items-center text-red-700 underline" href={`/?product=${encodeURIComponent(variant.name)}#request`}>Запросить цену</Link>}
-                    </td>
+                    <ProductOrderControls variant={variant} view="table"/>
                   </tr>
                 ))}
               </tbody>
@@ -318,25 +274,7 @@ function GenericProductVariantCatalog({
                   </div>
                   {!variant.imported && <Availability inStock={variant.inStock}/>}
                 </div>
-                <div className="mt-4 grid grid-cols-[1fr_auto] gap-3">
-                  <QuantityInput
-                    value={quantityFor(variant.id)}
-                    unit={getQuantityUnit(variant)}
-                    onChange={(quantity) => setQuantity(variant.id, quantity)}
-                  />
-                  <Button
-                    type="button"
-                    disabled={variant.quoteOnly || variant.priceQualifier === "from" || (!variant.imported && !variant.inStock)}
-                    onClick={() => addVariant(variant)}
-                  >
-                    {!variant.imported && !variant.inStock
-                      ? "Под заказ"
-                      : addedVariantId === variant.id
-                        ? "Добавлено"
-                        : "В корзину"}
-                  </Button>
-                  {(variant.quoteOnly || variant.priceQualifier === "from") && <Link className="inline-flex min-h-11 items-center text-red-700 underline" href={`/?product=${encodeURIComponent(variant.name)}#request`}>Запросить цену</Link>}
-                </div>
+                <ProductOrderControls variant={variant} view="card"/>
               </article>
             ))}
           </div>
@@ -351,32 +289,6 @@ function GenericProductVariantCatalog({
       {pages > 1 && <nav aria-label="Страницы вариантов" className="mt-6 flex flex-wrap items-center justify-center gap-4"><Button disabled={currentPage === 1} onClick={() => setPage(currentPage - 1)}>Назад</Button><span>Страница {currentPage} из {pages}</span><Button disabled={currentPage === pages} onClick={() => setPage(currentPage + 1)}>Далее</Button></nav>}
       </section>
     </>
-  );
-}
-
-function QuantityInput({
-  value,
-  unit,
-  onChange,
-}: {
-  value: number;
-  unit: string;
-  onChange: (value: number) => void;
-}) {
-  return (
-    <label className="flex min-w-0 flex-col items-start gap-1">
-      <span className="sr-only">Количество</span>
-      <Input
-        type="number"
-        min={0}
-        step="any"
-        max={999}
-        value={value}
-        onChange={(event) => onChange(event.currentTarget.valueAsNumber)}
-        className="w-14 px-2"
-      />
-      <span className="text-xs text-slate-500">{unit}</span>
-    </label>
   );
 }
 

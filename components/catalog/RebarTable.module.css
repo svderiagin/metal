@@ -1,0 +1,32 @@
+.table {
+  width: 100%;
+  min-width: 75rem;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+.table :is(th, td) {
+  vertical-align: middle;
+  overflow-wrap: anywhere;
+}
+
+.table .sumColumn {
+  padding-inline: 1rem;
+  text-align: center;
+}
+
+.table .sumColumn output {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+.table :is(button, a) {
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.tableAction {
+  width: 8rem;
+}

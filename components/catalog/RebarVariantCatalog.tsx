@@ -2,13 +2,12 @@
 
 import filterStyles from "./FilterPanel.module.css";
 import tableStyles from "./RebarTable.module.css";
-import Link from "next/link";
 import {PriceInput} from "./PriceInput";
 
 import {createCatalogSearchIndex} from "@/lib/search";
 import {useDeferredValue, useEffect, useMemo, useState} from "react";
 import {CatalogImage} from "./CatalogImage";
-import {Button} from "@/components/ui/Button";
+import {ButtonLink, Button} from "@/components/ui/Button";
 import {Input} from "@/components/ui/Input";
 import {Select} from "@/components/ui/Select";
 import {ResetFiltersButton} from "@/components/catalog/ResetFiltersButton";
@@ -315,10 +314,10 @@ function RebarVariantItem({
 
   const actionSizeClassName = view === "card" ? "w-full" : tableStyles.tableAction;
   const action = needsQuote ? (
-    <Link href={`/?product=${encodeURIComponent(variant.name)}#request`}
-      className={`${filterStyles.quoteButton} ${actionSizeClassName} inline-flex min-h-11 items-center justify-center rounded-lg px-2 py-2 text-center text-sm font-semibold`}>
+    <ButtonLink href={`/?product=${encodeURIComponent(variant.name)}#request`}
+      className={`${filterStyles.quoteButton} ${actionSizeClassName} px-3`}>
       Запросить цену
-    </Link>
+    </ButtonLink>
   ) : (
     <Button type="button" disabled={!hydrated || isSaved || removed || (!canPurchase && !shouldRemove)} onClick={addToCart}
       className={`${buttonClassName} ${actionSizeClassName} whitespace-nowrap px-3`}>

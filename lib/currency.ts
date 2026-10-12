@@ -5,7 +5,7 @@ export const formatCurrency = (value: number) => new Intl.NumberFormat("ru-RU", 
 }).format(value);
 
 export function formatUnitPrice(value: number | null, priceUnit: string): string {
-  if (value === null) return "Цена по запросу";
+  if (value === null) return "По запросу";
   const unit = getShortPriceUnit(priceUnit);
   return unit ? `${formatCurrency(value)}/${unit}` : formatCurrency(value);
 }

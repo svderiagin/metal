@@ -6,6 +6,15 @@
   box-shadow: none;
 }
 
+.cartButton,
+.quoteButton,
+.savedCartButton,
+.updateCartButton,
+.removeCartButton,
+.removedCartButton {
+  font-weight: 400;
+}
+
 .cartButton {
   background-color: #0f172a;
 }
@@ -32,10 +41,16 @@
 .quoteButton {
   background-color: #0f172a;
   color: #fff;
+  padding-inline: 12px;
 }
 
 .quoteButton:hover {
   background-color: #1e293b;
+}
+
+.orderAction {
+  width: 8rem;
+  max-width: 100%;
 }
 
 .savedCartButton,
@@ -69,4 +84,8 @@
   background-color: #f1f5f9;
   color: #475569;
   opacity: 1;
+}
+
+.orderActionCard {
+  width: 100%;
 }
