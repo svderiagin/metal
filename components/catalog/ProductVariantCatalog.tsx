@@ -1,5 +1,8 @@
 "use client";
 
+import {QuoteRequestProvider} from "@/components/forms/QuoteRequestContext";
+import {RequestQuoteSection} from "@/components/home/RequestQuoteSection";
+
 import filterStyles from "./FilterPanel.module.css";
 import {PriceInput} from "./PriceInput";
 
@@ -25,7 +28,14 @@ import {
 
 type SortMode = "relevance" | "availability" | "price-asc" | "price-desc" | "size" | "name";
 
-export function ProductVariantCatalog({
+export function ProductVariantCatalog(props: {variants: ProductVariant[]; categorySlug: string}) {
+  return <QuoteRequestProvider>
+    <VariantCatalogContent {...props}/>
+    <div className="min-w-0 lg:col-span-2"><RequestQuoteSection/></div>
+  </QuoteRequestProvider>;
+}
+
+function VariantCatalogContent({
   variants,
   categorySlug,
 }: {

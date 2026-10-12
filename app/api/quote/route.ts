@@ -1,5 +1,6 @@
 import {notificationService} from "@/lib/server/notifications";
 import {parseQuoteRequest} from "@/lib/server/validation";
+import {validateQuoteFields} from "@/lib/quoteValidation";
 
 export async function POST(request: Request) {
   let body: unknown;
@@ -9,7 +10,11 @@ export async function POST(request: Request) {
     return Response.json({ok: false, error: "Некорректный запрос."}, {status: 400});
   }
   const quote = parseQuoteRequest(body);
-  if (!quote) return Response.json({ok: false, error: "Проверьте данные формы."}, {status: 400});
+  if (!quote) {
+    const fieldErrors = typeof body === "object" && body !== null && !Array.isArray(body)
+      ? validateQuoteFields(body as Record<string, unknown>) : {};
+    return Response.json({ok: false, error: Object.values(fieldErrors).join(" ") || "Некорректные данные формы.", fieldErrors}, {status: 400});
+  }
   if (quote.website) return Response.json({ok: true});
   try {
     await notificationService.sendQuoteRequest(quote);

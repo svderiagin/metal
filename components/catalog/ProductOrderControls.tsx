@@ -2,10 +2,12 @@
 
 import {useEffect, useState} from "react";
 import {useCart} from "@/hooks/useCart";
-import {Button, ButtonLink} from "@/components/ui/Button";
+import {Button} from "@/components/ui/Button";
 import {Input} from "@/components/ui/Input";
 import {getQuantityUnit} from "@/lib/variantPresentation";
 import type {ProductVariant} from "@/types/product";
+import {QuoteRequestButton} from "./QuoteRequestButton";
+import {formatQuoteProductName} from "@/lib/quoteRequest";
 import styles from "./FilterPanel.module.css";
 
 export function ProductOrderControls({variant, view}: {variant: ProductVariant; view: "table" | "card"}) {
@@ -16,7 +18,7 @@ export function ProductOrderControls({variant, view}: {variant: ProductVariant; 
   const value = draft ?? String(line?.quantity ?? 1);
   const quantity = value.trim() === "" ? NaN : Number(value);
   const needsQuote = variant.price === null || variant.quoteOnly || variant.priceQualifier === "from";
-  const canPurchase = !needsQuote && (variant.inStock || variant.imported);
+  const canPurchase = !needsQuote && (variant.inStock || (variant.imported && variant.availability !== "ON_ORDER"));
   const shouldRemove = !!line && quantity === 0;
   const saved = !!line && !line.invalidReason && quantity === line.quantity;
   const valid = Number.isFinite(quantity) && quantity > 0 && quantity <= 999;
@@ -48,9 +50,15 @@ export function ProductOrderControls({variant, view}: {variant: ProductVariant; 
   const label = removed ? "Удалено" : shouldRemove ? "Удалить" : !canPurchase ? "Под заказ"
     : saved ? "✓ В корзине" : line ? "Обновить" : "В корзину";
   const actionClass = `${styles.orderAction} ${view === "card" ? styles.orderActionCard : ""} px-3`;
-  const action = needsQuote && !shouldRemove ? (
-    <ButtonLink href={`/?product=${encodeURIComponent(variant.name)}#request`}
-      className={`${styles.quoteButton} ${actionClass}`}>Запросить цену</ButtonLink>
+  const quoteQuantity = draft !== null || line || !needsQuote ? quantity : null;
+  const weightPerMeter = variant.weightPerMeterKg ?? (variant.weight?.unit === "кг/м" ? variant.weight.value : undefined);
+  const quoteTons = quoteQuantity === null ? null : variant.unit === "ton" ? quoteQuantity
+    : variant.unit === "kg" ? quoteQuantity / 1000
+      : variant.unit === "meter" && weightPerMeter !== undefined ? quoteQuantity * weightPerMeter / 1000 : null;
+  const action = !canPurchase && !shouldRemove && !removed ? (
+    <QuoteRequestButton label={needsQuote ? "Запросить цену" : "Под заказ"}
+      order={{product: formatQuoteProductName(variant), quantity: quoteQuantity, unit: getQuantityUnit(variant), tons: quoteTons}}
+      className={`${styles.quoteButton} ${actionClass}`}/>
   ) : (
     <Button type="button" onClick={submit}
       disabled={!hydrated || saved || removed || (!shouldRemove && (!canPurchase || !valid))}

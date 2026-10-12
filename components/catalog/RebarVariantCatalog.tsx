@@ -1,5 +1,8 @@
 "use client";
 
+import {QuoteRequestButton} from "./QuoteRequestButton";
+import {formatQuoteProductName} from "@/lib/quoteRequest";
+
 import filterStyles from "./FilterPanel.module.css";
 import tableStyles from "./RebarTable.module.css";
 import {PriceInput} from "./PriceInput";
@@ -7,7 +10,7 @@ import {PriceInput} from "./PriceInput";
 import {createCatalogSearchIndex} from "@/lib/search";
 import {useDeferredValue, useEffect, useMemo, useState} from "react";
 import {CatalogImage} from "./CatalogImage";
-import {ButtonLink, Button} from "@/components/ui/Button";
+import {Button} from "@/components/ui/Button";
 import {Input} from "@/components/ui/Input";
 import {Select} from "@/components/ui/Select";
 import {ResetFiltersButton} from "@/components/catalog/ResetFiltersButton";
@@ -313,11 +316,10 @@ function RebarVariantItem({
   }
 
   const actionSizeClassName = view === "card" ? "w-full" : tableStyles.tableAction;
-  const action = needsQuote ? (
-    <ButtonLink href={`/?product=${encodeURIComponent(variant.name)}#request`}
-      className={`${filterStyles.quoteButton} ${actionSizeClassName} px-3`}>
-      Запросить цену
-    </ButtonLink>
+  const action = !canPurchase && !shouldRemove && !removed ? (
+    <QuoteRequestButton label={needsQuote ? "Запросить цену" : "Под заказ"}
+      order={{product: formatQuoteProductName(variant), meters: parsedMeters, tons: parsedTons}}
+      className={`${filterStyles.quoteButton} ${actionSizeClassName} px-3`}/>
   ) : (
     <Button type="button" disabled={!hydrated || isSaved || removed || (!canPurchase && !shouldRemove)} onClick={addToCart}
       className={`${buttonClassName} ${actionSizeClassName} whitespace-nowrap px-3`}>

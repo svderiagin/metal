@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
 import ts from 'typescript';
+import {readProjectData} from './project-data.mjs';
 
 // Render the real component and exercise its event handlers with a cart boundary.
 function setup(overrides = {}) {
@@ -16,7 +17,9 @@ function setup(overrides = {}) {
     updateQuantity(id, quantity) { calls.push('update'); cart.lines.find(l => l.productId === id).quantity = quantity; },
     removeItem(id) { calls.push('remove'); cart.lines = cart.lines.filter(l => l.productId !== id); },
   };
-  const jsx = (type, props) => ({type, props});
+  const jsx = (type, props) => type === 'quote'
+    ? {type: 'link', props: {...props, children: props.label ?? 'Запросить цену'}}
+    : {type, props};
   const imports = {
     react: {
       useState(initial) { const i = cursor++; if (!(i in state)) state[i] = initial; return [state[i], value => {state[i] = value;}]; },
@@ -27,6 +30,8 @@ function setup(overrides = {}) {
     '@/components/ui/Button': {Button: 'button', ButtonLink: 'link'},
     '@/components/ui/Input': {Input: 'input'},
     '@/lib/variantPresentation': {getQuantityUnit: () => 'т'},
+    './QuoteRequestButton': {QuoteRequestButton: 'quote'},
+    '@/lib/quoteRequest': readProjectData('lib/quoteRequest.ts'),
     './FilterPanel.module.css': new Proxy({}, {get: (_, key) => key}),
   };
   const module = {exports: {}};
@@ -74,5 +79,35 @@ test('saved cart quantity, hydration, stock, quote and invalid input are respect
   assert.equal(setup({inStock: false}).render().action.children, 'Под заказ');
   assert.equal(setup({quoteOnly: true}).render().action.children, 'Запросить цену');
   assert.equal(setup({price: null}).render().action.children, 'Запросить цену');
-  assert.equal(setup({priceQualifier: 'from'}).render().action.children, 'Запйцуросить цену');
+  assert.equal(setup({priceQualifier: 'from'}).render().action.children, 'Запросить цену');
+});
+
+test('quote button receives only explicitly entered or saved order quantities', () => {
+  const h = setup({quoteOnly: true});
+  assert.equal(h.render().action.order.quantity, null);
+  h.change('2.5');
+  assert.equal(h.render().action.order.quantity, 2.5);
+  assert.equal(h.render().action.order.unit, 'т');
+  assert.equal(h.render().action.order.product, 'Товар');
+  h.change('');
+  assert.ok(Number.isNaN(h.render().action.order.quantity));
+});
+
+test('on-order action is a quote link carrying quantity and calculable weight', () => {
+  const h = setup({inStock: false, availability: 'ON_ORDER', unit: 'ton'});
+  assert.equal(h.render().action.children, 'Под заказ');
+  assert.equal(h.render().action.disabled, undefined);
+  assert.equal(h.render().action.order.quantity, 1);
+  h.change('2.5');
+  assert.equal(h.render().action.order.quantity, 2.5);
+  assert.equal(h.render().action.order.tons, 2.5);
+  assert.deepEqual(h.calls, []);
+  const imported = setup({inStock: false, imported: true, availability: 'ON_ORDER'});
+  assert.equal(imported.render().action.children, 'Под заказ');
+  const measured = setup({inStock: false, unit: 'meter', weight: {value: 0.888, unit: 'кг/м'}});
+  measured.change('100');
+  assert.equal(measured.render().action.order.tons, 0.0888);
+  h.cart.lines = [{productId: 'product', quantity: 2.5}];
+  h.change('0'); assert.equal(h.render().action.children, 'Удалить');
+  h.render().action.onClick(); assert.equal(h.render().action.children, 'Удалено');
 });

@@ -1,5 +1,6 @@
 import type {ContactRequest, QuoteRequest} from "@/types/forms";
 import type {CreateOrderInput, CustomerType, PaymentMethod} from "@/types/order";
+import {validateQuoteFields} from "@/lib/quoteValidation";
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const phonePattern = /^\+?[\d\s()-]{10,24}$/;
@@ -96,13 +97,12 @@ export function parseContactRequest(value: unknown): ContactRequest | null {
 }
 
 export function parseQuoteRequest(value: unknown): QuoteRequest | null {
-  if (!isRecord(value)) return null;
-  const name = text(value.name, 120);
-  const phone = text(value.phone, 30);
-  const email = text(value.email, 254);
-  const company = optionalText(value.company, 180);
-  const message = text(value.message, 3000);
-  const website = optionalText(value.website, 200);
-  if (!name || !phone || !phonePattern.test(phone) || !email || !emailPattern.test(email) || !message || value.consent !== true || company === null || website === null) return null;
-  return {name, phone, email: email.toLowerCase(), company, message, consent: true, website};
+  if (!isRecord(value) || Object.keys(validateQuoteFields(value)).length) return null;
+  return {
+    name: (value.name as string).trim(), phone: (value.phone as string).trim(),
+    email: (value.email as string).trim().toLowerCase(),
+    company: typeof value.company === "string" ? value.company.trim() || undefined : undefined,
+    message: (value.message as string).trim(), consent: true,
+    website: typeof value.website === "string" ? value.website.trim() || undefined : undefined,
+  };
 }
