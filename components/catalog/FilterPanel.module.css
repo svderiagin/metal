@@ -1,0 +1,19 @@
+.panel :is(input, select):focus,
+.field:focus {
+  border-color: #475569;
+  outline: 2px solid #475569;
+  outline-offset: 2px;
+  box-shadow: none;
+}
+
+.cartButton {
+  background-color: #0f172a;
+}
+
+.cartButton:hover {
+  background-color: #1e293b;
+}
+
+.cartButton:focus-visible {
+  outline-color: #475569;
+}

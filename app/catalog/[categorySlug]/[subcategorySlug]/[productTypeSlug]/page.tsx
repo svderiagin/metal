@@ -55,7 +55,7 @@ export default async function ProductTypePage({params}: Props) {
   const resolved = resolveProductType(await params);
   if (!resolved) notFound();
 
-  const {category, subcategory, productType} = resolved;
+  const {category, productType} = resolved;
   const variants = getProductVariantsByTypeId(productType.id);
 
   return (
@@ -64,9 +64,7 @@ export default async function ProductTypePage({params}: Props) {
         items={[
           {label: "Каталог", href: "/catalog"},
           {label: category.name, href: `/catalog/${category.slug}`},
-          {label: subcategory.name},
           {label: productType.name},
-          {label: "Варианты продукции"},
         ]}
       />
 

@@ -1,11 +1,22 @@
 import {notFound, redirect} from "next/navigation";
+import type {Metadata} from "next";
+import {Suspense} from "react";
+import {Breadcrumbs} from "@/components/catalog/Breadcrumbs";
+import {CatalogSidebar} from "@/components/catalog/CatalogSidebar";
+import {ProductTypeResults} from "@/components/catalog/ProductTypeResults";
+import {PageContainer} from "@/components/layout/PageContainer";
 import {
+  getAllCategories,
   getAllProductVariants,
   getCategoryById,
   getCategoryBySlug,
   getProductTypeById,
   getProductVariantBySlug,
   getSubcategoryById,
+  getSubcategoryBySlug,
+  getSubcategoriesByCategoryId,
+  getProductTypesBySubcategoryId,
+  getProductVariantsByCategoryId,
 } from "@/lib/catalog";
 
 type Props = {
@@ -15,24 +26,68 @@ type Props = {
   }>;
 };
 
-/**
- * Backward-compatible redirect for the former
- * /catalog/[categorySlug]/[productSlug] product URLs.
- */
+// Include subcategories and former product URLs to preserve legacy redirects.
 export function generateStaticParams() {
-  return getAllProductVariants().flatMap((variant) => {
+  const subcategoryParams = getAllCategories().flatMap((category) =>
+    getSubcategoriesByCategoryId(category.id).map((subcategory) => ({
+      categorySlug: category.slug,
+      subcategorySlug: subcategory.slug,
+    })),
+  );
+  const legacyParams = getAllProductVariants().flatMap((variant) => {
     const category = getCategoryById(variant.categoryId);
     return category
       ? [{categorySlug: category.slug, subcategorySlug: variant.slug}]
       : [];
   });
+  return [...new Map([...subcategoryParams, ...legacyParams].map((params) =>
+    [`${params.categorySlug}/${params.subcategorySlug}`, params],
+  )).values()];
 }
 
-export default async function LegacyProductPage({params}: Props) {
-  const {categorySlug, subcategorySlug: legacyProductSlug} = await params;
+export async function generateMetadata({params}: Props): Promise<Metadata> {
+  const {categorySlug, subcategorySlug} = await params;
   const category = getCategoryBySlug(categorySlug);
-  const variant = getProductVariantBySlug(legacyProductSlug);
-  if (!category || !variant || variant.categoryId !== category.id) notFound();
+  const subcategory = category && getSubcategoryBySlug(category.id, subcategorySlug);
+  return {title: subcategory ? subcategory.name : "Каталог"};
+}
+
+export default async function SubcategoryPage({params}: Props) {
+  const {categorySlug, subcategorySlug} = await params;
+  const category = getCategoryBySlug(categorySlug);
+  if (!category) notFound();
+
+  const currentSubcategory = getSubcategoryBySlug(category.id, subcategorySlug);
+  if (currentSubcategory) {
+    const productTypes = getProductTypesBySubcategoryId(currentSubcategory.id);
+    const variants = getProductVariantsByCategoryId(category.id)
+      .filter((variant) => variant.subcategoryId === currentSubcategory.id);
+
+    return (
+      <PageContainer className="py-8 sm:py-10 lg:py-12">
+        <Breadcrumbs items={[
+          {label: "Каталог", href: "/catalog"},
+          {label: category.name, href: `/catalog/${category.slug}`},
+          {label: currentSubcategory.name},
+        ]}/>
+        <div className="grid gap-7 lg:grid-cols-[280px_minmax(0,1fr)]">
+          <Suspense fallback={<div className="h-96 animate-pulse rounded-xl bg-slate-200"/>}>
+            <CatalogSidebar activeSlug={category.slug}/>
+          </Suspense>
+          <div className="min-w-0">
+            <h1 className="text-3xl font-black">{currentSubcategory.name}</h1>
+            <p className="mt-4 leading-7 text-slate-600">{currentSubcategory.description}</p>
+            <Suspense fallback={<div className="mt-8 h-80 animate-pulse rounded-lg bg-slate-200"/>}>
+              <ProductTypeResults productTypes={productTypes} variants={variants}/>
+            </Suspense>
+          </div>
+        </div>
+      </PageContainer>
+    );
+  }
+
+  const variant = getProductVariantBySlug(subcategorySlug);
+  if (!variant || variant.categoryId !== category.id) notFound();
 
   const subcategory = getSubcategoryById(variant.subcategoryId);
   const productType = getProductTypeById(variant.productTypeId);

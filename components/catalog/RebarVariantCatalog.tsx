@@ -1,5 +1,7 @@
 "use client";
 
+import filterStyles from "./FilterPanel.module.css";
+
 import {createCatalogSearchIndex} from "@/lib/search";
 import {useDeferredValue, useMemo, useState} from "react";
 import {CatalogImage} from "./CatalogImage";
@@ -42,7 +44,7 @@ export function isMeasuredRebarVariant(variant: ProductVariant): variant is Reba
     && variant.weightPerMeterKg !== undefined;
 }
 
-export function RebarVariantCatalog({variants}: {variants: RebarVariant[]}) {
+export function RebarVariantCatalog({variants, simplified = false}: {variants: RebarVariant[]; simplified?: boolean}) {
   const [query, setQuery] = useState("");
   const deferredQuery = useDeferredValue(query);
   const index = useMemo(() => createCatalogSearchIndex(variants), [variants]);
@@ -105,8 +107,8 @@ export function RebarVariantCatalog({variants}: {variants: RebarVariant[]}) {
 
   return (
     <>
-      <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6 lg:col-start-2">
-        <h2 className="text-xl font-bold">Фильтры вариантов</h2>
+      <div className={`${filterStyles.panel} rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6 lg:col-start-2`}>
+        <h2 className="text-xl font-bold">{simplified ? "Фильтры" : "Фильтры вариантов"}</h2>
         <label className="mt-4 block text-sm font-semibold">Поиск вариантов<Input type="search" value={query} onChange={e => {setQuery(e.target.value);setSort("relevance");}} className="mt-1" placeholder="Арматура ф12 А500С"/></label>
         <div className="mt-5 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
           <Filter label="Диаметр, мм" value={diameter} onChange={setDiameter}>
@@ -136,10 +138,10 @@ export function RebarVariantCatalog({variants}: {variants: RebarVariant[]}) {
             <option value="IN_STOCK">В наличии</option>
             <option value="ON_ORDER">Под заказ</option>
           </Filter>
-          <label className="text-sm font-semibold sm:col-span-2 xl:col-span-3">
+          <label className="text-sm font-semibold">
             Сортировка
             <Select value={sort} onChange={(event) => setSort(event.target.value as SortMode)}
-              className="mt-1 sm:max-w-sm">
+              className="mt-1">
               <option value="relevance">По релевантности</option>
               <option value="diameter-asc">Диаметр: по возрастанию</option>
               <option value="diameter-desc">Диаметр: по убыванию</option>
@@ -155,16 +157,16 @@ export function RebarVariantCatalog({variants}: {variants: RebarVariant[]}) {
         </div>
       </div>
 
-      <section className="lg:col-span-2" aria-labelledby="measured-variants-heading">
-      <div className="mb-6 flex items-center justify-between gap-4">
+      <section className="lg:col-span-2" aria-label={simplified ? "Продукция" : undefined} aria-labelledby={simplified ? undefined : "measured-variants-heading"}>
+      {!simplified && <div className="mb-6 flex items-center justify-between gap-4">
         <h2 id="measured-variants-heading" className="text-2xl font-black">Варианты с расчётом по массе</h2>
         <p className="text-sm text-slate-600">Найдено: {results.length}</p>
-      </div>
+      </div>}
 
       {results.length ? (
         <>
         <div className="hidden overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm xl:block">
-          <table className="w-full table-fixed border-collapse text-left text-sm">
+          <table className="w-full table-fixed border-collapse text-center text-sm">
             <colgroup>
               <col style={{width: "9%"}}/>
               <col style={{width: "11%"}}/>
@@ -184,7 +186,7 @@ export function RebarVariantCatalog({variants}: {variants: RebarVariant[]}) {
                 ].map((label) => (
                   <th
                     key={label}
-                    className="break-words px-2 py-3 font-semibold"
+                    className="break-words px-2 py-3 text-center align-middle font-semibold"
                   >
                     {label}
                   </th>
@@ -303,7 +305,7 @@ function RebarVariantItem({
             onChange={updateTons}
           />
         </div>
-        <Button type="button" disabled={!variant.inStock} onClick={addToCart} className="mt-4 w-full">
+        <Button type="button" disabled={!variant.inStock} onClick={addToCart} className={`${filterStyles.cartButton} mt-4 w-full`}>
           {variant.inStock ? "В корзину" : "Под заказ"}
         </Button>
         <span aria-live="polite" className={`mt-1 block text-xs ${
@@ -315,7 +317,7 @@ function RebarVariantItem({
 
   return (
     <tr id={`variant-${variant.id}`} className="border-t border-slate-200 align-middle">
-      <td className="px-2 py-4 font-bold"><CatalogImage src={variant.imageUrls[0]} name={variant.name} compact/>{formatNumber(variant.diameterMm)}</td>
+      <td className="px-2 py-4 font-bold">{formatNumber(variant.diameterMm)}</td>
       <td className="px-2 py-4">{formLabel(variant.form)}</td>
       <td className="px-2 py-4">{variant.steelGrade}</td>
       <td className="whitespace-nowrap px-2 py-4 font-semibold">{formatUnitPrice(variant.pricePerTon, "за тонну")}</td>
@@ -329,10 +331,10 @@ function RebarVariantItem({
       </td>
       <td className="px-2 py-3 text-center">
         <Button type="button" disabled={!variant.inStock} onClick={addToCart}
-          className="whitespace-nowrap px-3">
+          className={`${filterStyles.cartButton} whitespace-nowrap px-3`}>
           {variant.inStock ? "В корзину" : "Под заказ"}
         </Button>
-        <span aria-live="polite" className={`mt-1 block max-w-32 text-xs ${
+        <span aria-live="polite" className={`mx-auto mt-1 block max-w-32 text-xs ${
           message === "Добавлено" ? "text-green-700" : "text-red-700"
         }`}>{message}</span>
       </td>
@@ -356,7 +358,7 @@ function OrderInput({
       {visibleLabel && <span className="mb-1 block">{visibleLabel}</span>}
       <Input aria-label={label} type="number" inputMode="decimal" min={0} step="any"
         value={value} onChange={(event) => onChange(event.target.value)}
-        className="w-full min-w-0 px-2" placeholder="0"/>
+        className={`${filterStyles.field} w-full min-w-0 px-2 focus:placeholder:text-transparent ${visibleLabel ? "" : "text-center"}`} placeholder="0"/>
     </label>
   );
 }

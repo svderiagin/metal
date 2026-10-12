@@ -29,7 +29,6 @@ const rows: A500cRow[] = [
   {diameterMm: 28, form: "bar", lengthMeters: 11.7, pricePerTon: 68400, weightPerMeterKg: 4.83},
   {diameterMm: 32, form: "bar", lengthMeters: 11.7, pricePerTon: 68400, weightPerMeterKg: 6.31},
   {diameterMm: 36, form: "bar", lengthMeters: 11.7, pricePerTon: 68400, weightPerMeterKg: 7.99},
-  {diameterMm: 40, form: "bar", lengthMeters: 11.7, pricePerTon: 68400, weightPerMeterKg: 9.87},
 ];
 
 export const armaturaA500cVariants: ProductVariantSource[] = rows.map((row, index) => {

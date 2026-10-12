@@ -1,5 +1,7 @@
 "use client";
 
+import filterStyles from "./FilterPanel.module.css";
+
 import {createCatalogSearchIndex} from "@/lib/search";
 import {useDeferredValue, useEffect, useMemo, useState} from "react";
 import Link from "next/link";
@@ -33,6 +35,8 @@ export function ProductVariantCatalog({
 }) {
   const measured = variants.filter(v => !v.imported && isMeasuredRebarVariant(v)).filter(isMeasuredRebarVariant);
   if (measured.length > 0) {
+    const isA500c = categorySlug === "armatura" && variants.every(v => v.subcategoryId === "cat-arm-sub-1");
+    if (isA500c) return <RebarVariantCatalog variants={measured} simplified/>;
     const other = variants.filter(v => !measured.some(m => m.id === v.id));
     return <>{other.length > 0 && <GenericProductVariantCatalog variants={other} categorySlug={categorySlug}/>}<RebarVariantCatalog variants={measured}/></>;
   }
@@ -160,7 +164,7 @@ function GenericProductVariantCatalog({
 
   return (
     <>
-      <div className="min-w-0 rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6 lg:col-start-2">
+      <div className={`${filterStyles.panel} min-w-0 rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6 lg:col-start-2`}>
         <h2 className="text-xl font-bold">Фильтры вариантов</h2>
         <div className="mt-5 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
           <label className="text-sm font-semibold">Поиск варианта<Input className="mt-1" type="search" value={query} onChange={e => {setQuery(e.target.value); setSort("relevance"); setPage(1);}} placeholder="Название, размер, марка"/></label>

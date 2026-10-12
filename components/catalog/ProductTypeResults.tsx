@@ -1,5 +1,7 @@
 "use client";
 
+import filterStyles from "./FilterPanel.module.css";
+
 import {createCatalogSearchIndex} from "@/lib/search";
 import {useDeferredValue, useMemo, useState} from "react";
 import {Input} from "@/components/ui/Input";
@@ -74,7 +76,7 @@ export function ProductTypeResults({
 
   return (
     <section className="mt-8" aria-labelledby="product-types-heading">
-      <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+      <div className={`${filterStyles.panel} rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6`}>
         <label className="mb-4 block text-sm font-semibold">Поиск в категории<Input type="search" value={query} onChange={e => {setQuery(e.target.value);setSort("relevance");setLimit(12);}} className="mt-1" placeholder="Название, размер или марка стали"/></label>
         <div className="grid gap-4 md:grid-cols-3">
           <FilterSelect label="Материал" value={material} onChange={setMaterial}>
