@@ -29,9 +29,44 @@
   outline-color: #475569;
 }
 
+.quoteButton {
+  background-color: #0f172a;
+  color: #fff;
+}
+
+.quoteButton:hover {
+  background-color: #1e293b;
+}
+
 .savedCartButton,
 .savedCartButton:disabled {
   background-color: #dcfce7;
   color: #166534;
+  opacity: 1;
+}
+
+.updateCartButton {
+  background-color: #eff6ff;
+  color: #1e40af;
+  box-shadow: none;
+}
+
+.updateCartButton:hover {
+  background-color: #dbeafe;
+}
+
+.removeCartButton {
+  background-color: #fef2f2;
+  color: #b91c1c;
+  box-shadow: none;
+}
+
+.removeCartButton:hover {
+  background-color: #fee2e2;
+}
+
+.removedCartButton:disabled {
+  background-color: #f1f5f9;
+  color: #475569;
   opacity: 1;
 }

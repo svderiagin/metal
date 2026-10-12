@@ -1,6 +1,8 @@
 "use client";
 
 import filterStyles from "./FilterPanel.module.css";
+import tableStyles from "./RebarTable.module.css";
+import Link from "next/link";
 import {PriceInput} from "./PriceInput";
 
 import {createCatalogSearchIndex} from "@/lib/search";
@@ -24,7 +26,7 @@ import type {ProductVariant} from "@/types/product";
 
 type RebarVariant = ProductVariant & Required<Pick<
   ProductVariant,
-  "diameterMm" | "form" | "steelGrade" | "pricePerTon" | "weightPerMeterKg"
+  "diameterMm" | "form" | "steelGrade" | "weightPerMeterKg"
 >>;
 
 type SortMode =
@@ -36,11 +38,23 @@ type SortMode =
   | "weight-asc"
   | "weight-desc";
 
+const tableColumns = [
+  {label: "Диаметр, мм", width: "7%"},
+  {label: "Форма", width: "8%"},
+  {label: "Марка стали", width: "8%"},
+  {label: "Цена, ₽/т", width: "12%"},
+  {label: "Вес, кг/м", width: "8%"},
+  {label: "Длина, м", width: "7%"},
+  {label: "Заказ, м", width: "11%"},
+  {label: "Заказ, т", width: "11%"},
+  {label: "Сумма", width: "15%"},
+  {label: "Действие", width: "13%"},
+] as const;
+
 export function isMeasuredRebarVariant(variant: ProductVariant): variant is RebarVariant {
   return variant.diameterMm !== undefined
     && variant.form !== undefined
     && variant.steelGrade !== undefined
-    && variant.pricePerTon !== undefined
     && variant.weightPerMeterKg !== undefined;
 }
 
@@ -82,13 +96,13 @@ export function RebarVariantCatalog({variants, simplified = false}: {variants: R
       && (!form || variant.form === form)
       && (!length || variant.lengthMeters === Number(length))
       && (!availability || variant.availability === availability)
-      && (min === null || variant.pricePerTon >= min)
-      && (max === null || variant.pricePerTon <= max),
+      && (min === null || (variant.pricePerTon !== undefined && variant.pricePerTon >= min))
+      && (max === null || (variant.pricePerTon !== undefined && variant.pricePerTon <= max)),
     ).sort((left, right) => {
       if (sort === "relevance") return 0;
       if (sort === "diameter-desc") return right.diameterMm - left.diameterMm;
-      if (sort === "price-asc") return left.pricePerTon - right.pricePerTon;
-      if (sort === "price-desc") return right.pricePerTon - left.pricePerTon;
+      if (sort === "price-asc") return (left.pricePerTon ?? Infinity) - (right.pricePerTon ?? Infinity);
+      if (sort === "price-desc") return (right.pricePerTon ?? -Infinity) - (left.pricePerTon ?? -Infinity);
       if (sort === "weight-asc") return left.weightPerMeterKg - right.weightPerMeterKg;
       if (sort === "weight-desc") return right.weightPerMeterKg - left.weightPerMeterKg;
       return left.diameterMm - right.diameterMm;
@@ -157,7 +171,7 @@ export function RebarVariantCatalog({variants, simplified = false}: {variants: R
         </div>
       </div>
 
-      <section className="lg:col-span-2" aria-label={simplified ? "Продукция" : undefined} aria-labelledby={simplified ? undefined : "measured-variants-heading"}>
+      <section className="min-w-0 lg:col-span-2" aria-label={simplified ? "Продукция" : undefined} aria-labelledby={simplified ? undefined : "measured-variants-heading"}>
       {!simplified && <div className="mb-6 flex items-center justify-between gap-4">
         <h2 id="measured-variants-heading" className="text-2xl font-black">Варианты с расчётом по массе</h2>
         <p className="text-sm text-slate-600">Найдено: {results.length}</p>
@@ -165,34 +179,22 @@ export function RebarVariantCatalog({variants, simplified = false}: {variants: R
 
       {results.length ? (
         <>
-        <div className="hidden overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm xl:block">
-          <table className="w-full table-fixed border-collapse text-center text-sm">
+        <div className="hidden overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm xl:block">
+          <table className={`${tableStyles.table} text-center text-sm`}>
             <colgroup>
-              <col style={{width: "8%"}}/>
-              <col style={{width: "8%"}}/>
-              <col style={{width: "9%"}}/>
-              <col style={{width: "11%"}}/>
-              <col style={{width: "8%"}}/>
-              <col style={{width: "7%"}}/>
-              <col style={{width: "11%"}}/>
-              <col style={{width: "11%"}}/>
-              <col style={{width: "13%"}}/>
-              <col style={{width: "14%"}}/>
+              {tableColumns.map(column => <col key={column.label} style={{width: column.width}}/>)}
             </colgroup>
             <thead className="bg-slate-900 text-white">
               <tr>
-                {[
-                  "Диаметр, мм", "Форма", "Марка стали", "Цена, ₽/т",
-                  "Вес, кг/м", "Длина, м", "Заказ, м", "Заказ, т", "Сумма",
-                ].map((label) => (
+                {tableColumns.map(({label}) => (
                   <th
                     key={label}
-                    className={`break-words px-2 py-3 align-middle font-semibold ${label === "Сумма" ? "text-right" : "text-center"}`}
+                    scope="col"
+                    className={`px-2 py-3 font-semibold ${label === "Сумма" ? tableStyles.sumColumn : "text-center"}`}
                   >
-                    {label}
+                    {label === "Действие" ? <span className="sr-only">{label}</span> : label}
                   </th>
                 ))}
-                <th className="px-2 py-3 text-center"><span className="sr-only">Действие</span></th>
               </tr>
             </thead>
             <tbody>
@@ -245,18 +247,25 @@ function RebarVariantItem({
   const enteredTons = draft === null && savedMeasurement ? savedMeasurement.weightTons : parseNonNegativeDecimal(tons);
   const parsedMeters = inputMode === "meter" ? enteredMeters : enteredTons === null ? null : tonsToMeters(enteredTons, variant.weightPerMeterKg);
   const parsedTons = inputMode === "ton" ? enteredTons : enteredMeters === null ? null : metersToTons(enteredMeters, variant.weightPerMeterKg);
-  const estimatedTotal = parsedTons === null ? null : calculateLineTotal(parsedTons, variant.pricePerTon);
-  const totalLabel = estimatedTotal === null ? "Укажите объём" : formatCurrency(estimatedTotal);
+  const pricePerTon = variant.pricePerTon;
+  const needsQuote = pricePerTon === undefined || variant.quoteOnly || variant.priceQualifier === "from";
+  const canPurchase = !needsQuote && (variant.inStock || (variant.imported && variant.availability === "UNKNOWN"));
+  const estimatedTotal = parsedTons === null || pricePerTon === undefined || variant.quoteOnly ? null : calculateLineTotal(parsedTons, pricePerTon);
+  const totalLabel = variant.quoteOnly || pricePerTon === undefined ? "По запросу" : estimatedTotal === null ? "Укажите объём" : `${variant.priceQualifier === "from" ? "от " : ""}${formatCurrency(estimatedTotal)}`;
   const totalClassName = estimatedTotal === null
     ? "text-xs font-normal text-[color-mix(in_oklab,var(--color-slate-300),var(--color-slate-400))]"
-    : "whitespace-nowrap font-semibold tabular-nums text-slate-900";
+    : "font-semibold tabular-nums text-slate-900";
   const isSaved = !!savedMeasurement && !cartLine?.invalidReason && parsedTons !== null && parsedTons > 0
     && Math.abs(parsedTons - savedMeasurement.weightTons) <= Math.max(1, savedMeasurement.weightTons) * 1e-9;
   const hasChanges = !!cartLine && !isSaved;
   const enteredQuantity = inputMode === "meter" ? enteredMeters : enteredTons;
   const shouldRemove = !!cartLine && enteredQuantity === 0;
-  const buttonLabel = removed ? "Удалено" : !variant.inStock ? "Под заказ" : shouldRemove ? "Удалить" : isSaved ? "✓ В корзине" : hasChanges ? "Обновить" : "В корзину";
-  const buttonClassName = isSaved ? filterStyles.savedCartButton : filterStyles.cartButton;
+  const buttonLabel = removed ? "Удалено" : !canPurchase ? "Под заказ" : shouldRemove ? "Удалить" : isSaved ? "✓ В корзине" : hasChanges ? "Обновить" : "В корзину";
+  const buttonClassName = removed ? filterStyles.removedCartButton
+    : shouldRemove ? filterStyles.removeCartButton
+      : isSaved ? filterStyles.savedCartButton
+        : hasChanges && canPurchase ? filterStyles.updateCartButton
+          : filterStyles.cartButton;
   const status = message || (hasChanges ? "Не сохранено" : "");
 
   function updateMeters(value: string) {
@@ -276,7 +285,7 @@ function RebarVariantItem({
   }
 
   function addToCart() {
-    if (!hydrated || isSaved || removed || !variant.inStock) return;
+    if (!hydrated || isSaved || removed) return;
     if (shouldRemove) {
       removeItem(variant.id);
       setDraft(null);
@@ -288,7 +297,7 @@ function RebarVariantItem({
       setMessage("Укажите длину или вес больше нуля.");
       return;
     }
-    if (estimatedTotal === null) return;
+    if (!canPurchase || estimatedTotal === null || pricePerTon === undefined) return;
     addItem(
       variant.id,
       inputMode === "meter" ? parsedMeters : parsedTons,
@@ -296,7 +305,7 @@ function RebarVariantItem({
         inputMode,
         meters: parsedMeters,
         weightTons: parsedTons,
-        pricePerTon: variant.pricePerTon,
+        pricePerTon,
         estimatedTotal,
       },
     );
@@ -304,9 +313,22 @@ function RebarVariantItem({
     setMessage("");
   }
 
+  const actionSizeClassName = view === "card" ? "w-full" : tableStyles.tableAction;
+  const action = needsQuote ? (
+    <Link href={`/?product=${encodeURIComponent(variant.name)}#request`}
+      className={`${filterStyles.quoteButton} ${actionSizeClassName} inline-flex min-h-11 items-center justify-center rounded-lg px-2 py-2 text-center text-sm font-semibold`}>
+      Запросить цену
+    </Link>
+  ) : (
+    <Button type="button" disabled={!hydrated || isSaved || removed || (!canPurchase && !shouldRemove)} onClick={addToCart}
+      className={`${buttonClassName} ${actionSizeClassName} whitespace-nowrap px-3`}>
+      {shouldRemove ? "Удалить" : buttonLabel}
+    </Button>
+  );
+
   if (view === "card") {
     return (
-      <article className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+      <article className="min-w-0 break-words rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
         <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">{variant.sku}</p>
         <CatalogImage src={variant.imageUrls[0]} name={variant.name}/>
         <h3 className="mt-1 font-bold">{variant.name}</h3>
@@ -319,7 +341,7 @@ function RebarVariantItem({
             label="Длина"
             value={variant.lengthMeters === undefined ? "—" : `${formatNumber(variant.lengthMeters)} м`}
           />
-          <VariantDetail label="Цена" value={formatUnitPrice(variant.pricePerTon, "за тонну")}/>
+          <VariantDetail label="Цена" value={`${variant.priceQualifier === "from" ? "от " : ""}${formatUnitPrice(pricePerTon ?? null, "за тонну")}`}/>
         </dl>
         <div className="mt-4 grid grid-cols-2 gap-3 border-t border-slate-100 pt-4">
           <OrderInput
@@ -340,20 +362,18 @@ function RebarVariantItem({
           <span>Сумма:</span>
           <output aria-label={`Сумма заказа для ${variant.name}`} aria-live="polite" className={totalClassName}>{totalLabel}</output>
         </p>
-        <Button type="button" disabled={!hydrated || !variant.inStock || isSaved || removed} onClick={addToCart} className={`${buttonClassName} mt-4 w-full`}>
-          {buttonLabel}
-        </Button>
+        <div className="mt-4">{action}</div>
         <span aria-live="polite" className={`mt-1 block text-xs ${message ? "text-red-700" : "text-slate-500"}`}>{status}</span>
       </article>
     );
   }
 
   return (
-    <tr id={`variant-${variant.id}`} className="border-t border-slate-200 align-middle">
+    <tr id={`variant-${variant.id}`} title={variant.name} className="border-t border-slate-200 align-middle">
       <td className="px-2 py-4 font-bold">{formatNumber(variant.diameterMm)}</td>
       <td className="px-2 py-4">{formLabel(variant.form)}</td>
       <td className="px-2 py-4">{variant.steelGrade}</td>
-      <td className="whitespace-nowrap px-2 py-4 font-semibold">{formatUnitPrice(variant.pricePerTon, "за тонну")}</td>
+      <td className="px-2 py-4 font-semibold tabular-nums">{`${variant.priceQualifier === "from" ? "от " : ""}${formatUnitPrice(pricePerTon ?? null, "за тонну")}`}</td>
       <td className="px-2 py-4">{formatNumber(variant.weightPerMeterKg)}</td>
       <td className="px-2 py-4">{variant.lengthMeters === undefined ? "—" : formatNumber(variant.lengthMeters)}</td>
       <td className="px-2 py-3">
@@ -362,14 +382,11 @@ function RebarVariantItem({
       <td className="px-2 py-3">
         <OrderInput label={`Вес заказа в тоннах для ${variant.name}`} value={tons} onChange={updateTons} decimalPlaces={3}/>
       </td>
-      <td className="px-2 py-3 text-right">
+      <td className={`${tableStyles.sumColumn} py-3`}>
         <output aria-label={`Сумма заказа для ${variant.name}`} aria-live="polite" className={totalClassName}>{totalLabel}</output>
       </td>
       <td className="px-2 py-3 text-center">
-        <Button type="button" disabled={!hydrated || !variant.inStock || isSaved || removed} onClick={addToCart}
-          className={`${buttonClassName} whitespace-nowrap px-3`}>
-          {buttonLabel}
-        </Button>
+        {action}
         <span aria-live="polite" className={`mx-auto mt-1 block max-w-32 text-xs ${message ? "text-red-700" : "text-slate-500"}`}>{status}</span>
       </td>
     </tr>

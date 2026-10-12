@@ -34,9 +34,12 @@ export function ProductVariantCatalog({
   variants: ProductVariant[];
   categorySlug: string;
 }) {
+  const isA500c = categorySlug === "armatura" && variants.every(v => v.subcategoryId === "cat-arm-sub-1");
+  if (categorySlug === "armatura" && !isA500c && variants.every(isMeasuredRebarVariant)) {
+    return <RebarVariantCatalog variants={variants} simplified/>;
+  }
   const measured = variants.filter(v => !v.imported && isMeasuredRebarVariant(v)).filter(isMeasuredRebarVariant);
   if (measured.length > 0) {
-    const isA500c = categorySlug === "armatura" && variants.every(v => v.subcategoryId === "cat-arm-sub-1");
     if (isA500c) return <RebarVariantCatalog variants={measured} simplified/>;
     const other = variants.filter(v => !measured.some(m => m.id === v.id));
     return <>{other.length > 0 && <GenericProductVariantCatalog variants={other} categorySlug={categorySlug}/>}<RebarVariantCatalog variants={measured}/></>;
@@ -266,7 +269,7 @@ function GenericProductVariantCatalog({
                       <strong>{variant.quoteOnly ? "Цена по запросу" : `${variant.priceQualifier === "from" ? "от " : ""}${formatUnitPrice(variant.price, variant.priceUnit)}`}</strong>
                     </td>
                     <td className="px-1.5 py-3">
-                      {variant.imported ? <span className="text-xs">Наличие уточняется</span> : <Availability inStock={variant.inStock}/>}
+                      {!variant.imported && <Availability inStock={variant.inStock}/>}
                     </td>
                     <td className="px-2 py-3 text-center">
                       <QuantityInput
@@ -313,7 +316,7 @@ function GenericProductVariantCatalog({
                   <div>
                     <strong className="text-xl">{variant.quoteOnly ? "Цена по запросу" : `${variant.priceQualifier === "from" ? "от " : ""}${formatUnitPrice(variant.price, variant.priceUnit)}`}</strong>
                   </div>
-                  {variant.imported ? <span className="text-xs">Наличие уточняется</span> : <Availability inStock={variant.inStock}/>}
+                  {!variant.imported && <Availability inStock={variant.inStock}/>}
                 </div>
                 <div className="mt-4 grid grid-cols-[1fr_auto] gap-3">
                   <QuantityInput
