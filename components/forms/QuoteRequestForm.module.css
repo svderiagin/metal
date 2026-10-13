@@ -1,0 +1,33 @@
+.form :is(input:not([type="checkbox"]), textarea)[aria-invalid="true"] {
+  border-color: #f87171;
+}
+
+.form :is(input:not([type="checkbox"]), textarea)[aria-invalid="true"]:focus {
+  border-color: #dc2626;
+  box-shadow: 0 0 0 2px #fee2e2;
+}
+
+.error {
+  display: block;
+  color: #b91c1c;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  line-height: 1.25rem;
+}
+
+.messageMeta {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.counter {
+  flex-shrink: 0;
+  margin-left: auto;
+  color: #64748b;
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1.25rem;
+}

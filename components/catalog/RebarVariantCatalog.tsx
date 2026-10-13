@@ -1,29 +1,18 @@
 "use client";
 
-import {QuoteRequestButton} from "./QuoteRequestButton";
-import {formatQuoteProductName} from "@/lib/quoteRequest";
+import {MeasuredVariantItem} from "./MeasuredVariantItem";
+
+import {beamProfile, beamKind} from "@/lib/beam";
 
 import filterStyles from "./FilterPanel.module.css";
 import tableStyles from "./RebarTable.module.css";
 import {PriceInput} from "./PriceInput";
 
 import {createCatalogSearchIndex} from "@/lib/search";
-import {useDeferredValue, useEffect, useMemo, useState} from "react";
-import {CatalogImage} from "./CatalogImage";
-import {Button} from "@/components/ui/Button";
+import {useDeferredValue, useMemo, useState} from "react";
 import {Input} from "@/components/ui/Input";
 import {Select} from "@/components/ui/Select";
 import {ResetFiltersButton} from "@/components/catalog/ResetFiltersButton";
-import {useCart} from "@/hooks/useCart";
-import {formatCurrency, formatUnitPrice} from "@/lib/currency";
-import {formatNumber} from "@/lib/numberFormat";
-import {
-  calculateLineTotal,
-  formatDecimal,
-  metersToTons,
-  parseNonNegativeDecimal,
-  tonsToMeters,
-} from "@/lib/orderMeasurement";
 import type {ProductVariant} from "@/types/product";
 
 type RebarVariant = ProductVariant & Required<Pick<
@@ -61,6 +50,18 @@ export function isMeasuredRebarVariant(variant: ProductVariant): variant is Reba
 }
 
 export function RebarVariantCatalog({variants, simplified = false}: {variants: RebarVariant[]; simplified?: boolean}) {
+  return <MeasuredVariantCatalog variants={variants} simplified={simplified}/>;
+}
+
+export function BeamVariantCatalog({variants}: {variants: ProductVariant[]}) {
+  return <MeasuredVariantCatalog variants={variants} simplified kind="beam"/>;
+}
+
+function MeasuredVariantCatalog({variants, simplified = false, kind = "rebar"}: {variants: ProductVariant[]; simplified?: boolean; kind?: "rebar" | "beam"}) {
+  const isBeam = kind === "beam";
+  const columns = isBeam ? tableColumns.map((column, index) => index === 0 ? {...column, label: "Профиль", width: "9%"}
+    : index === 1 ? {...column, label: "Тип балки", width: "10%"}
+      : index === 8 ? {...column, width: "11%"} : column) : tableColumns;
   const [query, setQuery] = useState("");
   const deferredQuery = useDeferredValue(query);
   const index = useMemo(() => createCatalogSearchIndex(variants), [variants]);
@@ -75,8 +76,8 @@ export function RebarVariantCatalog({variants, simplified = false}: {variants: R
   const [sort, setSort] = useState<SortMode>("diameter-asc");
 
   const diameters = useMemo(
-    () => uniqueNumbers(variants.map((variant) => variant.diameterMm)),
-    [variants],
+    () => [...new Set(variants.map(variant => isBeam ? beamProfile(variant) : String(variant.diameterMm ?? "")))].sort((a, b) => a.localeCompare(b, "ru", {numeric: true})),
+    [variants, isBeam],
   );
   const lengths = useMemo(
     () => uniqueNumbers(variants.flatMap((variant) =>
@@ -85,31 +86,32 @@ export function RebarVariantCatalog({variants, simplified = false}: {variants: R
     [variants],
   );
   const forms = useMemo(
-    () => [...new Set(variants.map((variant) => variant.form))],
-    [variants],
+    () => [...new Set(variants.map(variant => isBeam ? beamKind(variant) : variant.form ?? ""))],
+    [variants, isBeam],
   );
 
   const results = useMemo(() => {
+    const sizeValue = (variant: ProductVariant) => isBeam ? beamProfile(variant) : String(variant.diameterMm ?? "");
     const min = parseOptionalNumber(minimumPrice);
     const max = parseOptionalNumber(maximumPrice);
     return (deferredQuery.trim() ? [...variants].sort((a, b) => (ranks.get(a.id) ?? Infinity) - (ranks.get(b.id) ?? Infinity)) : variants).filter((variant) =>
       (!deferredQuery.trim() || matched.has(variant.id))
-      && (!diameter || variant.diameterMm === Number(diameter))
-      && (!form || variant.form === form)
+      && (!diameter || (isBeam ? beamProfile(variant) : String(variant.diameterMm ?? "")) === diameter)
+      && (!form || (isBeam ? beamKind(variant) : variant.form) === form)
       && (!length || variant.lengthMeters === Number(length))
       && (!availability || variant.availability === availability)
       && (min === null || (variant.pricePerTon !== undefined && variant.pricePerTon >= min))
       && (max === null || (variant.pricePerTon !== undefined && variant.pricePerTon <= max)),
     ).sort((left, right) => {
       if (sort === "relevance") return 0;
-      if (sort === "diameter-desc") return right.diameterMm - left.diameterMm;
+      if (sort === "diameter-desc") return sizeValue(right).localeCompare(sizeValue(left), "ru", {numeric: true});
       if (sort === "price-asc") return (left.pricePerTon ?? Infinity) - (right.pricePerTon ?? Infinity);
       if (sort === "price-desc") return (right.pricePerTon ?? -Infinity) - (left.pricePerTon ?? -Infinity);
-      if (sort === "weight-asc") return left.weightPerMeterKg - right.weightPerMeterKg;
-      if (sort === "weight-desc") return right.weightPerMeterKg - left.weightPerMeterKg;
-      return left.diameterMm - right.diameterMm;
+      if (sort === "weight-asc") return (left.weightPerMeterKg ?? Infinity) - (right.weightPerMeterKg ?? Infinity);
+      if (sort === "weight-desc") return (right.weightPerMeterKg ?? -Infinity) - (left.weightPerMeterKg ?? -Infinity);
+      return sizeValue(left).localeCompare(sizeValue(right), "ru", {numeric: true});
     });
-  }, [ranks, deferredQuery, matched, availability, diameter, form, length, maximumPrice, minimumPrice, sort, variants]);
+  }, [ranks, deferredQuery, matched, availability, diameter, form, length, maximumPrice, minimumPrice, sort, variants, isBeam]);
   function resetFilters() {
     setQuery("");
     setDiameter("");
@@ -125,14 +127,14 @@ export function RebarVariantCatalog({variants, simplified = false}: {variants: R
     <>
       <div className={`${filterStyles.panel} rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6 lg:col-start-2`}>
         <h2 className="text-xl font-bold">{simplified ? "Фильтры" : "Фильтры вариантов"}</h2>
-        <label className="mt-4 block text-sm font-semibold">Поиск вариантов<Input type="search" value={query} onChange={e => {setQuery(e.target.value);setSort("relevance");}} className="mt-1" placeholder="Арматура А500С"/></label>
+        <label className="mt-4 block text-sm font-semibold">Поиск вариантов<Input type="search" value={query} onChange={e => {setQuery(e.target.value);setSort("relevance");}} className="mt-1" placeholder={isBeam ? "Балка 25Ш1" : "Арматура А500С"}/></label>
         <div className="mt-5 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-          <Filter label="Диаметр, мм" value={diameter} onChange={setDiameter}>
+          <Filter label={isBeam ? "Профиль" : "Диаметр, мм"} value={diameter} onChange={setDiameter}>
             {diameters.map((value) => <option key={value} value={value}>{value}</option>)}
           </Filter>
-          <Filter label="Форма продукции" value={form} onChange={setForm}>
+          <Filter label={isBeam ? "Тип балки" : "Форма продукции"} value={form} onChange={setForm}>
             {forms.map((value) => (
-              <option key={value} value={value}>{formLabel(value)}</option>
+              <option key={value} value={value}>{isBeam ? value : formLabel(value as "coil" | "bar")}</option>
             ))}
           </Filter>
           <Filter label="Длина, м" value={length} onChange={setLength}>
@@ -159,8 +161,8 @@ export function RebarVariantCatalog({variants, simplified = false}: {variants: R
             <Select value={sort} onChange={(event) => setSort(event.target.value as SortMode)}
               className="mt-1">
               <option value="relevance">По релевантности</option>
-              <option value="diameter-asc">Диаметр: по возрастанию</option>
-              <option value="diameter-desc">Диаметр: по убыванию</option>
+              <option value="diameter-asc">{isBeam ? "Профиль: по возрастанию" : "Диаметр: по возрастанию"}</option>
+              <option value="diameter-desc">{isBeam ? "Профиль: по убыванию" : "Диаметр: по убыванию"}</option>
               <option value="price-asc">Цена: по возрастанию</option>
               <option value="price-desc">Цена: по убыванию</option>
               <option value="weight-asc">Вес метра: по возрастанию</option>
@@ -184,11 +186,11 @@ export function RebarVariantCatalog({variants, simplified = false}: {variants: R
         <div className="hidden overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm xl:block">
           <table className={`${tableStyles.table} text-center text-sm`}>
             <colgroup>
-              {tableColumns.map(column => <col key={column.label} style={{width: column.width}}/>)}
+              {columns.map(column => <col key={column.label} style={{width: column.width}}/>)}
             </colgroup>
             <thead className="bg-slate-900 text-white">
               <tr>
-                {tableColumns.map(({label}) => (
+                {columns.map(({label}) => (
                   <th
                     key={label}
                     scope="col"
@@ -200,13 +202,13 @@ export function RebarVariantCatalog({variants, simplified = false}: {variants: R
               </tr>
             </thead>
             <tbody>
-              {results.map((variant) => <RebarVariantItem key={variant.id} variant={variant} view="table"/>)}
+              {results.map((variant) => <MeasuredVariantItem key={variant.id} variant={variant} kind={kind} view="table"/>)}
             </tbody>
           </table>
         </div>
         <div className="grid gap-4 sm:grid-cols-2 xl:hidden">
           {results.map((variant) => (
-            <RebarVariantItem key={variant.id} variant={variant} view="card"/>
+            <MeasuredVariantItem key={variant.id} variant={variant} kind={kind} view="card"/>
           ))}
         </div>
         </>
@@ -218,214 +220,6 @@ export function RebarVariantCatalog({variants, simplified = false}: {variants: R
       )}
       </section>
     </>
-  );
-}
-
-function RebarVariantItem({
-  variant,
-  view,
-}: {
-  variant: RebarVariant;
-  view: "table" | "card";
-}) {
-  const {addItem, removeItem, lines, hydrated} = useCart();
-  const cartLine = lines.find((line) => line.productId === variant.id);
-  const savedMeasurement = cartLine?.measurement;
-  const [draft, setDraft] = useState<{meters: string; tons: string; inputMode: "meter" | "ton"} | null>(null);
-  const inputMode = draft?.inputMode ?? (savedMeasurement?.inputMode ?? "meter");
-  const meters = draft?.meters ?? (savedMeasurement ? formatDecimal(savedMeasurement.meters, 2) : "");
-  const tons = draft?.tons ?? (savedMeasurement ? formatDecimal(savedMeasurement.weightTons, 3) : "");
-  const [message, setMessage] = useState("");
-  const [removed, setRemoved] = useState(false);
-
-  useEffect(() => {
-    if (!removed) return;
-    const timer = window.setTimeout(() => setRemoved(false), 1000);
-    return () => window.clearTimeout(timer);
-  }, [removed]);
-
-  // Calculate from the edited field, preserving precision before display rounding.
-  const enteredMeters = draft === null && savedMeasurement ? savedMeasurement.meters : parseNonNegativeDecimal(meters);
-  const enteredTons = draft === null && savedMeasurement ? savedMeasurement.weightTons : parseNonNegativeDecimal(tons);
-  const parsedMeters = inputMode === "meter" ? enteredMeters : enteredTons === null ? null : tonsToMeters(enteredTons, variant.weightPerMeterKg);
-  const parsedTons = inputMode === "ton" ? enteredTons : enteredMeters === null ? null : metersToTons(enteredMeters, variant.weightPerMeterKg);
-  const pricePerTon = variant.pricePerTon;
-  const needsQuote = pricePerTon === undefined || variant.quoteOnly || variant.priceQualifier === "from";
-  const canPurchase = !needsQuote && (variant.inStock || (variant.imported && variant.availability === "UNKNOWN"));
-  const estimatedTotal = parsedTons === null || pricePerTon === undefined || variant.quoteOnly ? null : calculateLineTotal(parsedTons, pricePerTon);
-  const totalLabel = variant.quoteOnly || pricePerTon === undefined ? "По запросу" : estimatedTotal === null ? "Укажите объём" : `${variant.priceQualifier === "from" ? "от " : ""}${formatCurrency(estimatedTotal)}`;
-  const totalClassName = estimatedTotal === null
-    ? "text-xs font-normal text-[color-mix(in_oklab,var(--color-slate-300),var(--color-slate-400))]"
-    : "font-semibold tabular-nums text-slate-900";
-  const isSaved = !!savedMeasurement && !cartLine?.invalidReason && parsedTons !== null && parsedTons > 0
-    && Math.abs(parsedTons - savedMeasurement.weightTons) <= Math.max(1, savedMeasurement.weightTons) * 1e-9;
-  const hasChanges = !!cartLine && !isSaved;
-  const enteredQuantity = inputMode === "meter" ? enteredMeters : enteredTons;
-  const shouldRemove = !!cartLine && enteredQuantity === 0;
-  const buttonLabel = removed ? "Удалено" : !canPurchase ? "Под заказ" : shouldRemove ? "Удалить" : isSaved ? "✓ В корзине" : hasChanges ? "Обновить" : "В корзину";
-  const buttonClassName = removed ? filterStyles.removedCartButton
-    : shouldRemove ? filterStyles.removeCartButton
-      : isSaved ? filterStyles.savedCartButton
-        : hasChanges && canPurchase ? filterStyles.updateCartButton
-          : filterStyles.cartButton;
-  const status = message || (hasChanges ? "Не сохранено" : "");
-
-  function updateMeters(value: string) {
-    const parsed = parseNonNegativeDecimal(value);
-    if (value !== "" && parsed === null) return;
-    const converted = parsed === null ? null : metersToTons(parsed, variant.weightPerMeterKg);
-    setDraft({inputMode: "meter", meters: value, tons: converted === null ? "" : formatDecimal(converted, 3)});
-    setMessage("");
-  }
-
-  function updateTons(value: string) {
-    const parsed = parseNonNegativeDecimal(value);
-    if (value !== "" && parsed === null) return;
-    const converted = parsed === null ? null : tonsToMeters(parsed, variant.weightPerMeterKg);
-    setDraft({inputMode: "ton", tons: value, meters: converted === null ? "" : formatDecimal(converted, 2)});
-    setMessage("");
-  }
-
-  function addToCart() {
-    if (!hydrated || isSaved || removed) return;
-    if (shouldRemove) {
-      removeItem(variant.id);
-      setDraft(null);
-      setMessage("");
-      setRemoved(true);
-      return;
-    }
-    if (!parsedMeters || !parsedTons) {
-      setMessage("Укажите длину или вес больше нуля.");
-      return;
-    }
-    if (!canPurchase || estimatedTotal === null || pricePerTon === undefined) return;
-    addItem(
-      variant.id,
-      inputMode === "meter" ? parsedMeters : parsedTons,
-      {
-        inputMode,
-        meters: parsedMeters,
-        weightTons: parsedTons,
-        pricePerTon,
-        estimatedTotal,
-      },
-    );
-    setDraft(null);
-    setMessage("");
-  }
-
-  const actionSizeClassName = view === "card" ? "w-full" : tableStyles.tableAction;
-  const action = !canPurchase && !shouldRemove && !removed ? (
-    <QuoteRequestButton label={needsQuote ? "Запросить цену" : "Под заказ"}
-      order={{product: formatQuoteProductName(variant), meters: parsedMeters, tons: parsedTons}}
-      className={`${filterStyles.quoteButton} ${actionSizeClassName} px-3`}/>
-  ) : (
-    <Button type="button" disabled={!hydrated || isSaved || removed || (!canPurchase && !shouldRemove)} onClick={addToCart}
-      className={`${buttonClassName} ${actionSizeClassName} whitespace-nowrap px-3`}>
-      {shouldRemove ? "Удалить" : buttonLabel}
-    </Button>
-  );
-
-  if (view === "card") {
-    return (
-      <article className="min-w-0 break-words rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-        <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">{variant.sku}</p>
-        <CatalogImage src={variant.imageUrls[0]} name={variant.name}/>
-        <h3 className="mt-1 font-bold">{variant.name}</h3>
-        <dl className="mt-4 grid grid-cols-2 gap-3 text-sm">
-          <VariantDetail label="Диаметр" value={`${formatNumber(variant.diameterMm)} мм`}/>
-          <VariantDetail label="Форма" value={formLabel(variant.form)}/>
-          <VariantDetail label="Марка стали" value={variant.steelGrade}/>
-          <VariantDetail label="Вес" value={`${formatNumber(variant.weightPerMeterKg)} кг/м`}/>
-          <VariantDetail
-            label="Длина"
-            value={variant.lengthMeters === undefined ? "—" : `${formatNumber(variant.lengthMeters)} м`}
-          />
-          <VariantDetail label="Цена" value={`${variant.priceQualifier === "from" ? "от " : ""}${formatUnitPrice(pricePerTon ?? null, "за тонну")}`}/>
-        </dl>
-        <div className="mt-4 grid grid-cols-2 gap-3 border-t border-slate-100 pt-4">
-          <OrderInput
-            label={`Длина заказа для ${variant.name}`}
-            visibleLabel="Заказ, м"
-            value={meters}
-            onChange={updateMeters}
-          />
-          <OrderInput
-            label={`Вес заказа в тоннах для ${variant.name}`}
-            visibleLabel="Заказ, т"
-            decimalPlaces={3}
-            value={tons}
-            onChange={updateTons}
-          />
-        </div>
-        <p className="mt-4 flex items-baseline justify-between gap-3 text-sm text-slate-900">
-          <span>Сумма:</span>
-          <output aria-label={`Сумма заказа для ${variant.name}`} aria-live="polite" className={totalClassName}>{totalLabel}</output>
-        </p>
-        <div className="mt-4">{action}</div>
-        <span aria-live="polite" className={`mt-1 block text-xs ${message ? "text-red-700" : "text-slate-500"}`}>{status}</span>
-      </article>
-    );
-  }
-
-  return (
-    <tr id={`variant-${variant.id}`} title={variant.name} className="border-t border-slate-200 align-middle">
-      <td className="px-2 py-4 font-bold">{formatNumber(variant.diameterMm)}</td>
-      <td className="px-2 py-4">{formLabel(variant.form)}</td>
-      <td className="px-2 py-4">{variant.steelGrade}</td>
-      <td className="px-2 py-4 font-semibold tabular-nums">{`${variant.priceQualifier === "from" ? "от " : ""}${formatUnitPrice(pricePerTon ?? null, "за тонну")}`}</td>
-      <td className="px-2 py-4">{formatNumber(variant.weightPerMeterKg)}</td>
-      <td className="px-2 py-4">{variant.lengthMeters === undefined ? "—" : formatNumber(variant.lengthMeters)}</td>
-      <td className="px-2 py-3">
-        <OrderInput label={`Длина заказа для ${variant.name}`} value={meters} onChange={updateMeters}/>
-      </td>
-      <td className="px-2 py-3">
-        <OrderInput label={`Вес заказа в тоннах для ${variant.name}`} value={tons} onChange={updateTons} decimalPlaces={3}/>
-      </td>
-      <td className={`${tableStyles.sumColumn} py-3`}>
-        <output aria-label={`Сумма заказа для ${variant.name}`} aria-live="polite" className={totalClassName}>{totalLabel}</output>
-      </td>
-      <td className="px-2 py-3 text-center">
-        {action}
-        <span aria-live="polite" className={`mx-auto mt-1 block max-w-32 text-xs ${message ? "text-red-700" : "text-slate-500"}`}>{status}</span>
-      </td>
-    </tr>
-  );
-}
-
-function OrderInput({
-  decimalPlaces = 2,
-  label,
-  visibleLabel,
-  value,
-  onChange,
-}: {
-  label: string;
-  decimalPlaces?: number;
-  visibleLabel?: string;
-  value: string;
-  onChange: (value: string) => void;
-}) {
-  return (
-    <label className="block text-sm font-semibold">
-      {visibleLabel && <span className="mb-1 block">{visibleLabel}</span>}
-      <Input aria-label={label} type="number" inputMode="decimal" min={0} step={10 ** -decimalPlaces}
-        value={value} onChange={(event) => {
-          const next = event.target.value;
-          if (next === "" || new RegExp(`^\\d+(?:[.,]\\d{0,${decimalPlaces}})?$`).test(next)) onChange(next);
-        }}
-        className={`${filterStyles.field} w-full min-w-0 px-2 tabular-nums focus:placeholder:text-transparent ${visibleLabel ? "" : "text-center"}`} placeholder="0"/>
-    </label>
-  );
-}
-
-function VariantDetail({label, value}: {label: string; value: string}) {
-  return (
-    <div>
-      <dt className="text-slate-500">{label}</dt>
-      <dd className="mt-1 font-medium">{value}</dd>
-    </div>
   );
 }
 

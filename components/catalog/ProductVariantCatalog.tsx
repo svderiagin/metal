@@ -22,6 +22,7 @@ import {Select} from "@/components/ui/Select";
 import {ResetFiltersButton} from "@/components/catalog/ResetFiltersButton";
 import type {ProductAttributeKey, ProductVariant} from "@/types/product";
 import {
+  BeamVariantCatalog,
   isMeasuredRebarVariant,
   RebarVariantCatalog,
 } from "@/components/catalog/RebarVariantCatalog";
@@ -42,6 +43,7 @@ function VariantCatalogContent({
   variants: ProductVariant[];
   categorySlug: string;
 }) {
+  if (categorySlug === "balka") return <BeamVariantCatalog variants={variants}/>;
   const isA500c = categorySlug === "armatura" && variants.every(v => v.subcategoryId === "cat-arm-sub-1");
   if (categorySlug === "armatura" && !isA500c && variants.every(isMeasuredRebarVariant)) {
     return <RebarVariantCatalog variants={variants} simplified/>;

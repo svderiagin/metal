@@ -19,6 +19,7 @@ import type {ProductVariant, ProductVariantSource, ProductWeight} from "@/types/
 import importedCatalog from "../imported-catalog.json";
 import catalogImages from "../catalog-images.json";
 import {normalizeRebarVariant} from "@/lib/rebar";
+import {normalizeBeamVariant} from "@/lib/beam";
 
 const productSources: ProductVariantSource[] = [
   ...armaturaProducts.filter((product) => product.subcategoryId !== "cat-arm-sub-1"),
@@ -55,7 +56,7 @@ export const existingVariants: ProductVariant[] = productSources.map((product) =
 export const productVariants: ProductVariant[] = [
   ...existingVariants.filter(p => !(importedCatalog.matchedIds as string[]).includes(p.id)),
   ...importedCatalog.products as ProductVariant[],
-].map(normalizeRebarVariant).map(product => ({
+].map(normalizeRebarVariant).map(normalizeBeamVariant).map(product => ({
   ...product,
   imageUrls: (catalogImages.products as Record<string, string>)[product.id]
     ? [(catalogImages.products as Record<string, string>)[product.id]]
