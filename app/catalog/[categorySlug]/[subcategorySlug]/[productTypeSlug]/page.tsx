@@ -1,11 +1,10 @@
-import {catalogImageUrl} from "@/lib/catalog-image";
 import type {Metadata} from "next";
 import {Suspense} from "react";
-import Image from "next/image";
 import {notFound} from "next/navigation";
 import {Breadcrumbs} from "@/components/catalog/Breadcrumbs";
 import {CatalogSidebar} from "@/components/catalog/CatalogSidebar";
 import {ProductVariantCatalog} from "@/components/catalog/ProductVariantCatalog";
+import {ProductImageViewer} from "@/components/catalog/ProductImageViewer";
 import {PageContainer} from "@/components/layout/PageContainer";
 import {
   getAllProductTypes,
@@ -80,17 +79,8 @@ export default async function ProductTypePage({params}: Props) {
               Тип продукции
             </p>
             <h1 className="mt-2 break-words text-3xl font-black sm:text-4xl">{productType.name}</h1>
-            {productType.imageUrl && !productType.imageUrl.endsWith(".svg") && <a
-              href={catalogImageUrl(productType.imageUrl)} target="_blank" rel="noopener noreferrer"
-              aria-label={`Открыть оригинал изображения: ${productType.name} (в новой вкладке)`}
-              className="group mx-auto mt-6 block w-full max-w-2xl rounded-xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-slate-600"
-            >
-              <div className="relative aspect-[2/1] overflow-hidden rounded-xl bg-white">
-                <Image src={catalogImageUrl(productType.imageUrl)} alt={productType.name} fill
-                  sizes="(min-width: 1024px) 640px, (min-width: 640px) 85vw, 90vw"
-                  className="object-contain object-center"/>
-              </div>
-            </a>}
+            {productType.imageUrl && !productType.imageUrl.endsWith(".svg") &&
+              <ProductImageViewer src={productType.imageUrl} name={productType.name}/>}
             <p className="mt-4 max-w-4xl leading-7 text-slate-600">{productType.description}</p>
           </div>
         </div>

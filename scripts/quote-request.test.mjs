@@ -34,7 +34,7 @@ test('quote request excludes empty, zero and invalid quantities and preserves ge
 test('quote button targets the local form, scrolls on every click and replaces the requested product', () => {
   const messages = [];
   let scrolls = 0;
-  const module = {exports: {}};
+  const testModule = {exports: {}};
   const imports = {
     'react/jsx-runtime': {jsx: (type, props) => ({type, props})},
     '@/components/ui/Button': {ButtonLink: 'link'},
@@ -44,10 +44,10 @@ test('quote button targets the local form, scrolls on every click and replaces t
   const source = ts.transpileModule(fs.readFileSync('components/catalog/QuoteRequestButton.tsx', 'utf8'), {
     compilerOptions: {module: ts.ModuleKind.CommonJS, jsx: ts.JsxEmit.ReactJSX},
   }).outputText;
-  vm.runInNewContext(source, {module, exports: module.exports, require: name => {
+  vm.runInNewContext(source, {module: testModule, exports: testModule.exports, require: name => {
     assert.ok(name in imports, name); return imports[name];
   }, document: {getElementById(id) {assert.equal(id, 'request'); return {scrollIntoView() {scrolls++;}};}}});
-  const button = (order, label) => module.exports.QuoteRequestButton({order, label, className: ''}).props;
+  const button = (order, label) => testModule.exports.QuoteRequestButton({order, label, className: ''}).props;
   const first = button({product: 'Арматура', meters: 100, tons: 0.089});
   assert.equal(first.href, '#request');
   let prevented = 0;

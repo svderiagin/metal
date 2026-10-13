@@ -1,5 +1,6 @@
 import type {ProductVariant} from "@/types/product";
 import {normalizeText} from "./russian";
+import {beamProfile, beamSeries, type BeamSeries} from "@/lib/beam";
 
 const number = "\\d+(?:\\.\\d+)?";
 const dimensionPattern = new RegExp(`(?<![а-яa-z\\d.])${number}(?:x${number})+(?![а-яa-z\\d.])`, "g");
@@ -19,7 +20,7 @@ function standards(text: string): string[] {
   return [...normalizeText(text).matchAll(/гост\s*(?:р\s*)?(\d+(?:\.\d+)*(?:-\d+)?)/g)].map(m => m[1]);
 }
 export interface TechnicalDocument {dimensions: string[][]; primary: Set<string>; numbers: Set<string>; grades: Set<string>; standards: Set<string>; sku: string}
-export interface TechnicalQuery {dimensions: string[][]; numbers: string[]; grades: string[]; standards: string[]; diameter?: string; thickness?: string; sku?: string; wordsText: string; invalid: boolean}
+export interface TechnicalQuery {dimensions: string[][]; numbers: string[]; grades: string[]; standards: string[]; diameter?: string; thickness?: string; sku?: string; beamSeries?: BeamSeries; wordsText: string; invalid: boolean}
 
 export function buildTechnicalDocument(product: ProductVariant): TechnicalDocument {
   const specs = product.specifications;
@@ -37,9 +38,16 @@ export function buildTechnicalDocument(product: ProductVariant): TechnicalDocume
     const match = normalizeText(attr.value).match(/^(\d+(?:\.\d+)?)\s*(?:мм)?$/);if (match) primary.add(canonicalNumber(match[1]));
   }
   const grades = new Set([...identifiers(gradeText), ...identifiers(product.name).filter(t => !/^[\d.]+х[\dх.]+$/.test(t))]);
+  if (product.categoryId === "cat-bal") {
+    const profile = beamProfile(product);
+    if (/^\d+(?:[.,]\d+)?[БШКМ]\d*$/.test(profile)) grades.add(canonicalIdentifier(profile));
+  }
   // Ст3сп/пс explicitly lists two variants; the second suffix inherits the written grade root.
   for (const m of normalizeText(gradeText + " " + product.name).matchAll(/(ст\d+)(сп|пс|кп)\s*\/\s*(сп|пс|кп)/g)) grades.add(m[1] + m[3]);
   const standardSet = new Set(standards(stdText));
+  if (product.categoryId === "cat-bal") {
+    for (const match of normalizeText(product.standard).matchAll(/;\s*(\d+(?:\.\d+)*(?:-\d+)?)/g)) standardSet.add(match[1]);
+  }
   const numbers = new Set([...primary, ...chains.flat(), ...[...standardSet].flatMap(s => [s, s.split("-")[0]])]);
   return {dimensions: chains, primary, numbers, grades, standards: standardSet, sku: normalizeText(product.sku)};
 }
@@ -47,6 +55,10 @@ export function buildTechnicalDocument(product: ProductVariant): TechnicalDocume
 export function parseTechnicalQuery(input: string): TechnicalQuery {
   let text = normalizeText(input).replace(/(\d)мм(?=$|[^а-яa-z])/g, "$1 мм");
   const query: TechnicalQuery = {dimensions: [], numbers: [], grades: [], standards: [], wordsText: "", invalid: false};
+  text = text.replace(/(балк[а-я]*|двутавр[а-я]*)\s+([бшкм])(?=\s|$)/g, (_, noun: string, series: string) => {
+    query.beamSeries = series.toUpperCase() as BeamSeries;
+    return noun;
+  });
   text = text.replace(/(?:ms|мп)-\d+/g, sku => {query.sku = sku; return " ";});
   text = text.replace(/гост\s*(?:р\s*)?(\d+(?:\.\d+)*(?:-\d+)?)/g, (_, value: string) => {query.standards.push(value);return " ";});
   text = text.replace(/(?:[øØ⌀ф]\s*|диаметр(?:ом)?\s*)(\d+(?:\.\d+)?)/g, (_, value: string) => {query.diameter = canonicalNumber(value);return " ";});
@@ -65,6 +77,7 @@ export function parseTechnicalQuery(input: string): TechnicalQuery {
 }
 
 export function technicalMatch(query: TechnicalQuery, doc: TechnicalDocument, product: ProductVariant): boolean {
+  if (query.beamSeries && beamSeries(product) !== query.beamSeries) return false;
   if (query.invalid || (query.sku && query.sku !== doc.sku)) return false;
   if (!query.dimensions.every(chain => doc.dimensions.some(candidate => chain.every((part, i) => part === candidate[i])))) return false;
   if (!query.numbers.every(n => Number(n) < 500 ? doc.primary.has(n) : doc.numbers.has(n))) return false;

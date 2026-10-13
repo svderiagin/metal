@@ -34,18 +34,18 @@ function setup(overrides = {}) {
     '@/lib/quoteRequest': readProjectData('lib/quoteRequest.ts'),
     './FilterPanel.module.css': new Proxy({}, {get: (_, key) => key}),
   };
-  const module = {exports: {}};
+  const testModule = {exports: {}};
   const source = ts.transpileModule(fs.readFileSync('components/catalog/ProductOrderControls.tsx', 'utf8'), {
     compilerOptions: {module: ts.ModuleKind.CommonJS, jsx: ts.JsxEmit.ReactJSX},
   }).outputText;
-  vm.runInNewContext(source, {module, exports: module.exports, require: name => {
+  vm.runInNewContext(source, {module: testModule, exports: testModule.exports, require: name => {
     assert(name in imports, name); return imports[name];
   }, window: {setTimeout: fn => {timers.push(fn); return timers.length;}, clearTimeout() {}}});
   const variant = {id: 'product', name: 'Товар', price: 100, inStock: true, ...overrides};
   function nodes(node) { return !node || typeof node !== 'object' ? [] : [node, ...[node.props?.children].flat().flatMap(nodes)]; }
   function render() {
     cursor = 0;
-    const tree = nodes(module.exports.ProductOrderControls({variant, view: 'table'}));
+    const tree = nodes(testModule.exports.ProductOrderControls({variant, view: 'table'}));
     return {input: tree.find(n => n.type === 'input').props, action: tree.find(n => n.type === 'button' || n.type === 'link').props};
   }
   return {cart, calls, timers, render, change: value => render().input.onChange({target: {value}})};

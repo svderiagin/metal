@@ -82833,8 +82833,7 @@
       "issues": [
         "Нулевая, отсутствующая или ненормализуемая исходная цена: цена по запросу"
       ],
-      "status": "imported",
-      "productId": "local-65597",
+      "status": "excluded",
       "chosenFile": "product\\balka-25s1x12000-gost-27772-s255-tm.html",
       "stockId": 5,
       "regionRule": "Москва, регион 1; склад 5 — сохранённый основной контекст; иные регионы не дают публичной цены",
@@ -82875,7 +82874,9 @@
           "product\\balka-25s1x12000-gost-27772-s255-tm.7cb5fbda19.html",
           "product\\balka-25s1x12000-gost-27772-s255-tm.html"
         ]
-      }
+      },
+      "reason": "Удалено по прямому указанию пользователя как дубль; сохранена карточка local-122247.",
+      "replacementProductId": "local-122247"
     },
     {
       "sourceId": "65598",
@@ -83157,8 +83158,7 @@
       "issues": [
         "Нулевая, отсутствующая или ненормализуемая исходная цена: цена по запросу"
       ],
-      "status": "imported",
-      "productId": "local-65598",
+      "status": "excluded",
       "chosenFile": "product\\balka-30s1x12000-gost-27772-s255-tm.html",
       "stockId": 5,
       "regionRule": "Москва, регион 1; склад 5 — сохранённый основной контекст; иные регионы не дают публичной цены",
@@ -83199,7 +83199,9 @@
           "product\\balka-30s1x12000-gost-27772-s255-tm.7cb5fbda19.html",
           "product\\balka-30s1x12000-gost-27772-s255-tm.html"
         ]
-      }
+      },
+      "reason": "Удалено по прямому указанию пользователя как дубль; сохранена карточка local-115982.",
+      "replacementProductId": "local-115982"
     },
     {
       "sourceId": "65599",
@@ -83699,8 +83701,7 @@
       "issues": [
         "Нулевая, отсутствующая или ненормализуемая исходная цена: цена по запросу"
       ],
-      "status": "imported",
-      "productId": "local-65601",
+      "status": "excluded",
       "chosenFile": "product\\balka-20b1x12000-gost-27772-s255-tm.html",
       "stockId": 5,
       "regionRule": "Москва, регион 1; склад 5 — сохранённый основной контекст; иные регионы не дают публичной цены",
@@ -83740,7 +83741,9 @@
         "unitEvidenceFiles": [
           "product\\balka-20b1x12000-gost-27772-s255-tm.html"
         ]
-      }
+      },
+      "reason": "Удалено по прямому указанию пользователя как дубль; сохранена карточка local-122248.",
+      "replacementProductId": "local-122248"
     },
     {
       "sourceId": "65602",
@@ -84087,8 +84090,7 @@
         }
       ],
       "issues": [],
-      "status": "imported",
-      "productId": "local-65602",
+      "status": "excluded",
       "chosenFile": "product\\balka-20k1x12000-gost-27772-s255-tm.92595da431.html",
       "stockId": 5,
       "regionRule": "Москва, регион 1; склад 5 — сохранённый основной контекст; иные регионы не дают публичной цены",
@@ -84129,7 +84131,9 @@
           "product\\balka-20k1x12000-gost-27772-s255-tm.92595da431.html",
           "product\\balka-20k1x12000-gost-27772-s255-tm.html"
         ]
-      }
+      },
+      "reason": "Удалено по прямому указанию пользователя; сохранена карточка 20К1 С255 с массой. С255 и С355 не объединялись.",
+      "replacementProductId": "local-11123500"
     },
     {
       "sourceId": "65668",
@@ -84940,8 +84944,7 @@
         }
       ],
       "issues": [],
-      "status": "imported",
-      "productId": "local-66264",
+      "status": "excluded",
       "chosenFile": "product\\balka-30k2x12000-gost-27772-s255-tm.92595da431.html",
       "stockId": 5,
       "regionRule": "Москва, регион 1; склад 5 — сохранённый основной контекст; иные регионы не дают публичной цены",
@@ -84982,7 +84985,9 @@
           "product\\balka-30k2x12000-gost-27772-s255-tm.92595da431.html",
           "product\\balka-30k2x12000-gost-27772-s255-tm.html"
         ]
-      }
+      },
+      "reason": "Удалено по прямому указанию пользователя как дубль; сохранена карточка local-122249.",
+      "replacementProductId": "local-122249"
     },
     {
       "sourceId": "66266",
@@ -85264,8 +85269,7 @@
       "issues": [
         "Нулевая, отсутствующая или ненормализуемая исходная цена: цена по запросу"
       ],
-      "status": "imported",
-      "productId": "local-66266",
+      "status": "excluded",
       "chosenFile": "product\\balka-40s2x12000-gost-27772-s255-tm.html",
       "stockId": 5,
       "regionRule": "Москва, регион 1; склад 5 — сохранённый основной контекст; иные регионы не дают публичной цены",
@@ -85306,7 +85310,9 @@
           "product\\balka-40s2x12000-gost-27772-s255-tm.7cb5fbda19.html",
           "product\\balka-40s2x12000-gost-27772-s255-tm.html"
         ]
-      }
+      },
+      "reason": "Удалено по прямому указанию пользователя как дубль; сохранена карточка local-118168.",
+      "replacementProductId": "local-118168"
     },
     {
       "sourceId": "66683",
@@ -345666,8 +345672,7 @@
         }
       ],
       "issues": [],
-      "status": "imported",
-      "productId": "local-122246",
+      "status": "excluded",
       "chosenFile": "product\\balka-20s2x12000-gost-35087-27772-s255-tm.92595da431.html",
       "stockId": 5,
       "regionRule": "Москва, регион 1; склад 5 — сохранённый основной контекст; иные регионы не дают публичной цены",
@@ -345708,7 +345713,9 @@
           "product\\balka-20s2x12000-gost-35087-27772-s255-tm.92595da431.html",
           "product\\balka-20s2x12000-gost-35087-27772-s255-tm.html"
         ]
-      }
+      },
+      "reason": "Удалено по прямому указанию пользователя как дубль; сохранена карточка local-73573.",
+      "replacementProductId": "local-73573"
     },
     {
       "sourceId": "122247",
@@ -362545,17 +362552,17 @@
     "after": {
       "categories": 19,
       "types": 76,
-      "variants": 688
+      "variants": 681
     },
     "sourceOccurrences": 3787,
     "sourceProducts": 551,
     "distinctSourceOffers": 1155,
-    "imported": 548,
+    "imported": 541,
     "updated": 0,
     "duplicates": 2632,
     "mergedIds": 3,
-    "excluded": 0,
+    "excluded": 7,
     "incomplete": 0,
-    "quoteOnly": 143
+    "quoteOnly": 139
   }
 }

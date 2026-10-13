@@ -234,12 +234,15 @@ function filterAndSortProductTypes(
     result.push(productType);
   }
 
+  const preserveBeamOrder = productTypes.every(productType => productType.categoryId === "cat-bal");
   result.sort((left, right) => {
     const leftVariants = variantsByType.get(left.id) ?? [];
     const rightVariants = variantsByType.get(right.id) ?? [];
     if (sort === "price-asc") return minimumPrice(leftVariants) - minimumPrice(rightVariants);
     if (sort === "price-desc") return minimumPrice(rightVariants) - minimumPrice(leftVariants);
     if (sort === "name") return left.name.localeCompare(right.name, "ru");
+    // Keep the configured beam series order instead of promoting stocked demo rows.
+    if (preserveBeamOrder) return 0;
     return availableCount(rightVariants) - availableCount(leftVariants);
   });
 

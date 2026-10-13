@@ -37,7 +37,7 @@ const originalSubcategories: Subcategory[] = [
   {
     "id": "cat-bal-sub-1",
     "categoryId": "cat-bal",
-    "name": "Балка обычная",
+    "name": "Балка нормальная",
     "slug": "balka-normalnaya",
     "shortDescription": "Балка нормальная: складские позиции популярных размеров и марок.",
     "description": "Балка нормальная для строительных, производственных и монтажных задач. Доступны подбор размера, резка и комплектная отгрузка."
@@ -57,6 +57,14 @@ const originalSubcategories: Subcategory[] = [
     "slug": "balka-kolonnaya",
     "shortDescription": "Балка колонная: складские позиции популярных размеров и марок.",
     "description": "Балка колонная для строительных, производственных и монтажных задач. Доступны подбор размера, резка и комплектная отгрузка."
+  },
+  {
+    "id": "cat-bal-sub-4",
+    "categoryId": "cat-bal",
+    "name": "Балка монорельсовая",
+    "slug": "balka-monorelsovaya",
+    "shortDescription": "Монорельсовые балки серии М для подвесных путей.",
+    "description": "Монорельсовые балки серии М по ГОСТ 19425 для подвесных путей. Подберите профиль, длину и объём поставки."
   },
   {
     "id": "cat-kat-sub-1",
@@ -500,5 +508,16 @@ const originalSubcategories: Subcategory[] = [
   }
 ];
 
-export const subcategories: Subcategory[] = importedCatalog.families as Subcategory[];
+export const subcategories: Subcategory[] = [
+  ...(importedCatalog.families as Subcategory[]).filter(family => family.id !== "mirror-family-cat-bal-15"),
+  ...originalSubcategories.filter(subcategory => subcategory.id === "cat-bal-sub-4"
+    && !importedCatalog.families.some(family => family.id === subcategory.id)),
+];
+// Display normal beams before wide-flange beams without changing other categories.
+const normalBeamIndex = subcategories.findIndex(item => item.id === "cat-bal-sub-1");
+const wideBeamIndex = subcategories.findIndex(item => item.id === "cat-bal-sub-2");
+if (normalBeamIndex !== -1 && wideBeamIndex !== -1 && normalBeamIndex > wideBeamIndex) {
+  [subcategories[normalBeamIndex], subcategories[wideBeamIndex]] =
+    [subcategories[wideBeamIndex], subcategories[normalBeamIndex]];
+}
 export {originalSubcategories};

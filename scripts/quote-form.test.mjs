@@ -29,15 +29,15 @@ test('blur validates only the visited field and clears its error after correctio
     './QuoteRequestContext': {useQuoteRequest: () => null},
     './QuoteRequestForm.module.css': {default: {form: 'form', error: 'error', messageMeta: 'messageMeta', counter: 'counter'}},
   };
-  const module = {exports: {}};
+  const testModule = {exports: {}};
   const source = ts.transpileModule(fs.readFileSync('components/forms/QuoteRequestForm.tsx', 'utf8'), {
     compilerOptions: {module: ts.ModuleKind.CommonJS, jsx: ts.JsxEmit.ReactJSX},
   }).outputText;
-  vm.runInNewContext(source, {module, exports: module.exports, HTMLInputElement: InputElement, HTMLTextAreaElement: InputElement,
+  vm.runInNewContext(source, {module: testModule, exports: testModule.exports, HTMLInputElement: InputElement, HTMLTextAreaElement: InputElement,
     FormData: class extends Map {constructor(form) {super(Object.entries(form));}},
     require: name => {assert.ok(name in imports, name); return imports[name];},
   });
-  function render() {cursor = 0; return module.exports.QuoteRequestForm();}
+  function render() {cursor = 0; return testModule.exports.QuoteRequestForm();}
   const form = {email: 'broken', name: '', phone: '', message: ''};
   function blur(name) {render().props.onBlur({target: new InputElement(name), currentTarget: form});}
   function nodes(node) {return !node || typeof node !== 'object' ? [] : [node, ...[node.props?.children].flat().flatMap(nodes)];}

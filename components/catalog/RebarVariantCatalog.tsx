@@ -61,7 +61,8 @@ function MeasuredVariantCatalog({variants, simplified = false, kind = "rebar"}: 
   const isBeam = kind === "beam";
   const columns = isBeam ? tableColumns.map((column, index) => index === 0 ? {...column, label: "Профиль", width: "9%"}
     : index === 1 ? {...column, label: "Тип балки", width: "10%"}
-      : index === 8 ? {...column, width: "11%"} : column) : tableColumns;
+      : index === 2 ? {...column, label: "Сталь / класс"}
+        : index === 8 ? {...column, width: "11%"} : column) : tableColumns;
   const [query, setQuery] = useState("");
   const deferredQuery = useDeferredValue(query);
   const index = useMemo(() => createCatalogSearchIndex(variants), [variants]);

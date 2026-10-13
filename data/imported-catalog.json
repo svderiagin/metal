@@ -189,7 +189,7 @@
     {
       "id": "cat-bal-sub-1",
       "categoryId": "cat-bal",
-      "name": "Балка обычная",
+      "name": "Балка нормальная",
       "slug": "balka-normalnaya",
       "shortDescription": "Балка нормальная: складские позиции популярных размеров и марок.",
       "description": "Балка нормальная для строительных, производственных и монтажных задач. Доступны подбор размера, резка и комплектная отгрузка."
@@ -699,14 +699,6 @@
       "description": "Профильные. Профильные трубы с некруглым сечением. Сопоставляйте обе стороны профиля, толщину стенки, марку стали, стандарт и длину."
     },
     {
-      "id": "mirror-family-cat-bal-15",
-      "categoryId": "cat-bal",
-      "name": "Балка",
-      "slug": "balka",
-      "shortDescription": "Балка. Двутавровые балки различаются полным обозначением сечения и серией. Для подбора сверяйте обозначение профиля, материал, стандарт и длину. Стандарты представленных исполнений: ГОСТ 27772; ГОСТ 19425; ГОСТ 35087; 27772.",
-      "description": "Балка. Двутавровые балки различаются полным обозначением сечения и серией. Для подбора сверяйте обозначение профиля, материал, стандарт и длину. Стандарты представленных исполнений: ГОСТ 27772; ГОСТ 19425; ГОСТ 35087; 27772."
-    },
-    {
       "id": "mirror-family-cat-pro-23",
       "categoryId": "cat-pro",
       "name": "Сварочная проволока",
@@ -761,6 +753,14 @@
       "slug": "rulon",
       "shortDescription": "Рулоны. Плоский прокат в рулонах. В отличие от листа фиксированной длины, рулон выбирают по толщине, ширине, материалу и покрытию. Стандарты представленных исполнений: ГОСТ 16523; ГОСТ 16523/ТУ.",
       "description": "Рулоны. Плоский прокат в рулонах. В отличие от листа фиксированной длины, рулон выбирают по толщине, ширине, материалу и покрытию. Стандарты представленных исполнений: ГОСТ 16523; ГОСТ 16523/ТУ."
+    },
+    {
+      "id": "cat-bal-sub-4",
+      "categoryId": "cat-bal",
+      "name": "Балка монорельсовая",
+      "slug": "balka-monorelsovaya",
+      "shortDescription": "Монорельсовые балки серии М для подвесных путей.",
+      "description": "Монорельсовые балки серии М по ГОСТ 19425 для подвесных путей. Подберите профиль, длину и объём поставки."
     }
   ],
   "products": [
@@ -11552,128 +11552,10 @@
       "imported": true
     },
     {
-      "id": "local-65597",
-      "categoryId": "cat-bal",
-      "subcategoryId": "mirror-family-cat-bal-15",
-      "productTypeId": "type-mirror-family-cat-bal-15",
-      "name": "Балка 25Ш1х12000 ГОСТ 27772 С255 ТМ",
-      "slug": "balka-25s1x12000-gost-27772-s255-tm",
-      "sku": "МП-65597",
-      "shortDescription": "Длина, мм: 12 000; Стандарт: ГОСТ 27772; Марка стали: С255",
-      "description": "Балка 25Ш1х12000 ГОСТ 27772 С255 ТМ. Длина, мм: 12 000; Стандарт: ГОСТ 27772; Марка стали: С255. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": null,
-      "quoteOnly": true,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 27772",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 27772"
-        },
-        {
-          "key": "grade",
-          "label": "Марка стали",
-          "value": "С255"
-        },
-        {
-          "key": "length",
-          "label": "Длина, мм",
-          "value": "12 000"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Длина, мм",
-          "value": "12 000"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 27772"
-        },
-        {
-          "name": "Марка стали",
-          "value": "С255"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Балка 25Ш1х12000 ГОСТ 27772 С255 ТМ"
-        }
-      ],
-      "imported": true
-    },
-    {
-      "id": "local-65598",
-      "categoryId": "cat-bal",
-      "subcategoryId": "mirror-family-cat-bal-15",
-      "productTypeId": "type-mirror-family-cat-bal-15",
-      "name": "Балка 30Ш1х12000 ГОСТ 27772 С255 ТМ",
-      "slug": "balka-30s1x12000-gost-27772-s255-tm",
-      "sku": "МП-65598",
-      "shortDescription": "Длина, мм: 12 000; Стандарт: ГОСТ 27772; Марка стали: С255",
-      "description": "Балка 30Ш1х12000 ГОСТ 27772 С255 ТМ. Длина, мм: 12 000; Стандарт: ГОСТ 27772; Марка стали: С255. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": null,
-      "quoteOnly": true,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 27772",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 27772"
-        },
-        {
-          "key": "grade",
-          "label": "Марка стали",
-          "value": "С255"
-        },
-        {
-          "key": "length",
-          "label": "Длина, мм",
-          "value": "12 000"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Длина, мм",
-          "value": "12 000"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 27772"
-        },
-        {
-          "name": "Марка стали",
-          "value": "С255"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Балка 30Ш1х12000 ГОСТ 27772 С255 ТМ"
-        }
-      ],
-      "imported": true
-    },
-    {
       "id": "local-65599",
       "categoryId": "cat-bal",
-      "subcategoryId": "mirror-family-cat-bal-15",
-      "productTypeId": "type-mirror-family-cat-bal-15",
+      "subcategoryId": "cat-bal-sub-1",
+      "productTypeId": "type-cat-bal-sub-1",
       "name": "Балка 40Б1х12000 ГОСТ 27772 С255 ТМ",
       "slug": "balka-40b1x12000-gost-27772-s255-tm",
       "sku": "МП-65599",
@@ -11728,125 +11610,6 @@
       ],
       "imported": true,
       "pricePerTon": 79470
-    },
-    {
-      "id": "local-65601",
-      "categoryId": "cat-bal",
-      "subcategoryId": "mirror-family-cat-bal-15",
-      "productTypeId": "type-mirror-family-cat-bal-15",
-      "name": "Балка 20Б1х12000 ГОСТ 27772 С255 ТМ",
-      "slug": "balka-20b1x12000-gost-27772-s255-tm",
-      "sku": "МП-65601",
-      "shortDescription": "Длина, мм: 12 000; Стандарт: ГОСТ 27772; Марка стали: С255",
-      "description": "Балка 20Б1х12000 ГОСТ 27772 С255 ТМ. Длина, мм: 12 000; Стандарт: ГОСТ 27772; Марка стали: С255. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": null,
-      "quoteOnly": true,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 27772",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 27772"
-        },
-        {
-          "key": "grade",
-          "label": "Марка стали",
-          "value": "С255"
-        },
-        {
-          "key": "length",
-          "label": "Длина, мм",
-          "value": "12 000"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Длина, мм",
-          "value": "12 000"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 27772"
-        },
-        {
-          "name": "Марка стали",
-          "value": "С255"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Балка 20Б1х12000 ГОСТ 27772 С255 ТМ"
-        }
-      ],
-      "imported": true
-    },
-    {
-      "id": "local-65602",
-      "categoryId": "cat-bal",
-      "subcategoryId": "mirror-family-cat-bal-15",
-      "productTypeId": "type-mirror-family-cat-bal-15",
-      "name": "Балка 20К1х12000 ГОСТ 27772 С255 ТМ",
-      "slug": "balka-20k1x12000-gost-27772-s255-tm",
-      "sku": "МП-65602",
-      "shortDescription": "Длина, мм: 12 000; Стандарт: ГОСТ 27772; Марка стали: С255",
-      "description": "Балка 20К1х12000 ГОСТ 27772 С255 ТМ. Длина, мм: 12 000; Стандарт: ГОСТ 27772; Марка стали: С255. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 79740,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 27772",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 27772"
-        },
-        {
-          "key": "grade",
-          "label": "Марка стали",
-          "value": "С255"
-        },
-        {
-          "key": "length",
-          "label": "Длина, мм",
-          "value": "12 000"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Длина, мм",
-          "value": "12 000"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 27772"
-        },
-        {
-          "name": "Марка стали",
-          "value": "С255"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Балка 20К1х12000 ГОСТ 27772 С255 ТМ"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 79740
     },
     {
       "id": "local-65668",
@@ -11913,125 +11676,6 @@
       "pricePerTon": 56340
     },
     {
-      "id": "local-66264",
-      "categoryId": "cat-bal",
-      "subcategoryId": "mirror-family-cat-bal-15",
-      "productTypeId": "type-mirror-family-cat-bal-15",
-      "name": "Балка 30К2х12000 ГОСТ 27772 С255 ТМ",
-      "slug": "balka-30k2x12000-gost-27772-s255-tm",
-      "sku": "МП-66264",
-      "shortDescription": "Длина, мм: 12 000; Стандарт: ГОСТ 27772; Марка стали: С255",
-      "description": "Балка 30К2х12000 ГОСТ 27772 С255 ТМ. Длина, мм: 12 000; Стандарт: ГОСТ 27772; Марка стали: С255. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 79470,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 27772",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 27772"
-        },
-        {
-          "key": "grade",
-          "label": "Марка стали",
-          "value": "С255"
-        },
-        {
-          "key": "length",
-          "label": "Длина, мм",
-          "value": "12 000"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Длина, мм",
-          "value": "12 000"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 27772"
-        },
-        {
-          "name": "Марка стали",
-          "value": "С255"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Балка 30К2х12000 ГОСТ 27772 С255 ТМ"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 79470
-    },
-    {
-      "id": "local-66266",
-      "categoryId": "cat-bal",
-      "subcategoryId": "mirror-family-cat-bal-15",
-      "productTypeId": "type-mirror-family-cat-bal-15",
-      "name": "Балка 40Ш2х12000 ГОСТ 27772 С255 ТМ",
-      "slug": "balka-40s2x12000-gost-27772-s255-tm",
-      "sku": "МП-66266",
-      "shortDescription": "Длина, мм: 12 000; Стандарт: ГОСТ 27772; Марка стали: С255",
-      "description": "Балка 40Ш2х12000 ГОСТ 27772 С255 ТМ. Длина, мм: 12 000; Стандарт: ГОСТ 27772; Марка стали: С255. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": null,
-      "quoteOnly": true,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 27772",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 27772"
-        },
-        {
-          "key": "grade",
-          "label": "Марка стали",
-          "value": "С255"
-        },
-        {
-          "key": "length",
-          "label": "Длина, мм",
-          "value": "12 000"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Длина, мм",
-          "value": "12 000"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 27772"
-        },
-        {
-          "name": "Марка стали",
-          "value": "С255"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Балка 40Ш2х12000 ГОСТ 27772 С255 ТМ"
-        }
-      ],
-      "imported": true
-    },
-    {
       "id": "local-66683",
       "categoryId": "cat-pro",
       "subcategoryId": "mirror-family-cat-pro-23",
@@ -12075,8 +11719,8 @@
     {
       "id": "local-67138",
       "categoryId": "cat-bal",
-      "subcategoryId": "mirror-family-cat-bal-15",
-      "productTypeId": "type-mirror-family-cat-bal-15",
+      "subcategoryId": "cat-bal-sub-1",
+      "productTypeId": "type-cat-bal-sub-1",
       "name": "Балка 20Б2х12000 ГОСТ 27772 С255 ТМ",
       "slug": "balka-20b2x12000-gost-27772-s255-tm",
       "sku": "МП-67138",
@@ -12135,8 +11779,8 @@
     {
       "id": "local-67139",
       "categoryId": "cat-bal",
-      "subcategoryId": "mirror-family-cat-bal-15",
-      "productTypeId": "type-mirror-family-cat-bal-15",
+      "subcategoryId": "cat-bal-sub-3",
+      "productTypeId": "type-cat-bal-sub-3",
       "name": "Балка 40К1х12000 ГОСТ 27772 С255 ТМ",
       "slug": "balka-40k1x12000-gost-27772-s255-tm",
       "sku": "МП-67139",
@@ -12606,8 +12250,8 @@
     {
       "id": "local-69066",
       "categoryId": "cat-bal",
-      "subcategoryId": "mirror-family-cat-bal-15",
-      "productTypeId": "type-mirror-family-cat-bal-15",
+      "subcategoryId": "cat-bal-sub-3",
+      "productTypeId": "type-cat-bal-sub-3",
       "name": "Балка 35К1х12000 ГОСТ 27772 С255 ТМ",
       "slug": "balka-35k1x12000-gost-27772-s255-tm",
       "sku": "МП-69066",
@@ -12665,8 +12309,8 @@
     {
       "id": "local-69356",
       "categoryId": "cat-bal",
-      "subcategoryId": "mirror-family-cat-bal-15",
-      "productTypeId": "type-mirror-family-cat-bal-15",
+      "subcategoryId": "cat-bal-sub-4",
+      "productTypeId": "type-cat-bal-sub-4",
       "name": "Балка 24Мх12000 ГОСТ 19425 С255 ТМ",
       "slug": "balka-24mx12000-gost-19425-s255-tm",
       "sku": "МП-69356",
@@ -13937,8 +13581,8 @@
     {
       "id": "local-69883",
       "categoryId": "cat-bal",
-      "subcategoryId": "mirror-family-cat-bal-15",
-      "productTypeId": "type-mirror-family-cat-bal-15",
+      "subcategoryId": "cat-bal-sub-1",
+      "productTypeId": "type-cat-bal-sub-1",
       "name": "Балка 55Б1х12000 ГОСТ 27772 С255 ТМ",
       "slug": "balka-55b1x12000-gost-27772-s255-tm",
       "sku": "МП-69883",
@@ -14510,8 +14154,8 @@
     {
       "id": "local-73573",
       "categoryId": "cat-bal",
-      "subcategoryId": "mirror-family-cat-bal-15",
-      "productTypeId": "type-mirror-family-cat-bal-15",
+      "subcategoryId": "cat-bal-sub-2",
+      "productTypeId": "type-cat-bal-sub-2",
       "name": "Балка 20Ш2х12000 ГОСТ 27772 С255 ТМ",
       "slug": "balka-20s2x12000-gost-27772-s255-tm",
       "sku": "МП-73573",
@@ -15650,8 +15294,8 @@
     {
       "id": "local-83922",
       "categoryId": "cat-bal",
-      "subcategoryId": "mirror-family-cat-bal-15",
-      "productTypeId": "type-mirror-family-cat-bal-15",
+      "subcategoryId": "cat-bal-sub-1",
+      "productTypeId": "type-cat-bal-sub-1",
       "name": "Балка 50Б1х12000 ГОСТ 27772 С255 ТМ",
       "slug": "balka-50b1x12000-gost-27772-s255-tm",
       "sku": "МП-83922",
@@ -15909,8 +15553,8 @@
     {
       "id": "local-86552",
       "categoryId": "cat-bal",
-      "subcategoryId": "mirror-family-cat-bal-15",
-      "productTypeId": "type-mirror-family-cat-bal-15",
+      "subcategoryId": "cat-bal-sub-4",
+      "productTypeId": "type-cat-bal-sub-4",
       "name": "Балка 30Мх12000 ГОСТ 19425 С255 ТМ",
       "slug": "balka-30mx12000-gost-19425-s255-tm",
       "sku": "МП-86552",
@@ -16042,8 +15686,8 @@
     {
       "id": "local-87267",
       "categoryId": "cat-bal",
-      "subcategoryId": "mirror-family-cat-bal-15",
-      "productTypeId": "type-mirror-family-cat-bal-15",
+      "subcategoryId": "cat-bal-sub-4",
+      "productTypeId": "type-cat-bal-sub-4",
       "name": "Балка 45Мх12000 ГОСТ 19425 С255 ТМ",
       "slug": "balka-45mx12000-gost-19425-s255-tm",
       "sku": "МП-87267",
@@ -16297,8 +15941,8 @@
     {
       "id": "local-92441",
       "categoryId": "cat-bal",
-      "subcategoryId": "mirror-family-cat-bal-15",
-      "productTypeId": "type-mirror-family-cat-bal-15",
+      "subcategoryId": "cat-bal-sub-4",
+      "productTypeId": "type-cat-bal-sub-4",
       "name": "Балка 36Мх12000 ГОСТ 19425 С255 ТМ",
       "slug": "balka-36mx12000-gost-19425-s255-tm",
       "sku": "МП-92441",
@@ -27646,8 +27290,8 @@
     {
       "id": "local-106617",
       "categoryId": "cat-bal",
-      "subcategoryId": "mirror-family-cat-bal-15",
-      "productTypeId": "type-mirror-family-cat-bal-15",
+      "subcategoryId": "cat-bal-sub-3",
+      "productTypeId": "type-cat-bal-sub-3",
       "name": "Балка 20К1х12000 ГОСТ 35087; 27772 С355 ТМ",
       "slug": "balka-20k1x12000-gost-35087-27772-s355-tm",
       "sku": "МП-106617",
@@ -27706,8 +27350,8 @@
     {
       "id": "local-108395",
       "categoryId": "cat-bal",
-      "subcategoryId": "mirror-family-cat-bal-15",
-      "productTypeId": "type-mirror-family-cat-bal-15",
+      "subcategoryId": "cat-bal-sub-2",
+      "productTypeId": "type-cat-bal-sub-2",
       "name": "Балка 35Ш2х12000 ГОСТ 35087; 27772 С255 ТМ",
       "slug": "balka-35s2x12000-gost-35087-27772-s255-tm",
       "sku": "МП-108395",
@@ -32015,8 +31659,8 @@
     {
       "id": "local-110259",
       "categoryId": "cat-bal",
-      "subcategoryId": "mirror-family-cat-bal-15",
-      "productTypeId": "type-mirror-family-cat-bal-15",
+      "subcategoryId": "cat-bal-sub-2",
+      "productTypeId": "type-cat-bal-sub-2",
       "name": "Балка 35Ш1х12000 ГОСТ 35087; 27772 С255 ТМ",
       "slug": "balka-35s1x12000-gost-35087-27772-s255-tm",
       "sku": "МП-110259",
@@ -32075,8 +31719,8 @@
     {
       "id": "local-110534",
       "categoryId": "cat-bal",
-      "subcategoryId": "mirror-family-cat-bal-15",
-      "productTypeId": "type-mirror-family-cat-bal-15",
+      "subcategoryId": "cat-bal-sub-3",
+      "productTypeId": "type-cat-bal-sub-3",
       "name": "Балка 20К2х12000 ГОСТ 35087; 27772 С255 ТМ",
       "slug": "balka-20k2x12000-gost-35087-27772-s255-tm",
       "sku": "МП-110534",
@@ -32135,8 +31779,8 @@
     {
       "id": "local-110539",
       "categoryId": "cat-bal",
-      "subcategoryId": "mirror-family-cat-bal-15",
-      "productTypeId": "type-mirror-family-cat-bal-15",
+      "subcategoryId": "cat-bal-sub-2",
+      "productTypeId": "type-cat-bal-sub-2",
       "name": "Балка 25Ш2х12000 ГОСТ 35087; 27772 С255 ТМ",
       "slug": "balka-25s2x12000-gost-35087-27772-s255-tm",
       "sku": "МП-110539",
@@ -32195,8 +31839,8 @@
     {
       "id": "local-110542",
       "categoryId": "cat-bal",
-      "subcategoryId": "mirror-family-cat-bal-15",
-      "productTypeId": "type-mirror-family-cat-bal-15",
+      "subcategoryId": "cat-bal-sub-2",
+      "productTypeId": "type-cat-bal-sub-2",
       "name": "Балка 30Ш2х12000 ГОСТ 35087; 27772 С255 ТМ",
       "slug": "balka-30s2x12000-gost-35087-27772-s255-tm",
       "sku": "МП-110542",
@@ -32255,8 +31899,8 @@
     {
       "id": "local-110545",
       "categoryId": "cat-bal",
-      "subcategoryId": "mirror-family-cat-bal-15",
-      "productTypeId": "type-mirror-family-cat-bal-15",
+      "subcategoryId": "cat-bal-sub-1",
+      "productTypeId": "type-cat-bal-sub-1",
       "name": "Балка 40Б2х12000 ГОСТ 35087; 27772 С255 ТМ",
       "slug": "balka-40b2x12000-gost-35087-27772-s255-tm",
       "sku": "МП-110545",
@@ -32315,8 +31959,8 @@
     {
       "id": "local-110546",
       "categoryId": "cat-bal",
-      "subcategoryId": "mirror-family-cat-bal-15",
-      "productTypeId": "type-mirror-family-cat-bal-15",
+      "subcategoryId": "cat-bal-sub-1",
+      "productTypeId": "type-cat-bal-sub-1",
       "name": "Балка 45Б1х12000 ГОСТ 35087; 27772 С255 ТМ",
       "slug": "balka-45b1x12000-gost-35087-27772-s255-tm",
       "sku": "МП-110546",
@@ -32375,8 +32019,8 @@
     {
       "id": "local-110554",
       "categoryId": "cat-bal",
-      "subcategoryId": "mirror-family-cat-bal-15",
-      "productTypeId": "type-mirror-family-cat-bal-15",
+      "subcategoryId": "cat-bal-sub-3",
+      "productTypeId": "type-cat-bal-sub-3",
       "name": "Балка 30К1х12000 ГОСТ 35087; 27772 С255 ТМ",
       "slug": "balka-30k1x12000-gost-35087-27772-s255-tm",
       "sku": "МП-110554",
@@ -32435,8 +32079,8 @@
     {
       "id": "local-110555",
       "categoryId": "cat-bal",
-      "subcategoryId": "mirror-family-cat-bal-15",
-      "productTypeId": "type-mirror-family-cat-bal-15",
+      "subcategoryId": "cat-bal-sub-1",
+      "productTypeId": "type-cat-bal-sub-1",
       "name": "Балка 35Б2х12000 ГОСТ 35087; 27772 С255 ТМ",
       "slug": "balka-35b2x12000-gost-35087-27772-s255-tm",
       "sku": "МП-110555",
@@ -32495,8 +32139,8 @@
     {
       "id": "local-110556",
       "categoryId": "cat-bal",
-      "subcategoryId": "mirror-family-cat-bal-15",
-      "productTypeId": "type-mirror-family-cat-bal-15",
+      "subcategoryId": "cat-bal-sub-1",
+      "productTypeId": "type-cat-bal-sub-1",
       "name": "Балка 35Б1х12000 ГОСТ 35087; 27772 С255 ТМ",
       "slug": "balka-35b1x12000-gost-35087-27772-s255-tm",
       "sku": "МП-110556",
@@ -32555,8 +32199,8 @@
     {
       "id": "local-110557",
       "categoryId": "cat-bal",
-      "subcategoryId": "mirror-family-cat-bal-15",
-      "productTypeId": "type-mirror-family-cat-bal-15",
+      "subcategoryId": "cat-bal-sub-2",
+      "productTypeId": "type-cat-bal-sub-2",
       "name": "Балка 40Ш1х12000 ГОСТ 35087; 27772 С255 ТМ",
       "slug": "balka-40s1x12000-gost-35087-27772-s255-tm",
       "sku": "МП-110557",
@@ -33886,8 +33530,8 @@
     {
       "id": "local-113874",
       "categoryId": "cat-bal",
-      "subcategoryId": "mirror-family-cat-bal-15",
-      "productTypeId": "type-mirror-family-cat-bal-15",
+      "subcategoryId": "cat-bal-sub-1",
+      "productTypeId": "type-cat-bal-sub-1",
       "name": "Балка 25Б2х12000 ГОСТ 35087; 27772 С255 ТМ",
       "slug": "balka-25b2x12000-gost-35087-27772-s255-tm",
       "sku": "МП-113874",
@@ -33946,8 +33590,8 @@
     {
       "id": "local-115970",
       "categoryId": "cat-bal",
-      "subcategoryId": "mirror-family-cat-bal-15",
-      "productTypeId": "type-mirror-family-cat-bal-15",
+      "subcategoryId": "cat-bal-sub-2",
+      "productTypeId": "type-cat-bal-sub-2",
       "name": "Балка 45Ш1х12000 ГОСТ 35087; 27772 С255 ТМ",
       "slug": "balka-45s1x12000-gost-35087-27772-s255-tm",
       "sku": "МП-115970",
@@ -34006,8 +33650,8 @@
     {
       "id": "local-115971",
       "categoryId": "cat-bal",
-      "subcategoryId": "mirror-family-cat-bal-15",
-      "productTypeId": "type-mirror-family-cat-bal-15",
+      "subcategoryId": "cat-bal-sub-3",
+      "productTypeId": "type-cat-bal-sub-3",
       "name": "Балка 25К2х12000 ГОСТ 35087; 27772 С255 ТМ",
       "slug": "balka-25k2x12000-gost-35087-27772-s255-tm",
       "sku": "МП-115971",
@@ -34066,8 +33710,8 @@
     {
       "id": "local-115972",
       "categoryId": "cat-bal",
-      "subcategoryId": "mirror-family-cat-bal-15",
-      "productTypeId": "type-mirror-family-cat-bal-15",
+      "subcategoryId": "cat-bal-sub-1",
+      "productTypeId": "type-cat-bal-sub-1",
       "name": "Балка 30Б2х12000 ГОСТ 35087; 27772 С255 ТМ",
       "slug": "balka-30b2x12000-gost-35087-27772-s255-tm",
       "sku": "МП-115972",
@@ -34126,8 +33770,8 @@
     {
       "id": "local-115976",
       "categoryId": "cat-bal",
-      "subcategoryId": "mirror-family-cat-bal-15",
-      "productTypeId": "type-mirror-family-cat-bal-15",
+      "subcategoryId": "cat-bal-sub-2",
+      "productTypeId": "type-cat-bal-sub-2",
       "name": "Балка 20Ш1х12000 ГОСТ 35087; 27772 С255 ТМ",
       "slug": "balka-20s1x12000-gost-35087-27772-s255-tm",
       "sku": "МП-115976",
@@ -34186,8 +33830,8 @@
     {
       "id": "local-115977",
       "categoryId": "cat-bal",
-      "subcategoryId": "mirror-family-cat-bal-15",
-      "productTypeId": "type-mirror-family-cat-bal-15",
+      "subcategoryId": "cat-bal-sub-1",
+      "productTypeId": "type-cat-bal-sub-1",
       "name": "Балка 30Б1х12000 ГОСТ 35087; 27772 С255 ТМ",
       "slug": "balka-30b1x12000-gost-35087-27772-s255-tm",
       "sku": "МП-115977",
@@ -34246,8 +33890,8 @@
     {
       "id": "local-115982",
       "categoryId": "cat-bal",
-      "subcategoryId": "mirror-family-cat-bal-15",
-      "productTypeId": "type-mirror-family-cat-bal-15",
+      "subcategoryId": "cat-bal-sub-2",
+      "productTypeId": "type-cat-bal-sub-2",
       "name": "Балка 30Ш1х12000 ГОСТ 35087; 27772 С255 ТМ",
       "slug": "balka-30s1x12000-gost-35087-27772-s255-tm",
       "sku": "МП-115982",
@@ -34306,8 +33950,8 @@
     {
       "id": "local-116009",
       "categoryId": "cat-bal",
-      "subcategoryId": "mirror-family-cat-bal-15",
-      "productTypeId": "type-mirror-family-cat-bal-15",
+      "subcategoryId": "cat-bal-sub-1",
+      "productTypeId": "type-cat-bal-sub-1",
       "name": "Балка 40Б1х12000 ГОСТ 35087; 27772 С255 ТМ",
       "slug": "balka-40b1x12000-gost-35087-27772-s255-tm",
       "sku": "МП-116009",
@@ -34433,8 +34077,8 @@
     {
       "id": "local-117670",
       "categoryId": "cat-bal",
-      "subcategoryId": "mirror-family-cat-bal-15",
-      "productTypeId": "type-mirror-family-cat-bal-15",
+      "subcategoryId": "cat-bal-sub-1",
+      "productTypeId": "type-cat-bal-sub-1",
       "name": "Балка 25Б1х12000 ГОСТ 35087; 27772 С255 ТМ",
       "slug": "balka-25b1x12000-gost-35087-27772-s255-tm",
       "sku": "МП-117670",
@@ -34822,8 +34466,8 @@
     {
       "id": "local-118168",
       "categoryId": "cat-bal",
-      "subcategoryId": "mirror-family-cat-bal-15",
-      "productTypeId": "type-mirror-family-cat-bal-15",
+      "subcategoryId": "cat-bal-sub-2",
+      "productTypeId": "type-cat-bal-sub-2",
       "name": "Балка 40Ш2х12000 ГОСТ 35087; 27772 С255 ТМ",
       "slug": "balka-40s2x12000-gost-35087-27772-s255-tm",
       "sku": "МП-118168",
@@ -35287,70 +34931,10 @@
       "pricePerTon": 65250
     },
     {
-      "id": "local-122246",
-      "categoryId": "cat-bal",
-      "subcategoryId": "mirror-family-cat-bal-15",
-      "productTypeId": "type-mirror-family-cat-bal-15",
-      "name": "Балка 20Ш2х12000 ГОСТ 35087; 27772 С255 ТМ",
-      "slug": "balka-20s2x12000-gost-35087-27772-s255-tm",
-      "sku": "МП-122246",
-      "shortDescription": "Длина, мм: 12 000; Стандарт: ГОСТ 35087; 27772; Марка стали: С255",
-      "description": "Балка 20Ш2х12000 ГОСТ 35087; 27772 С255 ТМ. Длина, мм: 12 000; Стандарт: ГОСТ 35087; 27772; Марка стали: С255. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 79290,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 35087; 27772",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 35087; 27772"
-        },
-        {
-          "key": "grade",
-          "label": "Марка стали",
-          "value": "С255"
-        },
-        {
-          "key": "length",
-          "label": "Длина, мм",
-          "value": "12 000"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Длина, мм",
-          "value": "12 000"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 35087; 27772"
-        },
-        {
-          "name": "Марка стали",
-          "value": "С255"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Балка 20Ш2х12000 ГОСТ 35087; 27772 С255 ТМ"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 79290
-    },
-    {
       "id": "local-122247",
       "categoryId": "cat-bal",
-      "subcategoryId": "mirror-family-cat-bal-15",
-      "productTypeId": "type-mirror-family-cat-bal-15",
+      "subcategoryId": "cat-bal-sub-2",
+      "productTypeId": "type-cat-bal-sub-2",
       "name": "Балка 25Ш1х12000 ГОСТ 35087; 27772 С255 ТМ",
       "slug": "balka-25s1x12000-gost-35087-27772-s255-tm",
       "sku": "МП-122247",
@@ -35409,8 +34993,8 @@
     {
       "id": "local-122248",
       "categoryId": "cat-bal",
-      "subcategoryId": "mirror-family-cat-bal-15",
-      "productTypeId": "type-mirror-family-cat-bal-15",
+      "subcategoryId": "cat-bal-sub-1",
+      "productTypeId": "type-cat-bal-sub-1",
       "name": "Балка 20Б1х12000 ГОСТ 35087; 27772 С255 ТМ",
       "slug": "balka-20b1x12000-gost-35087-27772-s255-tm",
       "sku": "МП-122248",
@@ -35468,8 +35052,8 @@
     {
       "id": "local-122249",
       "categoryId": "cat-bal",
-      "subcategoryId": "mirror-family-cat-bal-15",
-      "productTypeId": "type-mirror-family-cat-bal-15",
+      "subcategoryId": "cat-bal-sub-3",
+      "productTypeId": "type-cat-bal-sub-3",
       "name": "Балка 30К2х12000 ГОСТ 35087; 27772 С255 ТМ",
       "slug": "balka-30k2x12000-gost-35087-27772-s255-tm",
       "sku": "МП-122249",
@@ -37027,8 +36611,8 @@
     {
       "id": "local-11123500",
       "categoryId": "cat-bal",
-      "subcategoryId": "mirror-family-cat-bal-15",
-      "productTypeId": "type-mirror-family-cat-bal-15",
+      "subcategoryId": "cat-bal-sub-3",
+      "productTypeId": "type-cat-bal-sub-3",
       "name": "Балка 20К1х12000 ГОСТ 35087; 27772 С255 ТМ",
       "slug": "balka-20k1x12000-gost-35087-27772-s255-tm",
       "sku": "МП-11123500",

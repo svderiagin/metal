@@ -3,6 +3,7 @@ import type {ProductType, ProductVariant} from "@/types/product";
 import {normalizeText, russianStem, textWords} from "./russian";
 import {ALIASES_BY_STEM, expandCompoundQuery, STOP_WORDS} from "./terminology";
 import {buildTechnicalDocument, parseTechnicalQuery, technicalMatch} from "./technical";
+import {beamKind} from "@/lib/beam";
 
 interface Field {words: Set<string>; stems: Set<string>; weight: number}
 interface Document {product: ProductVariant; name: string; fields: Field[]; technical: ReturnType<typeof buildTechnicalDocument>}
@@ -21,7 +22,7 @@ function semanticTerms(product: ProductVariant, technical: ReturnType<typeof bui
   const text = normalizeText([product.name, product.material, ...product.attributes.filter(a => a.key === "material").map(a => a.value)].join(" "));
   if (product.categoryId !== "cat-cve" && !/алюмин|медн|латун/.test(text)) words.push("стальной сталь");
   if (product.categoryId === "cat-arm") words.push("строительная");
-  if (product.categoryId === "cat-bal") words.push("двутавровая двутавр");
+  if (product.categoryId === "cat-bal") words.push("двутавровая двутавр", beamKind(product));
   if (product.categoryId === "cat-trp") {
     words.push("труба профильная");
     const shape = technical.dimensions.find(d => d.length >= 2);

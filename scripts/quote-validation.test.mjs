@@ -64,7 +64,7 @@ test('malformed phone, email, name and consent cannot be submitted directly to t
 
 test('API returns specific validation errors without sending an invalid quote', async () => {
   const sent = [];
-  const module = {exports: {}};
+  const testModule = {exports: {}};
   const imports = {
     '@/lib/server/notifications': {notificationService: {sendQuoteRequest: async quote => sent.push(quote)}},
     '@/lib/server/validation': {parseQuoteRequest},
@@ -73,10 +73,10 @@ test('API returns specific validation errors without sending an invalid quote', 
   const source = ts.transpileModule(fs.readFileSync('app/api/quote/route.ts', 'utf8'), {
     compilerOptions: {module: ts.ModuleKind.CommonJS},
   }).outputText;
-  vm.runInNewContext(source, {module, exports: module.exports, Response, require: name => {
+  vm.runInNewContext(source, {module: testModule, exports: testModule.exports, Response, require: name => {
     assert.ok(name in imports, name); return imports[name];
   }});
-  const submit = body => module.exports.POST(new Request('http://localhost/api/quote', {
+  const submit = body => testModule.exports.POST(new Request('http://localhost/api/quote', {
     method: 'POST', body: JSON.stringify(body), headers: {'content-type': 'application/json'},
   }));
   const rejected = await submit({...valid(), phone: '+7911', message: 'а'.repeat(2001)});

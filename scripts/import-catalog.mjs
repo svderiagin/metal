@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import {readProjectData} from './project-data.mjs';
+const {beamSubcategoryId} = readProjectData('lib/beam.ts');
 import {discountedPrice,parsePrice} from './pricing.mjs';
 const json=p=>JSON.parse(fs.readFileSync(p,'utf8'));
 const write=(p,v)=>fs.writeFileSync(p,JSON.stringify(v,null,2)+'\n');
@@ -81,6 +82,8 @@ for(const [sourceId,entries] of [...sourceGroups].sort((a,b)=>Number(a[0])-Numbe
  const issues=[];
  const category=categoryFor(r);
  const entry={sourceId,files:entries.map(e=>e.file),originalUrl:`https://www.brokinvest.ru/product/${r.staticPath}`,rawOffers:entries.map(e=>({file:e.file,record:e.record})),issues};
+ const exclusion=overrides.excludedSourceIds?.[sourceId];
+ if(exclusion){manifest.push({...entry,status:'excluded',reason:exclusion.reason,replacementProductId:exclusion.replacementProductId});continue;}
  if(!category){manifest.push({...entry,status:'excluded',reason:'Не определён продуктовый раздел; требуется разбор записи'});continue;}
  if(!clean(r.title)||!r.staticPath){manifest.push({...entry,status:'incomplete',reason:'Нет однозначного обозначения'});continue;}
  if(!pool.length)issues.push('Нет московского предложения: цена по запросу');
@@ -135,7 +138,8 @@ for(const [sourceId,entries] of [...sourceGroups].sort((a,b)=>Number(a[0])-Numbe
  // Group actual product types, not each size/filter combination.
  let familyId=`mirror-family-${category.id}-${family?.id||r.admin_category?.id||'general'}`;
  const mappedFamily={11:'cat-arm-sub-4',12:'cat-arm-sub-3',13:'cat-arm-sub-1',52:'cat-lis-sub-1',53:'cat-lis-sub-2',54:'cat-lis-sub-3',56:'cat-lis-sub-4',2:'cat-trs-sub-3',3:'cat-trs-sub-4',65:'cat-trs-sub-1'}[family?.id];
- const existingFamily=families.find(f=>f.id===mappedFamily&&f.categoryId===category.id)||(families.find(f=>f.categoryId===category.id&&identity(f.name)===identity(familyName)));
+ const beamFamily=category.id==='cat-bal'?beamSubcategoryId({name,categoryId:category.id,attributes:[]}):undefined;
+ const existingFamily=families.find(f=>f.id===(beamFamily||mappedFamily)&&f.categoryId===category.id)||(families.find(f=>f.categoryId===category.id&&identity(f.name)===identity(familyName)));
  if(existingFamily)familyId=existingFamily.id;
  let f=families.find(f=>f.id===familyId);
  if(!f){f={id:familyId,categoryId:category.id,name:familyName,slug:familySlug,shortDescription:'',description:''};families.push(f);}

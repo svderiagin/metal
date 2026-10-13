@@ -42,17 +42,17 @@ function setup(id, kind = 'beam') {
     './CatalogImage': {CatalogImage: 'image'},
     './FilterPanel.module.css': {default: {}}, './RebarTable.module.css': {default: {}},
   };
-  const module = {exports: {}};
+  const testModule = {exports: {}};
   const source = ts.transpileModule(fs.readFileSync('components/catalog/MeasuredVariantItem.tsx', 'utf8'), {
     compilerOptions: {module: ts.ModuleKind.CommonJS, jsx: ts.JsxEmit.ReactJSX},
   }).outputText;
-  vm.runInNewContext(source, {module, exports: module.exports, require: name => {assert.ok(name in imports, name); return imports[name];},
+  vm.runInNewContext(source, {module: testModule, exports: testModule.exports, require: name => {assert.ok(name in imports, name); return imports[name];},
     window: {setTimeout(fn) {timers.push(fn); return timers.length;}, clearTimeout() {}},
   });
   function nodes(node) {return !node || typeof node !== 'object' ? [] : [node, ...[node.props?.children].flat().flatMap(nodes)];}
   function render() {
     cursor = 0;
-    const tree = nodes(module.exports.MeasuredVariantItem({variant, kind, view: 'table'}));
+    const tree = nodes(testModule.exports.MeasuredVariantItem({variant, kind, view: 'table'}));
     return {inputs: tree.filter(n => n.type === 'input').map(n => n.props), action: tree.find(n => ['button', 'link'].includes(n.type)).props};
   }
   return {cart, timers, render, change(index, value) {render().inputs[index].onChange({target: {value}});}};

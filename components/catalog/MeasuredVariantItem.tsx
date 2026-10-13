@@ -148,7 +148,7 @@ export function MeasuredVariantItem({
         <dl className="mt-4 grid grid-cols-2 gap-3 text-sm">
           <VariantDetail label={isBeam ? "Профиль" : "Диаметр"} value={isBeam ? beamProfile(variant) : `${formatNumber(variant.diameterMm ?? 0)} мм`}/>
           <VariantDetail label={isBeam ? "Тип балки" : "Форма"} value={isBeam ? beamKind(variant) : formLabel(variant.form ?? "bar")}/>
-          <VariantDetail label="Марка стали" value={variant.steelGrade ?? "—"}/>
+          <VariantDetail label={isBeam ? "Сталь / класс" : "Марка стали"} value={variant.steelGrade ?? "—"}/>
           <VariantDetail label="Вес" value={hasMass ? `${formatNumber(mass)} кг/м` : "—"}/>
           <VariantDetail
             label="Длина"
