@@ -1,4 +1,14 @@
-# Разбор архитектуры ООО «РВБ»
+# ООО «РВБ»: локальная витрина металлопроката
+
+Актуальные инструкции: [архитектура](docs/architecture.md), [локальный аудит и проверки](docs/local-audit.md),
+[запуск на DigitalOcean App Platform](docs/deployment.md), [каталог и импорт](docs/catalog-import.md).
+Сайт остаётся на Next.js 16 / React 19 с локальными данными. Для разработки: `npm run dev`;
+для проверки: `npm test`, `npm run lint`, `npm run build`.
+
+Ниже сохранён исторический разбор первоначальной версии. Числа товаров, имена компонентов и примеры корзины
+в нём не описывают текущую реализацию; при работе с проектом используйте документы выше.
+
+# Исторический разбор архитектуры ООО «РВБ»
 
 Это первая часть подробного разбора проекта: разделы 1–10. Она охватывает общую архитектуру, каталоги, маршрутизацию, React, Server/Client Components, корзину, данные каталога, checkout и все HTTP endpoints.
 
@@ -272,7 +282,7 @@ public/file.svg → /file.svg
 
 ### `page.tsx`
 
-```ts
+```tsx
 export default function CatalogPage() {
   return <PageContainer>...</PageContainer>;
 }
@@ -394,7 +404,7 @@ Props — входные параметры:
 <ProductCard product={product}/>
 ```
 
-```ts
+```text
 function ProductCard({product}: {product: Product})
 ```
 
@@ -457,7 +467,7 @@ Client Component перерисовывается при изменении stat
 
 `CartContext` обязан быть клиентским, потому что использует:
 
-```ts
+```text
 useState(...)
 useEffect(...)
 localStorage.getItem(...)
@@ -508,7 +518,7 @@ window.setTimeout(...)
 React 19 позволяет писать:
 
 ```tsx
-<CartContext value={value}>
+<CartContext value={value}>{children}</CartContext>
 ```
 
 В старых версиях React обычно использовалось `<CartContext.Provider value={value}>`.
@@ -704,8 +714,8 @@ fetch("/api/orders", {
   headers: {"content-type": "application/json"},
   body: JSON.stringify({
     items,
-    customer: {...},
-    delivery: {...},
+    customer: orderInput.customer,
+    delivery: orderInput.delivery,
     paymentMethod: form.paymentMethod
   })
 });
@@ -1073,7 +1083,7 @@ export interface OrderRepository {
 
 Development-реализация хранит заказы:
 
-```ts
+```text
 private readonly orders = new Map<string, Order>();
 ```
 
@@ -1153,7 +1163,7 @@ Hosted payment page означает, что данные карты вводя�
 
 `NotificationService` определяет:
 
-```ts
+```text
 sendContactRequest(...)
 sendQuoteRequest(...)
 sendOrderNotification(...)
@@ -1219,7 +1229,7 @@ Type guard:
 ```ts
 const isCustomerType = (
   value: unknown
-): value is CustomerType => ...
+): value is CustomerType => value === "INDIVIDUAL" || value === "COMPANY";
 ```
 
 сообщает TypeScript: после успешной проверки значение можно считать `CustomerType`.
@@ -1382,7 +1392,11 @@ async function value() {
 `await` приостанавливает текущую async-функцию до завершения Promise:
 
 ```ts
-const response = await fetch("/api/orders", ...);
+const response = await fetch("/api/orders", {
+  method: "POST",
+  headers: {"content-type": "application/json"},
+  body: JSON.stringify(orderInput),
+});
 const result = await response.json();
 ```
 
@@ -1418,7 +1432,7 @@ submit продолжает выполнение
 
 ```ts
 if (!response.ok) {
-  throw new Error(...);
+  throw new Error("Не удалось выполнить запрос.");
 }
 ```
 
@@ -1432,7 +1446,7 @@ Promise обычно отклоняется при сетевой ошибке, 
 - `catch` превращает ошибку в UI message;
 - `finally` всегда снимает состояние `submitting`.
 
-```ts
+```text
 } finally {
   setSubmitting(false);
 }
@@ -1444,7 +1458,7 @@ Route Handlers отдельно оборачивают `request.json()`, пот�
 
 Development repository сейчас работает синхронно внутри, но методы объявлены async:
 
-```ts
+```text
 async save(order: Order) {
   this.orders.set(order.reference, order);
 }
@@ -1506,8 +1520,12 @@ import {ProductCard} from "./ProductCard";
 `tsconfig.json`:
 
 ```json
-"paths": {
-  "@/*": ["./*"]
+{
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./*"]
+    }
+  }
 }
 ```
 
@@ -1966,7 +1984,8 @@ items.reduce((sum, item) => sum + item.subtotal, 0)
 
 ```ts
 getAllProducts().flatMap(product => {
-  return category ? [{...}] : [];
+  const category = getCategoryById(product.categoryId);
+  return category ? [{categorySlug: category.slug, productSlug: product.slug}] : [];
 });
 ```
 
@@ -1982,7 +2001,7 @@ const {categorySlug, productSlug} = await params;
 
 В параметрах:
 
-```ts
+```text
 function ProductCard({product}: {product: Product})
 ```
 
@@ -1991,8 +2010,8 @@ object разбирается прямо при вызове функции.
 ### Spread syntax
 
 ```ts
-{...order, paymentStatus: status}
-[...prev, {productId, quantity}]
+const updatedOrder = {...order, paymentStatus: status};
+const updatedItems = [...prev, {productId, quantity}];
 ```
 
 Создаёт поверхностную копию object или array. В Java потребовались бы copy constructor, builder или создание новой коллекции.
@@ -2095,9 +2114,11 @@ onChange={setQ}
 ### Event handler
 
 ```tsx
-onClick={add}
-onSubmit={submit}
-onChange={event => set(...)}
+<>
+  <button onClick={add}>Добавить</button>
+  <form onSubmit={submit}/>
+  <input onChange={event => set(event.target.value)}/>
+</>
 ```
 
 Это функция, которую React вызывает в ответ на browser event. Похоже на listener в Swing/JavaFX/Selenium-side JavaScript concepts, но handler участвует в React state flow.

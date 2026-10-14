@@ -7,14 +7,16 @@ import filterStyles from "./FilterPanel.module.css";
 import {PriceInput} from "./PriceInput";
 
 import {createCatalogSearchIndex} from "@/lib/search";
-import {useDeferredValue, useEffect, useMemo, useState} from "react";
+import {useDeferredValue, useMemo, useState} from "react";
+import {useLinkedVariant} from "@/hooks/useLinkedVariant";
+import {comparePrices} from "@/lib/catalogFilters";
 import {ProductOrderControls} from "./ProductOrderControls";
 import {CatalogImage} from "./CatalogImage";
 import {formatUnitPrice} from "@/lib/currency";
 import {formatNumber} from "@/lib/numberFormat";
 import {
   getVariantAttribute,
-  getVariantPresentation,
+  getVariantFilterKeys,
 } from "@/lib/variantPresentation";
 import {Button} from "@/components/ui/Button";
 import {Input} from "@/components/ui/Input";
@@ -48,7 +50,7 @@ function VariantCatalogContent({
   if (categorySlug === "armatura" && !isA500c && variants.every(isMeasuredRebarVariant)) {
     return <RebarVariantCatalog variants={variants} simplified/>;
   }
-  const measured = variants.filter(v => !v.imported && isMeasuredRebarVariant(v)).filter(isMeasuredRebarVariant);
+  const measured = variants.filter(v => !v.imported).filter(isMeasuredRebarVariant);
   if (measured.length > 0) {
     if (isA500c) return <RebarVariantCatalog variants={measured} simplified/>;
     const other = variants.filter(v => !measured.some(m => m.id === v.id));
@@ -65,7 +67,7 @@ function GenericProductVariantCatalog({
   variants: ProductVariant[];
   categorySlug: string;
 }) {
-  const presentation = getVariantPresentation(categorySlug);
+  const filterKeys = getVariantFilterKeys(categorySlug);
   const [filters, setFilters] = useState<Partial<Record<ProductAttributeKey, string>>>({});
   const [stockOnly, setStockOnly] = useState(false);
   const [minimumPrice, setMinimumPrice] = useState("");
@@ -76,28 +78,16 @@ function GenericProductVariantCatalog({
   const deferredQuery = useDeferredValue(query);
   const index = useMemo(() => createCatalogSearchIndex(variants), [variants]);
   const search = useMemo(() => index.search(deferredQuery), [index, deferredQuery]);
-  useEffect(() => {
-    function revealLinkedVariant() {
-      const id = window.location.hash.replace(/^#variant-/, "");
-      const variant = variants.find(v => v.id === id);
-      if (!variant) return;
-      setQuery(variant.name);
-      setPage(1);
-      window.setTimeout(() => document.getElementById(`${window.innerWidth < 1280 ? "variant-mobile-" : "variant-"}${id}`)?.scrollIntoView({block: "center"}), 100);
-    }
-    const timer = window.setTimeout(revealLinkedVariant, 0);
-    window.addEventListener("hashchange", revealLinkedVariant);
-    return () => {window.clearTimeout(timer); window.removeEventListener("hashchange", revealLinkedVariant);};
-  }, [variants]);
+  useLinkedVariant(variants, variant => {reset(); setQuery(variant.name);});
 
   const filterOptions = useMemo(
     () => new Map(
-      presentation.filterKeys.map((key) => [
+      filterKeys.map((key) => [
         key,
         uniqueAttributeValues(variants, key),
       ]),
     ),
-    [presentation.filterKeys, variants],
+    [filterKeys, variants],
   );
 
   const results = useMemo(() => {
@@ -105,7 +95,7 @@ function GenericProductVariantCatalog({
     const maximum = maximumPrice === "" ? null : Number(maximumPrice);
 
     const filtered = (deferredQuery.trim() ? search.hits.map(h => h.product) : variants).filter((variant) => {
-      const attributesMatch = presentation.filterKeys.every((key) =>
+      const attributesMatch = filterKeys.every((key) =>
         !filters[key] || getVariantAttribute(variant, key) === filters[key],
       );
 
@@ -118,9 +108,7 @@ function GenericProductVariantCatalog({
     return [...filtered].sort((left, right) => {
       if (sort === "relevance") return 0;
       if (sort === "name") return left.name.localeCompare(right.name, "ru", {numeric: true});
-      if (sort.startsWith("price") && left.quoteOnly !== right.quoteOnly) return left.quoteOnly ? 1 : -1;
-      if (sort === "price-asc") return (left.price ?? Infinity) - (right.price ?? Infinity);
-      if (sort === "price-desc") return (right.price ?? -Infinity) - (left.price ?? -Infinity);
+      if (sort === "price-asc" || sort === "price-desc") return comparePrices(left.quoteOnly ? null : left.price, right.quoteOnly ? null : right.price, sort === "price-desc");
       if (sort === "size") {
         return numericAttribute(left, "size") - numericAttribute(right, "size");
       }
@@ -130,7 +118,7 @@ function GenericProductVariantCatalog({
     filters,
     maximumPrice,
     minimumPrice,
-    presentation.filterKeys,
+    filterKeys,
     sort,
     stockOnly,
     variants,
@@ -161,7 +149,7 @@ function GenericProductVariantCatalog({
         <h2 className="text-xl font-bold">Фильтры вариантов</h2>
         <div className="mt-5 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
           <label className="text-sm font-semibold">Поиск варианта<Input className="mt-1" type="search" value={query} onChange={e => {setQuery(e.target.value); setSort("relevance"); setPage(1);}} placeholder="Название, размер, марка"/></label>
-          {presentation.filterKeys.filter(key => (filterOptions.get(key)?.length ?? 0) > 0).map((key) => (
+          {filterKeys.filter(key => (filterOptions.get(key)?.length ?? 0) > 0).map((key) => (
             <label key={key} className="min-w-0 text-sm font-semibold">
               {filterLabel(variants, key)}
               <Select

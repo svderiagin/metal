@@ -1,5 +1,5 @@
 import {orderRepository} from "@/lib/server/orders";
-import {paymentProvider} from "@/lib/server/payments";
+import {hasValidOrderAmount, paymentProvider} from "@/lib/server/payments";
 
 const error = (message: string, status: number) =>
   Response.json({ok: false, error: message}, {status});
@@ -17,8 +17,7 @@ export async function POST(request: Request) {
   try {
     const order = await orderRepository.findByReference(body.orderReference);
     if (!order || order.paymentMethod !== "CARD") return error("Заказ не найден.", 404);
-    const verifiedAmount = order.items.reduce((sum, item) => sum + item.unitPrice * item.quantity, 0);
-    if (verifiedAmount !== order.totalAmount) return error("Не удалось проверить сумму заказа.", 409);
+    if (!hasValidOrderAmount(order)) return error("Не удалось проверить сумму заказа.", 409);
     const session = await paymentProvider.createPayment(order);
     return Response.json({ok: true, redirectUrl: session.redirectUrl});
   } catch {

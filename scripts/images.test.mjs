@@ -6,11 +6,13 @@ import sharp from 'sharp';
 import {readProjectData} from './project-data.mjs';
 const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
 const mapping=read('data/catalog-images.json');
-const report=read('imports/image-mapping-report.json');
-const inventory=read('imports/image-source-inventory.json');
+const report=fs.existsSync('imports/image-mapping-report.json')?read('imports/image-mapping-report.json'):null;
+const inventory=fs.existsSync('imports/image-source-inventory.json')?read('imports/image-source-inventory.json'):null;
+const {normalizeRebarVariant}=readProjectData('lib/rebar.ts');
+const {normalizeBeamVariant}=readProjectData('lib/beam.ts');
 const imported=read('data/imported-catalog.json');
 const {productVariants,existingVariants}=readProjectData('data/products/index.ts');
-const original=[...existingVariants.filter(p=>!imported.matchedIds.includes(p.id)),...imported.products];
+const original=[...existingVariants.filter(p=>!imported.matchedIds.includes(p.id)),...imported.products].map(normalizeRebarVariant).map(normalizeBeamVariant);
 const digest=b=>crypto.createHash('sha256').update(b).digest('hex');
 
 test('image overlay preserves every product field other than image references',()=>{
@@ -21,9 +23,18 @@ test('image overlay preserves every product field other than image references',(
   if(!mapping.products[original[i].id])assert.equal(JSON.stringify(b),JSON.stringify(a.length?[mapping.fallback]:[]));
  }
 });
-test('all product and category paths exist; every new image decodes and matches source bytes',async()=>{
- const paths=new Set([...productVariants.flatMap(p=>p.imageUrls),...readProjectData('data/categories.ts').categories.map(c=>c.imageUrl)]);
- for(const url of paths){assert(url.startsWith('/images/'),url);assert(fs.existsSync('public'+url),url);}
+test('all public catalog images exist and decode on case-sensitive filesystems',async()=>{
+ const {productTypes}=readProjectData('data/productTypes.ts');
+ const paths=new Set([...productVariants.flatMap(p=>p.imageUrls),...readProjectData('data/categories.ts').categories.map(c=>c.imageUrl),...productTypes.map(t=>t.imageUrl).filter(Boolean)]);
+ for(const url of paths){
+  assert(url.startsWith('/images/'),url);assert(fs.existsSync('public'+url),url);
+  let directory='public';
+  for(const part of url.slice(1).split('/')){assert(fs.readdirSync(directory).includes(part),'Exact path case: '+url);directory+='/'+part;}
+  const metadata=await sharp('public'+url).metadata();assert(metadata.width>1&&metadata.height>1,url);
+ }
+});
+const evidenceSkip=!report||!inventory||!fs.existsSync('brokinvest.ru')?'Optional supplier evidence is not present in this checkout':false;
+test('copied image bytes match preserved supplier evidence',{skip:evidenceSkip},async()=>{
  const integrated=new Map(report.records.map(r=>[r.targetImage,r.sourceImage]));
  assert.equal(integrated.size,report.summary.uniqueImagesIntegrated);
  for(const [url,source] of integrated){
@@ -36,12 +47,12 @@ test('all product and category paths exist; every new image decodes and matches 
 test('incompatible forms keep fallbacks instead of inheriting generic category imagery',()=>{
  for(const p of productVariants){
   if(p.form==='coil'||/овальн|рифлен.*ромб|рифлён.*ромб|RAL|полимер/i.test(p.name))assert(!mapping.products[p.id],p.name);
-  if(p.categoryId==='cat-arm'&&/А240|А1(?:,|\s)/.test(p.name)&&mapping.products[p.id])assert(report.records.some(r=>r.targetId===p.id&&r.role==='smooth'),p.name);
+  if(report&&p.categoryId==='cat-arm'&&/А240|А1(?:,|\s)/.test(p.name)&&mapping.products[p.id])assert(report.records.some(r=>r.targetId===p.id&&r.role==='smooth'),p.name);
   if(p.categoryId==='cat-otv'||p.categoryId==='cat-she'||p.categoryId==='cat-cve'||p.categoryId==='cat-trn')assert(!mapping.products[p.id],p.name);
  }
- assert(!report.records.some(r=>r.sourceImage.endsWith('0b3ca4e2-f21f-4255-857a-cc70976cbacf.jpeg')),'ambiguous strip photo must be rejected');
+ if(report)assert(!report.records.some(r=>r.sourceImage.endsWith('0b3ca4e2-f21f-4255-857a-cc70976cbacf.jpeg')),'ambiguous strip photo must be rejected');
 });
-test('report covers every product and mapped family, with provenance and confidence',()=>{
+test('report covers every product and mapped family, with provenance and confidence',{skip:evidenceSkip},()=>{
  const assigned=report.records.filter(r=>r.targetKind==='product');
  assert.equal(assigned.length,Object.keys(mapping.products).length);
  assert.equal(assigned.length+report.unmatched.length,productVariants.length);

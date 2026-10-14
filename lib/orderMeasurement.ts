@@ -1,18 +1,21 @@
 export function metersToTons(meters: number, weightPerMeterKg: number) {
   if (!isNonNegativeFinite(meters) || !isPositiveFinite(weightPerMeterKg)) return null;
   // Length (m) × nominal linear mass (kg/m) / 1000 kg per tonne.
-  return meters * weightPerMeterKg / 1000;
+  const result = meters * weightPerMeterKg / 1000;
+  return Number.isFinite(result) ? result : null;
 }
 
 export function tonsToMeters(tons: number, weightPerMeterKg: number) {
   if (!isNonNegativeFinite(tons) || !isPositiveFinite(weightPerMeterKg)) return null;
   // Mass (t) × 1000 kg per tonne / nominal linear mass (kg/m).
-  return tons * 1000 / weightPerMeterKg;
+  const result = tons * 1000 / weightPerMeterKg;
+  return Number.isFinite(result) ? result : null;
 }
 
 export function calculateLineTotal(weightTons: number, pricePerTon: number) {
   if (!isNonNegativeFinite(weightTons) || !isNonNegativeFinite(pricePerTon)) return null;
-  return round(weightTons * pricePerTon, 2);
+  const total = round(weightTons * pricePerTon, 2);
+  return Number.isFinite(total) ? total : null;
 }
 
 export function parseNonNegativeDecimal(value: string) {

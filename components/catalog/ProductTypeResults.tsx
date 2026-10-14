@@ -10,6 +10,7 @@ import {Select} from "@/components/ui/Select";
 import {ProductTypeGrid} from "./ProductTypeGrid";
 import {ResetFiltersButton} from "./ResetFiltersButton";
 import type {ProductType, ProductVariant} from "@/types/product";
+import {comparePrices, matchesCategoryFilters} from "@/lib/catalogFilters";
 
 type SortMode = "relevance" | "availability" | "price-asc" | "price-desc" | "name";
 
@@ -39,7 +40,8 @@ export function ProductTypeResults({
     () => uniqueAttributeValues(variants, "standard"),
     [variants],
   );
-  const variantsByType = useMemo(() => groupVariantsByType(candidates), [candidates]);
+  const filteredVariants = useMemo(() => candidates.filter(variant => matchesCategoryFilters(variant, material, standard, stockOnly)), [candidates, material, standard, stockOnly]);
+  const variantsByType = useMemo(() => groupVariantsByType(filteredVariants), [filteredVariants]);
 
   const result = useMemo(() => {
     const filtered = filterAndSortProductTypes(
@@ -120,7 +122,7 @@ export function ProductTypeResults({
 
       {result.length ? (
         <>
-          <ProductTypeGrid productTypes={result.slice(0, limit)} variants={candidates}/>
+          <ProductTypeGrid productTypes={result.slice(0, limit)} variants={filteredVariants}/>
           {limit < result.length && (
             <div className="mt-6 text-center">
               <Button type="button" onClick={() => setLimit((value) => value + 12)}>
@@ -190,20 +192,10 @@ function uniqueAttributeValues(
   return [...values].sort((left, right) => left.localeCompare(right, "ru"));
 }
 
-function hasAttribute(
-  variants: ProductVariant[],
-  key: ProductVariant["attributes"][number]["key"],
-  value: string,
-) {
-  return variants.some((variant) =>
-    variant.attributes.some((attribute) => attribute.key === key && attribute.value === value),
-  );
-}
-
 function minimumPrice(variants: ProductVariant[]) {
-  let minimum = Number.MAX_SAFE_INTEGER;
+  let minimum: number | null = null;
   for (const variant of variants) {
-    if (!variant.quoteOnly && variant.price !== null && variant.price > 0 && variant.price < minimum) minimum = variant.price;
+    if (!variant.quoteOnly && variant.price !== null && variant.price > 0 && (minimum === null || variant.price < minimum)) minimum = variant.price;
   }
   return minimum;
 }
@@ -228,9 +220,7 @@ function filterAndSortProductTypes(
 
   for (const productType of productTypes) {
     const variants = variantsByType.get(productType.id) ?? [];
-    if (material && !hasAttribute(variants, "material", material)) continue;
-    if (standard && !hasAttribute(variants, "standard", standard)) continue;
-    if (stockOnly && availableCount(variants) === 0) continue;
+    if ((material || standard || stockOnly) && !variants.length) continue;
     result.push(productType);
   }
 
@@ -238,8 +228,7 @@ function filterAndSortProductTypes(
   result.sort((left, right) => {
     const leftVariants = variantsByType.get(left.id) ?? [];
     const rightVariants = variantsByType.get(right.id) ?? [];
-    if (sort === "price-asc") return minimumPrice(leftVariants) - minimumPrice(rightVariants);
-    if (sort === "price-desc") return minimumPrice(rightVariants) - minimumPrice(leftVariants);
+    if (sort === "price-asc" || sort === "price-desc") return comparePrices(minimumPrice(leftVariants), minimumPrice(rightVariants), sort === "price-desc");
     if (sort === "name") return left.name.localeCompare(right.name, "ru");
     // Keep the configured beam series order instead of promoting stocked demo rows.
     if (preserveBeamOrder) return 0;

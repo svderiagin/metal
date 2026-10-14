@@ -12,7 +12,7 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
-    "www.brokinvest.ru/**",
+    "brokinvest.ru/**",
     ".tmp/**",
   ]),
 ]);

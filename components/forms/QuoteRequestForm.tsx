@@ -10,6 +10,7 @@ import {useEffect} from "react";
 import {useQuoteRequest} from "./QuoteRequestContext";
 import styles from "./QuoteRequestForm.module.css";
 import {buildQuoteMessage} from "@/lib/quoteRequest";
+import {isApiSuccess, readApiError} from "@/lib/apiResponse";
 
 export function QuoteRequestForm() {
   const formId = useId();
@@ -29,9 +30,9 @@ export function QuoteRequestForm() {
   }, [requestVersion]);
   useEffect(() => {
     const product = new URLSearchParams(window.location.search).get("product");
-    const timer = window.setTimeout(() => {if (product) setLocalMessage(buildQuoteMessage({product}).slice(0, QUOTE_LIMITS.message));}, 0);
+    const timer = window.setTimeout(() => {if (product) setMessage(buildQuoteMessage({product}).slice(0, QUOTE_LIMITS.message));}, 0);
     return () => window.clearTimeout(timer);
-  }, []);
+  }, [setMessage]);
 
   function validateOnBlur(event: FocusEvent<HTMLFormElement>) {
     const input = event.target;
@@ -88,7 +89,7 @@ export function QuoteRequestForm() {
         body: JSON.stringify(payload)
       });
       const result: unknown = await response.json();
-      if (!response.ok) throw new Error(readError(result, "Не удалось отправить заявку."));
+      if (!response.ok || !isApiSuccess(result)) throw new Error(readApiError(result, "Не удалось отправить заявку."));
       setSuccess(true);
       form.reset();
     } catch (caught) {
@@ -151,8 +152,4 @@ export function QuoteRequestForm() {
     {error && <p role="alert" className="text-sm font-semibold text-red-700 sm:col-span-2">{error}</p>}
     <Button type="submit" disabled={submitting} className="sm:w-fit">{submitting ? "Отправляем…" : "Отправить заявку"}</Button>
   </form>;
-}
-
-function readError(value: unknown, fallback: string) {
-  return typeof value === "object" && value !== null && "error" in value && typeof value.error === "string" ? value.error : fallback
 }

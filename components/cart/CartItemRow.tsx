@@ -12,12 +12,12 @@ export function CartItemRow({line}: { line: CartLine }) {
     <article className="grid gap-4 border-b border-slate-200 py-5 last:border-0 sm:py-6 md:grid-cols-[minmax(0,1fr)_auto_auto] md:items-center md:gap-6">
       <div>
         <p className="text-xs font-medium text-slate-500">{line.sku}</p>
-        <Link
+        {line.slug ? <Link
           href={`/catalog/${line.categorySlug}/${line.subcategorySlug}/${line.productTypeSlug}#variant-${line.productId}`}
           className="mt-1 inline-block font-bold transition-colors hover:text-red-700"
         >
           {line.name}
-        </Link>
+        </Link> : <p className="mt-1 font-bold">{line.name}</p>}
         <p className="mt-1 text-sm text-slate-500">
           {line.invalidReason ? "Цена требует уточнения" : formatUnitPrice(line.price, line.priceUnit)}
         </p>
@@ -31,7 +31,8 @@ export function CartItemRow({line}: { line: CartLine }) {
           Ввод: {line.measurement.inputMode === "meter" ? "метры" : "тонны"}
         </p>
       ) : (
-        <QuantitySelector value={line.quantity} onChange={(value) => updateQuantity(line.productId, value)}/>
+        <div><QuantitySelector value={line.quantity} onChange={(value) => updateQuantity(line.productId, value)}/>
+          <span className="ml-2 text-sm text-slate-500">{line.quantityUnit}</span></div>
       )}
       <div className="flex items-center justify-between gap-5 md:block md:min-w-32 md:text-right">
         <strong className="text-lg">{line.invalidReason ? "Расчёт недоступен" : formatCurrency(line.estimatedTotal)}</strong>

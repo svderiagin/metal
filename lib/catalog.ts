@@ -25,8 +25,6 @@ export const getProductTypesByCategoryId = (categoryId: string) =>
   productTypes.filter((item) => item.categoryId === categoryId);
 export const getProductTypesBySubcategoryId = (subcategoryId: string) =>
   productTypes.filter((item) => item.subcategoryId === subcategoryId);
-export const getProductTypeCountByCategoryId = (categoryId: string) =>
-  productTypes.filter((item) => item.categoryId === categoryId).length;
 
 export const getAllProductVariants = () => productVariants;
 export const getProductVariantBySlug = (slug: string) =>

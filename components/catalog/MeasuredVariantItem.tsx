@@ -141,7 +141,7 @@ export function MeasuredVariantItem({
 
   if (view === "card") {
     return (
-      <article className="min-w-0 break-words rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+      <article id={`variant-mobile-${variant.id}`} className="min-w-0 break-words rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
         <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">{variant.sku}</p>
         <CatalogImage src={variant.imageUrls[0]} name={variant.name}/>
         <h3 className="mt-1 font-bold">{variant.name}</h3>

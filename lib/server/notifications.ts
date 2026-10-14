@@ -9,42 +9,10 @@ export interface NotificationService {
   sendOrderNotification(order: Order): Promise<void>;
 }
 
-class DevelopmentNotificationService implements NotificationService {
-  async sendContactRequest(request: ContactRequest) {
-    void request;
-  }
-
-  async sendQuoteRequest(request: QuoteRequest) {
-    void request;
-  }
-
-  async sendOrderNotification(order: Order) {
-    void order;
-  }
-}
-
-class UnconfiguredNotificationService implements NotificationService {
-  async sendContactRequest(request: ContactRequest) {
-    void request;
-    this.unavailable();
-  }
-
-  async sendQuoteRequest(request: QuoteRequest) {
-    void request;
-    this.unavailable();
-  }
-
-  async sendOrderNotification(order: Order) {
-    void order;
-    this.unavailable();
-  }
-
-  private unavailable(): never {
-    throw new Error("NOTIFICATION_PROVIDER_NOT_CONFIGURED");
-  }
-}
-
-export const notificationService: NotificationService =
-  process.env.NODE_ENV === "production"
-    ? new UnconfiguredNotificationService()
-    : new DevelopmentNotificationService();
+// Delivery has not been configured. Never report a discarded request as delivered,
+// including during local development. Browser tests mock responses explicitly.
+export const notificationService: NotificationService = {
+  async sendContactRequest() {throw new Error("NOTIFICATION_PROVIDER_NOT_CONFIGURED");},
+  async sendQuoteRequest() {throw new Error("NOTIFICATION_PROVIDER_NOT_CONFIGURED");},
+  async sendOrderNotification() {throw new Error("NOTIFICATION_PROVIDER_NOT_CONFIGURED");},
+};

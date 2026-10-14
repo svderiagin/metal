@@ -1,6 +1,6 @@
 # Catalog search
 
-All 688 catalog variants share `lib/search/`: Russian Snowball stemming, scoped directional terminology aliases, structured technical parsing, bounded Damerau spelling correction and weighted relevance. No dependencies or search service were added. The algorithm specification is https://snowballstem.org/algorithms/russian/stemmer.html.
+All 675 catalog variants share `lib/search/`: Russian Snowball stemming, scoped directional terminology aliases, structured technical parsing, bounded Damerau spelling correction and weighted relevance. No dependencies or search service were added. The algorithm specification is https://snowballstem.org/algorithms/russian/stemmer.html.
 
 An index is built once per mounted catalog dataset. Normalized fields and vocabulary are precomputed; compiled queries are cached. React deferred values keep typing responsive. Names have the highest text weight, followed by attributes, category/family names, inferred product terminology and descriptions. Exact names/SKUs receive a large ranking bonus. All significant terms must match. Explicit user sorting still takes precedence over relevance.
 
@@ -13,8 +13,8 @@ Examples: `профильных труб`, `строительную армат�
 Validation:
 
 - `npm run search:check`: morphology, synonyms, technical constraints, corrections, partial input, every real product name, filters/pagination and full-catalog timing.
-- `node scripts/check-search-browser.mjs`: requires the local site on port 3000 and Chrome CDP on 9223; checks desktop/mobile live queries, typing focus, category empty states and variant tables. Results go to `imports/search-browser-verification.json`.
-- `npm run catalog:check`, `node --test scripts/images.test.mjs`, application ESLint (excluding downloaded `brokinvest.ru/**`) and `npm run build`.
+- `node scripts/check-search-browser.mjs`: requires the local site on port 3000 and Chrome CDP on 9223; checks desktop/mobile live queries, typing focus, category empty states and variant tables. It uses the shared current-interface suite; results go to `.tmp/local-audit/`, without modifying supplier evidence.
+- `npm run catalog:check`, `node --test scripts/images.test.mjs`, application ESLint (downloaded `brokinvest.ru/**` is already ignored) and `npm run build`.
 
 Measured index construction: approximately 65 ms. Repeated full-catalog queries: approximately 4 ms each on the development machine; timings vary by device.
 

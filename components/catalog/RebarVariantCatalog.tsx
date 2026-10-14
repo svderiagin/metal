@@ -13,6 +13,8 @@ import {useDeferredValue, useMemo, useState} from "react";
 import {Input} from "@/components/ui/Input";
 import {Select} from "@/components/ui/Select";
 import {ResetFiltersButton} from "@/components/catalog/ResetFiltersButton";
+import {useLinkedVariant} from "@/hooks/useLinkedVariant";
+import {comparePrices} from "@/lib/catalogFilters";
 import type {ProductVariant} from "@/types/product";
 
 type RebarVariant = ProductVariant & Required<Pick<
@@ -29,7 +31,7 @@ type SortMode =
   | "weight-asc"
   | "weight-desc";
 
-const tableColumns = [
+const rebarColumns = [
   {label: "Диаметр, мм", width: "7%"},
   {label: "Форма", width: "8%"},
   {label: "Марка стали", width: "8%"},
@@ -39,6 +41,19 @@ const tableColumns = [
   {label: "Заказ, м", width: "11%"},
   {label: "Заказ, т", width: "11%"},
   {label: "Сумма", width: "15%"},
+  {label: "Действие", width: "13%"},
+] as const;
+
+const beamColumns = [
+  {label: "Профиль", width: "9%"},
+  {label: "Тип балки", width: "10%"},
+  {label: "Сталь / класс", width: "8%"},
+  {label: "Цена, ₽/т", width: "12%"},
+  {label: "Вес, кг/м", width: "8%"},
+  {label: "Длина, м", width: "7%"},
+  {label: "Заказ, м", width: "11%"},
+  {label: "Заказ, т", width: "11%"},
+  {label: "Сумма", width: "11%"},
   {label: "Действие", width: "13%"},
 ] as const;
 
@@ -59,15 +74,11 @@ export function BeamVariantCatalog({variants}: {variants: ProductVariant[]}) {
 
 function MeasuredVariantCatalog({variants, simplified = false, kind = "rebar"}: {variants: ProductVariant[]; simplified?: boolean; kind?: "rebar" | "beam"}) {
   const isBeam = kind === "beam";
-  const columns = isBeam ? tableColumns.map((column, index) => index === 0 ? {...column, label: "Профиль", width: "9%"}
-    : index === 1 ? {...column, label: "Тип балки", width: "10%"}
-      : index === 2 ? {...column, label: "Сталь / класс"}
-        : index === 8 ? {...column, width: "11%"} : column) : tableColumns;
+  const columns = isBeam ? beamColumns : rebarColumns;
   const [query, setQuery] = useState("");
   const deferredQuery = useDeferredValue(query);
   const index = useMemo(() => createCatalogSearchIndex(variants), [variants]);
-  const matched = useMemo(() => new Set(index.search(deferredQuery).hits.map(h => h.product.id)), [index, deferredQuery]);
-  const ranks = useMemo(() => new Map(index.search(deferredQuery).hits.map((h, i) => [h.product.id, i])), [index, deferredQuery]);
+  const hits = useMemo(() => index.search(deferredQuery).hits, [index, deferredQuery]);
   const [diameter, setDiameter] = useState("");
   const [form, setForm] = useState("");
   const [length, setLength] = useState("");
@@ -75,6 +86,7 @@ function MeasuredVariantCatalog({variants, simplified = false, kind = "rebar"}: 
   const [maximumPrice, setMaximumPrice] = useState("");
   const [availability, setAvailability] = useState("");
   const [sort, setSort] = useState<SortMode>("diameter-asc");
+  useLinkedVariant(variants, variant => {resetFilters(); setQuery(variant.name);});
 
   const diameters = useMemo(
     () => [...new Set(variants.map(variant => isBeam ? beamProfile(variant) : String(variant.diameterMm ?? "")))].sort((a, b) => a.localeCompare(b, "ru", {numeric: true})),
@@ -95,9 +107,8 @@ function MeasuredVariantCatalog({variants, simplified = false, kind = "rebar"}: 
     const sizeValue = (variant: ProductVariant) => isBeam ? beamProfile(variant) : String(variant.diameterMm ?? "");
     const min = parseOptionalNumber(minimumPrice);
     const max = parseOptionalNumber(maximumPrice);
-    return (deferredQuery.trim() ? [...variants].sort((a, b) => (ranks.get(a.id) ?? Infinity) - (ranks.get(b.id) ?? Infinity)) : variants).filter((variant) =>
-      (!deferredQuery.trim() || matched.has(variant.id))
-      && (!diameter || (isBeam ? beamProfile(variant) : String(variant.diameterMm ?? "")) === diameter)
+    return (deferredQuery.trim() ? hits.map(hit => hit.product) : variants).filter((variant) =>
+      (!diameter || (isBeam ? beamProfile(variant) : String(variant.diameterMm ?? "")) === diameter)
       && (!form || (isBeam ? beamKind(variant) : variant.form) === form)
       && (!length || variant.lengthMeters === Number(length))
       && (!availability || variant.availability === availability)
@@ -106,13 +117,12 @@ function MeasuredVariantCatalog({variants, simplified = false, kind = "rebar"}: 
     ).sort((left, right) => {
       if (sort === "relevance") return 0;
       if (sort === "diameter-desc") return sizeValue(right).localeCompare(sizeValue(left), "ru", {numeric: true});
-      if (sort === "price-asc") return (left.pricePerTon ?? Infinity) - (right.pricePerTon ?? Infinity);
-      if (sort === "price-desc") return (right.pricePerTon ?? -Infinity) - (left.pricePerTon ?? -Infinity);
+      if (sort === "price-asc" || sort === "price-desc") return comparePrices(left.pricePerTon, right.pricePerTon, sort === "price-desc");
       if (sort === "weight-asc") return (left.weightPerMeterKg ?? Infinity) - (right.weightPerMeterKg ?? Infinity);
       if (sort === "weight-desc") return (right.weightPerMeterKg ?? -Infinity) - (left.weightPerMeterKg ?? -Infinity);
       return sizeValue(left).localeCompare(sizeValue(right), "ru", {numeric: true});
     });
-  }, [ranks, deferredQuery, matched, availability, diameter, form, length, maximumPrice, minimumPrice, sort, variants, isBeam]);
+  }, [hits, deferredQuery, availability, diameter, form, length, maximumPrice, minimumPrice, sort, variants, isBeam]);
   function resetFilters() {
     setQuery("");
     setDiameter("");

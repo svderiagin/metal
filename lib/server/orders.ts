@@ -1,6 +1,6 @@
 import {randomBytes} from "node:crypto";
 import {getProductVariantById} from "@/lib/catalog";
-import {calculateLineTotal, metersToTons, tonsToMeters} from "@/lib/orderMeasurement";
+import {revalidateCartPrice} from "@/lib/cartPricing";
 import type {CreateOrderInput, Order, OrderItem, PaymentStatus} from "@/types/order";
 
 export interface OrderRepository {
@@ -58,25 +58,18 @@ export function createTrustedOrder(input: CreateOrderInput): Order | null {
   const items: OrderItem[] = [];
   for (const item of input.items) {
     const product = getProductVariantById(item.productId);
-    if (!product || product.price === null || product.quoteOnly || product.priceQualifier === "from" || !Number.isFinite(item.quantity) || item.quantity <= 0 || (!item.measurement && item.quantity > 999)) return null;
-    if (item.measurement) {
-      if (product.pricePerTon === undefined || product.weightPerMeterKg === undefined) return null;
-      const meters = item.measurement.inputMode === "meter"
-        ? item.measurement.meters
-        : tonsToMeters(item.measurement.weightTons, product.weightPerMeterKg);
-      const weightTons = item.measurement.inputMode === "ton"
-        ? item.measurement.weightTons
-        : metersToTons(item.measurement.meters, product.weightPerMeterKg);
-      if (meters === null || weightTons === null) return null;
-      const subtotal = calculateLineTotal(weightTons, product.pricePerTon);
-      if (subtotal === null) return null;
+    if (!product) return null;
+    const {measurement, estimatedTotal: subtotal, invalidReason} = revalidateCartPrice(product, item);
+    if (invalidReason) return null;
+    if (measurement) {
+      const {meters, weightTons} = measurement;
       items.push({
         productId: product.id,
-        quantity: item.measurement.inputMode === "meter" ? meters : weightTons,
-        measurement: {inputMode: item.measurement.inputMode, meters, weightTons},
+        quantity: measurement.inputMode === "meter" ? meters : weightTons,
+        measurement: {inputMode: measurement.inputMode, meters, weightTons},
         name: product.name,
         sku: product.sku,
-        unitPrice: product.pricePerTon,
+        unitPrice: measurement.pricePerTon,
         priceUnit: product.priceUnit,
         subtotal,
       });
@@ -87,9 +80,9 @@ export function createTrustedOrder(input: CreateOrderInput): Order | null {
       quantity: item.quantity,
       name: product.name,
       sku: product.sku,
-      unitPrice: product.price,
+      unitPrice: product.price!,
       priceUnit: product.priceUnit,
-      subtotal: calculateLineTotal(item.quantity, product.price) ?? 0,
+      subtotal,
     });
   }
   return {

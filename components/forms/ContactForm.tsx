@@ -4,6 +4,7 @@ import Link from "next/link";
 import {Button} from "@/components/ui/Button";
 import {Input} from "@/components/ui/Input";
 import {Textarea} from "@/components/ui/Textarea";
+import {isApiSuccess, readApiError} from "@/lib/apiResponse";
 
 export function ContactForm() {
   const [sent, setSent] = useState(false);
@@ -12,6 +13,7 @@ export function ContactForm() {
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    setSent(false);
     setSubmitting(true);
     setError("");
     const form = event.currentTarget;
@@ -30,7 +32,7 @@ export function ContactForm() {
         })
       });
       const result: unknown = await response.json();
-      if (!response.ok) throw new Error(readError(result, "Не удалось отправить сообщение."));
+      if (!response.ok || !isApiSuccess(result)) throw new Error(readApiError(result, "Не удалось отправить сообщение."));
       setSent(true);
       form.reset();
     } catch (caught) {
@@ -58,8 +60,4 @@ export function ContactForm() {
     <p role="alert" className="text-sm font-semibold text-red-700">{error}</p>}<Button type="submit"
                                                                                        disabled={submitting}>{submitting ? "Отправляем…" : "Отправить"}</Button>
   </form>
-}
-
-function readError(value: unknown, fallback: string) {
-  return typeof value === "object" && value !== null && "error" in value && typeof value.error === "string" ? value.error : fallback
 }

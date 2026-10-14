@@ -28,7 +28,7 @@ The downloaded mirror is read only. Runtime mappings are separate from the catal
 
 Coverage counts resolvable real images only: 0% before, 73.4% after. All 122 original product image references pointed to missing SVG files; absent images are now represented by a shared neutral placeholder where a fallback previously existed. Placeholders are excluded from coverage. Images illustrate reviewed form and surface, not certified grade, standard or exact dimensions.
 
-Full per-target provenance, confidence and unassigned products: [mapping report](../imports/image-mapping-report.json). Recursive source inventory: [source inventory](../imports/image-source-inventory.json). Browser results: [browser verification](../imports/image-browser-verification.json).
+Optional historical evidence (not present in every checkout): full per-target provenance, confidence and unassigned products: [mapping report](../imports/image-mapping-report.json). Recursive source inventory: [source inventory](../imports/image-source-inventory.json). Browser results: [browser verification](../imports/image-browser-verification.json).
 
 ## Rejected or uncertain source associations
 
@@ -48,7 +48,7 @@ No uncertain matches are automatically assigned. Medium confidence means a revie
 - `npm run catalog:check`: catalog and cart checks, including byte-identical re-import.
 - `npm run lint -- --ignore-pattern 'brokinvest.ru/**'`: application lint. Unscoped lint also scans downloaded donor JavaScript, which contains unrelated lint errors.
 - `npm run build`: production build and TypeScript validation.
-- `node scripts/check-catalog-images-browser.mjs`: running local server on port 3000 and headless Chrome debugging on port 9223; desktop/mobile checks for loaded images, alt text, expected mapping, preserved aspect ratio and horizontal overflow.
+- `node scripts/check-catalog-images-browser.mjs`: compatibility entry point to the shared current-interface suite, using site port 3000 and Chrome CDP 9223. It verifies visible image loading and desktop/mobile overflow without requiring supplier reports or overwriting import evidence. Results: `.tmp/local-audit/`.
 
 ## Image filenames
 
@@ -59,3 +59,5 @@ Catalog images in `public/images/catalog/` use descriptive Latin filenames (for 
 Replace the image at its existing path. `npm run dev` checks catalog image contents every second and updates `data/catalog-image-versions.json` when files change. Image components and original-image links append a content version to the URL, so a replacement gets a new browser and Next.js image cache entry. Restart the dev server once after installing this workflow; subsequent image replacements need no restart. Refresh an already open page if necessary.
 
 `npm run build` regenerates the versions automatically before building. For production, rebuild and deploy both the application and public images together; copying a file alone does not update pre-rendered pages. Changing a filename or extension still requires updating `data/catalog-images.json`.
+
+Public file existence, exact path case and image metadata are always checked by `npm test`. Supplier byte/provenance checks are explicitly skipped when the optional mirror or reports are absent.

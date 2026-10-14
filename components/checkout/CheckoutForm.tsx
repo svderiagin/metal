@@ -12,6 +12,7 @@ import {Button} from "@/components/ui/Button";
 import {formatCurrency} from "@/lib/currency";
 import {CustomerTypeSelector} from "./CustomerTypeSelector";
 import {PaymentMethodSelector} from "./PaymentMethodSelector";
+import {isApiSuccess, readApiError} from "@/lib/apiResponse";
 
 const initial: CheckoutFormData = {
   customerType: "INDIVIDUAL",
@@ -147,7 +148,7 @@ async function createOrder(input: CreateOrderInput): Promise<{order: {reference:
   });
   const result: unknown = await response.json();
   if (!response.ok || !isOrderResult(result)) {
-    throw new Error(readError(result, "Не удалось создать заказ."));
+    throw new Error(readApiError(result, "Не удалось создать заказ."));
   }
   return result;
 }
@@ -160,7 +161,7 @@ async function createPayment(orderReference: string): Promise<{redirectUrl: stri
   });
   const result: unknown = await response.json();
   if (!response.ok || !isPaymentResult(result)) {
-    const message = readError(result, "Онлайн-оплата пока не настроена.");
+    const message = readApiError(result, "Онлайн-оплата пока не настроена.");
     throw new Error(`${message} Заказ ${orderReference} сохранён; корзина не очищена.`);
   }
   return result;
@@ -172,13 +173,9 @@ function Field({label, children, wide = false}: { label: string; children: React
 }
 
 function isOrderResult(value: unknown): value is { order: { reference: string } } {
-  return typeof value === "object" && value !== null && "order" in value && typeof value.order === "object" && value.order !== null && "reference" in value.order && typeof value.order.reference === "string"
+  return isApiSuccess(value) && "order" in value && typeof value.order === "object" && value.order !== null && "reference" in value.order && typeof value.order.reference === "string"
 }
 
 function isPaymentResult(value: unknown): value is { redirectUrl: string } {
-  return typeof value === "object" && value !== null && "redirectUrl" in value && typeof value.redirectUrl === "string"
-}
-
-function readError(value: unknown, fallback: string) {
-  return typeof value === "object" && value !== null && "error" in value && typeof value.error === "string" ? value.error : fallback
+  return isApiSuccess(value) && "redirectUrl" in value && typeof value.redirectUrl === "string"
 }

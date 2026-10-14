@@ -24,5 +24,6 @@ export interface CartLine extends CartItem {
   sku: string;
   price: number;
   priceUnit: string;
+  quantityUnit: string;
   estimatedTotal: number;
 }

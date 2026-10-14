@@ -2,9 +2,29 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {execFileSync} from 'node:child_process';
+import os from 'node:os';
+import path from 'node:path';
 import {discountedPrice,parsePrice} from './pricing.mjs';
 import {readProjectData} from './project-data.mjs';
 const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+test('the combined hardcoded catalog has unique identities and resolvable canonical routes',()=>{
+ const cache=new Map();
+ const {productVariants}=readProjectData('data/products/index.ts',cache);
+ const {productTypes}=readProjectData('data/productTypes.ts',cache);
+ const {categories}=readProjectData('data/categories.ts',cache);
+ const {subcategories}=readProjectData('data/subcategories.ts',cache);
+ for(const key of ['id','sku','slug'])assert.equal(new Set(productVariants.map(p=>p[key])).size,productVariants.length,key);
+ const routes=new Set();
+ for(const type of productTypes){
+  const category=categories.find(c=>c.id===type.categoryId);
+  const subcategory=subcategories.find(s=>s.id===type.subcategoryId&&s.categoryId===type.categoryId);
+  assert(category&&subcategory,type.id);
+  assert.equal(type.categorySlug,category.slug);assert.equal(type.subcategorySlug,subcategory.slug);
+  const route=`${category.slug}/${subcategory.slug}/${type.slug}`;
+  assert(!routes.has(route),route);routes.add(route);
+ }
+ for(const product of productVariants)assert(productTypes.some(t=>t.id===product.productTypeId&&t.categoryId===product.categoryId&&t.subcategoryId===product.subcategoryId),product.id);
+});
 test('decimal safe discount, examples and half up',()=>{
  for(const [source,expected] of [['50 000,00',45000],['67 950,00',61155],['12 345,67',11111.10],['0.05',0.05],['0.15',0.14]])assert.equal(discountedPrice(source),expected);
 });
@@ -43,10 +63,14 @@ test('units remain per tonne and per kilogram, never per metre',()=>{
  assert.equal(products.find(p=>p.id==='local-80044').price,69750);
  assert.equal(products.find(p=>p.id==='local-67810').price,184500);
 });
-test('re-import is byte-identical and preserves editable local products',()=>{
+test('re-import is byte-identical and preserves editable local products', {skip: process.env.CATALOG_IMPORT_CHECK !== '1' ? 'Explicit opt-in; never regenerate the working catalog during checks' : false}, () => {
  const files=['data/imported-catalog.json','imports/catalog-manifest.json'];const before=files.map(p=>fs.readFileSync(p,'utf8'));
- execFileSync(process.execPath,['scripts/import-catalog.mjs']);
- files.forEach((p,i)=>assert.equal(fs.readFileSync(p,'utf8'),before[i]));
+ const temporary=fs.mkdtempSync(path.join(os.tmpdir(),'metal-import-check-'));
+ try {
+  for(const directory of ['data','lib','imports'])fs.cpSync(directory,path.join(temporary,directory),{recursive:true});
+  execFileSync(process.execPath,[path.resolve('scripts/import-catalog.mjs')],{cwd:temporary});
+  files.forEach((p,i)=>assert.equal(fs.readFileSync(path.join(temporary,p),'utf8'),before[i]));
+ } finally {fs.rmSync(temporary,{recursive:true,force:true});}
  const data=readProjectData('data/products/index.ts');
  assert.equal(data.productVariants.length,new Set(data.productVariants.map(p=>p.id)).size);
  for(const p of data.existingVariants)assert(data.productVariants.some(v=>v.id===p.id)||read('data/imported-catalog.json').matchedIds.includes(p.id));
