@@ -16,6 +16,13 @@ import {
   getSubcategoryBySlug,
 } from "@/lib/catalog";
 
+const rebarHeadings: Record<string, string> = {
+  "cat-arm-sub-1": "Арматура рифлёная А500С",
+  "cat-arm-sub-2": "Арматура рифлёная А400 (А3), 35ГС",
+  "cat-arm-sub-3": "Арматура рифлёная А400 (А3), 25Г2С",
+  "cat-arm-sub-4": "Арматура гладкая А240 (А1)",
+};
+
 type Props = {
   params: Promise<{
     categorySlug: string;
@@ -78,7 +85,7 @@ export default async function ProductTypePage({params}: Props) {
             <p className="text-sm font-bold uppercase tracking-[0.16em] text-red-700">
               Тип продукции
             </p>
-            <h1 className="mt-2 break-words text-3xl font-black sm:text-4xl">{productType.name}</h1>
+            <h1 className="mt-2 break-words text-3xl font-black sm:text-4xl">{rebarHeadings[productType.subcategoryId] ?? productType.name}</h1>
             {productType.imageUrl && !productType.imageUrl.endsWith(".svg") &&
               <ProductImageViewer src={productType.imageUrl} name={productType.name}/>}
             <p className="mt-4 max-w-4xl leading-7 text-slate-600">{productType.description}</p>

@@ -69,7 +69,7 @@ export function CatalogSearch({
               value={query}
               onChange={e => {setDraft({urlQuery, value: e.target.value});setLimit(20);}}
               maxLength={250}
-              placeholder="Например, арматура А500С или MS-0001"
+              placeholder="Например, арматура рифлёная А500С или MS-0001"
             />
           </label>
           <Button type="submit" className="sm:min-w-32">Найти</Button>

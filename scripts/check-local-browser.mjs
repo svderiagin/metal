@@ -69,6 +69,7 @@ async function input(selector, value) {
   await evaluate(`(() => {const el = document.querySelector(${JSON.stringify(selector)}); if (!el) throw Error('Missing input'); Object.getOwnPropertyDescriptor(el.tagName === 'TEXTAREA' ? HTMLTextAreaElement.prototype : HTMLInputElement.prototype, 'value').set.call(el, ${JSON.stringify(value)}); el.dispatchEvent(new Event('input', {bubbles: true}));})()`);
   await delay(180);
 }
+
 async function check(name, fn) {
   try {await fn(); results.push({name, ok: true});}
   catch (error) {results.push({name, ok: false, error: error.message}); if (!baseline) throw error;}
@@ -103,14 +104,24 @@ try {
         }
       });
     }
+    await check(`${width}: profile pipe families and requested category order`, async () => {
+      await go('/catalog/truby-profilnye');
+      const state = await evaluate(`({cards:[...document.querySelectorAll('main article h2')].map(el=>el.textContent),categories:[...document.querySelectorAll('aside nav[aria-label="Категории"] > ul > li > a')].slice(0,3).map(el=>el.textContent),subcategories:[...document.querySelectorAll('aside nav[aria-label="Категории"] > ul > li > ul a')].map(el=>el.textContent)})`);
+      const expected = ['Труба профильная квадратная','Труба профильная прямоугольная'];
+      assert.deepEqual(state.cards, expected);
+      assert.deepEqual(state.subcategories, expected);
+      assert.deepEqual(state.categories, ['Арматура','Трубы профильные','Трубы стальные']);
+    });
     await check(`${width}: Russian search, typo and dimensions`, async () => {
       await go('/catalog');
-      for (const query of ['профильных труб', 'арматруа', '40x40x2', 'абракадабразавр']) {
+      for (const query of ['профильных труб', 'арматруа', '40x40x4', 'абракадабразавр']) {
         await input('input[name="query"]', query);
+        await wait(`document.querySelector('main').innerText.includes(${JSON.stringify(`По запросу «${query}» найдено товаров:`)})`);
+        if (query !== 'абракадабразавр') await wait(`document.querySelectorAll('main li a[href*="#variant-"]').length > 0`);
         const links = await evaluate(`[...document.querySelectorAll('main li a[href*="#variant-"]')].map(a => a.textContent)`);
         if (query === 'абракадабразавр') assert.equal(links.length, 0);
         else assert.ok(links.length, query);
-        if (query === '40x40x2') assert.ok(links.every(name => /40[хx]40[хx]2(?:[хx]|\D|$)/.test(name)));
+        if (query === '40x40x4') assert.ok(links.every(name => /40[хx]40[хx]4(?:[хx]|\D|$)/.test(name)));
       }
     });
     await check(`${width}: generic filter and reset`, async () => {
@@ -170,7 +181,7 @@ try {
     assert.ok((await evaluate(`document.querySelector('main').innerText`)).replace(/\s/g,'').includes(expected));
   });
   await check('generic sorting, pagination and linked row after active filters', async () => {
-    const largestType = productTypes.filter(t => t.categoryId === 'cat-trp').sort((a,b) => productVariants.filter(v => v.productTypeId === b.id).length - productVariants.filter(v => v.productTypeId === a.id).length)[0];
+    const largestType = productTypes.filter(t => !['cat-arm','cat-bal'].includes(t.categoryId)).sort((a,b) => productVariants.filter(v => v.productTypeId === b.id).length - productVariants.filter(v => v.productTypeId === a.id).length)[0];
     const variants = productVariants.filter(v => v.productTypeId === largestType.id);
     await go(pathFor(variants[0]));
     await evaluate(`const el = [...document.querySelectorAll('label')].find(l => l.textContent.trim().startsWith('Сортировка')).querySelector('select'); el.value = 'price-desc'; el.dispatchEvent(new Event('change', {bubbles:true}))`);

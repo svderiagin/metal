@@ -7,7 +7,7 @@ import ts from 'typescript';
 
 const {normalizeRussianPhone, validateQuoteFields, QUOTE_LIMITS} = readProjectData('lib/quoteValidation.ts');
 const {parseQuoteRequest} = readProjectData('lib/server/validation.ts');
-const valid = () => ({name: 'Анна-Мария', phone: '+79115556677', email: 'anna+metal@example.ru', company: '', message: 'Арматура А500С\nДлина: 100 м', consent: true, website: ''});
+const valid = () => ({name: 'Анна-Мария', phone: '+79115556677', email: 'anna+metal@example.ru', company: '', message: 'Арматура рифлёная А500С\nДлина: 100 м', consent: true, website: ''});
 
 test('telephone typing and formatted paste use +7 and at most ten national digits', () => {
   for (const [input, expected] of [

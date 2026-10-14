@@ -84,6 +84,8 @@ for(const [sourceId,entries] of [...sourceGroups].sort((a,b)=>Number(a[0])-Numbe
  const entry={sourceId,files:entries.map(e=>e.file),originalUrl:`https://www.brokinvest.ru/product/${r.staticPath}`,rawOffers:entries.map(e=>({file:e.file,record:e.record})),issues};
  const exclusion=overrides.excludedSourceIds?.[sourceId];
  if(exclusion){manifest.push({...entry,status:'excluded',reason:exclusion.reason,replacementProductId:exclusion.replacementProductId});continue;}
+ // Owner keeps only the two local square/rectangular pipe families; do not recreate the removed imported family.
+ if(category?.id==='cat-trp'){manifest.push({...entry,status:'excluded',reason:'Удалено по указанию владельца: оставлены только локальные подкатегории квадратной и прямоугольной профильной трубы.'});continue;}
  if(!category){manifest.push({...entry,status:'excluded',reason:'Не определён продуктовый раздел; требуется разбор записи'});continue;}
  if(!clean(r.title)||!r.staticPath){manifest.push({...entry,status:'incomplete',reason:'Нет однозначного обозначения'});continue;}
  if(!pool.length)issues.push('Нет московского предложения: цена по запросу');
@@ -181,9 +183,9 @@ for(const c of categories)if(used.has(c.id)){
 for(const f of families)if(imported.some(p=>p.subcategoryId===f.id)){
  const c=categories.find(c=>c.id===f.categoryId);
  const definitions={
-  'cat-arm-sub-1':'Арматура класса А500С с рифлёной поверхностью. Класс следует отличать от марки стали; выбирайте номинальный диаметр, длину и стандарт исполнения.',
-  'cat-arm-sub-3':'Арматура марки 25Г2С с рифлёной поверхностью. Сопоставляйте номинальный диаметр и длину, а также стандарт конкретной позиции: в обозначениях встречаются разные ГОСТ.',
-  'cat-arm-sub-4':'Гладкая арматура А1 / А240. В отличие от рифлёных исполнений имеет гладкую поверхность. Для подбора нужны номинальный диаметр, длина и стандарт позиции.',
+  'cat-arm-sub-1':'Арматура рифлёная А500С. Класс следует отличать от марки стали; выбирайте номинальный диаметр, длину и стандарт исполнения.',
+  'cat-arm-sub-3':'Арматура рифлёная А400 (А3), 25Г2С. Сопоставляйте номинальный диаметр и длину, а также стандарт конкретной позиции: в обозначениях встречаются разные ГОСТ.',
+  'cat-arm-sub-4':'Арматура гладкая А240 (А1). В отличие от рифлёных исполнений имеет гладкую поверхность. Для подбора нужны номинальный диаметр, длина и стандарт позиции.',
   'cat-lis-sub-1':'Горячекатаный листовой прокат. Для выбора нужны толщина, ширина и длина листа, марка стали и стандарт; размеры приведены в миллиметрах.',
   'cat-lis-sub-2':'Холоднокатаный листовой прокат. Способ прокатки отличает его от горячекатаного; дополнительно сверяйте толщину, формат, марку стали и указанное состояние поверхности.',
   'cat-lis-sub-3':'Листы с оцинкованной поверхностью. Покрытие отличает их от листа без покрытия; выбирайте толщину, ширину, длину и обозначение исполнения.',

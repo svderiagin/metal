@@ -16,7 +16,7 @@ test('rebar quote names express bar length in metres and diameter in millimetres
 });
 
 test('quote request includes product and either or both measurements', () => {
-  const product = 'Арматура А500С 12 мм';
+  const product = 'Арматура рифлёная А500С 12 мм';
   assert.equal(buildQuoteMessage({product}), `Прошу рассчитать поставку:\nНаименование: ${product}`);
   assert.equal(buildQuoteMessage({product, meters: 100}), `Прошу рассчитать поставку:\nНаименование: ${product}\nОбщая длина: 100 м`);
   assert.equal(buildQuoteMessage({product, tons: 0.5}), `Прошу рассчитать поставку:\nНаименование: ${product}\nВес: 0,5 т`);

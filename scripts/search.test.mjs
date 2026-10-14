@@ -20,13 +20,13 @@ test('Scoped synonyms and abbreviations',()=>{
  assert.equal(hits('кругляк')[0].product.categoryId,'cat-kru');
 });
 test('Exact dimensions, equivalent notation, incompatible dimensions excluded',()=>{
- const expected=hits('40х40х2').map(h=>h.product.id);assert.ok(expected.length);
- for(const q of ['40x40x2','40×40×2','40 40 2']) assert.deepEqual(hits(q).map(h=>h.product.id),expected);
- assert.ok(hits('труба 40х40').length);
+ const expected=hits('40х40х4').map(h=>h.product.id);assert.ok(expected.length);
+ for(const q of ['40x40x4','40×40×4','40 40 4']) assert.deepEqual(hits(q).map(h=>h.product.id),expected);
+ assert.ok(hits('уголок 40х40').length);
  assert.ok(hits('лист 2 мм').length);
  assert.ok(hits('арматура ф12').length);assert.deepEqual(hits('арматура ф12').map(h=>h.product.id),hits('арматура Ø12').map(h=>h.product.id));
  assert.ok(hits('40х40х999').length===0);
- assert.ok(hits('40х40х2').every(h=>buildTechnicalDocument(h.product).dimensions.some(d=>d.slice(0,3).join('x')==='40x40x2')));
+ assert.ok(hits('40х40х4').every(h=>buildTechnicalDocument(h.product).dimensions.some(d=>d.slice(0,3).join('x')==='40x40x4')));
  assert.ok(hits('арматура 12').every(h=>buildTechnicalDocument(h.product).primary.has('12')));
 });
 test('Grades and standards are never fuzzy',()=>{
@@ -41,10 +41,10 @@ test('Controlled spelling corrections and partial input',()=>{
  assert.equal(hits('абракадабразавр').length,0);
 });
 test('Family-local index supports the same technical and typo query',()=>{
- const family=productTypes.find(t=>t.id===hits('40х40х2')[0].product.productTypeId);
+ const family=productTypes.find(t=>t.id===hits('профильная труба 12')[0].product.productTypeId);
  const subset=products.filter(p=>p.productTypeId===family.id);
  const local=createCatalogSearchIndex(subset);
- const result=local.search('профилная труба 40х40х2');
+ const result=local.search('профилная труба 12');
  assert.ok(result.total,JSON.stringify({family:family.name,subset:subset.map(p=>p.name),result}));
 });
 test('Exact real product names rank first across every category',()=>{

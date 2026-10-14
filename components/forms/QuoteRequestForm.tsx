@@ -132,7 +132,7 @@ export function QuoteRequestForm() {
     </label>
     <label className="text-sm font-semibold sm:col-span-2">Что требуется рассчитать? *
       <Textarea name="message" required maxLength={QUOTE_LIMITS.message} rows={4} value={message}
-        placeholder="Арматура А500С, 12 мм, 100 м. Доставка в Истринский округ, СНТ «Берёзка», участок 10."
+        placeholder="Арматура рифлёная А500С, 12 мм, 100 м. Доставка в Истринский округ, СНТ «Берёзка», участок 10."
         onChange={event => setMessage(event.target.value.slice(0, QUOTE_LIMITS.message))} className="mt-1 block" {...validationProps("message")}/>
       <span className={styles.messageMeta}>
         {fieldError("message", "")}

@@ -91,7 +91,6 @@ const imageNames = {
   "2d9df90a05ccd079b89f": "ugolok",
   "c16c8479c1e0bc60ad09": "shveller",
   "3f5f663cd12db9ee89ec": "list-holodnokatanyy",
-  "a0165433e200f1c1b124": "truby-kvadratnye",
   "e3c41e4fb5fa093dc10c": "elektrody",
   "e0316785f068b9e27c0f": "provoloka",
   "d18e7d12ab01ffbecc18": "rulony"

@@ -138,7 +138,7 @@ function MeasuredVariantCatalog({variants, simplified = false, kind = "rebar"}: 
     <>
       <div className={`${filterStyles.panel} rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6 lg:col-start-2`}>
         <h2 className="text-xl font-bold">{simplified ? "Фильтры" : "Фильтры вариантов"}</h2>
-        <label className="mt-4 block text-sm font-semibold">Поиск вариантов<Input type="search" value={query} onChange={e => {setQuery(e.target.value);setSort("relevance");}} className="mt-1" placeholder={isBeam ? "Балка 25Ш1" : "Арматура А500С"}/></label>
+        <label className="mt-4 block text-sm font-semibold">Поиск вариантов<Input type="search" value={query} onChange={e => {setQuery(e.target.value);setSort("relevance");}} className="mt-1" placeholder={isBeam ? "Балка 25Ш1" : "Арматура рифлёная А500С"}/></label>
         <div className="mt-5 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
           <Filter label={isBeam ? "Профиль" : "Диаметр, мм"} value={diameter} onChange={setDiameter}>
             {diameters.map((value) => <option key={value} value={value}>{value}</option>)}

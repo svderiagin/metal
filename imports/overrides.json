@@ -2,8 +2,25 @@
   "products": {},
   "sourcePrices": {},
   "matches": {},
-  "categories": {},
-  "families": {},
+  "categories": {
+    "cat-trp": {
+      "name": "Трубы профильные"
+    }
+  },
+  "families": {
+    "cat-arm-sub-1": {
+      "name": "Арматура А500С"
+    },
+    "cat-arm-sub-2": {
+      "name": "Арматура А400 (35ГС)"
+    },
+    "cat-arm-sub-3": {
+      "name": "Арматура А400 (25Г2С)"
+    },
+    "cat-arm-sub-4": {
+      "name": "Арматура А240 (А1)"
+    }
+  },
   "excludedSourceIds": {
     "65597": {
       "reason": "Удалено по прямому указанию пользователя как дубль; сохранена карточка local-122247.",

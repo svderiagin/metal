@@ -12,6 +12,22 @@ const originalCategories: Category[] = [
     "imageUrl": "/images/categories/armatura.svg"
   },
   {
+    "id": "cat-trp",
+    "name": "Трубы профильные",
+    "slug": "truby-profilnye",
+    "shortDescription": "Квадратные и прямоугольные профили",
+    "description": "Квадратные и прямоугольные профили. Подберите подкатегорию и отфильтруйте позиции по материалу, стандарту, цене и наличию.",
+    "imageUrl": "/images/categories/truby-profilnye.svg"
+  },
+  {
+    "id": "cat-trs",
+    "name": "Трубы стальные",
+    "slug": "truby-stalnye",
+    "shortDescription": "Круглые трубы для инженерных и строительных задач",
+    "description": "Круглые трубы для инженерных и строительных задач. Подберите подкатегорию и отфильтруйте позиции по материалу, стандарту, цене и наличию.",
+    "imageUrl": "/images/categories/truby-stalnye.svg"
+  },
+  {
     "id": "cat-bal",
     "name": "Балка",
     "slug": "balka",
@@ -76,28 +92,12 @@ const originalCategories: Category[] = [
     "imageUrl": "/images/categories/provoloka.svg"
   },
   {
-    "id": "cat-trs",
-    "name": "Трубы стальные",
-    "slug": "truby-stalnye",
-    "shortDescription": "Круглые трубы для инженерных и строительных задач",
-    "description": "Круглые трубы для инженерных и строительных задач. Подберите подкатегорию и отфильтруйте позиции по материалу, стандарту, цене и наличию.",
-    "imageUrl": "/images/categories/truby-stalnye.svg"
-  },
-  {
     "id": "cat-trn",
     "name": "Трубы нержавеющие",
     "slug": "truby-nerzhaveyushchie",
     "shortDescription": "Коррозионностойкие трубы для промышленности",
     "description": "Коррозионностойкие трубы для промышленности. Подберите подкатегорию и отфильтруйте позиции по материалу, стандарту, цене и наличию.",
     "imageUrl": "/images/categories/truby-nerzhaveyushchie.svg"
-  },
-  {
-    "id": "cat-trp",
-    "name": "Трубы профильные",
-    "slug": "truby-profilnye",
-    "shortDescription": "Квадратные и прямоугольные профили",
-    "description": "Квадратные и прямоугольные профили. Подберите подкатегорию и отфильтруйте позиции по материалу, стандарту, цене и наличию.",
-    "imageUrl": "/images/categories/truby-profilnye.svg"
   },
   {
     "id": "cat-ugo",
