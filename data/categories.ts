@@ -20,6 +20,14 @@ const originalCategories: Category[] = [
     "imageUrl": "/images/categories/truby-profilnye.svg"
   },
   {
+    "id": "cat-trk",
+    "name": "Труба круглая",
+    "slug": "truba-kruglaya",
+    "shortDescription": "Водогазопроводные и электросварные трубы, включая оцинкованные исполнения",
+    "description": "Водогазопроводные и электросварные трубы круглого сечения. Выберите исполнение поверхности, диаметр, толщину стенки и длину. У водогазопроводных труб условный проход DN отличается от наружного диаметра.",
+    "imageUrl": "/images/catalog/truby-vodogazoprovodnye.jpeg"
+  },
+  {
     "id": "cat-trs",
     "name": "Трубы стальные",
     "slug": "truby-stalnye",

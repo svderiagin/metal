@@ -119,7 +119,7 @@ export function createCatalogSearchIndex(products: ProductVariant[], types: Prod
   function search(input: string, options: SearchOptions = {}): SearchResult {
     const query = input.trim().slice(0, 250);
     const {terms, technical, correctedQuery} = compile(query);
-    const hasTechnical = technical.dimensions.length || technical.numbers.length || technical.grades.length || technical.standards.length || technical.diameter || technical.thickness || technical.sku;
+    const hasTechnical = technical.dimensions.length || technical.numbers.length || technical.grades.length || technical.standards.length || technical.nominalBore || technical.diameter || technical.thickness || technical.sku;
     if (query && !terms.length && !hasTechnical) return {hits: [], total: 0};
     const hits: SearchHit[] = [];
     for (const doc of documents) {

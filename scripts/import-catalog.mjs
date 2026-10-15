@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import {readProjectData} from './project-data.mjs';
 const {beamSubcategoryId} = readProjectData('lib/beam.ts');
+const {isPublicProduct} = readProjectData('data/catalog-visibility.ts');
 import {discountedPrice,parsePrice} from './pricing.mjs';
 const json=p=>JSON.parse(fs.readFileSync(p,'utf8'));
 const write=(p,v)=>fs.writeFileSync(p,JSON.stringify(v,null,2)+'\n');
@@ -25,7 +26,7 @@ const classified=(r)=>{
  if(/^угол/.test(n))return 'cat-ugo';
  if(/^лист|^профнастил/.test(n))return 'cat-lis';
  if(/^рулон/.test(n))return 'mirror-coils';
- if(/^труб/.test(n))return /профил|квадрат|прямоуг/.test(n)?'cat-trp':/нерж/.test(n)?'cat-trn':'cat-trs';
+ if(/^труб/.test(n))return /профил|квадрат|прямоуг/.test(n)?'cat-trp':/нерж/.test(n)?'cat-trn':/водогаз|вгп|электросвар|эсв/.test(n)?'cat-trk':'cat-trs';
  if(/^профиль замкнутый/.test(n))return 'cat-trp';
  if(/^круг|^прокат круг/.test(n))return 'cat-kru';
  if(/^квадрат/.test(n))return 'cat-kva';
@@ -133,15 +134,18 @@ for(const [sourceId,entries] of [...sourceGroups].sort((a,b)=>Number(a[0])-Numbe
    if(token)family=byId.get(token);
  }
  if(category.id==='cat-trp')family=byId.get(4);
- if(category.id==='cat-trs')family=byId.get(/водогаз|ВГП/i.test(name)?2:/бесшов/i.test(name)?65:3);
+ if(category.id==='cat-trs')family=byId.get(/бесшов/i.test(name)?65:3);
+ if(category.id==='cat-trk')family=byId.get(isVgp?2:3);
  if(category.id==='mirror-coils')family=byId.get(/полимер/i.test(name)?73:/оцинк|\bОЦ\b| оц /i.test(name)?72:/холоднокат| хк /i.test(name)?71:/горячекат| гк /i.test(name)?70:69);
  const familyName=family?.title||r.admin_category?.title||category.name;
  const familySlug=family?.staticPath||r.admin_category?.staticPath||category.slug;
  // Group actual product types, not each size/filter combination.
  let familyId=`mirror-family-${category.id}-${family?.id||r.admin_category?.id||'general'}`;
  const mappedFamily={11:'cat-arm-sub-4',12:'cat-arm-sub-3',13:'cat-arm-sub-1',52:'cat-lis-sub-1',53:'cat-lis-sub-2',54:'cat-lis-sub-3',56:'cat-lis-sub-4',2:'cat-trs-sub-3',3:'cat-trs-sub-4',65:'cat-trs-sub-1'}[family?.id];
+ const galvanized=/оцинк|(?:^|\s)оц(?:\s|$)/i.test(name);
+ const roundPipeFamily=category.id==='cat-trk'?(isVgp?(galvanized?'cat-trk-sub-3':'cat-trs-sub-3'):(galvanized?'cat-trk-sub-4':'cat-trs-sub-4')):undefined;
  const beamFamily=category.id==='cat-bal'?beamSubcategoryId({name,categoryId:category.id,attributes:[]}):undefined;
- const existingFamily=families.find(f=>f.id===(beamFamily||mappedFamily)&&f.categoryId===category.id)||(families.find(f=>f.categoryId===category.id&&identity(f.name)===identity(familyName)));
+ const existingFamily=families.find(f=>f.id===(roundPipeFamily||beamFamily||mappedFamily)&&f.categoryId===category.id)||(families.find(f=>f.categoryId===category.id&&identity(f.name)===identity(familyName)));
  if(existingFamily)familyId=existingFamily.id;
  let f=families.find(f=>f.id===familyId);
  if(!f){f={id:familyId,categoryId:category.id,name:familyName,slug:familySlug,shortDescription:'',description:''};families.push(f);}
@@ -156,7 +160,7 @@ for(const [sourceId,entries] of [...sourceGroups].sort((a,b)=>Number(a[0])-Numbe
  attr('size','Размеры',dimension.map(c=>`${characteristicLabel(c)}: ${clean(c.value)}`).join('; '));
  attr('length',clean(chars.find(c=>c.slug==='length')?.title)||'Длина',get('length'));
  const desc=specs.filter(s=>s.name!=='Полное обозначение').map(s=>`${s.name}: ${s.value}`).join('; ');
- const exactMatch=baseline.products.filter(p=>identity(p.name)===identity(name));
+ const exactMatch=baseline.products.filter(p=>isPublicProduct(p)&&identity(p.name)===identity(name));
  const overrideMatch=overrides.matches[sourceId];
  const old=overrideMatch?baseline.products.find(p=>p.id===overrideMatch):exactMatch.length===1?exactMatch[0]:null;
  if(old)matched.add(old.id);
@@ -172,8 +176,9 @@ for(const [sourceId,entries] of [...sourceGroups].sort((a,b)=>Number(a[0])-Numbe
  if(imported.some(p=>p.slug===product.slug))product.slug+=`-${sourceId}`;
  // No estimated mass, guessed geometry, factory expansion or donor availability.
  Object.assign(product,overrides.products[sourceId]||{});
+ if(!isPublicProduct(product)){manifest.push({...entry,status:'excluded',reason:'Архивная демонстрационная позиция исключена из публичного каталога'});continue;}
  imported.push(product);
- manifest.push({...entry,status:old?'updated':'imported',productId:id,chosenFile:selected.file,stockId:r.stockId,regionRule:'Москва, регион 1; склад 5 — сохранённый основной контекст; иные регионы не дают публичной цены',originalPrice:r.price,sourcePriceOverride:overrides.sourcePrices?.[sourceId]??null,priceInput,priceUnit:unit??null,currency:'RUB',qualifier:product.priceQualifier,ourPrice:price,updatedAt:r.updatedAt??null,normalizedSpecifications:specs,priceContext:{kind:'saved-public-product-price',regionId:pool.length?1:null,stockId:r.stockId,tier:null,volumeThreshold:null,vatQualifier:null,unitEvidenceFiles:entries.filter(e=>e.record.unit===unit).map(e=>e.file)}});
+ manifest.push({...entry,status:old?'updated':'imported',productId:id,chosenFile:selected.file,stockId:r.stockId,regionRule:'Москва, регион 1; склад 5 — сохранённый основной контекст; иные регионы не дают публичной цены',originalPrice:r.price,sourcePriceOverride:overrides.sourcePrices?.[sourceId]??null,priceInput,priceUnit:unit??null,currency:'RUB',qualifier:product.priceQualifier,ourPrice:price,updatedAt:r.updatedAt??null,normalizedSpecifications:product.specifications,priceContext:{kind:'saved-public-product-price',regionId:pool.length?1:null,stockId:r.stockId,tier:null,volumeThreshold:null,vatQualifier:null,unitEvidenceFiles:entries.filter(e=>e.record.unit===unit).map(e=>e.file)}});
 }
 const used=new Set(imported.map(p=>p.categoryId));
 for(const c of categories)if(used.has(c.id)){
@@ -199,7 +204,7 @@ for(const f of families)if(imported.some(p=>p.subcategoryId===f.id)){
  f.shortDescription=f.description;
  Object.assign(f,overrides.families[f.id]||{});
 }
-const retained=baseline.products.filter(p=>!matched.has(p.id));
+const retained=baseline.products.filter(p=>isPublicProduct(p)&&!matched.has(p.id));
 write('data/imported-catalog.json',{categories,families,products:imported,matchedIds:[...matched]});
-write('imports/catalog-manifest.json',{snapshotDate:null,regionStocks:[...regionStocks],rule:'Регион 1, основной сохранённый склад 5; минимальная цена между складами не выбирается. Неизвестный регион, единица или конфликт — запрос цены. Тарифы объёма не выявлены в структурированных записях.',records:manifest,counts:{before:{categories:baseline.categories.length,types:baseline.families.length,variants:baseline.products.length},after:{categories:categories.length,types:families.length,variants:retained.length+imported.length},sourceOccurrences:inventory.records.length,sourceProducts:sourceGroups.size,distinctSourceOffers:distinctOffers.size,imported:manifest.filter(x=>x.status==='imported').length,updated:matched.size,duplicates:inventory.records.length-distinctOffers.size,mergedIds:manifest.filter(x=>x.status==='merged-duplicate').length,excluded:manifest.filter(x=>x.status==='excluded').length,incomplete:manifest.filter(x=>x.status==='incomplete').length,quoteOnly:imported.filter(x=>x.quoteOnly).length}});
+write('imports/catalog-manifest.json',{snapshotDate:null,regionStocks:[...regionStocks],rule:'Регион 1, основной сохранённый склад 5; минимальная цена между складами не выбирается. Неизвестный регион, единица или конфликт — запрос цены. Тарифы объёма не выявлены в структурированных записях.',records:manifest,counts:{before:{categories:baseline.categories.length,types:baseline.families.length,variants:baseline.products.filter(isPublicProduct).length},after:{categories:categories.length,types:families.length,variants:retained.length+imported.length},sourceOccurrences:inventory.records.length,sourceProducts:sourceGroups.size,distinctSourceOffers:distinctOffers.size,imported:manifest.filter(x=>x.status==='imported').length,updated:matched.size,duplicates:inventory.records.length-distinctOffers.size,mergedIds:manifest.filter(x=>x.status==='merged-duplicate').length,excluded:manifest.filter(x=>x.status==='excluded').length,incomplete:manifest.filter(x=>x.status==='incomplete').length,quoteOnly:imported.filter(x=>x.quoteOnly).length}});
 console.log(json('imports/catalog-manifest.json').counts);

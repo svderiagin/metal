@@ -20,6 +20,8 @@ import importedCatalog from "../imported-catalog.json";
 import catalogImages from "../catalog-images.json";
 import {normalizeRebarVariant} from "@/lib/rebar";
 import {normalizeBeamVariant} from "@/lib/beam";
+import {isPublicProduct} from "@/data/catalog-visibility";
+import {isPipeProduct, normalizePipeWeight} from "@/lib/pipeWeight";
 
 const productSources: ProductVariantSource[] = [
   ...armaturaProducts.filter((product) => product.subcategoryId !== "cat-arm-sub-1"),
@@ -56,14 +58,15 @@ export const existingVariants: ProductVariant[] = productSources.map((product) =
 export const productVariants: ProductVariant[] = [
   ...existingVariants.filter(p => !(importedCatalog.matchedIds as string[]).includes(p.id)),
   ...importedCatalog.products as ProductVariant[],
-].map(normalizeRebarVariant).map(normalizeBeamVariant).map(product => ({
+].filter(isPublicProduct).map(normalizeRebarVariant).map(normalizeBeamVariant).map(normalizePipeWeight).map(product => ({
   ...product,
   imageUrls: (catalogImages.products as Record<string, string>)[product.id]
     ? [(catalogImages.products as Record<string, string>)[product.id]]
     : product.imageUrls.length ? [catalogImages.fallback] : [],
 }));
 
-function estimateDemoWeight(product: ProductVariantSource): ProductWeight {
+function estimateDemoWeight(product: ProductVariantSource): ProductWeight | undefined {
+  if (isPipeProduct(product)) return undefined;
   const size = Number.parseFloat(
     product.attributes.find((attribute) => attribute.key === "size")?.value.replace(",", ".") ?? "0",
   );

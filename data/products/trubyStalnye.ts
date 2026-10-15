@@ -283,7 +283,7 @@ export const trubyStalnyeProducts: ProductVariantSource[] = [
   },
   {
     "id": "prd-071",
-    "categoryId": "cat-trs",
+    "categoryId": "cat-trk",
     "subcategoryId": "cat-trs-sub-3",
     "name": "Труба водогазопроводная 10 мм",
     "slug": "truba-vodogazoprovodnaya-10",
@@ -353,7 +353,7 @@ export const trubyStalnyeProducts: ProductVariantSource[] = [
   },
   {
     "id": "prd-072",
-    "categoryId": "cat-trs",
+    "categoryId": "cat-trk",
     "subcategoryId": "cat-trs-sub-3",
     "name": "Труба водогазопроводная 16 мм",
     "slug": "truba-vodogazoprovodnaya-16",
@@ -423,7 +423,7 @@ export const trubyStalnyeProducts: ProductVariantSource[] = [
   },
   {
     "id": "prd-073",
-    "categoryId": "cat-trs",
+    "categoryId": "cat-trk",
     "subcategoryId": "cat-trs-sub-4",
     "name": "Труба электросварная 12 мм",
     "slug": "truba-elektrosvarnaya-12",
@@ -493,7 +493,7 @@ export const trubyStalnyeProducts: ProductVariantSource[] = [
   },
   {
     "id": "prd-074",
-    "categoryId": "cat-trs",
+    "categoryId": "cat-trk",
     "subcategoryId": "cat-trs-sub-4",
     "name": "Труба электросварная 20 мм",
     "slug": "truba-elektrosvarnaya-20",

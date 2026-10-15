@@ -3,6 +3,7 @@ import {Suspense} from "react";
 import {notFound} from "next/navigation";
 import {Breadcrumbs} from "@/components/catalog/Breadcrumbs";
 import {CatalogSidebar} from "@/components/catalog/CatalogSidebar";
+import {CatalogDescription} from "@/components/catalog/CatalogDescription";
 import {ProductVariantCatalog} from "@/components/catalog/ProductVariantCatalog";
 import {ProductImageViewer} from "@/components/catalog/ProductImageViewer";
 import {PageContainer} from "@/components/layout/PageContainer";
@@ -88,7 +89,7 @@ export default async function ProductTypePage({params}: Props) {
             <h1 className="mt-2 break-words text-3xl font-black sm:text-4xl">{rebarHeadings[productType.subcategoryId] ?? productType.name}</h1>
             {productType.imageUrl && !productType.imageUrl.endsWith(".svg") &&
               <ProductImageViewer src={productType.imageUrl} name={productType.name}/>}
-            <p className="mt-4 max-w-4xl leading-7 text-slate-600">{productType.description}</p>
+            <CatalogDescription description={productType.description}/>
           </div>
         </div>
         <ProductVariantCatalog variants={variants} categorySlug={category.slug}/>

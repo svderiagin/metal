@@ -246,7 +246,7 @@ function GenericProductVariantCatalog({
                       <strong>{variant.quoteOnly ? "Цена по запросу" : `${variant.priceQualifier === "from" ? "от " : ""}${formatUnitPrice(variant.price, variant.priceUnit)}`}</strong>
                     </td>
                     <td className="px-1.5 py-3">
-                      {!variant.imported && <Availability inStock={variant.inStock}/>}
+                      <Availability availability={variant.availability}/>
                     </td>
                     <ProductOrderControls variant={variant} view="table"/>
                   </tr>
@@ -272,7 +272,7 @@ function GenericProductVariantCatalog({
                   <div>
                     <strong className="text-xl">{variant.quoteOnly ? "Цена по запросу" : `${variant.priceQualifier === "from" ? "от " : ""}${formatUnitPrice(variant.price, variant.priceUnit)}`}</strong>
                   </div>
-                  {!variant.imported && <Availability inStock={variant.inStock}/>}
+                  <Availability availability={variant.availability}/>
                 </div>
                 <ProductOrderControls variant={variant} view="card"/>
               </article>
@@ -292,12 +292,13 @@ function GenericProductVariantCatalog({
   );
 }
 
-function Availability({inStock}: { inStock: boolean }) {
+function Availability({availability}: {availability: ProductVariant["availability"]}) {
   return (
     <span className={`inline-flex rounded-full px-2.5 py-1 text-xs font-bold ${
-      inStock ? "bg-green-100 text-green-800" : "bg-amber-100 text-amber-900"
+      availability === "UNKNOWN" ? "bg-slate-100 text-slate-600"
+        : availability === "IN_STOCK" ? "bg-green-100 text-green-800" : "bg-amber-100 text-amber-900"
     }`}>
-      {inStock ? "В наличии" : "Под заказ"}
+      {availability === "UNKNOWN" ? "Наличие уточняется" : availability === "IN_STOCK" ? "В наличии" : "Под заказ"}
     </span>
   );
 }

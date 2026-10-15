@@ -20,7 +20,7 @@ function standards(text: string): string[] {
   return [...normalizeText(text).matchAll(/гост\s*(?:р\s*)?(\d+(?:\.\d+)*(?:-\d+)?)/g)].map(m => m[1]);
 }
 export interface TechnicalDocument {dimensions: string[][]; primary: Set<string>; numbers: Set<string>; grades: Set<string>; standards: Set<string>; sku: string}
-export interface TechnicalQuery {dimensions: string[][]; numbers: string[]; grades: string[]; standards: string[]; diameter?: string; thickness?: string; sku?: string; beamSeries?: BeamSeries; wordsText: string; invalid: boolean}
+export interface TechnicalQuery {dimensions: string[][]; numbers: string[]; grades: string[]; standards: string[]; nominalBore?: string; diameter?: string; thickness?: string; sku?: string; beamSeries?: BeamSeries; wordsText: string; invalid: boolean}
 
 export function buildTechnicalDocument(product: ProductVariant): TechnicalDocument {
   const specs = product.specifications;
@@ -61,6 +61,7 @@ export function parseTechnicalQuery(input: string): TechnicalQuery {
   });
   text = text.replace(/(?:ms|мп)-\d+/g, sku => {query.sku = sku; return " ";});
   text = text.replace(/гост\s*(?:р\s*)?(\d+(?:\.\d+)*(?:-\d+)?)/g, (_, value: string) => {query.standards.push(value);return " ";});
+  text = text.replace(/(^|[^а-яa-z])ду\s*(\d+(?:\.\d+)?)/g, (_, prefix: string, value: string) => {query.nominalBore = canonicalNumber(value);return prefix + value;});
   text = text.replace(/(?:[øØ⌀ф]\s*|диаметр(?:ом)?\s*)(\d+(?:\.\d+)?)/g, (_, value: string) => {query.diameter = canonicalNumber(value);return " ";});
   text = text.replace(/толщин(?:а|ой|у)\s*(\d+(?:\.\d+)?)/g, (_, value: string) => {query.thickness = canonicalNumber(value);return " ";});
   text = text.replace(dimensionPattern, chain => {query.dimensions.push(chain.split("x").map(canonicalNumber));return " ";});
@@ -81,6 +82,8 @@ export function technicalMatch(query: TechnicalQuery, doc: TechnicalDocument, pr
   if (query.invalid || (query.sku && query.sku !== doc.sku)) return false;
   if (!query.dimensions.every(chain => doc.dimensions.some(candidate => chain.every((part, i) => part === candidate[i])))) return false;
   if (!query.numbers.every(n => Number(n) < 500 ? doc.primary.has(n) : doc.numbers.has(n))) return false;
+  if (query.nominalBore && !(product.nominalBoreMm === Number(query.nominalBore)
+    || product.specifications.some(s => /условный проход|^ду$|^dn$/i.test(s.name) && canonicalNumber(s.value) === query.nominalBore))) return false;
   if (query.diameter && !(product.diameterMm === Number(query.diameter) || product.specifications.some(s => /диаметр/i.test(s.name) && canonicalNumber(s.value) === query.diameter))) return false;
   if (query.thickness) {
     const thicknesses = product.specifications.filter(s => /толщина/i.test(s.name)).map(s => canonicalNumber(s.value));

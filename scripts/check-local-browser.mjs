@@ -110,7 +110,7 @@ try {
       const expected = ['Труба профильная квадратная','Труба профильная прямоугольная'];
       assert.deepEqual(state.cards, expected);
       assert.deepEqual(state.subcategories, expected);
-      assert.deepEqual(state.categories, ['Арматура','Трубы профильные','Трубы стальные']);
+      assert.deepEqual(state.categories, ['Арматура','Трубы профильные','Труба круглая']);
     });
     await check(`${width}: Russian search, typo and dimensions`, async () => {
       await go('/catalog');

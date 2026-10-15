@@ -12,7 +12,7 @@ import {ResetFiltersButton} from "./ResetFiltersButton";
 import type {ProductType, ProductVariant} from "@/types/product";
 import {comparePrices, matchesCategoryFilters} from "@/lib/catalogFilters";
 
-type SortMode = "relevance" | "availability" | "price-asc" | "price-desc" | "name";
+type SortMode = "catalog" | "relevance" | "availability" | "price-asc" | "price-desc" | "name";
 
 export function ProductTypeResults({
   productTypes,
@@ -29,7 +29,9 @@ export function ProductTypeResults({
   const [material, setMaterial] = useState("");
   const [standard, setStandard] = useState("");
   const [stockOnly, setStockOnly] = useState(false);
-  const [sort, setSort] = useState<SortMode>("availability");
+  const defaultSort: SortMode = productTypes.length > 0 && productTypes.every(type => type.categoryId === "cat-trk")
+    ? "catalog" : "availability";
+  const [sort, setSort] = useState<SortMode>(defaultSort);
   const [limit, setLimit] = useState(12);
 
   const materials = useMemo(
@@ -72,7 +74,7 @@ export function ProductTypeResults({
     setMaterial("");
     setStandard("");
     setStockOnly(false);
-    setSort("availability");
+    setSort(defaultSort);
     setLimit(12);
   }
 
@@ -94,6 +96,7 @@ export function ProductTypeResults({
             value={sort}
             onChange={(value) => setSort(value as SortMode)}
           >
+            {defaultSort === "catalog" && <option value="catalog">Порядок каталога</option>}
             <option value="relevance">По релевантности</option>
             <option value="availability">Сначала в наличии</option>
             <option value="price-asc">Сначала дешевле</option>
@@ -225,6 +228,7 @@ function filterAndSortProductTypes(
   }
 
   const preserveBeamOrder = productTypes.every(productType => productType.categoryId === "cat-bal");
+  if (sort === "catalog") return result;
   result.sort((left, right) => {
     const leftVariants = variantsByType.get(left.id) ?? [];
     const rightVariants = variantsByType.get(right.id) ?? [];

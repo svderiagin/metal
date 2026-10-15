@@ -10,9 +10,11 @@ const report=fs.existsSync('imports/image-mapping-report.json')?read('imports/im
 const inventory=fs.existsSync('imports/image-source-inventory.json')?read('imports/image-source-inventory.json'):null;
 const {normalizeRebarVariant}=readProjectData('lib/rebar.ts');
 const {normalizeBeamVariant}=readProjectData('lib/beam.ts');
+const {normalizePipeWeight}=readProjectData('lib/pipeWeight.ts');
+const {isPublicProduct}=readProjectData('data/catalog-visibility.ts');
 const imported=read('data/imported-catalog.json');
 const {productVariants,existingVariants}=readProjectData('data/products/index.ts');
-const original=[...existingVariants.filter(p=>!imported.matchedIds.includes(p.id)),...imported.products].map(normalizeRebarVariant).map(normalizeBeamVariant);
+const original=[...existingVariants.filter(p=>!imported.matchedIds.includes(p.id)),...imported.products].filter(isPublicProduct).map(normalizeRebarVariant).map(normalizeBeamVariant).map(normalizePipeWeight);
 const digest=b=>crypto.createHash('sha256').update(b).digest('hex');
 
 test('image overlay preserves every product field other than image references',()=>{

@@ -55,6 +55,8 @@ export interface ProductVariant {
   material: string;
   standard: string;
   diameterMm?: number;
+  nominalBoreMm?: number;
+  wallThicknessMm?: number;
   form?: "coil" | "bar";
   steelGrade?: string;
   pricePerTon?: number;

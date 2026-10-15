@@ -61,7 +61,9 @@ test('all records accounted for; unique IDs and valid routes',()=>{
  assert.equal(new Set(products.map(p=>p.slug)).size,products.length);
  for(const p of products){
   assert(categories.some(c=>c.id===p.categoryId));assert(families.some(f=>f.id===p.subcategoryId&&f.categoryId===p.categoryId));
-  assert.equal(p.inStock,false);assert.equal(p.weight,undefined);
+  assert.equal(p.inStock,false);
+  // The VGP audit added tabulated masses only to these seven verified records.
+  if(!['МП-258','МП-6204','МП-56374','МП-6224','МП-54870','МП-277','МП-281'].includes(p.sku))assert.equal(p.weight,undefined);
   assert(!/NaN|undefined/.test(JSON.stringify(p)));
   const r=manifest.records.find(r=>r.productId===p.id);
   assert.equal(p.price,r.ourPrice);

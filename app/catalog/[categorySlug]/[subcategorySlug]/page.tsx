@@ -3,6 +3,7 @@ import type {Metadata} from "next";
 import {Suspense} from "react";
 import {Breadcrumbs} from "@/components/catalog/Breadcrumbs";
 import {CatalogSidebar} from "@/components/catalog/CatalogSidebar";
+import {CatalogDescription} from "@/components/catalog/CatalogDescription";
 import {ProductTypeResults} from "@/components/catalog/ProductTypeResults";
 import {PageContainer} from "@/components/layout/PageContainer";
 import {
@@ -76,7 +77,7 @@ export default async function SubcategoryPage({params}: Props) {
           </Suspense>
           <div className="min-w-0">
             <h1 className="text-3xl font-black">{currentSubcategory.name}</h1>
-            <p className="mt-4 leading-7 text-slate-600">{currentSubcategory.description}</p>
+            <CatalogDescription description={currentSubcategory.description}/>
             <Suspense fallback={<div className="mt-8 h-80 animate-pulse rounded-lg bg-slate-200"/>}>
               <ProductTypeResults productTypes={productTypes} variants={variants}/>
             </Suspense>

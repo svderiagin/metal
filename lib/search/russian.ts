@@ -55,6 +55,7 @@ export function normalizeText(text: string): string {
   return text.normalize("NFKC").toLowerCase().replace(/ё/g, "е")
     .replace(/(\d),(?=\d)/g, "$1.")
     .replace(/(?<=\d)\s*[xх×*]\s*(?=\d)/g, "x")
+    .replace(/(^|[^а-яa-z])(?:ду|dn)\s*(?=\d)/g, "$1ду ")
     .replace(/(^|\s)г\s*\/\s*к(?=\s|$)/g, "$1горячекатаный")
     .replace(/(^|\s)х\s*\/\s*к(?=\s|$)/g, "$1холоднокатаный")
     .replace(/(^|\s)э\s*\/\s*с(?=\s|$)/g, "$1электросварной")
