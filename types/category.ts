@@ -5,6 +5,9 @@ export interface Subcategory {
   slug: string;
   shortDescription: string;
   description: string;
+  /** Category guidance, independent of the specifications of supplied batches. */
+  materialDescription?: string;
+  referenceStandard?: string;
 }
 
 export interface Category {

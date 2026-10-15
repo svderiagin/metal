@@ -31,6 +31,7 @@ function setup(id, kind = 'beam') {
     },
     'react/jsx-runtime': {jsx, jsxs: jsx},
     '@/lib/beam': readProjectData('lib/beam.ts'),
+    '@/lib/vgp': readProjectData('lib/vgp.ts'),
     '@/lib/quoteRequest': readProjectData('lib/quoteRequest.ts'),
     '@/lib/orderMeasurement': readProjectData('lib/orderMeasurement.ts'),
     '@/lib/currency': readProjectData('lib/currency.ts'),
@@ -53,7 +54,7 @@ function setup(id, kind = 'beam') {
   function render() {
     cursor = 0;
     const tree = nodes(testModule.exports.MeasuredVariantItem({variant, kind, view: 'table'}));
-    return {inputs: tree.filter(n => n.type === 'input').map(n => n.props), action: tree.find(n => ['button', 'link'].includes(n.type)).props};
+    return {inputs: tree.filter(n => n.type === 'input').map(n => n.props), action: tree.filter(n => ['button', 'link'].includes(n.type)).at(-1).props};
   }
   return {cart, timers, render, change(index, value) {render().inputs[index].onChange({target: {value}});}};
 }
@@ -101,4 +102,41 @@ test('existing generic tonne carts hydrate into measured controls and rebar keep
   assert.equal(r.render().inputs[1].value, '0.022');
   r.render().action.onClick();
   assert.ok(Math.abs(r.cart.lines[0].measurement.weightTons - 0.0222) < 1e-12);
+});
+
+test('VGP orders round up to whole pipes, retain exact mass and update or remove one cart line', () => {
+  const h = setup('local-258', 'vgp');
+  h.change(0, '7');
+  assert.equal(h.render().inputs[1].value, '0.01536');
+  h.render().inputs[0].onBlur();
+  assert.equal(h.render().inputs[0].value, '12');
+  h.render().action.onClick();
+  assert.equal(h.render().action.children, '✓ В корзине');
+  assert.equal(h.cart.lines[0].measurement.meters, 12);
+  assert.ok(Math.abs(h.cart.lines[0].measurement.weightTons - 0.01536) < 1e-12);
+  assert.equal(h.cart.lines[0].measurement.estimatedTotal, 823.91);
+  h.change(1, '0.02');
+  assert.equal(h.render().inputs[0].value, '18');
+  h.render().inputs[1].onBlur();
+  assert.equal(h.render().inputs[1].value, '0.02304');
+  h.render().action.onClick();
+  assert.equal(h.cart.lines.length, 1);
+  assert.equal(h.cart.lines[0].measurement.meters, 18);
+  assert.equal(h.cart.lines[0].measurement.inputMode, 'ton');
+  h.change(0, '0');
+  assert.equal(h.render().action.children, 'Удалить');
+  h.render().action.onClick();
+  assert.equal(h.cart.lines.length, 0);
+});
+
+test('VGP empty inputs cannot purchase; legacy fractional tonne orders require explicit correction', () => {
+  const h = setup('local-277', 'vgp');
+  h.render().action.onClick();
+  assert.equal(h.cart.lines.length, 0);
+  h.cart.lines = [{productId: 'local-277', quantity: 0.1, invalidReason: 'Whole pipes required'}];
+  assert.equal(h.render().action.children, 'Обновить');
+  h.render().action.onClick();
+  assert.equal(h.cart.lines.length, 1);
+  assert.equal(h.cart.lines[0].measurement.meters, 36);
+  assert.ok(Math.abs(h.cart.lines[0].measurement.weightTons - 0.13824) < 1e-12);
 });

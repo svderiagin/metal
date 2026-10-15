@@ -3,7 +3,7 @@
 import {QuoteRequestProvider} from "@/components/forms/QuoteRequestContext";
 import {RequestQuoteSection} from "@/components/home/RequestQuoteSection";
 
-import filterStyles from "./FilterPanel.module.css";
+import {FilterPanel} from "./FilterPanel";
 import {PriceInput} from "./PriceInput";
 
 import {createCatalogSearchIndex} from "@/lib/search";
@@ -19,7 +19,6 @@ import {
   getVariantFilterKeys,
 } from "@/lib/variantPresentation";
 import {Button} from "@/components/ui/Button";
-import {Input} from "@/components/ui/Input";
 import {Select} from "@/components/ui/Select";
 import {ResetFiltersButton} from "@/components/catalog/ResetFiltersButton";
 import type {ProductAttributeKey, ProductVariant} from "@/types/product";
@@ -27,7 +26,9 @@ import {
   BeamVariantCatalog,
   isMeasuredRebarVariant,
   RebarVariantCatalog,
+  VgpVariantCatalog,
 } from "@/components/catalog/RebarVariantCatalog";
+import {isVgpVariant} from "@/lib/vgp";
 
 type SortMode = "relevance" | "availability" | "price-asc" | "price-desc" | "size" | "name";
 
@@ -46,13 +47,14 @@ function VariantCatalogContent({
   categorySlug: string;
 }) {
   if (categorySlug === "balka") return <BeamVariantCatalog variants={variants}/>;
+  if (variants.length > 0 && variants.every(isVgpVariant)) return <VgpVariantCatalog variants={variants}/>;
   const isA500c = categorySlug === "armatura" && variants.every(v => v.subcategoryId === "cat-arm-sub-1");
-  if (categorySlug === "armatura" && !isA500c && variants.every(isMeasuredRebarVariant)) {
-    return <RebarVariantCatalog variants={variants} simplified/>;
+  if (categorySlug === "armatura" && variants.every(isMeasuredRebarVariant)) {
+    return <RebarVariantCatalog variants={variants}/>;
   }
   const measured = variants.filter(v => !v.imported).filter(isMeasuredRebarVariant);
   if (measured.length > 0) {
-    if (isA500c) return <RebarVariantCatalog variants={measured} simplified/>;
+    if (isA500c) return <RebarVariantCatalog variants={measured}/>;
     const other = variants.filter(v => !measured.some(m => m.id === v.id));
     return <>{other.length > 0 && <GenericProductVariantCatalog variants={other} categorySlug={categorySlug}/>}<RebarVariantCatalog variants={measured}/></>;
   }
@@ -145,10 +147,31 @@ function GenericProductVariantCatalog({
 
   return (
     <>
-      <div className={`${filterStyles.panel} min-w-0 rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6 lg:col-start-2`}>
-        <h2 className="text-xl font-bold">Фильтры вариантов</h2>
-        <div className="mt-5 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-          <label className="text-sm font-semibold">Поиск варианта<Input className="mt-1" type="search" value={query} onChange={e => {setQuery(e.target.value); setSort("relevance"); setPage(1);}} placeholder="Название, размер, марка"/></label>
+      <FilterPanel className="lg:col-start-2" query={query}
+        onQueryChange={value => {setQuery(value);setSort("relevance");setPage(1);}} onReset={reset}
+        sorting={
+          <label className="text-sm font-semibold">
+            Сортировка
+            <Select
+              value={sort}
+              onChange={(event) => setSort(event.target.value as SortMode)}
+              className="mt-1"
+            >
+              <option value="relevance">По релевантности</option>
+              <option value="name">По обозначению</option>
+              <option value="availability">Сначала в наличии</option>
+              <option value="price-asc">Сначала дешевле</option>
+              <option value="price-desc">Сначала дороже</option>
+              <option value="size">По размеру</option>
+            </Select>
+          </label>
+        } extraControls={
+          <label className="flex min-h-11 items-center gap-2 text-sm font-semibold">
+            <input type="checkbox" checked={stockOnly} onChange={event => setStockOnly(event.target.checked)}
+              className="size-4 accent-red-700"/>
+            Только в наличии
+          </label>
+        }>
           {filterKeys.filter(key => (filterOptions.get(key)?.length ?? 0) > 0).map((key) => (
             <label key={key} className="min-w-0 text-sm font-semibold">
               {filterLabel(variants, key)}
@@ -186,42 +209,9 @@ function GenericProductVariantCatalog({
               placeholder="До"
             />
           </label>
-          <label className="text-sm font-semibold">
-            Сортировка
-            <Select
-              value={sort}
-              onChange={(event) => setSort(event.target.value as SortMode)}
-              className="mt-1"
-            >
-              <option value="relevance">По релевантности</option>
-              <option value="name">По обозначению</option>
-              <option value="availability">Сначала в наличии</option>
-              <option value="price-asc">Сначала дешевле</option>
-              <option value="price-desc">Сначала дороже</option>
-              <option value="size">По размеру</option>
-            </Select>
-          </label>
-        </div>
-        <div className="mt-5 flex flex-wrap items-center gap-4">
-          <label className="flex min-h-11 items-center gap-2 text-sm font-semibold">
-            <input
-              type="checkbox"
-              checked={stockOnly}
-              onChange={(event) => setStockOnly(event.target.checked)}
-              className="size-4 accent-red-700"
-            />
-            Только в наличии
-          </label>
-          <ResetFiltersButton onClick={reset}/>
-        </div>
-      </div>
+      </FilterPanel>
 
-      <section className="min-w-0 lg:col-span-2" aria-labelledby="variants-heading">
-      <div className="mb-6 flex items-center justify-between gap-4">
-        <h2 id="variants-heading" className="text-2xl font-black">Варианты продукции</h2>
-        <p className="text-sm text-slate-600">Найдено: {results.length}</p>
-      </div>
-
+      <section className="min-w-0 lg:col-span-2" aria-label="Продукция">
       {results.length ? (
         <>
           <div className="hidden overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm xl:block">

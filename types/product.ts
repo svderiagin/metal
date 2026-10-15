@@ -33,6 +33,8 @@ export interface ProductType {
   shortDescription: string;
   description: string;
   imageUrl?: string;
+  materialDescription?: string;
+  referenceStandard?: string;
 }
 
 export interface ProductVariant {
@@ -50,6 +52,10 @@ export interface ProductVariant {
   priceQualifier?: "from" | "exact";
   currency?: string;
   imported?: boolean;
+  /** Original demonstration data; its technical attributes are not category guidance. */
+  demo?: boolean;
+  /** Price explicitly confirmed by the owner, including an offer based on a demo record. */
+  priceConfirmed?: boolean;
   unit: "meter" | "ton" | "sheet" | "piece" | "kg";
   priceUnit: string;
   material: string;

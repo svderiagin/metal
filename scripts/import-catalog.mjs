@@ -43,7 +43,7 @@ const classified=(r)=>{
 const categoryAlias={ 'cat-shv':'shveller','cat-ugo':'ugolok','cat-trp':'truby-profilnye','cat-trn':'truby-nerzhaveyushchie','cat-trs':'truby-stalnye','cat-pro':'provoloka','cat-she':'shestigrannik'};
 const newCategories=[['mirror-coils','Рулоны','rulony'],['mirror-strip','Лента','lenta'],['mirror-welding','Сварочные материалы','svarochnye-materialy']];
 const guidance={
- 'cat-arm':'Арматурный прокат для железобетонных конструкций. При выборе сопоставляйте номинальный диаметр, класс, марку стали, форму поставки и длину; класс и марка стали — разные характеристики.',
+ 'cat-arm':'Стальная арматура для армирования фундаментов, перекрытий, колонн и других железобетонных конструкций. Рифлёная арматура А500С и А400 применяется преимущественно для рабочего армирования, гладкая А240 — для хомутов и вспомогательных элементов каркасов. При выборе учитывают класс прочности, диаметр, длину и требования проекта.',
  'cat-bal':'Двутавровые балки различаются полным обозначением сечения и серией. Для подбора сверяйте обозначение профиля, материал, стандарт и длину.',
  'shveller':'Швеллеры с П-образным сечением. Номер и серия профиля определяют исполнение; дополнительно сопоставляйте марку стали, стандарт и длину.',
  'ugolok':'Уголковый прокат с двумя полками. Для равнополочных и неравнополочных исполнений нужны размеры обеих полок, толщина, марка стали и длина.',
@@ -202,8 +202,9 @@ for(const f of families)if(imported.some(p=>p.subcategoryId===f.id)){
  const standards=[...new Set(imported.filter(p=>p.subcategoryId===f.id).map(p=>p.standard).filter(Boolean))];
  f.description=(definitions[f.id]||`${f.name}. ${c.description}`)+(standards.length&&standards.length<=4?` Стандарты представленных исполнений: ${standards.join('; ')}.`:'');
  f.shortDescription=f.description;
- Object.assign(f,overrides.families[f.id]||{});
 }
+// Local-only families need the same owner-approved category guidance as imported families.
+for(const family of families)Object.assign(family,overrides.families[family.id]||{});
 const retained=baseline.products.filter(p=>isPublicProduct(p)&&!matched.has(p.id));
 write('data/imported-catalog.json',{categories,families,products:imported,matchedIds:[...matched]});
 write('imports/catalog-manifest.json',{snapshotDate:null,regionStocks:[...regionStocks],rule:'Регион 1, основной сохранённый склад 5; минимальная цена между складами не выбирается. Неизвестный регион, единица или конфликт — запрос цены. Тарифы объёма не выявлены в структурированных записях.',records:manifest,counts:{before:{categories:baseline.categories.length,types:baseline.families.length,variants:baseline.products.filter(isPublicProduct).length},after:{categories:categories.length,types:families.length,variants:retained.length+imported.length},sourceOccurrences:inventory.records.length,sourceProducts:sourceGroups.size,distinctSourceOffers:distinctOffers.size,imported:manifest.filter(x=>x.status==='imported').length,updated:matched.size,duplicates:inventory.records.length-distinctOffers.size,mergedIds:manifest.filter(x=>x.status==='merged-duplicate').length,excluded:manifest.filter(x=>x.status==='excluded').length,incomplete:manifest.filter(x=>x.status==='incomplete').length,quoteOnly:imported.filter(x=>x.quoteOnly).length}});

@@ -5,6 +5,7 @@ import Image from "next/image";
 import {notFound} from "next/navigation";
 import {Breadcrumbs} from "@/components/catalog/Breadcrumbs";
 import {CatalogSidebar} from "@/components/catalog/CatalogSidebar";
+import {CatalogDescription} from "@/components/catalog/CatalogDescription";
 import {ProductTypeResults} from "@/components/catalog/ProductTypeResults";
 import {PageContainer} from "@/components/layout/PageContainer";
 import {ButtonLink} from "@/components/ui/Button";
@@ -53,7 +54,7 @@ export default async function CategoryPage({params}: Props) {
                 sizes="(min-width: 1280px) 360px, (min-width: 768px) 320px, calc(100vw - 48px)"
                 className="object-contain object-center"/>
             </div>}
-            <p className="max-w-3xl leading-7 text-slate-600 md:col-start-1">{category.description}</p>
+            <CatalogDescription description={category.description} className="md:col-start-1"/>
           </div>
           <Suspense
             fallback={<div className="mt-8 h-80 animate-pulse rounded-lg bg-slate-200"/>}

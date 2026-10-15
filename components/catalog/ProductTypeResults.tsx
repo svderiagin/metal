@@ -1,16 +1,15 @@
 "use client";
 
-import filterStyles from "./FilterPanel.module.css";
+import {FilterPanel} from "./FilterPanel";
 
 import {createCatalogSearchIndex} from "@/lib/search";
 import {useDeferredValue, useMemo, useState} from "react";
-import {Input} from "@/components/ui/Input";
 import {Button} from "@/components/ui/Button";
 import {Select} from "@/components/ui/Select";
 import {ProductTypeGrid} from "./ProductTypeGrid";
-import {ResetFiltersButton} from "./ResetFiltersButton";
 import type {ProductType, ProductVariant} from "@/types/product";
 import {comparePrices, matchesCategoryFilters} from "@/lib/catalogFilters";
+import {getProductTypeSummary} from "@/lib/productTypeSummary";
 
 type SortMode = "catalog" | "relevance" | "availability" | "price-asc" | "price-desc" | "name";
 
@@ -79,18 +78,9 @@ export function ProductTypeResults({
   }
 
   return (
-    <section className="mt-8" aria-labelledby="product-types-heading">
-      <div className={`${filterStyles.panel} rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6`}>
-        <label className="mb-4 block text-sm font-semibold">Поиск в категории<Input type="search" value={query} onChange={e => {setQuery(e.target.value);setSort("relevance");setLimit(12);}} className="mt-1" placeholder="Название, размер или марка стали"/></label>
-        <div className="grid gap-4 md:grid-cols-3">
-          <FilterSelect label="Материал" value={material} onChange={setMaterial}>
-            <option value="">Все материалы</option>
-            {materials.map((value) => <option key={value} value={value}>{value}</option>)}
-          </FilterSelect>
-          <FilterSelect label="Стандарт" value={standard} onChange={setStandard}>
-            <option value="">Все стандарты</option>
-            {standards.map((value) => <option key={value} value={value}>{value}</option>)}
-          </FilterSelect>
+    <section className="mt-8" aria-label="Типы продукции">
+      <FilterPanel query={query} onQueryChange={value => {setQuery(value);setSort("relevance");setLimit(12);}}
+        onReset={reset} sorting={
           <FilterSelect
             label="Сортировка"
             value={sort}
@@ -103,26 +93,24 @@ export function ProductTypeResults({
             <option value="price-desc">Сначала дороже</option>
             <option value="name">По названию</option>
           </FilterSelect>
-        </div>
-        <div className="mt-5 flex flex-wrap items-center gap-4">
+        } extraControls={
           <label className="flex min-h-11 items-center gap-2 text-sm font-semibold">
-            <input
-              type="checkbox"
-              checked={stockOnly}
-              onChange={(event) => setStockOnly(event.target.checked)}
-              className="size-4 accent-red-700"
-            />
+            <input type="checkbox" checked={stockOnly} onChange={event => setStockOnly(event.target.checked)}
+              className="size-4 accent-red-700"/>
             Только в наличии
           </label>
-          <ResetFiltersButton onClick={reset}/>
-        </div>
-      </div>
+        }>
+          <FilterSelect label="Материал" value={material} onChange={setMaterial}>
+            <option value="">Все материалы</option>
+            {materials.map((value) => <option key={value} value={value}>{value}</option>)}
+          </FilterSelect>
+          <FilterSelect label="Стандарт" value={standard} onChange={setStandard}>
+            <option value="">Все стандарты</option>
+            {standards.map((value) => <option key={value} value={value}>{value}</option>)}
+          </FilterSelect>
+      </FilterPanel>
 
-      <div className="my-5 flex items-center justify-between gap-3">
-        <h2 id="product-types-heading" className="text-xl font-black">Типы продукции</h2>
-        <p className="text-sm text-slate-600">Найдено: {result.length}</p>
-      </div>
-
+      <div className="mt-5">
       {result.length ? (
         <>
           <ProductTypeGrid productTypes={result.slice(0, limit)} variants={filteredVariants}/>
@@ -140,6 +128,7 @@ export function ProductTypeResults({
           <p className="mt-2 text-sm text-slate-600">Измените фильтры или сбросьте параметры.</p>
         </div>
       )}
+      </div>
     </section>
   );
 }
@@ -195,14 +184,6 @@ function uniqueAttributeValues(
   return [...values].sort((left, right) => left.localeCompare(right, "ru"));
 }
 
-function minimumPrice(variants: ProductVariant[]) {
-  let minimum: number | null = null;
-  for (const variant of variants) {
-    if (!variant.quoteOnly && variant.price !== null && variant.price > 0 && (minimum === null || variant.price < minimum)) minimum = variant.price;
-  }
-  return minimum;
-}
-
 function availableCount(variants: ProductVariant[]) {
   let count = 0;
   for (const variant of variants) {
@@ -232,7 +213,11 @@ function filterAndSortProductTypes(
   result.sort((left, right) => {
     const leftVariants = variantsByType.get(left.id) ?? [];
     const rightVariants = variantsByType.get(right.id) ?? [];
-    if (sort === "price-asc" || sort === "price-desc") return comparePrices(minimumPrice(leftVariants), minimumPrice(rightVariants), sort === "price-desc");
+    if (sort === "price-asc" || sort === "price-desc") return comparePrices(
+      getProductTypeSummary(left, leftVariants).minimumPrice,
+      getProductTypeSummary(right, rightVariants).minimumPrice,
+      sort === "price-desc",
+    );
     if (sort === "name") return left.name.localeCompare(right.name, "ru");
     // Keep the configured beam series order instead of promoting stocked demo rows.
     if (preserveBeamOrder) return 0;

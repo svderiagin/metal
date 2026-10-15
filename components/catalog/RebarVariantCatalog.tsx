@@ -3,16 +3,15 @@
 import {MeasuredVariantItem} from "./MeasuredVariantItem";
 
 import {beamProfile, beamKind} from "@/lib/beam";
+import {vgpSize, vgpSeries} from "@/lib/vgp";
 
-import filterStyles from "./FilterPanel.module.css";
+import {FilterPanel} from "./FilterPanel";
 import tableStyles from "./RebarTable.module.css";
 import {PriceInput} from "./PriceInput";
 
 import {createCatalogSearchIndex} from "@/lib/search";
 import {useDeferredValue, useMemo, useState} from "react";
-import {Input} from "@/components/ui/Input";
 import {Select} from "@/components/ui/Select";
-import {ResetFiltersButton} from "@/components/catalog/ResetFiltersButton";
 import {useLinkedVariant} from "@/hooks/useLinkedVariant";
 import {comparePrices} from "@/lib/catalogFilters";
 import type {ProductVariant} from "@/types/product";
@@ -36,7 +35,7 @@ const rebarColumns = [
   {label: "Форма", width: "8%"},
   {label: "Марка стали", width: "8%"},
   {label: "Цена, ₽/т", width: "12%"},
-  {label: "Вес, кг/м", width: "8%"},
+  {label: "Масса, кг/м", width: "8%"},
   {label: "Длина, м", width: "7%"},
   {label: "Заказ, м", width: "11%"},
   {label: "Заказ, т", width: "11%"},
@@ -49,11 +48,24 @@ const beamColumns = [
   {label: "Тип балки", width: "10%"},
   {label: "Сталь / класс", width: "8%"},
   {label: "Цена, ₽/т", width: "12%"},
-  {label: "Вес, кг/м", width: "8%"},
+  {label: "Масса, кг/м", width: "8%"},
   {label: "Длина, м", width: "7%"},
   {label: "Заказ, м", width: "11%"},
   {label: "Заказ, т", width: "11%"},
   {label: "Сумма", width: "11%"},
+  {label: "Действие", width: "13%"},
+] as const;
+
+const vgpColumns = [
+  {label: "Ду × стенка, мм", width: "10%"},
+  {label: "Наружный Ø, мм", width: "7%"},
+  {label: "Серия", width: "10%"},
+  {label: "Цена, ₽/т", width: "11%"},
+  {label: "Масса, кг/м", width: "7%"},
+  {label: "Длина, м", width: "6%"},
+  {label: "Заказ, м", width: "11%"},
+  {label: "Заказ, т", width: "12%"},
+  {label: "Сумма", width: "13%"},
   {label: "Действие", width: "13%"},
 ] as const;
 
@@ -64,17 +76,22 @@ export function isMeasuredRebarVariant(variant: ProductVariant): variant is Reba
     && variant.weightPerMeterKg !== undefined;
 }
 
-export function RebarVariantCatalog({variants, simplified = false}: {variants: RebarVariant[]; simplified?: boolean}) {
-  return <MeasuredVariantCatalog variants={variants} simplified={simplified}/>;
+export function RebarVariantCatalog({variants}: {variants: RebarVariant[]}) {
+  return <MeasuredVariantCatalog variants={variants}/>;
 }
 
 export function BeamVariantCatalog({variants}: {variants: ProductVariant[]}) {
-  return <MeasuredVariantCatalog variants={variants} simplified kind="beam"/>;
+  return <MeasuredVariantCatalog variants={variants} kind="beam"/>;
 }
 
-function MeasuredVariantCatalog({variants, simplified = false, kind = "rebar"}: {variants: ProductVariant[]; simplified?: boolean; kind?: "rebar" | "beam"}) {
+export function VgpVariantCatalog({variants}: {variants: ProductVariant[]}) {
+  return <MeasuredVariantCatalog variants={variants} kind="vgp"/>;
+}
+
+function MeasuredVariantCatalog({variants, kind = "rebar"}: {variants: ProductVariant[]; kind?: "rebar" | "beam" | "vgp"}) {
   const isBeam = kind === "beam";
-  const columns = isBeam ? beamColumns : rebarColumns;
+  const isVgp = kind === "vgp";
+  const columns = isVgp ? vgpColumns : isBeam ? beamColumns : rebarColumns;
   const [query, setQuery] = useState("");
   const deferredQuery = useDeferredValue(query);
   const index = useMemo(() => createCatalogSearchIndex(variants), [variants]);
@@ -89,8 +106,8 @@ function MeasuredVariantCatalog({variants, simplified = false, kind = "rebar"}: 
   useLinkedVariant(variants, variant => {resetFilters(); setQuery(variant.name);});
 
   const diameters = useMemo(
-    () => [...new Set(variants.map(variant => isBeam ? beamProfile(variant) : String(variant.diameterMm ?? "")))].sort((a, b) => a.localeCompare(b, "ru", {numeric: true})),
-    [variants, isBeam],
+    () => [...new Set(variants.map(variant => isVgp ? vgpSize(variant) : isBeam ? beamProfile(variant) : String(variant.diameterMm ?? "")))].sort((a, b) => a.localeCompare(b, "ru", {numeric: true})),
+    [variants, isBeam, isVgp],
   );
   const lengths = useMemo(
     () => uniqueNumbers(variants.flatMap((variant) =>
@@ -99,17 +116,17 @@ function MeasuredVariantCatalog({variants, simplified = false, kind = "rebar"}: 
     [variants],
   );
   const forms = useMemo(
-    () => [...new Set(variants.map(variant => isBeam ? beamKind(variant) : variant.form ?? ""))],
-    [variants, isBeam],
+    () => [...new Set(variants.map(variant => isVgp ? vgpSeries(variant) : isBeam ? beamKind(variant) : variant.form ?? ""))],
+    [variants, isBeam, isVgp],
   );
 
   const results = useMemo(() => {
-    const sizeValue = (variant: ProductVariant) => isBeam ? beamProfile(variant) : String(variant.diameterMm ?? "");
+    const sizeValue = (variant: ProductVariant) => isVgp ? vgpSize(variant) : isBeam ? beamProfile(variant) : String(variant.diameterMm ?? "");
     const min = parseOptionalNumber(minimumPrice);
     const max = parseOptionalNumber(maximumPrice);
     return (deferredQuery.trim() ? hits.map(hit => hit.product) : variants).filter((variant) =>
-      (!diameter || (isBeam ? beamProfile(variant) : String(variant.diameterMm ?? "")) === diameter)
-      && (!form || (isBeam ? beamKind(variant) : variant.form) === form)
+      (!diameter || sizeValue(variant) === diameter)
+      && (!form || (isVgp ? vgpSeries(variant) : isBeam ? beamKind(variant) : variant.form) === form)
       && (!length || variant.lengthMeters === Number(length))
       && (!availability || variant.availability === availability)
       && (min === null || (variant.pricePerTon !== undefined && variant.pricePerTon >= min))
@@ -122,7 +139,7 @@ function MeasuredVariantCatalog({variants, simplified = false, kind = "rebar"}: 
       if (sort === "weight-desc") return (right.weightPerMeterKg ?? -Infinity) - (left.weightPerMeterKg ?? -Infinity);
       return sizeValue(left).localeCompare(sizeValue(right), "ru", {numeric: true});
     });
-  }, [hits, deferredQuery, availability, diameter, form, length, maximumPrice, minimumPrice, sort, variants, isBeam]);
+  }, [hits, deferredQuery, availability, diameter, form, length, maximumPrice, minimumPrice, sort, variants, isBeam, isVgp]);
   function resetFilters() {
     setQuery("");
     setDiameter("");
@@ -136,16 +153,29 @@ function MeasuredVariantCatalog({variants, simplified = false, kind = "rebar"}: 
 
   return (
     <>
-      <div className={`${filterStyles.panel} rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6 lg:col-start-2`}>
-        <h2 className="text-xl font-bold">{simplified ? "Фильтры" : "Фильтры вариантов"}</h2>
-        <label className="mt-4 block text-sm font-semibold">Поиск вариантов<Input type="search" value={query} onChange={e => {setQuery(e.target.value);setSort("relevance");}} className="mt-1" placeholder={isBeam ? "Балка 25Ш1" : "Арматура рифлёная А500С"}/></label>
-        <div className="mt-5 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-          <Filter label={isBeam ? "Профиль" : "Диаметр, мм"} value={diameter} onChange={setDiameter}>
+      <FilterPanel className="lg:col-start-2" query={query}
+        onQueryChange={value => {setQuery(value);setSort("relevance");}} onReset={resetFilters}
+        sorting={
+          <label className="text-sm font-semibold">
+            Сортировка
+            <Select value={sort} onChange={(event) => setSort(event.target.value as SortMode)}
+              className="mt-1">
+              <option value="relevance">По релевантности</option>
+              <option value="diameter-asc">{isVgp ? "Размер: по возрастанию" : isBeam ? "Профиль: по возрастанию" : "Диаметр: по возрастанию"}</option>
+              <option value="diameter-desc">{isVgp ? "Размер: по убыванию" : isBeam ? "Профиль: по убыванию" : "Диаметр: по убыванию"}</option>
+              <option value="price-asc">Цена: по возрастанию</option>
+              <option value="price-desc">Цена: по убыванию</option>
+              <option value="weight-asc">Вес метра: по возрастанию</option>
+              <option value="weight-desc">Вес метра: по убыванию</option>
+            </Select>
+          </label>
+        }>
+          <Filter label={isVgp ? "Ду × стенка, мм" : isBeam ? "Профиль" : "Диаметр, мм"} value={diameter} onChange={setDiameter}>
             {diameters.map((value) => <option key={value} value={value}>{value}</option>)}
           </Filter>
-          <Filter label={isBeam ? "Тип балки" : "Форма продукции"} value={form} onChange={setForm}>
+          <Filter label={isVgp ? "Серия" : isBeam ? "Тип балки" : "Форма продукции"} value={form} onChange={setForm}>
             {forms.map((value) => (
-              <option key={value} value={value}>{isBeam ? value : formLabel(value as "coil" | "bar")}</option>
+              <option key={value} value={value}>{isVgp || isBeam ? value : formLabel(value as "coil" | "bar")}</option>
             ))}
           </Filter>
           <Filter label="Длина, м" value={length} onChange={setLength}>
@@ -166,32 +196,11 @@ function MeasuredVariantCatalog({variants, simplified = false, kind = "rebar"}: 
           <Filter label="Наличие" value={availability} onChange={setAvailability}>
             <option value="IN_STOCK">В наличии</option>
             <option value="ON_ORDER">Под заказ</option>
+            {isVgp && <option value="UNKNOWN">Наличие уточняется</option>}
           </Filter>
-          <label className="text-sm font-semibold">
-            Сортировка
-            <Select value={sort} onChange={(event) => setSort(event.target.value as SortMode)}
-              className="mt-1">
-              <option value="relevance">По релевантности</option>
-              <option value="diameter-asc">{isBeam ? "Профиль: по возрастанию" : "Диаметр: по возрастанию"}</option>
-              <option value="diameter-desc">{isBeam ? "Профиль: по убыванию" : "Диаметр: по убыванию"}</option>
-              <option value="price-asc">Цена: по возрастанию</option>
-              <option value="price-desc">Цена: по убыванию</option>
-              <option value="weight-asc">Вес метра: по возрастанию</option>
-              <option value="weight-desc">Вес метра: по убыванию</option>
-            </Select>
-          </label>
-        </div>
-        <div className="mt-5">
-          <ResetFiltersButton onClick={resetFilters}/>
-        </div>
-      </div>
+      </FilterPanel>
 
-      <section className="min-w-0 lg:col-span-2" aria-label={simplified ? "Продукция" : undefined} aria-labelledby={simplified ? undefined : "measured-variants-heading"}>
-      {!simplified && <div className="mb-6 flex items-center justify-between gap-4">
-        <h2 id="measured-variants-heading" className="text-2xl font-black">Варианты с расчётом по массе</h2>
-        <p className="text-sm text-slate-600">Найдено: {results.length}</p>
-      </div>}
-
+      <section className="min-w-0 lg:col-span-2" aria-label="Продукция">
       {results.length ? (
         <>
         <div className="hidden overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm xl:block">

@@ -18,5 +18,7 @@ export const productTypes: ProductType[] = subcategories.flatMap((subcategory) =
     shortDescription: subcategory.shortDescription,
     description: subcategory.description,
     imageUrl: (catalogImages.types as Record<string, string>)[`type-${subcategory.id}`],
+    ...(subcategory.materialDescription ? {materialDescription: subcategory.materialDescription} : {}),
+    ...(subcategory.referenceStandard ? {referenceStandard: subcategory.referenceStandard} : {}),
   }];
 });
