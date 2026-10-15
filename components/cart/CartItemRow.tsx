@@ -23,7 +23,16 @@ export function CartItemRow({line}: { line: CartLine }) {
         </p>
         {line.invalidReason && <p role="alert" className="mt-2 text-sm text-amber-900">{line.invalidReason} <Link href="/#request" className="underline">Запросить расчёт</Link></p>}
       </div>
-      {line.measurement ? (
+      {line.pieceOrder ? (
+        <div>
+          <QuantitySelector whole value={line.pieceOrder.pieces}
+            onChange={value => updateQuantity(line.productId, value * line.pieceOrder!.lengthMeters)}/>
+          <span className="ml-2 text-sm text-slate-500">шт.</span>
+          <p className="mt-1 text-sm text-slate-600">
+            {formatNumber(line.pieceOrder.pieces)} × {formatNumber(line.pieceOrder.lengthMeters)} м = {formatNumber(line.quantity)} м
+          </p>
+        </div>
+      ) : line.measurement ? (
         <p className="text-sm text-slate-600 md:text-right">
           <strong className="block text-slate-900">
             {formatNumber(line.measurement.meters)} м / {formatNumber(line.measurement.weightTons)} т

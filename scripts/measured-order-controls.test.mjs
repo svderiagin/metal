@@ -41,6 +41,7 @@ function setup(id, kind = 'beam') {
     '@/components/ui/Input': {Input: 'input'},
     './QuoteRequestButton': {QuoteRequestButton: 'quote'},
     './CatalogImage': {CatalogImage: 'image'},
+    './ProfilePipeVariantItem': {ProfilePipeVariantItem: () => null},
     './FilterPanel.module.css': {default: {}}, './RebarTable.module.css': {default: {}},
   };
   const testModule = {exports: {}};

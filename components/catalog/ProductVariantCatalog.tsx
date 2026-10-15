@@ -27,8 +27,10 @@ import {
   isMeasuredRebarVariant,
   RebarVariantCatalog,
   VgpVariantCatalog,
+  ProfilePipeVariantCatalog,
 } from "@/components/catalog/RebarVariantCatalog";
 import {isVgpVariant} from "@/lib/vgp";
+import {isProfilePipeVariant} from "@/lib/profilePipe";
 
 type SortMode = "relevance" | "availability" | "price-asc" | "price-desc" | "size" | "name";
 
@@ -46,6 +48,14 @@ function VariantCatalogContent({
   variants: ProductVariant[];
   categorySlug: string;
 }) {
+  if (categorySlug === "truby-profilnye") {
+    const structured = variants.filter(isProfilePipeVariant);
+    const legacy = variants.filter(variant => !isProfilePipeVariant(variant));
+    return <>
+      {structured.length > 0 && <ProfilePipeVariantCatalog variants={structured}/>}
+      {legacy.length > 0 && <LegacyProfilePipeCatalog variants={legacy} categorySlug={categorySlug}/>}
+    </>;
+  }
   if (categorySlug === "balka") return <BeamVariantCatalog variants={variants}/>;
   if (variants.length > 0 && variants.every(isVgpVariant)) return <VgpVariantCatalog variants={variants}/>;
   const isA500c = categorySlug === "armatura" && variants.every(v => v.subcategoryId === "cat-arm-sub-1");
@@ -60,6 +70,17 @@ function VariantCatalogContent({
   }
 
   return <GenericProductVariantCatalog variants={variants} categorySlug={categorySlug}/>;
+}
+
+function LegacyProfilePipeCatalog({variants, categorySlug}: {variants: ProductVariant[]; categorySlug: string}) {
+  const [open, setOpen] = useState(false);
+  useLinkedVariant(variants, () => setOpen(true));
+  return <div className="min-w-0 lg:col-span-2">
+    <details open={open} onToggle={event => setOpen(event.currentTarget.open)} className="rounded-xl border border-slate-200 bg-white p-5">
+      <summary className="cursor-pointer font-semibold">Другие позиции — параметры уточняются</summary>
+      <GenericProductVariantCatalog variants={variants} categorySlug={categorySlug}/>
+    </details>
+  </div>;
 }
 
 function GenericProductVariantCatalog({
@@ -166,9 +187,9 @@ function GenericProductVariantCatalog({
             </Select>
           </label>
         } extraControls={
-          <label className="flex min-h-11 items-center gap-2 text-sm font-semibold">
+          <label className="flex min-h-11 cursor-pointer items-center gap-3 text-sm font-semibold">
             <input type="checkbox" checked={stockOnly} onChange={event => setStockOnly(event.target.checked)}
-              className="size-4 accent-red-700"/>
+              className="size-5 shrink-0 accent-red-700"/>
             Только в наличии
           </label>
         }>

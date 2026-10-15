@@ -7,11 +7,13 @@ import path from 'node:path';
 import {discountedPrice,parsePrice} from './pricing.mjs';
 import {readProjectData} from './project-data.mjs';
 const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
-test('profile pipe category contains only the two retained families and their local variants',()=>{
+test('profile pipe category retains two families, original articles and 51 structured offers',()=>{
  const catalog=readProjectData('lib/catalog.ts');
  assert.deepEqual(Array.from(catalog.getSubcategoriesByCategoryId('cat-trp'),s=>s.id),['cat-trp-sub-1','cat-trp-sub-2']);
  assert.deepEqual(Array.from(catalog.getProductTypesByCategoryId('cat-trp'),t=>t.id),['type-cat-trp-sub-1','type-cat-trp-sub-2']);
- assert.deepEqual(Array.from(catalog.getProductVariantsByCategoryId('cat-trp'),p=>p.id),['prd-087','prd-088','prd-089','prd-090']);
+ const variants=catalog.getProductVariantsByCategoryId('cat-trp');
+ assert.deepEqual(Array.from(variants.filter(p=>!p.profileWidthMm),p=>p.id),['prd-087','prd-088','prd-089','prd-090']);
+ assert.equal(variants.filter(p=>p.profileWidthMm).length,51);
  assert.ok(!read('data/imported-catalog.json').products.some(p=>p.categoryId==='cat-trp'));
  const mapping=read('data/catalog-images.json');
  const excluded=read('imports/catalog-manifest.json').records.filter(r=>r.status==='excluded'&&r.reason?.includes('только локальные подкатегории квадратной и прямоугольной'));

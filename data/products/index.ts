@@ -10,7 +10,7 @@ import {polosaProducts} from "./polosa";
 import {provolokaProducts} from "./provoloka";
 import {trubyStalnyeProducts} from "./trubyStalnye";
 import {trubyNerzhaveyushchieProducts} from "./trubyNerzhaveyushchie";
-import {trubyProfilnyeProducts} from "./trubyProfilnye";
+import {trubyProfilnyeProducts, profilePipeProducts} from "./trubyProfilnye";
 import {ugolokProducts} from "./ugolok";
 import {shvellerProducts} from "./shveller";
 import {shestigrannikProducts} from "./shestigrannik";
@@ -37,6 +37,7 @@ const productSources: ProductVariantSource[] = [
   ...trubyStalnyeProducts,
   ...trubyNerzhaveyushchieProducts,
   ...trubyProfilnyeProducts,
+  ...profilePipeProducts,
   ...ugolokProducts,
   ...shvellerProducts,
   ...shestigrannikProducts,
@@ -49,7 +50,7 @@ export const existingVariants: ProductVariant[] = productSources.map((product) =
   unit: normalizeUnit(product.priceUnit),
   material: attributeValue(product, "material"),
   standard: attributeValue(product, "standard"),
-  availability: product.inStock ? "IN_STOCK" : "ON_ORDER",
+  availability: product.availability ?? (product.inStock ? "IN_STOCK" : "ON_ORDER"),
   weight: product.weightPerMeterKg !== undefined
     ? {value: product.weightPerMeterKg, unit: "кг/м"}
     : estimateDemoWeight(product),

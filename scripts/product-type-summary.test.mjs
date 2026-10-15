@@ -88,7 +88,7 @@ test('minimum is taken from the supplied filtered subset; other categories keep 
   const row = products.find(p => p.id === 'local-80044');
   assert.equal(getProductTypeSummary(type, [row]).minimumPrice, 69750);
   const otherType = catalog.getAllProductTypes().find(t => t.subcategoryId === 'cat-trp-sub-1');
-  const rows = products.filter(p => p.productTypeId === otherType.id);
+  const rows = products.filter(p => p.productTypeId === otherType.id && !p.profileWidthMm);
   const summary = getProductTypeSummary(otherType, rows);
   for (const [key, field] of [['material','material'], ['standard','standard']]) {
     const expectedValues = [...new Set(rows.flatMap(p => p.attributes.filter(a => a.key === key).map(a => a.value)))].join(', ');

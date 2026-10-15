@@ -94,9 +94,9 @@ export function ProductTypeResults({
             <option value="name">По названию</option>
           </FilterSelect>
         } extraControls={
-          <label className="flex min-h-11 items-center gap-2 text-sm font-semibold">
+          <label className="flex min-h-11 cursor-pointer items-center gap-3 text-sm font-semibold">
             <input type="checkbox" checked={stockOnly} onChange={event => setStockOnly(event.target.checked)}
-              className="size-4 accent-red-700"/>
+              className="size-5 shrink-0 accent-red-700"/>
             Только в наличии
           </label>
         }>

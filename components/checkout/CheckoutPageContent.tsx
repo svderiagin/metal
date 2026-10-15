@@ -33,7 +33,9 @@ export function CheckoutPageContent() {
             <li key={line.productId} className="flex justify-between gap-4">
               <span className="leading-5 text-slate-700">
                 {line.name}
-                {line.measurement
+                {line.pieceOrder
+                  ? ` — ${formatNumber(line.pieceOrder.pieces)} шт. × ${formatNumber(line.pieceOrder.lengthMeters)} м = ${formatNumber(line.quantity)} м`
+                  : line.measurement
                   ? ` — ${formatNumber(line.measurement.meters)} м / ${formatNumber(line.measurement.weightTons)} т`
                   : ` × ${line.quantity} (${line.priceUnit})`}
               </span>

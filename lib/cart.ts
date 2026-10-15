@@ -2,6 +2,7 @@ import {getCategoryById, getProductTypeById, getProductVariantById, getSubcatego
 import {revalidateCartPrice} from "./cartPricing";
 import {getQuantityUnit} from "./variantPresentation";
 import type {CartItem, CartLine, CartMeasurement} from "@/types/cart";
+import {normalizePieceOrder} from "./profilePipe";
 
 export function normalizeCartItems(value: unknown): CartItem[] {
   if (!Array.isArray(value)) return [];
@@ -10,8 +11,12 @@ export function normalizeCartItems(value: unknown): CartItem[] {
   for (const item of value) {
     if (!item || typeof item.productId !== "string" || !Number.isFinite(item.quantity) || item.quantity <= 0) continue;
     const measurement = normalizeMeasurement(item.measurement);
+    const pieceOrder = normalizePieceOrder(item.pieceOrder);
     if (item.measurement !== undefined && !measurement) continue;
-    items.set(item.productId, measurement
+    if (item.pieceOrder !== undefined && !pieceOrder || measurement && pieceOrder) continue;
+    items.set(item.productId, pieceOrder
+      ? {productId: item.productId, quantity: pieceOrder.pieces * pieceOrder.lengthMeters, pieceOrder}
+      : measurement
       ? {productId: item.productId, quantity: measurement.inputMode === "meter" ? measurement.meters : measurement.weightTons, measurement}
       : {productId: item.productId, quantity: Math.min(item.quantity, 999)});
   }

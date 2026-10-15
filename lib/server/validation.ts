@@ -1,6 +1,7 @@
 import type {ContactRequest, QuoteRequest} from "@/types/forms";
 import type {CreateOrderInput, CustomerType, PaymentMethod} from "@/types/order";
 import {validateQuoteFields} from "@/lib/quoteValidation";
+import {normalizePieceOrder} from "@/lib/profilePipe";
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const phonePattern = /^\+?[\d\s()-]{10,24}$/;
@@ -33,13 +34,16 @@ export function parseCreateOrderInput(value: unknown): CreateOrderInput | null {
   for (const item of value.items) {
     if (!isRecord(item) || typeof item.productId !== "string" || !productIdPattern.test(item.productId)) return null;
     const measurement = parseMeasurement(item.measurement);
+    const pieceOrder = normalizePieceOrder(item.pieceOrder);
     if (item.measurement !== undefined && !measurement) return null;
+    if (item.pieceOrder !== undefined && !pieceOrder || pieceOrder && measurement) return null;
     if (typeof item.quantity !== "number" || !Number.isFinite(item.quantity) || item.quantity <= 0) return null;
-    if (!measurement && item.quantity > 999) return null;
+    if (!measurement && !pieceOrder && item.quantity > 999) return null;
     items.push({
       productId: item.productId,
       quantity: item.quantity,
       ...(measurement ? {measurement} : {}),
+      ...(pieceOrder ? {pieceOrder} : {}),
     });
   }
   if (!isCustomerType(value.customer.type) || !isPaymentMethod(value.paymentMethod)) return null;

@@ -2,8 +2,10 @@
 import {createContext, type ReactNode, useCallback, useEffect, useMemo, useState} from "react";
 import {CART_STORAGE_KEY} from "@/lib/constants";
 import {getProductVariantById} from "@/lib/catalog";
-import type {CartItem, CartLine, CartMeasurement} from "@/types/cart";
+import type {CartItem, CartLine, CartMeasurement, CartPieceOrder} from "@/types/cart";
 import {createCartLines, normalizeCartItems, normalizeMeasurement} from "@/lib/cart";
+import {isProfilePipeVariant, normalizePieceOrder} from "@/lib/profilePipe";
+import {revalidateCartPrice} from "@/lib/cartPricing";
 
 interface CartContextValue {
   items: CartItem[];
@@ -11,7 +13,7 @@ interface CartContextValue {
   hydrated: boolean;
   lineItemCount: number;
   totalAmount: number;
-  addItem: (id: string, q?: number, measurement?: CartMeasurement) => void;
+  addItem: (id: string, q?: number, measurement?: CartMeasurement, pieceOrder?: CartPieceOrder) => void;
   updateQuantity: (id: string, q: number) => void;
   removeItem: (id: string) => void;
   clearCart: () => void;
@@ -45,8 +47,17 @@ export function CartProvider({children}: { children: ReactNode }) {
     productId: string,
     quantity = 1,
     measurement?: CartMeasurement,
+    pieceOrder?: CartPieceOrder,
   ) => setItems(prev => {
     const product = getProductVariantById(productId);
+    if (product && isProfilePipeVariant(product)) {
+      const priced = revalidateCartPrice(product, {quantity, pieceOrder, measurement});
+      if (priced.invalidReason || !priced.pieceOrder) return prev;
+      const next = {productId, quantity, pieceOrder: priced.pieceOrder};
+      return prev.some(item => item.productId === productId)
+        ? prev.map(item => item.productId === productId ? next : item) : [...prev, next];
+    }
+    if (pieceOrder) return prev;
     if (!product || product.price === null || product.quoteOnly || product.priceQualifier === "from" || !Number.isFinite(quantity) || quantity <= 0 || (!measurement && quantity > 999)) return prev;
     const safeMeasurement = normalizeMeasurement(measurement);
     if (measurement && !safeMeasurement) return prev;
@@ -64,6 +75,17 @@ export function CartProvider({children}: { children: ReactNode }) {
     } : i) : [...prev, {productId, quantity: safe}]
   }), []);
   const updateQuantity = useCallback((productId: string, quantity: number) => {
+    const product = getProductVariantById(productId);
+    if (product && isProfilePipeVariant(product)) {
+      setItems(prev => prev.map(item => {
+        if (item.productId !== productId) return item;
+        const length = item.pieceOrder?.lengthMeters ?? product.lengthMeters;
+        const pieceOrder = length ? normalizePieceOrder({pieces: quantity / length, lengthMeters: length}) : undefined;
+        if (!pieceOrder || revalidateCartPrice(product, {quantity, pieceOrder}).invalidReason) return item;
+        return {...item, quantity, pieceOrder};
+      }));
+      return;
+    }
     if (!Number.isFinite(quantity) || quantity <= 0 || quantity > 999) return;
     setItems(prev => prev.map(i => i.productId === productId ? {
       ...i,

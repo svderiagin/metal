@@ -10,6 +10,7 @@ import tableStyles from "./RebarTable.module.css";
 import {CatalogImage} from "./CatalogImage";
 import {Button} from "@/components/ui/Button";
 import {Input} from "@/components/ui/Input";
+import {ProfilePipeVariantItem} from "./ProfilePipeVariantItem";
 import {useCart} from "@/hooks/useCart";
 import {formatCurrency, formatUnitPrice} from "@/lib/currency";
 import {formatNumber} from "@/lib/numberFormat";
@@ -19,6 +20,13 @@ import {
 import type {ProductVariant} from "@/types/product";
 
 export function MeasuredVariantItem({
+  variant, view, kind,
+}: {variant: ProductVariant; view: "table" | "card"; kind: "rebar" | "beam" | "vgp" | "profile"}) {
+  return kind === "profile" ? <ProfilePipeVariantItem variant={variant} view={view}/>
+    : <TonnageMeasuredVariantItem variant={variant} view={view} kind={kind}/>;
+}
+
+function TonnageMeasuredVariantItem({
   variant,
   view,
   kind,

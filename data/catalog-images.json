@@ -409,8 +409,8 @@
     "cat-trk": "/images/catalog/truba-kruglaya/truba-category title.jpg"
   },
   "types": {
-    "type-cat-arm-sub-2": "/images/catalog/armatura/armatura_a3-35gc_a400.jpg",
-    "type-cat-arm-sub-3": "/images/catalog/armatura/armatura_a3-25g2c.jpg",
+    "type-cat-arm-sub-2": "/images/catalog/armatura/armatura_a400_35g.jpg",
+    "type-cat-arm-sub-3": "/images/catalog/armatura/armatura_a400_25g2c.jpg",
     "type-cat-bal-sub-1": "/images/catalog/balka/balka-regular.jpg",
     "type-cat-bal-sub-2": "/images/catalog/balka/balka-shirokopolochnaya.jpg",
     "type-cat-bal-sub-3": "/images/catalog/balka/balka-kolonnaya.jpg",
@@ -434,7 +434,7 @@
     "type-mirror-family-cat-pol-20": "/images/catalog/polosa.jpg",
     "type-mirror-family-mirror-welding-22": "/images/catalog/elektrody.webp",
     "type-cat-arm-sub-1": "/images/catalog/armatura/armatura_а500с.jpg",
-    "type-cat-arm-sub-4": "/images/catalog/armatura/armatura_a1_a240.jpg",
+    "type-cat-arm-sub-4": "/images/catalog/armatura/armatura_a240_a1.jpg",
     "type-cat-trk-sub-3": "/images/catalog/truba-kruglaya/truba-vodogazoprovodnaya-cink.jpg",
     "type-cat-trk-sub-4": "/images/catalog/truba-kruglaya/truba-elektrosvarnaya-cink.jpg"
   }

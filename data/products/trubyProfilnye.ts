@@ -282,3 +282,92 @@ export const trubyProfilnyeProducts: ProductVariantSource[] = [
     ]
   }
 ];
+
+// Reference prices are kept separately in imports/profile-pipe-reference-prices.json.
+// These offers require commercial price confirmation; no mass, steel grade or stock is inferred.
+// The optional fifth value may be filled only with an owner-confirmed commercial price per metre.
+const profilePipeRows: [width: number, height: number, wall: number, length: number | [number, number], confirmedPrice?: number][] = [
+  [15, 15, 1.5, 6],
+  [20, 20, 1.5, 6],
+  [20, 20, 2, 6],
+  [25, 25, 1.5, 6],
+  [25, 25, 2, 6],
+  [30, 30, 1.5, 6],
+  [30, 30, 2, 6],
+  [40, 40, 1.5, 6],
+  [40, 40, 2, 6],
+  [40, 40, 3, 6],
+  [50, 50, 1.5, 6],
+  [50, 50, 2, 6],
+  [50, 50, 3, 6],
+  [50, 50, 4, 6],
+  [60, 60, 1.5, 6],
+  [60, 60, 2, 6],
+  [60, 60, 3, 6],
+  [60, 60, 4, 6],
+  [80, 80, 2, [6, 12]],
+  [80, 80, 3, 12],
+  [80, 80, 4, 12],
+  [100, 100, 3, 12],
+  [100, 100, 4, 12],
+  [100, 100, 5, 12],
+  [120, 120, 3, 12],
+  [120, 120, 4, 12],
+  [140, 140, 4, 12],
+  [160, 160, 4, 12],
+  [30, 20, 2, 6],
+  [40, 20, 1.5, 6],
+  [40, 20, 2, 6],
+  [40, 20, 3, 6],
+  [40, 25, 1.5, 6],
+  [40, 25, 2, 6],
+  [50, 25, 1.5, 6],
+  [50, 25, 2, 6],
+  [50, 25, 3, 6],
+  [60, 30, 1.5, 6],
+  [60, 30, 2, 6],
+  [60, 30, 3, 6],
+  [60, 40, 1.5, 6],
+  [60, 40, 2, 6],
+  [60, 40, 3, 6],
+  [60, 40, 4, 6],
+  [80, 40, 2, 6],
+  [80, 40, 3, 6],
+  [80, 60, 2, 6],
+  [80, 60, 3, 6],
+  [100, 50, 2, 6],
+  [100, 50, 3, 6],
+  [100, 60, 3, 6],
+];
+
+export const profilePipeProducts: ProductVariantSource[] = profilePipeRows.map(([width, height, wall, length, confirmedPrice]) => {
+  const square = width === height;
+  const family = square ? "квадратная" : "прямоугольная";
+  const shape = square ? "square" : "rectangular";
+  const size = `${width}×${height}`;
+  const thickness = String(wall).replace(".", ",");
+  const key = `${width}x${height}x${String(wall).replace(".", "-")}`;
+  const lengthLabel = Array.isArray(length) ? `${length[0]}–${length[1]} м` : `${length} м`;
+  return {
+    id: `profile-pipe-${shape}-${key}`,
+    categoryId: "cat-trp", subcategoryId: square ? "cat-trp-sub-1" : "cat-trp-sub-2",
+    name: `Труба профильная ${family} ${size}×${thickness} мм`,
+    slug: `truba-profilnaya-${shape}-${key}`, sku: `PP-${square ? "K" : "P"}-${key.toUpperCase()}`,
+    shortDescription: `Профиль ${size} мм, стенка ${thickness} мм, длина ${lengthLabel}.`,
+    description: "Цена и характеристики поставки уточняются при согласовании заказа.",
+    price: confirmedPrice ?? null, quoteOnly: confirmedPrice === undefined, priceConfirmed: confirmedPrice !== undefined, priceUnit: "за метр",
+    profileWidthMm: width, profileHeightMm: height, wallThicknessMm: wall,
+    ...(Array.isArray(length) ? {lengthRangeMeters: length} : {lengthMeters: length}),
+    inStock: false, availability: "UNKNOWN", featured: false, imageUrls: [],
+    attributes: [
+      {key: "size", label: "Размер", value: `${size} мм`},
+      {key: "wallThickness", label: "Стенка", value: `${thickness} мм`},
+      {key: "length", label: "Длина", value: lengthLabel},
+    ],
+    specifications: [
+      {name: "Размер", value: `${size} мм`},
+      {name: "Стенка", value: `${thickness} мм`},
+      {name: "Длина поставки", value: lengthLabel},
+    ],
+  };
+});

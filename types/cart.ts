@@ -1,5 +1,10 @@
 export type OrderInputMode = "meter" | "ton";
 
+export interface CartPieceOrder {
+  pieces: number;
+  lengthMeters: number;
+}
+
 export interface CartMeasurement {
   inputMode: OrderInputMode;
   meters: number;
@@ -12,6 +17,7 @@ export interface CartItem {
   productId: string;
   quantity: number;
   measurement?: CartMeasurement;
+  pieceOrder?: CartPieceOrder;
 }
 
 export interface CartLine extends CartItem {

@@ -1,3 +1,5 @@
+import type {CartPieceOrder} from "./cart";
+
 export type CustomerType = "INDIVIDUAL" | "COMPANY";
 export type PaymentMethod = "CARD" | "INVOICE";
 export type OrderStatus = "SUBMITTED" | "CANCELLED";
@@ -6,6 +8,7 @@ export type PaymentStatus = "PENDING" | "PAID" | "FAILED";
 export interface OrderItemInput {
   productId: string;
   quantity: number;
+  pieceOrder?: CartPieceOrder;
   measurement?: {
     inputMode: "meter" | "ton";
     meters: number;

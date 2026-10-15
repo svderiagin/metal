@@ -2,6 +2,7 @@ export type ProductAttributeKey =
   | "material"
   | "standard"
   | "size"
+  | "wallThickness"
   | "grade"
   | "class"
   | "length";
@@ -63,6 +64,10 @@ export interface ProductVariant {
   diameterMm?: number;
   nominalBoreMm?: number;
   wallThicknessMm?: number;
+  profileWidthMm?: number;
+  profileHeightMm?: number;
+  lengthRangeMeters?: [number, number];
+  weightConfirmed?: boolean;
   form?: "coil" | "bar";
   steelGrade?: string;
   pricePerTon?: number;
@@ -86,4 +91,4 @@ export interface ProductVariant {
 export type ProductVariantSource = Omit<
   ProductVariant,
   "productTypeId" | "unit" | "material" | "standard" | "availability" | "weight"
->;
+> & {availability?: ProductVariant["availability"]};

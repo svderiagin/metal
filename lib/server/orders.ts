@@ -59,7 +59,7 @@ export function createTrustedOrder(input: CreateOrderInput): Order | null {
   for (const item of input.items) {
     const product = getProductVariantById(item.productId);
     if (!product) return null;
-    const {measurement, estimatedTotal: subtotal, invalidReason} = revalidateCartPrice(product, item);
+    const {measurement, pieceOrder, estimatedTotal: subtotal, invalidReason} = revalidateCartPrice(product, item);
     if (invalidReason) return null;
     if (measurement) {
       const {meters, weightTons} = measurement;
@@ -78,6 +78,7 @@ export function createTrustedOrder(input: CreateOrderInput): Order | null {
     items.push({
       productId: product.id,
       quantity: item.quantity,
+      ...(pieceOrder ? {pieceOrder} : {}),
       name: product.name,
       sku: product.sku,
       unitPrice: product.price!,

@@ -16,6 +16,11 @@ export function roundSteelPipeMass(diameterMm: number, wallThicknessMm: number):
 
 export function normalizePipeWeight(product: ProductVariant): ProductVariant {
   if (!isPipeProduct(product)) return product;
+  if (product.categoryId === "cat-trp") {
+    const mass = product.weightConfirmed && product.weightPerMeterKg !== undefined
+      && Number.isFinite(product.weightPerMeterKg) && product.weightPerMeterKg > 0 ? product.weightPerMeterKg : undefined;
+    return {...product, weightPerMeterKg: mass, weight: mass === undefined ? undefined : {value: mass, unit: "кг/м"}};
+  }
   const geometricMass = product.diameterMm !== undefined && product.wallThicknessMm !== undefined
     ? roundSteelPipeMass(product.diameterMm, product.wallThicknessMm) : undefined;
   // An explicit mass has priority: the audited VGP records store table 1 of GOST 3262-75.

@@ -37,7 +37,10 @@ export default async function CategoryPage({params}: Props) {
   if (!category) notFound();
   const productTypes = getProductTypesByCategoryId(category.id);
   const variants = getProductVariantsByCategoryId(category.id);
-  const hasImage = !category.imageUrl.endsWith(".svg");
+  const mainImageUrl = category.id === "cat-trp"
+    ? "/images/catalog/truby-profilnye/trubi-main.jpg"
+    : category.imageUrl;
+  const hasImage = !mainImageUrl.endsWith(".svg");
 
   return (
     <PageContainer className="py-8 sm:py-10 lg:py-12">
@@ -50,7 +53,7 @@ export default async function CategoryPage({params}: Props) {
           <div className={`grid gap-x-6 gap-y-4 ${hasImage ? "md:grid-cols-[minmax(0,1fr)_320px] xl:grid-cols-[minmax(0,1fr)_360px]" : ""}`}>
             <h1 className="text-3xl font-black">{category.name}</h1>
             {hasImage && <div className="relative aspect-[2/1] w-full overflow-hidden rounded-xl bg-white md:col-start-2 md:row-span-2 md:row-start-1 md:self-center">
-              <Image src={catalogImageUrl(category.imageUrl)} alt={category.name} fill
+              <Image src={catalogImageUrl(mainImageUrl)} alt={category.name} fill
                 sizes="(min-width: 1280px) 360px, (min-width: 768px) 320px, calc(100vw - 48px)"
                 className="object-contain object-center"/>
             </div>}
