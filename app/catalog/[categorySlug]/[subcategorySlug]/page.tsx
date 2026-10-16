@@ -78,9 +78,7 @@ export default async function SubcategoryPage({params}: Props) {
           <div className="min-w-0">
             <h1 className="text-3xl font-black">{currentSubcategory.name}</h1>
             <CatalogDescription description={currentSubcategory.description}/>
-            <Suspense fallback={<div className="mt-8 h-80 animate-pulse rounded-lg bg-slate-200"/>}>
-              <ProductTypeResults productTypes={productTypes} variants={variants}/>
-            </Suspense>
+            <ProductTypeResults productTypes={productTypes} variants={variants}/>
           </div>
         </div>
       </PageContainer>

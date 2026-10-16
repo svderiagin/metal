@@ -15,7 +15,7 @@ type Props = {
 
 export function FilterPanel({query, onQueryChange, onReset, children, sorting, extraControls, className = ""}: Props) {
   return (
-    <div className={`${styles.panel} min-w-0 self-start rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6 ${className}`}>
+    <div className={`${styles.panel} min-w-0 self-start rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6 lg:self-stretch ${className}`}>
       <h2 className="text-xl font-bold">Фильтры</h2>
       <label className="mt-4 block text-sm font-semibold">
         Поиск товаров

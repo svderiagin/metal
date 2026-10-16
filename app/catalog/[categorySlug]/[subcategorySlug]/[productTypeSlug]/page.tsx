@@ -76,7 +76,7 @@ export default async function ProductTypePage({params}: Props) {
       />
 
       <div className="grid gap-7 lg:grid-cols-[280px_minmax(0,1fr)]">
-        <div className="lg:row-span-2">
+        <div className="lg:row-span-2 lg:[&>aside]:h-full">
           <Suspense fallback={<div className="h-96 animate-pulse rounded-xl bg-slate-200"/>}>
             <CatalogSidebar activeSlug={category.slug}/>
           </Suspense>

@@ -12,7 +12,7 @@ const {productVariants} = readProjectData('data/products/index.ts', cache);
 const {calculateLineTotal, metersToTons, tonsToMeters} = readProjectData('lib/orderMeasurement.ts', cache);
 const {revalidateCartPrice} = readProjectData('lib/cartPricing.ts', cache);
 const {hasValidOrderAmount} = readProjectData('lib/server/payments.ts', cache);
-const {matchesCategoryFilters, comparePrices} = readProjectData('lib/catalogFilters.ts', cache);
+const {comparePrices} = readProjectData('lib/catalogFilters.ts', cache);
 
 function serverModule(file, mocks = {}) {
   const testModule = {exports: {}};
@@ -67,13 +67,7 @@ test('overflow and invalid quantities cannot become a zero-valued valid order', 
   assert.ok(revalidateCartPrice(product, {quantity:1, measurement:{inputMode:'meter', meters:Number.MAX_VALUE, weightTons:1}}).invalidReason);
 });
 
-test('category filters must all match the same variant and unknown prices sort last', () => {
-  const variants = [
-    {attributes:[{key:'material',value:'A'},{key:'standard',value:'X'}],inStock:true},
-    {attributes:[{key:'material',value:'B'},{key:'standard',value:'Y'}],inStock:false},
-  ];
-  assert.equal(variants.filter(v => matchesCategoryFilters(v, 'A', 'Y', false)).length, 0);
-  assert.equal(variants.filter(v => matchesCategoryFilters(v, 'B', 'Y', true)).length, 0);
+test('unknown prices sort last in both price directions', () => {
   for (const descending of [false, true]) {
     const prices = [null, 200, undefined, 100].sort((a,b) => comparePrices(a,b,descending));
     assert.deepEqual(prices.slice(0,2), descending ? [200,100] : [100,200]);

@@ -59,14 +59,7 @@ export default async function CategoryPage({params}: Props) {
             </div>}
             <CatalogDescription description={category.description} className="md:col-start-1"/>
           </div>
-          <Suspense
-            fallback={<div className="mt-8 h-80 animate-pulse rounded-lg bg-slate-200"/>}
-          >
-            <ProductTypeResults
-              productTypes={productTypes}
-              variants={variants}
-            />
-          </Suspense>
+          <ProductTypeResults productTypes={productTypes} variants={variants}/>
           <div className="mt-10 rounded-lg bg-slate-900 p-6 text-white">
             <h2 className="text-xl font-bold">Нужна комплектация по спецификации?</h2>
             <p className="mt-2 text-slate-300">Опишите позиции и необходимые услуги — подготовим единый
