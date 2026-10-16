@@ -1,424 +1,173 @@
 import type {ProductVariantSource} from "@/types/product";
 
-export const shvellerProducts: ProductVariantSource[] = [
-  {
-    "id": "prd-107",
-    "categoryId": "cat-shv",
-    "subcategoryId": "cat-shv-sub-1",
-    "name": "Швеллер стальной 25 мм",
-    "slug": "shveller-stalnoy-25",
-    "sku": "MS-0107",
-    "shortDescription": "Швеллер стальной размера 25 мм для комплектования строительных и производственных заявок.",
-    "description": "Швеллер стальной 25 мм — оригинальная демонстрационная позиция каталога ООО «РВБ». Параметры партии, допуски и доступность обработки подтверждаются при согласовании заказа.",
-    "price": 110610,
-    "priceUnit": "за тонну",
-    "inStock": true,
-    "featured": false,
-    "imageUrls": [
-      "/images/products/shveller-stalnoy.svg"
-    ],
-    "attributes": [
-      {
-        "key": "material",
-        "label": "Материал",
-        "value": "Углеродистая сталь"
-      },
-      {
-        "key": "standard",
-        "label": "Стандарт",
-        "value": "ГОСТ 10704"
-      },
-      {
-        "key": "size",
-        "label": "Размер",
-        "value": "25 мм"
-      },
-      {
-        "key": "grade",
-        "label": "Марка",
-        "value": "Сталь 20"
-      },
-      {
-        "key": "length",
-        "label": "Длина",
-        "value": "6 м"
-      }
-    ],
-    "specifications": [
-      {
-        "name": "Стандарт",
-        "value": "ГОСТ 10704"
-      },
-      {
-        "name": "Материал",
-        "value": "Углеродистая сталь"
-      },
-      {
-        "name": "Марка",
-        "value": "Сталь 20"
-      },
-      {
-        "name": "Размер",
-        "value": "25 мм"
-      },
-      {
-        "name": "Длина поставки",
-        "value": "6 м"
-      },
-      {
-        "name": "Состояние",
-        "value": "Новое, складское хранение"
-      }
-    ]
-  },
-  {
-    "id": "prd-108",
-    "categoryId": "cat-shv",
-    "subcategoryId": "cat-shv-sub-1",
-    "name": "Швеллер стальной 40 мм",
-    "slug": "shveller-stalnoy-40",
-    "sku": "MS-0108",
-    "shortDescription": "Швеллер стальной размера 40 мм для комплектования строительных и производственных заявок.",
-    "description": "Швеллер стальной 40 мм — оригинальная демонстрационная позиция каталога ООО «РВБ». Параметры партии, допуски и доступность обработки подтверждаются при согласовании заказа.",
-    "price": 119060,
-    "priceUnit": "за тонну",
-    "inStock": true,
-    "featured": false,
-    "imageUrls": [
-      "/images/products/shveller-stalnoy.svg"
-    ],
-    "attributes": [
-      {
-        "key": "material",
-        "label": "Материал",
-        "value": "Углеродистая сталь"
-      },
-      {
-        "key": "standard",
-        "label": "Стандарт",
-        "value": "ГОСТ 19903"
-      },
-      {
-        "key": "size",
-        "label": "Размер",
-        "value": "40 мм"
-      },
-      {
-        "key": "grade",
-        "label": "Марка",
-        "value": "Ст3"
-      },
-      {
-        "key": "length",
-        "label": "Длина",
-        "value": "12 м"
-      }
-    ],
-    "specifications": [
-      {
-        "name": "Стандарт",
-        "value": "ГОСТ 19903"
-      },
-      {
-        "name": "Материал",
-        "value": "Углеродистая сталь"
-      },
-      {
-        "name": "Марка",
-        "value": "Ст3"
-      },
-      {
-        "name": "Размер",
-        "value": "40 мм"
-      },
-      {
-        "name": "Длина поставки",
-        "value": "12 м"
-      },
-      {
-        "name": "Состояние",
-        "value": "Новое, складское хранение"
-      }
-    ]
-  },
-  {
-    "id": "prd-109",
-    "categoryId": "cat-shv",
-    "subcategoryId": "cat-shv-sub-2",
-    "name": "Швеллер гнутый 32 мм",
-    "slug": "shveller-gnutyy-32",
-    "sku": "MS-0109",
-    "shortDescription": "Швеллер гнутый размера 32 мм для комплектования строительных и производственных заявок.",
-    "description": "Швеллер гнутый 32 мм — оригинальная демонстрационная позиция каталога ООО «РВБ». Параметры партии, допуски и доступность обработки подтверждаются при согласовании заказа.",
-    "price": 111980,
-    "priceUnit": "за тонну",
-    "inStock": true,
-    "featured": false,
-    "imageUrls": [
-      "/images/products/shveller-gnutyy.svg"
-    ],
-    "attributes": [
-      {
-        "key": "material",
-        "label": "Материал",
-        "value": "Углеродистая сталь"
-      },
-      {
-        "key": "standard",
-        "label": "Стандарт",
-        "value": "ГОСТ 19903"
-      },
-      {
-        "key": "size",
-        "label": "Размер",
-        "value": "32 мм"
-      },
-      {
-        "key": "grade",
-        "label": "Марка",
-        "value": "Ст3"
-      },
-      {
-        "key": "length",
-        "label": "Длина",
-        "value": "6 м"
-      }
-    ],
-    "specifications": [
-      {
-        "name": "Стандарт",
-        "value": "ГОСТ 19903"
-      },
-      {
-        "name": "Материал",
-        "value": "Углеродистая сталь"
-      },
-      {
-        "name": "Марка",
-        "value": "Ст3"
-      },
-      {
-        "name": "Размер",
-        "value": "32 мм"
-      },
-      {
-        "name": "Длина поставки",
-        "value": "6 м"
-      },
-      {
-        "name": "Состояние",
-        "value": "Новое, складское хранение"
-      }
-    ]
-  },
-  {
-    "id": "prd-110",
-    "categoryId": "cat-shv",
-    "subcategoryId": "cat-shv-sub-2",
-    "name": "Швеллер гнутый 10 мм",
-    "slug": "shveller-gnutyy-10",
-    "sku": "MS-0110",
-    "shortDescription": "Швеллер гнутый размера 10 мм для комплектования строительных и производственных заявок.",
-    "description": "Швеллер гнутый 10 мм — оригинальная демонстрационная позиция каталога ООО «РВБ». Параметры партии, допуски и доступность обработки подтверждаются при согласовании заказа.",
-    "price": 120430,
-    "priceUnit": "за тонну",
-    "inStock": true,
-    "featured": false,
-    "imageUrls": [
-      "/images/products/shveller-gnutyy.svg"
-    ],
-    "attributes": [
-      {
-        "key": "material",
-        "label": "Материал",
-        "value": "Углеродистая сталь"
-      },
-      {
-        "key": "standard",
-        "label": "Стандарт",
-        "value": "ГОСТ 2590"
-      },
-      {
-        "key": "size",
-        "label": "Размер",
-        "value": "10 мм"
-      },
-      {
-        "key": "grade",
-        "label": "Марка",
-        "value": "09Г2С"
-      },
-      {
-        "key": "length",
-        "label": "Длина",
-        "value": "12 м"
-      }
-    ],
-    "specifications": [
-      {
-        "name": "Стандарт",
-        "value": "ГОСТ 2590"
-      },
-      {
-        "name": "Материал",
-        "value": "Углеродистая сталь"
-      },
-      {
-        "name": "Марка",
-        "value": "09Г2С"
-      },
-      {
-        "name": "Размер",
-        "value": "10 мм"
-      },
-      {
-        "name": "Длина поставки",
-        "value": "12 м"
-      },
-      {
-        "name": "Состояние",
-        "value": "Новое, складское хранение"
-      }
-    ]
-  },
-  {
-    "id": "prd-111",
-    "categoryId": "cat-shv",
-    "subcategoryId": "cat-shv-sub-3",
-    "name": "Швеллер низколегированный 40 мм",
-    "slug": "shveller-nizkolegirovannyy-40",
-    "sku": "MS-0111",
-    "shortDescription": "Швеллер низколегированный размера 40 мм для комплектования строительных и производственных заявок.",
-    "description": "Швеллер низколегированный 40 мм — оригинальная демонстрационная позиция каталога ООО «РВБ». Параметры партии, допуски и доступность обработки подтверждаются при согласовании заказа.",
-    "price": 113350,
-    "priceUnit": "за тонну",
-    "inStock": true,
-    "featured": false,
-    "imageUrls": [
-      "/images/products/shveller-nizkolegirovannyy.svg"
-    ],
-    "attributes": [
-      {
-        "key": "material",
-        "label": "Материал",
-        "value": "Углеродистая сталь"
-      },
-      {
-        "key": "standard",
-        "label": "Стандарт",
-        "value": "ГОСТ 2590"
-      },
-      {
-        "key": "size",
-        "label": "Размер",
-        "value": "40 мм"
-      },
-      {
-        "key": "grade",
-        "label": "Марка",
-        "value": "09Г2С"
-      },
-      {
-        "key": "length",
-        "label": "Длина",
-        "value": "6 м"
-      }
-    ],
-    "specifications": [
-      {
-        "name": "Стандарт",
-        "value": "ГОСТ 2590"
-      },
-      {
-        "name": "Материал",
-        "value": "Углеродистая сталь"
-      },
-      {
-        "name": "Марка",
-        "value": "09Г2С"
-      },
-      {
-        "name": "Размер",
-        "value": "40 мм"
-      },
-      {
-        "name": "Длина поставки",
-        "value": "6 м"
-      },
-      {
-        "name": "Состояние",
-        "value": "Новое, складское хранение"
-      }
-    ]
-  },
-  {
-    "id": "prd-112",
-    "categoryId": "cat-shv",
-    "subcategoryId": "cat-shv-sub-3",
-    "name": "Швеллер низколегированный 12 мм",
-    "slug": "shveller-nizkolegirovannyy-12",
-    "sku": "MS-0112",
-    "shortDescription": "Швеллер низколегированный размера 12 мм для комплектования строительных и производственных заявок.",
-    "description": "Швеллер низколегированный 12 мм — оригинальная демонстрационная позиция каталога ООО «РВБ». Параметры партии, допуски и доступность обработки подтверждаются при согласовании заказа.",
-    "price": 121800,
-    "priceUnit": "за тонну",
-    "inStock": false,
-    "featured": false,
-    "imageUrls": [
-      "/images/products/shveller-nizkolegirovannyy.svg"
-    ],
-    "attributes": [
-      {
-        "key": "material",
-        "label": "Материал",
-        "value": "Углеродистая сталь"
-      },
-      {
-        "key": "standard",
-        "label": "Стандарт",
-        "value": "ГОСТ 5781"
-      },
-      {
-        "key": "size",
-        "label": "Размер",
-        "value": "12 мм"
-      },
-      {
-        "key": "grade",
-        "label": "Марка",
-        "value": "Сталь 20"
-      },
-      {
-        "key": "length",
-        "label": "Длина",
-        "value": "12 м"
-      }
-    ],
-    "specifications": [
-      {
-        "name": "Стандарт",
-        "value": "ГОСТ 5781"
-      },
-      {
-        "name": "Материал",
-        "value": "Углеродистая сталь"
-      },
-      {
-        "name": "Марка",
-        "value": "Сталь 20"
-      },
-      {
-        "name": "Размер",
-        "value": "12 мм"
-      },
-      {
-        "name": "Длина поставки",
-        "value": "12 м"
-      },
-      {
-        "name": "Состояние",
-        "value": "Новое, складское хранение"
-      }
-    ]
-  }
+type HotRolledRow = {
+  number: number;
+  series: "П" | "У";
+  weightPerMeterKg: number;
+  steelGrade?: "09Г2С";
+  existing?: {
+    id: string;
+    slug: string;
+    sku: string;
+    pricePerTon?: number;
+    lengthMeters: number;
+  };
+};
+
+type BentRow = {
+  heightMm: number;
+  widthMm: number;
+  wallThicknessMm: number;
+  weightPerMeterKg: number;
+  existing?: {
+    id: string;
+    slug: string;
+    sku: string;
+    pricePerTon: number;
+    lengthMeters: number;
+  };
+};
+
+// Nominal masses from the requested assortment for GOST 8240-97.
+const hotRolledRows: HotRolledRow[] = [
+  {number: 8, series: "П", weightPerMeterKg: 7.05, existing: {id: "local--516", slug: "sveller-8px12000-gost-8240", sku: "МП--516", pricePerTon: 83250, lengthMeters: 12}},
+  {number: 8, series: "У", weightPerMeterKg: 7.05},
+  {number: 10, series: "П", weightPerMeterKg: 8.59, existing: {id: "local-1420", slug: "sveller-10px12000-gost-8240", sku: "МП-1420", pricePerTon: 78750, lengthMeters: 12}},
+  {number: 10, series: "У", weightPerMeterKg: 8.59},
+  {number: 12, series: "П", weightPerMeterKg: 10.4, existing: {id: "local--756", slug: "sveller-12px12000-gost-8240", sku: "МП--756", pricePerTon: 85500, lengthMeters: 12}},
+  {number: 12, series: "У", weightPerMeterKg: 10.4},
+  {number: 14, series: "П", weightPerMeterKg: 12.3, existing: {id: "local-902", slug: "sveller-14px12000-gost-8240", sku: "МП-902", pricePerTon: 87750, lengthMeters: 12}},
+  {number: 14, series: "У", weightPerMeterKg: 12.3},
+  {number: 16, series: "П", weightPerMeterKg: 14.2, existing: {id: "local-970", slug: "sveller-16px12000-gost-8240", sku: "МП-970", pricePerTon: 84150, lengthMeters: 12}},
+  {number: 16, series: "У", weightPerMeterKg: 14.2},
+  {number: 18, series: "П", weightPerMeterKg: 16.3, existing: {id: "local--967", slug: "sveller-18px12000-gost-8240", sku: "МП--967", lengthMeters: 12}},
+  {number: 18, series: "У", weightPerMeterKg: 16.3},
+  {number: 20, series: "П", weightPerMeterKg: 18.4, existing: {id: "local-1259", slug: "sveller-20px12000-gost-8240", sku: "МП-1259", pricePerTon: 115200, lengthMeters: 12}},
+  {number: 20, series: "У", weightPerMeterKg: 18.4},
+  {number: 10, series: "П", weightPerMeterKg: 8.59, steelGrade: "09Г2С"},
+  {number: 12, series: "П", weightPerMeterKg: 10.4, steelGrade: "09Г2С"},
+  {number: 14, series: "П", weightPerMeterKg: 12.3, steelGrade: "09Г2С"},
+  {number: 16, series: "П", weightPerMeterKg: 14.2, steelGrade: "09Г2С"},
+  {number: 18, series: "П", weightPerMeterKg: 16.3, steelGrade: "09Г2С"},
+  {number: 20, series: "П", weightPerMeterKg: 18.4, steelGrade: "09Г2С"},
 ];
+
+// Nominal masses supplied for equal-flange bent channels under GOST 8278-83.
+const bentRows: BentRow[] = [
+  {heightMm: 50, widthMm: 40, wallThicknessMm: 3, weightPerMeterKg: 2.81},
+  {heightMm: 60, widthMm: 32, wallThicknessMm: 2.5, weightPerMeterKg: 2.26},
+  {heightMm: 60, widthMm: 32, wallThicknessMm: 4, weightPerMeterKg: 3.43},
+  {heightMm: 60, widthMm: 40, wallThicknessMm: 3, weightPerMeterKg: 3.04},
+  {heightMm: 80, widthMm: 40, wallThicknessMm: 3, weightPerMeterKg: 3.51},
+  {heightMm: 80, widthMm: 50, wallThicknessMm: 4, weightPerMeterKg: 5.18},
+  {heightMm: 80, widthMm: 60, wallThicknessMm: 4, weightPerMeterKg: 5.81},
+  {heightMm: 100, widthMm: 50, wallThicknessMm: 3, weightPerMeterKg: 4.47, existing: {id: "local-74057", slug: "sveller-xolodnognutyi-100x50x3x12000-gost-8278-tm", sku: "МП-74057", pricePerTon: 61650, lengthMeters: 12}},
+  {heightMm: 100, widthMm: 50, wallThicknessMm: 4, weightPerMeterKg: 5.81},
+  {heightMm: 120, widthMm: 50, wallThicknessMm: 3, weightPerMeterKg: 4.91},
+  {heightMm: 120, widthMm: 50, wallThicknessMm: 4, weightPerMeterKg: 6.44},
+];
+
+const hotRolledProducts = hotRolledRows.map((row, index): ProductVariantSource => {
+  const designation = `${row.number}${row.series}`;
+  const gradeSuffix = row.steelGrade ? ` ${row.steelGrade}` : "";
+  const generatedId = `channel-hot-${row.number}${row.series === "П" ? "p" : "u"}${row.steelGrade ? "-09g2s" : ""}`;
+  const pricePerTon = row.existing?.pricePerTon;
+
+  return {
+    id: row.existing?.id ?? generatedId,
+    categoryId: "cat-shv",
+    subcategoryId: "cat-shv-sub-1",
+    name: `Швеллер ${designation}${gradeSuffix}`,
+    slug: row.existing?.slug ?? generatedId,
+    sku: row.existing?.sku ?? `MS-CH-${row.number}${row.series}-${row.steelGrade ?? "STD"}`,
+    shortDescription: `Горячекатаный швеллер ${designation}${gradeSuffix} по ГОСТ 8240-97, теоретическая масса ${formatNumber(row.weightPerMeterKg)} кг/м.`,
+    description: "Стальной профиль для балок, рам, лестниц и каркасов гаражей. Применяется в несущих конструкциях с учётом проектных нагрузок. ГОСТ 8240-97.",
+    price: pricePerTon ?? null,
+    quoteOnly: pricePerTon === undefined,
+    priceQualifier: "exact",
+    currency: "RUB",
+    priceUnit: "за тонну",
+    inStock: false,
+    availability: "UNKNOWN",
+    imported: row.existing !== undefined,
+    priceConfirmed: pricePerTon !== undefined,
+    featured: index < 4,
+    imageUrls: [],
+    channelNumber: row.number,
+    channelSeries: row.series,
+    steelGrade: row.steelGrade,
+    pricePerTon,
+    weightPerMeterKg: row.weightPerMeterKg,
+    weightConfirmed: true,
+    lengthMeters: row.existing?.lengthMeters,
+    attributes: [
+      {key: "material", label: "Материал", value: row.steelGrade ? `Сталь ${row.steelGrade}` : "Сталь; марка уточняется"},
+      {key: "standard", label: "Стандарт", value: "ГОСТ 8240-97"},
+      {key: "size", label: "Номер и серия", value: designation},
+      ...(row.steelGrade ? [{key: "grade" as const, label: "Марка стали", value: row.steelGrade}] : []),
+      ...(row.existing ? [{key: "length" as const, label: "Длина", value: `${formatNumber(row.existing.lengthMeters)} м`}] : []),
+    ],
+    specifications: [
+      {name: "Номер и серия", value: designation},
+      {name: "Стандарт", value: "ГОСТ 8240-97"},
+      ...(row.steelGrade ? [{name: "Марка стали", value: row.steelGrade}] : []),
+      {name: "Теоретическая масса", value: `${formatNumber(row.weightPerMeterKg)} кг/м`},
+      ...(row.existing ? [{name: "Длина поставки", value: `${formatNumber(row.existing.lengthMeters)} м`}] : []),
+    ],
+  };
+});
+
+const bentProducts = bentRows.map((row, index): ProductVariantSource => {
+  const size = `${formatNumber(row.heightMm)}×${formatNumber(row.widthMm)}×${formatNumber(row.wallThicknessMm)}`;
+  const generatedId = `channel-bent-${row.heightMm}x${row.widthMm}x${String(row.wallThicknessMm).replace(".", "-")}`;
+  const pricePerTon = row.existing?.pricePerTon;
+
+  return {
+    id: row.existing?.id ?? generatedId,
+    categoryId: "cat-shv",
+    subcategoryId: "cat-shv-sub-2",
+    name: `Швеллер гнутый ${size}`,
+    slug: row.existing?.slug ?? generatedId,
+    sku: row.existing?.sku ?? `MS-CH-B-${row.heightMm}-${row.widthMm}-${String(row.wallThicknessMm).replace(".", "-")}`,
+    shortDescription: `Равнополочный гнутый швеллер ${size} мм по ГОСТ 8278-83, теоретическая масса ${formatNumber(row.weightPerMeterKg)} кг/м.`,
+    description: "Стальной профиль для лёгких каркасов, направляющих, обрамлений и вспомогательных металлоконструкций. ГОСТ 8278-83.",
+    price: pricePerTon ?? null,
+    quoteOnly: pricePerTon === undefined,
+    priceQualifier: "exact",
+    currency: "RUB",
+    priceUnit: "за тонну",
+    inStock: false,
+    availability: "UNKNOWN",
+    imported: row.existing !== undefined,
+    priceConfirmed: pricePerTon !== undefined,
+    featured: index < 4,
+    imageUrls: [],
+    profileHeightMm: row.heightMm,
+    profileWidthMm: row.widthMm,
+    wallThicknessMm: row.wallThicknessMm,
+    pricePerTon,
+    weightPerMeterKg: row.weightPerMeterKg,
+    weightConfirmed: true,
+    lengthMeters: row.existing?.lengthMeters,
+    attributes: [
+      {key: "material", label: "Материал", value: "Сталь; марка уточняется"},
+      {key: "standard", label: "Стандарт", value: "ГОСТ 8278-83"},
+      {key: "size", label: "Размер", value: `${size} мм`},
+      {key: "wallThickness", label: "Стенка", value: `${formatNumber(row.wallThicknessMm)} мм`},
+      ...(row.existing ? [{key: "length" as const, label: "Длина", value: `${formatNumber(row.existing.lengthMeters)} м`}] : []),
+    ],
+    specifications: [
+      {name: "Размер", value: `${size} мм`},
+      {name: "Стенка", value: `${formatNumber(row.wallThicknessMm)} мм`},
+      {name: "Стандарт", value: "ГОСТ 8278-83"},
+      {name: "Теоретическая масса", value: `${formatNumber(row.weightPerMeterKg)} кг/м`},
+      ...(row.existing ? [{name: "Длина поставки", value: `${formatNumber(row.existing.lengthMeters)} м`}] : []),
+    ],
+  };
+});
+
+export const shvellerProducts: ProductVariantSource[] = [...hotRolledProducts, ...bentProducts];
+
+function formatNumber(value: number) {
+  return new Intl.NumberFormat("ru-RU", {maximumFractionDigits: 3}).format(value);
+}

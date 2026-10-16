@@ -16,5 +16,10 @@ export interface Category {
   slug: string;
   shortDescription: string;
   description: string;
+  descriptionSections?: {
+    intro: string;
+    title: string;
+    details: string;
+  };
   imageUrl: string;
 }

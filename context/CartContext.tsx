@@ -6,6 +6,7 @@ import type {CartItem, CartLine, CartMeasurement, CartPieceOrder} from "@/types/
 import {createCartLines, normalizeCartItems, normalizeMeasurement} from "@/lib/cart";
 import {isProfilePipeVariant, normalizePieceOrder} from "@/lib/profilePipe";
 import {revalidateCartPrice} from "@/lib/cartPricing";
+import {isProfileSheetVariant} from "@/lib/profileSheet";
 
 interface CartContextValue {
   items: CartItem[];
@@ -59,6 +60,7 @@ export function CartProvider({children}: { children: ReactNode }) {
     }
     if (pieceOrder) return prev;
     if (!product || product.price === null || product.quoteOnly || product.priceQualifier === "from" || !Number.isFinite(quantity) || quantity <= 0 || (!measurement && quantity > 999)) return prev;
+    if (isProfileSheetVariant(product) && (!Number.isInteger(quantity) || measurement)) return prev;
     const safeMeasurement = normalizeMeasurement(measurement);
     if (measurement && !safeMeasurement) return prev;
     if (safeMeasurement) {
@@ -87,6 +89,7 @@ export function CartProvider({children}: { children: ReactNode }) {
       return;
     }
     if (!Number.isFinite(quantity) || quantity <= 0 || quantity > 999) return;
+    if (product && isProfileSheetVariant(product) && !Number.isInteger(quantity)) return;
     setItems(prev => prev.map(i => i.productId === productId ? {
       ...i,
       quantity,

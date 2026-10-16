@@ -2,6 +2,11 @@ import type {Category} from "@/types/category";
 import importedCatalog from "./imported-catalog.json";
 import catalogImages from "./catalog-images.json";
 
+const profnastilIntro = "Профнастил — профилированные стальные листы для кровли, заборов, облицовки фасадов и хозяйственных построек. Применяется при строительстве частных домов, дач, гаражей и навесов. В ассортименте представлены профили С8, С20 и Н75 с оцинкованным или окрашенным покрытием.";
+const profnastilDetails = `При выборе профнастила учитывают толщину стали, полезную ширину и длину листа, тип покрытия и условия эксплуатации. Для кровли дополнительно важны уклон, шаг обрешётки, снеговая и ветровая нагрузки.
+
+Основной стандарт для соответствующих профилированных стальных листов — **ГОСТ 24045-2016**. Характеристики конкретных изделий уточняйте в каталоге.`;
+
 const originalCategories: Category[] = [
   {
     "id": "cat-arm",
@@ -26,6 +31,19 @@ const originalCategories: Category[] = [
     "shortDescription": "Водогазопроводные и электросварные трубы, включая оцинкованные исполнения",
     "description": "Водогазопроводные и электросварные трубы круглого сечения. Выберите исполнение поверхности, диаметр, толщину стенки и длину. У водогазопроводных труб условный проход DN отличается от наружного диаметра.",
     "imageUrl": "/images/catalog/truby-vodogazoprovodnye.jpeg"
+  },
+  {
+    "id": "cat-pnf",
+    "name": "Профнастил",
+    "slug": "profnastil",
+    "shortDescription": "Профилированные стальные листы С8, С20 и Н75",
+    "description": `${profnastilIntro}\n\n${profnastilDetails}`,
+    "descriptionSections": {
+      "intro": profnastilIntro,
+      "title": "Как выбрать профнастил",
+      "details": profnastilDetails
+    },
+    "imageUrl": "/images/catalog/profnastil/profnastil_c8.jpg"
   },
   {
     "id": "cat-trs",
@@ -141,8 +159,20 @@ const originalCategories: Category[] = [
   }
 ];
 
-export const categories: Category[] = (importedCatalog.categories as Category[]).map(category => ({
+const importedCategories = (importedCatalog.categories as Category[]).map(category => ({
   ...category,
+  ...(category.id === "cat-shv" ? {
+    shortDescription: "Горячекатаный и гнутый стальной швеллер для строительства",
+    description: "Стальной швеллер применяется для изготовления балок, рам, лестниц, каркасов гаражей и хозяйственных построек. Горячекатаные профили используют в несущих металлоконструкциях, гнутые — преимущественно для лёгких и вспомогательных элементов. При выборе учитывают размеры, марку стали и расчётные нагрузки.",
+  } : {}),
   imageUrl: (catalogImages.categories as Record<string, string>)[category.id] ?? catalogImages.fallback,
 }));
+
+const roundPipeIndex = importedCategories.findIndex(category => category.id === "cat-trk");
+const profnastilCategory = originalCategories.find(category => category.id === "cat-pnf")!;
+export const categories: Category[] = [
+  ...importedCategories.slice(0, roundPipeIndex + 1),
+  {...profnastilCategory, imageUrl: (catalogImages.categories as Record<string, string>)[profnastilCategory.id] ?? profnastilCategory.imageUrl},
+  ...importedCategories.slice(roundPipeIndex + 1),
+];
 export {originalCategories};

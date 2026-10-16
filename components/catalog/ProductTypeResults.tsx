@@ -18,7 +18,9 @@ export function ProductTypeResults({
     }
   }
   const preserveOrder = productTypes.every(type => type.categoryId === "cat-trk")
-    || productTypes.every(type => type.categoryId === "cat-bal");
+    || productTypes.every(type => type.categoryId === "cat-bal")
+    || productTypes.every(type => type.categoryId === "cat-shv")
+    || productTypes.every(type => type.categoryId === "cat-pnf");
   const orderedTypes = preserveOrder ? productTypes : [...productTypes].sort((left, right) =>
     (availableCounts.get(right.id) ?? 0) - (availableCounts.get(left.id) ?? 0),
   );

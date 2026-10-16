@@ -390,7 +390,24 @@
     "local-69356": "/images/catalog/balka/balka-monorels.jpg",
     "local-86552": "/images/catalog/balka/balka-monorels.jpg",
     "local-87267": "/images/catalog/balka/balka-monorels.jpg",
-    "local-92441": "/images/catalog/balka/balka-monorels.jpg"
+    "local-92441": "/images/catalog/balka/balka-monorels.jpg",
+    "profnastil-c8-03-ral-3005": "/images/catalog/profnastil/profnastil_c8.jpg",
+    "profnastil-c8-03-ral-6005": "/images/catalog/profnastil/profnastil_c8.jpg",
+    "profnastil-c8-03-ral-8017": "/images/catalog/profnastil/profnastil_c8.jpg",
+    "profnastil-c8-03-galvanized": "/images/catalog/profnastil/profnastil_c8.jpg",
+    "profnastil-c8-03-ral-7024": "/images/catalog/profnastil/profnastil_c8.jpg",
+    "profnastil-c8-045-ral-6005": "/images/catalog/profnastil/profnastil_c8.jpg",
+    "profnastil-c8-045-ral-8017": "/images/catalog/profnastil/profnastil_c8.jpg",
+    "profnastil-c8-045-ral-7024": "/images/catalog/profnastil/profnastil_c8.jpg",
+    "profnastil-c20-03-ral-3005": "/images/catalog/profnastil/profnastil_c20.jpg",
+    "profnastil-c20-03-ral-6005": "/images/catalog/profnastil/profnastil_c20.jpg",
+    "profnastil-c20-03-ral-8017": "/images/catalog/profnastil/profnastil_c20.jpg",
+    "profnastil-c20-03-galvanized": "/images/catalog/profnastil/profnastil_c20.jpg",
+    "profnastil-c20-045-ral-7024": "/images/catalog/profnastil/profnastil_c20.jpg",
+    "profnastil-c20-045-ral-6005": "/images/catalog/profnastil/profnastil_c20.jpg",
+    "profnastil-c20-045-ral-8017": "/images/catalog/profnastil/profnastil_c20.jpg",
+    "profnastil-h75-05-galvanized": "/images/catalog/profnastil/profnastil_h75.jpg",
+    "profnastil-h75-07-galvanized": "/images/catalog/profnastil/profnastil_h75.jpg"
   },
   "categories": {
     "cat-arm": "/images/catalog/armatura.jpg",
@@ -406,7 +423,8 @@
     "cat-shv": "/images/catalog/shveller.jpeg",
     "mirror-welding": "/images/catalog/elektrody.webp",
     "mirror-coils": "/images/catalog/rulony.webp",
-    "cat-trk": "/images/catalog/truba-kruglaya/truba-category title.jpg"
+    "cat-trk": "/images/catalog/truba-kruglaya/truba-category title.jpg",
+    "cat-pnf": "/images/catalog/profnastil/profnastil_c8.jpg"
   },
   "types": {
     "type-cat-arm-sub-2": "/images/catalog/armatura/armatura_a400_35g.jpg",
@@ -418,6 +436,9 @@
     "type-cat-kva-sub-1": "/images/catalog/kvadrat.jpeg",
     "type-cat-kru-sub-1": "/images/catalog/krug.jpg",
     "type-cat-lis-sub-1": "/images/catalog/list-goryachekatanyy.jpg",
+    "type-cat-pnf-sub-1": "/images/catalog/profnastil/profnastil_c8.jpg",
+    "type-cat-pnf-sub-2": "/images/catalog/profnastil/profnastil_c20.jpg",
+    "type-cat-pnf-sub-3": "/images/catalog/profnastil/profnastil_h75.jpg",
     "type-cat-pol-sub-1": "/images/catalog/polosa.jpg",
     "type-cat-pol-sub-3": "/images/catalog/polosa.jpg",
     "type-cat-trs-sub-1": "/images/catalog/truby-stalnye.jpg",
@@ -429,6 +450,7 @@
     "type-cat-trp-sub-2": "/images/catalog/truby-profilnye/truby-priamougolnie.jpg",
     "type-cat-ugo-sub-1": "/images/catalog/ugolok.jpg",
     "type-cat-shv-sub-1": "/images/catalog/shveller.jpeg",
+    "type-cat-shv-sub-2": "/images/catalog/shveller.jpeg",
     "type-cat-shv-sub-3": "/images/catalog/shveller.jpeg",
     "type-mirror-family-cat-kva-19": "/images/catalog/kvadrat.jpeg",
     "type-mirror-family-cat-pol-20": "/images/catalog/polosa.jpg",

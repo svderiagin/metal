@@ -5,6 +5,7 @@ import {katankaProducts} from "./katanka";
 import {kvadratProducts} from "./kvadrat";
 import {krugProducts} from "./krug";
 import {listovoyProkatProducts} from "./listovoyProkat";
+import {profnastilProducts} from "./profnastil";
 import {otvodyProducts} from "./otvody";
 import {polosaProducts} from "./polosa";
 import {provolokaProducts} from "./provoloka";
@@ -31,6 +32,7 @@ const productSources: ProductVariantSource[] = [
   ...kvadratProducts,
   ...krugProducts,
   ...listovoyProkatProducts,
+  ...profnastilProducts,
   ...otvodyProducts,
   ...polosaProducts,
   ...provolokaProducts,
@@ -58,7 +60,7 @@ export const existingVariants: ProductVariant[] = productSources.map((product) =
 
 export const productVariants: ProductVariant[] = [
   ...existingVariants.filter(p => !(importedCatalog.matchedIds as string[]).includes(p.id)),
-  ...importedCatalog.products as ProductVariant[],
+  ...(importedCatalog.products as ProductVariant[]).filter(product => product.categoryId !== "cat-shv"),
 ].filter(isPublicProduct).map(normalizeRebarVariant).map(normalizeBeamVariant).map(normalizePipeWeight).map(product => ({
   ...product,
   imageUrls: (catalogImages.products as Record<string, string>)[product.id]
@@ -68,6 +70,7 @@ export const productVariants: ProductVariant[] = [
 
 function estimateDemoWeight(product: ProductVariantSource): ProductWeight | undefined {
   if (isPipeProduct(product)) return undefined;
+  if (product.profileMark) return undefined;
   const size = Number.parseFloat(
     product.attributes.find((attribute) => attribute.key === "size")?.value.replace(",", ".") ?? "0",
   );

@@ -21,7 +21,7 @@ import type {ProductVariant} from "@/types/product";
 
 export function MeasuredVariantItem({
   variant, view, kind,
-}: {variant: ProductVariant; view: "table" | "card"; kind: "rebar" | "beam" | "vgp" | "profile"}) {
+}: {variant: ProductVariant; view: "table" | "card"; kind: "rebar" | "beam" | "vgp" | "profile" | "channel-hot" | "channel-bent"}) {
   return kind === "profile" ? <ProfilePipeVariantItem variant={variant} view={view}/>
     : <TonnageMeasuredVariantItem variant={variant} view={view} kind={kind}/>;
 }
@@ -32,7 +32,7 @@ function TonnageMeasuredVariantItem({
   kind,
 }: {
   variant: ProductVariant;
-  kind: "rebar" | "beam" | "vgp";
+  kind: "rebar" | "beam" | "vgp" | "channel-hot" | "channel-bent";
   view: "table" | "card";
 }) {
   const {addItem, updateQuantity, removeItem, lines, hydrated} = useCart();
@@ -40,6 +40,9 @@ function TonnageMeasuredVariantItem({
   const mass = variant.weightPerMeterKg ?? 0;
   const isBeam = kind === "beam";
   const isVgp = kind === "vgp";
+  const isHotChannel = kind === "channel-hot";
+  const isBentChannel = kind === "channel-bent";
+  const isChannel = isHotChannel || isBentChannel;
   const [detailsOpen, setDetailsOpen] = useState(false);
   const cartLine = lines.find((line) => line.productId === variant.id);
   const savedMeasurement = cartLine?.measurement;
@@ -170,9 +173,15 @@ function TonnageMeasuredVariantItem({
         {!isVgp && <CatalogImage src={variant.imageUrls[0]} name={variant.name}/>}
         <h3 className="mt-1 font-bold">{variant.name}</h3>
         <dl className="mt-4 grid grid-cols-2 gap-3 text-sm">
-          <VariantDetail label={isVgp ? "Ду × стенка, мм" : isBeam ? "Профиль" : "Диаметр"} value={isVgp ? vgpSize(variant) : isBeam ? beamProfile(variant) : `${formatNumber(variant.diameterMm ?? 0)} мм`}/>
-          <VariantDetail label={isVgp ? "Серия" : isBeam ? "Тип балки" : "Форма"} value={isVgp ? vgpSeries(variant) : isBeam ? beamKind(variant) : formLabel(variant.form ?? "bar")}/>
-          <VariantDetail label={isVgp ? "Наружный Ø, мм" : isBeam ? "Сталь / класс" : "Марка стали"} value={isVgp ? formatNumber(variant.diameterMm ?? 0) : variant.steelGrade ?? "—"}/>
+          <VariantDetail
+            label={isHotChannel ? "Номер и серия" : isBentChannel ? "Размер, мм" : isVgp ? "Ду × стенка, мм" : isBeam ? "Профиль" : "Диаметр"}
+            value={isHotChannel ? channelDesignation(variant) : isBentChannel ? bentChannelSize(variant) : isVgp ? vgpSize(variant) : isBeam ? beamProfile(variant) : `${formatNumber(variant.diameterMm ?? 0)} мм`}
+          />
+          <VariantDetail
+            label={isHotChannel ? "Марка стали" : isBentChannel ? "Стенка, мм" : isVgp ? "Серия" : isBeam ? "Тип балки" : "Форма"}
+            value={isHotChannel ? variant.steelGrade ?? "—" : isBentChannel ? formatNumber(variant.wallThicknessMm ?? 0) : isVgp ? vgpSeries(variant) : isBeam ? beamKind(variant) : formLabel(variant.form ?? "bar")}
+          />
+          {!isChannel && <VariantDetail label={isVgp ? "Наружный Ø, мм" : isBeam ? "Сталь / класс" : "Марка стали"} value={isVgp ? formatNumber(variant.diameterMm ?? 0) : variant.steelGrade ?? "—"}/>}
           <VariantDetail label="Вес" value={hasMass ? `${formatNumber(mass)} кг/м` : "—"}/>
           <VariantDetail
             label="Длина"
@@ -206,6 +215,31 @@ function TonnageMeasuredVariantItem({
         <div className="mt-4">{action}</div>
         <span aria-live="polite" className={`mt-1 block text-xs ${message ? "text-red-700" : "text-slate-500"}`}>{status}</span>
       </article>
+    );
+  }
+
+  if (isChannel) {
+    return (
+      <tr id={`variant-${variant.id}`} title={variant.name} className="border-t border-slate-200 align-middle">
+        <td className="px-2 py-4 font-bold">{isHotChannel ? channelDesignation(variant) : bentChannelSize(variant)}</td>
+        <td className="px-2 py-4">{isHotChannel ? variant.steelGrade ?? "—" : formatNumber(variant.wallThicknessMm ?? 0)}</td>
+        <td className="px-2 py-4 font-semibold tabular-nums">{`${variant.priceQualifier === "from" ? "от " : ""}${formatUnitPrice(pricePerTon ?? null, "за тонну")}`}</td>
+        <td className="px-2 py-4">{hasMass ? formatNumber(mass) : "—"}</td>
+        <td className="px-2 py-4">{variant.lengthMeters === undefined ? "—" : formatNumber(variant.lengthMeters)}</td>
+        <td className="px-2 py-3">
+          <OrderInput label={`Длина заказа для ${variant.name}`} value={meters} onChange={updateMeters}/>
+        </td>
+        <td className="px-2 py-3">
+          <OrderInput label={`Вес заказа в тоннах для ${variant.name}`} value={tons} onChange={updateTons} decimalPlaces={3}/>
+        </td>
+        <td className={`${tableStyles.sumColumn} py-3`}>
+          <output aria-label={`Сумма заказа для ${variant.name}`} aria-live="polite" className={totalClassName}>{totalLabel}</output>
+        </td>
+        <td className="px-2 py-3 text-center">
+          {action}
+          <span aria-live="polite" className={`mx-auto mt-1 block max-w-32 text-xs ${message ? "text-red-700" : "text-slate-500"}`}>{status}</span>
+        </td>
+      </tr>
     );
   }
 
@@ -278,4 +312,14 @@ function VariantDetail({label, value}: {label: string; value: string}) {
 
 function formLabel(form: "coil" | "bar") {
   return form === "coil" ? "В бунтах" : "Пруток";
+}
+
+function channelDesignation(variant: ProductVariant) {
+  return `${formatNumber(variant.channelNumber ?? 0)}${variant.channelSeries ?? ""}`;
+}
+
+function bentChannelSize(variant: ProductVariant) {
+  return [variant.profileHeightMm, variant.profileWidthMm, variant.wallThicknessMm]
+    .map(value => formatNumber(value ?? 0))
+    .join("×");
 }

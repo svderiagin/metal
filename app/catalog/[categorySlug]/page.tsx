@@ -40,7 +40,9 @@ export default async function CategoryPage({params}: Props) {
   const mainImageUrl = category.id === "cat-trp"
     ? "/images/catalog/truby-profilnye/trubi-main.jpg"
     : category.imageUrl;
-  const hasImage = !mainImageUrl.endsWith(".svg");
+  const hasImage = category.id !== "cat-pnf" && !mainImageUrl.endsWith(".svg");
+  const introDescription = category.descriptionSections?.intro ?? category.description;
+  const detailedDescription = category.descriptionSections?.details;
 
   return (
     <PageContainer className="py-8 sm:py-10 lg:py-12">
@@ -51,15 +53,21 @@ export default async function CategoryPage({params}: Props) {
         </Suspense>
         <div className="min-w-0">
           <div className={`grid gap-x-6 gap-y-4 ${hasImage ? "md:grid-cols-[minmax(0,1fr)_320px] xl:grid-cols-[minmax(0,1fr)_360px]" : ""}`}>
-            <h1 className="text-3xl font-black">{category.name}</h1>
+            <h1 className="text-[1.625rem] font-bold leading-[1.2] sm:text-3xl">{category.name}</h1>
             {hasImage && <div className="relative aspect-[2/1] w-full overflow-hidden rounded-xl bg-white md:col-start-2 md:row-span-2 md:row-start-1 md:self-center">
               <Image src={catalogImageUrl(mainImageUrl)} alt={category.name} fill
                 sizes="(min-width: 1280px) 360px, (min-width: 768px) 320px, calc(100vw - 48px)"
                 className="object-contain object-center"/>
             </div>}
-            <CatalogDescription description={category.description} className="md:col-start-1"/>
+            <CatalogDescription description={introDescription} variant="category" className="md:col-start-1"/>
           </div>
           <ProductTypeResults productTypes={productTypes} variants={variants}/>
+          {detailedDescription && <section className="mt-12 max-w-[800px]" aria-labelledby={`${category.id}-details-heading`}>
+            <h2 id={`${category.id}-details-heading`} className="text-2xl font-bold leading-tight">
+              {category.descriptionSections?.title ?? `Подробнее о категории «${category.name}»`}
+            </h2>
+            <CatalogDescription description={detailedDescription} variant="categoryDetails" className="mt-4"/>
+          </section>}
           <div className="mt-10 rounded-lg bg-slate-900 p-6 text-white">
             <h2 className="text-xl font-bold">Нужна комплектация по спецификации?</h2>
             <p className="mt-2 text-slate-300">Опишите позиции и необходимые услуги — подготовим единый

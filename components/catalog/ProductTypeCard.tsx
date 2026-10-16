@@ -38,11 +38,13 @@ export function ProductTypeCard({
         </div>}
 
         <div className="flex flex-1 flex-col px-5 pb-5 pt-4 sm:px-6 sm:pb-6 sm:pt-5">
-          <h2 className="text-lg font-bold text-slate-950">{productType.name}</h2>
-          <p className="mt-2 flex-1 text-sm leading-6 text-slate-600">
-            {productType.shortDescription}
-          </p>
-          <p className="mt-3 text-sm leading-6 text-slate-600">{standard}</p>
+          <div className="flex-1">
+            <h2 className="text-lg font-bold text-slate-950">{productType.name}</h2>
+            <p className="mt-2 text-sm leading-6 text-slate-600">
+              {productType.shortDescription}
+            </p>
+            {standard !== "Уточняется" && <p className="mt-3 text-sm leading-6 text-slate-600">{standard}</p>}
+          </div>
 
           <div className="mt-5 border-t border-slate-100 pt-5">
             <div className="flex items-baseline gap-1 whitespace-nowrap">

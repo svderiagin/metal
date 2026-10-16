@@ -28,14 +28,37 @@ function highlight(text: string) {
     : part);
 }
 
-export function CatalogDescription({description, className = "mt-6"}: {description: string; className?: string}) {
+function richText(text: string) {
+  return text.split(/(\*\*[^*]+\*\*)/u).map((part, index) => part.startsWith("**") && part.endsWith("**")
+    ? <strong key={index} className="font-semibold">{part.slice(2, -2)}</strong>
+    : <span key={index}>{highlight(part)}</span>);
+}
+
+export function CatalogDescription({description, className = "mt-6", variant = "default"}: {
+  description: string;
+  className?: string;
+  variant?: "default" | "category" | "categoryDetails";
+}) {
+  const blocks = description.split(/\n\s*\n/u).filter(block => block.trim());
+  const typography = variant === "categoryDetails"
+    ? "max-w-[800px] space-y-4 text-base font-normal leading-[1.6] text-slate-700"
+    : variant === "category"
+      ? "max-w-[80ch] space-y-3 text-[15px] leading-6 text-slate-700 sm:space-y-4 sm:text-base sm:leading-[1.6]"
+    : "w-full space-y-4 text-[15px] leading-7 text-slate-700 sm:text-base sm:leading-7";
   return (
-    <div className={`w-full space-y-4 text-[15px] leading-7 text-slate-700 sm:text-base sm:leading-7 ${className}`}>
-      {paragraphs(description).map((paragraph, index) => (
-        <p key={index}>
-          {highlight(paragraph)}
-        </p>
-      ))}
+    <div className={`${typography} ${className}`}>
+      {blocks.flatMap((block, blockIndex) => {
+        const lines = block.split("\n").map(line => line.trim()).filter(Boolean);
+        if (lines.length > 0 && lines.every(line => line.startsWith("- "))) {
+          return [<ul key={`list-${blockIndex}`} className="list-disc space-y-2 pl-6">
+            {lines.map((line, lineIndex) => <li key={lineIndex}>{richText(line.slice(2))}</li>)}
+          </ul>];
+        }
+        const semanticParagraphs = variant === "category" || variant === "categoryDetails" ? [block] : paragraphs(block);
+        return semanticParagraphs.map((paragraph, paragraphIndex) => (
+          <p key={`paragraph-${blockIndex}-${paragraphIndex}`}>{richText(paragraph)}</p>
+        ));
+      })}
     </div>
   );
 }

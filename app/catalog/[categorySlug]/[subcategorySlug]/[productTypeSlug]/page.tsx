@@ -1,6 +1,6 @@
 import type {Metadata} from "next";
 import {Suspense} from "react";
-import {notFound} from "next/navigation";
+import {notFound, redirect} from "next/navigation";
 import {Breadcrumbs} from "@/components/catalog/Breadcrumbs";
 import {CatalogSidebar} from "@/components/catalog/CatalogSidebar";
 import {CatalogDescription} from "@/components/catalog/CatalogDescription";
@@ -59,7 +59,12 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
 }
 
 export default async function ProductTypePage({params}: Props) {
-  const resolved = resolveProductType(await params);
+  const routeParams = await params;
+  if (routeParams.categorySlug === "shveller"
+    && ["shveller-stalnoy", "shveller-nizkolegirovannyy", "shveller"].includes(routeParams.subcategorySlug)) {
+    redirect("/catalog/shveller/shveller-goryachekatanyy/shveller-goryachekatanyy");
+  }
+  const resolved = resolveProductType(routeParams);
   if (!resolved) notFound();
 
   const {category, productType} = resolved;

@@ -40,7 +40,7 @@ export function CartItemRow({line}: { line: CartLine }) {
           Ввод: {line.measurement.inputMode === "meter" ? "метры" : "тонны"}
         </p>
       ) : (
-        <div><QuantitySelector value={line.quantity} onChange={(value) => updateQuantity(line.productId, value)}/>
+        <div><QuantitySelector whole={line.wholeQuantity} value={line.quantity} onChange={(value) => updateQuantity(line.productId, value)}/>
           <span className="ml-2 text-sm text-slate-500">{line.quantityUnit}</span></div>
       )}
       <div className="flex items-center justify-between gap-5 md:block md:min-w-32 md:text-right">

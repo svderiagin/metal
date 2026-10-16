@@ -203,6 +203,30 @@ const originalSubcategories: Subcategory[] = [
     "description": "Лист алюминиевый для строительных, производственных и монтажных задач. Доступны подбор размера, резка и комплектная отгрузка."
   },
   {
+    "id": "cat-pnf-sub-1",
+    "categoryId": "cat-pnf",
+    "name": "Профнастил С8",
+    "slug": "profnastil-s8",
+    "shortDescription": "Стеновой профиль с высотой волны 8 мм. Подходит для заборов, облицовки фасадов и обшивки хозяйственных построек.",
+    "description": "Стеновой профнастил для заборов, облицовки фасадов и обшивки хозяйственных построек. Небольшая высота профиля обеспечивает аккуратный внешний вид, но ограничивает жёсткость листа. При выборе учитывают толщину стали, размеры листа и тип покрытия."
+  },
+  {
+    "id": "cat-pnf-sub-2",
+    "categoryId": "cat-pnf",
+    "name": "Профнастил С20",
+    "slug": "profnastil-s20",
+    "shortDescription": "Универсальный профиль для заборов, фасадов и кровли частных домов, гаражей и навесов. Жёстче С8, подходит для кровли при правильном выборе толщины и шага обрешётки.",
+    "description": "Универсальный профнастил для заборов, фасадов, кровли частных домов, гаражей и навесов. Обладает большей жёсткостью по сравнению с С8. При выборе для кровли учитывают толщину стали, уклон крыши, шаг обрешётки и снеговые нагрузки."
+  },
+  {
+    "id": "cat-pnf-sub-3",
+    "categoryId": "cat-pnf",
+    "name": "Профнастил Н75",
+    "slug": "profnastil-n75",
+    "shortDescription": "Несущий профиль высотой 75 мм для кровельных настилов и конструкций с повышенными нагрузками. Применяется с учётом расчётных пролётов и нагрузок.",
+    "description": "Несущий профнастил для кровельных настилов, перекрытий и конструкций с повышенными нагрузками. Высота профиля 75 мм обеспечивает высокую жёсткость листа. Толщину стали и допустимый пролёт выбирают по расчётным нагрузкам."
+  },
+  {
     "id": "cat-otv-sub-1",
     "categoryId": "cat-otv",
     "name": "Отводы стальные",
@@ -429,18 +453,22 @@ const originalSubcategories: Subcategory[] = [
   {
     "id": "cat-shv-sub-1",
     "categoryId": "cat-shv",
-    "name": "Швеллер стальной",
-    "slug": "shveller-stalnoy",
-    "shortDescription": "Швеллер стальной: складские позиции популярных размеров и марок.",
-    "description": "Швеллер стальной для строительных, производственных и монтажных задач. Доступны подбор размера, резка и комплектная отгрузка."
+    "name": "Швеллер горячекатаный",
+    "slug": "shveller-goryachekatanyy",
+    "shortDescription": "Стальной профиль для балок, рам, лестниц и каркасов гаражей. Применяется в несущих конструкциях с учётом проектных нагрузок.",
+    "description": "Стальной профиль для балок, рам, лестниц и каркасов гаражей. Применяется в несущих конструкциях с учётом проектных нагрузок. ГОСТ 8240-97.",
+    "materialDescription": "Сталь; марка уточняется",
+    "referenceStandard": "ГОСТ 8240-97"
   },
   {
     "id": "cat-shv-sub-2",
     "categoryId": "cat-shv",
     "name": "Швеллер гнутый",
     "slug": "shveller-gnutyy",
-    "shortDescription": "Швеллер гнутый: складские позиции популярных размеров и марок.",
-    "description": "Швеллер гнутый для строительных, производственных и монтажных задач. Доступны подбор размера, резка и комплектная отгрузка."
+    "shortDescription": "Стальной профиль для лёгких каркасов, направляющих, обрамлений и вспомогательных металлоконструкций.",
+    "description": "Стальной профиль для лёгких каркасов, направляющих, обрамлений и вспомогательных металлоконструкций. ГОСТ 8278-83.",
+    "materialDescription": "Сталь; марка уточняется",
+    "referenceStandard": "ГОСТ 8278-83"
   },
   {
     "id": "cat-shv-sub-3",
@@ -501,8 +529,12 @@ const originalSubcategories: Subcategory[] = [
 ];
 
 export const subcategories: Subcategory[] = [
-  ...(importedCatalog.families as Subcategory[]).filter(family => family.id !== "mirror-family-cat-bal-15"),
+  ...(importedCatalog.families as Subcategory[]).filter(family => family.id !== "mirror-family-cat-bal-15"
+    && family.categoryId !== "cat-shv"),
   ...originalSubcategories.filter(subcategory => subcategory.id === "cat-bal-sub-4"
+    && !importedCatalog.families.some(family => family.id === subcategory.id)),
+  ...originalSubcategories.filter(subcategory => ["cat-shv-sub-1", "cat-shv-sub-2"].includes(subcategory.id)),
+  ...originalSubcategories.filter(subcategory => ["cat-pnf-sub-1", "cat-pnf-sub-2", "cat-pnf-sub-3"].includes(subcategory.id)
     && !importedCatalog.families.some(family => family.id === subcategory.id)),
 ];
 // Display normal beams before wide-flange beams without changing other categories.

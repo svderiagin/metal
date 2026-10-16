@@ -30,7 +30,7 @@ export function buildTechnicalDocument(product: ProductVariant): TechnicalDocume
   for (const spec of specs.filter(s => /профил|размер|сечение/i.test(s.name))) chains.push(...dimensions(spec.value));
   const primary = new Set(chains.map(chain => chain[0]));
   if (product.diameterMm !== undefined) primary.add(String(product.diameterMm));
-  for (const spec of specs) if (/диаметр|размер/i.test(spec.name) || (/толщина/i.test(spec.name) && product.categoryId === "cat-lis")) {
+  for (const spec of specs) if (/диаметр|размер/i.test(spec.name) || (/толщина/i.test(spec.name) && ["cat-lis", "cat-pnf"].includes(product.categoryId))) {
     const match = normalizeText(spec.value).match(/^\d+(?:\.\d+)?$/); if (match) primary.add(canonicalNumber(match[0]));
   }
   // Editable demo rows have a single size, not a fully specified hollow section.
@@ -87,7 +87,7 @@ export function technicalMatch(query: TechnicalQuery, doc: TechnicalDocument, pr
   if (query.diameter && !(product.diameterMm === Number(query.diameter) || product.specifications.some(s => /диаметр/i.test(s.name) && canonicalNumber(s.value) === query.diameter))) return false;
   if (query.thickness) {
     const thicknesses = product.specifications.filter(s => /толщина/i.test(s.name)).map(s => canonicalNumber(s.value));
-    if (!thicknesses.includes(query.thickness) && !(product.categoryId === "cat-lis" && doc.primary.has(query.thickness))) return false;
+    if (!thicknesses.includes(query.thickness) && !(["cat-lis", "cat-pnf"].includes(product.categoryId) && doc.primary.has(query.thickness))) return false;
   }
   if (!query.standards.every(s => [...doc.standards].some(candidate => candidate === s || (!s.includes("-") && candidate.split("-")[0] === s)))) return false;
   return query.grades.every(g => doc.grades.has(g) || (/^ст\d+$/.test(g) && [...doc.grades].some(candidate => new RegExp(`^${g}(?:сп|пс|кп)$`).test(candidate))));

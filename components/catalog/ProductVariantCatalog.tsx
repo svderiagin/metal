@@ -28,9 +28,12 @@ import {
   RebarVariantCatalog,
   VgpVariantCatalog,
   ProfilePipeVariantCatalog,
+  ChannelVariantCatalog,
 } from "@/components/catalog/RebarVariantCatalog";
 import {isVgpVariant} from "@/lib/vgp";
 import {isProfilePipeVariant} from "@/lib/profilePipe";
+import {isProfileSheetVariant} from "@/lib/profileSheet";
+import {ProfileSheetVariantCatalog} from "./ProfileSheetVariantCatalog";
 
 type SortMode = "relevance" | "availability" | "price-asc" | "price-desc" | "size" | "name";
 
@@ -48,6 +51,15 @@ function VariantCatalogContent({
   variants: ProductVariant[];
   categorySlug: string;
 }) {
+  if (variants.length > 0 && variants.every(isProfileSheetVariant)) {
+    return <ProfileSheetVariantCatalog variants={variants}/>;
+  }
+  if (categorySlug === "shveller") {
+    return <ChannelVariantCatalog
+      variants={variants}
+      bent={variants.every(variant => variant.subcategoryId === "cat-shv-sub-2")}
+    />;
+  }
   if (categorySlug === "truby-profilnye") {
     const structured = variants.filter(isProfilePipeVariant);
     const legacy = variants.filter(variant => !isProfilePipeVariant(variant));

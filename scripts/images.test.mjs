@@ -14,7 +14,10 @@ const {normalizePipeWeight}=readProjectData('lib/pipeWeight.ts');
 const {isPublicProduct}=readProjectData('data/catalog-visibility.ts');
 const imported=read('data/imported-catalog.json');
 const {productVariants,existingVariants}=readProjectData('data/products/index.ts');
-const original=[...existingVariants.filter(p=>!imported.matchedIds.includes(p.id)),...imported.products].filter(isPublicProduct).map(normalizeRebarVariant).map(normalizeBeamVariant).map(normalizePipeWeight);
+const original=[
+ ...existingVariants.filter(p=>!imported.matchedIds.includes(p.id)),
+ ...imported.products.filter(p=>p.categoryId!=='cat-shv'),
+].filter(isPublicProduct).map(normalizeRebarVariant).map(normalizeBeamVariant).map(normalizePipeWeight);
 const digest=b=>crypto.createHash('sha256').update(b).digest('hex');
 
 test('image overlay preserves every product field other than image references',()=>{
@@ -48,7 +51,7 @@ test('copied image bytes match preserved supplier evidence',{skip:evidenceSkip},
 });
 test('incompatible forms keep fallbacks instead of inheriting generic category imagery',()=>{
  for(const p of productVariants){
-  if(p.form==='coil'||/овальн|рифлен.*ромб|рифлён.*ромб|RAL|полимер/i.test(p.name))assert(!mapping.products[p.id],p.name);
+  if(p.form==='coil'||(/овальн|рифлен.*ромб|рифлён.*ромб|RAL|полимер/i.test(p.name)&&!p.profileMark))assert(!mapping.products[p.id],p.name);
   if(report&&p.categoryId==='cat-arm'&&/А240|А1(?:,|\s)/.test(p.name)&&mapping.products[p.id])assert(report.records.some(r=>r.targetId===p.id&&r.role==='smooth'),p.name);
   if(p.categoryId==='cat-otv'||p.categoryId==='cat-she'||p.categoryId==='cat-cve'||p.categoryId==='cat-trn')assert(!mapping.products[p.id],p.name);
  }

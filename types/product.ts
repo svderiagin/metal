@@ -66,6 +66,13 @@ export interface ProductVariant {
   wallThicknessMm?: number;
   profileWidthMm?: number;
   profileHeightMm?: number;
+  channelNumber?: number;
+  channelSeries?: "П" | "У";
+  profileMark?: "С8" | "С20" | "Н75";
+  sheetSizeMeters?: string;
+  colorName?: string;
+  ralCode?: string;
+  coatingType?: "galvanized" | "painted";
   lengthRangeMeters?: [number, number];
   weightConfirmed?: boolean;
   form?: "coil" | "bar";

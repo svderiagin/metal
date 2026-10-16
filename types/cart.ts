@@ -32,4 +32,5 @@ export interface CartLine extends CartItem {
   priceUnit: string;
   quantityUnit: string;
   estimatedTotal: number;
+  wholeQuantity?: boolean;
 }

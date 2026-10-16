@@ -6,6 +6,7 @@ import ts from 'typescript';
 import {readProjectData} from './project-data.mjs';
 
 const pipe=readProjectData('lib/profilePipe.ts');
+const profileSheet=readProjectData('lib/profileSheet.ts');
 const {revalidateCartPrice}=readProjectData('lib/cartPricing.ts');
 const catalog=readProjectData('lib/catalog.ts');
 const rows=catalog.getProductVariantsByCategoryId('cat-trp').filter(pipe.isProfilePipeVariant);
@@ -50,8 +51,8 @@ test('the real cart provider replaces piece orders, preserves length and rejects
  const product={...base,price:157,priceConfirmed:true,quoteOnly:false};let cursor=0;const state=[];const timers=[];const storage=new Map();
  const react={createContext:()=>({}),useState(initial){const i=cursor++;if(!(i in state))state[i]=initial;return [state[i],value=>{state[i]=typeof value==='function'?value(state[i]):value;}];},useEffect(effect){effect();},useMemo:fn=>fn(),useCallback:fn=>fn};
  const mockCatalog={...catalog,getProductVariantById:id=>id===product.id?product:catalog.getProductVariantById(id)};
- const cart=evaluateModule('lib/cart.ts',{'./catalog':mockCatalog,'./cartPricing':{revalidateCartPrice},'./variantPresentation':readProjectData('lib/variantPresentation.ts'),'./profilePipe':pipe});
- const imports={react,'react/jsx-runtime':{jsx:(type,props)=>({type,props})},'@/lib/constants':readProjectData('lib/constants.ts'),'@/lib/catalog':mockCatalog,'@/lib/cart':cart,'@/lib/profilePipe':pipe,'@/lib/cartPricing':{revalidateCartPrice}};
+ const cart=evaluateModule('lib/cart.ts',{'./catalog':mockCatalog,'./cartPricing':{revalidateCartPrice},'./variantPresentation':readProjectData('lib/variantPresentation.ts'),'./profilePipe':pipe,'./profileSheet':profileSheet});
+ const imports={react,'react/jsx-runtime':{jsx:(type,props)=>({type,props})},'@/lib/constants':readProjectData('lib/constants.ts'),'@/lib/catalog':mockCatalog,'@/lib/cart':cart,'@/lib/profilePipe':pipe,'@/lib/profileSheet':profileSheet,'@/lib/cartPricing':{revalidateCartPrice}};
  const {CartProvider}=evaluateModule('context/CartContext.tsx',imports,{window:{setTimeout(fn){timers.push(fn);},clearTimeout(){}},localStorage:{getItem:key=>storage.get(key),setItem:(key,value)=>storage.set(key,value)}});
  const render=()=>{cursor=0;return CartProvider({children:null}).props.value;};render();timers.shift()();
  render().addItem(product.id,12,undefined,{pieces:2,lengthMeters:6});assert.equal(render().lines[0].estimatedTotal,1884);
