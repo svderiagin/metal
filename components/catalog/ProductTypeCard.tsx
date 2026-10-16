@@ -29,7 +29,7 @@ export function ProductTypeCard({
       >
         {productType.imageUrl ? <div className="relative aspect-[2/1] w-full shrink-0 bg-white">
           <Image src={catalogImageUrl(productType.imageUrl)} alt={productType.name} fill
-            sizes="(min-width: 1280px) 390px, (min-width: 640px) calc((100vw - 72px) / 2), calc(100vw - 34px)"
+            sizes="auto, (min-width: 1280px) 422px, (min-width: 640px) calc((100vw - 56px) / 2), calc(100vw - 34px)"
             className="object-cover object-center"/>
         </div> : <div className="flex aspect-[2/1] w-full shrink-0 items-center justify-center border-b border-slate-200 bg-[linear-gradient(135deg,#f8fafc_25%,#e2e8f0_25%,#e2e8f0_50%,#f8fafc_50%,#f8fafc_75%,#e2e8f0_75%)] bg-[length:20px_20px] p-5">
           <span className="rounded-lg bg-slate-900/90 px-4 py-2 text-center text-sm font-bold text-white">

@@ -2,6 +2,13 @@ import type {NextConfig} from "next";
 
 const nextConfig: NextConfig = {
   allowedDevOrigins: ["127.0.0.1"],
+  async headers() {
+    return [{
+      source: "/images/:path*",
+      has: [{type: "query", key: "v", value: "[a-f0-9]{12}"}],
+      headers: [{key: "Cache-Control", value: "public, max-age=31536000, immutable"}],
+    }];
+  },
   async redirects() {
     return [
       {"source":"/catalog/truby-stalnye/truba-vodogazoprovodnaya/:path*","destination":"/catalog/truba-kruglaya/truba-vodogazoprovodnaya/:path*","permanent":true},
@@ -50,6 +57,8 @@ const nextConfig: NextConfig = {
   },
   images: {
     formats: ["image/avif", "image/webp"],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1440, 1920, 2048, 3840],
+    imageSizes: [32, 48, 64, 96, 128, 256, 320, 384, 480],
     localPatterns: [
       {pathname: "/images/hero/**"},
       {pathname: "/images/catalog/**"},

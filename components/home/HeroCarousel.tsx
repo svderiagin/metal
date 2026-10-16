@@ -22,7 +22,9 @@ export function HeroCarousel({slides, children}: {slides: HeroSlide[]; children:
   const [hovered, setHovered] = useState(false);
   const [focused, setFocused] = useState(false);
   const usable = useMemo(() => slides.filter(slide => status[slide.id] === "ready"), [slides, status]);
-  const active = usable.find(slide => slide.id === current) ?? usable[0];
+  // Показываем первый кадр из серверной разметки, не ожидая гидратации.
+  const active = usable.find(slide => slide.id === current) ?? usable[0]
+    ?? slides.find(slide => status[slide.id] !== "failed");
   const canRotate = usable.length > 1;
 
   useEffect(() => {
@@ -49,10 +51,13 @@ export function HeroCarousel({slides, children}: {slides: HeroSlide[]; children:
   // Первый кадр присутствует в серверной HTML-разметке и загружается без lazy-loading.
   useEffect(() => {
     const last = slides[requested - 1];
-    if (requested >= slides.length || !last) return;
+    const activeIndex = slides.findIndex(slide => slide.id === active?.id);
+    // Готовим один следующий кадр, не загружая всю невидимую карусель.
+    if (requested >= slides.length || !last || !visible || !tabVisible
+      || (activeIndex < requested - 1 && status[last.id] !== "failed")) return;
     const timer = window.setTimeout(() => setRequested(n => Math.min(n + 1, slides.length)), status[last.id] ? 250 : 5000);
     return () => window.clearTimeout(timer);
-  }, [requested, slides, status]);
+  }, [requested, slides, status, active, visible, tabVisible]);
 
   useEffect(() => {
     if (!enabled || !canRotate || !active || !visible || !tabVisible || hovered || focused) return;

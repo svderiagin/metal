@@ -238,7 +238,8 @@ try {
     assert.equal(await evaluate(active), focused, 'focus pauses autoplay');
     await call('Emulation.setEmulatedMedia', {features: [{name: 'prefers-reduced-motion', value: 'reduce'}]});
     await go('/');
-    await wait(`${hero}.querySelectorAll('img').length === 5`);
+    // Reduced motion prepares the next frame without downloading every slide.
+    await wait(`${hero}.querySelectorAll('img').length === 2 && [...${hero}.querySelectorAll('img')].every(i => i.complete && i.naturalWidth)`);
     const reduced = await evaluate(active);
     await delay(2300);
     assert.equal(await evaluate(active), reduced);
