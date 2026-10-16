@@ -23,6 +23,7 @@ export function getProductTypeSummary(productType: ProductType, variants: Produc
     material: productType.materialDescription ?? attributeValues("material"),
     standard: productType.referenceStandard ?? attributeValues("standard"),
     standardLabel: productType.referenceStandard ? "ГОСТ класса" : "Стандарт",
+    hasPrices: priced.length > 0,
     minimumPrice,
     priceUnit,
   };

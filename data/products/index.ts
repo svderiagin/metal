@@ -6,6 +6,7 @@ import {kvadratProducts} from "./kvadrat";
 import {krugProducts} from "./krug";
 import {listovoyProkatProducts} from "./listovoyProkat";
 import {profnastilProducts} from "./profnastil";
+import {metalMeshProducts} from "./metalMesh";
 import {otvodyProducts} from "./otvody";
 import {polosaProducts} from "./polosa";
 import {provolokaProducts} from "./provoloka";
@@ -33,6 +34,7 @@ const productSources: ProductVariantSource[] = [
   ...krugProducts,
   ...listovoyProkatProducts,
   ...profnastilProducts,
+  ...metalMeshProducts,
   ...otvodyProducts,
   ...polosaProducts,
   ...provolokaProducts,

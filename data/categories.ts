@@ -46,6 +46,14 @@ const originalCategories: Category[] = [
     "imageUrl": "/images/catalog/profnastil/profnastil_c8.jpg"
   },
   {
+    "id": "cat-mesh",
+    "name": "Сетка металлическая",
+    "slug": "setka-metallicheskaya",
+    "shortDescription": "Сетка-рабица и сварная сетка в рулонах и картах",
+    "description": "Металлическая сетка для ограждений, строительных и хозяйственных задач. В каталоге представлены сетка-рабица, сварная сетка в рулонах и сварная сетка в картах.",
+    "imageUrl": "/images/catalog/setka-metallicheskaya/setka-metallicheskaya.jpg"
+  },
+  {
     "id": "cat-trs",
     "name": "Трубы стальные",
     "slug": "truby-stalnye",
@@ -170,9 +178,11 @@ const importedCategories = (importedCatalog.categories as Category[]).map(catego
 
 const roundPipeIndex = importedCategories.findIndex(category => category.id === "cat-trk");
 const profnastilCategory = originalCategories.find(category => category.id === "cat-pnf")!;
+const metalMeshCategory = originalCategories.find(category => category.id === "cat-mesh")!;
 export const categories: Category[] = [
   ...importedCategories.slice(0, roundPipeIndex + 1),
   {...profnastilCategory, imageUrl: (catalogImages.categories as Record<string, string>)[profnastilCategory.id] ?? profnastilCategory.imageUrl},
+  {...metalMeshCategory, imageUrl: (catalogImages.categories as Record<string, string>)[metalMeshCategory.id] ?? metalMeshCategory.imageUrl},
   ...importedCategories.slice(roundPipeIndex + 1),
 ];
 export {originalCategories};

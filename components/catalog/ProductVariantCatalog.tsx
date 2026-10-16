@@ -34,6 +34,8 @@ import {isVgpVariant} from "@/lib/vgp";
 import {isProfilePipeVariant} from "@/lib/profilePipe";
 import {isProfileSheetVariant} from "@/lib/profileSheet";
 import {ProfileSheetVariantCatalog} from "./ProfileSheetVariantCatalog";
+import {isMetalMeshVariant} from "@/lib/metalMesh";
+import {MetalMeshVariantCatalog} from "./MetalMeshVariantCatalog";
 
 type SortMode = "relevance" | "availability" | "price-asc" | "price-desc" | "size" | "name";
 
@@ -53,6 +55,9 @@ function VariantCatalogContent({
 }) {
   if (variants.length > 0 && variants.every(isProfileSheetVariant)) {
     return <ProfileSheetVariantCatalog variants={variants}/>;
+  }
+  if (variants.length > 0 && variants.every(isMetalMeshVariant)) {
+    return <MetalMeshVariantCatalog variants={variants}/>;
   }
   if (categorySlug === "shveller") {
     return <ChannelVariantCatalog

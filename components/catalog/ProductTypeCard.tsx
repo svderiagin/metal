@@ -16,7 +16,7 @@ export function ProductTypeCard({
   categorySlug: string;
   subcategorySlug: string;
 }) {
-  const {standard, minimumPrice, priceUnit} = getProductTypeSummary(productType, variants);
+  const {standard, hasPrices, minimumPrice, priceUnit} = getProductTypeSummary(productType, variants);
   const [priceAmount, priceUnitLabel] = minimumPrice === null
     ? []
     : formatUnitPrice(minimumPrice, priceUnit).replace(/,00(?=\s*₽)/u, "").split(/\s+(?=₽)/u);
@@ -55,7 +55,7 @@ export function ProductTypeCard({
                   <span className="text-sm font-medium text-slate-500">{priceUnitLabel}</span>
                 </>
               )}
-              {minimumPrice === null && <strong className="text-xl leading-8">Цена по запросу</strong>}
+              {minimumPrice === null && <strong className="text-xl leading-8">{hasPrices ? "Цены в каталоге" : "Цена по запросу"}</strong>}
             </div>
           </div>
         </div>

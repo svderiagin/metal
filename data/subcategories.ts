@@ -227,6 +227,30 @@ const originalSubcategories: Subcategory[] = [
     "description": "Несущий профнастил для кровельных настилов, перекрытий и конструкций с повышенными нагрузками. Высота профиля 75 мм обеспечивает высокую жёсткость листа. Толщину стали и допустимый пролёт выбирают по расчётным нагрузкам."
   },
   {
+    "id": "cat-mesh-sub-1",
+    "categoryId": "cat-mesh",
+    "name": "Сетка рабица",
+    "slug": "setka-rabitsa",
+    "shortDescription": "Плетёная оцинкованная сетка в рулонах для ограждений и хозяйственных конструкций.",
+    "description": "Сетка-рабица применяется для устройства ограждений, вольеров и хозяйственных конструкций. Выберите размер ячейки, диаметр проволоки и размер рулона."
+  },
+  {
+    "id": "cat-mesh-sub-2",
+    "categoryId": "cat-mesh",
+    "name": "Сетка сварная в рулонах",
+    "slug": "setka-svarnaya-v-rulonah",
+    "shortDescription": "Рулонная металлическая сетка для строительных, штукатурных и хозяйственных работ.",
+    "description": "Сварная и тканая сетка в рулонах применяется для строительных, штукатурных и хозяйственных работ. В каталоге представлены позиции с ценой за рулон или погонный метр."
+  },
+  {
+    "id": "cat-mesh-sub-3",
+    "categoryId": "cat-mesh",
+    "name": "Сетка сварная в картах",
+    "slug": "setka-svarnaya-v-kartah",
+    "shortDescription": "Сварная металлическая сетка в картах разных размеров и диаметров проволоки.",
+    "description": "Сварная сетка в картах применяется в строительстве и для изготовления ограждений и каркасов. Выберите размер ячейки, диаметр проволоки и формат карты."
+  },
+  {
     "id": "cat-otv-sub-1",
     "categoryId": "cat-otv",
     "name": "Отводы стальные",
@@ -535,6 +559,8 @@ export const subcategories: Subcategory[] = [
     && !importedCatalog.families.some(family => family.id === subcategory.id)),
   ...originalSubcategories.filter(subcategory => ["cat-shv-sub-1", "cat-shv-sub-2"].includes(subcategory.id)),
   ...originalSubcategories.filter(subcategory => ["cat-pnf-sub-1", "cat-pnf-sub-2", "cat-pnf-sub-3"].includes(subcategory.id)
+    && !importedCatalog.families.some(family => family.id === subcategory.id)),
+  ...originalSubcategories.filter(subcategory => ["cat-mesh-sub-1", "cat-mesh-sub-2", "cat-mesh-sub-3"].includes(subcategory.id)
     && !importedCatalog.families.some(family => family.id === subcategory.id)),
 ];
 // Display normal beams before wide-flange beams without changing other categories.

@@ -4,6 +4,7 @@ import type {CartMeasurement, CartPieceOrder} from "@/types/cart";
 import {isVgpVariant, wholeVgpOrder} from "./vgp";
 import {hasConfirmedProfilePipePrice, isProfilePipeVariant, profilePipeOrder} from "./profilePipe";
 import {isProfileSheetVariant} from "./profileSheet";
+import {requiresWholeMetalMeshQuantity} from "./variantPresentation";
 
 type PriceInput = {quantity: number; measurement?: Pick<CartMeasurement, "inputMode" | "meters" | "weightTons">; pieceOrder?: CartPieceOrder};
 
@@ -30,6 +31,11 @@ export function revalidateCartPrice(product: ProductVariant, item: PriceInput) {
   if (item.pieceOrder) invalidReason = "Количество целых труб не применимо к этой позиции.";
   if (isProfileSheetVariant(product) && (!Number.isInteger(item.quantity) || item.measurement)) {
     invalidReason = "Укажите целое количество листов.";
+  }
+  if (requiresWholeMetalMeshQuantity(product) && (!Number.isInteger(item.quantity) || item.measurement)) {
+    invalidReason = product.priceUnit.toLocaleLowerCase("ru").includes("рулон")
+      ? "Укажите целое количество рулонов."
+      : "Укажите целое количество штук.";
   }
   let estimatedTotal = calculateLineTotal(item.quantity, product.price ?? 0);
   if (!Number.isFinite(item.quantity) || item.quantity <= 0 || (!item.measurement && item.quantity > 999)) {
