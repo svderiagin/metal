@@ -28,7 +28,6 @@ import {
   RebarVariantCatalog,
   VgpVariantCatalog,
   ProfilePipeVariantCatalog,
-  ChannelVariantCatalog,
 } from "@/components/catalog/RebarVariantCatalog";
 import {isVgpVariant} from "@/lib/vgp";
 import {isProfilePipeVariant} from "@/lib/profilePipe";
@@ -58,12 +57,6 @@ function VariantCatalogContent({
   }
   if (variants.length > 0 && variants.every(isMetalMeshVariant)) {
     return <MetalMeshVariantCatalog variants={variants}/>;
-  }
-  if (categorySlug === "shveller") {
-    return <ChannelVariantCatalog
-      variants={variants}
-      bent={variants.every(variant => variant.subcategoryId === "cat-shv-sub-2")}
-    />;
   }
   if (categorySlug === "truby-profilnye") {
     const structured = variants.filter(isProfilePipeVariant);

@@ -16,6 +16,7 @@ if(!fs.existsSync(baselinePath))write(baselinePath,{
 const baseline={categories:readProjectData('data/categories.ts').originalCategories||json(baselinePath).categories,families:readProjectData('data/subcategories.ts').originalSubcategories||json(baselinePath).families,products:readProjectData('data/products/index.ts').existingVariants||json(baselinePath).products};
 const clean=x=>String(x??'').replace(/[\s\u00a0\u202f]+/g,' ').trim();
 const identity=x=>clean(x).toLowerCase().replace(/[хx×]/g,'×').replace(/(\d),(\d)/g,'$1.$2');
+const retainedCategoryIds=new Set(['cat-arm','cat-trp','cat-trk','cat-pnf','cat-mesh','cat-bal']);
 const categories=structuredClone(baseline.categories),families=structuredClone(baseline.families);
 const byId=new Map(inventory.categories.map(c=>[c.id,c]));
 const classified=(r)=>{
@@ -61,6 +62,7 @@ const guidance={
 function categoryId(r){const c=classified(r);return categoryAlias[c]?categories.find(x=>x.slug===categoryAlias[c])?.id:c;}
 function categoryFor(r){
  const id=categoryId(r);if(!id)return null;
+ if(!retainedCategoryIds.has(id))return null;
  let c=categories.find(x=>x.id===id);
  if(!c){const n=newCategories.find(x=>x[0]===id);if(!n)return null;c={id,name:n[1],slug:n[2],shortDescription:guidance[id],description:guidance[id],imageUrl:'/images/categories/listovoy-prokat.svg'};categories.push(c);}
  return c;

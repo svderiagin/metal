@@ -25,13 +25,13 @@ function serverModule(file, mocks = {}) {
 const {createTrustedOrder} = serverModule('lib/server/orders.ts', {'node:crypto': {randomBytes}});
 
 test('stored cart deduplicates IDs, validates unknown JSON and keeps fractional units', () => {
-  const product = productVariants.find(p => p.price && p.unit === 'kg');
+  const product = productVariants.find(p => p.categoryId === 'cat-mesh' && p.price && p.unit === 'meter');
   const items = normalizeCartItems([null, 'broken', {productId:product.id, quantity:1}, {productId:product.id, quantity:.5}, {productId:'unknown', quantity:2}, {productId:'invalid', quantity:Infinity}]);
   assert.equal(items.length, 2);
   assert.equal(items[0].quantity, .5);
   const lines = createCartLines(items);
   assert.equal(lines[0].estimatedTotal, product.price * .5);
-  assert.equal(lines[0].quantityUnit, 'кг');
+  assert.equal(lines[0].quantityUnit, 'м');
   assert.ok(lines[1].invalidReason);
   assert.equal(lines[1].slug, '');
   assert.equal(normalizeCartItems({items}).length, 0);

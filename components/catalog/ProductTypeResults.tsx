@@ -19,7 +19,6 @@ export function ProductTypeResults({
   }
   const preserveOrder = productTypes.every(type => type.categoryId === "cat-trk")
     || productTypes.every(type => type.categoryId === "cat-bal")
-    || productTypes.every(type => type.categoryId === "cat-shv")
     || productTypes.every(type => type.categoryId === "cat-pnf")
     || productTypes.every(type => type.categoryId === "cat-mesh");
   const orderedTypes = preserveOrder ? productTypes : [...productTypes].sort((left, right) =>

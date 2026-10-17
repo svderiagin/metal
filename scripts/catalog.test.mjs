@@ -73,12 +73,13 @@ test('all records accounted for; unique IDs and valid routes',()=>{
   else assert.equal(p.quoteOnly,true);
  }
 });
-test('units remain per tonne and per kilogram, never per metre',()=>{
+test('retained supplier products remain priced per tonne',()=>{
  const products=read('data/imported-catalog.json').products;
- assert(products.some(p=>p.unit==='ton'&&p.price));assert(products.some(p=>p.unit==='kg'&&p.price));
- assert(!products.some(p=>p.unit==='meter'));
- assert.equal(products.find(p=>p.id==='local-80044').price,69750);
- assert.equal(products.find(p=>p.id==='local-67810').price,184500);
+ assert(products.some(p=>p.unit==='ton'&&p.price));
+ assert(products.every(p=>p.unit==='ton'));
+ assert(products.every(p=>['cat-arm','cat-trk','cat-bal'].includes(p.categoryId)));
+ assert.equal(products.find(p=>p.id==='local-258').price,53640);
+ assert.equal(products.find(p=>p.id==='local-65599').price,79470);
 });
 test('re-import is byte-identical and preserves editable local products', {skip: process.env.CATALOG_IMPORT_CHECK !== '1' ? 'Explicit opt-in; never regenerate the working catalog during checks' : false}, () => {
  const files=['data/imported-catalog.json','imports/catalog-manifest.json'];const before=files.map(p=>fs.readFileSync(p,'utf8'));

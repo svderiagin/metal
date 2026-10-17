@@ -1,22 +1,10 @@
 import {armaturaProducts} from "./armatura";
 import {armaturaA500cVariants} from "./armaturaA500c";
 import {balkaProducts} from "./balka";
-import {katankaProducts} from "./katanka";
-import {kvadratProducts} from "./kvadrat";
-import {krugProducts} from "./krug";
-import {listovoyProkatProducts} from "./listovoyProkat";
 import {profnastilProducts} from "./profnastil";
 import {metalMeshProducts} from "./metalMesh";
-import {otvodyProducts} from "./otvody";
-import {polosaProducts} from "./polosa";
-import {provolokaProducts} from "./provoloka";
 import {roundPipeLegacyProducts} from "./trubaKruglayaLegacy";
-import {trubyNerzhaveyushchieProducts} from "./trubyNerzhaveyushchie";
 import {trubyProfilnyeProducts, profilePipeProducts} from "./trubyProfilnye";
-import {ugolokProducts} from "./ugolok";
-import {shvellerProducts} from "./shveller";
-import {shestigrannikProducts} from "./shestigrannik";
-import {tsvetnoyMetalloprokatProducts} from "./tsvetnoyMetalloprokat";
 import type {ProductVariant, ProductVariantSource, ProductWeight} from "@/types/product";
 import importedCatalog from "../imported-catalog.json";
 import catalogImages from "../catalog-images.json";
@@ -24,28 +12,17 @@ import {normalizeRebarVariant} from "@/lib/rebar";
 import {normalizeBeamVariant} from "@/lib/beam";
 import {isPublicProduct} from "@/data/catalog-visibility";
 import {isPipeProduct, normalizePipeWeight} from "@/lib/pipeWeight";
+import {isRetainedCategory} from "@/data/catalog-scope";
 
 const productSources: ProductVariantSource[] = [
   ...armaturaProducts.filter((product) => product.subcategoryId !== "cat-arm-sub-1"),
   ...armaturaA500cVariants,
   ...balkaProducts,
-  ...katankaProducts,
-  ...kvadratProducts,
-  ...krugProducts,
-  ...listovoyProkatProducts,
   ...profnastilProducts,
   ...metalMeshProducts,
-  ...otvodyProducts,
-  ...polosaProducts,
-  ...provolokaProducts,
   ...roundPipeLegacyProducts,
-  ...trubyNerzhaveyushchieProducts,
   ...trubyProfilnyeProducts,
   ...profilePipeProducts,
-  ...ugolokProducts,
-  ...shvellerProducts,
-  ...shestigrannikProducts,
-  ...tsvetnoyMetalloprokatProducts,
 ];
 
 export const existingVariants: ProductVariant[] = productSources.map((product) => ({
@@ -62,8 +39,8 @@ export const existingVariants: ProductVariant[] = productSources.map((product) =
 
 export const productVariants: ProductVariant[] = [
   ...existingVariants.filter(p => !(importedCatalog.matchedIds as string[]).includes(p.id)),
-  ...(importedCatalog.products as ProductVariant[]).filter(product => product.categoryId !== "cat-shv"),
-].filter(isPublicProduct).map(normalizeRebarVariant).map(normalizeBeamVariant).map(normalizePipeWeight).map(product => ({
+  ...(importedCatalog.products as ProductVariant[]).filter(product => isRetainedCategory(product.categoryId)),
+].filter(product => isRetainedCategory(product.categoryId)).filter(isPublicProduct).map(normalizeRebarVariant).map(normalizeBeamVariant).map(normalizePipeWeight).map(product => ({
   ...product,
   imageUrls: (catalogImages.products as Record<string, string>)[product.id]
     ? [(catalogImages.products as Record<string, string>)[product.id]]
@@ -79,10 +56,6 @@ function estimateDemoWeight(product: ProductVariantSource): ProductWeight | unde
 
   if (product.categoryId === "cat-arm") {
     return {value: round(Math.max(0.1, 0.00617 * size * size)), unit: "кг/м"};
-  }
-
-  if (product.categoryId === "cat-lis") {
-    return {value: round(Math.max(0.1, 7.85 * size)), unit: "кг/м²"};
   }
 
   return {value: round(Math.max(0.1, size * 0.24)), unit: "кг/м"};

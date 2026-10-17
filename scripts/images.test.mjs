@@ -16,7 +16,7 @@ const imported=read('data/imported-catalog.json');
 const {productVariants,existingVariants}=readProjectData('data/products/index.ts');
 const original=[
  ...existingVariants.filter(p=>!imported.matchedIds.includes(p.id)),
- ...imported.products.filter(p=>p.categoryId!=='cat-shv'),
+ ...imported.products,
 ].filter(isPublicProduct).map(normalizeRebarVariant).map(normalizeBeamVariant).map(normalizePipeWeight);
 const digest=b=>crypto.createHash('sha256').update(b).digest('hex');
 

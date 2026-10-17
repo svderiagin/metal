@@ -1,7 +1,7 @@
 import type {ProductVariant, ProductWeight} from "@/types/product";
 
 export function isPipeProduct(product: {categoryId: string}): boolean {
-  return ["cat-trk", "cat-trn", "cat-trp"].includes(product.categoryId);
+  return ["cat-trk", "cat-trp"].includes(product.categoryId);
 }
 
 // Circular steel section at 7850 kg/m³. Inputs are outer diameter and wall thickness in mm,

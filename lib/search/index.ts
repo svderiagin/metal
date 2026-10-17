@@ -20,7 +20,7 @@ function field(text: string, weight: number): Field {
 function semanticTerms(product: ProductVariant, technical: ReturnType<typeof buildTechnicalDocument>): string {
   const words = ["металлический металл"];
   const text = normalizeText([product.name, product.material, ...product.attributes.filter(a => a.key === "material").map(a => a.value)].join(" "));
-  if (product.categoryId !== "cat-cve" && !/алюмин|медн|латун/.test(text)) words.push("стальной сталь");
+  if (!/алюмин|медн|латун/.test(text)) words.push("стальной сталь");
   if (product.categoryId === "cat-arm") words.push("строительная");
   if (product.categoryId === "cat-bal") words.push("двутавровая двутавр", beamKind(product));
   if (product.categoryId === "cat-trp") {

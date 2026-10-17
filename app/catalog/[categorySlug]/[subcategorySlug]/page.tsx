@@ -58,11 +58,6 @@ export default async function SubcategoryPage({params}: Props) {
   const category = getCategoryBySlug(categorySlug);
   if (!category) notFound();
 
-  if (category.id === "cat-shv"
-    && ["shveller-stalnoy", "shveller-nizkolegirovannyy", "shveller"].includes(subcategorySlug)) {
-    redirect("/catalog/shveller/shveller-goryachekatanyy/shveller-goryachekatanyy");
-  }
-
   const currentSubcategory = getSubcategoryBySlug(category.id, subcategorySlug);
   if (currentSubcategory) {
     const productTypes = getProductTypesBySubcategoryId(currentSubcategory.id);
@@ -92,11 +87,6 @@ export default async function SubcategoryPage({params}: Props) {
 
   const variant = getProductVariantBySlug(subcategorySlug);
   if (!variant || variant.categoryId !== category.id) {
-    if (category.id === "cat-shv" && /^(?:s|sh)veller-/i.test(subcategorySlug)) {
-      const target = /gnut|xolodnognut/i.test(subcategorySlug)
-        ? "shveller-gnutyy" : "shveller-goryachekatanyy";
-      redirect(`/catalog/shveller/${target}/${target}`);
-    }
     notFound();
   }
 

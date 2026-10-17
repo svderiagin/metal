@@ -1,28 +1,21 @@
 import type {Category} from "@/types/category";
-import importedCatalog from "./imported-catalog.json";
-import catalogImages from "./catalog-images.json";
 
-const profnastilIntro = "Профнастил — профилированные стальные листы для кровли, заборов, облицовки фасадов и хозяйственных построек. Применяется при строительстве частных домов, дач, гаражей и навесов. В ассортименте представлены профили С8, С20 и Н75 с оцинкованным или окрашенным покрытием.";
-const profnastilDetails = `При выборе профнастила учитывают толщину стали, полезную ширину и длину листа, тип покрытия и условия эксплуатации. Для кровли дополнительно важны уклон, шаг обрешётки, снеговая и ветровая нагрузки.
-
-Основной стандарт для соответствующих профилированных стальных листов — **ГОСТ 24045-2016**. Характеристики конкретных изделий уточняйте в каталоге.`;
-
-const originalCategories: Category[] = [
+export const categories: Category[] = [
   {
     "id": "cat-arm",
     "name": "Арматура",
     "slug": "armatura",
     "shortDescription": "Стальная арматура для армирования фундаментов, перекрытий, колонн и других железобетонных конструкций.",
     "description": "Стальная арматура для армирования фундаментов, перекрытий, колонн и других железобетонных конструкций. Рифлёная арматура А500С и А400 применяется преимущественно для рабочего армирования, гладкая А240 — для хомутов и вспомогательных элементов каркасов. При выборе учитывают класс прочности, диаметр, длину и требования проекта.",
-    "imageUrl": "/images/categories/armatura.svg"
+    "imageUrl": "/images/catalog/armatura.jpg"
   },
   {
     "id": "cat-trp",
     "name": "Трубы профильные",
     "slug": "truby-profilnye",
-    "shortDescription": "Квадратные и прямоугольные профили",
+    "shortDescription": "Профильные трубы с некруглым сечением. Сопоставляйте обе стороны профиля, толщину стенки, марку стали, стандарт и длину.",
     "description": "Стальные профильные трубы квадратного и прямоугольного сечения для изготовления каркасов, навесов, гаражей, ворот и ограждений. При выборе учитывают размеры профиля, толщину стенки и нагрузки на конструкцию.",
-    "imageUrl": "/images/categories/truby-profilnye.svg"
+    "imageUrl": "/images/catalog/truby-profilnye/truby-kvadratnie.jpg"
   },
   {
     "id": "cat-trk",
@@ -30,18 +23,18 @@ const originalCategories: Category[] = [
     "slug": "truba-kruglaya",
     "shortDescription": "Водогазопроводные и электросварные трубы, включая оцинкованные исполнения",
     "description": "Водогазопроводные и электросварные трубы круглого сечения. Выберите исполнение поверхности, диаметр, толщину стенки и длину. У водогазопроводных труб условный проход DN отличается от наружного диаметра.",
-    "imageUrl": "/images/catalog/truby-vodogazoprovodnye.jpeg"
+    "imageUrl": "/images/catalog/truba-kruglaya/truba-category title.jpg"
   },
   {
     "id": "cat-pnf",
     "name": "Профнастил",
     "slug": "profnastil",
     "shortDescription": "Профилированные стальные листы С8, С20 и Н75",
-    "description": `${profnastilIntro}\n\n${profnastilDetails}`,
+    "description": "Профнастил — профилированные стальные листы для кровли, заборов, облицовки фасадов и хозяйственных построек. Применяется при строительстве частных домов, дач, гаражей и навесов. В ассортименте представлены профили С8, С20 и Н75 с оцинкованным или окрашенным покрытием.\n\nПри выборе профнастила учитывают толщину стали, полезную ширину и длину листа, тип покрытия и условия эксплуатации. Для кровли дополнительно важны уклон, шаг обрешётки, снеговая и ветровая нагрузки.\n\nОсновной стандарт для соответствующих профилированных стальных листов — **ГОСТ 24045-2016**. Характеристики конкретных изделий уточняйте в каталоге.",
     "descriptionSections": {
-      "intro": profnastilIntro,
+      "intro": "Профнастил — профилированные стальные листы для кровли, заборов, облицовки фасадов и хозяйственных построек. Применяется при строительстве частных домов, дач, гаражей и навесов. В ассортименте представлены профили С8, С20 и Н75 с оцинкованным или окрашенным покрытием.",
       "title": "Как выбрать профнастил",
-      "details": profnastilDetails
+      "details": "При выборе профнастила учитывают толщину стали, полезную ширину и длину листа, тип покрытия и условия эксплуатации. Для кровли дополнительно важны уклон, шаг обрешётки, снеговая и ветровая нагрузки.\n\nОсновной стандарт для соответствующих профилированных стальных листов — **ГОСТ 24045-2016**. Характеристики конкретных изделий уточняйте в каталоге."
     },
     "imageUrl": "/images/catalog/profnastil/profnastil_c8.jpg"
   },
@@ -57,124 +50,10 @@ const originalCategories: Category[] = [
     "id": "cat-bal",
     "name": "Балка",
     "slug": "balka",
-    "shortDescription": "Двутавровые балки для несущих конструкций",
-    "description": "Двутавровые балки для несущих конструкций. Подберите подкатегорию и отфильтруйте позиции по материалу, стандарту, цене и наличию.",
-    "imageUrl": "/images/categories/balka.svg"
-  },
-  {
-    "id": "cat-kat",
-    "name": "Катанка",
-    "slug": "katanka",
-    "shortDescription": "Стальная катанка в бухтах",
-    "description": "Стальная катанка в бухтах. Подберите подкатегорию и отфильтруйте позиции по материалу, стандарту, цене и наличию.",
-    "imageUrl": "/images/categories/katanka.svg"
-  },
-  {
-    "id": "cat-kva",
-    "name": "Квадрат",
-    "slug": "kvadrat",
-    "shortDescription": "Горячекатаный и калиброванный квадрат",
-    "description": "Горячекатаный и калиброванный квадрат. Подберите подкатегорию и отфильтруйте позиции по материалу, стандарту, цене и наличию.",
-    "imageUrl": "/images/categories/kvadrat.svg"
-  },
-  {
-    "id": "cat-kru",
-    "name": "Круг",
-    "slug": "krug",
-    "shortDescription": "Круглый прокат различных марок",
-    "description": "Круглый прокат различных марок. Подберите подкатегорию и отфильтруйте позиции по материалу, стандарту, цене и наличию.",
-    "imageUrl": "/images/categories/krug.svg"
-  },
-  {
-    "id": "cat-lis",
-    "name": "Листовой прокат",
-    "slug": "listovoy-prokat",
-    "shortDescription": "Стальные и цветные листы разных форматов",
-    "description": "Стальные и цветные листы разных форматов. Подберите подкатегорию и отфильтруйте позиции по материалу, стандарту, цене и наличию.",
-    "imageUrl": "/images/categories/listovoy-prokat.svg"
-  },
-  {
-    "id": "cat-otv",
-    "name": "Отводы",
-    "slug": "otvody",
-    "shortDescription": "Соединительные детали трубопроводов",
-    "description": "Соединительные детали трубопроводов. Подберите подкатегорию и отфильтруйте позиции по материалу, стандарту, цене и наличию.",
-    "imageUrl": "/images/categories/otvody.svg"
-  },
-  {
-    "id": "cat-pol",
-    "name": "Полоса",
-    "slug": "polosa",
-    "shortDescription": "Полосовой прокат для производства и монтажа",
-    "description": "Полосовой прокат для производства и монтажа. Подберите подкатегорию и отфильтруйте позиции по материалу, стандарту, цене и наличию.",
-    "imageUrl": "/images/categories/polosa.svg"
-  },
-  {
-    "id": "cat-pro",
-    "name": "Проволока",
-    "slug": "provoloka",
-    "shortDescription": "Проволока общего и специального назначения",
-    "description": "Проволока общего и специального назначения. Подберите подкатегорию и отфильтруйте позиции по материалу, стандарту, цене и наличию.",
-    "imageUrl": "/images/categories/provoloka.svg"
-  },
-  {
-    "id": "cat-trn",
-    "name": "Трубы нержавеющие",
-    "slug": "truby-nerzhaveyushchie",
-    "shortDescription": "Коррозионностойкие трубы для промышленности",
-    "description": "Коррозионностойкие трубы для промышленности. Подберите подкатегорию и отфильтруйте позиции по материалу, стандарту, цене и наличию.",
-    "imageUrl": "/images/categories/truby-nerzhaveyushchie.svg"
-  },
-  {
-    "id": "cat-ugo",
-    "name": "Уголок",
-    "slug": "ugolok",
-    "shortDescription": "Равнополочные и неравнополочные профили",
-    "description": "Равнополочные и неравнополочные профили. Подберите подкатегорию и отфильтруйте позиции по материалу, стандарту, цене и наличию.",
-    "imageUrl": "/images/categories/ugolok.svg"
-  },
-  {
-    "id": "cat-shv",
-    "name": "Швеллер",
-    "slug": "shveller",
-    "shortDescription": "Горячекатаный и гнутый П-образный профиль",
-    "description": "Горячекатаный и гнутый П-образный профиль. Подберите подкатегорию и отфильтруйте позиции по материалу, стандарту, цене и наличию.",
-    "imageUrl": "/images/categories/shveller.svg"
-  },
-  {
-    "id": "cat-she",
-    "name": "Шестигранник",
-    "slug": "shestigrannik",
-    "shortDescription": "Шестигранный сортовой прокат",
-    "description": "Шестигранный сортовой прокат. Подберите подкатегорию и отфильтруйте позиции по материалу, стандарту, цене и наличию.",
-    "imageUrl": "/images/categories/shestigrannik.svg"
-  },
-  {
-    "id": "cat-cve",
-    "name": "Цветной металлопрокат",
-    "slug": "tsvetnoy-metalloprokat",
-    "shortDescription": "Алюминий, медь и латунь",
-    "description": "Алюминий, медь и латунь. Подберите подкатегорию и отфильтруйте позиции по материалу, стандарту, цене и наличию.",
-    "imageUrl": "/images/categories/tsvetnoy-metalloprokat.svg"
+    "shortDescription": "Двутавровые балки различаются полным обозначением сечения и серией. Для подбора сверяйте обозначение профиля, материал, стандарт и длину.",
+    "description": "Двутавровые балки различаются полным обозначением сечения и серией. Для подбора сверяйте обозначение профиля, материал, стандарт и длину.",
+    "imageUrl": "/images/catalog/balka/balka-mainCategory.jpg"
   }
 ];
 
-const importedCategories = (importedCatalog.categories as Category[]).map(category => ({
-  ...category,
-  ...(category.id === "cat-shv" ? {
-    shortDescription: "Горячекатаный и гнутый стальной швеллер для строительства",
-    description: "Стальной швеллер применяется для изготовления балок, рам, лестниц, каркасов гаражей и хозяйственных построек. Горячекатаные профили используют в несущих металлоконструкциях, гнутые — преимущественно для лёгких и вспомогательных элементов. При выборе учитывают размеры, марку стали и расчётные нагрузки.",
-  } : {}),
-  imageUrl: (catalogImages.categories as Record<string, string>)[category.id] ?? catalogImages.fallback,
-}));
-
-const roundPipeIndex = importedCategories.findIndex(category => category.id === "cat-trk");
-const profnastilCategory = originalCategories.find(category => category.id === "cat-pnf")!;
-const metalMeshCategory = originalCategories.find(category => category.id === "cat-mesh")!;
-export const categories: Category[] = [
-  ...importedCategories.slice(0, roundPipeIndex + 1),
-  {...profnastilCategory, imageUrl: (catalogImages.categories as Record<string, string>)[profnastilCategory.id] ?? profnastilCategory.imageUrl},
-  {...metalMeshCategory, imageUrl: (catalogImages.categories as Record<string, string>)[metalMeshCategory.id] ?? metalMeshCategory.imageUrl},
-  ...importedCategories.slice(roundPipeIndex + 1),
-];
-export {originalCategories};
+export const originalCategories: Category[] = categories;
