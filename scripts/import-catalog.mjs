@@ -26,7 +26,7 @@ const classified=(r)=>{
  if(/^угол/.test(n))return 'cat-ugo';
  if(/^лист|^профнастил/.test(n))return 'cat-lis';
  if(/^рулон/.test(n))return 'mirror-coils';
- if(/^труб/.test(n))return /профил|квадрат|прямоуг/.test(n)?'cat-trp':/нерж/.test(n)?'cat-trn':/водогаз|вгп|электросвар|эсв/.test(n)?'cat-trk':'cat-trs';
+ if(/^труб/.test(n))return /профил|квадрат|прямоуг/.test(n)?'cat-trp':/нерж/.test(n)?'cat-trn':/водогаз|вгп|электросвар|эсв/.test(n)?'cat-trk':null;
  if(/^профиль замкнутый/.test(n))return 'cat-trp';
  if(/^круг|^прокат круг/.test(n))return 'cat-kru';
  if(/^квадрат/.test(n))return 'cat-kva';
@@ -40,7 +40,7 @@ const classified=(r)=>{
  return null;
 };
 // Resolve existing IDs from actual category slugs rather than guessing prefixes.
-const categoryAlias={ 'cat-shv':'shveller','cat-ugo':'ugolok','cat-trp':'truby-profilnye','cat-trn':'truby-nerzhaveyushchie','cat-trs':'truby-stalnye','cat-pro':'provoloka','cat-she':'shestigrannik'};
+const categoryAlias={ 'cat-shv':'shveller','cat-ugo':'ugolok','cat-trp':'truby-profilnye','cat-trn':'truby-nerzhaveyushchie','cat-pro':'provoloka','cat-she':'shestigrannik'};
 const newCategories=[['mirror-coils','Рулоны','rulony'],['mirror-strip','Лента','lenta'],['mirror-welding','Сварочные материалы','svarochnye-materialy']];
 const guidance={
  'cat-arm':'Стальная арматура для армирования фундаментов, перекрытий, колонн и других железобетонных конструкций. Рифлёная арматура А500С и А400 применяется преимущественно для рабочего армирования, гладкая А240 — для хомутов и вспомогательных элементов каркасов. При выборе учитывают класс прочности, диаметр, длину и требования проекта.',
@@ -48,7 +48,6 @@ const guidance={
  'shveller':'Швеллеры с П-образным сечением. Номер и серия профиля определяют исполнение; дополнительно сопоставляйте марку стали, стандарт и длину.',
  'ugolok':'Уголковый прокат с двумя полками. Для равнополочных и неравнополочных исполнений нужны размеры обеих полок, толщина, марка стали и длина.',
  'cat-lis':'Листовой прокат различается способом изготовления, поверхностью и покрытием. Сверяйте толщину, ширину и длину листа, марку материала и стандарт; профнастил выбирайте также по обозначению профиля.',
- 'truby-stalnye':'Круглые стальные трубы разных исполнений. Для подбора нужны диаметр, толщина стенки, материал и длина. У ВГП условный проход DN следует отличать от наружного диаметра.',
  'truby-profilnye':'Профильные трубы с некруглым сечением. Сопоставляйте обе стороны профиля, толщину стенки, марку стали, стандарт и длину.',
  'cat-kru':'Сплошной круглый прокат. Основной размер — диаметр; также сопоставляйте марку материала, стандарт и условие длины.',
  'cat-kva':'Сплошной квадратный прокат. Размер обозначает сторону сечения; выбирайте материал, исполнение и длину по характеристикам позиции.',
@@ -134,16 +133,15 @@ for(const [sourceId,entries] of [...sourceGroups].sort((a,b)=>Number(a[0])-Numbe
    if(token)family=byId.get(token);
  }
  if(category.id==='cat-trp')family=byId.get(4);
- if(category.id==='cat-trs')family=byId.get(/бесшов/i.test(name)?65:3);
  if(category.id==='cat-trk')family=byId.get(isVgp?2:3);
  if(category.id==='mirror-coils')family=byId.get(/полимер/i.test(name)?73:/оцинк|\bОЦ\b| оц /i.test(name)?72:/холоднокат| хк /i.test(name)?71:/горячекат| гк /i.test(name)?70:69);
  const familyName=family?.title||r.admin_category?.title||category.name;
  const familySlug=family?.staticPath||r.admin_category?.staticPath||category.slug;
  // Group actual product types, not each size/filter combination.
  let familyId=`mirror-family-${category.id}-${family?.id||r.admin_category?.id||'general'}`;
- const mappedFamily={11:'cat-arm-sub-4',12:'cat-arm-sub-3',13:'cat-arm-sub-1',52:'cat-lis-sub-1',53:'cat-lis-sub-2',54:'cat-lis-sub-3',56:'cat-lis-sub-4',2:'cat-trs-sub-3',3:'cat-trs-sub-4',65:'cat-trs-sub-1'}[family?.id];
+ const mappedFamily={11:'cat-arm-sub-4',12:'cat-arm-sub-3',13:'cat-arm-sub-1',52:'cat-lis-sub-1',53:'cat-lis-sub-2',54:'cat-lis-sub-3',56:'cat-lis-sub-4',2:'cat-trk-sub-1',3:'cat-trk-sub-2'}[family?.id];
  const galvanized=/оцинк|(?:^|\s)оц(?:\s|$)/i.test(name);
- const roundPipeFamily=category.id==='cat-trk'?(isVgp?(galvanized?'cat-trk-sub-3':'cat-trs-sub-3'):(galvanized?'cat-trk-sub-4':'cat-trs-sub-4')):undefined;
+ const roundPipeFamily=category.id==='cat-trk'?(isVgp?(galvanized?'cat-trk-sub-3':'cat-trk-sub-1'):(galvanized?'cat-trk-sub-4':'cat-trk-sub-2')):undefined;
  const beamFamily=category.id==='cat-bal'?beamSubcategoryId({name,categoryId:category.id,attributes:[]}):undefined;
  const existingFamily=families.find(f=>f.id===(roundPipeFamily||beamFamily||mappedFamily)&&f.categoryId===category.id)||(families.find(f=>f.categoryId===category.id&&identity(f.name)===identity(familyName)));
  if(existingFamily)familyId=existingFamily.id;
@@ -195,9 +193,8 @@ for(const f of families)if(imported.some(p=>p.subcategoryId===f.id)){
   'cat-lis-sub-2':'Холоднокатаный листовой прокат. Способ прокатки отличает его от горячекатаного; дополнительно сверяйте толщину, формат, марку стали и указанное состояние поверхности.',
   'cat-lis-sub-3':'Листы с оцинкованной поверхностью. Покрытие отличает их от листа без покрытия; выбирайте толщину, ширину, длину и обозначение исполнения.',
   'cat-lis-sub-4':'Листы с рифлением поверхности. Сопоставляйте обозначение рифления, толщину и формат листа, материал и стандарт конкретного исполнения.',
-  'cat-trs-sub-3':'Водогазопроводные трубы. DN обозначает условный проход, который отличается от наружного диаметра. Для выбора нужны DN, толщина стенки, длина и исполнение поверхности.',
-  'cat-trs-sub-4':'Электросварные прямошовные трубы. В отличие от бесшовных исполнений имеют сварной шов; выбирайте наружный диаметр, толщину стенки, материал и условие длины.',
-  'cat-trs-sub-1':'Бесшовные трубы горячедеформированного исполнения. Для подбора сопоставляйте наружный диаметр и стенку, марку стали, стандарты и мерную либо немерную длину.',
+  'cat-trk-sub-1':'Водогазопроводные трубы. DN обозначает условный проход, который отличается от наружного диаметра. Для выбора нужны DN, толщина стенки, длина и исполнение поверхности.',
+  'cat-trk-sub-2':'Электросварные прямошовные трубы. В отличие от бесшовных исполнений имеют сварной шов; выбирайте наружный диаметр, толщину стенки, материал и условие длины.',
  };
  const standards=[...new Set(imported.filter(p=>p.subcategoryId===f.id).map(p=>p.standard).filter(Boolean))];
  f.description=(definitions[f.id]||`${f.name}. ${c.description}`)+(standards.length&&standards.length<=4?` Стандарты представленных исполнений: ${standards.join('; ')}.`:'');

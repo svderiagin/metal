@@ -3,7 +3,7 @@ import type {ProductVariant} from "@/types/product";
 import type {OrderInputMode} from "@/types/cart";
 
 export function isVgpVariant(product: ProductVariant): boolean {
-  return product.categoryId === "cat-trk" && product.subcategoryId === "cat-trs-sub-3";
+  return product.categoryId === "cat-trk" && product.subcategoryId === "cat-trk-sub-1";
 }
 
 export function vgpSize(product: ProductVariant): string {

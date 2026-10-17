@@ -25,14 +25,6 @@
       "imageUrl": "/images/catalog/truby-vodogazoprovodnye.jpeg"
     },
     {
-      "id": "cat-trs",
-      "name": "Трубы стальные",
-      "slug": "truby-stalnye",
-      "shortDescription": "Круглые стальные трубы разных исполнений. Для подбора нужны диаметр, толщина стенки, материал и длина. У ВГП условный проход DN следует отличать от наружного диаметра.",
-      "description": "Круглые стальные трубы разных исполнений. Для подбора нужны диаметр, толщина стенки, материал и длина. У ВГП условный проход DN следует отличать от наружного диаметра.",
-      "imageUrl": "/images/categories/truby-stalnye.svg"
-    },
-    {
       "id": "cat-bal",
       "name": "Балка",
       "slug": "balka",
@@ -435,23 +427,7 @@
       "description": "Проволока оцинкованная для строительных, производственных и монтажных задач. Доступны подбор размера, резка и комплектная отгрузка."
     },
     {
-      "id": "cat-trs-sub-1",
-      "categoryId": "cat-trs",
-      "name": "Труба бесшовная горячедеформированная",
-      "slug": "truba-besshovnaya-goryachedeformirovannaya",
-      "shortDescription": "Бесшовные трубы горячедеформированного исполнения. Для подбора сопоставляйте наружный диаметр и стенку, марку стали, стандарты и мерную либо немерную длину. Стандарты представленных исполнений: ГОСТ 8732; 8731.",
-      "description": "Бесшовные трубы горячедеформированного исполнения. Для подбора сопоставляйте наружный диаметр и стенку, марку стали, стандарты и мерную либо немерную длину. Стандарты представленных исполнений: ГОСТ 8732; 8731."
-    },
-    {
-      "id": "cat-trs-sub-2",
-      "categoryId": "cat-trs",
-      "name": "Труба бесшовная холоднодеформированная",
-      "slug": "truba-besshovnaya-kholodnodeformirovannaya",
-      "shortDescription": "Труба бесшовная холоднодеформированная: складские позиции популярных размеров и марок.",
-      "description": "Труба бесшовная холоднодеформированная для строительных, производственных и монтажных задач. Доступны подбор размера, резка и комплектная отгрузка."
-    },
-    {
-      "id": "cat-trs-sub-3",
+      "id": "cat-trk-sub-1",
       "categoryId": "cat-trk",
       "name": "Труба водогазопроводная",
       "slug": "truba-vodogazoprovodnaya",
@@ -467,7 +443,7 @@
       "description": "Оцинкованные водогазопроводные трубы (ВГП) — стальные сварные трубы с защитным цинковым покрытием, которое помогает замедлить коррозию стали. Эффективность защиты зависит от условий эксплуатации и состояния покрытия. Применяются при монтаже систем водоснабжения, отопления и других инженерных коммуникаций с учётом условий эксплуатации. ГОСТ 3262-75 предусматривает оцинкованные ВГП-трубы и устанавливает требования к размерам, качеству труб и цинковому покрытию; соответствие выбранного изделия стандарту сверяют по документам поставщика. По толщине стенки трубы подразделяются на лёгкие, обыкновенные и усиленные. При выборе учитывают условный проход (Ду), толщину стенки, длину и наличие резьбы. Способ нанесения и характеристики цинкового покрытия уточняют для конкретного изделия. Места повреждения покрытия требуют дополнительной защиты."
     },
     {
-      "id": "cat-trs-sub-4",
+      "id": "cat-trk-sub-2",
       "categoryId": "cat-trk",
       "name": "Труба электросварная",
       "slug": "truba-elektrosvarnaya",
@@ -481,22 +457,6 @@
       "slug": "truba-elektrosvarnaya-otsinkovannaya",
       "shortDescription": "Прямошовные трубы с цинковым покрытием для ограждений и каркасов. Выбор по диаметру, стенке и характеристикам покрытия.",
       "description": "Оцинкованные электросварные прямошовные трубы — круглые стальные трубы с продольным сварным швом и защитным цинковым покрытием. Применяются для изготовления ограждений, ворот, опор, навесов, каркасов и других металлоконструкций, в том числе при эксплуатации на открытом воздухе. Цинковый слой помогает защитить поверхность стали от коррозии; его защитные свойства зависят от способа нанесения, состояния покрытия и среды эксплуатации. Сортамент стальной трубы-основы устанавливает ГОСТ 10704-91, а технические требования к соответствующим исполнениям — ГОСТ 10705-80. При выборе учитывают наружный диаметр, толщину стенки, длину, марку стали и характеристики цинкового покрытия. Стандарт поставки, способ нанесения и требования к покрытию сверяют по документам выбранного изделия. После резки или сварки повреждённые участки покрытия нуждаются в дополнительной защите."
-    },
-    {
-      "id": "cat-trs-sub-5",
-      "categoryId": "cat-trs",
-      "name": "Труба электросварная тонкостенная",
-      "slug": "truba-elektrosvarnaya-tonkostennaya",
-      "shortDescription": "Труба электросварная тонкостенная: складские позиции популярных размеров и марок.",
-      "description": "Труба электросварная тонкостенная для строительных, производственных и монтажных задач. Доступны подбор размера, резка и комплектная отгрузка."
-    },
-    {
-      "id": "cat-trs-sub-6",
-      "categoryId": "cat-trs",
-      "name": "Труба оцинкованная",
-      "slug": "truba-otsinkovannaya",
-      "shortDescription": "Труба оцинкованная: складские позиции популярных размеров и марок.",
-      "description": "Труба оцинкованная для строительных, производственных и монтажных задач. Доступны подбор размера, резка и комплектная отгрузка."
     },
     {
       "id": "cat-trn-sub-1",
@@ -3534,8 +3494,8 @@
     {
       "id": "local-258",
       "categoryId": "cat-trk",
-      "subcategoryId": "cat-trs-sub-3",
-      "productTypeId": "type-cat-trs-sub-3",
+      "subcategoryId": "cat-trk-sub-1",
+      "productTypeId": "type-cat-trk-sub-1",
       "name": "Труба ВГП Ду15×2,8×6000",
       "slug": "truba-vodogazoprovodnaya-15x28x6000-gost-3262-tm",
       "sku": "МП-258",
@@ -3601,7 +3561,7 @@
       "nominalBoreMm": 15,
       "diameterMm": 21.3,
       "wallThicknessMm": 2.8,
-      "lengthMeters": 6.0,
+      "lengthMeters": 6,
       "weightPerMeterKg": 1.28,
       "weight": {
         "value": 1.28,
@@ -3611,8 +3571,8 @@
     {
       "id": "local-277",
       "categoryId": "cat-trk",
-      "subcategoryId": "cat-trs-sub-3",
-      "productTypeId": "type-cat-trs-sub-3",
+      "subcategoryId": "cat-trk-sub-1",
+      "productTypeId": "type-cat-trk-sub-1",
       "name": "Труба ВГП Ду40×3,5×12000",
       "slug": "truba-vodogazoprovodnaya-40x35x12000-gost-3262-tm",
       "sku": "МП-277",
@@ -3676,9 +3636,9 @@
       "imported": true,
       "pricePerTon": 62100,
       "nominalBoreMm": 40,
-      "diameterMm": 48.0,
+      "diameterMm": 48,
       "wallThicknessMm": 3.5,
-      "lengthMeters": 12.0,
+      "lengthMeters": 12,
       "weightPerMeterKg": 3.84,
       "weight": {
         "value": 3.84,
@@ -3688,8 +3648,8 @@
     {
       "id": "local-281",
       "categoryId": "cat-trk",
-      "subcategoryId": "cat-trs-sub-3",
-      "productTypeId": "type-cat-trs-sub-3",
+      "subcategoryId": "cat-trk-sub-1",
+      "productTypeId": "type-cat-trk-sub-1",
       "name": "Труба ВГП Ду50×3,5×12000",
       "slug": "truba-vodogazoprovodnaya-50x35x12000-gost-3262-tm",
       "sku": "МП-281",
@@ -3753,9 +3713,9 @@
       "imported": true,
       "pricePerTon": 50940,
       "nominalBoreMm": 50,
-      "diameterMm": 60.0,
+      "diameterMm": 60,
       "wallThicknessMm": 3.5,
-      "lengthMeters": 12.0,
+      "lengthMeters": 12,
       "weightPerMeterKg": 4.88,
       "weight": {
         "value": 4.88,
@@ -3765,8 +3725,8 @@
     {
       "id": "local-302",
       "categoryId": "cat-trk",
-      "subcategoryId": "cat-trs-sub-4",
-      "productTypeId": "type-cat-trs-sub-4",
+      "subcategoryId": "cat-trk-sub-2",
+      "productTypeId": "type-cat-trk-sub-2",
       "name": "Труба электросварная прямошовная 57х3х12000 ГОСТ 10704; 10705 ТМ",
       "slug": "truba-elektrosvarnaya-pryamosovnaya-57x3x12000-gost-10704-10705-tm",
       "sku": "МП-302",
@@ -3829,8 +3789,8 @@
     {
       "id": "local-305",
       "categoryId": "cat-trk",
-      "subcategoryId": "cat-trs-sub-4",
-      "productTypeId": "type-cat-trs-sub-4",
+      "subcategoryId": "cat-trk-sub-2",
+      "productTypeId": "type-cat-trk-sub-2",
       "name": "Труба электросварная прямошовная 57х3.5х12000 ГОСТ 10704; 10705 ТМ",
       "slug": "truba-elektrosvarnaya-pryamosovnaya-57x35x12000-gost-10704-10705-tm",
       "sku": "МП-305",
@@ -3893,8 +3853,8 @@
     {
       "id": "local-309",
       "categoryId": "cat-trk",
-      "subcategoryId": "cat-trs-sub-4",
-      "productTypeId": "type-cat-trs-sub-4",
+      "subcategoryId": "cat-trk-sub-2",
+      "productTypeId": "type-cat-trk-sub-2",
       "name": "Труба электросварная прямошовная 76х3х12000 ГОСТ 10704; 10705 ТМ",
       "slug": "truba-elektrosvarnaya-pryamosovnaya-76x3x12000-gost-10704-10705-tm",
       "sku": "МП-309",
@@ -3957,8 +3917,8 @@
     {
       "id": "local-311",
       "categoryId": "cat-trk",
-      "subcategoryId": "cat-trs-sub-4",
-      "productTypeId": "type-cat-trs-sub-4",
+      "subcategoryId": "cat-trk-sub-2",
+      "productTypeId": "type-cat-trk-sub-2",
       "name": "Труба электросварная прямошовная 76х3.5х12000 ГОСТ 10704; 10705 ТМ",
       "slug": "truba-elektrosvarnaya-pryamosovnaya-76x35x12000-gost-10704-10705-tm",
       "sku": "МП-311",
@@ -4021,8 +3981,8 @@
     {
       "id": "local-313",
       "categoryId": "cat-trk",
-      "subcategoryId": "cat-trs-sub-4",
-      "productTypeId": "type-cat-trs-sub-4",
+      "subcategoryId": "cat-trk-sub-2",
+      "productTypeId": "type-cat-trk-sub-2",
       "name": "Труба электросварная прямошовная 76х4х12000 ГОСТ 10704; 10705 ТМ",
       "slug": "truba-elektrosvarnaya-pryamosovnaya-76x4x12000-gost-10704-10705-tm",
       "sku": "МП-313",
@@ -4085,8 +4045,8 @@
     {
       "id": "local-316",
       "categoryId": "cat-trk",
-      "subcategoryId": "cat-trs-sub-4",
-      "productTypeId": "type-cat-trs-sub-4",
+      "subcategoryId": "cat-trk-sub-2",
+      "productTypeId": "type-cat-trk-sub-2",
       "name": "Труба электросварная прямошовная 89х3.5х12000 ГОСТ 10704; 10705 ТМ",
       "slug": "truba-elektrosvarnaya-pryamosovnaya-89x35x12000-gost-10704-10705-tm",
       "sku": "МП-316",
@@ -4149,8 +4109,8 @@
     {
       "id": "local-318",
       "categoryId": "cat-trk",
-      "subcategoryId": "cat-trs-sub-4",
-      "productTypeId": "type-cat-trs-sub-4",
+      "subcategoryId": "cat-trk-sub-2",
+      "productTypeId": "type-cat-trk-sub-2",
       "name": "Труба электросварная прямошовная 89х4х12000 ГОСТ 10704; 10705 ТМ",
       "slug": "truba-elektrosvarnaya-pryamosovnaya-89x4x12000-gost-10704-10705-tm",
       "sku": "МП-318",
@@ -4213,8 +4173,8 @@
     {
       "id": "local-333",
       "categoryId": "cat-trk",
-      "subcategoryId": "cat-trs-sub-4",
-      "productTypeId": "type-cat-trs-sub-4",
+      "subcategoryId": "cat-trk-sub-2",
+      "productTypeId": "type-cat-trk-sub-2",
       "name": "Труба электросварная прямошовная 133х4.5х12000 ГОСТ 10704; 10705 ТМ",
       "slug": "truba-elektrosvarnaya-pryamosovnaya-133x45x12000-gost-10704-10705-tm",
       "sku": "МП-333",
@@ -4277,8 +4237,8 @@
     {
       "id": "local-337",
       "categoryId": "cat-trk",
-      "subcategoryId": "cat-trs-sub-4",
-      "productTypeId": "type-cat-trs-sub-4",
+      "subcategoryId": "cat-trk-sub-2",
+      "productTypeId": "type-cat-trk-sub-2",
       "name": "Труба электросварная прямошовная 159х4х12000 ГОСТ 10704; 10705 ТМ",
       "slug": "truba-elektrosvarnaya-pryamosovnaya-159x4x12000-gost-10704-10705-tm",
       "sku": "МП-337",
@@ -6526,8 +6486,8 @@
     {
       "id": "local-3963",
       "categoryId": "cat-trk",
-      "subcategoryId": "cat-trs-sub-4",
-      "productTypeId": "type-cat-trs-sub-4",
+      "subcategoryId": "cat-trk-sub-2",
+      "productTypeId": "type-cat-trk-sub-2",
       "name": "Труба электросварная прямошовная 108х4.5х12000 ГОСТ 10704; 10705 ТМ",
       "slug": "truba-elektrosvarnaya-pryamosovnaya-108x45x12000-gost-10704-10705-tm",
       "sku": "МП-3963",
@@ -6799,8 +6759,8 @@
     {
       "id": "local-6204",
       "categoryId": "cat-trk",
-      "subcategoryId": "cat-trs-sub-3",
-      "productTypeId": "type-cat-trs-sub-3",
+      "subcategoryId": "cat-trk-sub-1",
+      "productTypeId": "type-cat-trk-sub-1",
       "name": "Труба ВГП Ду20×2,8×6000",
       "slug": "truba-vodogazoprovodnaya-20x28x6000-gost-3262-tm",
       "sku": "МП-6204",
@@ -6866,7 +6826,7 @@
       "nominalBoreMm": 20,
       "diameterMm": 26.8,
       "wallThicknessMm": 2.8,
-      "lengthMeters": 6.0,
+      "lengthMeters": 6,
       "weightPerMeterKg": 1.66,
       "weight": {
         "value": 1.66,
@@ -6876,8 +6836,8 @@
     {
       "id": "local-6224",
       "categoryId": "cat-trk",
-      "subcategoryId": "cat-trs-sub-3",
-      "productTypeId": "type-cat-trs-sub-3",
+      "subcategoryId": "cat-trk-sub-1",
+      "productTypeId": "type-cat-trk-sub-1",
       "name": "Труба ВГП Ду32×2,8×6000",
       "slug": "truba-vodogazoprovodnaya-32x28x6000-gost-3262-tm",
       "sku": "МП-6224",
@@ -6943,7 +6903,7 @@
       "nominalBoreMm": 32,
       "diameterMm": 42.3,
       "wallThicknessMm": 2.8,
-      "lengthMeters": 6.0,
+      "lengthMeters": 6,
       "weightPerMeterKg": 2.73,
       "weight": {
         "value": 2.73,
@@ -8191,8 +8151,8 @@
     {
       "id": "local-9211",
       "categoryId": "cat-trk",
-      "subcategoryId": "cat-trs-sub-4",
-      "productTypeId": "type-cat-trs-sub-4",
+      "subcategoryId": "cat-trk-sub-2",
+      "productTypeId": "type-cat-trk-sub-2",
       "name": "Труба электросварная прямошовная 219х4х12000 ГОСТ 10704; 10705 ТМ",
       "slug": "truba-elektrosvarnaya-pryamosovnaya-219x4x12000-gost-10704-10705-tm",
       "sku": "МП-9211",
@@ -8981,8 +8941,8 @@
     {
       "id": "local-40706",
       "categoryId": "cat-trk",
-      "subcategoryId": "cat-trs-sub-4",
-      "productTypeId": "type-cat-trs-sub-4",
+      "subcategoryId": "cat-trk-sub-2",
+      "productTypeId": "type-cat-trk-sub-2",
       "name": "Труба электросварная прямошовная 219х5х12000 ГОСТ 10704; 10705 ТМ",
       "slug": "truba-elektrosvarnaya-pryamosovnaya-219x5x12000-gost-10704-10705-tm",
       "sku": "МП-40706",
@@ -9045,8 +9005,8 @@
     {
       "id": "local-40707",
       "categoryId": "cat-trk",
-      "subcategoryId": "cat-trs-sub-4",
-      "productTypeId": "type-cat-trs-sub-4",
+      "subcategoryId": "cat-trk-sub-2",
+      "productTypeId": "type-cat-trk-sub-2",
       "name": "Труба электросварная прямошовная 219х6х12000 ГОСТ 10704; 10705 ТМ",
       "slug": "truba-elektrosvarnaya-pryamosovnaya-219x6x12000-gost-10704-10705-tm",
       "sku": "МП-40707",
@@ -9400,8 +9360,8 @@
     {
       "id": "local-52334",
       "categoryId": "cat-trk",
-      "subcategoryId": "cat-trs-sub-4",
-      "productTypeId": "type-cat-trs-sub-4",
+      "subcategoryId": "cat-trk-sub-2",
+      "productTypeId": "type-cat-trk-sub-2",
       "name": "Труба электросварная прямошовная 273х6х12000 ГОСТ 10704; 10705 ТМ",
       "slug": "truba-elektrosvarnaya-pryamosovnaya-273x6x12000-gost-10704-10705-tm",
       "sku": "МП-52334",
@@ -9464,8 +9424,8 @@
     {
       "id": "local-53918",
       "categoryId": "cat-trk",
-      "subcategoryId": "cat-trs-sub-4",
-      "productTypeId": "type-cat-trs-sub-4",
+      "subcategoryId": "cat-trk-sub-2",
+      "productTypeId": "type-cat-trk-sub-2",
       "name": "Труба электросварная прямошовная 127х4х12000 ГОСТ 10704; 10705 Ст20 ВМЗ ТМ",
       "slug": "truba-elektrosvarnaya-pryamosovnaya-127x4x12000-gost-10704-10705-st20-vmz-tm",
       "sku": "МП-53918",
@@ -9536,8 +9496,8 @@
     {
       "id": "local-54870",
       "categoryId": "cat-trk",
-      "subcategoryId": "cat-trs-sub-3",
-      "productTypeId": "type-cat-trs-sub-3",
+      "subcategoryId": "cat-trk-sub-1",
+      "productTypeId": "type-cat-trk-sub-1",
       "name": "Труба ВГП Ду32×3,2×6000",
       "slug": "truba-vodogazoprovodnaya-32x32x6000-gost-3262-tm",
       "sku": "МП-54870",
@@ -9603,7 +9563,7 @@
       "nominalBoreMm": 32,
       "diameterMm": 42.3,
       "wallThicknessMm": 3.2,
-      "lengthMeters": 6.0,
+      "lengthMeters": 6,
       "weightPerMeterKg": 3.09,
       "weight": {
         "value": 3.09,
@@ -9613,8 +9573,8 @@
     {
       "id": "local-56374",
       "categoryId": "cat-trk",
-      "subcategoryId": "cat-trs-sub-3",
-      "productTypeId": "type-cat-trs-sub-3",
+      "subcategoryId": "cat-trk-sub-1",
+      "productTypeId": "type-cat-trk-sub-1",
       "name": "Труба ВГП Ду25×2,8×6000",
       "slug": "truba-vodogazoprovodnaya-25x28x6000-gost-3262-tm",
       "sku": "МП-56374",
@@ -9680,7 +9640,7 @@
       "nominalBoreMm": 25,
       "diameterMm": 33.5,
       "wallThicknessMm": 2.8,
-      "lengthMeters": 6.0,
+      "lengthMeters": 6,
       "weightPerMeterKg": 2.12,
       "weight": {
         "value": 2.12,
@@ -9763,8 +9723,8 @@
     {
       "id": "local-58627",
       "categoryId": "cat-trk",
-      "subcategoryId": "cat-trs-sub-4",
-      "productTypeId": "type-cat-trs-sub-4",
+      "subcategoryId": "cat-trk-sub-2",
+      "productTypeId": "type-cat-trk-sub-2",
       "name": "Труба электросварная прямошовная 273х8 ГОСТ 10704; 10705 Ст20 ВМЗ ТМ н/д (11-12м)",
       "slug": "truba-elektrosvarnaya-pryamosovnaya-273x8-gost-10704-10705-st20-vmz-tm-nd-11-12m",
       "sku": "МП-58627",
@@ -9827,8 +9787,8 @@
     {
       "id": "local-58631",
       "categoryId": "cat-trk",
-      "subcategoryId": "cat-trs-sub-4",
-      "productTypeId": "type-cat-trs-sub-4",
+      "subcategoryId": "cat-trk-sub-2",
+      "productTypeId": "type-cat-trk-sub-2",
       "name": "Труба электросварная прямошовная 325х7 ГОСТ 10704; 10705 Ст20 ВМЗ ТМ н/д (11-12м)",
       "slug": "truba-elektrosvarnaya-pryamosovnaya-325x7-gost-10704-10705-st20-vmz-tm-nd-11-12m",
       "sku": "МП-58631",
@@ -9890,8 +9850,8 @@
     {
       "id": "local-58634",
       "categoryId": "cat-trk",
-      "subcategoryId": "cat-trs-sub-4",
-      "productTypeId": "type-cat-trs-sub-4",
+      "subcategoryId": "cat-trk-sub-2",
+      "productTypeId": "type-cat-trk-sub-2",
       "name": "Труба электросварная прямошовная 325х10 ГОСТ 10704; 10705 Ст20 ВМЗ ТМ н/д (11-12м)",
       "slug": "truba-elektrosvarnaya-pryamosovnaya-325x10-gost-10704-10705-st20-vmz-tm-nd-11-12m",
       "sku": "МП-58634",
@@ -10027,8 +9987,8 @@
     {
       "id": "local-62388",
       "categoryId": "cat-trk",
-      "subcategoryId": "cat-trs-sub-4",
-      "productTypeId": "type-cat-trs-sub-4",
+      "subcategoryId": "cat-trk-sub-2",
+      "productTypeId": "type-cat-trk-sub-2",
       "name": "Труба электросварная прямошовная 57х3х12000 ГОСТ 10704; 10705 Ст20 ВМЗ ТМ",
       "slug": "truba-elektrosvarnaya-pryamosovnaya-57x3x12000-gost-10704-10705-st20-vmz-tm",
       "sku": "МП-62388",
@@ -12385,134 +12345,6 @@
       "pricePerTon": 101520
     },
     {
-      "id": "local-93327",
-      "categoryId": "cat-trs",
-      "subcategoryId": "cat-trs-sub-1",
-      "productTypeId": "type-cat-trs-sub-1",
-      "name": "Труба бесшовная г/д 76х5 ГОСТ 8732; 8731 Ст20 ВМЗ н/д",
-      "slug": "truba-bessovnaya-gd-76x5-gost-8732-8731-st20-vmz-nd",
-      "sku": "МП-93327",
-      "shortDescription": "Диаметр, мм: 76; Марка стали: Ст20; Толщина, мм: 5; Стандарт: ГОСТ 8732; 8731",
-      "description": "Труба бесшовная г/д 76х5 ГОСТ 8732; 8731 Ст20 ВМЗ н/д. Диаметр, мм: 76; Марка стали: Ст20; Толщина, мм: 5; Стандарт: ГОСТ 8732; 8731. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 103500,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 8732; 8731",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "key": "grade",
-          "label": "Марка стали",
-          "value": "Ст20"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Диаметр, мм: 76; Толщина, мм: 5"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Диаметр, мм",
-          "value": "76"
-        },
-        {
-          "name": "Марка стали",
-          "value": "Ст20"
-        },
-        {
-          "name": "Толщина, мм",
-          "value": "5"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Труба бесшовная г/д 76х5 ГОСТ 8732; 8731 Ст20 ВМЗ н/д"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 103500
-    },
-    {
-      "id": "local-93332",
-      "categoryId": "cat-trs",
-      "subcategoryId": "cat-trs-sub-1",
-      "productTypeId": "type-cat-trs-sub-1",
-      "name": "Труба бесшовная г/д 76х6 ГОСТ 8732; 8731 09Г2С ВМЗ н/д",
-      "slug": "truba-bessovnaya-gd-76x6-gost-8732-8731-09g2s-vmz-nd",
-      "sku": "МП-93332",
-      "shortDescription": "Диаметр, мм: 76; Марка стали: 09Г2С; Толщина, мм: 6; Стандарт: ГОСТ 8732; 8731",
-      "description": "Труба бесшовная г/д 76х6 ГОСТ 8732; 8731 09Г2С ВМЗ н/д. Диаметр, мм: 76; Марка стали: 09Г2С; Толщина, мм: 6; Стандарт: ГОСТ 8732; 8731. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 108000,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 8732; 8731",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "key": "grade",
-          "label": "Марка стали",
-          "value": "09Г2С"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Диаметр, мм: 76; Толщина, мм: 6"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Диаметр, мм",
-          "value": "76"
-        },
-        {
-          "name": "Марка стали",
-          "value": "09Г2С"
-        },
-        {
-          "name": "Толщина, мм",
-          "value": "6"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Труба бесшовная г/д 76х6 ГОСТ 8732; 8731 09Г2С ВМЗ н/д"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 108000
-    },
-    {
       "id": "local-93338",
       "categoryId": "cat-lis",
       "subcategoryId": "cat-lis-sub-1",
@@ -12584,134 +12416,6 @@
       ],
       "imported": true,
       "pricePerTon": 60750
-    },
-    {
-      "id": "local-93341",
-      "categoryId": "cat-trs",
-      "subcategoryId": "cat-trs-sub-1",
-      "productTypeId": "type-cat-trs-sub-1",
-      "name": "Труба бесшовная г/д 89х7 ГОСТ 8732; 8731 Ст20 ВМЗ н/д",
-      "slug": "truba-bessovnaya-gd-89x7-gost-8732-8731-st20-vmz-nd",
-      "sku": "МП-93341",
-      "shortDescription": "Диаметр, мм: 89; Марка стали: Ст20; Толщина, мм: 7; Стандарт: ГОСТ 8732; 8731",
-      "description": "Труба бесшовная г/д 89х7 ГОСТ 8732; 8731 Ст20 ВМЗ н/д. Диаметр, мм: 89; Марка стали: Ст20; Толщина, мм: 7; Стандарт: ГОСТ 8732; 8731. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 103500,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 8732; 8731",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "key": "grade",
-          "label": "Марка стали",
-          "value": "Ст20"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Диаметр, мм: 89; Толщина, мм: 7"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Диаметр, мм",
-          "value": "89"
-        },
-        {
-          "name": "Марка стали",
-          "value": "Ст20"
-        },
-        {
-          "name": "Толщина, мм",
-          "value": "7"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Труба бесшовная г/д 89х7 ГОСТ 8732; 8731 Ст20 ВМЗ н/д"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 103500
-    },
-    {
-      "id": "local-93347",
-      "categoryId": "cat-trs",
-      "subcategoryId": "cat-trs-sub-1",
-      "productTypeId": "type-cat-trs-sub-1",
-      "name": "Труба бесшовная г/д 114х5 ГОСТ 8732; 8731 Ст20 ВМЗ н/д",
-      "slug": "truba-bessovnaya-gd-114x5-gost-8732-8731-st20-vmz-nd",
-      "sku": "МП-93347",
-      "shortDescription": "Диаметр, мм: 114; Марка стали: Ст20; Толщина, мм: 5; Стандарт: ГОСТ 8732; 8731",
-      "description": "Труба бесшовная г/д 114х5 ГОСТ 8732; 8731 Ст20 ВМЗ н/д. Диаметр, мм: 114; Марка стали: Ст20; Толщина, мм: 5; Стандарт: ГОСТ 8732; 8731. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 103500,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 8732; 8731",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "key": "grade",
-          "label": "Марка стали",
-          "value": "Ст20"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Диаметр, мм: 114; Толщина, мм: 5"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Диаметр, мм",
-          "value": "114"
-        },
-        {
-          "name": "Марка стали",
-          "value": "Ст20"
-        },
-        {
-          "name": "Толщина, мм",
-          "value": "5"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Труба бесшовная г/д 114х5 ГОСТ 8732; 8731 Ст20 ВМЗ н/д"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 103500
     },
     {
       "id": "local-93380",
@@ -14534,2374 +14238,6 @@
       "pricePerTon": 58950
     },
     {
-      "id": "local-93414",
-      "categoryId": "cat-trs",
-      "subcategoryId": "cat-trs-sub-1",
-      "productTypeId": "type-cat-trs-sub-1",
-      "name": "Труба бесшовная г/д 76х7 ГОСТ 8732; 8731 Ст20 ВМЗ н/д",
-      "slug": "truba-bessovnaya-gd-76x7-gost-8732-8731-st20-vmz-nd",
-      "sku": "МП-93414",
-      "shortDescription": "Диаметр, мм: 76; Марка стали: Ст20; Толщина, мм: 7; Стандарт: ГОСТ 8732; 8731",
-      "description": "Труба бесшовная г/д 76х7 ГОСТ 8732; 8731 Ст20 ВМЗ н/д. Диаметр, мм: 76; Марка стали: Ст20; Толщина, мм: 7; Стандарт: ГОСТ 8732; 8731. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 103500,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 8732; 8731",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "key": "grade",
-          "label": "Марка стали",
-          "value": "Ст20"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Диаметр, мм: 76; Толщина, мм: 7"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Диаметр, мм",
-          "value": "76"
-        },
-        {
-          "name": "Марка стали",
-          "value": "Ст20"
-        },
-        {
-          "name": "Толщина, мм",
-          "value": "7"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Труба бесшовная г/д 76х7 ГОСТ 8732; 8731 Ст20 ВМЗ н/д"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 103500
-    },
-    {
-      "id": "local-93421",
-      "categoryId": "cat-trs",
-      "subcategoryId": "cat-trs-sub-1",
-      "productTypeId": "type-cat-trs-sub-1",
-      "name": "Труба бесшовная г/д 89х10 ГОСТ 8732; 8731 Ст20 ВМЗ н/д",
-      "slug": "truba-bessovnaya-gd-89x10-gost-8732-8731-st20-vmz-nd",
-      "sku": "МП-93421",
-      "shortDescription": "Диаметр, мм: 89; Марка стали: Ст20; Толщина, мм: 10; Стандарт: ГОСТ 8732; 8731",
-      "description": "Труба бесшовная г/д 89х10 ГОСТ 8732; 8731 Ст20 ВМЗ н/д. Диаметр, мм: 89; Марка стали: Ст20; Толщина, мм: 10; Стандарт: ГОСТ 8732; 8731. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 103500,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 8732; 8731",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "key": "grade",
-          "label": "Марка стали",
-          "value": "Ст20"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Диаметр, мм: 89; Толщина, мм: 10"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Диаметр, мм",
-          "value": "89"
-        },
-        {
-          "name": "Марка стали",
-          "value": "Ст20"
-        },
-        {
-          "name": "Толщина, мм",
-          "value": "10"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Труба бесшовная г/д 89х10 ГОСТ 8732; 8731 Ст20 ВМЗ н/д"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 103500
-    },
-    {
-      "id": "local-93427",
-      "categoryId": "cat-trs",
-      "subcategoryId": "cat-trs-sub-1",
-      "productTypeId": "type-cat-trs-sub-1",
-      "name": "Труба бесшовная г/д 114х8 ГОСТ 8732; 8731 Ст20 ВМЗ н/д",
-      "slug": "truba-bessovnaya-gd-114x8-gost-8732-8731-st20-vmz-nd",
-      "sku": "МП-93427",
-      "shortDescription": "Диаметр, мм: 114; Марка стали: Ст20; Толщина, мм: 8; Стандарт: ГОСТ 8732; 8731",
-      "description": "Труба бесшовная г/д 114х8 ГОСТ 8732; 8731 Ст20 ВМЗ н/д. Диаметр, мм: 114; Марка стали: Ст20; Толщина, мм: 8; Стандарт: ГОСТ 8732; 8731. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 103500,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 8732; 8731",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "key": "grade",
-          "label": "Марка стали",
-          "value": "Ст20"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Диаметр, мм: 114; Толщина, мм: 8"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Диаметр, мм",
-          "value": "114"
-        },
-        {
-          "name": "Марка стали",
-          "value": "Ст20"
-        },
-        {
-          "name": "Толщина, мм",
-          "value": "8"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Труба бесшовная г/д 114х8 ГОСТ 8732; 8731 Ст20 ВМЗ н/д"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 103500
-    },
-    {
-      "id": "local-93428",
-      "categoryId": "cat-trs",
-      "subcategoryId": "cat-trs-sub-1",
-      "productTypeId": "type-cat-trs-sub-1",
-      "name": "Труба бесшовная г/д 114х10 ГОСТ 8732; 8731 Ст20 ВМЗ н/д",
-      "slug": "truba-bessovnaya-gd-114x10-gost-8732-8731-st20-vmz-nd",
-      "sku": "МП-93428",
-      "shortDescription": "Диаметр, мм: 114; Марка стали: Ст20; Толщина, мм: 10; Стандарт: ГОСТ 8732; 8731",
-      "description": "Труба бесшовная г/д 114х10 ГОСТ 8732; 8731 Ст20 ВМЗ н/д. Диаметр, мм: 114; Марка стали: Ст20; Толщина, мм: 10; Стандарт: ГОСТ 8732; 8731. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 103500,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 8732; 8731",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "key": "grade",
-          "label": "Марка стали",
-          "value": "Ст20"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Диаметр, мм: 114; Толщина, мм: 10"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Диаметр, мм",
-          "value": "114"
-        },
-        {
-          "name": "Марка стали",
-          "value": "Ст20"
-        },
-        {
-          "name": "Толщина, мм",
-          "value": "10"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Труба бесшовная г/д 114х10 ГОСТ 8732; 8731 Ст20 ВМЗ н/д"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 103500
-    },
-    {
-      "id": "local-93430",
-      "categoryId": "cat-trs",
-      "subcategoryId": "cat-trs-sub-1",
-      "productTypeId": "type-cat-trs-sub-1",
-      "name": "Труба бесшовная г/д 133х5 ГОСТ 8732; 8731 Ст20 ВМЗ н/д",
-      "slug": "truba-bessovnaya-gd-133x5-gost-8732-8731-st20-vmz-nd",
-      "sku": "МП-93430",
-      "shortDescription": "Диаметр, мм: 133; Марка стали: Ст20; Толщина, мм: 5; Стандарт: ГОСТ 8732; 8731",
-      "description": "Труба бесшовная г/д 133х5 ГОСТ 8732; 8731 Ст20 ВМЗ н/д. Диаметр, мм: 133; Марка стали: Ст20; Толщина, мм: 5; Стандарт: ГОСТ 8732; 8731. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 103500,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 8732; 8731",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "key": "grade",
-          "label": "Марка стали",
-          "value": "Ст20"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Диаметр, мм: 133; Толщина, мм: 5"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Диаметр, мм",
-          "value": "133"
-        },
-        {
-          "name": "Марка стали",
-          "value": "Ст20"
-        },
-        {
-          "name": "Толщина, мм",
-          "value": "5"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Труба бесшовная г/д 133х5 ГОСТ 8732; 8731 Ст20 ВМЗ н/д"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 103500
-    },
-    {
-      "id": "local-93433",
-      "categoryId": "cat-trs",
-      "subcategoryId": "cat-trs-sub-1",
-      "productTypeId": "type-cat-trs-sub-1",
-      "name": "Труба бесшовная г/д 133х8 ГОСТ 8732; 8731 Ст20 ВМЗ н/д",
-      "slug": "truba-bessovnaya-gd-133x8-gost-8732-8731-st20-vmz-nd",
-      "sku": "МП-93433",
-      "shortDescription": "Диаметр, мм: 133; Марка стали: Ст20; Толщина, мм: 8; Стандарт: ГОСТ 8732; 8731",
-      "description": "Труба бесшовная г/д 133х8 ГОСТ 8732; 8731 Ст20 ВМЗ н/д. Диаметр, мм: 133; Марка стали: Ст20; Толщина, мм: 8; Стандарт: ГОСТ 8732; 8731. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 103500,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 8732; 8731",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "key": "grade",
-          "label": "Марка стали",
-          "value": "Ст20"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Диаметр, мм: 133; Толщина, мм: 8"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Диаметр, мм",
-          "value": "133"
-        },
-        {
-          "name": "Марка стали",
-          "value": "Ст20"
-        },
-        {
-          "name": "Толщина, мм",
-          "value": "8"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Труба бесшовная г/д 133х8 ГОСТ 8732; 8731 Ст20 ВМЗ н/д"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 103500
-    },
-    {
-      "id": "local-93434",
-      "categoryId": "cat-trs",
-      "subcategoryId": "cat-trs-sub-1",
-      "productTypeId": "type-cat-trs-sub-1",
-      "name": "Труба бесшовная г/д 133х10 ГОСТ 8732; 8731 Ст20 ВМЗ н/д",
-      "slug": "truba-bessovnaya-gd-133x10-gost-8732-8731-st20-vmz-nd",
-      "sku": "МП-93434",
-      "shortDescription": "Диаметр, мм: 133; Марка стали: Ст20; Толщина, мм: 10; Стандарт: ГОСТ 8732; 8731",
-      "description": "Труба бесшовная г/д 133х10 ГОСТ 8732; 8731 Ст20 ВМЗ н/д. Диаметр, мм: 133; Марка стали: Ст20; Толщина, мм: 10; Стандарт: ГОСТ 8732; 8731. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 103500,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 8732; 8731",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "key": "grade",
-          "label": "Марка стали",
-          "value": "Ст20"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Диаметр, мм: 133; Толщина, мм: 10"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Диаметр, мм",
-          "value": "133"
-        },
-        {
-          "name": "Марка стали",
-          "value": "Ст20"
-        },
-        {
-          "name": "Толщина, мм",
-          "value": "10"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Труба бесшовная г/д 133х10 ГОСТ 8732; 8731 Ст20 ВМЗ н/д"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 103500
-    },
-    {
-      "id": "local-93435",
-      "categoryId": "cat-trs",
-      "subcategoryId": "cat-trs-sub-1",
-      "productTypeId": "type-cat-trs-sub-1",
-      "name": "Труба бесшовная г/д 133х12 ГОСТ 8732; 8731 Ст20 ВМЗ н/д",
-      "slug": "truba-bessovnaya-gd-133x12-gost-8732-8731-st20-vmz-nd",
-      "sku": "МП-93435",
-      "shortDescription": "Диаметр, мм: 133; Марка стали: Ст20; Толщина, мм: 12; Стандарт: ГОСТ 8732; 8731",
-      "description": "Труба бесшовная г/д 133х12 ГОСТ 8732; 8731 Ст20 ВМЗ н/д. Диаметр, мм: 133; Марка стали: Ст20; Толщина, мм: 12; Стандарт: ГОСТ 8732; 8731. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 103500,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 8732; 8731",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "key": "grade",
-          "label": "Марка стали",
-          "value": "Ст20"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Диаметр, мм: 133; Толщина, мм: 12"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Диаметр, мм",
-          "value": "133"
-        },
-        {
-          "name": "Марка стали",
-          "value": "Ст20"
-        },
-        {
-          "name": "Толщина, мм",
-          "value": "12"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Труба бесшовная г/д 133х12 ГОСТ 8732; 8731 Ст20 ВМЗ н/д"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 103500
-    },
-    {
-      "id": "local-93438",
-      "categoryId": "cat-trs",
-      "subcategoryId": "cat-trs-sub-1",
-      "productTypeId": "type-cat-trs-sub-1",
-      "name": "Труба бесшовная г/д 159х7 ГОСТ 8732; 8731 Ст20 ВМЗ н/д",
-      "slug": "truba-bessovnaya-gd-159x7-gost-8732-8731-st20-vmz-nd",
-      "sku": "МП-93438",
-      "shortDescription": "Диаметр, мм: 159; Марка стали: Ст20; Толщина, мм: 7; Стандарт: ГОСТ 8732; 8731",
-      "description": "Труба бесшовная г/д 159х7 ГОСТ 8732; 8731 Ст20 ВМЗ н/д. Диаметр, мм: 159; Марка стали: Ст20; Толщина, мм: 7; Стандарт: ГОСТ 8732; 8731. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 103500,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 8732; 8731",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "key": "grade",
-          "label": "Марка стали",
-          "value": "Ст20"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Диаметр, мм: 159; Толщина, мм: 7"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Диаметр, мм",
-          "value": "159"
-        },
-        {
-          "name": "Марка стали",
-          "value": "Ст20"
-        },
-        {
-          "name": "Толщина, мм",
-          "value": "7"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Труба бесшовная г/д 159х7 ГОСТ 8732; 8731 Ст20 ВМЗ н/д"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 103500
-    },
-    {
-      "id": "local-93439",
-      "categoryId": "cat-trs",
-      "subcategoryId": "cat-trs-sub-1",
-      "productTypeId": "type-cat-trs-sub-1",
-      "name": "Труба бесшовная г/д 159х8 ГОСТ 8732; 8731 Ст20 ВМЗ н/д",
-      "slug": "truba-bessovnaya-gd-159x8-gost-8732-8731-st20-vmz-nd",
-      "sku": "МП-93439",
-      "shortDescription": "Диаметр, мм: 159; Марка стали: Ст20; Толщина, мм: 8; Стандарт: ГОСТ 8732; 8731",
-      "description": "Труба бесшовная г/д 159х8 ГОСТ 8732; 8731 Ст20 ВМЗ н/д. Диаметр, мм: 159; Марка стали: Ст20; Толщина, мм: 8; Стандарт: ГОСТ 8732; 8731. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 103500,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 8732; 8731",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "key": "grade",
-          "label": "Марка стали",
-          "value": "Ст20"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Диаметр, мм: 159; Толщина, мм: 8"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Диаметр, мм",
-          "value": "159"
-        },
-        {
-          "name": "Марка стали",
-          "value": "Ст20"
-        },
-        {
-          "name": "Толщина, мм",
-          "value": "8"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Труба бесшовная г/д 159х8 ГОСТ 8732; 8731 Ст20 ВМЗ н/д"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 103500
-    },
-    {
-      "id": "local-93441",
-      "categoryId": "cat-trs",
-      "subcategoryId": "cat-trs-sub-1",
-      "productTypeId": "type-cat-trs-sub-1",
-      "name": "Труба бесшовная г/д 168х6 ГОСТ 8732; 8731 Ст20 ВМЗ н/д",
-      "slug": "truba-bessovnaya-gd-168x6-gost-8732-8731-st20-vmz-nd",
-      "sku": "МП-93441",
-      "shortDescription": "Диаметр, мм: 168; Марка стали: Ст20; Толщина, мм: 6; Стандарт: ГОСТ 8732; 8731",
-      "description": "Труба бесшовная г/д 168х6 ГОСТ 8732; 8731 Ст20 ВМЗ н/д. Диаметр, мм: 168; Марка стали: Ст20; Толщина, мм: 6; Стандарт: ГОСТ 8732; 8731. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 103500,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 8732; 8731",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "key": "grade",
-          "label": "Марка стали",
-          "value": "Ст20"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Диаметр, мм: 168; Толщина, мм: 6"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Диаметр, мм",
-          "value": "168"
-        },
-        {
-          "name": "Марка стали",
-          "value": "Ст20"
-        },
-        {
-          "name": "Толщина, мм",
-          "value": "6"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Труба бесшовная г/д 168х6 ГОСТ 8732; 8731 Ст20 ВМЗ н/д"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 103500
-    },
-    {
-      "id": "local-93442",
-      "categoryId": "cat-trs",
-      "subcategoryId": "cat-trs-sub-1",
-      "productTypeId": "type-cat-trs-sub-1",
-      "name": "Труба бесшовная г/д 168х8 ГОСТ 8732; 8731 Ст20 ВМЗ н/д",
-      "slug": "truba-bessovnaya-gd-168x8-gost-8732-8731-st20-vmz-nd",
-      "sku": "МП-93442",
-      "shortDescription": "Диаметр, мм: 168; Марка стали: Ст20; Толщина, мм: 8; Стандарт: ГОСТ 8732; 8731",
-      "description": "Труба бесшовная г/д 168х8 ГОСТ 8732; 8731 Ст20 ВМЗ н/д. Диаметр, мм: 168; Марка стали: Ст20; Толщина, мм: 8; Стандарт: ГОСТ 8732; 8731. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 103500,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 8732; 8731",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "key": "grade",
-          "label": "Марка стали",
-          "value": "Ст20"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Диаметр, мм: 168; Толщина, мм: 8"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Диаметр, мм",
-          "value": "168"
-        },
-        {
-          "name": "Марка стали",
-          "value": "Ст20"
-        },
-        {
-          "name": "Толщина, мм",
-          "value": "8"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Труба бесшовная г/д 168х8 ГОСТ 8732; 8731 Ст20 ВМЗ н/д"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 103500
-    },
-    {
-      "id": "local-93443",
-      "categoryId": "cat-trs",
-      "subcategoryId": "cat-trs-sub-1",
-      "productTypeId": "type-cat-trs-sub-1",
-      "name": "Труба бесшовная г/д 168х10 ГОСТ 8732; 8731 Ст20 ВМЗ н/д",
-      "slug": "truba-bessovnaya-gd-168x10-gost-8732-8731-st20-vmz-nd",
-      "sku": "МП-93443",
-      "shortDescription": "Диаметр, мм: 168; Марка стали: Ст20; Толщина, мм: 10; Стандарт: ГОСТ 8732; 8731",
-      "description": "Труба бесшовная г/д 168х10 ГОСТ 8732; 8731 Ст20 ВМЗ н/д. Диаметр, мм: 168; Марка стали: Ст20; Толщина, мм: 10; Стандарт: ГОСТ 8732; 8731. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 103500,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 8732; 8731",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "key": "grade",
-          "label": "Марка стали",
-          "value": "Ст20"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Диаметр, мм: 168; Толщина, мм: 10"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Диаметр, мм",
-          "value": "168"
-        },
-        {
-          "name": "Марка стали",
-          "value": "Ст20"
-        },
-        {
-          "name": "Толщина, мм",
-          "value": "10"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Труба бесшовная г/д 168х10 ГОСТ 8732; 8731 Ст20 ВМЗ н/д"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 103500
-    },
-    {
-      "id": "local-93446",
-      "categoryId": "cat-trs",
-      "subcategoryId": "cat-trs-sub-1",
-      "productTypeId": "type-cat-trs-sub-1",
-      "name": "Труба бесшовная г/д 219х7 ГОСТ 8732; 8731 Ст20 ВМЗ н/д",
-      "slug": "truba-bessovnaya-gd-219x7-gost-8732-8731-st20-vmz-nd",
-      "sku": "МП-93446",
-      "shortDescription": "Диаметр, мм: 219; Марка стали: Ст20; Толщина, мм: 7; Стандарт: ГОСТ 8732; 8731",
-      "description": "Труба бесшовная г/д 219х7 ГОСТ 8732; 8731 Ст20 ВМЗ н/д. Диаметр, мм: 219; Марка стали: Ст20; Толщина, мм: 7; Стандарт: ГОСТ 8732; 8731. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 108000,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 8732; 8731",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "key": "grade",
-          "label": "Марка стали",
-          "value": "Ст20"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Диаметр, мм: 219; Толщина, мм: 7"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Диаметр, мм",
-          "value": "219"
-        },
-        {
-          "name": "Марка стали",
-          "value": "Ст20"
-        },
-        {
-          "name": "Толщина, мм",
-          "value": "7"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Труба бесшовная г/д 219х7 ГОСТ 8732; 8731 Ст20 ВМЗ н/д"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 108000
-    },
-    {
-      "id": "local-93447",
-      "categoryId": "cat-trs",
-      "subcategoryId": "cat-trs-sub-1",
-      "productTypeId": "type-cat-trs-sub-1",
-      "name": "Труба бесшовная г/д 219х8 ГОСТ 8732; 8731 Ст20 ВМЗ н/д",
-      "slug": "truba-bessovnaya-gd-219x8-gost-8732-8731-st20-vmz-nd",
-      "sku": "МП-93447",
-      "shortDescription": "Диаметр, мм: 219; Марка стали: Ст20; Толщина, мм: 8; Стандарт: ГОСТ 8732; 8731",
-      "description": "Труба бесшовная г/д 219х8 ГОСТ 8732; 8731 Ст20 ВМЗ н/д. Диаметр, мм: 219; Марка стали: Ст20; Толщина, мм: 8; Стандарт: ГОСТ 8732; 8731. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 103500,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 8732; 8731",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "key": "grade",
-          "label": "Марка стали",
-          "value": "Ст20"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Диаметр, мм: 219; Толщина, мм: 8"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Диаметр, мм",
-          "value": "219"
-        },
-        {
-          "name": "Марка стали",
-          "value": "Ст20"
-        },
-        {
-          "name": "Толщина, мм",
-          "value": "8"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Труба бесшовная г/д 219х8 ГОСТ 8732; 8731 Ст20 ВМЗ н/д"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 103500
-    },
-    {
-      "id": "local-93448",
-      "categoryId": "cat-trs",
-      "subcategoryId": "cat-trs-sub-1",
-      "productTypeId": "type-cat-trs-sub-1",
-      "name": "Труба бесшовная г/д 219х10 ГОСТ 8732; 8731 Ст20 ВМЗ н/д",
-      "slug": "truba-bessovnaya-gd-219x10-gost-8732-8731-st20-vmz-nd",
-      "sku": "МП-93448",
-      "shortDescription": "Диаметр, мм: 219; Марка стали: Ст20; Толщина, мм: 10; Стандарт: ГОСТ 8732; 8731",
-      "description": "Труба бесшовная г/д 219х10 ГОСТ 8732; 8731 Ст20 ВМЗ н/д. Диаметр, мм: 219; Марка стали: Ст20; Толщина, мм: 10; Стандарт: ГОСТ 8732; 8731. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 108000,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 8732; 8731",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "key": "grade",
-          "label": "Марка стали",
-          "value": "Ст20"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Диаметр, мм: 219; Толщина, мм: 10"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Диаметр, мм",
-          "value": "219"
-        },
-        {
-          "name": "Марка стали",
-          "value": "Ст20"
-        },
-        {
-          "name": "Толщина, мм",
-          "value": "10"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Труба бесшовная г/д 219х10 ГОСТ 8732; 8731 Ст20 ВМЗ н/д"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 108000
-    },
-    {
-      "id": "local-93449",
-      "categoryId": "cat-trs",
-      "subcategoryId": "cat-trs-sub-1",
-      "productTypeId": "type-cat-trs-sub-1",
-      "name": "Труба бесшовная г/д 219х12 ГОСТ 8732; 8731 Ст20 ВМЗ н/д",
-      "slug": "truba-bessovnaya-gd-219x12-gost-8732-8731-st20-vmz-nd",
-      "sku": "МП-93449",
-      "shortDescription": "Диаметр, мм: 219; Марка стали: Ст20; Толщина, мм: 12; Стандарт: ГОСТ 8732; 8731",
-      "description": "Труба бесшовная г/д 219х12 ГОСТ 8732; 8731 Ст20 ВМЗ н/д. Диаметр, мм: 219; Марка стали: Ст20; Толщина, мм: 12; Стандарт: ГОСТ 8732; 8731. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 108000,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 8732; 8731",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "key": "grade",
-          "label": "Марка стали",
-          "value": "Ст20"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Диаметр, мм: 219; Толщина, мм: 12"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Диаметр, мм",
-          "value": "219"
-        },
-        {
-          "name": "Марка стали",
-          "value": "Ст20"
-        },
-        {
-          "name": "Толщина, мм",
-          "value": "12"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Труба бесшовная г/д 219х12 ГОСТ 8732; 8731 Ст20 ВМЗ н/д"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 108000
-    },
-    {
-      "id": "local-93451",
-      "categoryId": "cat-trs",
-      "subcategoryId": "cat-trs-sub-1",
-      "productTypeId": "type-cat-trs-sub-1",
-      "name": "Труба бесшовная г/д 273х10 ГОСТ 8732; 8731 Ст20 ВМЗ н/д",
-      "slug": "truba-bessovnaya-gd-273x10-gost-8732-8731-st20-vmz-nd",
-      "sku": "МП-93451",
-      "shortDescription": "Диаметр, мм: 273; Марка стали: Ст20; Толщина, мм: 10; Стандарт: ГОСТ 8732; 8731",
-      "description": "Труба бесшовная г/д 273х10 ГОСТ 8732; 8731 Ст20 ВМЗ н/д. Диаметр, мм: 273; Марка стали: Ст20; Толщина, мм: 10; Стандарт: ГОСТ 8732; 8731. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 108000,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 8732; 8731",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "key": "grade",
-          "label": "Марка стали",
-          "value": "Ст20"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Диаметр, мм: 273; Толщина, мм: 10"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Диаметр, мм",
-          "value": "273"
-        },
-        {
-          "name": "Марка стали",
-          "value": "Ст20"
-        },
-        {
-          "name": "Толщина, мм",
-          "value": "10"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Труба бесшовная г/д 273х10 ГОСТ 8732; 8731 Ст20 ВМЗ н/д"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 108000
-    },
-    {
-      "id": "local-93452",
-      "categoryId": "cat-trs",
-      "subcategoryId": "cat-trs-sub-1",
-      "productTypeId": "type-cat-trs-sub-1",
-      "name": "Труба бесшовная г/д 273х7 ГОСТ 8732; 8731 Ст20 ВМЗ н/д",
-      "slug": "truba-bessovnaya-gd-273x7-gost-8732-8731-st20-vmz-nd",
-      "sku": "МП-93452",
-      "shortDescription": "Диаметр, мм: 273; Марка стали: Ст20; Толщина, мм: 7; Стандарт: ГОСТ 8732; 8731",
-      "description": "Труба бесшовная г/д 273х7 ГОСТ 8732; 8731 Ст20 ВМЗ н/д. Диаметр, мм: 273; Марка стали: Ст20; Толщина, мм: 7; Стандарт: ГОСТ 8732; 8731. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 108000,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 8732; 8731",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "key": "grade",
-          "label": "Марка стали",
-          "value": "Ст20"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Диаметр, мм: 273; Толщина, мм: 7"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Диаметр, мм",
-          "value": "273"
-        },
-        {
-          "name": "Марка стали",
-          "value": "Ст20"
-        },
-        {
-          "name": "Толщина, мм",
-          "value": "7"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Труба бесшовная г/д 273х7 ГОСТ 8732; 8731 Ст20 ВМЗ н/д"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 108000
-    },
-    {
-      "id": "local-93464",
-      "categoryId": "cat-trs",
-      "subcategoryId": "cat-trs-sub-1",
-      "productTypeId": "type-cat-trs-sub-1",
-      "name": "Труба бесшовная г/д 76х7 ГОСТ 8732; 8731 09Г2С ВМЗ н/д",
-      "slug": "truba-bessovnaya-gd-76x7-gost-8732-8731-09g2s-vmz-nd",
-      "sku": "МП-93464",
-      "shortDescription": "Диаметр, мм: 76; Марка стали: 09Г2С; Толщина, мм: 7; Стандарт: ГОСТ 8732; 8731",
-      "description": "Труба бесшовная г/д 76х7 ГОСТ 8732; 8731 09Г2С ВМЗ н/д. Диаметр, мм: 76; Марка стали: 09Г2С; Толщина, мм: 7; Стандарт: ГОСТ 8732; 8731. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 108000,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 8732; 8731",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "key": "grade",
-          "label": "Марка стали",
-          "value": "09Г2С"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Диаметр, мм: 76; Толщина, мм: 7"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Диаметр, мм",
-          "value": "76"
-        },
-        {
-          "name": "Марка стали",
-          "value": "09Г2С"
-        },
-        {
-          "name": "Толщина, мм",
-          "value": "7"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Труба бесшовная г/д 76х7 ГОСТ 8732; 8731 09Г2С ВМЗ н/д"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 108000
-    },
-    {
-      "id": "local-93468",
-      "categoryId": "cat-trs",
-      "subcategoryId": "cat-trs-sub-1",
-      "productTypeId": "type-cat-trs-sub-1",
-      "name": "Труба бесшовная г/д 89х10 ГОСТ 8732; 8731 09Г2С ВМЗ н/д",
-      "slug": "truba-bessovnaya-gd-89x10-gost-8732-8731-09g2s-vmz-nd",
-      "sku": "МП-93468",
-      "shortDescription": "Диаметр, мм: 89; Марка стали: 09Г2С; Толщина, мм: 10; Стандарт: ГОСТ 8732; 8731",
-      "description": "Труба бесшовная г/д 89х10 ГОСТ 8732; 8731 09Г2С ВМЗ н/д. Диаметр, мм: 89; Марка стали: 09Г2С; Толщина, мм: 10; Стандарт: ГОСТ 8732; 8731. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 108000,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 8732; 8731",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "key": "grade",
-          "label": "Марка стали",
-          "value": "09Г2С"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Диаметр, мм: 89; Толщина, мм: 10"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Диаметр, мм",
-          "value": "89"
-        },
-        {
-          "name": "Марка стали",
-          "value": "09Г2С"
-        },
-        {
-          "name": "Толщина, мм",
-          "value": "10"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Труба бесшовная г/д 89х10 ГОСТ 8732; 8731 09Г2С ВМЗ н/д"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 108000
-    },
-    {
-      "id": "local-93470",
-      "categoryId": "cat-trs",
-      "subcategoryId": "cat-trs-sub-1",
-      "productTypeId": "type-cat-trs-sub-1",
-      "name": "Труба бесшовная г/д 108х7 ГОСТ 8732; 8731 09Г2С ВМЗ н/д",
-      "slug": "truba-bessovnaya-gd-108x7-gost-8732-8731-09g2s-vmz-nd",
-      "sku": "МП-93470",
-      "shortDescription": "Диаметр, мм: 108; Марка стали: 09Г2С; Толщина, мм: 7; Стандарт: ГОСТ 8732; 8731",
-      "description": "Труба бесшовная г/д 108х7 ГОСТ 8732; 8731 09Г2С ВМЗ н/д. Диаметр, мм: 108; Марка стали: 09Г2С; Толщина, мм: 7; Стандарт: ГОСТ 8732; 8731. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 108000,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 8732; 8731",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "key": "grade",
-          "label": "Марка стали",
-          "value": "09Г2С"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Диаметр, мм: 108; Толщина, мм: 7"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Диаметр, мм",
-          "value": "108"
-        },
-        {
-          "name": "Марка стали",
-          "value": "09Г2С"
-        },
-        {
-          "name": "Толщина, мм",
-          "value": "7"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Труба бесшовная г/д 108х7 ГОСТ 8732; 8731 09Г2С ВМЗ н/д"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 108000
-    },
-    {
-      "id": "local-93472",
-      "categoryId": "cat-trs",
-      "subcategoryId": "cat-trs-sub-1",
-      "productTypeId": "type-cat-trs-sub-1",
-      "name": "Труба бесшовная г/д 108х10 ГОСТ 8732; 8731 09Г2С ВМЗ н/д",
-      "slug": "truba-bessovnaya-gd-108x10-gost-8732-8731-09g2s-vmz-nd",
-      "sku": "МП-93472",
-      "shortDescription": "Диаметр, мм: 108; Марка стали: 09Г2С; Толщина, мм: 10; Стандарт: ГОСТ 8732; 8731",
-      "description": "Труба бесшовная г/д 108х10 ГОСТ 8732; 8731 09Г2С ВМЗ н/д. Диаметр, мм: 108; Марка стали: 09Г2С; Толщина, мм: 10; Стандарт: ГОСТ 8732; 8731. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 108000,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 8732; 8731",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "key": "grade",
-          "label": "Марка стали",
-          "value": "09Г2С"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Диаметр, мм: 108; Толщина, мм: 10"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Диаметр, мм",
-          "value": "108"
-        },
-        {
-          "name": "Марка стали",
-          "value": "09Г2С"
-        },
-        {
-          "name": "Толщина, мм",
-          "value": "10"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Труба бесшовная г/д 108х10 ГОСТ 8732; 8731 09Г2С ВМЗ н/д"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 108000
-    },
-    {
-      "id": "local-93473",
-      "categoryId": "cat-trs",
-      "subcategoryId": "cat-trs-sub-1",
-      "productTypeId": "type-cat-trs-sub-1",
-      "name": "Труба бесшовная г/д 114х6 ГОСТ 8732; 8731 09Г2С ВМЗ н/д",
-      "slug": "truba-bessovnaya-gd-114x6-gost-8732-8731-09g2s-vmz-nd",
-      "sku": "МП-93473",
-      "shortDescription": "Диаметр, мм: 114; Марка стали: 09Г2С; Толщина, мм: 6; Стандарт: ГОСТ 8732; 8731",
-      "description": "Труба бесшовная г/д 114х6 ГОСТ 8732; 8731 09Г2С ВМЗ н/д. Диаметр, мм: 114; Марка стали: 09Г2С; Толщина, мм: 6; Стандарт: ГОСТ 8732; 8731. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 108000,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 8732; 8731",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "key": "grade",
-          "label": "Марка стали",
-          "value": "09Г2С"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Диаметр, мм: 114; Толщина, мм: 6"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Диаметр, мм",
-          "value": "114"
-        },
-        {
-          "name": "Марка стали",
-          "value": "09Г2С"
-        },
-        {
-          "name": "Толщина, мм",
-          "value": "6"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Труба бесшовная г/д 114х6 ГОСТ 8732; 8731 09Г2С ВМЗ н/д"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 108000
-    },
-    {
-      "id": "local-93474",
-      "categoryId": "cat-trs",
-      "subcategoryId": "cat-trs-sub-1",
-      "productTypeId": "type-cat-trs-sub-1",
-      "name": "Труба бесшовная г/д 114х8 ГОСТ 8732; 8731 09Г2С ВМЗ н/д",
-      "slug": "truba-bessovnaya-gd-114x8-gost-8732-8731-09g2s-vmz-nd",
-      "sku": "МП-93474",
-      "shortDescription": "Диаметр, мм: 114; Марка стали: 09Г2С; Толщина, мм: 8; Стандарт: ГОСТ 8732; 8731",
-      "description": "Труба бесшовная г/д 114х8 ГОСТ 8732; 8731 09Г2С ВМЗ н/д. Диаметр, мм: 114; Марка стали: 09Г2С; Толщина, мм: 8; Стандарт: ГОСТ 8732; 8731. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 108000,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 8732; 8731",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "key": "grade",
-          "label": "Марка стали",
-          "value": "09Г2С"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Диаметр, мм: 114; Толщина, мм: 8"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Диаметр, мм",
-          "value": "114"
-        },
-        {
-          "name": "Марка стали",
-          "value": "09Г2С"
-        },
-        {
-          "name": "Толщина, мм",
-          "value": "8"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Труба бесшовная г/д 114х8 ГОСТ 8732; 8731 09Г2С ВМЗ н/д"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 108000
-    },
-    {
-      "id": "local-93477",
-      "categoryId": "cat-trs",
-      "subcategoryId": "cat-trs-sub-1",
-      "productTypeId": "type-cat-trs-sub-1",
-      "name": "Труба бесшовная г/д 133х8 ГОСТ 8732; 8731 09Г2С ВМЗ н/д",
-      "slug": "truba-bessovnaya-gd-133x8-gost-8732-8731-09g2s-vmz-nd",
-      "sku": "МП-93477",
-      "shortDescription": "Диаметр, мм: 133; Марка стали: 09Г2С; Толщина, мм: 8; Стандарт: ГОСТ 8732; 8731",
-      "description": "Труба бесшовная г/д 133х8 ГОСТ 8732; 8731 09Г2С ВМЗ н/д. Диаметр, мм: 133; Марка стали: 09Г2С; Толщина, мм: 8; Стандарт: ГОСТ 8732; 8731. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 108000,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 8732; 8731",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "key": "grade",
-          "label": "Марка стали",
-          "value": "09Г2С"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Диаметр, мм: 133; Толщина, мм: 8"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Диаметр, мм",
-          "value": "133"
-        },
-        {
-          "name": "Марка стали",
-          "value": "09Г2С"
-        },
-        {
-          "name": "Толщина, мм",
-          "value": "8"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Труба бесшовная г/д 133х8 ГОСТ 8732; 8731 09Г2С ВМЗ н/д"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 108000
-    },
-    {
-      "id": "local-93478",
-      "categoryId": "cat-trs",
-      "subcategoryId": "cat-trs-sub-1",
-      "productTypeId": "type-cat-trs-sub-1",
-      "name": "Труба бесшовная г/д 133х10 ГОСТ 8732; 8731 09Г2С ВМЗ н/д",
-      "slug": "truba-bessovnaya-gd-133x10-gost-8732-8731-09g2s-vmz-nd",
-      "sku": "МП-93478",
-      "shortDescription": "Диаметр, мм: 133; Марка стали: 09Г2С; Толщина, мм: 10; Стандарт: ГОСТ 8732; 8731",
-      "description": "Труба бесшовная г/д 133х10 ГОСТ 8732; 8731 09Г2С ВМЗ н/д. Диаметр, мм: 133; Марка стали: 09Г2С; Толщина, мм: 10; Стандарт: ГОСТ 8732; 8731. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 108000,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 8732; 8731",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "key": "grade",
-          "label": "Марка стали",
-          "value": "09Г2С"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Диаметр, мм: 133; Толщина, мм: 10"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Диаметр, мм",
-          "value": "133"
-        },
-        {
-          "name": "Марка стали",
-          "value": "09Г2С"
-        },
-        {
-          "name": "Толщина, мм",
-          "value": "10"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Труба бесшовная г/д 133х10 ГОСТ 8732; 8731 09Г2С ВМЗ н/д"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 108000
-    },
-    {
-      "id": "local-93482",
-      "categoryId": "cat-trs",
-      "subcategoryId": "cat-trs-sub-1",
-      "productTypeId": "type-cat-trs-sub-1",
-      "name": "Труба бесшовная г/д 159х10 ГОСТ 8732; 8731 09Г2С ВМЗ н/д",
-      "slug": "truba-bessovnaya-gd-159x10-gost-8732-8731-09g2s-vmz-nd",
-      "sku": "МП-93482",
-      "shortDescription": "Диаметр, мм: 159; Марка стали: 09Г2С; Толщина, мм: 10; Стандарт: ГОСТ 8732; 8731",
-      "description": "Труба бесшовная г/д 159х10 ГОСТ 8732; 8731 09Г2С ВМЗ н/д. Диаметр, мм: 159; Марка стали: 09Г2С; Толщина, мм: 10; Стандарт: ГОСТ 8732; 8731. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 108000,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 8732; 8731",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "key": "grade",
-          "label": "Марка стали",
-          "value": "09Г2С"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Диаметр, мм: 159; Толщина, мм: 10"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Диаметр, мм",
-          "value": "159"
-        },
-        {
-          "name": "Марка стали",
-          "value": "09Г2С"
-        },
-        {
-          "name": "Толщина, мм",
-          "value": "10"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Труба бесшовная г/д 159х10 ГОСТ 8732; 8731 09Г2С ВМЗ н/д"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 108000
-    },
-    {
-      "id": "local-93483",
-      "categoryId": "cat-trs",
-      "subcategoryId": "cat-trs-sub-1",
-      "productTypeId": "type-cat-trs-sub-1",
-      "name": "Труба бесшовная г/д 159х12 ГОСТ 8732; 8731 09Г2С ВМЗ н/д",
-      "slug": "truba-bessovnaya-gd-159x12-gost-8732-8731-09g2s-vmz-nd",
-      "sku": "МП-93483",
-      "shortDescription": "Диаметр, мм: 159; Марка стали: 09Г2С; Толщина, мм: 12; Стандарт: ГОСТ 8732; 8731",
-      "description": "Труба бесшовная г/д 159х12 ГОСТ 8732; 8731 09Г2С ВМЗ н/д. Диаметр, мм: 159; Марка стали: 09Г2С; Толщина, мм: 12; Стандарт: ГОСТ 8732; 8731. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 108000,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 8732; 8731",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "key": "grade",
-          "label": "Марка стали",
-          "value": "09Г2С"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Диаметр, мм: 159; Толщина, мм: 12"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Диаметр, мм",
-          "value": "159"
-        },
-        {
-          "name": "Марка стали",
-          "value": "09Г2С"
-        },
-        {
-          "name": "Толщина, мм",
-          "value": "12"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Труба бесшовная г/д 159х12 ГОСТ 8732; 8731 09Г2С ВМЗ н/д"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 108000
-    },
-    {
-      "id": "local-93484",
-      "categoryId": "cat-trs",
-      "subcategoryId": "cat-trs-sub-1",
-      "productTypeId": "type-cat-trs-sub-1",
-      "name": "Труба бесшовная г/д 168х6 ГОСТ 8732; 8731 09Г2С ВМЗ н/д",
-      "slug": "truba-bessovnaya-gd-168x6-gost-8732-8731-09g2s-vmz-nd",
-      "sku": "МП-93484",
-      "shortDescription": "Диаметр, мм: 168; Марка стали: 09Г2С; Толщина, мм: 6; Стандарт: ГОСТ 8732; 8731",
-      "description": "Труба бесшовная г/д 168х6 ГОСТ 8732; 8731 09Г2С ВМЗ н/д. Диаметр, мм: 168; Марка стали: 09Г2С; Толщина, мм: 6; Стандарт: ГОСТ 8732; 8731. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 108000,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 8732; 8731",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "key": "grade",
-          "label": "Марка стали",
-          "value": "09Г2С"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Диаметр, мм: 168; Толщина, мм: 6"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Диаметр, мм",
-          "value": "168"
-        },
-        {
-          "name": "Марка стали",
-          "value": "09Г2С"
-        },
-        {
-          "name": "Толщина, мм",
-          "value": "6"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Труба бесшовная г/д 168х6 ГОСТ 8732; 8731 09Г2С ВМЗ н/д"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 108000
-    },
-    {
-      "id": "local-93486",
-      "categoryId": "cat-trs",
-      "subcategoryId": "cat-trs-sub-1",
-      "productTypeId": "type-cat-trs-sub-1",
-      "name": "Труба бесшовная г/д 168х10 ГОСТ 8732; 8731 09Г2С ВМЗ н/д",
-      "slug": "truba-bessovnaya-gd-168x10-gost-8732-8731-09g2s-vmz-nd",
-      "sku": "МП-93486",
-      "shortDescription": "Диаметр, мм: 168; Марка стали: 09Г2С; Толщина, мм: 10; Стандарт: ГОСТ 8732; 8731",
-      "description": "Труба бесшовная г/д 168х10 ГОСТ 8732; 8731 09Г2С ВМЗ н/д. Диаметр, мм: 168; Марка стали: 09Г2С; Толщина, мм: 10; Стандарт: ГОСТ 8732; 8731. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 108000,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 8732; 8731",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "key": "grade",
-          "label": "Марка стали",
-          "value": "09Г2С"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Диаметр, мм: 168; Толщина, мм: 10"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Диаметр, мм",
-          "value": "168"
-        },
-        {
-          "name": "Марка стали",
-          "value": "09Г2С"
-        },
-        {
-          "name": "Толщина, мм",
-          "value": "10"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Труба бесшовная г/д 168х10 ГОСТ 8732; 8731 09Г2С ВМЗ н/д"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 108000
-    },
-    {
-      "id": "local-93490",
-      "categoryId": "cat-trs",
-      "subcategoryId": "cat-trs-sub-1",
-      "productTypeId": "type-cat-trs-sub-1",
-      "name": "Труба бесшовная г/д 219х7 ГОСТ 8732; 8731 09Г2С ВМЗ н/д",
-      "slug": "truba-bessovnaya-gd-219x7-gost-8732-8731-09g2s-vmz-nd",
-      "sku": "МП-93490",
-      "shortDescription": "Диаметр, мм: 219; Марка стали: 09Г2С; Толщина, мм: 7; Стандарт: ГОСТ 8732; 8731",
-      "description": "Труба бесшовная г/д 219х7 ГОСТ 8732; 8731 09Г2С ВМЗ н/д. Диаметр, мм: 219; Марка стали: 09Г2С; Толщина, мм: 7; Стандарт: ГОСТ 8732; 8731. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 108000,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 8732; 8731",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "key": "grade",
-          "label": "Марка стали",
-          "value": "09Г2С"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Диаметр, мм: 219; Толщина, мм: 7"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Диаметр, мм",
-          "value": "219"
-        },
-        {
-          "name": "Марка стали",
-          "value": "09Г2С"
-        },
-        {
-          "name": "Толщина, мм",
-          "value": "7"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Труба бесшовная г/д 219х7 ГОСТ 8732; 8731 09Г2С ВМЗ н/д"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 108000
-    },
-    {
-      "id": "local-93494",
-      "categoryId": "cat-trs",
-      "subcategoryId": "cat-trs-sub-1",
-      "productTypeId": "type-cat-trs-sub-1",
-      "name": "Труба бесшовная г/д 219х10 ГОСТ 8732; 8731 09Г2С ВМЗ н/д",
-      "slug": "truba-bessovnaya-gd-219x10-gost-8732-8731-09g2s-vmz-nd",
-      "sku": "МП-93494",
-      "shortDescription": "Диаметр, мм: 219; Марка стали: 09Г2С; Толщина, мм: 10; Стандарт: ГОСТ 8732; 8731",
-      "description": "Труба бесшовная г/д 219х10 ГОСТ 8732; 8731 09Г2С ВМЗ н/д. Диаметр, мм: 219; Марка стали: 09Г2С; Толщина, мм: 10; Стандарт: ГОСТ 8732; 8731. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 112500,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 8732; 8731",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "key": "grade",
-          "label": "Марка стали",
-          "value": "09Г2С"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Диаметр, мм: 219; Толщина, мм: 10"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Диаметр, мм",
-          "value": "219"
-        },
-        {
-          "name": "Марка стали",
-          "value": "09Г2С"
-        },
-        {
-          "name": "Толщина, мм",
-          "value": "10"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Труба бесшовная г/д 219х10 ГОСТ 8732; 8731 09Г2С ВМЗ н/д"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 112500
-    },
-    {
-      "id": "local-93495",
-      "categoryId": "cat-trs",
-      "subcategoryId": "cat-trs-sub-1",
-      "productTypeId": "type-cat-trs-sub-1",
-      "name": "Труба бесшовная г/д 219х12 ГОСТ 8732; 8731 09Г2С ВМЗ н/д",
-      "slug": "truba-bessovnaya-gd-219x12-gost-8732-8731-09g2s-vmz-nd",
-      "sku": "МП-93495",
-      "shortDescription": "Диаметр, мм: 219; Марка стали: 09Г2С; Толщина, мм: 12; Стандарт: ГОСТ 8732; 8731",
-      "description": "Труба бесшовная г/д 219х12 ГОСТ 8732; 8731 09Г2С ВМЗ н/д. Диаметр, мм: 219; Марка стали: 09Г2С; Толщина, мм: 12; Стандарт: ГОСТ 8732; 8731. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 112500,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 8732; 8731",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "key": "grade",
-          "label": "Марка стали",
-          "value": "09Г2С"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Диаметр, мм: 219; Толщина, мм: 12"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Диаметр, мм",
-          "value": "219"
-        },
-        {
-          "name": "Марка стали",
-          "value": "09Г2С"
-        },
-        {
-          "name": "Толщина, мм",
-          "value": "12"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Труба бесшовная г/д 219х12 ГОСТ 8732; 8731 09Г2С ВМЗ н/д"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 112500
-    },
-    {
-      "id": "local-93496",
-      "categoryId": "cat-trs",
-      "subcategoryId": "cat-trs-sub-1",
-      "productTypeId": "type-cat-trs-sub-1",
-      "name": "Труба бесшовная г/д 273х7 ГОСТ 8732; 8731 09Г2С ВМЗ н/д",
-      "slug": "truba-bessovnaya-gd-273x7-gost-8732-8731-09g2s-vmz-nd",
-      "sku": "МП-93496",
-      "shortDescription": "Диаметр, мм: 273; Марка стали: 09Г2С; Толщина, мм: 7; Стандарт: ГОСТ 8732; 8731",
-      "description": "Труба бесшовная г/д 273х7 ГОСТ 8732; 8731 09Г2С ВМЗ н/д. Диаметр, мм: 273; Марка стали: 09Г2С; Толщина, мм: 7; Стандарт: ГОСТ 8732; 8731. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 112500,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 8732; 8731",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "key": "grade",
-          "label": "Марка стали",
-          "value": "09Г2С"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Диаметр, мм: 273; Толщина, мм: 7"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Диаметр, мм",
-          "value": "273"
-        },
-        {
-          "name": "Марка стали",
-          "value": "09Г2С"
-        },
-        {
-          "name": "Толщина, мм",
-          "value": "7"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Труба бесшовная г/д 273х7 ГОСТ 8732; 8731 09Г2С ВМЗ н/д"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 112500
-    },
-    {
-      "id": "local-93498",
-      "categoryId": "cat-trs",
-      "subcategoryId": "cat-trs-sub-1",
-      "productTypeId": "type-cat-trs-sub-1",
-      "name": "Труба бесшовная г/д 273х9 ГОСТ 8732; 8731 09Г2С ВМЗ н/д",
-      "slug": "truba-bessovnaya-gd-273x9-gost-8732-8731-09g2s-vmz-nd",
-      "sku": "МП-93498",
-      "shortDescription": "Диаметр, мм: 273; Марка стали: 09Г2С; Толщина, мм: 9; Стандарт: ГОСТ 8732; 8731",
-      "description": "Труба бесшовная г/д 273х9 ГОСТ 8732; 8731 09Г2С ВМЗ н/д. Диаметр, мм: 273; Марка стали: 09Г2С; Толщина, мм: 9; Стандарт: ГОСТ 8732; 8731. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 112500,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 8732; 8731",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "key": "grade",
-          "label": "Марка стали",
-          "value": "09Г2С"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Диаметр, мм: 273; Толщина, мм: 9"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Диаметр, мм",
-          "value": "273"
-        },
-        {
-          "name": "Марка стали",
-          "value": "09Г2С"
-        },
-        {
-          "name": "Толщина, мм",
-          "value": "9"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Труба бесшовная г/д 273х9 ГОСТ 8732; 8731 09Г2С ВМЗ н/д"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 112500
-    },
-    {
-      "id": "local-93499",
-      "categoryId": "cat-trs",
-      "subcategoryId": "cat-trs-sub-1",
-      "productTypeId": "type-cat-trs-sub-1",
-      "name": "Труба бесшовная г/д 273х10 ГОСТ 8732; 8731 09Г2С ВМЗ н/д",
-      "slug": "truba-bessovnaya-gd-273x10-gost-8732-8731-09g2s-vmz-nd",
-      "sku": "МП-93499",
-      "shortDescription": "Диаметр, мм: 273; Марка стали: 09Г2С; Толщина, мм: 10; Стандарт: ГОСТ 8732; 8731",
-      "description": "Труба бесшовная г/д 273х10 ГОСТ 8732; 8731 09Г2С ВМЗ н/д. Диаметр, мм: 273; Марка стали: 09Г2С; Толщина, мм: 10; Стандарт: ГОСТ 8732; 8731. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 112500,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 8732; 8731",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "key": "grade",
-          "label": "Марка стали",
-          "value": "09Г2С"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Диаметр, мм: 273; Толщина, мм: 10"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Диаметр, мм",
-          "value": "273"
-        },
-        {
-          "name": "Марка стали",
-          "value": "09Г2С"
-        },
-        {
-          "name": "Толщина, мм",
-          "value": "10"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Труба бесшовная г/д 273х10 ГОСТ 8732; 8731 09Г2С ВМЗ н/д"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 112500
-    },
-    {
       "id": "local-93516",
       "categoryId": "cat-shv",
       "subcategoryId": "mirror-family-cat-shv-16",
@@ -17261,134 +14597,6 @@
       ],
       "imported": true,
       "pricePerTon": 61200
-    },
-    {
-      "id": "local-94288",
-      "categoryId": "cat-trs",
-      "subcategoryId": "cat-trs-sub-1",
-      "productTypeId": "type-cat-trs-sub-1",
-      "name": "Труба бесшовная г/д 108х4 ГОСТ 8732; 8731 Ст20 ВМЗ н/д",
-      "slug": "truba-bessovnaya-gd-108x4-gost-8732-8731-st20-vmz-nd",
-      "sku": "МП-94288",
-      "shortDescription": "Диаметр, мм: 108; Марка стали: Ст20; Толщина, мм: 4; Стандарт: ГОСТ 8732; 8731",
-      "description": "Труба бесшовная г/д 108х4 ГОСТ 8732; 8731 Ст20 ВМЗ н/д. Диаметр, мм: 108; Марка стали: Ст20; Толщина, мм: 4; Стандарт: ГОСТ 8732; 8731. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 103500,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 8732; 8731",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "key": "grade",
-          "label": "Марка стали",
-          "value": "Ст20"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Диаметр, мм: 108; Толщина, мм: 4"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Диаметр, мм",
-          "value": "108"
-        },
-        {
-          "name": "Марка стали",
-          "value": "Ст20"
-        },
-        {
-          "name": "Толщина, мм",
-          "value": "4"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Труба бесшовная г/д 108х4 ГОСТ 8732; 8731 Ст20 ВМЗ н/д"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 103500
-    },
-    {
-      "id": "local-94289",
-      "categoryId": "cat-trs",
-      "subcategoryId": "cat-trs-sub-1",
-      "productTypeId": "type-cat-trs-sub-1",
-      "name": "Труба бесшовная г/д 108х4.5 ГОСТ 8732; 8731 Ст20 ВМЗ н/д",
-      "slug": "truba-bessovnaya-gd-108x45-gost-8732-8731-st20-vmz-nd",
-      "sku": "МП-94289",
-      "shortDescription": "Диаметр, мм: 108; Марка стали: Ст20; Толщина, мм: 4,5; Стандарт: ГОСТ 8732; 8731",
-      "description": "Труба бесшовная г/д 108х4.5 ГОСТ 8732; 8731 Ст20 ВМЗ н/д. Диаметр, мм: 108; Марка стали: Ст20; Толщина, мм: 4,5; Стандарт: ГОСТ 8732; 8731. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 103500,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 8732; 8731",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "key": "grade",
-          "label": "Марка стали",
-          "value": "Ст20"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Диаметр, мм: 108; Толщина, мм: 4,5"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Диаметр, мм",
-          "value": "108"
-        },
-        {
-          "name": "Марка стали",
-          "value": "Ст20"
-        },
-        {
-          "name": "Толщина, мм",
-          "value": "4,5"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 8732; 8731"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Труба бесшовная г/д 108х4.5 ГОСТ 8732; 8731 Ст20 ВМЗ н/д"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 103500
     },
     {
       "id": "local-94324",
@@ -28606,8 +25814,8 @@
     {
       "id": "local-125936",
       "categoryId": "cat-trk",
-      "subcategoryId": "cat-trs-sub-4",
-      "productTypeId": "type-cat-trs-sub-4",
+      "subcategoryId": "cat-trk-sub-2",
+      "productTypeId": "type-cat-trk-sub-2",
       "name": "Труба электросварная прямошовная 48х3х6000 ГОСТ 10704; 10705 ТМ",
       "slug": "truba-elektrosvarnaya-pryamosovnaya-48x3x6000-gost-10704-10705-tm",
       "sku": "МП-125936",

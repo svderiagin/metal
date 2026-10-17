@@ -18,12 +18,12 @@ export const SEARCH_ALIASES: SearchAlias[] = [
   {query: "оцинковка", alternatives: ["оцинкованный", "оц"], weight: .85},
   {query: "оцинкованный", alternatives: ["оц"], weight: .9},
   {query: "оц", alternatives: ["оцинкованный"], weight: .85},
-  {query: "вгп", alternatives: ["водогазопроводный"], categoryIds: ["cat-trs", "cat-trk"], weight: .9},
-  {query: "водогазопроводный", alternatives: ["вгп"], categoryIds: ["cat-trs", "cat-trk"], weight: .9},
+  {query: "вгп", alternatives: ["водогазопроводный"], categoryIds: ["cat-trk"], weight: .9},
+  {query: "водогазопроводный", alternatives: ["вгп"], categoryIds: ["cat-trk"], weight: .9},
   {query: "гк", alternatives: ["горячекатаный"], weight: .9},
   {query: "хк", alternatives: ["холоднокатаный"], weight: .9},
-  {query: "эсв", alternatives: ["электросварной"], categoryIds: ["cat-trs", "cat-trk", "cat-trp"], weight: .85},
-  {query: "эсвпш", alternatives: ["электросварной"], categoryIds: ["cat-trs", "cat-trk"], weight: .85},
+  {query: "эсв", alternatives: ["электросварной"], categoryIds: ["cat-trk", "cat-trp"], weight: .85},
+  {query: "эсвпш", alternatives: ["электросварной"], categoryIds: ["cat-trk"], weight: .85},
   {query: "электросварный", alternatives: ["электросварной"], weight: .95},
 ];
 

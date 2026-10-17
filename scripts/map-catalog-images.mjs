@@ -58,7 +58,6 @@ function roleFor(p){
    if(/рифлен/.test(n)&&/чечевиц/.test(details)&&!/ромб/.test(details))return 'lentilSheet';
    return null;
   case 'cat-trk':
-  case 'cat-trs':return /бесшовн/.test(n)?'seamless':/электросвар|эсв|эшп/.test(n)?'erw':/водогаз|вгп/.test(n)?'vgp':null;
   case 'cat-trp':{
    if(/оваль/.test(n))return null;
    if(/квадратн/.test(n))return 'squarePipe';
@@ -84,7 +83,6 @@ const imageNames = {
   "4029efc2f95894b2878e": "krug",
   "c49d5dacbff3cd5f6da6": "list-goryachekatanyy",
   "fb98a0c86d2510b194ce": "polosa",
-  "18fbe6467e7250fa3a8f": "truby-stalnye",
   "868928d7bd01ddf352a8": "truby-vodogazoprovodnye",
   "489eeaf9ab3081de62ed": "truby-elektrosvarnye",
   "c53036d5c556ae9722ec": "profil-zamknutyy-kvadratnyy",
@@ -116,7 +114,7 @@ for(const p of products){
  const evidencePages=directFile?.pages?.length?directFile.pages:exact?.pages.filter(p=>p.startsWith('product/'));
  records.push({targetKind:'product',targetId:p.id,targetName:p.name,targetImage:target,sourceImage:asset.file,sourcePages:direct?evidencePages.slice(0,1):asset.pages.slice(0,1),sourceTitle:asset.sourceTitle,sourceProduct:exact?.titleFull||exact?.title,role,matchPriority:direct?1:3,confidence:direct?'high':'medium',evidence:[asset.association,direct?'Exact source product explicitly references this image (possibly inherited category illustration)':'Explicit source family association plus reviewed visual equivalence',`Visible scope: ${role}; checked against target name and specifications. Illustration is not evidence of grade, ГОСТ or exact dimensions.`]});
 }
-const categoryRoles={'cat-arm':'ribbed','cat-bal':'beam','cat-kva':'square','cat-kru':'round','cat-lis':'hotSheet','cat-trs':'seamless','cat-trk':'vgp','cat-trp':'rectangular','cat-shv':'channel','cat-pol':'flatStrip','cat-ugo':'equalAngle','cat-pro':'steelWire','mirror-coils':'coil','mirror-welding':'electrodes'};
+const categoryRoles={'cat-arm':'ribbed','cat-bal':'beam','cat-kva':'square','cat-kru':'round','cat-lis':'hotSheet','cat-trk':'vgp','cat-trp':'rectangular','cat-shv':'channel','cat-pol':'flatStrip','cat-ugo':'equalAngle','cat-pro':'steelWire','mirror-coils':'coil','mirror-welding':'electrodes'};
 for(const c of catalog.categories){const role=categoryRoles[c.id],asset=assets[role];if(!asset)continue;const target=integrate(asset);map.categories[c.id]=target;records.push({targetKind:'category',targetId:c.id,targetName:c.name,targetImage:target,sourceImage:asset.file,sourcePages:asset.pages.slice(0,1),sourceTitle:asset.sourceTitle,confidence:'high',matchPriority:4,evidence:[asset.association,'Representative category image only; not propagated to incompatible product variants']});}
 for(const f of catalog.families){
  const members=products.filter(p=>p.subcategoryId===f.id),matches=records.filter(r=>r.targetKind==='product'&&members.some(p=>p.id===r.targetId));

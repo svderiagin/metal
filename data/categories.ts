@@ -54,14 +54,6 @@ const originalCategories: Category[] = [
     "imageUrl": "/images/catalog/setka-metallicheskaya/setka-metallicheskaya.jpg"
   },
   {
-    "id": "cat-trs",
-    "name": "Трубы стальные",
-    "slug": "truby-stalnye",
-    "shortDescription": "Круглые трубы для инженерных и строительных задач",
-    "description": "Круглые трубы для инженерных и строительных задач. Подберите подкатегорию и отфильтруйте позиции по материалу, стандарту, цене и наличию.",
-    "imageUrl": "/images/categories/truby-stalnye.svg"
-  },
-  {
     "id": "cat-bal",
     "name": "Балка",
     "slug": "balka",

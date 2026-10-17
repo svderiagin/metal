@@ -1,7 +1,7 @@
 import type {ProductVariant, ProductWeight} from "@/types/product";
 
 export function isPipeProduct(product: {categoryId: string}): boolean {
-  return ["cat-trk", "cat-trs", "cat-trn", "cat-trp"].includes(product.categoryId);
+  return ["cat-trk", "cat-trn", "cat-trp"].includes(product.categoryId);
 }
 
 // Circular steel section at 7850 kg/m³. Inputs are outer diameter and wall thickness in mm,
@@ -28,7 +28,7 @@ export function normalizePipeWeight(product: ProductVariant): ProductVariant {
   let mass: number | undefined;
   if (geometricMass !== undefined) {
     if (explicitMass !== undefined && Number.isFinite(explicitMass) && explicitMass > 0) mass = explicitMass;
-    else if (["cat-trk", "cat-trs"].includes(product.categoryId)) mass = geometricMass;
+    else if (product.categoryId === "cat-trk") mass = geometricMass;
   }
   const weight: ProductWeight | undefined = mass === undefined ? undefined : {value: mass, unit: "кг/м"};
   return {...product, weightPerMeterKg: mass, weight};

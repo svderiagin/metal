@@ -10,7 +10,7 @@ import {metalMeshProducts} from "./metalMesh";
 import {otvodyProducts} from "./otvody";
 import {polosaProducts} from "./polosa";
 import {provolokaProducts} from "./provoloka";
-import {trubyStalnyeProducts} from "./trubyStalnye";
+import {roundPipeLegacyProducts} from "./trubaKruglayaLegacy";
 import {trubyNerzhaveyushchieProducts} from "./trubyNerzhaveyushchie";
 import {trubyProfilnyeProducts, profilePipeProducts} from "./trubyProfilnye";
 import {ugolokProducts} from "./ugolok";
@@ -38,7 +38,7 @@ const productSources: ProductVariantSource[] = [
   ...otvodyProducts,
   ...polosaProducts,
   ...provolokaProducts,
-  ...trubyStalnyeProducts,
+  ...roundPipeLegacyProducts,
   ...trubyNerzhaveyushchieProducts,
   ...trubyProfilnyeProducts,
   ...profilePipeProducts,

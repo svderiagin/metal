@@ -18,7 +18,7 @@ const {wholeVgpOrder} = readProjectData('lib/vgp.ts', cache);
 const imported = JSON.parse(fs.readFileSync('data/imported-catalog.json', 'utf8'));
 const manifest = JSON.parse(fs.readFileSync('imports/catalog-manifest.json', 'utf8'));
 const products = catalog.getAllProductVariants();
-const vgp = products.filter(p => p.subcategoryId === 'cat-trs-sub-3');
+const vgp = products.filter(p => p.subcategoryId === 'cat-trk-sub-1');
 // Independently transcribed from GOST 3262-75, table 1 (edition with amendments 1–6).
 const expected = [
   ['МП-258', 15, 21.3, 2.8, 6000, 'Обыкновенная', 1.28, 53640],
@@ -113,13 +113,13 @@ test('VGP search accepts Ду, synonyms, equivalent dimensions and exact ГОС�
 test('pipe mass uses the hollow section only with valid outer diameter and wall; other metal rules stay unchanged', () => {
   assert.equal(roundSteelPipeMass(21.3, 2.8), 1.277);
   for (const args of [[0,2], [20,0], [20,10], [20,11], [Infinity,2], [20,NaN], [1e154,1e153], [1e-6,1e-8]]) assert.equal(roundSteelPipeMass(...args), undefined);
-  const base = {categoryId:'cat-trs', weight:{value:2.4,unit:'кг/м'}, specifications:[], attributes:[]};
+  const base = {categoryId:'cat-trk', weight:{value:2.4,unit:'кг/м'}, specifications:[], attributes:[]};
   assert.equal(normalizePipeWeight(base).weight, undefined);
   assert.equal(normalizePipeWeight({...base, nominalBoreMm:15, wallThicknessMm:2.8}).weight, undefined, 'Ду cannot stand in for outer diameter');
   assert.equal(normalizePipeWeight({...base, diameterMm:21.3, wallThicknessMm:2.8}).weight.value, 1.277);
   assert.equal(normalizePipeWeight({...base, diameterMm:21.3, wallThicknessMm:2.8, weightPerMeterKg:1.28}).weight.value, 1.28);
   assert.equal(normalizePipeWeight({...base, weightPerMeterKg:2.4}).weightPerMeterKg, undefined, 'Missing geometry cannot enable conversion');
-  for (const p of existingVariants.filter(p => ['cat-trs','cat-trn','cat-trp','cat-trk'].includes(p.categoryId))) {
+  for (const p of existingVariants.filter(p => ['cat-trn','cat-trp','cat-trk'].includes(p.categoryId))) {
     if (p.diameterMm === undefined || p.wallThicknessMm === undefined) assert.equal(normalizePipeWeight(p).weight, undefined, p.id);
   }
   for (const categoryId of ['cat-arm','cat-bal','cat-lis','cat-kru']) {

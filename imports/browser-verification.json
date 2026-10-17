@@ -16,13 +16,6 @@
     },
     {
       "width": 1440,
-      "category": "cat-trs",
-      "title": "Труба бесшовная горячедеформированная",
-      "rows": 40,
-      "scrollWidth": 1425
-    },
-    {
-      "width": 1440,
       "category": "cat-lis",
       "title": "Лист горячекатаный",
       "rows": 40,
@@ -53,13 +46,6 @@
       "width": 390,
       "category": "cat-bal",
       "title": "Балка",
-      "rows": 40,
-      "scrollWidth": 390
-    },
-    {
-      "width": 390,
-      "category": "cat-trs",
-      "title": "Труба бесшовная горячедеформированная",
       "rows": 40,
       "scrollWidth": 390
     },
