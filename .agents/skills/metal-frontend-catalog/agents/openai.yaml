@@ -1,0 +1,4 @@
+interface:
+  display_name: "Metal Frontend Catalog"
+  short_description: "Правки каталога metal-frontend с быстрыми проверками"
+  default_prompt: "Use $metal-frontend-catalog to update this project safely and efficiently."
