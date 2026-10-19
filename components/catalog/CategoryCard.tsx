@@ -22,7 +22,7 @@ export function CategoryCard({category}: { category: Category }) {
           {category.name.slice(0, 2).toUpperCase()}
         </div>}
         <div className={`flex flex-1 flex-col px-5 pb-5 sm:px-6 sm:pb-6 ${hasImage ? "pt-4 sm:pt-5" : "pt-5 sm:pt-6"}`}>
-          <h3 className="text-lg font-bold text-slate-950 dark:text-slate-100">
+          <h3 className={`text-lg font-bold ${category.slug === "shtaketnik" ? "text-red-700 dark:text-red-400" : "text-slate-950 dark:text-slate-100"}`}>
             {category.name}
           </h3>
           <p className="mt-2 flex-1 text-sm leading-6 text-slate-600 dark:text-slate-300">

@@ -161,7 +161,7 @@ function TonnageMeasuredVariantItem({
 
   const details = <div className="space-y-2 text-left text-sm font-normal text-slate-600 dark:text-slate-300">
     <p className="font-bold text-slate-900 dark:text-slate-100">{variant.name}</p>
-    <p>Артикул: {variant.sku} · {variant.availability === "UNKNOWN" ? "Наличие уточняется" : variant.availability === "IN_STOCK" ? "В наличии" : "Под заказ"}</p>
+    <p>{variant.availability === "UNKNOWN" ? "Наличие уточняется" : variant.availability === "IN_STOCK" ? "В наличии" : "Под заказ"}</p>
     <p>{variant.shortDescription}</p>
     <p>{variant.description}</p>
   </div>;
@@ -169,7 +169,6 @@ function TonnageMeasuredVariantItem({
   if (view === "card") {
     return (
       <article id={`variant-mobile-${variant.id}`} className="min-w-0 break-words rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-5 shadow-sm">
-        <p className="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">{variant.sku}</p>
         {!isVgp && <CatalogImage src={variant.imageUrls[0]} name={variant.name}/>}
         <h3 className="mt-1 font-bold">{variant.name}</h3>
         <dl className="mt-4 grid grid-cols-2 gap-3 text-sm">
@@ -246,7 +245,7 @@ function TonnageMeasuredVariantItem({
   return (
     <>
     <tr id={`variant-${variant.id}`} title={variant.name} className="border-t border-slate-200 dark:border-slate-700 align-middle">
-      <td className="px-2 py-4 font-bold">{isVgp ? <button type="button" aria-expanded={detailsOpen} aria-controls={`vgp-details-${variant.id}`} aria-label={`Подробности: ${variant.name}, ${variant.sku}`} onClick={() => setDetailsOpen(!detailsOpen)} className="min-h-11 underline decoration-slate-300 dark:decoration-slate-500 underline-offset-4 hover:text-red-700 dark:hover:text-red-400 focus-visible:outline-2 focus-visible:outline-red-700 dark:focus-visible:outline-red-300">{vgpSize(variant)}</button> : isBeam ? beamProfile(variant) : formatNumber(variant.diameterMm ?? 0)}</td>
+      <td className="px-2 py-4 font-bold">{isVgp ? <button type="button" aria-expanded={detailsOpen} aria-controls={`vgp-details-${variant.id}`} aria-label={`Подробности: ${variant.name}`} onClick={() => setDetailsOpen(!detailsOpen)} className="min-h-11 underline decoration-slate-300 dark:decoration-slate-500 underline-offset-4 hover:text-red-700 dark:hover:text-red-400 focus-visible:outline-2 focus-visible:outline-red-700 dark:focus-visible:outline-red-300">{vgpSize(variant)}</button> : isBeam ? beamProfile(variant) : formatNumber(variant.diameterMm ?? 0)}</td>
       <td className="px-2 py-4">{isVgp ? formatNumber(variant.diameterMm ?? 0) : isBeam ? beamKind(variant) : formLabel(variant.form ?? "bar")}</td>
       <td className="px-2 py-4">{isVgp ? vgpSeries(variant) : variant.steelGrade}</td>
       <td className="px-2 py-4 font-semibold tabular-nums">{`${variant.priceQualifier === "from" ? "от " : ""}${formatUnitPrice(pricePerTon ?? null, "за тонну")}`}</td>

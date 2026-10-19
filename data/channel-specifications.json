@@ -1,0 +1,455 @@
+{
+  "checkedOn": "2026-10-19",
+  "sourceEvidence": "imports/shveller-specifications.source.json",
+  "verificationEvidence": "imports/shveller-specifications.verified.json",
+  "replacedSpecificationNames": [
+    "Размер",
+    "Вес",
+    "Высота",
+    "Ширина",
+    "Длина",
+    "Толщина",
+    "Номер профиля",
+    "Ширина полки",
+    "Толщина стенки",
+    "Толщина полки",
+    "Теоретическая масса",
+    "Длина по каталогу"
+  ],
+  "products": {
+    "rozmet-2235": {
+      "imageUrl": "/images/catalog/shveller/shveller-5-clean.webp",
+      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_5/",
+      "profileNumber": "5",
+      "specifications": [
+        {
+          "name": "Высота",
+          "value": "50 мм"
+        },
+        {
+          "name": "Ширина полки",
+          "value": "32 мм"
+        },
+        {
+          "name": "Толщина стенки",
+          "value": "4,4 мм"
+        },
+        {
+          "name": "Толщина полки",
+          "value": "7 мм"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "4,84 кг/м"
+        },
+        {
+          "name": "Длина по каталогу",
+          "value": "11,7 м"
+        }
+      ]
+    },
+    "rozmet-2236": {
+      "imageUrl": "/images/catalog/shveller/shveller-6-5-clean.webp",
+      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_6.5/",
+      "profileNumber": "6,5",
+      "specifications": [
+        {
+          "name": "Высота",
+          "value": "65 мм"
+        },
+        {
+          "name": "Ширина полки",
+          "value": "36 мм"
+        },
+        {
+          "name": "Толщина стенки",
+          "value": "4,4 мм"
+        },
+        {
+          "name": "Толщина полки",
+          "value": "7,2 мм"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "5,90 кг/м"
+        },
+        {
+          "name": "Длина по каталогу",
+          "value": "6–12 м"
+        }
+      ]
+    },
+    "rozmet-2237": {
+      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_8/",
+      "profileNumber": "8",
+      "specifications": [
+        {
+          "name": "Высота",
+          "value": "80 мм"
+        },
+        {
+          "name": "Ширина полки",
+          "value": "40 мм"
+        },
+        {
+          "name": "Толщина стенки",
+          "value": "4,5 мм"
+        },
+        {
+          "name": "Толщина полки",
+          "value": "7,4 мм"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "7,05 кг/м"
+        },
+        {
+          "name": "Длина по каталогу",
+          "value": "6–12 м"
+        }
+      ],
+      "imageUrl": "/images/catalog/shveller/shveller-8-clean.webp"
+    },
+    "rozmet-2238": {
+      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_10/",
+      "profileNumber": "10",
+      "specifications": [
+        {
+          "name": "Высота",
+          "value": "100 мм"
+        },
+        {
+          "name": "Ширина полки",
+          "value": "46 мм"
+        },
+        {
+          "name": "Толщина стенки",
+          "value": "4,5 мм"
+        },
+        {
+          "name": "Толщина полки",
+          "value": "7,6 мм"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "8,59 кг/м"
+        },
+        {
+          "name": "Длина по каталогу",
+          "value": "12 м"
+        }
+      ],
+      "imageUrl": "/images/catalog/shveller/shveller-10-clean.webp"
+    },
+    "rozmet-2239": {
+      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_12/",
+      "profileNumber": "12",
+      "specifications": [
+        {
+          "name": "Высота",
+          "value": "120 мм"
+        },
+        {
+          "name": "Ширина полки",
+          "value": "52 мм"
+        },
+        {
+          "name": "Толщина стенки",
+          "value": "4,8 мм"
+        },
+        {
+          "name": "Толщина полки",
+          "value": "7,8 мм"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "10,40 кг/м"
+        },
+        {
+          "name": "Длина по каталогу",
+          "value": "12 м"
+        }
+      ],
+      "imageUrl": "/images/catalog/shveller/shveller-12-clean.webp"
+    },
+    "rozmet-2240": {
+      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_14/",
+      "profileNumber": "14",
+      "specifications": [
+        {
+          "name": "Высота",
+          "value": "140 мм"
+        },
+        {
+          "name": "Ширина полки",
+          "value": "58 мм"
+        },
+        {
+          "name": "Толщина стенки",
+          "value": "4,9 мм"
+        },
+        {
+          "name": "Толщина полки",
+          "value": "8,1 мм"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "12,30 кг/м"
+        },
+        {
+          "name": "Длина по каталогу",
+          "value": "12 м"
+        }
+      ],
+      "imageUrl": "/images/catalog/shveller/shveller-14-clean.webp"
+    },
+    "rozmet-2241": {
+      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_16/",
+      "profileNumber": "16",
+      "specifications": [
+        {
+          "name": "Высота",
+          "value": "160 мм"
+        },
+        {
+          "name": "Ширина полки",
+          "value": "64 мм"
+        },
+        {
+          "name": "Толщина стенки",
+          "value": "5 мм"
+        },
+        {
+          "name": "Толщина полки",
+          "value": "8,4 мм"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "14,20 кг/м"
+        },
+        {
+          "name": "Длина по каталогу",
+          "value": "11,7–12 м"
+        }
+      ],
+      "imageUrl": "/images/catalog/shveller/shveller-16-clean.webp"
+    },
+    "rozmet-2242": {
+      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_18/",
+      "profileNumber": "18",
+      "specifications": [
+        {
+          "name": "Высота",
+          "value": "180 мм"
+        },
+        {
+          "name": "Ширина полки",
+          "value": "70 мм"
+        },
+        {
+          "name": "Толщина стенки",
+          "value": "5,1 мм"
+        },
+        {
+          "name": "Толщина полки",
+          "value": "8,7 мм"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "16,30 кг/м"
+        },
+        {
+          "name": "Длина по каталогу",
+          "value": "12 м"
+        }
+      ],
+      "imageUrl": "/images/catalog/shveller/shveller-18-clean.webp"
+    },
+    "rozmet-2243": {
+      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_20/",
+      "profileNumber": "20",
+      "specifications": [
+        {
+          "name": "Высота",
+          "value": "200 мм"
+        },
+        {
+          "name": "Ширина полки",
+          "value": "76 мм"
+        },
+        {
+          "name": "Толщина стенки",
+          "value": "5,2 мм"
+        },
+        {
+          "name": "Толщина полки",
+          "value": "9 мм"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "18,40 кг/м"
+        },
+        {
+          "name": "Длина по каталогу",
+          "value": "12 м"
+        }
+      ],
+      "imageUrl": "/images/catalog/shveller/shveller-20-clean.webp"
+    },
+    "rozmet-2244": {
+      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_22/",
+      "profileNumber": "22",
+      "specifications": [
+        {
+          "name": "Высота",
+          "value": "220 мм"
+        },
+        {
+          "name": "Ширина полки",
+          "value": "82 мм"
+        },
+        {
+          "name": "Толщина стенки",
+          "value": "5,4 мм"
+        },
+        {
+          "name": "Толщина полки",
+          "value": "9,5 мм"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "21,00 кг/м"
+        },
+        {
+          "name": "Длина по каталогу",
+          "value": "12 м"
+        }
+      ],
+      "imageUrl": "/images/catalog/shveller/shveller-22-clean.webp"
+    },
+    "rozmet-2245": {
+      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_24/",
+      "profileNumber": "24",
+      "specifications": [
+        {
+          "name": "Высота",
+          "value": "240 мм"
+        },
+        {
+          "name": "Ширина полки",
+          "value": "90 мм"
+        },
+        {
+          "name": "Толщина стенки",
+          "value": "5,6 мм"
+        },
+        {
+          "name": "Толщина полки",
+          "value": "10 мм"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "24,00 кг/м"
+        },
+        {
+          "name": "Длина по каталогу",
+          "value": "12 м"
+        }
+      ],
+      "imageUrl": "/images/catalog/shveller/shveller-24-clean.webp"
+    },
+    "rozmet-2246": {
+      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_27/",
+      "profileNumber": "27",
+      "specifications": [
+        {
+          "name": "Высота",
+          "value": "270 мм"
+        },
+        {
+          "name": "Ширина полки",
+          "value": "95 мм"
+        },
+        {
+          "name": "Толщина стенки",
+          "value": "6 мм"
+        },
+        {
+          "name": "Толщина полки",
+          "value": "10,5 мм"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "27,70 кг/м"
+        },
+        {
+          "name": "Длина по каталогу",
+          "value": "12 м"
+        }
+      ],
+      "imageUrl": "/images/catalog/shveller/shveller-27-clean.webp"
+    },
+    "rozmet-2247": {
+      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_30/",
+      "profileNumber": "30",
+      "specifications": [
+        {
+          "name": "Высота",
+          "value": "300 мм"
+        },
+        {
+          "name": "Ширина полки",
+          "value": "100 мм"
+        },
+        {
+          "name": "Толщина стенки",
+          "value": "6,5 мм"
+        },
+        {
+          "name": "Толщина полки",
+          "value": "11 мм"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "31,80 кг/м"
+        },
+        {
+          "name": "Длина по каталогу",
+          "value": "12 м"
+        }
+      ],
+      "imageUrl": "/images/catalog/shveller/shveller-30-clean.webp"
+    },
+    "rozmet-2248": {
+      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_40/",
+      "profileNumber": "40",
+      "specifications": [
+        {
+          "name": "Высота",
+          "value": "400 мм"
+        },
+        {
+          "name": "Ширина полки",
+          "value": "115 мм"
+        },
+        {
+          "name": "Толщина стенки",
+          "value": "8 мм"
+        },
+        {
+          "name": "Толщина полки",
+          "value": "13,5 мм"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "48,30 кг/м"
+        },
+        {
+          "name": "Длина по каталогу",
+          "value": "12 м"
+        }
+      ],
+      "imageUrl": "/images/catalog/shveller/shveller-40-clean.webp"
+    }
+  }
+}

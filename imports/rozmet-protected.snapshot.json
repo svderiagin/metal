@@ -69,7 +69,7 @@
       "slug": "setka-metallicheskaya",
       "shortDescription": "Сетка-рабица и сварная сетка в рулонах и картах",
       "description": "Металлическая сетка применяется для ограждения участков, строительства вольеров, хозяйственных конструкций и отдельных бетонных работ. В ассортименте представлены плетёная сетка-рабица, сварная сетка в рулонах и картах. Они различаются конструкцией, назначением и формой поставки. При выборе учитывают размер ячейки, диаметр проволоки, размеры изделия и защитное покрытие.",
-      "imageUrl": "/images/catalog/setka-metallicheskaya/setka-metallicheskaya.jpg"
+      "imageUrl": "/images/catalog/setka-metallicheskaya/setka-main.jpg"
     },
     {
       "id": "cat-bal",
@@ -77,7 +77,7 @@
       "slug": "balka",
       "shortDescription": "Двутавровые балки различаются полным обозначением сечения и серией. Для подбора сверяйте обозначение профиля, материал, стандарт и длину.",
       "description": "Стальные двутавровые балки применяются для устройства перекрытий, несущих каркасов, колонн и других металлоконструкций при строительстве домов, гаражей и хозяйственных построек. В ассортименте представлены нормальные, широкополочные, колонные и специальные монорельсовые балки. При выборе учитывают тип профиля, размеры, марку стали, длину и расчётные нагрузки.",
-      "imageUrl": "/images/catalog/balka/balka-mainCategory.jpg"
+      "imageUrl": "/images/catalog/balka/balka-main.jpg"
     }
   ],
   "subcategories": [
@@ -17694,8 +17694,8 @@
     "/images/catalog/truby-profilnye/truby-kvadratnie.jpg": "31231c6e4efe0ad19dcf0260628ff1c75058b4a885a147c66accec89a082e504",
     "/images/catalog/truba-kruglaya/truba-category title.jpg": "a7d7d91d627449f8df111928fc28e7b4093f96199b361aa3eac7050c7ab530b9",
     "/images/catalog/profnastil/profnastil_c8.jpg": "af34af341d05a8569474b1369a9ae2625f96d3d5653157d0e1cb99ffaa77aa05",
-    "/images/catalog/setka-metallicheskaya/setka-metallicheskaya.jpg": "08c70695784bee27818b0052b54a78116eee7e783bf14759f06b6759b321959e",
-    "/images/catalog/balka/balka-mainCategory.jpg": "c59642a2048610aee2ce501ac7edbb26f60dd68f5ca0c6a6bc2d21b022b00b6e",
+    "/images/catalog/setka-metallicheskaya/setka-main.jpg": "48d3a83d3092b32627c6bf1d45d5e31dc5c1f5571789e995895f63dec4f6aa2b",
+    "/images/catalog/balka/balka-main.jpg": "c59642a2048610aee2ce501ac7edbb26f60dd68f5ca0c6a6bc2d21b022b00b6e",
     "/images/catalog/armatura-gladkaya.jpg": "92cdf1b4062ea245344cf6e659dfbca25b8d96ba9e2f20c4083ca4234d26e5ab",
     "/images/catalog/balka/balka-shirokopolochnaya.jpg": "615f3765ac25724cac1d8325d2237d6f64491b9fe752bc76d11411f0faa86861",
     "/images/catalog/profnastil/profnastil_c20.jpg": "f7231cdaa57f859dbfa65c308f187d30a40caafbe95086bbe7e6cbdf9fde398d",

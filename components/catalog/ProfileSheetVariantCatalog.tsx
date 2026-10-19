@@ -157,7 +157,6 @@ function ProfileSheetItem({variant, view}: {variant: ProfileSheetVariant; view: 
 
   if (view === "card") return <article id={`variant-mobile-${variant.id}`}
     className="min-w-0 break-words rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-5 shadow-sm">
-    <p className="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">{variant.sku}</p>
     <CatalogImage src={variant.imageUrls[0]} name={variant.name}/>
     <h3 className="mt-2 font-bold">{variant.name}</h3>
     <dl className="mt-4 grid grid-cols-2 gap-3 text-sm">

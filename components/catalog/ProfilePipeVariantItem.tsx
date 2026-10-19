@@ -83,8 +83,7 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
       ? "font-semibold tabular-nums text-slate-900 dark:text-slate-100" : "text-xs font-normal text-slate-500 dark:text-slate-400"}>{totalLabel}</output>;
 
   if (view === "card") return <article id={`variant-mobile-${variant.id}`} className="min-w-0 break-words rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-5 shadow-sm">
-    <p className="text-xs text-slate-500 dark:text-slate-400">{variant.sku}</p>
-    <h3 className="mt-1 font-bold">{variant.name}</h3>
+    <h3 className="font-bold">{variant.name}</h3>
     <dl className="mt-4 grid grid-cols-2 gap-x-4 gap-y-3 text-sm">
       <Detail label="Размер, мм" value={profilePipeSize(variant)}/>
       <Detail label="Стенка, мм" value={formatNumber(variant.wallThicknessMm!)}/>
@@ -98,7 +97,7 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
     <div className="mt-4">{action}</div>
   </article>;
 
-  return <tr id={`variant-${variant.id}`} title={`${variant.name} · ${variant.sku}`} className="border-t border-slate-200 dark:border-slate-700 align-middle">
+  return <tr id={`variant-${variant.id}`} title={variant.name} className="border-t border-slate-200 dark:border-slate-700 align-middle">
     <td className="px-2 py-4 font-bold tabular-nums">{profilePipeSize(variant)}</td>
     <td className="px-2 py-4 tabular-nums">{formatNumber(variant.wallThicknessMm!)}</td>
     <td className={`px-2 py-4 tabular-nums ${confirmedPrice ? "font-semibold" : "text-xs text-slate-500 dark:text-slate-400"}`}>{priceLabel}</td>

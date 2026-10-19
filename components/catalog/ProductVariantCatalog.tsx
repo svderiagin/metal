@@ -36,6 +36,9 @@ import {ProfileSheetVariantCatalog} from "./ProfileSheetVariantCatalog";
 import {isMetalMeshVariant} from "@/lib/metalMesh";
 import {MetalMeshVariantCatalog} from "./MetalMeshVariantCatalog";
 import {CatalogDescription} from "./CatalogDescription";
+import tableStyles from "./RebarTable.module.css";
+import {ChannelSpecificationNote} from "./ChannelSpecificationNote";
+import {ChannelProductPreview} from "./ChannelProductPreview";
 
 type SortMode = "relevance" | "availability" | "price-asc" | "price-desc" | "size" | "name";
 
@@ -102,6 +105,9 @@ function GenericProductVariantCatalog({
   categorySlug: string;
 }) {
   const filterKeys = getVariantFilterKeys(categorySlug);
+  const isChannel = categorySlug === "shveller";
+  const showAvailability = !isChannel;
+  const columnWidths = showAvailability ? [25, 27, 15, 10, 9, 14] : [13, 24, 28, 13, 10, 12];
   const [filters, setFilters] = useState<Partial<Record<ProductAttributeKey, string>>>({});
   const [stockOnly, setStockOnly] = useState(false);
   const [minimumPrice, setMinimumPrice] = useState("");
@@ -244,17 +250,21 @@ function GenericProductVariantCatalog({
       </FilterPanel>
 
       <section className="min-w-0 lg:col-span-2" aria-label="Продукция">
+      {isChannel && <ChannelSpecificationNote/>}
       {results.length ? (
         <>
-          <div className="hidden overflow-hidden rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-sm xl:block">
-            <table className="w-full table-fixed border-collapse text-left text-sm">
-              <colgroup><col style={{width:"25%"}}/><col style={{width:"27%"}}/><col style={{width:"15%"}}/><col style={{width:"10%"}}/><col style={{width:"9%"}}/><col style={{width:"14%"}}/></colgroup>
+          <div className={`hidden ${isChannel ? "overflow-x-auto" : "overflow-hidden"} rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-sm xl:block`}>
+            <table className={isChannel ? `${tableStyles.table} ${tableStyles.compactTable} text-center text-sm` : "w-full table-fixed border-collapse text-left text-sm"}>
+              <colgroup>{columnWidths.map((width, index) => <col key={index} style={{width: `${width}%`}}/>)}</colgroup>
               <thead className="bg-slate-900 text-white">
                 <tr>
-                  <th className="p-3 font-semibold">Полное обозначение</th>
-                  <th className="p-3 font-semibold">Характеристики</th>
+                  {isChannel ? <>
+                    <th scope="col" className="whitespace-nowrap px-2 py-3 font-semibold">Наименование</th>
+                    <th scope="col" className="px-2 py-3 font-semibold">Изображение</th>
+                  </> : <th className="p-3 font-semibold">Полное обозначение</th>}
+                  <th className={isChannel ? "px-3 py-3 text-left font-semibold" : "p-3 font-semibold"}>Характеристики</th>
                   <th className="px-2 py-3 font-semibold">Цена</th>
-                  <th className="px-2 py-3 font-semibold">Наличие</th>
+                  {showAvailability && <th className="px-2 py-3 font-semibold">Наличие</th>}
                   <th className="px-1.5 py-3 font-semibold">Кол-во</th>
                   <th className="px-2 py-3 text-center"><span className="sr-only">Действие</span></th>
                 </tr>
@@ -262,15 +272,18 @@ function GenericProductVariantCatalog({
               <tbody>
                 {visible.map((variant) => (
                   <tr id={`variant-${variant.id}`} key={variant.id} className="border-t border-slate-200 dark:border-slate-700 align-middle">
-                    <td className="break-words p-3"><CatalogImage src={variant.imageUrls[0]} name={variant.name} compact/><strong>{variant.name}</strong><p className="mt-2 text-xs text-slate-500 dark:text-slate-400">{variant.sku}</p></td>
-                    <td className="break-words p-3"><VariantSpecifications variant={variant}/></td>
+                    {isChannel ? <>
+                      <th scope="row" className="px-3 py-4 font-semibold">{channelProfileName(variant.name)}</th>
+                      <td className="px-2 py-4"><ChannelProductPreview variant={variant} compact/></td>
+                    </> : <td className="break-words p-3"><CatalogImage src={variant.imageUrls[0]} name={variant.name} compact/><strong>{variant.name}</strong></td>}
+                    <td className={`break-words ${isChannel ? "px-3 py-4 text-left" : "p-3"}`}><VariantSpecifications variant={variant} showDetails={!isChannel}/></td>
                     <td className="break-words px-2 py-3">
-                      <strong>{variant.quoteOnly ? "Цена по запросу" : `${variant.priceQualifier === "from" ? "от " : ""}${formatUnitPrice(variant.price, variant.priceUnit)}`}</strong>
+                      <strong className={isChannel ? "font-semibold tabular-nums" : undefined}>{variant.quoteOnly ? "Цена по запросу" : `${variant.priceQualifier === "from" ? "от " : ""}${formatUnitPrice(variant.price, variant.priceUnit)}`}</strong>
                     </td>
-                    <td className="px-1.5 py-3">
+                    {showAvailability && <td className="px-1.5 py-3">
                       <Availability availability={variant.availability}/>
-                    </td>
-                    <ProductOrderControls variant={variant} view="table"/>
+                    </td>}
+                    <ProductOrderControls variant={variant} view="table" referenceStyle={isChannel}/>
                   </tr>
                 ))}
               </tbody>
@@ -284,17 +297,15 @@ function GenericProductVariantCatalog({
                 key={variant.id}
                 className="min-w-0 break-words rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-5 shadow-sm"
               >
-                <p className="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
-                  {variant.sku}
-                </p>
-                <CatalogImage src={variant.imageUrls[0]} name={variant.name}/>
-                <h3 className="mt-1 font-bold">{variant.name}</h3>
-                <div className="mt-4"><VariantSpecifications variant={variant}/></div>
+                {isChannel && <h3 className="mb-3 text-lg font-bold">{channelProfileName(variant.name)}</h3>}
+                {isChannel ? <ChannelProductPreview variant={variant}/> : <CatalogImage src={variant.imageUrls[0]} name={variant.name}/>}
+                {!isChannel && <h3 className="mt-1 font-bold">{variant.name}</h3>}
+                <div className="mt-4"><VariantSpecifications variant={variant} showDetails={!isChannel}/></div>
                 <div className="mt-5 flex flex-wrap items-end justify-between gap-4 border-t border-slate-100 dark:border-slate-800 pt-4">
                   <div>
                     <strong className="text-xl">{variant.quoteOnly ? "Цена по запросу" : `${variant.priceQualifier === "from" ? "от " : ""}${formatUnitPrice(variant.price, variant.priceUnit)}`}</strong>
                   </div>
-                  <Availability availability={variant.availability}/>
+                  {showAvailability && <Availability availability={variant.availability}/>}
                 </div>
                 <ProductOrderControls variant={variant} view="card"/>
               </article>
@@ -325,10 +336,15 @@ function Availability({availability}: {availability: ProductVariant["availabilit
   );
 }
 
-function VariantSpecifications({variant}: {variant: ProductVariant}) {
+function channelProfileName(name: string) {
+  const number = name.match(/№\s*(\d+(?:[.,]\d+)?)/)?.[1];
+  return number ? `№ ${number.replace(".", ",")}` : name;
+}
+
+function VariantSpecifications({variant, showDetails = true}: {variant: ProductVariant; showDetails?: boolean}) {
   return <>
-    <dl className="space-y-1 text-sm">{variant.specifications.filter(s => s.name !== "Полное обозначение").map((s, i) => <div key={`${s.name}-${i}`}><dt className="inline text-slate-500 dark:text-slate-400">{s.name}: </dt><dd className="inline">{s.value}</dd></div>)}{variant.weight && <div><dt className="inline text-slate-500 dark:text-slate-400">Теоретическая масса: </dt><dd className="inline">{formatNumber(variant.weight.value)} {variant.weight.unit}</dd></div>}</dl>
-    {variant.id.startsWith("rozmet-") && (variant.description || variant.imageUrls.length > 1) && <details className="mt-3 text-sm">
+    <dl className="space-y-1 text-sm">{variant.specifications.filter(s => !["Полное обозначение", "Условия цены", "Условия оплаты"].includes(s.name)).map((s, i) => <div key={`${s.name}-${i}`}><dt className="inline text-slate-500 dark:text-slate-400">{s.name}: </dt><dd className="inline">{s.value}</dd></div>)}{variant.weight && <div><dt className="inline text-slate-500 dark:text-slate-400">Теоретическая масса: </dt><dd className="inline">{formatNumber(variant.weight.value)} {variant.weight.unit}</dd></div>}</dl>
+    {showDetails && variant.id.startsWith("rozmet-") && (variant.description || variant.imageUrls.length > 1) && <details className="mt-3 text-sm">
       <summary className="cursor-pointer font-semibold">Подробнее о товаре</summary>
       {variant.description && <CatalogDescription description={variant.description} className="mt-3"/>}
       {variant.imageUrls.slice(1).map(src => <CatalogImage key={src} src={src} name={variant.name} compact/>)}

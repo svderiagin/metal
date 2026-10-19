@@ -173,8 +173,7 @@ function MetalMeshItem({variant, view}: {variant: MetalMeshVariant; view: "table
 
   if (view === "card") return <article id={`variant-mobile-${variant.id}`}
     className="min-w-0 break-words rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-5 shadow-sm">
-    <p className="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">{variant.sku}</p>
-    <h3 className="mt-2 font-bold">{variant.name}</h3>
+    <h3 className="font-bold">{variant.name}</h3>
     <dl className="mt-4 grid grid-cols-2 gap-3 text-sm">
       <VariantDetail label="Размер ячейки" value={cell}/>
       <VariantDetail label="Диаметр проволоки" value={wire}/>
@@ -190,7 +189,6 @@ function MetalMeshItem({variant, view}: {variant: MetalMeshVariant; view: "table
   return <tr id={`variant-${variant.id}`} className="border-t border-slate-200 dark:border-slate-700 align-middle">
     <td className="px-3 py-4 text-left">
       <strong className="block leading-snug">{variant.name}</strong>
-      <span className="mt-1 block text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">{variant.sku}</span>
     </td>
     <td className="px-2 py-4"><strong className="block">{cell}</strong><span className="mt-1 block text-xs text-slate-500 dark:text-slate-400">{wire}</span></td>
     <td className="px-2 py-4">{productFormat}</td>

@@ -12,13 +12,12 @@ export function CartItemRow({line}: { line: CartLine }) {
   return (
     <article className="grid gap-4 border-b border-slate-200 dark:border-slate-700 py-5 last:border-0 sm:py-6 md:grid-cols-[minmax(0,1fr)_auto_auto] md:items-center md:gap-6">
       <div>
-        <p className="text-xs font-medium text-slate-500 dark:text-slate-400">{line.sku}</p>
         {line.slug ? <Link
           href={catalogProductPath(line.categorySlug, line.subcategorySlug, line.productTypeSlug, line.productId)}
-          className="mt-1 inline-block font-bold transition-colors hover:text-red-700 dark:hover:text-red-400"
+          className="inline-block font-bold transition-colors hover:text-red-700 dark:hover:text-red-400"
         >
           {line.name}
-        </Link> : <p className="mt-1 font-bold">{line.name}</p>}
+        </Link> : <p className="font-bold">{line.name}</p>}
         <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
           {line.invalidReason ? "Цена требует уточнения" : formatUnitPrice(line.price, line.priceUnit)}
         </p>

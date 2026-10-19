@@ -143,6 +143,8 @@ function MeasuredVariantCatalog({variants, kind = "rebar"}: {
   const isHotChannel = kind === "channel-hot";
   const isBentChannel = kind === "channel-bent";
   const isChannel = isHotChannel || isBentChannel;
+  const showPositionCount = kind === "rebar" && variants.length > 0
+    && variants.every(variant => variant.subcategoryId === "cat-arm-sub-1");
   const columns = isHotChannel ? hotRolledChannelColumns : isBentChannel ? bentChannelColumns
     : isProfile ? profilePipeColumns : isVgp ? vgpColumns : isBeam ? beamColumns : rebarColumns;
   const [query, setQuery] = useState("");
@@ -213,6 +215,14 @@ function MeasuredVariantCatalog({variants, kind = "rebar"}: {
     <>
       <FilterPanel className="lg:col-start-2" query={query}
         onQueryChange={value => {setQuery(value);setSort("relevance");}} onReset={resetFilters}
+        resultSummary={showPositionCount && (
+          <p role="status" aria-atomic="true" aria-busy={query !== deferredQuery}
+            className="text-sm text-slate-600 dark:text-slate-400">
+            {results.length === variants.length ? "Позиций в таблице: " : "Найдено: "}
+            <span className="font-semibold tabular-nums text-slate-900 dark:text-slate-100">{results.length}</span>
+            {results.length !== variants.length && <> из <span className="tabular-nums">{variants.length}</span></>}
+          </p>
+        )}
         sorting={
           <label className="text-sm font-semibold">
             Сортировка

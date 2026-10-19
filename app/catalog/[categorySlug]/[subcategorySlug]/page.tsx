@@ -4,8 +4,10 @@ import {Suspense} from "react";
 import {Breadcrumbs} from "@/components/catalog/Breadcrumbs";
 import {CatalogSidebar} from "@/components/catalog/CatalogSidebar";
 import {CatalogDescription} from "@/components/catalog/CatalogDescription";
+import {CatalogProductDetail} from "@/components/catalog/CatalogProductDetail";
 import {ProductTypeResults} from "@/components/catalog/ProductTypeResults";
 import {PageContainer} from "@/components/layout/PageContainer";
+import {getChannelProductDescription} from "@/lib/channelDescription";
 import {
   getAllCategories,
   getAllProductVariants,
@@ -50,6 +52,10 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
   const {categorySlug, subcategorySlug} = await params;
   const category = getCategoryBySlug(categorySlug);
   const subcategory = category && getSubcategoryBySlug(category.id, subcategorySlug);
+  const variant = categorySlug === "shveller" && category && getProductVariantBySlug(subcategorySlug);
+  if (!subcategory && category && variant && variant.categoryId === category.id) {
+    return {title: variant.name, description: getChannelProductDescription(variant).split("\n\n")[0]};
+  }
   return {title: subcategory ? subcategory.name : "Каталог"};
 }
 
@@ -90,6 +96,7 @@ export default async function SubcategoryPage({params}: Props) {
   if (!variant || variant.categoryId !== category.id) {
     notFound();
   }
+  if (category.slug === "shveller") return <CatalogProductDetail category={category} variant={variant}/>;
   if (category.directProducts) redirect(`/catalog/${category.slug}#variant-${variant.id}`);
 
   const subcategory = getSubcategoryById(variant.subcategoryId);

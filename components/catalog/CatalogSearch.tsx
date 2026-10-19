@@ -68,7 +68,7 @@ export function CatalogSearch({
       <div className="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-5 shadow-sm sm:p-6">
         <h2 id="catalog-search-heading" className="text-xl font-bold">Поиск по каталогу</h2>
         <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
-          Найдите тип продукции по названию, артикулу варианта, размеру, материалу или стандарту.
+          Найдите тип продукции по названию, размеру, материалу или стандарту.
         </p>
         <form onSubmit={submit} role="search" className="mt-5 flex flex-col gap-3 sm:flex-row">
           <label className="flex-1">
@@ -108,7 +108,7 @@ export function CatalogSearch({
               {search.correctedQuery && <p className="mb-4 text-sm">Возможно, вы имели в виду: <button type="button" className="font-semibold text-red-700 dark:text-red-400 underline" onClick={() => setDraft({urlQuery, value: search.correctedQuery!})}>{search.correctedQuery}</button></p>}
               <ul className="mb-6 divide-y divide-slate-200 dark:divide-slate-700 rounded-xl bg-white dark:bg-slate-900">{matchingVariants.slice(0, limit).map(product => {
                 const type = productTypes.find(t => t.id === product.productTypeId);
-                return type && <li key={product.id} className="p-4"><Link className="font-semibold text-red-700 dark:text-red-400 hover:underline" href={catalogProductPath(type.categorySlug, type.subcategorySlug, type.slug, product.id)}>{product.name}</Link><p className="mt-1 text-sm text-slate-600 dark:text-slate-300">{product.sku}</p></li>;
+                return type && <li key={product.id} className="p-4"><Link className="font-semibold text-red-700 dark:text-red-400 hover:underline" href={catalogProductPath(type.categorySlug, type.subcategorySlug, type.slug, product.id)}>{product.name}</Link></li>;
               })}</ul>
               {limit < matchingVariants.length && <Button type="button" className="mb-6" onClick={() => setLimit(n => n + 20)}>Показать ещё</Button>}
               <ProductTypeGrid productTypes={results} variants={matchingVariants}/>

@@ -36,7 +36,7 @@ export function CatalogCategoryLink({
         active ? "border-l-4 border-slate-700 bg-slate-300 dark:bg-slate-600 pl-4 text-slate-950 dark:text-slate-100" : ""
       }`}
     >
-      {label}
+      {href === "/catalog/shtaketnik" ? <span className="text-red-700 dark:text-red-400">{label}</span> : label}
     </Link>
   );
 }

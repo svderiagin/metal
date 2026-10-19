@@ -28,7 +28,7 @@ export function Footer() {
             {getAllCategories().map((category) => (
               <li key={category.id}>
                 <Link href={`/catalog/${category.slug}`} className={footerLinkClass}>
-                  {category.name}
+                  {category.slug === "shtaketnik" ? <span className="text-red-400">{category.name}</span> : category.name}
                 </Link>
               </li>
             ))}

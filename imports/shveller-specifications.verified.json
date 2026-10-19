@@ -1,0 +1,51 @@
+{
+  "verifiedOn": "2026-10-19",
+  "standard": "ГОСТ 8240-97",
+  "scope": "Номинальные размеры h, b, s, t и теоретическая масса совпадают для приведённых номеров серий У и П в таблицах 1 и 2. Серия и соответствие конкретной партии стандарту поставщиком не подтверждены.",
+  "sources": [
+    {
+      "url": "https://protect.gost.ru/gost/details/83e3d647-9d84-48cd-b105-72378de872a5",
+      "title": "Росстандарт: ГОСТ 8240-97",
+      "usage": "Официальное обозначение и действующий статус стандарта"
+    },
+    {
+      "url": "https://www.metall-energy.ru/data/file/gosty/shveller/gost_8240-97.pdf",
+      "title": "Текст ГОСТ 8240-97, таблицы 1 и 2",
+      "usage": "Размеры и теоретическая масса; h — высота, b — ширина полки, s — толщина стенки, t — толщина полки"
+    },
+    {
+      "url": "https://ese.pro/assortments/channels/",
+      "title": "ЕВРАЗ Стил Инжиниринг: сортамент швеллеров",
+      "usage": "Дополнительная сверка размеров h, b, s, t для опубликованных профилей; масса из этой таблицы не использована"
+    }
+  ],
+  "standardStatus": "По карточкам Росстандарта ГОСТ 8240-97 действует; ГОСТ 8240-2026 вводится 01.04.2027 с правом досрочного применения.",
+  "lengthPolicy": "Длина конкретной поставки не определяется по номеру профиля. Сохраняется поле «Длина» вкладки поставщика, а при его отсутствии — «Размер»; на сайте оно явно обозначено «Длина по каталогу».",
+  "supplierDiscrepancies": [
+    {"productId": "rozmet-2235", "field": "Ширина полки", "supplierDescription": "50 мм названы шириной", "verifiedValue": "32 мм; 50 мм — высота профиля"},
+    {"productId": "rozmet-2236", "field": "Теоретическая масса", "supplierDescription": "4,84 кг на метр", "verifiedValue": "5,90 кг/м"},
+    {"productId": "rozmet-2236", "field": "Длина", "supplierTab": "6-12 м", "supplierDescription": "6 м", "resolution": "Длина по каталогу: 6–12 м; фактическая поставка не подтверждена"},
+    {"productId": "rozmet-2237", "field": "Длина", "supplierTab": "6-12 м", "supplierDescription": "6 м", "resolution": "Длина по каталогу: 6–12 м; фактическая поставка не подтверждена"},
+    {"productId": "rozmet-2238", "field": "Длина", "supplierTab": "12 м", "supplierDescription": "9 м", "resolution": "Длина по каталогу: 12 м; фактическая поставка не подтверждена"},
+    {"productId": "rozmet-2242", "field": "Длина", "supplierTab": "12 м", "supplierDescription": "9 или 12 м", "resolution": "Длина по каталогу: 12 м; фактическая поставка не подтверждена"},
+    {"productId": "rozmet-2244", "field": "Длина", "supplierTab": "12 м", "supplierDescription": "11,7 м", "resolution": "Длина по каталогу: 12 м; фактическая поставка не подтверждена"},
+    {"productId": "rozmet-2245", "field": "Длина", "supplierTab": "12 м", "supplierDescription": "11,7 м", "resolution": "Длина по каталогу: 12 м; фактическая поставка не подтверждена"},
+    {"productId": "rozmet-2246", "field": "Длина", "supplierTab": "12 м", "supplierDescription": "11,7 м", "resolution": "Длина по каталогу: 12 м; фактическая поставка не подтверждена"}
+  ],
+  "rows": [
+    {"number": "5", "h": 50, "b": 32, "s": 4.4, "t": 7, "massKgPerMeter": 4.84},
+    {"number": "6,5", "h": 65, "b": 36, "s": 4.4, "t": 7.2, "massKgPerMeter": 5.9},
+    {"number": "8", "h": 80, "b": 40, "s": 4.5, "t": 7.4, "massKgPerMeter": 7.05},
+    {"number": "10", "h": 100, "b": 46, "s": 4.5, "t": 7.6, "massKgPerMeter": 8.59},
+    {"number": "12", "h": 120, "b": 52, "s": 4.8, "t": 7.8, "massKgPerMeter": 10.4},
+    {"number": "14", "h": 140, "b": 58, "s": 4.9, "t": 8.1, "massKgPerMeter": 12.3},
+    {"number": "16", "h": 160, "b": 64, "s": 5, "t": 8.4, "massKgPerMeter": 14.2},
+    {"number": "18", "h": 180, "b": 70, "s": 5.1, "t": 8.7, "massKgPerMeter": 16.3},
+    {"number": "20", "h": 200, "b": 76, "s": 5.2, "t": 9, "massKgPerMeter": 18.4},
+    {"number": "22", "h": 220, "b": 82, "s": 5.4, "t": 9.5, "massKgPerMeter": 21},
+    {"number": "24", "h": 240, "b": 90, "s": 5.6, "t": 10, "massKgPerMeter": 24},
+    {"number": "27", "h": 270, "b": 95, "s": 6, "t": 10.5, "massKgPerMeter": 27.7},
+    {"number": "30", "h": 300, "b": 100, "s": 6.5, "t": 11, "massKgPerMeter": 31.8},
+    {"number": "40", "h": 400, "b": 115, "s": 8, "t": 13.5, "massKgPerMeter": 48.3}
+  ]
+}

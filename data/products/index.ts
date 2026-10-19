@@ -5,7 +5,7 @@ import {profnastilProducts} from "./profnastil";
 import {metalMeshProducts} from "./metalMesh";
 import {roundPipeLegacyProducts} from "./trubaKruglayaLegacy";
 import {trubyProfilnyeProducts, profilePipeProducts} from "./trubyProfilnye";
-import type {ProductVariant, ProductVariantSource, ProductWeight} from "@/types/product";
+import type {ProductSpecification, ProductVariant, ProductVariantSource, ProductWeight} from "@/types/product";
 import importedCatalog from "../imported-catalog.json";
 import rozmetCatalog from "../rozmet-catalog.json";
 import catalogImages from "../catalog-images.json";
@@ -14,6 +14,7 @@ import {normalizeBeamVariant} from "@/lib/beam";
 import {isPublicProduct} from "@/data/catalog-visibility";
 import {isPipeProduct, normalizePipeWeight} from "@/lib/pipeWeight";
 import {isRetainedCategory} from "@/data/catalog-scope";
+import channelSpecifications from "../channel-specifications.json";
 
 const productSources: ProductVariantSource[] = [
   ...armaturaProducts.filter((product) => product.subcategoryId !== "cat-arm-sub-1"),
@@ -50,7 +51,12 @@ const retainedProductVariants: ProductVariant[] = [
 
 export const productVariants: ProductVariant[] = [
   ...retainedProductVariants,
-  ...rozmetCatalog.products as ProductVariant[],
+  ...(rozmetCatalog.products as ProductVariant[]).map(product => {
+    const details = (channelSpecifications.products as Record<string, {sourceUrl: string; imageUrl?: string; specifications: ProductSpecification[]}>)[product.id];
+    if (product.categoryId !== "rozmet-cat-shveller" || !details || details.sourceUrl !== product.sourceReference) return product;
+    const otherSpecifications = product.specifications.filter(item => !channelSpecifications.replacedSpecificationNames.includes(item.name));
+    return {...product, imageUrls: details.imageUrl ? [details.imageUrl] : product.imageUrls, specifications: [...details.specifications, ...otherSpecifications]};
+  }),
 ];
 
 function estimateDemoWeight(product: ProductVariantSource): ProductWeight | undefined {

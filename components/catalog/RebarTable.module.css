@@ -30,3 +30,7 @@
 .tableAction {
   width: 8rem;
 }
+
+.compactTable {
+  min-width: 48rem;
+}

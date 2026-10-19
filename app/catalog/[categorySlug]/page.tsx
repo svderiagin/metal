@@ -58,7 +58,7 @@ export default async function CategoryPage({params}: Props) {
         </Suspense>
         <div className="min-w-0">
           <div className={`grid gap-x-6 gap-y-4 ${hasImage ? "md:grid-cols-[minmax(0,1fr)_320px] xl:grid-cols-[minmax(0,1fr)_360px]" : ""}`}>
-            <h1 className="text-[1.625rem] font-bold leading-[1.2] sm:text-3xl">{category.name}</h1>
+            <h1 className={`text-[1.625rem] font-bold leading-[1.2] sm:text-3xl ${category.slug === "shtaketnik" ? "text-red-700 dark:text-red-400" : ""}`}>{category.name}</h1>
             {hasImage && <div className="relative aspect-[2/1] w-full overflow-hidden rounded-xl bg-white md:col-start-2 md:row-span-2 md:row-start-1 md:self-center">
               <Image src={catalogImageUrl(mainImageUrl)} alt={category.name} fill
                 sizes={imageSizes}
