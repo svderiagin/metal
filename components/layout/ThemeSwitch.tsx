@@ -21,8 +21,8 @@ export function ThemeSwitch() {
       <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75"
         className="size-5">
         {preference === "system" ? <>
-          <circle cx="12" cy="12" r="9"/>
-          <path d="M12 3a9 9 0 0 1 0 18Z" fill="currentColor" stroke="none"/>
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 18a6 6 0 0 0 0-12v12z" strokeLinecap="round" strokeLinejoin="round"/>
         </> : preference === "dark"
           ? <path strokeLinecap="round" strokeLinejoin="round" d="M20.9 13.1A9 9 0 0 1 10.9 3.1a9 9 0 1 0 10 10Z"/>
           : <><circle cx="12" cy="12" r="4"/><path strokeLinecap="round" d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></>}

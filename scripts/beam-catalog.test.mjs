@@ -189,14 +189,15 @@ test('equivalent profile spellings classify consistently without inventing demo 
 test('beam names, series and individual profiles work in global and table search', () => {
   const {createCatalogSearchIndex} = readProjectData('lib/search/index.ts');
   const {productTypes} = readProjectData('data/productTypes.ts');
-  for (const index of [createCatalogSearchIndex(productVariants, productTypes), createCatalogSearchIndex(beams)]) {
+  const {categories} = readProjectData('data/categories.ts');
+  for (const index of [createCatalogSearchIndex(productVariants, productTypes, categories), createCatalogSearchIndex(productVariants, productTypes), createCatalogSearchIndex(beams)]) {
     for (const query of ['балка', 'двутавр', 'двутавровая балка']) {
       const result = index.search(query, {categoryId:'cat-bal'});
       assert.equal(result.total, 38, query);
       assert.ok(result.hits.every(h => h.product.categoryId === 'cat-bal'));
     }
     for (const [series, count, word] of [['Б', 14, 'нормальная'], ['Ш', 12, 'широкополочная'], ['К', 8, 'колонная'], ['М', 4, 'монорельсовая']]) {
-      for (const query of [`балка ${series}`, `двутавр ${series}`, `балка ${word}`]) {
+      for (const query of [`балка ${series}`, `двутавр ${series}`, `балка ${word}`, `${word} балка`]) {
         const result = index.search(query);
         assert.equal(result.total, count, query);
         assert.ok(result.hits.every(h => beamSeries(h.product) === series));

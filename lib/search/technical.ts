@@ -59,6 +59,14 @@ export function parseTechnicalQuery(input: string): TechnicalQuery {
     query.beamSeries = series.toUpperCase() as BeamSeries;
     return noun;
   });
+  // A named beam family is a profile constraint even when descriptions mention other families.
+  if (!query.beamSeries && /(?:^|\s)(?:балк[а-я]*|двутавр[а-я]*)(?=\s|$)/.test(text)) {
+    const family = text.match(/(?:^|\s)(нормальн|широкополочн|колонн|монорельсов)[а-я]*(?=\s|$)/);
+    if (family) {
+      const namedSeries: Record<string, BeamSeries> = {нормальн: "Б", широкополочн: "Ш", колонн: "К", монорельсов: "М"};
+      query.beamSeries = namedSeries[family[1]];
+    }
+  }
   text = text.replace(/(?:ms|мп)-\d+/g, sku => {query.sku = sku; return " ";});
   text = text.replace(/гост\s*(?:р\s*)?(\d+(?:\.\d+)*(?:-\d+)?)/g, (_, value: string) => {query.standards.push(value);return " ";});
   text = text.replace(/(^|[^а-яa-z])ду\s*(\d+(?:\.\d+)?)/g, (_, prefix: string, value: string) => {query.nominalBore = canonicalNumber(value);return prefix + value;});
