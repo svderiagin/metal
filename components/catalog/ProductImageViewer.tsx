@@ -37,7 +37,7 @@ export function ProductImageViewer({src, name}: {src: string; name: string}) {
         onClick={() => setOpen(true)}
         aria-haspopup="dialog"
         aria-label={`Увеличить изображение: ${name}`}
-        className="group mx-auto mt-6 block w-full max-w-2xl cursor-zoom-in rounded-xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-slate-600"
+        className="group mx-auto mt-6 block w-full max-w-2xl cursor-zoom-in rounded-xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-slate-600 dark:focus-visible:outline-red-300"
       >
         <span className="relative block aspect-[2/1] overflow-hidden rounded-xl bg-white">
           <Image src={imageUrl} alt={name} fill

@@ -32,8 +32,8 @@ export function CatalogCategoryLink({
       href={href}
       scroll={false}
       aria-current={active ? "page" : undefined}
-      className={`block min-h-12 px-5 py-3.5 text-base font-semibold transition-colors hover:bg-slate-50 hover:text-red-700 ${
-        active ? "border-l-4 border-slate-700 bg-slate-300 pl-4 text-slate-950" : ""
+      className={`block min-h-12 px-5 py-3.5 text-base font-semibold transition-colors hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:text-red-700 dark:hover:text-red-400 ${
+        active ? "border-l-4 border-slate-700 bg-slate-300 dark:bg-slate-600 pl-4 text-slate-950 dark:text-slate-100" : ""
       }`}
     >
       {label}

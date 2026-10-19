@@ -33,8 +33,8 @@ export function CatalogSubcategoryLink({
       aria-current={active ? "page" : undefined}
       className={`block border-l-4 px-5 py-2 text-sm leading-5 transition-colors ${
         active
-          ? "border-slate-700 bg-slate-200 text-slate-900"
-          : "border-transparent text-slate-600 hover:bg-slate-100 hover:text-red-700"
+          ? "border-slate-700 bg-slate-200 dark:bg-slate-700 text-slate-900 dark:text-slate-100"
+          : "border-transparent text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-red-700 dark:hover:text-red-400"
       }`}
     >
       {label}

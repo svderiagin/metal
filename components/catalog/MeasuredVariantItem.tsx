@@ -74,7 +74,7 @@ function TonnageMeasuredVariantItem({
   const totalLabel = variant.quoteOnly || pricePerTon === undefined ? "По запросу" : estimatedTotal === null ? "Укажите объём" : `${variant.priceQualifier === "from" ? "от " : ""}${formatCurrency(estimatedTotal)}`;
   const totalClassName = estimatedTotal === null
     ? "text-xs font-normal text-[color-mix(in_oklab,var(--color-slate-300),var(--color-slate-400))]"
-    : "font-semibold tabular-nums text-slate-900";
+    : "font-semibold tabular-nums text-slate-900 dark:text-slate-100";
   const enteredQuantity = draft === null && cartLine && !savedMeasurement ? enteredTons : inputMode === "meter" ? enteredMeters : enteredTons;
   const isSaved = !!cartLine && !cartLine.invalidReason && parsedTons !== null && parsedTons > 0
     && enteredQuantity !== 0
@@ -159,8 +159,8 @@ function TonnageMeasuredVariantItem({
     </Button>
   );
 
-  const details = <div className="space-y-2 text-left text-sm font-normal text-slate-600">
-    <p className="font-bold text-slate-900">{variant.name}</p>
+  const details = <div className="space-y-2 text-left text-sm font-normal text-slate-600 dark:text-slate-300">
+    <p className="font-bold text-slate-900 dark:text-slate-100">{variant.name}</p>
     <p>Артикул: {variant.sku} · {variant.availability === "UNKNOWN" ? "Наличие уточняется" : variant.availability === "IN_STOCK" ? "В наличии" : "Под заказ"}</p>
     <p>{variant.shortDescription}</p>
     <p>{variant.description}</p>
@@ -168,8 +168,8 @@ function TonnageMeasuredVariantItem({
 
   if (view === "card") {
     return (
-      <article id={`variant-mobile-${variant.id}`} className="min-w-0 break-words rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-        <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">{variant.sku}</p>
+      <article id={`variant-mobile-${variant.id}`} className="min-w-0 break-words rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-5 shadow-sm">
+        <p className="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">{variant.sku}</p>
         {!isVgp && <CatalogImage src={variant.imageUrls[0]} name={variant.name}/>}
         <h3 className="mt-1 font-bold">{variant.name}</h3>
         <dl className="mt-4 grid grid-cols-2 gap-3 text-sm">
@@ -189,8 +189,8 @@ function TonnageMeasuredVariantItem({
           />
           <VariantDetail label="Цена" value={`${variant.priceQualifier === "from" ? "от " : ""}${formatUnitPrice(pricePerTon ?? null, "за тонну")}`}/>
         </dl>
-        {isVgp && <details className="mt-4 text-sm"><summary className="cursor-pointer font-semibold text-slate-600 focus-visible:outline-2 focus-visible:outline-red-700">Подробнее о товаре</summary><div className="mt-3">{details}</div></details>}
-        <div className="mt-4 grid grid-cols-2 gap-3 border-t border-slate-100 pt-4">
+        {isVgp && <details className="mt-4 text-sm"><summary className="cursor-pointer font-semibold text-slate-600 dark:text-slate-300 focus-visible:outline-2 focus-visible:outline-red-700 dark:focus-visible:outline-red-300">Подробнее о товаре</summary><div className="mt-3">{details}</div></details>}
+        <div className="mt-4 grid grid-cols-2 gap-3 border-t border-slate-100 dark:border-slate-800 pt-4">
           <OrderInput
             label={`Длина заказа для ${variant.name}`}
             visibleLabel="Заказ, м"
@@ -208,19 +208,19 @@ function TonnageMeasuredVariantItem({
             onBlur={settlePipeOrder}
           />
         </div>
-        <p className="mt-4 flex items-baseline justify-between gap-3 text-sm text-slate-900">
+        <p className="mt-4 flex items-baseline justify-between gap-3 text-sm text-slate-900 dark:text-slate-100">
           <span>Сумма:</span>
           <output aria-label={`Сумма заказа для ${variant.name}`} aria-live="polite" className={totalClassName}>{totalLabel}</output>
         </p>
         <div className="mt-4">{action}</div>
-        <span aria-live="polite" className={`mt-1 block text-xs ${message ? "text-red-700" : "text-slate-500"}`}>{status}</span>
+        <span aria-live="polite" className={`mt-1 block text-xs ${message ? "text-red-700 dark:text-red-400" : "text-slate-500 dark:text-slate-400"}`}>{status}</span>
       </article>
     );
   }
 
   if (isChannel) {
     return (
-      <tr id={`variant-${variant.id}`} title={variant.name} className="border-t border-slate-200 align-middle">
+      <tr id={`variant-${variant.id}`} title={variant.name} className="border-t border-slate-200 dark:border-slate-700 align-middle">
         <td className="px-2 py-4 font-bold">{isHotChannel ? channelDesignation(variant) : bentChannelSize(variant)}</td>
         <td className="px-2 py-4">{isHotChannel ? variant.steelGrade ?? "—" : formatNumber(variant.wallThicknessMm ?? 0)}</td>
         <td className="px-2 py-4 font-semibold tabular-nums">{`${variant.priceQualifier === "from" ? "от " : ""}${formatUnitPrice(pricePerTon ?? null, "за тонну")}`}</td>
@@ -237,7 +237,7 @@ function TonnageMeasuredVariantItem({
         </td>
         <td className="px-2 py-3 text-center">
           {action}
-          <span aria-live="polite" className={`mx-auto mt-1 block max-w-32 text-xs ${message ? "text-red-700" : "text-slate-500"}`}>{status}</span>
+          <span aria-live="polite" className={`mx-auto mt-1 block max-w-32 text-xs ${message ? "text-red-700 dark:text-red-400" : "text-slate-500 dark:text-slate-400"}`}>{status}</span>
         </td>
       </tr>
     );
@@ -245,8 +245,8 @@ function TonnageMeasuredVariantItem({
 
   return (
     <>
-    <tr id={`variant-${variant.id}`} title={variant.name} className="border-t border-slate-200 align-middle">
-      <td className="px-2 py-4 font-bold">{isVgp ? <button type="button" aria-expanded={detailsOpen} aria-controls={`vgp-details-${variant.id}`} aria-label={`Подробности: ${variant.name}, ${variant.sku}`} onClick={() => setDetailsOpen(!detailsOpen)} className="min-h-11 underline decoration-slate-300 underline-offset-4 hover:text-red-700 focus-visible:outline-2 focus-visible:outline-red-700">{vgpSize(variant)}</button> : isBeam ? beamProfile(variant) : formatNumber(variant.diameterMm ?? 0)}</td>
+    <tr id={`variant-${variant.id}`} title={variant.name} className="border-t border-slate-200 dark:border-slate-700 align-middle">
+      <td className="px-2 py-4 font-bold">{isVgp ? <button type="button" aria-expanded={detailsOpen} aria-controls={`vgp-details-${variant.id}`} aria-label={`Подробности: ${variant.name}, ${variant.sku}`} onClick={() => setDetailsOpen(!detailsOpen)} className="min-h-11 underline decoration-slate-300 dark:decoration-slate-500 underline-offset-4 hover:text-red-700 dark:hover:text-red-400 focus-visible:outline-2 focus-visible:outline-red-700 dark:focus-visible:outline-red-300">{vgpSize(variant)}</button> : isBeam ? beamProfile(variant) : formatNumber(variant.diameterMm ?? 0)}</td>
       <td className="px-2 py-4">{isVgp ? formatNumber(variant.diameterMm ?? 0) : isBeam ? beamKind(variant) : formLabel(variant.form ?? "bar")}</td>
       <td className="px-2 py-4">{isVgp ? vgpSeries(variant) : variant.steelGrade}</td>
       <td className="px-2 py-4 font-semibold tabular-nums">{`${variant.priceQualifier === "from" ? "от " : ""}${formatUnitPrice(pricePerTon ?? null, "за тонну")}`}</td>
@@ -263,10 +263,10 @@ function TonnageMeasuredVariantItem({
       </td>
       <td className="px-2 py-3 text-center">
         {action}
-        <span aria-live="polite" className={`mx-auto mt-1 block max-w-32 text-xs ${message ? "text-red-700" : "text-slate-500"}`}>{status}</span>
+        <span aria-live="polite" className={`mx-auto mt-1 block max-w-32 text-xs ${message ? "text-red-700 dark:text-red-400" : "text-slate-500 dark:text-slate-400"}`}>{status}</span>
       </td>
     </tr>
-    {isVgp && <tr id={`vgp-details-${variant.id}`} hidden={!detailsOpen} className="border-t border-slate-200 bg-slate-50"><td colSpan={10} className="p-4">{details}</td></tr>}
+    {isVgp && <tr id={`vgp-details-${variant.id}`} hidden={!detailsOpen} className="border-t border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50"><td colSpan={10} className="p-4">{details}</td></tr>}
     </>
   );
 }
@@ -304,7 +304,7 @@ function OrderInput({
 function VariantDetail({label, value}: {label: string; value: string}) {
   return (
     <div>
-      <dt className="text-slate-500">{label}</dt>
+      <dt className="text-slate-500 dark:text-slate-400">{label}</dt>
       <dd className="mt-1 font-medium">{value}</dd>
     </div>
   );

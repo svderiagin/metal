@@ -1,7 +1,62 @@
 @import "tailwindcss";
-:root{--background:#f1f5f9;--foreground:#172033}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--background);color:var(--foreground);font-family:Arial,"Helvetica Neue",sans-serif;text-rendering:optimizeLegibility}a{color:inherit;text-decoration:none}:focus-visible{outline:3px solid #475569;outline-offset:3px}::selection{background:#fecaca;color:#450a0a}
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+:root {
+  color-scheme: light;
+  --background: #f1f5f9;
+  --foreground: #172033;
+  --focus: #475569;
+  --control-surface: #fff;
+  --control-border: #cbd5e1;
+  --action-background: #0f172a;
+  --action-hover: #1e293b;
+  --success-background: #dcfce7;
+  --success-text: #166534;
+  --update-background: #eff6ff;
+  --update-hover: #dbeafe;
+  --update-text: #1e40af;
+  --danger-background: #fef2f2;
+  --danger-hover: #fee2e2;
+  --danger-text: #b91c1c;
+  --inactive-background: #f1f5f9;
+  --inactive-text: #475569;
+  --error-ring: #fee2e2;
+  --error-border: #dc2626;
+  --counter-text: #64748b;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --background: #0b1120;
+  --foreground: #f1f5f9;
+  --focus: #fca5a5;
+  --control-surface: #020617;
+  --control-border: #64748b;
+  --action-background: #334155;
+  --action-hover: #475569;
+  --success-background: #052e16;
+  --success-text: #86efac;
+  --update-background: #172554;
+  --update-hover: #1e3a8a;
+  --update-text: #93c5fd;
+  --danger-background: #450a0a;
+  --danger-hover: #7f1d1d;
+  --danger-text: #fca5a5;
+  --inactive-background: #1e293b;
+  --inactive-text: #cbd5e1;
+  --error-ring: #7f1d1d;
+  --error-border: #f87171;
+  --counter-text: #94a3b8;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--background); color: var(--foreground); font-family: Arial,"Helvetica Neue",sans-serif; text-rendering: optimizeLegibility; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+::selection { background: #fecaca; color: #450a0a; }
 
 @layer base {
+  a { color: inherit; text-decoration: none; }
   button, input, textarea, select {
     font: inherit;
   }

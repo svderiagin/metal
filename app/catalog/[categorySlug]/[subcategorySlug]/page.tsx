@@ -73,7 +73,7 @@ export default async function SubcategoryPage({params}: Props) {
           {label: currentSubcategory.name},
         ]}/>
         <div className="grid gap-7 lg:grid-cols-[280px_minmax(0,1fr)]">
-          <Suspense fallback={<div className="h-96 animate-pulse rounded-xl bg-slate-200"/>}>
+          <Suspense fallback={<div className="h-96 animate-pulse rounded-xl bg-slate-200 dark:bg-slate-700"/>}>
             <CatalogSidebar activeSlug={category.slug}/>
           </Suspense>
           <div className="min-w-0">

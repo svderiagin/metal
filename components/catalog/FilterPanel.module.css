@@ -11,8 +11,8 @@
 
 .panel :is(input:not([type="checkbox"]), select):focus,
 .field:focus {
-  border-color: #475569;
-  outline: 2px solid #475569;
+  border-color: var(--focus);
+  outline: 2px solid var(--focus);
   outline-offset: 2px;
   box-shadow: none;
 }
@@ -20,9 +20,9 @@
 .panel input[type="checkbox"] {
   appearance: none;
   margin: 0;
-  border: 1px solid var(--color-slate-300);
+  border: 1px solid var(--control-border);
   border-radius: 4px;
-  background-color: #fff;
+  background-color: var(--control-surface);
   background-position: center;
   background-repeat: no-repeat;
   background-size: 16px;
@@ -50,7 +50,7 @@
 }
 
 .panel input[type="checkbox"]:focus-visible {
-  outline: 2px solid var(--color-slate-600);
+  outline: 2px solid var(--focus);
   outline-offset: 3px;
 }
 
@@ -74,7 +74,7 @@
 }
 
 .cartButton {
-  background-color: #0f172a;
+  background-color: var(--action-background);
 }
 
 .field[type="number"] {
@@ -89,21 +89,21 @@
 }
 
 .cartButton:hover {
-  background-color: #1e293b;
+  background-color: var(--action-hover);
 }
 
 .cartButton:focus-visible {
-  outline-color: #475569;
+  outline-color: var(--focus);
 }
 
 .quoteButton {
-  background-color: #0f172a;
+  background-color: var(--action-background);
   color: #fff;
   padding-inline: 12px;
 }
 
 .quoteButton:hover {
-  background-color: #1e293b;
+  background-color: var(--action-hover);
 }
 
 .orderAction {
@@ -113,34 +113,34 @@
 
 .savedCartButton,
 .savedCartButton:disabled {
-  background-color: #dcfce7;
-  color: #166534;
+  background-color: var(--success-background);
+  color: var(--success-text);
   opacity: 1;
 }
 
 .updateCartButton {
-  background-color: #eff6ff;
-  color: #1e40af;
+  background-color: var(--update-background);
+  color: var(--update-text);
   box-shadow: none;
 }
 
 .updateCartButton:hover {
-  background-color: #dbeafe;
+  background-color: var(--update-hover);
 }
 
 .removeCartButton {
-  background-color: #fef2f2;
-  color: #b91c1c;
+  background-color: var(--danger-background);
+  color: var(--danger-text);
   box-shadow: none;
 }
 
 .removeCartButton:hover {
-  background-color: #fee2e2;
+  background-color: var(--danger-hover);
 }
 
 .removedCartButton:disabled {
-  background-color: #f1f5f9;
-  color: #475569;
+  background-color: var(--inactive-background);
+  color: var(--inactive-text);
   opacity: 1;
 }
 

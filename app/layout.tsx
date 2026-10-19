@@ -3,6 +3,7 @@ import "./globals.css";
 import {CartProvider} from "@/context/CartContext";
 import {Header} from "@/components/layout/Header";
 import {Footer} from "@/components/layout/Footer";
+import {themeInitScript} from "@/lib/theme";
 
 export const metadata: Metadata = {
   title: {
@@ -11,7 +12,8 @@ export const metadata: Metadata = {
   }, description: "Каталог металлоконструкций и металлопроката с оформлением заказа, оплатой картой или по счёту."
 };
 export default function RootLayout({children}: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="ru">
+  return <html lang="ru" suppressHydrationWarning>
+  <head><script dangerouslySetInnerHTML={{__html: themeInitScript}}/></head>
   <body className="flex min-h-screen flex-col"><CartProvider><Header/>
     <main className="flex-1">{children}</main>
     <Footer/></CartProvider></body>

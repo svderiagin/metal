@@ -7,7 +7,7 @@ import {ButtonLink} from "@/components/ui/Button";
 
 export function CartPageContent() {
   const {lines, hydrated} = useCart();
-  if (!hydrated) return <div className="h-40 animate-pulse rounded-xl bg-slate-200"/>;
+  if (!hydrated) return <div className="h-40 animate-pulse rounded-xl bg-slate-200 dark:bg-slate-700"/>;
   if (!lines.length) {
     return (
       <EmptyState
@@ -20,7 +20,7 @@ export function CartPageContent() {
   return (
     <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-8">
       <section
-        className="rounded-xl border border-slate-200 bg-white px-5 shadow-sm sm:px-6"
+        className="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-5 shadow-sm sm:px-6"
         aria-label="Товары в корзине"
       >
         {lines.map((line) => (

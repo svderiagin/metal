@@ -15,8 +15,8 @@ export function CustomerTypeSelector({value, onChange}: { value: CustomerType; o
             key={option.value}
             className={`flex min-h-14 cursor-pointer items-center gap-3 rounded-lg border p-4 transition-colors ${
               value === option.value
-                ? "border-red-700 bg-red-50"
-                : "border-slate-200 hover:border-slate-400"
+                ? "border-red-700 bg-red-50 dark:bg-red-950/40"
+                : "border-slate-200 dark:border-slate-700 hover:border-slate-400 dark:hover:border-slate-500"
             }`}
           >
             <input

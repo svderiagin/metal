@@ -12,12 +12,12 @@ export function AdvantagesSection() {
   return (
     <section>
       <SectionHeading eyebrow="Почему мы" title="Поставка без лишних операций"/>
-      <div className="grid gap-px overflow-hidden rounded-xl border border-slate-200 bg-slate-200 shadow-sm sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-px overflow-hidden rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-200 dark:bg-slate-700 shadow-sm sm:grid-cols-2 lg:grid-cols-4">
         {items.map((item, index) => (
-          <article key={item.t} className="bg-white p-5 sm:p-6">
-            <span className="text-sm font-black text-red-700">0{index + 1}</span>
+          <article key={item.t} className="bg-white dark:bg-slate-900 p-5 sm:p-6">
+            <span className="text-sm font-black text-red-700 dark:text-red-400">0{index + 1}</span>
             <h3 className="mt-5 font-bold">{item.t}</h3>
-            <p className="mt-2 text-sm leading-6 text-slate-600">{item.d}</p>
+            <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">{item.d}</p>
           </article>
         ))}
       </div>

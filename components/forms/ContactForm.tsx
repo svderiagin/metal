@@ -55,9 +55,9 @@ export function ContactForm() {
     className="absolute -left-[10000px]" aria-hidden>Сайт<Input name="website" tabIndex={-1}
                                                                 autoComplete="off"/></label><label
     className="flex items-start gap-2 text-sm"><input name="consent" type="checkbox" required
-                                                       className="mt-1 size-4 shrink-0 accent-red-700"/><span>Я согласен на обработку персональных данных в соответствии с <Link href="/privacy" className="font-semibold text-red-700 underline underline-offset-2">Политикой обработки персональных данных</Link>.</span></label>{sent &&
-    <p role="status" className="text-sm font-semibold text-green-700">Сообщение принято.</p>}{error &&
-    <p role="alert" className="text-sm font-semibold text-red-700">{error}</p>}<Button type="submit"
+                                                       className="mt-1 size-4 shrink-0 accent-red-700"/><span>Я согласен на обработку персональных данных в соответствии с <Link href="/privacy" className="font-semibold text-red-700 dark:text-red-400 underline underline-offset-2">Политикой обработки персональных данных</Link>.</span></label>{sent &&
+    <p role="status" className="text-sm font-semibold text-green-700 dark:text-green-300">Сообщение принято.</p>}{error &&
+    <p role="alert" className="text-sm font-semibold text-red-700 dark:text-red-400">{error}</p>}<Button type="submit"
                                                                                        disabled={submitting}>{submitting ? "Отправляем…" : "Отправить"}</Button>
   </form>
 }

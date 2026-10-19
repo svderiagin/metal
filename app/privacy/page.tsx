@@ -9,15 +9,15 @@ export const metadata: Metadata = {
   description: `Политика ${companyDetails.shortName} в отношении обработки персональных данных пользователей сайта.`,
 };
 
-const listClass = "mt-3 list-disc space-y-2 pl-5 text-slate-600 marker:text-red-700";
+const listClass = "mt-3 list-disc space-y-2 pl-5 text-slate-600 dark:text-slate-300 marker:text-red-700 dark:marker:text-red-400";
 
 export default function PrivacyPage() {
   return <PageContainer className="py-8 sm:py-10 lg:py-12">
     <Breadcrumbs items={[{label: "Политика обработки персональных данных"}]}/>
-    <article className="max-w-4xl rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-7 lg:p-9">
-      <p className="text-xs font-bold uppercase tracking-[0.18em] text-red-700">Правовая информация</p>
+    <article className="max-w-4xl rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-5 shadow-sm sm:p-7 lg:p-9">
+      <p className="text-xs font-bold uppercase tracking-[0.18em] text-red-700 dark:text-red-400">Правовая информация</p>
       <h1 className="mt-2 text-3xl font-black">Политика в отношении обработки персональных данных</h1>
-      <p className="mt-4 leading-7 text-slate-600">Настоящая Политика описывает, какие персональные данные получает {companyDetails.shortName} через сайт, для каких целей и на каких условиях они обрабатываются.</p>
+      <p className="mt-4 leading-7 text-slate-600 dark:text-slate-300">Настоящая Политика описывает, какие персональные данные получает {companyDetails.shortName} через сайт, для каких целей и на каких условиях они обрабатываются.</p>
 
       <PolicySection number="1" title="Общие положения">
         <p>Оператор персональных данных — {companyDetails.legalName} ({companyDetails.shortName}), ОГРН {companyDetails.ogrn}, ИНН {companyDetails.inn}, КПП {companyDetails.kpp}, адрес: {companyDetails.legalAddress}.</p>
@@ -26,10 +26,10 @@ export default function PrivacyPage() {
 
       <PolicySection number="2" title="Основные термины">
         <ul className={listClass}>
-          <li><strong className="text-slate-900">Персональные данные</strong> — информация, относящаяся прямо или косвенно к определённому или определяемому физическому лицу.</li>
-          <li><strong className="text-slate-900">Обработка персональных данных</strong> — любое действие или совокупность действий с персональными данными, включая сбор, запись, систематизацию, хранение, уточнение, использование, передачу, блокирование и уничтожение.</li>
-          <li><strong className="text-slate-900">Пользователь</strong> — посетитель сайта, который просматривает каталог, направляет обращение или заявку либо оформляет заказ.</li>
-          <li><strong className="text-slate-900">Автоматизированная обработка</strong> — обработка персональных данных с помощью средств вычислительной техники.</li>
+          <li><strong className="text-slate-900 dark:text-slate-100">Персональные данные</strong> — информация, относящаяся прямо или косвенно к определённому или определяемому физическому лицу.</li>
+          <li><strong className="text-slate-900 dark:text-slate-100">Обработка персональных данных</strong> — любое действие или совокупность действий с персональными данными, включая сбор, запись, систематизацию, хранение, уточнение, использование, передачу, блокирование и уничтожение.</li>
+          <li><strong className="text-slate-900 dark:text-slate-100">Пользователь</strong> — посетитель сайта, который просматривает каталог, направляет обращение или заявку либо оформляет заказ.</li>
+          <li><strong className="text-slate-900 dark:text-slate-100">Автоматизированная обработка</strong> — обработка персональных данных с помощью средств вычислительной техники.</li>
         </ul>
       </PolicySection>
 
@@ -100,7 +100,7 @@ export default function PrivacyPage() {
 
       <PolicySection number="12" title="Обращение к Оператору">
         <p>Запрос по вопросам обработки персональных данных можно направить письменно по адресу Оператора:</p>
-        <address className="mt-3 not-italic text-slate-900">{companyDetails.legalName}<br/>{companyDetails.legalAddressLines.map(line => <span key={line} className="block">{line}</span>)}</address>
+        <address className="mt-3 not-italic text-slate-900 dark:text-slate-100">{companyDetails.legalName}<br/>{companyDetails.legalAddressLines.map(line => <span key={line} className="block">{line}</span>)}</address>
         <p>В запросе следует указать сведения, позволяющие идентифицировать заявителя и предмет обращения. Проверенный отдельный адрес электронной почты для обращений по персональным данным на сайте пока не опубликован.</p>
       </PolicySection>
 
@@ -112,8 +112,8 @@ export default function PrivacyPage() {
 }
 
 function PolicySection({number, title, children}: {number: string; title: string; children: ReactNode}) {
-  return <section className="mt-8 border-t border-slate-200 pt-6">
+  return <section className="mt-8 border-t border-slate-200 dark:border-slate-700 pt-6">
     <h2 className="text-xl font-bold">{number}. {title}</h2>
-    <div className="mt-3 space-y-3 leading-7 text-slate-600">{children}</div>
+    <div className="mt-3 space-y-3 leading-7 text-slate-600 dark:text-slate-300">{children}</div>
   </section>;
 }

@@ -76,7 +76,7 @@ export function HeroCarousel({slides, children}: {slides: HeroSlide[]; children:
     });
   }
 
-  const circle = `${styles.control} flex size-12 shrink-0 items-center justify-center rounded-full bg-white text-slate-950 shadow-sm transition-colors hover:bg-slate-200`;
+  const circle = `${styles.control} flex size-12 shrink-0 items-center justify-center rounded-full bg-white dark:bg-slate-900 text-slate-950 dark:text-slate-100 shadow-sm transition-colors hover:bg-slate-200 dark:hover:bg-slate-700`;
 
   return <section ref={hero} className={styles.hero} aria-labelledby="home-hero-title" aria-roledescription={canRotate ? "карусель" : undefined}
     onFocusCapture={event => {

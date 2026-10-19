@@ -65,9 +65,9 @@ export function CatalogSearch({
 
   return (
     <section aria-labelledby="catalog-search-heading">
-      <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+      <div className="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-5 shadow-sm sm:p-6">
         <h2 id="catalog-search-heading" className="text-xl font-bold">Поиск по каталогу</h2>
-        <p className="mt-2 text-sm leading-6 text-slate-600">
+        <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
           Найдите тип продукции по названию, артикулу варианта, размеру, материалу или стандарту.
         </p>
         <form onSubmit={submit} role="search" className="mt-5 flex flex-col gap-3 sm:flex-row">
@@ -87,7 +87,7 @@ export function CatalogSearch({
             <Button
               type="button"
               onClick={clear}
-              className="border border-slate-300 bg-white text-slate-700 shadow-none hover:bg-slate-100 sm:min-w-32"
+              className="border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 shadow-none hover:bg-slate-100 dark:hover:bg-slate-800 sm:min-w-32"
             >
               Очистить
             </Button>
@@ -99,24 +99,24 @@ export function CatalogSearch({
         <div className="mt-8" aria-live="polite">
           <div className="mb-5 flex flex-wrap items-baseline justify-between gap-3">
             <h2 className="text-xl font-black">Результаты поиска</h2>
-            <p className="text-sm text-slate-600">
+            <p className="text-sm text-slate-600 dark:text-slate-300">
               По запросу «{query}» найдено товаров: {search.total}
             </p>
           </div>
           {results.length ? (
             <>
-              {search.correctedQuery && <p className="mb-4 text-sm">Возможно, вы имели в виду: <button type="button" className="font-semibold text-red-700 underline" onClick={() => setDraft({urlQuery, value: search.correctedQuery!})}>{search.correctedQuery}</button></p>}
-              <ul className="mb-6 divide-y divide-slate-200 rounded-xl bg-white">{matchingVariants.slice(0, limit).map(product => {
+              {search.correctedQuery && <p className="mb-4 text-sm">Возможно, вы имели в виду: <button type="button" className="font-semibold text-red-700 dark:text-red-400 underline" onClick={() => setDraft({urlQuery, value: search.correctedQuery!})}>{search.correctedQuery}</button></p>}
+              <ul className="mb-6 divide-y divide-slate-200 dark:divide-slate-700 rounded-xl bg-white dark:bg-slate-900">{matchingVariants.slice(0, limit).map(product => {
                 const type = productTypes.find(t => t.id === product.productTypeId);
-                return type && <li key={product.id} className="p-4"><Link className="font-semibold text-red-700 hover:underline" href={catalogProductPath(type.categorySlug, type.subcategorySlug, type.slug, product.id)}>{product.name}</Link><p className="mt-1 text-sm text-slate-600">{product.sku}</p></li>;
+                return type && <li key={product.id} className="p-4"><Link className="font-semibold text-red-700 dark:text-red-400 hover:underline" href={catalogProductPath(type.categorySlug, type.subcategorySlug, type.slug, product.id)}>{product.name}</Link><p className="mt-1 text-sm text-slate-600 dark:text-slate-300">{product.sku}</p></li>;
               })}</ul>
               {limit < matchingVariants.length && <Button type="button" className="mb-6" onClick={() => setLimit(n => n + 20)}>Показать ещё</Button>}
               <ProductTypeGrid productTypes={results} variants={matchingVariants}/>
             </>
           ) : (
-            <div className="rounded-xl border border-dashed border-slate-300 bg-white px-5 py-10 text-center">
+            <div className="rounded-xl border border-dashed border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 px-5 py-10 text-center">
               <strong className="text-lg">Типы продукции не найдены</strong>
-              <p className="mt-2 text-sm text-slate-600">
+              <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
                 Проверьте запрос или попробуйте указать меньше параметров.
               </p>
             </div>

@@ -8,7 +8,7 @@ export function PriceInput({className = "", ...props}: InputHTMLAttributes<HTMLI
         {...props}
         className={`pr-10 [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none ${className}`}
       />
-      <span aria-hidden="true" className="pointer-events-none absolute inset-y-0 right-3.5 flex items-center font-normal text-slate-500">₽</span>
+      <span aria-hidden="true" className="pointer-events-none absolute inset-y-0 right-3.5 flex items-center font-normal text-slate-500 dark:text-slate-400">₽</span>
       <span className="sr-only">в рублях</span>
     </span>
   );

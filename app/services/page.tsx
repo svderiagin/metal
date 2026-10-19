@@ -19,13 +19,13 @@ const items = [{
 export default function ServicesPage() {
   return <PageContainer className="py-8 sm:py-10 lg:py-12"><Breadcrumbs items={[{label: "Услуги"}]}/><h1
     className="text-3xl font-black">Услуги металлообработки</h1><p
-    className="mt-3 max-w-3xl text-slate-600">Комплектуйте заказ готовыми заготовками, чтобы сократить операции на
+    className="mt-3 max-w-3xl text-slate-600 dark:text-slate-300">Комплектуйте заказ готовыми заготовками, чтобы сократить операции на
     своей площадке.</p>
     <div
-      className="mt-8 divide-y divide-slate-200 overflow-hidden rounded-lg border border-slate-200 bg-white">{items.map((x, i) =>
+      className="mt-8 divide-y divide-slate-200 dark:divide-slate-700 overflow-hidden rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900">{items.map((x, i) =>
       <section key={x.t} className="grid gap-3 p-6 md:grid-cols-[80px_260px_1fr]"><span
-        className="text-2xl font-black text-red-700">0{i + 1}</span><h2
-        className="text-xl font-bold">{x.t}</h2><p className="leading-7 text-slate-600">{x.d}</p>
+        className="text-2xl font-black text-red-700 dark:text-red-400">0{i + 1}</span><h2
+        className="text-xl font-bold">{x.t}</h2><p className="leading-7 text-slate-600 dark:text-slate-300">{x.d}</p>
       </section>)}</div>
   </PageContainer>
 }

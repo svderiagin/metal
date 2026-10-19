@@ -4,6 +4,7 @@ import {DesktopNavigation} from "./DesktopNavigation";
 import {MobileNavigation} from "./MobileNavigation";
 import {CartButton} from "@/components/cart/CartButton";
 import {companyDetails} from "@/lib/companyDetails";
+import {ThemeSwitch} from "./ThemeSwitch";
 
 export function Header() {
   return (
@@ -17,7 +18,7 @@ export function Header() {
           </Link>
         </PageContainer>
       </div>
-      <PageContainer className="flex items-center gap-4 py-4 sm:py-5">
+      <PageContainer className="flex items-center gap-2 py-4 sm:gap-4 sm:py-5">
         <Link href="/" className="shrink-0 rounded-sm">
           <span className="block text-xl font-black tracking-wider sm:text-2xl">
             ООО <span className="text-red-600">РВБ</span>
@@ -26,7 +27,8 @@ export function Header() {
             Металлоконструкции и металлопрокат
           </span>
         </Link>
-        <div className="ml-auto flex items-center gap-3">
+        <div className="ml-auto flex items-center gap-2 sm:gap-3">
+          <ThemeSwitch/>
           <Link
             href="/#request"
             className="hidden min-h-11 items-center rounded-lg bg-red-700 px-5 text-sm font-bold shadow-sm transition-colors hover:bg-red-800 sm:inline-flex"

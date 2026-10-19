@@ -21,12 +21,12 @@ const sections = [{
 }];
 export default function DeliveryPage() {
   return <PageContainer className="py-8 sm:py-10 lg:py-12"><Breadcrumbs items={[{label: "Доставка"}]}/><h1
-    className="text-3xl font-black">Доставка и самовывоз</h1><p className="mt-3 max-w-3xl text-slate-600">Организуем
+    className="text-3xl font-black">Доставка и самовывоз</h1><p className="mt-3 max-w-3xl text-slate-600 dark:text-slate-300">Организуем
     перевозку с учётом габаритов металлопроката и условий на площадке.</p>
     <div className="mt-8 grid gap-4 md:grid-cols-2">{sections.map((s, i) => <section key={s.t}
-                                                                                     className="rounded-lg border border-slate-200 bg-white p-6">
-      <span className="text-sm font-black text-red-700">0{i + 1}</span><h2
-      className="mt-3 text-xl font-bold">{s.t}</h2><p className="mt-2 leading-7 text-slate-600">{s.d}</p>
+                                                                                     className="rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-6">
+      <span className="text-sm font-black text-red-700 dark:text-red-400">0{i + 1}</span><h2
+      className="mt-3 text-xl font-bold">{s.t}</h2><p className="mt-2 leading-7 text-slate-600 dark:text-slate-300">{s.d}</p>
     </section>)}</div>
   </PageContainer>
 }

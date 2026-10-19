@@ -261,7 +261,7 @@ function MeasuredVariantCatalog({variants, kind = "rebar"}: {
       <section className="min-w-0 lg:col-span-2" aria-label="Продукция">
       {results.length ? (
         <>
-        <div className="hidden overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm xl:block">
+        <div className="hidden overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-sm xl:block">
           <table className={`${tableStyles.table} text-center text-sm`}>
             <colgroup>
               {columns.map(column => <col key={column.label} style={{width: column.width}}/>)}
@@ -291,9 +291,9 @@ function MeasuredVariantCatalog({variants, kind = "rebar"}: {
         </div>
         </>
       ) : (
-        <div className="rounded-xl border border-dashed border-slate-300 bg-white p-8 text-center">
+        <div className="rounded-xl border border-dashed border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 p-8 text-center">
           <strong className="text-lg">Варианты не найдены</strong>
-          <p className="mt-2 text-sm text-slate-600">Измените или сбросьте фильтры.</p>
+          <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">Измените или сбросьте фильтры.</p>
         </div>
       )}
       </section>

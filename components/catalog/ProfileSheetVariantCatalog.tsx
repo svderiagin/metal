@@ -93,7 +93,7 @@ export function ProfileSheetVariantCatalog({variants}: {variants: ProfileSheetVa
 
     <section className="min-w-0 lg:col-span-2" aria-label="Профнастил">
       {results.length ? <>
-        <div className="hidden overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm xl:block">
+        <div className="hidden overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-sm xl:block">
           <table className={`${tableStyles.table} text-center text-sm`}>
             <colgroup>{columns.map((column) => <col key={column.label} style={{width: column.width}}/>)}</colgroup>
             <thead className="bg-slate-900 text-white"><tr>
@@ -108,9 +108,9 @@ export function ProfileSheetVariantCatalog({variants}: {variants: ProfileSheetVa
         <div className="grid gap-4 sm:grid-cols-2 xl:hidden">
           {results.map((variant) => <ProfileSheetItem key={variant.id} variant={variant} view="card"/>)}
         </div>
-      </> : <div className="rounded-xl border border-dashed border-slate-300 bg-white p-8 text-center">
+      </> : <div className="rounded-xl border border-dashed border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 p-8 text-center">
         <strong className="text-lg">Варианты не найдены</strong>
-        <p className="mt-2 text-sm text-slate-600">Измените или сбросьте фильтры.</p>
+        <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">Измените или сбросьте фильтры.</p>
       </div>}
     </section>
   </>;
@@ -147,7 +147,7 @@ function ProfileSheetItem({variant, view}: {variant: ProfileSheetVariant; view: 
       className={`${filterStyles.field} w-full min-w-0 px-2 text-center tabular-nums`} />
   </label>;
   const totalOutput = <output aria-label={`Сумма заказа для ${variant.name}`} aria-live="polite"
-    className={total === null ? "text-xs text-slate-400" : "font-semibold tabular-nums text-slate-900"}>
+    className={total === null ? "text-xs text-slate-400" : "font-semibold tabular-nums text-slate-900 dark:text-slate-100"}>
     {total === null ? "Укажите количество" : formatCurrency(total)}
   </output>;
   const action = <Button type="button" disabled={!hydrated || !valid || saved} onClick={submit}
@@ -156,8 +156,8 @@ function ProfileSheetItem({variant, view}: {variant: ProfileSheetVariant; view: 
   </Button>;
 
   if (view === "card") return <article id={`variant-mobile-${variant.id}`}
-    className="min-w-0 break-words rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-    <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">{variant.sku}</p>
+    className="min-w-0 break-words rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-5 shadow-sm">
+    <p className="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">{variant.sku}</p>
     <CatalogImage src={variant.imageUrls[0]} name={variant.name}/>
     <h3 className="mt-2 font-bold">{variant.name}</h3>
     <dl className="mt-4 grid grid-cols-2 gap-3 text-sm">
@@ -166,13 +166,13 @@ function ProfileSheetItem({variant, view}: {variant: ProfileSheetVariant; view: 
       <VariantDetail label="Размер листа, м" value={variant.sheetSizeMeters}/>
       <VariantDetail label="Цена" value={formatUnitPrice(variant.price, variant.priceUnit)}/>
     </dl>
-    <div className="mt-4 border-t border-slate-100 pt-4">{quantityInput}</div>
+    <div className="mt-4 border-t border-slate-100 dark:border-slate-800 pt-4">{quantityInput}</div>
     <p className="mt-4 flex items-baseline justify-between gap-3 text-sm"><span>Сумма:</span>{totalOutput}</p>
     <div className="mt-4">{action}</div>
-    {!valid && <p role="alert" className="mt-2 text-xs text-red-700">Введите целое количество от 1 до 999.</p>}
+    {!valid && <p role="alert" className="mt-2 text-xs text-red-700 dark:text-red-400">Введите целое количество от 1 до 999.</p>}
   </article>;
 
-  return <tr id={`variant-${variant.id}`} title={variant.name} className="border-t border-slate-200 align-middle">
+  return <tr id={`variant-${variant.id}`} title={variant.name} className="border-t border-slate-200 dark:border-slate-700 align-middle">
     <td className="px-2 py-4 font-bold">{formatNumber(variant.wallThicknessMm)}</td>
     <td className="px-2 py-4">{profileSheetCoatingLabel(variant)}</td>
     <td className="px-2 py-4">{variant.sheetSizeMeters}</td>
@@ -181,11 +181,11 @@ function ProfileSheetItem({variant, view}: {variant: ProfileSheetVariant; view: 
     <td className={`${tableStyles.sumColumn} py-3`}>{totalOutput}</td>
     <td className="px-2 py-3 text-center">
       {action}
-      {!valid && <span role="alert" className="mx-auto mt-1 block max-w-32 text-xs text-red-700">Только целые числа</span>}
+      {!valid && <span role="alert" className="mx-auto mt-1 block max-w-32 text-xs text-red-700 dark:text-red-400">Только целые числа</span>}
     </td>
   </tr>;
 }
 
 function VariantDetail({label, value}: {label: string; value: string}) {
-  return <div><dt className="text-slate-500">{label}</dt><dd className="mt-1 font-medium">{value}</dd></div>;
+  return <div><dt className="text-slate-500 dark:text-slate-400">{label}</dt><dd className="mt-1 font-medium">{value}</dd></div>;
 }

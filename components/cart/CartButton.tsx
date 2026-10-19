@@ -7,7 +7,7 @@ export function CartButton() {
   return (
     <Link
       href="/cart"
-      className="relative inline-flex min-h-11 items-center gap-2 rounded-lg border border-slate-600 px-4 font-bold text-white transition-colors hover:border-white hover:bg-slate-900"
+      className="relative inline-flex min-h-11 items-center gap-2 rounded-lg border border-slate-600 px-4 font-bold text-white transition-colors hover:border-white hover:bg-slate-900 max-[380px]:gap-1 max-[380px]:px-2 max-[380px]:text-sm"
     >
       <span aria-hidden>▣</span>
       Корзина

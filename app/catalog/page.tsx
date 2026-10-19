@@ -15,11 +15,11 @@ export const metadata: Metadata = {
 };
 export default function CatalogPage() {
   return <PageContainer className="py-8 sm:py-10 lg:py-12"><Breadcrumbs items={[{label: "Каталог"}]}/><h1
-    className="text-3xl font-black">Каталог металлопроката</h1><p className="mt-3 max-w-3xl text-slate-600">Выберите
+    className="text-3xl font-black">Каталог металлопроката</h1><p className="mt-3 max-w-3xl text-slate-600 dark:text-slate-300">Выберите
     раздел или просмотрите доступные складские позиции. Итоговые условия поставки зависят от объёма и обработки.</p>
     <div className="mt-7 grid gap-7 lg:grid-cols-[250px_1fr]"><CatalogSidebar/>
       <div>
-        <Suspense fallback={<div className="h-40 animate-pulse rounded-xl bg-slate-200"/>}>
+        <Suspense fallback={<div className="h-40 animate-pulse rounded-xl bg-slate-200 dark:bg-slate-700"/>}>
           <CatalogSearch
             categories={getAllCategories()}
             productTypes={getAllProductTypes()}

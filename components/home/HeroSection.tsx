@@ -29,7 +29,7 @@ export function HeroSection() {
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <ButtonLink href="/catalog">Перейти в каталог</ButtonLink>
-            <ButtonLink href="/#request" variant="secondary" className="text-slate-900!">Запросить расчёт</ButtonLink>
+            <ButtonLink href="/#request" variant="secondary" className="text-slate-900! dark:text-slate-100!">Запросить расчёт</ButtonLink>
           </div>
         </div>
     </HeroCarousel>

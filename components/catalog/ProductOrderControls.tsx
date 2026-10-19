@@ -72,7 +72,7 @@ export function ProductOrderControls({variant, view}: {variant: ProductVariant; 
       <Input type="number" min={0} max={999} step={wholeQuantity ? 1 : "any"} value={value}
         onChange={event => setDraft(event.target.value)}
         className={`${styles.field} min-w-0 px-2`}/>
-      <span className="text-xs text-slate-500">{getQuantityUnit(variant)}</span>
+      <span className="text-xs text-slate-500 dark:text-slate-400">{getQuantityUnit(variant)}</span>
     </label>
   );
   return view === "table" ? <>

@@ -37,23 +37,23 @@ const advantages = [
 
 export default function AboutPage() {
   return <PageContainer className="py-6 sm:py-8"><Breadcrumbs items={[{label: "О компании"}]}/>
-    <article className="overflow-hidden rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6 lg:p-7">
-      <p className="text-xs font-bold uppercase tracking-[0.18em] text-red-700">Поставщик металлопроката</p>
+    <article className="overflow-hidden rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-5 shadow-sm sm:p-6 lg:p-7">
+      <p className="text-xs font-bold uppercase tracking-[0.18em] text-red-700 dark:text-red-400">Поставщик металлопроката</p>
       <h1 className="mt-1.5 text-3xl font-black">О компании {companyDetails.shortName}</h1>
-      <div className="mt-4 max-w-5xl space-y-2.5 leading-7 text-slate-600">
+      <div className="mt-4 max-w-5xl space-y-2.5 leading-7 text-slate-600 dark:text-slate-300">
         <p>{companyDetails.shortName} поставляет металлопрокат для строительства, производства и частных проектов. В каталоге — арматура, трубы, листовой, сортовой и фасонный прокат в различных размерах, марках стали и стандартах.</p>
         <p>Мы работаем как со складскими позициями, так и с поставками под заказ. Помогаем подобрать нужный металл, собрать комплексную заявку и организовать доставку до объекта.</p>
       </div>
 
-      <section className="mt-5 border-t border-slate-200 pt-5">
-        <h2 className="text-2xl font-black tracking-tight text-slate-950 sm:text-3xl">Почему выбирают нас</h2>
-        <div className="mt-4 grid gap-px overflow-hidden rounded-lg bg-slate-200 sm:grid-cols-2 lg:grid-cols-3">
-          {advantages.map((advantage, index) => <div key={advantage.title} className="bg-white px-3 py-3.5 sm:px-4">
+      <section className="mt-5 border-t border-slate-200 dark:border-slate-700 pt-5">
+        <h2 className="text-2xl font-black tracking-tight text-slate-950 dark:text-slate-100 sm:text-3xl">Почему выбирают нас</h2>
+        <div className="mt-4 grid gap-px overflow-hidden rounded-lg bg-slate-200 dark:bg-slate-700 sm:grid-cols-2 lg:grid-cols-3">
+          {advantages.map((advantage, index) => <div key={advantage.title} className="bg-white dark:bg-slate-900 px-3 py-3.5 sm:px-4">
             <div className="flex items-baseline gap-2.5">
-              <span className="text-sm font-black text-red-700">0{index + 1}</span>
+              <span className="text-sm font-black text-red-700 dark:text-red-400">0{index + 1}</span>
               <h3 className="font-bold">{advantage.title}</h3>
             </div>
-            <p className="mt-1.5 text-sm leading-6 text-slate-600">{advantage.description}</p>
+            <p className="mt-1.5 text-sm leading-6 text-slate-600 dark:text-slate-300">{advantage.description}</p>
           </div>)}
         </div>
       </section>

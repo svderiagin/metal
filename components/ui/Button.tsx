@@ -6,7 +6,7 @@ const styles = [
   "text-center text-sm font-bold",
   "bg-red-700 text-white shadow-sm",
   "transition-colors hover:bg-red-800",
-  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-600",
+  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-600 dark:focus-visible:outline-red-300",
   "disabled:pointer-events-none disabled:opacity-50",
 ].join(" ");
 
@@ -27,7 +27,7 @@ export function ButtonLink({href, children, variant = "primary", className = "",
       onClick={onClick}
       className={`${styles} ${
         variant === "secondary"
-          ? "border border-slate-300 bg-white text-slate-900 shadow-none hover:bg-slate-100"
+          ? "border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 shadow-none hover:bg-slate-100 dark:hover:bg-slate-800"
           : ""
       } ${className}`}
     >

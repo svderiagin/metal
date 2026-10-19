@@ -41,10 +41,10 @@ export function CatalogDescription({description, className = "mt-6", variant = "
 }) {
   const blocks = description.split(/\n\s*\n/u).filter(block => block.trim());
   const typography = variant === "categoryDetails"
-    ? "max-w-[800px] space-y-4 text-base font-normal leading-[1.6] text-slate-700"
+    ? "max-w-[800px] space-y-4 text-base font-normal leading-[1.6] text-slate-700 dark:text-slate-300"
     : variant === "category"
-      ? "max-w-[80ch] space-y-3 text-[15px] leading-6 text-slate-700 sm:space-y-4 sm:text-base sm:leading-[1.6]"
-    : "w-full space-y-4 text-[15px] leading-7 text-slate-700 sm:text-base sm:leading-7";
+      ? "max-w-[80ch] space-y-3 text-[15px] leading-6 text-slate-700 dark:text-slate-300 sm:space-y-4 sm:text-base sm:leading-[1.6]"
+    : "w-full space-y-4 text-[15px] leading-7 text-slate-700 dark:text-slate-300 sm:text-base sm:leading-7";
   return (
     <div className={`${typography} ${className}`}>
       {blocks.flatMap((block, blockIndex) => {

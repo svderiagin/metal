@@ -53,7 +53,7 @@ export default async function CategoryPage({params}: Props) {
       {hasImage && <DesktopImagePreload src={catalogImageUrl(mainImageUrl)} sizes={imageSizes}/>}
       <Breadcrumbs items={[{label: "Каталог", href: "/catalog"}, {label: category.name}]}/>
       <div className="grid gap-7 lg:grid-cols-[280px_1fr]">
-        <Suspense fallback={<div className="h-96 animate-pulse rounded-xl bg-slate-200"/>}>
+        <Suspense fallback={<div className="h-96 animate-pulse rounded-xl bg-slate-200 dark:bg-slate-700"/>}>
           <CatalogSidebar activeSlug={category.slug}/>
         </Suspense>
         <div className="min-w-0">

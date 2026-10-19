@@ -79,13 +79,13 @@ export default async function ProductTypePage({params}: Props) {
 
       <div className="grid gap-7 lg:grid-cols-[280px_minmax(0,1fr)]">
         <div className="lg:row-span-2 lg:[&>aside]:h-full">
-          <Suspense fallback={<div className="h-96 animate-pulse rounded-xl bg-slate-200"/>}>
+          <Suspense fallback={<div className="h-96 animate-pulse rounded-xl bg-slate-200 dark:bg-slate-700"/>}>
             <CatalogSidebar activeSlug={category.slug}/>
           </Suspense>
         </div>
         <div className="min-w-0">
-          <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6 lg:p-8">
-            <p className="text-sm font-bold uppercase tracking-[0.16em] text-red-700">
+          <div className="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-5 shadow-sm sm:p-6 lg:p-8">
+            <p className="text-sm font-bold uppercase tracking-[0.16em] text-red-700 dark:text-red-400">
               Тип продукции
             </p>
             <h1 className="mt-2 break-words text-3xl font-black sm:text-4xl">{rebarHeadings[productType.subcategoryId] ?? productType.name}</h1>

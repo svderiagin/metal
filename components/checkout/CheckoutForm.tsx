@@ -98,8 +98,8 @@ export function CheckoutForm() {
                            onChange={(v: PaymentMethod) => updateField("paymentMethod", v)}/><label
       className="flex items-start gap-2 text-sm"><input type="checkbox" checked={form.consentAccepted}
                                                         onChange={e => updateField("consentAccepted", e.target.checked)}
-                                                        className="mt-1 size-4 shrink-0 accent-red-700"/><span>Согласен на обработку персональных данных в соответствии с <Link href="/privacy" className="font-semibold text-red-700 underline underline-offset-2">Политикой обработки персональных данных</Link> и подтверждаю корректность информации.</span></label>{error &&
-      <p role="alert" className="font-semibold text-red-700">{error}</p>}<Button type="submit"
+                                                        className="mt-1 size-4 shrink-0 accent-red-700"/><span>Согласен на обработку персональных данных в соответствии с <Link href="/privacy" className="font-semibold text-red-700 dark:text-red-400 underline underline-offset-2">Политикой обработки персональных данных</Link> и подтверждаю корректность информации.</span></label>{error &&
+      <p role="alert" className="font-semibold text-red-700 dark:text-red-400">{error}</p>}<Button type="submit"
                                                                                  disabled={submitting}>{submitting ? "Создаём заказ…" : `Создать заказ на ${formatCurrency(totalAmount)}`}</Button>
   </form>
 }

@@ -87,7 +87,7 @@ function LegacyProfilePipeCatalog({variants, categorySlug}: {variants: ProductVa
   const [open, setOpen] = useState(false);
   useLinkedVariant(variants, () => setOpen(true));
   return <div className="min-w-0 lg:col-span-2">
-    <details open={open} onToggle={event => setOpen(event.currentTarget.open)} className="rounded-xl border border-slate-200 bg-white p-5">
+    <details open={open} onToggle={event => setOpen(event.currentTarget.open)} className="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-5">
       <summary className="cursor-pointer font-semibold">Другие позиции — параметры уточняются</summary>
       <GenericProductVariantCatalog variants={variants} categorySlug={categorySlug}/>
     </details>
@@ -246,7 +246,7 @@ function GenericProductVariantCatalog({
       <section className="min-w-0 lg:col-span-2" aria-label="Продукция">
       {results.length ? (
         <>
-          <div className="hidden overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm xl:block">
+          <div className="hidden overflow-hidden rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-sm xl:block">
             <table className="w-full table-fixed border-collapse text-left text-sm">
               <colgroup><col style={{width:"25%"}}/><col style={{width:"27%"}}/><col style={{width:"15%"}}/><col style={{width:"10%"}}/><col style={{width:"9%"}}/><col style={{width:"14%"}}/></colgroup>
               <thead className="bg-slate-900 text-white">
@@ -261,8 +261,8 @@ function GenericProductVariantCatalog({
               </thead>
               <tbody>
                 {visible.map((variant) => (
-                  <tr id={`variant-${variant.id}`} key={variant.id} className="border-t border-slate-200 align-middle">
-                    <td className="break-words p-3"><CatalogImage src={variant.imageUrls[0]} name={variant.name} compact/><strong>{variant.name}</strong><p className="mt-2 text-xs text-slate-500">{variant.sku}</p></td>
+                  <tr id={`variant-${variant.id}`} key={variant.id} className="border-t border-slate-200 dark:border-slate-700 align-middle">
+                    <td className="break-words p-3"><CatalogImage src={variant.imageUrls[0]} name={variant.name} compact/><strong>{variant.name}</strong><p className="mt-2 text-xs text-slate-500 dark:text-slate-400">{variant.sku}</p></td>
                     <td className="break-words p-3"><VariantSpecifications variant={variant}/></td>
                     <td className="break-words px-2 py-3">
                       <strong>{variant.quoteOnly ? "Цена по запросу" : `${variant.priceQualifier === "from" ? "от " : ""}${formatUnitPrice(variant.price, variant.priceUnit)}`}</strong>
@@ -282,15 +282,15 @@ function GenericProductVariantCatalog({
               <article
                 id={`variant-mobile-${variant.id}`}
                 key={variant.id}
-                className="min-w-0 break-words rounded-xl border border-slate-200 bg-white p-5 shadow-sm"
+                className="min-w-0 break-words rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-5 shadow-sm"
               >
-                <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+                <p className="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
                   {variant.sku}
                 </p>
                 <CatalogImage src={variant.imageUrls[0]} name={variant.name}/>
                 <h3 className="mt-1 font-bold">{variant.name}</h3>
                 <div className="mt-4"><VariantSpecifications variant={variant}/></div>
-                <div className="mt-5 flex flex-wrap items-end justify-between gap-4 border-t border-slate-100 pt-4">
+                <div className="mt-5 flex flex-wrap items-end justify-between gap-4 border-t border-slate-100 dark:border-slate-800 pt-4">
                   <div>
                     <strong className="text-xl">{variant.quoteOnly ? "Цена по запросу" : `${variant.priceQualifier === "from" ? "от " : ""}${formatUnitPrice(variant.price, variant.priceUnit)}`}</strong>
                   </div>
@@ -302,9 +302,9 @@ function GenericProductVariantCatalog({
           </div>
         </>
       ) : (
-        <div className="rounded-xl border border-dashed border-slate-300 bg-white p-8 text-center">
+        <div className="rounded-xl border border-dashed border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 p-8 text-center">
           <strong className="text-lg">Варианты не найдены</strong>
-          <p className="mt-2 text-sm text-slate-600">Измените или сбросьте фильтры.</p>
+          <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">Измените или сбросьте фильтры.</p>
           <ResetFiltersButton onClick={reset}/>
         </div>
       )}
@@ -317,8 +317,8 @@ function GenericProductVariantCatalog({
 function Availability({availability}: {availability: ProductVariant["availability"]}) {
   return (
     <span className={`inline-flex rounded-full px-2.5 py-1 text-xs font-bold ${
-      availability === "UNKNOWN" ? "bg-slate-100 text-slate-600"
-        : availability === "IN_STOCK" ? "bg-green-100 text-green-800" : "bg-amber-100 text-amber-900"
+      availability === "UNKNOWN" ? "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300"
+        : availability === "IN_STOCK" ? "bg-green-100 dark:bg-green-950/60 text-green-800 dark:text-green-300" : "bg-amber-100 dark:bg-amber-950/60 text-amber-900 dark:text-amber-200"
     }`}>
       {availability === "UNKNOWN" ? "Наличие уточняется" : availability === "IN_STOCK" ? "В наличии" : "Под заказ"}
     </span>
@@ -327,7 +327,7 @@ function Availability({availability}: {availability: ProductVariant["availabilit
 
 function VariantSpecifications({variant}: {variant: ProductVariant}) {
   return <>
-    <dl className="space-y-1 text-sm">{variant.specifications.filter(s => s.name !== "Полное обозначение").map((s, i) => <div key={`${s.name}-${i}`}><dt className="inline text-slate-500">{s.name}: </dt><dd className="inline">{s.value}</dd></div>)}{variant.weight && <div><dt className="inline text-slate-500">Теоретическая масса: </dt><dd className="inline">{formatNumber(variant.weight.value)} {variant.weight.unit}</dd></div>}</dl>
+    <dl className="space-y-1 text-sm">{variant.specifications.filter(s => s.name !== "Полное обозначение").map((s, i) => <div key={`${s.name}-${i}`}><dt className="inline text-slate-500 dark:text-slate-400">{s.name}: </dt><dd className="inline">{s.value}</dd></div>)}{variant.weight && <div><dt className="inline text-slate-500 dark:text-slate-400">Теоретическая масса: </dt><dd className="inline">{formatNumber(variant.weight.value)} {variant.weight.unit}</dd></div>}</dl>
     {variant.id.startsWith("rozmet-") && (variant.description || variant.imageUrls.length > 1) && <details className="mt-3 text-sm">
       <summary className="cursor-pointer font-semibold">Подробнее о товаре</summary>
       {variant.description && <CatalogDescription description={variant.description} className="mt-3"/>}

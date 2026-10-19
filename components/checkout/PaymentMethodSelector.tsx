@@ -23,8 +23,8 @@ export function PaymentMethodSelector({value, onChange}: {
             key={option.v}
             className={`flex cursor-pointer gap-3 rounded-lg border p-4 transition-colors sm:p-5 ${
               value === option.v
-                ? "border-red-700 bg-red-50"
-                : "border-slate-200 hover:border-slate-400"
+                ? "border-red-700 bg-red-50 dark:bg-red-950/40"
+                : "border-slate-200 dark:border-slate-700 hover:border-slate-400 dark:hover:border-slate-500"
             }`}
           >
             <input
@@ -36,7 +36,7 @@ export function PaymentMethodSelector({value, onChange}: {
             />
             <span>
               <strong className="block">{option.l}</strong>
-              <span className="mt-1 block text-sm leading-6 text-slate-600">{option.d}</span>
+              <span className="mt-1 block text-sm leading-6 text-slate-600 dark:text-slate-300">{option.d}</span>
             </span>
           </label>
         ))}

@@ -100,7 +100,7 @@ export function QuoteRequestForm() {
   }
 
   if (success) return <div role="status"
-                           className="rounded-lg border border-green-300 bg-green-50 p-5 text-green-900"><strong>Заявка
+                           className="rounded-lg border border-green-300 dark:border-green-800 bg-green-50 dark:bg-green-950/40 p-5 text-green-900 dark:text-green-200"><strong>Заявка
     принята.</strong><p className="mt-1 text-sm">Мы свяжемся с вами после обработки запроса.</p>
     <button onClick={() => setSuccess(false)} className="mt-3 text-sm underline">Отправить ещё одну</button>
   </div>;
@@ -145,11 +145,11 @@ export function QuoteRequestForm() {
     <div className="sm:col-span-2">
       <label className="flex items-start gap-2 text-sm">
         <input name="consent" type="checkbox" required className="mt-1 size-4 shrink-0 accent-red-700" {...validationProps("consent")}/>
-        <span>Я согласен на обработку персональных данных для ответа на заявку в соответствии с <Link href="/privacy" className="font-semibold text-red-700 underline underline-offset-2">Политикой обработки персональных данных</Link>.</span>
+        <span>Я согласен на обработку персональных данных для ответа на заявку в соответствии с <Link href="/privacy" className="font-semibold text-red-700 dark:text-red-400 underline underline-offset-2">Политикой обработки персональных данных</Link>.</span>
       </label>
       {fieldError("consent")}
     </div>
-    {error && <p role="alert" className="text-sm font-semibold text-red-700 sm:col-span-2">{error}</p>}
+    {error && <p role="alert" className="text-sm font-semibold text-red-700 dark:text-red-400 sm:col-span-2">{error}</p>}
     <Button type="submit" disabled={submitting} className="sm:w-fit">{submitting ? "Отправляем…" : "Отправить заявку"}</Button>
   </form>;
 }
