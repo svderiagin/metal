@@ -1,7 +1,7 @@
 "use client";
 import {createContext, type ReactNode, useCallback, useEffect, useMemo, useState} from "react";
 import {CART_STORAGE_KEY} from "@/lib/constants";
-import {getProductVariantById} from "@/lib/catalog";
+import {getProductVariantById} from "@/lib/cartCatalog";
 import type {CartItem, CartLine, CartMeasurement, CartPieceOrder} from "@/types/cart";
 import {createCartLines, normalizeCartItems, normalizeMeasurement} from "@/lib/cart";
 import {isProfilePipeVariant, normalizePieceOrder} from "@/lib/profilePipe";

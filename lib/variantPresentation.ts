@@ -18,12 +18,17 @@ export function getVariantAttribute(
 }
 
 export function getQuantityUnit(variant: ProductVariant) {
+  if (variant.unit === "square_meter") return "м²";
   if (variant.unit === "meter") return "м";
   if (variant.unit === "ton") return "т";
   if (variant.unit === "sheet") return "лист";
   if (variant.unit === "kg") return "кг";
   if (variant.priceUnit.toLocaleLowerCase("ru").includes("рулон")) return "рул.";
   return "шт.";
+}
+
+export function requiresWholeRozmetQuantity(variant: ProductVariant) {
+  return variant.id?.startsWith("rozmet-") === true && variant.unit === "piece";
 }
 
 export function requiresWholeMetalMeshQuantity(variant: ProductVariant) {

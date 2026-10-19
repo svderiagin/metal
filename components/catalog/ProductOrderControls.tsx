@@ -4,7 +4,7 @@ import {useEffect, useState} from "react";
 import {useCart} from "@/hooks/useCart";
 import {Button} from "@/components/ui/Button";
 import {Input} from "@/components/ui/Input";
-import {getQuantityUnit} from "@/lib/variantPresentation";
+import {getQuantityUnit, requiresWholeRozmetQuantity} from "@/lib/variantPresentation";
 import type {ProductVariant} from "@/types/product";
 import {QuoteRequestButton} from "./QuoteRequestButton";
 import {formatQuoteProductName} from "@/lib/quoteRequest";
@@ -21,7 +21,9 @@ export function ProductOrderControls({variant, view}: {variant: ProductVariant; 
   const canPurchase = !needsQuote && (variant.inStock || (variant.imported && variant.availability !== "ON_ORDER"));
   const shouldRemove = !!line && quantity === 0;
   const saved = !!line && !line.invalidReason && quantity === line.quantity;
-  const valid = Number.isFinite(quantity) && quantity > 0 && quantity <= 999;
+  const wholeQuantity = requiresWholeRozmetQuantity(variant);
+  const valid = Number.isFinite(quantity) && quantity > 0 && quantity <= 999
+    && (!wholeQuantity || Number.isInteger(quantity));
 
   useEffect(() => {
     if (!removed) return;
@@ -67,7 +69,7 @@ export function ProductOrderControls({variant, view}: {variant: ProductVariant; 
   const input = (
     <label className="flex min-w-0 flex-col items-start gap-1">
       <span className="sr-only">Количество {variant.name}</span>
-      <Input type="number" min={0} max={999} step="any" value={value}
+      <Input type="number" min={0} max={999} step={wholeQuantity ? 1 : "any"} value={value}
         onChange={event => setDraft(event.target.value)}
         className={`${styles.field} min-w-0 px-2`}/>
       <span className="text-xs text-slate-500">{getQuantityUnit(variant)}</span>

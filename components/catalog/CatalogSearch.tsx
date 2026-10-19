@@ -6,6 +6,7 @@ import {Button} from "@/components/ui/Button";
 import {Input} from "@/components/ui/Input";
 import {createCatalogSearchIndex} from "@/lib/search";
 import Link from "next/link";
+import {catalogProductPath} from "@/lib/catalogLinks";
 import {ProductTypeGrid} from "./ProductTypeGrid";
 import type {ProductType, ProductVariant} from "@/types/product";
 import type {Category} from "@/types/category";
@@ -25,7 +26,16 @@ export function CatalogSearch({
   const [draft, setDraft] = useState({urlQuery, value: urlQuery});
   const query = draft.urlQuery === urlQuery ? draft.value : urlQuery;
   const deferredQuery = useDeferredValue(query);
-  const index = useMemo(() => createCatalogSearchIndex(variants, productTypes, categories), [variants, productTypes, categories]);
+  // Keep the index for subsequent queries, but do not normalize the whole catalog
+  // until a visitor actually searches. Empty-state results are never displayed.
+  const index = useMemo(() => {
+    let cached: ReturnType<typeof createCatalogSearchIndex> | undefined;
+    return {search(value: string) {
+      if (!value.trim()) return {hits: [], total: 0};
+      cached ??= createCatalogSearchIndex(variants, productTypes, categories);
+      return cached.search(value);
+    }};
+  }, [variants, productTypes, categories]);
   const search = useMemo(() => index.search(deferredQuery), [index, deferredQuery]);
   const matchingVariants = useMemo(() => search.hits.map(h => h.product), [search]);
   const [limit, setLimit] = useState(20);
@@ -98,7 +108,7 @@ export function CatalogSearch({
               {search.correctedQuery && <p className="mb-4 text-sm">Возможно, вы имели в виду: <button type="button" className="font-semibold text-red-700 underline" onClick={() => setDraft({urlQuery, value: search.correctedQuery!})}>{search.correctedQuery}</button></p>}
               <ul className="mb-6 divide-y divide-slate-200 rounded-xl bg-white">{matchingVariants.slice(0, limit).map(product => {
                 const type = productTypes.find(t => t.id === product.productTypeId);
-                return type && <li key={product.id} className="p-4"><Link className="font-semibold text-red-700 hover:underline" href={"/catalog/" + type.categorySlug + "/" + type.subcategorySlug + "/" + type.slug + "#variant-" + product.id}>{product.name}</Link><p className="mt-1 text-sm text-slate-600">{product.sku}</p></li>;
+                return type && <li key={product.id} className="p-4"><Link className="font-semibold text-red-700 hover:underline" href={catalogProductPath(type.categorySlug, type.subcategorySlug, type.slug, product.id)}>{product.name}</Link><p className="mt-1 text-sm text-slate-600">{product.sku}</p></li>;
               })}</ul>
               {limit < matchingVariants.length && <Button type="button" className="mb-6" onClick={() => setLimit(n => n + 20)}>Показать ещё</Button>}
               <ProductTypeGrid productTypes={results} variants={matchingVariants}/>

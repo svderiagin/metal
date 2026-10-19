@@ -13,6 +13,7 @@ const {subcategories} = readProjectData('data/subcategories.ts');
 const {productVariants} = readProjectData('data/products/index.ts');
 const snapshotPath = path.join(root, 'imports/protected-catalog.snapshot.json');
 const snapshot = fs.existsSync(snapshotPath) ? JSON.parse(fs.readFileSync(snapshotPath, 'utf8')) : null;
+const protectedIds = new Set(snapshot?.categories.map(category => category.id) ?? []);
 
 const categoryIds = new Set(categories.map(category => category.id));
 const subcategoryIds = new Set(subcategories.map(subcategory => subcategory.id));
@@ -21,9 +22,9 @@ const orphans = {
   products: productVariants.filter(item => !categoryIds.has(item.categoryId) || !subcategoryIds.has(item.subcategoryId)).map(item => item.id),
 };
 const exact = snapshot ? {
-  categories: JSON.stringify(categories) === JSON.stringify(snapshot.categories),
-  subcategories: JSON.stringify(subcategories) === JSON.stringify(snapshot.subcategories),
-  products: JSON.stringify(productVariants) === JSON.stringify(snapshot.products),
+  categories: JSON.stringify(categories.filter(category => protectedIds.has(category.id))) === JSON.stringify(snapshot.categories),
+  subcategories: JSON.stringify(subcategories.filter(subcategory => protectedIds.has(subcategory.categoryId))) === JSON.stringify(snapshot.subcategories),
+  products: JSON.stringify(productVariants.filter(product => protectedIds.has(product.categoryId))) === JSON.stringify(snapshot.products),
 } : null;
 
 console.log(JSON.stringify({

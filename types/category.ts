@@ -1,4 +1,6 @@
 export interface Subcategory {
+  /** Internal type adapter for source categories whose products have no subcategory. */
+  internal?: boolean;
   id: string;
   categoryId: string;
   name: string;
@@ -11,6 +13,8 @@ export interface Subcategory {
 }
 
 export interface Category {
+  /** Show source products directly when the source has no subcategories. */
+  directProducts?: boolean;
   id: string;
   name: string;
   slug: string;

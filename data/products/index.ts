@@ -7,6 +7,7 @@ import {roundPipeLegacyProducts} from "./trubaKruglayaLegacy";
 import {trubyProfilnyeProducts, profilePipeProducts} from "./trubyProfilnye";
 import type {ProductVariant, ProductVariantSource, ProductWeight} from "@/types/product";
 import importedCatalog from "../imported-catalog.json";
+import rozmetCatalog from "../rozmet-catalog.json";
 import catalogImages from "../catalog-images.json";
 import {normalizeRebarVariant} from "@/lib/rebar";
 import {normalizeBeamVariant} from "@/lib/beam";
@@ -37,7 +38,7 @@ export const existingVariants: ProductVariant[] = productSources.map((product) =
     : estimateDemoWeight(product),
 }));
 
-export const productVariants: ProductVariant[] = [
+const retainedProductVariants: ProductVariant[] = [
   ...existingVariants.filter(p => !(importedCatalog.matchedIds as string[]).includes(p.id)),
   ...(importedCatalog.products as ProductVariant[]).filter(product => isRetainedCategory(product.categoryId)),
 ].filter(product => isRetainedCategory(product.categoryId)).filter(isPublicProduct).map(normalizeRebarVariant).map(normalizeBeamVariant).map(normalizePipeWeight).map(product => ({
@@ -46,6 +47,11 @@ export const productVariants: ProductVariant[] = [
     ? [(catalogImages.products as Record<string, string>)[product.id]]
     : product.imageUrls.length ? [catalogImages.fallback] : [],
 }));
+
+export const productVariants: ProductVariant[] = [
+  ...retainedProductVariants,
+  ...rozmetCatalog.products as ProductVariant[],
+];
 
 function estimateDemoWeight(product: ProductVariantSource): ProductWeight | undefined {
   if (isPipeProduct(product)) return undefined;

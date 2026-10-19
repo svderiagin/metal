@@ -3,6 +3,9 @@
 import {useEffect, useRef, useState} from "react";
 import Image from "next/image";
 import {catalogImageUrl} from "@/lib/catalog-image";
+import {DesktopImagePreload} from "./DesktopImagePreload";
+
+const imageSizes = "(min-width: 768px) 672px, (min-width: 640px) calc(100vw - 40px), calc(100vw - 32px)";
 
 export function ProductImageViewer({src, name}: {src: string; name: string}) {
   const [open, setOpen] = useState(false);
@@ -27,6 +30,7 @@ export function ProductImageViewer({src, name}: {src: string; name: string}) {
 
   return (
     <>
+      <DesktopImagePreload src={imageUrl} sizes={imageSizes}/>
       <button
         ref={triggerRef}
         type="button"
@@ -37,7 +41,7 @@ export function ProductImageViewer({src, name}: {src: string; name: string}) {
       >
         <span className="relative block aspect-[2/1] overflow-hidden rounded-xl bg-white">
           <Image src={imageUrl} alt={name} fill
-            sizes="(min-width: 1024px) 640px, (min-width: 640px) 85vw, 90vw"
+            sizes={imageSizes}
             className="object-contain object-center"/>
           <span aria-hidden="true" className="absolute bottom-3 right-3 rounded-lg bg-slate-950/80 px-3 py-1.5 text-xs font-semibold text-white transition group-hover:bg-slate-950">
             Увеличить

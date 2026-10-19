@@ -23,9 +23,9 @@ export function CatalogSidebar({activeSlug}: { activeSlug?: string }) {
                   label={category.name}
                   active={active}
                 />
-                {active &&
+                {active && !category.directProducts &&
                   <ul className="border-t border-slate-100 bg-slate-50 py-1">
-                    {getSubcategoriesByCategoryId(category.id).flatMap((subcategory) => {
+                    {getSubcategoriesByCategoryId(category.id).filter(subcategory => !subcategory.internal).flatMap((subcategory) => {
                       const productType = getProductTypesBySubcategoryId(subcategory.id)[0];
                       if (!productType) return [];
 

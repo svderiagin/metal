@@ -191,7 +191,7 @@ test('beam names, series and individual profiles work in global and table search
   const {productTypes} = readProjectData('data/productTypes.ts');
   for (const index of [createCatalogSearchIndex(productVariants, productTypes), createCatalogSearchIndex(beams)]) {
     for (const query of ['балка', 'двутавр', 'двутавровая балка']) {
-      const result = index.search(query);
+      const result = index.search(query, {categoryId:'cat-bal'});
       assert.equal(result.total, 38, query);
       assert.ok(result.hits.every(h => h.product.categoryId === 'cat-bal'));
     }

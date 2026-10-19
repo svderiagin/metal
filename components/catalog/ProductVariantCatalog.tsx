@@ -35,6 +35,7 @@ import {isProfileSheetVariant} from "@/lib/profileSheet";
 import {ProfileSheetVariantCatalog} from "./ProfileSheetVariantCatalog";
 import {isMetalMeshVariant} from "@/lib/metalMesh";
 import {MetalMeshVariantCatalog} from "./MetalMeshVariantCatalog";
+import {CatalogDescription} from "./CatalogDescription";
 
 type SortMode = "relevance" | "availability" | "price-asc" | "price-desc" | "size" | "name";
 
@@ -325,7 +326,14 @@ function Availability({availability}: {availability: ProductVariant["availabilit
 }
 
 function VariantSpecifications({variant}: {variant: ProductVariant}) {
-  return <dl className="space-y-1 text-sm">{variant.specifications.filter(s => s.name !== "Полное обозначение").map((s, i) => <div key={`${s.name}-${i}`}><dt className="inline text-slate-500">{s.name}: </dt><dd className="inline">{s.value}</dd></div>)}{variant.weight && <div><dt className="inline text-slate-500">Теоретическая масса: </dt><dd className="inline">{formatNumber(variant.weight.value)} {variant.weight.unit}</dd></div>}</dl>;
+  return <>
+    <dl className="space-y-1 text-sm">{variant.specifications.filter(s => s.name !== "Полное обозначение").map((s, i) => <div key={`${s.name}-${i}`}><dt className="inline text-slate-500">{s.name}: </dt><dd className="inline">{s.value}</dd></div>)}{variant.weight && <div><dt className="inline text-slate-500">Теоретическая масса: </dt><dd className="inline">{formatNumber(variant.weight.value)} {variant.weight.unit}</dd></div>}</dl>
+    {variant.id.startsWith("rozmet-") && (variant.description || variant.imageUrls.length > 1) && <details className="mt-3 text-sm">
+      <summary className="cursor-pointer font-semibold">Подробнее о товаре</summary>
+      {variant.description && <CatalogDescription description={variant.description} className="mt-3"/>}
+      {variant.imageUrls.slice(1).map(src => <CatalogImage key={src} src={src} name={variant.name} compact/>)}
+    </details>}
+  </>;
 }
 
 function uniqueAttributeValues(

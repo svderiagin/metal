@@ -1,0 +1,3518 @@
+{
+  "source": "https://rozmet.ru/production/",
+  "collectedAt": "2026-10-18T09:49:16.682Z",
+  "categories": [
+    {
+      "id": "rozmet-cat-shtaketnik",
+      "name": "Металлический штакетник",
+      "slug": "shtaketnik",
+      "subcategories": [],
+      "products": 48
+    },
+    {
+      "id": "rozmet-cat-shveller",
+      "name": "Швеллер",
+      "slug": "shveller",
+      "subcategories": [],
+      "products": 14
+    },
+    {
+      "id": "rozmet-cat-ugolok",
+      "name": "Уголок стальной",
+      "slug": "ugolok",
+      "subcategories": [],
+      "products": 22
+    },
+    {
+      "id": "rozmet-cat-kvadrat",
+      "name": "Квадрат металлический",
+      "slug": "kvadrat",
+      "subcategories": [],
+      "products": 7
+    },
+    {
+      "id": "rozmet-cat-listovoy-prokat",
+      "name": "Листовой прокат",
+      "slug": "listovoy-prokat",
+      "subcategories": [
+        "Лист оцинкованный",
+        "Лист Холоднокатаный",
+        "Лист рифленый",
+        "Лист горячекатаный"
+      ],
+      "products": 25
+    },
+    {
+      "id": "rozmet-cat-polosa",
+      "name": "Полоса",
+      "slug": "polosa",
+      "subcategories": [],
+      "products": 19
+    },
+    {
+      "id": "rozmet-cat-provoloka-ok",
+      "name": "Проволока ОК",
+      "slug": "provoloka-ok",
+      "subcategories": [],
+      "products": 9
+    },
+    {
+      "id": "rozmet-cat-stulchik",
+      "name": "Фиксаторы арматуры",
+      "slug": "stulchik",
+      "subcategories": [],
+      "products": 21
+    },
+    {
+      "id": "rozmet-cat-zaglushki-dlya-trub",
+      "name": "Заглушки для труб",
+      "slug": "zaglushki-dlya-trub",
+      "subcategories": [],
+      "products": 24
+    },
+    {
+      "id": "rozmet-cat-armaturnye-izdeliya",
+      "name": "Арматурные изделия",
+      "slug": "armaturnye-izdeliya",
+      "subcategories": [
+        "Лягушки арматурные",
+        "Пэшки арматурные"
+      ],
+      "products": 12
+    },
+    {
+      "id": "rozmet-cat-stroymaterialy",
+      "name": "Стройматериалы для фундамента",
+      "slug": "stroymaterialy",
+      "subcategories": [],
+      "products": 10
+    },
+    {
+      "id": "rozmet-cat-vintovye-svai",
+      "name": "Винтовые сваи",
+      "slug": "vintovye-svai",
+      "subcategories": [],
+      "products": 18
+    },
+    {
+      "id": "rozmet-cat-petli-dlya-vorot",
+      "name": "Петли для ворот",
+      "slug": "petli-dlya-vorot",
+      "subcategories": [],
+      "products": 16
+    },
+    {
+      "id": "rozmet-cat-otvodi",
+      "name": "Фитинги",
+      "slug": "otvodi",
+      "subcategories": [],
+      "products": 88
+    }
+  ],
+  "sections": [
+    {
+      "url": "https://rozmet.ru/production/shtaketnik/",
+      "categoryId": "rozmet-cat-shtaketnik",
+      "subcategoryId": "rozmet-sub-shtaketnik-shtaketnik",
+      "internal": true,
+      "descriptionMissing": false
+    },
+    {
+      "url": "https://rozmet.ru/production/shveller/",
+      "categoryId": "rozmet-cat-shveller",
+      "subcategoryId": "rozmet-sub-shveller-shveller",
+      "internal": true,
+      "descriptionMissing": false
+    },
+    {
+      "url": "https://rozmet.ru/production/ugolok/",
+      "categoryId": "rozmet-cat-ugolok",
+      "subcategoryId": "rozmet-sub-ugolok-ugolok",
+      "internal": true,
+      "descriptionMissing": false
+    },
+    {
+      "url": "https://rozmet.ru/production/kvadrat/",
+      "categoryId": "rozmet-cat-kvadrat",
+      "subcategoryId": "rozmet-sub-kvadrat-kvadrat",
+      "internal": true,
+      "descriptionMissing": false
+    },
+    {
+      "url": "https://rozmet.ru/production/listovoy_prokat/galvanized_steel_sheet/",
+      "categoryId": "rozmet-cat-listovoy-prokat",
+      "subcategoryId": "rozmet-sub-listovoy-prokat-galvanized-steel-sheet",
+      "internal": false,
+      "descriptionMissing": true
+    },
+    {
+      "url": "https://rozmet.ru/production/listovoy_prokat/list-ocynkovannyj/",
+      "categoryId": "rozmet-cat-listovoy-prokat",
+      "subcategoryId": "rozmet-sub-listovoy-prokat-list-ocynkovannyj",
+      "internal": false,
+      "descriptionMissing": false
+    },
+    {
+      "url": "https://rozmet.ru/production/listovoy_prokat/list-riflennyj/",
+      "categoryId": "rozmet-cat-listovoy-prokat",
+      "subcategoryId": "rozmet-sub-listovoy-prokat-list-riflennyj",
+      "internal": false,
+      "descriptionMissing": false
+    },
+    {
+      "url": "https://rozmet.ru/production/listovoy_prokat/list-goryachekatanyj/",
+      "categoryId": "rozmet-cat-listovoy-prokat",
+      "subcategoryId": "rozmet-sub-listovoy-prokat-list-goryachekatanyj",
+      "internal": false,
+      "descriptionMissing": false
+    },
+    {
+      "url": "https://rozmet.ru/production/polosa/",
+      "categoryId": "rozmet-cat-polosa",
+      "subcategoryId": "rozmet-sub-polosa-polosa",
+      "internal": true,
+      "descriptionMissing": false
+    },
+    {
+      "url": "https://rozmet.ru/production/provoloka_ok/",
+      "categoryId": "rozmet-cat-provoloka-ok",
+      "subcategoryId": "rozmet-sub-provoloka-ok-provoloka-ok",
+      "internal": true,
+      "descriptionMissing": false
+    },
+    {
+      "url": "https://rozmet.ru/production/stulchik/",
+      "categoryId": "rozmet-cat-stulchik",
+      "subcategoryId": "rozmet-sub-stulchik-stulchik",
+      "internal": true,
+      "descriptionMissing": false
+    },
+    {
+      "url": "https://rozmet.ru/production/zaglushki_dlya_trub/",
+      "categoryId": "rozmet-cat-zaglushki-dlya-trub",
+      "subcategoryId": "rozmet-sub-zaglushki-dlya-trub-zaglushki-dlya-trub",
+      "internal": true,
+      "descriptionMissing": false
+    },
+    {
+      "url": "https://rozmet.ru/production/armaturnye_izdeliya/lyagushki_armaturnye/",
+      "categoryId": "rozmet-cat-armaturnye-izdeliya",
+      "subcategoryId": "rozmet-sub-armaturnye-izdeliya-lyagushki-armaturnye",
+      "internal": false,
+      "descriptionMissing": true
+    },
+    {
+      "url": "https://rozmet.ru/production/armaturnye_izdeliya/peshki_armaturnye/",
+      "categoryId": "rozmet-cat-armaturnye-izdeliya",
+      "subcategoryId": "rozmet-sub-armaturnye-izdeliya-peshki-armaturnye",
+      "internal": false,
+      "descriptionMissing": true
+    },
+    {
+      "url": "https://rozmet.ru/production/stroymaterialy/",
+      "categoryId": "rozmet-cat-stroymaterialy",
+      "subcategoryId": "rozmet-sub-stroymaterialy-stroymaterialy",
+      "internal": true,
+      "descriptionMissing": true
+    },
+    {
+      "url": "https://rozmet.ru/production/vintovye_svai/",
+      "categoryId": "rozmet-cat-vintovye-svai",
+      "subcategoryId": "rozmet-sub-vintovye-svai-vintovye-svai",
+      "internal": true,
+      "descriptionMissing": false
+    },
+    {
+      "url": "https://rozmet.ru/production/petli_dlya_vorot/",
+      "categoryId": "rozmet-cat-petli-dlya-vorot",
+      "subcategoryId": "rozmet-sub-petli-dlya-vorot-petli-dlya-vorot",
+      "internal": true,
+      "descriptionMissing": false
+    },
+    {
+      "url": "https://rozmet.ru/production/otvodi/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "internal": true,
+      "descriptionMissing": false
+    }
+  ],
+  "counts": {
+    "categories": 14,
+    "sourceSubcategories": 6,
+    "products": 333,
+    "updated": 0,
+    "preventedDuplicateRows": 37,
+    "images": 353
+  },
+  "missing": {
+    "productDescriptions": [
+      "29270",
+      "29271",
+      "29272",
+      "29273",
+      "29274",
+      "29275",
+      "29276",
+      "29277",
+      "29278",
+      "29279",
+      "29280",
+      "29281",
+      "29282",
+      "29283",
+      "29284",
+      "29285",
+      "29286",
+      "29287",
+      "29288",
+      "29289",
+      "29290",
+      "29291",
+      "29292",
+      "29293",
+      "29294",
+      "29295",
+      "29296",
+      "29297",
+      "29298",
+      "29299",
+      "29300",
+      "29301",
+      "29302",
+      "29303",
+      "29304",
+      "29305",
+      "29306",
+      "29307",
+      "29308",
+      "29309",
+      "29310",
+      "29311",
+      "29312",
+      "29313",
+      "29314",
+      "29315",
+      "29316",
+      "29317",
+      "20157",
+      "20160",
+      "2199",
+      "28931",
+      "28942",
+      "16727",
+      "28974",
+      "28975",
+      "19707",
+      "19708",
+      "2162",
+      "2163",
+      "20207",
+      "20208",
+      "29014",
+      "20138",
+      "20139",
+      "20140",
+      "29015",
+      "24313",
+      "29068",
+      "23967",
+      "20413",
+      "22011",
+      "20414",
+      "20415",
+      "28950",
+      "28956",
+      "28957",
+      "28961",
+      "28962",
+      "28963",
+      "28964",
+      "28965",
+      "28966",
+      "28960",
+      "29263",
+      "29264",
+      "29265",
+      "29266",
+      "29267",
+      "29268",
+      "29257",
+      "29258",
+      "29259",
+      "29260",
+      "29261",
+      "29262",
+      "29244",
+      "29243",
+      "29246",
+      "29245",
+      "29247",
+      "29249",
+      "29248",
+      "21675",
+      "21678",
+      "21676",
+      "23130",
+      "23127",
+      "20191",
+      "20190",
+      "28969",
+      "23129",
+      "20169",
+      "20189",
+      "26565",
+      "20170",
+      "26564",
+      "20171",
+      "20192",
+      "20193",
+      "20194",
+      "20195",
+      "26588",
+      "26589",
+      "24380",
+      "24381",
+      "24383",
+      "24382",
+      "24384",
+      "24385",
+      "24386",
+      "24387",
+      "28978",
+      "28979",
+      "28980",
+      "28981",
+      "28982",
+      "28983",
+      "28984",
+      "28985",
+      "15504",
+      "15505",
+      "15506",
+      "15507",
+      "21512",
+      "15508",
+      "15509",
+      "15510",
+      "15511",
+      "26568",
+      "15512",
+      "15513",
+      "15514",
+      "15515",
+      "15516",
+      "15517",
+      "15518",
+      "15520",
+      "15521",
+      "15522",
+      "28656",
+      "28958",
+      "28959",
+      "24357",
+      "24378",
+      "24358",
+      "24359",
+      "24360",
+      "24361",
+      "24317",
+      "24370",
+      "24318",
+      "24319",
+      "24320",
+      "24321",
+      "24322",
+      "24371",
+      "24323",
+      "24324",
+      "24325",
+      "24326",
+      "24327",
+      "24372",
+      "24328",
+      "24329",
+      "24330",
+      "24331",
+      "24332",
+      "24373",
+      "24333",
+      "24334",
+      "24335",
+      "24336",
+      "24347",
+      "24376",
+      "24348",
+      "24349",
+      "24350",
+      "24351",
+      "24352",
+      "24377",
+      "24353",
+      "24354",
+      "24355",
+      "24356",
+      "24337",
+      "24374",
+      "24338",
+      "24339",
+      "24340",
+      "24341",
+      "24342",
+      "24375",
+      "24343",
+      "24344",
+      "24345",
+      "24346",
+      "28660",
+      "28661",
+      "28662",
+      "28663",
+      "28664",
+      "28665",
+      "28666",
+      "28667",
+      "28668",
+      "28669",
+      "28670"
+    ],
+    "productImages": [
+      "21512",
+      "24370",
+      "24371",
+      "24377",
+      "24374"
+    ],
+    "productSpecifications": [
+      "20207",
+      "20208",
+      "28950",
+      "28956",
+      "28957",
+      "28961",
+      "28962",
+      "28963",
+      "28964",
+      "28965",
+      "28966",
+      "28960",
+      "28660",
+      "28661",
+      "28662",
+      "28663",
+      "28664",
+      "28665",
+      "28666",
+      "28667",
+      "28668",
+      "28669",
+      "28670"
+    ],
+    "categoryDescriptions": [
+      "https://rozmet.ru/production/armaturnye_izdeliya/",
+      "https://rozmet.ru/production/stroymaterialy/",
+      "https://rozmet.ru/production/listovoy_prokat/galvanized_steel_sheet/",
+      "https://rozmet.ru/production/armaturnye_izdeliya/lyagushki_armaturnye/",
+      "https://rozmet.ru/production/armaturnye_izdeliya/peshki_armaturnye/"
+    ]
+  },
+  "records": [
+    {
+      "id": "rozmet-29270",
+      "source": "https://rozmet.ru/production/shtaketnik/shtaketnik_polukruglyy_ral_8017_shokoladno_korichnevyy_105kh0_45_odnostoronniy_1_5_m/",
+      "categoryId": "rozmet-cat-shtaketnik",
+      "subcategoryId": "rozmet-sub-shtaketnik-shtaketnik",
+      "price": 189,
+      "unit": "piece",
+      "sku": "29270"
+    },
+    {
+      "id": "rozmet-29271",
+      "source": "https://rozmet.ru/production/shtaketnik/shtaketnik_polukruglyy_ral_8017_shokoladno_korichnevyy_105kh0_45_dvukhstoronniy_1_5_m/",
+      "categoryId": "rozmet-cat-shtaketnik",
+      "subcategoryId": "rozmet-sub-shtaketnik-shtaketnik",
+      "price": 178,
+      "unit": "piece",
+      "sku": "29271"
+    },
+    {
+      "id": "rozmet-29272",
+      "source": "https://rozmet.ru/production/shtaketnik/shtaketnik_polukruglyy_ral_7024_grafitovyy_seryy_105kh0_45_odnostoronniy_1_5_m/",
+      "categoryId": "rozmet-cat-shtaketnik",
+      "subcategoryId": "rozmet-sub-shtaketnik-shtaketnik",
+      "price": 189,
+      "unit": "piece",
+      "sku": "29272"
+    },
+    {
+      "id": "rozmet-29273",
+      "source": "https://rozmet.ru/production/shtaketnik/shtaketnik_polukruglyy_ral_7024_grafitovyy_seryy_105kh0_45_dvukhstoronniy_1_5_m/",
+      "categoryId": "rozmet-cat-shtaketnik",
+      "subcategoryId": "rozmet-sub-shtaketnik-shtaketnik",
+      "price": 178,
+      "unit": "piece",
+      "sku": "29273"
+    },
+    {
+      "id": "rozmet-29274",
+      "source": "https://rozmet.ru/production/shtaketnik/shtaketnik_polukruglyy_ral_8017_shokoladno_korichnevyy_105kh0_5_odnostoronniy_1_5_m/",
+      "categoryId": "rozmet-cat-shtaketnik",
+      "subcategoryId": "rozmet-sub-shtaketnik-shtaketnik",
+      "price": 203,
+      "unit": "piece",
+      "sku": "29274"
+    },
+    {
+      "id": "rozmet-29275",
+      "source": "https://rozmet.ru/production/shtaketnik/shtaketnik_polukruglyy_ral_8017_shokoladno_korichnevyy_105kh0_5_dvukhstoronniy_1_5_m/",
+      "categoryId": "rozmet-cat-shtaketnik",
+      "subcategoryId": "rozmet-sub-shtaketnik-shtaketnik",
+      "price": 223,
+      "unit": "piece",
+      "sku": "29275"
+    },
+    {
+      "id": "rozmet-29276",
+      "source": "https://rozmet.ru/production/shtaketnik/shtaketnik_polukruglyy_ral_7024_grafitovyy_seryy_105kh0_5_odnostoronniy_1_5_m/",
+      "categoryId": "rozmet-cat-shtaketnik",
+      "subcategoryId": "rozmet-sub-shtaketnik-shtaketnik",
+      "price": 203,
+      "unit": "piece",
+      "sku": "29276"
+    },
+    {
+      "id": "rozmet-29277",
+      "source": "https://rozmet.ru/production/shtaketnik/shtaketnik_polukruglyy_ral_7024_grafitovyy_seryy_105kh0_5_dvukhstoronniy_1_5_m/",
+      "categoryId": "rozmet-cat-shtaketnik",
+      "subcategoryId": "rozmet-sub-shtaketnik-shtaketnik",
+      "price": 223,
+      "unit": "piece",
+      "sku": "29277"
+    },
+    {
+      "id": "rozmet-29278",
+      "source": "https://rozmet.ru/production/shtaketnik/shtaketnik_polukruglyy_ral_8017_shokoladno_korichnevyy_118kh0_45_odnostoronniy_1_5_m/",
+      "categoryId": "rozmet-cat-shtaketnik",
+      "subcategoryId": "rozmet-sub-shtaketnik-shtaketnik",
+      "price": 192,
+      "unit": "piece",
+      "sku": "29278"
+    },
+    {
+      "id": "rozmet-29279",
+      "source": "https://rozmet.ru/production/shtaketnik/shtaketnik_polukruglyy_ral_8017_shokoladno_korichnevyy_118kh0_45_dvukhstoronniy_1_5_m/",
+      "categoryId": "rozmet-cat-shtaketnik",
+      "subcategoryId": "rozmet-sub-shtaketnik-shtaketnik",
+      "price": 210,
+      "unit": "piece",
+      "sku": "29279"
+    },
+    {
+      "id": "rozmet-29280",
+      "source": "https://rozmet.ru/production/shtaketnik/shtaketnik_polukruglyy_ral_7024_grafitovyy_seryy_118kh0_45_odnostoronniy_1_5_m/",
+      "categoryId": "rozmet-cat-shtaketnik",
+      "subcategoryId": "rozmet-sub-shtaketnik-shtaketnik",
+      "price": 192,
+      "unit": "piece",
+      "sku": "29280"
+    },
+    {
+      "id": "rozmet-29281",
+      "source": "https://rozmet.ru/production/shtaketnik/shtaketnik_polukruglyy_ral_7024_grafitovyy_seryy_118kh0_45_dvukhstoronniy_1_5_m/",
+      "categoryId": "rozmet-cat-shtaketnik",
+      "subcategoryId": "rozmet-sub-shtaketnik-shtaketnik",
+      "price": 210,
+      "unit": "piece",
+      "sku": "29281"
+    },
+    {
+      "id": "rozmet-29282",
+      "source": "https://rozmet.ru/production/shtaketnik/shtaketnik_polukruglyy_ral_8017_shokoladno_korichnevyy_118kh0_5_odnostoronniy_1_5_m/",
+      "categoryId": "rozmet-cat-shtaketnik",
+      "subcategoryId": "rozmet-sub-shtaketnik-shtaketnik",
+      "price": 203,
+      "unit": "piece",
+      "sku": "29282"
+    },
+    {
+      "id": "rozmet-29283",
+      "source": "https://rozmet.ru/production/shtaketnik/shtaketnik_polukruglyy_ral_8017_shokoladno_korichnevyy_118kh0_5_dvukhstoronniy_1_5_m/",
+      "categoryId": "rozmet-cat-shtaketnik",
+      "subcategoryId": "rozmet-sub-shtaketnik-shtaketnik",
+      "price": 223,
+      "unit": "piece",
+      "sku": "29283"
+    },
+    {
+      "id": "rozmet-29284",
+      "source": "https://rozmet.ru/production/shtaketnik/shtaketnik_polukruglyy_ral_7024_grafitovyy_seryy_118kh0_5_odnostoronniy_1_5_m/",
+      "categoryId": "rozmet-cat-shtaketnik",
+      "subcategoryId": "rozmet-sub-shtaketnik-shtaketnik",
+      "price": 203,
+      "unit": "piece",
+      "sku": "29284"
+    },
+    {
+      "id": "rozmet-29285",
+      "source": "https://rozmet.ru/production/shtaketnik/shtaketnik_polukruglyy_ral_7024_grafitovyy_seryy_118kh0_5_dvukhstoronniy_1_5_m/",
+      "categoryId": "rozmet-cat-shtaketnik",
+      "subcategoryId": "rozmet-sub-shtaketnik-shtaketnik",
+      "price": 223,
+      "unit": "piece",
+      "sku": "29285"
+    },
+    {
+      "id": "rozmet-29286",
+      "source": "https://rozmet.ru/production/shtaketnik/shtaketnik_polukruglyy_ral_8017_shokoladno_korichnevyy_105kh0_45_odnostoronniy_1_8_m/",
+      "categoryId": "rozmet-cat-shtaketnik",
+      "subcategoryId": "rozmet-sub-shtaketnik-shtaketnik",
+      "price": 227,
+      "unit": "piece",
+      "sku": "29286"
+    },
+    {
+      "id": "rozmet-29287",
+      "source": "https://rozmet.ru/production/shtaketnik/shtaketnik_polukruglyy_ral_8017_shokoladno_korichnevyy_105kh0_45_dvukhstoronniy_1_8_m/",
+      "categoryId": "rozmet-cat-shtaketnik",
+      "subcategoryId": "rozmet-sub-shtaketnik-shtaketnik",
+      "price": 214,
+      "unit": "piece",
+      "sku": "29287"
+    },
+    {
+      "id": "rozmet-29288",
+      "source": "https://rozmet.ru/production/shtaketnik/shtaketnik_polukruglyy_ral_7024_grafitovyy_seryy_105kh0_45_odnostoronniy_1_8_m/",
+      "categoryId": "rozmet-cat-shtaketnik",
+      "subcategoryId": "rozmet-sub-shtaketnik-shtaketnik",
+      "price": 227,
+      "unit": "piece",
+      "sku": "29288"
+    },
+    {
+      "id": "rozmet-29289",
+      "source": "https://rozmet.ru/production/shtaketnik/shtaketnik_polukruglyy_ral_7024_grafitovyy_seryy_105kh0_45_dvukhstoronniy_1_8_m/",
+      "categoryId": "rozmet-cat-shtaketnik",
+      "subcategoryId": "rozmet-sub-shtaketnik-shtaketnik",
+      "price": 214,
+      "unit": "piece",
+      "sku": "29289"
+    },
+    {
+      "id": "rozmet-29290",
+      "source": "https://rozmet.ru/production/shtaketnik/shtaketnik_polukruglyy_ral_8017_shokoladno_korichnevyy_105kh0_5_odnostoronniy_1_8_m/",
+      "categoryId": "rozmet-cat-shtaketnik",
+      "subcategoryId": "rozmet-sub-shtaketnik-shtaketnik",
+      "price": 243,
+      "unit": "piece",
+      "sku": "29290"
+    },
+    {
+      "id": "rozmet-29291",
+      "source": "https://rozmet.ru/production/shtaketnik/shtaketnik_polukruglyy_ral_8017_shokoladno_korichnevyy_105kh0_5_dvukhstoronniy_1_8_m/",
+      "categoryId": "rozmet-cat-shtaketnik",
+      "subcategoryId": "rozmet-sub-shtaketnik-shtaketnik",
+      "price": 268,
+      "unit": "piece",
+      "sku": "29291"
+    },
+    {
+      "id": "rozmet-29292",
+      "source": "https://rozmet.ru/production/shtaketnik/shtaketnik_polukruglyy_ral_7024_grafitovyy_seryy_105kh0_5_odnostoronniy_1_8_m/",
+      "categoryId": "rozmet-cat-shtaketnik",
+      "subcategoryId": "rozmet-sub-shtaketnik-shtaketnik",
+      "price": 243,
+      "unit": "piece",
+      "sku": "29292"
+    },
+    {
+      "id": "rozmet-29293",
+      "source": "https://rozmet.ru/production/shtaketnik/shtaketnik_polukruglyy_ral_7024_grafitovyy_seryy_105kh0_5_dvukhstoronniy_1_8_m/",
+      "categoryId": "rozmet-cat-shtaketnik",
+      "subcategoryId": "rozmet-sub-shtaketnik-shtaketnik",
+      "price": 268,
+      "unit": "piece",
+      "sku": "29293"
+    },
+    {
+      "id": "rozmet-29294",
+      "source": "https://rozmet.ru/production/shtaketnik/shtaketnik_polukruglyy_ral_8017_shokoladno_korichnevyy_118kh0_45_odnostoronniy_1_8_m/",
+      "categoryId": "rozmet-cat-shtaketnik",
+      "subcategoryId": "rozmet-sub-shtaketnik-shtaketnik",
+      "price": 230,
+      "unit": "piece",
+      "sku": "29294"
+    },
+    {
+      "id": "rozmet-29295",
+      "source": "https://rozmet.ru/production/shtaketnik/shtaketnik_polukruglyy_ral_8017_shokoladno_korichnevyy_118kh0_45_dvukhstoronniy_1_8_m/",
+      "categoryId": "rozmet-cat-shtaketnik",
+      "subcategoryId": "rozmet-sub-shtaketnik-shtaketnik",
+      "price": 252,
+      "unit": "piece",
+      "sku": "29295"
+    },
+    {
+      "id": "rozmet-29296",
+      "source": "https://rozmet.ru/production/shtaketnik/shtaketnik_polukruglyy_ral_7024_grafitovyy_seryy_118kh0_45_odnostoronniy_1_8_m/",
+      "categoryId": "rozmet-cat-shtaketnik",
+      "subcategoryId": "rozmet-sub-shtaketnik-shtaketnik",
+      "price": 230,
+      "unit": "piece",
+      "sku": "29296"
+    },
+    {
+      "id": "rozmet-29297",
+      "source": "https://rozmet.ru/production/shtaketnik/shtaketnik_polukruglyy_ral_7024_grafitovyy_seryy_118kh0_45_dvukhstoronniy_1_8_m/",
+      "categoryId": "rozmet-cat-shtaketnik",
+      "subcategoryId": "rozmet-sub-shtaketnik-shtaketnik",
+      "price": 252,
+      "unit": "piece",
+      "sku": "29297"
+    },
+    {
+      "id": "rozmet-29298",
+      "source": "https://rozmet.ru/production/shtaketnik/shtaketnik_polukruglyy_ral_8017_shokoladno_korichnevyy_118kh0_5_odnostoronniy_1_8_m/",
+      "categoryId": "rozmet-cat-shtaketnik",
+      "subcategoryId": "rozmet-sub-shtaketnik-shtaketnik",
+      "price": 243,
+      "unit": "piece",
+      "sku": "29298"
+    },
+    {
+      "id": "rozmet-29299",
+      "source": "https://rozmet.ru/production/shtaketnik/shtaketnik_polukruglyy_ral_8017_shokoladno_korichnevyy_118kh0_5_dvukhstoronniy_1_8_m/",
+      "categoryId": "rozmet-cat-shtaketnik",
+      "subcategoryId": "rozmet-sub-shtaketnik-shtaketnik",
+      "price": 268,
+      "unit": "piece",
+      "sku": "29299"
+    },
+    {
+      "id": "rozmet-29300",
+      "source": "https://rozmet.ru/production/shtaketnik/shtaketnik_polukruglyy_ral_7024_grafitovyy_seryy_118kh0_5_odnostoronniy_1_8_m/",
+      "categoryId": "rozmet-cat-shtaketnik",
+      "subcategoryId": "rozmet-sub-shtaketnik-shtaketnik",
+      "price": 243,
+      "unit": "piece",
+      "sku": "29300"
+    },
+    {
+      "id": "rozmet-29301",
+      "source": "https://rozmet.ru/production/shtaketnik/shtaketnik_polukruglyy_ral_7024_grafitovyy_seryy_118kh0_5_dvukhstoronniy_1_8_m/",
+      "categoryId": "rozmet-cat-shtaketnik",
+      "subcategoryId": "rozmet-sub-shtaketnik-shtaketnik",
+      "price": 268,
+      "unit": "piece",
+      "sku": "29301"
+    },
+    {
+      "id": "rozmet-29302",
+      "source": "https://rozmet.ru/production/shtaketnik/shtaketnik_polukruglyy_ral_8017_shokoladno_korichnevyy_105kh0_45_odnostoronniy_2_m/",
+      "categoryId": "rozmet-cat-shtaketnik",
+      "subcategoryId": "rozmet-sub-shtaketnik-shtaketnik",
+      "price": 252,
+      "unit": "piece",
+      "sku": "29302"
+    },
+    {
+      "id": "rozmet-29303",
+      "source": "https://rozmet.ru/production/shtaketnik/shtaketnik_polukruglyy_ral_8017_shokoladno_korichnevyy_105kh0_45_dvukhstoronniy_2_m/",
+      "categoryId": "rozmet-cat-shtaketnik",
+      "subcategoryId": "rozmet-sub-shtaketnik-shtaketnik",
+      "price": 237,
+      "unit": "piece",
+      "sku": "29303"
+    },
+    {
+      "id": "rozmet-29304",
+      "source": "https://rozmet.ru/production/shtaketnik/shtaketnik_polukruglyy_ral_7024_grafitovyy_seryy_105kh0_45_odnostoronniy_2_m/",
+      "categoryId": "rozmet-cat-shtaketnik",
+      "subcategoryId": "rozmet-sub-shtaketnik-shtaketnik",
+      "price": 252,
+      "unit": "piece",
+      "sku": "29304"
+    },
+    {
+      "id": "rozmet-29305",
+      "source": "https://rozmet.ru/production/shtaketnik/shtaketnik_polukruglyy_ral_7024_grafitovyy_seryy_105kh0_45_dvukhstoronniy_2_m/",
+      "categoryId": "rozmet-cat-shtaketnik",
+      "subcategoryId": "rozmet-sub-shtaketnik-shtaketnik",
+      "price": 237,
+      "unit": "piece",
+      "sku": "29305"
+    },
+    {
+      "id": "rozmet-29306",
+      "source": "https://rozmet.ru/production/shtaketnik/shtaketnik_polukruglyy_ral_8017_shokoladno_korichnevyy_105kh0_5_odnostoronniy_2_m/",
+      "categoryId": "rozmet-cat-shtaketnik",
+      "subcategoryId": "rozmet-sub-shtaketnik-shtaketnik",
+      "price": 270,
+      "unit": "piece",
+      "sku": "29306"
+    },
+    {
+      "id": "rozmet-29307",
+      "source": "https://rozmet.ru/production/shtaketnik/shtaketnik_polukruglyy_ral_8017_shokoladno_korichnevyy_105kh0_5_dvukhstoronniy_2_m/",
+      "categoryId": "rozmet-cat-shtaketnik",
+      "subcategoryId": "rozmet-sub-shtaketnik-shtaketnik",
+      "price": 297,
+      "unit": "piece",
+      "sku": "29307"
+    },
+    {
+      "id": "rozmet-29308",
+      "source": "https://rozmet.ru/production/shtaketnik/shtaketnik_polukruglyy_ral_7024_grafitovyy_seryy_105kh0_5_odnostoronniy_2_m/",
+      "categoryId": "rozmet-cat-shtaketnik",
+      "subcategoryId": "rozmet-sub-shtaketnik-shtaketnik",
+      "price": 270,
+      "unit": "piece",
+      "sku": "29308"
+    },
+    {
+      "id": "rozmet-29309",
+      "source": "https://rozmet.ru/production/shtaketnik/shtaketnik_polukruglyy_ral_7024_grafitovyy_seryy_105kh0_5_dvukhstoronniy_2_m/",
+      "categoryId": "rozmet-cat-shtaketnik",
+      "subcategoryId": "rozmet-sub-shtaketnik-shtaketnik",
+      "price": 297,
+      "unit": "piece",
+      "sku": "29309"
+    },
+    {
+      "id": "rozmet-29310",
+      "source": "https://rozmet.ru/production/shtaketnik/shtaketnik_polukruglyy_ral_8017_shokoladno_korichnevyy_118kh0_45_odnostoronniy_2_m/",
+      "categoryId": "rozmet-cat-shtaketnik",
+      "subcategoryId": "rozmet-sub-shtaketnik-shtaketnik",
+      "price": 255,
+      "unit": "piece",
+      "sku": "29310"
+    },
+    {
+      "id": "rozmet-29311",
+      "source": "https://rozmet.ru/production/shtaketnik/shtaketnik_polukruglyy_ral_8017_shokoladno_korichnevyy_118kh0_45_dvukhstoronniy_2_m/",
+      "categoryId": "rozmet-cat-shtaketnik",
+      "subcategoryId": "rozmet-sub-shtaketnik-shtaketnik",
+      "price": 279,
+      "unit": "piece",
+      "sku": "29311"
+    },
+    {
+      "id": "rozmet-29312",
+      "source": "https://rozmet.ru/production/shtaketnik/shtaketnik_polukruglyy_ral_7024_grafitovyy_seryy_118kh0_45_odnostoronniy_2_m/",
+      "categoryId": "rozmet-cat-shtaketnik",
+      "subcategoryId": "rozmet-sub-shtaketnik-shtaketnik",
+      "price": 255,
+      "unit": "piece",
+      "sku": "29312"
+    },
+    {
+      "id": "rozmet-29313",
+      "source": "https://rozmet.ru/production/shtaketnik/shtaketnik_polukruglyy_ral_7024_grafitovyy_seryy_118kh0_45_dvukhstoronniy_2_m/",
+      "categoryId": "rozmet-cat-shtaketnik",
+      "subcategoryId": "rozmet-sub-shtaketnik-shtaketnik",
+      "price": 279,
+      "unit": "piece",
+      "sku": "29313"
+    },
+    {
+      "id": "rozmet-29314",
+      "source": "https://rozmet.ru/production/shtaketnik/shtaketnik_polukruglyy_ral_8017_shokoladno_korichnevyy_118kh0_5_odnostoronniy_2_m/",
+      "categoryId": "rozmet-cat-shtaketnik",
+      "subcategoryId": "rozmet-sub-shtaketnik-shtaketnik",
+      "price": 270,
+      "unit": "piece",
+      "sku": "29314"
+    },
+    {
+      "id": "rozmet-29315",
+      "source": "https://rozmet.ru/production/shtaketnik/shtaketnik_polukruglyy_ral_8017_shokoladno_korichnevyy_118kh0_5_dvukhstoronniy_2_m/",
+      "categoryId": "rozmet-cat-shtaketnik",
+      "subcategoryId": "rozmet-sub-shtaketnik-shtaketnik",
+      "price": 297,
+      "unit": "piece",
+      "sku": "29315"
+    },
+    {
+      "id": "rozmet-29316",
+      "source": "https://rozmet.ru/production/shtaketnik/shtaketnik_polukruglyy_ral_7024_grafitovyy_seryy_118kh0_5_odnostoronniy_2_m/",
+      "categoryId": "rozmet-cat-shtaketnik",
+      "subcategoryId": "rozmet-sub-shtaketnik-shtaketnik",
+      "price": 270,
+      "unit": "piece",
+      "sku": "29316"
+    },
+    {
+      "id": "rozmet-29317",
+      "source": "https://rozmet.ru/production/shtaketnik/shtaketnik_polukruglyy_ral_7024_grafitovyy_seryy_118kh0_5_dvukhstoronniy_2_m/",
+      "categoryId": "rozmet-cat-shtaketnik",
+      "subcategoryId": "rozmet-sub-shtaketnik-shtaketnik",
+      "price": 297,
+      "unit": "piece",
+      "sku": "29317"
+    },
+    {
+      "id": "rozmet-2235",
+      "source": "https://rozmet.ru/production/shveller/shveller_5/",
+      "categoryId": "rozmet-cat-shveller",
+      "subcategoryId": "rozmet-sub-shveller-shveller",
+      "price": 535,
+      "unit": "meter",
+      "sku": "2235"
+    },
+    {
+      "id": "rozmet-2236",
+      "source": "https://rozmet.ru/production/shveller/shveller_6.5/",
+      "categoryId": "rozmet-cat-shveller",
+      "subcategoryId": "rozmet-sub-shveller-shveller",
+      "price": 575,
+      "unit": "meter",
+      "sku": "2236"
+    },
+    {
+      "id": "rozmet-2237",
+      "source": "https://rozmet.ru/production/shveller/shveller_8/",
+      "categoryId": "rozmet-cat-shveller",
+      "subcategoryId": "rozmet-sub-shveller-shveller",
+      "price": 690,
+      "unit": "meter",
+      "sku": "2237"
+    },
+    {
+      "id": "rozmet-2238",
+      "source": "https://rozmet.ru/production/shveller/shveller_10/",
+      "categoryId": "rozmet-cat-shveller",
+      "subcategoryId": "rozmet-sub-shveller-shveller",
+      "price": 855,
+      "unit": "meter",
+      "sku": "2238"
+    },
+    {
+      "id": "rozmet-2239",
+      "source": "https://rozmet.ru/production/shveller/shveller_12/",
+      "categoryId": "rozmet-cat-shveller",
+      "subcategoryId": "rozmet-sub-shveller-shveller",
+      "price": 1195,
+      "unit": "meter",
+      "sku": "2239"
+    },
+    {
+      "id": "rozmet-2240",
+      "source": "https://rozmet.ru/production/shveller/shveller_14/",
+      "categoryId": "rozmet-cat-shveller",
+      "subcategoryId": "rozmet-sub-shveller-shveller",
+      "price": 1380,
+      "unit": "meter",
+      "sku": "2240"
+    },
+    {
+      "id": "rozmet-2241",
+      "source": "https://rozmet.ru/production/shveller/shveller_16/",
+      "categoryId": "rozmet-cat-shveller",
+      "subcategoryId": "rozmet-sub-shveller-shveller",
+      "price": 1670,
+      "unit": "meter",
+      "sku": "2241"
+    },
+    {
+      "id": "rozmet-2242",
+      "source": "https://rozmet.ru/production/shveller/shveller_18/",
+      "categoryId": "rozmet-cat-shveller",
+      "subcategoryId": "rozmet-sub-shveller-shveller",
+      "price": 1880,
+      "unit": "meter",
+      "sku": "2242"
+    },
+    {
+      "id": "rozmet-2243",
+      "source": "https://rozmet.ru/production/shveller/shveller_20/",
+      "categoryId": "rozmet-cat-shveller",
+      "subcategoryId": "rozmet-sub-shveller-shveller",
+      "price": 2525,
+      "unit": "meter",
+      "sku": "2243"
+    },
+    {
+      "id": "rozmet-2244",
+      "source": "https://rozmet.ru/production/shveller/shveller_22/",
+      "categoryId": "rozmet-cat-shveller",
+      "subcategoryId": "rozmet-sub-shveller-shveller",
+      "price": 2700,
+      "unit": "meter",
+      "sku": "2244"
+    },
+    {
+      "id": "rozmet-2245",
+      "source": "https://rozmet.ru/production/shveller/shveller_24/",
+      "categoryId": "rozmet-cat-shveller",
+      "subcategoryId": "rozmet-sub-shveller-shveller",
+      "price": 3370,
+      "unit": "meter",
+      "sku": "2245"
+    },
+    {
+      "id": "rozmet-2246",
+      "source": "https://rozmet.ru/production/shveller/shveller_27/",
+      "categoryId": "rozmet-cat-shveller",
+      "subcategoryId": "rozmet-sub-shveller-shveller",
+      "price": 4130,
+      "unit": "meter",
+      "sku": "2246"
+    },
+    {
+      "id": "rozmet-2247",
+      "source": "https://rozmet.ru/production/shveller/shveller_30/",
+      "categoryId": "rozmet-cat-shveller",
+      "subcategoryId": "rozmet-sub-shveller-shveller",
+      "price": 4890,
+      "unit": "meter",
+      "sku": "2247"
+    },
+    {
+      "id": "rozmet-2248",
+      "source": "https://rozmet.ru/production/shveller/shveller_40/",
+      "categoryId": "rozmet-cat-shveller",
+      "subcategoryId": "rozmet-sub-shveller-shveller",
+      "price": 12000,
+      "unit": "meter",
+      "sku": "2248"
+    },
+    {
+      "id": "rozmet-2209",
+      "source": "https://rozmet.ru/production/ugolok/ugolok_25x25x3/",
+      "categoryId": "rozmet-cat-ugolok",
+      "subcategoryId": "rozmet-sub-ugolok-ugolok",
+      "price": 115,
+      "unit": "meter",
+      "sku": "2209"
+    },
+    {
+      "id": "rozmet-2210",
+      "source": "https://rozmet.ru/production/ugolok/ugolok_32x32x3/",
+      "categoryId": "rozmet-cat-ugolok",
+      "subcategoryId": "rozmet-sub-ugolok-ugolok",
+      "price": 147,
+      "unit": "meter",
+      "sku": "2210"
+    },
+    {
+      "id": "rozmet-20157",
+      "source": "https://rozmet.ru/production/ugolok/ugolok_35x35x4/",
+      "categoryId": "rozmet-cat-ugolok",
+      "subcategoryId": "rozmet-sub-ugolok-ugolok",
+      "price": 227,
+      "unit": "meter",
+      "sku": "20157"
+    },
+    {
+      "id": "rozmet-2211",
+      "source": "https://rozmet.ru/production/ugolok/ugolok_40x40x3/",
+      "categoryId": "rozmet-cat-ugolok",
+      "subcategoryId": "rozmet-sub-ugolok-ugolok",
+      "price": 195,
+      "unit": "meter",
+      "sku": "2211"
+    },
+    {
+      "id": "rozmet-2212",
+      "source": "https://rozmet.ru/production/ugolok/ugolok_40x40x4/",
+      "categoryId": "rozmet-cat-ugolok",
+      "subcategoryId": "rozmet-sub-ugolok-ugolok",
+      "price": 254,
+      "unit": "meter",
+      "sku": "2212"
+    },
+    {
+      "id": "rozmet-2213",
+      "source": "https://rozmet.ru/production/ugolok/ugolok_45x45x4/",
+      "categoryId": "rozmet-cat-ugolok",
+      "subcategoryId": "rozmet-sub-ugolok-ugolok",
+      "price": 284,
+      "unit": "meter",
+      "sku": "2213"
+    },
+    {
+      "id": "rozmet-2214",
+      "source": "https://rozmet.ru/production/ugolok/ugolok_50x50x4/",
+      "categoryId": "rozmet-cat-ugolok",
+      "subcategoryId": "rozmet-sub-ugolok-ugolok",
+      "price": 255,
+      "unit": "meter",
+      "sku": "2214"
+    },
+    {
+      "id": "rozmet-2215",
+      "source": "https://rozmet.ru/production/ugolok/ugolok_50x50x5/",
+      "categoryId": "rozmet-cat-ugolok",
+      "subcategoryId": "rozmet-sub-ugolok-ugolok",
+      "price": 343,
+      "unit": "meter",
+      "sku": "2215"
+    },
+    {
+      "id": "rozmet-2216",
+      "source": "https://rozmet.ru/production/ugolok/ugolok_63x63x4/",
+      "categoryId": "rozmet-cat-ugolok",
+      "subcategoryId": "rozmet-sub-ugolok-ugolok",
+      "price": 345,
+      "unit": "meter",
+      "sku": "2216"
+    },
+    {
+      "id": "rozmet-2217",
+      "source": "https://rozmet.ru/production/ugolok/ugolok_63x63x5/",
+      "categoryId": "rozmet-cat-ugolok",
+      "subcategoryId": "rozmet-sub-ugolok-ugolok",
+      "price": 455,
+      "unit": "meter",
+      "sku": "2217"
+    },
+    {
+      "id": "rozmet-2218",
+      "source": "https://rozmet.ru/production/ugolok/ugolok_75x75x5/",
+      "categoryId": "rozmet-cat-ugolok",
+      "subcategoryId": "rozmet-sub-ugolok-ugolok",
+      "price": 565,
+      "unit": "meter",
+      "sku": "2218"
+    },
+    {
+      "id": "rozmet-20160",
+      "source": "https://rozmet.ru/production/ugolok/ugolok_75x75x6/",
+      "categoryId": "rozmet-cat-ugolok",
+      "subcategoryId": "rozmet-sub-ugolok-ugolok",
+      "price": 720,
+      "unit": "meter",
+      "sku": "20160"
+    },
+    {
+      "id": "rozmet-2220",
+      "source": "https://rozmet.ru/production/ugolok/ugolok_90x90x6/",
+      "categoryId": "rozmet-cat-ugolok",
+      "subcategoryId": "rozmet-sub-ugolok-ugolok",
+      "price": 775,
+      "unit": "meter",
+      "sku": "2220"
+    },
+    {
+      "id": "rozmet-2219",
+      "source": "https://rozmet.ru/production/ugolok/ugolok-75kh75kh6/",
+      "categoryId": "rozmet-cat-ugolok",
+      "subcategoryId": "rozmet-sub-ugolok-ugolok",
+      "price": 810,
+      "unit": "meter",
+      "sku": "2219"
+    },
+    {
+      "id": "rozmet-2221",
+      "source": "https://rozmet.ru/production/ugolok/ugolok_100x100x7/",
+      "categoryId": "rozmet-cat-ugolok",
+      "subcategoryId": "rozmet-sub-ugolok-ugolok",
+      "price": 1130,
+      "unit": "meter",
+      "sku": "2221"
+    },
+    {
+      "id": "rozmet-2222",
+      "source": "https://rozmet.ru/production/ugolok/ugolok_100x100x8/",
+      "categoryId": "rozmet-cat-ugolok",
+      "subcategoryId": "rozmet-sub-ugolok-ugolok",
+      "price": 1285,
+      "unit": "meter",
+      "sku": "2222"
+    },
+    {
+      "id": "rozmet-20368",
+      "source": "https://rozmet.ru/production/ugolok/ugolok_100x100x10/",
+      "categoryId": "rozmet-cat-ugolok",
+      "subcategoryId": "rozmet-sub-ugolok-ugolok",
+      "price": 1700,
+      "unit": "meter",
+      "sku": "20368"
+    },
+    {
+      "id": "rozmet-2223",
+      "source": "https://rozmet.ru/production/ugolok/ugolok_125x125x8/",
+      "categoryId": "rozmet-cat-ugolok",
+      "subcategoryId": "rozmet-sub-ugolok-ugolok",
+      "price": 1480,
+      "unit": "meter",
+      "sku": "2223"
+    },
+    {
+      "id": "rozmet-29030",
+      "source": "https://rozmet.ru/production/ugolok/ugolok_125kh125kh10/",
+      "categoryId": "rozmet-cat-ugolok",
+      "subcategoryId": "rozmet-sub-ugolok-ugolok",
+      "price": 1940,
+      "unit": "meter",
+      "sku": "29030"
+    },
+    {
+      "id": "rozmet-2224",
+      "source": "https://rozmet.ru/production/ugolok/ugolok_140x140x10/",
+      "categoryId": "rozmet-cat-ugolok",
+      "subcategoryId": "rozmet-sub-ugolok-ugolok",
+      "price": 3113,
+      "unit": "meter",
+      "sku": "2224"
+    },
+    {
+      "id": "rozmet-2225",
+      "source": "https://rozmet.ru/production/ugolok/ugolok_160x160x10/",
+      "categoryId": "rozmet-cat-ugolok",
+      "subcategoryId": "rozmet-sub-ugolok-ugolok",
+      "price": 3810,
+      "unit": "meter",
+      "sku": "2225"
+    },
+    {
+      "id": "rozmet-16726",
+      "source": "https://rozmet.ru/production/ugolok/ugolok_100kh100kh10/",
+      "categoryId": "rozmet-cat-ugolok",
+      "subcategoryId": "rozmet-sub-ugolok-ugolok",
+      "price": 3440,
+      "unit": "meter",
+      "sku": "16726"
+    },
+    {
+      "id": "rozmet-2204",
+      "source": "https://rozmet.ru/production/kvadrat/kvadrat_8/",
+      "categoryId": "rozmet-cat-kvadrat",
+      "subcategoryId": "rozmet-sub-kvadrat-kvadrat",
+      "price": 75,
+      "unit": "meter",
+      "sku": "2204"
+    },
+    {
+      "id": "rozmet-2205",
+      "source": "https://rozmet.ru/production/kvadrat/kvadrat_10/",
+      "categoryId": "rozmet-cat-kvadrat",
+      "subcategoryId": "rozmet-sub-kvadrat-kvadrat",
+      "price": 80,
+      "unit": "meter",
+      "sku": "2205"
+    },
+    {
+      "id": "rozmet-2206",
+      "source": "https://rozmet.ru/production/kvadrat/kvadrat_12/",
+      "categoryId": "rozmet-cat-kvadrat",
+      "subcategoryId": "rozmet-sub-kvadrat-kvadrat",
+      "price": 99,
+      "unit": "meter",
+      "sku": "2206"
+    },
+    {
+      "id": "rozmet-2207",
+      "source": "https://rozmet.ru/production/kvadrat/kvadrat_14/",
+      "categoryId": "rozmet-cat-kvadrat",
+      "subcategoryId": "rozmet-sub-kvadrat-kvadrat",
+      "price": 135,
+      "unit": "meter",
+      "sku": "2207"
+    },
+    {
+      "id": "rozmet-26579",
+      "source": "https://rozmet.ru/production/kvadrat/kvadrat_16/",
+      "categoryId": "rozmet-cat-kvadrat",
+      "subcategoryId": "rozmet-sub-kvadrat-kvadrat",
+      "price": 180,
+      "unit": "meter",
+      "sku": "27483"
+    },
+    {
+      "id": "rozmet-28995",
+      "source": "https://rozmet.ru/production/kvadrat/kvadrat_18/",
+      "categoryId": "rozmet-cat-kvadrat",
+      "subcategoryId": "rozmet-sub-kvadrat-kvadrat",
+      "price": 240,
+      "unit": "meter",
+      "sku": "28995"
+    },
+    {
+      "id": "rozmet-2208",
+      "source": "https://rozmet.ru/production/kvadrat/kvadrat_20/",
+      "categoryId": "rozmet-cat-kvadrat",
+      "subcategoryId": "rozmet-sub-kvadrat-kvadrat",
+      "price": 280,
+      "unit": "meter",
+      "sku": "2208"
+    },
+    {
+      "id": "rozmet-2181",
+      "source": "https://rozmet.ru/production/listovoy_prokat/galvanized_steel_sheet/list-05-ocinkovanniyyi/",
+      "categoryId": "rozmet-cat-listovoy-prokat",
+      "subcategoryId": "rozmet-sub-listovoy-prokat-galvanized-steel-sheet",
+      "price": 1350,
+      "unit": "piece",
+      "sku": "2181"
+    },
+    {
+      "id": "rozmet-2199",
+      "source": "https://rozmet.ru/production/listovoy_prokat/galvanized_steel_sheet/list_0_7_otsinkovannyy/",
+      "categoryId": "rozmet-cat-listovoy-prokat",
+      "subcategoryId": "rozmet-sub-listovoy-prokat-galvanized-steel-sheet",
+      "price": 2000,
+      "unit": "piece",
+      "sku": "2199"
+    },
+    {
+      "id": "rozmet-2184",
+      "source": "https://rozmet.ru/production/listovoy_prokat/galvanized_steel_sheet/list-1-ocinkovanniyyi/",
+      "categoryId": "rozmet-cat-listovoy-prokat",
+      "subcategoryId": "rozmet-sub-listovoy-prokat-galvanized-steel-sheet",
+      "price": 2785,
+      "unit": "piece",
+      "sku": "2184"
+    },
+    {
+      "id": "rozmet-2182",
+      "source": "https://rozmet.ru/production/listovoy_prokat/list-ocynkovannyj/list-05/",
+      "categoryId": "rozmet-cat-listovoy-prokat",
+      "subcategoryId": "rozmet-sub-listovoy-prokat-list-ocynkovannyj",
+      "price": 1300,
+      "unit": "piece",
+      "sku": "2182"
+    },
+    {
+      "id": "rozmet-2185",
+      "source": "https://rozmet.ru/production/listovoy_prokat/list-ocynkovannyj/list-1/",
+      "categoryId": "rozmet-cat-listovoy-prokat",
+      "subcategoryId": "rozmet-sub-listovoy-prokat-list-ocynkovannyj",
+      "price": 2050,
+      "unit": "piece",
+      "sku": "2185"
+    },
+    {
+      "id": "rozmet-28952",
+      "source": "https://rozmet.ru/production/listovoy_prokat/list-riflennyj/list_3_tu_riflenyy/",
+      "categoryId": "rozmet-cat-listovoy-prokat",
+      "subcategoryId": "rozmet-sub-listovoy-prokat-list-riflennyj",
+      "price": 4500,
+      "unit": "piece",
+      "sku": "28952"
+    },
+    {
+      "id": "rozmet-2201",
+      "source": "https://rozmet.ru/production/listovoy_prokat/list-riflennyj/list-3-rifleniy/",
+      "categoryId": "rozmet-cat-listovoy-prokat",
+      "subcategoryId": "rozmet-sub-listovoy-prokat-list-riflennyj",
+      "price": 5400,
+      "unit": "piece",
+      "sku": "2201"
+    },
+    {
+      "id": "rozmet-2202",
+      "source": "https://rozmet.ru/production/listovoy_prokat/list-riflennyj/list-4-rifleniy/",
+      "categoryId": "rozmet-cat-listovoy-prokat",
+      "subcategoryId": "rozmet-sub-listovoy-prokat-list-riflennyj",
+      "price": 2300,
+      "unit": "square_meter",
+      "sku": "2202"
+    },
+    {
+      "id": "rozmet-2203",
+      "source": "https://rozmet.ru/production/listovoy_prokat/list-riflennyj/list-5-rifleniy/",
+      "categoryId": "rozmet-cat-listovoy-prokat",
+      "subcategoryId": "rozmet-sub-listovoy-prokat-list-riflennyj",
+      "price": 2950,
+      "unit": "square_meter",
+      "sku": "2203"
+    },
+    {
+      "id": "rozmet-2186",
+      "source": "https://rozmet.ru/production/listovoy_prokat/list-goryachekatanyj/list-1-5/",
+      "categoryId": "rozmet-cat-listovoy-prokat",
+      "subcategoryId": "rozmet-sub-listovoy-prokat-list-goryachekatanyj",
+      "price": 3300,
+      "unit": "piece",
+      "sku": "2186"
+    },
+    {
+      "id": "rozmet-2187",
+      "source": "https://rozmet.ru/production/listovoy_prokat/list-goryachekatanyj/list-2/",
+      "categoryId": "rozmet-cat-listovoy-prokat",
+      "subcategoryId": "rozmet-sub-listovoy-prokat-list-goryachekatanyj",
+      "price": 3500,
+      "unit": "piece",
+      "sku": "2187"
+    },
+    {
+      "id": "rozmet-28951",
+      "source": "https://rozmet.ru/production/listovoy_prokat/list-goryachekatanyj/list_3_tu/",
+      "categoryId": "rozmet-cat-listovoy-prokat",
+      "subcategoryId": "rozmet-sub-listovoy-prokat-list-goryachekatanyj",
+      "price": 4380,
+      "unit": "piece",
+      "sku": "28951"
+    },
+    {
+      "id": "rozmet-2188",
+      "source": "https://rozmet.ru/production/listovoy_prokat/list-goryachekatanyj/list-3/",
+      "categoryId": "rozmet-cat-listovoy-prokat",
+      "subcategoryId": "rozmet-sub-listovoy-prokat-list-goryachekatanyj",
+      "price": 5200,
+      "unit": "piece",
+      "sku": "2188"
+    },
+    {
+      "id": "rozmet-26569",
+      "source": "https://rozmet.ru/production/listovoy_prokat/list-goryachekatanyj/list_3_vytyazhnoy_pvl_306_1kh3_3m/",
+      "categoryId": "rozmet-cat-listovoy-prokat",
+      "subcategoryId": "rozmet-sub-listovoy-prokat-list-goryachekatanyj",
+      "price": 3900,
+      "unit": "piece",
+      "sku": "26569"
+    },
+    {
+      "id": "rozmet-28931",
+      "source": "https://rozmet.ru/production/listovoy_prokat/list-goryachekatanyj/list_vytyazhnoy_pvl_306_3_1kh3m/",
+      "categoryId": "rozmet-cat-listovoy-prokat",
+      "subcategoryId": "rozmet-sub-listovoy-prokat-list-goryachekatanyj",
+      "price": 4200,
+      "unit": "piece",
+      "sku": "28931"
+    },
+    {
+      "id": "rozmet-28971",
+      "source": "https://rozmet.ru/production/listovoy_prokat/list-goryachekatanyj/list_4_vytyazhnoy_406_1x3m_pvl/",
+      "categoryId": "rozmet-cat-listovoy-prokat",
+      "subcategoryId": "rozmet-sub-listovoy-prokat-list-goryachekatanyj",
+      "price": 5190,
+      "unit": "piece",
+      "sku": "28971"
+    },
+    {
+      "id": "rozmet-2190",
+      "source": "https://rozmet.ru/production/listovoy_prokat/list-goryachekatanyj/list-4/",
+      "categoryId": "rozmet-cat-listovoy-prokat",
+      "subcategoryId": "rozmet-sub-listovoy-prokat-list-goryachekatanyj",
+      "price": 2300,
+      "unit": "square_meter",
+      "sku": "2190"
+    },
+    {
+      "id": "rozmet-2191",
+      "source": "https://rozmet.ru/production/listovoy_prokat/list-goryachekatanyj/list-5/",
+      "categoryId": "rozmet-cat-listovoy-prokat",
+      "subcategoryId": "rozmet-sub-listovoy-prokat-list-goryachekatanyj",
+      "price": 2790,
+      "unit": "square_meter",
+      "sku": "2191"
+    },
+    {
+      "id": "rozmet-2192",
+      "source": "https://rozmet.ru/production/listovoy_prokat/list-goryachekatanyj/list-6/",
+      "categoryId": "rozmet-cat-listovoy-prokat",
+      "subcategoryId": "rozmet-sub-listovoy-prokat-list-goryachekatanyj",
+      "price": 3300,
+      "unit": "square_meter",
+      "sku": "2192"
+    },
+    {
+      "id": "rozmet-2194",
+      "source": "https://rozmet.ru/production/listovoy_prokat/list-goryachekatanyj/list-8/",
+      "categoryId": "rozmet-cat-listovoy-prokat",
+      "subcategoryId": "rozmet-sub-listovoy-prokat-list-goryachekatanyj",
+      "price": 4410,
+      "unit": "square_meter",
+      "sku": "2194"
+    },
+    {
+      "id": "rozmet-2195",
+      "source": "https://rozmet.ru/production/listovoy_prokat/list-goryachekatanyj/list-10/",
+      "categoryId": "rozmet-cat-listovoy-prokat",
+      "subcategoryId": "rozmet-sub-listovoy-prokat-list-goryachekatanyj",
+      "price": 5600,
+      "unit": "square_meter",
+      "sku": "2195"
+    },
+    {
+      "id": "rozmet-2196",
+      "source": "https://rozmet.ru/production/listovoy_prokat/list-goryachekatanyj/list-12/",
+      "categoryId": "rozmet-cat-listovoy-prokat",
+      "subcategoryId": "rozmet-sub-listovoy-prokat-list-goryachekatanyj",
+      "price": 6700,
+      "unit": "square_meter",
+      "sku": "2196"
+    },
+    {
+      "id": "rozmet-2197",
+      "source": "https://rozmet.ru/production/listovoy_prokat/list-goryachekatanyj/list-14/",
+      "categoryId": "rozmet-cat-listovoy-prokat",
+      "subcategoryId": "rozmet-sub-listovoy-prokat-list-goryachekatanyj",
+      "price": 7500,
+      "unit": "square_meter",
+      "sku": "2197"
+    },
+    {
+      "id": "rozmet-2198",
+      "source": "https://rozmet.ru/production/listovoy_prokat/list-goryachekatanyj/list-16/",
+      "categoryId": "rozmet-cat-listovoy-prokat",
+      "subcategoryId": "rozmet-sub-listovoy-prokat-list-goryachekatanyj",
+      "price": 8500,
+      "unit": "square_meter",
+      "sku": "2198"
+    },
+    {
+      "id": "rozmet-2200",
+      "source": "https://rozmet.ru/production/listovoy_prokat/list-goryachekatanyj/list-20/",
+      "categoryId": "rozmet-cat-listovoy-prokat",
+      "subcategoryId": "rozmet-sub-listovoy-prokat-list-goryachekatanyj",
+      "price": 11500,
+      "unit": "square_meter",
+      "sku": "2200"
+    },
+    {
+      "id": "rozmet-2168",
+      "source": "https://rozmet.ru/production/polosa/polosa-20x4/",
+      "categoryId": "rozmet-cat-polosa",
+      "subcategoryId": "rozmet-sub-polosa-polosa",
+      "price": 65,
+      "unit": "meter",
+      "sku": "2168"
+    },
+    {
+      "id": "rozmet-2169",
+      "source": "https://rozmet.ru/production/polosa/polosa-25x4/",
+      "categoryId": "rozmet-cat-polosa",
+      "subcategoryId": "rozmet-sub-polosa-polosa",
+      "price": 87,
+      "unit": "meter",
+      "sku": "2169"
+    },
+    {
+      "id": "rozmet-2170",
+      "source": "https://rozmet.ru/production/polosa/polosa-30x4/",
+      "categoryId": "rozmet-cat-polosa",
+      "subcategoryId": "rozmet-sub-polosa-polosa",
+      "price": 90,
+      "unit": "meter",
+      "sku": "2170"
+    },
+    {
+      "id": "rozmet-29037",
+      "source": "https://rozmet.ru/production/polosa/polosa_40kh3/",
+      "categoryId": "rozmet-cat-polosa",
+      "subcategoryId": "rozmet-sub-polosa-polosa",
+      "price": 120,
+      "unit": "meter",
+      "sku": "29037"
+    },
+    {
+      "id": "rozmet-2171",
+      "source": "https://rozmet.ru/production/polosa/polosa-40x4/",
+      "categoryId": "rozmet-cat-polosa",
+      "subcategoryId": "rozmet-sub-polosa-polosa",
+      "price": 120,
+      "unit": "meter",
+      "sku": "2171"
+    },
+    {
+      "id": "rozmet-28942",
+      "source": "https://rozmet.ru/production/polosa/polosa_40x5/",
+      "categoryId": "rozmet-cat-polosa",
+      "subcategoryId": "rozmet-sub-polosa-polosa",
+      "price": 145,
+      "unit": "meter",
+      "sku": "28942"
+    },
+    {
+      "id": "rozmet-2172",
+      "source": "https://rozmet.ru/production/polosa/polosa-50x4/",
+      "categoryId": "rozmet-cat-polosa",
+      "subcategoryId": "rozmet-sub-polosa-polosa",
+      "price": 160,
+      "unit": "meter",
+      "sku": "2172"
+    },
+    {
+      "id": "rozmet-16727",
+      "source": "https://rozmet.ru/production/polosa/polosa_50kh5/",
+      "categoryId": "rozmet-cat-polosa",
+      "subcategoryId": "rozmet-sub-polosa-polosa",
+      "price": 195,
+      "unit": "meter",
+      "sku": "16727"
+    },
+    {
+      "id": "rozmet-2173",
+      "source": "https://rozmet.ru/production/polosa/polosa_60x5/",
+      "categoryId": "rozmet-cat-polosa",
+      "subcategoryId": "rozmet-sub-polosa-polosa",
+      "price": 215,
+      "unit": "meter",
+      "sku": "2173"
+    },
+    {
+      "id": "rozmet-2174",
+      "source": "https://rozmet.ru/production/polosa/polosa_60x6/",
+      "categoryId": "rozmet-cat-polosa",
+      "subcategoryId": "rozmet-sub-polosa-polosa",
+      "price": 265,
+      "unit": "meter",
+      "sku": "2174"
+    },
+    {
+      "id": "rozmet-28974",
+      "source": "https://rozmet.ru/production/polosa/polosa_80x4/",
+      "categoryId": "rozmet-cat-polosa",
+      "subcategoryId": "rozmet-sub-polosa-polosa",
+      "price": 250,
+      "unit": "meter",
+      "sku": "28974"
+    },
+    {
+      "id": "rozmet-28975",
+      "source": "https://rozmet.ru/production/polosa/polosa_80x5/",
+      "categoryId": "rozmet-cat-polosa",
+      "subcategoryId": "rozmet-sub-polosa-polosa",
+      "price": 320,
+      "unit": "meter",
+      "sku": "28975"
+    },
+    {
+      "id": "rozmet-2175",
+      "source": "https://rozmet.ru/production/polosa/polosa_80x6/",
+      "categoryId": "rozmet-cat-polosa",
+      "subcategoryId": "rozmet-sub-polosa-polosa",
+      "price": 420,
+      "unit": "meter",
+      "sku": "2175"
+    },
+    {
+      "id": "rozmet-19707",
+      "source": "https://rozmet.ru/production/polosa/polosa_80x8/",
+      "categoryId": "rozmet-cat-polosa",
+      "subcategoryId": "rozmet-sub-polosa-polosa",
+      "price": 600,
+      "unit": "meter",
+      "sku": "19707"
+    },
+    {
+      "id": "rozmet-19708",
+      "source": "https://rozmet.ru/production/polosa/polosa_80x10/",
+      "categoryId": "rozmet-cat-polosa",
+      "subcategoryId": "rozmet-sub-polosa-polosa",
+      "price": 705,
+      "unit": "meter",
+      "sku": "19708"
+    },
+    {
+      "id": "rozmet-12050",
+      "source": "https://rozmet.ru/production/polosa/band_no_100kh4/",
+      "categoryId": "rozmet-cat-polosa",
+      "subcategoryId": "rozmet-sub-polosa-polosa",
+      "price": 320,
+      "unit": "meter",
+      "sku": "12050"
+    },
+    {
+      "id": "rozmet-2177",
+      "source": "https://rozmet.ru/production/polosa/Polosa-100x8/",
+      "categoryId": "rozmet-cat-polosa",
+      "subcategoryId": "rozmet-sub-polosa-polosa",
+      "price": 730,
+      "unit": "meter",
+      "sku": "2177"
+    },
+    {
+      "id": "rozmet-2176",
+      "source": "https://rozmet.ru/production/polosa/Polosa-100x6/",
+      "categoryId": "rozmet-cat-polosa",
+      "subcategoryId": "rozmet-sub-polosa-polosa",
+      "price": 465,
+      "unit": "meter",
+      "sku": "2176"
+    },
+    {
+      "id": "rozmet-2178",
+      "source": "https://rozmet.ru/production/polosa/polosa_100kh10/",
+      "categoryId": "rozmet-cat-polosa",
+      "subcategoryId": "rozmet-sub-polosa-polosa",
+      "price": 770,
+      "unit": "meter",
+      "sku": "2178"
+    },
+    {
+      "id": "rozmet-2162",
+      "source": "https://rozmet.ru/production/provoloka_ok/provoloka_vyazalnaya_otsinkovannaya_1_2_mm/",
+      "categoryId": "rozmet-cat-provoloka-ok",
+      "subcategoryId": "rozmet-sub-provoloka-ok-provoloka-ok",
+      "price": 200,
+      "unit": "kg",
+      "sku": "2162"
+    },
+    {
+      "id": "rozmet-2161",
+      "source": "https://rozmet.ru/production/provoloka_ok/provoloka-vyazalnaya-1-2/",
+      "categoryId": "rozmet-cat-provoloka-ok",
+      "subcategoryId": "rozmet-sub-provoloka-ok-provoloka-ok",
+      "price": 100,
+      "unit": "kg",
+      "sku": "2161"
+    },
+    {
+      "id": "rozmet-2163",
+      "source": "https://rozmet.ru/production/provoloka_ok/provoloka-vyazalnaya-2/",
+      "categoryId": "rozmet-cat-provoloka-ok",
+      "subcategoryId": "rozmet-sub-provoloka-ok-provoloka-ok",
+      "price": 100,
+      "unit": "kg",
+      "sku": "2163"
+    },
+    {
+      "id": "rozmet-2164",
+      "source": "https://rozmet.ru/production/provoloka_ok/provoloka-vyazalnaya-3/",
+      "categoryId": "rozmet-cat-provoloka-ok",
+      "subcategoryId": "rozmet-sub-provoloka-ok-provoloka-ok",
+      "price": 100,
+      "unit": "kg",
+      "sku": "2164"
+    },
+    {
+      "id": "rozmet-2165",
+      "source": "https://rozmet.ru/production/provoloka_ok/provoloka-vyazalnaya-4/",
+      "categoryId": "rozmet-cat-provoloka-ok",
+      "subcategoryId": "rozmet-sub-provoloka-ok-provoloka-ok",
+      "price": 100,
+      "unit": "kg",
+      "sku": "2165"
+    },
+    {
+      "id": "rozmet-2166",
+      "source": "https://rozmet.ru/production/provoloka_ok/provoloka-vyazalnaya-5/",
+      "categoryId": "rozmet-cat-provoloka-ok",
+      "subcategoryId": "rozmet-sub-provoloka-ok-provoloka-ok",
+      "price": 100,
+      "unit": "kg",
+      "sku": "2166"
+    },
+    {
+      "id": "rozmet-2167",
+      "source": "https://rozmet.ru/production/provoloka_ok/provoloka-vyazalnaya-6/",
+      "categoryId": "rozmet-cat-provoloka-ok",
+      "subcategoryId": "rozmet-sub-provoloka-ok-provoloka-ok",
+      "price": 100,
+      "unit": "kg",
+      "sku": "2167"
+    },
+    {
+      "id": "rozmet-20207",
+      "source": "https://rozmet.ru/production/provoloka_ok/kryuchok_vyazalnyy_dlya_armatury_avto/",
+      "categoryId": "rozmet-cat-provoloka-ok",
+      "subcategoryId": "rozmet-sub-provoloka-ok-provoloka-ok",
+      "price": 450,
+      "unit": "piece",
+      "sku": "20207"
+    },
+    {
+      "id": "rozmet-20208",
+      "source": "https://rozmet.ru/production/provoloka_ok/kryuchok_vyazalnyy_dlya_armatury_obychnyy/",
+      "categoryId": "rozmet-cat-provoloka-ok",
+      "subcategoryId": "rozmet-sub-provoloka-ok-provoloka-ok",
+      "price": 250,
+      "unit": "piece",
+      "sku": "20208"
+    },
+    {
+      "id": "rozmet-22012",
+      "source": "https://rozmet.ru/production/stulchik/fiksator_armatury_stulchik_20mm/",
+      "categoryId": "rozmet-cat-stulchik",
+      "subcategoryId": "rozmet-sub-stulchik-stulchik",
+      "price": 3,
+      "unit": "piece",
+      "sku": "22012"
+    },
+    {
+      "id": "rozmet-2160",
+      "source": "https://rozmet.ru/production/stulchik/fiksator_armatury_stulchik_25/",
+      "categoryId": "rozmet-cat-stulchik",
+      "subcategoryId": "rozmet-sub-stulchik-stulchik",
+      "price": 4.5,
+      "unit": "piece",
+      "sku": "2160"
+    },
+    {
+      "id": "rozmet-2159",
+      "source": "https://rozmet.ru/production/stulchik/fiksator_armatury_stulchik_30/",
+      "categoryId": "rozmet-cat-stulchik",
+      "subcategoryId": "rozmet-sub-stulchik-stulchik",
+      "price": 5,
+      "unit": "piece",
+      "sku": "2159"
+    },
+    {
+      "id": "rozmet-22013",
+      "source": "https://rozmet.ru/production/stulchik/fiksator_armatury_ctulchik_35mm/",
+      "categoryId": "rozmet-cat-stulchik",
+      "subcategoryId": "rozmet-sub-stulchik-stulchik",
+      "price": 6.5,
+      "unit": "piece",
+      "sku": "22013"
+    },
+    {
+      "id": "rozmet-20915",
+      "source": "https://rozmet.ru/production/stulchik/fiksator_armatury_stulchik_40mm/",
+      "categoryId": "rozmet-cat-stulchik",
+      "subcategoryId": "rozmet-sub-stulchik-stulchik",
+      "price": 7,
+      "unit": "piece",
+      "sku": "20915"
+    },
+    {
+      "id": "rozmet-20916",
+      "source": "https://rozmet.ru/production/stulchik/podstavka_na_grunt_pod_stulchik/",
+      "categoryId": "rozmet-cat-stulchik",
+      "subcategoryId": "rozmet-sub-stulchik-stulchik",
+      "price": 5,
+      "unit": "piece",
+      "sku": "20916"
+    },
+    {
+      "id": "rozmet-29014",
+      "source": "https://rozmet.ru/production/stulchik/fiksator_armatury_c_ploshchadkoy_20mm/",
+      "categoryId": "rozmet-cat-stulchik",
+      "subcategoryId": "rozmet-sub-stulchik-stulchik",
+      "price": 7,
+      "unit": "piece",
+      "sku": "29014"
+    },
+    {
+      "id": "rozmet-20138",
+      "source": "https://rozmet.ru/production/stulchik/fiksator_armatury_stoyka_30mm_/",
+      "categoryId": "rozmet-cat-stulchik",
+      "subcategoryId": "rozmet-sub-stulchik-stulchik",
+      "price": 7.5,
+      "unit": "piece",
+      "sku": "20138"
+    },
+    {
+      "id": "rozmet-20139",
+      "source": "https://rozmet.ru/production/stulchik/fiksator_armatury_stoyka_40mm/",
+      "categoryId": "rozmet-cat-stulchik",
+      "subcategoryId": "rozmet-sub-stulchik-stulchik",
+      "price": 6,
+      "unit": "piece",
+      "sku": "20139"
+    },
+    {
+      "id": "rozmet-20140",
+      "source": "https://rozmet.ru/production/stulchik/fiksator_armatury_stoyka_50mm/",
+      "categoryId": "rozmet-cat-stulchik",
+      "subcategoryId": "rozmet-sub-stulchik-stulchik",
+      "price": 9.5,
+      "unit": "piece",
+      "sku": "20140"
+    },
+    {
+      "id": "rozmet-29015",
+      "source": "https://rozmet.ru/production/stulchik/fiksator_opora_kubik_30_mm/",
+      "categoryId": "rozmet-cat-stulchik",
+      "subcategoryId": "rozmet-sub-stulchik-stulchik",
+      "price": 5,
+      "unit": "piece",
+      "sku": "29015"
+    },
+    {
+      "id": "rozmet-24313",
+      "source": "https://rozmet.ru/production/stulchik/fiksator_opora_kubik_50_mm/",
+      "categoryId": "rozmet-cat-stulchik",
+      "subcategoryId": "rozmet-sub-stulchik-stulchik",
+      "price": 8,
+      "unit": "piece",
+      "sku": "24313"
+    },
+    {
+      "id": "rozmet-29068",
+      "source": "https://rozmet.ru/production/stulchik/fiksator_opora_kubik_70_mm/",
+      "categoryId": "rozmet-cat-stulchik",
+      "subcategoryId": "rozmet-sub-stulchik-stulchik",
+      "price": 10,
+      "unit": "piece",
+      "sku": "29068"
+    },
+    {
+      "id": "rozmet-23967",
+      "source": "https://rozmet.ru/production/stulchik/fiksator_pod_armaturu_zvyezdochka_25mm/",
+      "categoryId": "rozmet-cat-stulchik",
+      "subcategoryId": "rozmet-sub-stulchik-stulchik",
+      "price": 3.5,
+      "unit": "piece",
+      "sku": "23967"
+    },
+    {
+      "id": "rozmet-20413",
+      "source": "https://rozmet.ru/production/stulchik/fiksator_pod_armaturu_zvyezdochka_30mm/",
+      "categoryId": "rozmet-cat-stulchik",
+      "subcategoryId": "rozmet-sub-stulchik-stulchik",
+      "price": 4,
+      "unit": "piece",
+      "sku": "20413"
+    },
+    {
+      "id": "rozmet-22011",
+      "source": "https://rozmet.ru/production/stulchik/fiksator_pod_armaturu_zvyezdochka_35mm/",
+      "categoryId": "rozmet-cat-stulchik",
+      "subcategoryId": "rozmet-sub-stulchik-stulchik",
+      "price": 5,
+      "unit": "piece",
+      "sku": "22011"
+    },
+    {
+      "id": "rozmet-20414",
+      "source": "https://rozmet.ru/production/stulchik/fiksator_pod_armaturu_zvyezdochka_40mm/",
+      "categoryId": "rozmet-cat-stulchik",
+      "subcategoryId": "rozmet-sub-stulchik-stulchik",
+      "price": 5,
+      "unit": "piece",
+      "sku": "20414"
+    },
+    {
+      "id": "rozmet-20415",
+      "source": "https://rozmet.ru/production/stulchik/fiksator_pod_armaturu_zvyezdochka_50mm/",
+      "categoryId": "rozmet-cat-stulchik",
+      "subcategoryId": "rozmet-sub-stulchik-stulchik",
+      "price": 8,
+      "unit": "piece",
+      "sku": "20415"
+    },
+    {
+      "id": "rozmet-28950",
+      "source": "https://rozmet.ru/production/stulchik/fiksator_armatury_konus/",
+      "categoryId": "rozmet-cat-stulchik",
+      "subcategoryId": "rozmet-sub-stulchik-stulchik",
+      "price": 3,
+      "unit": "piece",
+      "sku": "28950"
+    },
+    {
+      "id": "rozmet-28956",
+      "source": "https://rozmet.ru/production/stulchik/fiksator_armatury_mnogourovnevyy_25_35_45_55mm/",
+      "categoryId": "rozmet-cat-stulchik",
+      "subcategoryId": "rozmet-sub-stulchik-stulchik",
+      "price": 10,
+      "unit": "piece",
+      "sku": "28956"
+    },
+    {
+      "id": "rozmet-28957",
+      "source": "https://rozmet.ru/production/stulchik/podstavka_pod_mnogourovnevuyu_stoyku/",
+      "categoryId": "rozmet-cat-stulchik",
+      "subcategoryId": "rozmet-sub-stulchik-stulchik",
+      "price": 5,
+      "unit": "piece",
+      "sku": "28957"
+    },
+    {
+      "id": "rozmet-20196",
+      "source": "https://rozmet.ru/production/zaglushki_dlya_trub/zaglushka_dlya_trub_15x15_plastikovaya/",
+      "categoryId": "rozmet-cat-zaglushki-dlya-trub",
+      "subcategoryId": "rozmet-sub-zaglushki-dlya-trub-zaglushki-dlya-trub",
+      "price": 3,
+      "unit": "piece",
+      "sku": "20196"
+    },
+    {
+      "id": "rozmet-2151",
+      "source": "https://rozmet.ru/production/zaglushki_dlya_trub/zaglushka-dlya-trub-plastikovaya-20-20/",
+      "categoryId": "rozmet-cat-zaglushki-dlya-trub",
+      "subcategoryId": "rozmet-sub-zaglushki-dlya-trub-zaglushki-dlya-trub",
+      "price": 5,
+      "unit": "piece",
+      "sku": "2151"
+    },
+    {
+      "id": "rozmet-2152",
+      "source": "https://rozmet.ru/production/zaglushki_dlya_trub/zaglushka-dlya-trub-plastikovaya-25-25/",
+      "categoryId": "rozmet-cat-zaglushki-dlya-trub",
+      "subcategoryId": "rozmet-sub-zaglushki-dlya-trub-zaglushki-dlya-trub",
+      "price": 4,
+      "unit": "piece",
+      "sku": "2152"
+    },
+    {
+      "id": "rozmet-20197",
+      "source": "https://rozmet.ru/production/zaglushki_dlya_trub/zaglushka_dlya_trub_30x30_plastikovaya/",
+      "categoryId": "rozmet-cat-zaglushki-dlya-trub",
+      "subcategoryId": "rozmet-sub-zaglushki-dlya-trub-zaglushki-dlya-trub",
+      "price": 5,
+      "unit": "piece",
+      "sku": "20197"
+    },
+    {
+      "id": "rozmet-2153",
+      "source": "https://rozmet.ru/production/zaglushki_dlya_trub/zaglushka-dlya-trub-plastikovaya-40-20/",
+      "categoryId": "rozmet-cat-zaglushki-dlya-trub",
+      "subcategoryId": "rozmet-sub-zaglushki-dlya-trub-zaglushki-dlya-trub",
+      "price": 5,
+      "unit": "piece",
+      "sku": "2153"
+    },
+    {
+      "id": "rozmet-2154",
+      "source": "https://rozmet.ru/production/zaglushki_dlya_trub/zaglushka-dlya-trub-plastikovaya-40-40/",
+      "categoryId": "rozmet-cat-zaglushki-dlya-trub",
+      "subcategoryId": "rozmet-sub-zaglushki-dlya-trub-zaglushki-dlya-trub",
+      "price": 7,
+      "unit": "piece",
+      "sku": "2154"
+    },
+    {
+      "id": "rozmet-20198",
+      "source": "https://rozmet.ru/production/zaglushki_dlya_trub/zaglushka_dlya_trub_50x25_plastikovaya/",
+      "categoryId": "rozmet-cat-zaglushki-dlya-trub",
+      "subcategoryId": "rozmet-sub-zaglushki-dlya-trub-zaglushki-dlya-trub",
+      "price": 6.5,
+      "unit": "piece",
+      "sku": "20198"
+    },
+    {
+      "id": "rozmet-2155",
+      "source": "https://rozmet.ru/production/zaglushki_dlya_trub/zaglushka-dlya-trub-plastikovaya-50-50/",
+      "categoryId": "rozmet-cat-zaglushki-dlya-trub",
+      "subcategoryId": "rozmet-sub-zaglushki-dlya-trub-zaglushki-dlya-trub",
+      "price": 10,
+      "unit": "piece",
+      "sku": "2155"
+    },
+    {
+      "id": "rozmet-20199",
+      "source": "https://rozmet.ru/production/zaglushki_dlya_trub/zaglushka_dlya_trub_60x30_plastikovaya/",
+      "categoryId": "rozmet-cat-zaglushki-dlya-trub",
+      "subcategoryId": "rozmet-sub-zaglushki-dlya-trub-zaglushki-dlya-trub",
+      "price": 8,
+      "unit": "piece",
+      "sku": "20199"
+    },
+    {
+      "id": "rozmet-20200",
+      "source": "https://rozmet.ru/production/zaglushki_dlya_trub/zaglushka_dlya_trub_60x40_plastikovaya/",
+      "categoryId": "rozmet-cat-zaglushki-dlya-trub",
+      "subcategoryId": "rozmet-sub-zaglushki-dlya-trub-zaglushki-dlya-trub",
+      "price": 8,
+      "unit": "piece",
+      "sku": "20200"
+    },
+    {
+      "id": "rozmet-2156",
+      "source": "https://rozmet.ru/production/zaglushki_dlya_trub/zaglushka-dlya-trub-plastikovaya-60-60/",
+      "categoryId": "rozmet-cat-zaglushki-dlya-trub",
+      "subcategoryId": "rozmet-sub-zaglushki-dlya-trub-zaglushki-dlya-trub",
+      "price": 11,
+      "unit": "piece",
+      "sku": "2156"
+    },
+    {
+      "id": "rozmet-20201",
+      "source": "https://rozmet.ru/production/zaglushki_dlya_trub/zaglushka_dlya_trub_80kh80_plastikovaya/",
+      "categoryId": "rozmet-cat-zaglushki-dlya-trub",
+      "subcategoryId": "rozmet-sub-zaglushki-dlya-trub-zaglushki-dlya-trub",
+      "price": 11,
+      "unit": "piece",
+      "sku": "20201"
+    },
+    {
+      "id": "rozmet-24369",
+      "source": "https://rozmet.ru/production/zaglushki_dlya_trub/zaglushka_dlya_trub_80kh60_plastikovaya/",
+      "categoryId": "rozmet-cat-zaglushki-dlya-trub",
+      "subcategoryId": "rozmet-sub-zaglushki-dlya-trub-zaglushki-dlya-trub",
+      "price": 15,
+      "unit": "piece",
+      "sku": "24369"
+    },
+    {
+      "id": "rozmet-2157",
+      "source": "https://rozmet.ru/production/zaglushki_dlya_trub/zaglushka-dlya-trub-plastikovaya-80-80/",
+      "categoryId": "rozmet-cat-zaglushki-dlya-trub",
+      "subcategoryId": "rozmet-sub-zaglushki-dlya-trub-zaglushki-dlya-trub",
+      "price": 20,
+      "unit": "piece",
+      "sku": "2157"
+    },
+    {
+      "id": "rozmet-24368",
+      "source": "https://rozmet.ru/production/zaglushki_dlya_trub/zaglushka_dlya_trub_100kh50_plastikovaya/",
+      "categoryId": "rozmet-cat-zaglushki-dlya-trub",
+      "subcategoryId": "rozmet-sub-zaglushki-dlya-trub-zaglushki-dlya-trub",
+      "price": 39,
+      "unit": "piece",
+      "sku": "24368"
+    },
+    {
+      "id": "rozmet-2158",
+      "source": "https://rozmet.ru/production/zaglushki_dlya_trub/zaglushka-dlya-trub-plastikovaya-100-100/",
+      "categoryId": "rozmet-cat-zaglushki-dlya-trub",
+      "subcategoryId": "rozmet-sub-zaglushki-dlya-trub-zaglushki-dlya-trub",
+      "price": 30,
+      "unit": "piece",
+      "sku": "2158"
+    },
+    {
+      "id": "rozmet-24367",
+      "source": "https://rozmet.ru/production/zaglushki_dlya_trub/zaglushka_dlya_trub_120kh120_plastikovaya/",
+      "categoryId": "rozmet-cat-zaglushki-dlya-trub",
+      "subcategoryId": "rozmet-sub-zaglushki-dlya-trub-zaglushki-dlya-trub",
+      "price": 95,
+      "unit": "piece",
+      "sku": "24367"
+    },
+    {
+      "id": "rozmet-28961",
+      "source": "https://rozmet.ru/production/zaglushki_dlya_trub/zaglushka_stalnaya_ellipticheskaya_32kh3_0_du25/",
+      "categoryId": "rozmet-cat-zaglushki-dlya-trub",
+      "subcategoryId": "rozmet-sub-zaglushki-dlya-trub-zaglushki-dlya-trub",
+      "price": 35,
+      "unit": "piece",
+      "sku": "28961"
+    },
+    {
+      "id": "rozmet-28962",
+      "source": "https://rozmet.ru/production/zaglushki_dlya_trub/zaglushka_stalnaya_ellipticheskaya_38kh3_du32/",
+      "categoryId": "rozmet-cat-zaglushki-dlya-trub",
+      "subcategoryId": "rozmet-sub-zaglushki-dlya-trub-zaglushki-dlya-trub",
+      "price": 60,
+      "unit": "piece",
+      "sku": "28962"
+    },
+    {
+      "id": "rozmet-28963",
+      "source": "https://rozmet.ru/production/zaglushki_dlya_trub/zaglushka_stalnaya_ellipticheskaya_45kh2_5_du40/",
+      "categoryId": "rozmet-cat-zaglushki-dlya-trub",
+      "subcategoryId": "rozmet-sub-zaglushki-dlya-trub-zaglushki-dlya-trub",
+      "price": 80,
+      "unit": "piece",
+      "sku": "28963"
+    },
+    {
+      "id": "rozmet-28964",
+      "source": "https://rozmet.ru/production/zaglushki_dlya_trub/zaglushka_stalnaya_ellipticheskaya_57kh3_du50/",
+      "categoryId": "rozmet-cat-zaglushki-dlya-trub",
+      "subcategoryId": "rozmet-sub-zaglushki-dlya-trub-zaglushki-dlya-trub",
+      "price": 90,
+      "unit": "piece",
+      "sku": "28964"
+    },
+    {
+      "id": "rozmet-28965",
+      "source": "https://rozmet.ru/production/zaglushki_dlya_trub/zaglushka_stalnaya_ellipticheskaya_76kh3_5_du65/",
+      "categoryId": "rozmet-cat-zaglushki-dlya-trub",
+      "subcategoryId": "rozmet-sub-zaglushki-dlya-trub-zaglushki-dlya-trub",
+      "price": 90,
+      "unit": "piece",
+      "sku": "28965"
+    },
+    {
+      "id": "rozmet-28966",
+      "source": "https://rozmet.ru/production/zaglushki_dlya_trub/zaglushka_stalnaya_ellipticheskaya_89kh3_5_du80/",
+      "categoryId": "rozmet-cat-zaglushki-dlya-trub",
+      "subcategoryId": "rozmet-sub-zaglushki-dlya-trub-zaglushki-dlya-trub",
+      "price": 120,
+      "unit": "piece",
+      "sku": "28966"
+    },
+    {
+      "id": "rozmet-28960",
+      "source": "https://rozmet.ru/production/zaglushki_dlya_trub/zaglushka_stalnaya_ellipticheskaya_108kh4_du100/",
+      "categoryId": "rozmet-cat-zaglushki-dlya-trub",
+      "subcategoryId": "rozmet-sub-zaglushki-dlya-trub-zaglushki-dlya-trub",
+      "price": 160,
+      "unit": "piece",
+      "sku": "28960"
+    },
+    {
+      "id": "rozmet-29263",
+      "source": "https://rozmet.ru/production/armaturnye_izdeliya/lyagushki_armaturnye/lyagushka_iz_armatury_8mm_a500s_250_100_mm/",
+      "categoryId": "rozmet-cat-armaturnye-izdeliya",
+      "subcategoryId": "rozmet-sub-armaturnye-izdeliya-lyagushki-armaturnye",
+      "price": 70,
+      "unit": "piece",
+      "sku": "29263"
+    },
+    {
+      "id": "rozmet-29264",
+      "source": "https://rozmet.ru/production/armaturnye_izdeliya/lyagushki_armaturnye/lyagushka_iz_armatury_8mm_a500s_250_150_mm/",
+      "categoryId": "rozmet-cat-armaturnye-izdeliya",
+      "subcategoryId": "rozmet-sub-armaturnye-izdeliya-lyagushki-armaturnye",
+      "price": 75,
+      "unit": "piece",
+      "sku": "29264"
+    },
+    {
+      "id": "rozmet-29265",
+      "source": "https://rozmet.ru/production/armaturnye_izdeliya/lyagushki_armaturnye/lyagushka_iz_armatury_8mm_a500s_250_200_mm/",
+      "categoryId": "rozmet-cat-armaturnye-izdeliya",
+      "subcategoryId": "rozmet-sub-armaturnye-izdeliya-lyagushki-armaturnye",
+      "price": 80,
+      "unit": "piece",
+      "sku": "29265"
+    },
+    {
+      "id": "rozmet-29266",
+      "source": "https://rozmet.ru/production/armaturnye_izdeliya/lyagushki_armaturnye/lyagushka_iz_armatury_10mm_a500s_250_100_mm/",
+      "categoryId": "rozmet-cat-armaturnye-izdeliya",
+      "subcategoryId": "rozmet-sub-armaturnye-izdeliya-lyagushki-armaturnye",
+      "price": 85,
+      "unit": "piece",
+      "sku": "29266"
+    },
+    {
+      "id": "rozmet-29267",
+      "source": "https://rozmet.ru/production/armaturnye_izdeliya/lyagushki_armaturnye/lyagushka_iz_armatury_10mm_a500s_250_150_mm/",
+      "categoryId": "rozmet-cat-armaturnye-izdeliya",
+      "subcategoryId": "rozmet-sub-armaturnye-izdeliya-lyagushki-armaturnye",
+      "price": 87,
+      "unit": "piece",
+      "sku": "29267"
+    },
+    {
+      "id": "rozmet-29268",
+      "source": "https://rozmet.ru/production/armaturnye_izdeliya/lyagushki_armaturnye/lyagushka_iz_armatury_10mm_a500s_250_200_mm/",
+      "categoryId": "rozmet-cat-armaturnye-izdeliya",
+      "subcategoryId": "rozmet-sub-armaturnye-izdeliya-lyagushki-armaturnye",
+      "price": 90,
+      "unit": "piece",
+      "sku": "29268"
+    },
+    {
+      "id": "rozmet-29257",
+      "source": "https://rozmet.ru/production/armaturnye_izdeliya/peshki_armaturnye/peshka_iz_armatury_8_mm_a500s_100_250_mm/",
+      "categoryId": "rozmet-cat-armaturnye-izdeliya",
+      "subcategoryId": "rozmet-sub-armaturnye-izdeliya-peshki-armaturnye",
+      "price": 60,
+      "unit": "piece",
+      "sku": "29257"
+    },
+    {
+      "id": "rozmet-29258",
+      "source": "https://rozmet.ru/production/armaturnye_izdeliya/peshki_armaturnye/peshka_iz_armatury_8_mm_a500s_150_250_mm/",
+      "categoryId": "rozmet-cat-armaturnye-izdeliya",
+      "subcategoryId": "rozmet-sub-armaturnye-izdeliya-peshki-armaturnye",
+      "price": 62,
+      "unit": "piece",
+      "sku": "29258"
+    },
+    {
+      "id": "rozmet-29259",
+      "source": "https://rozmet.ru/production/armaturnye_izdeliya/peshki_armaturnye/peshka_iz_armatury_8_mm_a500s_200_250_mm/",
+      "categoryId": "rozmet-cat-armaturnye-izdeliya",
+      "subcategoryId": "rozmet-sub-armaturnye-izdeliya-peshki-armaturnye",
+      "price": 64,
+      "unit": "piece",
+      "sku": "29259"
+    },
+    {
+      "id": "rozmet-29260",
+      "source": "https://rozmet.ru/production/armaturnye_izdeliya/peshki_armaturnye/peshka_iz_armatury_10_mm_a500s_100_250_mm/",
+      "categoryId": "rozmet-cat-armaturnye-izdeliya",
+      "subcategoryId": "rozmet-sub-armaturnye-izdeliya-peshki-armaturnye",
+      "price": 70,
+      "unit": "piece",
+      "sku": "29260"
+    },
+    {
+      "id": "rozmet-29261",
+      "source": "https://rozmet.ru/production/armaturnye_izdeliya/peshki_armaturnye/peshka_iz_armatury_10_mm_a500s_150_250_mm/",
+      "categoryId": "rozmet-cat-armaturnye-izdeliya",
+      "subcategoryId": "rozmet-sub-armaturnye-izdeliya-peshki-armaturnye",
+      "price": 72,
+      "unit": "piece",
+      "sku": "29261"
+    },
+    {
+      "id": "rozmet-29262",
+      "source": "https://rozmet.ru/production/armaturnye_izdeliya/peshki_armaturnye/peshka_iz_armatury_10_mm_a500s_200_250_mm/",
+      "categoryId": "rozmet-cat-armaturnye-izdeliya",
+      "subcategoryId": "rozmet-sub-armaturnye-izdeliya-peshki-armaturnye",
+      "price": 74,
+      "unit": "piece",
+      "sku": "29262"
+    },
+    {
+      "id": "rozmet-29244",
+      "source": "https://rozmet.ru/production/stroymaterialy/penopleks_komfort_50_mm/",
+      "categoryId": "rozmet-cat-stroymaterialy",
+      "subcategoryId": "rozmet-sub-stroymaterialy-stroymaterialy",
+      "price": 2500,
+      "unit": "meter",
+      "sku": "29244"
+    },
+    {
+      "id": "rozmet-29243",
+      "source": "https://rozmet.ru/production/stroymaterialy/penopleks_komfort_100_mm/",
+      "categoryId": "rozmet-cat-stroymaterialy",
+      "subcategoryId": "rozmet-sub-stroymaterialy-stroymaterialy",
+      "price": 2950,
+      "unit": "meter",
+      "sku": "29243"
+    },
+    {
+      "id": "rozmet-29246",
+      "source": "https://rozmet.ru/production/stroymaterialy/penopleks_fundament_50_mm/",
+      "categoryId": "rozmet-cat-stroymaterialy",
+      "subcategoryId": "rozmet-sub-stroymaterialy-stroymaterialy",
+      "price": 2700,
+      "unit": "meter",
+      "sku": "29246"
+    },
+    {
+      "id": "rozmet-29245",
+      "source": "https://rozmet.ru/production/stroymaterialy/penopleks_fundament_100_mm_1185_585_upakovka_4_lista_2_77_m/",
+      "categoryId": "rozmet-cat-stroymaterialy",
+      "subcategoryId": "rozmet-sub-stroymaterialy-stroymaterialy",
+      "price": 3200,
+      "unit": "meter",
+      "sku": "29245"
+    },
+    {
+      "id": "rozmet-29247",
+      "source": "https://rozmet.ru/production/stroymaterialy/membrana_profilirovannaya_planter_standard/",
+      "categoryId": "rozmet-cat-stroymaterialy",
+      "subcategoryId": "rozmet-sub-stroymaterialy-stroymaterialy",
+      "price": 5500,
+      "unit": "meter",
+      "sku": "29247"
+    },
+    {
+      "id": "rozmet-29249",
+      "source": "https://rozmet.ru/production/stroymaterialy/geotekstil_dornit_300_g_m_igloprobivnoy_2_50_m_100_m_/",
+      "categoryId": "rozmet-cat-stroymaterialy",
+      "subcategoryId": "rozmet-sub-stroymaterialy-stroymaterialy",
+      "price": 6800,
+      "unit": "meter",
+      "sku": "29249"
+    },
+    {
+      "id": "rozmet-29248",
+      "source": "https://rozmet.ru/production/stroymaterialy/lenta_samokleyashchayasya_planterband_10_m_10_sm/",
+      "categoryId": "rozmet-cat-stroymaterialy",
+      "subcategoryId": "rozmet-sub-stroymaterialy-stroymaterialy",
+      "price": 840,
+      "unit": "meter",
+      "sku": "29248"
+    },
+    {
+      "id": "rozmet-21675",
+      "source": "https://rozmet.ru/production/stroymaterialy/stekloizol_r_khpp_2_1_9x1m/",
+      "categoryId": "rozmet-cat-stroymaterialy",
+      "subcategoryId": "rozmet-sub-stroymaterialy-stroymaterialy",
+      "price": 880,
+      "unit": "piece",
+      "sku": "21675"
+    },
+    {
+      "id": "rozmet-21678",
+      "source": "https://rozmet.ru/production/stroymaterialy/tekhnoelast_epp_10x1m/",
+      "categoryId": "rozmet-cat-stroymaterialy",
+      "subcategoryId": "rozmet-sub-stroymaterialy-stroymaterialy",
+      "price": 3800,
+      "unit": "piece",
+      "sku": "21678"
+    },
+    {
+      "id": "rozmet-21676",
+      "source": "https://rozmet.ru/production/stroymaterialy/tekhnoelast_ekp_4_2mm_slanets_seryy_10kh1m/",
+      "categoryId": "rozmet-cat-stroymaterialy",
+      "subcategoryId": "rozmet-sub-stroymaterialy-stroymaterialy",
+      "price": 4700,
+      "unit": "piece",
+      "sku": "21676"
+    },
+    {
+      "id": "rozmet-23130",
+      "source": "https://rozmet.ru/production/vintovye_svai/vintovaya_svaya_57kh3_dlina_1_m/",
+      "categoryId": "rozmet-cat-vintovye-svai",
+      "subcategoryId": "rozmet-sub-vintovye-svai-vintovye-svai",
+      "price": 750,
+      "unit": "piece",
+      "sku": "23130"
+    },
+    {
+      "id": "rozmet-23127",
+      "source": "https://rozmet.ru/production/vintovye_svai/vintovaya_svaya_57kh3_dlina_2_m/",
+      "categoryId": "rozmet-cat-vintovye-svai",
+      "subcategoryId": "rozmet-sub-vintovye-svai-vintovye-svai",
+      "price": 1100,
+      "unit": "piece",
+      "sku": "23127"
+    },
+    {
+      "id": "rozmet-20191",
+      "source": "https://rozmet.ru/production/vintovye_svai/vintovaya_svaya_57x3_dlina_2_m/",
+      "categoryId": "rozmet-cat-vintovye-svai",
+      "subcategoryId": "rozmet-sub-vintovye-svai-vintovye-svai",
+      "price": 1200,
+      "unit": "piece",
+      "sku": "20191"
+    },
+    {
+      "id": "rozmet-20190",
+      "source": "https://rozmet.ru/production/vintovye_svai/vintovaya_svaya_57kh3_dlina_2_5_m/",
+      "categoryId": "rozmet-cat-vintovye-svai",
+      "subcategoryId": "rozmet-sub-vintovye-svai-vintovye-svai",
+      "price": 1350,
+      "unit": "piece",
+      "sku": "20190"
+    },
+    {
+      "id": "rozmet-28969",
+      "source": "https://rozmet.ru/production/vintovye_svai/vintovaya_svaya_76kh3_dlina_1_m/",
+      "categoryId": "rozmet-cat-vintovye-svai",
+      "subcategoryId": "rozmet-sub-vintovye-svai-vintovye-svai",
+      "price": 950,
+      "unit": "piece",
+      "sku": "28969"
+    },
+    {
+      "id": "rozmet-23129",
+      "source": "https://rozmet.ru/production/vintovye_svai/vintovaya_svaya_76kh3_dlina_1_5_m/",
+      "categoryId": "rozmet-cat-vintovye-svai",
+      "subcategoryId": "rozmet-sub-vintovye-svai-vintovye-svai",
+      "price": 1350,
+      "unit": "piece",
+      "sku": "23129"
+    },
+    {
+      "id": "rozmet-20169",
+      "source": "https://rozmet.ru/production/vintovye_svai/vintovaya_svaya_76kh2_5_dlina_2_5_m/",
+      "categoryId": "rozmet-cat-vintovye-svai",
+      "subcategoryId": "rozmet-sub-vintovye-svai-vintovye-svai",
+      "price": 1850,
+      "unit": "piece",
+      "sku": "20169"
+    },
+    {
+      "id": "rozmet-20189",
+      "source": "https://rozmet.ru/production/vintovye_svai/vintovaya_svaya_76x3_dlina_2_m/",
+      "categoryId": "rozmet-cat-vintovye-svai",
+      "subcategoryId": "rozmet-sub-vintovye-svai-vintovye-svai",
+      "price": 1450,
+      "unit": "piece",
+      "sku": "20189"
+    },
+    {
+      "id": "rozmet-26565",
+      "source": "https://rozmet.ru/production/vintovye_svai/vintovaya_svaya_89kh3_dlina_2_m/",
+      "categoryId": "rozmet-cat-vintovye-svai",
+      "subcategoryId": "rozmet-sub-vintovye-svai-vintovye-svai",
+      "price": 1800,
+      "unit": "piece",
+      "sku": "26984"
+    },
+    {
+      "id": "rozmet-20170",
+      "source": "https://rozmet.ru/production/vintovye_svai/vintovaya_svaya_89kh2_5_dlina_2_5_m/",
+      "categoryId": "rozmet-cat-vintovye-svai",
+      "subcategoryId": "rozmet-sub-vintovye-svai-vintovye-svai",
+      "price": 2000,
+      "unit": "piece",
+      "sku": "20170"
+    },
+    {
+      "id": "rozmet-26564",
+      "source": "https://rozmet.ru/production/vintovye_svai/vintovaya_svaya_108kh3_dlina_2m/",
+      "categoryId": "rozmet-cat-vintovye-svai",
+      "subcategoryId": "rozmet-sub-vintovye-svai-vintovye-svai",
+      "price": 2250,
+      "unit": "piece",
+      "sku": "26983"
+    },
+    {
+      "id": "rozmet-20171",
+      "source": "https://rozmet.ru/production/vintovye_svai/vintovaya_svaya_108kh2_5_dlina_2_5_m/",
+      "categoryId": "rozmet-cat-vintovye-svai",
+      "subcategoryId": "rozmet-sub-vintovye-svai-vintovye-svai",
+      "price": 2590,
+      "unit": "piece",
+      "sku": "20171"
+    },
+    {
+      "id": "rozmet-20192",
+      "source": "https://rozmet.ru/production/vintovye_svai/ogolovok_vintovoy_svai_57x150/",
+      "categoryId": "rozmet-cat-vintovye-svai",
+      "subcategoryId": "rozmet-sub-vintovye-svai-vintovye-svai",
+      "price": 180,
+      "unit": "piece",
+      "sku": "20192"
+    },
+    {
+      "id": "rozmet-20193",
+      "source": "https://rozmet.ru/production/vintovye_svai/ogolovok_vintovoy_svai_76x150/",
+      "categoryId": "rozmet-cat-vintovye-svai",
+      "subcategoryId": "rozmet-sub-vintovye-svai-vintovye-svai",
+      "price": 180,
+      "unit": "piece",
+      "sku": "20193"
+    },
+    {
+      "id": "rozmet-20194",
+      "source": "https://rozmet.ru/production/vintovye_svai/ogolovok_vintovoy_svai_89x150/",
+      "categoryId": "rozmet-cat-vintovye-svai",
+      "subcategoryId": "rozmet-sub-vintovye-svai-vintovye-svai",
+      "price": 180,
+      "unit": "piece",
+      "sku": "20194"
+    },
+    {
+      "id": "rozmet-20195",
+      "source": "https://rozmet.ru/production/vintovye_svai/ogolovok_vintovoy_svai_108x200/",
+      "categoryId": "rozmet-cat-vintovye-svai",
+      "subcategoryId": "rozmet-sub-vintovye-svai-vintovye-svai",
+      "price": 260,
+      "unit": "piece",
+      "sku": "20195"
+    },
+    {
+      "id": "rozmet-26588",
+      "source": "https://rozmet.ru/production/vintovye_svai/ogolovok_vnutrenniy_76mm_na_svayu_89mm/",
+      "categoryId": "rozmet-cat-vintovye-svai",
+      "subcategoryId": "rozmet-sub-vintovye-svai-vintovye-svai",
+      "price": 230,
+      "unit": "piece",
+      "sku": "29611"
+    },
+    {
+      "id": "rozmet-26589",
+      "source": "https://rozmet.ru/production/vintovye_svai/ogolovok_vnutrenniy_89mm_na_svayu_108mm/",
+      "categoryId": "rozmet-cat-vintovye-svai",
+      "subcategoryId": "rozmet-sub-vintovye-svai-vintovye-svai",
+      "price": 252,
+      "unit": "piece",
+      "sku": "29612"
+    },
+    {
+      "id": "rozmet-24380",
+      "source": "https://rozmet.ru/production/petli_dlya_vorot/petlya_garazhnaya_s_sharom_d_14_90mm_4_sht_rossiya_sibrtekh/",
+      "categoryId": "rozmet-cat-petli-dlya-vorot",
+      "subcategoryId": "rozmet-sub-petli-dlya-vorot-petli-dlya-vorot",
+      "price": 75,
+      "unit": "piece",
+      "sku": "24380"
+    },
+    {
+      "id": "rozmet-24381",
+      "source": "https://rozmet.ru/production/petli_dlya_vorot/petlya_garazhnaya_s_sharom_d_16_100mm_4_sht_rossiya_sibrtekh/",
+      "categoryId": "rozmet-cat-petli-dlya-vorot",
+      "subcategoryId": "rozmet-sub-petli-dlya-vorot-petli-dlya-vorot",
+      "price": 100,
+      "unit": "piece",
+      "sku": "24381"
+    },
+    {
+      "id": "rozmet-24383",
+      "source": "https://rozmet.ru/production/petli_dlya_vorot/petlya_garazhnaya_s_sharom_d_20_100mm_4_sht_rossiya_sibrtekh/",
+      "categoryId": "rozmet-cat-petli-dlya-vorot",
+      "subcategoryId": "rozmet-sub-petli-dlya-vorot-petli-dlya-vorot",
+      "price": 150,
+      "unit": "piece",
+      "sku": "24383"
+    },
+    {
+      "id": "rozmet-24382",
+      "source": "https://rozmet.ru/production/petli_dlya_vorot/petlya_garazhnaya_s_sharom_d_16_120mm_4_sht_rossiya_sibrtekh/",
+      "categoryId": "rozmet-cat-petli-dlya-vorot",
+      "subcategoryId": "rozmet-sub-petli-dlya-vorot-petli-dlya-vorot",
+      "price": 120,
+      "unit": "piece",
+      "sku": "24382"
+    },
+    {
+      "id": "rozmet-24384",
+      "source": "https://rozmet.ru/production/petli_dlya_vorot/petlya_garazhnaya_s_sharom_d_20_120mm_4_sht_rossiya_sibrtekh/",
+      "categoryId": "rozmet-cat-petli-dlya-vorot",
+      "subcategoryId": "rozmet-sub-petli-dlya-vorot-petli-dlya-vorot",
+      "price": 170,
+      "unit": "piece",
+      "sku": "24384"
+    },
+    {
+      "id": "rozmet-24385",
+      "source": "https://rozmet.ru/production/petli_dlya_vorot/petlya_garazhnaya_s_sharom_d_22_120mm_4_sht_rossiya_sibrtekh/",
+      "categoryId": "rozmet-cat-petli-dlya-vorot",
+      "subcategoryId": "rozmet-sub-petli-dlya-vorot-petli-dlya-vorot",
+      "price": 180,
+      "unit": "piece",
+      "sku": "24385"
+    },
+    {
+      "id": "rozmet-24386",
+      "source": "https://rozmet.ru/production/petli_dlya_vorot/petlya_garazhnaya_s_sharom_d_25_120mm_4_sht_rossiya_sibrtekh/",
+      "categoryId": "rozmet-cat-petli-dlya-vorot",
+      "subcategoryId": "rozmet-sub-petli-dlya-vorot-petli-dlya-vorot",
+      "price": 200,
+      "unit": "piece",
+      "sku": "24386"
+    },
+    {
+      "id": "rozmet-24387",
+      "source": "https://rozmet.ru/production/petli_dlya_vorot/petlya_garazhnaya_s_sharom_d_30_140mm_2_sht_rossiya_sibrtekh/",
+      "categoryId": "rozmet-cat-petli-dlya-vorot",
+      "subcategoryId": "rozmet-sub-petli-dlya-vorot-petli-dlya-vorot",
+      "price": 600,
+      "unit": "piece",
+      "sku": "24387"
+    },
+    {
+      "id": "rozmet-28978",
+      "source": "https://rozmet.ru/production/petli_dlya_vorot/petlya_kaplevidnaya_10x60_mm_s_podshipnikom_sibrtekh/",
+      "categoryId": "rozmet-cat-petli-dlya-vorot",
+      "subcategoryId": "rozmet-sub-petli-dlya-vorot-petli-dlya-vorot",
+      "price": 80,
+      "unit": "piece",
+      "sku": "28978"
+    },
+    {
+      "id": "rozmet-28979",
+      "source": "https://rozmet.ru/production/petli_dlya_vorot/petlya_kaplevidnaya_12x80_mm_s_podshipnikom_sibrtekh/",
+      "categoryId": "rozmet-cat-petli-dlya-vorot",
+      "subcategoryId": "rozmet-sub-petli-dlya-vorot-petli-dlya-vorot",
+      "price": 90,
+      "unit": "piece",
+      "sku": "28979"
+    },
+    {
+      "id": "rozmet-28980",
+      "source": "https://rozmet.ru/production/petli_dlya_vorot/petlya_kaplevidnaya_14x100_mm_s_podshipnikom_sibrtekh/",
+      "categoryId": "rozmet-cat-petli-dlya-vorot",
+      "subcategoryId": "rozmet-sub-petli-dlya-vorot-petli-dlya-vorot",
+      "price": 100,
+      "unit": "piece",
+      "sku": "28980"
+    },
+    {
+      "id": "rozmet-28981",
+      "source": "https://rozmet.ru/production/petli_dlya_vorot/petlya_kaplevidnaya_16x100_mm_s_podshipnikom_sibrtekh/",
+      "categoryId": "rozmet-cat-petli-dlya-vorot",
+      "subcategoryId": "rozmet-sub-petli-dlya-vorot-petli-dlya-vorot",
+      "price": 180,
+      "unit": "piece",
+      "sku": "92025"
+    },
+    {
+      "id": "rozmet-28982",
+      "source": "https://rozmet.ru/production/petli_dlya_vorot/petlya_kaplevidnaya_18x120_mm_s_podshipnikom_sibrtekh/",
+      "categoryId": "rozmet-cat-petli-dlya-vorot",
+      "subcategoryId": "rozmet-sub-petli-dlya-vorot-petli-dlya-vorot",
+      "price": 210,
+      "unit": "piece",
+      "sku": "28982"
+    },
+    {
+      "id": "rozmet-28983",
+      "source": "https://rozmet.ru/production/petli_dlya_vorot/petlya_kaplevidnaya_20x140_mm_s_podshipnikom_sibrtekh/",
+      "categoryId": "rozmet-cat-petli-dlya-vorot",
+      "subcategoryId": "rozmet-sub-petli-dlya-vorot-petli-dlya-vorot",
+      "price": 270,
+      "unit": "piece",
+      "sku": "28983"
+    },
+    {
+      "id": "rozmet-28984",
+      "source": "https://rozmet.ru/production/petli_dlya_vorot/petlya_kaplevidnaya_22x140_mm_s_podshipnikom_sibrtekh/",
+      "categoryId": "rozmet-cat-petli-dlya-vorot",
+      "subcategoryId": "rozmet-sub-petli-dlya-vorot-petli-dlya-vorot",
+      "price": 300,
+      "unit": "piece",
+      "sku": "28984"
+    },
+    {
+      "id": "rozmet-28985",
+      "source": "https://rozmet.ru/production/petli_dlya_vorot/petlya_kaplevidnaya_25x160_mm_s_podshipnikom_sibrtekh/",
+      "categoryId": "rozmet-cat-petli-dlya-vorot",
+      "subcategoryId": "rozmet-sub-petli-dlya-vorot-petli-dlya-vorot",
+      "price": 500,
+      "unit": "piece",
+      "sku": "28985"
+    },
+    {
+      "id": "rozmet-15504",
+      "source": "https://rozmet.ru/production/otvodi/otvod_stalnoy_korotkiy_shovnyy_15/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 27,
+      "unit": "piece",
+      "sku": "15504"
+    },
+    {
+      "id": "rozmet-15505",
+      "source": "https://rozmet.ru/production/otvodi/otvod_stalnoy_korotkiy_shovnyy_20/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 37,
+      "unit": "piece",
+      "sku": "15505"
+    },
+    {
+      "id": "rozmet-15506",
+      "source": "https://rozmet.ru/production/otvodi/otvod_stalnoy_korotkiy_shovnyy_25/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 45,
+      "unit": "piece",
+      "sku": "15506"
+    },
+    {
+      "id": "rozmet-15507",
+      "source": "https://rozmet.ru/production/otvodi/otvod_stalnoy_korotkiy_shovnyy_32/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 67,
+      "unit": "piece",
+      "sku": "15507"
+    },
+    {
+      "id": "rozmet-21512",
+      "source": "https://rozmet.ru/production/otvodi/otvod_stalnoy_korotkiy_shovnyy_38/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 110,
+      "unit": "piece",
+      "sku": "21512"
+    },
+    {
+      "id": "rozmet-15508",
+      "source": "https://rozmet.ru/production/otvodi/otvod_stalnoy_korotkiy_shovnyy_40/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 78,
+      "unit": "piece",
+      "sku": "15508"
+    },
+    {
+      "id": "rozmet-15509",
+      "source": "https://rozmet.ru/production/otvodi/otvod_stalnoy_korotkiy_shovnyy_57/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 95,
+      "unit": "piece",
+      "sku": "15509"
+    },
+    {
+      "id": "rozmet-15510",
+      "source": "https://rozmet.ru/production/otvodi/otvod_stalnoy_korotkiy_shovnyy_76/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 185,
+      "unit": "piece",
+      "sku": "15510"
+    },
+    {
+      "id": "rozmet-15511",
+      "source": "https://rozmet.ru/production/otvodi/otvod_stalnoy_korotkiy_shovnyy_89/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 240,
+      "unit": "piece",
+      "sku": "15511"
+    },
+    {
+      "id": "rozmet-26568",
+      "source": "https://rozmet.ru/production/otvodi/otvod_stalnoy_korotkiy_shovnyy_102/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 730,
+      "unit": "meter",
+      "sku": "27478"
+    },
+    {
+      "id": "rozmet-15512",
+      "source": "https://rozmet.ru/production/otvodi/otvod_stalnoy_korotkiy_shovnyy_108/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 370,
+      "unit": "piece",
+      "sku": "15512"
+    },
+    {
+      "id": "rozmet-15513",
+      "source": "https://rozmet.ru/production/otvodi/otvod_stalnoy_shovnyy_otsinkovannyy_15/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 30,
+      "unit": "piece",
+      "sku": "15513"
+    },
+    {
+      "id": "rozmet-15514",
+      "source": "https://rozmet.ru/production/otvodi/otvod_stalnoy_shovnyy_otsinkovannyy_20/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 35,
+      "unit": "piece",
+      "sku": "15514"
+    },
+    {
+      "id": "rozmet-15515",
+      "source": "https://rozmet.ru/production/otvodi/otvod_stalnoy_shovnyy_otsinkovannyy_25/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 60,
+      "unit": "piece",
+      "sku": "15515"
+    },
+    {
+      "id": "rozmet-15516",
+      "source": "https://rozmet.ru/production/otvodi/otvod_stalnoy_shovnyy_otsinkovannyy_32/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 66,
+      "unit": "piece",
+      "sku": "15516"
+    },
+    {
+      "id": "rozmet-15517",
+      "source": "https://rozmet.ru/production/otvodi/otvod_stalnoy_shovnyy_otsinkovannyy_40/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 90,
+      "unit": "piece",
+      "sku": "15517"
+    },
+    {
+      "id": "rozmet-15518",
+      "source": "https://rozmet.ru/production/otvodi/otvod_stalnoy_shovnyy_otsinkovannyy_57/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 115,
+      "unit": "piece",
+      "sku": "15518"
+    },
+    {
+      "id": "rozmet-15520",
+      "source": "https://rozmet.ru/production/otvodi/otvod_shovnyy_otsinkovannyy_krutoizognutyy_76kh3_5_mm/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 225,
+      "unit": "piece",
+      "sku": "15520"
+    },
+    {
+      "id": "rozmet-15521",
+      "source": "https://rozmet.ru/production/otvodi/otvod_besshovnyy_otsinkovannyy_krutoizognutyy_89kh3_5/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 300,
+      "unit": "piece",
+      "sku": "15521"
+    },
+    {
+      "id": "rozmet-15522",
+      "source": "https://rozmet.ru/production/otvodi/otvod_besshovnyy_otsinkovannyy_krutoizognutyy_108_ots/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 450,
+      "unit": "piece",
+      "sku": "15522"
+    },
+    {
+      "id": "rozmet-28656",
+      "source": "https://rozmet.ru/production/otvodi/otvod_gnutyy_du_20_odno_rezbovoy_chernyy_90/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 35,
+      "unit": "piece",
+      "sku": "28656"
+    },
+    {
+      "id": "rozmet-28958",
+      "source": "https://rozmet.ru/production/otvodi/otvod_gnutyy_otsink_du_25_dvukhstoronnyaya_rezba_90/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 50,
+      "unit": "piece",
+      "sku": "28958"
+    },
+    {
+      "id": "rozmet-28959",
+      "source": "https://rozmet.ru/production/otvodi/otvod_gnutyy_otsink_du_32_dvukhstoronnyaya_rezba_90/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 60,
+      "unit": "piece",
+      "sku": "28959"
+    },
+    {
+      "id": "rozmet-24357",
+      "source": "https://rozmet.ru/production/otvodi/kontragayka_du_15/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 15.2,
+      "unit": "piece",
+      "sku": "5561100001"
+    },
+    {
+      "id": "rozmet-24378",
+      "source": "https://rozmet.ru/production/otvodi/kontragayka_du_20/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 40,
+      "unit": "piece",
+      "sku": "24378"
+    },
+    {
+      "id": "rozmet-24358",
+      "source": "https://rozmet.ru/production/otvodi/kontragayka_du_25/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 45,
+      "unit": "piece",
+      "sku": "5561100002"
+    },
+    {
+      "id": "rozmet-24359",
+      "source": "https://rozmet.ru/production/otvodi/kontragayka_du_32/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 50,
+      "unit": "piece",
+      "sku": "5561100003"
+    },
+    {
+      "id": "rozmet-24360",
+      "source": "https://rozmet.ru/production/otvodi/kontragayka_du_40/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 60,
+      "unit": "piece",
+      "sku": "5561100004"
+    },
+    {
+      "id": "rozmet-24361",
+      "source": "https://rozmet.ru/production/otvodi/kontragayka_du_50/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 80,
+      "unit": "piece",
+      "sku": "5561100005"
+    },
+    {
+      "id": "rozmet-24317",
+      "source": "https://rozmet.ru/production/otvodi/mufta_stal_du_15/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 40,
+      "unit": "piece",
+      "sku": "5566200001"
+    },
+    {
+      "id": "rozmet-24370",
+      "source": "https://rozmet.ru/production/otvodi/mufta_stal_du_20/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 25,
+      "unit": "piece",
+      "sku": "24370"
+    },
+    {
+      "id": "rozmet-24318",
+      "source": "https://rozmet.ru/production/otvodi/mufta_stal_du_25/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 70,
+      "unit": "piece",
+      "sku": "5566200002"
+    },
+    {
+      "id": "rozmet-24319",
+      "source": "https://rozmet.ru/production/otvodi/mufta_stal_du_32/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 80,
+      "unit": "piece",
+      "sku": "5566200003"
+    },
+    {
+      "id": "rozmet-24320",
+      "source": "https://rozmet.ru/production/otvodi/mufta_stal_du_40/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 80,
+      "unit": "piece",
+      "sku": "5566200004"
+    },
+    {
+      "id": "rozmet-24321",
+      "source": "https://rozmet.ru/production/otvodi/mufta_stal_du_50/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 95,
+      "unit": "piece",
+      "sku": "5566200005"
+    },
+    {
+      "id": "rozmet-24322",
+      "source": "https://rozmet.ru/production/otvodi/mufta_du_15/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 20,
+      "unit": "piece",
+      "sku": "5554100001"
+    },
+    {
+      "id": "rozmet-24371",
+      "source": "https://rozmet.ru/production/otvodi/mufta_du_20/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 65,
+      "unit": "piece",
+      "sku": "24371"
+    },
+    {
+      "id": "rozmet-24323",
+      "source": "https://rozmet.ru/production/otvodi/mufta_du_25/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 63,
+      "unit": "piece",
+      "sku": "5554100002"
+    },
+    {
+      "id": "rozmet-24324",
+      "source": "https://rozmet.ru/production/otvodi/mufta_du_32/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 130,
+      "unit": "piece",
+      "sku": "5554100003"
+    },
+    {
+      "id": "rozmet-24325",
+      "source": "https://rozmet.ru/production/otvodi/mufta_du_40/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 145,
+      "unit": "piece",
+      "sku": "5554100004"
+    },
+    {
+      "id": "rozmet-24326",
+      "source": "https://rozmet.ru/production/otvodi/mufta_du_50/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 150,
+      "unit": "piece",
+      "sku": "5554100005"
+    },
+    {
+      "id": "rozmet-24327",
+      "source": "https://rozmet.ru/production/otvodi/sgon_du_15/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 34,
+      "unit": "piece",
+      "sku": "5569200001"
+    },
+    {
+      "id": "rozmet-24372",
+      "source": "https://rozmet.ru/production/otvodi/sgon_du_20/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 45,
+      "unit": "piece",
+      "sku": "24372"
+    },
+    {
+      "id": "rozmet-24328",
+      "source": "https://rozmet.ru/production/otvodi/sgon_du_25/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 55,
+      "unit": "piece",
+      "sku": "5569200002"
+    },
+    {
+      "id": "rozmet-24329",
+      "source": "https://rozmet.ru/production/otvodi/sgon_du_32/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 65,
+      "unit": "piece",
+      "sku": "5569200003"
+    },
+    {
+      "id": "rozmet-24330",
+      "source": "https://rozmet.ru/production/otvodi/sgon_du_40/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 95,
+      "unit": "piece",
+      "sku": "5569200004"
+    },
+    {
+      "id": "rozmet-24331",
+      "source": "https://rozmet.ru/production/otvodi/sgon_du_50/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 110,
+      "unit": "piece",
+      "sku": "5569200005"
+    },
+    {
+      "id": "rozmet-24332",
+      "source": "https://rozmet.ru/production/otvodi/sgon_otsinkovannyy_du_15/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 40,
+      "unit": "piece",
+      "sku": "5569900001"
+    },
+    {
+      "id": "rozmet-24373",
+      "source": "https://rozmet.ru/production/otvodi/sgon_otsinkovannyy_du_20/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 40,
+      "unit": "piece",
+      "sku": "24373"
+    },
+    {
+      "id": "rozmet-24333",
+      "source": "https://rozmet.ru/production/otvodi/sgon_otsinkovannyy_du_25/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 45,
+      "unit": "piece",
+      "sku": "5569900002"
+    },
+    {
+      "id": "rozmet-24334",
+      "source": "https://rozmet.ru/production/otvodi/sgon_otsinkovannyy_du_32/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 65,
+      "unit": "piece",
+      "sku": "5569900003"
+    },
+    {
+      "id": "rozmet-24335",
+      "source": "https://rozmet.ru/production/otvodi/sgon_otsinkovannyy_du_40/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 80,
+      "unit": "piece",
+      "sku": "5569900004"
+    },
+    {
+      "id": "rozmet-24336",
+      "source": "https://rozmet.ru/production/otvodi/sgon_otsinkovannyy_du_50/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 100,
+      "unit": "piece",
+      "sku": "5569900005"
+    },
+    {
+      "id": "rozmet-24347",
+      "source": "https://rozmet.ru/production/otvodi/bochata_du_15/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 13,
+      "unit": "piece",
+      "sku": "5570200001"
+    },
+    {
+      "id": "rozmet-24376",
+      "source": "https://rozmet.ru/production/otvodi/bochata_du_20/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 15,
+      "unit": "piece",
+      "sku": "24376"
+    },
+    {
+      "id": "rozmet-24348",
+      "source": "https://rozmet.ru/production/otvodi/bochata_du_25/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 25,
+      "unit": "piece",
+      "sku": "5570200002"
+    },
+    {
+      "id": "rozmet-24349",
+      "source": "https://rozmet.ru/production/otvodi/bochata_du_32/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 40,
+      "unit": "piece",
+      "sku": "5570200003"
+    },
+    {
+      "id": "rozmet-24350",
+      "source": "https://rozmet.ru/production/otvodi/bochata_du_40/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 50,
+      "unit": "piece",
+      "sku": "5570200004"
+    },
+    {
+      "id": "rozmet-24351",
+      "source": "https://rozmet.ru/production/otvodi/bochata_du_50/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 60,
+      "unit": "piece",
+      "sku": "5570200005"
+    },
+    {
+      "id": "rozmet-24352",
+      "source": "https://rozmet.ru/production/otvodi/bochata_otsinkovannye_du_15/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 15,
+      "unit": "piece",
+      "sku": "5570900001"
+    },
+    {
+      "id": "rozmet-24377",
+      "source": "https://rozmet.ru/production/otvodi/bochata_otsinkovannye_du_20/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 22,
+      "unit": "piece",
+      "sku": "24377"
+    },
+    {
+      "id": "rozmet-24353",
+      "source": "https://rozmet.ru/production/otvodi/bochata_otsinkovannye_du_25/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 30,
+      "unit": "piece",
+      "sku": "5570900002"
+    },
+    {
+      "id": "rozmet-24354",
+      "source": "https://rozmet.ru/production/otvodi/bochata_otsinkovannye_du_32/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 45,
+      "unit": "piece",
+      "sku": "5570900003"
+    },
+    {
+      "id": "rozmet-24355",
+      "source": "https://rozmet.ru/production/otvodi/bochata_otsinkovannye_du_40/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 60,
+      "unit": "piece",
+      "sku": "5570900004"
+    },
+    {
+      "id": "rozmet-24356",
+      "source": "https://rozmet.ru/production/otvodi/bochata_otsinkovannye_du_50/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 70,
+      "unit": "piece",
+      "sku": "5570900005"
+    },
+    {
+      "id": "rozmet-24337",
+      "source": "https://rozmet.ru/production/otvodi/rezba_du_15/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 13,
+      "unit": "piece",
+      "sku": "5571200001"
+    },
+    {
+      "id": "rozmet-24374",
+      "source": "https://rozmet.ru/production/otvodi/rezba_du_20/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 19,
+      "unit": "piece",
+      "sku": "24374"
+    },
+    {
+      "id": "rozmet-24338",
+      "source": "https://rozmet.ru/production/otvodi/rezba_du_25/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 25,
+      "unit": "piece",
+      "sku": "5571200002"
+    },
+    {
+      "id": "rozmet-24339",
+      "source": "https://rozmet.ru/production/otvodi/rezba_du_32/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 34,
+      "unit": "piece",
+      "sku": "5571200003"
+    },
+    {
+      "id": "rozmet-24340",
+      "source": "https://rozmet.ru/production/otvodi/rezba_du_40/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 35,
+      "unit": "piece",
+      "sku": "5571200004"
+    },
+    {
+      "id": "rozmet-24341",
+      "source": "https://rozmet.ru/production/otvodi/rezba_du_50/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 35,
+      "unit": "piece",
+      "sku": "5571200005"
+    },
+    {
+      "id": "rozmet-24342",
+      "source": "https://rozmet.ru/production/otvodi/rezba_otsinkovannaya_du_15/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 21,
+      "unit": "piece",
+      "sku": "5571900001"
+    },
+    {
+      "id": "rozmet-24375",
+      "source": "https://rozmet.ru/production/otvodi/rezba_otsinkovannaya_du_20/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 35,
+      "unit": "piece",
+      "sku": "24375"
+    },
+    {
+      "id": "rozmet-24343",
+      "source": "https://rozmet.ru/production/otvodi/rezba_otsinkovannaya_du_25/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 25,
+      "unit": "piece",
+      "sku": "5571900002"
+    },
+    {
+      "id": "rozmet-24344",
+      "source": "https://rozmet.ru/production/otvodi/rezba_otsinkovannaya_du_32/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 35,
+      "unit": "piece",
+      "sku": "5571900003"
+    },
+    {
+      "id": "rozmet-24345",
+      "source": "https://rozmet.ru/production/otvodi/rezba_otsinkovannaya_du_40/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 45,
+      "unit": "piece",
+      "sku": "5571900004"
+    },
+    {
+      "id": "rozmet-24346",
+      "source": "https://rozmet.ru/production/otvodi/rezba_otsinkovannaya_du_50/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 110,
+      "unit": "piece",
+      "sku": "5571900005"
+    },
+    {
+      "id": "rozmet-28660",
+      "source": "https://rozmet.ru/production/otvodi/perekhod_stalnoy_40kh2_5_35kh2/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 50,
+      "unit": "piece",
+      "sku": "28660"
+    },
+    {
+      "id": "rozmet-28661",
+      "source": "https://rozmet.ru/production/otvodi/perekhod_stalnoy_57kh3_25kh2/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 60,
+      "unit": "piece",
+      "sku": "28661"
+    },
+    {
+      "id": "rozmet-28662",
+      "source": "https://rozmet.ru/production/otvodi/perekhod_stalnoy_57kh3_35kh2/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 130,
+      "unit": "piece",
+      "sku": "28662"
+    },
+    {
+      "id": "rozmet-28663",
+      "source": "https://rozmet.ru/production/otvodi/perekhod_stalnoy_57kh3_38kh2/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 60,
+      "unit": "piece",
+      "sku": "28663"
+    },
+    {
+      "id": "rozmet-28664",
+      "source": "https://rozmet.ru/production/otvodi/perekhod_stalnoy_57kh3_40kh2/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 70,
+      "unit": "piece",
+      "sku": "28664"
+    },
+    {
+      "id": "rozmet-28665",
+      "source": "https://rozmet.ru/production/otvodi/perekhod_stalnoy_76kh3_5_57kh3/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 190,
+      "unit": "piece",
+      "sku": "28665"
+    },
+    {
+      "id": "rozmet-28666",
+      "source": "https://rozmet.ru/production/otvodi/perekhod_stalnoy_89kh3_5_57kh3/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 150,
+      "unit": "piece",
+      "sku": "28666"
+    },
+    {
+      "id": "rozmet-28667",
+      "source": "https://rozmet.ru/production/otvodi/perekhod_stalnoy_108kh4_57kh3/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 290,
+      "unit": "piece",
+      "sku": "28667"
+    },
+    {
+      "id": "rozmet-28668",
+      "source": "https://rozmet.ru/production/otvodi/perekhod_stalnoy_108kh4_76kh3_5/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 250,
+      "unit": "piece",
+      "sku": "28668"
+    },
+    {
+      "id": "rozmet-28669",
+      "source": "https://rozmet.ru/production/otvodi/perekhod_stalnoy_108kh4_89kh3_5/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 200,
+      "unit": "piece",
+      "sku": "28669"
+    },
+    {
+      "id": "rozmet-28670",
+      "source": "https://rozmet.ru/production/otvodi/perekhod_stalnoy_159kh108/",
+      "categoryId": "rozmet-cat-otvodi",
+      "subcategoryId": "rozmet-sub-otvodi-otvodi",
+      "price": 250,
+      "unit": "piece",
+      "sku": "28670"
+    }
+  ]
+}

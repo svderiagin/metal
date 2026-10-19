@@ -2,11 +2,13 @@ import {catalogImageUrl} from "@/lib/catalog-image";
 import type {Metadata} from "next";
 import {Suspense} from "react";
 import Image from "next/image";
+import {DesktopImagePreload} from "@/components/catalog/DesktopImagePreload";
 import {notFound} from "next/navigation";
 import {Breadcrumbs} from "@/components/catalog/Breadcrumbs";
 import {CatalogSidebar} from "@/components/catalog/CatalogSidebar";
 import {CatalogDescription} from "@/components/catalog/CatalogDescription";
 import {ProductTypeResults} from "@/components/catalog/ProductTypeResults";
+import {ProductVariantCatalog} from "@/components/catalog/ProductVariantCatalog";
 import {PageContainer} from "@/components/layout/PageContainer";
 import {ButtonLink} from "@/components/ui/Button";
 import {
@@ -19,6 +21,8 @@ import {
 type Props = {
   params: Promise<{ categorySlug: string }>;
 };
+
+const imageSizes = "(min-width: 1280px) 360px, (min-width: 768px) 320px, calc(100vw - 48px)";
 
 export function generateStaticParams() {
   return getAllCategories().map((category) => ({categorySlug: category.slug}));
@@ -46,6 +50,7 @@ export default async function CategoryPage({params}: Props) {
 
   return (
     <PageContainer className="py-8 sm:py-10 lg:py-12">
+      {hasImage && <DesktopImagePreload src={catalogImageUrl(mainImageUrl)} sizes={imageSizes}/>}
       <Breadcrumbs items={[{label: "Каталог", href: "/catalog"}, {label: category.name}]}/>
       <div className="grid gap-7 lg:grid-cols-[280px_1fr]">
         <Suspense fallback={<div className="h-96 animate-pulse rounded-xl bg-slate-200"/>}>
@@ -56,12 +61,14 @@ export default async function CategoryPage({params}: Props) {
             <h1 className="text-[1.625rem] font-bold leading-[1.2] sm:text-3xl">{category.name}</h1>
             {hasImage && <div className="relative aspect-[2/1] w-full overflow-hidden rounded-xl bg-white md:col-start-2 md:row-span-2 md:row-start-1 md:self-center">
               <Image src={catalogImageUrl(mainImageUrl)} alt={category.name} fill
-                sizes="(min-width: 1280px) 360px, (min-width: 768px) 320px, calc(100vw - 48px)"
+                sizes={imageSizes}
                 className="object-contain object-center"/>
             </div>}
             <CatalogDescription description={introDescription} variant="category" className="md:col-start-1"/>
           </div>
-          <ProductTypeResults productTypes={productTypes} variants={variants}/>
+          {category.directProducts
+            ? <div className="mt-8 min-w-0 space-y-7"><ProductVariantCatalog variants={variants} categorySlug={category.slug}/></div>
+            : <ProductTypeResults productTypes={productTypes} variants={variants}/>}
           {detailedDescription && <section className="mt-12 max-w-[800px]" aria-labelledby={`${category.id}-details-heading`}>
             <h2 id={`${category.id}-details-heading`} className="text-2xl font-bold leading-tight">
               {category.descriptionSections?.title ?? `Подробнее о категории «${category.name}»`}

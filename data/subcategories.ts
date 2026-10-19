@@ -1,6 +1,7 @@
 import type {Subcategory} from "@/types/category";
+import rozmetCatalog from "./rozmet-catalog.json";
 
-export const subcategories: Subcategory[] = [
+const retainedSubcategories: Subcategory[] = [
   {
     "id": "cat-arm-sub-1",
     "categoryId": "cat-arm",
@@ -171,4 +172,5 @@ export const subcategories: Subcategory[] = [
   }
 ];
 
-export const originalSubcategories: Subcategory[] = subcategories;
+export const subcategories: Subcategory[] = [...retainedSubcategories, ...rozmetCatalog.subcategories as Subcategory[]];
+export const originalSubcategories: Subcategory[] = retainedSubcategories;

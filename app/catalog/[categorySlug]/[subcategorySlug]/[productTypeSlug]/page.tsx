@@ -60,14 +60,11 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
 
 export default async function ProductTypePage({params}: Props) {
   const routeParams = await params;
-  if (routeParams.categorySlug === "shveller"
-    && ["shveller-stalnoy", "shveller-nizkolegirovannyy", "shveller"].includes(routeParams.subcategorySlug)) {
-    redirect("/catalog/shveller/shveller-goryachekatanyy/shveller-goryachekatanyy");
-  }
   const resolved = resolveProductType(routeParams);
   if (!resolved) notFound();
 
   const {category, productType} = resolved;
+  if (category.directProducts) redirect(`/catalog/${category.slug}`);
   const variants = getProductVariantsByTypeId(productType.id);
 
   return (

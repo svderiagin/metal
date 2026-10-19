@@ -60,6 +60,7 @@ export default async function SubcategoryPage({params}: Props) {
 
   const currentSubcategory = getSubcategoryBySlug(category.id, subcategorySlug);
   if (currentSubcategory) {
+    if (currentSubcategory.internal) redirect(`/catalog/${category.slug}`);
     const productTypes = getProductTypesBySubcategoryId(currentSubcategory.id);
     const variants = getProductVariantsByCategoryId(category.id)
       .filter((variant) => variant.subcategoryId === currentSubcategory.id);
@@ -89,6 +90,7 @@ export default async function SubcategoryPage({params}: Props) {
   if (!variant || variant.categoryId !== category.id) {
     notFound();
   }
+  if (category.directProducts) redirect(`/catalog/${category.slug}#variant-${variant.id}`);
 
   const subcategory = getSubcategoryById(variant.subcategoryId);
   const productType = getProductTypeById(variant.productTypeId);

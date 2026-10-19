@@ -1,6 +1,7 @@
 import type {Category} from "@/types/category";
+import rozmetCatalog from "./rozmet-catalog.json";
 
-export const categories: Category[] = [
+const retainedCategories: Category[] = [
   {
     "id": "cat-arm",
     "name": "Арматура",
@@ -56,4 +57,5 @@ export const categories: Category[] = [
   }
 ];
 
-export const originalCategories: Category[] = categories;
+export const categories: Category[] = [...retainedCategories, ...rozmetCatalog.categories as Category[]];
+export const originalCategories: Category[] = retainedCategories;

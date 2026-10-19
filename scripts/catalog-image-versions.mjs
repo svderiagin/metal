@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {spawn} from 'node:child_process';
+import {cartSourceSignature, updateCartCatalog} from './cart-catalog.mjs';
 
 const directory = 'public/images/catalog';
 const output = 'data/catalog-image-versions.json';
@@ -26,11 +27,17 @@ function updateVersions() {
 }
 
 updateVersions();
+updateCartCatalog();
 
 if (process.argv.includes('--dev')) {
+  let cartSignature = cartSourceSignature();
   // Polling also catches editor atomic replacements and new nested folders.
   const timer = setInterval(() => {
-    try { updateVersions(); }
+    try {
+      updateVersions();
+      const nextSignature = cartSourceSignature();
+      if (nextSignature !== cartSignature) {updateCartCatalog(); cartSignature = nextSignature;}
+    }
     catch (error) { console.error('Could not update catalog image versions:', error); }
   }, 1000);
   const child = spawn(process.execPath, ['node_modules/next/dist/bin/next', 'dev', ...process.argv.slice(3)], {stdio: 'inherit'});

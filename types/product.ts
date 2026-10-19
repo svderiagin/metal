@@ -57,7 +57,7 @@ export interface ProductVariant {
   demo?: boolean;
   /** Price explicitly confirmed by the owner, including an offer based on a demo record. */
   priceConfirmed?: boolean;
-  unit: "meter" | "ton" | "sheet" | "piece" | "kg";
+  unit: "meter" | "square_meter" | "ton" | "sheet" | "piece" | "kg";
   priceUnit: string;
   material: string;
   standard: string;

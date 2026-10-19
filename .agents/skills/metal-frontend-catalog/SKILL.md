@@ -24,7 +24,7 @@ Follow `AGENTS.md`. When changing a Next.js API or convention, read the matching
 
 - The hierarchy is `Category → Subcategory → ProductType → ProductVariant`.
 - `data/categories.ts` and `data/subcategories.ts` define navigation. `data/productTypes.ts` derives product types. `data/products/index.ts` is the public product boundary. `lib/catalog.ts` is the read API used by pages.
-- The current catalog contains only these category IDs in this order: `cat-arm`, `cat-trp`, `cat-trk`, `cat-pnf`, `cat-mesh`, `cat-bal`.
+- These six protected category IDs stay first in this order: `cat-arm`, `cat-trp`, `cat-trk`, `cat-pnf`, `cat-mesh`, `cat-bal`. Owner-approved rozmet.ru content follows them; see `docs/rozmet-import.md` for its separate data files and source evidence.
 - Treat `imports/protected-catalog.snapshot.json` and `scripts/catalog-pruning.test.mjs` as the regression guard. Update them only when the user explicitly requests a change to the retained catalog.
 - Keep identifiers, slugs, units, prices, and cart calculations stable unless the request changes them. Never infer missing commercial or technical facts.
 - Reuse the existing category-specific table closest to the requested product family. Do not add dependencies or create another design system.

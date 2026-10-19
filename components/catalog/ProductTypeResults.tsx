@@ -18,6 +18,7 @@ export function ProductTypeResults({
     }
   }
   const preserveOrder = productTypes.every(type => type.categoryId === "cat-trk")
+    || productTypes.every(type => type.categoryId.startsWith("rozmet-cat-"))
     || productTypes.every(type => type.categoryId === "cat-bal")
     || productTypes.every(type => type.categoryId === "cat-pnf")
     || productTypes.every(type => type.categoryId === "cat-mesh");

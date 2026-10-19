@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import {catalogProductPath} from "@/lib/catalogLinks";
 import type {CartLine} from "@/types/cart";
 import {useCart} from "@/hooks/useCart";
 import {formatCurrency, formatUnitPrice} from "@/lib/currency";
@@ -13,7 +14,7 @@ export function CartItemRow({line}: { line: CartLine }) {
       <div>
         <p className="text-xs font-medium text-slate-500">{line.sku}</p>
         {line.slug ? <Link
-          href={`/catalog/${line.categorySlug}/${line.subcategorySlug}/${line.productTypeSlug}#variant-${line.productId}`}
+          href={catalogProductPath(line.categorySlug, line.subcategorySlug, line.productTypeSlug, line.productId)}
           className="mt-1 inline-block font-bold transition-colors hover:text-red-700"
         >
           {line.name}

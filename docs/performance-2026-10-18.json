@@ -1,0 +1,2758 @@
+{
+  "method": {
+    "browserRuns": 1,
+    "windowMs": 8000,
+    "downloadBytesPerSecond": 200000,
+    "latencyMs": 150,
+    "cpuSlowdown": 4
+  },
+  "before": [
+    {
+      "profile": "desktop",
+      "page": "/",
+      "warm": false,
+      "summary": {
+        "fcpMs": 584,
+        "blockingTimeMs": 38,
+        "lcpMs": 3584,
+        "cls": 0,
+        "firstImageMs": 2232.2999999523163,
+        "firstFullImageMs": 2232.2999999523163,
+        "imageRequests8s": 12,
+        "imageBytes8s": 509062,
+        "imageBytesTotal": 509062,
+        "scriptBytes": 363945,
+        "longTaskMs": 88,
+        "failures": []
+      },
+      "domElements": 512,
+      "tableRows": 0,
+      "overflow": false
+    },
+    {
+      "profile": "desktop",
+      "page": "/",
+      "warm": true,
+      "summary": {
+        "fcpMs": 304,
+        "blockingTimeMs": 34,
+        "lcpMs": 304,
+        "cls": 0,
+        "firstImageMs": 313.69999980926514,
+        "firstFullImageMs": 313.69999980926514,
+        "imageRequests8s": 14,
+        "imageBytes8s": 0,
+        "imageBytesTotal": 0,
+        "scriptBytes": 0,
+        "longTaskMs": 84,
+        "failures": []
+      },
+      "domElements": 514,
+      "tableRows": 0,
+      "overflow": false
+    },
+    {
+      "profile": "desktop",
+      "page": "/catalog",
+      "warm": false,
+      "summary": {
+        "fcpMs": 664,
+        "blockingTimeMs": 573,
+        "lcpMs": 2048,
+        "cls": 0.003468063281009541,
+        "firstImageMs": 1994.2999999523163,
+        "firstFullImageMs": 1994.2999999523163,
+        "imageRequests8s": 9,
+        "imageBytes8s": 124837,
+        "imageBytesTotal": 124837,
+        "scriptBytes": 363945,
+        "longTaskMs": 773,
+        "failures": []
+      },
+      "domElements": 681,
+      "tableRows": 0,
+      "overflow": false
+    },
+    {
+      "profile": "desktop",
+      "page": "/catalog",
+      "warm": true,
+      "summary": {
+        "fcpMs": 340,
+        "blockingTimeMs": 520,
+        "lcpMs": 384,
+        "cls": 0.003468063281009541,
+        "firstImageMs": 376.90000009536743,
+        "firstFullImageMs": 376.90000009536743,
+        "imageRequests8s": 9,
+        "imageBytes8s": 0,
+        "imageBytesTotal": 0,
+        "scriptBytes": 0,
+        "longTaskMs": 670,
+        "failures": []
+      },
+      "domElements": 681,
+      "tableRows": 0,
+      "overflow": false
+    },
+    {
+      "profile": "desktop",
+      "page": "/catalog/armatura",
+      "warm": false,
+      "summary": {
+        "fcpMs": 620,
+        "blockingTimeMs": 35,
+        "lcpMs": 948,
+        "cls": 0,
+        "firstImageMs": 1682.5,
+        "firstFullImageMs": 1682.5,
+        "imageRequests8s": 5,
+        "imageBytes8s": 61399,
+        "imageBytesTotal": 61399,
+        "scriptBytes": 389670,
+        "longTaskMs": 185,
+        "failures": []
+      },
+      "domElements": 300,
+      "tableRows": 0,
+      "overflow": false
+    },
+    {
+      "profile": "desktop",
+      "page": "/catalog/armatura",
+      "warm": true,
+      "summary": {
+        "fcpMs": 284,
+        "blockingTimeMs": 34,
+        "lcpMs": 284,
+        "cls": 0,
+        "firstImageMs": 292.59999990463257,
+        "firstFullImageMs": 292.59999990463257,
+        "imageRequests8s": 5,
+        "imageBytes8s": 0,
+        "imageBytesTotal": 0,
+        "scriptBytes": 0,
+        "longTaskMs": 84,
+        "failures": []
+      },
+      "domElements": 300,
+      "tableRows": 0,
+      "overflow": false
+    },
+    {
+      "profile": "desktop",
+      "page": "/catalog/armatura/armatura-a500s",
+      "warm": false,
+      "summary": {
+        "fcpMs": 652,
+        "blockingTimeMs": 32,
+        "lcpMs": 1288,
+        "cls": 0,
+        "firstImageMs": 1285.2000000476837,
+        "firstFullImageMs": 1285.2000000476837,
+        "imageRequests8s": 1,
+        "imageBytes8s": 13049,
+        "imageBytesTotal": 13049,
+        "scriptBytes": 395969,
+        "longTaskMs": 132,
+        "failures": []
+      },
+      "domElements": 255,
+      "tableRows": 0,
+      "overflow": false
+    },
+    {
+      "profile": "desktop",
+      "page": "/catalog/armatura/armatura-a500s",
+      "warm": true,
+      "summary": {
+        "fcpMs": 300,
+        "blockingTimeMs": 44,
+        "lcpMs": 316,
+        "cls": 0,
+        "firstImageMs": 302.09999990463257,
+        "firstFullImageMs": 302.09999990463257,
+        "imageRequests8s": 1,
+        "imageBytes8s": 0,
+        "imageBytesTotal": 0,
+        "scriptBytes": 0,
+        "longTaskMs": 94,
+        "failures": []
+      },
+      "domElements": 255,
+      "tableRows": 0,
+      "overflow": false
+    },
+    {
+      "profile": "desktop",
+      "page": "/catalog/armatura/armatura-a500s/armatura-a500s",
+      "warm": false,
+      "summary": {
+        "fcpMs": 604,
+        "blockingTimeMs": 59,
+        "lcpMs": 1992,
+        "cls": 0,
+        "firstImageMs": 1983.0999999046326,
+        "firstFullImageMs": 1983.0999999046326,
+        "imageRequests8s": 2,
+        "imageBytes8s": 47691,
+        "imageBytesTotal": 47691,
+        "scriptBytes": 389670,
+        "longTaskMs": 209,
+        "failures": []
+      },
+      "domElements": 2282,
+      "tableRows": 35,
+      "overflow": false
+    },
+    {
+      "profile": "desktop",
+      "page": "/catalog/armatura/armatura-a500s/armatura-a500s",
+      "warm": true,
+      "summary": {
+        "fcpMs": 352,
+        "blockingTimeMs": 56,
+        "lcpMs": 372,
+        "cls": 0,
+        "firstImageMs": 347.10000014305115,
+        "firstFullImageMs": 347.10000014305115,
+        "imageRequests8s": 2,
+        "imageBytes8s": 0,
+        "imageBytesTotal": 0,
+        "scriptBytes": 0,
+        "longTaskMs": 106,
+        "failures": []
+      },
+      "domElements": 2282,
+      "tableRows": 35,
+      "overflow": false
+    },
+    {
+      "profile": "desktop",
+      "page": "/catalog/otvodi",
+      "warm": false,
+      "summary": {
+        "fcpMs": 600,
+        "blockingTimeMs": 56,
+        "lcpMs": 1068,
+        "cls": 0,
+        "firstImageMs": 1446.7000000476837,
+        "firstFullImageMs": 1446.7000000476837,
+        "imageRequests8s": 17,
+        "imageBytes8s": 31861,
+        "imageBytesTotal": 31861,
+        "scriptBytes": 322432,
+        "longTaskMs": 156,
+        "failures": []
+      },
+      "domElements": 2097,
+      "tableRows": 40,
+      "overflow": false
+    },
+    {
+      "profile": "desktop",
+      "page": "/catalog/otvodi",
+      "warm": true,
+      "summary": {
+        "fcpMs": 360,
+        "blockingTimeMs": 99,
+        "lcpMs": 360,
+        "cls": 0,
+        "firstImageMs": 382.2000000476837,
+        "firstFullImageMs": 382.2000000476837,
+        "imageRequests8s": 17,
+        "imageBytes8s": 0,
+        "imageBytesTotal": 0,
+        "scriptBytes": 0,
+        "longTaskMs": 199,
+        "failures": []
+      },
+      "domElements": 2097,
+      "tableRows": 40,
+      "overflow": false
+    },
+    {
+      "profile": "desktop",
+      "page": "/cart",
+      "warm": false,
+      "summary": {
+        "fcpMs": 648,
+        "blockingTimeMs": 35,
+        "lcpMs": 2012,
+        "cls": 0.03436631578947369,
+        "firstImageMs": null,
+        "firstFullImageMs": null,
+        "imageRequests8s": 0,
+        "imageBytes8s": 0,
+        "imageBytesTotal": 0,
+        "scriptBytes": 363945,
+        "longTaskMs": 135,
+        "failures": []
+      },
+      "domElements": 165,
+      "tableRows": 0,
+      "overflow": false
+    },
+    {
+      "profile": "desktop",
+      "page": "/cart",
+      "warm": true,
+      "summary": {
+        "fcpMs": 272,
+        "blockingTimeMs": 31,
+        "lcpMs": 360,
+        "cls": 0.03436631578947369,
+        "firstImageMs": null,
+        "firstFullImageMs": null,
+        "imageRequests8s": 0,
+        "imageBytes8s": 0,
+        "imageBytesTotal": 0,
+        "scriptBytes": 0,
+        "longTaskMs": 81,
+        "failures": []
+      },
+      "domElements": 165,
+      "tableRows": 0,
+      "overflow": false
+    },
+    {
+      "profile": "mobile",
+      "page": "/",
+      "warm": false,
+      "summary": {
+        "fcpMs": 592,
+        "blockingTimeMs": 29,
+        "lcpMs": 2160,
+        "cls": 0,
+        "firstImageMs": 2152.699999809265,
+        "firstFullImageMs": 2152.699999809265,
+        "imageRequests8s": 6,
+        "imageBytes8s": 324251,
+        "imageBytesTotal": 324251,
+        "scriptBytes": 363945,
+        "longTaskMs": 129,
+        "failures": []
+      },
+      "domElements": 512,
+      "tableRows": 0,
+      "overflow": false
+    },
+    {
+      "profile": "mobile",
+      "page": "/",
+      "warm": true,
+      "summary": {
+        "fcpMs": 332,
+        "blockingTimeMs": 49,
+        "lcpMs": 348,
+        "cls": 0,
+        "firstImageMs": 344.2999999523163,
+        "firstFullImageMs": 344.2999999523163,
+        "imageRequests8s": 8,
+        "imageBytes8s": 0,
+        "imageBytesTotal": 0,
+        "scriptBytes": 0,
+        "longTaskMs": 99,
+        "failures": []
+      },
+      "domElements": 514,
+      "tableRows": 0,
+      "overflow": false
+    },
+    {
+      "profile": "mobile",
+      "page": "/catalog",
+      "warm": false,
+      "summary": {
+        "fcpMs": 660,
+        "blockingTimeMs": 499,
+        "lcpMs": 912,
+        "cls": 0,
+        "firstImageMs": null,
+        "firstFullImageMs": null,
+        "imageRequests8s": 1,
+        "imageBytes8s": 54253,
+        "imageBytesTotal": 54253,
+        "scriptBytes": 363945,
+        "longTaskMs": 699,
+        "failures": []
+      },
+      "domElements": 681,
+      "tableRows": 0,
+      "overflow": false
+    },
+    {
+      "profile": "mobile",
+      "page": "/catalog",
+      "warm": true,
+      "summary": {
+        "fcpMs": 324,
+        "blockingTimeMs": 501,
+        "lcpMs": 356,
+        "cls": 0,
+        "firstImageMs": null,
+        "firstFullImageMs": null,
+        "imageRequests8s": 1,
+        "imageBytes8s": 0,
+        "imageBytesTotal": 0,
+        "scriptBytes": 0,
+        "longTaskMs": 651,
+        "failures": []
+      },
+      "domElements": 681,
+      "tableRows": 0,
+      "overflow": false
+    },
+    {
+      "profile": "mobile",
+      "page": "/catalog/armatura",
+      "warm": false,
+      "summary": {
+        "fcpMs": 632,
+        "blockingTimeMs": 53,
+        "lcpMs": 960,
+        "cls": 0,
+        "firstImageMs": null,
+        "firstFullImageMs": null,
+        "imageRequests8s": 2,
+        "imageBytes8s": 118434,
+        "imageBytesTotal": 118434,
+        "scriptBytes": 389670,
+        "longTaskMs": 203,
+        "failures": []
+      },
+      "domElements": 300,
+      "tableRows": 0,
+      "overflow": false
+    },
+    {
+      "profile": "mobile",
+      "page": "/catalog/armatura",
+      "warm": true,
+      "summary": {
+        "fcpMs": 296,
+        "blockingTimeMs": 50,
+        "lcpMs": 312,
+        "cls": 0,
+        "firstImageMs": null,
+        "firstFullImageMs": null,
+        "imageRequests8s": 2,
+        "imageBytes8s": 0,
+        "imageBytesTotal": 0,
+        "scriptBytes": 0,
+        "longTaskMs": 100,
+        "failures": []
+      },
+      "domElements": 300,
+      "tableRows": 0,
+      "overflow": false
+    },
+    {
+      "profile": "mobile",
+      "page": "/catalog/armatura/armatura-a500s",
+      "warm": false,
+      "summary": {
+        "fcpMs": 656,
+        "blockingTimeMs": 37,
+        "lcpMs": 980,
+        "cls": 0,
+        "firstImageMs": null,
+        "firstFullImageMs": null,
+        "imageRequests8s": 1,
+        "imageBytes8s": 64181,
+        "imageBytesTotal": 64181,
+        "scriptBytes": 395969,
+        "longTaskMs": 87,
+        "failures": []
+      },
+      "domElements": 255,
+      "tableRows": 0,
+      "overflow": false
+    },
+    {
+      "profile": "mobile",
+      "page": "/catalog/armatura/armatura-a500s",
+      "warm": true,
+      "summary": {
+        "fcpMs": 300,
+        "blockingTimeMs": 45,
+        "lcpMs": 316,
+        "cls": 0,
+        "firstImageMs": null,
+        "firstFullImageMs": null,
+        "imageRequests8s": 1,
+        "imageBytes8s": 0,
+        "imageBytesTotal": 0,
+        "scriptBytes": 0,
+        "longTaskMs": 95,
+        "failures": []
+      },
+      "domElements": 255,
+      "tableRows": 0,
+      "overflow": false
+    },
+    {
+      "profile": "mobile",
+      "page": "/catalog/armatura/armatura-a500s/armatura-a500s",
+      "warm": false,
+      "summary": {
+        "fcpMs": 612,
+        "blockingTimeMs": 56,
+        "lcpMs": 972,
+        "cls": 0,
+        "firstImageMs": null,
+        "firstFullImageMs": null,
+        "imageRequests8s": 2,
+        "imageBytes8s": 64181,
+        "imageBytesTotal": 64181,
+        "scriptBytes": 389670,
+        "longTaskMs": 206,
+        "failures": []
+      },
+      "domElements": 2282,
+      "tableRows": 35,
+      "overflow": false
+    },
+    {
+      "profile": "mobile",
+      "page": "/catalog/armatura/armatura-a500s/armatura-a500s",
+      "warm": true,
+      "summary": {
+        "fcpMs": 388,
+        "blockingTimeMs": 114,
+        "lcpMs": 388,
+        "cls": 0,
+        "firstImageMs": 400.7000000476837,
+        "firstFullImageMs": 400.7000000476837,
+        "imageRequests8s": 2,
+        "imageBytes8s": 0,
+        "imageBytesTotal": 0,
+        "scriptBytes": 0,
+        "longTaskMs": 214,
+        "failures": []
+      },
+      "domElements": 2282,
+      "tableRows": 35,
+      "overflow": false
+    },
+    {
+      "profile": "mobile",
+      "page": "/catalog/otvodi",
+      "warm": false,
+      "summary": {
+        "fcpMs": 628,
+        "blockingTimeMs": 98,
+        "lcpMs": 880,
+        "cls": 0,
+        "firstImageMs": 2495.0999999046326,
+        "firstFullImageMs": 2495.0999999046326,
+        "imageRequests8s": 4,
+        "imageBytes8s": 29641,
+        "imageBytesTotal": 29641,
+        "scriptBytes": 322432,
+        "longTaskMs": 298,
+        "failures": []
+      },
+      "domElements": 2097,
+      "tableRows": 40,
+      "overflow": false
+    },
+    {
+      "profile": "mobile",
+      "page": "/catalog/otvodi",
+      "warm": true,
+      "summary": {
+        "fcpMs": 420,
+        "blockingTimeMs": 143,
+        "lcpMs": 432,
+        "cls": 0,
+        "firstImageMs": 419.7000000476837,
+        "firstFullImageMs": 419.7000000476837,
+        "imageRequests8s": 4,
+        "imageBytes8s": 0,
+        "imageBytesTotal": 0,
+        "scriptBytes": 0,
+        "longTaskMs": 243,
+        "failures": []
+      },
+      "domElements": 2097,
+      "tableRows": 40,
+      "overflow": false
+    },
+    {
+      "profile": "mobile",
+      "page": "/cart",
+      "warm": false,
+      "summary": {
+        "fcpMs": 664,
+        "blockingTimeMs": 44,
+        "lcpMs": 664,
+        "cls": 0.0422553401765459,
+        "firstImageMs": null,
+        "firstFullImageMs": null,
+        "imageRequests8s": 0,
+        "imageBytes8s": 0,
+        "imageBytesTotal": 0,
+        "scriptBytes": 363945,
+        "longTaskMs": 144,
+        "failures": []
+      },
+      "domElements": 165,
+      "tableRows": 0,
+      "overflow": false
+    },
+    {
+      "profile": "mobile",
+      "page": "/cart",
+      "warm": true,
+      "summary": {
+        "fcpMs": 292,
+        "blockingTimeMs": 33,
+        "lcpMs": 292,
+        "cls": 0,
+        "firstImageMs": null,
+        "firstFullImageMs": null,
+        "imageRequests8s": 0,
+        "imageBytes8s": 0,
+        "imageBytesTotal": 0,
+        "scriptBytes": 0,
+        "longTaskMs": 83,
+        "failures": []
+      },
+      "domElements": 165,
+      "tableRows": 0,
+      "overflow": false
+    }
+  ],
+  "after": [
+    {
+      "profile": "desktop",
+      "page": "/",
+      "warm": false,
+      "summary": {
+        "fcpMs": 608,
+        "blockingTimeMs": 52,
+        "lcpMs": 3116,
+        "cls": 0,
+        "firstImageMs": 2193.800000190735,
+        "firstFullImageMs": 2193.800000190735,
+        "imageRequests8s": 12,
+        "imageBytes8s": 509062,
+        "imageBytesTotal": 509062,
+        "scriptBytes": 261083,
+        "longTaskMs": 152,
+        "failures": []
+      },
+      "domElements": 512,
+      "tableRows": 0,
+      "overflow": false
+    },
+    {
+      "profile": "desktop",
+      "page": "/",
+      "warm": true,
+      "summary": {
+        "fcpMs": 300,
+        "blockingTimeMs": 33,
+        "lcpMs": 300,
+        "cls": 0,
+        "firstImageMs": 312.2999999523163,
+        "firstFullImageMs": 312.2999999523163,
+        "imageRequests8s": 14,
+        "imageBytes8s": 0,
+        "imageBytesTotal": 0,
+        "scriptBytes": 0,
+        "longTaskMs": 83,
+        "failures": []
+      },
+      "domElements": 514,
+      "tableRows": 0,
+      "overflow": false
+    },
+    {
+      "profile": "desktop",
+      "page": "/catalog",
+      "warm": false,
+      "summary": {
+        "fcpMs": 656,
+        "blockingTimeMs": 45,
+        "lcpMs": 2056,
+        "cls": 0.003468063281009541,
+        "firstImageMs": 1986.2999999523163,
+        "firstFullImageMs": 1986.2999999523163,
+        "imageRequests8s": 9,
+        "imageBytes8s": 124837,
+        "imageBytesTotal": 124837,
+        "scriptBytes": 261083,
+        "longTaskMs": 145,
+        "failures": []
+      },
+      "domElements": 681,
+      "tableRows": 0,
+      "overflow": false
+    },
+    {
+      "profile": "desktop",
+      "page": "/catalog",
+      "warm": true,
+      "summary": {
+        "fcpMs": 308,
+        "blockingTimeMs": 39,
+        "lcpMs": 360,
+        "cls": 0.003468063281009541,
+        "firstImageMs": 337.30000019073486,
+        "firstFullImageMs": 337.30000019073486,
+        "imageRequests8s": 9,
+        "imageBytes8s": 0,
+        "imageBytesTotal": 0,
+        "scriptBytes": 0,
+        "longTaskMs": 89,
+        "failures": []
+      },
+      "domElements": 681,
+      "tableRows": 0,
+      "overflow": false
+    },
+    {
+      "profile": "desktop",
+      "page": "/catalog/armatura",
+      "warm": false,
+      "summary": {
+        "fcpMs": 632,
+        "blockingTimeMs": 38,
+        "lcpMs": 860,
+        "cls": 0,
+        "firstImageMs": 859.6999998092651,
+        "firstFullImageMs": 859.6999998092651,
+        "imageRequests8s": 5,
+        "imageBytes8s": 61399,
+        "imageBytesTotal": 61399,
+        "scriptBytes": 287298,
+        "longTaskMs": 138,
+        "failures": []
+      },
+      "domElements": 303,
+      "tableRows": 0,
+      "overflow": false
+    },
+    {
+      "profile": "desktop",
+      "page": "/catalog/armatura",
+      "warm": true,
+      "summary": {
+        "fcpMs": 292,
+        "blockingTimeMs": 32,
+        "lcpMs": 292,
+        "cls": 0,
+        "firstImageMs": 299.69999980926514,
+        "firstFullImageMs": 299.69999980926514,
+        "imageRequests8s": 5,
+        "imageBytes8s": 0,
+        "imageBytesTotal": 0,
+        "scriptBytes": 0,
+        "longTaskMs": 82,
+        "failures": []
+      },
+      "domElements": 303,
+      "tableRows": 0,
+      "overflow": false
+    },
+    {
+      "profile": "desktop",
+      "page": "/catalog/armatura/armatura-a500s",
+      "warm": false,
+      "summary": {
+        "fcpMs": 660,
+        "blockingTimeMs": 42,
+        "lcpMs": 1280,
+        "cls": 0,
+        "firstImageMs": 1276,
+        "firstFullImageMs": 1276,
+        "imageRequests8s": 1,
+        "imageBytes8s": 13049,
+        "imageBytesTotal": 13049,
+        "scriptBytes": 293597,
+        "longTaskMs": 142,
+        "failures": []
+      },
+      "domElements": 255,
+      "tableRows": 0,
+      "overflow": false
+    },
+    {
+      "profile": "desktop",
+      "page": "/catalog/armatura/armatura-a500s",
+      "warm": true,
+      "summary": {
+        "fcpMs": 296,
+        "blockingTimeMs": 42,
+        "lcpMs": 312,
+        "cls": 0,
+        "firstImageMs": 298.5,
+        "firstFullImageMs": 298.5,
+        "imageRequests8s": 1,
+        "imageBytes8s": 0,
+        "imageBytesTotal": 0,
+        "scriptBytes": 0,
+        "longTaskMs": 92,
+        "failures": []
+      },
+      "domElements": 255,
+      "tableRows": 0,
+      "overflow": false
+    },
+    {
+      "profile": "desktop",
+      "page": "/catalog/armatura/armatura-a500s/armatura-a500s",
+      "warm": false,
+      "summary": {
+        "fcpMs": 604,
+        "blockingTimeMs": 71,
+        "lcpMs": 1792,
+        "cls": 0,
+        "firstImageMs": 1783.5,
+        "firstFullImageMs": 1783.5,
+        "imageRequests8s": 2,
+        "imageBytes8s": 64181,
+        "imageBytesTotal": 64181,
+        "scriptBytes": 287298,
+        "longTaskMs": 221,
+        "failures": []
+      },
+      "domElements": 2283,
+      "tableRows": 35,
+      "overflow": false
+    },
+    {
+      "profile": "desktop",
+      "page": "/catalog/armatura/armatura-a500s/armatura-a500s",
+      "warm": true,
+      "summary": {
+        "fcpMs": 356,
+        "blockingTimeMs": 67,
+        "lcpMs": 356,
+        "cls": 0,
+        "firstImageMs": 363.39999985694885,
+        "firstFullImageMs": 363.39999985694885,
+        "imageRequests8s": 2,
+        "imageBytes8s": 0,
+        "imageBytesTotal": 0,
+        "scriptBytes": 0,
+        "longTaskMs": 167,
+        "failures": []
+      },
+      "domElements": 2283,
+      "tableRows": 35,
+      "overflow": false
+    },
+    {
+      "profile": "desktop",
+      "page": "/catalog/otvodi",
+      "warm": false,
+      "summary": {
+        "fcpMs": 616,
+        "blockingTimeMs": 79,
+        "lcpMs": 968,
+        "cls": 0,
+        "firstImageMs": 948.8999998569489,
+        "firstFullImageMs": 948.8999998569489,
+        "imageRequests8s": 17,
+        "imageBytes8s": 31861,
+        "imageBytesTotal": 31861,
+        "scriptBytes": 219154,
+        "longTaskMs": 229,
+        "failures": []
+      },
+      "domElements": 2100,
+      "tableRows": 40,
+      "overflow": false
+    },
+    {
+      "profile": "desktop",
+      "page": "/catalog/otvodi",
+      "warm": true,
+      "summary": {
+        "fcpMs": 356,
+        "blockingTimeMs": 100,
+        "lcpMs": 356,
+        "cls": 0,
+        "firstImageMs": 373.7999999523163,
+        "firstFullImageMs": 373.7999999523163,
+        "imageRequests8s": 17,
+        "imageBytes8s": 0,
+        "imageBytesTotal": 0,
+        "scriptBytes": 0,
+        "longTaskMs": 200,
+        "failures": []
+      },
+      "domElements": 2100,
+      "tableRows": 40,
+      "overflow": false
+    },
+    {
+      "profile": "desktop",
+      "page": "/cart",
+      "warm": false,
+      "summary": {
+        "fcpMs": 664,
+        "blockingTimeMs": 46,
+        "lcpMs": 1480,
+        "cls": 0.03436631578947369,
+        "firstImageMs": null,
+        "firstFullImageMs": null,
+        "imageRequests8s": 0,
+        "imageBytes8s": 0,
+        "imageBytesTotal": 0,
+        "scriptBytes": 261083,
+        "longTaskMs": 146,
+        "failures": []
+      },
+      "domElements": 165,
+      "tableRows": 0,
+      "overflow": false
+    },
+    {
+      "profile": "desktop",
+      "page": "/cart",
+      "warm": true,
+      "summary": {
+        "fcpMs": 272,
+        "blockingTimeMs": 30,
+        "lcpMs": 336,
+        "cls": 0.03436631578947369,
+        "firstImageMs": null,
+        "firstFullImageMs": null,
+        "imageRequests8s": 0,
+        "imageBytes8s": 0,
+        "imageBytesTotal": 0,
+        "scriptBytes": 0,
+        "longTaskMs": 80,
+        "failures": []
+      },
+      "domElements": 165,
+      "tableRows": 0,
+      "overflow": false
+    },
+    {
+      "profile": "mobile",
+      "page": "/",
+      "warm": false,
+      "summary": {
+        "fcpMs": 612,
+        "blockingTimeMs": 52,
+        "lcpMs": 1996,
+        "cls": 0,
+        "firstImageMs": 1987.9000000953674,
+        "firstFullImageMs": 1987.9000000953674,
+        "imageRequests8s": 7,
+        "imageBytes8s": 335847,
+        "imageBytesTotal": 324251,
+        "scriptBytes": 261083,
+        "longTaskMs": 152,
+        "failures": []
+      },
+      "domElements": 513,
+      "tableRows": 0,
+      "overflow": false
+    },
+    {
+      "profile": "mobile",
+      "page": "/",
+      "warm": true,
+      "summary": {
+        "fcpMs": 324,
+        "blockingTimeMs": 32,
+        "lcpMs": 328,
+        "cls": 0,
+        "firstImageMs": 322.7000000476837,
+        "firstFullImageMs": 322.7000000476837,
+        "imageRequests8s": 8,
+        "imageBytes8s": 0,
+        "imageBytesTotal": 0,
+        "scriptBytes": 0,
+        "longTaskMs": 82,
+        "failures": []
+      },
+      "domElements": 514,
+      "tableRows": 0,
+      "overflow": false
+    },
+    {
+      "profile": "mobile",
+      "page": "/catalog",
+      "warm": false,
+      "summary": {
+        "fcpMs": 664,
+        "blockingTimeMs": 50,
+        "lcpMs": 912,
+        "cls": 0,
+        "firstImageMs": null,
+        "firstFullImageMs": null,
+        "imageRequests8s": 1,
+        "imageBytes8s": 54253,
+        "imageBytesTotal": 54253,
+        "scriptBytes": 261083,
+        "longTaskMs": 150,
+        "failures": []
+      },
+      "domElements": 681,
+      "tableRows": 0,
+      "overflow": false
+    },
+    {
+      "profile": "mobile",
+      "page": "/catalog",
+      "warm": true,
+      "summary": {
+        "fcpMs": 324,
+        "blockingTimeMs": 44,
+        "lcpMs": 324,
+        "cls": 0,
+        "firstImageMs": null,
+        "firstFullImageMs": null,
+        "imageRequests8s": 1,
+        "imageBytes8s": 0,
+        "imageBytesTotal": 0,
+        "scriptBytes": 0,
+        "longTaskMs": 94,
+        "failures": []
+      },
+      "domElements": 681,
+      "tableRows": 0,
+      "overflow": false
+    },
+    {
+      "profile": "mobile",
+      "page": "/catalog/armatura",
+      "warm": false,
+      "summary": {
+        "fcpMs": 632,
+        "blockingTimeMs": 47,
+        "lcpMs": 856,
+        "cls": 0,
+        "firstImageMs": null,
+        "firstFullImageMs": null,
+        "imageRequests8s": 2,
+        "imageBytes8s": 118434,
+        "imageBytesTotal": 118434,
+        "scriptBytes": 287298,
+        "longTaskMs": 147,
+        "failures": []
+      },
+      "domElements": 303,
+      "tableRows": 0,
+      "overflow": false
+    },
+    {
+      "profile": "mobile",
+      "page": "/catalog/armatura",
+      "warm": true,
+      "summary": {
+        "fcpMs": 300,
+        "blockingTimeMs": 50,
+        "lcpMs": 312,
+        "cls": 0,
+        "firstImageMs": null,
+        "firstFullImageMs": null,
+        "imageRequests8s": 2,
+        "imageBytes8s": 0,
+        "imageBytesTotal": 0,
+        "scriptBytes": 0,
+        "longTaskMs": 100,
+        "failures": []
+      },
+      "domElements": 303,
+      "tableRows": 0,
+      "overflow": false
+    },
+    {
+      "profile": "mobile",
+      "page": "/catalog/armatura/armatura-a500s",
+      "warm": false,
+      "summary": {
+        "fcpMs": 648,
+        "blockingTimeMs": 38,
+        "lcpMs": 896,
+        "cls": 0,
+        "firstImageMs": null,
+        "firstFullImageMs": null,
+        "imageRequests8s": 1,
+        "imageBytes8s": 64181,
+        "imageBytesTotal": 64181,
+        "scriptBytes": 293597,
+        "longTaskMs": 138,
+        "failures": []
+      },
+      "domElements": 255,
+      "tableRows": 0,
+      "overflow": false
+    },
+    {
+      "profile": "mobile",
+      "page": "/catalog/armatura/armatura-a500s",
+      "warm": true,
+      "summary": {
+        "fcpMs": 304,
+        "blockingTimeMs": 53,
+        "lcpMs": 316,
+        "cls": 0,
+        "firstImageMs": null,
+        "firstFullImageMs": null,
+        "imageRequests8s": 1,
+        "imageBytes8s": 0,
+        "imageBytesTotal": 0,
+        "scriptBytes": 0,
+        "longTaskMs": 103,
+        "failures": []
+      },
+      "domElements": 255,
+      "tableRows": 0,
+      "overflow": false
+    },
+    {
+      "profile": "mobile",
+      "page": "/catalog/armatura/armatura-a500s/armatura-a500s",
+      "warm": false,
+      "summary": {
+        "fcpMs": 608,
+        "blockingTimeMs": 77,
+        "lcpMs": 888,
+        "cls": 0,
+        "firstImageMs": null,
+        "firstFullImageMs": null,
+        "imageRequests8s": 2,
+        "imageBytes8s": 64181,
+        "imageBytesTotal": 64181,
+        "scriptBytes": 287298,
+        "longTaskMs": 227,
+        "failures": []
+      },
+      "domElements": 2283,
+      "tableRows": 35,
+      "overflow": false
+    },
+    {
+      "profile": "mobile",
+      "page": "/catalog/armatura/armatura-a500s/armatura-a500s",
+      "warm": true,
+      "summary": {
+        "fcpMs": 348,
+        "blockingTimeMs": 103,
+        "lcpMs": 380,
+        "cls": 0,
+        "firstImageMs": null,
+        "firstFullImageMs": null,
+        "imageRequests8s": 2,
+        "imageBytes8s": 0,
+        "imageBytesTotal": 0,
+        "scriptBytes": 0,
+        "longTaskMs": 203,
+        "failures": []
+      },
+      "domElements": 2283,
+      "tableRows": 35,
+      "overflow": false
+    },
+    {
+      "profile": "mobile",
+      "page": "/catalog/otvodi",
+      "warm": false,
+      "summary": {
+        "fcpMs": 600,
+        "blockingTimeMs": 78,
+        "lcpMs": 968,
+        "cls": 0,
+        "firstImageMs": 1982.6999998092651,
+        "firstFullImageMs": 1982.6999998092651,
+        "imageRequests8s": 4,
+        "imageBytes8s": 29641,
+        "imageBytesTotal": 29641,
+        "scriptBytes": 219154,
+        "longTaskMs": 228,
+        "failures": []
+      },
+      "domElements": 2100,
+      "tableRows": 40,
+      "overflow": false
+    },
+    {
+      "profile": "mobile",
+      "page": "/catalog/otvodi",
+      "warm": true,
+      "summary": {
+        "fcpMs": 304,
+        "blockingTimeMs": 83,
+        "lcpMs": 540,
+        "cls": 0,
+        "firstImageMs": 705.8000001907349,
+        "firstFullImageMs": 705.8000001907349,
+        "imageRequests8s": 4,
+        "imageBytes8s": 0,
+        "imageBytesTotal": 0,
+        "scriptBytes": 0,
+        "longTaskMs": 183,
+        "failures": []
+      },
+      "domElements": 2100,
+      "tableRows": 40,
+      "overflow": false
+    },
+    {
+      "profile": "mobile",
+      "page": "/cart",
+      "warm": false,
+      "summary": {
+        "fcpMs": 660,
+        "blockingTimeMs": 51,
+        "lcpMs": 660,
+        "cls": 0.0422553401765459,
+        "firstImageMs": null,
+        "firstFullImageMs": null,
+        "imageRequests8s": 0,
+        "imageBytes8s": 0,
+        "imageBytesTotal": 0,
+        "scriptBytes": 261083,
+        "longTaskMs": 151,
+        "failures": []
+      },
+      "domElements": 165,
+      "tableRows": 0,
+      "overflow": false
+    },
+    {
+      "profile": "mobile",
+      "page": "/cart",
+      "warm": true,
+      "summary": {
+        "fcpMs": 292,
+        "blockingTimeMs": 32,
+        "lcpMs": 292,
+        "cls": 0,
+        "firstImageMs": null,
+        "firstFullImageMs": null,
+        "imageRequests8s": 0,
+        "imageBytes8s": 0,
+        "imageBytesTotal": 0,
+        "scriptBytes": 0,
+        "longTaskMs": 82,
+        "failures": []
+      },
+      "domElements": 165,
+      "tableRows": 0,
+      "overflow": false
+    }
+  ],
+  "webp": [
+    {
+      "profile": "desktop",
+      "page": "/",
+      "warm": false,
+      "summary": {
+        "fcpMs": 596,
+        "blockingTimeMs": 41,
+        "lcpMs": 3236,
+        "cls": 0,
+        "firstImageMs": 2305.2000000476837,
+        "firstFullImageMs": 2305.2000000476837,
+        "imageRequests8s": 12,
+        "imageBytes8s": 581784,
+        "imageBytesTotal": 581784,
+        "scriptBytes": 261083,
+        "longTaskMs": 141,
+        "failures": []
+      },
+      "domElements": 512,
+      "tableRows": 0,
+      "overflow": false
+    },
+    {
+      "profile": "desktop",
+      "page": "/",
+      "warm": true,
+      "summary": {
+        "fcpMs": 312,
+        "blockingTimeMs": 41,
+        "lcpMs": 312,
+        "cls": 0,
+        "firstImageMs": 320.39999985694885,
+        "firstFullImageMs": 320.39999985694885,
+        "imageRequests8s": 14,
+        "imageBytes8s": 0,
+        "imageBytesTotal": 0,
+        "scriptBytes": 0,
+        "longTaskMs": 91,
+        "failures": []
+      },
+      "domElements": 514,
+      "tableRows": 0,
+      "overflow": false
+    },
+    {
+      "profile": "desktop",
+      "page": "/catalog/armatura",
+      "warm": false,
+      "summary": {
+        "fcpMs": 632,
+        "blockingTimeMs": 46,
+        "lcpMs": 960,
+        "cls": 0,
+        "firstImageMs": 959,
+        "firstFullImageMs": 959,
+        "imageRequests8s": 5,
+        "imageBytes8s": 65224,
+        "imageBytesTotal": 65224,
+        "scriptBytes": 287298,
+        "longTaskMs": 146,
+        "failures": []
+      },
+      "domElements": 303,
+      "tableRows": 0,
+      "overflow": false
+    },
+    {
+      "profile": "desktop",
+      "page": "/catalog/armatura",
+      "warm": true,
+      "summary": {
+        "fcpMs": 296,
+        "blockingTimeMs": 47,
+        "lcpMs": 296,
+        "cls": 0,
+        "firstImageMs": 308.39999985694885,
+        "firstFullImageMs": 308.39999985694885,
+        "imageRequests8s": 5,
+        "imageBytes8s": 0,
+        "imageBytesTotal": 0,
+        "scriptBytes": 0,
+        "longTaskMs": 97,
+        "failures": []
+      },
+      "domElements": 303,
+      "tableRows": 0,
+      "overflow": false
+    },
+    {
+      "profile": "desktop",
+      "page": "/catalog/armatura/armatura-a500s/armatura-a500s",
+      "warm": false,
+      "summary": {
+        "fcpMs": 604,
+        "blockingTimeMs": 83,
+        "lcpMs": 1876,
+        "cls": 0,
+        "firstImageMs": 1869,
+        "firstFullImageMs": 1869,
+        "imageRequests8s": 2,
+        "imageBytes8s": 69800,
+        "imageBytesTotal": 69800,
+        "scriptBytes": 287298,
+        "longTaskMs": 233,
+        "failures": []
+      },
+      "domElements": 2283,
+      "tableRows": 35,
+      "overflow": false
+    },
+    {
+      "profile": "desktop",
+      "page": "/catalog/armatura/armatura-a500s/armatura-a500s",
+      "warm": true,
+      "summary": {
+        "fcpMs": 324,
+        "blockingTimeMs": 77,
+        "lcpMs": 324,
+        "cls": 0,
+        "firstImageMs": 349.7000000476837,
+        "firstFullImageMs": 349.7000000476837,
+        "imageRequests8s": 2,
+        "imageBytes8s": 0,
+        "imageBytesTotal": 0,
+        "scriptBytes": 0,
+        "longTaskMs": 177,
+        "failures": []
+      },
+      "domElements": 2283,
+      "tableRows": 35,
+      "overflow": false
+    }
+  ],
+  "formats": [
+    {
+      "page": "/",
+      "run": 0,
+      "format": "image/avif",
+      "warm": false,
+      "headersMs": 223.882833,
+      "totalMs": 225.037417,
+      "bytes": 150178,
+      "status": 200,
+      "contentType": "image/avif",
+      "cache": "MISS",
+      "control": "public, max-age=31536000, must-revalidate"
+    },
+    {
+      "page": "/",
+      "run": 0,
+      "format": "image/avif",
+      "warm": true,
+      "headersMs": 5.55762500000003,
+      "totalMs": 5.811959000000002,
+      "bytes": 150178,
+      "status": 200,
+      "contentType": "image/avif",
+      "cache": "HIT",
+      "control": "public, max-age=31536000, must-revalidate"
+    },
+    {
+      "page": "/",
+      "run": 0,
+      "format": "image/webp",
+      "warm": false,
+      "headersMs": 173.65975000000003,
+      "totalMs": 173.90300000000002,
+      "bytes": 161004,
+      "status": 200,
+      "contentType": "image/webp",
+      "cache": "MISS",
+      "control": "public, max-age=31536000, must-revalidate"
+    },
+    {
+      "page": "/",
+      "run": 0,
+      "format": "image/webp",
+      "warm": true,
+      "headersMs": 12.670000000000016,
+      "totalMs": 12.870875000000012,
+      "bytes": 161004,
+      "status": 200,
+      "contentType": "image/webp",
+      "cache": "HIT",
+      "control": "public, max-age=31536000, must-revalidate"
+    },
+    {
+      "page": "/",
+      "run": 1,
+      "format": "image/avif",
+      "warm": false,
+      "headersMs": 187.140875,
+      "totalMs": 187.37387499999994,
+      "bytes": 150178,
+      "status": 200,
+      "contentType": "image/avif",
+      "cache": "MISS",
+      "control": "public, max-age=31536000, must-revalidate"
+    },
+    {
+      "page": "/",
+      "run": 1,
+      "format": "image/avif",
+      "warm": true,
+      "headersMs": 6.362958000000049,
+      "totalMs": 6.546124999999961,
+      "bytes": 150178,
+      "status": 200,
+      "contentType": "image/avif",
+      "cache": "HIT",
+      "control": "public, max-age=31536000, must-revalidate"
+    },
+    {
+      "page": "/",
+      "run": 1,
+      "format": "image/webp",
+      "warm": false,
+      "headersMs": 167.63141700000006,
+      "totalMs": 167.83233399999995,
+      "bytes": 161004,
+      "status": 200,
+      "contentType": "image/webp",
+      "cache": "MISS",
+      "control": "public, max-age=31536000, must-revalidate"
+    },
+    {
+      "page": "/",
+      "run": 1,
+      "format": "image/webp",
+      "warm": true,
+      "headersMs": 5.380750000000035,
+      "totalMs": 5.6070419999999785,
+      "bytes": 161004,
+      "status": 200,
+      "contentType": "image/webp",
+      "cache": "HIT",
+      "control": "public, max-age=31536000, must-revalidate"
+    },
+    {
+      "page": "/",
+      "run": 2,
+      "format": "image/avif",
+      "warm": false,
+      "headersMs": 186.74154199999987,
+      "totalMs": 186.91120799999987,
+      "bytes": 150178,
+      "status": 200,
+      "contentType": "image/avif",
+      "cache": "MISS",
+      "control": "public, max-age=31536000, must-revalidate"
+    },
+    {
+      "page": "/",
+      "run": 2,
+      "format": "image/avif",
+      "warm": true,
+      "headersMs": 6.148707999999942,
+      "totalMs": 6.397832999999991,
+      "bytes": 150178,
+      "status": 200,
+      "contentType": "image/avif",
+      "cache": "HIT",
+      "control": "public, max-age=31536000, must-revalidate"
+    },
+    {
+      "page": "/",
+      "run": 2,
+      "format": "image/webp",
+      "warm": false,
+      "headersMs": 168.43266700000004,
+      "totalMs": 168.596583,
+      "bytes": 161004,
+      "status": 200,
+      "contentType": "image/webp",
+      "cache": "MISS",
+      "control": "public, max-age=31536000, must-revalidate"
+    },
+    {
+      "page": "/",
+      "run": 2,
+      "format": "image/webp",
+      "warm": true,
+      "headersMs": 8.988792000000103,
+      "totalMs": 9.175208999999995,
+      "bytes": 161004,
+      "status": 200,
+      "contentType": "image/webp",
+      "cache": "HIT",
+      "control": "public, max-age=31536000, must-revalidate"
+    },
+    {
+      "page": "/catalog/armatura",
+      "run": 0,
+      "format": "image/avif",
+      "warm": false,
+      "headersMs": 18.05254100000002,
+      "totalMs": 18.119207999999844,
+      "bytes": 17451,
+      "status": 200,
+      "contentType": "image/avif",
+      "cache": "MISS",
+      "control": "public, max-age=31536000, must-revalidate"
+    },
+    {
+      "page": "/catalog/armatura",
+      "run": 0,
+      "format": "image/avif",
+      "warm": true,
+      "headersMs": 11.230750000000171,
+      "totalMs": 11.307500000000118,
+      "bytes": 17451,
+      "status": 200,
+      "contentType": "image/avif",
+      "cache": "HIT",
+      "control": "public, max-age=31536000, must-revalidate"
+    },
+    {
+      "page": "/catalog/armatura",
+      "run": 0,
+      "format": "image/webp",
+      "warm": false,
+      "headersMs": 12.278833000000077,
+      "totalMs": 12.367749999999887,
+      "bytes": 18486,
+      "status": 200,
+      "contentType": "image/webp",
+      "cache": "MISS",
+      "control": "public, max-age=31536000, must-revalidate"
+    },
+    {
+      "page": "/catalog/armatura",
+      "run": 0,
+      "format": "image/webp",
+      "warm": true,
+      "headersMs": 6.885250000000042,
+      "totalMs": 6.9525000000001,
+      "bytes": 18486,
+      "status": 200,
+      "contentType": "image/webp",
+      "cache": "HIT",
+      "control": "public, max-age=31536000, must-revalidate"
+    },
+    {
+      "page": "/catalog/armatura",
+      "run": 1,
+      "format": "image/avif",
+      "warm": false,
+      "headersMs": 17.443667000000005,
+      "totalMs": 17.543083000000024,
+      "bytes": 17451,
+      "status": 200,
+      "contentType": "image/avif",
+      "cache": "MISS",
+      "control": "public, max-age=31536000, must-revalidate"
+    },
+    {
+      "page": "/catalog/armatura",
+      "run": 1,
+      "format": "image/avif",
+      "warm": true,
+      "headersMs": 4.355375000000095,
+      "totalMs": 4.417249999999967,
+      "bytes": 17451,
+      "status": 200,
+      "contentType": "image/avif",
+      "cache": "HIT",
+      "control": "public, max-age=31536000, must-revalidate"
+    },
+    {
+      "page": "/catalog/armatura",
+      "run": 1,
+      "format": "image/webp",
+      "warm": false,
+      "headersMs": 12.706458999999995,
+      "totalMs": 12.768291999999974,
+      "bytes": 18486,
+      "status": 200,
+      "contentType": "image/webp",
+      "cache": "MISS",
+      "control": "public, max-age=31536000, must-revalidate"
+    },
+    {
+      "page": "/catalog/armatura",
+      "run": 1,
+      "format": "image/webp",
+      "warm": true,
+      "headersMs": 4.0284999999998945,
+      "totalMs": 4.0879580000000715,
+      "bytes": 18486,
+      "status": 200,
+      "contentType": "image/webp",
+      "cache": "HIT",
+      "control": "public, max-age=31536000, must-revalidate"
+    },
+    {
+      "page": "/catalog/armatura",
+      "run": 2,
+      "format": "image/avif",
+      "warm": false,
+      "headersMs": 16.751708000000008,
+      "totalMs": 16.817957999999862,
+      "bytes": 17451,
+      "status": 200,
+      "contentType": "image/avif",
+      "cache": "MISS",
+      "control": "public, max-age=31536000, must-revalidate"
+    },
+    {
+      "page": "/catalog/armatura",
+      "run": 2,
+      "format": "image/avif",
+      "warm": true,
+      "headersMs": 3.5218750000001364,
+      "totalMs": 3.5616670000001704,
+      "bytes": 17451,
+      "status": 200,
+      "contentType": "image/avif",
+      "cache": "HIT",
+      "control": "public, max-age=31536000, must-revalidate"
+    },
+    {
+      "page": "/catalog/armatura",
+      "run": 2,
+      "format": "image/webp",
+      "warm": false,
+      "headersMs": 12.187582999999904,
+      "totalMs": 12.242415999999821,
+      "bytes": 18486,
+      "status": 200,
+      "contentType": "image/webp",
+      "cache": "MISS",
+      "control": "public, max-age=31536000, must-revalidate"
+    },
+    {
+      "page": "/catalog/armatura",
+      "run": 2,
+      "format": "image/webp",
+      "warm": true,
+      "headersMs": 4.967582999999877,
+      "totalMs": 5.038000000000011,
+      "bytes": 18486,
+      "status": 200,
+      "contentType": "image/webp",
+      "cache": "HIT",
+      "control": "public, max-age=31536000, must-revalidate"
+    },
+    {
+      "page": "/catalog/armatura/armatura-a500s/armatura-a500s",
+      "run": 0,
+      "format": "image/avif",
+      "warm": false,
+      "headersMs": 32.09504100000004,
+      "totalMs": 32.147500000000036,
+      "bytes": 47209,
+      "status": 200,
+      "contentType": "image/avif",
+      "cache": "MISS",
+      "control": "public, max-age=31536000, must-revalidate"
+    },
+    {
+      "page": "/catalog/armatura/armatura-a500s/armatura-a500s",
+      "run": 0,
+      "format": "image/avif",
+      "warm": true,
+      "headersMs": 7.26170900000011,
+      "totalMs": 7.324084000000084,
+      "bytes": 47209,
+      "status": 200,
+      "contentType": "image/avif",
+      "cache": "HIT",
+      "control": "public, max-age=31536000, must-revalidate"
+    },
+    {
+      "page": "/catalog/armatura/armatura-a500s/armatura-a500s",
+      "run": 0,
+      "format": "image/webp",
+      "warm": false,
+      "headersMs": 26.200792000000092,
+      "totalMs": 26.295458999999937,
+      "bytes": 51290,
+      "status": 200,
+      "contentType": "image/webp",
+      "cache": "MISS",
+      "control": "public, max-age=31536000, must-revalidate"
+    },
+    {
+      "page": "/catalog/armatura/armatura-a500s/armatura-a500s",
+      "run": 0,
+      "format": "image/webp",
+      "warm": true,
+      "headersMs": 9.185208000000102,
+      "totalMs": 9.257415999999921,
+      "bytes": 51290,
+      "status": 200,
+      "contentType": "image/webp",
+      "cache": "HIT",
+      "control": "public, max-age=31536000, must-revalidate"
+    },
+    {
+      "page": "/catalog/armatura/armatura-a500s/armatura-a500s",
+      "run": 1,
+      "format": "image/avif",
+      "warm": false,
+      "headersMs": 30.984750000000076,
+      "totalMs": 31.052333999999973,
+      "bytes": 47209,
+      "status": 200,
+      "contentType": "image/avif",
+      "cache": "MISS",
+      "control": "public, max-age=31536000, must-revalidate"
+    },
+    {
+      "page": "/catalog/armatura/armatura-a500s/armatura-a500s",
+      "run": 1,
+      "format": "image/avif",
+      "warm": true,
+      "headersMs": 14.683291999999938,
+      "totalMs": 14.75412499999993,
+      "bytes": 47209,
+      "status": 200,
+      "contentType": "image/avif",
+      "cache": "HIT",
+      "control": "public, max-age=31536000, must-revalidate"
+    },
+    {
+      "page": "/catalog/armatura/armatura-a500s/armatura-a500s",
+      "run": 1,
+      "format": "image/webp",
+      "warm": false,
+      "headersMs": 25.219291000000112,
+      "totalMs": 25.344790999999987,
+      "bytes": 51290,
+      "status": 200,
+      "contentType": "image/webp",
+      "cache": "MISS",
+      "control": "public, max-age=31536000, must-revalidate"
+    },
+    {
+      "page": "/catalog/armatura/armatura-a500s/armatura-a500s",
+      "run": 1,
+      "format": "image/webp",
+      "warm": true,
+      "headersMs": 8.076958999999988,
+      "totalMs": 8.11349999999993,
+      "bytes": 51290,
+      "status": 200,
+      "contentType": "image/webp",
+      "cache": "HIT",
+      "control": "public, max-age=31536000, must-revalidate"
+    },
+    {
+      "page": "/catalog/armatura/armatura-a500s/armatura-a500s",
+      "run": 2,
+      "format": "image/avif",
+      "warm": false,
+      "headersMs": 30.289458000000195,
+      "totalMs": 30.35179100000005,
+      "bytes": 47209,
+      "status": 200,
+      "contentType": "image/avif",
+      "cache": "MISS",
+      "control": "public, max-age=31536000, must-revalidate"
+    },
+    {
+      "page": "/catalog/armatura/armatura-a500s/armatura-a500s",
+      "run": 2,
+      "format": "image/avif",
+      "warm": true,
+      "headersMs": 8.09787499999993,
+      "totalMs": 8.143500000000131,
+      "bytes": 47209,
+      "status": 200,
+      "contentType": "image/avif",
+      "cache": "HIT",
+      "control": "public, max-age=31536000, must-revalidate"
+    },
+    {
+      "page": "/catalog/armatura/armatura-a500s/armatura-a500s",
+      "run": 2,
+      "format": "image/webp",
+      "warm": false,
+      "headersMs": 26.062584000000015,
+      "totalMs": 26.120458999999983,
+      "bytes": 51290,
+      "status": 200,
+      "contentType": "image/webp",
+      "cache": "MISS",
+      "control": "public, max-age=31536000, must-revalidate"
+    },
+    {
+      "page": "/catalog/armatura/armatura-a500s/armatura-a500s",
+      "run": 2,
+      "format": "image/webp",
+      "warm": true,
+      "headersMs": 13.102499999999964,
+      "totalMs": 13.140208999999913,
+      "bytes": 51290,
+      "status": 200,
+      "contentType": "image/webp",
+      "cache": "HIT",
+      "control": "public, max-age=31536000, must-revalidate"
+    }
+  ],
+  "tableRender": [
+    {
+      "name": "RebarVariantCatalog",
+      "rows": 35,
+      "medianSsrMs": 9.141999999999825,
+      "htmlBytes": 253759,
+      "elements": 2005
+    },
+    {
+      "name": "ProfileSheetVariantCatalog",
+      "rows": 8,
+      "medianSsrMs": 1.487875000000031,
+      "htmlBytes": 48552,
+      "elements": 363
+    },
+    {
+      "name": "MetalMeshVariantCatalog",
+      "rows": 7,
+      "medianSsrMs": 1.2167910000000575,
+      "htmlBytes": 37462,
+      "elements": 385
+    }
+  ],
+  "bundlesBefore": [
+    {
+      "route": "/",
+      "htmlBytes": 199309,
+      "scripts": [
+        {
+          "src": "/_next/static/chunks/27jktro2p5rq9.js",
+          "raw": 44414,
+          "gzip": 9238
+        },
+        {
+          "src": "/_next/static/chunks/2-5nk792mwq2y.js",
+          "raw": 150470,
+          "gzip": 40511
+        },
+        {
+          "src": "/_next/static/chunks/3gzxhq9iq6efl.js",
+          "raw": 227315,
+          "gzip": 70980
+        },
+        {
+          "src": "/_next/static/chunks/turbopack-10lq434y9-9i5.js",
+          "raw": 10580,
+          "gzip": 4159
+        },
+        {
+          "src": "/_next/static/chunks/3npwwma57ymf4.js",
+          "raw": 13333,
+          "gzip": 5519
+        },
+        {
+          "src": "/_next/static/chunks/26-uptyeum1ht.js",
+          "raw": 1173753,
+          "gzip": 128548
+        },
+        {
+          "src": "/_next/static/chunks/14mrh2-p_w84d.js",
+          "raw": 54646,
+          "gzip": 12863
+        },
+        {
+          "src": "/_next/static/chunks/15tj4ekt7finv.js",
+          "raw": 31872,
+          "gzip": 11563
+        },
+        {
+          "src": "/_next/static/chunks/0cz1d0mv5g_q7.js",
+          "raw": 112594,
+          "gzip": 39473
+        },
+        {
+          "src": "/_next/static/chunks/0iq1i69206cyl.js",
+          "raw": 23985,
+          "gzip": 7461
+        }
+      ],
+      "jsRaw": 1842962,
+      "jsGzip": 330315
+    },
+    {
+      "route": "/catalog",
+      "htmlBytes": 1564090,
+      "scripts": [
+        {
+          "src": "/_next/static/chunks/27jktro2p5rq9.js",
+          "raw": 44414,
+          "gzip": 9238
+        },
+        {
+          "src": "/_next/static/chunks/2-5nk792mwq2y.js",
+          "raw": 150470,
+          "gzip": 40511
+        },
+        {
+          "src": "/_next/static/chunks/3gzxhq9iq6efl.js",
+          "raw": 227315,
+          "gzip": 70980
+        },
+        {
+          "src": "/_next/static/chunks/turbopack-10lq434y9-9i5.js",
+          "raw": 10580,
+          "gzip": 4159
+        },
+        {
+          "src": "/_next/static/chunks/3npwwma57ymf4.js",
+          "raw": 13333,
+          "gzip": 5519
+        },
+        {
+          "src": "/_next/static/chunks/26-uptyeum1ht.js",
+          "raw": 1173753,
+          "gzip": 128548
+        },
+        {
+          "src": "/_next/static/chunks/14mrh2-p_w84d.js",
+          "raw": 54646,
+          "gzip": 12863
+        },
+        {
+          "src": "/_next/static/chunks/3p5t0tnxg5h7c.js",
+          "raw": 8006,
+          "gzip": 3263
+        },
+        {
+          "src": "/_next/static/chunks/0wxrfo7_ck0vr.js",
+          "raw": 55880,
+          "gzip": 19731
+        },
+        {
+          "src": "/_next/static/chunks/0cz1d0mv5g_q7.js",
+          "raw": 112594,
+          "gzip": 39473
+        },
+        {
+          "src": "/_next/static/chunks/0iq1i69206cyl.js",
+          "raw": 23985,
+          "gzip": 7461
+        }
+      ],
+      "jsRaw": 1874976,
+      "jsGzip": 341746
+    },
+    {
+      "route": "/catalog/armatura",
+      "htmlBytes": 81612,
+      "scripts": [
+        {
+          "src": "/_next/static/chunks/27jktro2p5rq9.js",
+          "raw": 44414,
+          "gzip": 9238
+        },
+        {
+          "src": "/_next/static/chunks/2-5nk792mwq2y.js",
+          "raw": 150470,
+          "gzip": 40511
+        },
+        {
+          "src": "/_next/static/chunks/3gzxhq9iq6efl.js",
+          "raw": 227315,
+          "gzip": 70980
+        },
+        {
+          "src": "/_next/static/chunks/turbopack-10lq434y9-9i5.js",
+          "raw": 10580,
+          "gzip": 4159
+        },
+        {
+          "src": "/_next/static/chunks/3npwwma57ymf4.js",
+          "raw": 13333,
+          "gzip": 5519
+        },
+        {
+          "src": "/_next/static/chunks/26-uptyeum1ht.js",
+          "raw": 1173753,
+          "gzip": 128548
+        },
+        {
+          "src": "/_next/static/chunks/14mrh2-p_w84d.js",
+          "raw": 54646,
+          "gzip": 12863
+        },
+        {
+          "src": "/_next/static/chunks/0qwq_cp3k3bqn.js",
+          "raw": 13421,
+          "gzip": 5261
+        },
+        {
+          "src": "/_next/static/chunks/1af0pu2yhzshl.js",
+          "raw": 63307,
+          "gzip": 14395
+        },
+        {
+          "src": "/_next/static/chunks/1xxbeha2nkxiz.js",
+          "raw": 53496,
+          "gzip": 18962
+        },
+        {
+          "src": "/_next/static/chunks/0cz1d0mv5g_q7.js",
+          "raw": 112594,
+          "gzip": 39473
+        },
+        {
+          "src": "/_next/static/chunks/0iq1i69206cyl.js",
+          "raw": 23985,
+          "gzip": 7461
+        }
+      ],
+      "jsRaw": 1941314,
+      "jsGzip": 357370
+    },
+    {
+      "route": "/catalog/armatura/armatura-a500s",
+      "htmlBytes": 58364,
+      "scripts": [
+        {
+          "src": "/_next/static/chunks/27jktro2p5rq9.js",
+          "raw": 44414,
+          "gzip": 9238
+        },
+        {
+          "src": "/_next/static/chunks/2-5nk792mwq2y.js",
+          "raw": 150470,
+          "gzip": 40511
+        },
+        {
+          "src": "/_next/static/chunks/3gzxhq9iq6efl.js",
+          "raw": 227315,
+          "gzip": 70980
+        },
+        {
+          "src": "/_next/static/chunks/turbopack-10lq434y9-9i5.js",
+          "raw": 10580,
+          "gzip": 4159
+        },
+        {
+          "src": "/_next/static/chunks/3npwwma57ymf4.js",
+          "raw": 13333,
+          "gzip": 5519
+        },
+        {
+          "src": "/_next/static/chunks/26-uptyeum1ht.js",
+          "raw": 1173753,
+          "gzip": 128548
+        },
+        {
+          "src": "/_next/static/chunks/14mrh2-p_w84d.js",
+          "raw": 54646,
+          "gzip": 12863
+        },
+        {
+          "src": "/_next/static/chunks/39odx7seih3db.js",
+          "raw": 15739,
+          "gzip": 5902
+        },
+        {
+          "src": "/_next/static/chunks/0cz1d0mv5g_q7.js",
+          "raw": 112594,
+          "gzip": 39473
+        },
+        {
+          "src": "/_next/static/chunks/0iq1i69206cyl.js",
+          "raw": 23985,
+          "gzip": 7461
+        }
+      ],
+      "jsRaw": 1826829,
+      "jsGzip": 324654
+    },
+    {
+      "route": "/catalog/armatura/armatura-a500s/armatura-a500s",
+      "htmlBytes": 396672,
+      "scripts": [
+        {
+          "src": "/_next/static/chunks/27jktro2p5rq9.js",
+          "raw": 44414,
+          "gzip": 9238
+        },
+        {
+          "src": "/_next/static/chunks/2-5nk792mwq2y.js",
+          "raw": 150470,
+          "gzip": 40511
+        },
+        {
+          "src": "/_next/static/chunks/3gzxhq9iq6efl.js",
+          "raw": 227315,
+          "gzip": 70980
+        },
+        {
+          "src": "/_next/static/chunks/turbopack-10lq434y9-9i5.js",
+          "raw": 10580,
+          "gzip": 4159
+        },
+        {
+          "src": "/_next/static/chunks/3npwwma57ymf4.js",
+          "raw": 13333,
+          "gzip": 5519
+        },
+        {
+          "src": "/_next/static/chunks/26-uptyeum1ht.js",
+          "raw": 1173753,
+          "gzip": 128548
+        },
+        {
+          "src": "/_next/static/chunks/14mrh2-p_w84d.js",
+          "raw": 54646,
+          "gzip": 12863
+        },
+        {
+          "src": "/_next/static/chunks/2q7l60gcfg5bu.js",
+          "raw": 15542,
+          "gzip": 5963
+        },
+        {
+          "src": "/_next/static/chunks/1af0pu2yhzshl.js",
+          "raw": 63307,
+          "gzip": 14395
+        },
+        {
+          "src": "/_next/static/chunks/0-2pcc8l46q0k.js",
+          "raw": 53496,
+          "gzip": 18961
+        },
+        {
+          "src": "/_next/static/chunks/0cz1d0mv5g_q7.js",
+          "raw": 112594,
+          "gzip": 39473
+        },
+        {
+          "src": "/_next/static/chunks/0iq1i69206cyl.js",
+          "raw": 23985,
+          "gzip": 7461
+        }
+      ],
+      "jsRaw": 1943435,
+      "jsGzip": 358071
+    },
+    {
+      "route": "/catalog/otvodi",
+      "htmlBytes": 467645,
+      "scripts": [
+        {
+          "src": "/_next/static/chunks/27jktro2p5rq9.js",
+          "raw": 44414,
+          "gzip": 9238
+        },
+        {
+          "src": "/_next/static/chunks/2-5nk792mwq2y.js",
+          "raw": 150470,
+          "gzip": 40511
+        },
+        {
+          "src": "/_next/static/chunks/3gzxhq9iq6efl.js",
+          "raw": 227315,
+          "gzip": 70980
+        },
+        {
+          "src": "/_next/static/chunks/turbopack-10lq434y9-9i5.js",
+          "raw": 10580,
+          "gzip": 4159
+        },
+        {
+          "src": "/_next/static/chunks/3npwwma57ymf4.js",
+          "raw": 13333,
+          "gzip": 5519
+        },
+        {
+          "src": "/_next/static/chunks/26-uptyeum1ht.js",
+          "raw": 1173753,
+          "gzip": 128548
+        },
+        {
+          "src": "/_next/static/chunks/14mrh2-p_w84d.js",
+          "raw": 54646,
+          "gzip": 12863
+        },
+        {
+          "src": "/_next/static/chunks/0qwq_cp3k3bqn.js",
+          "raw": 13421,
+          "gzip": 5261
+        },
+        {
+          "src": "/_next/static/chunks/1af0pu2yhzshl.js",
+          "raw": 63307,
+          "gzip": 14395
+        },
+        {
+          "src": "/_next/static/chunks/1xxbeha2nkxiz.js",
+          "raw": 53496,
+          "gzip": 18962
+        },
+        {
+          "src": "/_next/static/chunks/0cz1d0mv5g_q7.js",
+          "raw": 112594,
+          "gzip": 39473
+        },
+        {
+          "src": "/_next/static/chunks/0iq1i69206cyl.js",
+          "raw": 23985,
+          "gzip": 7461
+        }
+      ],
+      "jsRaw": 1941314,
+      "jsGzip": 357370
+    },
+    {
+      "route": "/cart",
+      "htmlBytes": 32616,
+      "scripts": [
+        {
+          "src": "/_next/static/chunks/27jktro2p5rq9.js",
+          "raw": 44414,
+          "gzip": 9238
+        },
+        {
+          "src": "/_next/static/chunks/2-5nk792mwq2y.js",
+          "raw": 150470,
+          "gzip": 40511
+        },
+        {
+          "src": "/_next/static/chunks/3gzxhq9iq6efl.js",
+          "raw": 227315,
+          "gzip": 70980
+        },
+        {
+          "src": "/_next/static/chunks/turbopack-10lq434y9-9i5.js",
+          "raw": 10580,
+          "gzip": 4159
+        },
+        {
+          "src": "/_next/static/chunks/3npwwma57ymf4.js",
+          "raw": 13333,
+          "gzip": 5519
+        },
+        {
+          "src": "/_next/static/chunks/26-uptyeum1ht.js",
+          "raw": 1173753,
+          "gzip": 128548
+        },
+        {
+          "src": "/_next/static/chunks/14mrh2-p_w84d.js",
+          "raw": 54646,
+          "gzip": 12863
+        },
+        {
+          "src": "/_next/static/chunks/2vqw2h5hevn--.js",
+          "raw": 8699,
+          "gzip": 3146
+        },
+        {
+          "src": "/_next/static/chunks/0cz1d0mv5g_q7.js",
+          "raw": 112594,
+          "gzip": 39473
+        },
+        {
+          "src": "/_next/static/chunks/0iq1i69206cyl.js",
+          "raw": 23985,
+          "gzip": 7461
+        }
+      ],
+      "jsRaw": 1819789,
+      "jsGzip": 321898
+    }
+  ],
+  "bundlesAfter": [
+    {
+      "route": "/",
+      "htmlBytes": 199309,
+      "scripts": [
+        {
+          "src": "/_next/static/chunks/27jktro2p5rq9.js",
+          "raw": 44414,
+          "gzip": 9238
+        },
+        {
+          "src": "/_next/static/chunks/2-5nk792mwq2y.js",
+          "raw": 150470,
+          "gzip": 40511
+        },
+        {
+          "src": "/_next/static/chunks/3gzxhq9iq6efl.js",
+          "raw": 227315,
+          "gzip": 70980
+        },
+        {
+          "src": "/_next/static/chunks/turbopack-10lq434y9-9i5.js",
+          "raw": 10580,
+          "gzip": 4159
+        },
+        {
+          "src": "/_next/static/chunks/0c7vlci1-68om.js",
+          "raw": 11189,
+          "gzip": 4482
+        },
+        {
+          "src": "/_next/static/chunks/381_pblsv3gyj.js",
+          "raw": 304507,
+          "gzip": 26023
+        },
+        {
+          "src": "/_next/static/chunks/14mrh2-p_w84d.js",
+          "raw": 54646,
+          "gzip": 12863
+        },
+        {
+          "src": "/_next/static/chunks/15tj4ekt7finv.js",
+          "raw": 31872,
+          "gzip": 11563
+        },
+        {
+          "src": "/_next/static/chunks/0cz1d0mv5g_q7.js",
+          "raw": 112594,
+          "gzip": 39473
+        },
+        {
+          "src": "/_next/static/chunks/0iq1i69206cyl.js",
+          "raw": 23985,
+          "gzip": 7461
+        }
+      ],
+      "raw": 971572,
+      "gzip": 226753
+    },
+    {
+      "route": "/catalog",
+      "htmlBytes": 1564090,
+      "scripts": [
+        {
+          "src": "/_next/static/chunks/27jktro2p5rq9.js",
+          "raw": 44414,
+          "gzip": 9238
+        },
+        {
+          "src": "/_next/static/chunks/2-5nk792mwq2y.js",
+          "raw": 150470,
+          "gzip": 40511
+        },
+        {
+          "src": "/_next/static/chunks/3gzxhq9iq6efl.js",
+          "raw": 227315,
+          "gzip": 70980
+        },
+        {
+          "src": "/_next/static/chunks/turbopack-10lq434y9-9i5.js",
+          "raw": 10580,
+          "gzip": 4159
+        },
+        {
+          "src": "/_next/static/chunks/0c7vlci1-68om.js",
+          "raw": 11189,
+          "gzip": 4482
+        },
+        {
+          "src": "/_next/static/chunks/381_pblsv3gyj.js",
+          "raw": 304507,
+          "gzip": 26023
+        },
+        {
+          "src": "/_next/static/chunks/14mrh2-p_w84d.js",
+          "raw": 54646,
+          "gzip": 12863
+        },
+        {
+          "src": "/_next/static/chunks/3kj_hvygyjuwk.js",
+          "raw": 8136,
+          "gzip": 3323
+        },
+        {
+          "src": "/_next/static/chunks/1wxvoghz0ywuh.js",
+          "raw": 56654,
+          "gzip": 20087
+        },
+        {
+          "src": "/_next/static/chunks/0cz1d0mv5g_q7.js",
+          "raw": 112594,
+          "gzip": 39473
+        },
+        {
+          "src": "/_next/static/chunks/0iq1i69206cyl.js",
+          "raw": 23985,
+          "gzip": 7461
+        }
+      ],
+      "raw": 1004490,
+      "gzip": 238600
+    },
+    {
+      "route": "/catalog/armatura",
+      "htmlBytes": 85789,
+      "scripts": [
+        {
+          "src": "/_next/static/chunks/27jktro2p5rq9.js",
+          "raw": 44414,
+          "gzip": 9238
+        },
+        {
+          "src": "/_next/static/chunks/2-5nk792mwq2y.js",
+          "raw": 150470,
+          "gzip": 40511
+        },
+        {
+          "src": "/_next/static/chunks/3gzxhq9iq6efl.js",
+          "raw": 227315,
+          "gzip": 70980
+        },
+        {
+          "src": "/_next/static/chunks/turbopack-10lq434y9-9i5.js",
+          "raw": 10580,
+          "gzip": 4159
+        },
+        {
+          "src": "/_next/static/chunks/0c7vlci1-68om.js",
+          "raw": 11189,
+          "gzip": 4482
+        },
+        {
+          "src": "/_next/static/chunks/381_pblsv3gyj.js",
+          "raw": 304507,
+          "gzip": 26023
+        },
+        {
+          "src": "/_next/static/chunks/14mrh2-p_w84d.js",
+          "raw": 54646,
+          "gzip": 12863
+        },
+        {
+          "src": "/_next/static/chunks/0qwq_cp3k3bqn.js",
+          "raw": 13421,
+          "gzip": 5261
+        },
+        {
+          "src": "/_next/static/chunks/1af0pu2yhzshl.js",
+          "raw": 63307,
+          "gzip": 14395
+        },
+        {
+          "src": "/_next/static/chunks/2sm458e9iw6d5.js",
+          "raw": 54270,
+          "gzip": 19325
+        },
+        {
+          "src": "/_next/static/chunks/0cz1d0mv5g_q7.js",
+          "raw": 112594,
+          "gzip": 39473
+        },
+        {
+          "src": "/_next/static/chunks/0iq1i69206cyl.js",
+          "raw": 23985,
+          "gzip": 7461
+        }
+      ],
+      "raw": 1070698,
+      "gzip": 254171
+    },
+    {
+      "route": "/catalog/armatura/armatura-a500s",
+      "htmlBytes": 58364,
+      "scripts": [
+        {
+          "src": "/_next/static/chunks/27jktro2p5rq9.js",
+          "raw": 44414,
+          "gzip": 9238
+        },
+        {
+          "src": "/_next/static/chunks/2-5nk792mwq2y.js",
+          "raw": 150470,
+          "gzip": 40511
+        },
+        {
+          "src": "/_next/static/chunks/3gzxhq9iq6efl.js",
+          "raw": 227315,
+          "gzip": 70980
+        },
+        {
+          "src": "/_next/static/chunks/turbopack-10lq434y9-9i5.js",
+          "raw": 10580,
+          "gzip": 4159
+        },
+        {
+          "src": "/_next/static/chunks/0c7vlci1-68om.js",
+          "raw": 11189,
+          "gzip": 4482
+        },
+        {
+          "src": "/_next/static/chunks/381_pblsv3gyj.js",
+          "raw": 304507,
+          "gzip": 26023
+        },
+        {
+          "src": "/_next/static/chunks/14mrh2-p_w84d.js",
+          "raw": 54646,
+          "gzip": 12863
+        },
+        {
+          "src": "/_next/static/chunks/39odx7seih3db.js",
+          "raw": 15739,
+          "gzip": 5902
+        },
+        {
+          "src": "/_next/static/chunks/0cz1d0mv5g_q7.js",
+          "raw": 112594,
+          "gzip": 39473
+        },
+        {
+          "src": "/_next/static/chunks/0iq1i69206cyl.js",
+          "raw": 23985,
+          "gzip": 7461
+        }
+      ],
+      "raw": 955439,
+      "gzip": 221092
+    },
+    {
+      "route": "/catalog/armatura/armatura-a500s/armatura-a500s",
+      "htmlBytes": 400207,
+      "scripts": [
+        {
+          "src": "/_next/static/chunks/27jktro2p5rq9.js",
+          "raw": 44414,
+          "gzip": 9238
+        },
+        {
+          "src": "/_next/static/chunks/2-5nk792mwq2y.js",
+          "raw": 150470,
+          "gzip": 40511
+        },
+        {
+          "src": "/_next/static/chunks/3gzxhq9iq6efl.js",
+          "raw": 227315,
+          "gzip": 70980
+        },
+        {
+          "src": "/_next/static/chunks/turbopack-10lq434y9-9i5.js",
+          "raw": 10580,
+          "gzip": 4159
+        },
+        {
+          "src": "/_next/static/chunks/0c7vlci1-68om.js",
+          "raw": 11189,
+          "gzip": 4482
+        },
+        {
+          "src": "/_next/static/chunks/381_pblsv3gyj.js",
+          "raw": 304507,
+          "gzip": 26023
+        },
+        {
+          "src": "/_next/static/chunks/14mrh2-p_w84d.js",
+          "raw": 54646,
+          "gzip": 12863
+        },
+        {
+          "src": "/_next/static/chunks/0dpld02_9yauy.js",
+          "raw": 15845,
+          "gzip": 6092
+        },
+        {
+          "src": "/_next/static/chunks/1af0pu2yhzshl.js",
+          "raw": 63307,
+          "gzip": 14395
+        },
+        {
+          "src": "/_next/static/chunks/1qxdp3f8h1qdc.js",
+          "raw": 54270,
+          "gzip": 19322
+        },
+        {
+          "src": "/_next/static/chunks/0cz1d0mv5g_q7.js",
+          "raw": 112594,
+          "gzip": 39473
+        },
+        {
+          "src": "/_next/static/chunks/0iq1i69206cyl.js",
+          "raw": 23985,
+          "gzip": 7461
+        }
+      ],
+      "raw": 1073122,
+      "gzip": 254999
+    },
+    {
+      "route": "/catalog/otvodi",
+      "htmlBytes": 472357,
+      "scripts": [
+        {
+          "src": "/_next/static/chunks/27jktro2p5rq9.js",
+          "raw": 44414,
+          "gzip": 9238
+        },
+        {
+          "src": "/_next/static/chunks/2-5nk792mwq2y.js",
+          "raw": 150470,
+          "gzip": 40511
+        },
+        {
+          "src": "/_next/static/chunks/3gzxhq9iq6efl.js",
+          "raw": 227315,
+          "gzip": 70980
+        },
+        {
+          "src": "/_next/static/chunks/turbopack-10lq434y9-9i5.js",
+          "raw": 10580,
+          "gzip": 4159
+        },
+        {
+          "src": "/_next/static/chunks/0c7vlci1-68om.js",
+          "raw": 11189,
+          "gzip": 4482
+        },
+        {
+          "src": "/_next/static/chunks/381_pblsv3gyj.js",
+          "raw": 304507,
+          "gzip": 26023
+        },
+        {
+          "src": "/_next/static/chunks/14mrh2-p_w84d.js",
+          "raw": 54646,
+          "gzip": 12863
+        },
+        {
+          "src": "/_next/static/chunks/0qwq_cp3k3bqn.js",
+          "raw": 13421,
+          "gzip": 5261
+        },
+        {
+          "src": "/_next/static/chunks/1af0pu2yhzshl.js",
+          "raw": 63307,
+          "gzip": 14395
+        },
+        {
+          "src": "/_next/static/chunks/2sm458e9iw6d5.js",
+          "raw": 54270,
+          "gzip": 19325
+        },
+        {
+          "src": "/_next/static/chunks/0cz1d0mv5g_q7.js",
+          "raw": 112594,
+          "gzip": 39473
+        },
+        {
+          "src": "/_next/static/chunks/0iq1i69206cyl.js",
+          "raw": 23985,
+          "gzip": 7461
+        }
+      ],
+      "raw": 1070698,
+      "gzip": 254171
+    },
+    {
+      "route": "/cart",
+      "htmlBytes": 32616,
+      "scripts": [
+        {
+          "src": "/_next/static/chunks/27jktro2p5rq9.js",
+          "raw": 44414,
+          "gzip": 9238
+        },
+        {
+          "src": "/_next/static/chunks/2-5nk792mwq2y.js",
+          "raw": 150470,
+          "gzip": 40511
+        },
+        {
+          "src": "/_next/static/chunks/3gzxhq9iq6efl.js",
+          "raw": 227315,
+          "gzip": 70980
+        },
+        {
+          "src": "/_next/static/chunks/turbopack-10lq434y9-9i5.js",
+          "raw": 10580,
+          "gzip": 4159
+        },
+        {
+          "src": "/_next/static/chunks/0c7vlci1-68om.js",
+          "raw": 11189,
+          "gzip": 4482
+        },
+        {
+          "src": "/_next/static/chunks/381_pblsv3gyj.js",
+          "raw": 304507,
+          "gzip": 26023
+        },
+        {
+          "src": "/_next/static/chunks/14mrh2-p_w84d.js",
+          "raw": 54646,
+          "gzip": 12863
+        },
+        {
+          "src": "/_next/static/chunks/2vqw2h5hevn--.js",
+          "raw": 8699,
+          "gzip": 3146
+        },
+        {
+          "src": "/_next/static/chunks/0cz1d0mv5g_q7.js",
+          "raw": 112594,
+          "gzip": 39473
+        },
+        {
+          "src": "/_next/static/chunks/0iq1i69206cyl.js",
+          "raw": 23985,
+          "gzip": 7461
+        }
+      ],
+      "raw": 948399,
+      "gzip": 218336
+    }
+  ]
+}

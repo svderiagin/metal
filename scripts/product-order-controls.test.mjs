@@ -29,7 +29,7 @@ function setup(overrides = {}) {
     '@/hooks/useCart': {useCart: () => cart},
     '@/components/ui/Button': {Button: 'button', ButtonLink: 'link'},
     '@/components/ui/Input': {Input: 'input'},
-    '@/lib/variantPresentation': {getQuantityUnit: () => 'т'},
+    '@/lib/variantPresentation': {getQuantityUnit: () => 'т', requiresWholeRozmetQuantity: () => false},
     './QuoteRequestButton': {QuoteRequestButton: 'quote'},
     '@/lib/quoteRequest': readProjectData('lib/quoteRequest.ts'),
     './FilterPanel.module.css': new Proxy({}, {get: (_, key) => key}),

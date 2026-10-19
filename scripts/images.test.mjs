@@ -14,6 +14,7 @@ const {normalizePipeWeight}=readProjectData('lib/pipeWeight.ts');
 const {isPublicProduct}=readProjectData('data/catalog-visibility.ts');
 const imported=read('data/imported-catalog.json');
 const {productVariants,existingVariants}=readProjectData('data/products/index.ts');
+const retainedProductVariants=productVariants.filter(product=>!product.id.startsWith('rozmet-'));
 const original=[
  ...existingVariants.filter(p=>!imported.matchedIds.includes(p.id)),
  ...imported.products,
@@ -21,9 +22,9 @@ const original=[
 const digest=b=>crypto.createHash('sha256').update(b).digest('hex');
 
 test('image overlay preserves every product field other than image references',()=>{
- assert.equal(productVariants.length,original.length);
+ assert.equal(retainedProductVariants.length,original.length);
  for(let i=0;i<original.length;i++){
-  const {imageUrls:a,...before}=original[i];const {imageUrls:b,...after}=productVariants[i];
+  const {imageUrls:a,...before}=original[i];const {imageUrls:b,...after}=retainedProductVariants[i];
   assert.equal(JSON.stringify(after),JSON.stringify(before));
   if(!mapping.products[original[i].id])assert.equal(JSON.stringify(b),JSON.stringify(a.length?[mapping.fallback]:[]));
  }
@@ -50,7 +51,7 @@ test('copied image bytes match preserved supplier evidence',{skip:evidenceSkip},
  }
 });
 test('incompatible forms keep fallbacks instead of inheriting generic category imagery',()=>{
- for(const p of productVariants){
+ for(const p of retainedProductVariants){
   if(p.form==='coil'||(/овальн|рифлен.*ромб|рифлён.*ромб|RAL|полимер/i.test(p.name)&&!p.profileMark))assert(!mapping.products[p.id],p.name);
   if(report&&p.categoryId==='cat-arm'&&/А240|А1(?:,|\s)/.test(p.name)&&mapping.products[p.id])assert(report.records.some(r=>r.targetId===p.id&&r.role==='smooth'),p.name);
   if(p.categoryId==='cat-otv'||p.categoryId==='cat-she'||p.categoryId==='cat-cve'||p.categoryId==='cat-trn')assert(!mapping.products[p.id],p.name);
