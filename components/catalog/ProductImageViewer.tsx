@@ -7,11 +7,12 @@ import {DesktopImagePreload} from "./DesktopImagePreload";
 
 const imageSizes = "(min-width: 768px) 672px, (min-width: 640px) calc(100vw - 40px), calc(100vw - 32px)";
 
-export function ProductImageViewer({src, name, presentation = "page", caption}: {
+export function ProductImageViewer({src, name, presentation = "page", caption, framed = false}: {
   src: string;
   name: string;
   presentation?: "page" | "table" | "card";
   caption?: ReactNode;
+  framed?: boolean;
 }) {
   const [open, setOpen] = useState(false);
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -47,10 +48,10 @@ export function ProductImageViewer({src, name, presentation = "page", caption}: 
         style={presentation === "table" ? {width: 176} : undefined}
         className={`group mx-auto block cursor-zoom-in rounded-xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-slate-600 dark:focus-visible:outline-red-300 ${presentation === "table" ? "w-44 max-w-full" : presentation === "card" ? "mb-4 w-full" : "mt-6 w-full max-w-2xl"}`}
       >
-        <span className={`relative block overflow-hidden rounded-xl bg-white ${isPreview ? "aspect-[4/3] ring-1 ring-inset ring-slate-200" : "aspect-[2/1]"}`}>
+        <span className={`relative block overflow-hidden rounded-xl bg-white ${isPreview ? framed ? "aspect-[4/3] border border-slate-300 shadow-[0_1px_3px_rgba(15,23,42,0.12),inset_0_0_0_1px_rgba(255,255,255,0.85)] dark:border-slate-600" : "aspect-[4/3] ring-1 ring-inset ring-slate-200" : "aspect-[2/1]"}`}>
           <Image src={imageUrl} alt={name} fill
             sizes={triggerSizes}
-            className={`object-contain object-center ${isPreview ? "p-1.5" : ""}`}/>
+            className={`object-contain object-center ${isPreview && !framed ? "p-1.5" : ""}`}/>
           {isPreview ? <span aria-hidden="true" className="absolute bottom-1.5 right-1.5 flex h-6 w-6 items-center justify-center rounded-md bg-slate-950/75 text-white transition group-hover:bg-slate-950">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" className="h-4 w-4"><path d="M9 3H3v6m12-6h6v6M3 15v6h6m12-6v6h-6"/></svg>
           </span> : <span aria-hidden="true" className="absolute bottom-3 right-3 rounded-lg bg-slate-950/80 px-3 py-1.5 text-xs font-semibold text-white transition group-hover:bg-slate-950">Увеличить</span>}
@@ -72,8 +73,10 @@ export function ProductImageViewer({src, name, presentation = "page", caption}: 
               <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-5 w-5"><path d="m6 6 12 12M6 18 18 6"/></svg>
             </button>
           </div>
-          <div className="relative aspect-[4/3] max-h-[60dvh] w-full bg-white">
-            <Image src={imageUrl} alt={name} fill loading="eager" sizes="(max-width: 768px) calc(100vw - 32px), 768px" className="object-contain p-3 sm:p-4"/>
+          <div className={framed
+            ? "relative mx-3 my-3 aspect-[4/3] max-h-[60dvh] overflow-hidden rounded-xl border border-slate-300 bg-white shadow-[0_2px_10px_rgba(15,23,42,0.10),inset_0_0_0_1px_rgba(255,255,255,0.9)] dark:border-slate-600 sm:mx-4 sm:my-4"
+            : "relative aspect-[4/3] max-h-[60dvh] w-full bg-white"}>
+            <Image src={imageUrl} alt={name} fill loading="eager" sizes="(max-width: 768px) calc(100vw - 32px), 768px" className={`object-contain ${framed ? "" : "p-3 sm:p-4"}`}/>
           </div>
           {caption && <div className="border-t border-slate-200 p-4 text-left text-sm font-normal leading-relaxed text-slate-600 dark:border-slate-700 dark:text-slate-300 sm:p-6">{caption}</div>}
         </> : <button type="button" onClick={() => setOpen(false)}

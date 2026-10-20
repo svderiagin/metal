@@ -72,9 +72,29 @@ test('channel captions contain brief guidance and reference standard without rep
   for (const variant of productVariants.filter(item => item.categoryId === 'rozmet-cat-shveller')) {
     const preview = ChannelProductPreview({variant, compact: true});
     assert.equal(preview.props.presentation, 'table');
+    assert.equal(preview.props.framed, variant.id === 'rozmet-2235');
     const caption = JSON.stringify(preview.props.caption);
     assert.match(caption, /ГОСТ 8240-97/);
+    assert.match(caption, /\/documents\/gost-8240-97\.pdf/);
+    assert.doesNotMatch(caption, /https?:\/\//);
     assert.doesNotMatch(caption, /Параметры:|Толщина|Высота|Характеристики|4,84|Условия оплаты/);
     assert.ok(caption.includes('соответствие конкретной партии'));
+  }
+});
+
+test('channel standard is stored locally and every channel reference uses it', () => {
+  const localStandard = '/documents/gost-8240-97.pdf';
+  const documentPath = `public${localStandard}`;
+  const bytes = fs.readFileSync(documentPath);
+  assert.ok(bytes.length > 100_000);
+  assert.equal(bytes.subarray(0, 5).toString(), '%PDF-');
+
+  for (const file of [
+    'components/catalog/ChannelProductPreview.tsx',
+    'components/catalog/ChannelSpecificationNote.tsx',
+  ]) {
+    const source = fs.readFileSync(file, 'utf8');
+    assert.match(source, new RegExp(localStandard.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
+    assert.doesNotMatch(source, /metall-energy\.ru|https?:\/\//);
   }
 });

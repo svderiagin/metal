@@ -42,6 +42,16 @@ import {ChannelProductPreview} from "./ChannelProductPreview";
 
 type SortMode = "relevance" | "availability" | "price-asc" | "price-desc" | "size" | "name";
 
+// Ширина колонок таблицы «Швеллер» в процентах. Сумма должна оставаться равной 100.
+const channelColumnWidths = [
+  9,  // Наименование
+  26, // Изображение
+  28, // Характеристики
+  13, // Цена
+  11, // Кол-во, м
+  13, // В корзину
+] as const;
+
 export function ProductVariantCatalog(props: {variants: ProductVariant[]; categorySlug: string}) {
   return <QuoteRequestProvider>
     <VariantCatalogContent {...props}/>
@@ -107,7 +117,7 @@ function GenericProductVariantCatalog({
   const filterKeys = getVariantFilterKeys(categorySlug);
   const isChannel = categorySlug === "shveller";
   const showAvailability = !isChannel;
-  const columnWidths = showAvailability ? [25, 27, 15, 10, 9, 14] : [13, 24, 28, 13, 10, 12];
+  const columnWidths = showAvailability ? [25, 27, 15, 10, 9, 14] : channelColumnWidths;
   const [filters, setFilters] = useState<Partial<Record<ProductAttributeKey, string>>>({});
   const [stockOnly, setStockOnly] = useState(false);
   const [minimumPrice, setMinimumPrice] = useState("");
@@ -254,18 +264,18 @@ function GenericProductVariantCatalog({
       {results.length ? (
         <>
           <div className={`hidden ${isChannel ? "overflow-x-auto" : "overflow-hidden"} rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-sm xl:block`}>
-            <table className={isChannel ? `${tableStyles.table} ${tableStyles.compactTable} text-center text-sm` : "w-full table-fixed border-collapse text-left text-sm"}>
+            <table className={isChannel ? `${tableStyles.table} text-center text-sm` : "w-full table-fixed border-collapse text-left text-sm"}>
               <colgroup>{columnWidths.map((width, index) => <col key={index} style={{width: `${width}%`}}/>)}</colgroup>
               <thead className="bg-slate-900 text-white">
                 <tr>
                   {isChannel ? <>
-                    <th scope="col" className="whitespace-nowrap px-2 py-3 font-semibold">Наименование</th>
-                    <th scope="col" className="px-2 py-3 font-semibold">Изображение</th>
+                    <th scope="col" className="whitespace-nowrap py-3 pl-4 pr-1 font-semibold">Наименование</th>
+                    <th scope="col" className="-translate-x-2 px-2 py-3 font-semibold">Изображение</th>
                   </> : <th className="p-3 font-semibold">Полное обозначение</th>}
-                  <th className={isChannel ? "px-3 py-3 text-left font-semibold" : "p-3 font-semibold"}>Характеристики</th>
+                  <th className={isChannel ? "py-3 pl-5 pr-3 text-left font-semibold" : "p-3 font-semibold"}>Характеристики</th>
                   <th className="px-2 py-3 font-semibold">Цена</th>
                   {showAvailability && <th className="px-2 py-3 font-semibold">Наличие</th>}
-                  <th className="px-1.5 py-3 font-semibold">Кол-во</th>
+                  <th className="px-1.5 py-3 font-semibold">{isChannel ? "Кол-во, м" : "Кол-во"}</th>
                   <th className="px-2 py-3 text-center"><span className="sr-only">Действие</span></th>
                 </tr>
               </thead>
@@ -273,10 +283,10 @@ function GenericProductVariantCatalog({
                 {visible.map((variant) => (
                   <tr id={`variant-${variant.id}`} key={variant.id} className="border-t border-slate-200 dark:border-slate-700 align-middle">
                     {isChannel ? <>
-                      <th scope="row" className="px-3 py-4 font-semibold">{channelProfileName(variant.name)}</th>
-                      <td className="px-2 py-4"><ChannelProductPreview variant={variant} compact/></td>
+                      <th scope="row" className="py-4 pl-4 pr-1 font-semibold">{channelProfileName(variant.name)}</th>
+                      <td className="-translate-x-2 px-2 py-4"><ChannelProductPreview variant={variant} compact/></td>
                     </> : <td className="break-words p-3"><CatalogImage src={variant.imageUrls[0]} name={variant.name} compact/><strong>{variant.name}</strong></td>}
-                    <td className={`break-words ${isChannel ? "px-3 py-4 text-left" : "p-3"}`}><VariantSpecifications variant={variant} showDetails={!isChannel}/></td>
+                    <td className={`break-words ${isChannel ? "py-4 pl-5 pr-3 text-left" : "p-3"}`}><VariantSpecifications variant={variant} showDetails={!isChannel}/></td>
                     <td className="break-words px-2 py-3">
                       <strong className={isChannel ? "font-semibold tabular-nums" : undefined}>{variant.quoteOnly ? "Цена по запросу" : `${variant.priceQualifier === "from" ? "от " : ""}${formatUnitPrice(variant.price, variant.priceUnit)}`}</strong>
                     </td>

@@ -8,6 +8,9 @@ const images = imageSources.map(url=>({source:url,local:`/images/catalog/rozmet/
 const localImage = new Map(images.map(image => [image.source, image.local]));
 const current = JSON.parse(fs.readFileSync('imports/rozmet-protected.snapshot.json','utf8')).products;
 const mapping = JSON.parse(fs.readFileSync('data/catalog-images.json', 'utf8'));
+const categoryImageOverrides = {
+  'rozmet-cat-shveller': '/images/catalog/shveller/shweller-main.jpg',
+};
 const categories = [], subcategories = [], products = [], sections = [];
 const slugOf = url => new URL(url).pathname.split('/').filter(Boolean).at(-1).replaceAll('_', '-');
 const hash = value => crypto.createHash('sha256').update(value).digest('hex').slice(0, 8);
@@ -20,7 +23,7 @@ for (const url of source.roots) {
   const section = source.sections.find(item => item.url === url);
   const slug = slugOf(url), id = `rozmet-cat-${slug}`;
   const children = source.sections.filter(item => item.url !== url && item.url.startsWith(url));
-  const imageUrl = localImage.get(section.image) ?? mapping.fallback;
+  const imageUrl = categoryImageOverrides[id] ?? localImage.get(section.image) ?? mapping.fallback;
   categories.push({id, name:section.name, slug, shortDescription:section.intro || shorten(section.details),
     description:[section.intro,section.details].filter(Boolean).join('\n\n'),
     ...(section.intro && section.details ? {descriptionSections:{intro:section.intro,title:`Подробнее о категории «${section.name}»`,details:section.details}} : {}),

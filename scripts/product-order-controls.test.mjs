@@ -6,7 +6,7 @@ import ts from 'typescript';
 import {readProjectData} from './project-data.mjs';
 
 // Render the real component and exercise its event handlers with a cart boundary.
-function setup(overrides = {}) {
+function setup(overrides = {}, componentProps = {}) {
   let cursor = 0;
   const state = [];
   const timers = [];
@@ -45,8 +45,8 @@ function setup(overrides = {}) {
   function nodes(node) { return !node || typeof node !== 'object' ? [] : [node, ...[node.props?.children].flat().flatMap(nodes)]; }
   function render() {
     cursor = 0;
-    const tree = nodes(testModule.exports.ProductOrderControls({variant, view: 'table'}));
-    return {input: tree.find(n => n.type === 'input').props, action: tree.find(n => n.type === 'button' || n.type === 'link').props};
+    const tree = nodes(testModule.exports.ProductOrderControls({variant, view: 'table', ...componentProps}));
+    return {tree, input: tree.find(n => n.type === 'input').props, action: tree.find(n => n.type === 'button' || n.type === 'link').props};
   }
   return {cart, calls, timers, render, change: value => render().input.onChange({target: {value}})};
 }
@@ -110,4 +110,12 @@ test('on-order action is a quote link carrying quantity and calculable weight', 
   h.cart.lines = [{productId: 'product', quantity: 2.5}];
   h.change('0'); assert.equal(h.render().action.children, 'Удалить');
   h.render().action.onClick(); assert.equal(h.render().action.children, 'Удалено');
+});
+
+test('reference table quantity matches the centered rebar input format', () => {
+  const rendered = setup({}, {referenceStyle: true}).render();
+  assert.equal(rendered.input.inputMode, 'decimal');
+  assert.equal(rendered.input.placeholder, '0');
+  assert.match(rendered.input.className, /text-center/);
+  assert.equal(rendered.tree.some(node => node.props?.children === 'т'), false);
 });

@@ -9,6 +9,7 @@ import {CatalogSidebar} from "@/components/catalog/CatalogSidebar";
 import {CatalogDescription} from "@/components/catalog/CatalogDescription";
 import {ProductTypeResults} from "@/components/catalog/ProductTypeResults";
 import {ProductVariantCatalog} from "@/components/catalog/ProductVariantCatalog";
+import {ProductImageViewer} from "@/components/catalog/ProductImageViewer";
 import {PageContainer} from "@/components/layout/PageContainer";
 import {ButtonLink} from "@/components/ui/Button";
 import {
@@ -47,6 +48,46 @@ export default async function CategoryPage({params}: Props) {
   const hasImage = category.id !== "cat-pnf" && !mainImageUrl.endsWith(".svg");
   const introDescription = category.descriptionSections?.intro ?? category.description;
   const detailedDescription = category.descriptionSections?.details;
+  const useProductPageLayout = category.slug === "shveller";
+
+  if (useProductPageLayout) {
+    return (
+      <PageContainer className="py-8 sm:py-10 lg:py-12">
+        <Breadcrumbs items={[{label: "Каталог", href: "/catalog"}, {label: category.name}]}/>
+        <div className="grid gap-7 lg:grid-cols-[280px_minmax(0,1fr)]">
+          <div className="lg:row-span-2 lg:[&>aside]:h-full">
+            <Suspense fallback={<div className="h-96 animate-pulse rounded-xl bg-slate-200 dark:bg-slate-700"/>}>
+              <CatalogSidebar activeSlug={category.slug}/>
+            </Suspense>
+          </div>
+          <div className="min-w-0">
+            <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-900 sm:p-6 lg:p-8">
+              <p className="text-sm font-bold uppercase tracking-[0.16em] text-red-700 dark:text-red-400">
+                Категория
+              </p>
+              <h1 className="mt-2 break-words text-3xl font-black sm:text-4xl">{category.name}</h1>
+              {hasImage && <ProductImageViewer src={mainImageUrl} name={category.name}/>}
+              <CatalogDescription description={introDescription}/>
+            </div>
+          </div>
+          <ProductVariantCatalog variants={variants} categorySlug={category.slug}/>
+          <div className="min-w-0 lg:col-start-2">
+            {detailedDescription && <section className="max-w-[800px]" aria-labelledby={`${category.id}-details-heading`}>
+              <h2 id={`${category.id}-details-heading`} className="text-2xl font-bold leading-tight">
+                {category.descriptionSections?.title ?? `Подробнее о категории «${category.name}»`}
+              </h2>
+              <CatalogDescription description={detailedDescription} variant="categoryDetails" className="mt-4"/>
+            </section>}
+            <div className="mt-10 rounded-lg bg-slate-900 p-6 text-white">
+              <h2 className="text-xl font-bold">Нужна комплектация по спецификации?</h2>
+              <p className="mt-2 text-slate-300">Опишите позиции и необходимые услуги — подготовим единый расчёт.</p>
+              <ButtonLink href="/#request" className="mt-5">Запросить расчёт</ButtonLink>
+            </div>
+          </div>
+        </div>
+      </PageContainer>
+    );
+  }
 
   return (
     <PageContainer className="py-8 sm:py-10 lg:py-12">
