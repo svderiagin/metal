@@ -1,6 +1,6 @@
 ---
 name: metal-frontend-catalog
-description: Maintain the metal-frontend catalog, product tables, cart behavior, search, and category pages in this repository. Use for code or data changes under /Users/sergei/Projects/metal-frontend; do not use for unrelated websites.
+description: Maintain metal-frontend catalog data, hierarchy, category routes, product tables, search, and supplier imports. Use for catalog changes in this repository; pure styling and checkout/API work have separate skills.
 ---
 
 # Metal Frontend Catalog
@@ -12,11 +12,11 @@ Work from the repository root. Preserve the existing visual system and data mode
 Run these before opening large catalog files:
 
 ```bash
-node .agents/skills/metal-frontend-catalog/scripts/catalog_state.mjs
+node .agents/skills/metal-frontend-catalog/scripts/catalog_state.mjs --summary
 git status --short
 ```
 
-Use the compact state output to identify the relevant category and invariants. Search with `rg`, then read only the component, data module, and focused test for the requested area. Do not inspect `data/imported-catalog.json`, snapshots, or broad documentation unless the task actually changes imported data or the audit fails.
+Use the summary for totals and protected-data checks; omit `--summary` only when category counts help. Search with `rg`, then read only the component, data module, and focused test for the requested area. Do not print full imported JSON, snapshots, or broad documentation. For a supplier record, select the ID and relevant fields programmatically.
 
 Follow `AGENTS.md`. When changing a Next.js API or convention, read the matching file in `node_modules/next/dist/docs/` first. Ordinary copy or catalog-data edits do not require broad Next.js documentation review.
 
@@ -27,18 +27,15 @@ Follow `AGENTS.md`. When changing a Next.js API or convention, read the matching
 - These six protected category IDs stay first in this order: `cat-arm`, `cat-trp`, `cat-trk`, `cat-pnf`, `cat-mesh`, `cat-bal`. Owner-approved rozmet.ru content follows them; see `docs/rozmet-import.md` for its separate data files and source evidence.
 - Treat `imports/protected-catalog.snapshot.json` and `scripts/catalog-pruning.test.mjs` as the regression guard. Update them only when the user explicitly requests a change to the retained catalog.
 - Keep identifiers, slugs, units, prices, and cart calculations stable unless the request changes them. Never infer missing commercial or technical facts.
-- Reuse the existing category-specific table closest to the requested product family. Do not add dependencies or create another design system.
+- Reuse the existing category-specific table closest to the requested product family. Direct-product categories use the table at category level; `internal: true` subcategories are adapters, not extra navigation levels.
 - Import tooling must not restore removed categories. Run `npm run catalog:import` only when the user requests import work; it rewrites generated data.
 
 Read [references/project-map.md](references/project-map.md) when the task changes catalog structure, product ordering, search, tables, cart calculations, or imports.
 
-## Efficient workflow
+## Verification
 
-1. Identify the smallest affected data module/component and its focused test.
-2. Record a baseline only for invariants at risk. Use the state script instead of printing product arrays.
-3. Make the narrow edit. Keep unrelated uncommitted work intact.
-4. Run the focused test first. Use `node --test scripts/<area>.test.mjs`.
-5. After the implementation is stable, run `npx tsc --noEmit`, `npm run lint`, `npm test`, and `npm run build` once. Do not repeat full checks after changes that cannot affect their result; run the focused check instead.
-6. Use the browser only for visual or interaction changes. Verify the relevant localhost route and one failure/edge state, then stop.
+Follow [the shared check matrix](../../../docs/development-workflow.md) (repository `docs/development-workflow.md`). Start with the area's test from the project map. Recheck counts/protected data when the edit can affect them. Price/product edits also need the generated cart projection refreshed before browser checks; do not regenerate supplier imports for that.
 
-Report the changed behavior, retained catalog counts, focused/full checks, and any real limitation. Avoid command transcripts and large data dumps.
+Verify desktop tables and mobile cards when behavior or layout changes. Preserve search/cart links using `#variant-<id>` and their mobile targets; `hooks/useLinkedVariant.ts` reveals filtered or collapsed rows.
+
+Report changed behavior, relevant checks and limitations; include counts only when catalog membership changed or was at risk.

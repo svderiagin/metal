@@ -1,0 +1,4 @@
+interface:
+  display_name: "Metal Frontend Orders"
+  short_description: "Корзина, расчёты, формы и API сайта metal-frontend"
+  default_prompt: "Use $metal-frontend-orders to update the purchase or inquiry flow and verify its calculations and failure state."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Metal Frontend UI"
+  short_description: "Вёрстка, темы и изображения сайта metal-frontend"
+  default_prompt: "Use $metal-frontend-ui to update this site's interface and verify the affected screen."

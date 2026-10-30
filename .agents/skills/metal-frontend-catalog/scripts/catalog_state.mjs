@@ -27,7 +27,7 @@ const exact = snapshot ? {
   products: JSON.stringify(productVariants.filter(product => protectedIds.has(product.categoryId))) === JSON.stringify(snapshot.products),
 } : null;
 
-console.log(JSON.stringify({
+const report = {
   totals: {categories: categories.length, subcategories: subcategories.length, products: productVariants.length},
   categories: categories.map(category => ({
     id: category.id,
@@ -37,7 +37,12 @@ console.log(JSON.stringify({
   })),
   orphans,
   protectedSnapshotExact: exact,
-}, null, 2));
+};
+if (process.argv.includes('--summary')) {
+  console.log(JSON.stringify({totals: report.totals, orphans: report.orphans, protectedSnapshotExact: report.protectedSnapshotExact}));
+} else {
+  console.log(JSON.stringify(report, null, 2));
+}
 
 if (orphans.subcategories.length || orphans.products.length || (exact && Object.values(exact).includes(false))) {
   process.exitCode = 1;

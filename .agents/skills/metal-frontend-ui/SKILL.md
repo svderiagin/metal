@@ -1,0 +1,35 @@
+---
+name: metal-frontend-ui
+description: Edit metal-frontend layout, responsive styling, theme, navigation, images, home and informational pages. Use for visual and accessibility changes in this repository; catalog facts and order calculations have separate skills.
+---
+
+# Metal Frontend UI
+
+Preserve the existing visual language unless the user requests a redesign: red actions, slate surfaces, Arial, rounded panels, light/dark/system themes. Reuse the nearest existing component rather than adding a UI library.
+
+## Find the owner
+
+| Task | Start here |
+| --- | --- |
+| Page width, header/menu/footer | `components/layout/`; `PageContainer.tsx` sets 1360 px maximum; links in `lib/constants.ts` |
+| Company facts | `lib/companyDetails.ts`; do not invent contact or commercial details |
+| Home sections/carousel | `components/home/`, `data/hero-slides.ts`; `docs/hero-carousel.md` only for carousel changes |
+| Shared controls | `components/ui/`; catalog controls also use `FilterPanel.module.css`, `RebarTable.module.css` |
+| Themes | `app/globals.css`, `lib/theme.ts`, `components/layout/ThemeSwitch.tsx`; details: `docs/theme.md` |
+| Product photos/dialog | `CatalogImage.tsx`, `ProductImageViewer.tsx`, `ChannelProductPreview.tsx`, `lib/catalog-image.ts` |
+| Category layout | `app/catalog/[categorySlug]/page.tsx`; contains special layout branches. Table/card markup lives in `components/catalog/`. |
+| About/delivery/services/contacts/privacy | Corresponding `app/<route>/page.tsx`; form behavior is covered by the orders skill |
+
+## Non-obvious constraints
+
+- Theme initialization runs before paint in `app/layout.tsx`; preserve the stable server snapshot and existing `suppressHydrationWarning` on `html`. Add dark surfaces, borders, text and state colors together. Do not recolor product photos with filters.
+- Table and mobile-card markup often coexist in one component. Change both presentations when the request affects shared behavior; scope browser locators to the visible control. Check where the category/sidebar appears before assuming no horizontal overflow means good mobile usability.
+- Keep image geometry reserved, use the existing URL version helper, and size downloads to rendered width. For new/replaced files read the relevant part of `docs/catalog-images.md`; for loading regressions read `docs/image-performance.md`. Old image-coverage counts are historical.
+- Before changing `next/image`, read `node_modules/next/dist/docs/01-app/03-api-reference/02-components/image.md`. Measure the actual visible LCP candidate; avoid preloading every image or copying deprecated `priority` usage.
+- Product previews use a native dialog, Escape, scroll locking and focus return. Preserve these when changing the presentation.
+
+## Verify proportionally
+
+Use [the shared check matrix](../../../docs/development-workflow.md). Check the changed route at desktop and mobile for responsive edits; check both themes for new colors. Test one relevant empty/error/interaction state. Menu/dialog changes need keyboard and focus verification. Existing focused tests: `theme.test.mjs`, `hero-loading.test.mjs`, `images.test.mjs`, `product-image-preview.test.mjs` in `scripts/`.
+
+Do not change product prices, identifiers or supplier evidence to achieve a visual result. Report what changed, what was actually viewed/tested, and material limitations.
