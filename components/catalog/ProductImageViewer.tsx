@@ -120,7 +120,7 @@ export function ProductImageViewer({src, name, presentation = "page", caption, f
         onClick={event => {if (isPreview && event.target === event.currentTarget) close();}}
         style={isExpandedPreview ? {width: "min(1000px, calc(100vw - 32px), calc((90dvh - 32px) * 4 / 3 + 32px))"} : undefined}
         className={isExpandedPreview
-          ? "fixed inset-0 m-auto max-h-none max-w-none overflow-hidden rounded-[28px] border-0 bg-slate-950 p-4 text-white shadow-2xl ring-1 ring-slate-600 backdrop:bg-black/75"
+          ? "fixed inset-0 m-auto max-h-none max-w-none overflow-hidden rounded-[28px] border-0 bg-white p-4 text-slate-900 shadow-2xl ring-1 ring-slate-200 backdrop:bg-black/75 dark:bg-slate-950 dark:text-white dark:ring-slate-600"
           : isPreview ? "fixed inset-0 m-auto max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-3xl overflow-y-auto rounded-2xl border border-slate-200 bg-white p-0 text-slate-900 shadow-2xl dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 backdrop:bg-black/75" : "fixed inset-0 m-0 h-dvh max-h-none w-screen max-w-none border-0 bg-slate-950 p-4 text-white sm:p-6 backdrop:bg-black/80"}
       >
         {isExpandedPreview ? open && <>
@@ -135,6 +135,10 @@ export function ProductImageViewer({src, name, presentation = "page", caption, f
               </span>
             </button>
           </div>
+          <button type="button" onClick={close} aria-label="Закрыть просмотр" title="Закрыть (Esc)"
+            className="absolute right-6 top-6 z-10 flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-white/15 bg-slate-900/45 text-white/90 shadow-sm backdrop-blur-sm transition-colors hover:bg-slate-900/75 hover:text-white focus-visible:bg-slate-900/75 focus-visible:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white active:bg-slate-950/90">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" className="h-5 w-5"><path strokeLinecap="round" d="m6 6 12 12M6 18 18 6"/></svg>
+          </button>
         </> : isPreview ? open && <>
           <div className="flex items-center justify-between gap-4 border-b border-slate-200 px-4 py-2 dark:border-slate-700 sm:px-6">
             <h2 className="text-lg font-bold">{name}</h2>

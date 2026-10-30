@@ -96,13 +96,24 @@ function checkPreview({presentation, expanded = false}) {
   render().find(node => node.props?.['aria-haspopup'] === 'dialog').props.onClick();
   const reopened = render();
   if (expanded) {
-    assert.equal(reopened.some(node => node.type === 'details' || node.props?.['aria-label'] === 'Закрыть просмотр'), false);
+    assert.equal(reopened.some(node => node.type === 'details'), false);
     const modal = reopened.find(node => node.type === 'dialog');
     modal.props.onClick({target: modal, currentTarget: modal});
   } else reopened.find(node => node.props?.['aria-label'] === 'Закрыть просмотр').props.onClick();
   render();
   assert.equal(dialog.open, false);
   assert.equal(focusCount, 2);
+  if (expanded) {
+    render().find(node => node.props?.['aria-haspopup'] === 'dialog').props.onClick();
+    render().find(node => node.props?.['aria-label'] === 'Увеличение изображения').props.onClick({detail: 0});
+    assert.equal(zoomed, true);
+    render().find(node => node.props?.['aria-label'] === 'Закрыть просмотр').props.onClick();
+    render();
+    assert.equal(dialog.open, false, 'close button works while the image is zoomed');
+    assert.equal(zoomed, false);
+    assert.equal(document.documentElement.style.overflow, 'auto');
+    assert.equal(focusCount, 3);
+  }
 }
 
 for (const [label, props] of [
