@@ -17,16 +17,29 @@ function load(file, imports, globals = {}) {
   return testModule.exports;
 }
 
-test('table preview opens without navigation, Escape and close restore focus and scroll', () => {
-  let open = false, effect, cleanup, lastOpen, reference = 0, focusCount = 0;
+function checkPreview({presentation, expanded = false}) {
+  let open = false, zoomed = false, effects, cleanup, lastOpen, reference = 0, stateIndex = 0, focusCount = 0;
+  const extraRefs = [];
+  let pan = {x: 0, y: 0};
+  const viewport = {clientWidth: 800, clientHeight: 600,
+    getBoundingClientRect() {return {left: 0, top: 0, width: 800, height: 600};}};
   const document = {documentElement: {style: {overflow: 'auto'}}};
   const dialog = {open: false, showModal() {this.open = true;}, close() {this.open = false;}};
   const trigger = {isConnected: true, focus() {focusCount++;}};
   const {ProductImageViewer} = load('components/catalog/ProductImageViewer.tsx', {
     react: {
-      useState() {return [open, value => {open = value;}];},
-      useRef() {return {current: reference++ === 0 ? dialog : trigger};},
-      useEffect(callback) {effect = callback;},
+      useState() {
+        const index = stateIndex++;
+        return index === 0 ? [open, value => {open = value;}]
+          : index === 1 ? [zoomed, value => {zoomed = typeof value === 'function' ? value(zoomed) : value;}]
+            : [pan, value => {pan = typeof value === 'function' ? value(pan) : value;}];
+      },
+      useRef(initial) {
+        const index = reference++;
+        if (index < 3) return {current: [dialog, trigger, viewport][index]};
+        return extraRefs[index] ??= {current: initial};
+      },
+      useEffect(callback) {effects.push(callback);},
     },
     'react/jsx-runtime': {jsx, jsxs: jsx, Fragment: 'fragment'},
     'next/image': {default: 'image'},
@@ -35,8 +48,10 @@ test('table preview opens without navigation, Escape and close restore focus and
   }, {document});
   const render = () => {
     reference = 0;
-    const tree = nodes(ProductImageViewer({src: '/channel.webp', name: 'Швеллер № 5', presentation: 'table', caption: 'Короткое описание'}));
-    if (lastOpen !== open) {cleanup?.(); cleanup = effect(); lastOpen = open;}
+    stateIndex = 0;
+    effects = [];
+    const tree = nodes(ProductImageViewer({src: '/channel.webp', name: 'Швеллер № 5', presentation, expanded, caption: 'Короткое описание'}));
+    if (lastOpen !== open) {cleanup?.(); cleanup = effects[0](); lastOpen = open;}
     return tree;
   };
   let tree = render();
@@ -46,7 +61,31 @@ test('table preview opens without navigation, Escape and close restore focus and
   tree = render();
   assert.equal(dialog.open, true);
   assert.equal(document.documentElement.style.overflow, 'hidden');
-  assert.ok(tree.some(node => node.props?.children === 'Короткое описание'));
+  assert.equal(tree.some(node => node.props?.children === 'Короткое описание'), !expanded);
+  if (expanded) {
+    const imageControl = () => tree.find(node => node.props?.['aria-label'] === 'Увеличение изображения');
+    assert.equal(imageControl().props['aria-pressed'], false);
+    imageControl().props.onClick({detail: 0});
+    tree = render();
+    assert.equal(imageControl().props['aria-pressed'], true);
+    assert.match(tree.find(node => node.props?.style?.transform)?.props.style.transform, /scale\(2\)/);
+    assert.equal(dialog.open, true);
+    imageControl().props.onPointerDown({button: 0, clientX: 10, clientY: 10, pointerType: 'mouse', pointerId: 1, currentTarget: {setPointerCapture() {}}});
+    imageControl().props.onPointerMove({buttons: 1, clientX: 35, clientY: 10, pointerType: 'mouse'});
+    imageControl().props.onClick({detail: 1});
+    tree = render();
+    assert.equal(imageControl().props['aria-pressed'], true, 'panning must not toggle zoom');
+    assert.equal(pan.x, 25, 'dragging moves the enlarged image');
+    imageControl().props.onKeyDown({key: 'ArrowRight', preventDefault() {}});
+    assert.equal(pan.x, -15, 'arrow keys move the image without scrolling');
+    imageControl().props.onPointerCancel();
+    imageControl().props.onClick({detail: 1});
+    tree = render();
+    assert.equal(imageControl().props['aria-pressed'], true, 'cancelled touch gesture must not toggle zoom');
+    imageControl().props.onClick({detail: 0});
+    tree = render();
+    assert.equal(imageControl().props['aria-pressed'], false);
+  }
   let prevented = false;
   tree.find(node => node.type === 'dialog').props.onCancel({preventDefault() {prevented = true;}});
   render();
@@ -55,11 +94,24 @@ test('table preview opens without navigation, Escape and close restore focus and
   assert.equal(document.documentElement.style.overflow, 'auto');
   assert.equal(focusCount, 1);
   render().find(node => node.props?.['aria-haspopup'] === 'dialog').props.onClick();
-  render().find(node => node.props?.['aria-label'] === 'Закрыть просмотр').props.onClick();
+  const reopened = render();
+  if (expanded) {
+    assert.equal(reopened.some(node => node.type === 'details' || node.props?.['aria-label'] === 'Закрыть просмотр'), false);
+    const modal = reopened.find(node => node.type === 'dialog');
+    modal.props.onClick({target: modal, currentTarget: modal});
+  } else reopened.find(node => node.props?.['aria-label'] === 'Закрыть просмотр').props.onClick();
   render();
   assert.equal(dialog.open, false);
   assert.equal(focusCount, 2);
-});
+}
+
+for (const [label, props] of [
+  ['table preview', {presentation: 'table'}],
+  ['expanded table preview', {presentation: 'table', expanded: true}],
+  ['expanded mobile card preview', {presentation: 'card', expanded: true}],
+]) {
+  test(`${label} opens without navigation, Escape and close restore focus and scroll`, () => checkPreview(props));
+}
 
 test('channel captions contain brief guidance and reference standard without repeating specifications', () => {
   const {getChannelProductDescription} = readProjectData('lib/channelDescription.ts');
