@@ -1,0 +1,723 @@
+{
+  "renderer": "scripts/render-shveller-images.mjs",
+  "reference": "imports/shveller-image-template/reference-5.jpg",
+  "cleanPhoto": "imports/shveller-image-template/photo.png",
+  "method": "Original reference pixels with deterministic Inter labels from public product specifications; no generative editing.",
+  "illustration": "Shared family photograph; nominal dimensions are labels, not a scaled manufacturing drawing.",
+  "records": [
+    {
+      "id": "rozmet-2235",
+      "number": "5",
+      "imageUrl": "/images/catalog/shveller/shveller-5-clean.webp",
+      "values": {
+        "Высота": "50 мм",
+        "Ширина полки": "32 мм",
+        "Толщина стенки": "4,4 мм",
+        "Толщина полки": "7 мм",
+        "Длина по каталогу": "11,7 м",
+        "Теоретическая масса": "4,84 кг/м"
+      },
+      "labels": [
+        {
+          "key": "title",
+          "text": "Швеллер № 5"
+        },
+        {
+          "key": "flangeWidth",
+          "text": "32 мм"
+        },
+        {
+          "key": "webThickness",
+          "text": "4,4 мм"
+        },
+        {
+          "key": "flangeThickness",
+          "text": "7 мм"
+        },
+        {
+          "key": "height",
+          "text": "50 мм"
+        },
+        {
+          "key": "length",
+          "text": "11,7 м"
+        },
+        {
+          "key": "mass",
+          "text": "4,84 кг/м"
+        }
+      ],
+      "sourceReference": "imports/shveller-image-template/reference-5.jpg",
+      "referenceUnmodified": true,
+      "output": "public/images/catalog/shveller/shveller-5-clean.webp",
+      "width": 2400,
+      "height": 1800,
+      "format": "lossless WebP",
+      "bytes": 1079574,
+      "sha256": "3e163dfc9e683e101919c140b43b03851237ad1d9febf4f27df5f914f7bbc76e"
+    },
+    {
+      "id": "rozmet-2236",
+      "number": "6,5",
+      "imageUrl": "/images/catalog/shveller/shveller-6-5-clean.webp",
+      "values": {
+        "Высота": "65 мм",
+        "Ширина полки": "36 мм",
+        "Толщина стенки": "4,4 мм",
+        "Толщина полки": "7,2 мм",
+        "Длина по каталогу": "6–12 м",
+        "Теоретическая масса": "5,90 кг/м"
+      },
+      "labels": [
+        {
+          "key": "title",
+          "text": "Швеллер № 6,5"
+        },
+        {
+          "key": "flangeWidth",
+          "text": "36 мм"
+        },
+        {
+          "key": "webThickness",
+          "text": "4,4 мм"
+        },
+        {
+          "key": "flangeThickness",
+          "text": "7,2 мм"
+        },
+        {
+          "key": "height",
+          "text": "65 мм"
+        },
+        {
+          "key": "length",
+          "text": "6–12 м"
+        },
+        {
+          "key": "mass",
+          "text": "5,90 кг/м"
+        }
+      ],
+      "sourceReference": "imports/shveller-image-template/reference-5.jpg",
+      "referenceUnmodified": false,
+      "output": "public/images/catalog/shveller/shveller-6-5-clean.webp",
+      "width": 2400,
+      "height": 1800,
+      "format": "lossless WebP",
+      "bytes": 1100516,
+      "sha256": "dd83eb6a818ef1c714185560d121aeaaa12eaea14cd9dc27c80e5e50be13077a"
+    },
+    {
+      "id": "rozmet-2237",
+      "number": "8",
+      "imageUrl": "/images/catalog/shveller/shveller-8-clean.webp",
+      "values": {
+        "Высота": "80 мм",
+        "Ширина полки": "40 мм",
+        "Толщина стенки": "4,5 мм",
+        "Толщина полки": "7,4 мм",
+        "Длина по каталогу": "6–12 м",
+        "Теоретическая масса": "7,05 кг/м"
+      },
+      "labels": [
+        {
+          "key": "title",
+          "text": "Швеллер № 8"
+        },
+        {
+          "key": "flangeWidth",
+          "text": "40 мм"
+        },
+        {
+          "key": "webThickness",
+          "text": "4,5 мм"
+        },
+        {
+          "key": "flangeThickness",
+          "text": "7,4 мм"
+        },
+        {
+          "key": "height",
+          "text": "80 мм"
+        },
+        {
+          "key": "length",
+          "text": "6–12 м"
+        },
+        {
+          "key": "mass",
+          "text": "7,05 кг/м"
+        }
+      ],
+      "sourceReference": "imports/shveller-image-template/reference-5.jpg",
+      "referenceUnmodified": false,
+      "output": "public/images/catalog/shveller/shveller-8-clean.webp",
+      "width": 2400,
+      "height": 1800,
+      "format": "lossless WebP",
+      "bytes": 1099930,
+      "sha256": "85ead4f4a157a0f9cf7b5d384796a7b39d1e2d4f78084bf53e1e26ab3f0f799f"
+    },
+    {
+      "id": "rozmet-2238",
+      "number": "10",
+      "imageUrl": "/images/catalog/shveller/shveller-10-clean.webp",
+      "values": {
+        "Высота": "100 мм",
+        "Ширина полки": "46 мм",
+        "Толщина стенки": "4,5 мм",
+        "Толщина полки": "7,6 мм",
+        "Длина по каталогу": "12 м",
+        "Теоретическая масса": "8,59 кг/м"
+      },
+      "labels": [
+        {
+          "key": "title",
+          "text": "Швеллер № 10"
+        },
+        {
+          "key": "flangeWidth",
+          "text": "46 мм"
+        },
+        {
+          "key": "webThickness",
+          "text": "4,5 мм"
+        },
+        {
+          "key": "flangeThickness",
+          "text": "7,6 мм"
+        },
+        {
+          "key": "height",
+          "text": "100 мм"
+        },
+        {
+          "key": "length",
+          "text": "12 м"
+        },
+        {
+          "key": "mass",
+          "text": "8,59 кг/м"
+        }
+      ],
+      "sourceReference": "imports/shveller-image-template/reference-5.jpg",
+      "referenceUnmodified": false,
+      "output": "public/images/catalog/shveller/shveller-10-clean.webp",
+      "width": 2400,
+      "height": 1800,
+      "format": "lossless WebP",
+      "bytes": 1100368,
+      "sha256": "c93bf39aaaccb04e45534701cf93bd7771308209b1f3be426ea789d5df875057"
+    },
+    {
+      "id": "rozmet-2239",
+      "number": "12",
+      "imageUrl": "/images/catalog/shveller/shveller-12-clean.webp",
+      "values": {
+        "Высота": "120 мм",
+        "Ширина полки": "52 мм",
+        "Толщина стенки": "4,8 мм",
+        "Толщина полки": "7,8 мм",
+        "Длина по каталогу": "12 м",
+        "Теоретическая масса": "10,40 кг/м"
+      },
+      "labels": [
+        {
+          "key": "title",
+          "text": "Швеллер № 12"
+        },
+        {
+          "key": "flangeWidth",
+          "text": "52 мм"
+        },
+        {
+          "key": "webThickness",
+          "text": "4,8 мм"
+        },
+        {
+          "key": "flangeThickness",
+          "text": "7,8 мм"
+        },
+        {
+          "key": "height",
+          "text": "120 мм"
+        },
+        {
+          "key": "length",
+          "text": "12 м"
+        },
+        {
+          "key": "mass",
+          "text": "10,40 кг/м"
+        }
+      ],
+      "sourceReference": "imports/shveller-image-template/reference-5.jpg",
+      "referenceUnmodified": false,
+      "output": "public/images/catalog/shveller/shveller-12-clean.webp",
+      "width": 2400,
+      "height": 1800,
+      "format": "lossless WebP",
+      "bytes": 1099344,
+      "sha256": "6ad74813e97b62117a567f28d1a31ac659e792b6849800575722f356630a49a1"
+    },
+    {
+      "id": "rozmet-2240",
+      "number": "14",
+      "imageUrl": "/images/catalog/shveller/shveller-14-clean.webp",
+      "values": {
+        "Высота": "140 мм",
+        "Ширина полки": "58 мм",
+        "Толщина стенки": "4,9 мм",
+        "Толщина полки": "8,1 мм",
+        "Длина по каталогу": "12 м",
+        "Теоретическая масса": "12,30 кг/м"
+      },
+      "labels": [
+        {
+          "key": "title",
+          "text": "Швеллер № 14"
+        },
+        {
+          "key": "flangeWidth",
+          "text": "58 мм"
+        },
+        {
+          "key": "webThickness",
+          "text": "4,9 мм"
+        },
+        {
+          "key": "flangeThickness",
+          "text": "8,1 мм"
+        },
+        {
+          "key": "height",
+          "text": "140 мм"
+        },
+        {
+          "key": "length",
+          "text": "12 м"
+        },
+        {
+          "key": "mass",
+          "text": "12,30 кг/м"
+        }
+      ],
+      "sourceReference": "imports/shveller-image-template/reference-5.jpg",
+      "referenceUnmodified": false,
+      "output": "public/images/catalog/shveller/shveller-14-clean.webp",
+      "width": 2400,
+      "height": 1800,
+      "format": "lossless WebP",
+      "bytes": 1098868,
+      "sha256": "9509b64ceddac2df00b4b87156a62210cb9d1183887773ecd080f390a69749d0"
+    },
+    {
+      "id": "rozmet-2241",
+      "number": "16",
+      "imageUrl": "/images/catalog/shveller/shveller-16-clean.webp",
+      "values": {
+        "Высота": "160 мм",
+        "Ширина полки": "64 мм",
+        "Толщина стенки": "5 мм",
+        "Толщина полки": "8,4 мм",
+        "Длина по каталогу": "11,7–12 м",
+        "Теоретическая масса": "14,20 кг/м"
+      },
+      "labels": [
+        {
+          "key": "title",
+          "text": "Швеллер № 16"
+        },
+        {
+          "key": "flangeWidth",
+          "text": "64 мм"
+        },
+        {
+          "key": "webThickness",
+          "text": "5 мм"
+        },
+        {
+          "key": "flangeThickness",
+          "text": "8,4 мм"
+        },
+        {
+          "key": "height",
+          "text": "160 мм"
+        },
+        {
+          "key": "length",
+          "text": "11,7–12 м"
+        },
+        {
+          "key": "mass",
+          "text": "14,20 кг/м"
+        }
+      ],
+      "sourceReference": "imports/shveller-image-template/reference-5.jpg",
+      "referenceUnmodified": false,
+      "output": "public/images/catalog/shveller/shveller-16-clean.webp",
+      "width": 2400,
+      "height": 1800,
+      "format": "lossless WebP",
+      "bytes": 1100460,
+      "sha256": "cfb447c6310796b3b779142e7b5bf100bb454a1a0a11143763c0c771190cf5f5"
+    },
+    {
+      "id": "rozmet-2242",
+      "number": "18",
+      "imageUrl": "/images/catalog/shveller/shveller-18-clean.webp",
+      "values": {
+        "Высота": "180 мм",
+        "Ширина полки": "70 мм",
+        "Толщина стенки": "5,1 мм",
+        "Толщина полки": "8,7 мм",
+        "Длина по каталогу": "12 м",
+        "Теоретическая масса": "16,30 кг/м"
+      },
+      "labels": [
+        {
+          "key": "title",
+          "text": "Швеллер № 18"
+        },
+        {
+          "key": "flangeWidth",
+          "text": "70 мм"
+        },
+        {
+          "key": "webThickness",
+          "text": "5,1 мм"
+        },
+        {
+          "key": "flangeThickness",
+          "text": "8,7 мм"
+        },
+        {
+          "key": "height",
+          "text": "180 мм"
+        },
+        {
+          "key": "length",
+          "text": "12 м"
+        },
+        {
+          "key": "mass",
+          "text": "16,30 кг/м"
+        }
+      ],
+      "sourceReference": "imports/shveller-image-template/reference-5.jpg",
+      "referenceUnmodified": false,
+      "output": "public/images/catalog/shveller/shveller-18-clean.webp",
+      "width": 2400,
+      "height": 1800,
+      "format": "lossless WebP",
+      "bytes": 1099812,
+      "sha256": "7b011b53b2bb6f24637f82a4e9897f182b38ae523f0709efc6ff8faaad6c61a1"
+    },
+    {
+      "id": "rozmet-2243",
+      "number": "20",
+      "imageUrl": "/images/catalog/shveller/shveller-20-clean.webp",
+      "values": {
+        "Высота": "200 мм",
+        "Ширина полки": "76 мм",
+        "Толщина стенки": "5,2 мм",
+        "Толщина полки": "9 мм",
+        "Длина по каталогу": "12 м",
+        "Теоретическая масса": "18,40 кг/м"
+      },
+      "labels": [
+        {
+          "key": "title",
+          "text": "Швеллер № 20"
+        },
+        {
+          "key": "flangeWidth",
+          "text": "76 мм"
+        },
+        {
+          "key": "webThickness",
+          "text": "5,2 мм"
+        },
+        {
+          "key": "flangeThickness",
+          "text": "9 мм"
+        },
+        {
+          "key": "height",
+          "text": "200 мм"
+        },
+        {
+          "key": "length",
+          "text": "12 м"
+        },
+        {
+          "key": "mass",
+          "text": "18,40 кг/м"
+        }
+      ],
+      "sourceReference": "imports/shveller-image-template/reference-5.jpg",
+      "referenceUnmodified": false,
+      "output": "public/images/catalog/shveller/shveller-20-clean.webp",
+      "width": 2400,
+      "height": 1800,
+      "format": "lossless WebP",
+      "bytes": 1101200,
+      "sha256": "f13010266d29fa3e38a0e7a600cef15a5a5b03933fa7ff39f38be97eb89eb191"
+    },
+    {
+      "id": "rozmet-2244",
+      "number": "22",
+      "imageUrl": "/images/catalog/shveller/shveller-22-clean.webp",
+      "values": {
+        "Высота": "220 мм",
+        "Ширина полки": "82 мм",
+        "Толщина стенки": "5,4 мм",
+        "Толщина полки": "9,5 мм",
+        "Длина по каталогу": "12 м",
+        "Теоретическая масса": "21,00 кг/м"
+      },
+      "labels": [
+        {
+          "key": "title",
+          "text": "Швеллер № 22"
+        },
+        {
+          "key": "flangeWidth",
+          "text": "82 мм"
+        },
+        {
+          "key": "webThickness",
+          "text": "5,4 мм"
+        },
+        {
+          "key": "flangeThickness",
+          "text": "9,5 мм"
+        },
+        {
+          "key": "height",
+          "text": "220 мм"
+        },
+        {
+          "key": "length",
+          "text": "12 м"
+        },
+        {
+          "key": "mass",
+          "text": "21,00 кг/м"
+        }
+      ],
+      "sourceReference": "imports/shveller-image-template/reference-5.jpg",
+      "referenceUnmodified": false,
+      "output": "public/images/catalog/shveller/shveller-22-clean.webp",
+      "width": 2400,
+      "height": 1800,
+      "format": "lossless WebP",
+      "bytes": 1100016,
+      "sha256": "747793d6ca8d44b8297e3576b134e21b7319a9c593db84b424c4db8260e300db"
+    },
+    {
+      "id": "rozmet-2245",
+      "number": "24",
+      "imageUrl": "/images/catalog/shveller/shveller-24-clean.webp",
+      "values": {
+        "Высота": "240 мм",
+        "Ширина полки": "90 мм",
+        "Толщина стенки": "5,6 мм",
+        "Толщина полки": "10 мм",
+        "Длина по каталогу": "12 м",
+        "Теоретическая масса": "24,00 кг/м"
+      },
+      "labels": [
+        {
+          "key": "title",
+          "text": "Швеллер № 24"
+        },
+        {
+          "key": "flangeWidth",
+          "text": "90 мм"
+        },
+        {
+          "key": "webThickness",
+          "text": "5,6 мм"
+        },
+        {
+          "key": "flangeThickness",
+          "text": "10 мм"
+        },
+        {
+          "key": "height",
+          "text": "240 мм"
+        },
+        {
+          "key": "length",
+          "text": "12 м"
+        },
+        {
+          "key": "mass",
+          "text": "24,00 кг/м"
+        }
+      ],
+      "sourceReference": "imports/shveller-image-template/reference-5.jpg",
+      "referenceUnmodified": false,
+      "output": "public/images/catalog/shveller/shveller-24-clean.webp",
+      "width": 2400,
+      "height": 1800,
+      "format": "lossless WebP",
+      "bytes": 1100910,
+      "sha256": "f02252a15e2971fddc48a2dfc2e4cb2976eddc6953194c52814c638a2fa0eac9"
+    },
+    {
+      "id": "rozmet-2246",
+      "number": "27",
+      "imageUrl": "/images/catalog/shveller/shveller-27-clean.webp",
+      "values": {
+        "Высота": "270 мм",
+        "Ширина полки": "95 мм",
+        "Толщина стенки": "6 мм",
+        "Толщина полки": "10,5 мм",
+        "Длина по каталогу": "12 м",
+        "Теоретическая масса": "27,70 кг/м"
+      },
+      "labels": [
+        {
+          "key": "title",
+          "text": "Швеллер № 27"
+        },
+        {
+          "key": "flangeWidth",
+          "text": "95 мм"
+        },
+        {
+          "key": "webThickness",
+          "text": "6 мм"
+        },
+        {
+          "key": "flangeThickness",
+          "text": "10,5 мм"
+        },
+        {
+          "key": "height",
+          "text": "270 мм"
+        },
+        {
+          "key": "length",
+          "text": "12 м"
+        },
+        {
+          "key": "mass",
+          "text": "27,70 кг/м"
+        }
+      ],
+      "sourceReference": "imports/shveller-image-template/reference-5.jpg",
+      "referenceUnmodified": false,
+      "output": "public/images/catalog/shveller/shveller-27-clean.webp",
+      "width": 2400,
+      "height": 1800,
+      "format": "lossless WebP",
+      "bytes": 1098548,
+      "sha256": "8205cda219459271cfb9b86ac857e44ee67422b7bbdab74baab93251e4420610"
+    },
+    {
+      "id": "rozmet-2247",
+      "number": "30",
+      "imageUrl": "/images/catalog/shveller/shveller-30-clean.webp",
+      "values": {
+        "Высота": "300 мм",
+        "Ширина полки": "100 мм",
+        "Толщина стенки": "6,5 мм",
+        "Толщина полки": "11 мм",
+        "Длина по каталогу": "12 м",
+        "Теоретическая масса": "31,80 кг/м"
+      },
+      "labels": [
+        {
+          "key": "title",
+          "text": "Швеллер № 30"
+        },
+        {
+          "key": "flangeWidth",
+          "text": "100 мм"
+        },
+        {
+          "key": "webThickness",
+          "text": "6,5 мм"
+        },
+        {
+          "key": "flangeThickness",
+          "text": "11 мм"
+        },
+        {
+          "key": "height",
+          "text": "300 мм"
+        },
+        {
+          "key": "length",
+          "text": "12 м"
+        },
+        {
+          "key": "mass",
+          "text": "31,80 кг/м"
+        }
+      ],
+      "sourceReference": "imports/shveller-image-template/reference-5.jpg",
+      "referenceUnmodified": false,
+      "output": "public/images/catalog/shveller/shveller-30-clean.webp",
+      "width": 2400,
+      "height": 1800,
+      "format": "lossless WebP",
+      "bytes": 1101710,
+      "sha256": "672a1ea8118b75c8f39976f419698ae1e9d478e03eabe00766c39b2f96cb3276"
+    },
+    {
+      "id": "rozmet-2248",
+      "number": "40",
+      "imageUrl": "/images/catalog/shveller/shveller-40-clean.webp",
+      "values": {
+        "Высота": "400 мм",
+        "Ширина полки": "115 мм",
+        "Толщина стенки": "8 мм",
+        "Толщина полки": "13,5 мм",
+        "Длина по каталогу": "12 м",
+        "Теоретическая масса": "48,30 кг/м"
+      },
+      "labels": [
+        {
+          "key": "title",
+          "text": "Швеллер № 40"
+        },
+        {
+          "key": "flangeWidth",
+          "text": "115 мм"
+        },
+        {
+          "key": "webThickness",
+          "text": "8 мм"
+        },
+        {
+          "key": "flangeThickness",
+          "text": "13,5 мм"
+        },
+        {
+          "key": "height",
+          "text": "400 мм"
+        },
+        {
+          "key": "length",
+          "text": "12 м"
+        },
+        {
+          "key": "mass",
+          "text": "48,30 кг/м"
+        }
+      ],
+      "sourceReference": "imports/shveller-image-template/reference-5.jpg",
+      "referenceUnmodified": false,
+      "output": "public/images/catalog/shveller/shveller-40-clean.webp",
+      "width": 2400,
+      "height": 1800,
+      "format": "lossless WebP",
+      "bytes": 1099096,
+      "sha256": "f7b1a6c78c878ec5b95d031bb41413fd1c5096fcef335f87fbe251ef68525ab1"
+    }
+  ]
+}

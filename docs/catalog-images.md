@@ -61,3 +61,23 @@ Replace the image at its existing path. `npm run dev` checks catalog image conte
 `npm run build` regenerates the versions automatically before building. For production, rebuild and deploy both the application and public images together; copying a file alone does not update pre-rendered pages. Changing a filename or extension still requires updating `data/catalog-images.json`.
 
 Public file existence, exact path case and image metadata are always checked by `npm test`. Supplier byte/provenance checks are explicitly skipped when the optional mirror or reports are absent.
+
+## Channel illustrations: approved template
+
+The channel product images use the owner's approved No. 5 reference in
+`imports/shveller-image-template/reference-5.jpg`. Each 2400 × 1800 lossless WebP
+keeps the shared photograph, reflection, dimension arrows and layout; only the
+profile title and numeric labels change. No. 5 preserves the approved image's
+decoded pixels. These are family illustrations with nominal dimensions, not
+manufacturing drawings or photographs proving the exact profile geometry.
+
+Regenerate with `node scripts/render-shveller-images.mjs --write`. The renderer
+reads the same public specifications as the site from `data/products/index.ts`,
+including supplier lengths and theoretical masses. Preview one profile with
+`node scripts/render-shveller-images.mjs --preview 40`. Inter is bundled with its
+OFL license in the template folder; font caches are written only under `.tmp/`.
+The generated `imports/shveller-image-template/rendered.json` records every
+label, product association, output size and image hash. The older ImageGen
+prompts in `imports/shveller-template-images.json` describe historical assets.
+Existing catalog URLs are retained; the normal image-version watcher refreshes
+their cache keys. Next.js creates the smaller delivery variants as before.
