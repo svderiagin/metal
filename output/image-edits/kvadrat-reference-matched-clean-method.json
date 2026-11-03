@@ -1,0 +1,61 @@
+{
+  "input": "output/image-edits/kvadrat-new-start-source.png",
+  "output": "output/image-edits/kvadrat-reference-matched-clean-2400x1800.png",
+  "width": 2400,
+  "height": 1800,
+  "sourceCorners": [
+    [
+      493,
+      1334
+    ],
+    [
+      847,
+      1417
+    ],
+    [
+      853,
+      1759
+    ],
+    [
+      506,
+      1673
+    ]
+  ],
+  "referenceCorners": [
+    [
+      1262,
+      1142
+    ],
+    [
+      1904,
+      1288
+    ],
+    [
+      1911,
+      1908
+    ],
+    [
+      1282,
+      1758
+    ]
+  ],
+  "referenceSize": [
+    2996,
+    2828
+  ],
+  "referenceSimilarityFit": {
+    "scale": 1.8120640627596591,
+    "rotationDegrees": -0.07052221635243923,
+    "maxLandmarkErrorPixels": 3.78
+  },
+  "applied": {
+    "uniformScale": 1.4515,
+    "translation": [
+      291,
+      -1274
+    ],
+    "rotationDegrees": 0
+  },
+  "method": "One uniform Lanczos3 resize of the entire original photograph followed by integer placement on the canvas. Product, face, original shadow and original reflection always transformed together. No perspective editing, no separate face manipulation, no texture transfer, no AI generation or sharpening.",
+  "verifiedUnchangedPixelsAfterSingleResize": 3435561
+}

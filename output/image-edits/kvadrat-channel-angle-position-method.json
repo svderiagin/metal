@@ -1,0 +1,22 @@
+{
+  "input": "output/image-edits/kvadrat-whole-source.png",
+  "reference": "/var/folders/4r/5d6pj6416r3fzt01xv9jt1rr0000gq/T/codex-clipboard-b0267ad8-6ab6-4b2e-b9fd-b17f1e10c327.png",
+  "output": "output/image-edits/kvadrat-channel-angle-position-2400x1800.png",
+  "canvas": [
+    2400,
+    1800
+  ],
+  "sourceCenter": [
+    674.75,
+    1545.75
+  ],
+  "targetCenter": [
+    1382.9733163913595,
+    1016.893039049236
+  ],
+  "sourceAngleDeg": -41.23437141643561,
+  "targetAngleDeg": -41.0496633374323,
+  "rotationDeg": 0.18470807900330333,
+  "scale": 1.35,
+  "method": "Single similarity transform of the entire original photograph, including original corners, shadows and reflection. No plane warps, material replacement or generation."
+}

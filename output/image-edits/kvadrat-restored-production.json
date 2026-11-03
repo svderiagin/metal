@@ -1,0 +1,9 @@
+{
+  "source": "/var/folders/4r/5d6pj6416r3fzt01xv9jt1rr0000gq/T/codex-clipboard-98e782f3-8fe6-48f9-8ac2-5304b5c8ebfb.png",
+  "composition": "output/image-edits/kvadrat-clean-master-2400x1800.png",
+  "native": "output/image-edits/kvadrat-restored-native.png",
+  "output": "output/image-edits/kvadrat-restored-sharp-2400x1800.png",
+  "method": "Built-in imagegen photographic restoration with locked composition and original surface references. Export Lanczos3 to 2400x1800, sRGB lossless PNG. Reflected saw-mark microdetail corrected from actual front-face pixels while retaining floor shading.",
+  "pixelIdenticalTexture": false,
+  "prompt": "Conservative photo restoration using source materials and locked previous composition: sharpen continuous edges and gently rounded corners, preserve smooth gray rolled steel and fine diagonal sawing marks, retain realistic shadow/reflection; no coarse texture, no lizard grain, no halos, no text."
+}

@@ -1,0 +1,20 @@
+{
+  "input": "output/image-edits/kvadrat-whole-source.png",
+  "output": "output/image-edits/kvadrat-shift-only-2400x1800.png",
+  "width": 2400,
+  "height": 1800,
+  "translation": {
+    "x": 584,
+    "y": -530
+  },
+  "method": "Integer translation of the entire source photograph, including its original shadow and reflection. No resize, rotation, perspective transform, texture transfer, sharpening or AI. New canvas padding uses source background edge pixels; added bottom background fades to a uniform studio tone.",
+  "verifiedUnchangedSourcePixels": 2669520,
+  "originalFaceCenter": [
+    674.75,
+    1545.75
+  ],
+  "shiftedFaceCenter": [
+    1258.75,
+    1015.75
+  ]
+}

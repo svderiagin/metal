@@ -1,0 +1,58 @@
+{
+  "source": "/var/folders/4r/5d6pj6416r3fzt01xv9jt1rr0000gq/T/codex-clipboard-dda9ec56-1fab-4a6c-86de-97fad21a8dfc.png",
+  "reference": "imports/shveller-image-template/photo.png",
+  "native": "output/image-edits/kvadrat-neutral-background-native.png",
+  "output": "output/image-edits/kvadrat-neutral-background-2400x1800.png",
+  "size": [
+    2400,
+    1800
+  ],
+  "nativeSize": [
+    1448,
+    1086
+  ],
+  "protectedPixels": 362203,
+  "protectedPixelChanges": 0,
+  "samples": [
+    {
+      "y": 180,
+      "result": [
+        252,
+        252,
+        252
+      ],
+      "reference": [
+        253,
+        252,
+        253
+      ]
+    },
+    {
+      "y": 545,
+      "result": [
+        252,
+        252,
+        252
+      ],
+      "reference": [
+        252,
+        252,
+        252
+      ]
+    },
+    {
+      "y": 865,
+      "result": [
+        252,
+        252,
+        252
+      ],
+      "reference": [
+        252,
+        252,
+        252
+      ]
+    }
+  ],
+  "method": "Built-in imagegen background study followed by deterministic white-point matching of the original floor to the channel reference. Product pixels protected and copied byte-identically at native resolution. Original shadow/reflection geometry and detail retained, no material regeneration. One Lanczos3 upscale for the 2400x1800 export."
+}

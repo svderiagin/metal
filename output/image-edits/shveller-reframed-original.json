@@ -1,0 +1,20 @@
+{
+  "input": "/var/folders/4r/5d6pj6416r3fzt01xv9jt1rr0000gq/T/codex-clipboard-a7cc54bf-ce03-4a9a-8d9f-12577ad0d01c.png",
+  "output": "/Users/sergei/Projects/metal-frontend/output/image-edits/shveller-reframed-original.png",
+  "width": 3000,
+  "height": 2250,
+  "translation": {
+    "x": 1030,
+    "y": -180
+  },
+  "scaled": false,
+  "sourceRegion": {
+    "left": 0,
+    "top": 180,
+    "width": 1970,
+    "height": 1820
+  },
+  "comparedPixels": 3585400,
+  "differingChannels": 0,
+  "bytes": 1807779
+}

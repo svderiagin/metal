@@ -1,0 +1,166 @@
+{
+  "source": "output/image-edits/kvadrat-original-source.png",
+  "output": "output/image-edits/kvadrat-original-texture-2400x1800.png",
+  "method": "Deterministic horizontal reflection and three planar homographies; bicubic sampling directly from source photograph; no generative product pixels or invented texture.",
+  "size": [
+    2400,
+    1800
+  ],
+  "sourceFaceCornersMirrored": [
+    [
+      493,
+      1334
+    ],
+    [
+      847,
+      1417
+    ],
+    [
+      853,
+      1759
+    ],
+    [
+      506,
+      1673
+    ]
+  ],
+  "destinationFaceCorners": [
+    [
+      1018,
+      778
+    ],
+    [
+      1500,
+      856
+    ],
+    [
+      1500,
+      1258
+    ],
+    [
+      1018,
+      1182
+    ]
+  ],
+  "planes": [
+    {
+      "name": "end",
+      "src": [
+        [
+          493,
+          1334
+        ],
+        [
+          847,
+          1417
+        ],
+        [
+          853,
+          1759
+        ],
+        [
+          506,
+          1673
+        ]
+      ],
+      "dst": [
+        [
+          1018,
+          778
+        ],
+        [
+          1500,
+          856
+        ],
+        [
+          1500,
+          1258
+        ],
+        [
+          1018,
+          1182
+        ]
+      ]
+    },
+    {
+      "name": "top",
+      "src": [
+        [
+          493,
+          1334
+        ],
+        [
+          847,
+          1417
+        ],
+        [
+          1855.96,
+          403.55999999999995
+        ],
+        [
+          1615.24,
+          347.12
+        ]
+      ],
+      "dst": [
+        [
+          1018,
+          778
+        ],
+        [
+          1500,
+          856
+        ],
+        [
+          2440,
+          -615.2
+        ],
+        [
+          2054.4,
+          -677.6000000000001
+        ]
+      ]
+    },
+    {
+      "name": "side",
+      "src": [
+        [
+          847,
+          1417
+        ],
+        [
+          853,
+          1759
+        ],
+        [
+          1860.04,
+          636.1199999999999
+        ],
+        [
+          1855.96,
+          403.55999999999995
+        ]
+      ],
+      "dst": [
+        [
+          1500,
+          856
+        ],
+        [
+          1500,
+          1258
+        ],
+        [
+          2440,
+          -293.60000000000014
+        ],
+        [
+          2440,
+          -615.2
+        ]
+      ]
+    }
+  ],
+  "reflection": "End and side faces geometrically reflected onto the floor, mildly blurred and faded.",
+  "sampledProductPixels": 852019
+}

@@ -1,0 +1,7 @@
+Method: deterministic projected reflection of the existing end-face pixels; no image-generation prompt or AI edits.
+Input: output/image-edits/kvadrat-rounded-shadows-surface-2400x1800.png
+Output: output/image-edits/kvadrat-rounded-shadows-final-2400x1800.png
+Mapping: x'=x; y'=2*(1182+(1258-1182)/(1500-1018)*(x-1018))-y.
+Reflection: Gaussian blur 1.1 px, opacity 0.43*exp(-depth/155), feathered floor mask.
+Verified: all product pixels and all pixels outside the reflection floor region are unchanged.
+Changed floor pixels: 216438.

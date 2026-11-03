@@ -1,0 +1,15 @@
+{
+  "source": "output/image-edits/kvadrat-whole-source.png",
+  "reference": "output/image-edits/kvadrat-approved-rounded-reference-2400x1800.png",
+  "output": "output/image-edits/kvadrat-corners-shadows-v3-2400x1800.png",
+  "size": [
+    2400,
+    1800
+  ],
+  "edgeBand": {
+    "unchanged": 22,
+    "transition": 36
+  },
+  "method": "Deterministic transfer from source with protected reference corners and highlights; preserve floor shading and replace reflection detail only.",
+  "changedProductPixels": 731916
+}

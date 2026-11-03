@@ -1,0 +1,17 @@
+{
+  "input": "output/image-edits/kvadrat-corners-shadows-v3-2400x1800.png",
+  "output": "output/image-edits/kvadrat-upper-right-left-adjusted-2400x1800.png",
+  "translation": {
+    "dx": 140,
+    "dy": -240
+  },
+  "changeFromPrevious": {
+    "dx": -100,
+    "dy": 0
+  },
+  "size": [
+    2400,
+    1800
+  ],
+  "method": "Integer translation of whole scene; no resampling or change to metal pixels."
+}

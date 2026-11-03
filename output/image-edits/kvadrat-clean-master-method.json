@@ -1,0 +1,32 @@
+{
+  "source": "/var/folders/4r/5d6pj6416r3fzt01xv9jt1rr0000gq/T/codex-clipboard-f1e5209a-4928-46a9-82e6-645177173f9c.png",
+  "output": "output/image-edits/kvadrat-clean-master-2400x1800.png",
+  "size": [
+    2400,
+    1800
+  ],
+  "sourceSize": [
+    2000,
+    2000
+  ],
+  "method": "Mirror full source photograph; restrained bilateral speckle reduction; one Lanczos3 resize to 135%; thresholded edge sharpening; integer placement. No synthetic texture, plane reconstruction or reflection reconstruction.",
+  "denoise": {
+    "spatialSigma": 0.9,
+    "rangeSigma": 7,
+    "mix": 0.75
+  },
+  "sharpen": {
+    "sigma": 0.55,
+    "m1": 0,
+    "m2": 0.8,
+    "x1": 10,
+    "y2": 2,
+    "y3": 3
+  },
+  "placement": {
+    "dx": 472,
+    "dy": -1070
+  },
+  "profile": "sRGB",
+  "format": "lossless PNG"
+}

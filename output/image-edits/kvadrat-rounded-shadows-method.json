@@ -1,0 +1,166 @@
+{
+  "source": "output/image-edits/kvadrat-whole-source.png",
+  "reference": "output/image-edits/kvadrat-approved-rounded-reference-2400x1800.png",
+  "output": "output/image-edits/kvadrat-rounded-shadows-surface-2400x1800.png",
+  "method": "Source photograph texture transferred through continuous camera projections onto the approved photographic geometry. Nine-pixel transitions retain reference highlights and rounded outer edges; no new image generation.",
+  "size": [
+    2400,
+    1800
+  ],
+  "sourceFaceCorners": [
+    [
+      493,
+      1334
+    ],
+    [
+      847,
+      1417
+    ],
+    [
+      853,
+      1759
+    ],
+    [
+      506,
+      1673
+    ]
+  ],
+  "destinationFaceCorners": [
+    [
+      1018,
+      778
+    ],
+    [
+      1500,
+      856
+    ],
+    [
+      1500,
+      1258
+    ],
+    [
+      1018,
+      1182
+    ]
+  ],
+  "planes": [
+    {
+      "name": "end",
+      "src": [
+        [
+          493,
+          1334
+        ],
+        [
+          847,
+          1417
+        ],
+        [
+          853,
+          1759
+        ],
+        [
+          506,
+          1673
+        ]
+      ],
+      "dst": [
+        [
+          1018,
+          778
+        ],
+        [
+          1500,
+          856
+        ],
+        [
+          1500,
+          1258
+        ],
+        [
+          1018,
+          1182
+        ]
+      ]
+    },
+    {
+      "name": "top",
+      "src": [
+        [
+          493,
+          1334
+        ],
+        [
+          847,
+          1417
+        ],
+        [
+          2434.537441461097,
+          -177.58645008160292
+        ],
+        [
+          2246.5,
+          -208
+        ]
+      ],
+      "dst": [
+        [
+          1018,
+          778
+        ],
+        [
+          1500,
+          856
+        ],
+        [
+          2838.101983002833,
+          -1238.271954674221
+        ],
+        [
+          2498.571428571429,
+          -1301.4285714285716
+        ]
+      ]
+    },
+    {
+      "name": "side",
+      "src": [
+        [
+          847,
+          1417
+        ],
+        [
+          853,
+          1759
+        ],
+        [
+          2421.396254507877,
+          10.190830292932906
+        ],
+        [
+          2434.537441461097,
+          -177.58645008160292
+        ]
+      ],
+      "dst": [
+        [
+          1500,
+          856
+        ],
+        [
+          1500,
+          1258
+        ],
+        [
+          2838.101983002833,
+          -950.7223796033993
+        ],
+        [
+          2838.101983002833,
+          -1238.271954674221
+        ]
+      ]
+    }
+  ],
+  "sampledProductPixels": 850769
+}

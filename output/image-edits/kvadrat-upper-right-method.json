@@ -1,0 +1,14 @@
+{
+  "input": "output/image-edits/kvadrat-corners-shadows-v3-2400x1800.png",
+  "output": "output/image-edits/kvadrat-upper-right-2400x1800.png",
+  "translation": {
+    "dx": 240,
+    "dy": -240
+  },
+  "size": [
+    2400,
+    1800
+  ],
+  "exactCopiedPixels": 3369600,
+  "method": "Whole scene integer translation; no scaling, rotation or new product texture. Extend only background at left and bottom."
+}
