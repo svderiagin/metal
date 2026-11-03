@@ -48,7 +48,7 @@ export default async function CategoryPage({params}: Props) {
   const hasImage = category.id !== "cat-pnf" && !mainImageUrl.endsWith(".svg");
   const introDescription = category.descriptionSections?.intro ?? category.description;
   const detailedDescription = category.descriptionSections?.details;
-  const useProductPageLayout = category.slug === "shveller";
+  const useProductPageLayout = category.slug === "shveller" || category.slug === "ugolok";
 
   if (useProductPageLayout) {
     return (

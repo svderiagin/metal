@@ -39,14 +39,16 @@ import {CatalogDescription} from "./CatalogDescription";
 import tableStyles from "./RebarTable.module.css";
 import {ChannelSpecificationNote} from "./ChannelSpecificationNote";
 import {ChannelProductPreview} from "./ChannelProductPreview";
+import {ProductImageViewer} from "./ProductImageViewer";
+import {formatAngleSpecificationValue} from "@/lib/anglePresentation";
 
 type SortMode = "relevance" | "availability" | "price-asc" | "price-desc" | "size" | "name";
 
-// Ширина колонок таблицы «Швеллер» в процентах. Сумма должна оставаться равной 100.
+// Ширина колонок таблиц «Швеллер» и «Уголок» в процентах. Сумма должна оставаться равной 100.
 const channelColumnWidths = [
-  10, // Наименование
-  25, // Изображение
-  28, // Характеристики
+  12, // Наименование
+  24, // Изображение
+  27, // Характеристики
   13, // Цена
   11, // Кол-во, м
   13, // В корзину
@@ -116,7 +118,9 @@ function GenericProductVariantCatalog({
 }) {
   const filterKeys = getVariantFilterKeys(categorySlug);
   const isChannel = categorySlug === "shveller";
-  const showAvailability = !isChannel;
+  const isAngle = categorySlug === "ugolok";
+  const usesReferenceTable = isChannel || isAngle;
+  const showAvailability = !usesReferenceTable;
   const columnWidths = showAvailability ? [25, 27, 15, 10, 9, 14] : channelColumnWidths;
   const [filters, setFilters] = useState<Partial<Record<ProductAttributeKey, string>>>({});
   const [stockOnly, setStockOnly] = useState(false);
@@ -263,37 +267,37 @@ function GenericProductVariantCatalog({
       {isChannel && <ChannelSpecificationNote/>}
       {results.length ? (
         <>
-          <div className={`hidden ${isChannel ? "overflow-x-auto" : "overflow-hidden"} rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-sm xl:block`}>
-            <table className={isChannel ? `${tableStyles.table} text-center text-sm` : "w-full table-fixed border-collapse text-left text-sm"}>
+          <div className="hidden overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-sm xl:block">
+            <table className={`${tableStyles.table} ${usesReferenceTable ? "" : tableStyles.compactTable} text-center text-sm`}>
               <colgroup>{columnWidths.map((width, index) => <col key={index} style={{width: `${width}%`}}/>)}</colgroup>
               <thead className="bg-slate-900 text-white">
                 <tr>
-                  {isChannel ? <>
-                    <th scope="col" className="whitespace-nowrap px-2 py-3 font-semibold">Наименование</th>
+                  {usesReferenceTable ? <>
+                    <th scope="col" className="px-2 py-3 font-semibold">Наименование</th>
                     <th scope="col" className="px-2 py-3 font-semibold">Изображение</th>
-                  </> : <th className="p-3 font-semibold">Полное обозначение</th>}
-                  <th className={isChannel ? "px-3 py-3 text-left font-semibold" : "p-3 font-semibold"}>Характеристики</th>
+                  </> : <th className="p-3 text-left font-semibold">Полное обозначение</th>}
+                  <th className="px-3 py-3 text-left font-semibold">Характеристики</th>
                   <th className="px-2 py-3 font-semibold">Цена</th>
                   {showAvailability && <th className="px-2 py-3 font-semibold">Наличие</th>}
-                  <th className="px-2 py-3 font-semibold">{isChannel ? "Кол-во, м" : "Кол-во"}</th>
+                  <th className="px-2 py-3 font-semibold">{usesReferenceTable ? "Кол-во, м" : "Кол-во"}</th>
                   <th className="px-2 py-3 text-center"><span className="sr-only">Действие</span></th>
                 </tr>
               </thead>
               <tbody>
                 {visible.map((variant) => (
                   <tr id={`variant-${variant.id}`} key={variant.id} className="border-t border-slate-200 dark:border-slate-700 align-middle">
-                    {isChannel ? <>
-                      <th scope="row" className="px-2 py-4 font-semibold">{channelProfileName(variant.name)}</th>
-                      <td className="px-2 py-4"><ChannelProductPreview variant={variant} compact/></td>
-                    </> : <td className="break-words p-3"><CatalogImage src={variant.imageUrls[0]} name={variant.name} compact/><strong>{variant.name}</strong></td>}
-                    <td className={`break-words ${isChannel ? "px-3 py-4 text-left" : "p-3"}`}><VariantSpecifications variant={variant} showDetails={!isChannel}/></td>
+                    {usesReferenceTable ? <>
+                      <th scope="row" className="px-2 py-4 font-semibold">{referenceProfileName(variant.name, categorySlug)}</th>
+                      <td className="px-2 py-4"><ReferenceProductPreview variant={variant} compact isChannel={isChannel}/></td>
+                    </> : <td className="break-words p-3 text-left"><CatalogImage src={variant.imageUrls[0]} name={variant.name} compact/><strong>{variant.name}</strong></td>}
+                    <td className="break-words px-3 py-4 text-left"><VariantSpecifications variant={variant} showDetails={!usesReferenceTable}/></td>
                     <td className="break-words px-2 py-3">
-                      <strong className={isChannel ? "font-semibold tabular-nums" : undefined}>{variant.quoteOnly ? "Цена по запросу" : `${variant.priceQualifier === "from" ? "от " : ""}${formatUnitPrice(variant.price, variant.priceUnit)}`}</strong>
+                      <strong className={usesReferenceTable ? "font-semibold tabular-nums" : undefined}>{variant.quoteOnly ? "Цена по запросу" : `${variant.priceQualifier === "from" ? "от " : ""}${formatUnitPrice(variant.price, variant.priceUnit)}`}</strong>
                     </td>
                     {showAvailability && <td className="px-1.5 py-3">
                       <Availability availability={variant.availability}/>
                     </td>}
-                    <ProductOrderControls variant={variant} view="table" referenceStyle={isChannel}/>
+                    <ProductOrderControls variant={variant} view="table" referenceStyle={usesReferenceTable}/>
                   </tr>
                 ))}
               </tbody>
@@ -307,10 +311,10 @@ function GenericProductVariantCatalog({
                 key={variant.id}
                 className="min-w-0 break-words rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-5 shadow-sm"
               >
-                {isChannel && <h3 className="mb-3 text-lg font-bold">{channelProfileName(variant.name)}</h3>}
-                {isChannel ? <ChannelProductPreview variant={variant}/> : <CatalogImage src={variant.imageUrls[0]} name={variant.name}/>}
-                {!isChannel && <h3 className="mt-1 font-bold">{variant.name}</h3>}
-                <div className="mt-4"><VariantSpecifications variant={variant} showDetails={!isChannel}/></div>
+                {usesReferenceTable && <h3 className="mb-3 text-lg font-bold">{referenceProfileName(variant.name, categorySlug)}</h3>}
+                {usesReferenceTable ? <ReferenceProductPreview variant={variant} isChannel={isChannel}/> : <CatalogImage src={variant.imageUrls[0]} name={variant.name}/>} 
+                {!usesReferenceTable && <h3 className="mt-1 font-bold">{variant.name}</h3>}
+                <div className="mt-4"><VariantSpecifications variant={variant} showDetails={!usesReferenceTable}/></div>
                 <div className="mt-5 flex flex-wrap items-end justify-between gap-4 border-t border-slate-100 dark:border-slate-800 pt-4">
                   <div>
                     <strong className="text-xl">{variant.quoteOnly ? "Цена по запросу" : `${variant.priceQualifier === "from" ? "от " : ""}${formatUnitPrice(variant.price, variant.priceUnit)}`}</strong>
@@ -351,9 +355,32 @@ function channelProfileName(name: string) {
   return number ? `№ ${number.replace(".", ",")}` : name;
 }
 
+function referenceProfileName(name: string, categorySlug: string) {
+  if (categorySlug === "shveller") return channelProfileName(name);
+  if (categorySlug === "ugolok") return name.replace(/^Уголок металлический\s*/i, "");
+  return name;
+}
+
+function ReferenceProductPreview({variant, compact = false, isChannel}: {variant: ProductVariant; compact?: boolean; isChannel: boolean}) {
+  if (isChannel) return <ChannelProductPreview variant={variant} compact={compact}/>;
+  if (!variant.imageUrls[0]) return null;
+  const description = variant.description?.split("\n\n")[0];
+  return <ProductImageViewer
+    src={variant.imageUrls[0]}
+    name={variant.name}
+    presentation={compact ? "table" : "card"}
+    framed
+    expanded
+    caption={description ? <p>{description}</p> : undefined}
+  />;
+}
+
 function VariantSpecifications({variant, showDetails = true}: {variant: ProductVariant; showDetails?: boolean}) {
+  const specifications = variant.specifications
+    .filter(s => !["Полное обозначение", "Условия цены", "Условия оплаты"].includes(s.name))
+    .map(s => variant.categoryId === "rozmet-cat-ugolok" ? {...s, value: formatAngleSpecificationValue(s.value)} : s);
   return <>
-    <dl className="space-y-1 text-sm">{variant.specifications.filter(s => !["Полное обозначение", "Условия цены", "Условия оплаты"].includes(s.name)).map((s, i) => <div key={`${s.name}-${i}`}><dt className="inline text-slate-500 dark:text-slate-400">{s.name}: </dt><dd className="inline">{s.value}</dd></div>)}{variant.weight && <div><dt className="inline text-slate-500 dark:text-slate-400">Теоретическая масса: </dt><dd className="inline">{formatNumber(variant.weight.value)} {variant.weight.unit}</dd></div>}</dl>
+    <dl className="space-y-1 text-sm">{specifications.map((s, i) => <div key={`${s.name}-${i}`}><dt className="inline text-slate-500 dark:text-slate-400">{s.name}: </dt><dd className="inline">{s.value}</dd></div>)}{variant.weight && <div><dt className="inline text-slate-500 dark:text-slate-400">Теоретическая масса: </dt><dd className="inline">{formatNumber(variant.weight.value)} {variant.weight.unit}</dd></div>}</dl>
     {showDetails && variant.id.startsWith("rozmet-") && (variant.description || variant.imageUrls.length > 1) && <details className="mt-3 text-sm">
       <summary className="cursor-pointer font-semibold">Подробнее о товаре</summary>
       {variant.description && <CatalogDescription description={variant.description} className="mt-3"/>}

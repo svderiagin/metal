@@ -1,0 +1,2239 @@
+{
+  "renderer": "scripts/render-ugolok-images.mjs",
+  "reference": "imports/ugolok-image-template/reference-25x25x3.jpg",
+  "backgroundPlate": "imports/ugolok-image-template/clean-background-generated.png",
+  "patches": {
+    "title": {
+      "left": 110,
+      "top": 100,
+      "width": 1260,
+      "height": 120
+    },
+    "firstLeg": {
+      "left": 700,
+      "top": 840,
+      "width": 232,
+      "height": 88
+    },
+    "secondLeg": {
+      "left": 1175,
+      "top": 1438,
+      "width": 370,
+      "height": 76
+    },
+    "thickness": {
+      "left": 1920,
+      "top": 1324,
+      "width": 290,
+      "height": 84
+    },
+    "length": {
+      "left": 590,
+      "top": 1550,
+      "width": 420,
+      "height": 67
+    },
+    "mass": {
+      "left": 590,
+      "top": 1620,
+      "width": 500,
+      "height": 70
+    }
+  },
+  "method": "Original reference pixels; ImageGen background patches restricted to variable text; deterministic Inter labels from public product specifications.",
+  "illustration": "Shared family photograph; labels show nominal dimensions, not scaled manufacturing geometry.",
+  "records": [
+    {
+      "id": "rozmet-2209",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_25x25x3/",
+      "profile": "25x25x3",
+      "imageUrl": "/images/catalog/ugolok/ugolok-25x25x3-clean.webp",
+      "labels": [
+        {
+          "key": "title",
+          "text": "Угол стальной № 25x25x3"
+        },
+        {
+          "key": "firstLeg",
+          "text": "25 мм"
+        },
+        {
+          "key": "secondLeg",
+          "text": "25 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "3 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "1,12 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "mass",
+          "text": "1,12 кг/м",
+          "size": 40,
+          "weight": 700,
+          "left": 610,
+          "top": 1634,
+          "width": 166,
+          "height": 37
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/ugolok/ugolok-25x25x3-clean.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "b80183ef0b257d50f6ecdad3a53c2bfbf314b00b82a42876dd5e39c633d6ddc4"
+    },
+    {
+      "id": "rozmet-2210",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_32x32x3/",
+      "profile": "32x32x3",
+      "imageUrl": "/images/catalog/ugolok/ugolok-32x32x3-clean.webp",
+      "labels": [
+        {
+          "key": "title",
+          "text": "Угол стальной № 32x32x3"
+        },
+        {
+          "key": "firstLeg",
+          "text": "32 мм"
+        },
+        {
+          "key": "secondLeg",
+          "text": "32 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "3 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "1,46 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "firstLeg",
+        "secondLeg",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "Угол стальной № 32x32x3",
+          "size": 84,
+          "weight": 700,
+          "left": 132,
+          "top": 125,
+          "width": 1069,
+          "height": 66
+        },
+        {
+          "key": "firstLeg",
+          "text": "32 мм",
+          "size": 56,
+          "center": 837,
+          "top": 862,
+          "left": 763,
+          "width": 148,
+          "height": 42
+        },
+        {
+          "key": "secondLeg",
+          "text": "32 мм",
+          "size": 56,
+          "center": 1348,
+          "top": 1454,
+          "left": 1274,
+          "width": 148,
+          "height": 42
+        },
+        {
+          "key": "mass",
+          "text": "1,46 кг/м",
+          "size": 40,
+          "weight": 700,
+          "left": 610,
+          "top": 1634,
+          "width": 166,
+          "height": 37
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/ugolok/ugolok-32x32x3-clean.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "ab04cab4faf524878b88793832fef4d43fb307bfe30440370b08f591fe24ffed"
+    },
+    {
+      "id": "rozmet-20157",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_35x35x4/",
+      "profile": "35x35x4",
+      "imageUrl": "/images/catalog/ugolok/ugolok-35x35x4-clean.webp",
+      "labels": [
+        {
+          "key": "title",
+          "text": "Угол стальной № 35x35x4"
+        },
+        {
+          "key": "firstLeg",
+          "text": "35 мм"
+        },
+        {
+          "key": "secondLeg",
+          "text": "35 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "4 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "2,1 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "firstLeg",
+        "secondLeg",
+        "thickness",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "Угол стальной № 35x35x4",
+          "size": 84,
+          "weight": 700,
+          "left": 132,
+          "top": 125,
+          "width": 1069,
+          "height": 66
+        },
+        {
+          "key": "firstLeg",
+          "text": "35 мм",
+          "size": 56,
+          "center": 837,
+          "top": 862,
+          "left": 763,
+          "width": 148,
+          "height": 42
+        },
+        {
+          "key": "secondLeg",
+          "text": "35 мм",
+          "size": 56,
+          "center": 1348,
+          "top": 1454,
+          "left": 1274,
+          "width": 148,
+          "height": 42
+        },
+        {
+          "key": "thickness",
+          "text": "4 мм",
+          "size": 56,
+          "left": 1940,
+          "top": 1342,
+          "width": 117,
+          "height": 40
+        },
+        {
+          "key": "mass",
+          "text": "2,1 кг/м",
+          "size": 40,
+          "weight": 700,
+          "left": 610,
+          "top": 1634,
+          "width": 145,
+          "height": 37
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/ugolok/ugolok-35x35x4-clean.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "3d293c93c58f09cab5bdf12a3dc4c36183b1d19a0a2ed822ff951fa8469df52f"
+    },
+    {
+      "id": "rozmet-2211",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_40x40x3/",
+      "profile": "40x40x3",
+      "imageUrl": "/images/catalog/ugolok/ugolok-40x40x3-clean.webp",
+      "labels": [
+        {
+          "key": "title",
+          "text": "Угол стальной № 40x40x3"
+        },
+        {
+          "key": "firstLeg",
+          "text": "40 мм"
+        },
+        {
+          "key": "secondLeg",
+          "text": "40 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "3 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "1,85 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "firstLeg",
+        "secondLeg",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "Угол стальной № 40x40x3",
+          "size": 84,
+          "weight": 700,
+          "left": 132,
+          "top": 125,
+          "width": 1069,
+          "height": 66
+        },
+        {
+          "key": "firstLeg",
+          "text": "40 мм",
+          "size": 56,
+          "center": 837,
+          "top": 862,
+          "left": 763,
+          "width": 148,
+          "height": 42
+        },
+        {
+          "key": "secondLeg",
+          "text": "40 мм",
+          "size": 56,
+          "center": 1348,
+          "top": 1454,
+          "left": 1274,
+          "width": 148,
+          "height": 42
+        },
+        {
+          "key": "mass",
+          "text": "1,85 кг/м",
+          "size": 40,
+          "weight": 700,
+          "left": 610,
+          "top": 1634,
+          "width": 166,
+          "height": 37
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/ugolok/ugolok-40x40x3-clean.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "e10b35820fadcaaa4c91fb804b94c32e6214fe907ed009cb68dc95fc1c6a5f97"
+    },
+    {
+      "id": "rozmet-2212",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_40x40x4/",
+      "profile": "40x40x4",
+      "imageUrl": "/images/catalog/ugolok/ugolok-40x40x4-clean.webp",
+      "labels": [
+        {
+          "key": "title",
+          "text": "Угол стальной № 40x40x4"
+        },
+        {
+          "key": "firstLeg",
+          "text": "40 мм"
+        },
+        {
+          "key": "secondLeg",
+          "text": "40 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "4 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "2,42 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "firstLeg",
+        "secondLeg",
+        "thickness",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "Угол стальной № 40x40x4",
+          "size": 84,
+          "weight": 700,
+          "left": 132,
+          "top": 125,
+          "width": 1069,
+          "height": 66
+        },
+        {
+          "key": "firstLeg",
+          "text": "40 мм",
+          "size": 56,
+          "center": 837,
+          "top": 862,
+          "left": 763,
+          "width": 148,
+          "height": 42
+        },
+        {
+          "key": "secondLeg",
+          "text": "40 мм",
+          "size": 56,
+          "center": 1348,
+          "top": 1454,
+          "left": 1274,
+          "width": 148,
+          "height": 42
+        },
+        {
+          "key": "thickness",
+          "text": "4 мм",
+          "size": 56,
+          "left": 1940,
+          "top": 1342,
+          "width": 117,
+          "height": 40
+        },
+        {
+          "key": "mass",
+          "text": "2,42 кг/м",
+          "size": 40,
+          "weight": 700,
+          "left": 610,
+          "top": 1634,
+          "width": 167,
+          "height": 37
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/ugolok/ugolok-40x40x4-clean.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "8fd85064f70f2a9dd2a2c717d3446a658f519358fd01fa309f136421792d9c1c"
+    },
+    {
+      "id": "rozmet-2213",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_45x45x4/",
+      "profile": "45x45x4",
+      "imageUrl": "/images/catalog/ugolok/ugolok-45x45x4-clean.webp",
+      "labels": [
+        {
+          "key": "title",
+          "text": "Угол стальной № 45x45x4"
+        },
+        {
+          "key": "firstLeg",
+          "text": "45 мм"
+        },
+        {
+          "key": "secondLeg",
+          "text": "45 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "4 мм"
+        },
+        {
+          "key": "length",
+          "text": "12 м"
+        },
+        {
+          "key": "mass",
+          "text": "2,73 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "firstLeg",
+        "secondLeg",
+        "thickness",
+        "length",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "Угол стальной № 45x45x4",
+          "size": 84,
+          "weight": 700,
+          "left": 132,
+          "top": 125,
+          "width": 1069,
+          "height": 66
+        },
+        {
+          "key": "firstLeg",
+          "text": "45 мм",
+          "size": 56,
+          "center": 837,
+          "top": 862,
+          "left": 763,
+          "width": 148,
+          "height": 41
+        },
+        {
+          "key": "secondLeg",
+          "text": "45 мм",
+          "size": 56,
+          "center": 1348,
+          "top": 1454,
+          "left": 1274,
+          "width": 148,
+          "height": 41
+        },
+        {
+          "key": "thickness",
+          "text": "4 мм",
+          "size": 56,
+          "left": 1940,
+          "top": 1342,
+          "width": 117,
+          "height": 40
+        },
+        {
+          "key": "length",
+          "text": "12 м",
+          "size": 40,
+          "weight": 700,
+          "left": 610,
+          "top": 1568,
+          "width": 80,
+          "height": 29
+        },
+        {
+          "key": "mass",
+          "text": "2,73 кг/м",
+          "size": 40,
+          "weight": 700,
+          "left": 610,
+          "top": 1634,
+          "width": 167,
+          "height": 37
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/ugolok/ugolok-45x45x4-clean.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "b281e4fe0915c57938f5aa8daaa37d914e9a86539f440d121812e7ee7e9bc94e"
+    },
+    {
+      "id": "rozmet-2214",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_50x50x4/",
+      "profile": "50x50x4",
+      "imageUrl": "/images/catalog/ugolok/ugolok-50x50x4-clean.webp",
+      "labels": [
+        {
+          "key": "title",
+          "text": "Угол стальной № 50x50x4"
+        },
+        {
+          "key": "firstLeg",
+          "text": "50 мм"
+        },
+        {
+          "key": "secondLeg",
+          "text": "50 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "4 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "3,05 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "firstLeg",
+        "secondLeg",
+        "thickness",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "Угол стальной № 50x50x4",
+          "size": 84,
+          "weight": 700,
+          "left": 132,
+          "top": 125,
+          "width": 1069,
+          "height": 66
+        },
+        {
+          "key": "firstLeg",
+          "text": "50 мм",
+          "size": 56,
+          "center": 837,
+          "top": 862,
+          "left": 763,
+          "width": 148,
+          "height": 42
+        },
+        {
+          "key": "secondLeg",
+          "text": "50 мм",
+          "size": 56,
+          "center": 1348,
+          "top": 1454,
+          "left": 1274,
+          "width": 148,
+          "height": 42
+        },
+        {
+          "key": "thickness",
+          "text": "4 мм",
+          "size": 56,
+          "left": 1940,
+          "top": 1342,
+          "width": 117,
+          "height": 40
+        },
+        {
+          "key": "mass",
+          "text": "3,05 кг/м",
+          "size": 40,
+          "weight": 700,
+          "left": 610,
+          "top": 1634,
+          "width": 167,
+          "height": 37
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/ugolok/ugolok-50x50x4-clean.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "a2ed009df7dfc1659ca472e572e0e5d258ac625666dacd56a0d70db9b7e956bd"
+    },
+    {
+      "id": "rozmet-2215",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_50x50x5/",
+      "profile": "50x50x5",
+      "imageUrl": "/images/catalog/ugolok/ugolok-50x50x5-clean.webp",
+      "labels": [
+        {
+          "key": "title",
+          "text": "Угол стальной № 50x50x5"
+        },
+        {
+          "key": "firstLeg",
+          "text": "50 мм"
+        },
+        {
+          "key": "secondLeg",
+          "text": "50 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "5 мм"
+        },
+        {
+          "key": "length",
+          "text": "12 м"
+        },
+        {
+          "key": "mass",
+          "text": "3,77 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "firstLeg",
+        "secondLeg",
+        "thickness",
+        "length",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "Угол стальной № 50x50x5",
+          "size": 84,
+          "weight": 700,
+          "left": 132,
+          "top": 125,
+          "width": 1069,
+          "height": 66
+        },
+        {
+          "key": "firstLeg",
+          "text": "50 мм",
+          "size": 56,
+          "center": 837,
+          "top": 862,
+          "left": 763,
+          "width": 148,
+          "height": 42
+        },
+        {
+          "key": "secondLeg",
+          "text": "50 мм",
+          "size": 56,
+          "center": 1348,
+          "top": 1454,
+          "left": 1274,
+          "width": 148,
+          "height": 42
+        },
+        {
+          "key": "thickness",
+          "text": "5 мм",
+          "size": 56,
+          "left": 1940,
+          "top": 1342,
+          "width": 117,
+          "height": 40
+        },
+        {
+          "key": "length",
+          "text": "12 м",
+          "size": 40,
+          "weight": 700,
+          "left": 610,
+          "top": 1568,
+          "width": 80,
+          "height": 29
+        },
+        {
+          "key": "mass",
+          "text": "3,77 кг/м",
+          "size": 40,
+          "weight": 700,
+          "left": 610,
+          "top": 1634,
+          "width": 167,
+          "height": 37
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/ugolok/ugolok-50x50x5-clean.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "2bb00238bd9dcbb8237f02f64462b41d74136f3f9e1c3bf090dcb7e476fd36f0"
+    },
+    {
+      "id": "rozmet-2216",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_63x63x4/",
+      "profile": "63x63x4",
+      "imageUrl": "/images/catalog/ugolok/ugolok-63x63x4-clean.webp",
+      "labels": [
+        {
+          "key": "title",
+          "text": "Угол стальной № 63x63x4"
+        },
+        {
+          "key": "firstLeg",
+          "text": "63 мм"
+        },
+        {
+          "key": "secondLeg",
+          "text": "63 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "4 мм"
+        },
+        {
+          "key": "length",
+          "text": "12 м"
+        },
+        {
+          "key": "mass",
+          "text": "3,91 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "firstLeg",
+        "secondLeg",
+        "thickness",
+        "length",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "Угол стальной № 63x63x4",
+          "size": 84,
+          "weight": 700,
+          "left": 132,
+          "top": 125,
+          "width": 1069,
+          "height": 66
+        },
+        {
+          "key": "firstLeg",
+          "text": "63 мм",
+          "size": 56,
+          "center": 837,
+          "top": 862,
+          "left": 764,
+          "width": 147,
+          "height": 42
+        },
+        {
+          "key": "secondLeg",
+          "text": "63 мм",
+          "size": 56,
+          "center": 1348,
+          "top": 1454,
+          "left": 1275,
+          "width": 147,
+          "height": 42
+        },
+        {
+          "key": "thickness",
+          "text": "4 мм",
+          "size": 56,
+          "left": 1940,
+          "top": 1342,
+          "width": 117,
+          "height": 40
+        },
+        {
+          "key": "length",
+          "text": "12 м",
+          "size": 40,
+          "weight": 700,
+          "left": 610,
+          "top": 1568,
+          "width": 80,
+          "height": 29
+        },
+        {
+          "key": "mass",
+          "text": "3,91 кг/м",
+          "size": 40,
+          "weight": 700,
+          "left": 610,
+          "top": 1634,
+          "width": 167,
+          "height": 37
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/ugolok/ugolok-63x63x4-clean.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "9754cba7ebc3149bf34a7b94e5efdf3cf22cb621c31c9aadb23d318f1515d3ef"
+    },
+    {
+      "id": "rozmet-2217",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_63x63x5/",
+      "profile": "63x63x5",
+      "imageUrl": "/images/catalog/ugolok/ugolok-63x63x5-clean.webp",
+      "labels": [
+        {
+          "key": "title",
+          "text": "Угол стальной № 63x63x5"
+        },
+        {
+          "key": "firstLeg",
+          "text": "63 мм"
+        },
+        {
+          "key": "secondLeg",
+          "text": "63 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "5 мм"
+        },
+        {
+          "key": "length",
+          "text": "12 м"
+        },
+        {
+          "key": "mass",
+          "text": "4,81 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "firstLeg",
+        "secondLeg",
+        "thickness",
+        "length",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "Угол стальной № 63x63x5",
+          "size": 84,
+          "weight": 700,
+          "left": 132,
+          "top": 125,
+          "width": 1069,
+          "height": 66
+        },
+        {
+          "key": "firstLeg",
+          "text": "63 мм",
+          "size": 56,
+          "center": 837,
+          "top": 862,
+          "left": 764,
+          "width": 147,
+          "height": 42
+        },
+        {
+          "key": "secondLeg",
+          "text": "63 мм",
+          "size": 56,
+          "center": 1348,
+          "top": 1454,
+          "left": 1275,
+          "width": 147,
+          "height": 42
+        },
+        {
+          "key": "thickness",
+          "text": "5 мм",
+          "size": 56,
+          "left": 1940,
+          "top": 1342,
+          "width": 117,
+          "height": 40
+        },
+        {
+          "key": "length",
+          "text": "12 м",
+          "size": 40,
+          "weight": 700,
+          "left": 610,
+          "top": 1568,
+          "width": 80,
+          "height": 29
+        },
+        {
+          "key": "mass",
+          "text": "4,81 кг/м",
+          "size": 40,
+          "weight": 700,
+          "left": 610,
+          "top": 1634,
+          "width": 167,
+          "height": 37
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/ugolok/ugolok-63x63x5-clean.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "5d5393f3eef6b178873c676761458f66ba69ff31f639095fddd60c9c7c930b4c"
+    },
+    {
+      "id": "rozmet-2218",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_75x75x5/",
+      "profile": "75x75x5",
+      "imageUrl": "/images/catalog/ugolok/ugolok-75x75x5-clean.webp",
+      "labels": [
+        {
+          "key": "title",
+          "text": "Угол стальной № 75x75x5"
+        },
+        {
+          "key": "firstLeg",
+          "text": "75 мм"
+        },
+        {
+          "key": "secondLeg",
+          "text": "75 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "5 мм"
+        },
+        {
+          "key": "length",
+          "text": "12 м"
+        },
+        {
+          "key": "mass",
+          "text": "5,379 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "firstLeg",
+        "secondLeg",
+        "thickness",
+        "length",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "Угол стальной № 75x75x5",
+          "size": 84,
+          "weight": 700,
+          "left": 132,
+          "top": 125,
+          "width": 1069,
+          "height": 66
+        },
+        {
+          "key": "firstLeg",
+          "text": "75 мм",
+          "size": 56,
+          "center": 837,
+          "top": 862,
+          "left": 764,
+          "width": 147,
+          "height": 40
+        },
+        {
+          "key": "secondLeg",
+          "text": "75 мм",
+          "size": 56,
+          "center": 1348,
+          "top": 1454,
+          "left": 1275,
+          "width": 147,
+          "height": 40
+        },
+        {
+          "key": "thickness",
+          "text": "5 мм",
+          "size": 56,
+          "left": 1940,
+          "top": 1342,
+          "width": 117,
+          "height": 40
+        },
+        {
+          "key": "length",
+          "text": "12 м",
+          "size": 40,
+          "weight": 700,
+          "left": 610,
+          "top": 1568,
+          "width": 80,
+          "height": 29
+        },
+        {
+          "key": "mass",
+          "text": "5,379 кг/м",
+          "size": 40,
+          "weight": 700,
+          "left": 610,
+          "top": 1634,
+          "width": 189,
+          "height": 37
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/ugolok/ugolok-75x75x5-clean.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "3e7f6057b319951022bcdd15c76588a2593f93797446959513b427be1ee04205"
+    },
+    {
+      "id": "rozmet-20160",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_75x75x6/",
+      "profile": "75x75x6",
+      "imageUrl": "/images/catalog/ugolok/ugolok-75x75x6-clean.webp",
+      "labels": [
+        {
+          "key": "title",
+          "text": "Угол стальной № 75x75x6"
+        },
+        {
+          "key": "firstLeg",
+          "text": "75 мм"
+        },
+        {
+          "key": "secondLeg",
+          "text": "75 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "6 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "6,89 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "firstLeg",
+        "secondLeg",
+        "thickness",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "Угол стальной № 75x75x6",
+          "size": 84,
+          "weight": 700,
+          "left": 132,
+          "top": 125,
+          "width": 1069,
+          "height": 66
+        },
+        {
+          "key": "firstLeg",
+          "text": "75 мм",
+          "size": 56,
+          "center": 837,
+          "top": 862,
+          "left": 764,
+          "width": 147,
+          "height": 40
+        },
+        {
+          "key": "secondLeg",
+          "text": "75 мм",
+          "size": 56,
+          "center": 1348,
+          "top": 1454,
+          "left": 1275,
+          "width": 147,
+          "height": 40
+        },
+        {
+          "key": "thickness",
+          "text": "6 мм",
+          "size": 56,
+          "left": 1940,
+          "top": 1342,
+          "width": 116,
+          "height": 42
+        },
+        {
+          "key": "mass",
+          "text": "6,89 кг/м",
+          "size": 40,
+          "weight": 700,
+          "left": 610,
+          "top": 1634,
+          "width": 167,
+          "height": 37
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/ugolok/ugolok-75x75x6-clean.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "4456b8179cdbc49c3aff91223917a1d07c8f9b458a08457d3e745d89113c616a"
+    },
+    {
+      "id": "rozmet-2220",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_90x90x6/",
+      "profile": "90x90x6",
+      "imageUrl": "/images/catalog/ugolok/ugolok-90x90x6-clean.webp",
+      "labels": [
+        {
+          "key": "title",
+          "text": "Угол стальной № 90x90x6"
+        },
+        {
+          "key": "firstLeg",
+          "text": "90 мм"
+        },
+        {
+          "key": "secondLeg",
+          "text": "90 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "6 мм"
+        },
+        {
+          "key": "length",
+          "text": "12 м"
+        },
+        {
+          "key": "mass",
+          "text": "8,33 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "firstLeg",
+        "secondLeg",
+        "thickness",
+        "length",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "Угол стальной № 90x90x6",
+          "size": 84,
+          "weight": 700,
+          "left": 132,
+          "top": 125,
+          "width": 1069,
+          "height": 66
+        },
+        {
+          "key": "firstLeg",
+          "text": "90 мм",
+          "size": 56,
+          "center": 837,
+          "top": 862,
+          "left": 763,
+          "width": 148,
+          "height": 42
+        },
+        {
+          "key": "secondLeg",
+          "text": "90 мм",
+          "size": 56,
+          "center": 1348,
+          "top": 1454,
+          "left": 1274,
+          "width": 148,
+          "height": 42
+        },
+        {
+          "key": "thickness",
+          "text": "6 мм",
+          "size": 56,
+          "left": 1940,
+          "top": 1342,
+          "width": 116,
+          "height": 42
+        },
+        {
+          "key": "length",
+          "text": "12 м",
+          "size": 40,
+          "weight": 700,
+          "left": 610,
+          "top": 1568,
+          "width": 80,
+          "height": 29
+        },
+        {
+          "key": "mass",
+          "text": "8,33 кг/м",
+          "size": 40,
+          "weight": 700,
+          "left": 610,
+          "top": 1634,
+          "width": 167,
+          "height": 37
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/ugolok/ugolok-90x90x6-clean.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "1a0477ae0a11c440a89643d1f914b5370e7ed9e829176bdbc45ac9b6a62ca526"
+    },
+    {
+      "id": "rozmet-2219",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok-75kh75kh6/",
+      "profile": "100x63x6",
+      "imageUrl": "/images/catalog/ugolok/ugolok-100x63x6-clean.webp",
+      "labels": [
+        {
+          "key": "title",
+          "text": "Угол стальной № 100x63x6"
+        },
+        {
+          "key": "firstLeg",
+          "text": "100 мм"
+        },
+        {
+          "key": "secondLeg",
+          "text": "63 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "6 мм"
+        },
+        {
+          "key": "length",
+          "text": "12 м"
+        },
+        {
+          "key": "mass",
+          "text": "7,52 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "firstLeg",
+        "secondLeg",
+        "thickness",
+        "length",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "Угол стальной № 100x63x6",
+          "size": 84,
+          "weight": 700,
+          "left": 132,
+          "top": 125,
+          "width": 1116,
+          "height": 66
+        },
+        {
+          "key": "firstLeg",
+          "text": "100 мм",
+          "size": 56,
+          "center": 837,
+          "top": 862,
+          "left": 747,
+          "width": 175,
+          "height": 42
+        },
+        {
+          "key": "secondLeg",
+          "text": "63 мм",
+          "size": 56,
+          "center": 1348,
+          "top": 1454,
+          "left": 1275,
+          "width": 147,
+          "height": 42
+        },
+        {
+          "key": "thickness",
+          "text": "6 мм",
+          "size": 56,
+          "left": 1940,
+          "top": 1342,
+          "width": 116,
+          "height": 42
+        },
+        {
+          "key": "length",
+          "text": "12 м",
+          "size": 40,
+          "weight": 700,
+          "left": 610,
+          "top": 1568,
+          "width": 80,
+          "height": 29
+        },
+        {
+          "key": "mass",
+          "text": "7,52 кг/м",
+          "size": 40,
+          "weight": 700,
+          "left": 610,
+          "top": 1634,
+          "width": 167,
+          "height": 37
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/ugolok/ugolok-100x63x6-clean.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "fcf117d5f1e174620e388986aaae04fa1eaec56d95369ce190d67f0fcf826014"
+    },
+    {
+      "id": "rozmet-2221",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_100x100x7/",
+      "profile": "100x100x7",
+      "imageUrl": "/images/catalog/ugolok/ugolok-100x100x7-clean.webp",
+      "labels": [
+        {
+          "key": "title",
+          "text": "Угол стальной № 100x100x7"
+        },
+        {
+          "key": "firstLeg",
+          "text": "100 мм"
+        },
+        {
+          "key": "secondLeg",
+          "text": "100 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "7 мм"
+        },
+        {
+          "key": "length",
+          "text": "12 м"
+        },
+        {
+          "key": "mass",
+          "text": "10,8 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "firstLeg",
+        "secondLeg",
+        "thickness",
+        "length",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "Угол стальной № 100x100x7",
+          "size": 84,
+          "weight": 700,
+          "left": 132,
+          "top": 125,
+          "width": 1164,
+          "height": 66
+        },
+        {
+          "key": "firstLeg",
+          "text": "100 мм",
+          "size": 56,
+          "center": 837,
+          "top": 862,
+          "left": 747,
+          "width": 175,
+          "height": 42
+        },
+        {
+          "key": "secondLeg",
+          "text": "100 мм",
+          "size": 56,
+          "center": 1348,
+          "top": 1454,
+          "left": 1261,
+          "width": 175,
+          "height": 42
+        },
+        {
+          "key": "thickness",
+          "text": "7 мм",
+          "size": 56,
+          "left": 1940,
+          "top": 1342,
+          "width": 116,
+          "height": 39
+        },
+        {
+          "key": "length",
+          "text": "12 м",
+          "size": 40,
+          "weight": 700,
+          "left": 610,
+          "top": 1568,
+          "width": 80,
+          "height": 29
+        },
+        {
+          "key": "mass",
+          "text": "10,8 кг/м",
+          "size": 40,
+          "weight": 700,
+          "left": 610,
+          "top": 1634,
+          "width": 166,
+          "height": 37
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/ugolok/ugolok-100x100x7-clean.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "f8e38bceefb6c9874de917ffb769278be59581e89c7361a0295a8d19d991b56f"
+    },
+    {
+      "id": "rozmet-2222",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_100x100x8/",
+      "profile": "100x100x8",
+      "imageUrl": "/images/catalog/ugolok/ugolok-100x100x8-clean.webp",
+      "labels": [
+        {
+          "key": "title",
+          "text": "Угол стальной № 100x100x8"
+        },
+        {
+          "key": "firstLeg",
+          "text": "100 мм"
+        },
+        {
+          "key": "secondLeg",
+          "text": "100 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "8 мм"
+        },
+        {
+          "key": "length",
+          "text": "12 м"
+        },
+        {
+          "key": "mass",
+          "text": "14,3 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "firstLeg",
+        "secondLeg",
+        "thickness",
+        "length",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "Угол стальной № 100x100x8",
+          "size": 84,
+          "weight": 700,
+          "left": 132,
+          "top": 125,
+          "width": 1163,
+          "height": 66
+        },
+        {
+          "key": "firstLeg",
+          "text": "100 мм",
+          "size": 56,
+          "center": 837,
+          "top": 862,
+          "left": 747,
+          "width": 175,
+          "height": 42
+        },
+        {
+          "key": "secondLeg",
+          "text": "100 мм",
+          "size": 56,
+          "center": 1348,
+          "top": 1454,
+          "left": 1261,
+          "width": 175,
+          "height": 42
+        },
+        {
+          "key": "thickness",
+          "text": "8 мм",
+          "size": 56,
+          "left": 1940,
+          "top": 1342,
+          "width": 117,
+          "height": 42
+        },
+        {
+          "key": "length",
+          "text": "12 м",
+          "size": 40,
+          "weight": 700,
+          "left": 610,
+          "top": 1568,
+          "width": 80,
+          "height": 29
+        },
+        {
+          "key": "mass",
+          "text": "14,3 кг/м",
+          "size": 40,
+          "weight": 700,
+          "left": 610,
+          "top": 1634,
+          "width": 166,
+          "height": 37
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/ugolok/ugolok-100x100x8-clean.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "2f1c234a4b075f6788ac95ca75a5af454be5594f698c800f07fc8f38fefb264a"
+    },
+    {
+      "id": "rozmet-20368",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_100x100x10/",
+      "profile": "100x100x10",
+      "imageUrl": "/images/catalog/ugolok/ugolok-100x100x10-clean.webp",
+      "labels": [
+        {
+          "key": "title",
+          "text": "Угол стальной № 100x100x10"
+        },
+        {
+          "key": "firstLeg",
+          "text": "100 мм"
+        },
+        {
+          "key": "secondLeg",
+          "text": "100 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "10 мм"
+        },
+        {
+          "key": "length",
+          "text": "12 м"
+        },
+        {
+          "key": "mass",
+          "text": "15,1 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "firstLeg",
+        "secondLeg",
+        "thickness",
+        "length",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "Угол стальной № 100x100x10",
+          "size": 84,
+          "weight": 700,
+          "left": 132,
+          "top": 125,
+          "width": 1210,
+          "height": 66
+        },
+        {
+          "key": "firstLeg",
+          "text": "100 мм",
+          "size": 56,
+          "center": 837,
+          "top": 862,
+          "left": 747,
+          "width": 175,
+          "height": 42
+        },
+        {
+          "key": "secondLeg",
+          "text": "100 мм",
+          "size": 56,
+          "center": 1348,
+          "top": 1454,
+          "left": 1261,
+          "width": 175,
+          "height": 42
+        },
+        {
+          "key": "thickness",
+          "text": "10 мм",
+          "size": 56,
+          "left": 1940,
+          "top": 1342,
+          "width": 144,
+          "height": 42
+        },
+        {
+          "key": "length",
+          "text": "12 м",
+          "size": 40,
+          "weight": 700,
+          "left": 610,
+          "top": 1568,
+          "width": 80,
+          "height": 29
+        },
+        {
+          "key": "mass",
+          "text": "15,1 кг/м",
+          "size": 40,
+          "weight": 700,
+          "left": 610,
+          "top": 1634,
+          "width": 166,
+          "height": 37
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/ugolok/ugolok-100x100x10-clean.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "71d1eaba7797f317fea038b31b15a7ffed158e14d8001fba0c02f8c2711c2595"
+    },
+    {
+      "id": "rozmet-2223",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_125x125x8/",
+      "profile": "125x125x8",
+      "imageUrl": "/images/catalog/ugolok/ugolok-125x125x8-clean.webp",
+      "labels": [
+        {
+          "key": "title",
+          "text": "Угол стальной № 125x125x8"
+        },
+        {
+          "key": "firstLeg",
+          "text": "125 мм"
+        },
+        {
+          "key": "secondLeg",
+          "text": "125 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "8 мм"
+        },
+        {
+          "key": "length",
+          "text": "12 м"
+        },
+        {
+          "key": "mass",
+          "text": "15,46 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "firstLeg",
+        "secondLeg",
+        "thickness",
+        "length",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "Угол стальной № 125x125x8",
+          "size": 84,
+          "weight": 700,
+          "left": 132,
+          "top": 125,
+          "width": 1163,
+          "height": 66
+        },
+        {
+          "key": "firstLeg",
+          "text": "125 мм",
+          "size": 56,
+          "center": 837,
+          "top": 862,
+          "left": 747,
+          "width": 175,
+          "height": 41
+        },
+        {
+          "key": "secondLeg",
+          "text": "125 мм",
+          "size": 56,
+          "center": 1348,
+          "top": 1454,
+          "left": 1261,
+          "width": 175,
+          "height": 41
+        },
+        {
+          "key": "thickness",
+          "text": "8 мм",
+          "size": 56,
+          "left": 1940,
+          "top": 1342,
+          "width": 117,
+          "height": 42
+        },
+        {
+          "key": "length",
+          "text": "12 м",
+          "size": 40,
+          "weight": 700,
+          "left": 610,
+          "top": 1568,
+          "width": 80,
+          "height": 29
+        },
+        {
+          "key": "mass",
+          "text": "15,46 кг/м",
+          "size": 40,
+          "weight": 700,
+          "left": 610,
+          "top": 1634,
+          "width": 188,
+          "height": 37
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/ugolok/ugolok-125x125x8-clean.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "c4b3a67074d559ebdf531f98f9f63c6139fd8786a69f3123d4685600f328ed07"
+    },
+    {
+      "id": "rozmet-29030",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_125kh125kh10/",
+      "profile": "125x125x10",
+      "imageUrl": "/images/catalog/ugolok/ugolok-125x125x10-clean.webp",
+      "labels": [
+        {
+          "key": "title",
+          "text": "Угол стальной № 125x125x10"
+        },
+        {
+          "key": "firstLeg",
+          "text": "125 мм"
+        },
+        {
+          "key": "secondLeg",
+          "text": "125 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "10 мм"
+        },
+        {
+          "key": "length",
+          "text": "12 м"
+        },
+        {
+          "key": "mass",
+          "text": "15,46 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "firstLeg",
+        "secondLeg",
+        "thickness",
+        "length",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "Угол стальной № 125x125x10",
+          "size": 84,
+          "weight": 700,
+          "left": 132,
+          "top": 125,
+          "width": 1210,
+          "height": 66
+        },
+        {
+          "key": "firstLeg",
+          "text": "125 мм",
+          "size": 56,
+          "center": 837,
+          "top": 862,
+          "left": 747,
+          "width": 175,
+          "height": 41
+        },
+        {
+          "key": "secondLeg",
+          "text": "125 мм",
+          "size": 56,
+          "center": 1348,
+          "top": 1454,
+          "left": 1261,
+          "width": 175,
+          "height": 41
+        },
+        {
+          "key": "thickness",
+          "text": "10 мм",
+          "size": 56,
+          "left": 1940,
+          "top": 1342,
+          "width": 144,
+          "height": 42
+        },
+        {
+          "key": "length",
+          "text": "12 м",
+          "size": 40,
+          "weight": 700,
+          "left": 610,
+          "top": 1568,
+          "width": 80,
+          "height": 29
+        },
+        {
+          "key": "mass",
+          "text": "15,46 кг/м",
+          "size": 40,
+          "weight": 700,
+          "left": 610,
+          "top": 1634,
+          "width": 188,
+          "height": 37
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/ugolok/ugolok-125x125x10-clean.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "21cceb6060d90f30c9af005605b1c3e521b231897df23c03a99b22c6960e3c10"
+    },
+    {
+      "id": "rozmet-2224",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_140x140x10/",
+      "profile": "140x140x10",
+      "imageUrl": "/images/catalog/ugolok/ugolok-140x140x10-clean.webp",
+      "labels": [
+        {
+          "key": "title",
+          "text": "Угол стальной № 140x140x10"
+        },
+        {
+          "key": "firstLeg",
+          "text": "140 мм"
+        },
+        {
+          "key": "secondLeg",
+          "text": "140 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "10 мм"
+        },
+        {
+          "key": "length",
+          "text": "12 м"
+        },
+        {
+          "key": "mass",
+          "text": "21,5 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "firstLeg",
+        "secondLeg",
+        "thickness",
+        "length",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "Угол стальной № 140x140x10",
+          "size": 84,
+          "weight": 700,
+          "left": 132,
+          "top": 125,
+          "width": 1210,
+          "height": 66
+        },
+        {
+          "key": "firstLeg",
+          "text": "140 мм",
+          "size": 56,
+          "center": 837,
+          "top": 862,
+          "left": 747,
+          "width": 175,
+          "height": 42
+        },
+        {
+          "key": "secondLeg",
+          "text": "140 мм",
+          "size": 56,
+          "center": 1348,
+          "top": 1454,
+          "left": 1261,
+          "width": 175,
+          "height": 42
+        },
+        {
+          "key": "thickness",
+          "text": "10 мм",
+          "size": 56,
+          "left": 1940,
+          "top": 1342,
+          "width": 144,
+          "height": 42
+        },
+        {
+          "key": "length",
+          "text": "12 м",
+          "size": 40,
+          "weight": 700,
+          "left": 610,
+          "top": 1568,
+          "width": 80,
+          "height": 29
+        },
+        {
+          "key": "mass",
+          "text": "21,5 кг/м",
+          "size": 40,
+          "weight": 700,
+          "left": 610,
+          "top": 1634,
+          "width": 167,
+          "height": 37
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/ugolok/ugolok-140x140x10-clean.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "978b21c29d1e4eef3231191e819853b3973ad30bda4c0417bb069ff6188b791a"
+    },
+    {
+      "id": "rozmet-2225",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_160x160x10/",
+      "profile": "160x160x10",
+      "imageUrl": "/images/catalog/ugolok/ugolok-160x160x10-clean.webp",
+      "labels": [
+        {
+          "key": "title",
+          "text": "Угол стальной № 160x160x10"
+        },
+        {
+          "key": "firstLeg",
+          "text": "160 мм"
+        },
+        {
+          "key": "secondLeg",
+          "text": "160 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "10 мм"
+        },
+        {
+          "key": "length",
+          "text": "12 м"
+        },
+        {
+          "key": "mass",
+          "text": "24,7 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "firstLeg",
+        "secondLeg",
+        "thickness",
+        "length",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "Угол стальной № 160x160x10",
+          "size": 84,
+          "weight": 700,
+          "left": 132,
+          "top": 125,
+          "width": 1210,
+          "height": 66
+        },
+        {
+          "key": "firstLeg",
+          "text": "160 мм",
+          "size": 56,
+          "center": 837,
+          "top": 862,
+          "left": 747,
+          "width": 175,
+          "height": 42
+        },
+        {
+          "key": "secondLeg",
+          "text": "160 мм",
+          "size": 56,
+          "center": 1348,
+          "top": 1454,
+          "left": 1261,
+          "width": 175,
+          "height": 42
+        },
+        {
+          "key": "thickness",
+          "text": "10 мм",
+          "size": 56,
+          "left": 1940,
+          "top": 1342,
+          "width": 144,
+          "height": 42
+        },
+        {
+          "key": "length",
+          "text": "12 м",
+          "size": 40,
+          "weight": 700,
+          "left": 610,
+          "top": 1568,
+          "width": 80,
+          "height": 29
+        },
+        {
+          "key": "mass",
+          "text": "24,7 кг/м",
+          "size": 40,
+          "weight": 700,
+          "left": 610,
+          "top": 1634,
+          "width": 167,
+          "height": 37
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/ugolok/ugolok-160x160x10-clean.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "519c79cfb4b3a9c47c484ddbb2dc08ee5b0a5370c9a938f3bf62ab054f91382b"
+    },
+    {
+      "id": "rozmet-16726",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_100kh100kh10/",
+      "profile": "160x100x10",
+      "imageUrl": "/images/catalog/ugolok/ugolok-160x100x10-clean.webp",
+      "labels": [
+        {
+          "key": "title",
+          "text": "Угол стальной № 160x100x10"
+        },
+        {
+          "key": "firstLeg",
+          "text": "160 мм"
+        },
+        {
+          "key": "secondLeg",
+          "text": "100 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "10 мм"
+        },
+        {
+          "key": "length",
+          "text": "12 м"
+        },
+        {
+          "key": "mass",
+          "text": "19,85 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "firstLeg",
+        "secondLeg",
+        "thickness",
+        "length",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "Угол стальной № 160x100x10",
+          "size": 84,
+          "weight": 700,
+          "left": 132,
+          "top": 125,
+          "width": 1210,
+          "height": 66
+        },
+        {
+          "key": "firstLeg",
+          "text": "160 мм",
+          "size": 56,
+          "center": 837,
+          "top": 862,
+          "left": 747,
+          "width": 175,
+          "height": 42
+        },
+        {
+          "key": "secondLeg",
+          "text": "100 мм",
+          "size": 56,
+          "center": 1348,
+          "top": 1454,
+          "left": 1261,
+          "width": 175,
+          "height": 42
+        },
+        {
+          "key": "thickness",
+          "text": "10 мм",
+          "size": 56,
+          "left": 1940,
+          "top": 1342,
+          "width": 144,
+          "height": 42
+        },
+        {
+          "key": "length",
+          "text": "12 м",
+          "size": 40,
+          "weight": 700,
+          "left": 610,
+          "top": 1568,
+          "width": 80,
+          "height": 29
+        },
+        {
+          "key": "mass",
+          "text": "19,85 кг/м",
+          "size": 40,
+          "weight": 700,
+          "left": 610,
+          "top": 1634,
+          "width": 188,
+          "height": 37
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/ugolok/ugolok-160x100x10-clean.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "7b5393b0038e7c204a42abe68e8a8a058e22ad38c768e94b96e76d5d93253bc7"
+    }
+  ]
+}

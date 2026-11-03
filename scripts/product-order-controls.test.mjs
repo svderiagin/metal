@@ -33,6 +33,7 @@ function setup(overrides = {}, componentProps = {}) {
     './QuoteRequestButton': {QuoteRequestButton: 'quote'},
     '@/lib/quoteRequest': readProjectData('lib/quoteRequest.ts'),
     './FilterPanel.module.css': new Proxy({}, {get: (_, key) => key}),
+    './RebarTable.module.css': new Proxy({}, {get: (_, key) => key}),
   };
   const testModule = {exports: {}};
   const source = ts.transpileModule(fs.readFileSync('components/catalog/ProductOrderControls.tsx', 'utf8'), {

@@ -1,0 +1,7 @@
+{
+  "tool": "image_gen.imagegen (built-in)",
+  "reference": "imports/ugolok-image-template/reference-25x25x3.jpg",
+  "output": "imports/ugolok-image-template/clean-background-generated.png",
+  "use": "Only clean background patches inside variable-label rectangles; generated product pixels are excluded from final illustrations.",
+  "prompt": "Use case: precise-object-edit. Edit target: attached steel angle technical product photograph, 2400 x 1800 landscape 4:3. Create a clean template plate by removing ALL typography, numbers, dimension lines and arrowheads from the near-white background. Remove heading at top left, three dimension labels and their arrows around the end section, and both text rows at bottom left. Reconstruct only the continuous subtle near-white neutral paper/studio background and light reflection formerly behind annotations. Keep the steel angle product EXACTLY fixed in position and shape; preserve the visible texture, machined cut face scratches, rounded corners, continuous edges, lighting, cast shadow and reflection. No retexturing, no geometry change, no resizing, no cropping, no new text or overlays, no new objects. The output will supply small clean background patches for programmatic replacement of the old labels. Preserve native 2400x1800 size."
+}

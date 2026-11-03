@@ -1,4 +1,12 @@
 .table {
+  /* Общие параметры всех товарных таблиц; состав и ширина колонок задаются по категории. */
+  --cell-padding-x: 0.5rem;
+  --edge-padding-x: 1rem;
+  --heading-padding-y: 0.75rem;
+  --cell-padding-y: 1rem;
+  --control-padding-y: 0.75rem;
+  --control-height: 2.75rem;
+  --action-width: 8rem;
   width: 100%;
   min-width: 75rem;
   table-layout: fixed;
@@ -10,8 +18,37 @@
   overflow-wrap: anywhere;
 }
 
-.table .sumColumn {
-  padding-inline: 1rem;
+.table > thead > tr > th {
+  padding: var(--heading-padding-y) var(--cell-padding-x);
+  font-weight: 600;
+  white-space: normal;
+  overflow-wrap: normal;
+}
+
+.table > tbody > tr > :is(th, td):not([colspan]) {
+  padding: var(--cell-padding-y) var(--cell-padding-x);
+}
+
+.table > tbody > tr > td:has(input, .tableAction) {
+  padding-block: var(--control-padding-y);
+}
+
+.table > :is(thead, tbody) > tr > :is(th, td):first-child:not([colspan]) {
+  padding-inline-start: var(--edge-padding-x);
+}
+
+.table > :is(thead, tbody) > tr > :is(th, td):last-child:not([colspan]) {
+  padding-inline-end: var(--edge-padding-x);
+}
+
+.table td input {
+  min-height: var(--control-height);
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.table > :is(thead, tbody) > tr > :is(th, td).sumColumn {
+  padding-inline: var(--edge-padding-x);
   text-align: center;
 }
 
@@ -28,7 +65,9 @@
 }
 
 .tableAction {
-  width: 8rem;
+  width: var(--action-width, 8rem);
+  max-width: 100%;
+  min-height: var(--control-height, 2.75rem);
 }
 
 .compactTable {

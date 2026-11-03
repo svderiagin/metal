@@ -50,20 +50,23 @@ async function textImage(text, size, weight = 400) {
 // Erase only the variable labels using the matching unannotated photograph.
 // All other pixels (including the reflection and existing dimension arrows)
 // are retained from the user-approved reference. No AI editing or inpainting.
-const patches = [
-  {left: 110, top: 105, width: 960, height: 120},
-  {left: 680, top: 876, width: 230, height: 58},
-  {left: 1160, top: 1227, width: 320, height: 83},
-  {left: 1964, top: 986, width: 370, height: 94},
-  {left: 900, top: 1408, width: 980, height: 90},
-  {left: 600, top: 1552, width: 470, height: 64},
-  {left: 600, top: 1621, width: 470, height: 65},
-];
-const patchLayers = await Promise.all(patches.map(async rectangle => ({
+const patches = {
+  title: {left: 110, top: 105, width: 960, height: 120},
+  flangeWidth: {left: 680, top: 876, width: 224, height: 58},
+  webThickness: {left: 1160, top: 1227, width: 320, height: 83},
+  flangeThickness: {left: 1964, top: 986, width: 370, height: 94},
+  height: {left: 900, top: 1408, width: 980, height: 90},
+  length: {left: 600, top: 1552, width: 470, height: 64},
+  mass: {left: 600, top: 1621, width: 470, height: 65},
+};
+const referenceLabels = {
+  title: 'Швеллер № 5', flangeWidth: '32 мм', webThickness: '4,4 мм',
+  flangeThickness: '7 мм', height: '50 мм', length: '11,7 м', mass: '4,84 кг/м',
+};
+const patchLayers = Object.fromEntries(await Promise.all(Object.entries(patches).map(async ([key, rectangle]) => [key, {
   input: await sharp(photo).extract(rectangle).png().toBuffer(),
   left: rectangle.left, top: rectangle.top,
-})));
-const cleanReference = await sharp(reference).composite(patchLayers).png().toBuffer();
+}])));
 
 async function render(product) {
   const number = product.name.match(/№\s*(\d+(?:[.,]\d+)?)/u)?.[1].replace('.', ',');
@@ -86,9 +89,11 @@ async function render(product) {
     {key: 'mass', text: values['Теоретическая масса'], size: 40, weight: 700, left: 610, top: 1634},
   ];
   const placements = [];
-  if (number !== '5') {
+  const changedLabels = labels.filter(label => label.text !== referenceLabels[label.key]);
+  if (changedLabels.length) {
+    const cleanReference = await sharp(reference).composite(changedLabels.map(label => patchLayers[label.key])).png().toBuffer();
     const layers = [];
-    for (const label of labels) {
+    for (const label of changedLabels) {
       const rendered = await textImage(label.text, label.size, label.weight);
       let left = label.center === undefined ? label.left : Math.round(label.center - rendered.info.width / 2);
       // Longer flange-width values must not run into the metal's front edge.
@@ -102,19 +107,21 @@ async function render(product) {
       layers.push({input: rendered.data, left, top: label.top});
     }
     const overall = placements.find(label => label.key === 'height');
-    const gapLeft = overall.left - 10, gapRight = overall.left + overall.width + 10;
     // Restore the overall-dimension segment erased with its old numeric label.
-    const lines = svg(`<g stroke="#59636F" stroke-width="4" fill="none">
+    const gapLeft = overall ? overall.left - 10 : 0;
+    const gapRight = overall ? overall.left + overall.width + 10 : 0;
+    const lines = overall ? [{input: svg(`<g stroke="#59636F" stroke-width="4" fill="none">
       <path d="M920 1408V1467 M1860 1408V1467 M920 1451H${gapLeft} M${gapRight} 1451H1860"/>
-      </g><g fill="#59636F"><path d="M920 1451l24 -4v8z M1860 1451l-24 -4v8z"/></g>`);
-    image = await sharp(cleanReference).composite([{input: lines, left: 0, top: 0}, ...layers]).png().toBuffer();
+      </g><g fill="#59636F"><path d="M920 1451l24 -4v8z M1860 1451l-24 -4v8z"/></g>`), left: 0, top: 0}] : [];
+    image = await sharp(cleanReference).composite([...lines, ...layers]).png().toBuffer();
   }
   const output = write ? `public${expectedPath}` : `${previewDirectory}/shveller-${number.replace(',', '-')}.webp`;
   // Lossless source assets preserve the photograph; next/image delivers smaller variants.
   const result = await sharp(image).webp({lossless: true, effort: 6}).toBuffer();
   await fs.writeFile(output, result);
   return {id: product.id, number, imageUrl: expectedPath, values, labels: labels.map(({key, text}) => ({key, text})),
-    sourceReference: referencePath, referenceUnmodified: number === '5', output, width: WIDTH, height: HEIGHT,
+    sourceReference: referencePath, referenceUnmodified: changedLabels.length === 0,
+    changedLabels: changedLabels.map(label => label.key), output, width: WIDTH, height: HEIGHT,
     format: 'lossless WebP', bytes: result.length, sha256: createHash('sha256').update(result).digest('hex')};
 }
 

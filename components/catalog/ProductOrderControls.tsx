@@ -9,6 +9,7 @@ import type {ProductVariant} from "@/types/product";
 import {QuoteRequestButton} from "./QuoteRequestButton";
 import {formatQuoteProductName} from "@/lib/quoteRequest";
 import styles from "./FilterPanel.module.css";
+import tableStyles from "./RebarTable.module.css";
 
 export function ProductOrderControls({variant, view, referenceStyle = false}: {variant: ProductVariant; view: "table" | "card"; referenceStyle?: boolean}) {
   const {lines, hydrated, addItem, updateQuantity, removeItem} = useCart();
@@ -51,7 +52,7 @@ export function ProductOrderControls({variant, view, referenceStyle = false}: {v
         : line && canPurchase ? styles.updateCartButton : styles.cartButton;
   const label = removed ? "Удалено" : shouldRemove ? "Удалить" : !canPurchase ? "Под заказ"
     : saved ? "✓ В корзине" : line ? "Обновить" : "В корзину";
-  const actionClass = `${styles.orderAction} ${view === "card" ? styles.orderActionCard : ""} px-3`;
+  const actionClass = `${view === "card" ? "w-full" : tableStyles.tableAction} px-3`;
   const quoteQuantity = draft !== null || line || !needsQuote ? quantity : null;
   const weightPerMeter = variant.weightPerMeterKg ?? (variant.weight?.unit === "кг/м" ? variant.weight.value : undefined);
   const quoteTons = quoteQuantity === null ? null : variant.unit === "ton" ? quoteQuantity

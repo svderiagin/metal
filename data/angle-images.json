@@ -1,0 +1,92 @@
+{
+  "products": {
+    "rozmet-2209": {
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_25x25x3/",
+      "imageUrl": "/images/catalog/ugolok/ugolok-25x25x3-clean.webp"
+    },
+    "rozmet-2210": {
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_32x32x3/",
+      "imageUrl": "/images/catalog/ugolok/ugolok-32x32x3-clean.webp"
+    },
+    "rozmet-20157": {
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_35x35x4/",
+      "imageUrl": "/images/catalog/ugolok/ugolok-35x35x4-clean.webp"
+    },
+    "rozmet-2211": {
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_40x40x3/",
+      "imageUrl": "/images/catalog/ugolok/ugolok-40x40x3-clean.webp"
+    },
+    "rozmet-2212": {
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_40x40x4/",
+      "imageUrl": "/images/catalog/ugolok/ugolok-40x40x4-clean.webp"
+    },
+    "rozmet-2213": {
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_45x45x4/",
+      "imageUrl": "/images/catalog/ugolok/ugolok-45x45x4-clean.webp"
+    },
+    "rozmet-2214": {
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_50x50x4/",
+      "imageUrl": "/images/catalog/ugolok/ugolok-50x50x4-clean.webp"
+    },
+    "rozmet-2215": {
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_50x50x5/",
+      "imageUrl": "/images/catalog/ugolok/ugolok-50x50x5-clean.webp"
+    },
+    "rozmet-2216": {
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_63x63x4/",
+      "imageUrl": "/images/catalog/ugolok/ugolok-63x63x4-clean.webp"
+    },
+    "rozmet-2217": {
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_63x63x5/",
+      "imageUrl": "/images/catalog/ugolok/ugolok-63x63x5-clean.webp"
+    },
+    "rozmet-2218": {
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_75x75x5/",
+      "imageUrl": "/images/catalog/ugolok/ugolok-75x75x5-clean.webp"
+    },
+    "rozmet-20160": {
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_75x75x6/",
+      "imageUrl": "/images/catalog/ugolok/ugolok-75x75x6-clean.webp"
+    },
+    "rozmet-2220": {
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_90x90x6/",
+      "imageUrl": "/images/catalog/ugolok/ugolok-90x90x6-clean.webp"
+    },
+    "rozmet-2219": {
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok-75kh75kh6/",
+      "imageUrl": "/images/catalog/ugolok/ugolok-100x63x6-clean.webp"
+    },
+    "rozmet-2221": {
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_100x100x7/",
+      "imageUrl": "/images/catalog/ugolok/ugolok-100x100x7-clean.webp"
+    },
+    "rozmet-2222": {
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_100x100x8/",
+      "imageUrl": "/images/catalog/ugolok/ugolok-100x100x8-clean.webp"
+    },
+    "rozmet-20368": {
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_100x100x10/",
+      "imageUrl": "/images/catalog/ugolok/ugolok-100x100x10-clean.webp"
+    },
+    "rozmet-2223": {
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_125x125x8/",
+      "imageUrl": "/images/catalog/ugolok/ugolok-125x125x8-clean.webp"
+    },
+    "rozmet-29030": {
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_125kh125kh10/",
+      "imageUrl": "/images/catalog/ugolok/ugolok-125x125x10-clean.webp"
+    },
+    "rozmet-2224": {
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_140x140x10/",
+      "imageUrl": "/images/catalog/ugolok/ugolok-140x140x10-clean.webp"
+    },
+    "rozmet-2225": {
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_160x160x10/",
+      "imageUrl": "/images/catalog/ugolok/ugolok-160x160x10-clean.webp"
+    },
+    "rozmet-16726": {
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_100kh100kh10/",
+      "imageUrl": "/images/catalog/ugolok/ugolok-160x100x10-clean.webp"
+    }
+  }
+}

@@ -68,7 +68,11 @@ The channel product images use the owner's approved No. 5 reference in
 `imports/shveller-image-template/reference-5.jpg`. Each 2400 × 1800 lossless WebP
 keeps the shared photograph, reflection, dimension arrows and layout; only the
 profile title and numeric labels change. No. 5 preserves the approved image's
-decoded pixels. These are family illustrations with nominal dimensions, not
+decoded pixels. The current reference is the owner's update without white
+backplates on the labels over the light background. Values that match No. 5
+are retained directly from that reference; only differing labels are replaced.
+The soft contrast backing for the flange-thickness label over the dark metal
+is retained as in the supplied reference. These are family illustrations with nominal dimensions, not
 manufacturing drawings or photographs proving the exact profile geometry.
 
 Regenerate with `node scripts/render-shveller-images.mjs --write`. The renderer
@@ -81,3 +85,53 @@ label, product association, output size and image hash. The older ImageGen
 prompts in `imports/shveller-template-images.json` describe historical assets.
 Existing catalog URLs are retained; the normal image-version watcher refreshes
 their cache keys. Next.js creates the smaller delivery variants as before.
+
+## Angle illustrations: approved template
+
+All 22 products on `/catalog/ugolok` use the owner's supplied 25×25×3 reference,
+saved unchanged in `imports/ugolok-image-template/reference-25x25x3.jpg`.
+The individual 2400 × 1800 lossless WebP files live in
+`public/images/catalog/ugolok/ugolok-*-clean.webp`. The table and mobile cards
+open the same expanded image viewer as channel products, including zoom and pan.
+
+Regenerate with `node scripts/render-ugolok-images.mjs --write`, or preview with
+`node scripts/render-ugolok-images.mjs --preview 160x100x10`. Dimensions, thickness,
+supplier length and theoretical mass come from public product specifications.
+The supplied reference says 0.5 kg/m for 25×25×3; the catalog says 1.12 kg/m,
+so its illustration uses **1,12 кг/м**. Other source facts remain unchanged.
+Decimal commas, nonbreaking spaces and `кг/м` are used in the image labels.
+
+ImageGen supplied a clean background plate for replacing labels. Only small
+background patches from that plate enter the final assets. The original product,
+cut face, edges, shadow and reflection remain from the supplied reference;
+the renderer verifies zero changed pixels outside the variable-label rectangles.
+The background plate is resized to the native reference canvas, without resizing
+the product photo. Inter and its license are shared with the channel renderer.
+The exact generation prompt is stored in the template's `generation.json`.
+
+`data/angle-images.json` is a separate ID/source-URL image overlay applied at
+`data/products/index.ts`, so supplier imports do not overwrite the illustrations.
+`imports/ugolok-image-template/rendered.json` records labels, patches, hashes and
+pixel checks. These are shared family photographs with nominal dimension labels,
+including the two unequal-leg profiles; they are not scaled manufacturing drawings.
+Validate with `node --test scripts/ugolok-images.test.mjs scripts/images.test.mjs`.
+
+## Shared product image viewer
+
+`ProductImageViewer.tsx` opens a viewport-sized native dialog for page images,
+table previews and mobile cards. `CatalogImage.tsx` also uses it for product
+photographs that previously had no enlargement control. Category and type
+navigation cards retain their navigation links.
+
+Only the clicked image's original, versioned file is loaded in the dialog
+(`unoptimized`); thumbnails retain responsive Next.js optimization. The dialog
+fits the image into the available area below its toolbar, preserves its aspect
+ratio and does not upscale small originals. The **100%** control or a click on
+the image switches to native dimensions: one source pixel per CSS pixel. This
+uses `naturalWidth`/`naturalHeight`, not a fixed zoom factor or optimized thumbnail
+dimensions. Drag with a mouse or one finger, or use arrow keys, to move the image.
+Panning is bounded by the image edges and adapts when the viewport changes.
+**Вписать**, another image click, or closing/reopening restores the fitted view.
+Escape/close restores page scrolling and focus to the originating thumbnail.
+
+Geometry and interaction checks: `node --test scripts/image-viewer-geometry.test.mjs scripts/product-image-preview.test.mjs`.

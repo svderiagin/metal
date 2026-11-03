@@ -49,12 +49,13 @@
       ],
       "sourceReference": "imports/shveller-image-template/reference-5.jpg",
       "referenceUnmodified": true,
+      "changedLabels": [],
       "output": "public/images/catalog/shveller/shveller-5-clean.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
-      "bytes": 1079574,
-      "sha256": "3e163dfc9e683e101919c140b43b03851237ad1d9febf4f27df5f914f7bbc76e"
+      "bytes": 1090612,
+      "sha256": "620a97a328be7f9a0d4b6b84f6308f5f99a6f5354313c9bcf09ea8d9377bffd5"
     },
     {
       "id": "rozmet-2236",
@@ -100,12 +101,20 @@
       ],
       "sourceReference": "imports/shveller-image-template/reference-5.jpg",
       "referenceUnmodified": false,
+      "changedLabels": [
+        "title",
+        "flangeWidth",
+        "flangeThickness",
+        "height",
+        "length",
+        "mass"
+      ],
       "output": "public/images/catalog/shveller/shveller-6-5-clean.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
-      "bytes": 1100516,
-      "sha256": "dd83eb6a818ef1c714185560d121aeaaa12eaea14cd9dc27c80e5e50be13077a"
+      "bytes": 1102808,
+      "sha256": "4b54ddeb8ce91deb2005c99ce4e365216b0f29f998800bb05f68ea5cc450fd5a"
     },
     {
       "id": "rozmet-2237",
@@ -151,12 +160,21 @@
       ],
       "sourceReference": "imports/shveller-image-template/reference-5.jpg",
       "referenceUnmodified": false,
+      "changedLabels": [
+        "title",
+        "flangeWidth",
+        "webThickness",
+        "flangeThickness",
+        "height",
+        "length",
+        "mass"
+      ],
       "output": "public/images/catalog/shveller/shveller-8-clean.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
-      "bytes": 1099930,
-      "sha256": "85ead4f4a157a0f9cf7b5d384796a7b39d1e2d4f78084bf53e1e26ab3f0f799f"
+      "bytes": 1104722,
+      "sha256": "ac0224814c67986f7419c69a7487f55ceb63e6f83259a77cc47c77eae110fda2"
     },
     {
       "id": "rozmet-2238",
@@ -202,12 +220,21 @@
       ],
       "sourceReference": "imports/shveller-image-template/reference-5.jpg",
       "referenceUnmodified": false,
+      "changedLabels": [
+        "title",
+        "flangeWidth",
+        "webThickness",
+        "flangeThickness",
+        "height",
+        "length",
+        "mass"
+      ],
       "output": "public/images/catalog/shveller/shveller-10-clean.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
-      "bytes": 1100368,
-      "sha256": "c93bf39aaaccb04e45534701cf93bd7771308209b1f3be426ea789d5df875057"
+      "bytes": 1103924,
+      "sha256": "6b41746d223e3fa0c2e0358d1cf48314960547b8f59ffa68e72f195c67c25aab"
     },
     {
       "id": "rozmet-2239",
@@ -253,12 +280,21 @@
       ],
       "sourceReference": "imports/shveller-image-template/reference-5.jpg",
       "referenceUnmodified": false,
+      "changedLabels": [
+        "title",
+        "flangeWidth",
+        "webThickness",
+        "flangeThickness",
+        "height",
+        "length",
+        "mass"
+      ],
       "output": "public/images/catalog/shveller/shveller-12-clean.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
-      "bytes": 1099344,
-      "sha256": "6ad74813e97b62117a567f28d1a31ac659e792b6849800575722f356630a49a1"
+      "bytes": 1103522,
+      "sha256": "c267754c6871cbe79586702c434686978ab91540136d5580c97d04670892fbc0"
     },
     {
       "id": "rozmet-2240",
@@ -304,12 +340,21 @@
       ],
       "sourceReference": "imports/shveller-image-template/reference-5.jpg",
       "referenceUnmodified": false,
+      "changedLabels": [
+        "title",
+        "flangeWidth",
+        "webThickness",
+        "flangeThickness",
+        "height",
+        "length",
+        "mass"
+      ],
       "output": "public/images/catalog/shveller/shveller-14-clean.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
-      "bytes": 1098868,
-      "sha256": "9509b64ceddac2df00b4b87156a62210cb9d1183887773ecd080f390a69749d0"
+      "bytes": 1102888,
+      "sha256": "064488acb642c33cb483529d8dbe2b068f5ba0b54b9bb7f84eaac52db96f5b6a"
     },
     {
       "id": "rozmet-2241",
@@ -355,12 +400,21 @@
       ],
       "sourceReference": "imports/shveller-image-template/reference-5.jpg",
       "referenceUnmodified": false,
+      "changedLabels": [
+        "title",
+        "flangeWidth",
+        "webThickness",
+        "flangeThickness",
+        "height",
+        "length",
+        "mass"
+      ],
       "output": "public/images/catalog/shveller/shveller-16-clean.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
-      "bytes": 1100460,
-      "sha256": "cfb447c6310796b3b779142e7b5bf100bb454a1a0a11143763c0c771190cf5f5"
+      "bytes": 1103642,
+      "sha256": "887284e9aba828e9d778235c95c40606460250b1d5802eaa06bb0e101e19828a"
     },
     {
       "id": "rozmet-2242",
@@ -406,12 +460,21 @@
       ],
       "sourceReference": "imports/shveller-image-template/reference-5.jpg",
       "referenceUnmodified": false,
+      "changedLabels": [
+        "title",
+        "flangeWidth",
+        "webThickness",
+        "flangeThickness",
+        "height",
+        "length",
+        "mass"
+      ],
       "output": "public/images/catalog/shveller/shveller-18-clean.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
-      "bytes": 1099812,
-      "sha256": "7b011b53b2bb6f24637f82a4e9897f182b38ae523f0709efc6ff8faaad6c61a1"
+      "bytes": 1103410,
+      "sha256": "54c9778159a18744877d632bcb27ae51b6958d50e5397fcfc952f2cf74a8d27e"
     },
     {
       "id": "rozmet-2243",
@@ -457,12 +520,21 @@
       ],
       "sourceReference": "imports/shveller-image-template/reference-5.jpg",
       "referenceUnmodified": false,
+      "changedLabels": [
+        "title",
+        "flangeWidth",
+        "webThickness",
+        "flangeThickness",
+        "height",
+        "length",
+        "mass"
+      ],
       "output": "public/images/catalog/shveller/shveller-20-clean.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
-      "bytes": 1101200,
-      "sha256": "f13010266d29fa3e38a0e7a600cef15a5a5b03933fa7ff39f38be97eb89eb191"
+      "bytes": 1106976,
+      "sha256": "05df342bd27851247124c3412197eb17e7e58d0fc9694aac44c218d1337b87dd"
     },
     {
       "id": "rozmet-2244",
@@ -508,12 +580,21 @@
       ],
       "sourceReference": "imports/shveller-image-template/reference-5.jpg",
       "referenceUnmodified": false,
+      "changedLabels": [
+        "title",
+        "flangeWidth",
+        "webThickness",
+        "flangeThickness",
+        "height",
+        "length",
+        "mass"
+      ],
       "output": "public/images/catalog/shveller/shveller-22-clean.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
-      "bytes": 1100016,
-      "sha256": "747793d6ca8d44b8297e3576b134e21b7319a9c593db84b424c4db8260e300db"
+      "bytes": 1104186,
+      "sha256": "4be20254107a4a9acff5ece8c0de69fa2cac4c85920f74161a9025d48637bdd3"
     },
     {
       "id": "rozmet-2245",
@@ -559,12 +640,21 @@
       ],
       "sourceReference": "imports/shveller-image-template/reference-5.jpg",
       "referenceUnmodified": false,
+      "changedLabels": [
+        "title",
+        "flangeWidth",
+        "webThickness",
+        "flangeThickness",
+        "height",
+        "length",
+        "mass"
+      ],
       "output": "public/images/catalog/shveller/shveller-24-clean.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
-      "bytes": 1100910,
-      "sha256": "f02252a15e2971fddc48a2dfc2e4cb2976eddc6953194c52814c638a2fa0eac9"
+      "bytes": 1106736,
+      "sha256": "c0ea1d98be6dde41d170e9eef5861ad5abb8c231cac5856bcbea81471b26f300"
     },
     {
       "id": "rozmet-2246",
@@ -610,12 +700,21 @@
       ],
       "sourceReference": "imports/shveller-image-template/reference-5.jpg",
       "referenceUnmodified": false,
+      "changedLabels": [
+        "title",
+        "flangeWidth",
+        "webThickness",
+        "flangeThickness",
+        "height",
+        "length",
+        "mass"
+      ],
       "output": "public/images/catalog/shveller/shveller-27-clean.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
-      "bytes": 1098548,
-      "sha256": "8205cda219459271cfb9b86ac857e44ee67422b7bbdab74baab93251e4420610"
+      "bytes": 1104464,
+      "sha256": "3611ee1679840e596ac4c1a79195f72e2325cf95389749b5e99ae812ce34e3df"
     },
     {
       "id": "rozmet-2247",
@@ -661,12 +760,21 @@
       ],
       "sourceReference": "imports/shveller-image-template/reference-5.jpg",
       "referenceUnmodified": false,
+      "changedLabels": [
+        "title",
+        "flangeWidth",
+        "webThickness",
+        "flangeThickness",
+        "height",
+        "length",
+        "mass"
+      ],
       "output": "public/images/catalog/shveller/shveller-30-clean.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
-      "bytes": 1101710,
-      "sha256": "672a1ea8118b75c8f39976f419698ae1e9d478e03eabe00766c39b2f96cb3276"
+      "bytes": 1104106,
+      "sha256": "acc2180416c58e0864e0444b53b4840657a25e19f23cbba70781d9a5cc176912"
     },
     {
       "id": "rozmet-2248",
@@ -712,12 +820,21 @@
       ],
       "sourceReference": "imports/shveller-image-template/reference-5.jpg",
       "referenceUnmodified": false,
+      "changedLabels": [
+        "title",
+        "flangeWidth",
+        "webThickness",
+        "flangeThickness",
+        "height",
+        "length",
+        "mass"
+      ],
       "output": "public/images/catalog/shveller/shveller-40-clean.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
-      "bytes": 1099096,
-      "sha256": "f7b1a6c78c878ec5b95d031bb41413fd1c5096fcef335f87fbe251ef68525ab1"
+      "bytes": 1103908,
+      "sha256": "0d7ee59c007b971fcc4ccc16074649d005927bfabe08a30b944c26eab6ca3073"
     }
   ]
 }
