@@ -60,7 +60,6 @@ export function Footer() {
           <p>© 2024 ООО РВБ — Металлоконструкции и металлопрокат</p>
           <div className="flex flex-wrap gap-x-5 gap-y-2">
             <Link className="transition-colors hover:text-white" href="/privacy">Политика обработки персональных данных</Link>
-            <a className="transition-colors hover:text-white" href="#">Условия продажи</a>
           </div>
         </PageContainer>
       </div>

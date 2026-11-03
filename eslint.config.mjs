@@ -14,6 +14,7 @@ const eslintConfig = defineConfig([
     "next-env.d.ts",
     "brokinvest.ru/**",
     ".tmp/**",
+    "output/**",
   ]),
 ]);
 

@@ -55,6 +55,7 @@ export const orderRepository: OrderRepository =
   process.env.NODE_ENV === "production" ? new UnconfiguredOrderRepository() : developmentRepository;
 
 export function createTrustedOrder(input: CreateOrderInput): Order | null {
+  if (input.consent !== true) return null;
   const items: OrderItem[] = [];
   for (const item of input.items) {
     const product = getProductVariantById(item.productId);

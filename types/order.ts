@@ -17,6 +17,7 @@ export interface OrderItemInput {
 }
 
 export interface CreateOrderInput {
+  consent: boolean;
   items: OrderItemInput[];
   customer: {
     type: CustomerType;
@@ -52,11 +53,6 @@ export interface Order {
   status: OrderStatus;
   paymentStatus: PaymentStatus;
   createdAt: string;
-}
-
-export interface ApiErrorResponse {
-  ok: false;
-  error: string;
 }
 
 export interface CreateOrderResponse {

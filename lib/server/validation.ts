@@ -2,9 +2,8 @@ import type {ContactRequest, QuoteRequest} from "@/types/forms";
 import type {CreateOrderInput, CustomerType, PaymentMethod} from "@/types/order";
 import {validateQuoteFields} from "@/lib/quoteValidation";
 import {normalizePieceOrder} from "@/lib/profilePipe";
+import {isValidEmail, isValidPhone} from "@/lib/validation";
 
-const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const phonePattern = /^\+?[\d\s()-]{10,24}$/;
 const productIdPattern = /^[a-zA-Z0-9-]{1,80}$/;
 
 const isRecord = (value: unknown): value is Record<string, unknown> =>
@@ -29,10 +28,13 @@ const isPaymentMethod = (value: unknown): value is PaymentMethod =>
 
 export function parseCreateOrderInput(value: unknown): CreateOrderInput | null {
   if (!isRecord(value) || !Array.isArray(value.items) || !isRecord(value.customer) || !isRecord(value.delivery)) return null;
-  if (value.items.length < 1 || value.items.length > 100) return null;
+  if (value.consent !== true || value.items.length < 1 || value.items.length > 100) return null;
   const items: CreateOrderInput["items"] = [];
+  const productIds = new Set<string>();
   for (const item of value.items) {
     if (!isRecord(item) || typeof item.productId !== "string" || !productIdPattern.test(item.productId)) return null;
+    if (productIds.has(item.productId)) return null;
+    productIds.add(item.productId);
     const measurement = parseMeasurement(item.measurement);
     const pieceOrder = normalizePieceOrder(item.pieceOrder);
     if (item.measurement !== undefined && !measurement) return null;
@@ -55,9 +57,10 @@ export function parseCreateOrderInput(value: unknown): CreateOrderInput | null {
   const companyName = optionalText(value.customer.companyName, 180);
   const taxNumber = optionalText(value.customer.taxNumber, 20);
   const legalAddress = optionalText(value.customer.legalAddress, 300);
-  if (!fullName || !email || !emailPattern.test(email) || !phone || !phonePattern.test(phone) || !address || comment === null || companyName === null || taxNumber === null || legalAddress === null) return null;
+  if (!fullName || !email || !isValidEmail(email) || !phone || !isValidPhone(phone) || !address || comment === null || companyName === null || taxNumber === null || legalAddress === null) return null;
   if (value.customer.type === "COMPANY" && (!companyName || !taxNumber || !legalAddress)) return null;
   return {
+    consent: true,
     items,
     customer: {
       type: value.customer.type,
@@ -95,8 +98,8 @@ export function parseContactRequest(value: unknown): ContactRequest | null {
   const phone = optionalText(value.phone, 30);
   const message = text(value.message, 2000);
   const website = optionalText(value.website, 200);
-  if (!name || !email || !emailPattern.test(email) || !message || value.consent !== true || phone === null || website === null) return null;
-  if (phone && !phonePattern.test(phone)) return null;
+  if (!name || !email || !isValidEmail(email) || !message || value.consent !== true || phone === null || website === null) return null;
+  if (phone && !isValidPhone(phone)) return null;
   return {name, email: email.toLowerCase(), phone, message, consent: true, website};
 }
 

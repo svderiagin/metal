@@ -13,6 +13,7 @@ the relevant guide in `node_modules/next/dist/docs/` before writing any code. He
   - [metal-frontend-catalog](.agents/skills/metal-frontend-catalog/SKILL.md): данные, маршруты, поиск, товарные таблицы, импорт.
   - [metal-frontend-ui](.agents/skills/metal-frontend-ui/SKILL.md): вёрстка, темы, навигация, изображения, информационные страницы.
   - [metal-frontend-orders](.agents/skills/metal-frontend-orders/SKILL.md): корзина, количества, пересчёт цен, формы, checkout и API.
+  - [metal-frontend-quality](.agents/skills/metal-frontend-quality/SKILL.md): аудит, декомпозиция, тестовое покрытие и регрессия по скриншотам.
 - Для пересекающейся задачи подключайте второй навык только в затронутой области.
 - Проверки и генерация: [docs/development-workflow.md](docs/development-workflow.md). Объём проверки зависит от риска изменения.
 - `README.md` содержит большой исторический разбор. Текущие детали подтверждайте кодом; не читайте README целиком по умолчанию.

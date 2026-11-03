@@ -114,6 +114,10 @@ export function HeroCarousel({slides, children}: {slides: HeroSlide[]; children:
     </div>
     <PageContainer className="relative flex min-h-[530px] flex-col justify-center py-12 pb-28 sm:min-h-[550px] sm:py-16 sm:pb-28 lg:min-h-[600px] lg:py-20 lg:pb-28">
       {canRotate && <div className="absolute bottom-6 right-4 flex items-center gap-3 sm:bottom-8 sm:right-6 lg:right-8" role="group" aria-label="Управление фотографиями">
+        <button type="button" className={circle} aria-label={enabled ? "Приостановить слайд-шоу" : "Запустить слайд-шоу"}
+          onClick={() => setEnabled(value => !value)}>
+          <svg viewBox="0 0 24 24" fill="currentColor" className="size-5" aria-hidden="true">{enabled ? <path d="M7 5h4v14H7zm6 0h4v14h-4z"/> : <path d="m8 4 12 8-12 8z"/>}</svg>
+        </button>
         <button type="button" className={circle} aria-label="Предыдущая фотография" onClick={() => move(-1)}><Arrow direction="left"/></button>
         <button type="button" className={circle} aria-label="Следующая фотография" onClick={() => move(1)}><Arrow direction="right"/></button>
       </div>}

@@ -25,9 +25,10 @@ Follow `AGENTS.md`. When changing a Next.js API or convention, read the matching
 - The hierarchy is `Category → Subcategory → ProductType → ProductVariant`.
 - `data/categories.ts` and `data/subcategories.ts` define navigation. `data/productTypes.ts` derives product types. `data/products/index.ts` is the public product boundary. `lib/catalog.ts` is the read API used by pages.
 - These six protected category IDs stay first in this order: `cat-arm`, `cat-trp`, `cat-trk`, `cat-pnf`, `cat-mesh`, `cat-bal`. Owner-approved rozmet.ru content follows them; see `docs/rozmet-import.md` for its separate data files and source evidence.
+- `lib/catalogOverrides.ts` applies approved channel/angle/square images and display labels, guarded by category, ID and source URL. Keep saved supplier specifications reproducible; a display label such as «Теоретическая масса» does not belong in the raw supplier import.
 - Treat `imports/protected-catalog.snapshot.json` and `scripts/catalog-pruning.test.mjs` as the regression guard. Update them only when the user explicitly requests a change to the retained catalog.
 - Keep identifiers, slugs, units, prices, and cart calculations stable unless the request changes them. Never infer missing commercial or technical facts.
-- Reuse the existing category-specific table closest to the requested product family. Direct-product categories use the table at category level; `internal: true` subcategories are adapters, not extra navigation levels.
+- `ProductVariantCatalog.tsx` dispatches product families; `GenericProductVariantCatalog.tsx` owns filter state, `lib/variantCatalog.ts` selection/sorting, and `VariantCatalogResults.tsx` rows/cards. Fix shared selection rules in the pure helper, not in both layouts. Direct-product categories use the table at category level; `internal: true` subcategories are adapters, not extra navigation levels.
 - Import tooling must not restore removed categories. Run `npm run catalog:import` only when the user requests import work; it rewrites generated data.
 
 Read [references/project-map.md](references/project-map.md) when the task changes catalog structure, product ordering, search, tables, cart calculations, or imports.

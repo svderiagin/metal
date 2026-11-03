@@ -1,3 +1,5 @@
+import {storefrontDescription} from "@/lib/catalogContent";
+
 const sentenceSegmenter = new Intl.Segmenter("ru", {granularity: "sentence"});
 
 // Break at existing changes of subject; keep short descriptions together.
@@ -39,7 +41,7 @@ export function CatalogDescription({description, className = "mt-6", variant = "
   className?: string;
   variant?: "default" | "category" | "categoryDetails";
 }) {
-  const blocks = description.split(/\n\s*\n/u).filter(block => block.trim());
+  const blocks = storefrontDescription(description).split(/\n\s*\n/u).filter(block => block.trim());
   const typography = variant === "categoryDetails"
     ? "max-w-[800px] space-y-4 text-base font-normal leading-[1.6] text-slate-700 dark:text-slate-300"
     : variant === "category"

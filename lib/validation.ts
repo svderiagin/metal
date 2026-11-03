@@ -1,2 +1,3 @@
-export const isValidEmail = (value: string) => /^\S+@\S+\.\S+$/.test(value);
-export const isValidPhone = (value: string) => value.replace(/\D/g, "").length >= 10;
+export const isValidEmail = (value: string) => value.trim().length <= 254 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
+export const isValidPhone = (value: string) => /^\+?[\d\s()-]+$/.test(value.trim())
+  && value.length <= 30 && /^\d{10,15}$/.test(value.replace(/\D/g, ""));

@@ -7,12 +7,13 @@ description: Maintain metal-frontend cart, quantity controls, pricing conversion
 
 ## Read the affected path
 
-- Cart UI/state: `components/cart/`, `context/CartContext.tsx`, `hooks/useCart.ts`, `lib/cart.ts`.
+- Cart UI/state: `components/cart/`, `context/CartContext.tsx`, `hooks/useCart.ts`, `lib/cart.ts`; validated add/update mutations: `lib/cartMutations.ts`.
 - Client product lookup: `lib/cartCatalog.ts` → generated `data/cart-catalog.json`; projection: `lib/cartProjection.ts`, `scripts/cart-catalog.mjs`.
 - Shared authoritative price calculation: `lib/cartPricing.ts`, `lib/orderMeasurement.ts`. Specialized constraints: `lib/rebar.ts`, `beam.ts`, `vgp.ts`, `profilePipe.ts`, `profileSheet.ts`, `metalMesh.ts`.
 - Table/card order controls: `ProductOrderControls.tsx`, `MeasuredVariantItem.tsx`, `ProfilePipeVariantItem.tsx`, specialized catalogs in `components/catalog/`.
 - Inquiry prefilling: `lib/quoteRequest.ts`, `lib/quoteValidation.ts`, `components/forms/QuoteRequestContext.tsx`, `QuoteRequestForm.tsx`, `components/catalog/QuoteRequestButton.tsx`.
 - Other forms: `components/forms/ContactForm.tsx`, `PhoneInput.tsx`; checkout: `components/checkout/`.
+- Checkout field UI: `CheckoutFields.tsx`; payload/limits: `lib/checkout.ts`; HTTP/payment redirects: `lib/checkoutClient.ts`; validated receipt storage with an in-memory fallback: `lib/orderConfirmation.ts`.
 - API boundary: `app/api/{contact,quote,orders}/route.ts`, `app/api/payments/{create,webhook}/route.ts`; `lib/server/{validation,orders,payments,notifications}.ts`, `lib/apiResponse.ts`.
 
 Read only the path relevant to the request. Before changing Route Handlers, read the local Next.js guide `node_modules/next/dist/docs/01-app/01-getting-started/15-route-handlers.md` and the matching API reference if needed.
@@ -24,6 +25,8 @@ Read only the path relevant to the request. Before changing Route Handlers, read
 - Profile pipes preserve piece count and selected pipe length; VGP rounds up to whole pipe lengths. Mesh/piece and measured products have different quantity constraints. Change the corresponding helper and verify both cart and server behavior when changing these rules.
 - Distinguish unknown/from/quote-only prices from ordinary purchase prices. Keep inquiry quantity, unit and computed tonnes consistent with the selected variant.
 - API success requires both an appropriate HTTP status and the expected `ok: true` payload. Preserve entered form data/cart on failure; clear stale success messages before resubmission.
+- Order requests must include `consent: true` and unique product IDs. Contact/checkout phone validation is shared in `lib/validation.ts`; the quote form intentionally has its own Russian-mobile contract. JSON endpoints use `lib/server/request.ts` to cap the actual body at 64 KiB, not just trust Content-Length. Webhooks retain their provider-owned raw-body boundary.
+- Receipt storage is untrusted. A direct visit to `/order/success` is not proof of an order; use `readOrderConfirmation`. A storage exception must not convert an already accepted order into an apparent submission failure. Hosted payment redirects must be absolute HTTPS URLs; provider-specific allowlisting belongs to the configured adapter.
 - Server totals come from current catalog data. Payment status is confirmed by a verified webhook, not a redirect or browser flag; secrets remain server-only.
 
 ## Integration boundaries

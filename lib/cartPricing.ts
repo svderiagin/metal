@@ -25,7 +25,7 @@ export function revalidateCartPrice(product: ProductVariant, item: PriceInput) {
       estimatedTotal: invalidReason ? 0 : order?.estimatedTotal ?? 0,
     };
   }
-  let invalidReason = product.price === null || product.quoteOnly || product.priceQualifier === "from"
+  let invalidReason = product.price === null || !Number.isFinite(product.price) || product.price < 0 || product.quoteOnly || product.priceQualifier === "from"
     ? "Цена требует уточнения. Отправьте запрос на расчёт." : undefined;
   let measurement: CartMeasurement | undefined;
   if (item.pieceOrder) invalidReason = "Количество целых труб не применимо к этой позиции.";
@@ -46,7 +46,9 @@ export function revalidateCartPrice(product: ProductVariant, item: PriceInput) {
   }
   if (item.measurement) {
     const input = item.measurement;
-    if (!product.pricePerTon || !product.weightPerMeterKg) {
+    if (input.inputMode !== "meter" && input.inputMode !== "ton") {
+      invalidReason = "Не удалось определить единицу измерения.";
+    } else if (!product.pricePerTon || !product.weightPerMeterKg) {
       invalidReason = "Недостаточно данных для пересчёта массы и стоимости. Уточните позицию.";
     } else {
       const meters = input.inputMode === "meter" ? input.meters : tonsToMeters(input.weightTons, product.weightPerMeterKg);

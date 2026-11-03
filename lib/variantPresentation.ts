@@ -6,6 +6,8 @@ const filterKeysByCategory: Record<string, ProductAttributeKey[]> = {
   armatura: ["material", "standard", "size", "class", "grade", "length"],
   "setka-metallicheskaya": ["material", "size", "wallThickness", "length"],
   kvadrat: ["size", "length"],
+  shveller: ["size", "length"],
+  ugolok: ["size", "wallThickness", "length"],
 };
 
 export function getVariantFilterKeys(categorySlug: string) {
@@ -16,11 +18,24 @@ export function getVariantAttribute(
   variant: ProductVariant,
   key: ProductAttributeKey,
 ) {
+  if (variant.categoryId === "rozmet-cat-shveller") {
+    if (key === "size") return variant.name.match(/№\s*(\d+(?:[.,]\d+)?)/)?.[1].replace(".", ",") ?? "—";
+    if (key === "length") return specification(variant, ["Длина по каталогу", "Длина", "Размер"]);
+  }
+  if (variant.categoryId === "rozmet-cat-ugolok") {
+    if (key === "size") return specification(variant, ["Размеры уголка"]);
+    if (key === "length") return specification(variant, ["Длина по каталогу", "Длина", "Размер"]);
+  }
   if (variant.categoryId === "rozmet-cat-kvadrat" && (key === "size" || key === "length")) {
     const square = getSquareProductParameters(variant);
     if (square) return key === "size" ? square.section : square.length;
   }
   return variant.attributes.find((attribute) => attribute.key === key)?.value ?? "—";
+}
+
+function specification(variant: ProductVariant, names: string[]) {
+  const value = names.map(name => variant.specifications.find(item => item.name === name)?.value).find(Boolean);
+  return value?.replace(/(\d)\.(?=\d)/g, "$1,").replace(/(\d)\s*-\s*(?=\d)/g, "$1–") ?? "—";
 }
 
 export function getQuantityUnit(variant: ProductVariant) {

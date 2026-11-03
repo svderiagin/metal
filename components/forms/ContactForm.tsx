@@ -44,13 +44,13 @@ export function ContactForm() {
 
   return <form onSubmit={submit} className="min-w-0 space-y-5"><h2
     className="text-xl font-bold">Написать нам</h2><label className="block text-sm font-semibold">Имя<Input required
-                                                                                                            name="name"
+                                                                                                            name="name" maxLength={120} autoComplete="name"
                                                                                                             className="mt-1"/></label><label
-    className="block text-sm font-semibold">Электронная почта<Input required type="email" name="email"
+    className="block text-sm font-semibold">Электронная почта<Input required type="email" name="email" maxLength={254} autoComplete="email"
                                                         className="mt-1"/></label><label
-    className="block text-sm font-semibold">Телефон<Input name="phone" className="mt-1"
+    className="block text-sm font-semibold">Телефон<Input name="phone" type="tel" maxLength={30} className="mt-1"
                                                           autoComplete="tel"/></label><label
-    className="block text-sm font-semibold">Сообщение<Textarea required name="message" rows={5}
+    className="block text-sm font-semibold">Сообщение<Textarea required name="message" rows={5} maxLength={2000}
                                                                className="mt-1"/></label><label
     className="absolute -left-[10000px]" aria-hidden>Сайт<Input name="website" tabIndex={-1}
                                                                 autoComplete="off"/></label><label

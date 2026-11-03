@@ -1,5 +1,6 @@
 "use client";
 
+import {rebarColumns, beamColumns, vgpColumns, profilePipeColumns} from "./measuredCatalogColumns";
 import {MeasuredVariantItem} from "./MeasuredVariantItem";
 
 import {beamProfile, beamKind} from "@/lib/beam";
@@ -31,81 +32,6 @@ type SortMode =
   | "weight-asc"
   | "weight-desc";
 
-const rebarColumns = [
-  {label: "Диаметр, мм", width: "7%"},
-  {label: "Форма", width: "8%"},
-  {label: "Марка стали", width: "8%"},
-  {label: "Цена, ₽/т", width: "12%"},
-  {label: "Масса, кг/м", width: "8%"},
-  {label: "Длина, м", width: "7%"},
-  {label: "Заказ, м", width: "11%"},
-  {label: "Заказ, т", width: "11%"},
-  {label: "Сумма", width: "15%"},
-  {label: "Действие", width: "13%"},
-] as const;
-
-const beamColumns = [
-  {label: "Профиль", width: "9%"},
-  {label: "Тип балки", width: "10%"},
-  {label: "Сталь / класс", width: "8%"},
-  {label: "Цена, ₽/т", width: "12%"},
-  {label: "Масса, кг/м", width: "8%"},
-  {label: "Длина, м", width: "7%"},
-  {label: "Заказ, м", width: "11%"},
-  {label: "Заказ, т", width: "11%"},
-  {label: "Сумма", width: "11%"},
-  {label: "Действие", width: "13%"},
-] as const;
-
-const vgpColumns = [
-  {label: "Ду × стенка, мм", width: "10%"},
-  {label: "Наружный Ø, мм", width: "7%"},
-  {label: "Серия", width: "10%"},
-  {label: "Цена, ₽/т", width: "11%"},
-  {label: "Масса, кг/м", width: "7%"},
-  {label: "Длина, м", width: "6%"},
-  {label: "Заказ, м", width: "11%"},
-  {label: "Заказ, т", width: "12%"},
-  {label: "Сумма", width: "13%"},
-  {label: "Действие", width: "13%"},
-] as const;
-
-const profilePipeColumns = [
-  {label: "Размер, мм", width: "11%"},
-  {label: "Стенка, мм", width: "8%"},
-  {label: "Цена, ₽/м", width: "12%"},
-  {label: "Масса, кг/м", width: "9%"},
-  {label: "Длина, м", width: "11%"},
-  {label: "Кол-во, шт", width: "10%"},
-  {label: "Заказ, м", width: "10%"},
-  {label: "Сумма", width: "15%"},
-  {label: "В корзину", width: "14%"},
-] as const;
-
-const hotRolledChannelColumns = [
-  {label: "Номер и серия", width: "11%"},
-  {label: "Марка стали", width: "10%"},
-  {label: "Цена, ₽/т", width: "12%"},
-  {label: "Масса, кг/м", width: "9%"},
-  {label: "Длина, м", width: "8%"},
-  {label: "Заказ, м", width: "12%"},
-  {label: "Заказ, т", width: "12%"},
-  {label: "Сумма", width: "13%"},
-  {label: "В корзину", width: "13%"},
-] as const;
-
-const bentChannelColumns = [
-  {label: "Размер, мм", width: "12%"},
-  {label: "Стенка, мм", width: "9%"},
-  {label: "Цена, ₽/т", width: "12%"},
-  {label: "Масса, кг/м", width: "9%"},
-  {label: "Длина, м", width: "8%"},
-  {label: "Заказ, м", width: "12%"},
-  {label: "Заказ, т", width: "12%"},
-  {label: "Сумма", width: "13%"},
-  {label: "В корзину", width: "13%"},
-] as const;
-
 export function isMeasuredRebarVariant(variant: ProductVariant): variant is RebarVariant {
   return variant.diameterMm !== undefined
     && variant.form !== undefined
@@ -129,24 +55,16 @@ export function ProfilePipeVariantCatalog({variants}: {variants: ProductVariant[
   return <MeasuredVariantCatalog variants={variants} kind="profile"/>;
 }
 
-export function ChannelVariantCatalog({variants, bent}: {variants: ProductVariant[]; bent: boolean}) {
-  return <MeasuredVariantCatalog variants={variants} kind={bent ? "channel-bent" : "channel-hot"}/>;
-}
-
 function MeasuredVariantCatalog({variants, kind = "rebar"}: {
   variants: ProductVariant[];
-  kind?: "rebar" | "beam" | "vgp" | "profile" | "channel-hot" | "channel-bent";
+  kind?: "rebar" | "beam" | "vgp" | "profile";
 }) {
   const isBeam = kind === "beam";
   const isVgp = kind === "vgp";
   const isProfile = kind === "profile";
-  const isHotChannel = kind === "channel-hot";
-  const isBentChannel = kind === "channel-bent";
-  const isChannel = isHotChannel || isBentChannel;
   const showPositionCount = kind === "rebar" && variants.length > 0
     && variants.every(variant => variant.subcategoryId === "cat-arm-sub-1");
-  const columns = isHotChannel ? hotRolledChannelColumns : isBentChannel ? bentChannelColumns
-    : isProfile ? profilePipeColumns : isVgp ? vgpColumns : isBeam ? beamColumns : rebarColumns;
+  const columns = isProfile ? profilePipeColumns : isVgp ? vgpColumns : isBeam ? beamColumns : rebarColumns;
   const [query, setQuery] = useState("");
   const deferredQuery = useDeferredValue(query);
   const index = useMemo(() => createCatalogSearchIndex(variants), [variants]);
@@ -161,8 +79,8 @@ function MeasuredVariantCatalog({variants, kind = "rebar"}: {
   useLinkedVariant(variants, variant => {resetFilters(); setQuery(variant.name);});
 
   const diameters = useMemo(
-    () => [...new Set(variants.map(variant => isHotChannel ? channelDesignation(variant) : isBentChannel ? bentChannelSize(variant) : isProfile ? profilePipeSize(variant) : isVgp ? vgpSize(variant) : isBeam ? beamProfile(variant) : String(variant.diameterMm ?? "")))].sort((a, b) => a.localeCompare(b, "ru", {numeric: true})),
-    [variants, isBeam, isVgp, isProfile, isHotChannel, isBentChannel],
+    () => [...new Set(variants.map(variant => isProfile ? profilePipeSize(variant) : isVgp ? vgpSize(variant) : isBeam ? beamProfile(variant) : String(variant.diameterMm ?? "")))].sort((a, b) => a.localeCompare(b, "ru", {numeric: true})),
+    [variants, isBeam, isVgp, isProfile],
   );
   const lengths = useMemo(
     () => uniqueNumbers(variants.flatMap((variant) =>
@@ -172,15 +90,15 @@ function MeasuredVariantCatalog({variants, kind = "rebar"}: {
   );
   const forms = useMemo(
     () => {
-      const values = [...new Set(variants.map(variant => isHotChannel ? variant.steelGrade ?? "Марка не указана" : isBentChannel ? formatChannelNumber(variant.wallThicknessMm) : isProfile ? String(variant.wallThicknessMm).replace(".", ",") : isVgp ? vgpSeries(variant) : isBeam ? beamKind(variant) : variant.form ?? ""))];
-      return isProfile || isBentChannel ? values.sort((a, b) => a.localeCompare(b, "ru", {numeric: true})) : values;
+      const values = [...new Set(variants.map(variant => isProfile ? String(variant.wallThicknessMm).replace(".", ",") : isVgp ? vgpSeries(variant) : isBeam ? beamKind(variant) : variant.form ?? ""))];
+      return isProfile ? values.sort((a, b) => a.localeCompare(b, "ru", {numeric: true})) : values;
     },
-    [variants, isBeam, isVgp, isProfile, isHotChannel, isBentChannel],
+    [variants, isBeam, isVgp, isProfile],
   );
 
   const results = useMemo(() => {
-    const sizeValue = (variant: ProductVariant) => isHotChannel ? channelDesignation(variant) : isBentChannel ? bentChannelSize(variant) : isProfile ? profilePipeSize(variant) : isVgp ? vgpSize(variant) : isBeam ? beamProfile(variant) : String(variant.diameterMm ?? "");
-    const formValue = (variant: ProductVariant) => isHotChannel ? variant.steelGrade ?? "Марка не указана" : isBentChannel ? formatChannelNumber(variant.wallThicknessMm) : isProfile ? String(variant.wallThicknessMm).replace(".", ",") : isVgp ? vgpSeries(variant) : isBeam ? beamKind(variant) : variant.form;
+    const sizeValue = (variant: ProductVariant) => isProfile ? profilePipeSize(variant) : isVgp ? vgpSize(variant) : isBeam ? beamProfile(variant) : String(variant.diameterMm ?? "");
+    const formValue = (variant: ProductVariant) => isProfile ? String(variant.wallThicknessMm).replace(".", ",") : isVgp ? vgpSeries(variant) : isBeam ? beamKind(variant) : variant.form;
     const priceValue = (variant: ProductVariant) => isProfile ? hasConfirmedProfilePipePrice(variant) ? variant.price ?? undefined : undefined : variant.pricePerTon;
     const min = parseOptionalNumber(minimumPrice);
     const max = parseOptionalNumber(maximumPrice);
@@ -199,7 +117,7 @@ function MeasuredVariantCatalog({variants, kind = "rebar"}: {
       if (sort === "weight-desc") return (right.weightPerMeterKg ?? -Infinity) - (left.weightPerMeterKg ?? -Infinity);
       return sizeValue(left).localeCompare(sizeValue(right), "ru", {numeric: true});
     });
-  }, [hits, deferredQuery, availability, diameter, form, length, maximumPrice, minimumPrice, sort, variants, isBeam, isVgp, isProfile, isHotChannel, isBentChannel]);
+  }, [hits, deferredQuery, availability, diameter, form, length, maximumPrice, minimumPrice, sort, variants, isBeam, isVgp, isProfile]);
   function resetFilters() {
     setQuery("");
     setDiameter("");
@@ -229,8 +147,8 @@ function MeasuredVariantCatalog({variants, kind = "rebar"}: {
             <Select value={sort} onChange={(event) => setSort(event.target.value as SortMode)}
               className="mt-1">
               <option value="relevance">По релевантности</option>
-              <option value="diameter-asc">{isVgp || isProfile || isChannel ? "Размер: по возрастанию" : isBeam ? "Профиль: по возрастанию" : "Диаметр: по возрастанию"}</option>
-              <option value="diameter-desc">{isVgp || isProfile || isChannel ? "Размер: по убыванию" : isBeam ? "Профиль: по убыванию" : "Диаметр: по убыванию"}</option>
+              <option value="diameter-asc">{isVgp || isProfile ? "Размер: по возрастанию" : isBeam ? "Профиль: по возрастанию" : "Диаметр: по возрастанию"}</option>
+              <option value="diameter-desc">{isVgp || isProfile ? "Размер: по убыванию" : isBeam ? "Профиль: по убыванию" : "Диаметр: по убыванию"}</option>
               <option value="price-asc">Цена: по возрастанию</option>
               <option value="price-desc">Цена: по убыванию</option>
               <option value="weight-asc">Вес метра: по возрастанию</option>
@@ -238,12 +156,12 @@ function MeasuredVariantCatalog({variants, kind = "rebar"}: {
             </Select>
           </label>
         }>
-          <Filter label={isHotChannel ? "Номер и серия" : isBentChannel || isProfile ? "Размер, мм" : isVgp ? "Ду × стенка, мм" : isBeam ? "Профиль" : "Диаметр, мм"} value={diameter} onChange={setDiameter}>
+          <Filter label={isProfile ? "Размер, мм" : isVgp ? "Ду × стенка, мм" : isBeam ? "Профиль" : "Диаметр, мм"} value={diameter} onChange={setDiameter}>
             {diameters.map((value) => <option key={value} value={value}>{value}</option>)}
           </Filter>
-          <Filter label={isHotChannel ? "Марка стали" : isBentChannel || isProfile ? "Стенка, мм" : isVgp ? "Серия" : isBeam ? "Тип балки" : "Форма продукции"} value={form} onChange={setForm}>
+          <Filter label={isProfile ? "Стенка, мм" : isVgp ? "Серия" : isBeam ? "Тип балки" : "Форма продукции"} value={form} onChange={setForm}>
             {forms.map((value) => (
-              <option key={value} value={value}>{isVgp || isBeam || isProfile || isChannel ? value : formLabel(value as "coil" | "bar")}</option>
+              <option key={value} value={value}>{isVgp || isBeam || isProfile ? value : formLabel(value as "coil" | "bar")}</option>
             ))}
           </Filter>
           <Filter label="Длина, м" value={length} onChange={setLength}>
@@ -264,7 +182,7 @@ function MeasuredVariantCatalog({variants, kind = "rebar"}: {
           <Filter label="Наличие" value={availability} onChange={setAvailability}>
             <option value="IN_STOCK">В наличии</option>
             <option value="ON_ORDER">Под заказ</option>
-            {(isVgp || isProfile || isChannel) && <option value="UNKNOWN">Наличие уточняется</option>}
+            {(isVgp || isProfile) && <option value="UNKNOWN">Наличие уточняется</option>}
           </Filter>
       </FilterPanel>
 
@@ -335,20 +253,6 @@ function Filter({
 
 function formLabel(form: "coil" | "bar") {
   return form === "coil" ? "В бунтах" : "Пруток";
-}
-
-function channelDesignation(variant: ProductVariant) {
-  return `${formatChannelNumber(variant.channelNumber)}${variant.channelSeries ?? ""}`;
-}
-
-function bentChannelSize(variant: ProductVariant) {
-  return [variant.profileHeightMm, variant.profileWidthMm, variant.wallThicknessMm]
-    .map(formatChannelNumber)
-    .join("×");
-}
-
-function formatChannelNumber(value: number | undefined) {
-  return value === undefined ? "—" : String(value).replace(".", ",");
 }
 
 function uniqueNumbers(values: number[]) {

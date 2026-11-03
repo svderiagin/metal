@@ -13,6 +13,7 @@ Read only the section relevant to the current request.
 - Rozmet data: `data/rozmet-catalog.json`; saved evidence: `imports/rozmet-source.json`; direct leaf routes: `data/rozmet-routes.json`. Read `docs/rozmet-import.md` for import work. Do not overwrite manual changes by reimporting.
 - Channel specifications/images overlay: `data/channel-specifications.json`, applied by `data/products/index.ts` only for matching ID and source URL
 - Image overlay: `data/catalog-images.json`; versioning: `scripts/catalog-image-versions.mjs`
+- Approved product display overrides: `lib/catalogOverrides.ts` with channel/angle/square JSON evidence; raw Rozmet specifications retain supplier names.
 - Catalog selectors: `lib/catalog.ts`
 - Routes: `app/catalog/page.tsx` and the three dynamic directories below it; `lib/catalogLinks.ts` builds canonical links. Direct categories bypass the visible subcategory/type layers.
 
@@ -21,12 +22,13 @@ Route resolution depends on category, subcategory, and product-type IDs agreeing
 ## Specialized product tables
 
 - Shared dispatcher: `components/catalog/ProductVariantCatalog.tsx`
+- Generic filter state: `components/catalog/GenericProductVariantCatalog.tsx`; pure selection, labels and reference-column rules: `lib/variantCatalog.ts`; row/card rendering: `components/catalog/VariantCatalogResults.tsx`
 - Rebar, beam, and VGP: `components/catalog/RebarVariantCatalog.tsx`, `MeasuredVariantItem.tsx`
 - Profile pipes: `ProfilePipeVariantItem.tsx`, `lib/profilePipe.ts`
 - Profile sheets: `ProfileSheetVariantCatalog.tsx`, `lib/profileSheet.ts`
 - Metal mesh: `MetalMeshVariantCatalog.tsx`, `lib/metalMesh.ts`
 - Generic presentation and filters: `lib/variantPresentation.ts`, `components/catalog/FilterPanel.tsx`
-- Channel/angle/square layouts: generic table in `ProductVariantCatalog.tsx`; previews: `ChannelProductPreview.tsx`, `ProductImageViewer.tsx`. Category-level layout branches live in `app/catalog/[categorySlug]/page.tsx`.
+- Channel/angle/square layouts: `VariantCatalogResults.tsx`; previews: `ChannelProductPreview.tsx`, `ProductImageViewer.tsx`. Category-level layout branches live in `app/catalog/[categorySlug]/page.tsx`. Measured column geometry lives in `measuredCatalogColumns.ts`; the unused old channel-tonnage renderer has been removed.
 
 Keep desktop tables and mobile cards behaviorally equivalent. Quantity validation must agree with cart and server repricing.
 

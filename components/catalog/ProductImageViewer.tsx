@@ -1,6 +1,7 @@
 "use client";
 
 import {useEffect, useRef, useState, type ReactNode, type MouseEvent, type PointerEvent, type KeyboardEvent} from "react";
+import {createPortal} from "react-dom";
 import Image from "next/image";
 import {catalogImageUrl} from "@/lib/catalog-image";
 import {clampImagePan, imageViewGeometry, imageZoomPan, type ImageSize} from "@/lib/imageViewer";
@@ -109,7 +110,12 @@ export function ProductImageViewer({src, name, presentation = "page", caption, f
       observer.disconnect();
       dialog.close();
       document.documentElement.style.overflow = previousOverflow;
-      if (trigger?.isConnected) trigger.focus({preventScroll: true});
+      if (trigger?.isConnected) {
+        const visibleTrigger = trigger.getClientRects().length ? trigger
+          : Array.from(document.querySelectorAll<HTMLButtonElement>('button[aria-haspopup="dialog"]'))
+            .find(button => button.ariaLabel === trigger.ariaLabel && button.getClientRects().length);
+        visibleTrigger?.focus({preventScroll: true});
+      }
     };
   }, [open]);
 
@@ -150,7 +156,7 @@ export function ProductImageViewer({src, name, presentation = "page", caption, f
         </span>
       </button>
 
-      <dialog ref={dialogRef} aria-label={`Просмотр изображения: ${name}`}
+      {open && createPortal(<dialog ref={dialogRef} aria-label={`Просмотр изображения: ${name}`}
         onCancel={event => {event.preventDefault(); close();}} onClose={close}
         onKeyDown={handleDialogKeyDown}
         onClick={event => {if (isPreview && event.target === event.currentTarget) close();}}
@@ -199,7 +205,7 @@ export function ProductImageViewer({src, name, presentation = "page", caption, f
           </button>}
           {caption && !expanded && <div className="max-h-[15dvh] shrink-0 overflow-y-auto border-t border-slate-200 px-4 py-2 text-sm text-slate-600 dark:border-slate-700 dark:text-slate-300">{caption}</div>}
         </div>}
-      </dialog>
+      </dialog>, document.body)}
     </>
   );
 }

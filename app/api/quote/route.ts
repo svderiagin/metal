@@ -1,14 +1,12 @@
+import {readJsonBody} from "@/lib/server/request";
 import {notificationService} from "@/lib/server/notifications";
 import {parseQuoteRequest} from "@/lib/server/validation";
 import {validateQuoteFields} from "@/lib/quoteValidation";
 
 export async function POST(request: Request) {
-  let body: unknown;
-  try {
-    body = await request.json();
-  } catch {
-    return Response.json({ok: false, error: "Некорректный запрос."}, {status: 400});
-  }
+  const parsed = await readJsonBody(request);
+  if (!parsed.ok) return parsed.response;
+  const body = parsed.value;
   const quote = parseQuoteRequest(body);
   if (!quote) {
     const fieldErrors = typeof body === "object" && body !== null && !Array.isArray(body)
@@ -20,6 +18,6 @@ export async function POST(request: Request) {
     await notificationService.sendQuoteRequest(quote);
     return Response.json({ok: true});
   } catch {
-    return Response.json({ok: false, error: "Отправка заявок пока не настроена."}, {status: 503});
+    return Response.json({ok: false, error: "Отправка временно недоступна. Свяжитесь с нами по телефону."}, {status: 503});
   }
 }
