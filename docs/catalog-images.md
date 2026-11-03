@@ -118,17 +118,20 @@ Validate with `node --test scripts/ugolok-images.test.mjs scripts/images.test.mj
 
 ## Shared product image viewer
 
-`ProductImageViewer.tsx` opens a viewport-sized native dialog for page images,
-table previews and mobile cards. `CatalogImage.tsx` also uses it for product
+`ProductImageViewer.tsx` opens a viewport-sized native dialog for page images.
+Table previews and mobile cards retain the centered rounded window with a
+soft frame, close control over the image and a maximum outer width of 1000 px.
+`CatalogImage.tsx` also uses it for product
 photographs that previously had no enlargement control. Category and type
 navigation cards retain their navigation links.
 
 Only the clicked image's original, versioned file is loaded in the dialog
 (`unoptimized`); thumbnails retain responsive Next.js optimization. The dialog
-fits the image into the available area below its toolbar, preserves its aspect
-ratio and does not upscale small originals. The **100%** control or a click on
-the image switches to native dimensions: one source pixel per CSS pixel. This
-uses `naturalWidth`/`naturalHeight`, not a fixed zoom factor or optimized thumbnail
+fits the image into the available viewing area, preserves its aspect
+ratio and does not upscale small originals. A click on the image (or the
+**100%** control in the full-screen page viewer) switches to native dimensions.
+One source pixel corresponds to one CSS pixel. This uses
+`naturalWidth`/`naturalHeight`, not a fixed zoom factor or optimized thumbnail
 dimensions. Drag with a mouse or one finger, or use arrow keys, to move the image.
 Panning is bounded by the image edges and adapts when the viewport changes.
 **Вписать**, another image click, or closing/reopening restores the fitted view.
@@ -148,3 +151,29 @@ subcategory, navigation, metadata and product descriptions. Its URL remains
 `/catalog/kvadrat`. The cover overrides and square terminology are also applied
 by `scripts/import-rozmet.mjs`, preserving the owner's changes on future imports
 without modifying saved supplier evidence.
+
+## Steel square product illustrations
+
+The seven products on `/catalog/kvadrat` use the same six-column profile table
+and mobile previews as channels and angles. Each row shows its section, supplier
+length, theoretical mass and its own 2400 × 1800 lossless WebP illustration.
+The section filter uses the profile number (8×8 through 20×20 mm), separately
+from the supplier's `Размер` field, which means length (6 m for all seven).
+
+The owner's marked `public/images/catalog/kvadrat/kvadrat_2400_1800_marked.jpg` and
+clean `kvadrat_2400_1800_original.jpg` are saved unchanged as `reference-8x8.jpg` and
+`photo.jpg` in `imports/kvadrat-image-template/`. The 8×8 illustration preserves
+every decoded reference pixel. Other images replace only differing labels,
+using background crops from the clean photograph and Inter text. Arrow segments
+through the replaced dimension labels are restored in place. No AI editing,
+resizing or new metal texture is used. These are shared family illustrations,
+not scaled manufacturing drawings.
+
+Regenerate with `node scripts/render-kvadrat-images.mjs --write`; preview with
+`node scripts/render-kvadrat-images.mjs --preview 20`. The manifest `rendered.json`
+records labels, patches, hashes and zero changes outside those patches.
+`data/square-images.json` associates images by product ID and matching supplier
+URL, independently of supplier imports. `lib/squarePresentation.ts` supplies
+consistent values to the table, filters and renderer, with decimal commas and
+`кг/м`. Supplier values stay intact, including the listed **1,54 кг/м** for №16.
+Validate with `node --test scripts/kvadrat-images.test.mjs scripts/images.test.mjs`.

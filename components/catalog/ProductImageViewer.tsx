@@ -151,9 +151,13 @@ export function ProductImageViewer({src, name, presentation = "page", caption, f
       <dialog ref={dialogRef} aria-label={`Просмотр изображения: ${name}`}
         onCancel={event => {event.preventDefault(); close();}} onClose={close}
         onKeyDown={handleDialogKeyDown}
-        className="fixed inset-0 m-0 h-dvh max-h-none w-screen max-w-none overflow-hidden border-0 bg-slate-100 p-0 text-slate-900 dark:bg-slate-950 dark:text-white backdrop:bg-black/80">
-        {open && <div className="flex h-full min-h-0 flex-col pt-[env(safe-area-inset-top)] pr-[env(safe-area-inset-right)] pb-[env(safe-area-inset-bottom)] pl-[env(safe-area-inset-left)]">
-          <div className="flex shrink-0 items-center gap-2 border-b border-slate-200 px-3 py-2 dark:border-slate-700 sm:px-5">
+        onClick={event => {if (isPreview && event.target === event.currentTarget) close();}}
+        style={isPreview ? {width: "min(1000px, calc(100vw - 32px), calc((90dvh - 32px) * 4 / 3 + 32px))"} : undefined}
+        className={isPreview
+          ? "fixed inset-0 m-auto max-h-none max-w-none overflow-hidden rounded-[28px] border-0 bg-white p-4 text-slate-900 shadow-2xl ring-1 ring-slate-200 backdrop:bg-black/75 dark:bg-slate-950 dark:text-white dark:ring-slate-600"
+          : "fixed inset-0 m-0 h-dvh max-h-none w-screen max-w-none overflow-hidden border-0 bg-slate-100 p-0 text-slate-900 dark:bg-slate-950 dark:text-white backdrop:bg-black/80"}>
+        {open && <div className={isPreview ? "relative flex aspect-[4/3] w-full min-h-0 flex-col" : "flex h-full min-h-0 flex-col pt-[env(safe-area-inset-top)] pr-[env(safe-area-inset-right)] pb-[env(safe-area-inset-bottom)] pl-[env(safe-area-inset-left)]"}>
+          {!isPreview && <div className="flex shrink-0 items-center gap-2 border-b border-slate-200 px-3 py-2 dark:border-slate-700 sm:px-5">
             <h2 className="min-w-0 flex-1 truncate text-left text-sm font-semibold sm:text-base" title={name}>{name}</h2>
             <button type="button" onClick={event => toggleImageZoom(event)} disabled={(!geometry.canZoom && !zoomed) || failed}
               aria-label={zoomed ? "Вписать изображение в экран" : "Показать оригинал в масштабе 1:1"} aria-pressed={zoomed}
@@ -164,9 +168,10 @@ export function ProductImageViewer({src, name, presentation = "page", caption, f
               className="flex h-11 w-11 shrink-0 cursor-pointer items-center justify-center rounded-lg hover:bg-slate-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-600 dark:hover:bg-slate-800 dark:focus-visible:outline-red-300">
               <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-5 w-5"><path d="m6 6 12 12M6 18 18 6"/></svg>
             </button>
-          </div>
-          <div ref={imageViewportRef} className="relative min-h-0 flex-1 overflow-hidden">
+          </div>}
+          <div ref={imageViewportRef} className={`relative min-h-0 flex-1 overflow-hidden ${isPreview ? "rounded-xl" : ""}`}>
             <button type="button" autoFocus onClick={event => toggleImageZoom(event, true)} aria-label="Увеличение изображения" aria-pressed={zoomed}
+              title={zoomed ? "Нажмите, чтобы вписать изображение. Перетаскивайте для просмотра деталей" : "Нажмите для просмотра в масштабе 1:1"}
               disabled={(!geometry.canZoom && !zoomed) || failed}
               onPointerDown={beginImageGesture} onPointerMove={moveImageGesture} onPointerUp={endImageGesture}
               onPointerCancel={() => {imageGesture.current.moved = true; imageGesture.current.pointerId = null;}}
@@ -178,6 +183,7 @@ export function ProductImageViewer({src, name, presentation = "page", caption, f
                   onError={() => setFailed(true)} className="object-contain object-center"/>
               </span>
             </button>
+            {isPreview && <span aria-hidden="true" className="pointer-events-none absolute inset-0 rounded-xl shadow-[inset_0_0_8px_2px_#fff] dark:shadow-[inset_0_0_8px_2px_var(--color-slate-950)]"/>}
             {failed ? <p role="alert" className="pointer-events-none absolute inset-0 flex items-center justify-center p-6 text-center text-sm">Не удалось загрузить изображение.</p>
               : !sourceSize.width ? <p role="status" className="pointer-events-none absolute inset-0 flex items-center justify-center text-sm">Загрузка изображения…</p>
                 : zoomed && <p role="status" className="pointer-events-none absolute inset-x-3 bottom-3 mx-auto w-fit max-w-[calc(100%-1.5rem)] rounded-lg bg-slate-950/80 px-3 py-2 text-center text-xs leading-4 text-white sm:text-sm">
@@ -185,6 +191,10 @@ export function ProductImageViewer({src, name, presentation = "page", caption, f
                   <span className="hidden [@media(pointer:coarse)]:inline">Перетаскивайте изображение пальцем</span>
                 </p>}
           </div>
+          {isPreview && <button type="button" onClick={close} aria-label="Закрыть просмотр" title="Закрыть (Esc)"
+            className="absolute right-2 top-2 z-10 flex h-11 w-11 cursor-pointer items-center justify-center rounded-lg border border-white/15 bg-slate-900/45 text-white/90 shadow-sm backdrop-blur-sm transition-colors hover:bg-slate-900/75 hover:text-white focus-visible:bg-slate-900/75 focus-visible:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white active:bg-slate-950/90">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" className="h-5 w-5"><path strokeLinecap="round" d="m6 6 12 12M6 18 18 6"/></svg>
+          </button>}
           {caption && !expanded && <div className="max-h-[15dvh] shrink-0 overflow-y-auto border-t border-slate-200 px-4 py-2 text-sm text-slate-600 dark:border-slate-700 dark:text-slate-300">{caption}</div>}
         </div>}
       </dialog>

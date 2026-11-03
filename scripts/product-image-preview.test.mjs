@@ -155,6 +155,17 @@ test('Tab stays inside the dialog even when the close button is its only enabled
   assert.equal(focused, 2);
 });
 
+test('preview windows close on backdrop clicks and restore focus to their thumbnail', () => {
+  const h = previewHarness({presentation: 'table', expanded: true});
+  const modal = h.open().find(n => n.type === 'dialog');
+  const backdrop = {};
+  modal.props.onClick({target: backdrop, currentTarget: backdrop});
+  h.render();
+  assert.equal(h.dialog.open, false);
+  assert.equal(h.document.documentElement.style.overflow, 'auto');
+  assert.equal(h.focusCount(), 1);
+});
+
 test('ordinary product thumbnails use the shared viewer and explicit navigation links stay links', () => {
   const {CatalogImage} = load('components/catalog/CatalogImage.tsx', {
     'react/jsx-runtime': {jsx, jsxs: jsx, Fragment: 'fragment'},

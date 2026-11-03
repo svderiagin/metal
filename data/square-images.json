@@ -1,0 +1,32 @@
+{
+  "products": {
+    "rozmet-2204": {
+      "sourceUrl": "https://rozmet.ru/production/kvadrat/kvadrat_8/",
+      "imageUrl": "/images/catalog/kvadrat/kvadrat-8x8-clean.webp"
+    },
+    "rozmet-2205": {
+      "sourceUrl": "https://rozmet.ru/production/kvadrat/kvadrat_10/",
+      "imageUrl": "/images/catalog/kvadrat/kvadrat-10x10-clean.webp"
+    },
+    "rozmet-2206": {
+      "sourceUrl": "https://rozmet.ru/production/kvadrat/kvadrat_12/",
+      "imageUrl": "/images/catalog/kvadrat/kvadrat-12x12-clean.webp"
+    },
+    "rozmet-2207": {
+      "sourceUrl": "https://rozmet.ru/production/kvadrat/kvadrat_14/",
+      "imageUrl": "/images/catalog/kvadrat/kvadrat-14x14-clean.webp"
+    },
+    "rozmet-26579": {
+      "sourceUrl": "https://rozmet.ru/production/kvadrat/kvadrat_16/",
+      "imageUrl": "/images/catalog/kvadrat/kvadrat-16x16-clean.webp"
+    },
+    "rozmet-28995": {
+      "sourceUrl": "https://rozmet.ru/production/kvadrat/kvadrat_18/",
+      "imageUrl": "/images/catalog/kvadrat/kvadrat-18x18-clean.webp"
+    },
+    "rozmet-2208": {
+      "sourceUrl": "https://rozmet.ru/production/kvadrat/kvadrat_20/",
+      "imageUrl": "/images/catalog/kvadrat/kvadrat-20x20-clean.webp"
+    }
+  }
+}

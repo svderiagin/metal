@@ -123,13 +123,14 @@ test('all channel specifications match the verified standard and supplier length
   assert.equal(six.specifications.find(item => item.name === 'Теоретическая масса').value, '5,90 кг/м');
 });
 
-test('verification overlay leaves other imported fields unchanged and respects the angle image overlay', () => {
+test('verification overlay leaves other imported fields unchanged and respects profile image overlays', () => {
   const angleImages = JSON.parse(fs.readFileSync('data/angle-images.json', 'utf8')).products;
+  const squareImages = JSON.parse(fs.readFileSync('data/square-images.json', 'utf8')).products;
   for (const original of rawCatalog.products.filter(item => item.categoryId !== category.id)) {
     const actual = catalog.getAllProductVariants().find(item => item.id === original.id);
-    const image = angleImages[original.id];
+    const image = angleImages[original.id] ?? squareImages[original.id];
     if (image) {
-      assert.equal(original.categoryId, 'rozmet-cat-ugolok');
+      assert.equal(original.categoryId, angleImages[original.id] ? 'rozmet-cat-ugolok' : 'rozmet-cat-kvadrat');
       assert.equal(image.sourceUrl, original.sourceReference);
     }
     assert.deepEqual(JSON.parse(JSON.stringify(actual)), image ? {...original, imageUrls: [image.imageUrl]} : original, original.id);

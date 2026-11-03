@@ -1,9 +1,11 @@
 import type {ProductAttributeKey, ProductVariant} from "@/types/product";
+import {getSquareProductParameters} from "./squarePresentation";
 
 const defaultFilterKeys: ProductAttributeKey[] = ["material", "standard", "size", "grade", "length"];
 const filterKeysByCategory: Record<string, ProductAttributeKey[]> = {
   armatura: ["material", "standard", "size", "class", "grade", "length"],
   "setka-metallicheskaya": ["material", "size", "wallThickness", "length"],
+  kvadrat: ["size", "length"],
 };
 
 export function getVariantFilterKeys(categorySlug: string) {
@@ -14,6 +16,10 @@ export function getVariantAttribute(
   variant: ProductVariant,
   key: ProductAttributeKey,
 ) {
+  if (variant.categoryId === "rozmet-cat-kvadrat" && (key === "size" || key === "length")) {
+    const square = getSquareProductParameters(variant);
+    if (square) return key === "size" ? square.section : square.length;
+  }
   return variant.attributes.find((attribute) => attribute.key === key)?.value ?? "—";
 }
 

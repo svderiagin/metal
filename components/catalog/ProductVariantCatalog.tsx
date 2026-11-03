@@ -41,10 +41,11 @@ import {ChannelSpecificationNote} from "./ChannelSpecificationNote";
 import {ChannelProductPreview} from "./ChannelProductPreview";
 import {ProductImageViewer} from "./ProductImageViewer";
 import {formatAngleSpecificationValue} from "@/lib/anglePresentation";
+import {getSquareProductParameters, getSquareProductSpecifications} from "@/lib/squarePresentation";
 
 type SortMode = "relevance" | "availability" | "price-asc" | "price-desc" | "size" | "name";
 
-// Ширина колонок таблиц «Швеллер» и «Уголок» в процентах. Сумма должна оставаться равной 100.
+// Ширина колонок таблиц профилей в процентах. Сумма должна оставаться равной 100.
 const channelColumnWidths = [
   12, // Наименование
   24, // Изображение
@@ -119,7 +120,8 @@ function GenericProductVariantCatalog({
   const filterKeys = getVariantFilterKeys(categorySlug);
   const isChannel = categorySlug === "shveller";
   const isAngle = categorySlug === "ugolok";
-  const usesReferenceTable = isChannel || isAngle;
+  const isSquare = categorySlug === "kvadrat";
+  const usesReferenceTable = isChannel || isAngle || isSquare;
   const showAvailability = !usesReferenceTable;
   const columnWidths = showAvailability ? [25, 27, 15, 10, 9, 14] : channelColumnWidths;
   const [filters, setFilters] = useState<Partial<Record<ProductAttributeKey, string>>>({});
@@ -358,6 +360,7 @@ function channelProfileName(name: string) {
 function referenceProfileName(name: string, categorySlug: string) {
   if (categorySlug === "shveller") return channelProfileName(name);
   if (categorySlug === "ugolok") return name.replace(/^Уголок металлический\s*/i, "");
+  if (categorySlug === "kvadrat") return name.replace(/^Квадрат стальной\s*/i, "").replace(/^№\s*/u, "№ ");
   return name;
 }
 
@@ -376,7 +379,7 @@ function ReferenceProductPreview({variant, compact = false, isChannel}: {variant
 }
 
 function VariantSpecifications({variant, showDetails = true}: {variant: ProductVariant; showDetails?: boolean}) {
-  const specifications = variant.specifications
+  const specifications = (variant.categoryId === "rozmet-cat-kvadrat" ? getSquareProductSpecifications(variant) : variant.specifications)
     .filter(s => !["Полное обозначение", "Условия цены", "Условия оплаты"].includes(s.name))
     .map(s => variant.categoryId === "rozmet-cat-ugolok" ? {...s, value: formatAngleSpecificationValue(s.value)} : s);
   return <>
@@ -399,6 +402,10 @@ function uniqueAttributeValues(
 }
 
 function filterLabel(variants: ProductVariant[], key: ProductAttributeKey) {
+  if (variants[0] && getSquareProductParameters(variants[0])) {
+    if (key === "size") return "Сечение";
+    if (key === "length") return "Длина по каталогу";
+  }
   return variants
     .flatMap((variant) => variant.attributes)
     .find((attribute) => attribute.key === key)?.label ?? key;

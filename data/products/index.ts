@@ -16,6 +16,7 @@ import {isPipeProduct, normalizePipeWeight} from "@/lib/pipeWeight";
 import {isRetainedCategory} from "@/data/catalog-scope";
 import channelSpecifications from "../channel-specifications.json";
 import angleImages from "../angle-images.json";
+import squareImages from "../square-images.json";
 
 const productSources: ProductVariantSource[] = [
   ...armaturaProducts.filter((product) => product.subcategoryId !== "cat-arm-sub-1"),
@@ -53,6 +54,10 @@ const retainedProductVariants: ProductVariant[] = [
 export const productVariants: ProductVariant[] = [
   ...retainedProductVariants,
   ...(rozmetCatalog.products as ProductVariant[]).map(product => {
+    const squareImage = (squareImages.products as Record<string, {sourceUrl: string; imageUrl: string}>)[product.id];
+    if (product.categoryId === "rozmet-cat-kvadrat" && squareImage?.sourceUrl === product.sourceReference) {
+      return {...product, imageUrls: [squareImage.imageUrl]};
+    }
     const angleImage = (angleImages.products as Record<string, {sourceUrl: string; imageUrl: string}>)[product.id];
     if (product.categoryId === "rozmet-cat-ugolok" && angleImage?.sourceUrl === product.sourceReference) {
       return {...product, imageUrls: [angleImage.imageUrl]};
