@@ -139,9 +139,11 @@ export function ProductImageViewer({src, name, presentation = "page", caption, f
         aria-label={`Увеличить изображение: ${name}`}
         style={presentation === "table" ? {width: 176} : undefined}
         className={`group mx-auto block cursor-pointer rounded-xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-slate-600 dark:focus-visible:outline-red-300 ${triggerLayout}`}>
-        <span className={`relative block overflow-hidden rounded-xl bg-white ${presentation === "compact" ? "h-full w-full" : isReferencePreview ? "aspect-[4/3]" : "aspect-[2/1]"} ${isReferencePreview ? framed ? "border border-slate-300 shadow-[0_1px_3px_rgba(15,23,42,0.12),inset_0_0_0_1px_rgba(255,255,255,0.85)] dark:border-slate-600" : "ring-1 ring-inset ring-slate-200" : ""}`}>
+        <span className={`relative block overflow-hidden rounded-xl bg-white ${presentation === "compact" ? "h-full w-full" : isReferencePreview ? "aspect-[4/3]" : "aspect-[2/1]"} ${isReferencePreview ? framed ? "shadow-[0_1px_3px_rgba(15,23,42,0.12)]" : "ring-1 ring-inset ring-slate-200" : ""}`}>
           <Image src={imageUrl} alt={name} fill sizes={triggerSizes}
             className={`object-contain object-center ${isReferencePreview && !framed ? "p-1.5" : ""}`}/>
+          {/* Overlay the frame so it does not shrink the image's 4:3 content box. */}
+          {isReferencePreview && framed && <span aria-hidden="true" className="pointer-events-none absolute inset-0 rounded-xl border border-slate-300 dark:border-slate-600"/>}
           {isPreview ? <span aria-hidden="true" className="absolute bottom-1.5 right-1.5 flex h-6 w-6 items-center justify-center rounded-md bg-slate-950/75 text-white transition group-hover:bg-slate-950">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" className="h-4 w-4"><path d="M9 3H3v6m12-6h6v6M3 15v6h6m12-6v6h-6"/></svg>
           </span> : <span aria-hidden="true" className="absolute bottom-3 right-3 rounded-lg bg-slate-950/80 px-3 py-1.5 text-xs font-semibold text-white transition group-hover:bg-slate-950">Увеличить</span>}
