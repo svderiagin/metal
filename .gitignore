@@ -3,11 +3,14 @@
 
 # Next.js
 /.next/
+/.next-test/
 /out/
 /build/
 
 # Testing
 /coverage/
+/playwright-report/
+/test-results/
 
 # Environment variables
 .env*

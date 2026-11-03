@@ -11,7 +11,7 @@ const {productVariants} = readProjectData('data/products/index.ts');
 const {formatAngleSpecificationValue} = readProjectData('lib/anglePresentation.ts');
 const angles = productVariants.filter(p => p.categoryId === 'rozmet-cat-ugolok');
 
-test('all 22 angles have individual illustrations while their non-image fields match the source', () => {
+test('all 22 angles preserve supplier values with approved illustrations and display mass labels', () => {
   assert.equal(angles.length, 22);
   assert.equal(Object.keys(mapping.products).length, angles.length);
   assert.equal(new Set(angles.map(p => p.imageUrls[0])).size, angles.length);
@@ -20,7 +20,8 @@ test('all 22 angles have individual illustrations while their non-image fields m
     const original = source.products.find(p => p.id === product.id);
     const {imageUrls: originalImages, ...expected} = original;
     assert.ok(originalImages.length);
-    assert.deepEqual(actual, expected, product.id);
+    assert.deepEqual(JSON.parse(JSON.stringify(actual)), {...expected, specifications: expected.specifications.map(item =>
+      item.name === 'Вес' ? {...item, name:'Теоретическая масса'} : item)}, product.id);
     assert.equal(mapping.products[product.id].sourceUrl, product.sourceReference);
     assert.equal(imageUrls.length, 1);
     assert.equal(imageUrls[0], mapping.products[product.id].imageUrl);

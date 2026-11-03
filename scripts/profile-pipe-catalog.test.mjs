@@ -77,7 +77,7 @@ test('server order validation and payment totals use metres, not pieces or fabri
  const product=confirmed(find(40,40,2),157);const testModule={exports:{}};
  const source=ts.transpileModule(fs.readFileSync('lib/server/orders.ts','utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2020}}).outputText;
  vm.runInNewContext(source,{module:testModule,exports:testModule.exports,process:{env:{NODE_ENV:'test'}},require:name=>name==='node:crypto'?{randomBytes}:name==='@/lib/catalog'?{getProductVariantById:id=>id===product.id?product:undefined}:readProjectData(name.replace('@/','')+'.ts',cache)});
- const body={items:[{productId:product.id,quantity:12,pieceOrder:{pieces:2,lengthMeters:6}}],customer:{type:'INDIVIDUAL',fullName:'Тест',email:'test@example.invalid',phone:'+79000000000'},delivery:{address:'Тестовый адрес'},paymentMethod:'INVOICE'};
+ const body={consent:true,items:[{productId:product.id,quantity:12,pieceOrder:{pieces:2,lengthMeters:6}}],customer:{type:'INDIVIDUAL',fullName:'Тест',email:'test@example.invalid',phone:'+79000000000'},delivery:{address:'Тестовый адрес'},paymentMethod:'INVOICE'};
  const parsed=parseCreateOrderInput(body);assert.ok(parsed);assert.equal(parsed.items[0].pieceOrder.pieces,2);
  const order=testModule.exports.createTrustedOrder(parsed);assert.equal(order.totalAmount,1884);assert.equal(order.items[0].quantity,12);assert.equal(order.items[0].unitPrice,157);assert.equal(order.items[0].pieceOrder.pieces,2);assert.equal(hasValidOrderAmount(order),true);
  order.items[0].subtotal=314;assert.equal(hasValidOrderAmount(order),false);

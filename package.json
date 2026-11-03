@@ -11,25 +11,36 @@
     "start": "next start",
     "lint": "eslint",
     "pretest": "node scripts/cart-catalog.mjs",
-    "test": "node --test scripts/*.test.mjs",
+    "test": "node --import tsx --test scripts/*.test.mjs tests/unit/*.test.ts",
     "catalog:import": "node scripts/inventory-mirror.mjs && node scripts/import-catalog.mjs && node scripts/completeness-mirror.mjs",
     "catalog:check": "node --test scripts/catalog.test.mjs",
     "search:check": "node --test scripts/search.test.mjs",
-    "prebuild": "node scripts/catalog-image-versions.mjs"
+    "prebuild": "node scripts/catalog-image-versions.mjs",
+    "test:unit": "node --import tsx --test scripts/*.test.mjs tests/unit/*.test.ts",
+    "test:coverage": "node --import tsx --test --experimental-test-coverage --test-coverage-include='lib/**/*.ts' --test-coverage-lines=90 --test-coverage-branches=85 --test-coverage-functions=85 tests/unit/*.test.ts",
+    "test:install": "playwright install chromium",
+    "test:build": "METAL_TEST_DIST_DIR=.next-test next build --webpack",
+    "test:serve": "METAL_TEST_DIST_DIR=.next-test next start --hostname 127.0.0.1 --port 3100",
+    "test:e2e": "playwright test tests/e2e",
+    "test:visual": "playwright test tests/visual",
+    "test:visual:update": "playwright test tests/visual --update-snapshots",
+    "test:visual:probe": "node scripts/check-visual-sensitivity.mjs"
   },
   "dependencies": {
-    "next": "16.2.11",
+    "next": "16.4.5",
     "react": "19.2.4",
     "react-dom": "19.2.4"
   },
   "devDependencies": {
+    "@playwright/test": "1.64.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "16.2.11",
+    "eslint-config-next": "16.4.5",
     "tailwindcss": "^4",
+    "tsx": "4.23.15",
     "typescript": "^5"
   }
 }

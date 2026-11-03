@@ -10,6 +10,7 @@ import {readProjectData} from './project-data.mjs';
 const json = file=>JSON.parse(fs.readFileSync(file,'utf8'));
 const source=json('imports/rozmet-source.json'), imported=json('data/rozmet-catalog.json');
 const baseline=json('imports/rozmet-protected.snapshot.json');
+const imageCorrections=json('imports/protected-image-corrections.json');
 const cache=new Map();
 const {categories}=readProjectData('data/categories.ts',cache);
 const {subcategories}=readProjectData('data/subcategories.ts',cache);
@@ -49,8 +50,9 @@ test('all protected category positions, data, product types and image bytes are 
   }
   for(const {id,index} of baseline.categoryOrder) assert.equal(categories[index].id,id);
   for(const [image,hash] of Object.entries(baseline.imagesSha256)) {
-    assert.equal(crypto.createHash('sha256').update(fs.readFileSync('public'+image)).digest('hex'),hash,image);
+    assert.equal(crypto.createHash('sha256').update(fs.readFileSync('public'+image)).digest('hex'),imageCorrections[image]?.sha256 ?? hash,image);
   }
+  for(const image of Object.keys(imageCorrections)) assert.ok(image in baseline.imagesSha256, image);
 });
 
 test('every discovered source section and unique product is imported once under its original parent',()=>{

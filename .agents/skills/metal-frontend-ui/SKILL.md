@@ -24,6 +24,7 @@ Preserve the existing visual language unless the user requests a redesign: red a
 ## Non-obvious constraints
 
 - Theme initialization runs before paint in `app/layout.tsx`; preserve the stable server snapshot and existing `suppressHydrationWarning` on `html`. Add dark surfaces, borders, text and state colors together. Do not recolor product photos with filters.
+- Use `variant="secondary"` for secondary `Button`/`ButtonLink` controls. Do not append conflicting `text-white` and dark-text utilities to the same element: Tailwind's generated order, not JSX class order, chooses the winner. Check readable labels on both themes.
 - Table and mobile-card markup often coexist in one component. Change both presentations when the request affects shared behavior; scope browser locators to the visible control. Check where the category/sidebar appears before assuming no horizontal overflow means good mobile usability.
 - Keep image geometry reserved, use the existing URL version helper, and size downloads to rendered width. For new/replaced files read the relevant part of `docs/catalog-images.md`; for loading regressions read `docs/image-performance.md`. Old image-coverage counts are historical.
 - Before changing `next/image`, read `node_modules/next/dist/docs/01-app/03-api-reference/02-components/image.md`. Measure the actual visible LCP candidate; avoid preloading every image or copying deprecated `priority` usage.
@@ -34,5 +35,7 @@ Preserve the existing visual language unless the user requests a redesign: red a
 ## Verify proportionally
 
 Use [the shared check matrix](../../../docs/development-workflow.md). Check the changed route at desktop and mobile for responsive edits; check both themes for new colors. Test one relevant empty/error/interaction state. Menu/dialog changes need keyboard and focus verification. Existing focused tests: `theme.test.mjs`, `hero-loading.test.mjs`, `images.test.mjs`, `product-image-preview.test.mjs` in `scripts/`.
+
+Automated browser/image cases live in `tests/e2e/images.spec.ts` and `tests/visual/catalog.visual.spec.ts`; commands and baseline platform are documented in [testing.md](../../../docs/testing.md). Compare existing baselines before deciding to update them. Include deliberately updated PNGs in the commit.
 
 Do not change product prices, identifiers or supplier evidence to achieve a visual result. Report what changed, what was actually viewed/tested, and material limitations.

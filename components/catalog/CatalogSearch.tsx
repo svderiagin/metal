@@ -86,8 +86,9 @@ export function CatalogSearch({
           {query && (
             <Button
               type="button"
+              variant="secondary"
               onClick={clear}
-              className="border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 shadow-none hover:bg-slate-100 dark:hover:bg-slate-800 sm:min-w-32"
+              className="sm:min-w-32"
             >
               Очистить
             </Button>

@@ -44,7 +44,7 @@ test('server and cart share current measured prices and ignore cached money', ()
   assert.equal(item.quantity, 100);
   const cart = revalidateCartPrice(product, item);
   assert.equal(cart.measurement.weightTons, .0888);
-  const order = createTrustedOrder({items:[item], customer:{}, delivery:{}, paymentMethod:'CARD'});
+  const order = createTrustedOrder({consent:true, items:[item], customer:{}, delivery:{}, paymentMethod:'CARD'});
   assert.equal(order.totalAmount, cart.estimatedTotal);
   assert.equal(order.items[0].quantity, 100);
   assert.equal(hasValidOrderAmount(order), true, 'metres must be priced by weight, not multiplied by a tonne price');
@@ -77,7 +77,8 @@ test('unknown prices sort last in both price directions', () => {
 test('unconfigured contact and quote routes fail honestly in local development', async () => {
   for (const endpoint of ['contact','quote']) {
     const {POST} = serverModule(`app/api/${endpoint}/route.ts`);
-    const response = await POST({json:async () => ({name:'Тест', email:'audit@example.invalid', phone:'+79000000000', message:'Локальная проверка', consent:true})});
+    const response = await POST(new Request(`http://localhost/api/${endpoint}`, {method:'POST', headers:{'content-type':'application/json'},
+      body:JSON.stringify({name:'Тест', email:'audit@example.invalid', phone:'+79000000000', message:'Локальная проверка', consent:true})}));
     assert.equal(response.status, 503);
     assert.equal((await response.json()).ok, false);
   }

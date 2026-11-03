@@ -37,6 +37,8 @@ Read [references/project-map.md](references/project-map.md) when the task change
 
 Follow [the shared check matrix](../../../docs/development-workflow.md) (repository `docs/development-workflow.md`). Start with the area's test from the project map. Recheck counts/protected data when the edit can affect them. Price/product edits also need the generated cart projection refreshed before browser checks; do not regenerate supplier imports for that.
 
+Rendered links, filters and all family layouts are covered by `tests/e2e/catalog.spec.ts` and `tests/visual/catalog.visual.spec.ts`; direct selection/overlay invariants by `tests/unit/catalog-and-cart.test.ts`. See [testing.md](../../../docs/testing.md) for commands. The four image-only corrections in `imports/protected-image-corrections.json` have explicit Git provenance; they do not authorize changes to protected catalog facts or arbitrary snapshot exceptions.
+
 Verify desktop tables and mobile cards when behavior or layout changes. Preserve search/cart links using `#variant-<id>` and their mobile targets; `hooks/useLinkedVariant.ts` reveals filtered or collapsed rows.
 
 Report changed behavior, relevant checks and limitations; include counts only when catalog membership changed or was at risk.

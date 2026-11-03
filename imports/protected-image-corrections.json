@@ -1,0 +1,22 @@
+{
+  "/images/catalog/setka-metallicheskaya/setka-main.jpg": {
+    "sha256": "b4fdc97090bcc8c5c3034fbd186a0e5181bdcba91b7301a2e8eca7ee8e550bda",
+    "sourceCommit": "aac0891",
+    "reason": "The category cover has this same byte hash in its original Git commit aac0891 and has not changed since. The separate Rozmet snapshot recorded 48d3a83d3092b32627c6bf1d45d5e31dc5c1f5571789e995895f63dec4f6aa2b for this path. Preserve the unchanged public cover and document the erroneous snapshot hash instead of replacing the image or rewriting the snapshot."
+  },
+  "/images/catalog/setka-metallicheskaya/setka-rabitsa.jpg": {
+    "sha256": "acb9056c4423fc14decad3454ec017343859cfd6b41434e51fdd5b9359a898ce",
+    "sourceCommit": "bbc7a7c",
+    "reason": "The unchanged current category photo has the same bytes as the owner catalog update in commit bbc7a7c. The Rozmet import snapshot retained the earlier image hash. Preserve the approved photo and record the narrow image-only correction."
+  },
+  "/images/catalog/setka-metallicheskaya/setka-svarnaya-rulony.jpg": {
+    "sha256": "b8b0beaf7fe5354d60421a52fa11e97ae53604d48731f84b4b5ebd5687bc6f8e",
+    "sourceCommit": "bbc7a7c",
+    "reason": "The unchanged current category photo has the same bytes as the owner catalog update in commit bbc7a7c. The Rozmet import snapshot retained the earlier image hash. Preserve the approved photo and record the narrow image-only correction."
+  },
+  "/images/catalog/setka-metallicheskaya/setka-svarnaya-karty.jpg": {
+    "sha256": "6ea947a4636c485b81d176b65383f4f36d37c154e5890e2df02fae3cf4edd01f",
+    "sourceCommit": "aac0891",
+    "reason": "The unchanged current category photo has the same bytes as the owner catalog update in commit aac0891. The Rozmet import snapshot retained the earlier image hash. Preserve the approved photo and record the narrow image-only correction."
+  }
+}

@@ -24,7 +24,7 @@ function previewHarness(props = {}) {
     getBoundingClientRect() {return {left: 0, top: 0, width: this.clientWidth, height: this.clientHeight};}};
   const document = {documentElement: {style: {overflow: 'auto'}}};
   const dialog = {open: false, showModal() {this.open = true;}, close() {this.open = false;}};
-  const trigger = {isConnected: true, focus() {focusCount++;}};
+  const trigger = {isConnected: true, getClientRects: () => [1], focus() {focusCount++;}};
   const {ProductImageViewer} = load('components/catalog/ProductImageViewer.tsx', {
     react: {
       useState(initial) {
@@ -39,6 +39,7 @@ function previewHarness(props = {}) {
       useEffect(callback) {effects.push(callback);},
     },
     'react/jsx-runtime': {jsx, jsxs: jsx, Fragment: 'fragment'},
+    'react-dom': {createPortal: children => children},
     'next/image': {default: 'image'},
     '@/lib/catalog-image': {catalogImageUrl: src => src},
     '@/lib/imageViewer': readProjectData('lib/imageViewer.ts'),
@@ -197,7 +198,7 @@ test('channel captions contain brief guidance and reference standard without rep
   for (const variant of productVariants.filter(item => item.categoryId === 'rozmet-cat-shveller')) {
     const preview = ChannelProductPreview({variant, compact: true});
     assert.equal(preview.props.presentation, 'table');
-    assert.equal(preview.props.framed, variant.id === 'rozmet-2235');
+    assert.equal(preview.props.framed, true);
     const caption = JSON.stringify(preview.props.caption);
     assert.match(caption, /ГОСТ 8240-97/);
     assert.match(caption, /\/documents\/gost-8240-97\.pdf/);

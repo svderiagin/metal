@@ -14,12 +14,12 @@ export function parseOrderConfirmation(value: unknown): OrderConfirmation | null
     paymentPending: order.paymentMethod === "CARD"};
 }
 
-export function rememberOrderConfirmation(order: OrderConfirmation, storage = () => window.sessionStorage) {
+export function rememberOrderConfirmation(order: OrderConfirmation, storage: () => Pick<Storage, "setItem"> = () => window.sessionStorage) {
   memory = parseOrderConfirmation(order);
   try {storage().setItem(ORDER_STORAGE_KEY, JSON.stringify(memory));} catch { /* Client navigation retains the confirmed order in memory. */ }
 }
 
-export function readOrderConfirmation(storage = () => window.sessionStorage): OrderConfirmation | null {
+export function readOrderConfirmation(storage: () => Pick<Storage, "getItem"> = () => window.sessionStorage): OrderConfirmation | null {
   try {
     const raw = storage().getItem(ORDER_STORAGE_KEY);
     return raw ? parseOrderConfirmation(JSON.parse(raw)) : memory;

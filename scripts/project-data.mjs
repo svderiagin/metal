@@ -14,6 +14,6 @@ export function readProjectData(file,cache=new Map()){
   if(fs.existsSync(p+'.ts'))p+='.ts';else p=path.join(p,'index.ts');
   return readProjectData(p,cache);
  };
- vm.runInNewContext(js,{module:dataModule,exports:dataModule.exports,require,console},{filename:absolute});
+ vm.runInNewContext(js,{module:dataModule,exports:dataModule.exports,require,console,URL,TextEncoder,TextDecoder,Request,Response},{filename:absolute});
  return dataModule.exports;
 }

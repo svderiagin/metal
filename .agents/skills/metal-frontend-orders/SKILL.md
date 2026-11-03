@@ -40,3 +40,5 @@ UI testing does not require sending real inquiries or initiating payments. Use f
 Follow [the shared check matrix](../../../docs/development-workflow.md), including regenerating the cart projection after source price/product changes. Focused tests in `scripts/`: `cart-and-order`, `cart-projection`, `product-order-controls`, `measured-order-controls`, `quote-request`, `quote-validation`, `quote-form` (all `.test.mjs`), plus the affected product family's test.
 
 For changed behavior verify one normal path and the relevant invalid quantity, stale/unknown product, unavailable storage or API rejection. Do not run every edge case for a copy edit. Report actual checks and any remaining unconfigured integration.
+
+Direct imports of current TypeScript behavior are tested in `tests/unit/{catalog-and-cart,checkout,api}.test.ts`; mocked browser submissions and persistence in `tests/e2e/orders.spec.ts`. Use the commands in [testing.md](../../../docs/testing.md). Avoid new source-text/VM assertions for behavior that can be imported or exercised through the DOM.

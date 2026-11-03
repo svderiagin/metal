@@ -66,6 +66,7 @@ test('API returns specific validation errors without sending an invalid quote', 
   const sent = [];
   const testModule = {exports: {}};
   const imports = {
+    '@/lib/server/request': readProjectData('lib/server/request.ts'),
     '@/lib/server/notifications': {notificationService: {sendQuoteRequest: async quote => sent.push(quote)}},
     '@/lib/server/validation': {parseQuoteRequest},
     '@/lib/quoteValidation': {validateQuoteFields},

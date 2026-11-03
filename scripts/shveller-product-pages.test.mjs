@@ -133,6 +133,7 @@ test('verification overlay leaves other imported fields unchanged and respects p
       assert.equal(original.categoryId, angleImages[original.id] ? 'rozmet-cat-ugolok' : 'rozmet-cat-kvadrat');
       assert.equal(image.sourceUrl, original.sourceReference);
     }
-    assert.deepEqual(JSON.parse(JSON.stringify(actual)), image ? {...original, imageUrls: [image.imageUrl]} : original, original.id);
+    assert.deepEqual(JSON.parse(JSON.stringify(actual)), image ? {...original, imageUrls: [image.imageUrl], specifications: original.specifications.map(item =>
+      original.categoryId === 'rozmet-cat-ugolok' && item.name === 'Вес' ? {...item, name:'Теоретическая масса'} : item)} : original, original.id);
   }
 });
