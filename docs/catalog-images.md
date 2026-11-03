@@ -135,3 +135,16 @@ Panning is bounded by the image edges and adapts when the viewport changes.
 Escape/close restores page scrolling and focus to the originating thumbnail.
 
 Geometry and interaction checks: `node --test scripts/image-viewer-geometry.test.mjs scripts/product-image-preview.test.mjs`.
+
+## Angle and steel square category covers
+
+The category and product-type cards use the supplied 1200 × 600 warehouse
+photographs: `ugolok/ugolok-main.jpg` and `kvadrat/kvadrat_main.jpg` under
+`public/images/catalog/`. The same covers appear at the top of the category pages.
+These unannotated covers are separate from individual product illustrations.
+
+The square category is displayed as **Квадрат стальной**, including its internal
+subcategory, navigation, metadata and product descriptions. Its URL remains
+`/catalog/kvadrat`. The cover overrides and square terminology are also applied
+by `scripts/import-rozmet.mjs`, preserving the owner's changes on future imports
+without modifying saved supplier evidence.

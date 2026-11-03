@@ -10,7 +10,16 @@ const current = JSON.parse(fs.readFileSync('imports/rozmet-protected.snapshot.js
 const mapping = JSON.parse(fs.readFileSync('data/catalog-images.json', 'utf8'));
 const categoryImageOverrides = {
   'rozmet-cat-shveller': '/images/catalog/shveller/shweller-main.jpg',
+  'rozmet-cat-ugolok': '/images/catalog/ugolok/ugolok-main.jpg',
+  'rozmet-cat-kvadrat': '/images/catalog/kvadrat/kvadrat_main.jpg',
 };
+// Owner-approved display terminology; keep saved supplier evidence unchanged.
+const catalogText = (value, categoryId) => categoryId !== 'rozmet-cat-kvadrat' ? value : value
+  .replaceAll('Квадрат металлический', 'Квадрат стальной')
+  .replaceAll('квадрат металлический', 'квадрат стальной')
+  .replaceAll('Металлический квадрат', 'Стальной квадрат')
+  .replaceAll('металлический квадрат', 'стальной квадрат')
+  .replaceAll('металлического квадрата', 'стального квадрата');
 const categories = [], subcategories = [], products = [], sections = [];
 const slugOf = url => new URL(url).pathname.split('/').filter(Boolean).at(-1).replaceAll('_', '-');
 const hash = value => crypto.createHash('sha256').update(value).digest('hex').slice(0, 8);
@@ -24,19 +33,21 @@ for (const url of source.roots) {
   const slug = slugOf(url), id = `rozmet-cat-${slug}`;
   const children = source.sections.filter(item => item.url !== url && item.url.startsWith(url));
   const imageUrl = categoryImageOverrides[id] ?? localImage.get(section.image) ?? mapping.fallback;
-  categories.push({id, name:section.name, slug, shortDescription:section.intro || shorten(section.details),
-    description:[section.intro,section.details].filter(Boolean).join('\n\n'),
-    ...(section.intro && section.details ? {descriptionSections:{intro:section.intro,title:`Подробнее о категории «${section.name}»`,details:section.details}} : {}),
+  const name = catalogText(section.name, id), intro = catalogText(section.intro, id), details = catalogText(section.details, id);
+  categories.push({id, name, slug, shortDescription:intro || shorten(details),
+    description:[intro,details].filter(Boolean).join('\n\n'),
+    ...(intro && details ? {descriptionSections:{intro,title:`Подробнее о категории «${name}»`,details}} : {}),
     imageUrl, ...(!children.length ? {directProducts:true} : {})});
   mapping.categories[id] = imageUrl;
   const families = children.length ? children : [section];
   for (const child of families) {
     const subId = `rozmet-sub-${slug}-${slugOf(child.url)}`;
     const internal = !children.length;
-    subcategories.push({id:subId, categoryId:id, name:child.name, slug:slugOf(child.url),
-      shortDescription:child.intro || shorten(child.details), description:[child.intro,child.details].filter(Boolean).join('\n\n'),
+    subcategories.push({id:subId, categoryId:id, name:catalogText(child.name, id), slug:slugOf(child.url),
+      shortDescription:catalogText(child.intro || shorten(child.details), id), description:catalogText([child.intro,child.details].filter(Boolean).join('\n\n'), id),
       ...(internal ? {internal:true} : {})});
-    const childImage = localImage.get(child.image);
+    const childImage = internal && ['rozmet-cat-ugolok', 'rozmet-cat-kvadrat'].includes(id)
+      ? categoryImageOverrides[id] : localImage.get(child.image);
     if (childImage) mapping.types[`type-${subId}`] = childImage;
     sections.push({url:child.url,categoryId:id,subcategoryId:subId,internal,descriptionMissing:!child.intro && !child.details});
   }
@@ -70,7 +81,7 @@ for (const item of source.products) {
     : item.stockText === 'Под заказ' && item.availability?.endsWith('/BackOrder') ? 'ON_ORDER' : 'UNKNOWN';
   const product = {id:match?.id ?? `rozmet-${item.id}`,categoryId:parent.categoryId,subcategoryId:parent.subcategoryId,
     productTypeId:`type-${parent.subcategoryId}`,name:item.name,slug:match?.slug ?? `rozmet-${slugOf(item.url)}-${hash(item.url)}`,
-    sku:match?.sku ?? item.sku,shortDescription:shorten(item.description),description:item.description,
+    sku:match?.sku ?? item.sku,shortDescription:shorten(catalogText(item.description, parent.categoryId)),description:catalogText(item.description, parent.categoryId),
     price:item.price, ...(item.price === null ? {quoteOnly:true} : {}),priceQualifier:'exact',currency:'RUB',imported:true,
     unit:unit[0],priceUnit:unit[1],material:'',standard:'',availability,inStock:availability === 'IN_STOCK',featured:false,
     imageUrls,attributes,specifications:specs,sourceReference:item.url,sourceProductName:item.name};
