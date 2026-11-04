@@ -1,20 +1,14 @@
-import Image from "next/image";
-import {catalogImageUrl} from "@/lib/catalog-image";
+import {CatalogCoverGallery} from "./CatalogCoverGallery";
 
-const imageSizes = "(min-width: 1360px) 1004px, (min-width: 1024px) calc(100vw - 356px), (min-width: 640px) calc(100vw - 40px), calc(100vw - 32px)";
-
-export function CategoryCover({name, imageUrl, summary, descriptionId}: {
+export function CategoryCover({name, images, summary, descriptionId}: {
   name: string;
-  imageUrl: string;
+  images: readonly string[];
   summary: string;
   descriptionId: string;
 }) {
   return (
     <header>
-      <div className="relative aspect-[2/1] w-full overflow-hidden rounded-xl bg-white sm:aspect-[5/2]">
-        <Image src={catalogImageUrl(imageUrl)} alt={name} fill sizes={imageSizes}
-          loading="eager" fetchPriority="high" className="object-cover object-center"/>
-      </div>
+      <CatalogCoverGallery images={images} name={name} layout="banner"/>
       <div className="mt-5 grid min-h-[13.5rem] grid-rows-[1fr_auto] gap-3 sm:mt-6 sm:min-h-[10rem]">
         <div>
           <h1 className="text-page-title">{name}</h1>

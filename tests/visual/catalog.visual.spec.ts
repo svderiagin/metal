@@ -17,6 +17,15 @@ test("armatura category cover and introduction", async ({page}) => {
   await expect(page).toHaveScreenshot("armatura-category.png");
 });
 
+test("title photo viewer uses a rounded frame and the original aspect ratio", async ({page}) => {
+  await page.goto("/catalog/armatura");
+  await page.getByRole("button", {name: "Увеличить титульное изображение: Арматура", exact: true}).click();
+  const dialog = page.getByRole("dialog", {name: "Просмотр титульных фотографий: Арматура", exact: true});
+  await expect(dialog.getByRole("button", {name: "Показать титульное фото в масштабе 1:1", exact: true})).toBeEnabled();
+  await settleImages(page);
+  await expect(page).toHaveScreenshot("cover-viewer.png");
+});
+
 for (const family of ["shveller", "ugolok", "kvadrat", "armatura", "balka", "profile", "vgp", "profnastil", "mesh"] as const) {
   test(`${family} table or card geometry`, async ({page}) => {
     await openProduct(page, samples[family]);

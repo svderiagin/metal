@@ -1,8 +1,6 @@
-import {catalogImageUrl} from "@/lib/catalog-image";
+import {getCatalogCoverImages} from "@/lib/catalogCoverImages";
 import type {Metadata} from "next";
 import {Suspense} from "react";
-import Image from "next/image";
-import {DesktopImagePreload} from "@/components/catalog/DesktopImagePreload";
 import {notFound} from "next/navigation";
 import {Breadcrumbs} from "@/components/catalog/Breadcrumbs";
 import {CatalogSidebar} from "@/components/catalog/CatalogSidebar";
@@ -10,7 +8,7 @@ import {CatalogDescription} from "@/components/catalog/CatalogDescription";
 import {CategoryCover} from "@/components/catalog/CategoryCover";
 import {ProductTypeResults} from "@/components/catalog/ProductTypeResults";
 import {ProductVariantCatalog} from "@/components/catalog/ProductVariantCatalog";
-import {ProductImageViewer} from "@/components/catalog/ProductImageViewer";
+import {CatalogCoverGallery} from "@/components/catalog/CatalogCoverGallery";
 import {PageContainer} from "@/components/layout/PageContainer";
 import {ButtonLink} from "@/components/ui/Button";
 import {
@@ -23,8 +21,6 @@ import {
 type Props = {
   params: Promise<{ categorySlug: string }>;
 };
-
-const imageSizes = "(min-width: 1280px) 360px, (min-width: 768px) 320px, calc(100vw - 48px)";
 
 export function generateStaticParams() {
   return getAllCategories().map((category) => ({categorySlug: category.slug}));
@@ -47,6 +43,7 @@ export default async function CategoryPage({params}: Props) {
     ? "/images/catalog/truby-profilnye/trubi-main.jpg"
     : category.imageUrl;
   const hasImage = category.id !== "cat-pnf" && !mainImageUrl.endsWith(".svg");
+  const coverImages = getCatalogCoverImages(category.id, mainImageUrl);
   const introDescription = category.descriptionSections?.intro ?? category.description;
   const useCoverLayout = category.slug === "armatura";
   const detailedDescription = category.descriptionSections?.details ?? (useCoverLayout ? category.description : undefined);
@@ -68,7 +65,7 @@ export default async function CategoryPage({params}: Props) {
                 Категория
               </p>
               <h1 className="mt-2 break-words text-page-title">{category.name}</h1>
-              {hasImage && <ProductImageViewer src={mainImageUrl} name={category.name}/>}
+              {hasImage && <CatalogCoverGallery key={category.id} images={coverImages} name={category.name}/>}
               <CatalogDescription description={introDescription}/>
             </div>
           </div>
@@ -93,22 +90,18 @@ export default async function CategoryPage({params}: Props) {
 
   return (
     <PageContainer className="py-8 sm:py-10 lg:py-12">
-      {hasImage && !useCoverLayout && <DesktopImagePreload src={catalogImageUrl(mainImageUrl)} sizes={imageSizes}/>}
       <Breadcrumbs items={[{label: "Каталог", href: "/catalog"}, {label: category.name}]}/>
       <div className="grid gap-7 lg:grid-cols-[280px_1fr]">
         <Suspense fallback={<div className="h-96 animate-pulse rounded-xl bg-slate-200 dark:bg-slate-700"/>}>
           <CatalogSidebar activeSlug={category.slug}/>
         </Suspense>
         <div className="min-w-0">
-          {useCoverLayout ? <CategoryCover name={category.name} imageUrl={mainImageUrl}
+          {useCoverLayout ? <CategoryCover key={category.id} name={category.name} images={coverImages}
             summary={category.shortDescription} descriptionId={`${category.id}-details-heading`}/>
           : <div className={`grid gap-x-6 gap-y-4 ${hasImage ? "md:grid-cols-[minmax(0,1fr)_320px] xl:grid-cols-[minmax(0,1fr)_360px]" : ""}`}>
             <h1 className={`text-page-title ${category.slug === "shtaketnik" ? "text-red-700 dark:text-red-400" : ""}`}>{category.name}</h1>
-            {hasImage && <div className="relative aspect-[2/1] w-full overflow-hidden rounded-xl bg-white md:col-start-2 md:row-span-2 md:row-start-1 md:self-center">
-              <Image src={catalogImageUrl(mainImageUrl)} alt={category.name} fill
-                sizes={imageSizes}
-                className="object-contain object-center"/>
-            </div>}
+            {hasImage && <CatalogCoverGallery key={category.id} images={coverImages} name={category.name} layout="compact"
+              className="md:col-start-2 md:row-span-2 md:row-start-1 md:self-center"/>}
             <CatalogDescription description={introDescription} variant="category" className="md:col-start-1"/>
           </div>}
           {category.directProducts

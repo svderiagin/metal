@@ -66,3 +66,33 @@ test("profile-sheet guidance follows product families in the rendered page", asy
   const details = await page.getByRole("heading", {name: "Как выбрать профнастил", exact: true}).boundingBox();
   expect(families!.y + families!.height).toBeLessThanOrEqual(details!.y);
 });
+
+for (const family of ["armatura", "balka", "profile", "vgp", "profnastil", "mesh", "shveller", "ugolok", "kvadrat"] as const) {
+  test(`${family}: wide title photo keeps filters beside the catalog`, async ({page, isMobile}) => {
+    const route = ["shveller", "ugolok", "kvadrat"].includes(family)
+      ? `/catalog/${family}` : productPath(samples[family], false);
+    await page.goto(route);
+    const photo = page.getByRole("main").locator('button[aria-haspopup="dialog"]').first();
+    await expect(photo).toBeVisible();
+    await page.evaluate(() => document.fonts.ready);
+    const imageWidth = await photo.evaluate(element => {
+      // Measure the header panel, not the gallery wrapper, which could itself shrink.
+      let panel = element.parentElement!;
+      while (!panel.querySelector("h1") && panel.parentElement) panel = panel.parentElement;
+      const style = getComputedStyle(panel);
+      const available = panel.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
+      return {actual: element.getBoundingClientRect().width, available};
+    });
+    expect(Math.abs(imageWidth.actual - imageWidth.available), "title photo fills the content width").toBeLessThan(1);
+    if (!isMobile) {
+      const sidebar = page.getByRole("complementary");
+      await expect(sidebar.getByRole("navigation", {name: "Категории", exact: true})).toBeVisible();
+      const sidebarBox = (await sidebar.boundingBox())!;
+      const filters = page.getByRole("heading", {name: "Фильтры", exact: true}).locator("..");
+      const filterBox = (await filters.boundingBox())!;
+      expect(filterBox.x).toBeGreaterThan(sidebarBox.x + sidebarBox.width);
+      expect(filterBox.y + filterBox.height).toBeLessThanOrEqual(sidebarBox.y + sidebarBox.height + 1);
+    }
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  });
+}

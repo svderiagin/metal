@@ -5,7 +5,8 @@ import {Breadcrumbs} from "@/components/catalog/Breadcrumbs";
 import {CatalogSidebar} from "@/components/catalog/CatalogSidebar";
 import {CatalogDescription} from "@/components/catalog/CatalogDescription";
 import {ProductVariantCatalog} from "@/components/catalog/ProductVariantCatalog";
-import {ProductImageViewer} from "@/components/catalog/ProductImageViewer";
+import {CatalogCoverGallery} from "@/components/catalog/CatalogCoverGallery";
+import {getCatalogCoverImages} from "@/lib/catalogCoverImages";
 import {PageContainer} from "@/components/layout/PageContainer";
 import {
   getAllProductTypes,
@@ -90,7 +91,7 @@ export default async function ProductTypePage({params}: Props) {
             </p>
             <h1 className="mt-2 break-words text-page-title">{rebarHeadings[productType.subcategoryId] ?? productType.name}</h1>
             {productType.imageUrl && !productType.imageUrl.endsWith(".svg") &&
-              <ProductImageViewer src={productType.imageUrl} name={productType.name}/>}
+              <CatalogCoverGallery key={productType.id} images={getCatalogCoverImages(productType.id, productType.imageUrl)} name={productType.name}/>}
             <CatalogDescription description={productType.description}/>
           </div>
         </div>
