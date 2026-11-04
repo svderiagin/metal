@@ -13,6 +13,9 @@ await fs.mkdir(temporaryDirectory, {recursive: true});
 const fontConfiguration = path.join(temporaryDirectory, 'fonts.conf');
 await fs.writeFile(fontConfiguration, `<?xml version="1.0"?><!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd"><fontconfig><dir>${path.join(root, 'imports/shveller-image-template/fonts')}</dir><cachedir>${temporaryDirectory}/font-cache</cachedir></fontconfig>`);
 process.env.FONTCONFIG_FILE = fontConfiguration;
+// On macOS, Core Text ignores this isolated font directory and can substitute
+// a system face. Fontconfig applies the bundled Inter's actual weight axis.
+process.env.PANGOCAIRO_BACKEND = 'fontconfig';
 const {default: sharp} = await import('sharp');
 
 const WIDTH = 2400, HEIGHT = 1800;
@@ -71,7 +74,7 @@ for (const product of products) {
     {key: 'height', text: parameters.dimension, size: 56, center: 1037, top: 942},
     {key: 'width', text: parameters.dimension, size: 56, center: 1390, top: 1374},
     {key: 'length', text: parameters.length, size: 40, weight: 700, left: 610, top: 1568},
-    {key: 'mass', text: parameters.mass, size: 40, weight: 700, left: 610, top: 1634},
+    {key: 'mass', text: parameters.mass, size: 44, weight: 750, left: 610, top: 1634},
   ];
   const changed = labels.filter(label => label.text !== referenceLabels[label.key]);
   const placements = [];
@@ -119,6 +122,7 @@ if (write) {
   assert.equal(records.length, 7);
   await fs.writeFile(`${directory}/rendered.json`, JSON.stringify({renderer: 'scripts/render-kvadrat-images.mjs',
     reference: referencePath, cleanPhoto: photoPath,
+    typography: {family: 'Inter', fontFile: fontPath, backend: 'fontconfig', mass: {size: 44, weight: 750}},
     suppliedSources: ['public/images/catalog/kvadrat/kvadrat_2400_1800_marked.jpg', 'public/images/catalog/kvadrat/kvadrat_2400_1800_original.jpg'],
     patches, method: 'Original reference pixels; clean owner-supplied photograph patches and deterministic Inter labels from public product parameters; no generative editing.',
     illustration: 'Shared family photograph; nominal labels are not scaled manufacturing geometry.', records}, null, 2) + '\n');

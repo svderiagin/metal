@@ -1,5 +1,56 @@
 # Catalog images
 
+## Image quality review (required)
+
+Image quality is a completion criterion for image tasks. Source hashes, image
+dimensions, valid mappings and passing tests verify technical properties;
+they do not establish that labels match the owner's reference. Apply this review
+to replacements and annotation fixes as well as new image sets.
+Typography and batch checks apply to annotated/generated variants. For a single
+unannotated photograph, review the source and delivered views; do not add labels
+or generate extra variants solely to satisfy this checklist.
+
+1. **Establish the reference.** Inspect the supplied files and distinguish the
+   marked layout reference from the clean photograph. Preserve both originals.
+   Use the clean photograph for label backgrounds when provided. Keep the approved
+   product surface, cut face, edges, shadows, reflection and composition intact;
+   do not redraw the metal to fix text or a thumbnail frame.
+2. **Review a derived preview before batch generation.** For generated annotations, choose an actual
+   non-reference product with a multi-digit section, decimal mass or long label.
+   Compare reference and output side by side at the same 1:1 scale. Check font
+   family, visible weight and letter height, spacing, baseline, alignment and gaps
+   between labels/values. Inspect arrows, units, decimal commas and clipping.
+   Compare repeated unit glyphs and the reference's bold length/mass values,
+   rather than assuming `weight: 700` produces the same appearance.
+3. **Verify font selection and the full changed set.** A text renderer can silently
+   substitute a font or ignore a variable weight axis. The channel, angle and square renderers use
+   bundled Inter with `PANGOCAIRO_BACKEND=fontconfig` before loading Sharp;
+   read that family's renderer before changing its typography. If a backend/font
+   change affects headings or dimensions too, review those labels as well.
+   For a set of variants, inspect a contact sheet of every changed image, then native-size crops of
+   the smallest/largest profiles, longest labels, decimal values and any outliers.
+   Match every image's values to the public product specifications; do not replace
+   supplier facts with inferred formulas.
+4. **Check the delivered image on the site.** After refreshing version hashes,
+   open at least one changed image (a non-reference variant for generated sets) from its actual table/card
+   thumbnail. Check desktop and mobile, thumbnail sharpness/crop, fit view and 1:1
+   details. Confirm the viewer loads the versioned original. Check both themes
+   and responsive boundaries when changing frames, backgrounds or viewer layout.
+5. **Use tests for the right scope.** Run the family's image/specification checks
+   and verify that pixels outside the intended label patches are unchanged where
+   that invariant applies. This protects the photo but cannot approve typography
+   inside the patches. Renderer regression coverage must exercise a generated
+   variant: a screenshot of an unchanged 8×8 reference does not validate the new
+   12×12 mass text. Review the visual result before updating affected baselines.
+6. **Record evidence and finish honestly.** Save a readable crop/comparison or
+   screenshot showing the corrected detail and show it in the result. Keep QA
+   intermediates under `.tmp/`; retain the required source and production assets
+   in the project. State which views were actually checked and any unresolved
+   mismatch. Matching incoming files to stored files alone is insufficient to
+   declare the existing image set visually correct.
+
+## Historical supplier mapping
+
 Regenerate with:
 
 1. `node scripts/scan-images.mjs`
@@ -62,6 +113,14 @@ Replace the image at its existing path. `npm run dev` checks catalog image conte
 
 Public file existence, exact path case and image metadata are always checked by `npm test`. Supplier byte/provenance checks are explicitly skipped when the optional mirror or reports are absent.
 
+`node --test scripts/catalog-image-labels.test.mjs` compares native 1:1 length/mass
+crops of generated channel No. 6.5, angle 160×100×10 and square 12×12 against reviewed
+PNG baselines in `tests/visual/label-baselines/`. These asset checks are independent
+of browser screenshot scaling and protect typography on derived variants.
+On failure the current crop is saved under `.tmp/catalog-image-qa/`; compare it
+with the supplied source before accepting a new baseline. The same test verifies
+that all channel photos remain unchanged outside their permitted label patches.
+
 ## Channel illustrations: approved template
 
 The channel product images use the owner's approved No. 5 reference in
@@ -86,6 +145,12 @@ prompts in `imports/shveller-template-images.json` describe historical assets.
 Existing catalog URLs are retained; the normal image-version watcher refreshes
 their cache keys. Next.js creates the smaller delivery variants as before.
 
+Generated length/mass values use bundled Inter at 44 px / weight 750, matched
+to the reference. Fontconfig is selected before Sharp loads, including on macOS.
+The renderer also checks label bounds and exact photo preservation outside patches;
+the existing soft thickness-label backing is clipped to its permitted region.
+Previews are written to `.tmp/catalog-image-qa/shveller-preview/`.
+
 ## Angle illustrations: approved template
 
 All 22 products on `/catalog/ugolok` use the owner's supplied 25×25×3 reference,
@@ -107,10 +172,18 @@ cut face, edges, shadow and reflection remain from the supplied reference;
 the renderer verifies zero changed pixels outside the variable-label rectangles.
 The background plate is resized to the native reference canvas, without resizing
 the product photo. Inter and its license are shared with the channel renderer.
+
+Generated length/mass values use 44 px / weight 750 and the Fontconfig backend,
+matching the bold reference values. Other variable labels are reviewed with the
+same bundled font. Previews go to `.tmp/catalog-image-qa/ugolok-preview/`.
 The exact generation prompt is stored in the template's `generation.json`.
 
 `data/angle-images.json` is a separate ID/source-URL image overlay applied at
 `data/products/index.ts`, so supplier imports do not overwrite the illustrations.
+`getAngleProductSpecifications` derives the displayed equal/unequal-leg type from
+the explicit section dimensions: 100×63×6 and 160×100×10 show «Неравнополочный».
+The contradictory raw supplier type is preserved in the import, while desktop
+and mobile specifications use the same presentation helper.
 `imports/ugolok-image-template/rendered.json` records labels, patches, hashes and
 pixel checks. These are shared family photographs with nominal dimension labels,
 including the two unequal-leg profiles; they are not scaled manufacturing drawings.
@@ -168,6 +241,10 @@ using background crops from the clean photograph and Inter text. Arrow segments
 through the replaced dimension labels are restored in place. No AI editing,
 resizing or new metal texture is used. These are shared family illustrations,
 not scaled manufacturing drawings.
+
+The renderer explicitly selects the Fontconfig backend so macOS uses the bundled
+variable Inter font and its actual weight axis. Mass values use 44 px / weight 750,
+matched visually to the supplied reference; the original 8×8 pixels remain intact.
 
 Regenerate with `node scripts/render-kvadrat-images.mjs --write`; preview with
 `node scripts/render-kvadrat-images.mjs --preview 20`. The manifest `rendered.json`

@@ -41,4 +41,6 @@ Rendered links, filters and all family layouts are covered by `tests/e2e/catalog
 
 Verify desktop tables and mobile cards when behavior or layout changes. Preserve search/cart links using `#variant-<id>` and their mobile targets; `hooks/useLinkedVariant.ts` reveals filtered or collapsed rows.
 
+For product-image tasks, also apply the UI skill's [image quality review](../../../docs/catalog-images.md#image-quality-review-required). Check each variant's rendered labels against public catalog facts; preserving supplier data or decoding every file does not verify the image's typography or appearance.
+
 Report changed behavior, relevant checks and limitations; include counts only when catalog membership changed or was at risk.

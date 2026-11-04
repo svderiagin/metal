@@ -2,6 +2,15 @@
   "renderer": "scripts/render-kvadrat-images.mjs",
   "reference": "imports/kvadrat-image-template/reference-8x8.jpg",
   "cleanPhoto": "imports/kvadrat-image-template/photo.jpg",
+  "typography": {
+    "family": "Inter",
+    "fontFile": "imports/shveller-image-template/fonts/Inter-variable.ttf",
+    "backend": "fontconfig",
+    "mass": {
+      "size": 44,
+      "weight": 750
+    }
+  },
   "suppliedSources": [
     "public/images/catalog/kvadrat/kvadrat_2400_1800_marked.jpg",
     "public/images/catalog/kvadrat/kvadrat_2400_1800_original.jpg"
@@ -119,8 +128,8 @@
           "weight": 700,
           "left": 132,
           "top": 127,
-          "width": 1123,
-          "height": 82
+          "width": 1080,
+          "height": 79
         },
         {
           "key": "height",
@@ -129,8 +138,8 @@
           "center": 1037,
           "top": 942,
           "left": 965,
-          "width": 144,
-          "height": 42
+          "width": 145,
+          "height": 43
         },
         {
           "key": "width",
@@ -139,25 +148,25 @@
           "center": 1390,
           "top": 1374,
           "left": 1318,
-          "width": 144,
-          "height": 42
+          "width": 145,
+          "height": 43
         },
         {
           "key": "mass",
           "text": "0,79 кг/м",
-          "size": 40,
-          "weight": 700,
+          "size": 44,
+          "weight": 750,
           "left": 610,
           "top": 1634,
-          "width": 167,
-          "height": 37
+          "width": 187,
+          "height": 40
         }
       ],
       "protectedPixelChanges": 0,
       "output": "public/images/catalog/kvadrat/kvadrat-10x10-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "eb595849ffe881d6c85efe7005ed77cad9f5352b6f95f8f397798a6e767cb59c"
+      "sha256": "bc303c055508130c0db8fa7fe68ccaa51acc39857bb2dbe1ebf62f35fe0d9fea"
     },
     {
       "id": "rozmet-2206",
@@ -201,8 +210,8 @@
           "weight": 700,
           "left": 132,
           "top": 127,
-          "width": 1123,
-          "height": 82
+          "width": 1068,
+          "height": 79
         },
         {
           "key": "height",
@@ -210,9 +219,9 @@
           "size": 56,
           "center": 1037,
           "top": 942,
-          "left": 965,
-          "width": 144,
-          "height": 40
+          "left": 966,
+          "width": 142,
+          "height": 42
         },
         {
           "key": "width",
@@ -220,26 +229,26 @@
           "size": 56,
           "center": 1390,
           "top": 1374,
-          "left": 1318,
-          "width": 144,
-          "height": 40
+          "left": 1319,
+          "width": 142,
+          "height": 42
         },
         {
           "key": "mass",
           "text": "1,13 кг/м",
-          "size": 40,
-          "weight": 700,
+          "size": 44,
+          "weight": 750,
           "left": 610,
           "top": 1634,
-          "width": 166,
-          "height": 37
+          "width": 167,
+          "height": 40
         }
       ],
       "protectedPixelChanges": 0,
       "output": "public/images/catalog/kvadrat/kvadrat-12x12-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "032ca504f6b2cf3398c03b132923bd968d66485501aaf201748e54c030638bbc"
+      "sha256": "2b4b2c68111bb8f2c6dae61ee4126eb7eb3d14efbc13e9bf385076a711c4e8c7"
     },
     {
       "id": "rozmet-2207",
@@ -283,8 +292,8 @@
           "weight": 700,
           "left": 132,
           "top": 127,
-          "width": 1123,
-          "height": 82
+          "width": 1079,
+          "height": 79
         },
         {
           "key": "height",
@@ -292,9 +301,9 @@
           "size": 56,
           "center": 1037,
           "top": 942,
-          "left": 965,
-          "width": 144,
-          "height": 40
+          "left": 964,
+          "width": 146,
+          "height": 41
         },
         {
           "key": "width",
@@ -302,26 +311,26 @@
           "size": 56,
           "center": 1390,
           "top": 1374,
-          "left": 1318,
-          "width": 144,
-          "height": 40
+          "left": 1317,
+          "width": 146,
+          "height": 41
         },
         {
           "key": "mass",
           "text": "1,54 кг/м",
-          "size": 40,
-          "weight": 700,
+          "size": 44,
+          "weight": 750,
           "left": 610,
           "top": 1634,
-          "width": 166,
-          "height": 37
+          "width": 184,
+          "height": 40
         }
       ],
       "protectedPixelChanges": 0,
       "output": "public/images/catalog/kvadrat/kvadrat-14x14-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "ea2a21f51fe8db217eef345fb53bdd28688c30c13d7afa24b8ee5a3c27e5317c"
+      "sha256": "e050cb6dd77993d445298cbc963575ea872722a45e1b786ad0ba253a2b3ea85f"
     },
     {
       "id": "rozmet-26579",
@@ -365,8 +374,8 @@
           "weight": 700,
           "left": 132,
           "top": 127,
-          "width": 1123,
-          "height": 82
+          "width": 1073,
+          "height": 79
         },
         {
           "key": "height",
@@ -376,7 +385,7 @@
           "top": 942,
           "left": 965,
           "width": 144,
-          "height": 42
+          "height": 43
         },
         {
           "key": "width",
@@ -386,24 +395,24 @@
           "top": 1374,
           "left": 1318,
           "width": 144,
-          "height": 42
+          "height": 43
         },
         {
           "key": "mass",
           "text": "1,54 кг/м",
-          "size": 40,
-          "weight": 700,
+          "size": 44,
+          "weight": 750,
           "left": 610,
           "top": 1634,
-          "width": 166,
-          "height": 37
+          "width": 184,
+          "height": 40
         }
       ],
       "protectedPixelChanges": 0,
       "output": "public/images/catalog/kvadrat/kvadrat-16x16-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "cab96047660864a289b53f2c72737e0314360b3061d02f8d1890e8c1a00ffd7d"
+      "sha256": "34bd277159fb55634f68645f284879343c2116754ce5d1520a1992edfcd74b9c"
     },
     {
       "id": "rozmet-28995",
@@ -447,8 +456,8 @@
           "weight": 700,
           "left": 132,
           "top": 127,
-          "width": 1123,
-          "height": 82
+          "width": 1073,
+          "height": 79
         },
         {
           "key": "height",
@@ -458,7 +467,7 @@
           "top": 942,
           "left": 965,
           "width": 144,
-          "height": 42
+          "height": 44
         },
         {
           "key": "width",
@@ -468,24 +477,24 @@
           "top": 1374,
           "left": 1318,
           "width": 144,
-          "height": 42
+          "height": 44
         },
         {
           "key": "mass",
           "text": "2,54 кг/м",
-          "size": 40,
-          "weight": 700,
+          "size": 44,
+          "weight": 750,
           "left": 610,
           "top": 1634,
-          "width": 167,
-          "height": 37
+          "width": 192,
+          "height": 40
         }
       ],
       "protectedPixelChanges": 0,
       "output": "public/images/catalog/kvadrat/kvadrat-18x18-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "b83c1dbf745c4df78ab9fbcd85b6c5d18225c411100129073a9798f57accb0ba"
+      "sha256": "a834596f09dcea5052bfcdd75c187b8138e00ff2f561eefcf35bf6ba9ee487c6"
     },
     {
       "id": "rozmet-2208",
@@ -529,8 +538,8 @@
           "weight": 700,
           "left": 132,
           "top": 127,
-          "width": 1123,
-          "height": 82
+          "width": 1114,
+          "height": 79
         },
         {
           "key": "height",
@@ -538,9 +547,9 @@
           "size": 56,
           "center": 1037,
           "top": 942,
-          "left": 963,
-          "width": 148,
-          "height": 42
+          "left": 960,
+          "width": 155,
+          "height": 43
         },
         {
           "key": "width",
@@ -548,26 +557,26 @@
           "size": 56,
           "center": 1390,
           "top": 1374,
-          "left": 1316,
-          "width": 148,
-          "height": 42
+          "left": 1313,
+          "width": 155,
+          "height": 43
         },
         {
           "key": "mass",
           "text": "3,14 кг/м",
-          "size": 40,
-          "weight": 700,
+          "size": 44,
+          "weight": 750,
           "left": 610,
           "top": 1634,
-          "width": 167,
-          "height": 37
+          "width": 178,
+          "height": 40
         }
       ],
       "protectedPixelChanges": 0,
       "output": "public/images/catalog/kvadrat/kvadrat-20x20-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "432f283a2177df155ebb98e7cec3a017ea53c2384ad75f17ed6819b6e0dd237f"
+      "sha256": "747c644fb750b2d33365b548356b692d9b42736cfdb32816befd72246c2a79bc"
     }
   ]
 }

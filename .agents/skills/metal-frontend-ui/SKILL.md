@@ -34,6 +34,15 @@ Preserve the existing visual language unless the user requests a redesign: red a
 
 ## Verify proportionally
 
+For every product-image replacement, generation or annotation change, follow
+[Image quality review](../../../docs/catalog-images.md#image-quality-review-required)
+before reporting completion. For generated annotations, compare the supplied
+reference with a **regenerated, non-reference variant**, including native-size
+crops of typography. Check the actual thumbnail/expanded view for image tasks.
+A declared font weight, matching source hash or passing
+image-decode test does not establish visual fidelity. Preserve the photo while
+correcting labels; inspect every label affected by a renderer/font-backend change.
+
 Use [the shared check matrix](../../../docs/development-workflow.md). Check the changed route at desktop and mobile for responsive edits; check both themes for new colors. Test one relevant empty/error/interaction state. Menu/dialog changes need keyboard and focus verification. Existing focused tests: `theme.test.mjs`, `hero-loading.test.mjs`, `images.test.mjs`, `product-image-preview.test.mjs` in `scripts/`.
 
 Automated browser/image cases live in `tests/e2e/images.spec.ts` and `tests/visual/catalog.visual.spec.ts`; commands and baseline platform are documented in [testing.md](../../../docs/testing.md). Compare existing baselines before deciding to update them. Include deliberately updated PNGs in the commit.

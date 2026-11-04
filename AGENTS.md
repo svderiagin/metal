@@ -15,6 +15,7 @@ the relevant guide in `node_modules/next/dist/docs/` before writing any code. He
   - [metal-frontend-orders](.agents/skills/metal-frontend-orders/SKILL.md): корзина, количества, пересчёт цен, формы, checkout и API.
   - [metal-frontend-quality](.agents/skills/metal-frontend-quality/SKILL.md): аудит, декомпозиция, тестовое покрытие и регрессия по скриншотам.
 - Для пересекающейся задачи подключайте второй навык только в затронутой области.
+- Изображения — важная часть продукта. Для их замены, генерации и разметки применяйте `metal-frontend-ui` и [обязательную визуальную проверку](docs/catalog-images.md#image-quality-review-required). Проверяйте результат на сайте, а при генерации — и производные варианты относительно исходника; хеши, размеры файлов и зелёные тесты не заменяют оценку внешнего вида.
 - Проверки и генерация: [docs/development-workflow.md](docs/development-workflow.md). Объём проверки зависит от риска изменения.
 - `README.md` содержит большой исторический разбор. Текущие детали подтверждайте кодом; не читайте README целиком по умолчанию.
 - Аудит от 30.10.2026: [docs/development-audit-2026-10-30.md](docs/development-audit-2026-10-30.md). Это снимок состояния, а не актуальный список ошибок для каждой следующей задачи.

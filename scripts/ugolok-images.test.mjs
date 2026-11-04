@@ -8,8 +8,23 @@ const source = JSON.parse(fs.readFileSync('data/rozmet-catalog.json', 'utf8'));
 const mapping = JSON.parse(fs.readFileSync('data/angle-images.json', 'utf8'));
 const manifest = JSON.parse(fs.readFileSync('imports/ugolok-image-template/rendered.json', 'utf8'));
 const {productVariants} = readProjectData('data/products/index.ts');
-const {formatAngleSpecificationValue} = readProjectData('lib/anglePresentation.ts');
+const {formatAngleSpecificationValue, getAngleProductSpecifications} = readProjectData('lib/anglePresentation.ts');
 const angles = productVariants.filter(p => p.categoryId === 'rozmet-cat-ugolok');
+
+test('displayed angle type follows its explicit leg dimensions without changing supplier data', () => {
+  const before = JSON.stringify(angles);
+  for (const [profile, expectedType] of [['25x25x3', 'Равнополочный'], ['100x63x6', 'Неравнополочный'], ['160x100x10', 'Неравнополочный']]) {
+    const record = manifest.records.find(item => item.profile === profile);
+    const product = angles.find(item => item.id === record.id);
+    const type = getAngleProductSpecifications(product).find(s => s.name === 'Тип уголка').value;
+    assert.equal(type, expectedType, product.id);
+  }
+  assert.equal(JSON.stringify(angles), before);
+  const invalid = {...angles[0], specifications: [{name: 'Размеры уголка', value: 'неизвестно'}, {name: 'Тип уголка', value: 'Уточняется'}]};
+  assert.equal(getAngleProductSpecifications(invalid), invalid.specifications);
+  const other = {...angles[0], categoryId: 'other'};
+  assert.equal(getAngleProductSpecifications(other), other.specifications);
+});
 
 test('all 22 angles preserve supplier values with approved illustrations and display mass labels', () => {
   assert.equal(angles.length, 22);

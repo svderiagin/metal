@@ -13,6 +13,7 @@ await fs.mkdir(temporaryDirectory, {recursive: true});
 const fontConfiguration = path.join(temporaryDirectory, 'fonts.conf');
 await fs.writeFile(fontConfiguration, `<?xml version="1.0"?><!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd"><fontconfig><dir>${path.join(root, templateDirectory, 'fonts')}</dir><cachedir>${temporaryDirectory}/font-cache</cachedir></fontconfig>`);
 process.env.FONTCONFIG_FILE = fontConfiguration;
+process.env.PANGOCAIRO_BACKEND = 'fontconfig';
 const {default: sharp} = await import('sharp');
 
 const WIDTH = 2400, HEIGHT = 1800;
@@ -21,6 +22,7 @@ const photoPath = `${templateDirectory}/photo.png`;
 const fontPath = `${templateDirectory}/fonts/Inter-variable.ttf`;
 const reference = await fs.readFile(referencePath);
 const photo = await fs.readFile(photoPath);
+const referencePixels = await sharp(reference).removeAlpha().raw().toBuffer();
 const products = readProjectData('data/products/index.ts').productVariants
   .filter(product => product.categoryId === 'rozmet-cat-shveller');
 assert.equal(products.length, 14, 'Review the channel collection before changing its image set');
@@ -35,7 +37,7 @@ const previewIndex = process.argv.indexOf('--preview');
 const previewNumber = previewIndex >= 0 ? process.argv[previewIndex + 1]?.replace('.', ',') : undefined;
 assert.ok(!(write && previewIndex >= 0), 'Use --write for the whole family or --preview for one profile');
 assert.ok(previewIndex < 0 || previewNumber, '--preview requires a profile number');
-const previewDirectory = 'output/image-edits/shveller-catalog-preview';
+const previewDirectory = '.tmp/catalog-image-qa/shveller-preview';
 await fs.mkdir(previewDirectory, {recursive: true});
 
 const xml = value => value.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');
@@ -85,8 +87,8 @@ async function render(product) {
     {key: 'webThickness', text: values['Толщина стенки'], size: 56, left: 1172, top: 1245},
     {key: 'flangeThickness', text: values['Толщина полки'], size: 56, left: 1980, top: 1010, halo: true},
     {key: 'height', text: values['Высота'], size: 56, center: 1390, top: 1431},
-    {key: 'length', text: values['Длина по каталогу'], size: 40, weight: 700, left: 610, top: 1568},
-    {key: 'mass', text: values['Теоретическая масса'], size: 40, weight: 700, left: 610, top: 1634},
+    {key: 'length', text: values['Длина по каталогу'], size: 44, weight: 750, left: 610, top: 1568},
+    {key: 'mass', text: values['Теоретическая масса'], size: 44, weight: 750, left: 610, top: 1634},
   ];
   const placements = [];
   const changedLabels = labels.filter(label => label.text !== referenceLabels[label.key]);
@@ -99,9 +101,12 @@ async function render(product) {
       // Longer flange-width values must not run into the metal's front edge.
       if (label.key === 'flangeWidth') left = Math.min(left, 896 - rendered.info.width);
       assert.ok(left >= 0 && left + rendered.info.width <= WIDTH, `${product.id}: ${label.key} is clipped`);
+      const box = patches[label.key];
+      assert.ok(left >= box.left && left + rendered.info.width <= box.left + box.width, `${product.id}: label exceeds its patch`);
+      assert.ok(label.top >= box.top && label.top + rendered.info.height <= box.top + box.height, `${product.id}: label height exceeds its patch`);
       placements.push({...label, left, width: rendered.info.width, height: rendered.info.height});
       if (label.halo) {
-        const halo = svg(`<defs><filter id="label-background" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="5"/></filter></defs><rect x="${left - 7}" y="${label.top - 7}" width="${rendered.info.width + 14}" height="${rendered.info.height + 14}" rx="5" fill="#FFFFFF" filter="url(#label-background)"/>`);
+        const halo = svg(`<defs><filter id="label-background" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="5"/></filter><clipPath id="label-area"><rect x="${box.left}" y="${box.top}" width="${box.width}" height="${box.height}"/></clipPath></defs><g clip-path="url(#label-area)"><rect x="${left - 7}" y="${label.top - 7}" width="${rendered.info.width + 14}" height="${rendered.info.height + 14}" rx="5" fill="#FFFFFF" filter="url(#label-background)"/></g>`);
         layers.push({input: halo, left: 0, top: 0});
       }
       layers.push({input: rendered.data, left, top: label.top});
@@ -118,10 +123,19 @@ async function render(product) {
   const output = write ? `public${expectedPath}` : `${previewDirectory}/shveller-${number.replace(',', '-')}.webp`;
   // Lossless source assets preserve the photograph; next/image delivers smaller variants.
   const result = await sharp(image).webp({lossless: true, effort: 6}).toBuffer();
+  const mask = Buffer.alloc(WIDTH * HEIGHT);
+  for (const {key} of changedLabels) {
+    const box = patches[key];
+    for (let y = box.top; y < box.top + box.height; y++) mask.fill(1, y * WIDTH + box.left, y * WIDTH + box.left + box.width);
+  }
+  const renderedPixels = await sharp(result).removeAlpha().raw().toBuffer();
+  let protectedPixelChanges = 0;
+  for (let p = 0; p < mask.length; p++) if (!mask[p] && (referencePixels[p * 3] !== renderedPixels[p * 3] || referencePixels[p * 3 + 1] !== renderedPixels[p * 3 + 1] || referencePixels[p * 3 + 2] !== renderedPixels[p * 3 + 2])) protectedPixelChanges++;
+  assert.equal(protectedPixelChanges, 0, `${product.id}: pixels changed outside variable-label regions`);
   await fs.writeFile(output, result);
   return {id: product.id, number, imageUrl: expectedPath, values, labels: labels.map(({key, text}) => ({key, text})),
     sourceReference: referencePath, referenceUnmodified: changedLabels.length === 0,
-    changedLabels: changedLabels.map(label => label.key), output, width: WIDTH, height: HEIGHT,
+    changedLabels: changedLabels.map(label => label.key), placements, protectedPixelChanges, output, width: WIDTH, height: HEIGHT,
     format: 'lossless WebP', bytes: result.length, sha256: createHash('sha256').update(result).digest('hex')};
 }
 
@@ -137,6 +151,7 @@ if (write) {
   assert.equal(records.length, 14, '--write must update the whole reviewed family');
   await fs.writeFile('imports/shveller-image-template/rendered.json', JSON.stringify({
     renderer: 'scripts/render-shveller-images.mjs', reference: referencePath, cleanPhoto: photoPath,
+    typography: {family: 'Inter', fontFile: fontPath, backend: 'fontconfig', values: {size: 44, weight: 750}}, patches,
     method: 'Original reference pixels with deterministic Inter labels from public product specifications; no generative editing.',
     illustration: 'Shared family photograph; nominal dimensions are labels, not a scaled manufacturing drawing.', records,
   }, null, 2) + '\n');

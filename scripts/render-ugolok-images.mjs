@@ -13,6 +13,7 @@ await fs.mkdir(temporaryDirectory, {recursive: true});
 const fontConfiguration = path.join(temporaryDirectory, 'fonts.conf');
 await fs.writeFile(fontConfiguration, `<?xml version="1.0"?><!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd"><fontconfig><dir>${path.join(root, 'imports/shveller-image-template/fonts')}</dir><cachedir>${temporaryDirectory}/font-cache</cachedir></fontconfig>`);
 process.env.FONTCONFIG_FILE = fontConfiguration;
+process.env.PANGOCAIRO_BACKEND = 'fontconfig';
 const {default: sharp} = await import('sharp');
 
 const WIDTH = 2400, HEIGHT = 1800;
@@ -66,7 +67,7 @@ const previewIndex = process.argv.indexOf('--preview');
 const previewProfile = previewIndex >= 0 ? process.argv[previewIndex + 1] : undefined;
 assert.ok(!(write && previewIndex >= 0), 'Use --write or --preview PROFILE');
 assert.ok(previewIndex < 0 || previewProfile, '--preview requires dimensions such as 160x100x10');
-const outputDirectory = write ? 'public/images/catalog/ugolok' : 'output/image-edits/ugolok-catalog-preview';
+const outputDirectory = write ? 'public/images/catalog/ugolok' : '.tmp/catalog-image-qa/ugolok-preview';
 await fs.mkdir(outputDirectory, {recursive: true});
 const records = [];
 for (const product of products) {
@@ -86,8 +87,8 @@ for (const product of products) {
     {key: 'firstLeg', text: `${legs[1]}\u00a0мм`, size: 56, center: 837, top: 862},
     {key: 'secondLeg', text: `${legs[2]}\u00a0мм`, size: 56, center: 1348, top: 1454},
     {key: 'thickness', text: `${thickness}\u00a0мм`, size: 56, left: 1940, top: 1342},
-    {key: 'length', text: normalize(specification('Размер')), size: 40, weight: 700, left: 610, top: 1568},
-    {key: 'mass', text: normalize(specification('Теоретическая масса')), size: 40, weight: 700, left: 610, top: 1634},
+    {key: 'length', text: normalize(specification('Размер')), size: 44, weight: 750, left: 610, top: 1568},
+    {key: 'mass', text: normalize(specification('Теоретическая масса')), size: 44, weight: 750, left: 610, top: 1634},
   ];
   const changed = labels.filter(label => label.text !== referenceLabels[label.key]);
   const clean = await sharp(reference).composite(changed.map(label => patchLayers[label.key])).png().toBuffer();
@@ -135,6 +136,7 @@ assert.ok(records.length, 'Unknown preview profile');
 if (write) {
   assert.equal(records.length, 22);
   await fs.writeFile(`${directory}/rendered.json`, JSON.stringify({renderer: 'scripts/render-ugolok-images.mjs', reference: referencePath,
+    typography: {family: 'Inter', fontFile: fontPath, backend: 'fontconfig', values: {size: 44, weight: 750}},
     backgroundPlate: `${directory}/clean-background-generated.png`, patches,
     method: 'Original reference pixels; ImageGen background patches restricted to variable text; deterministic Inter labels from public product specifications.',
     illustration: 'Shared family photograph; labels show nominal dimensions, not scaled manufacturing geometry.', records}, null, 2) + '\n');

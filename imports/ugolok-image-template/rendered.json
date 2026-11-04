@@ -1,6 +1,15 @@
 {
   "renderer": "scripts/render-ugolok-images.mjs",
   "reference": "imports/ugolok-image-template/reference-25x25x3.jpg",
+  "typography": {
+    "family": "Inter",
+    "fontFile": "imports/shveller-image-template/fonts/Inter-variable.ttf",
+    "backend": "fontconfig",
+    "values": {
+      "size": 44,
+      "weight": 750
+    }
+  },
   "backgroundPlate": "imports/ugolok-image-template/clean-background-generated.png",
   "patches": {
     "title": {
@@ -81,19 +90,19 @@
         {
           "key": "mass",
           "text": "1,12 кг/м",
-          "size": 40,
-          "weight": 700,
+          "size": 44,
+          "weight": 750,
           "left": 610,
           "top": 1634,
-          "width": 166,
-          "height": 37
+          "width": 167,
+          "height": 40
         }
       ],
       "protectedPixelChanges": 0,
       "output": "public/images/catalog/ugolok/ugolok-25x25x3-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "b80183ef0b257d50f6ecdad3a53c2bfbf314b00b82a42876dd5e39c633d6ddc4"
+      "sha256": "c4418870ec508c7af664b607177e80aa44a742607d1872b205c1f448bbd0e335"
     },
     {
       "id": "rozmet-2210",
@@ -140,8 +149,8 @@
           "weight": 700,
           "left": 132,
           "top": 125,
-          "width": 1069,
-          "height": 66
+          "width": 1062,
+          "height": 63
         },
         {
           "key": "firstLeg",
@@ -149,9 +158,9 @@
           "size": 56,
           "center": 837,
           "top": 862,
-          "left": 763,
-          "width": 148,
-          "height": 42
+          "left": 760,
+          "width": 154,
+          "height": 44
         },
         {
           "key": "secondLeg",
@@ -159,26 +168,26 @@
           "size": 56,
           "center": 1348,
           "top": 1454,
-          "left": 1274,
-          "width": 148,
-          "height": 42
+          "left": 1271,
+          "width": 154,
+          "height": 44
         },
         {
           "key": "mass",
           "text": "1,46 кг/м",
-          "size": 40,
-          "weight": 700,
+          "size": 44,
+          "weight": 750,
           "left": 610,
           "top": 1634,
-          "width": 166,
-          "height": 37
+          "width": 184,
+          "height": 40
         }
       ],
       "protectedPixelChanges": 0,
       "output": "public/images/catalog/ugolok/ugolok-32x32x3-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "ab04cab4faf524878b88793832fef4d43fb307bfe30440370b08f591fe24ffed"
+      "sha256": "ce3003ef09276f1f576c0bbc3162aede1a4bfa0f94aca682326add35725e8523"
     },
     {
       "id": "rozmet-20157",
@@ -226,8 +235,8 @@
           "weight": 700,
           "left": 132,
           "top": 125,
-          "width": 1069,
-          "height": 66
+          "width": 1065,
+          "height": 63
         },
         {
           "key": "firstLeg",
@@ -235,9 +244,9 @@
           "size": 56,
           "center": 837,
           "top": 862,
-          "left": 763,
-          "width": 148,
-          "height": 42
+          "left": 760,
+          "width": 155,
+          "height": 44
         },
         {
           "key": "secondLeg",
@@ -245,9 +254,9 @@
           "size": 56,
           "center": 1348,
           "top": 1454,
-          "left": 1274,
-          "width": 148,
-          "height": 42
+          "left": 1271,
+          "width": 155,
+          "height": 44
         },
         {
           "key": "thickness",
@@ -255,25 +264,25 @@
           "size": 56,
           "left": 1940,
           "top": 1342,
-          "width": 117,
-          "height": 40
+          "width": 126,
+          "height": 41
         },
         {
           "key": "mass",
           "text": "2,1 кг/м",
-          "size": 40,
-          "weight": 700,
+          "size": 44,
+          "weight": 750,
           "left": 610,
           "top": 1634,
-          "width": 145,
-          "height": 37
+          "width": 148,
+          "height": 40
         }
       ],
       "protectedPixelChanges": 0,
       "output": "public/images/catalog/ugolok/ugolok-35x35x4-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "3d293c93c58f09cab5bdf12a3dc4c36183b1d19a0a2ed822ff951fa8469df52f"
+      "sha256": "9bd684a0134fd548620ced9673fd7fb06a8d87e96b8ddc41cd88e0d8af94ce4f"
     },
     {
       "id": "rozmet-2211",
@@ -320,8 +329,8 @@
           "weight": 700,
           "left": 132,
           "top": 125,
-          "width": 1069,
-          "height": 66
+          "width": 1078,
+          "height": 63
         },
         {
           "key": "firstLeg",
@@ -329,9 +338,9 @@
           "size": 56,
           "center": 837,
           "top": 862,
-          "left": 763,
-          "width": 148,
-          "height": 42
+          "left": 757,
+          "width": 160,
+          "height": 43
         },
         {
           "key": "secondLeg",
@@ -339,26 +348,26 @@
           "size": 56,
           "center": 1348,
           "top": 1454,
-          "left": 1274,
-          "width": 148,
-          "height": 42
+          "left": 1268,
+          "width": 160,
+          "height": 43
         },
         {
           "key": "mass",
           "text": "1,85 кг/м",
-          "size": 40,
-          "weight": 700,
+          "size": 44,
+          "weight": 750,
           "left": 610,
           "top": 1634,
-          "width": 166,
-          "height": 37
+          "width": 182,
+          "height": 40
         }
       ],
       "protectedPixelChanges": 0,
       "output": "public/images/catalog/ugolok/ugolok-40x40x3-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "e10b35820fadcaaa4c91fb804b94c32e6214fe907ed009cb68dc95fc1c6a5f97"
+      "sha256": "c82d74475ec39fcb2e950c73285ca40ef9fa7cda9b539031ff5693b122112b21"
     },
     {
       "id": "rozmet-2212",
@@ -406,8 +415,8 @@
           "weight": 700,
           "left": 132,
           "top": 125,
-          "width": 1069,
-          "height": 66
+          "width": 1081,
+          "height": 63
         },
         {
           "key": "firstLeg",
@@ -415,9 +424,9 @@
           "size": 56,
           "center": 837,
           "top": 862,
-          "left": 763,
-          "width": 148,
-          "height": 42
+          "left": 757,
+          "width": 160,
+          "height": 43
         },
         {
           "key": "secondLeg",
@@ -425,9 +434,9 @@
           "size": 56,
           "center": 1348,
           "top": 1454,
-          "left": 1274,
-          "width": 148,
-          "height": 42
+          "left": 1268,
+          "width": 160,
+          "height": 43
         },
         {
           "key": "thickness",
@@ -435,25 +444,25 @@
           "size": 56,
           "left": 1940,
           "top": 1342,
-          "width": 117,
-          "height": 40
+          "width": 126,
+          "height": 41
         },
         {
           "key": "mass",
           "text": "2,42 кг/м",
-          "size": 40,
-          "weight": 700,
+          "size": 44,
+          "weight": 750,
           "left": 610,
           "top": 1634,
-          "width": 167,
-          "height": 37
+          "width": 192,
+          "height": 40
         }
       ],
       "protectedPixelChanges": 0,
       "output": "public/images/catalog/ugolok/ugolok-40x40x4-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "8fd85064f70f2a9dd2a2c717d3446a658f519358fd01fa309f136421792d9c1c"
+      "sha256": "11bae4a8fce0f6037abf245f91a2cae0bc016075592d4674c4c2fc082e38b4cb"
     },
     {
       "id": "rozmet-2213",
@@ -502,8 +511,8 @@
           "weight": 700,
           "left": 132,
           "top": 125,
-          "width": 1069,
-          "height": 66
+          "width": 1071,
+          "height": 63
         },
         {
           "key": "firstLeg",
@@ -511,9 +520,9 @@
           "size": 56,
           "center": 837,
           "top": 862,
-          "left": 763,
-          "width": 148,
-          "height": 41
+          "left": 758,
+          "width": 158,
+          "height": 42
         },
         {
           "key": "secondLeg",
@@ -521,9 +530,9 @@
           "size": 56,
           "center": 1348,
           "top": 1454,
-          "left": 1274,
-          "width": 148,
-          "height": 41
+          "left": 1269,
+          "width": 158,
+          "height": 42
         },
         {
           "key": "thickness",
@@ -531,35 +540,35 @@
           "size": 56,
           "left": 1940,
           "top": 1342,
-          "width": 117,
-          "height": 40
+          "width": 126,
+          "height": 41
         },
         {
           "key": "length",
           "text": "12 м",
-          "size": 40,
-          "weight": 700,
+          "size": 44,
+          "weight": 750,
           "left": 610,
           "top": 1568,
-          "width": 80,
-          "height": 29
+          "width": 85,
+          "height": 32
         },
         {
           "key": "mass",
           "text": "2,73 кг/м",
-          "size": 40,
-          "weight": 700,
+          "size": 44,
+          "weight": 750,
           "left": 610,
           "top": 1634,
-          "width": 167,
-          "height": 37
+          "width": 185,
+          "height": 40
         }
       ],
       "protectedPixelChanges": 0,
       "output": "public/images/catalog/ugolok/ugolok-45x45x4-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "b281e4fe0915c57938f5aa8daaa37d914e9a86539f440d121812e7ee7e9bc94e"
+      "sha256": "58a799b784fd95fa6d1d173bdae5db612cd7f532bc80292a7b878391b08c5f77"
     },
     {
       "id": "rozmet-2214",
@@ -607,8 +616,8 @@
           "weight": 700,
           "left": 132,
           "top": 125,
-          "width": 1069,
-          "height": 66
+          "width": 1071,
+          "height": 63
         },
         {
           "key": "firstLeg",
@@ -616,9 +625,9 @@
           "size": 56,
           "center": 837,
           "top": 862,
-          "left": 763,
-          "width": 148,
-          "height": 42
+          "left": 759,
+          "width": 156,
+          "height": 43
         },
         {
           "key": "secondLeg",
@@ -626,9 +635,9 @@
           "size": 56,
           "center": 1348,
           "top": 1454,
-          "left": 1274,
-          "width": 148,
-          "height": 42
+          "left": 1270,
+          "width": 156,
+          "height": 43
         },
         {
           "key": "thickness",
@@ -636,25 +645,25 @@
           "size": 56,
           "left": 1940,
           "top": 1342,
-          "width": 117,
-          "height": 40
+          "width": 126,
+          "height": 41
         },
         {
           "key": "mass",
           "text": "3,05 кг/м",
-          "size": 40,
-          "weight": 700,
+          "size": 44,
+          "weight": 750,
           "left": 610,
           "top": 1634,
-          "width": 167,
-          "height": 37
+          "width": 192,
+          "height": 40
         }
       ],
       "protectedPixelChanges": 0,
       "output": "public/images/catalog/ugolok/ugolok-50x50x4-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "a2ed009df7dfc1659ca472e572e0e5d258ac625666dacd56a0d70db9b7e956bd"
+      "sha256": "23de9b98b848fa3ee60dd18cd5c9c1977d7765609423031bbb3077cfda295328"
     },
     {
       "id": "rozmet-2215",
@@ -703,8 +712,8 @@
           "weight": 700,
           "left": 132,
           "top": 125,
-          "width": 1069,
-          "height": 66
+          "width": 1067,
+          "height": 63
         },
         {
           "key": "firstLeg",
@@ -712,9 +721,9 @@
           "size": 56,
           "center": 837,
           "top": 862,
-          "left": 763,
-          "width": 148,
-          "height": 42
+          "left": 759,
+          "width": 156,
+          "height": 43
         },
         {
           "key": "secondLeg",
@@ -722,9 +731,9 @@
           "size": 56,
           "center": 1348,
           "top": 1454,
-          "left": 1274,
-          "width": 148,
-          "height": 42
+          "left": 1270,
+          "width": 156,
+          "height": 43
         },
         {
           "key": "thickness",
@@ -732,35 +741,35 @@
           "size": 56,
           "left": 1940,
           "top": 1342,
-          "width": 117,
-          "height": 40
+          "width": 122,
+          "height": 42
         },
         {
           "key": "length",
           "text": "12 м",
-          "size": 40,
-          "weight": 700,
+          "size": 44,
+          "weight": 750,
           "left": 610,
           "top": 1568,
-          "width": 80,
-          "height": 29
+          "width": 85,
+          "height": 32
         },
         {
           "key": "mass",
           "text": "3,77 кг/м",
-          "size": 40,
-          "weight": 700,
+          "size": 44,
+          "weight": 750,
           "left": 610,
           "top": 1634,
-          "width": 167,
-          "height": 37
+          "width": 184,
+          "height": 40
         }
       ],
       "protectedPixelChanges": 0,
       "output": "public/images/catalog/ugolok/ugolok-50x50x5-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "2bb00238bd9dcbb8237f02f64462b41d74136f3f9e1c3bf090dcb7e476fd36f0"
+      "sha256": "9db8673c0a95a75d5d2601bef5e62a2cb1b0aae46f16da7ac4d59421702dac58"
     },
     {
       "id": "rozmet-2216",
@@ -810,7 +819,7 @@
           "left": 132,
           "top": 125,
           "width": 1069,
-          "height": 66
+          "height": 63
         },
         {
           "key": "firstLeg",
@@ -818,9 +827,9 @@
           "size": 56,
           "center": 837,
           "top": 862,
-          "left": 764,
-          "width": 147,
-          "height": 42
+          "left": 759,
+          "width": 157,
+          "height": 44
         },
         {
           "key": "secondLeg",
@@ -828,9 +837,9 @@
           "size": 56,
           "center": 1348,
           "top": 1454,
-          "left": 1275,
-          "width": 147,
-          "height": 42
+          "left": 1270,
+          "width": 157,
+          "height": 44
         },
         {
           "key": "thickness",
@@ -838,35 +847,35 @@
           "size": 56,
           "left": 1940,
           "top": 1342,
-          "width": 117,
-          "height": 40
+          "width": 126,
+          "height": 41
         },
         {
           "key": "length",
           "text": "12 м",
-          "size": 40,
-          "weight": 700,
+          "size": 44,
+          "weight": 750,
           "left": 610,
           "top": 1568,
-          "width": 80,
-          "height": 29
+          "width": 85,
+          "height": 32
         },
         {
           "key": "mass",
           "text": "3,91 кг/м",
-          "size": 40,
-          "weight": 700,
+          "size": 44,
+          "weight": 750,
           "left": 610,
           "top": 1634,
-          "width": 167,
-          "height": 37
+          "width": 180,
+          "height": 40
         }
       ],
       "protectedPixelChanges": 0,
       "output": "public/images/catalog/ugolok/ugolok-63x63x4-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "9754cba7ebc3149bf34a7b94e5efdf3cf22cb621c31c9aadb23d318f1515d3ef"
+      "sha256": "d4efc8d2d31c5ee658ed961ff268e46f4e48db7e2dbe3de9ac29fb83ad9921ac"
     },
     {
       "id": "rozmet-2217",
@@ -915,8 +924,8 @@
           "weight": 700,
           "left": 132,
           "top": 125,
-          "width": 1069,
-          "height": 66
+          "width": 1065,
+          "height": 63
         },
         {
           "key": "firstLeg",
@@ -924,9 +933,9 @@
           "size": 56,
           "center": 837,
           "top": 862,
-          "left": 764,
-          "width": 147,
-          "height": 42
+          "left": 759,
+          "width": 157,
+          "height": 44
         },
         {
           "key": "secondLeg",
@@ -934,9 +943,9 @@
           "size": 56,
           "center": 1348,
           "top": 1454,
-          "left": 1275,
-          "width": 147,
-          "height": 42
+          "left": 1270,
+          "width": 157,
+          "height": 44
         },
         {
           "key": "thickness",
@@ -944,35 +953,35 @@
           "size": 56,
           "left": 1940,
           "top": 1342,
-          "width": 117,
-          "height": 40
+          "width": 122,
+          "height": 42
         },
         {
           "key": "length",
           "text": "12 м",
-          "size": 40,
-          "weight": 700,
+          "size": 44,
+          "weight": 750,
           "left": 610,
           "top": 1568,
-          "width": 80,
-          "height": 29
+          "width": 85,
+          "height": 32
         },
         {
           "key": "mass",
           "text": "4,81 кг/м",
-          "size": 40,
-          "weight": 700,
+          "size": 44,
+          "weight": 750,
           "left": 610,
           "top": 1634,
-          "width": 167,
-          "height": 37
+          "width": 182,
+          "height": 40
         }
       ],
       "protectedPixelChanges": 0,
       "output": "public/images/catalog/ugolok/ugolok-63x63x5-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "5d5393f3eef6b178873c676761458f66ba69ff31f639095fddd60c9c7c930b4c"
+      "sha256": "8a85111c31ee049600a93e5806892304b9ffb7385405edf9ed6098c4e74b5ca9"
     },
     {
       "id": "rozmet-2218",
@@ -1021,8 +1030,8 @@
           "weight": 700,
           "left": 132,
           "top": 125,
-          "width": 1069,
-          "height": 66
+          "width": 1047,
+          "height": 63
         },
         {
           "key": "firstLeg",
@@ -1030,9 +1039,9 @@
           "size": 56,
           "center": 837,
           "top": 862,
-          "left": 764,
-          "width": 147,
-          "height": 40
+          "left": 762,
+          "width": 151,
+          "height": 42
         },
         {
           "key": "secondLeg",
@@ -1040,9 +1049,9 @@
           "size": 56,
           "center": 1348,
           "top": 1454,
-          "left": 1275,
-          "width": 147,
-          "height": 40
+          "left": 1273,
+          "width": 151,
+          "height": 42
         },
         {
           "key": "thickness",
@@ -1050,35 +1059,35 @@
           "size": 56,
           "left": 1940,
           "top": 1342,
-          "width": 117,
-          "height": 40
+          "width": 122,
+          "height": 42
         },
         {
           "key": "length",
           "text": "12 м",
-          "size": 40,
-          "weight": 700,
+          "size": 44,
+          "weight": 750,
           "left": 610,
           "top": 1568,
-          "width": 80,
-          "height": 29
+          "width": 85,
+          "height": 32
         },
         {
           "key": "mass",
           "text": "5,379 кг/м",
-          "size": 40,
-          "weight": 700,
+          "size": 44,
+          "weight": 750,
           "left": 610,
           "top": 1634,
-          "width": 189,
-          "height": 37
+          "width": 213,
+          "height": 40
         }
       ],
       "protectedPixelChanges": 0,
       "output": "public/images/catalog/ugolok/ugolok-75x75x5-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "3e7f6057b319951022bcdd15c76588a2593f93797446959513b427be1ee04205"
+      "sha256": "175d6a876e4f1ebdb491b43be1cbed7cd7d372a9804217e5f3a1ad3f06533c46"
     },
     {
       "id": "rozmet-20160",
@@ -1126,8 +1135,8 @@
           "weight": 700,
           "left": 132,
           "top": 125,
-          "width": 1069,
-          "height": 66
+          "width": 1048,
+          "height": 63
         },
         {
           "key": "firstLeg",
@@ -1135,9 +1144,9 @@
           "size": 56,
           "center": 837,
           "top": 862,
-          "left": 764,
-          "width": 147,
-          "height": 40
+          "left": 762,
+          "width": 151,
+          "height": 42
         },
         {
           "key": "secondLeg",
@@ -1145,9 +1154,9 @@
           "size": 56,
           "center": 1348,
           "top": 1454,
-          "left": 1275,
-          "width": 147,
-          "height": 40
+          "left": 1273,
+          "width": 151,
+          "height": 42
         },
         {
           "key": "thickness",
@@ -1155,25 +1164,25 @@
           "size": 56,
           "left": 1940,
           "top": 1342,
-          "width": 116,
-          "height": 42
+          "width": 123,
+          "height": 43
         },
         {
           "key": "mass",
           "text": "6,89 кг/м",
-          "size": 40,
-          "weight": 700,
+          "size": 44,
+          "weight": 750,
           "left": 610,
           "top": 1634,
-          "width": 167,
-          "height": 37
+          "width": 190,
+          "height": 40
         }
       ],
       "protectedPixelChanges": 0,
       "output": "public/images/catalog/ugolok/ugolok-75x75x6-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "4456b8179cdbc49c3aff91223917a1d07c8f9b458a08457d3e745d89113c616a"
+      "sha256": "ba5da93fcb15a39d18552640609439d16af65eb31cf070f3e40cddd17455ffdd"
     },
     {
       "id": "rozmet-2220",
@@ -1222,8 +1231,8 @@
           "weight": 700,
           "left": 132,
           "top": 125,
-          "width": 1069,
-          "height": 66
+          "width": 1072,
+          "height": 63
         },
         {
           "key": "firstLeg",
@@ -1231,9 +1240,9 @@
           "size": 56,
           "center": 837,
           "top": 862,
-          "left": 763,
-          "width": 148,
-          "height": 42
+          "left": 759,
+          "width": 157,
+          "height": 43
         },
         {
           "key": "secondLeg",
@@ -1241,9 +1250,9 @@
           "size": 56,
           "center": 1348,
           "top": 1454,
-          "left": 1274,
-          "width": 148,
-          "height": 42
+          "left": 1270,
+          "width": 157,
+          "height": 43
         },
         {
           "key": "thickness",
@@ -1251,35 +1260,35 @@
           "size": 56,
           "left": 1940,
           "top": 1342,
-          "width": 116,
-          "height": 42
+          "width": 123,
+          "height": 43
         },
         {
           "key": "length",
           "text": "12 м",
-          "size": 40,
-          "weight": 700,
+          "size": 44,
+          "weight": 750,
           "left": 610,
           "top": 1568,
-          "width": 80,
-          "height": 29
+          "width": 85,
+          "height": 32
         },
         {
           "key": "mass",
           "text": "8,33 кг/м",
-          "size": 40,
-          "weight": 700,
+          "size": 44,
+          "weight": 750,
           "left": 610,
           "top": 1634,
-          "width": 167,
-          "height": 37
+          "width": 190,
+          "height": 40
         }
       ],
       "protectedPixelChanges": 0,
       "output": "public/images/catalog/ugolok/ugolok-90x90x6-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "1a0477ae0a11c440a89643d1f914b5370e7ed9e829176bdbc45ac9b6a62ca526"
+      "sha256": "410595af01e0ff6e96285156deb15c5606ccf4ec6975bd480a2cffb8326c8db9"
     },
     {
       "id": "rozmet-2219",
@@ -1328,8 +1337,8 @@
           "weight": 700,
           "left": 132,
           "top": 125,
-          "width": 1116,
-          "height": 66
+          "width": 1105,
+          "height": 63
         },
         {
           "key": "firstLeg",
@@ -1337,9 +1346,9 @@
           "size": 56,
           "center": 837,
           "top": 862,
-          "left": 747,
-          "width": 175,
-          "height": 42
+          "left": 743,
+          "width": 179,
+          "height": 43
         },
         {
           "key": "secondLeg",
@@ -1347,9 +1356,9 @@
           "size": 56,
           "center": 1348,
           "top": 1454,
-          "left": 1275,
-          "width": 147,
-          "height": 42
+          "left": 1270,
+          "width": 157,
+          "height": 44
         },
         {
           "key": "thickness",
@@ -1357,35 +1366,35 @@
           "size": 56,
           "left": 1940,
           "top": 1342,
-          "width": 116,
-          "height": 42
+          "width": 123,
+          "height": 43
         },
         {
           "key": "length",
           "text": "12 м",
-          "size": 40,
-          "weight": 700,
+          "size": 44,
+          "weight": 750,
           "left": 610,
           "top": 1568,
-          "width": 80,
-          "height": 29
+          "width": 85,
+          "height": 32
         },
         {
           "key": "mass",
           "text": "7,52 кг/м",
-          "size": 40,
-          "weight": 700,
+          "size": 44,
+          "weight": 750,
           "left": 610,
           "top": 1634,
-          "width": 167,
-          "height": 37
+          "width": 183,
+          "height": 40
         }
       ],
       "protectedPixelChanges": 0,
       "output": "public/images/catalog/ugolok/ugolok-100x63x6-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "fcf117d5f1e174620e388986aaae04fa1eaec56d95369ce190d67f0fcf826014"
+      "sha256": "092d00c7529385229fdeb0ee774c2ec94f435e01df5db542f9819538c937dab2"
     },
     {
       "id": "rozmet-2221",
@@ -1434,8 +1443,8 @@
           "weight": 700,
           "left": 132,
           "top": 125,
-          "width": 1164,
-          "height": 66
+          "width": 1139,
+          "height": 63
         },
         {
           "key": "firstLeg",
@@ -1443,9 +1452,9 @@
           "size": 56,
           "center": 837,
           "top": 862,
-          "left": 747,
-          "width": 175,
-          "height": 42
+          "left": 743,
+          "width": 179,
+          "height": 43
         },
         {
           "key": "secondLeg",
@@ -1453,9 +1462,9 @@
           "size": 56,
           "center": 1348,
           "top": 1454,
-          "left": 1261,
-          "width": 175,
-          "height": 42
+          "left": 1259,
+          "width": 179,
+          "height": 43
         },
         {
           "key": "thickness",
@@ -1463,35 +1472,35 @@
           "size": 56,
           "left": 1940,
           "top": 1342,
-          "width": 116,
-          "height": 39
+          "width": 120,
+          "height": 41
         },
         {
           "key": "length",
           "text": "12 м",
-          "size": 40,
-          "weight": 700,
+          "size": 44,
+          "weight": 750,
           "left": 610,
           "top": 1568,
-          "width": 80,
-          "height": 29
+          "width": 85,
+          "height": 32
         },
         {
           "key": "mass",
           "text": "10,8 кг/м",
-          "size": 40,
-          "weight": 700,
+          "size": 44,
+          "weight": 750,
           "left": 610,
           "top": 1634,
-          "width": 166,
-          "height": 37
+          "width": 183,
+          "height": 40
         }
       ],
       "protectedPixelChanges": 0,
       "output": "public/images/catalog/ugolok/ugolok-100x100x7-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "f8e38bceefb6c9874de917ffb769278be59581e89c7361a0295a8d19d991b56f"
+      "sha256": "05e5f656a63ecf3242069cee5ed7c177ed4b8803abc1b63fc189e4652a693d3e"
     },
     {
       "id": "rozmet-2222",
@@ -1540,8 +1549,8 @@
           "weight": 700,
           "left": 132,
           "top": 125,
-          "width": 1163,
-          "height": 66
+          "width": 1144,
+          "height": 64
         },
         {
           "key": "firstLeg",
@@ -1549,9 +1558,9 @@
           "size": 56,
           "center": 837,
           "top": 862,
-          "left": 747,
-          "width": 175,
-          "height": 42
+          "left": 743,
+          "width": 179,
+          "height": 43
         },
         {
           "key": "secondLeg",
@@ -1559,9 +1568,9 @@
           "size": 56,
           "center": 1348,
           "top": 1454,
-          "left": 1261,
-          "width": 175,
-          "height": 42
+          "left": 1259,
+          "width": 179,
+          "height": 43
         },
         {
           "key": "thickness",
@@ -1569,35 +1578,35 @@
           "size": 56,
           "left": 1940,
           "top": 1342,
-          "width": 117,
-          "height": 42
+          "width": 123,
+          "height": 44
         },
         {
           "key": "length",
           "text": "12 м",
-          "size": 40,
-          "weight": 700,
+          "size": 44,
+          "weight": 750,
           "left": 610,
           "top": 1568,
-          "width": 80,
-          "height": 29
+          "width": 85,
+          "height": 32
         },
         {
           "key": "mass",
           "text": "14,3 кг/м",
-          "size": 40,
-          "weight": 700,
+          "size": 44,
+          "weight": 750,
           "left": 610,
           "top": 1634,
-          "width": 166,
-          "height": 37
+          "width": 182,
+          "height": 40
         }
       ],
       "protectedPixelChanges": 0,
       "output": "public/images/catalog/ugolok/ugolok-100x100x8-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "2f1c234a4b075f6788ac95ca75a5af454be5594f698c800f07fc8f38fefb264a"
+      "sha256": "0b8e69d279935c0d2b5524ff4557775f72ee8ed7c4787934c8234ed0b3defb22"
     },
     {
       "id": "rozmet-20368",
@@ -1646,8 +1655,8 @@
           "weight": 700,
           "left": 132,
           "top": 125,
-          "width": 1210,
-          "height": 66
+          "width": 1181,
+          "height": 63
         },
         {
           "key": "firstLeg",
@@ -1655,9 +1664,9 @@
           "size": 56,
           "center": 837,
           "top": 862,
-          "left": 747,
-          "width": 175,
-          "height": 42
+          "left": 743,
+          "width": 179,
+          "height": 43
         },
         {
           "key": "secondLeg",
@@ -1665,9 +1674,9 @@
           "size": 56,
           "center": 1348,
           "top": 1454,
-          "left": 1261,
-          "width": 175,
-          "height": 42
+          "left": 1259,
+          "width": 179,
+          "height": 43
         },
         {
           "key": "thickness",
@@ -1675,35 +1684,35 @@
           "size": 56,
           "left": 1940,
           "top": 1342,
-          "width": 144,
-          "height": 42
+          "width": 145,
+          "height": 43
         },
         {
           "key": "length",
           "text": "12 м",
-          "size": 40,
-          "weight": 700,
+          "size": 44,
+          "weight": 750,
           "left": 610,
           "top": 1568,
-          "width": 80,
-          "height": 29
+          "width": 85,
+          "height": 32
         },
         {
           "key": "mass",
           "text": "15,1 кг/м",
-          "size": 40,
-          "weight": 700,
+          "size": 44,
+          "weight": 750,
           "left": 610,
           "top": 1634,
           "width": 166,
-          "height": 37
+          "height": 40
         }
       ],
       "protectedPixelChanges": 0,
       "output": "public/images/catalog/ugolok/ugolok-100x100x10-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "71d1eaba7797f317fea038b31b15a7ffed158e14d8001fba0c02f8c2711c2595"
+      "sha256": "ad9e2aca8f7f1fa1eb0ad682e15b9f477a7184648e2310710e57e8c8a0bbb5f6"
     },
     {
       "id": "rozmet-2223",
@@ -1752,8 +1761,8 @@
           "weight": 700,
           "left": 132,
           "top": 125,
-          "width": 1163,
-          "height": 66
+          "width": 1124,
+          "height": 64
         },
         {
           "key": "firstLeg",
@@ -1761,9 +1770,9 @@
           "size": 56,
           "center": 837,
           "top": 862,
-          "left": 747,
-          "width": 175,
-          "height": 41
+          "left": 748,
+          "width": 174,
+          "height": 43
         },
         {
           "key": "secondLeg",
@@ -1772,8 +1781,8 @@
           "center": 1348,
           "top": 1454,
           "left": 1261,
-          "width": 175,
-          "height": 41
+          "width": 174,
+          "height": 43
         },
         {
           "key": "thickness",
@@ -1781,35 +1790,35 @@
           "size": 56,
           "left": 1940,
           "top": 1342,
-          "width": 117,
-          "height": 42
+          "width": 123,
+          "height": 44
         },
         {
           "key": "length",
           "text": "12 м",
-          "size": 40,
-          "weight": 700,
+          "size": 44,
+          "weight": 750,
           "left": 610,
           "top": 1568,
-          "width": 80,
-          "height": 29
+          "width": 85,
+          "height": 32
         },
         {
           "key": "mass",
           "text": "15,46 кг/м",
-          "size": 40,
-          "weight": 700,
+          "size": 44,
+          "weight": 750,
           "left": 610,
           "top": 1634,
-          "width": 188,
-          "height": 37
+          "width": 210,
+          "height": 40
         }
       ],
       "protectedPixelChanges": 0,
       "output": "public/images/catalog/ugolok/ugolok-125x125x8-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "c4b3a67074d559ebdf531f98f9f63c6139fd8786a69f3123d4685600f328ed07"
+      "sha256": "82a4fd742f1fb3cdbeab643eab2202d28515e42ecfa798fe7f5f98b1b3f5f99e"
     },
     {
       "id": "rozmet-29030",
@@ -1858,8 +1867,8 @@
           "weight": 700,
           "left": 132,
           "top": 125,
-          "width": 1210,
-          "height": 66
+          "width": 1161,
+          "height": 63
         },
         {
           "key": "firstLeg",
@@ -1867,9 +1876,9 @@
           "size": 56,
           "center": 837,
           "top": 862,
-          "left": 747,
-          "width": 175,
-          "height": 41
+          "left": 748,
+          "width": 174,
+          "height": 43
         },
         {
           "key": "secondLeg",
@@ -1878,8 +1887,8 @@
           "center": 1348,
           "top": 1454,
           "left": 1261,
-          "width": 175,
-          "height": 41
+          "width": 174,
+          "height": 43
         },
         {
           "key": "thickness",
@@ -1887,35 +1896,35 @@
           "size": 56,
           "left": 1940,
           "top": 1342,
-          "width": 144,
-          "height": 42
+          "width": 145,
+          "height": 43
         },
         {
           "key": "length",
           "text": "12 м",
-          "size": 40,
-          "weight": 700,
+          "size": 44,
+          "weight": 750,
           "left": 610,
           "top": 1568,
-          "width": 80,
-          "height": 29
+          "width": 85,
+          "height": 32
         },
         {
           "key": "mass",
           "text": "15,46 кг/м",
-          "size": 40,
-          "weight": 700,
+          "size": 44,
+          "weight": 750,
           "left": 610,
           "top": 1634,
-          "width": 188,
-          "height": 37
+          "width": 210,
+          "height": 40
         }
       ],
       "protectedPixelChanges": 0,
       "output": "public/images/catalog/ugolok/ugolok-125x125x10-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "21cceb6060d90f30c9af005605b1c3e521b231897df23c03a99b22c6960e3c10"
+      "sha256": "ce9d340cbb4cefbb254b8343c623233144423795c9f0268639fdcc4a093dd2e4"
     },
     {
       "id": "rozmet-2224",
@@ -1964,8 +1973,8 @@
           "weight": 700,
           "left": 132,
           "top": 125,
-          "width": 1210,
-          "height": 66
+          "width": 1181,
+          "height": 63
         },
         {
           "key": "firstLeg",
@@ -1973,9 +1982,9 @@
           "size": 56,
           "center": 837,
           "top": 862,
-          "left": 747,
-          "width": 175,
-          "height": 42
+          "left": 742,
+          "width": 180,
+          "height": 43
         },
         {
           "key": "secondLeg",
@@ -1983,9 +1992,9 @@
           "size": 56,
           "center": 1348,
           "top": 1454,
-          "left": 1261,
-          "width": 175,
-          "height": 42
+          "left": 1258,
+          "width": 180,
+          "height": 43
         },
         {
           "key": "thickness",
@@ -1993,35 +2002,35 @@
           "size": 56,
           "left": 1940,
           "top": 1342,
-          "width": 144,
-          "height": 42
+          "width": 145,
+          "height": 43
         },
         {
           "key": "length",
           "text": "12 м",
-          "size": 40,
-          "weight": 700,
+          "size": 44,
+          "weight": 750,
           "left": 610,
           "top": 1568,
-          "width": 80,
-          "height": 29
+          "width": 85,
+          "height": 32
         },
         {
           "key": "mass",
           "text": "21,5 кг/м",
-          "size": 40,
-          "weight": 700,
+          "size": 44,
+          "weight": 750,
           "left": 610,
           "top": 1634,
-          "width": 167,
-          "height": 37
+          "width": 180,
+          "height": 40
         }
       ],
       "protectedPixelChanges": 0,
       "output": "public/images/catalog/ugolok/ugolok-140x140x10-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "978b21c29d1e4eef3231191e819853b3973ad30bda4c0417bb069ff6188b791a"
+      "sha256": "c8593897966163cad245329e03bb5cf4381aba50c4279b814356758f6a8c2c69"
     },
     {
       "id": "rozmet-2225",
@@ -2070,8 +2079,8 @@
           "weight": 700,
           "left": 132,
           "top": 125,
-          "width": 1210,
-          "height": 66
+          "width": 1175,
+          "height": 63
         },
         {
           "key": "firstLeg",
@@ -2079,9 +2088,9 @@
           "size": 56,
           "center": 837,
           "top": 862,
-          "left": 747,
-          "width": 175,
-          "height": 42
+          "left": 744,
+          "width": 178,
+          "height": 43
         },
         {
           "key": "secondLeg",
@@ -2089,9 +2098,9 @@
           "size": 56,
           "center": 1348,
           "top": 1454,
-          "left": 1261,
-          "width": 175,
-          "height": 42
+          "left": 1259,
+          "width": 178,
+          "height": 43
         },
         {
           "key": "thickness",
@@ -2099,35 +2108,35 @@
           "size": 56,
           "left": 1940,
           "top": 1342,
-          "width": 144,
-          "height": 42
+          "width": 145,
+          "height": 43
         },
         {
           "key": "length",
           "text": "12 м",
-          "size": 40,
-          "weight": 700,
+          "size": 44,
+          "weight": 750,
           "left": 610,
           "top": 1568,
-          "width": 80,
-          "height": 29
+          "width": 85,
+          "height": 32
         },
         {
           "key": "mass",
           "text": "24,7 кг/м",
-          "size": 40,
-          "weight": 700,
+          "size": 44,
+          "weight": 750,
           "left": 610,
           "top": 1634,
-          "width": 167,
-          "height": 37
+          "width": 185,
+          "height": 40
         }
       ],
       "protectedPixelChanges": 0,
       "output": "public/images/catalog/ugolok/ugolok-160x160x10-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "519c79cfb4b3a9c47c484ddbb2dc08ee5b0a5370c9a938f3bf62ab054f91382b"
+      "sha256": "5d8e0947d5ab0989a3b0eee78a45e87eed4e1b16aa55206ebc849af3ff9638a0"
     },
     {
       "id": "rozmet-16726",
@@ -2176,8 +2185,8 @@
           "weight": 700,
           "left": 132,
           "top": 125,
-          "width": 1210,
-          "height": 66
+          "width": 1178,
+          "height": 63
         },
         {
           "key": "firstLeg",
@@ -2185,9 +2194,9 @@
           "size": 56,
           "center": 837,
           "top": 862,
-          "left": 747,
-          "width": 175,
-          "height": 42
+          "left": 744,
+          "width": 178,
+          "height": 43
         },
         {
           "key": "secondLeg",
@@ -2195,9 +2204,9 @@
           "size": 56,
           "center": 1348,
           "top": 1454,
-          "left": 1261,
-          "width": 175,
-          "height": 42
+          "left": 1259,
+          "width": 179,
+          "height": 43
         },
         {
           "key": "thickness",
@@ -2205,35 +2214,35 @@
           "size": 56,
           "left": 1940,
           "top": 1342,
-          "width": 144,
-          "height": 42
+          "width": 145,
+          "height": 43
         },
         {
           "key": "length",
           "text": "12 м",
-          "size": 40,
-          "weight": 700,
+          "size": 44,
+          "weight": 750,
           "left": 610,
           "top": 1568,
-          "width": 80,
-          "height": 29
+          "width": 85,
+          "height": 32
         },
         {
           "key": "mass",
           "text": "19,85 кг/м",
-          "size": 40,
-          "weight": 700,
+          "size": 44,
+          "weight": 750,
           "left": 610,
           "top": 1634,
-          "width": 188,
-          "height": 37
+          "width": 208,
+          "height": 40
         }
       ],
       "protectedPixelChanges": 0,
       "output": "public/images/catalog/ugolok/ugolok-160x100x10-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "7b5393b0038e7c204a42abe68e8a8a058e22ad38c768e94b96e76d5d93253bc7"
+      "sha256": "b92f6e51ccc885b0384720f5d135b8c1de33624a4cd67333b9d825684aabbe8e"
     }
   ]
 }

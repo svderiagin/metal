@@ -2,6 +2,59 @@
   "renderer": "scripts/render-shveller-images.mjs",
   "reference": "imports/shveller-image-template/reference-5.jpg",
   "cleanPhoto": "imports/shveller-image-template/photo.png",
+  "typography": {
+    "family": "Inter",
+    "fontFile": "imports/shveller-image-template/fonts/Inter-variable.ttf",
+    "backend": "fontconfig",
+    "values": {
+      "size": 44,
+      "weight": 750
+    }
+  },
+  "patches": {
+    "title": {
+      "left": 110,
+      "top": 105,
+      "width": 960,
+      "height": 120
+    },
+    "flangeWidth": {
+      "left": 680,
+      "top": 876,
+      "width": 224,
+      "height": 58
+    },
+    "webThickness": {
+      "left": 1160,
+      "top": 1227,
+      "width": 320,
+      "height": 83
+    },
+    "flangeThickness": {
+      "left": 1964,
+      "top": 986,
+      "width": 370,
+      "height": 94
+    },
+    "height": {
+      "left": 900,
+      "top": 1408,
+      "width": 980,
+      "height": 90
+    },
+    "length": {
+      "left": 600,
+      "top": 1552,
+      "width": 470,
+      "height": 64
+    },
+    "mass": {
+      "left": 600,
+      "top": 1621,
+      "width": 470,
+      "height": 65
+    }
+  },
   "method": "Original reference pixels with deterministic Inter labels from public product specifications; no generative editing.",
   "illustration": "Shared family photograph; nominal dimensions are labels, not a scaled manufacturing drawing.",
   "records": [
@@ -50,6 +103,8 @@
       "sourceReference": "imports/shveller-image-template/reference-5.jpg",
       "referenceUnmodified": true,
       "changedLabels": [],
+      "placements": [],
+      "protectedPixelChanges": 0,
       "output": "public/images/catalog/shveller/shveller-5-clean.webp",
       "width": 2400,
       "height": 1800,
@@ -109,12 +164,75 @@
         "length",
         "mass"
       ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "Швеллер № 6,5",
+          "size": 84,
+          "weight": 700,
+          "left": 136,
+          "top": 127,
+          "width": 610,
+          "height": 79
+        },
+        {
+          "key": "flangeWidth",
+          "text": "36 мм",
+          "size": 56,
+          "center": 814,
+          "top": 884,
+          "left": 736,
+          "width": 156,
+          "height": 44
+        },
+        {
+          "key": "flangeThickness",
+          "text": "7,2 мм",
+          "size": 56,
+          "left": 1980,
+          "top": 1010,
+          "halo": true,
+          "width": 157,
+          "height": 50
+        },
+        {
+          "key": "height",
+          "text": "65 мм",
+          "size": 56,
+          "center": 1390,
+          "top": 1431,
+          "left": 1313,
+          "width": 155,
+          "height": 43
+        },
+        {
+          "key": "length",
+          "text": "6–12 м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1568,
+          "width": 133,
+          "height": 33
+        },
+        {
+          "key": "mass",
+          "text": "5,90 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1634,
+          "width": 191,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
       "output": "public/images/catalog/shveller/shveller-6-5-clean.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
-      "bytes": 1102808,
-      "sha256": "4b54ddeb8ce91deb2005c99ce4e365216b0f29f998800bb05f68ea5cc450fd5a"
+      "bytes": 1104022,
+      "sha256": "b3ef29862fbdd080dc279220ce2ecd58887e17560cd7e614eb0847e8b0f3c0ac"
     },
     {
       "id": "rozmet-2237",
@@ -169,12 +287,84 @@
         "length",
         "mass"
       ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "Швеллер № 8",
+          "size": 84,
+          "weight": 700,
+          "left": 136,
+          "top": 127,
+          "width": 541,
+          "height": 79
+        },
+        {
+          "key": "flangeWidth",
+          "text": "40 мм",
+          "size": 56,
+          "center": 814,
+          "top": 884,
+          "left": 734,
+          "width": 160,
+          "height": 43
+        },
+        {
+          "key": "webThickness",
+          "text": "4,5 мм",
+          "size": 56,
+          "left": 1172,
+          "top": 1245,
+          "width": 168,
+          "height": 49
+        },
+        {
+          "key": "flangeThickness",
+          "text": "7,4 мм",
+          "size": 56,
+          "left": 1980,
+          "top": 1010,
+          "halo": true,
+          "width": 160,
+          "height": 49
+        },
+        {
+          "key": "height",
+          "text": "80 мм",
+          "size": 56,
+          "center": 1390,
+          "top": 1431,
+          "left": 1312,
+          "width": 157,
+          "height": 44
+        },
+        {
+          "key": "length",
+          "text": "6–12 м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1568,
+          "width": 133,
+          "height": 33
+        },
+        {
+          "key": "mass",
+          "text": "7,05 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1634,
+          "width": 184,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
       "output": "public/images/catalog/shveller/shveller-8-clean.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
-      "bytes": 1104722,
-      "sha256": "ac0224814c67986f7419c69a7487f55ceb63e6f83259a77cc47c77eae110fda2"
+      "bytes": 1102852,
+      "sha256": "cf61714fde0f8943cc378373f4c71aeed67a819f50e88a583a1b7fa1945b0745"
     },
     {
       "id": "rozmet-2238",
@@ -229,12 +419,84 @@
         "length",
         "mass"
       ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "Швеллер № 10",
+          "size": 84,
+          "weight": 700,
+          "left": 136,
+          "top": 127,
+          "width": 578,
+          "height": 79
+        },
+        {
+          "key": "flangeWidth",
+          "text": "46 мм",
+          "size": 56,
+          "center": 814,
+          "top": 884,
+          "left": 735,
+          "width": 159,
+          "height": 43
+        },
+        {
+          "key": "webThickness",
+          "text": "4,5 мм",
+          "size": 56,
+          "left": 1172,
+          "top": 1245,
+          "width": 168,
+          "height": 49
+        },
+        {
+          "key": "flangeThickness",
+          "text": "7,6 мм",
+          "size": 56,
+          "left": 1980,
+          "top": 1010,
+          "halo": true,
+          "width": 157,
+          "height": 50
+        },
+        {
+          "key": "height",
+          "text": "100 мм",
+          "size": 56,
+          "center": 1390,
+          "top": 1431,
+          "left": 1301,
+          "width": 179,
+          "height": 43
+        },
+        {
+          "key": "length",
+          "text": "12 м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1568,
+          "width": 85,
+          "height": 32
+        },
+        {
+          "key": "mass",
+          "text": "8,59 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1634,
+          "width": 191,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
       "output": "public/images/catalog/shveller/shveller-10-clean.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
-      "bytes": 1103924,
-      "sha256": "6b41746d223e3fa0c2e0358d1cf48314960547b8f59ffa68e72f195c67c25aab"
+      "bytes": 1104828,
+      "sha256": "656feaa38df186328242befc8f608ace6c3b29eb571e3141b7622e676a46fbc3"
     },
     {
       "id": "rozmet-2239",
@@ -289,12 +551,84 @@
         "length",
         "mass"
       ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "Швеллер № 12",
+          "size": 84,
+          "weight": 700,
+          "left": 136,
+          "top": 127,
+          "width": 571,
+          "height": 79
+        },
+        {
+          "key": "flangeWidth",
+          "text": "52 мм",
+          "size": 56,
+          "center": 814,
+          "top": 884,
+          "left": 738,
+          "width": 153,
+          "height": 43
+        },
+        {
+          "key": "webThickness",
+          "text": "4,8 мм",
+          "size": 56,
+          "left": 1172,
+          "top": 1245,
+          "width": 169,
+          "height": 51
+        },
+        {
+          "key": "flangeThickness",
+          "text": "7,8 мм",
+          "size": 56,
+          "left": 1980,
+          "top": 1010,
+          "halo": true,
+          "width": 158,
+          "height": 51
+        },
+        {
+          "key": "height",
+          "text": "120 мм",
+          "size": 56,
+          "center": 1390,
+          "top": 1431,
+          "left": 1302,
+          "width": 176,
+          "height": 43
+        },
+        {
+          "key": "length",
+          "text": "12 м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1568,
+          "width": 85,
+          "height": 32
+        },
+        {
+          "key": "mass",
+          "text": "10,40 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1634,
+          "width": 214,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
       "output": "public/images/catalog/shveller/shveller-12-clean.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
-      "bytes": 1103522,
-      "sha256": "c267754c6871cbe79586702c434686978ab91540136d5580c97d04670892fbc0"
+      "bytes": 1103190,
+      "sha256": "f544d9b6940ff599a7f12a48f4549a6b9919faf193efd6e581b0bc40e89db398"
     },
     {
       "id": "rozmet-2240",
@@ -349,12 +683,84 @@
         "length",
         "mass"
       ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "Швеллер № 14",
+          "size": 84,
+          "weight": 700,
+          "left": 136,
+          "top": 127,
+          "width": 577,
+          "height": 79
+        },
+        {
+          "key": "flangeWidth",
+          "text": "58 мм",
+          "size": 56,
+          "center": 814,
+          "top": 884,
+          "left": 737,
+          "width": 155,
+          "height": 44
+        },
+        {
+          "key": "webThickness",
+          "text": "4,9 мм",
+          "size": 56,
+          "left": 1172,
+          "top": 1245,
+          "width": 169,
+          "height": 50
+        },
+        {
+          "key": "flangeThickness",
+          "text": "8,1 мм",
+          "size": 56,
+          "left": 1980,
+          "top": 1010,
+          "halo": true,
+          "width": 148,
+          "height": 51
+        },
+        {
+          "key": "height",
+          "text": "140 мм",
+          "size": 56,
+          "center": 1390,
+          "top": 1431,
+          "left": 1300,
+          "width": 180,
+          "height": 43
+        },
+        {
+          "key": "length",
+          "text": "12 м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1568,
+          "width": 85,
+          "height": 32
+        },
+        {
+          "key": "mass",
+          "text": "12,30 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1634,
+          "width": 210,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
       "output": "public/images/catalog/shveller/shveller-14-clean.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
-      "bytes": 1102888,
-      "sha256": "064488acb642c33cb483529d8dbe2b068f5ba0b54b9bb7f84eaac52db96f5b6a"
+      "bytes": 1104000,
+      "sha256": "48e68719d3fd4d202872625cf6df8479a2c47a3c422b0bc2a1a47ac70b4a887e"
     },
     {
       "id": "rozmet-2241",
@@ -409,12 +815,84 @@
         "length",
         "mass"
       ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "Швеллер № 16",
+          "size": 84,
+          "weight": 700,
+          "left": 136,
+          "top": 127,
+          "width": 574,
+          "height": 79
+        },
+        {
+          "key": "flangeWidth",
+          "text": "64 мм",
+          "size": 56,
+          "center": 814,
+          "top": 884,
+          "left": 735,
+          "width": 158,
+          "height": 43
+        },
+        {
+          "key": "webThickness",
+          "text": "5 мм",
+          "size": 56,
+          "left": 1172,
+          "top": 1245,
+          "width": 122,
+          "height": 42
+        },
+        {
+          "key": "flangeThickness",
+          "text": "8,4 мм",
+          "size": 56,
+          "left": 1980,
+          "top": 1010,
+          "halo": true,
+          "width": 168,
+          "height": 51
+        },
+        {
+          "key": "height",
+          "text": "160 мм",
+          "size": 56,
+          "center": 1390,
+          "top": 1431,
+          "left": 1301,
+          "width": 178,
+          "height": 43
+        },
+        {
+          "key": "length",
+          "text": "11,7–12 м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1568,
+          "width": 174,
+          "height": 39
+        },
+        {
+          "key": "mass",
+          "text": "14,20 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1634,
+          "width": 212,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
       "output": "public/images/catalog/shveller/shveller-16-clean.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
-      "bytes": 1103642,
-      "sha256": "887284e9aba828e9d778235c95c40606460250b1d5802eaa06bb0e101e19828a"
+      "bytes": 1104354,
+      "sha256": "edac2ae0ec95e26f78b6f2c1e4a9013b8db156b607b49e1ae5e451a0ba541ce0"
     },
     {
       "id": "rozmet-2242",
@@ -469,12 +947,84 @@
         "length",
         "mass"
       ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "Швеллер № 18",
+          "size": 84,
+          "weight": 700,
+          "left": 136,
+          "top": 127,
+          "width": 574,
+          "height": 79
+        },
+        {
+          "key": "flangeWidth",
+          "text": "70 мм",
+          "size": 56,
+          "center": 814,
+          "top": 884,
+          "left": 738,
+          "width": 153,
+          "height": 43
+        },
+        {
+          "key": "webThickness",
+          "text": "5,1 мм",
+          "size": 56,
+          "left": 1172,
+          "top": 1245,
+          "width": 148,
+          "height": 49
+        },
+        {
+          "key": "flangeThickness",
+          "text": "8,7 мм",
+          "size": 56,
+          "left": 1980,
+          "top": 1010,
+          "halo": true,
+          "width": 162,
+          "height": 51
+        },
+        {
+          "key": "height",
+          "text": "180 мм",
+          "size": 56,
+          "center": 1390,
+          "top": 1431,
+          "left": 1301,
+          "width": 178,
+          "height": 44
+        },
+        {
+          "key": "length",
+          "text": "12 м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1568,
+          "width": 85,
+          "height": 32
+        },
+        {
+          "key": "mass",
+          "text": "16,30 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1634,
+          "width": 209,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
       "output": "public/images/catalog/shveller/shveller-18-clean.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
-      "bytes": 1103410,
-      "sha256": "54c9778159a18744877d632bcb27ae51b6958d50e5397fcfc952f2cf74a8d27e"
+      "bytes": 1104556,
+      "sha256": "087a4a6f4b8c5b41a3584b42356b19b2fdf4b6de220ce89e277fb78e4d7e2fc4"
     },
     {
       "id": "rozmet-2243",
@@ -529,12 +1079,84 @@
         "length",
         "mass"
       ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "Швеллер № 20",
+          "size": 84,
+          "weight": 700,
+          "left": 136,
+          "top": 127,
+          "width": 595,
+          "height": 79
+        },
+        {
+          "key": "flangeWidth",
+          "text": "76 мм",
+          "size": 56,
+          "center": 814,
+          "top": 884,
+          "left": 738,
+          "width": 152,
+          "height": 43
+        },
+        {
+          "key": "webThickness",
+          "text": "5,2 мм",
+          "size": 56,
+          "left": 1172,
+          "top": 1245,
+          "width": 165,
+          "height": 50
+        },
+        {
+          "key": "flangeThickness",
+          "text": "9 мм",
+          "size": 56,
+          "left": 1980,
+          "top": 1010,
+          "halo": true,
+          "width": 123,
+          "height": 43
+        },
+        {
+          "key": "height",
+          "text": "200 мм",
+          "size": 56,
+          "center": 1390,
+          "top": 1431,
+          "left": 1296,
+          "width": 189,
+          "height": 43
+        },
+        {
+          "key": "length",
+          "text": "12 м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1568,
+          "width": 85,
+          "height": 32
+        },
+        {
+          "key": "mass",
+          "text": "18,40 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1634,
+          "width": 213,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
       "output": "public/images/catalog/shveller/shveller-20-clean.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
-      "bytes": 1106976,
-      "sha256": "05df342bd27851247124c3412197eb17e7e58d0fc9694aac44c218d1337b87dd"
+      "bytes": 1106958,
+      "sha256": "801f7148d7c8fa0214dcab06381919feaa892d1f502ea337fcb46ac98c88f937"
     },
     {
       "id": "rozmet-2244",
@@ -589,12 +1211,84 @@
         "length",
         "mass"
       ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "Швеллер № 22",
+          "size": 84,
+          "weight": 700,
+          "left": 136,
+          "top": 127,
+          "width": 588,
+          "height": 79
+        },
+        {
+          "key": "flangeWidth",
+          "text": "82 мм",
+          "size": 56,
+          "center": 814,
+          "top": 884,
+          "left": 737,
+          "width": 154,
+          "height": 44
+        },
+        {
+          "key": "webThickness",
+          "text": "5,4 мм",
+          "size": 56,
+          "left": 1172,
+          "top": 1245,
+          "width": 168,
+          "height": 49
+        },
+        {
+          "key": "flangeThickness",
+          "text": "9,5 мм",
+          "size": 56,
+          "left": 1980,
+          "top": 1010,
+          "halo": true,
+          "width": 165,
+          "height": 50
+        },
+        {
+          "key": "height",
+          "text": "220 мм",
+          "size": 56,
+          "center": 1390,
+          "top": 1431,
+          "left": 1297,
+          "width": 186,
+          "height": 43
+        },
+        {
+          "key": "length",
+          "text": "12 м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1568,
+          "width": 85,
+          "height": 32
+        },
+        {
+          "key": "mass",
+          "text": "21,00 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1634,
+          "width": 210,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
       "output": "public/images/catalog/shveller/shveller-22-clean.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
-      "bytes": 1104186,
-      "sha256": "4be20254107a4a9acff5ece8c0de69fa2cac4c85920f74161a9025d48637bdd3"
+      "bytes": 1104682,
+      "sha256": "d1d8a5efd33650b5f0660bd956a65b5b972bc6c0758e2b1288e4bd0180923ad2"
     },
     {
       "id": "rozmet-2245",
@@ -649,12 +1343,84 @@
         "length",
         "mass"
       ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "Швеллер № 24",
+          "size": 84,
+          "weight": 700,
+          "left": 136,
+          "top": 127,
+          "width": 593,
+          "height": 79
+        },
+        {
+          "key": "flangeWidth",
+          "text": "90 мм",
+          "size": 56,
+          "center": 814,
+          "top": 884,
+          "left": 736,
+          "width": 157,
+          "height": 43
+        },
+        {
+          "key": "webThickness",
+          "text": "5,6 мм",
+          "size": 56,
+          "left": 1172,
+          "top": 1245,
+          "width": 165,
+          "height": 50
+        },
+        {
+          "key": "flangeThickness",
+          "text": "10 мм",
+          "size": 56,
+          "left": 1980,
+          "top": 1010,
+          "halo": true,
+          "width": 145,
+          "height": 43
+        },
+        {
+          "key": "height",
+          "text": "240 мм",
+          "size": 56,
+          "center": 1390,
+          "top": 1431,
+          "left": 1295,
+          "width": 190,
+          "height": 43
+        },
+        {
+          "key": "length",
+          "text": "12 м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1568,
+          "width": 85,
+          "height": 32
+        },
+        {
+          "key": "mass",
+          "text": "24,00 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1634,
+          "width": 220,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
       "output": "public/images/catalog/shveller/shveller-24-clean.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
-      "bytes": 1106736,
-      "sha256": "c0ea1d98be6dde41d170e9eef5861ad5abb8c231cac5856bcbea81471b26f300"
+      "bytes": 1106174,
+      "sha256": "b12ae96a6b03587eea34426a6bf49f3787a9bc9026184f8a976aeffe25063e49"
     },
     {
       "id": "rozmet-2246",
@@ -709,12 +1475,84 @@
         "length",
         "mass"
       ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "Швеллер № 27",
+          "size": 84,
+          "weight": 700,
+          "left": 136,
+          "top": 127,
+          "width": 586,
+          "height": 79
+        },
+        {
+          "key": "flangeWidth",
+          "text": "95 мм",
+          "size": 56,
+          "center": 814,
+          "top": 884,
+          "left": 737,
+          "width": 155,
+          "height": 43
+        },
+        {
+          "key": "webThickness",
+          "text": "6 мм",
+          "size": 56,
+          "left": 1172,
+          "top": 1245,
+          "width": 123,
+          "height": 43
+        },
+        {
+          "key": "flangeThickness",
+          "text": "10,5 мм",
+          "size": 56,
+          "left": 1980,
+          "top": 1010,
+          "halo": true,
+          "width": 188,
+          "height": 50
+        },
+        {
+          "key": "height",
+          "text": "270 мм",
+          "size": 56,
+          "center": 1390,
+          "top": 1431,
+          "left": 1299,
+          "width": 183,
+          "height": 43
+        },
+        {
+          "key": "length",
+          "text": "12 м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1568,
+          "width": 85,
+          "height": 32
+        },
+        {
+          "key": "mass",
+          "text": "27,70 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1634,
+          "width": 206,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
       "output": "public/images/catalog/shveller/shveller-27-clean.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
-      "bytes": 1104464,
-      "sha256": "3611ee1679840e596ac4c1a79195f72e2325cf95389749b5e99ae812ce34e3df"
+      "bytes": 1104610,
+      "sha256": "7b9a394e071229eb7ed197889ad62d63032014e4e844121c13c090dba3e618d5"
     },
     {
       "id": "rozmet-2247",
@@ -769,12 +1607,84 @@
         "length",
         "mass"
       ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "Швеллер № 30",
+          "size": 84,
+          "weight": 700,
+          "left": 136,
+          "top": 127,
+          "width": 597,
+          "height": 79
+        },
+        {
+          "key": "flangeWidth",
+          "text": "100 мм",
+          "size": 56,
+          "center": 814,
+          "top": 884,
+          "left": 717,
+          "width": 179,
+          "height": 43
+        },
+        {
+          "key": "webThickness",
+          "text": "6,5 мм",
+          "size": 56,
+          "left": 1172,
+          "top": 1245,
+          "width": 165,
+          "height": 50
+        },
+        {
+          "key": "flangeThickness",
+          "text": "11 мм",
+          "size": 56,
+          "left": 1980,
+          "top": 1010,
+          "halo": true,
+          "width": 131,
+          "height": 41
+        },
+        {
+          "key": "height",
+          "text": "300 мм",
+          "size": 56,
+          "center": 1390,
+          "top": 1431,
+          "left": 1295,
+          "width": 191,
+          "height": 44
+        },
+        {
+          "key": "length",
+          "text": "12 м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1568,
+          "width": 85,
+          "height": 32
+        },
+        {
+          "key": "mass",
+          "text": "31,80 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1634,
+          "width": 210,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
       "output": "public/images/catalog/shveller/shveller-30-clean.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
-      "bytes": 1104106,
-      "sha256": "acc2180416c58e0864e0444b53b4840657a25e19f23cbba70781d9a5cc176912"
+      "bytes": 1107690,
+      "sha256": "d95a8eb119b24e496b5572cc1fe21fd317c0460824b9109e4ca01f2b0e59f4de"
     },
     {
       "id": "rozmet-2248",
@@ -829,12 +1739,84 @@
         "length",
         "mass"
       ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "Швеллер № 40",
+          "size": 84,
+          "weight": 700,
+          "left": 136,
+          "top": 127,
+          "width": 600,
+          "height": 79
+        },
+        {
+          "key": "flangeWidth",
+          "text": "115 мм",
+          "size": 56,
+          "center": 814,
+          "top": 884,
+          "left": 733,
+          "width": 163,
+          "height": 42
+        },
+        {
+          "key": "webThickness",
+          "text": "8 мм",
+          "size": 56,
+          "left": 1172,
+          "top": 1245,
+          "width": 123,
+          "height": 44
+        },
+        {
+          "key": "flangeThickness",
+          "text": "13,5 мм",
+          "size": 56,
+          "left": 1980,
+          "top": 1010,
+          "halo": true,
+          "width": 187,
+          "height": 51
+        },
+        {
+          "key": "height",
+          "text": "400 мм",
+          "size": 56,
+          "center": 1390,
+          "top": 1431,
+          "left": 1293,
+          "width": 194,
+          "height": 43
+        },
+        {
+          "key": "length",
+          "text": "12 м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1568,
+          "width": 85,
+          "height": 32
+        },
+        {
+          "key": "mass",
+          "text": "48,30 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1634,
+          "width": 221,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
       "output": "public/images/catalog/shveller/shveller-40-clean.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
-      "bytes": 1103908,
-      "sha256": "0d7ee59c007b971fcc4ccc16074649d005927bfabe08a30b944c26eab6ca3073"
+      "bytes": 1103520,
+      "sha256": "bdd2a179d52ea7d7dc89516580d2bdfa61cafd870135687403139b17c6e45e16"
     }
   ]
 }

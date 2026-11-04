@@ -10,7 +10,7 @@ import {ChannelProductPreview} from "./ChannelProductPreview";
 import {ProductImageViewer} from "./ProductImageViewer";
 import {formatUnitPrice} from "@/lib/currency";
 import {formatNumber} from "@/lib/numberFormat";
-import {formatAngleSpecificationValue} from "@/lib/anglePresentation";
+import {formatAngleSpecificationValue, getAngleProductSpecifications} from "@/lib/anglePresentation";
 import {getSquareProductSpecifications} from "@/lib/squarePresentation";
 import {Button} from "@/components/ui/Button";
 import {ResetFiltersButton} from "./ResetFiltersButton";
@@ -126,7 +126,8 @@ function ReferenceProductPreview({variant, compact = false, isChannel}: {variant
 }
 
 function VariantSpecifications({variant, showDetails = true}: {variant: ProductVariant; showDetails?: boolean}) {
-  const specifications = (variant.categoryId === "rozmet-cat-kvadrat" ? getSquareProductSpecifications(variant) : variant.specifications)
+  const specifications = (variant.categoryId === "rozmet-cat-kvadrat" ? getSquareProductSpecifications(variant)
+    : variant.categoryId === "rozmet-cat-ugolok" ? getAngleProductSpecifications(variant) : variant.specifications)
     .filter(s => !["Полное обозначение", "Условия цены", "Условия оплаты"].includes(s.name))
     .map(s => variant.categoryId === "rozmet-cat-ugolok" ? {...s, value: formatAngleSpecificationValue(s.value)} : s);
   return <>
