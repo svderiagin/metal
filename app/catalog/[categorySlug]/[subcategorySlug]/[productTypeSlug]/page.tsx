@@ -85,10 +85,10 @@ export default async function ProductTypePage({params}: Props) {
         </div>
         <div className="min-w-0">
           <div className="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-5 shadow-sm sm:p-6 lg:p-8">
-            <p className="text-sm font-bold uppercase tracking-[0.16em] text-red-700 dark:text-red-400">
+            <p className="text-eyebrow uppercase text-red-700 dark:text-red-400">
               Тип продукции
             </p>
-            <h1 className="mt-2 break-words text-3xl font-black sm:text-4xl">{rebarHeadings[productType.subcategoryId] ?? productType.name}</h1>
+            <h1 className="mt-2 break-words text-page-title">{rebarHeadings[productType.subcategoryId] ?? productType.name}</h1>
             {productType.imageUrl && !productType.imageUrl.endsWith(".svg") &&
               <ProductImageViewer src={productType.imageUrl} name={productType.name}/>}
             <CatalogDescription description={productType.description}/>

@@ -16,6 +16,9 @@ const eslintConfig = defineConfig([
     "brokinvest.ru/**",
     ".tmp/**",
     "output/**",
+    "test-results/**",
+    "playwright-report/**",
+    "coverage/**",
   ]),
 ]);
 

@@ -18,16 +18,16 @@ export function Header() {
           </Link>
         </PageContainer>
       </div>
-      <PageContainer className="flex items-center gap-2 py-4 sm:gap-4 sm:py-5">
-        <Link href="/" className="shrink-0 rounded-sm">
-          <span className="block text-xl font-black tracking-wider sm:text-2xl">
+      <PageContainer className="flex flex-wrap items-center gap-2 py-4 sm:gap-4 sm:py-5">
+        <Link href="/" className="max-w-full shrink-0 rounded-sm">
+          <span className="block text-xl font-bold tracking-wider sm:text-2xl">
             ООО <span className="text-red-600">РВБ</span>
           </span>
           <span className="hidden text-xs text-slate-400 sm:block">
             Металлоконструкции и металлопрокат
           </span>
         </Link>
-        <div className="ml-auto flex items-center gap-2 sm:gap-3">
+        <div className="ml-auto flex max-w-full flex-wrap items-center gap-2 sm:gap-3">
           <ThemeSwitch/>
           <Link
             href="/#request"

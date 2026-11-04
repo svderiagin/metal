@@ -12,7 +12,7 @@ export function ServicesSection() {
             key={service.id}
             className="flex gap-5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-5 shadow-sm sm:p-6"
           >
-            <span className="text-2xl font-black text-red-700 dark:text-red-400">{service.marker}</span>
+            <span className="text-2xl font-bold text-red-700 dark:text-red-400">{service.marker}</span>
             <div>
               <h3 className="font-bold">{service.name}</h3>
               <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">{service.description}</p>

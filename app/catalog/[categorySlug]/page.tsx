@@ -7,6 +7,7 @@ import {notFound} from "next/navigation";
 import {Breadcrumbs} from "@/components/catalog/Breadcrumbs";
 import {CatalogSidebar} from "@/components/catalog/CatalogSidebar";
 import {CatalogDescription} from "@/components/catalog/CatalogDescription";
+import {CategoryCover} from "@/components/catalog/CategoryCover";
 import {ProductTypeResults} from "@/components/catalog/ProductTypeResults";
 import {ProductVariantCatalog} from "@/components/catalog/ProductVariantCatalog";
 import {ProductImageViewer} from "@/components/catalog/ProductImageViewer";
@@ -47,7 +48,8 @@ export default async function CategoryPage({params}: Props) {
     : category.imageUrl;
   const hasImage = category.id !== "cat-pnf" && !mainImageUrl.endsWith(".svg");
   const introDescription = category.descriptionSections?.intro ?? category.description;
-  const detailedDescription = category.descriptionSections?.details;
+  const useCoverLayout = category.slug === "armatura";
+  const detailedDescription = category.descriptionSections?.details ?? (useCoverLayout ? category.description : undefined);
   const useProductPageLayout = ["shveller", "ugolok", "kvadrat"].includes(category.slug);
 
   if (useProductPageLayout) {
@@ -62,10 +64,10 @@ export default async function CategoryPage({params}: Props) {
           </div>
           <div className="min-w-0">
             <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-900 sm:p-6 lg:p-8">
-              <p className="text-sm font-bold uppercase tracking-[0.16em] text-red-700 dark:text-red-400">
+              <p className="text-eyebrow uppercase text-red-700 dark:text-red-400">
                 Категория
               </p>
-              <h1 className="mt-2 break-words text-3xl font-black sm:text-4xl">{category.name}</h1>
+              <h1 className="mt-2 break-words text-page-title">{category.name}</h1>
               {hasImage && <ProductImageViewer src={mainImageUrl} name={category.name}/>}
               <CatalogDescription description={introDescription}/>
             </div>
@@ -73,7 +75,7 @@ export default async function CategoryPage({params}: Props) {
           <ProductVariantCatalog variants={variants} categorySlug={category.slug}/>
           <div className="min-w-0 lg:col-start-2">
             {detailedDescription && <section className="max-w-[800px]" aria-labelledby={`${category.id}-details-heading`}>
-              <h2 id={`${category.id}-details-heading`} className="text-2xl font-bold leading-tight">
+              <h2 id={`${category.id}-details-heading`} className="text-section-title leading-tight">
                 {category.descriptionSections?.title ?? `Подробнее о категории «${category.name}»`}
               </h2>
               <CatalogDescription description={detailedDescription} variant="categoryDetails" className="mt-4"/>
@@ -91,27 +93,29 @@ export default async function CategoryPage({params}: Props) {
 
   return (
     <PageContainer className="py-8 sm:py-10 lg:py-12">
-      {hasImage && <DesktopImagePreload src={catalogImageUrl(mainImageUrl)} sizes={imageSizes}/>}
+      {hasImage && !useCoverLayout && <DesktopImagePreload src={catalogImageUrl(mainImageUrl)} sizes={imageSizes}/>}
       <Breadcrumbs items={[{label: "Каталог", href: "/catalog"}, {label: category.name}]}/>
       <div className="grid gap-7 lg:grid-cols-[280px_1fr]">
         <Suspense fallback={<div className="h-96 animate-pulse rounded-xl bg-slate-200 dark:bg-slate-700"/>}>
           <CatalogSidebar activeSlug={category.slug}/>
         </Suspense>
         <div className="min-w-0">
-          <div className={`grid gap-x-6 gap-y-4 ${hasImage ? "md:grid-cols-[minmax(0,1fr)_320px] xl:grid-cols-[minmax(0,1fr)_360px]" : ""}`}>
-            <h1 className={`text-[1.625rem] font-bold leading-[1.2] sm:text-3xl ${category.slug === "shtaketnik" ? "text-red-700 dark:text-red-400" : ""}`}>{category.name}</h1>
+          {useCoverLayout ? <CategoryCover name={category.name} imageUrl={mainImageUrl}
+            summary={category.shortDescription} descriptionId={`${category.id}-details-heading`}/>
+          : <div className={`grid gap-x-6 gap-y-4 ${hasImage ? "md:grid-cols-[minmax(0,1fr)_320px] xl:grid-cols-[minmax(0,1fr)_360px]" : ""}`}>
+            <h1 className={`text-page-title ${category.slug === "shtaketnik" ? "text-red-700 dark:text-red-400" : ""}`}>{category.name}</h1>
             {hasImage && <div className="relative aspect-[2/1] w-full overflow-hidden rounded-xl bg-white md:col-start-2 md:row-span-2 md:row-start-1 md:self-center">
               <Image src={catalogImageUrl(mainImageUrl)} alt={category.name} fill
                 sizes={imageSizes}
                 className="object-contain object-center"/>
             </div>}
             <CatalogDescription description={introDescription} variant="category" className="md:col-start-1"/>
-          </div>
+          </div>}
           {category.directProducts
             ? <div className="mt-8 min-w-0 space-y-7"><ProductVariantCatalog variants={variants} categorySlug={category.slug}/></div>
             : <ProductTypeResults productTypes={productTypes} variants={variants}/>}
           {detailedDescription && <section className="mt-12 max-w-[800px]" aria-labelledby={`${category.id}-details-heading`}>
-            <h2 id={`${category.id}-details-heading`} className="text-2xl font-bold leading-tight">
+            <h2 id={`${category.id}-details-heading`} className="text-section-title scroll-mt-8 leading-tight">
               {category.descriptionSections?.title ?? `Подробнее о категории «${category.name}»`}
             </h2>
             <CatalogDescription description={detailedDescription} variant="categoryDetails" className="mt-4"/>

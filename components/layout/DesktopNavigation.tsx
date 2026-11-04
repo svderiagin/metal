@@ -11,10 +11,10 @@ export function DesktopNavigation() {
       <PageContainer>
         <ul className="flex w-full">
           {mainNavigation.map((item) => (
-            <li key={item.href} className="flex-1 border-r border-slate-700 first:border-l">
+            <li key={item.href} className="min-w-0 flex-1 border-r border-slate-700 first:border-l">
               <Link
                 href={item.href}
-                className="flex min-h-12 items-center justify-center px-4 py-3 text-center text-sm font-semibold whitespace-nowrap text-slate-200 transition-colors hover:bg-red-700 hover:text-white"
+                className="flex min-h-12 items-center justify-center px-4 py-3 text-center text-sm font-semibold text-slate-200 transition-colors hover:bg-red-700 hover:text-white"
               >
                 {item.label}
               </Link>

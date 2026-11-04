@@ -1,0 +1,68 @@
+@theme inline {
+  --font-sans: var(--font-inter), Arial, "Helvetica Neue", sans-serif;
+}
+
+@theme {
+  --text-xs: 0.8125rem;
+  --text-xs--line-height: 1.5;
+  --text-sm: 0.9375rem;
+  --text-sm--line-height: 1.6;
+  --text-base: 1rem;
+  --text-base--line-height: 1.625;
+
+  --text-page-title: 1.75rem;
+  --text-page-title--line-height: 1.25;
+  --text-page-title--letter-spacing: -0.015em;
+  --text-page-title--font-weight: 700;
+  --text-section-title: 1.5rem;
+  --text-section-title--line-height: 1.3;
+  --text-section-title--letter-spacing: -0.01em;
+  --text-section-title--font-weight: 600;
+  --text-card-title: 1.125rem;
+  --text-card-title--line-height: 1.45;
+  --text-card-title--font-weight: 600;
+  --text-eyebrow: 0.8125rem;
+  --text-eyebrow--line-height: 1.5;
+  --text-eyebrow--letter-spacing: 0.06em;
+  --text-eyebrow--font-weight: 600;
+}
+
+@layer base {
+  body {
+    font-family: var(--font-inter), Arial, "Helvetica Neue", sans-serif;
+    font-size: var(--text-base);
+    font-weight: 400;
+    line-height: var(--text-base--line-height);
+    font-optical-sizing: auto;
+    overflow-wrap: anywhere;
+  }
+
+  :is(h1, h2, h3, h4) {
+    text-wrap: balance;
+  }
+
+  :is(strong, b) {
+    font-weight: 600;
+  }
+
+  :is(button, input, textarea, select) {
+    font: inherit;
+  }
+
+  :is(input:not([type="checkbox"]):not([type="radio"]), textarea, select) {
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+
+  :is(table, output, input[inputmode="decimal"], input[type="number"]) {
+    font-variant-numeric: lining-nums tabular-nums;
+  }
+}
+
+@media (min-width: 40rem) {
+  :root {
+    --text-page-title: 2rem;
+    --text-section-title: 1.75rem;
+  }
+}

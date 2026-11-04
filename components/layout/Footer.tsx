@@ -10,7 +10,7 @@ export function Footer() {
     <footer className="mt-auto border-t-4 border-red-700 bg-slate-950 text-slate-300">
       <PageContainer className="grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-12 lg:py-14">
         <div>
-          <p className="text-xl font-black text-white">
+          <p className="text-xl font-bold text-white">
             OOO <span className="text-red-600">РВБ</span>
           </p>
           <p className="mt-4 text-sm leading-6">

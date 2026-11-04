@@ -3,7 +3,7 @@ import type {ButtonHTMLAttributes, MouseEventHandler, ReactNode} from "react";
 
 const styles = [
   "inline-flex min-h-11 items-center justify-center rounded-lg px-5 py-2.5",
-  "text-center text-sm font-bold",
+  "text-center text-sm font-semibold",
   "transition-colors",
   "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-600 dark:focus-visible:outline-red-300",
   "disabled:pointer-events-none disabled:opacity-50",

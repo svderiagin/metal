@@ -99,7 +99,7 @@ export function CatalogSearch({
       {query && (
         <div className="mt-8" aria-live="polite">
           <div className="mb-5 flex flex-wrap items-baseline justify-between gap-3">
-            <h2 className="text-xl font-black">Результаты поиска</h2>
+            <h2 className="text-xl font-bold">Результаты поиска</h2>
             <p className="text-sm text-slate-600 dark:text-slate-300">
               По запросу «{query}» найдено товаров: {search.total}
             </p>

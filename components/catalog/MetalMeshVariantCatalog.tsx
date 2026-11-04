@@ -162,7 +162,7 @@ function MetalMeshItem({variant, view}: {variant: MetalMeshVariant; view: "table
     </span>
   </label>;
   const totalOutput = <output aria-label={`Сумма заказа для ${variant.name}`} aria-live="polite"
-    className={total === null ? "text-xs text-slate-400" : "font-semibold tabular-nums text-slate-900 dark:text-slate-100"}>
+    className={total === null ? "text-xs text-slate-500 dark:text-slate-400" : "font-semibold tabular-nums text-slate-900 dark:text-slate-100"}>
     {total === null ? "Укажите количество" : formatCurrency(total)}
   </output>;
   const action = <Button type="button" disabled={!hydrated || !valid || saved} onClick={submit}
@@ -218,7 +218,7 @@ function MeshFilter({label, value, values, onChange}: {
 }
 
 function VariantDetail({label, value}: {label: string; value: string}) {
-  return <div><dt className="text-slate-500 dark:text-slate-400">{label}</dt><dd className="mt-1 font-medium">{value}</dd></div>;
+  return <div><dt className="text-slate-600 dark:text-slate-400">{label}</dt><dd className="mt-1 font-medium">{value}</dd></div>;
 }
 
 function uniqueValues(variants: MetalMeshVariant[], specification: string) {

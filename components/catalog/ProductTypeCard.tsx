@@ -39,7 +39,7 @@ export function ProductTypeCard({
 
         <div className="flex flex-1 flex-col px-5 pb-5 pt-4 sm:px-6 sm:pb-6 sm:pt-5">
           <div className="flex-1">
-            <h2 className="text-lg font-bold text-slate-950 dark:text-slate-100">{productType.name}</h2>
+            <h2 className="text-card-title text-slate-950 dark:text-slate-100">{productType.name}</h2>
             <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
               {productType.shortDescription}
             </p>

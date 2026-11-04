@@ -11,6 +11,7 @@
   min-width: 75rem;
   table-layout: fixed;
   border-collapse: collapse;
+  line-height: 1.5;
 }
 
 .table :is(th, td) {

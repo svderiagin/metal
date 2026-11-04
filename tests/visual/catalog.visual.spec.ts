@@ -10,6 +10,13 @@ test("home and catalog first-screen layout", async ({page}) => {
   }
 });
 
+test("armatura category cover and introduction", async ({page}) => {
+  await page.goto("/catalog/armatura");
+  await expect(page.getByRole("heading", {level: 1, name: "Арматура", exact: true})).toBeVisible();
+  await settleImages(page);
+  await expect(page).toHaveScreenshot("armatura-category.png");
+});
+
 for (const family of ["shveller", "ugolok", "kvadrat", "armatura", "balka", "profile", "vgp", "profnastil", "mesh"] as const) {
   test(`${family} table or card geometry`, async ({page}) => {
     await openProduct(page, samples[family]);

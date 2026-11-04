@@ -10,10 +10,10 @@ export const metadata: Metadata = {
 };
 export default function ContactsPage() {
   return <PageContainer className="py-8 sm:py-10 lg:py-12"><Breadcrumbs items={[{label: "Контакты"}]}/><h1
-    className="text-3xl font-black">Контакты</h1>
+    className="text-page-title">Контакты</h1>
     <section id="details" className="mt-7 scroll-mt-6">
-      <div className="max-w-3xl"><p className="text-xs font-bold uppercase tracking-[0.18em] text-red-700 dark:text-red-400">Официальная информация</p>
-        <h2 className="mt-2 text-2xl font-black sm:text-3xl">Реквизиты компании</h2>
+      <div className="max-w-3xl"><p className="text-eyebrow uppercase text-red-700 dark:text-red-400">Официальная информация</p>
+        <h2 className="text-section-title mt-2">Реквизиты компании</h2>
         <p className="mt-3 leading-7 text-slate-600 dark:text-slate-300">Юридические и банковские данные организации.</p></div>
       <div className="mt-6 grid gap-5 md:grid-cols-2">
         <DetailsCard title="Компания" rows={[
@@ -35,7 +35,7 @@ export default function ContactsPage() {
     <section className="mt-8 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-5 shadow-sm sm:p-6 md:p-8">
       <div className="grid gap-7 lg:grid-cols-[minmax(0,.8fr)_minmax(0,1.2fr)] lg:gap-10">
         <div>
-          <h2 className="text-2xl font-black">Связаться с нами</h2>
+          <h2 className="text-section-title">Связаться с нами</h2>
           <p className="mt-3 leading-7 text-slate-600 dark:text-slate-300">Заполните форму, чтобы обсудить заказ, поставку или получить консультацию.</p>
         </div>
         <ContactForm/>

@@ -14,7 +14,7 @@ export function CartSummary() {
           <dt>Позиций</dt>
           <dd>{lineItemCount}</dd>
         </div>
-        <div className="flex justify-between gap-4 border-t border-slate-200 dark:border-slate-700 pt-4 text-lg font-black">
+        <div className="flex justify-between gap-4 border-t border-slate-200 dark:border-slate-700 pt-4 text-lg font-bold">
           <dt>Сумма</dt>
           <dd>{invalid ? "Требует уточнения" : formatCurrency(totalAmount)}</dd>
         </div>

@@ -83,13 +83,11 @@ test('the profile-sheet category uses the supplied guidance and hides only its p
   assert.match(categoryPage, /category\.id !== "cat-pnf"/);
   assert.match(categoryPage, /category\.descriptionSections\?\.title/);
   assert.match(categoryPage, /mt-12 max-w-\[800px\]/);
-  assert.match(categoryPage, /text-2xl font-bold/);
   assert.match(categoryPage, /variant="categoryDetails"/);
   const descriptionComponent = fs.readFileSync('components/catalog/CatalogDescription.tsx', 'utf8');
   assert.match(descriptionComponent, /list-disc/);
   assert.match(descriptionComponent, /part\.slice\(2, -2\)/);
-  assert.match(descriptionComponent, /max-w-\[80ch\]/);
-  assert.match(descriptionComponent, /max-w-\[800px\] space-y-4 text-base font-normal leading-\[1\.6\]/);
+  // Font loading, readable sizes and enlarged text are checked in tests/e2e/typography.spec.ts.
   assert.match(descriptionComponent, /variant === "category" \|\| variant === "categoryDetails" \? \[block\] : paragraphs\(block\)/);
   const productTypeCard = fs.readFileSync('components/catalog/ProductTypeCard.tsx', 'utf8');
   assert.match(productTypeCard, /standard !== "Уточняется"/);

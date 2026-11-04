@@ -70,7 +70,7 @@ function TonnageMeasuredVariantItem({
   const estimatedTotal = parsedTons === null || pricePerTon === undefined || variant.quoteOnly ? null : calculateLineTotal(parsedTons, pricePerTon);
   const totalLabel = variant.quoteOnly || pricePerTon === undefined ? "По запросу" : estimatedTotal === null ? "Укажите объём" : `${variant.priceQualifier === "from" ? "от " : ""}${formatCurrency(estimatedTotal)}`;
   const totalClassName = estimatedTotal === null
-    ? "text-xs font-normal text-[color-mix(in_oklab,var(--color-slate-300),var(--color-slate-400))]"
+    ? "text-xs font-normal text-slate-500 dark:text-slate-400"
     : "font-semibold tabular-nums text-slate-900 dark:text-slate-100";
   const enteredQuantity = draft === null && cartLine && !savedMeasurement ? enteredTons : inputMode === "meter" ? enteredMeters : enteredTons;
   const isSaved = !!cartLine && !cartLine.invalidReason && parsedTons !== null && parsedTons > 0
@@ -276,7 +276,7 @@ function OrderInput({
 function VariantDetail({label, value}: {label: string; value: string}) {
   return (
     <div>
-      <dt className="text-slate-500 dark:text-slate-400">{label}</dt>
+      <dt className="text-slate-600 dark:text-slate-400">{label}</dt>
       <dd className="mt-1 font-medium">{value}</dd>
     </div>
   );

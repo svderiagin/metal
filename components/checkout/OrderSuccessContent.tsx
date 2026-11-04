@@ -17,7 +17,7 @@ export function OrderSuccessContent() {
       className="mx-auto flex size-16 items-center justify-center rounded-full bg-green-100 dark:bg-green-950/60 text-3xl text-green-700 dark:text-green-300"
       aria-hidden>{order ? "✓" : "i"}
     </div>
-    <h1 className="mt-5 text-3xl font-black">{order ? "Заказ создан" : "Информация о заказе"}</h1>{order === undefined ?
+    <h1 className="mt-5 text-page-title">{order ? "Заказ создан" : "Информация о заказе"}</h1>{order === undefined ?
     <p className="mt-3 text-slate-600 dark:text-slate-300">Загружаем данные заказа…</p> : order ? <><p
         className="mt-3 text-slate-600 dark:text-slate-300">Номер заказа: <strong
         className="text-slate-950 dark:text-slate-100">{order.orderNumber}</strong></p><p

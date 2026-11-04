@@ -5,7 +5,7 @@ description: Edit metal-frontend layout, responsive styling, theme, navigation, 
 
 # Metal Frontend UI
 
-Preserve the existing visual language unless the user requests a redesign: red actions, slate surfaces, Arial, rounded panels, light/dark/system themes. Reuse the nearest existing component rather than adding a UI library.
+Preserve the existing visual language unless the user requests a redesign: red actions, slate surfaces, locally hosted Inter, rounded panels, light/dark/system themes. Reuse the nearest existing component rather than adding a UI library.
 
 ## Find the owner
 
@@ -15,6 +15,7 @@ Preserve the existing visual language unless the user requests a redesign: red a
 | Company facts | `lib/companyDetails.ts`; do not invent contact or commercial details |
 | Home sections/carousel | `components/home/`, `data/hero-slides.ts`; `docs/hero-carousel.md` only for carousel changes |
 | Shared controls | `components/ui/`; catalog controls also use `FilterPanel.module.css`, `RebarTable.module.css` |
+| Typography | `app/typography.css`, `app/layout.tsx`, `app/fonts/`; read `docs/typography.md` when changing fonts, type scale or text density. |
 | Themes | `app/globals.css`, `lib/theme.ts`, `components/layout/ThemeSwitch.tsx`; details: `docs/theme.md` |
 | Product photos/dialog | `CatalogImage.tsx`, `ProductImageViewer.tsx`, `ChannelProductPreview.tsx`, `lib/catalog-image.ts` |
 | Generic product rows/cards | `VariantCatalogResults.tsx`; filters: `GenericProductVariantCatalog.tsx` and `lib/variantCatalog.ts` |
@@ -23,6 +24,7 @@ Preserve the existing visual language unless the user requests a redesign: red a
 
 ## Non-obvious constraints
 
+- Typography uses shared `text-page-title`, `text-section-title`, `text-card-title` and `text-eyebrow` roles. `text-sm` is 15 px and `text-xs` is 13 px; editable controls keep 16 px. Preserve local Cyrillic font loading and tabular figures for quantities/prices. Font changes need native-size text review, font-failure/200% text checks, and deliberate screenshot baseline review. Do not regenerate approved bitmap labels for an interface-font change.
 - Theme initialization runs before paint in `app/layout.tsx`; preserve the stable server snapshot and existing `suppressHydrationWarning` on `html`. Add dark surfaces, borders, text and state colors together. Do not recolor product photos with filters.
 - Use `variant="secondary"` for secondary `Button`/`ButtonLink` controls. Do not append conflicting `text-white` and dark-text utilities to the same element: Tailwind's generated order, not JSX class order, chooses the winner. Check readable labels on both themes.
 - Table and mobile-card markup often coexist in one component. Change both presentations when the request affects shared behavior; scope browser locators to the visible control. Check where the category/sidebar appears before assuming no horizontal overflow means good mobile usability.

@@ -26,8 +26,8 @@ export function CatalogProductDetail({category, variant}: {category: Category; v
       </Suspense>
       <div className="min-w-0">
         <div className="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-5 shadow-sm sm:p-6 lg:p-8">
-          <p className="text-sm font-bold uppercase tracking-[0.16em] text-red-700 dark:text-red-400">Товар</p>
-          <h1 className="mt-2 break-words text-3xl font-black sm:text-4xl">{variant.name}</h1>
+          <p className="text-eyebrow uppercase text-red-700 dark:text-red-400">Товар</p>
+          <h1 className="mt-2 break-words text-page-title">{variant.name}</h1>
           {variant.imageUrls[0] && <ProductImageViewer src={variant.imageUrls[0]} name={variant.name}/>}
           {description && <CatalogDescription description={description}/>}
           {specifications.length > 0 && <section className="mt-8" aria-labelledby="product-specifications-heading">

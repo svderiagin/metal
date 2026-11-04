@@ -79,7 +79,7 @@ export function VariantCatalogResults({visible, categorySlug, resultsCount, curr
                 <div className="mt-4"><VariantSpecifications variant={variant} showDetails={!usesReferenceTable}/></div>
                 <div className="mt-5 flex flex-wrap items-end justify-between gap-4 border-t border-slate-100 dark:border-slate-800 pt-4">
                   <div>
-                    <strong className="text-xl">{variant.quoteOnly ? "Цена по запросу" : `${variant.priceQualifier === "from" ? "от " : ""}${formatUnitPrice(variant.price, variant.priceUnit)}`}</strong>
+                    <strong className="text-xl tabular-nums">{variant.quoteOnly ? "Цена по запросу" : `${variant.priceQualifier === "from" ? "от " : ""}${formatUnitPrice(variant.price, variant.priceUnit)}`}</strong>
                   </div>
                   {showAvailability && <Availability availability={variant.availability}/>}
                 </div>
@@ -131,7 +131,7 @@ function VariantSpecifications({variant, showDetails = true}: {variant: ProductV
     .filter(s => !["Полное обозначение", "Условия цены", "Условия оплаты"].includes(s.name))
     .map(s => variant.categoryId === "rozmet-cat-ugolok" ? {...s, value: formatAngleSpecificationValue(s.value)} : s);
   return <>
-    <dl className="space-y-1 text-sm">{specifications.map((s, i) => <div key={`${s.name}-${i}`}><dt className="inline text-slate-500 dark:text-slate-400">{s.name}: </dt><dd className="inline">{s.value}</dd></div>)}{variant.weight && <div><dt className="inline text-slate-500 dark:text-slate-400">Теоретическая масса: </dt><dd className="inline">{formatNumber(variant.weight.value)} {variant.weight.unit}</dd></div>}</dl>
+    <dl className="space-y-1.5 text-sm">{specifications.map((s, i) => <div key={`${s.name}-${i}`}><dt className="inline text-slate-600 dark:text-slate-400">{s.name}: </dt><dd className="inline font-medium tabular-nums">{s.value}</dd></div>)}{variant.weight && <div><dt className="inline text-slate-600 dark:text-slate-400">Теоретическая масса: </dt><dd className="inline font-medium tabular-nums">{formatNumber(variant.weight.value)} {variant.weight.unit}</dd></div>}</dl>
     {showDetails && variant.id.startsWith("rozmet-") && (variant.description || variant.imageUrls.length > 1) && <details className="mt-3 text-sm">
       <summary className="cursor-pointer font-semibold">Подробнее о товаре</summary>
       {variant.description && <CatalogDescription description={variant.description} className="mt-3"/>}

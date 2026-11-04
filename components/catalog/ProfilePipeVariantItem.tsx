@@ -111,5 +111,5 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
 }
 
 function Detail({label, value}: {label: string; value: string}) {
-  return <div><dt className="text-slate-500 dark:text-slate-400">{label}</dt><dd className="mt-1 font-medium text-slate-800 dark:text-slate-200">{value}</dd></div>;
+  return <div><dt className="text-slate-600 dark:text-slate-400">{label}</dt><dd className="mt-1 font-medium text-slate-800 dark:text-slate-200">{value}</dd></div>;
 }

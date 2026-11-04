@@ -43,7 +43,7 @@ export function CheckoutPageContent() {
             </li>
           ))}
         </ul>
-        <div className="mt-5 flex justify-between gap-4 border-t border-slate-200 dark:border-slate-700 pt-5 text-lg font-black">
+        <div className="mt-5 flex justify-between gap-4 border-t border-slate-200 dark:border-slate-700 pt-5 text-lg font-bold">
           <span>Итого</span>
           <span>{formatCurrency(totalAmount)}</span>
         </div>

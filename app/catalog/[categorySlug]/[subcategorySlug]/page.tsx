@@ -83,7 +83,7 @@ export default async function SubcategoryPage({params}: Props) {
             <CatalogSidebar activeSlug={category.slug}/>
           </Suspense>
           <div className="min-w-0">
-            <h1 className="text-3xl font-black">{currentSubcategory.name}</h1>
+            <h1 className="text-page-title">{currentSubcategory.name}</h1>
             <CatalogDescription description={currentSubcategory.description}/>
             <ProductTypeResults productTypes={productTypes} variants={variants}/>
           </div>
