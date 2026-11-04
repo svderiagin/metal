@@ -28,7 +28,7 @@ jobs:
       - run: npx tsc --noEmit --incremental false
       - run: npm run test:unit
       - run: npm run test:coverage
-      - run: npm audit --omit=dev
+      - run: npm audit
       - run: npx playwright install --with-deps chromium
       - run: npm run test:build
       - run: npm run test:e2e
