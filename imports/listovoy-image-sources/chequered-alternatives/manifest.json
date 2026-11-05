@@ -1,0 +1,115 @@
+{
+  "selectedOn": "2026-11-04",
+  "status": "source-selection-only",
+  "subject": "Рифлёный стальной лист — дополнительные изображения без разметки",
+  "connectedToStorefront": false,
+  "notes": [
+    "Файлы сохранены без перекодирования, ретуши, обрезки и увеличения; это доступные публичные веб-файлы, не заявленные мастер-файлы камеры.",
+    "Разрешение проверено декодированием фактического файла, а пригодность к разметке — просмотром изображения. Размер файла не равен числу пикселей самого изделия.",
+    "Рисунок рифления, размеры и масса должны соответствовать конкретному товару проекта. Донорская карточка не подтверждает наши характеристики.",
+    "Контактный лист служит для выбора. Все исходные файлы сохранены отдельно."
+  ],
+  "images": [
+    {
+      "key": "cronvall",
+      "file": "01-cronvall-whole-sheet.png",
+      "supplier": "Cronvall",
+      "page": "https://cronvall.de/variant/62908",
+      "image": "https://storage.googleapis.com/retool_image_cdn/variant/62908/2602b0e4-8fa8-4310-9ae2-52c0992fec42.png",
+      "use": "whole-sheet",
+      "review": "Целый лист, белый фон, четыре края и выраженная толщина. По внешнему виду визуализация; источник прямо называет кадр символической иллюстрацией. Удобен для подписей длины, ширины и толщины, но не подтверждает фактуру поставляемой партии. Не называть документальной фотографией.",
+      "number": 1,
+      "format": "png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1445049,
+      "sha256": "7b02f26dbe724320a7960a4c6bc44b3930a3c825c4a160b8e03aa2a4f926d2c5"
+    },
+    {
+      "key": "epicentr",
+      "file": "02-epicentr-whole-sheet.jpg",
+      "supplier": "Эпицентр",
+      "page": "https://epicentrk.ua/shop/mplc-list-stalevij-riflenij-garacekatanij-1500h1000-tovsina-4-0-mm-standart-s235jr-g-k-1-st-2604038147-1597-1f03196a-c169-6b1a-b482-9f34dc7a506d.html",
+      "image": "https://cdn.27.ua/sc--media--prod/default/68/8d/87/688d870d-091c-4b7c-a901-ee0889e9fb8f.jpg",
+      "use": "whole-sheet",
+      "review": "Один целый лист на белом фоне, ровный ракурс для длины и ширины; рисунок хорошо различим. Толщина почти не видна, поэтому для её выносок слабее первого варианта. Карточка указывает стальной горячекатаный лист S235JR; числовые характеристики источника не переносить на наши позиции.",
+      "number": 2,
+      "format": "jpeg",
+      "width": 1280,
+      "height": 1280,
+      "bytes": 103871,
+      "sha256": "8426a1e6022075842c284158857ff7608d78b06da02ce7ec7596db596baac9e5"
+    },
+    {
+      "key": "cutmy-1",
+      "file": "03-cutmy-steel-sample.jpg",
+      "supplier": "Cut My",
+      "page": "https://www.cutmy.co.uk/metal/mild-steel/sheets/checker-plate/",
+      "image": "https://www.cutmy.co.uk/media/catalog/product/c/h/checkerplate.jpg",
+      "use": "whole-sample",
+      "review": "Реальный вид небольшого стального образца: целый контур и передняя кромка на белом фоне. Рифли крупно, есть окалина и бурые следы окисления. Подходит для толщины и формы сечения, но не показывает пропорции целого длинного листа; менее аккуратен для основной карточки.",
+      "number": 3,
+      "format": "jpeg",
+      "width": 1000,
+      "height": 1000,
+      "bytes": 99753,
+      "sha256": "0d48a7a21f98b977775032484145133f9fa916c49b840d8304779431eeb32805"
+    },
+    {
+      "key": "christmas-steel",
+      "file": "04-christmas-steel-whole-sheet.png",
+      "supplier": "Christmas Stockholders",
+      "page": "https://www.christmas-steel.co.uk/steel/chequer-plate.html",
+      "image": "https://www.christmas-steel.co.uk/images/steel/chequer-plate.png",
+      "use": "whole-sheet-backup",
+      "review": "Целый тёмный стальной лист на белом фоне, без разметки и посторонних предметов. Ракурс удобен для длины и ширины. Резервный вариант: 800×800, фактура при увеличении уступает более крупным файлам.",
+      "number": 4,
+      "format": "png",
+      "width": 800,
+      "height": 800,
+      "bytes": 343396,
+      "sha256": "0d129e630c28705dc34188188d3af7ea51d2432b542d3514ae94e2b1b76a91fd"
+    },
+    {
+      "key": "moris",
+      "file": "05-moris-surface-detail.webp",
+      "supplier": "MORIS",
+      "page": "https://moris.eu/pl/product/SSHSHTPL31/blachy-cienkie-ryflowane",
+      "image": "https://api.moris.eu/medias/2560Wx1440H-SSHSHTPL31-1.webp?context=bWFzdGVyfGF6dXJlaW1hZ2VzfDI1NzQ1OHxpbWFnZS93ZWJwfGFEWTJMMmhoWWk4eE1ERTJPRGswT0RjNE5URTRNaTh5TlRZd1YzZ3hORFF3U0Y5VFUwaFRTRlJRVERNeFh6RXVkMlZpY0F8OTU5ZmI2N2Q1ZDQ5YjdkOTgzZTI4ODgxYjEzYmY4MTAzMzJlYmYyODdiZTUxMTI2MmUzOGI5YzM4N2JkMmRlNQ",
+      "use": "surface-and-edge-detail",
+      "review": "Крупный файл 2560×1920: фрагмент листа, чёткая фактура и передняя кромка на белом фоне. Для пояснения рифления и толщины, не для подписей полной длины и ширины: контур листа обрезан исходником. Источник относит карточку к стали S235JR/S235JR+N и предупреждает об иллюстративном характере изображения.",
+      "number": 5,
+      "format": "webp",
+      "width": 2560,
+      "height": 1920,
+      "bytes": 257458,
+      "sha256": "936e5af5bee46d92e690f6cb4708a551504d704972f8a2b458e68aed3fb0da59"
+    }
+  ],
+  "rejected": [
+    {
+      "source": "Steel and Pipes",
+      "reason": "1330×1330, но дальний контур изделия обрезан; преимущество перед выбранными целыми листами отсутствует."
+    },
+    {
+      "source": "Orlandi",
+      "reason": "1000×1000, целый контур и хороший светлый ракурс, но на проверенной карточке материал явно не уточнён; не включён в стальную подборку."
+    },
+    {
+      "source": "Marketstal",
+      "reason": "2802×2802, но стопка листов, складской фон и надписи на металле; не подходит для чистой размерной иллюстрации."
+    },
+    {
+      "source": "thyssenkrupp Schulte",
+      "reason": "Проверенные кадры показывают угол и фактуру без полного контура; для этих целей выбран более крупный MORIS."
+    },
+    {
+      "source": "Sartorius",
+      "reason": "1920×1920, но линейный рисунок вместо изображения металла; не включён в основную подборку."
+    },
+    {
+      "source": "Metalpro / Metallco / The Metal Store",
+      "reason": "Кадры показывают фрагмент, а не целый лист; MORIS даёт более крупный файл для деталей."
+    }
+  ]
+}

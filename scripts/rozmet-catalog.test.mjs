@@ -21,12 +21,19 @@ const {catalogProductPath}=readProjectData('lib/catalogLinks.ts',cache);
 const {revalidateCartPrice}=readProjectData('lib/cartPricing.ts',cache);
 const {createCartLines}=readProjectData('lib/cart.ts',cache);
 const protectedIds=new Set(baseline.categories.map(item=>item.id));
+const archivedPvlIds=new Set(['rozmet-26569','rozmet-28931','rozmet-28971']);
 const squareDisplayText = text => text
   .replaceAll('Квадрат металлический', 'Квадрат стальной')
   .replaceAll('квадрат металлический', 'квадрат стальной')
   .replaceAll('Металлический квадрат', 'Стальной квадрат')
   .replaceAll('металлический квадрат', 'стальной квадрат')
   .replaceAll('металлического квадрата', 'стального квадрата');
+const sheetDisplayNames = new Map([
+  ['rozmet-sub-listovoy-prokat-galvanized-steel-sheet', 'Лист оцинкованный'],
+  ['rozmet-sub-listovoy-prokat-list-ocynkovannyj', 'Лист холоднокатаный'],
+  ['rozmet-sub-listovoy-prokat-list-riflennyj', 'Лист рифлёный'],
+  ['rozmet-sub-listovoy-prokat-list-goryachekatanyj', 'Лист горячекатаный'],
+]);
 
 test('re-import from saved evidence is identical and does not duplicate products',()=>{
   const temporary=fs.mkdtempSync(path.join(os.tmpdir(),'metal-rozmet-import-'));
@@ -59,6 +66,8 @@ test('every discovered source section and unique product is imported once under 
   assert.equal(imported.categories.length,source.roots.length);
   assert.equal(imported.subcategories.filter(item=>!item.internal).length,source.sections.length-source.roots.length);
   assert.equal(imported.products.length,source.products.length);
+  assert.deepEqual(Array.from(productVariants.filter(item=>item.id.startsWith('rozmet-')),item=>item.id),
+    imported.products.filter(item=>!archivedPvlIds.has(item.id)).map(item=>item.id));
   for(const key of ['id','slug','sku']) assert.equal(new Set(productVariants.map(item=>item[key])).size,productVariants.length,key);
   for(const product of imported.products) {
     const parent=catalog.getSubcategoryById(product.subcategoryId);
@@ -67,8 +76,10 @@ test('every discovered source section and unique product is imported once under 
     assert.equal(parent.categoryId,category.id);
     const section=source.sections.filter(item=>product.sourceReference.startsWith(item.url)).sort((a,b)=>b.url.length-a.url.length)[0];
     assert.ok(section,product.id);
-    assert.equal(parent.name,parent.categoryId==='rozmet-cat-kvadrat'?squareDisplayText(section.name):section.name);
-    assert.ok(catalog.getProductTypeById(product.productTypeId));
+    const sourceName=parent.categoryId==='rozmet-cat-kvadrat'?squareDisplayText(section.name):section.name;
+    assert.equal(imported.subcategories.find(item=>item.id===parent.id).name,sourceName);
+    assert.equal(parent.name,sheetDisplayNames.get(parent.id)??sourceName);
+    assert.equal(catalog.getProductTypeById(product.productTypeId)?.name,parent.name);
   }
 });
 
@@ -121,5 +132,10 @@ test('source piece quantities are integers while metre, square-metre and kilogra
     assert.equal(line.estimatedTotal,price.estimatedTotal);
     if(unit==='square_meter') {assert.equal(line.quantityUnit,'м²');assert.ok(formatUnitPrice(product.price,product.priceUnit).endsWith('/м²'));}
     if(unit==='piece') assert.ok(revalidateCartPrice(product,{quantity:1.5}).invalidReason);
+  }
+  for(const productId of archivedPvlIds) {
+    const [archived]=createCartLines([{productId,quantity:1}]);
+    assert.ok(archived.invalidReason);
+    assert.equal(archived.estimatedTotal,0);
   }
 });

@@ -1,0 +1,13 @@
+Use case: compositing.
+Edit target: input 1, the current approved layout of a steel tread plate on a white 4:3 canvas.
+Input 2 is the original Cronvall source for material detail and clarity only.
+
+Perform a single geometric edit: enlarge the SAME plate by exactly 20% (uniform scale 1.20 in both image axes), with its LEFTMOST metal boundary and LOWEST metal boundary anchored at their current positions. The enlargement must grow toward the RIGHT and UP. Keep the plate orientation, edge angles, flat rectangular shape, thickness proportions, original metallic surface, individual alternating lentil/oval raised tread, reflections and soft contact shadow. No rotation, no perspective change, no reshaping, no extra ridges, no text.
+
+On the final 2400 x 1800 canvas, the scaling pivot is (854,1338), the intersection of the current metal bounding box's left and bottom boundary lines. For every image point use conceptually x_new = 854 + 1.20*(x_old - 854), y_new = 1338 + 1.20*(y_old - 1338).
+Before edit: metal bounding box approximately x=854..2055, y=344..1338.
+After edit: metal bounding box approximately x=854..2295, y=145..1338.
+Thus leave the leftmost metal point at x≈854 and the lowest metal point at y≈1338, move the far upper corner upward to y≈145, and extend the far right corner rightward to x≈2295.
+Approximate projected corner positions after enlargement: near-left (855,1035), near-right/bottom (1565,1335), far upper-left (1770,145), far upper-right (2295,260). These are layout constraints, not annotations.
+
+Output: clean landscape 4:3 canvas, ideally 2400 x 1800 pixels, white background, entire product perimeter and all four corners visible. Keep clear white heading space in upper-left and property rows in lower-left, and the blank area beneath the metal for future width/thickness dimension lines. No writing, no numbers, no lines, no arrows, no guides, no ruler, no logo, no watermark, no extra objects. The user will add all markup later.

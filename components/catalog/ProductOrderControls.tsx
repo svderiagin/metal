@@ -11,7 +11,9 @@ import {formatQuoteProductName} from "@/lib/quoteRequest";
 import styles from "./FilterPanel.module.css";
 import tableStyles from "./RebarTable.module.css";
 
-export function ProductOrderControls({variant, view, referenceStyle = false}: {variant: ProductVariant; view: "table" | "card"; referenceStyle?: boolean}) {
+export function ProductOrderControls({variant, view, referenceStyle = false, showUnit = !referenceStyle}: {
+  variant: ProductVariant; view: "table" | "card"; referenceStyle?: boolean; showUnit?: boolean;
+}) {
   const {lines, hydrated, addItem, updateQuantity, removeItem} = useCart();
   const line = lines.find(item => item.productId === variant.id);
   const [draft, setDraft] = useState<string | null>(null);
@@ -67,14 +69,18 @@ export function ProductOrderControls({variant, view, referenceStyle = false}: {v
       disabled={!hydrated || saved || removed || (!shouldRemove && (!canPurchase || !valid))}
       className={`${stateClass} ${actionClass}`}>{label}</Button>
   );
+  const inlineUnit = referenceStyle && showUnit;
   const quantityInput = <Input type="number" inputMode={wholeQuantity ? "numeric" : "decimal"} min={0} max={999} step={wholeQuantity ? 1 : "any"} value={value}
         onChange={event => setDraft(event.target.value)}
-        className={`${styles.field} min-w-0 px-2 ${referenceStyle ? "text-center tabular-nums focus:placeholder:text-transparent" : ""}`}
+        className={`${styles.field} min-w-0 ${inlineUnit ? "px-7" : "px-2"} ${referenceStyle ? "text-center tabular-nums focus:placeholder:text-transparent" : ""}`}
         placeholder={referenceStyle ? "0" : undefined}/>;
   const input = (
     <label className="flex min-w-0 flex-col items-start gap-1">
       <span className="sr-only">Количество {variant.name}</span>
-      {referenceStyle ? quantityInput : <>{quantityInput}<span className="text-xs text-slate-500 dark:text-slate-400">{getQuantityUnit(variant)}</span></>}
+      {inlineUnit ? <span className="relative w-full">
+        {quantityInput}
+        <span className="pointer-events-none absolute inset-y-0 right-2 flex items-center text-xs text-slate-600 dark:text-slate-400">{getQuantityUnit(variant)}</span>
+      </span> : <>{quantityInput}{showUnit && <span className="text-xs text-slate-500 dark:text-slate-400">{getQuantityUnit(variant)}</span>}</>}
     </label>
   );
   return view === "table" ? <>

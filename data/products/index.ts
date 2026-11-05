@@ -51,7 +51,7 @@ const retainedProductVariants: ProductVariant[] = [
 
 export const productVariants: ProductVariant[] = [
   ...retainedProductVariants,
-  ...(rozmetCatalog.products as ProductVariant[]).map(applyCatalogOverrides),
+  ...(rozmetCatalog.products as ProductVariant[]).filter(isPublicProduct).map(applyCatalogOverrides),
 ];
 
 function estimateDemoWeight(product: ProductVariantSource): ProductWeight | undefined {

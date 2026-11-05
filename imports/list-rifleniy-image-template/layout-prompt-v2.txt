@@ -1,0 +1,24 @@
+Use case: compositing. Correct ONLY the scale, placement and in-plane orientation of the tread plate on the existing white 4:3 canvas.
+
+Input 1 is the EDIT TARGET: the previous tread-plate layout. It is too large and extends too far left and down.
+Input 2 is the clean steel square-bar composition, the authoritative POSITION reference.
+Input 3 is the same square bar with the owner's approved annotation layout; use it only to understand the negative space required for the heading, dimension arrows and the two lower-left information lines. DO NOT copy any of its text or arrows.
+
+Keep the exact same single flat rectangular grey steel tread plate subject from input 1, with the individual alternating lentil/oval raised ridges, thin straight cut edges, material, reflections and soft contact shadow. Preserve its product identity and proportions. No new shapes, no bars, no raised vertical flange. Make it appreciably smaller and move its nearest cut edge to the same area as the BOTTOM EDGE of the square bar's front face.
+
+Output canvas: landscape 4:3, 2400 × 1800 pixels. Strict placement goals on that canvas:
+- the nearest plate edge runs from about (1140,1185) to (1630,1300); its slope is only about 12–14 degrees down to the right, similar to the lower edge of the square-bar face;
+- the leftmost actual metal point must be approximately x=1135 (47% canvas width), NEVER x=600 or x=800 as in input 1;
+- the lowest actual metal point must be at about y=1300 (72% canvas height), NEVER y=1500;
+- the long sides recede up and to the right; keep the whole plate visible in the right-hand area, approximately within x=1135..2250 and y=370..1300;
+- the far corners may be approximately (1810,370) and (2240,470), with natural perspective consistent with the same plate. Uniformly scale and rotate the same subject rather than stretching or warping it. Slight adjustments to the far-corner coordinates are fine; the near-edge coordinates and clear annotation zones are the priority.
+
+Required empty white space:
+- upper-left heading zone x=120..1250, y=110..240;
+- the entire left half, especially x=900..1080 alongside the nearest metal edge, stays clear for dimension leaders and a thickness label;
+- below the near edge, y=1360..1480 and x=1100..1740, stays clear for a width dimension line;
+- footer properties zone x=120..950 and y=1550..1690 stays fully empty;
+- space alongside the long left edge for a future length dimension.
+The intent is the same placement of the nearest product edges and annotation breathing room as the marked square reference, while keeping the plate identifiable and fully visible.
+
+Add NOTHING to the clean output: no writing, no numbers, no arrows, no dimension lines, no symbols, no labels, no logo, no watermark, no guide rectangles. White neutral studio background, faint realistic contact shadow only.

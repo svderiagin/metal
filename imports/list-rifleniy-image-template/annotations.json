@@ -1,0 +1,201 @@
+{
+  "preparedOn": "2026-11-04",
+  "status": "owner-requested-example-only",
+  "connectedToProductTables": false,
+  "renderer": "imports/list-rifleniy-image-template/render-annotations.mjs",
+  "productId": "rozmet-2202",
+  "productName": "Лист № 4 рифленый",
+  "sourceReference": "https://rozmet.ru/production/listovoy_prokat/list-riflennyj/list-4-rifleniy/",
+  "specifications": [
+    {
+      "name": "Толщина",
+      "value": "4 мм"
+    },
+    {
+      "name": "Текстура листа",
+      "value": "Рифлёный"
+    },
+    {
+      "name": "Вес",
+      "value": "31.4 кг/м2"
+    },
+    {
+      "name": "Размер",
+      "value": "1,5х6 м"
+    }
+  ],
+  "referenceStyle": "imports/kvadrat-image-template/reference-8x8.jpg",
+  "cleanPhoto": {
+    "file": "public/images/catalog/listovoy-prokat/list-rifleniy_2400_1800_original.png",
+    "sha256": "a762354f56d773d448f7cd904c0086c215d5161c667841aeb2c0352d715090e3"
+  },
+  "output": {
+    "file": "public/images/catalog/listovoy-prokat/list-rifleniy-4-1500x6000-marked.png",
+    "width": 2400,
+    "height": 1800,
+    "sha256": "17560b2354f6f995cfb74b9157df89840d5cb3e52c7d8e186fd61fc2036ad0d4"
+  },
+  "typography": {
+    "family": "Inter",
+    "fontFile": "imports/shveller-image-template/fonts/Inter-variable.ttf",
+    "backend": "fontconfig",
+    "textColor": "#41464D",
+    "lineColor": "#59636F",
+    "lineWidth": 4
+  },
+  "labels": [
+    {
+      "key": "title",
+      "text": "Лист рифлёный № 4",
+      "size": 84,
+      "weight": 700,
+      "left": 132,
+      "top": 127,
+      "width": 818,
+      "height": 79
+    },
+    {
+      "key": "length",
+      "text": "6000 мм",
+      "size": 56,
+      "weight": 400,
+      "left": 1102,
+      "top": 472,
+      "width": 225,
+      "height": 43
+    },
+    {
+      "key": "width",
+      "text": "1500 мм",
+      "size": 56,
+      "weight": 400,
+      "left": 1059,
+      "top": 1294,
+      "width": 211,
+      "height": 43
+    },
+    {
+      "key": "thickness",
+      "text": "4 мм",
+      "size": 56,
+      "weight": 400,
+      "left": 503,
+      "top": 1022,
+      "width": 126,
+      "height": 41
+    },
+    {
+      "key": "thickness-caption",
+      "text": "Толщина основания",
+      "size": 32,
+      "weight": 400,
+      "left": 390,
+      "top": 960,
+      "width": 293,
+      "height": 28
+    },
+    {
+      "key": "length-caption",
+      "text": "Длина по каталогу",
+      "size": 44,
+      "weight": 400,
+      "left": 132,
+      "top": 1568,
+      "width": 374,
+      "height": 41
+    },
+    {
+      "key": "length-value",
+      "text": "6 м",
+      "size": 40,
+      "weight": 700,
+      "left": 610,
+      "top": 1568,
+      "width": 62,
+      "height": 29
+    },
+    {
+      "key": "width-caption",
+      "text": "Ширина по каталогу",
+      "size": 44,
+      "weight": 400,
+      "left": 132,
+      "top": 1634,
+      "width": 403,
+      "height": 41
+    },
+    {
+      "key": "width-value",
+      "text": "1,5 м",
+      "size": 44,
+      "weight": 750,
+      "left": 610,
+      "top": 1634,
+      "width": 96,
+      "height": 39
+    }
+  ],
+  "dimensions": [
+    {
+      "key": "length",
+      "from": {
+        "x": 855,
+        "y": 1034
+      },
+      "to": {
+        "x": 1751,
+        "y": 130
+      },
+      "offset": {
+        "x": -89,
+        "y": -88
+      },
+      "normal": {
+        "x": 0.7102424632860833,
+        "y": 0.7039571317525781
+      }
+    },
+    {
+      "key": "width",
+      "from": {
+        "x": 860,
+        "y": 1054
+      },
+      "to": {
+        "x": 1566,
+        "y": 1338
+      },
+      "offset": {
+        "x": -49,
+        "y": 120
+      },
+      "normal": {
+        "x": -0.3732025112267731,
+        "y": 0.9277499046693726
+      }
+    }
+  ],
+  "thickness": {
+    "top": {
+      "x": 855,
+      "y": 1034
+    },
+    "bottom": {
+      "x": 855,
+      "y": 1054
+    },
+    "dimensionX": 730
+  },
+  "verification": {
+    "outsideOverlayChanges": 0,
+    "overlayPixelCount": 58393
+  },
+  "engineeringNotes": [
+    "Длинная сторона обозначена 6000 мм, короткая — 1500 мм; размерные линии параллельны соответствующим кромкам иллюстрации.",
+    "4 мм относится к основанию листа, а не к высоте вместе с рифлями; точки выносок находятся на верхней и нижней плоскости основания у ближнего угла.",
+    "Иллюстрация семейства с номинальными размерами, не масштабный производственный чертёж.",
+    "Масса не добавлена: каталог даёт 31.4 кг/м², что совпадает с массой гладкого основания 4 мм; подтверждения массы рифлёного исполнения нет. Каталожные данные не менялись.",
+    "Владелец разрешил произвольную позицию для демонстрации; выбрана существующая позиция 4 мм, 1500×6000 мм."
+  ],
+  "methodReference": "https://www.tatasteeluk.com/products/hot-rolled/durbar-floor-plate"
+}

@@ -39,6 +39,39 @@ test('all public catalog images exist and decode on case-sensitive filesystems',
   const metadata=await sharp('public'+url).metadata();assert(metadata.width>1&&metadata.height>1,url);
  }
 });
+
+const {isTreadPlate, isGalvanizedSheet, isColdRolledSheet, isPlainHotRolledSheet, getSheetParameters} = readProjectData('lib/sheetPresentation.ts');
+for (const {family, matches, count} of [
+ {family: 'tread-plate', matches: isTreadPlate, count: 4},
+ {family: 'galvanized-sheet', matches: isGalvanizedSheet, count: 3},
+ {family: 'cold-rolled-sheet', matches: isColdRolledSheet, count: 2},
+ {family: 'hot-rolled-sheet', matches: isPlainHotRolledSheet, count: 13},
+]) {
+ test(`${family} products receive distinct source-matched images and retain supplier facts`, async () => {
+  const {applyCatalogOverrides} = readProjectData('lib/catalogOverrides.ts');
+  const originals = read('data/rozmet-catalog.json').products.filter(matches);
+  const illustrations = read(`data/${family}-images.json`).products;
+  assert.equal(originals.length, count);
+  assert.equal(Object.keys(illustrations).length, originals.length);
+  assert.equal(new Set(Object.values(illustrations).map(image => image.imageUrl)).size, originals.length);
+
+  for (const original of originals) {
+   const published = productVariants.find(product => product.id === original.id);
+   const {imageUrls, ...actual} = published;
+   const {imageUrls: oldImages, ...expected} = original;
+   assert.ok(oldImages.length);
+   assert.deepEqual(JSON.parse(JSON.stringify(actual)), expected);
+   assert.equal(imageUrls.length, 1);
+   assert.equal(imageUrls[0], illustrations[original.id].imageUrl);
+   assert.equal(illustrations[original.id].sourceUrl, original.sourceReference);
+   assert.ok(getSheetParameters(published));
+   const {width, height} = await sharp(`public${imageUrls[0]}`).metadata();
+   assert.deepEqual([width, height], [2400, 1800]);
+   const differentSource = {...original, sourceReference: 'https://example.test/another-sheet'};
+   assert.equal(applyCatalogOverrides(differentSource), differentSource);
+  }
+ });
+}
 const evidenceSkip=!report||!inventory||!fs.existsSync('brokinvest.ru')?'Optional supplier evidence is not present in this checkout':false;
 test('copied image bytes match preserved supplier evidence',{skip:evidenceSkip},async()=>{
  const integrated=new Map(report.records.map(r=>[r.targetImage,r.sourceImage]));

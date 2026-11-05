@@ -7,6 +7,7 @@ import {Select} from "@/components/ui/Select";
 import {createCatalogSearchIndex} from "@/lib/search";
 import {useLinkedVariant} from "@/hooks/useLinkedVariant";
 import {getVariantFilterKeys} from "@/lib/variantPresentation";
+import {isIllustratedSheet, sheetFilterKeys} from "@/lib/sheetPresentation";
 import {selectVariants, uniqueAttributeValues, variantFilterLabel, type VariantSort} from "@/lib/variantCatalog";
 import type {ProductAttributeKey, ProductVariant} from "@/types/product";
 import {VariantCatalogResults} from "./VariantCatalogResults";
@@ -18,7 +19,8 @@ export function GenericProductVariantCatalog({
   variants: ProductVariant[];
   categorySlug: string;
 }) {
-  const filterKeys = getVariantFilterKeys(categorySlug);
+  const isSheetCatalog = variants.length > 0 && variants.every(isIllustratedSheet);
+  const filterKeys = isSheetCatalog ? sheetFilterKeys : getVariantFilterKeys(categorySlug);
   const [filters, setFilters] = useState<Partial<Record<ProductAttributeKey, string>>>({});
   const [stockOnly, setStockOnly] = useState(false);
   const [minimumPrice, setMinimumPrice] = useState("");
@@ -128,7 +130,7 @@ export function GenericProductVariantCatalog({
           </label>
       </FilterPanel>
 
-      <VariantCatalogResults visible={visible} categorySlug={categorySlug} resultsCount={results.length}
+      <VariantCatalogResults visible={visible} categorySlug={categorySlug} isSheetCatalog={isSheetCatalog} resultsCount={results.length}
         currentPage={currentPage} pages={pages} onPageChange={setPage} onReset={reset}/>
     </>
   );

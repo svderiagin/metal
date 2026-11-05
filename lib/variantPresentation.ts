@@ -1,5 +1,6 @@
 import type {ProductAttributeKey, ProductVariant} from "@/types/product";
 import {getSquareProductParameters} from "./squarePresentation";
+import {getSheetParameters} from "./sheetPresentation";
 
 const defaultFilterKeys: ProductAttributeKey[] = ["material", "standard", "size", "grade", "length"];
 const filterKeysByCategory: Record<string, ProductAttributeKey[]> = {
@@ -29,6 +30,10 @@ export function getVariantAttribute(
   if (variant.categoryId === "rozmet-cat-kvadrat" && (key === "size" || key === "length")) {
     const square = getSquareProductParameters(variant);
     if (square) return key === "size" ? square.section : square.length;
+  }
+  if (key === "size" || key === "wallThickness") {
+    const sheet = getSheetParameters(variant);
+    if (sheet) return key === "size" ? sheet.format : `${sheet.thickness} мм`;
   }
   return variant.attributes.find((attribute) => attribute.key === key)?.value ?? "—";
 }

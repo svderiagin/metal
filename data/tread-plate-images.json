@@ -1,0 +1,20 @@
+{
+  "products": {
+    "rozmet-28952": {
+      "sourceUrl": "https://rozmet.ru/production/listovoy_prokat/list-riflennyj/list_3_tu_riflenyy/",
+      "imageUrl": "/images/catalog/listovoy-prokat/list-refleniy/list_refleniy_2400_1800_marked.jpg"
+    },
+    "rozmet-2201": {
+      "sourceUrl": "https://rozmet.ru/production/listovoy_prokat/list-riflennyj/list-3-rifleniy/",
+      "imageUrl": "/images/catalog/listovoy-prokat/list-refleniy/list-refleniy-3-1250x2500-rozmet-2201.webp"
+    },
+    "rozmet-2202": {
+      "sourceUrl": "https://rozmet.ru/production/listovoy_prokat/list-riflennyj/list-4-rifleniy/",
+      "imageUrl": "/images/catalog/listovoy-prokat/list-refleniy/list-refleniy-4-1500x6000-rozmet-2202.webp"
+    },
+    "rozmet-2203": {
+      "sourceUrl": "https://rozmet.ru/production/listovoy_prokat/list-riflennyj/list-5-rifleniy/",
+      "imageUrl": "/images/catalog/listovoy-prokat/list-refleniy/list-refleniy-5-1500x6000-rozmet-2203.webp"
+    }
+  }
+}

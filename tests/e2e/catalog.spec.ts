@@ -31,6 +31,51 @@ test("channel section filter contains profile numbers and is independent of leng
   await expect(page.getByRole("combobox", {name: "Длина по каталогу", exact: true})).toBeVisible();
 });
 
+test("tread plate filters use the table dimensions and keep the ordering units", async ({page}) => {
+  await page.goto(productPath(samples.treadPlate, false));
+  await expect(page.getByRole("heading", {name: "Лист рифлёный", level: 1})).toBeVisible();
+  const format = page.getByRole("combobox", {name: "Размер листа", exact: true});
+  const thickness = page.getByRole("combobox", {name: "Толщина", exact: true});
+  const sheet = visibleProduct(page, "rozmet-28952");
+  const area = visibleProduct(page, samples.treadPlate.id);
+  await expect(sheet.getByText("№ 3 ТУ", {exact: true})).toBeVisible();
+  await expect(sheet.getByText("Только при оплате наличными", {exact: true})).toBeVisible();
+  await expect(sheet.getByText("шт.", {exact: true})).toBeVisible();
+  await format.selectOption("1500 × 6000 мм");
+  await expect(sheet).toHaveCount(0);
+  await expect(area.getByText("1500 × 6000 мм", {exact: true})).toBeVisible();
+  await expect(area.getByText("м²", {exact: true})).toBeVisible();
+  await thickness.selectOption("3 мм");
+  await expect(page.getByText("Варианты не найдены", {exact: true})).toBeVisible();
+  await page.getByRole("button", {name: "Сбросить фильтры", exact: true}).first().click();
+  await expect(sheet).toBeVisible();
+  await expect(area).toBeVisible();
+});
+
+test("galvanized sheets filter decimal thickness and keep per-sheet ordering and payment conditions", async ({page}) => {
+  await page.goto(productPath(samples.galvanizedSheet, false));
+  await expect(page.getByRole("heading", {name: "Лист оцинкованный", level: 1})).toBeVisible();
+  const thickness = page.getByRole("combobox", {name: "Толщина", exact: true});
+  const format = page.getByRole("combobox", {name: "Размер листа", exact: true});
+  const thin = visibleProduct(page, "rozmet-2181");
+  const selected = visibleProduct(page, samples.galvanizedSheet.id);
+  const thick = visibleProduct(page, "rozmet-2184");
+  await expect(thin.getByText("Только при оплате наличными", {exact: true})).toBeVisible();
+  await expect(thick.getByText("Только при оплате наличными", {exact: true})).toHaveCount(0);
+  await format.selectOption("1250 × 2500 мм");
+  await thickness.selectOption("0,7 мм");
+  await expect(thin).toHaveCount(0);
+  await expect(thick).toHaveCount(0);
+  await expect(selected.getByText("№ 0,7", {exact: true})).toBeVisible();
+  await expect(selected.getByText("1250 × 2500 мм", {exact: true})).toBeVisible();
+  await expect(selected.getByText("шт.", {exact: true})).toBeVisible();
+  await expect(selected.getByRole("spinbutton")).toHaveAttribute("step", "1");
+  await expect(selected.getByText("Только при оплате наличными", {exact: true})).toBeVisible();
+  await page.getByRole("button", {name: "Сбросить фильтры", exact: true}).first().click();
+  await expect(thin).toBeVisible();
+  await expect(thick).toBeVisible();
+});
+
 test("search resolves a technical query to a visible linked product", async ({page}) => {
   await page.goto("/catalog");
   await page.getByLabel("Поисковый запрос", {exact: true}).fill("арматура 12");
@@ -67,7 +112,7 @@ test("profile-sheet guidance follows product families in the rendered page", asy
   expect(families!.y + families!.height).toBeLessThanOrEqual(details!.y);
 });
 
-for (const family of ["armatura", "balka", "profile", "vgp", "profnastil", "mesh", "shveller", "ugolok", "kvadrat"] as const) {
+for (const family of ["armatura", "balka", "profile", "vgp", "profnastil", "mesh", "shveller", "ugolok", "kvadrat", "treadPlate", "galvanizedSheet", "coldRolledSheet", "hotRolledSheet"] as const) {
   test(`${family}: wide title photo keeps filters beside the catalog`, async ({page, isMobile}) => {
     const route = ["shveller", "ugolok", "kvadrat"].includes(family)
       ? `/catalog/${family}` : productPath(samples[family], false);

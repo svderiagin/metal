@@ -1,4 +1,5 @@
 import type {Subcategory} from "@/types/category";
+import {coldRolledSheetSubcategoryId, treadPlateSubcategoryId} from "@/lib/sheetPresentation";
 import rozmetCatalog from "./rozmet-catalog.json";
 
 const retainedSubcategories: Subcategory[] = [
@@ -172,5 +173,21 @@ const retainedSubcategories: Subcategory[] = [
   }
 ];
 
-export const subcategories: Subcategory[] = [...retainedSubcategories, ...rozmetCatalog.subcategories as Subcategory[]];
+const coldRolledIntro = "Гладкий стальной лист холодной прокатки. В таблице можно сравнить толщину, массу и цену за лист.";
+const sheetSubcategoryOverrides = new Map<string, Partial<Pick<Subcategory, "name" | "shortDescription" | "description">>>([
+  [treadPlateSubcategoryId, {name: "Лист рифлёный"}],
+  [coldRolledSheetSubcategoryId, {
+    name: "Лист холоднокатаный",
+    shortDescription: coldRolledIntro,
+    description: `${coldRolledIntro}\n\nХолоднокатаный лист применяют для изготовления вентиляционного оборудования, облицовки и деталей, которые получают гибкой и формовкой.`,
+  }],
+]);
+
+export const subcategories: Subcategory[] = [
+  ...retainedSubcategories,
+  ...rozmetCatalog.subcategories.map(subcategory => {
+    const override = sheetSubcategoryOverrides.get(subcategory.id);
+    return override ? {...subcategory, ...override} : subcategory;
+  }),
+];
 export const originalSubcategories: Subcategory[] = retainedSubcategories;

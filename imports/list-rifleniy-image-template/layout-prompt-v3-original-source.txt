@@ -1,0 +1,11 @@
+Use case: compositing.
+Primary request: Produce a clean high-quality product illustration from the ORIGINAL source photograph in input 1, using input 2 ONLY as the approved composition guide. The user approved input 2's scale and position but wants us to go back to the original for image quality, rather than processing the previously generated plate again.
+
+Input 1: the ORIGINAL 1536x1024 Cronvall steel tread-plate PNG. Preserve its actual grey metal surface, thin rectangular straight cut edges, soft reflections and the individual oval/lentil alternating tread pattern. This is the sole source for the product's appearance.
+Input 2: approved placement reference, a smaller plate on the right half of a white 4:3 canvas. Copy the scale, position and perspective direction of its plate ONLY, not its regenerated surface details.
+
+Create a landscape 4:3 white canvas, ideally 2400x1800. On the 2400x1800 coordinate system, before any later canvas translation, match the input 2 silhouette approximately: near/front left corner (1050,1085), nearest front/right corner (1645,1335), far upper-left corner (1810,345), far upper-right corner (2255,435). Match the reference's product footprint and front-edge angle. Do not enlarge the plate or move it lower. Keep the full contour and four corners visible. Reposition and uniformly scale/rotate the original plate to match this composition; preserve its identity and coherent flat rectangular geometry, no bending, no vertical flange.
+
+Important workflow detail: The final required 200-pixel LEFT translation on the 2400x1800 canvas will be applied deterministically AFTER this image is returned. Therefore do NOT perform the 200-pixel left shift yourself; match input 2's current placement now.
+
+White neutral studio background and faint contact shadow. Large clean white upper-left area for a later heading, clear lower-left footer and clear area below the nearest edge for dimensions. No writing, no numbers, no arrows, no dimensions, no symbols, no rulers, no logos or watermarks. Produce the clearest version of the original metal at this approved smaller composition.

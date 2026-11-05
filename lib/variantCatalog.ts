@@ -1,6 +1,7 @@
 import type {ProductAttributeKey, ProductVariant} from "@/types/product";
 import {comparePrices} from "./catalogFilters";
 import {getVariantAttribute} from "./variantPresentation";
+import {getSheetDesignation, isIllustratedSheet, isPlainHotRolledSheet, sheetFormatLabel} from "./sheetPresentation";
 
 export type VariantSort = "relevance" | "availability" | "price-asc" | "price-desc" | "size" | "name";
 export const referenceCategorySlugs = ["shveller", "ugolok", "kvadrat"] as const;
@@ -22,6 +23,7 @@ export function uniqueAttributeValues(variants: ProductVariant[], key: ProductAt
 }
 
 export function variantFilterLabel(variants: ProductVariant[], key: ProductAttributeKey) {
+  if (key === "size" && variants.length > 0 && variants.every(isIllustratedSheet)) return sheetFormatLabel;
   const category = variants[0]?.categoryId;
   if (category === "rozmet-cat-kvadrat" || category === "rozmet-cat-shveller" || category === "rozmet-cat-ugolok") {
     if (key === "size") return category === "rozmet-cat-shveller" ? "Номер профиля" : "Сечение";
@@ -46,11 +48,15 @@ export function selectVariants(variants: ProductVariant[], options: {
     && (maximum === null || (!variant.quoteOnly && variant.price !== null && variant.price <= maximum)))
     .sort((left, right) => {
       if (options.sort === "relevance") return 0;
-      if (options.sort === "name") return left.name.localeCompare(right.name, "ru", {numeric: true});
+      if (options.sort === "name") return sortDesignation(left).localeCompare(sortDesignation(right), "ru", {numeric: true});
       if (options.sort === "price-asc" || options.sort === "price-desc") return comparePrices(left.quoteOnly ? null : left.price, right.quoteOnly ? null : right.price, options.sort === "price-desc");
       if (options.sort === "size") return getVariantAttribute(left, "size").localeCompare(getVariantAttribute(right, "size"), "ru", {numeric: true});
       return Number(right.inStock) - Number(left.inStock);
     });
+}
+
+function sortDesignation(variant: ProductVariant) {
+  return isPlainHotRolledSheet(variant) ? getSheetDesignation(variant) : variant.name;
 }
 
 function parsePrice(value: string) {

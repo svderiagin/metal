@@ -45,6 +45,9 @@ test('Family-local index supports the same technical and typo query',()=>{
  const local=createCatalogSearchIndex(subset);
  const result=local.search('профилная труба 12');
  assert.ok(result.total,JSON.stringify({family:family.name,subset:subset.map(p=>p.name),result}));
+ const hotRolled=createCatalogSearchIndex(products.filter(p=>p.subcategoryId==='rozmet-sub-listovoy-prokat-list-goryachekatanyj'));
+ assert.deepEqual(Array.from(hotRolled.search('Лист горячекатаный 3 мм').hits,h=>h.product.id).sort(), ['rozmet-2188','rozmet-28951']);
+ for(const sku of ['26569','28931','28971']) assert.equal(hotRolled.search(sku).total,0);
 });
 test('Exact real product names rank first across every category',()=>{
  for(const p of products) assert.equal(hits(p.name)[0]?.product.name,p.name,p.name);

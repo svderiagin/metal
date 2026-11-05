@@ -5,8 +5,9 @@ import {Breadcrumbs} from "@/components/catalog/Breadcrumbs";
 import {CatalogSidebar} from "@/components/catalog/CatalogSidebar";
 import {CatalogDescription} from "@/components/catalog/CatalogDescription";
 import {ProductVariantCatalog} from "@/components/catalog/ProductVariantCatalog";
-import {CatalogCoverGallery} from "@/components/catalog/CatalogCoverGallery";
+import {ProductCatalogIntro} from "@/components/catalog/ProductCatalogIntro";
 import {getCatalogCoverImages} from "@/lib/catalogCoverImages";
+import {getSheetPresentation} from "@/lib/sheetPresentation";
 import {PageContainer} from "@/components/layout/PageContainer";
 import {
   getAllProductTypes,
@@ -53,9 +54,11 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
   const resolved = resolveProductType(await params);
   if (!resolved) return {title: "Тип продукции не найден"};
 
+  const {productType} = resolved;
+  const sheet = getSheetPresentation(productType.subcategoryId);
   return {
-    title: resolved.productType.name,
-    description: resolved.productType.shortDescription,
+    title: productType.name,
+    description: sheet?.intro ?? productType.shortDescription,
   };
 }
 
@@ -67,6 +70,13 @@ export default async function ProductTypePage({params}: Props) {
   const {category, productType} = resolved;
   if (category.directProducts) redirect(`/catalog/${category.slug}`);
   const variants = getProductVariantsByTypeId(productType.id);
+  const sheet = getSheetPresentation(productType.subcategoryId);
+  const title = productType.name;
+  const intro = sheet ? sheet.intro ?? productType.shortDescription : productType.description;
+  const details = productType.description.startsWith(productType.shortDescription)
+    ? productType.description.slice(productType.shortDescription.length).trim()
+    : productType.description;
+  const images = productType.imageUrl && !productType.imageUrl.endsWith(".svg") ? getCatalogCoverImages(productType.id, productType.imageUrl) : [];
 
   return (
     <PageContainer className="py-8 sm:py-10 lg:py-12">
@@ -74,7 +84,7 @@ export default async function ProductTypePage({params}: Props) {
         items={[
           {label: "Каталог", href: "/catalog"},
           {label: category.name, href: `/catalog/${category.slug}`},
-          {label: productType.name},
+          {label: title},
         ]}
       />
 
@@ -84,18 +94,13 @@ export default async function ProductTypePage({params}: Props) {
             <CatalogSidebar activeSlug={category.slug}/>
           </Suspense>
         </div>
-        <div className="min-w-0">
-          <div className="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-5 shadow-sm sm:p-6 lg:p-8">
-            <p className="text-eyebrow uppercase text-red-700 dark:text-red-400">
-              Тип продукции
-            </p>
-            <h1 className="mt-2 break-words text-page-title">{rebarHeadings[productType.subcategoryId] ?? productType.name}</h1>
-            {productType.imageUrl && !productType.imageUrl.endsWith(".svg") &&
-              <CatalogCoverGallery key={productType.id} images={getCatalogCoverImages(productType.id, productType.imageUrl)} name={productType.name}/>}
-            <CatalogDescription description={productType.description}/>
-          </div>
-        </div>
+        <ProductCatalogIntro key={productType.id} title={rebarHeadings[productType.subcategoryId] ?? title}
+          label={sheet ? "Подкатегория" : "Тип продукции"} images={images} description={intro} coverName={title}/>
         <ProductVariantCatalog variants={variants} categorySlug={category.slug}/>
+        {sheet && details && <section className="min-w-0 max-w-[800px] lg:col-start-2" aria-labelledby="sheet-details-heading">
+          <h2 id="sheet-details-heading" className="text-section-title leading-tight">{sheet.detailsTitle}</h2>
+          <CatalogDescription description={details} variant="categoryDetails" className="mt-4"/>
+        </section>}
       </div>
     </PageContainer>
   );

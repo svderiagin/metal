@@ -1,6 +1,7 @@
 import type {ProductVariant} from "@/types/product";
 import {normalizeText} from "./russian";
 import {beamProfile, beamSeries, type BeamSeries} from "@/lib/beam";
+import {getSheetParameters, isPlainHotRolledSheet} from "@/lib/sheetPresentation";
 
 const number = "\\d+(?:\\.\\d+)?";
 const dimensionPattern = new RegExp(`(?<![а-яa-z\\d.])${number}(?:x${number})+(?![а-яa-z\\d.])`, "g");
@@ -30,6 +31,10 @@ export function buildTechnicalDocument(product: ProductVariant): TechnicalDocume
   for (const spec of specs.filter(s => /профил|размер|сечение/i.test(s.name))) chains.push(...dimensions(spec.value));
   const primary = new Set(chains.map(chain => chain[0]));
   if (product.diameterMm !== undefined) primary.add(String(product.diameterMm));
+  if (isPlainHotRolledSheet(product)) {
+    const thickness = getSheetParameters(product)?.thickness;
+    if (thickness) primary.add(canonicalNumber(thickness));
+  }
   for (const spec of specs) if (/диаметр|размер/i.test(spec.name) || (/толщина/i.test(spec.name) && product.categoryId === "cat-pnf")) {
     const match = normalizeText(spec.value).match(/^\d+(?:\.\d+)?$/); if (match) primary.add(canonicalNumber(match[0]));
   }

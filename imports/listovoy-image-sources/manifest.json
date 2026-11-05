@@ -1,0 +1,764 @@
+{
+  "selectedOn": "2026-11-04",
+  "status": "source-selection-only",
+  "category": {
+    "id": "rozmet-cat-listovoy-prokat",
+    "name": "Листовой прокат",
+    "slug": "listovoy-prokat"
+  },
+  "subcategories": [
+    {
+      "id": "rozmet-sub-listovoy-prokat-galvanized-steel-sheet",
+      "name": "Лист оцинкованный",
+      "typeId": "type-rozmet-sub-listovoy-prokat-galvanized-steel-sheet",
+      "slug": "galvanized-steel-sheet"
+    },
+    {
+      "id": "rozmet-sub-listovoy-prokat-list-ocynkovannyj",
+      "name": "Лист Холоднокатаный",
+      "typeId": "type-rozmet-sub-listovoy-prokat-list-ocynkovannyj",
+      "slug": "list-ocynkovannyj"
+    },
+    {
+      "id": "rozmet-sub-listovoy-prokat-list-riflennyj",
+      "name": "Лист рифленый",
+      "typeId": "type-rozmet-sub-listovoy-prokat-list-riflennyj",
+      "slug": "list-riflennyj"
+    },
+    {
+      "id": "rozmet-sub-listovoy-prokat-list-goryachekatanyj",
+      "name": "Лист горячекатаный",
+      "typeId": "type-rozmet-sub-listovoy-prokat-list-goryachekatanyj",
+      "slug": "list-goryachekatanyj"
+    }
+  ],
+  "notes": [
+    "Оригинальные байты опубликованных файлов сохранены без ретуши и увеличения разрешения. Это доступные веб-изображения поставщиков, не заявленные мастер-файлы камеры.",
+    "Назначения candidateProductIds предназначены для подготовки, не являются одобренным image overlay и не подключены к приложению.",
+    "Технические подписи берутся только из текущих характеристик конкретной позиции; значения и стандарты источников изображений не подменяют данные проекта.",
+    "Для размерной схемы нужны длина, ширина, толщина; для ПВЛ уточняется, какая толщина указана, а размеры ячеек не выводятся из фотографии.",
+    "Перед публикацией проверить вид рифления, ПВЛ 306/406, противоречивую классификацию холоднокатаной группы и визуальное качество одного размеченного производного варианта. Фото семейства не является масштабным чертежом."
+  ],
+  "images": [
+    {
+      "key": "galvanized",
+      "name": "Лист оцинкованный",
+      "file": "galvanized-sheet.webp",
+      "supplier": "BRIX",
+      "page": "https://brix.uz/ru/product/galvanized-steel-sheet-100",
+      "image": "https://storage.googleapis.com/brix_bucket/products/prod_234030e98ac144babde2564dbac939ff/w1200.webp",
+      "review": "Отдельный лист, все четыре края в кадре, характерная фактура цинкового покрытия, свободный светлый фон. Карточка и соответствие URL проверены в браузере. Иллюстрация семейства, не подтверждение конкретной марки, размера или поставки.",
+      "format": "webp",
+      "width": 1200,
+      "height": 1200,
+      "bytes": 14402,
+      "sha256": "f4281900716a5cab31065d737ae0aa505e947a114c2598ade23094c9f8f2ca6a",
+      "candidateProductIds": [
+        "rozmet-2181",
+        "rozmet-2199",
+        "rozmet-2184"
+      ]
+    },
+    {
+      "key": "cold-rolled",
+      "name": "Лист холоднокатаный",
+      "file": "cold-rolled-sheet.jpg",
+      "supplier": "e-materials / thyssenkrupp",
+      "page": "https://e-materials.pl/products/blacha-stalowa-2-mm-zimnowalcowana-dc01",
+      "image": "https://cdn.shopify.com/s/files/1/0783/4376/6358/files/blacha-zimnowalcowana-2-mm.jpg?v=1728913573",
+      "review": "Второй кадр галереи: один целый лист на белом фоне, видна передняя кромка. Марку DC01, толщину 2 мм и размеры карточки источника не переносить в каталог. Внутренний slug этой группы list-ocynkovannyj и её старое описание противоречат текущему названию; до подготовки подписей проверить классификацию товаров, не исправлять данные автоматически.",
+      "format": "jpeg",
+      "width": 1200,
+      "height": 816,
+      "bytes": 68206,
+      "sha256": "a986648ab714de4d06e23bc14d880fc18908b47486ba01e6343f8c4114b46619",
+      "candidateProductIds": [
+        "rozmet-2182",
+        "rozmet-2185"
+      ]
+    },
+    {
+      "key": "chequered",
+      "name": "Лист рифлёный",
+      "file": "chequered-steel-sheet.jpg",
+      "supplier": "ATREON",
+      "page": "https://www.atreon.pl/blacha-ryflowana-stalowa-5mm/",
+      "image": "https://www.atreon.pl/user/categories/orig/plech_slza.jpg",
+      "review": "Изолированная иллюстрация одного стального листа с чечевичным рисунком, видна толщина кромки. В каталоге указано только «Рифлёный»: конкретный рисунок не подтверждён. Кандидат для чечевичного исполнения; не применять к ромбическому или другому рисунку без подтверждения. Марку S235 и толщину 5 мм из источника не переносить в подписи товаров.",
+      "format": "jpeg",
+      "width": 1920,
+      "height": 1080,
+      "bytes": 70770,
+      "sha256": "1b607365c248c1478e0f5f0052d7a09bb51c7422afbbb10c99f4f592a0fb9f58",
+      "candidateProductIds": [
+        "rozmet-28952",
+        "rozmet-2201",
+        "rozmet-2202",
+        "rozmet-2203"
+      ]
+    },
+    {
+      "key": "hot-rolled",
+      "name": "Лист горячекатаный · гладкий",
+      "file": "hot-rolled-sheet.jpg",
+      "supplier": "Альфалес",
+      "page": "https://alfales.ru/catalog/metalloprokat/list-metall/list-2012502500-gk/",
+      "image": "https://alfales.ru/files/images/stalnoj-list-2mm-1250x2500.jpg",
+      "review": "Один лист с целыми краями на белом фоне; источник прямо относит его к г/к прокату. Иллюстративное изображение: цвет, толщина и состояние поверхности конкретной партии могут отличаться. Для ПВЛ не использовать.",
+      "format": "jpeg",
+      "width": 1000,
+      "height": 1000,
+      "bytes": 15082,
+      "sha256": "8baecbf46d1dec87fe0312ab08a6ff6d0f4a0c0188e5201678d3312be59aa5ce",
+      "candidateProductIds": [
+        "rozmet-2186",
+        "rozmet-2187",
+        "rozmet-28951",
+        "rozmet-2188",
+        "rozmet-2190",
+        "rozmet-2191",
+        "rozmet-2192",
+        "rozmet-2194",
+        "rozmet-2195",
+        "rozmet-2196",
+        "rozmet-2197",
+        "rozmet-2198",
+        "rozmet-2200"
+      ]
+    },
+    {
+      "key": "expanded",
+      "name": "Лист просечно-вытяжной · ПВЛ",
+      "file": "expanded-metal-sheet.jpg",
+      "supplier": "Металлсервис / ВсеИнструменты",
+      "page": "https://www.vseinstrumenti.ru/product/prosechno-vytyazhnoj-list-metallservis-pvl-406-1200x300-mm-1237741-8352795/",
+      "image": "https://cdn.vseinstrumenti.ru/images/goods/stroitelnye-materialy/zabory-i-ograzhdeniya/8352795/1200x800/96257859.jpg",
+      "review": "Один просечно-вытяжной лист на белом фоне, целый контур и ромбовидные ячейки. В проекте ПВЛ находится внутри горячекатаной группы: требуется отдельное изображение. Фото источника относится к ПВЛ 406; перенос на ПВЛ 306 и размеры ячеек требует отдельной проверки. Размеры 1200×300 и прочие характеристики карточки источника не переносить в каталог.",
+      "format": "jpeg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 88703,
+      "sha256": "af78357f8c00b203aeff462a6bab7958eb33602c15294b662a36fcc31908aa82",
+      "candidateProductIds": [
+        "rozmet-26569",
+        "rozmet-28931",
+        "rozmet-28971"
+      ]
+    }
+  ],
+  "catalogVariants": [
+    {
+      "id": "rozmet-2181",
+      "name": "Лист № 0,5 оцинкованный",
+      "productTypeId": "type-rozmet-sub-listovoy-prokat-galvanized-steel-sheet",
+      "candidateImageKey": "galvanized",
+      "specifications": [
+        {
+          "name": "Толщина",
+          "value": "0.5 мм"
+        },
+        {
+          "name": "Текстура листа",
+          "value": "Гладкий"
+        },
+        {
+          "name": "Вес",
+          "value": "12.26 кг/шт."
+        },
+        {
+          "name": "Размер",
+          "value": "1,25х2,5 м"
+        }
+      ]
+    },
+    {
+      "id": "rozmet-2199",
+      "name": "Лист № 0,7 оцинкованный",
+      "productTypeId": "type-rozmet-sub-listovoy-prokat-galvanized-steel-sheet",
+      "candidateImageKey": "galvanized",
+      "specifications": [
+        {
+          "name": "Толщина",
+          "value": "0.7 мм"
+        },
+        {
+          "name": "Текстура листа",
+          "value": "Гладкий"
+        },
+        {
+          "name": "Вес",
+          "value": "17.17 кг/шт."
+        },
+        {
+          "name": "Размер",
+          "value": "1,25х2,5 м"
+        }
+      ]
+    },
+    {
+      "id": "rozmet-2184",
+      "name": "Лист № 1 оцинкованный",
+      "productTypeId": "type-rozmet-sub-listovoy-prokat-galvanized-steel-sheet",
+      "candidateImageKey": "galvanized",
+      "specifications": [
+        {
+          "name": "Толщина",
+          "value": "1 мм"
+        },
+        {
+          "name": "Текстура листа",
+          "value": "Гладкий"
+        },
+        {
+          "name": "Вес",
+          "value": "24.53 кг/шт."
+        },
+        {
+          "name": "Размер",
+          "value": "1,25х2,5 м"
+        }
+      ]
+    },
+    {
+      "id": "rozmet-2182",
+      "name": "Лист № 0,5",
+      "productTypeId": "type-rozmet-sub-listovoy-prokat-list-ocynkovannyj",
+      "candidateImageKey": "cold-rolled",
+      "specifications": [
+        {
+          "name": "Толщина",
+          "value": "0.5 мм"
+        },
+        {
+          "name": "Текстура листа",
+          "value": "Гладкий"
+        },
+        {
+          "name": "Вес",
+          "value": "12.26 кг/шт."
+        },
+        {
+          "name": "Размер",
+          "value": "1,25х2,5 м"
+        }
+      ]
+    },
+    {
+      "id": "rozmet-2185",
+      "name": "Лист № 1",
+      "productTypeId": "type-rozmet-sub-listovoy-prokat-list-ocynkovannyj",
+      "candidateImageKey": "cold-rolled",
+      "specifications": [
+        {
+          "name": "Толщина",
+          "value": "1 мм"
+        },
+        {
+          "name": "Текстура листа",
+          "value": "Гладкий"
+        },
+        {
+          "name": "Вес",
+          "value": "24.53 кг/шт."
+        },
+        {
+          "name": "Размер",
+          "value": "1,25х2,5 м"
+        }
+      ]
+    },
+    {
+      "id": "rozmet-28952",
+      "name": "Лист № 3 ТУ рифленый",
+      "productTypeId": "type-rozmet-sub-listovoy-prokat-list-riflennyj",
+      "candidateImageKey": "chequered",
+      "specifications": [
+        {
+          "name": "Толщина",
+          "value": "3 мм"
+        },
+        {
+          "name": "Текстура листа",
+          "value": "Рифлёный"
+        },
+        {
+          "name": "Вес",
+          "value": "73.59 кг/шт."
+        },
+        {
+          "name": "Размер",
+          "value": "1,25х2,5 м"
+        }
+      ]
+    },
+    {
+      "id": "rozmet-2201",
+      "name": "Лист № 3 Ф рифленый",
+      "productTypeId": "type-rozmet-sub-listovoy-prokat-list-riflennyj",
+      "candidateImageKey": "chequered",
+      "specifications": [
+        {
+          "name": "Толщина",
+          "value": "3 мм"
+        },
+        {
+          "name": "Текстура листа",
+          "value": "Рифлёный"
+        },
+        {
+          "name": "Вес",
+          "value": "73.59 кг/шт."
+        },
+        {
+          "name": "Размер",
+          "value": "1,25х2,5 м"
+        }
+      ]
+    },
+    {
+      "id": "rozmet-2202",
+      "name": "Лист № 4 рифленый",
+      "productTypeId": "type-rozmet-sub-listovoy-prokat-list-riflennyj",
+      "candidateImageKey": "chequered",
+      "specifications": [
+        {
+          "name": "Толщина",
+          "value": "4 мм"
+        },
+        {
+          "name": "Текстура листа",
+          "value": "Рифлёный"
+        },
+        {
+          "name": "Вес",
+          "value": "31.4 кг/м2"
+        },
+        {
+          "name": "Размер",
+          "value": "1,5х6 м"
+        }
+      ]
+    },
+    {
+      "id": "rozmet-2203",
+      "name": "Лист № 5 рифленый",
+      "productTypeId": "type-rozmet-sub-listovoy-prokat-list-riflennyj",
+      "candidateImageKey": "chequered",
+      "specifications": [
+        {
+          "name": "Толщина",
+          "value": "5 мм"
+        },
+        {
+          "name": "Текстура листа",
+          "value": "Рифлёный"
+        },
+        {
+          "name": "Вес",
+          "value": "39.25 кг/м2"
+        },
+        {
+          "name": "Размер",
+          "value": "1,5х6 м"
+        }
+      ]
+    },
+    {
+      "id": "rozmet-2186",
+      "name": "Лист № 1,5",
+      "productTypeId": "type-rozmet-sub-listovoy-prokat-list-goryachekatanyj",
+      "candidateImageKey": "hot-rolled",
+      "specifications": [
+        {
+          "name": "Толщина",
+          "value": "1.5 мм"
+        },
+        {
+          "name": "Текстура листа",
+          "value": "Гладкий"
+        },
+        {
+          "name": "Вес",
+          "value": "36.78 кг/шт."
+        },
+        {
+          "name": "Размер",
+          "value": "1,25х2,5 м"
+        }
+      ]
+    },
+    {
+      "id": "rozmet-2187",
+      "name": "Лист металлический 2 мм",
+      "productTypeId": "type-rozmet-sub-listovoy-prokat-list-goryachekatanyj",
+      "candidateImageKey": "hot-rolled",
+      "specifications": [
+        {
+          "name": "Толщина",
+          "value": "2 мм"
+        },
+        {
+          "name": "Текстура листа",
+          "value": "Гладкий"
+        },
+        {
+          "name": "Вес",
+          "value": "49.06 кг/шт."
+        },
+        {
+          "name": "Размер",
+          "value": "1,25х2,5 м"
+        }
+      ]
+    },
+    {
+      "id": "rozmet-28951",
+      "name": "Лист металлический 3 мм ТУ",
+      "productTypeId": "type-rozmet-sub-listovoy-prokat-list-goryachekatanyj",
+      "candidateImageKey": "hot-rolled",
+      "specifications": [
+        {
+          "name": "Толщина",
+          "value": "3 мм"
+        },
+        {
+          "name": "Текстура листа",
+          "value": "Гладкий"
+        },
+        {
+          "name": "Вес",
+          "value": "73.59 кг/шт."
+        },
+        {
+          "name": "Размер",
+          "value": "1,25х2,5 м"
+        }
+      ]
+    },
+    {
+      "id": "rozmet-2188",
+      "name": "Лист металлический 3 мм ГОСТ",
+      "productTypeId": "type-rozmet-sub-listovoy-prokat-list-goryachekatanyj",
+      "candidateImageKey": "hot-rolled",
+      "specifications": [
+        {
+          "name": "Толщина",
+          "value": "3 мм"
+        },
+        {
+          "name": "Текстура листа",
+          "value": "Гладкий"
+        },
+        {
+          "name": "Вес",
+          "value": "73.59 кг/шт."
+        },
+        {
+          "name": "Размер",
+          "value": "1,25х2,5 м"
+        }
+      ]
+    },
+    {
+      "id": "rozmet-26569",
+      "name": "Лист №3 вытяжной ПВЛ 306 (1х3.3м)",
+      "productTypeId": "type-rozmet-sub-listovoy-prokat-list-goryachekatanyj",
+      "candidateImageKey": "expanded",
+      "specifications": [
+        {
+          "name": "Толщина",
+          "value": "3 мм"
+        },
+        {
+          "name": "Текстура листа",
+          "value": "Просечно-вытяжной"
+        },
+        {
+          "name": "Размер",
+          "value": "1х3,3 м"
+        }
+      ]
+    },
+    {
+      "id": "rozmet-28931",
+      "name": "Лист вытяжной ПВЛ 306 №3 (1х3м)",
+      "productTypeId": "type-rozmet-sub-listovoy-prokat-list-goryachekatanyj",
+      "candidateImageKey": "expanded",
+      "specifications": [
+        {
+          "name": "Толщина",
+          "value": "3 мм"
+        },
+        {
+          "name": "Текстура листа",
+          "value": "Просечно-вытяжной"
+        },
+        {
+          "name": "Вес",
+          "value": "20.4 кг/шт."
+        },
+        {
+          "name": "Размер",
+          "value": "1х3 м"
+        }
+      ]
+    },
+    {
+      "id": "rozmet-28971",
+      "name": "Лист № 4 вытяжной 406 1.5x3м(ПВЛ)",
+      "productTypeId": "type-rozmet-sub-listovoy-prokat-list-goryachekatanyj",
+      "candidateImageKey": "expanded",
+      "specifications": [
+        {
+          "name": "Толщина",
+          "value": "4 мм"
+        },
+        {
+          "name": "Текстура листа",
+          "value": "Просечно-вытяжной"
+        },
+        {
+          "name": "Вес",
+          "value": "31.4 кг/шт."
+        },
+        {
+          "name": "Размер",
+          "value": "1,5х3 м"
+        }
+      ]
+    },
+    {
+      "id": "rozmet-2190",
+      "name": "Лист металлический 4 мм",
+      "productTypeId": "type-rozmet-sub-listovoy-prokat-list-goryachekatanyj",
+      "candidateImageKey": "hot-rolled",
+      "specifications": [
+        {
+          "name": "Толщина",
+          "value": "4 мм"
+        },
+        {
+          "name": "Текстура листа",
+          "value": "Гладкий"
+        },
+        {
+          "name": "Вес",
+          "value": "31.4 кг/м2"
+        },
+        {
+          "name": "Размер",
+          "value": "1,5х6 м"
+        }
+      ]
+    },
+    {
+      "id": "rozmet-2191",
+      "name": "Лист металлический 5 мм",
+      "productTypeId": "type-rozmet-sub-listovoy-prokat-list-goryachekatanyj",
+      "candidateImageKey": "hot-rolled",
+      "specifications": [
+        {
+          "name": "Толщина",
+          "value": "5 мм"
+        },
+        {
+          "name": "Текстура листа",
+          "value": "Гладкий"
+        },
+        {
+          "name": "Вес",
+          "value": "39.25 кг/м2"
+        },
+        {
+          "name": "Размер",
+          "value": "1,5х6 м"
+        }
+      ]
+    },
+    {
+      "id": "rozmet-2192",
+      "name": "Лист металлический 6 мм",
+      "productTypeId": "type-rozmet-sub-listovoy-prokat-list-goryachekatanyj",
+      "candidateImageKey": "hot-rolled",
+      "specifications": [
+        {
+          "name": "Толщина",
+          "value": "6 мм"
+        },
+        {
+          "name": "Текстура листа",
+          "value": "Гладкий"
+        },
+        {
+          "name": "Вес",
+          "value": "47.1 кг/м2"
+        },
+        {
+          "name": "Размер",
+          "value": "1,5х6 м"
+        }
+      ]
+    },
+    {
+      "id": "rozmet-2194",
+      "name": "Лист металлический 8 мм",
+      "productTypeId": "type-rozmet-sub-listovoy-prokat-list-goryachekatanyj",
+      "candidateImageKey": "hot-rolled",
+      "specifications": [
+        {
+          "name": "Толщина",
+          "value": "8 мм"
+        },
+        {
+          "name": "Текстура листа",
+          "value": "Гладкий"
+        },
+        {
+          "name": "Вес",
+          "value": "62.8 кг/м2"
+        },
+        {
+          "name": "Размер",
+          "value": "1,5х6 м"
+        }
+      ]
+    },
+    {
+      "id": "rozmet-2195",
+      "name": "Лист металлический 10 мм",
+      "productTypeId": "type-rozmet-sub-listovoy-prokat-list-goryachekatanyj",
+      "candidateImageKey": "hot-rolled",
+      "specifications": [
+        {
+          "name": "Толщина",
+          "value": "10 мм"
+        },
+        {
+          "name": "Текстура листа",
+          "value": "Гладкий"
+        },
+        {
+          "name": "Вес",
+          "value": "78.5 кг/м2"
+        },
+        {
+          "name": "Размер",
+          "value": "1,5х6 м"
+        }
+      ]
+    },
+    {
+      "id": "rozmet-2196",
+      "name": "Лист металлический 12 мм",
+      "productTypeId": "type-rozmet-sub-listovoy-prokat-list-goryachekatanyj",
+      "candidateImageKey": "hot-rolled",
+      "specifications": [
+        {
+          "name": "Толщина",
+          "value": "12 мм"
+        },
+        {
+          "name": "Текстура листа",
+          "value": "Гладкий"
+        },
+        {
+          "name": "Вес",
+          "value": "94.2 кг/м2"
+        },
+        {
+          "name": "Размер",
+          "value": "1,5х6 м"
+        }
+      ]
+    },
+    {
+      "id": "rozmet-2197",
+      "name": "Лист металлический 14 мм",
+      "productTypeId": "type-rozmet-sub-listovoy-prokat-list-goryachekatanyj",
+      "candidateImageKey": "hot-rolled",
+      "specifications": [
+        {
+          "name": "Толщина",
+          "value": "14 мм"
+        },
+        {
+          "name": "Текстура листа",
+          "value": "Гладкий"
+        },
+        {
+          "name": "Вес",
+          "value": "109.9 кг/м2"
+        },
+        {
+          "name": "Размер",
+          "value": "1,5х6 м"
+        }
+      ]
+    },
+    {
+      "id": "rozmet-2198",
+      "name": "Лист металлический 16 мм",
+      "productTypeId": "type-rozmet-sub-listovoy-prokat-list-goryachekatanyj",
+      "candidateImageKey": "hot-rolled",
+      "specifications": [
+        {
+          "name": "Толщина",
+          "value": "16 мм"
+        },
+        {
+          "name": "Текстура листа",
+          "value": "Гладкий"
+        },
+        {
+          "name": "Вес",
+          "value": "125.6 кг/м2"
+        },
+        {
+          "name": "Размер",
+          "value": "1,5х6 м"
+        }
+      ]
+    },
+    {
+      "id": "rozmet-2200",
+      "name": "Лист металлический 20 мм",
+      "productTypeId": "type-rozmet-sub-listovoy-prokat-list-goryachekatanyj",
+      "candidateImageKey": "hot-rolled",
+      "specifications": [
+        {
+          "name": "Толщина",
+          "value": "20 мм"
+        },
+        {
+          "name": "Текстура листа",
+          "value": "Гладкий"
+        },
+        {
+          "name": "Вес",
+          "value": "157 кг/м2"
+        },
+        {
+          "name": "Размер",
+          "value": "1,5х6 м"
+        }
+      ]
+    }
+  ],
+  "additionalImages": [
+    {
+      "key": "atreon-chequered-product-photo",
+      "name": "Лист рифлёный · отдельный кадр карточки ATREON",
+      "file": "atreon-chequered-steel-sheet.png",
+      "supplier": "ATREON",
+      "page": "https://www.atreon.pl/blacha-ryflowana-1x2-m--grubosc-4-mm/",
+      "image": "https://www.atreon.pl/user/shop/orig/603-1_blacha-ryflowana-1x2-m--grubosc-4-mm_3.png?66d95af2",
+      "review": "Третий кадр галереи: один целый стальной лист с чечевичным рисунком на белом фоне, без размерной схемы. Сохранён без перекодирования, обрезки, ретуши или увеличения. Отдельный исходник, не заменяет ранее выбранную иллюстрацию 1920×1080 и не подключён к сайту. Размеры 1×2 м, толщину 4 мм и марку S235 карточки источника не переносить на остальные товары.",
+      "format": "png",
+      "width": 1024,
+      "height": 768,
+      "bytes": 191375,
+      "sha256": "2d4a86434a9a35b8abd2976600dfc9981ada436fa971e65b5630d28c2a7591cf",
+      "savedOn": "2026-11-04"
+    }
+  ]
+}

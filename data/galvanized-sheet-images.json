@@ -1,0 +1,16 @@
+{
+  "products": {
+    "rozmet-2181": {
+      "sourceUrl": "https://rozmet.ru/production/listovoy_prokat/galvanized_steel_sheet/list-05-ocinkovanniyyi/",
+      "imageUrl": "/images/catalog/listovoy-prokat/list_ocinkovanniy/list-ocinkovanniy-0.5-1250x2500-rozmet-2181.webp"
+    },
+    "rozmet-2199": {
+      "sourceUrl": "https://rozmet.ru/production/listovoy_prokat/galvanized_steel_sheet/list_0_7_otsinkovannyy/",
+      "imageUrl": "/images/catalog/listovoy-prokat/list_ocinkovanniy/list-ocinkovanniy-0.7-1250x2500-rozmet-2199.webp"
+    },
+    "rozmet-2184": {
+      "sourceUrl": "https://rozmet.ru/production/listovoy_prokat/galvanized_steel_sheet/list-1-ocinkovanniyyi/",
+      "imageUrl": "/images/catalog/listovoy-prokat/list_ocinkovanniy/list-ocinkovanniy-1-1250x2500-rozmet-2184.webp"
+    }
+  }
+}

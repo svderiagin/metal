@@ -6,6 +6,7 @@ import ts from 'typescript';
 import {readProjectData} from './project-data.mjs';
 
 const catalog = readProjectData('lib/catalog.ts');
+const {isPublicProduct} = readProjectData('data/catalog-visibility.ts');
 const {getChannelProductDescription} = readProjectData('lib/channelDescription.ts');
 const category = catalog.getCategoryBySlug('shveller');
 const products = catalog.getProductVariantsByCategoryId(category.id);
@@ -123,16 +124,24 @@ test('all channel specifications match the verified standard and supplier length
   assert.equal(six.specifications.find(item => item.name === 'Теоретическая масса').value, '5,90 кг/м');
 });
 
-test('verification overlay leaves other imported fields unchanged and respects profile image overlays', () => {
+test('verification overlay leaves other imported fields unchanged and respects approved image overlays', () => {
   const angleImages = JSON.parse(fs.readFileSync('data/angle-images.json', 'utf8')).products;
   const squareImages = JSON.parse(fs.readFileSync('data/square-images.json', 'utf8')).products;
-  for (const original of rawCatalog.products.filter(item => item.categoryId !== category.id)) {
+  const treadPlateImages = JSON.parse(fs.readFileSync('data/tread-plate-images.json', 'utf8')).products;
+  const galvanizedSheetImages = JSON.parse(fs.readFileSync('data/galvanized-sheet-images.json', 'utf8')).products;
+  const coldRolledSheetImages = JSON.parse(fs.readFileSync('data/cold-rolled-sheet-images.json', 'utf8')).products;
+  const hotRolledSheetImages = JSON.parse(fs.readFileSync('data/hot-rolled-sheet-images.json', 'utf8')).products;
+  for (const original of rawCatalog.products.filter(item => item.categoryId !== category.id && isPublicProduct(item))) {
     const actual = catalog.getAllProductVariants().find(item => item.id === original.id);
-    const image = angleImages[original.id] ?? squareImages[original.id];
-    if (image) {
-      assert.equal(original.categoryId, angleImages[original.id] ? 'rozmet-cat-ugolok' : 'rozmet-cat-kvadrat');
-      assert.equal(image.sourceUrl, original.sourceReference);
-    }
+    const image = angleImages[original.id] ?? squareImages[original.id] ?? treadPlateImages[original.id]
+      ?? galvanizedSheetImages[original.id] ?? coldRolledSheetImages[original.id] ?? hotRolledSheetImages[original.id];
+    if (angleImages[original.id]) assert.equal(original.categoryId, 'rozmet-cat-ugolok');
+    if (squareImages[original.id]) assert.equal(original.categoryId, 'rozmet-cat-kvadrat');
+    if (treadPlateImages[original.id]) assert.equal(original.subcategoryId, 'rozmet-sub-listovoy-prokat-list-riflennyj');
+    if (galvanizedSheetImages[original.id]) assert.equal(original.subcategoryId, 'rozmet-sub-listovoy-prokat-galvanized-steel-sheet');
+    if (coldRolledSheetImages[original.id]) assert.equal(original.subcategoryId, 'rozmet-sub-listovoy-prokat-list-ocynkovannyj');
+    if (hotRolledSheetImages[original.id]) assert.equal(original.subcategoryId, 'rozmet-sub-listovoy-prokat-list-goryachekatanyj');
+    if (image) assert.equal(image.sourceUrl, original.sourceReference);
     assert.deepEqual(JSON.parse(JSON.stringify(actual)), image ? {...original, imageUrls: [image.imageUrl], specifications: original.specifications.map(item =>
       original.categoryId === 'rozmet-cat-ugolok' && item.name === 'Вес' ? {...item, name:'Теоретическая масса'} : item)} : original, original.id);
   }

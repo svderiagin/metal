@@ -2,13 +2,29 @@ import type {ProductSpecification, ProductVariant} from "@/types/product";
 import channelSpecifications from "@/data/channel-specifications.json";
 import angleImages from "@/data/angle-images.json";
 import squareImages from "@/data/square-images.json";
+import treadPlateImages from "@/data/tread-plate-images.json";
+import galvanizedSheetImages from "@/data/galvanized-sheet-images.json";
+import coldRolledSheetImages from "@/data/cold-rolled-sheet-images.json";
+import hotRolledSheetImages from "@/data/hot-rolled-sheet-images.json";
+import {coldRolledSheetSubcategoryId, galvanizedSheetSubcategoryId, hotRolledSheetSubcategoryId, treadPlateSubcategoryId} from "./sheetPresentation";
 
 type ImageOverride = {sourceUrl: string; imageUrl: string};
 type ChannelOverride = {sourceUrl: string; imageUrl?: string; specifications: ProductSpecification[]};
+const sheetImageOverrides = new Map<string, Record<string, ImageOverride>>([
+  [treadPlateSubcategoryId, treadPlateImages.products],
+  [galvanizedSheetSubcategoryId, galvanizedSheetImages.products],
+  [coldRolledSheetSubcategoryId, coldRolledSheetImages.products],
+  [hotRolledSheetSubcategoryId, hotRolledSheetImages.products],
+]);
 
 // The saved supplier catalog remains reproducible. Display corrections and
 // approved illustrations are applied only to the matching identity and source.
 export function applyCatalogOverrides(product: ProductVariant): ProductVariant {
+  const sheetImages = sheetImageOverrides.get(product.subcategoryId);
+  if (sheetImages) {
+    const image = sheetImages[product.id];
+    return image && image.sourceUrl === product.sourceReference ? {...product, imageUrls: [image.imageUrl]} : product;
+  }
   if (product.categoryId === "rozmet-cat-kvadrat") {
     const image = (squareImages.products as Record<string, ImageOverride>)[product.id];
     return image && image.sourceUrl === product.sourceReference ? {...product, imageUrls: [image.imageUrl]} : product;

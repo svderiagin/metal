@@ -1,0 +1,113 @@
+{
+  "preparedOn": "2026-11-04",
+  "purpose": "Чистый холст для ручной размерной разметки рифлёного листа",
+  "status": "unannotated-layout-only",
+  "connectedToProductTables": false,
+  "method": "built-in imagegen enlargement, followed by exact uniform-scale normalization and left/bottom anchor alignment",
+  "promptFile": "imports/list-rifleniy-image-template/layout-prompt-v4-anchored-enlargement.txt",
+  "source": {
+    "file": "imports/list-rifleniy-image-template/source.png",
+    "format": "png",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 1445049,
+    "sha256": "7b02f26dbe724320a7960a4c6bc44b3930a3c825c4a160b8e03aa2a4f926d2c5"
+  },
+  "positionReference": {
+    "file": "imports/list-rifleniy-image-template/layout-v2-position-reference.png",
+    "format": "png",
+    "width": 1448,
+    "height": 1086,
+    "bytes": 1298462,
+    "sha256": "0ff7886adb002fbe2cb6351f335d25f8f864399e16d9536d157e0b3255909d4e"
+  },
+  "generated": {
+    "file": "imports/list-rifleniy-image-template/layout-v4-anchored-enlargement.png",
+    "format": "png",
+    "width": 1448,
+    "height": 1086,
+    "bytes": 1436141,
+    "sha256": "d5639aa829326d0f100c1a784ebf9a215714ed56ed21fc5a1dd91eea1c405033"
+  },
+  "output": {
+    "file": "public/images/catalog/listovoy-prokat/list-rifleniy_2400_1800_original.png",
+    "format": "png",
+    "width": 2400,
+    "height": 1800,
+    "bytes": 2612939,
+    "sha256": "a762354f56d773d448f7cd904c0086c215d5161c667841aeb2c0352d715090e3"
+  },
+  "canvasTransform": {
+    "width": 2400,
+    "height": 1800,
+    "requestedScale": 1.2,
+    "normalizationScale": 0.9357560025957171,
+    "anchors": {
+      "left": 854,
+      "bottom": 1338
+    },
+    "previousBounds": {
+      "left": 854,
+      "top": 344,
+      "right": 2055,
+      "bottom": 1338,
+      "width": 1202,
+      "height": 995
+    },
+    "finalBounds": {
+      "left": 854,
+      "top": 129,
+      "right": 2295,
+      "bottom": 1338,
+      "width": 1442,
+      "height": 1210
+    },
+    "measuredWidthScale": 1.199667221297837,
+    "measuredHeightScale": 1.2160804020100502,
+    "backgroundFill": "white"
+  },
+  "review": {
+    "wholeContourVisible": true,
+    "allFourCornersVisible": true,
+    "annotationsPresent": false,
+    "headingSpace": "upper left",
+    "dimensionSpace": "left and below the plate, with space beside the long edges",
+    "propertiesSpace": "lower left",
+    "notes": [
+      "Размер и расположение уменьшенного варианта одобрены владельцем, затем он запросил смещение на 200 px влево и работу от исходника ради качества.",
+      "Изображение изделия для imagegen взято из source.png; версия v2 использовалась только как ориентир композиции.",
+      "Встроенный инструмент вернул 1448×1086. Итоговый PNG экспортирован на холст 2400×1800, затем сдвинут ровно на 200 px влево без повторной интерполяции пикселей.",
+      "Это AI-перекомпоновка исходного изображения, а не пиксельноточное аффинное преобразование фотографии.",
+      "Первый крупный вариант layout-generated.png отклонён: занимал зону размерной разметки. Исходник сохранён без изменения байтов.",
+      "По следующему запросу лист увеличен примерно на 20%, левая и нижняя границы закреплены. Генератор сместил границы; при экспорте выполнено равномерное выравнивание, без искажения пропорций."
+    ]
+  },
+  "previousAttempts": [
+    {
+      "file": "imports/list-rifleniy-image-template/layout-generated.png",
+      "status": "rejected-too-large"
+    },
+    {
+      "file": "imports/list-rifleniy-image-template/layout-v2-position-reference.png",
+      "status": "owner-approved-placement-before-left-shift"
+    }
+  ],
+  "previousVersion": {
+    "output": {
+      "file": "imports/list-rifleniy-image-template/layout-v3-left-shift-reference.png",
+      "format": "png",
+      "width": 2400,
+      "height": 1800,
+      "bytes": 1854921,
+      "sha256": "62f5507ba75df1c7b593fd9711c6e32c7fceef9972dcd344285ea368e4355d93"
+    },
+    "bounds": {
+      "left": 854,
+      "top": 344,
+      "right": 2055,
+      "bottom": 1338,
+      "width": 1202,
+      "height": 995
+    }
+  }
+}

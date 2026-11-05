@@ -7,6 +7,7 @@ import {CatalogSidebar} from "@/components/catalog/CatalogSidebar";
 import {CatalogDescription} from "@/components/catalog/CatalogDescription";
 import {CategoryCover} from "@/components/catalog/CategoryCover";
 import {ProductTypeResults} from "@/components/catalog/ProductTypeResults";
+import {ProductCatalogIntro} from "@/components/catalog/ProductCatalogIntro";
 import {ProductVariantCatalog} from "@/components/catalog/ProductVariantCatalog";
 import {CatalogCoverGallery} from "@/components/catalog/CatalogCoverGallery";
 import {PageContainer} from "@/components/layout/PageContainer";
@@ -59,16 +60,8 @@ export default async function CategoryPage({params}: Props) {
               <CatalogSidebar activeSlug={category.slug}/>
             </Suspense>
           </div>
-          <div className="min-w-0">
-            <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-900 sm:p-6 lg:p-8">
-              <p className="text-eyebrow uppercase text-red-700 dark:text-red-400">
-                Категория
-              </p>
-              <h1 className="mt-2 break-words text-page-title">{category.name}</h1>
-              {hasImage && <CatalogCoverGallery key={category.id} images={coverImages} name={category.name}/>}
-              <CatalogDescription description={introDescription}/>
-            </div>
-          </div>
+          <ProductCatalogIntro key={category.id} title={category.name} label="Категория"
+            images={hasImage ? coverImages : []} description={introDescription}/>
           <ProductVariantCatalog variants={variants} categorySlug={category.slug}/>
           <div className="min-w-0 lg:col-start-2">
             {detailedDescription && <section className="max-w-[800px]" aria-labelledby={`${category.id}-details-heading`}>

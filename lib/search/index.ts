@@ -4,6 +4,7 @@ import {normalizeText, russianStem, textWords} from "./russian";
 import {ALIASES_BY_STEM, expandCompoundQuery, STOP_WORDS} from "./terminology";
 import {buildTechnicalDocument, parseTechnicalQuery, technicalMatch} from "./technical";
 import {beamKind} from "@/lib/beam";
+import {hotRolledSheetTitle, isPlainHotRolledSheet} from "@/lib/sheetPresentation";
 
 interface Field {words: Set<string>; stems: Set<string>; weight: number}
 interface Document {product: ProductVariant; name: string; fields: Field[]; technical: ReturnType<typeof buildTechnicalDocument>}
@@ -59,7 +60,7 @@ export function createCatalogSearchIndex(products: ProductVariant[], types: Prod
     const type = typeById.get(product.productTypeId), category = categoryById.get(product.categoryId);
     const technical = buildTechnicalDocument(product);
     const fields = [
-      field(product.name + " " + product.sku, 160),
+      field([product.name, product.sku, isPlainHotRolledSheet(product) ? hotRolledSheetTitle : ""].join(" "), 160),
       field([product.material, ...product.attributes.map(a => a.value), ...product.specifications.map(s => s.value)].join(" "), 95),
       // Contextual description text belongs below exact product attributes, not technical constraints.
       field([category?.name ?? "", type?.name ?? ""].join(" "), 65),

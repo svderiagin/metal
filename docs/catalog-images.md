@@ -1,5 +1,15 @@
 # Catalog images
 
+## Памятка: цвета разметки товаров
+
+| Элемент | HEX | RGB |
+| --- | --- | --- |
+| Заголовок, подписи и значения | `#41464D` | `65, 70, 77` |
+| Стрелки, размерные и выносные линии | `#59636F` | `89, 99, 111` |
+
+Это цвета разметки внутри изображений, используемые в эталоне квадрата и примере
+рифлёного листа. При подготовке следующих иллюстраций сохранять эти значения.
+
 ## Image quality review (required)
 
 Image quality is a completion criterion for image tasks. Source hashes, image
@@ -188,6 +198,110 @@ and mobile specifications use the same presentation helper.
 pixel checks. These are shared family photographs with nominal dimension labels,
 including the two unequal-leg profiles; they are not scaled manufacturing drawings.
 Validate with `node --test scripts/ugolok-images.test.mjs scripts/images.test.mjs`.
+
+## Sheet illustration candidates
+
+[Sheet source selection](../imports/listovoy-image-sources/README.md) contains five
+reviewed, unannotated product images for the four sheet subcategories, with a
+separate PVL image for the expanded-metal variants inside the hot-rolled group.
+These preparation assets are not connected to the storefront. The manifest
+records source URLs, native file dimensions, hashes, candidate product IDs and
+restrictions. Confirm the tread pattern, PVL 306/406 association and the conflicting
+cold-rolled group description before generating dimension labels; use project
+specifications rather than donor sizes or grades.
+
+The owner-selected Cronvall tread plate also has a clean, unannotated layout for
+manual dimension work: `public/images/catalog/listovoy-prokat/list-rifleniy_2400_1800_original.png`.
+Its source, exact imagegen prompt, generation dimensions and review notes are in
+[`imports/list-rifleniy-image-template/`](../imports/list-rifleniy-image-template/README.md).
+The owner approved the smaller placement and requested a 200 px shift to the left.
+The final composition was rebuilt with the original Cronvall PNG as its appearance
+source and the approved placement as a composition reference. The final canvas is
+2400 × 1800; the built-in imagegen result was 1448 × 1086 and was exported uniformly,
+then translated exactly -200 px horizontally without resampling the retained pixels.
+This is an AI-recomposed illustration, not a pixel-identical source transform.
+The next revision increases the plate footprint by about 20%, keeping its left
+boundary at x=854 and bottom boundary at y=1338. All four corners remain visible.
+The first oversized attempt is recorded as rejected.
+
+An owner-requested example annotation is saved separately as
+`listovoy-prokat/list-rifleniy-4-1500x6000-marked.png`. It uses the public
+rozmet-2202 parameters: 4 mm base thickness, 1500 mm width and 6000 mm length.
+`imports/list-rifleniy-image-template/render-annotations.mjs` draws the same bundled
+Inter typography and slate lines as the square family. Dimension lines follow the
+projected length/width edges; external thickness arrows identify the base sheet
+at its nearest cut edge, excluding the raised tread. Footer labels show length
+and width. The inherited mass value is omitted pending confirmation for the
+actual treaded product. `annotations.json` records all placements and verifies
+unchanged photo pixels outside the transparent annotation layer. These are
+nominal catalog dimensions on a family illustration, not a manufacturing drawing.
+The clean source remains separate; no product-table mappings have been changed.
+
+## Tread plate product illustrations
+
+The active 2400 × 1800 templates are the owner's marked and clean JPGs in
+`public/images/catalog/listovoy-prokat/list-refleniy/`. The marked JPG serves
+«Лист № 3 ТУ» unchanged. `node scripts/render-tread-plate-images.mjs --write`
+renders the other three products as lossless WebP and records their associations
+in `data/tread-plate-images.json`. Run without `--write` for previews under
+`.tmp/list-refleniy-qa/`.
+
+The renderer uses clean photo patches and bundled Inter only for changed labels.
+It verifies that all pixels outside those patches match the marked reference.
+Arrows, unit glyphs, and the plate composition stay in place. Width, length,
+thickness, and mass come from the saved catalog. The № 4 and № 5 illustrations
+label the supplied kg/m² value as «Масса по каталогу». The four images share one
+illustrative plate shape and tread pattern, with nominal dimensions for each SKU.
+
+The product table and mobile cards reuse the profile thumbnails and viewer.
+Quantity units remain specific to each row, and the cash-only price condition
+appears next to the corresponding price.
+
+## Galvanized sheet product illustrations
+
+The supplied clean and marked 2400 × 1800 JPGs are in
+`public/images/catalog/listovoy-prokat/list_ocinkovanniy/`. The marked JPG
+sets the layout and the title «Лист оцинкованный № 0,5». Its decoded pixels are
+used for the 0,5 mm illustration.
+
+Run `node scripts/render-galvanized-sheet-images.mjs --write` to generate three
+lossless WebP illustrations and the source-matched `data/galvanized-sheet-images.json`.
+The renderer uses clean photo patches to replace the designation, thickness
+and mass for the 0,7 mm and 1 mm illustrations. It reads the values from the
+saved supplier data and checks that all pixels outside the edited labels
+match the marked reference.
+
+The illustrated sheet families use the same table, filters, cards and image viewer.
+Galvanized sheets are ordered by the piece. The price notes for № 0,5 and № 0,7
+appear in the row and mobile card.
+
+## Cold-rolled sheet product illustrations
+
+The marked and clean 2400 × 1800 JPGs are in
+`public/images/catalog/listovoy-prokat/list_holodnokataniy/`.
+Run `node scripts/render-cold-rolled-sheet-images.mjs --write` to generate the two
+lossless WebP illustrations and `data/cold-rolled-sheet-images.json`. Without
+`--write`, the generated images go to `.tmp/cold-rolled-sheet-catalog/`.
+
+The № 0,5 illustration preserves every decoded pixel of the marked JPG. The
+№ 1 illustration uses the clean JPG and bundled Inter to replace its designation,
+thickness and mass. The renderer verifies that pixels outside these label patches
+match the reference. The shared plate illustration uses each product's saved nominal
+dimensions and mass. The storefront uses the title «Лист холоднокатаный» at the
+existing `list-ocynkovannyj` route.
+
+## Hot-rolled sheet product illustrations
+
+The marked and clean 2400 × 1800 JPGs are in
+`public/images/catalog/listovoy-prokat/list_goriachekataniy/`.
+The marked № 2 source supplies the composition for the 13 smooth variants.
+The product images use saved thicknesses, nominal sheet formats and masses,
+including kg per piece for the smaller format and kg per square metre for the
+larger format. The 3 mm illustrations distinguish «ТУ» and «ГОСТ».
+
+Run `node scripts/render-hot-rolled-sheet-images.mjs --write` to regenerate
+the lossless WebP files and `data/hot-rolled-sheet-images.json`. The renderer
+checks that the photo pixels outside the changed labels match the marked source.
 
 ## Shared product image viewer
 
