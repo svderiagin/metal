@@ -1,4 +1,5 @@
 import {test, expect, openProduct, samples, seedCart, settleImages, visibleProduct} from "../browser";
+import {getProductIllustration} from "../../lib/productPreviewImage";
 
 test("home and catalog first-screen layout", async ({page}) => {
   for (const [path, name] of [["/", "home"], ["/catalog", "catalog"]]) {
@@ -52,6 +53,27 @@ test("rounded product viewer fits the original and zooms 1:1", async ({page}) =>
   await expect(zoom).toHaveAttribute("aria-pressed", "true");
   await settleImages(page);
   await expect(dialog).toHaveScreenshot("image-viewer-native.png");
+});
+
+test("profile pipe uses a clean thumbnail and shows the annotated product in its viewer", async ({page}) => {
+  const product = samples.profile;
+  const illustration = getProductIllustration(product)!;
+  await openProduct(page, product);
+  const thumbnail = visibleProduct(page, product.id).getByRole("button", {name: `Увеличить изображение: ${product.name}`, exact: true});
+  await expect.poll(() => thumbnail.getByRole("img").evaluate(element => {
+    const address = new URL((element as HTMLImageElement).src);
+    return decodeURI((address.searchParams.get("url") ?? address.pathname).split("?")[0]);
+  })).toBe(illustration.photoUrl);
+  await thumbnail.click();
+  const dialog = page.getByRole("dialog", {name: `Просмотр изображения: ${product.name}`, exact: true});
+  const image = dialog.getByRole("img");
+  await expect.poll(() => image.evaluate(element => decodeURI(new URL((element as HTMLImageElement).src).pathname))).toBe(illustration.imageUrl);
+  await expect(dialog.getByRole("button", {name: "Увеличение изображения", exact: true})).toBeEnabled();
+  await image.evaluate(element => (element as HTMLImageElement).decode());
+  await page.mouse.move(0, 0);
+  // Isolate the dialog corners from unrelated scroll and content behind the overlay.
+  await page.addStyleTag({content: "dialog[open]::backdrop { background-color: #000; }"});
+  await expect(dialog).toHaveScreenshot("annotated-profile-viewer.png");
 });
 
 test("cart and checkout layout with a real catalog product", async ({page}) => {

@@ -15,20 +15,11 @@ import {
 } from "@/lib/metalMesh";
 import {getQuantityUnit, requiresWholeMetalMeshQuantity} from "@/lib/variantPresentation";
 import {FilterPanel} from "./FilterPanel";
+import {CatalogVariantLayout, CatalogVariantOrder, CatalogVariantQuantity, CatalogVariantSpecifications, CatalogVariantTable} from "./CatalogVariantLayout";
 import filterStyles from "./FilterPanel.module.css";
 import tableStyles from "./RebarTable.module.css";
 
 type SortMode = "name" | "cell-asc" | "price-asc" | "price-desc";
-
-const columns = [
-  {label: "Наименование", width: "24%"},
-  {label: "Ячейка / проволока", width: "14%"},
-  {label: "Рулон / карта", width: "12%"},
-  {label: "Цена", width: "14%"},
-  {label: "Количество", width: "13%"},
-  {label: "Сумма", width: "11%"},
-  {label: "В корзину", width: "12%"},
-] as const;
 
 export function MetalMeshVariantCatalog({variants}: {variants: MetalMeshVariant[]}) {
   const [query, setQuery] = useState("");
@@ -98,18 +89,9 @@ export function MetalMeshVariantCatalog({variants}: {variants: MetalMeshVariant[
 
     <section className="min-w-0 lg:col-span-2" aria-label="Сетка металлическая">
       {results.length ? <>
-        <div className="hidden overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-sm xl:block">
-          <table className={`${tableStyles.table} text-center text-sm`}>
-            <colgroup>{columns.map((column) => <col key={column.label} style={{width: column.width}}/>)}</colgroup>
-            <thead className="bg-slate-900 text-white"><tr>
-              {columns.map(({label}) => <th key={label} scope="col"
-                className={`px-2 py-3 font-semibold ${label === "Сумма" ? tableStyles.sumColumn : "text-center"}`}>
-                {label}
-              </th>)}
-            </tr></thead>
-            <tbody>{results.map((variant) => <MetalMeshItem key={variant.id} variant={variant} view="table"/>)}</tbody>
-          </table>
-        </div>
+        <CatalogVariantTable>
+          {results.map(variant => <MetalMeshItem key={variant.id} variant={variant} view="table"/>)}
+        </CatalogVariantTable>
         <div className="grid gap-4 sm:grid-cols-2 xl:hidden">
           {results.map((variant) => <MetalMeshItem key={variant.id} variant={variant} view="card"/>)}
         </div>
@@ -147,20 +129,12 @@ function MetalMeshItem({variant, view}: {variant: MetalMeshVariant; view: "table
     setDraft(null);
   }
 
-  const quantityInput = <label className="block text-sm font-semibold">
-    {view === "card" && <span className="mb-1 block">Количество, {quantityUnit}</span>}
-    <span className={view === "table" ? "sr-only" : "hidden"}>Количество, {quantityUnit}</span>
-    <span className="relative block">
-      <Input aria-label={`Количество для ${variant.name}`} type="number"
-        inputMode={whole ? "numeric" : "decimal"} min={whole ? 1 : 0.1} max={999} step={whole ? 1 : 0.1}
-        value={value} onChange={(event) => setDraft(event.target.value)}
-        className={`${filterStyles.field} w-full min-w-0 pl-2 pr-10 text-center tabular-nums`}/>
-      <span aria-hidden="true"
-        className="pointer-events-none absolute inset-y-0 right-2 flex items-center text-xs font-normal text-slate-500 dark:text-slate-400">
-        {quantityUnit}
-      </span>
-    </span>
-  </label>;
+  const quantityInput = <CatalogVariantQuantity unit={quantityUnit}>
+    <Input aria-label={`Количество для ${variant.name}`} type="number"
+      inputMode={whole ? "numeric" : "decimal"} min={whole ? 1 : 0.1} max={999} step={whole ? 1 : 0.1}
+      value={value} onChange={(event) => setDraft(event.target.value)}
+      className={`${filterStyles.field} w-full min-w-0 pl-2 pr-10 text-center tabular-nums`}/>
+  </CatalogVariantQuantity>;
   const totalOutput = <output aria-label={`Сумма заказа для ${variant.name}`} aria-live="polite"
     className={total === null ? "text-xs text-slate-500 dark:text-slate-400" : "font-semibold tabular-nums text-slate-900 dark:text-slate-100"}>
     {total === null ? "Укажите количество" : formatCurrency(total)}
@@ -171,35 +145,16 @@ function MetalMeshItem({variant, view}: {variant: MetalMeshVariant; view: "table
   </Button>;
   const error = whole ? "Введите целое количество от 1 до 999." : "Введите количество от 0,1 до 999.";
 
-  if (view === "card") return <article id={`variant-mobile-${variant.id}`}
-    className="min-w-0 break-words rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-5 shadow-sm">
-    <h3 className="font-bold">{variant.name}</h3>
-    <dl className="mt-4 grid grid-cols-2 gap-3 text-sm">
-      <VariantDetail label="Размер ячейки" value={cell}/>
-      <VariantDetail label="Диаметр проволоки" value={wire}/>
-      <VariantDetail label="Размер рулона / карты" value={productFormat}/>
-      <VariantDetail label="Цена" value={formatUnitPrice(variant.price, variant.priceUnit)}/>
-    </dl>
-    <div className="mt-4 border-t border-slate-100 dark:border-slate-800 pt-4">{quantityInput}</div>
-    <p className="mt-4 flex items-baseline justify-between gap-3 text-sm"><span>Сумма:</span>{totalOutput}</p>
-    <div className="mt-4">{action}</div>
-    {!valid && <p role="alert" className="mt-2 text-xs text-red-700 dark:text-red-400">{error}</p>}
-  </article>;
+  const specifications = <CatalogVariantSpecifications items={[
+    {label: "Размер ячейки", value: cell},
+    {label: "Диаметр проволоки", value: wire},
+    {label: "Размер рулона / карты", value: productFormat},
+  ]}/>;
+  const status = !valid && <p role="alert" className="text-xs text-red-700 dark:text-red-400">{error}</p>;
 
-  return <tr id={`variant-${variant.id}`} className="border-t border-slate-200 dark:border-slate-700 align-middle">
-    <td className="px-3 py-4 text-left">
-      <strong className="block leading-snug">{variant.name}</strong>
-    </td>
-    <td className="px-2 py-4"><strong className="block">{cell}</strong><span className="mt-1 block text-xs text-slate-500 dark:text-slate-400">{wire}</span></td>
-    <td className="px-2 py-4">{productFormat}</td>
-    <td className="px-2 py-4 font-semibold tabular-nums">{formatUnitPrice(variant.price, variant.priceUnit)}</td>
-    <td className="px-2 py-3">{quantityInput}</td>
-    <td className={`${tableStyles.sumColumn} py-3`}>{totalOutput}</td>
-    <td className="px-2 py-3 text-center">
-      {action}
-      {!valid && <span role="alert" className="mx-auto mt-1 block max-w-32 text-xs text-red-700 dark:text-red-400">{error}</span>}
-    </td>
-  </tr>;
+  return <CatalogVariantLayout view={view} variant={variant} specifications={specifications}
+    price={formatUnitPrice(variant.price, variant.priceUnit)}
+    order={<CatalogVariantOrder view={view} quantity={quantityInput} action={action} total={totalOutput} status={status}/>}/>;
 }
 
 function MeshFilter({label, value, values, onChange}: {
@@ -215,10 +170,6 @@ function MeshFilter({label, value, values, onChange}: {
       {values.map((option) => <option key={option} value={option}>{option}</option>)}
     </Select>
   </label>;
-}
-
-function VariantDetail({label, value}: {label: string; value: string}) {
-  return <div><dt className="text-slate-600 dark:text-slate-400">{label}</dt><dd className="mt-1 font-medium">{value}</dd></div>;
 }
 
 function uniqueValues(variants: MetalMeshVariant[], specification: string) {

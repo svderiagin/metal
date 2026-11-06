@@ -11,8 +11,9 @@ const imageSizes = "(min-width: 768px) 672px, (min-width: 640px) calc(100vw - 40
 
 type Presentation = "page" | "table" | "card" | "catalog" | "compact";
 
-export function ProductImageViewer({src, name, presentation = "page", caption, framed = false, expanded = false}: {
+export function ProductImageViewer({src, previewSrc = src, name, presentation = "page", caption, framed = false, expanded = false}: {
   src: string;
+  previewSrc?: string;
   name: string;
   presentation?: Presentation;
   caption?: ReactNode;
@@ -146,7 +147,7 @@ export function ProductImageViewer({src, name, presentation = "page", caption, f
         style={presentation === "table" ? {width: 176} : undefined}
         className={`group mx-auto block cursor-pointer rounded-xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-slate-600 dark:focus-visible:outline-red-300 ${triggerLayout}`}>
         <span className={`relative block overflow-hidden rounded-xl bg-white ${presentation === "compact" ? "h-full w-full" : isReferencePreview ? "aspect-[4/3]" : "aspect-[2/1]"} ${isReferencePreview ? framed ? "shadow-[0_1px_3px_rgba(15,23,42,0.12)]" : "ring-1 ring-inset ring-slate-200" : ""}`}>
-          <Image src={imageUrl} alt={name} fill sizes={triggerSizes}
+          <Image src={catalogImageUrl(previewSrc)} alt={name} fill sizes={triggerSizes}
             className={`object-contain object-center ${isReferencePreview && !framed ? "p-1.5" : ""}`}/>
           {/* Overlay the frame so it does not shrink the image's 4:3 content box. */}
           {isReferencePreview && framed && <span aria-hidden="true" className="pointer-events-none absolute inset-0 rounded-xl border border-slate-300 dark:border-slate-600"/>}

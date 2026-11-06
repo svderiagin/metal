@@ -171,6 +171,62 @@
 | Сварная сетка в картах | `welded-panels-stacks.webp` | [СМ-Сетка, кладочная сетка в картах](https://sm-setka.kz/product/1) · [фото](https://sm-setka.kz/assets/mash_light-MZmTjSta.webp) |
 | Сварная сетка в картах | `welded-panels-edges.jpg` | [ProSteel, кладочная сетка ВР-1](https://prosteel.kz/p99710854-setka-kladochnaya.html) · [фото](https://images.satu.kz/183691994_setka-kladochnaya-vr-1.jpg) |
 
+## Остальные категории каталога
+
+«Листовой прокат» показывает складские фотографии горячекатаного, холоднокатаного,
+оцинкованного и рифлёного листа из их собственных галерей. «Арматурные изделия»
+объединяют ракурсы лягушек и открытых П-образных скоб. Для каждого из этих двух
+видов на его странице сохранена отдельная галерея.
+
+Фотографии показывают форму, поверхность, упаковку или применение продукции.
+Основные файлы размещены в папке `cover/` соответствующей категории. Часть
+предметных кадров используется из `illustration-sources/` и каталога Розмета.
+
+| Раздел | Файл | Размер | Источник |
+| --- | --- | --- | --- |
+| Штакетник металлический | `grand-line-brown-fence.jpg` | 750 × 500 | [Krona, полукруглый Grand Line RAL 8017](https://krona-msk.ru/shop/katalog/shtaketnik-metallicheskiy-grand-line-slim-polukruglyy-pryamoy-poliester-dvukhstoronniy-0-4-mm-ral-8017/) · [фото](https://krona-msk.ru/upload/iblock/9c6/38c2p0bp9gxwlvo4q1g9ix0eq0ca57oz.jpg) |
+| Штакетник металлический | `center-mk-graphite-fence.jpg` | 800 × 600 | [Центр Металлокровли, полукруглый RAL 7024](https://centermk.ru/projects/evroshtaketnik/shtaketnik-polukruglyy-234m-seryy-grafit-dvustoronniy-poliester/) · [фото](https://centermk.ru/upload/iblock/e0c/pefspldocj4g5cmdrjmi4mbbn5vwtoy2.jpg) |
+| Штакетник металлический | `pmzabor-rounded-pickets.jpg` | 1000 × 666 | [ПМ Забор, планки RAL 8017](https://pmzabor.ru/shtaketnik-kruglyj-figurnyj-0-45-pe-double-ral-8017) · [фото](https://pmzabor.ru/images/o/shtaketnik-kruglyj-figurnyj-0-45-pe-double-ral-8017_1.jpg) |
+| Полоса стальная | `changzeng-hot-rolled-flat-bundles.webp` | 750 × 750 | [Changzeng, пачки горячекатаной полосы](https://changzengsteel.en.made-in-china.com/product/tsLxBQKvZDWX/China-Hot-Rolled-Steel-Flat-Bars-Grade-ASTM-A36-1045-A105.html) · [фото](https://image.made-in-china.com/2f0j00eUjfGnRKHYqo/Hot-Rolled-Steel-Flat-Bars-Grade-ASTM-A36-1045-A105.webp) |
+| Полоса стальная | `metals4u-flat-bar-end.jpg` | 1400 × 1400 | [metals4U, торец стальной полосы](https://www.metals4u.co.uk/materials/mild-steel/mild-steel-flat/flat-black/2056-p) · [фото](https://www.metals4u.co.uk/media/catalog/product/2/0/2056.jpg) |
+| Полоса стальная | `carbon-flat-bar-yard.webp` | 768 × 768 | [Склад стальной полосы](https://m.made-in-china.com/product/Manufacture-Carbon-Steel-Flat-Bar-Barre-De-Fer-Plat-Flat-Bar-1924284001.html) · [фото](https://image.made-in-china.com/2f0j00WbjizavCCVfK/Manufacture-Carbon-Steel-Flat-Bar-Barre-De-Fer-Plat-Flat-Bar.webp) |
+| Проволока | `modulstal-wire-coils.webp` | 1024 × 683 | [Modulstal, склад проволоки](https://modulstal.uz/product/provoloka) · [фото](https://modulstal.uz/media/photos/products/prov1.webp) |
+| Проволока | `termolife-binding-wire.jpg` | 600 × 600 | [Термолайф, вязальная проволока ГОСТ 3282-74](https://termolife.pro/catalog/provoloka-vyazalnaya-1-2-mm-gost-3282-74/) · [фото](https://termolife.pro/upload/iblock/9eb/24dw16qfba7z7d2u8lkjh0h9fma7u4zw.jpg) |
+| Проволока | `petrovich-binding-hook.jpg` | 1000 × 1000 | [Петрович, автоматический крючок ЗУБР](https://moscow.petrovich.ru/product/1084355/) · [фото](https://cs.p-static.ru/image/50945046/original.jpg) |
+| Фиксаторы арматуры | `good-zon-rebar-chair.jpg` | 600 × 600 | [Good-Zon, опора под горизонтальную арматуру](https://good-zon.com.ua/ua/fiksator-zashitnogo-sloya) · [фото](https://good-zon.com.ua/image/cache/catalog/opalubka/867-600x600.jpg) |
+| Фиксаторы арматуры | `sanpol-star-spacers.jpg` | 1024 × 768 | [Sanpol, звёздочки на вертикальной сетке](https://sanpol.ua/ua/catalogue/fiksatory-armatury/fiksator-zvezdochka/) · [фото](https://sanpol.ua/uploads/Catalogue/%D0%B7%D0%B2%D0%B5%D0%B7%D0%B4%D0%B4%D0%B4_1865_1494853226.JPG) |
+| Фиксаторы арматуры | `stroybat-spacer-chair.jpg` | 1118 × 1118 | [Стройбат, фиксатор «Стульчик»](https://tssp.kz/product/fiksator-armatury-stulchik50-50-sht-strojbat-78649) · [фото](https://tssp.kz/_ipx/f_webp%26s_1600x1600/https%3A/storage.tssp.kz/uploads/images/product-images/78649_1-23c65916-7053-4b88-afd5-589e4a6c7e0d.jpg) |
+| Заглушки для труб | `sbs-plastic-inserts.jpg` | 1600 × 1200 | [SBS, пластиковые заглушки квадратных и прямоугольных труб](https://www.sbs24.de/haushalt/stopfen/482/sbs-lamellenstopfen-fuer-vierkantrohre) · [фото](https://www.sbs24.de/media/image/b6/4c/94/sbs-lamellenstopfen-kunststoff-vierkantrohr-rechteck-quadrat-2668.jpg) |
+| Заглушки для труб | `baalcke-rectangular-inserts.jpg` | 998 × 998 | [Baalcke, прямоугольные заглушки](https://www.design-shop-baalcke.de/Rechteckrohr-Lamellenstopfen-Kunststoff-Schwarz/LS-RE-3010) · [фото](https://design-baalcke.cstatic.com/media/1b/87/7e/1779962375/Lamellenstopfen%20Rechteckrohr.jpg?ts=1779962375) |
+| Заглушки для труб | `nordsteel-elliptical-caps.jpg` | 1024 × 683 | [НордСталь, стальные эллиптические заглушки](https://nordstmgk.ru/tpost/z25pzn7cj1-zaglushki-stalnie-ellipticheskie) · [фото](https://static.tildacdn.com/tild6166-6139-4239-a165-346334393665/_.jpg) |
+| Заглушки для труб | `metallservice-steel-cap.jpg` | 1200 × 800 | [Металлсервис, эллиптическая заглушка ГОСТ 17379-2001](https://www.vseinstrumenti.ru/product/ellipticheskaya-zaglushka-metallservis-stal-dn-57x3-du-50-pod-privarku-gost-17379-2001-1212823-9503426/) · [фото](https://cdn.vseinstrumenti.ru/images/goods/santehnicheskoe-oborudovanie/inzhenernaya-santehnika/9503426/1200x800/ellipticheskaya-zaglushka-metallservis-stal-dn-57x3-du-50-pod-privarku-gost-17379-2001-1212823_475709.jpg) |
+| Лягушки арматурные | `ks-store-frog.jpg` | 560 × 504 | [Каркас Сервис, лягушка из рифлёной А500С](https://www.vseinstrumenti.ru/product/armaturnaya-lyagushka-ks-store-a500s-250x150x250x150x250-mm-diametr-8-mm-upakovka-50-shtuk-lag2515258m-12631709/) · [фото](https://cdn.vseinstrumenti.ru/images/goods/stroitelnye-materialy/metalloprokat/12631709/560x504/157759853.jpg) |
+| Лягушки арматурные | `frog-on-grid.jpg` | 1500 × 1000 | [МногоСетки, лягушки на арматурной сетке](https://mnogosetki.ru/info/articles/statii-armaturnye-setki/primenenie-armaturnoy-lyagushki/) · [фото](https://mnogosetki.ru/upload/iblock/f27/f27a28db9621169c52b832a5171fe975.jpeg) |
+| Лягушки арматурные | `ks-store-frog-stock.jpg` | 1280 × 960 | [Каркас Сервис, пачка арматурных лягушек](https://ks-store.ru/catalog/lyagushka_iz_riflenoy_armatury/1060/?offer=1076) · [фото](https://ks-store.ru/upload/iblock/753/ywql32aqds34sfkrsynbahtq2m7bacxs.jpeg) |
+| Лягушки арматурные | `frog-installation-detail.jpg` | 700 × 525 | [МногоСетки, крупный план установленной лягушки](https://mnogosetki.ru/info/articles/statii-armaturnye-setki/primenenie-armaturnoy-lyagushki/) · [фото](https://mnogosetki.ru/upload/iblock/af8/af8d6ffac0f2be03e13350dffdd1e826.jpg) |
+| Пэшки арматурные | `peshka-warehouse.jpg` | 810 × 1080 | [Каркас Сервис, пачки П-образных скоб из А500С](https://ks-store.ru/catalog/skoba_armaturnaya_iz_riflenoy_armatury/2678/) · [фото](https://ks-store.ru/upload/iblock/11a/rrj5jhyvmj43f2rv7zy3acvdq8t80y1k.jpg) |
+| Пэшки арматурные | `garantstroy-rebar-stacks.jpg` | 1024 × 576 | [ГарантСтрой, гнутые арматурные изделия на производстве](https://gst-metall.ru/product/proizvodstvo-kompanii-garantstroy/) · [фото](https://gst-metall.ru/upload/medialibrary/b46/3him9c8o32y7e3m0mi2wwcyxodfusmtl.jpeg) |
+| Пэшки арматурные | `garantstroy-bent-bars.jpg` | 461 × 1024 | [ГарантСтрой, крупный план изгиба скоб](https://gst-metall.ru/product/armaturnye-izdeliya/gnutye-elementy-iz-armatury/) · [фото](https://gst-metall.ru/upload/medialibrary/669/mp2aqs0eyxu8hhc9elu0hrjbnuy71i1f.jpeg) |
+| Стройматериалы | `nova-foundation-installation.jpg` | 1280 × 720 | [Нова, применение профилированной мембраны](https://www.ccnova.ru/our-work/naro-fominsk-3.html) · [фото](https://www.ccnova.ru/upload/iblock/814/qtiuea8s0qw375ywuta2ssj8ss07idlr/Stroitelstvo_doma_Naro_Fominsk_foto_1.jpg) |
+| Стройматериалы | `penoplex-fundament-50.jpg` | 800 × 670 | [ПЕНОПЛЭКС Фундамент 50 мм](https://shop.penoplex.ru/spb/catalog/teploizolyatsiya/penopleks-fundament-50kh585kh1185mm/) · [фото](https://shop.penoplex.ru/upload/iblock/5f1/b23keu4oy9vntu2ejnh6egs25d223phk.jpg) |
+| Стройматериалы | `tn-planter-standard.jpg` | 560 × 504 | [Planter Standard 2×20 м](https://www.vseinstrumenti.ru/product/profilirovannaya-membrana-tehnonikol-planter-standard-2x20-m-tn362078-2808710/) · [фото](https://cdn.vseinstrumenti.ru/images/goods/stroitelnye-materialy/izolyatsionnye-materialy/2808710/560x504/56692886.jpg) |
+| Стройматериалы | `geoarm-dornit-300.png` | 960 × 640 | [Дорнит 300, представитель марки материала](https://geoarm.ru/products/geotekstil-dornit/geotekstil-dornit-300) · [фото](https://geoarm.ru/storage/images/uploads/01KD5FGKCNXBKQKP7PYY58MG6X.png) |
+| Стройматериалы | `tn-planterband.png` | 1800 × 1400 | [Planterband 10 м × 10 см](https://www.progress-polymer.ru/profilirovannaya-membrana/planterband-10m-h-10sm) · [фото](https://www.progress-polymer.ru/uploads/product/4900/4973/16116901428214_467783_planterband.png) |
+| Винтовые сваи | `screw-pile-stacks.webp` | 750 × 1000 | [Склад производителя винтовых свай](https://vintovye-svai-s-ustanovkoy.ru/) · [фото](https://vintovye-svai-s-ustanovkoy.ru/userfiles/images/proizvodstvo-im1.webp) |
+| Винтовые сваи | `screw-pile-yard.jpg` | 1920 × 1080 | [Металл-Архив, винтовые сваи на площадке](https://metal-archive.ru/novosti/7347-vintovye-svai-osobennosti-i-preimuschestva.html) · [фото](https://metal-archive.ru/uploads/posts/2020-07/1595079733_6024058_1920.jpg) |
+| Петли для ворот | `sibrteh-teardrop-hinge.jpg` | 1200 × 800 | [Сибртех, каплевидная петля в разборе](https://www.vseinstrumenti.ru/product/kaplevidnaya-petlya-sibrteh-18-h-120-mm-s-podshipnikom-92030-970541/) · [фото](https://cdn.vseinstrumenti.ru/images/goods/krepezh/metizy/970541/1200x800/101584394.jpg) |
+| Петли для ворот | `allure-weld-on-hinge.jpg` | 1000 × 1000 | [Аллюр, сварная каплевидная петля с подшипником](https://www.vseinstrumenti.ru/product/sharnir-petlya-pod-svarku-allyur-20x140-s-podshipnikom-kaplevidnaya-16969-17830475/) · [фото](https://cdn.vseinstrumenti.ru/images/goods/krepezh/metizy/17830475/1000x1000/188547689.jpg) |
+| Отводы и фитинги | `rich-black-steel-elbows.webp` | 646 × 505 | [Rich Pipe Fitting, стальные приварные отводы](https://richpipefitting.en.made-in-china.com/product/GwktazPCgeVf/China-ASTM-Carbon-Steel-ANSI-DIN-90-Degree-Lr-Sr-Carbon-Steel-Pipe-Fitting-Butt-Weld-Elbows.html) · [фото](https://image.made-in-china.com/2f0j00ongWyhGBfVki/ASTM-Carbon-Steel-ANSI-DIN-90-Degree-Lr-Sr-Carbon-Steel-Pipe-Fitting-Butt-Weld-Elbows.webp) |
+
+| Раздел | Существующий файл | Источник |
+| --- | --- | --- |
+| Фиксаторы арматуры | `ff1bc2efd0aa43170843.jpg` | [Розмет, фиксатор «Кубик»](https://rozmet.ru/production/stulchik/fiksator_opora_kubik_30_mm/) |
+| Винтовые сваи | `f99763bb527bf6acf541.jpg` | [Розмет, оголовок внутренний](https://rozmet.ru/production/vintovye_svai/ogolovok_vnutrenniy_89mm_na_svayu_108mm/) |
+| Петли для ворот | `62db5460b6e46e150b36.jpg` | [Розмет, гаражная петля с шаром](https://rozmet.ru/production/petli_dlya_vorot/petlya_garazhnaya_s_sharom_d_14_90mm_4_sht_rossiya_sibrtekh/) |
+| Отводы и фитинги | `0d5eb4e1c59aad29975c.jpg` | [Розмет, оцинкованный бесшовный отвод](https://rozmet.ru/production/otvodi/otvod_besshovnyy_otsinkovannyy_krutoizognutyy_108_ots/) |
+| Отводы и фитинги | `36a6e167a31fe76e85e7.jpg` | [Розмет, сгон Ду-20](https://rozmet.ru/production/otvodi/sgon_du_20/) |
+| Отводы и фитинги | `65338ceb19822e4f03da.jpg` | [Розмет, стальной переход](https://rozmet.ru/production/otvodi/perekhod_stalnoy_76kh3_5_57kh3/) |
+
 ## Проверка
 
 `tests/e2e/cover-gallery.spec.ts` проверяет четыре варианта подключения,

@@ -96,11 +96,12 @@ test('metal mesh uses its dedicated catalog table and quantity rules', () => {
   const pricingSource = fs.readFileSync('lib/cartPricing.ts', 'utf8');
 
   assert.match(catalogSource, /variants\.every\(isMetalMeshVariant\)/);
-  for (const heading of ['Наименование', 'Ячейка / проволока', 'Рулон / карта', 'Цена', 'Количество', 'Сумма', 'В корзину']) {
-    assert.ok(tableSource.includes(heading), `missing table heading: ${heading}`);
+  assert.match(tableSource, /<CatalogVariantTable>/);
+  for (const specification of ['Размер ячейки', 'Диаметр проволоки', 'Размер рулона / карты']) {
+    assert.ok(tableSource.includes(specification), `missing specification: ${specification}`);
   }
   assert.match(tableSource, /inputMode=\{whole \? "numeric" : "decimal"\}/);
-  assert.match(tableSource, /absolute inset-y-0 right-2/);
+  assert.match(tableSource, /<CatalogVariantQuantity unit=\{quantityUnit\}>/);
   assert.match(cartSource, /requiresWholeMetalMeshQuantity\(product\)/);
   assert.match(pricingSource, /Укажите целое количество рулонов/);
 });

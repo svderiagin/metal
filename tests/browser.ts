@@ -30,6 +30,7 @@ export const samples = {
   vgp: products.find(p => p.categoryId === "cat-trk" && p.weightPerMeterKg)!,
   profnastil: products.find(p => p.categoryId === "cat-pnf")!,
   mesh: products.find(p => p.categoryId === "cat-mesh")!,
+  shtaketnik: products.find(p => p.categoryId === "rozmet-cat-shtaketnik")!,
 };
 
 export function productPath(product: typeof samples.shveller, linked = true) {

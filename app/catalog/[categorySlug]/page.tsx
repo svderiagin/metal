@@ -1,4 +1,5 @@
 import {getCatalogCoverImages} from "@/lib/catalogCoverImages";
+import {importedCatalogDescriptionCopy} from "@/data/catalog-imported-description-copy";
 import type {Metadata} from "next";
 import {Suspense} from "react";
 import {notFound} from "next/navigation";
@@ -31,7 +32,7 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
   const {categorySlug} = await params;
   const category = getCategoryBySlug(categorySlug);
   if (!category) return {title: "Категория не найдена"};
-  return {title: category.name, description: category.shortDescription};
+  return {title: category.name, description: importedCatalogDescriptionCopy[category.id]?.intro ?? category.shortDescription};
 }
 
 export default async function CategoryPage({params}: Props) {
@@ -46,16 +47,16 @@ export default async function CategoryPage({params}: Props) {
   const coverImages = getCatalogCoverImages(category.id,
     category.id === "cat-pnf" || mainImageUrl.endsWith(".svg") ? "" : mainImageUrl);
   const hasImage = coverImages.length > 0;
-  const introDescription = category.descriptionSections?.intro ?? category.description;
+  const description = importedCatalogDescriptionCopy[category.id] ?? category.descriptionSections;
+  const introDescription = description?.intro ?? category.description;
   const useCoverLayout = category.slug === "armatura";
-  const detailedDescription = category.descriptionSections?.details ?? (useCoverLayout ? category.description : undefined);
-  const useProductPageLayout = ["shveller", "ugolok", "kvadrat"].includes(category.slug);
+  const detailedDescription = description?.details ?? (useCoverLayout ? category.description : undefined);
 
-  if (useProductPageLayout) {
+  if (category.directProducts) {
     return (
       <PageContainer className="py-8 sm:py-10 lg:py-12">
         <Breadcrumbs items={[{label: "Каталог", href: "/catalog"}, {label: category.name}]}/>
-        <div className="grid gap-7 lg:grid-cols-[280px_minmax(0,1fr)]">
+        <div className="grid gap-7 lg:grid-cols-[280px_minmax(0,1fr)] lg:grid-rows-[max-content_minmax(0,1fr)]">
           <div className="lg:row-span-2 lg:[&>aside]:h-full">
             <Suspense fallback={<div className="h-96 animate-pulse rounded-xl bg-slate-200 dark:bg-slate-700"/>}>
               <CatalogSidebar activeSlug={category.slug}/>
@@ -67,7 +68,7 @@ export default async function CategoryPage({params}: Props) {
           <div className="min-w-0 lg:col-start-2">
             {detailedDescription && <section className="max-w-[800px]" aria-labelledby={`${category.id}-details-heading`}>
               <h2 id={`${category.id}-details-heading`} className="text-section-title leading-tight">
-                {category.descriptionSections?.title ?? `Подробнее о категории «${category.name}»`}
+                {description?.title ?? `Подробнее о категории «${category.name}»`}
               </h2>
               <CatalogDescription description={detailedDescription} variant="categoryDetails" className="mt-4"/>
             </section>}
@@ -98,12 +99,10 @@ export default async function CategoryPage({params}: Props) {
               className="md:col-start-2 md:row-span-2 md:row-start-1 md:self-center"/>}
             <CatalogDescription description={introDescription} variant="category" className="md:col-start-1"/>
           </div>}
-          {category.directProducts
-            ? <div className="mt-8 min-w-0 space-y-7"><ProductVariantCatalog variants={variants} categorySlug={category.slug}/></div>
-            : <ProductTypeResults productTypes={productTypes} variants={variants}/>}
+          <ProductTypeResults productTypes={productTypes} variants={variants}/>
           {detailedDescription && <section className="mt-12 max-w-[800px]" aria-labelledby={`${category.id}-details-heading`}>
             <h2 id={`${category.id}-details-heading`} className="text-section-title scroll-mt-8 leading-tight">
-              {category.descriptionSections?.title ?? `Подробнее о категории «${category.name}»`}
+              {description?.title ?? `Подробнее о категории «${category.name}»`}
             </h2>
             <CatalogDescription description={detailedDescription} variant="categoryDetails" className="mt-4"/>
           </section>}

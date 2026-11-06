@@ -7,17 +7,29 @@ test("every category and product-family route responds without a missing page", 
   for (const path of paths) expect((await request.get(path)).status(), path).toBe(200);
 });
 
-for (const family of ["shveller", "ugolok", "kvadrat", "armatura", "balka", "profile", "vgp", "profnastil", "mesh"] as const) {
+for (const family of ["shveller", "ugolok", "kvadrat", "armatura", "balka", "profile", "vgp", "profnastil", "mesh", "shtaketnik"] as const) {
   test(`${family}: linked product is visible and filters reset`, async ({page}) => {
     const product = samples[family];
     await openProduct(page, product);
+    const productItem = visibleProduct(page, product.id);
+    if (await productItem.evaluate(element => element.tagName === "TR")) {
+      const headers = productItem.locator("xpath=ancestor::table").getByRole("columnheader");
+      await expect(headers).toHaveText([
+        "Наименование", "Изображение", "Характеристики", "Цена", /^Кол-во(?:, м)?$/, "Действие",
+      ]);
+      await expect(headers.first()).toHaveCSS("padding-inline-start", "16px");
+      await expect(productItem.getByRole("rowheader")).toBeVisible();
+    } else {
+      await expect(productItem.getByRole("heading", {level: 3})).toBeVisible();
+    }
+    await expect(productItem.getByRole("spinbutton").first()).toBeVisible();
     const query = page.getByLabel("Поиск товаров", {exact: true}).filter({visible: true});
     await expect(query).toHaveValue(product.name);
     await query.fill("нет-такого-товара-zzzzzz");
     await expect(page.getByText("Варианты не найдены", {exact: true})).toBeVisible();
     await page.getByRole("button", {name: "Сбросить фильтры", exact: true}).first().click();
     await expect(query).toHaveValue("");
-    await expect(visibleProduct(page, product.id)).toBeVisible();
+    await expect(productItem).toBeVisible();
   });
 }
 
@@ -112,7 +124,7 @@ test("profile-sheet guidance follows product families in the rendered page", asy
   expect(families!.y + families!.height).toBeLessThanOrEqual(details!.y);
 });
 
-for (const family of ["armatura", "balka", "profile", "vgp", "profnastil", "mesh", "shveller", "ugolok", "kvadrat", "treadPlate", "galvanizedSheet", "coldRolledSheet", "hotRolledSheet"] as const) {
+for (const family of ["armatura", "balka", "profile", "vgp", "profnastil", "mesh", "shveller", "ugolok", "kvadrat", "shtaketnik", "treadPlate", "galvanizedSheet", "coldRolledSheet", "hotRolledSheet"] as const) {
   test(`${family}: wide title photo keeps filters beside the catalog`, async ({page, isMobile}) => {
     const route = ["shveller", "ugolok", "kvadrat"].includes(family)
       ? `/catalog/${family}` : productPath(samples[family], false);

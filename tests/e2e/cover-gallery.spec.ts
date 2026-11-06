@@ -5,9 +5,10 @@ import {getCatalogCoverImages} from "../../lib/catalogCoverImages";
 const titleButton = "button[aria-label^='Увеличить титульное изображение:']";
 const titleDialog = {name: /^Просмотр титульных фотографий:/};
 
-for (const [layout, route, hasGallery] of [
-  ["banner", "/catalog/armatura", true], ["compact with one photo", "/catalog/polosa", false],
-  ["direct products", "/catalog/shveller", true], ["product family", productPath(samples.armatura, false), true],
+for (const [layout, route] of [
+  ["banner", "/catalog/armatura"], ["compact", "/catalog/balka"],
+  ["direct products", "/catalog/shveller"], ["generic direct products", "/catalog/polosa"],
+  ["product family", productPath(samples.armatura, false)],
 ] as const) {
   test(`${layout}: title opens above the page and closes with photo, Escape and close control`, async ({page, context}) => {
     await page.goto(route);
@@ -20,7 +21,7 @@ for (const [layout, route, hasGallery] of [
     const dialog = page.getByRole("dialog", titleDialog);
     await expect(dialog).toBeVisible();
     await expect(dialog).toHaveCSS("border-radius", "28px");
-    await expect(dialog.getByRole("button", {name: "Следующее фото", exact: true})).toHaveCount(hasGallery ? 1 : 0);
+    await expect(dialog.getByRole("button", {name: "Следующее фото", exact: true})).toBeVisible();
     expect(context.pages()).toHaveLength(1);
     expect(await page.evaluate(() => document.documentElement.style.overflow)).toBe("hidden");
     const photo = dialog.getByRole("button", {name: /^Вернуть изображение на страницу:/});

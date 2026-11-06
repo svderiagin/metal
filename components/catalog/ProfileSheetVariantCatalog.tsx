@@ -10,22 +10,12 @@ import {comparePrices} from "@/lib/catalogFilters";
 import {formatCurrency, formatUnitPrice} from "@/lib/currency";
 import {formatNumber} from "@/lib/numberFormat";
 import {profileSheetCoatingLabel, type ProfileSheetVariant} from "@/lib/profileSheet";
-import {CatalogImage} from "./CatalogImage";
 import {FilterPanel} from "./FilterPanel";
+import {CatalogVariantLayout, CatalogVariantOrder, CatalogVariantQuantity, CatalogVariantSpecifications, CatalogVariantTable} from "./CatalogVariantLayout";
 import filterStyles from "./FilterPanel.module.css";
 import tableStyles from "./RebarTable.module.css";
 
 type SortMode = "thickness-asc" | "thickness-desc" | "price-asc" | "price-desc";
-
-const columns = [
-  {label: "Толщина, мм", width: "11%"},
-  {label: "Цвет / покрытие", width: "20%"},
-  {label: "Размер листа, м", width: "15%"},
-  {label: "Цена, ₽/шт.", width: "14%"},
-  {label: "Количество, шт.", width: "14%"},
-  {label: "Сумма", width: "14%"},
-  {label: "В корзину", width: "12%"},
-] as const;
 
 export function ProfileSheetVariantCatalog({variants}: {variants: ProfileSheetVariant[]}) {
   const [query, setQuery] = useState("");
@@ -93,18 +83,9 @@ export function ProfileSheetVariantCatalog({variants}: {variants: ProfileSheetVa
 
     <section className="min-w-0 lg:col-span-2" aria-label="Профнастил">
       {results.length ? <>
-        <div className="hidden overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-sm xl:block">
-          <table className={`${tableStyles.table} text-center text-sm`}>
-            <colgroup>{columns.map((column) => <col key={column.label} style={{width: column.width}}/>)}</colgroup>
-            <thead className="bg-slate-900 text-white"><tr>
-              {columns.map(({label}) => <th key={label} scope="col"
-                className={`px-2 py-3 font-semibold ${label === "Сумма" ? tableStyles.sumColumn : "text-center"}`}>
-                {label}
-              </th>)}
-            </tr></thead>
-            <tbody>{results.map((variant) => <ProfileSheetItem key={variant.id} variant={variant} view="table"/>)}</tbody>
-          </table>
-        </div>
+        <CatalogVariantTable>
+          {results.map(variant => <ProfileSheetItem key={variant.id} variant={variant} view="table"/>)}
+        </CatalogVariantTable>
         <div className="grid gap-4 sm:grid-cols-2 xl:hidden">
           {results.map((variant) => <ProfileSheetItem key={variant.id} variant={variant} view="card"/>)}
         </div>
@@ -136,16 +117,15 @@ function ProfileSheetItem({variant, view}: {variant: ProfileSheetVariant; view: 
     setDraft(null);
   }
 
-  const quantityInput = <label className="block text-sm font-semibold">
-    {view === "card" && <span className="mb-1 block">Количество, шт.</span>}
+  const quantityInput = <CatalogVariantQuantity unit="шт.">
     <Input aria-label={`Количество листов для ${variant.name}`} type="number" inputMode="numeric"
       min={1} max={999} step={1} value={value}
       onChange={(event) => {
         const next = event.target.value;
         if (next === "" || /^\d+$/.test(next)) setDraft(next);
       }}
-      className={`${filterStyles.field} w-full min-w-0 px-2 text-center tabular-nums`} />
-  </label>;
+      className={`${filterStyles.field} w-full min-w-0 px-7 text-center tabular-nums`} />
+  </CatalogVariantQuantity>;
   const totalOutput = <output aria-label={`Сумма заказа для ${variant.name}`} aria-live="polite"
     className={total === null ? "text-xs text-slate-500 dark:text-slate-400" : "font-semibold tabular-nums text-slate-900 dark:text-slate-100"}>
     {total === null ? "Укажите количество" : formatCurrency(total)}
@@ -155,36 +135,14 @@ function ProfileSheetItem({variant, view}: {variant: ProfileSheetVariant; view: 
     {buttonLabel}
   </Button>;
 
-  if (view === "card") return <article id={`variant-mobile-${variant.id}`}
-    className="min-w-0 break-words rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-5 shadow-sm">
-    <CatalogImage src={variant.imageUrls[0]} name={variant.name}/>
-    <h3 className="mt-2 font-bold">{variant.name}</h3>
-    <dl className="mt-4 grid grid-cols-2 gap-3 text-sm">
-      <VariantDetail label="Толщина, мм" value={formatNumber(variant.wallThicknessMm)}/>
-      <VariantDetail label="Цвет / покрытие" value={profileSheetCoatingLabel(variant)}/>
-      <VariantDetail label="Размер листа, м" value={variant.sheetSizeMeters}/>
-      <VariantDetail label="Цена" value={formatUnitPrice(variant.price, variant.priceUnit)}/>
-    </dl>
-    <div className="mt-4 border-t border-slate-100 dark:border-slate-800 pt-4">{quantityInput}</div>
-    <p className="mt-4 flex items-baseline justify-between gap-3 text-sm"><span>Сумма:</span>{totalOutput}</p>
-    <div className="mt-4">{action}</div>
-    {!valid && <p role="alert" className="mt-2 text-xs text-red-700 dark:text-red-400">Введите целое количество от 1 до 999.</p>}
-  </article>;
+  const specifications = <CatalogVariantSpecifications items={[
+    {label: "Толщина, мм", value: formatNumber(variant.wallThicknessMm)},
+    {label: "Цвет / покрытие", value: profileSheetCoatingLabel(variant)},
+    {label: "Размер листа, м", value: variant.sheetSizeMeters},
+  ]}/>;
+  const status = !valid && <p role="alert" className="text-xs text-red-700 dark:text-red-400">Введите целое количество от 1 до 999.</p>;
 
-  return <tr id={`variant-${variant.id}`} title={variant.name} className="border-t border-slate-200 dark:border-slate-700 align-middle">
-    <td className="px-2 py-4 font-bold">{formatNumber(variant.wallThicknessMm)}</td>
-    <td className="px-2 py-4">{profileSheetCoatingLabel(variant)}</td>
-    <td className="px-2 py-4">{variant.sheetSizeMeters}</td>
-    <td className="px-2 py-4 font-semibold tabular-nums">{formatUnitPrice(variant.price, variant.priceUnit)}</td>
-    <td className="px-2 py-3">{quantityInput}</td>
-    <td className={`${tableStyles.sumColumn} py-3`}>{totalOutput}</td>
-    <td className="px-2 py-3 text-center">
-      {action}
-      {!valid && <span role="alert" className="mx-auto mt-1 block max-w-32 text-xs text-red-700 dark:text-red-400">Только целые числа</span>}
-    </td>
-  </tr>;
-}
-
-function VariantDetail({label, value}: {label: string; value: string}) {
-  return <div><dt className="text-slate-600 dark:text-slate-400">{label}</dt><dd className="mt-1 font-medium">{value}</dd></div>;
+  return <CatalogVariantLayout view={view} variant={variant} specifications={specifications}
+    price={formatUnitPrice(variant.price, variant.priceUnit)}
+    order={<CatalogVariantOrder view={view} quantity={quantityInput} action={action} total={totalOutput} status={status}/>}/>;
 }

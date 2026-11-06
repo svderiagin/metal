@@ -7,6 +7,7 @@ import {CatalogDescription} from "@/components/catalog/CatalogDescription";
 import {ProductVariantCatalog} from "@/components/catalog/ProductVariantCatalog";
 import {ProductCatalogIntro} from "@/components/catalog/ProductCatalogIntro";
 import {getCatalogCoverImages} from "@/lib/catalogCoverImages";
+import {importedCatalogDescriptionCopy} from "@/data/catalog-imported-description-copy";
 import {getSheetPresentation} from "@/lib/sheetPresentation";
 import {PageContainer} from "@/components/layout/PageContainer";
 import {
@@ -58,7 +59,7 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
   const sheet = getSheetPresentation(productType.subcategoryId);
   return {
     title: productType.name,
-    description: sheet?.intro ?? productType.shortDescription,
+    description: importedCatalogDescriptionCopy[productType.subcategoryId]?.intro ?? sheet?.intro ?? productType.shortDescription,
   };
 }
 
@@ -71,12 +72,16 @@ export default async function ProductTypePage({params}: Props) {
   if (category.directProducts) redirect(`/catalog/${category.slug}`);
   const variants = getProductVariantsByTypeId(productType.id);
   const sheet = getSheetPresentation(productType.subcategoryId);
+  const copy = importedCatalogDescriptionCopy[productType.subcategoryId];
   const title = productType.name;
-  const intro = sheet ? sheet.intro ?? productType.shortDescription : productType.description;
-  const details = productType.description.startsWith(productType.shortDescription)
+  const intro = copy?.intro ?? (sheet ? sheet.intro ?? productType.shortDescription : productType.description);
+  const sourceDetails = productType.description.startsWith(productType.shortDescription)
     ? productType.description.slice(productType.shortDescription.length).trim()
     : productType.description;
-  const images = productType.imageUrl && !productType.imageUrl.endsWith(".svg") ? getCatalogCoverImages(productType.id, productType.imageUrl) : [];
+  const details = copy?.details ?? (sheet ? sourceDetails : "");
+  const detailsTitle = copy?.title ?? sheet?.detailsTitle;
+  const images = getCatalogCoverImages(productType.id,
+    productType.imageUrl && !productType.imageUrl.endsWith(".svg") ? productType.imageUrl : "");
 
   return (
     <PageContainer className="py-8 sm:py-10 lg:py-12">
@@ -88,17 +93,17 @@ export default async function ProductTypePage({params}: Props) {
         ]}
       />
 
-      <div className="grid gap-7 lg:grid-cols-[280px_minmax(0,1fr)]">
+      <div className="grid gap-7 lg:grid-cols-[280px_minmax(0,1fr)] lg:grid-rows-[max-content_minmax(0,1fr)]">
         <div className="lg:row-span-2 lg:[&>aside]:h-full">
           <Suspense fallback={<div className="h-96 animate-pulse rounded-xl bg-slate-200 dark:bg-slate-700"/>}>
             <CatalogSidebar activeSlug={category.slug}/>
           </Suspense>
         </div>
         <ProductCatalogIntro key={productType.id} title={rebarHeadings[productType.subcategoryId] ?? title}
-          label={sheet ? "Подкатегория" : "Тип продукции"} images={images} description={intro} coverName={title}/>
+          label={sheet || copy ? "Подкатегория" : "Тип продукции"} images={images} description={intro} coverName={title}/>
         <ProductVariantCatalog variants={variants} categorySlug={category.slug}/>
-        {sheet && details && <section className="min-w-0 max-w-[800px] lg:col-start-2" aria-labelledby="sheet-details-heading">
-          <h2 id="sheet-details-heading" className="text-section-title leading-tight">{sheet.detailsTitle}</h2>
+        {detailsTitle && details && <section className="min-w-0 max-w-[800px] lg:col-start-2" aria-labelledby="product-type-details-heading">
+          <h2 id="product-type-details-heading" className="text-section-title leading-tight">{detailsTitle}</h2>
           <CatalogDescription description={details} variant="categoryDetails" className="mt-4"/>
         </section>}
       </div>

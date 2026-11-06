@@ -20,7 +20,13 @@ function evaluateModule(file,imports,globals={}) {
 function setup(variant={...base,price:157,priceConfirmed:true,quoteOnly:false}) {
  let cursor=0;const state=[];const timers=[];const cart={hydrated:true,lines:[],addItem(productId,quantity,measurement,pieceOrder){assert.equal(measurement,undefined);const result=revalidateCartPrice(variant,{quantity,pieceOrder});assert.equal(result.invalidReason,undefined);cart.lines=[{productId,quantity,...result}];},removeItem(){cart.lines=[];}};
  const jsx=(type,props)=>typeof type==='function'?type(props):{type,props};
- const imports={react:{useState(initial){const i=cursor++;if(!(i in state))state[i]=initial;return [state[i],value=>{state[i]=value;}];},useEffect(effect){effect();}},'react/jsx-runtime':{jsx,jsxs:jsx},'@/hooks/useCart':{useCart:()=>cart},'@/components/ui/Button':{Button:'button'},'@/components/ui/Input':{Input:'input'},'@/lib/currency':readProjectData('lib/currency.ts'),'@/lib/numberFormat':readProjectData('lib/numberFormat.ts'),'@/lib/profilePipe':pipe,'./QuoteRequestButton':{QuoteRequestButton:'quote'},'./FilterPanel.module.css':{default:{}},'./RebarTable.module.css':{default:{}}};
+ const layout = {
+   CatalogVariantLayout: ({specifications, order}) => jsx('row', {children: [specifications, order]}),
+   CatalogVariantSpecifications: 'specifications',
+   CatalogVariantOrder: ({quantity, action, total}) => jsx('order', {children: [quantity, total, action]}),
+   CatalogVariantQuantity: 'quantity',
+ };
+ const imports={react:{useState(initial){const i=cursor++;if(!(i in state))state[i]=initial;return [state[i],value=>{state[i]=value;}];},useEffect(effect){effect();}},'react/jsx-runtime':{jsx,jsxs:jsx},'@/hooks/useCart':{useCart:()=>cart},'@/components/ui/Button':{Button:'button'},'@/components/ui/Input':{Input:'input'},'@/lib/currency':readProjectData('lib/currency.ts'),'@/lib/numberFormat':readProjectData('lib/numberFormat.ts'),'@/lib/profilePipe':pipe,'./QuoteRequestButton':{QuoteRequestButton:'quote'},'./CatalogVariantLayout':layout,'./FilterPanel.module.css':{default:{}},'./RebarTable.module.css':{default:{}}};
  const {ProfilePipeVariantItem}=evaluateModule('components/catalog/ProfilePipeVariantItem.tsx',imports,{window:{setTimeout(fn){timers.push(fn);},clearTimeout(){}}});
  const nodes=node=>!node||typeof node!=='object'?[]:[node,...[node.props?.children].flat().flatMap(nodes)];
  function render(view='table'){cursor=0;const tree=nodes(ProfilePipeVariantItem({variant,view}));return {tree,inputs:tree.filter(n=>n.type==='input').map(n=>n.props),action:tree.find(n=>['button','quote'].includes(n.type)).props,outputs:tree.filter(n=>n.type==='output').map(n=>n.props)};}

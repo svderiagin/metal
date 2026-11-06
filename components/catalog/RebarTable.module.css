@@ -48,17 +48,6 @@
   font-variant-numeric: tabular-nums;
 }
 
-.table > :is(thead, tbody) > tr > :is(th, td).sumColumn {
-  padding-inline: var(--edge-padding-x);
-  text-align: center;
-}
-
-.table .sumColumn output {
-  display: block;
-  width: 100%;
-  text-align: center;
-}
-
 .table :is(button, a) {
   max-width: 100%;
   white-space: normal;
@@ -69,8 +58,4 @@
   width: var(--action-width, 8rem);
   max-width: 100%;
   min-height: var(--control-height, 2.75rem);
-}
-
-.compactTable {
-  min-width: 48rem;
 }

@@ -59,6 +59,24 @@ or generate extra variants solely to satisfy this checklist.
    mismatch. Matching incoming files to stored files alone is insufficient to
    declare the existing image set visually correct.
 
+## Product illustrations for the remaining categories
+
+`data/product-illustration-sources.json` maps reviewed source photos to a product
+or a product type. Keep these images free of printed dimensions from the donor
+SKU. See [photo sources](product-illustration-sources.md). The table thumbnail
+shows the photo. The product viewer opens the annotated 2400 × 1800 WebP,
+with native zoom and pan. The approved sheet, channel, angle and square sets
+retain their separate production images and renderers.
+
+Run `node --import tsx scripts/render-product-illustrations.mjs <product-id>` to
+generate previews under `.tmp/product-illustrations/`. After visual review, run
+the same script with `--write`, then `node scripts/catalog-image-versions.mjs`.
+The renderer reads the current catalog and uses the bundled Inter font with the
+palette above. Put confirmed sizes and properties on the illustration. Keep
+ambiguous supplier dimensions under the catalog designation and leave out
+unverified weights. The product lookup verifies the catalog signature and falls
+back to the existing product photo if the data has changed.
+
 ## Historical supplier mapping
 
 Regenerate with:

@@ -22,9 +22,11 @@ const imports = {
   react: {Suspense: 'suspense'},
   'react/jsx-runtime': {jsx, jsxs: jsx},
   '@/lib/catalog': catalog,
+  '@/lib/catalogCoverImages': readProjectData('lib/catalogCoverImages.ts'),
+  '@/data/catalog-imported-description-copy': readProjectData('data/catalog-imported-description-copy.ts'),
   '@/lib/channelDescription': {getChannelProductDescription},
 };
-for (const name of ['Breadcrumbs', 'CatalogSidebar', 'CatalogDescription', 'CatalogProductDetail', 'ProductTypeResults']) {
+for (const name of ['Breadcrumbs', 'CatalogSidebar', 'CatalogDescription', 'CatalogProductDetail', 'ProductCatalogIntro', 'ProductTypeResults']) {
   imports[`@/components/catalog/${name}`] = {[name]: name};
 }
 imports['@/components/layout/PageContainer'] = {PageContainer: 'PageContainer'};

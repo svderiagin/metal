@@ -54,7 +54,7 @@ test('the three profile-sheet subcategories contain exactly 17 requested rows', 
   );
 });
 
-test('the profile-sheet category uses the supplied guidance and hides only its page-header image', () => {
+test('the profile-sheet category and subcategories keep the supplied guidance', () => {
   const category = categories.find(item => item.id === 'cat-pnf');
   assert.equal(category.descriptionSections.intro,
     'Профнастил — профилированные стальные листы для кровли, заборов, облицовки фасадов и хозяйственных построек. Применяется при строительстве частных домов, дач, гаражей и навесов. В ассортименте представлены профили С8, С20 и Н75 с оцинкованным или окрашенным покрытием.');
@@ -78,12 +78,7 @@ test('the profile-sheet category uses the supplied guidance and hides only its p
       'Несущий профнастил для кровельных настилов, перекрытий и конструкций с повышенными нагрузками. Высота профиля 75 мм обеспечивает высокую жёсткость листа. Толщину стали и допустимый пролёт выбирают по расчётным нагрузкам.',
     ],
   );
-  // The rendered ordering is covered by tests/e2e/catalog.spec.ts; source indexOf spans unrelated layout branches.
-  const categoryPage = fs.readFileSync('app/catalog/[categorySlug]/page.tsx', 'utf8');
-  assert.match(categoryPage, /category\.id !== "cat-pnf"/);
-  assert.match(categoryPage, /category\.descriptionSections\?\.title/);
-  assert.match(categoryPage, /mt-12 max-w-\[800px\]/);
-  assert.match(categoryPage, /variant="categoryDetails"/);
+  // The rendered order and the title gallery are covered by the browser tests.
   const descriptionComponent = fs.readFileSync('components/catalog/CatalogDescription.tsx', 'utf8');
   assert.match(descriptionComponent, /list-disc/);
   assert.match(descriptionComponent, /part\.slice\(2, -2\)/);
@@ -146,10 +141,10 @@ test('quantity and current per-piece price are revalidated in the cart', () => {
   assert.match(revalidateCartPrice(product, {quantity: 1.5}).invalidReason, /целое количество листов/);
 });
 
-test('the responsive catalog table exposes exactly the requested columns and whole-number input', () => {
+test('the shared catalog presentation retains sheet specifications and whole-number input', () => {
   const source = fs.readFileSync('components/catalog/ProfileSheetVariantCatalog.tsx', 'utf8');
-  for (const label of ['Толщина, мм', 'Цвет / покрытие', 'Размер листа, м', 'Цена, ₽/шт.',
-    'Количество, шт.', 'Сумма', 'В корзину']) assert.match(source, new RegExp(label.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
+  assert.match(source, /<CatalogVariantTable>/);
+  for (const label of ['Толщина, мм', 'Цвет / покрытие', 'Размер листа, м']) assert.ok(source.includes(label), label);
   assert.match(source, /inputMode="numeric"/);
   assert.match(source, /step=\{1\}/);
   assert.match(source, /Number\.isInteger\(quantity\)/);

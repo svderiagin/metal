@@ -1,6 +1,5 @@
 "use client";
 
-import {rebarColumns, beamColumns, vgpColumns, profilePipeColumns} from "./measuredCatalogColumns";
 import {MeasuredVariantItem} from "./MeasuredVariantItem";
 
 import {beamProfile, beamKind} from "@/lib/beam";
@@ -8,7 +7,7 @@ import {vgpSize, vgpSeries} from "@/lib/vgp";
 import {hasConfirmedProfilePipePrice, profilePipeSize} from "@/lib/profilePipe";
 
 import {FilterPanel} from "./FilterPanel";
-import tableStyles from "./RebarTable.module.css";
+import {CatalogVariantTable} from "./CatalogVariantLayout";
 import {PriceInput} from "./PriceInput";
 
 import {createCatalogSearchIndex} from "@/lib/search";
@@ -64,7 +63,6 @@ function MeasuredVariantCatalog({variants, kind = "rebar"}: {
   const isProfile = kind === "profile";
   const showPositionCount = kind === "rebar" && variants.length > 0
     && variants.every(variant => variant.subcategoryId === "cat-arm-sub-1");
-  const columns = isProfile ? profilePipeColumns : isVgp ? vgpColumns : isBeam ? beamColumns : rebarColumns;
   const [query, setQuery] = useState("");
   const deferredQuery = useDeferredValue(query);
   const index = useMemo(() => createCatalogSearchIndex(variants), [variants]);
@@ -189,29 +187,9 @@ function MeasuredVariantCatalog({variants, kind = "rebar"}: {
       <section className="min-w-0 lg:col-span-2" aria-label="Продукция">
       {results.length ? (
         <>
-        <div className="hidden overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-sm xl:block">
-          <table className={`${tableStyles.table} text-center text-sm`}>
-            <colgroup>
-              {columns.map(column => <col key={column.label} style={{width: column.width}}/>)}
-            </colgroup>
-            <thead className="bg-slate-900 text-white">
-              <tr>
-                {columns.map(({label}) => (
-                  <th
-                    key={label}
-                    scope="col"
-                    className={`px-2 py-3 font-semibold ${label === "Сумма" ? tableStyles.sumColumn : "text-center"}`}
-                  >
-                    {label === "Действие" ? <span className="sr-only">{label}</span> : label}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {results.map((variant) => <MeasuredVariantItem key={variant.id} variant={variant} kind={kind} view="table"/>)}
-            </tbody>
-          </table>
-        </div>
+        <CatalogVariantTable>
+          {results.map(variant => <MeasuredVariantItem key={variant.id} variant={variant} kind={kind} view="table"/>)}
+        </CatalogVariantTable>
         <div className="grid gap-4 sm:grid-cols-2 xl:hidden">
           {results.map((variant) => (
             <MeasuredVariantItem key={variant.id} variant={variant} kind={kind} view="card"/>

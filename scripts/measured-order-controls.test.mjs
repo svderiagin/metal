@@ -40,7 +40,12 @@ function setup(id, kind = 'beam') {
     '@/components/ui/Button': {Button: 'button'},
     '@/components/ui/Input': {Input: 'input'},
     './QuoteRequestButton': {QuoteRequestButton: 'quote'},
-    './CatalogImage': {CatalogImage: 'image'},
+    './CatalogVariantLayout': {
+      CatalogVariantLayout: ({specifications, order}) => jsx('row', {children: [specifications, order]}),
+      CatalogVariantSpecifications: 'specifications',
+      CatalogVariantOrder: ({quantity, action, total}) => jsx('order', {children: [quantity, total, action]}),
+      CatalogVariantQuantity: 'quantity',
+    },
     './ProfilePipeVariantItem': {ProfilePipeVariantItem: () => null},
     './FilterPanel.module.css': {default: {}}, './RebarTable.module.css': {default: {}},
   };

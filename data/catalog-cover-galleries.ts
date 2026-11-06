@@ -13,6 +13,7 @@ const roundTubeCoverDirectory = "/images/catalog/truba-kruglaya/cover";
 const roofingCoverDirectory = "/images/catalog/profnastil/cover";
 const meshCoverDirectory = "/images/catalog/setka-metallicheskaya/cover";
 const beamCoverDirectory = "/images/catalog/balka/cover";
+const illustrationSourcesDirectory = "/images/catalog/illustration-sources";
 
 export const catalogCoverGalleries: Partial<Record<string, {cover?: string; additional: readonly string[]}>> = {
   "cat-arm": {
@@ -242,6 +243,105 @@ export const catalogCoverGalleries: Partial<Record<string, {cover?: string; addi
       `${hotRolledCoverDirectory}/beshert-warehouse.jpg`,
       `${hotRolledCoverDirectory}/ural-sheet-surface.jpg`,
       `${hotRolledCoverDirectory}/marketstal-sheet-edges.webp`,
+    ],
+  },
+  "rozmet-cat-shtaketnik": {
+    cover: "/images/catalog/shtaketnik/cover/grand-line-brown-fence.jpg",
+    additional: [
+      "/images/catalog/shtaketnik/cover/center-mk-graphite-fence.jpg",
+      "/images/catalog/shtaketnik/cover/pmzabor-rounded-pickets.jpg",
+    ],
+  },
+  "rozmet-cat-listovoy-prokat": {
+    cover: `${hotRolledCoverDirectory}/morgan-warehouse.webp`,
+    additional: [
+      `${coldRolledCoverDirectory}/marketstal-sheet-rack.webp`,
+      `${galvanizedCoverDirectory}/harcelik.webp`,
+      `${treadPlateCoverDirectory}/sugar-steel-warehouse.jpg`,
+    ],
+  },
+  "rozmet-cat-polosa": {
+    cover: "/images/catalog/polosa/cover/changzeng-hot-rolled-flat-bundles.webp",
+    additional: [
+      "/images/catalog/polosa/cover/metals4u-flat-bar-end.jpg",
+      "/images/catalog/polosa/cover/carbon-flat-bar-yard.webp",
+    ],
+  },
+  "rozmet-cat-provoloka-ok": {
+    cover: "/images/catalog/provoloka-ok/cover/modulstal-wire-coils.webp",
+    additional: [
+      "/images/catalog/provoloka-ok/cover/termolife-binding-wire.jpg",
+      "/images/catalog/provoloka-ok/cover/petrovich-binding-hook.jpg",
+    ],
+  },
+  "rozmet-cat-stulchik": {
+    cover: "/images/catalog/stulchik/cover/good-zon-rebar-chair.jpg",
+    additional: [
+      "/images/catalog/stulchik/cover/sanpol-star-spacers.jpg",
+      "/images/catalog/stulchik/cover/stroybat-spacer-chair.jpg",
+      "/images/catalog/rozmet/ff1bc2efd0aa43170843.jpg",
+    ],
+  },
+  "rozmet-cat-zaglushki-dlya-trub": {
+    cover: "/images/catalog/zaglushki-dlya-trub/cover/sbs-plastic-inserts.jpg",
+    additional: [
+      "/images/catalog/zaglushki-dlya-trub/cover/baalcke-rectangular-inserts.jpg",
+      "/images/catalog/zaglushki-dlya-trub/cover/nordsteel-elliptical-caps.jpg",
+      "/images/catalog/zaglushki-dlya-trub/cover/metallservice-steel-cap.jpg",
+    ],
+  },
+  "rozmet-cat-armaturnye-izdeliya": {
+    cover: "/images/catalog/armaturnye-izdeliya/cover/frog-on-grid.jpg",
+    additional: [
+      "/images/catalog/armaturnye-izdeliya/cover/peshka-warehouse.jpg",
+      "/images/catalog/armaturnye-izdeliya/cover/ks-store-frog.jpg",
+      "/images/catalog/armaturnye-izdeliya/cover/garantstroy-rebar-stacks.jpg",
+    ],
+  },
+  "type-rozmet-sub-armaturnye-izdeliya-lyagushki-armaturnye": {
+    cover: "/images/catalog/armaturnye-izdeliya/cover/ks-store-frog.jpg",
+    additional: [
+      "/images/catalog/armaturnye-izdeliya/cover/frog-on-grid.jpg",
+      "/images/catalog/armaturnye-izdeliya/cover/ks-store-frog-stock.jpg",
+      "/images/catalog/armaturnye-izdeliya/cover/frog-installation-detail.jpg",
+    ],
+  },
+  "type-rozmet-sub-armaturnye-izdeliya-peshki-armaturnye": {
+    cover: "/images/catalog/armaturnye-izdeliya/cover/peshka-warehouse.jpg",
+    additional: [
+      "/images/catalog/armaturnye-izdeliya/cover/garantstroy-rebar-stacks.jpg",
+      "/images/catalog/armaturnye-izdeliya/cover/garantstroy-bent-bars.jpg",
+    ],
+  },
+  "rozmet-cat-stroymaterialy": {
+    cover: "/images/catalog/stroymaterialy/cover/nova-foundation-installation.jpg",
+    additional: [
+      `${illustrationSourcesDirectory}/penoplex-fundament-50.jpg`,
+      `${illustrationSourcesDirectory}/tn-planter-standard.jpg`,
+      `${illustrationSourcesDirectory}/geoarm-dornit-300.png`,
+      `${illustrationSourcesDirectory}/tn-planterband.png`,
+    ],
+  },
+  "rozmet-cat-vintovye-svai": {
+    cover: "/images/catalog/vintovye-svai/cover/screw-pile-stacks.webp",
+    additional: [
+      "/images/catalog/vintovye-svai/cover/screw-pile-yard.jpg",
+      "/images/catalog/rozmet/f99763bb527bf6acf541.jpg",
+    ],
+  },
+  "rozmet-cat-petli-dlya-vorot": {
+    cover: "/images/catalog/petli-dlya-vorot/cover/sibrteh-teardrop-hinge.jpg",
+    additional: [
+      "/images/catalog/rozmet/62db5460b6e46e150b36.jpg",
+      "/images/catalog/petli-dlya-vorot/cover/allure-weld-on-hinge.jpg",
+    ],
+  },
+  "rozmet-cat-otvodi": {
+    cover: "/images/catalog/otvodi/cover/rich-black-steel-elbows.webp",
+    additional: [
+      "/images/catalog/rozmet/0d5eb4e1c59aad29975c.jpg",
+      "/images/catalog/rozmet/36a6e167a31fe76e85e7.jpg",
+      "/images/catalog/rozmet/65338ceb19822e4f03da.jpg",
     ],
   },
 };

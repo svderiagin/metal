@@ -9,6 +9,7 @@ import {ProductCatalogIntro} from "@/components/catalog/ProductCatalogIntro";
 import {ProductTypeResults} from "@/components/catalog/ProductTypeResults";
 import {PageContainer} from "@/components/layout/PageContainer";
 import {getCatalogCoverImages} from "@/lib/catalogCoverImages";
+import {importedCatalogDescriptionCopy} from "@/data/catalog-imported-description-copy";
 import {getChannelProductDescription} from "@/lib/channelDescription";
 import {
   getAllCategories,
@@ -58,7 +59,10 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
   if (!subcategory && category && variant && variant.categoryId === category.id) {
     return {title: variant.name, description: getChannelProductDescription(variant).split("\n\n")[0]};
   }
-  return {title: subcategory ? subcategory.name : "Каталог"};
+  return subcategory ? {
+    title: subcategory.name,
+    description: importedCatalogDescriptionCopy[subcategory.id]?.intro ?? subcategory.shortDescription,
+  } : {title: "Каталог"};
 }
 
 export default async function SubcategoryPage({params}: Props) {
@@ -71,6 +75,8 @@ export default async function SubcategoryPage({params}: Props) {
     if (currentSubcategory.internal) redirect(`/catalog/${category.slug}`);
     const productTypes = getProductTypesBySubcategoryId(currentSubcategory.id);
     const [productType] = productTypes;
+    const copy = importedCatalogDescriptionCopy[currentSubcategory.id];
+    const intro = copy?.intro ?? currentSubcategory.description;
     const coverImages = productTypes.length === 1
       ? getCatalogCoverImages(productType.id, productType.imageUrl ?? "")
       : [];
@@ -91,12 +97,16 @@ export default async function SubcategoryPage({params}: Props) {
           <div className="min-w-0">
             {coverImages.length > 1
               ? <ProductCatalogIntro key={currentSubcategory.id} title={currentSubcategory.name} label="Подкатегория"
-                  images={coverImages} description={currentSubcategory.description}/>
+                  images={coverImages} description={intro}/>
               : <>
                   <h1 className="text-page-title">{currentSubcategory.name}</h1>
-                  <CatalogDescription description={currentSubcategory.description}/>
+                  <CatalogDescription description={intro}/>
                 </>}
             <ProductTypeResults productTypes={productTypes} variants={variants}/>
+            {copy && <section className="mt-12 max-w-[800px]" aria-labelledby="subcategory-details-heading">
+              <h2 id="subcategory-details-heading" className="text-section-title">{copy.title}</h2>
+              <CatalogDescription description={copy.details} variant="categoryDetails" className="mt-4"/>
+            </section>}
           </div>
         </div>
       </PageContainer>

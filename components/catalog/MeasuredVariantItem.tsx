@@ -7,7 +7,7 @@ import {QuoteRequestButton} from "./QuoteRequestButton";
 import {formatQuoteProductName} from "@/lib/quoteRequest";
 import filterStyles from "./FilterPanel.module.css";
 import tableStyles from "./RebarTable.module.css";
-import {CatalogImage} from "./CatalogImage";
+import {CatalogVariantLayout, CatalogVariantOrder, CatalogVariantQuantity, CatalogVariantSpecifications} from "./CatalogVariantLayout";
 import {Button} from "@/components/ui/Button";
 import {Input} from "@/components/ui/Input";
 import {ProfilePipeVariantItem} from "./ProfilePipeVariantItem";
@@ -163,90 +163,44 @@ function TonnageMeasuredVariantItem({
     <p>{variant.description}</p>
   </div>;
 
-  if (view === "card") {
-    return (
-      <article id={`variant-mobile-${variant.id}`} className="min-w-0 break-words rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-5 shadow-sm">
-        {!isVgp && <CatalogImage src={variant.imageUrls[0]} name={variant.name}/>}
-        <h3 className="mt-1 font-bold">{variant.name}</h3>
-        <dl className="mt-4 grid grid-cols-2 gap-3 text-sm">
-          <VariantDetail
-            label={isVgp ? "Ду × стенка, мм" : isBeam ? "Профиль" : "Диаметр"}
-            value={isVgp ? vgpSize(variant) : isBeam ? beamProfile(variant) : `${formatNumber(variant.diameterMm ?? 0)} мм`}
-          />
-          <VariantDetail
-            label={isVgp ? "Серия" : isBeam ? "Тип балки" : "Форма"}
-            value={isVgp ? vgpSeries(variant) : isBeam ? beamKind(variant) : formLabel(variant.form ?? "bar")}
-          />
-          {<VariantDetail label={isVgp ? "Наружный Ø, мм" : isBeam ? "Сталь / класс" : "Марка стали"} value={isVgp ? formatNumber(variant.diameterMm ?? 0) : variant.steelGrade ?? "—"}/>}
-          <VariantDetail label="Вес" value={hasMass ? `${formatNumber(mass)} кг/м` : "—"}/>
-          <VariantDetail
-            label="Длина"
-            value={variant.lengthMeters === undefined ? "—" : `${formatNumber(variant.lengthMeters)} м`}
-          />
-          <VariantDetail label="Цена" value={`${variant.priceQualifier === "from" ? "от " : ""}${formatUnitPrice(pricePerTon ?? null, "за тонну")}`}/>
-        </dl>
-        {isVgp && <details className="mt-4 text-sm"><summary className="cursor-pointer font-semibold text-slate-600 dark:text-slate-300 focus-visible:outline-2 focus-visible:outline-red-700 dark:focus-visible:outline-red-300">Подробнее о товаре</summary><div className="mt-3">{details}</div></details>}
-        <div className="mt-4 grid grid-cols-2 gap-3 border-t border-slate-100 dark:border-slate-800 pt-4">
-          <OrderInput
-            label={`Длина заказа для ${variant.name}`}
-            visibleLabel="Заказ, м"
-            value={meters}
-            onChange={updateMeters}
-            step={isVgp ? variant.lengthMeters : undefined}
-            onBlur={settlePipeOrder}
-          />
-          <OrderInput
-            label={`Вес заказа в тоннах для ${variant.name}`}
-            visibleLabel="Заказ, т"
-            decimalPlaces={isVgp ? 6 : 3}
-            value={tons}
-            onChange={updateTons}
-            onBlur={settlePipeOrder}
-          />
-        </div>
-        <p className="mt-4 flex items-baseline justify-between gap-3 text-sm text-slate-900 dark:text-slate-100">
-          <span>Сумма:</span>
-          <output aria-label={`Сумма заказа для ${variant.name}`} aria-live="polite" className={totalClassName}>{totalLabel}</output>
-        </p>
-        <div className="mt-4">{action}</div>
-        <span aria-live="polite" className={`mt-1 block text-xs ${message ? "text-red-700 dark:text-red-400" : "text-slate-500 dark:text-slate-400"}`}>{status}</span>
-      </article>
-    );
-  }
+  const specifications = <CatalogVariantSpecifications items={[
+    {label: isVgp ? "Ду × стенка, мм" : isBeam ? "Профиль" : "Диаметр", value: isVgp ? vgpSize(variant)
+      : isBeam ? beamProfile(variant) : `${formatNumber(variant.diameterMm ?? 0)} мм`},
+    {label: isVgp ? "Серия" : isBeam ? "Тип балки" : "Форма", value: isVgp ? vgpSeries(variant)
+      : isBeam ? beamKind(variant) : formLabel(variant.form ?? "bar")},
+    {label: isVgp ? "Наружный Ø, мм" : isBeam ? "Сталь / класс" : "Марка стали",
+      value: isVgp ? formatNumber(variant.diameterMm ?? 0) : variant.steelGrade ?? "—"},
+    {label: "Теоретическая масса", value: hasMass ? `${formatNumber(mass)} кг/м` : "—"},
+    {label: "Длина", value: variant.lengthMeters === undefined ? "—" : `${formatNumber(variant.lengthMeters)} м`},
+  ]}/>;
+  const moreDetails = view === "card"
+    ? <details className="mt-3 text-sm"><summary className="cursor-pointer font-semibold text-slate-600 focus-visible:outline-2 focus-visible:outline-red-700 dark:text-slate-300 dark:focus-visible:outline-red-300">Подробнее о товаре</summary>
+      <div className="mt-3">{details}</div></details>
+    : <button type="button" aria-expanded={detailsOpen} aria-controls={`vgp-details-${variant.id}`}
+      aria-label={`Подробности: ${variant.name}`} onClick={() => setDetailsOpen(!detailsOpen)}
+      className="mt-2 cursor-pointer rounded-sm text-sm font-semibold text-slate-600 underline decoration-slate-300 underline-offset-4 hover:text-red-700 focus-visible:outline-2 focus-visible:outline-red-700 dark:text-slate-300 dark:decoration-slate-500 dark:hover:text-red-400 dark:focus-visible:outline-red-300">Подробнее о товаре</button>;
+  const quantity = <div className="grid gap-2">
+    <OrderInput label={`Длина заказа для ${variant.name}`} unit="м" value={meters} onChange={updateMeters}
+      step={isVgp ? variant.lengthMeters : undefined} onBlur={settlePipeOrder}/>
+    <OrderInput label={`Вес заказа в тоннах для ${variant.name}`} unit="т" value={tons} onChange={updateTons}
+      decimalPlaces={isVgp ? 6 : 3} onBlur={settlePipeOrder}/>
+  </div>;
+  const total = <output aria-label={`Сумма заказа для ${variant.name}`} aria-live="polite" className={totalClassName}>{totalLabel}</output>;
+  const orderStatus = <span aria-live="polite" className={`block text-xs ${message ? "text-red-700 dark:text-red-400" : "text-slate-500 dark:text-slate-400"}`}>{status}</span>;
 
-
-  return (
-    <>
-    <tr id={`variant-${variant.id}`} title={variant.name} className="border-t border-slate-200 dark:border-slate-700 align-middle">
-      <td className="px-2 py-4 font-bold">{isVgp ? <button type="button" aria-expanded={detailsOpen} aria-controls={`vgp-details-${variant.id}`} aria-label={`Подробности: ${variant.name}`} onClick={() => setDetailsOpen(!detailsOpen)} className="min-h-11 underline decoration-slate-300 dark:decoration-slate-500 underline-offset-4 hover:text-red-700 dark:hover:text-red-400 focus-visible:outline-2 focus-visible:outline-red-700 dark:focus-visible:outline-red-300">{vgpSize(variant)}</button> : isBeam ? beamProfile(variant) : formatNumber(variant.diameterMm ?? 0)}</td>
-      <td className="px-2 py-4">{isVgp ? formatNumber(variant.diameterMm ?? 0) : isBeam ? beamKind(variant) : formLabel(variant.form ?? "bar")}</td>
-      <td className="px-2 py-4">{isVgp ? vgpSeries(variant) : variant.steelGrade}</td>
-      <td className="px-2 py-4 font-semibold tabular-nums">{`${variant.priceQualifier === "from" ? "от " : ""}${formatUnitPrice(pricePerTon ?? null, "за тонну")}`}</td>
-      <td className="px-2 py-4">{hasMass ? formatNumber(mass) : "—"}</td>
-      <td className="px-2 py-4">{variant.lengthMeters === undefined ? "—" : formatNumber(variant.lengthMeters)}</td>
-      <td className="px-2 py-3">
-        <OrderInput label={`Длина заказа для ${variant.name}`} value={meters} onChange={updateMeters} step={isVgp ? variant.lengthMeters : undefined} onBlur={settlePipeOrder}/>
-      </td>
-      <td className="px-2 py-3">
-        <OrderInput label={`Вес заказа в тоннах для ${variant.name}`} value={tons} onChange={updateTons} decimalPlaces={isVgp ? 6 : 3} onBlur={settlePipeOrder}/>
-      </td>
-      <td className={`${tableStyles.sumColumn} py-3`}>
-        <output aria-label={`Сумма заказа для ${variant.name}`} aria-live="polite" className={totalClassName}>{totalLabel}</output>
-      </td>
-      <td className="px-2 py-3 text-center">
-        {action}
-        <span aria-live="polite" className={`mx-auto mt-1 block max-w-32 text-xs ${message ? "text-red-700 dark:text-red-400" : "text-slate-500 dark:text-slate-400"}`}>{status}</span>
-      </td>
-    </tr>
-    {isVgp && <tr id={`vgp-details-${variant.id}`} hidden={!detailsOpen} className="border-t border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50"><td colSpan={10} className="p-4">{details}</td></tr>}
-    </>
-  );
+  return <>
+    <CatalogVariantLayout view={view} variant={variant} specifications={<>{specifications}{isVgp && moreDetails}</>}
+      price={`${variant.priceQualifier === "from" ? "от " : ""}${formatUnitPrice(pricePerTon ?? null, "за тонну")}`}
+      order={<CatalogVariantOrder view={view} quantity={quantity} action={action} total={total} status={orderStatus}/>}/>
+    {isVgp && view === "table" && <tr id={`vgp-details-${variant.id}`} hidden={!detailsOpen}
+      className="border-t border-slate-200 bg-slate-50 dark:border-slate-700 dark:bg-slate-800/50"><td colSpan={6} className="p-4">{details}</td></tr>}
+  </>;
 }
 
 function OrderInput({
   decimalPlaces = 2,
   label,
-  visibleLabel,
+  unit,
   value,
   onChange,
   onBlur,
@@ -254,31 +208,21 @@ function OrderInput({
 }: {
   label: string;
   decimalPlaces?: number;
-  visibleLabel?: string;
+  unit: string;
   value: string;
   onChange: (value: string) => void;
   onBlur?: () => void;
   step?: number;
 }) {
   return (
-    <label className="block text-sm font-semibold">
-      {visibleLabel && <span className="mb-1 block">{visibleLabel}</span>}
+    <CatalogVariantQuantity unit={unit}>
       <Input aria-label={label} type="number" inputMode="decimal" min={0} step={step ?? 10 ** -decimalPlaces} onBlur={onBlur}
         value={value} onChange={(event) => {
           const next = event.target.value;
           if (next === "" || new RegExp(`^\\d+(?:[.,]\\d{0,${decimalPlaces}})?$`).test(next)) onChange(next);
         }}
-        className={`${filterStyles.field} w-full min-w-0 px-2 tabular-nums focus:placeholder:text-transparent ${visibleLabel ? "" : "text-center"}`} placeholder="0"/>
-    </label>
-  );
-}
-
-function VariantDetail({label, value}: {label: string; value: string}) {
-  return (
-    <div>
-      <dt className="text-slate-600 dark:text-slate-400">{label}</dt>
-      <dd className="mt-1 font-medium">{value}</dd>
-    </div>
+        className={`${filterStyles.field} w-full min-w-0 pr-5 pl-2 text-center tabular-nums focus:placeholder:text-transparent`} placeholder="0"/>
+    </CatalogVariantQuantity>
   );
 }
 
