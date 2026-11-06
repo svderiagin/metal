@@ -18,11 +18,10 @@
 
 ## Добавление кадров
 
-Сейчас у каждой обложки один кадр: дополнительных фотографий пользователь ещё
-не предоставил. Для них предусмотрен `data/catalog-cover-galleries.ts`.
-Ключ — существующий `Category.id` или `ProductType.id`, значение — упорядоченные
-пути дополнительных фото в `public/`, без префикса `/public`.
-Основное фото из каталога всегда идёт первым; пустые пути и дубликаты удаляются.
+Галереи задаются в `data/catalog-cover-galleries.ts` по существующему `Category.id`
+или `ProductType.id`. В `additional` идут упорядоченные пути фото без префикса
+`/public`. Первым показывается `cover`, если он задан, или основное фото из
+каталога. Пустые пути и дубликаты удаляются.
 Не смешивайте разные виды проката, марки стали и товарные размеры ради наполнения.
 
 При двух и более кадрах автоматически появляются стрелки и счётчик — на странице
@@ -31,9 +30,146 @@
 сбрасываются при переходе к следующему фото. Дополнительные кадры заранее
 не загружаются все вместе. После добавления файлов обновите версии изображений
 и выполните визуальную проверку по `docs/catalog-images.md`.
+На странице многокадровая обложка заполняет рамку 2:1. В увеличенном просмотре
+весь кадр виден в исходных пропорциях.
 
 Просмотр фото товаров в строках/карточках таблицы остаётся в
 `ProductImageViewer`; к нему эта галерея не относится.
+
+## «Лист оцинкованный»
+
+Восемь кадров хранятся в `public/images/catalog/listovoy-prokat/list_ocinkovanniy/cover/`.
+Первым идёт горизонтальный кадр Harçelik. На странице используются оптимизированные
+копии, а увеличенный просмотр показывает исходные файлы.
+
+| Файл | Источник |
+| --- | --- |
+| `harcelik.webp` | [Harçelik](https://www.harcelik.com/en/kategori/galvaniz-sac) · [фото](https://www.harcelik.com/harcelikpanel/Sayfalar/urunler/galvaniz-sac-126.webp) |
+| `marketstal-warehouse.webp` | [Marketstal](https://marketstal.pl/blacha-ocynkowana-3-1500x3000-dx51d-z275) · [фото](https://marketstal.pl/userdata/public/gfx/8310/Blacha-ocynkowana-3%2C0-mm-1500x3000-DX51D-Z275-magazyn-1.webp) |
+| `rolled-steel-sheet.jpg` | [RolledSteelSheet](https://www.rolledsteelsheet.com/sale-41382044-hot-dip-gi-galvanized-sheet-plate-dx51d-1-5mm-thick-4x8-rolled-hrb60.html) · [фото](https://www.rolledsteelsheet.com/photo/pl160978991-hot_dip_gi_galvanized_sheet_plate_dx51d_1_5mm_thick_4x8_rolled_hrb60.jpg) |
+| `cs-carbon-steel.jpg` | [Shandong TISCO](https://www.cscarbonsteel.com/sale-35394406-mild-metal-galvanized-steel-sheet-plate-1mm-2mm-thick-baosteel.html) · [фото](https://www.cscarbonsteel.com/photo/pl138409441-mild_metal_galvanized_steel_sheet_plate_1mm_2mm_thick_baosteel.jpg) |
+| `expo-snab.jpg` | [СтройЭкспоСнаб](https://expo-snab.kz/p60239579-list-otsinkovannyj-035mm.html) · [фото](https://images.satu.kz/93051994_w1280_h640_93051994.jpg) |
+| `wuxi-gms.jpg` | [Wuxi GMS](https://wxgms1.en.made-in-china.com/product/CwdGiKBMwrYb/China-Saph440-Z275-Galvanized-Steel-Coil-and-Sheet-Saph-440-Material-Properties.html) · [фото](https://image.made-in-china.com/2f0j00RCwWGlBcHUzV/Saph440-Z275-Galvanized-Steel-Coil-and-Sheet-Saph-440-Material-Properties.jpg) |
+| `marketstal-edges.webp` | [Marketstal](https://marketstal.pl/blacha-ocynkowana-3-1500x3000-dx51d-z275) · [фото](https://marketstal.pl/userdata/public/gfx/8306/Blacha-ocynkowana-3%2C0-mm-1500x3000-DX51D-Z275--krawedz.webp) |
+| `marketstal-surface.webp` | [Marketstal](https://marketstal.pl/blacha-ocynkowana-3-1500x3000-dx51d-z275) · [фото](https://marketstal.pl/userdata/public/gfx/8307/Blacha-ocynkowana-3%2C0-mm-1500x3000-DX51D-Z275-zblizenie-powierzchni.webp) |
+
+## Другие подкатегории листового проката
+
+Фото лежат в `cover/` каждой подкатегории. В каждой серии первым идёт складской
+кадр, затем идут другие ракурсы пачек, кромок и поверхности.
+
+| Подкатегория | Файл | Источник |
+| --- | --- | --- |
+| Холоднокатаный | `marketstal-sheet-rack.webp` | [Marketstal](https://marketstal.pl/blacha-dc01-2-0-1500x3000-zimnowalcowana) · [фото](https://marketstal.pl/userdata/public/gfx/8558/Blacha-DC01-2%2C0x1500x3000-stalowa-zimnowalcowana-magazyn-1.webp) |
+| Холоднокатаный | `maras-metal-banded-sheets.jpg` | [Maraş Metal](https://marasmetal.com.tr/hizmet-detay/levha) · [фото](https://marasmetal.com.tr/tema/genel/uploads/hizmetler/0132998_030-soguk-haddelenmis-levha-sac.jpeg) |
+| Холоднокатаный | `marketstal-sheet-surface.webp` | [Marketstal](https://marketstal.pl/blacha-dc01-2-0-1500x3000-zimnowalcowana) · [фото](https://marketstal.pl/userdata/public/gfx/8556/Blacha-DC01-2%2C0x1500x3000-stalowa-zimnowalcowana-widok-tafli.webp) |
+| Холоднокатаный | `marketstal-sheet-edges.webp` | [Marketstal](https://marketstal.pl/blacha-dc01-2-0-1500x3000-zimnowalcowana) · [фото](https://marketstal.pl/userdata/public/gfx/8557/Blacha-DC01-2%2C0x1500x3000-stalowa-zimnowalcowana-krawedz.webp) |
+| Рифлёный | `sugar-steel-warehouse.jpg` | [Sugar Steel](https://sugarsteel.com/products/floor-tread-plate/) · [фото](https://sugarsteel.com/wp-content/uploads/1_-_IMG_2082.jpg) |
+| Рифлёный | `marketstal-sheet-rack.webp` | [Marketstal](https://marketstal.pl/blacha-lezka-4-0-1250x2500-s235-ryflowana) · [фото](https://marketstal.pl/userdata/public/gfx/8608/Blacha-lezka-4%2C0x1250x2500-stalowa-ryflowana-S235-magazyn-1.webp.webp) |
+| Рифлёный | `total-steel-stacks.jpg` | [Total Steel](https://totalsteel.com.au/floor-plates.html) · [фото](https://totalsteel.com.au/assets/images/product-images/floorplates/chq_plate.jpg) |
+| Рифлёный | `stalserwis-sheet-edges.jpg` | [Stalserwis](https://www.stalserwis24.pl/asortyment/blachy/ryflowane/blacha-ryflowana-lezka-3-x-1000-x-2000/) · [фото](https://www.stalserwis24.pl/wp-content/uploads/2020/05/6-2.jpg) |
+| Рифлёный | `sugar-steel-tread-detail.jpg` | [Sugar Steel](https://sugarsteel.com/products/floor-tread-plate/) · [фото](https://sugarsteel.com/wp-content/uploads/IMG_2169.jpg) |
+| Горячекатаный | `morgan-warehouse.webp` | [Morgan Steel](https://www.morgansteel.com/products) · [фото](https://images.squarespace-cdn.com/content/v1/6121663d61b714478bb2d875/1651871511190-MHG4BVHUTVCJT4J7NIEA/PRODUCTS%2BPAGE%2B-%2BFLAT%2BROLLED%2B-%2B%2BHR%2B%282%29-min.jpg) |
+| Горячекатаный | `huale-stacks.webp` | [Huale](https://hualesteel.com/production-lines) · [фото](https://hualesteel.com/assets/images/products/slitting-hot-rolled-sheet-02.webp) |
+| Горячекатаный | `beshert-warehouse.jpg` | [Beshert Steel](https://www.beshertsteel.com/steel-types/hot-rolled/) · [фото](https://www.beshertsteel.com/assets/images/buckets/metal-types-hot-rolled.jpg) |
+| Горячекатаный | `ural-sheet-surface.jpg` | [Уральская Стальная Компания](https://met-chel.ru/list-goryachekatanyij) · [фото](https://met-chel.ru/assets/images/products/126/34c1b67c1b8364b35a66474c0ef4cc2686e88408.jpg) |
+| Горячекатаный | `marketstal-sheet-edges.webp` | [Marketstal](https://marketstal.pl/blacha-stalowa-12-0-1500x3000-s235-goracowalcowana) · [фото](https://marketstal.pl/userdata/public/gfx/8492/Blacha-stalowa-12%2C0x1500x3000-goracowalcowana-S235-krawedz.webp) |
+
+## «Швеллер», «Уголок стальной» и «Квадрат стальной»
+
+В каждой галерее первой идёт существующая обложка, затем четыре дополнительных
+кадра со складскими ракурсами и деталями сечения. Дополнительные фото лежат в
+`cover/` соответствующей категории. На странице кадры вписываются в формат 2:1
+с обрезкой по центру, в просмотре открывается целый кадр.
+
+| Категория | Файл | Источник |
+| --- | --- | --- |
+| Швеллер | `rigang-channel-bundle.avif` | [Rigang](https://rigangmaterials.com/products/steel-profile/channel-steel/) · [фото](https://rigangmaterials.com/wp-content/uploads/2026/08/Channel-Steel3.avif) |
+| Швеллер | `gradstal-channel-stock.jpg` | [Град Сталь](https://gradstal.ru/catalog/shveller/) · [фото](https://www.gradstal.ru/images/shveller-1-large.jpg) |
+| Швеллер | `artmetal-channel-ends.jpg` | [АртМеталлГрупп](https://artmetalgroup.ru/shveller/shveller-8-p) · [фото](https://artmetalgroup.ru/images/product/163/1719472037-7.jpg) |
+| Швеллер | `eststeel-channel-profile.jpg` | [Eastern Steel](https://eststeel.com/en/products/c-channel/) · [фото](https://eststeel.com/images/c-channel-1.jpg) |
+| Уголок стальной | `ostermaier-angle-rack.jpg` | [Ostermaier](https://www.metallbau-ostermaier.de/stahlhandel/) · [фото](https://image.jimcdn.com/app/cms/image/transf/dimension%3Dorigxorig%3Aformat%3Djpg/path/s402e4372dc922405/image/i7502f59e57049442/version/1537375756/winkelstahl-bandstahl-heb-hea-hem-vierkantstahl-eisen-stahl-verkauf-aresing-ostermaier-schrobenhausen-eisenhandel-in-der-n%C3%A4he-gerolsbach-waidhofen-m%C3%BChlried-steingriff-edelshausen-h%C3%B6rzhausen-weilach-schiltberg-dachau.jpg) |
+| Уголок стальной | `kzmc-angle-bundles.jpg` | [КЗМЦ](https://kzmc.uz/product/nizkolegirovannyj_gorjachekatanyj_ravnopolochnyj_ugolok_250h250h25_18g2afd/) · [фото](https://kzmc.uz/media/uploads/images/load/nizkolegirovannyj_ugolok_2.jpg) |
+| Уголок стальной | `marketstal-angle-profile.jpg` | [Marketstal](https://marketstal.pl/Katownik-goracowalcowany-40x40x4,0-mm-dl.-6m) · [фото](https://marketstal.pl/userdata/public/gfx/7355/Katownik-goracowalcowany-40x40x4%2C0-mm.jpg) |
+| Уголок стальной | `stalmal-angle-ends.jpg` | [Stalmal](https://stalmal.olsztyn.pl/wyroby-hutnicze-olsztyn/katowniki) · [фото](https://stalmal.olsztyn.pl/lib/x3jbjm/katowniki-stalowe-liq1xqfx.jpg) |
+| Квадрат стальной | `tianyuda-square-yard.jpg` | [Tianyuda](https://www.tydsteelplate.com/products_20/58.html) · [фото](https://www.tydsteelplate.com/static/upload/image/20210120/1611127553114487.jpg) |
+| Квадрат стальной | `zhongji-square-bundles.jpg` | [Zhongji Metal](https://www.zhongjimetal-steel.com/ar/products/Steel-Rod/Carbon-Steel-Square-Bars.html) · [фото](https://usimg.bjyyb.net/sites/96500/96556/1759114171831118833566154752.jpg) |
+| Квадрат стальной | `ozdemir-square-ends.jpg` | [Özdemir](https://www.ozdemirsac.com/Urun-Detay-st37-s235-kare-dolu-demir-101) · [фото](https://www.ozdemirsac.com/img/urunler/st37_st37-2_st37-3_s235j0_s235jr_s235j2_kare_dolu_demiri.jpg) |
+| Квадрат стальной | `metalshoppen-square-profile.jpg` | [Metalshoppen](https://metalshoppen.dk/products/stal-firkant-12x12mm-ubehandlet) · [фото](https://metalshoppen.dk/cdn/shop/files/thumbnail_black_steel_square_bar_d8a8cc03-4f5c-4b1d-aff7-fb02618b5508.jpg?v=1699909739) |
+
+Из файла Marketstal удалены метаданные EXIF с геолокацией. Пиксели и размеры
+исходного кадра сохранены.
+
+## Арматура, трубы, профнастил, сетка и балки
+
+Шесть категорий и 20 видов продукции используют отдельные галереи. На общей
+странице категории часть фотографий показывает её разные виды продукции.
+Галерея вида доступна и на странице подкатегории с одним видом продукции.
+Кадры подобраны по карточкам поставщиков и показывают форму, фактуру и упаковку
+проката. Марку стали и соответствие партии подтверждают документы качества.
+
+### Арматура и балки
+
+| Файл | Размер | Источник |
+| --- | --- | --- |
+| `a500c-warehouse-meg.webp` | 1024 × 576 | [Карточка поставщика](https://spb.metexpro.ru/catalog/chernyy-prokat/armatura/armatura-12-a500s/) · [фото](https://spb.metexpro.ru/static/handoff/assets/photos/cat/armatura.webp) |
+| `a500c-bundle-tag.jpg` | 960 × 1280 | [Карточка поставщика](https://www.prom.uz/ads/armatura-a500s-34028-2016-rossiya-25/) · [фото](https://devel.prom.uz/upload/products/2026/1/12/1/2-2.jpg) |
+| `a400-35gs-stock-moststal.jpg` | 607 × 1080 | [Карточка поставщика](https://moststal.ru/magazin/armatura-a3-a400-35gs-12-mm) · [фото](https://moststal.ru/assets/images/products/2318/a400.jpeg) |
+| `a400-25g2s-stock-pkfsst.jpg` | 836 × 627 | [Карточка поставщика](https://pkfsst.ru/armatura-40-mm-a3-a400-riflenaya-25g2s) · [фото](https://pkfsst.ru/img/static/329276/armatura-a3-2.jpeg) |
+| `a400-25g2s-bundles-metallmk.jpg` | 600 × 800 | [Карточка поставщика](https://metallmk.ru/armatura/armatura-riflenaya/armatura-16-mm-a3-a400-riflenaya-25g2s/) · [фото](https://metallmk.ru/image/catalog/products_images/products/armatura-riflenaya4.jpg) |
+| `a240-stock-citymet.jpg` | 3130 × 2495 | [Карточка поставщика](https://citymet.ru/armatura-gladkaya-a1) · [фото](https://citymet.ru/assets/mgr/images/armatura-gladkaya-a1/armatura-gladkaya.jpg) |
+| `a240-bundle-citymet.jpg` | 1342 × 890 | [Карточка поставщика](https://citymet.ru/armatura-gladkaya-a1) · [фото](https://citymet.ru/assets/mgr/images/armatura-gladkaya-a1/armatura-a1-2.jpg) |
+| `a240-rods-metallrs.webp` | 963 × 1280 | [Карточка поставщика](https://metall-rs.ru/armatura-gladkaya/armatura-gladkaya-25-mm-a240) · [фото](https://metall-rs.ru/images/product/25/armatura-gladkaya-25-mm-a240-191746512067-1.webp) |
+| `normal-parallel-flanges-expo.jpg` | 1280 × 760 | [Карточка поставщика](https://expo-snab.kz/p58327210-balka-30b1-30b2.html) · [фото](https://images.satu.kz/89460171_balka-30b1-30b2.jpg) |
+| `wide-flanges-betall.jpg` | 568 × 426 | [Карточка поставщика](https://proflist.moscow/shirokopolochnyj-dvutavr/sh1) · [фото](https://proflist.moscow/wp-content/uploads/1970/01/shirokopolochnyj-dvutavr-sh1_2.jpg) |
+| `wide-stock-betall.jpg` | 568 × 426 | [Карточка поставщика](https://proflist.moscow/shirokopolochnyj-dvutavr/sh1) · [фото](https://proflist.moscow/wp-content/uploads/1970/01/shirokopolochnyj-dvutavr-sh1_3.jpg) |
+| `monorail-taper-expo.jpg` | 777 × 764 | [Карточка поставщика](https://expo-snab.kz/p58327664-balka-monorelsovaya-24m.html) · [фото](https://images.satu.kz/89465245_balka-monorelsovaya-24m.jpg) |
+| `column-stock-sda.jpg` | 1000 × 1000 | [Карточка поставщика](https://atyrau.sda.kz/shaped/ibeam/i-beam-k1-k2) · [фото](https://atyrau.sda.kz/assets/images/catalog/balki-pic.jpg) |
+
+### Профильные и круглые трубы
+
+Категория «Трубы профильные» использует существующий общий складской кадр `trubi-main.jpg`. Категория «Труба круглая» и шесть видов сохраняют свои текущие первые кадры. Обзорные галереи используют несколько фотографий из соответствующих видов.
+
+| Тип | Файл | Источник | Примечание |
+| --- | --- | --- | --- |
+| Квадратная профильная | `robmetalstal-square-warehouse.webp` (1000 × 750) | [РобМеталлСталь](https://robmetalstal.ru/truba-profilnaya/truba-profilnaya-100x100h4) · [фото](https://robmetalstal.ru/images/product/270/270_1755241716-2159957.webp) | Квадратная профильная труба 100 × 100, ГОСТ 8639-82. Общий складской ракурс. |
+| Квадратная профильная | `stroy-partner-square-ends.jpg` (914 × 690) | [Строй Партнёр](https://stroy-partner.spb.ru/truba-profilnaya-kvadratnaya) · [фото](https://static.tildacdn.com/tild3765-6535-4430-a566-653133306166/__.jpg) | Крупный план полых квадратных сечений. |
+| Квадратная профильная | `metamoll-square-detail.jpg` (873 × 472) | [Метамолл](https://metamoll.ru/truba-kvadratnaya) · [фото](https://metamoll.ru/images/category/1753691297.jpg) | Квадратные полые профили по ГОСТ 8639-82, торцы под углом. |
+| Прямоугольная профильная | `marketstal-rectangular-bundle.jpg` (2178 × 2178) | [Marketstal](https://marketstal.pl/Profil-stalowy-zamkniety-30x20x1%2C5x6000) · [фото](https://marketstal.pl/userdata/public/gfx/7891/profil-stalowy-30x20-1.jpg) | Прямоугольные стальные замкнутые профили 30 × 20 на складе. EXIF с геолокацией удалён без перекодирования. |
+| Прямоугольная профильная | `gradstal-rectangular-stack.jpg` (1200 × 803) | [Град Сталь](https://gradstal.ru/catalog/truby_profilnye/) · [фото](https://gradstal.ru/images/truba-profilnaya-8-large.jpg) | Складской ракурс пачки с явно прямоугольными торцами. |
+| Прямоугольная профильная | `mecafluid-rectangular-ends.jpg` (1181 × 1181) | [Mecafluid](https://www.mecafluid.eu/fr/catalog/tube-rectangulaire-acier-soude-electriquement-dimensions-80-x-40-x-4-mm~c4bfe7c4-083b-4472-bb0b-51d039287bd5) · [фото](https://www.mecafluid.eu/assets/8082ede3-946b-49ef-8725-31c086880330/599872-tuacserect-crop.jpg) | Чистый крупный план торцов стальной электросварной прямоугольной трубы 80 × 40. |
+| ВГП | `prometey-black-vgp-bundle.webp` (1800 × 1200) | [Прометей](https://prometey-ural.ru/catalog/truby/truby_vgp/truba_32_du_3_2/) · [фото](https://prometey-ural.ru/upload/resize_cache/webp/iblock/c02/suub4y0okygwzj33sk119u8w4hhbufg4.webp) | ВГП Ду32 с тёмной сталью и торцами, складской ракурс. |
+| ВГП | `aksvil-black-vgp-ends.jpg` (1252 × 717) | [Аксвил](https://aksvil.by/klientam/materialy-po-prokatu/trubi-stalniye-metallicheskie.html) · [фото](https://aksvil.by/images/_for-materials3/kak-vibrat-truby/vgp-truby.jpg) | Торцы ВГП малого диаметра. Снимок к разделу ВГП по ГОСТ 3262-75. |
+| ВГП оцинкованная | `steel-expert-galvanized-vgp-ends.jpg` (1409 × 1817) | [Сталь-Эксперт](https://steel-ex.ru/otsinkovka/truba-otsinkovannaya/truba-vgp-otsinkovannaya-80kh4-0/) · [фото](https://steel-ex.ru/upload/iblock/c5a/c5a8afdbe7c8fb25b2afae2eecfb7930.jpg) | Крупный план оцинкованных ВГП по ГОСТ 3262-75. |
+| ВГП оцинкованная | `lorber-galvanized-vgp-threads.jpg` (1200 × 1200) | [J. Lorber](https://www.jlorber.com/catalog/products/Plumbing/Pipe/dept-5U1) · [фото](https://www.jlorber.com/product-image/galvanized-pipe.jpg) | Резьбовые торцы оцинкованных водопроводных труб, категория Plumbing Pipe. |
+| Электросварная | `metservis-welded-warehouse.jpg` (1000 × 1000) | [Метсервис](https://metservis63.ru/product/trubi/truba-krug/truba-elektrosvarnaya-pryamoshovnaya-kruglaya-76kh1-5/) · [фото](https://metservis63.ru/upload/iblock/363/x7we2yn8g9u2flz7slehnztt7a7x6nxu.jpg) | Пачки прямошовных электросварных труб на складе. |
+| Электросварная | `stalnoy-dom-welded-ends.jpg` (800 × 533) | [Стальной Дом](https://stalnoydom.ru/catalog/truby_elektrosvarnye_kruglye_108x4-5_13187/) · [фото](https://stalnoydom.ru/upload/iblock/05d/trubaes_krneots-002.jpg) | Торцы и длина круглых неоцинкованных электросварных труб по ГОСТ 10704-91. |
+| Электросварная | `ural-welded-stock.jpg` (800 × 483) | [Металл-Урал](https://petrozavodsk.metall-ural.ru/store/truby/truby-elektrosvarnye/truba-gost-10705-80/) · [фото](https://petrozavodsk.metall-ural.ru/uploadedFiles/eshopimages/big/truby-elektrosvarnye.JPG) | Чёрные электросварные трубы по ГОСТ 10705-80, складской ракурс сверху. |
+| Электросварная оцинкованная | `marketstal-galvanized-welded-stock.jpg` (600 × 400) | [Marketstal](https://marketstal.pl/Rura-stalowa-ocynkowana-48-0x2-0x2-4mb-szew-napyl) · [фото](https://marketstal.pl/userdata/public/gfx/4877/Rura-ocynkowana-48%2C0x2%2C0x2%2C4-napylana-4.jpg) | Пачка круглой оцинкованной стальной трубы с обработанным сварным швом. |
+| Электросварная оцинкованная | `hotoks-galvanized-welded-seam.webp` (1000 × 1000) | [Хотокс](https://hotoks-pkf.ru/catalog/truby-elektrosvarnye-otsinkovannye/truba-elektrosvarnaya-57kh3-5-mm-pryamoshovnaya-otsinkovannaya-gost-10704-91/) · [фото](https://hotoks-pkf.ru/upload/iblock/449/pjgv774zyheewi0ijj9acp57xt1nm6zu.webp) | Оцинкованная прямошовная труба по ГОСТ 10704-91. Виден продольный шов. |
+
+### Профнастил и металлическая сетка
+
+Складские и производственные фотографии опубликованы в папке `cover/` каждой категории. Для общего баннера «Профнастил» выбран кадр готовых стальных листов у линии прокатки. На страницах С8, С20 и Н75 фотографии сопоставлены с карточками профиля. С8-1150 имеет полную ширину 1200 мм, С20-1100 — 1150 мм, Н75-750 имеет рабочую ширину 750 мм. В галерее металлической сетки есть отдельные ракурсы ромбической рабицы, сварных рулонов и плоских карт.
+
+Кадр зелёного С8 локально отретуширован с помощью ImageGen. За пределами
+области водяного знака сохранены пиксели исходной фотографии.
+
+| Раздел | Файл | Источник |
+| --- | --- | --- |
+| Профнастил | `profiled-steel-production.webp` | [Henan Tiga, стальной профнастил](https://cus-steel.en.made-in-china.com/product/KNnmpjdFGsVB/China-Australia-Woodland-Grey-Box-Profile-Colourful-Trapezoidal-Roofing-Sheet-for-Fencing.html) · [фото](https://image.made-in-china.com/2f0j00DSukqMrRsToG/Australia-Woodland-Grey-Box-Profile-Colourful-Trapezoidal-Roofing-Sheet-for-Fencing.webp) |
+| С8 | `s8-coated-packs.webp` | [МетСтрой, С8-1150](https://metst.ru/tver/production/profnastil/s8-1150/) · [фото до ретуши](https://metst.ru/upload/iblock/06f/proflist_s8_6005.jpg) |
+| С8 | `s8-coated-surface.jpg` | [Металлик и Ко, С8 1200 × 2000](https://metallik.ru/catalog/profnastil_c8/profnastil-s-8-kh-1200-kh-2000-ots-0-50-ral-6005-dvustor/) · [фото](https://metallik.ru/upload/uf/70b/37ox5geaa8fpy0d28jyhwzud1rgoc945.jpg) |
+| С20 | `s20-galvanized-packs.webp` | [СтальТорг, С20](https://steeltorg.pro/ocinkovannyj-profnastil/profnastil-c21-ocinkovannyj-2000h1050h0-3-mm) · [фото](https://steeltorg.pro/images/product/513/1747986107-IMG-20250523-WA0013.webp) |
+| С20 | `s20-coated-sheets.jpg` | [Металлик и Ко, С20 1150 × 2000](https://metallik.ru/catalog/profnastil_s20_stenovoy/profnastil-stenovoy-s-20-kh-1150-kh-2000-ots-0-50-ral-5021/) · [фото](https://metallik.ru/upload/uf/1ee/q8xxbxbjqz3bp0s3f3le83bf59xei0in.jpg) |
+| Н75 | `n75-galvanized-packs.jpg` | [Айрон Полимер, Н75](https://ironpolimer.ru/ocinkovannyj-profnastil-n-75/) · [фото](https://ironpolimer.ru/assets/images/gallery/profnastil/ocinkovannyj-profnastil-n-75-1.jpg) |
+| Н75 | `n75-galvanized-profile.jpg` | [Айрон Полимер, Н75](https://ironpolimer.ru/ocinkovannyj-profnastil-n-75/) · [фото](https://ironpolimer.ru/assets/images/gallery/profnastil/ocinkovannyj-profnastil-n-75.jpg) |
+| Рабица | `rabitsa-warehouse-packs.jpg` | [Security Steel Fence, оцинкованная рабица](https://www.securitysteelfence.com/sale-48678891-playground_galvanized_chain_link_fence_wire_mesh_100_ft_roll_for_sale.html) · [фото](https://www.securitysteelfence.com/photo/pl187538750-playground_galvanized_chain_link_fence_wire_mesh_100_ft_roll_for_sale.jpg) |
+| Рабица | `rabitsa-production-rolls.webp` | [Hongli, оцинкованная рабица](https://honglimetals.en.made-in-china.com/product/bZGTuNUSryas/China-Factory-Price-Wire-Mesh-Roll-Diamond-Chain-Link-Fence-Galvanized.html) · [фото](https://image.made-in-china.com/2f0j00oOriRgeUHnGc/Factory-Price-Wire-Mesh-Roll-Diamond-Chain-Link-Fence-Galvanized.webp) |
+| Сварная сетка в рулонах | `welded-rolls-warehouse.jpg` | [Сталь ПРО, сварная сетка](https://steel-pro.ru/company/articles/setka_svarnaya_sposoby_proizvodstva_i_obrabotki_materiala/) · [фото](https://steel-pro.ru/upload/iblock/6a6/i73dm27gkb38c4qxk1wmpoih6ri8t7hh.jpg) |
+| Сварная сетка в рулонах | `welded-rolls-packed.jpg` | [Enzar Metal, оцинкованная сварная сетка](https://www.weldedwiremeshpanel.com/cn/technology/galvanized-wire-mesh-welded.html) · [фото](https://www.weldedwiremeshpanel.com/img/welded-mesh-plastic-film.jpg) |
+| Сварная сетка в картах | `welded-panels-stacks.webp` | [СМ-Сетка, кладочная сетка в картах](https://sm-setka.kz/product/1) · [фото](https://sm-setka.kz/assets/mash_light-MZmTjSta.webp) |
+| Сварная сетка в картах | `welded-panels-edges.jpg` | [ProSteel, кладочная сетка ВР-1](https://prosteel.kz/p99710854-setka-kladochnaya.html) · [фото](https://images.satu.kz/183691994_setka-kladochnaya-vr-1.jpg) |
 
 ## Проверка
 
@@ -42,6 +178,6 @@
 и отказ загрузки оригинала. `tests/unit/catalog-cover-gallery.test.ts` защищает
 порядок кадров, цикл и условное появление навигации.
 `cover-viewer.png` защищает оформление просмотра в четырёх проектах браузера.
-После появления дополнительных утверждённых фото добавьте соответствующий
-интеграционный сценарий переключения; до этого несколько кадров проверены
-на отдельном временном примере с настоящим компонентом, вне страниц каталога.
+Сценарии для многокадровых галерей проверяют циклическое переключение кадров,
+клавиатуру и возврат фокуса после закрытия. Сценарий для оцинкованного листа
+также проверяет сохранение выбранной фотографии на странице.

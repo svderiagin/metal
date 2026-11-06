@@ -43,8 +43,9 @@ export default async function CategoryPage({params}: Props) {
   const mainImageUrl = category.id === "cat-trp"
     ? "/images/catalog/truby-profilnye/trubi-main.jpg"
     : category.imageUrl;
-  const hasImage = category.id !== "cat-pnf" && !mainImageUrl.endsWith(".svg");
-  const coverImages = getCatalogCoverImages(category.id, mainImageUrl);
+  const coverImages = getCatalogCoverImages(category.id,
+    category.id === "cat-pnf" || mainImageUrl.endsWith(".svg") ? "" : mainImageUrl);
+  const hasImage = coverImages.length > 0;
   const introDescription = category.descriptionSections?.intro ?? category.description;
   const useCoverLayout = category.slug === "armatura";
   const detailedDescription = category.descriptionSections?.details ?? (useCoverLayout ? category.description : undefined);

@@ -1,12 +1,14 @@
 import {test, expect, productPath, samples} from "../browser";
+import {getCategoryBySlug, getProductTypesByCategoryId} from "../../lib/catalog";
+import {getCatalogCoverImages} from "../../lib/catalogCoverImages";
 
 const titleButton = "button[aria-label^='Увеличить титульное изображение:']";
 const titleDialog = {name: /^Просмотр титульных фотографий:/};
 
-for (const [layout, route] of [
-  ["banner", "/catalog/armatura"], ["compact", "/catalog/balka"],
-  ["direct products", "/catalog/shveller"], ["product family", productPath(samples.armatura, false)],
-]) {
+for (const [layout, route, hasGallery] of [
+  ["banner", "/catalog/armatura", true], ["compact with one photo", "/catalog/polosa", false],
+  ["direct products", "/catalog/shveller", true], ["product family", productPath(samples.armatura, false), true],
+] as const) {
   test(`${layout}: title opens above the page and closes with photo, Escape and close control`, async ({page, context}) => {
     await page.goto(route);
     const trigger = page.locator(titleButton);
@@ -18,7 +20,7 @@ for (const [layout, route] of [
     const dialog = page.getByRole("dialog", titleDialog);
     await expect(dialog).toBeVisible();
     await expect(dialog).toHaveCSS("border-radius", "28px");
-    await expect(dialog.getByRole("button", {name: "Следующее фото", exact: true})).toHaveCount(0);
+    await expect(dialog.getByRole("button", {name: "Следующее фото", exact: true})).toHaveCount(hasGallery ? 1 : 0);
     expect(context.pages()).toHaveLength(1);
     expect(await page.evaluate(() => document.documentElement.style.overflow)).toBe("hidden");
     const photo = dialog.getByRole("button", {name: /^Вернуть изображение на страницу:/});
@@ -90,4 +92,85 @@ test("failed full-size title photo remains dismissible", async ({page}) => {
   await dialog.getByRole("button", {name: /^Вернуть изображение на страницу:/}).click();
   await expect(dialog).not.toBeVisible();
   await expect(page.locator(titleButton)).toBeFocused();
+});
+
+test("galvanized sheet title gallery cycles through its own photographs", async ({page}) => {
+  await page.goto(productPath(samples.galvanizedSheet, false));
+  const trigger = page.locator(titleButton);
+  await trigger.click();
+  const dialog = page.getByRole("dialog", titleDialog);
+  const picture = dialog.getByRole("img");
+  await expect(picture).toHaveAttribute("src", /\/harcelik\.webp\?v=[a-f0-9]{12}$/);
+  await dialog.getByRole("button", {name: "Предыдущее фото", exact: true}).click();
+  await expect(dialog.getByRole("status").filter({hasText: /8\s*\/\s*из\s*8/})).toBeVisible();
+  await expect(picture).toHaveAttribute("src", /\/marketstal-surface\.webp\?v=[a-f0-9]{12}$/);
+  await page.keyboard.press("ArrowRight");
+  await expect(picture).toHaveAttribute("src", /\/harcelik\.webp\?v=[a-f0-9]{12}$/);
+  await dialog.getByRole("button", {name: "Следующее фото", exact: true}).click();
+  await expect(picture).toHaveAttribute("src", /\/marketstal-warehouse\.webp\?v=[a-f0-9]{12}$/);
+  await dialog.getByRole("button", {name: /^Вернуть изображение на страницу:/}).click();
+  await expect(dialog).not.toBeVisible();
+  await expect(trigger).toBeFocused();
+  await expect(trigger.locator("img")).toHaveAttribute("alt", "Лист оцинкованный — фото 2");
+});
+
+const nestedGallerySlugs = ["armatura", "truby-profilnye", "truba-kruglaya", "profnastil", "setka-metallicheskaya", "balka"];
+const nestedGalleryPages = nestedGallerySlugs.flatMap(slug => {
+  const {id} = getCategoryBySlug(slug)!;
+  return getProductTypesByCategoryId(id).map(type => {
+    const subcategoryRoute = `/catalog/${slug}/${type.subcategorySlug}`;
+    return {name: type.name, route: `${subcategoryRoute}/${type.slug}`, subcategoryRoute, id: type.id, cover: type.imageUrl ?? ""};
+  });
+});
+
+const coverGalleryPages = [
+  ...(["coldRolledSheet", "treadPlate", "hotRolledSheet"] as const).map(family => {
+    const sample = samples[family];
+    return {name: family, route: productPath(sample, false), id: sample.productTypeId, cover: ""};
+  }),
+  ...["shveller", "ugolok", "kvadrat", ...nestedGallerySlugs].map(slug => {
+    const category = getCategoryBySlug(slug)!;
+    const cover = slug === "truby-profilnye" ? "/images/catalog/truby-profilnye/trubi-main.jpg" : category.imageUrl;
+    return {name: category.name, route: `/catalog/${slug}`, id: category.id, cover};
+  }),
+  ...nestedGalleryPages,
+];
+
+for (const {name, route, id, cover} of coverGalleryPages) {
+  test(`${name}: title gallery opens and cycles through all photos`, async ({page}) => {
+    const frames = getCatalogCoverImages(id, cover);
+    expect(frames.length).toBeGreaterThan(1);
+    await page.goto(route);
+    const trigger = page.locator(titleButton);
+    await trigger.click();
+    const dialog = page.getByRole("dialog", titleDialog);
+    const picture = dialog.getByRole("img");
+    const next = dialog.getByRole("button", {name: "Следующее фото", exact: true});
+    const source = async () => decodeURI(await picture.getAttribute("src") ?? "");
+    for (const frame of frames) {
+      await expect.poll(source).toContain(`${frame}?v=`);
+      await expect.poll(() => picture.evaluate(image => (image as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
+      await next.click();
+    }
+    await expect.poll(source).toContain(`${frames[0]}?v=`);
+    await page.keyboard.press("ArrowLeft");
+    await expect.poll(source).toContain(`${frames.at(-1)}?v=`);
+    await dialog.getByRole("button", {name: /^Вернуть изображение на страницу:/}).click();
+    await expect(dialog).not.toBeVisible();
+    await expect(trigger).toBeFocused();
+  });
+}
+
+test("subcategory overview shows the same title gallery as its product family", async ({page}) => {
+  const family = nestedGalleryPages.find(entry => entry.id === samples.armatura.productTypeId)!;
+  const frames = getCatalogCoverImages(family.id, family.cover);
+  await page.goto(family.subcategoryRoute);
+  const trigger = page.locator(titleButton);
+  await trigger.click();
+  const dialog = page.getByRole("dialog", titleDialog);
+  const picture = dialog.getByRole("img");
+  const source = async () => decodeURI(await picture.getAttribute("src") ?? "");
+  await expect.poll(source).toContain(`${frames[0]}?v=`);
+  await dialog.getByRole("button", {name: "Следующее фото", exact: true}).click();
+  await expect.poll(source).toContain(`${frames[1]}?v=`);
 });

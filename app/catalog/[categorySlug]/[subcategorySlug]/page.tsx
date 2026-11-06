@@ -5,8 +5,10 @@ import {Breadcrumbs} from "@/components/catalog/Breadcrumbs";
 import {CatalogSidebar} from "@/components/catalog/CatalogSidebar";
 import {CatalogDescription} from "@/components/catalog/CatalogDescription";
 import {CatalogProductDetail} from "@/components/catalog/CatalogProductDetail";
+import {ProductCatalogIntro} from "@/components/catalog/ProductCatalogIntro";
 import {ProductTypeResults} from "@/components/catalog/ProductTypeResults";
 import {PageContainer} from "@/components/layout/PageContainer";
+import {getCatalogCoverImages} from "@/lib/catalogCoverImages";
 import {getChannelProductDescription} from "@/lib/channelDescription";
 import {
   getAllCategories,
@@ -68,6 +70,10 @@ export default async function SubcategoryPage({params}: Props) {
   if (currentSubcategory) {
     if (currentSubcategory.internal) redirect(`/catalog/${category.slug}`);
     const productTypes = getProductTypesBySubcategoryId(currentSubcategory.id);
+    const [productType] = productTypes;
+    const coverImages = productTypes.length === 1
+      ? getCatalogCoverImages(productType.id, productType.imageUrl ?? "")
+      : [];
     const variants = getProductVariantsByCategoryId(category.id)
       .filter((variant) => variant.subcategoryId === currentSubcategory.id);
 
@@ -83,8 +89,13 @@ export default async function SubcategoryPage({params}: Props) {
             <CatalogSidebar activeSlug={category.slug}/>
           </Suspense>
           <div className="min-w-0">
-            <h1 className="text-page-title">{currentSubcategory.name}</h1>
-            <CatalogDescription description={currentSubcategory.description}/>
+            {coverImages.length > 1
+              ? <ProductCatalogIntro key={currentSubcategory.id} title={currentSubcategory.name} label="Подкатегория"
+                  images={coverImages} description={currentSubcategory.description}/>
+              : <>
+                  <h1 className="text-page-title">{currentSubcategory.name}</h1>
+                  <CatalogDescription description={currentSubcategory.description}/>
+                </>}
             <ProductTypeResults productTypes={productTypes} variants={variants}/>
           </div>
         </div>
