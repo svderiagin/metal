@@ -14,13 +14,24 @@ for (const family of ["shveller", "ugolok", "kvadrat", "armatura", "balka", "pro
     const productItem = visibleProduct(page, product.id);
     if (await productItem.evaluate(element => element.tagName === "TR")) {
       const headers = productItem.locator("xpath=ancestor::table").getByRole("columnheader");
-      await expect(headers).toHaveText([
-        "Наименование", "Изображение", "Характеристики", "Цена", /^Кол-во(?:, м)?$/, "Действие",
-      ]);
+      if (family === "armatura") {
+        await expect(headers).toHaveText([
+          "Диаметр, мм", "Форма", "Марка стали", "Цена, ₽/т", "Масса, кг/м", "Длина, м", "Заказ, м", "Заказ, т", "Сумма", "Действие",
+        ]);
+        await expect(productItem.getByRole("cell").first()).toHaveText(String(product.diameterMm));
+      } else {
+        await expect(headers).toHaveText([
+          "Наименование", "Изображение", "Характеристики", "Цена", /^Кол-во(?:, м)?$/, "Действие",
+        ]);
+        await expect(productItem.getByRole("rowheader")).toBeVisible();
+      }
       await expect(headers.first()).toHaveCSS("padding-inline-start", "16px");
-      await expect(productItem.getByRole("rowheader")).toBeVisible();
     } else {
       await expect(productItem.getByRole("heading", {level: 3})).toBeVisible();
+    }
+    if (family === "armatura") {
+      await expect(page.getByRole("region", {name: "Продукция"}).locator("img")).toHaveCount(0);
+      await expect(productItem.getByRole("spinbutton")).toHaveCount(2);
     }
     await expect(productItem.getByRole("spinbutton").first()).toBeVisible();
     const query = page.getByLabel("Поиск товаров", {exact: true}).filter({visible: true});

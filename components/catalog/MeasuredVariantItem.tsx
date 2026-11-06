@@ -1,6 +1,6 @@
 "use client";
 
-import {useEffect, useState} from "react";
+import {useEffect, useState, type ReactNode} from "react";
 import {beamProfile, beamKind} from "@/lib/beam";
 import {vgpSize, vgpSeries, wholeVgpOrder} from "@/lib/vgp";
 import {QuoteRequestButton} from "./QuoteRequestButton";
@@ -38,7 +38,7 @@ function TonnageMeasuredVariantItem({
   const {addItem, updateQuantity, removeItem, lines, hydrated} = useCart();
   const hasMass = variant.weightPerMeterKg !== undefined && variant.weightPerMeterKg > 0;
   const mass = variant.weightPerMeterKg ?? 0;
-  const isBeam = kind === "beam";
+  const isRebar = kind === "rebar";
   const isVgp = kind === "vgp";
   const [detailsOpen, setDetailsOpen] = useState(false);
   const cartLine = lines.find((line) => line.productId === variant.id);
@@ -156,6 +156,22 @@ function TonnageMeasuredVariantItem({
     </Button>
   );
 
+  const showOrderLabels = isRebar && view === "card";
+  const meterInput = <OrderInput label={`Длина заказа для ${variant.name}`} unit={isRebar ? undefined : "м"}
+    visibleLabel={showOrderLabels ? "Заказ, м" : undefined} value={meters} onChange={updateMeters}
+    step={isVgp ? variant.lengthMeters : undefined} onBlur={settlePipeOrder}/>;
+  const tonInput = <OrderInput label={`Вес заказа в тоннах для ${variant.name}`} unit={isRebar ? undefined : "т"}
+    visibleLabel={showOrderLabels ? "Заказ, т" : undefined} value={tons} onChange={updateTons}
+    decimalPlaces={isVgp ? 6 : 3} onBlur={settlePipeOrder}/>;
+  const price = `${variant.priceQualifier === "from" ? "от " : ""}${formatUnitPrice(pricePerTon ?? null, "за тонну")}`;
+  const total = <output aria-label={`Сумма заказа для ${variant.name}`} aria-live="polite" className={totalClassName}>{totalLabel}</output>;
+  const statusColor = message ? "text-red-700 dark:text-red-400" : "text-slate-500 dark:text-slate-400";
+  const statusSpacing = isRebar ? view === "table" ? "mx-auto mt-1 max-w-32" : "mt-1" : "";
+  const orderStatus = <span aria-live="polite" className={`block text-xs ${statusSpacing} ${statusColor}`}>{status}</span>;
+
+  if (isRebar) return <RebarVariantLayout view={view} variant={variant} price={price}
+    meterInput={meterInput} tonInput={tonInput} total={total} action={action} orderStatus={orderStatus}/>;
+
   const details = <div className="space-y-2 text-left text-sm font-normal text-slate-600 dark:text-slate-300">
     <p className="font-bold text-slate-900 dark:text-slate-100">{variant.name}</p>
     <p>{variant.availability === "UNKNOWN" ? "Наличие уточняется" : variant.availability === "IN_STOCK" ? "В наличии" : "Под заказ"}</p>
@@ -164,11 +180,9 @@ function TonnageMeasuredVariantItem({
   </div>;
 
   const specifications = <CatalogVariantSpecifications items={[
-    {label: isVgp ? "Ду × стенка, мм" : isBeam ? "Профиль" : "Диаметр", value: isVgp ? vgpSize(variant)
-      : isBeam ? beamProfile(variant) : `${formatNumber(variant.diameterMm ?? 0)} мм`},
-    {label: isVgp ? "Серия" : isBeam ? "Тип балки" : "Форма", value: isVgp ? vgpSeries(variant)
-      : isBeam ? beamKind(variant) : formLabel(variant.form ?? "bar")},
-    {label: isVgp ? "Наружный Ø, мм" : isBeam ? "Сталь / класс" : "Марка стали",
+    {label: isVgp ? "Ду × стенка, мм" : "Профиль", value: isVgp ? vgpSize(variant) : beamProfile(variant)},
+    {label: isVgp ? "Серия" : "Тип балки", value: isVgp ? vgpSeries(variant) : beamKind(variant)},
+    {label: isVgp ? "Наружный Ø, мм" : "Сталь / класс",
       value: isVgp ? formatNumber(variant.diameterMm ?? 0) : variant.steelGrade ?? "—"},
     {label: "Теоретическая масса", value: hasMass ? `${formatNumber(mass)} кг/м` : "—"},
     {label: "Длина", value: variant.lengthMeters === undefined ? "—" : `${formatNumber(variant.lengthMeters)} м`},
@@ -179,28 +193,87 @@ function TonnageMeasuredVariantItem({
     : <button type="button" aria-expanded={detailsOpen} aria-controls={`vgp-details-${variant.id}`}
       aria-label={`Подробности: ${variant.name}`} onClick={() => setDetailsOpen(!detailsOpen)}
       className="mt-2 cursor-pointer rounded-sm text-sm font-semibold text-slate-600 underline decoration-slate-300 underline-offset-4 hover:text-red-700 focus-visible:outline-2 focus-visible:outline-red-700 dark:text-slate-300 dark:decoration-slate-500 dark:hover:text-red-400 dark:focus-visible:outline-red-300">Подробнее о товаре</button>;
-  const quantity = <div className="grid gap-2">
-    <OrderInput label={`Длина заказа для ${variant.name}`} unit="м" value={meters} onChange={updateMeters}
-      step={isVgp ? variant.lengthMeters : undefined} onBlur={settlePipeOrder}/>
-    <OrderInput label={`Вес заказа в тоннах для ${variant.name}`} unit="т" value={tons} onChange={updateTons}
-      decimalPlaces={isVgp ? 6 : 3} onBlur={settlePipeOrder}/>
-  </div>;
-  const total = <output aria-label={`Сумма заказа для ${variant.name}`} aria-live="polite" className={totalClassName}>{totalLabel}</output>;
-  const orderStatus = <span aria-live="polite" className={`block text-xs ${message ? "text-red-700 dark:text-red-400" : "text-slate-500 dark:text-slate-400"}`}>{status}</span>;
+  const quantity = <div className="grid gap-2">{meterInput}{tonInput}</div>;
 
   return <>
     <CatalogVariantLayout view={view} variant={variant} specifications={<>{specifications}{isVgp && moreDetails}</>}
-      price={`${variant.priceQualifier === "from" ? "от " : ""}${formatUnitPrice(pricePerTon ?? null, "за тонну")}`}
+      price={price}
       order={<CatalogVariantOrder view={view} quantity={quantity} action={action} total={total} status={orderStatus}/>}/>
     {isVgp && view === "table" && <tr id={`vgp-details-${variant.id}`} hidden={!detailsOpen}
       className="border-t border-slate-200 bg-slate-50 dark:border-slate-700 dark:bg-slate-800/50"><td colSpan={6} className="p-4">{details}</td></tr>}
   </>;
 }
 
+function RebarVariantLayout({view, variant, price, meterInput, tonInput, total, action, orderStatus}: {
+  view: "table" | "card";
+  variant: ProductVariant;
+  price: string;
+  meterInput: ReactNode;
+  tonInput: ReactNode;
+  total: ReactNode;
+  action: ReactNode;
+  orderStatus: ReactNode;
+}) {
+  const diameter = formatNumber(variant.diameterMm ?? 0);
+  const form = formLabel(variant.form ?? "bar");
+  const mass = variant.weightPerMeterKg;
+  const length = variant.lengthMeters;
+
+  if (view === "card") return (
+    <article id={`variant-mobile-${variant.id}`} className="min-w-0 break-words rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-900">
+      <h3 className="mt-1 font-bold">{variant.name}</h3>
+      <dl className="mt-4 grid grid-cols-2 gap-3 text-sm">
+        {[
+          ["Диаметр", `${diameter} мм`],
+          ["Форма", form],
+          ["Марка стали", variant.steelGrade ?? "—"],
+          ["Вес", mass !== undefined && mass > 0 ? `${formatNumber(mass)} кг/м` : "—"],
+          ["Длина", length === undefined ? "—" : `${formatNumber(length)} м`],
+          ["Цена", price],
+        ].map(([label, value]) => (
+          <div key={label}>
+            <dt className="text-slate-600 dark:text-slate-400">{label}</dt>
+            <dd className="mt-1 font-medium">{value}</dd>
+          </div>
+        ))}
+      </dl>
+      <div className="mt-4 grid grid-cols-2 gap-3 border-t border-slate-100 pt-4 dark:border-slate-800">
+        {meterInput}
+        {tonInput}
+      </div>
+      <p className="mt-4 flex items-baseline justify-between gap-3 text-sm text-slate-900 dark:text-slate-100">
+        <span>Сумма:</span>
+        {total}
+      </p>
+      <div className="mt-4">{action}</div>
+      {orderStatus}
+    </article>
+  );
+
+  return (
+    <tr id={`variant-${variant.id}`} title={variant.name} className="align-middle border-t border-slate-200 dark:border-slate-700">
+      <td className="font-bold">{diameter}</td>
+      <td>{form}</td>
+      <td>{variant.steelGrade}</td>
+      <td className="font-semibold tabular-nums">{price}</td>
+      <td>{mass !== undefined && mass > 0 ? formatNumber(mass) : "—"}</td>
+      <td>{length === undefined ? "—" : formatNumber(length)}</td>
+      <td>{meterInput}</td>
+      <td>{tonInput}</td>
+      <td className={tableStyles.sumColumn}>{total}</td>
+      <td className="text-center">
+        {action}
+        {orderStatus}
+      </td>
+    </tr>
+  );
+}
+
 function OrderInput({
   decimalPlaces = 2,
   label,
   unit,
+  visibleLabel,
   value,
   onChange,
   onBlur,
@@ -208,21 +281,27 @@ function OrderInput({
 }: {
   label: string;
   decimalPlaces?: number;
-  unit: string;
+  unit?: string;
+  visibleLabel?: string;
   value: string;
   onChange: (value: string) => void;
   onBlur?: () => void;
   step?: number;
 }) {
+  const alignment = unit ? "pr-5 pl-2 text-center" : visibleLabel ? "px-2" : "px-2 text-center";
+  const input = <Input aria-label={label} type="number" inputMode="decimal" min={0} step={step ?? 10 ** -decimalPlaces} onBlur={onBlur}
+    value={value} onChange={(event) => {
+      const next = event.target.value;
+      if (next === "" || new RegExp(`^\\d+(?:[.,]\\d{0,${decimalPlaces}})?$`).test(next)) onChange(next);
+    }}
+    className={`${filterStyles.field} w-full min-w-0 ${alignment} tabular-nums focus:placeholder:text-transparent`} placeholder="0"/>;
+  if (unit) return <CatalogVariantQuantity unit={unit}>{input}</CatalogVariantQuantity>;
+
   return (
-    <CatalogVariantQuantity unit={unit}>
-      <Input aria-label={label} type="number" inputMode="decimal" min={0} step={step ?? 10 ** -decimalPlaces} onBlur={onBlur}
-        value={value} onChange={(event) => {
-          const next = event.target.value;
-          if (next === "" || new RegExp(`^\\d+(?:[.,]\\d{0,${decimalPlaces}})?$`).test(next)) onChange(next);
-        }}
-        className={`${filterStyles.field} w-full min-w-0 pr-5 pl-2 text-center tabular-nums focus:placeholder:text-transparent`} placeholder="0"/>
-    </CatalogVariantQuantity>
+    <label className="block text-sm font-semibold">
+      {visibleLabel && <span className="mb-1 block">{visibleLabel}</span>}
+      {input}
+    </label>
   );
 }
 

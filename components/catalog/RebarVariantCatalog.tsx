@@ -9,9 +9,10 @@ import {hasConfirmedProfilePipePrice, profilePipeSize} from "@/lib/profilePipe";
 import {FilterPanel} from "./FilterPanel";
 import {CatalogVariantTable} from "./CatalogVariantLayout";
 import {PriceInput} from "./PriceInput";
+import tableStyles from "./RebarTable.module.css";
 
 import {createCatalogSearchIndex} from "@/lib/search";
-import {useDeferredValue, useMemo, useState} from "react";
+import {useDeferredValue, useMemo, useState, type ReactNode} from "react";
 import {Select} from "@/components/ui/Select";
 import {useLinkedVariant} from "@/hooks/useLinkedVariant";
 import {comparePrices} from "@/lib/catalogFilters";
@@ -30,6 +31,19 @@ type SortMode =
   | "price-desc"
   | "weight-asc"
   | "weight-desc";
+
+const rebarColumns = [
+  {label: "Диаметр, мм", width: "7%"},
+  {label: "Форма", width: "8%"},
+  {label: "Марка стали", width: "8%"},
+  {label: "Цена, ₽/т", width: "12%"},
+  {label: "Масса, кг/м", width: "8%"},
+  {label: "Длина, м", width: "7%"},
+  {label: "Заказ, м", width: "11%"},
+  {label: "Заказ, т", width: "11%"},
+  {label: "Сумма", width: "15%"},
+  {label: "Действие", width: "13%"},
+] as const;
 
 export function isMeasuredRebarVariant(variant: ProductVariant): variant is RebarVariant {
   return variant.diameterMm !== undefined
@@ -61,6 +75,7 @@ function MeasuredVariantCatalog({variants, kind = "rebar"}: {
   const isBeam = kind === "beam";
   const isVgp = kind === "vgp";
   const isProfile = kind === "profile";
+  const Table = kind === "rebar" ? RebarVariantTable : CatalogVariantTable;
   const showPositionCount = kind === "rebar" && variants.length > 0
     && variants.every(variant => variant.subcategoryId === "cat-arm-sub-1");
   const [query, setQuery] = useState("");
@@ -187,9 +202,9 @@ function MeasuredVariantCatalog({variants, kind = "rebar"}: {
       <section className="min-w-0 lg:col-span-2" aria-label="Продукция">
       {results.length ? (
         <>
-        <CatalogVariantTable>
+        <Table>
           {results.map(variant => <MeasuredVariantItem key={variant.id} variant={variant} kind={kind} view="table"/>)}
-        </CatalogVariantTable>
+        </Table>
         <div className="grid gap-4 sm:grid-cols-2 xl:hidden">
           {results.map((variant) => (
             <MeasuredVariantItem key={variant.id} variant={variant} kind={kind} view="card"/>
@@ -204,6 +219,28 @@ function MeasuredVariantCatalog({variants, kind = "rebar"}: {
       )}
       </section>
     </>
+  );
+}
+
+function RebarVariantTable({children}: {children: ReactNode}) {
+  return (
+    <div className="hidden overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-900 xl:block">
+      <table className={`${tableStyles.table} text-center text-sm`}>
+        <colgroup>
+          {rebarColumns.map(({label, width}) => <col key={label} style={{width}}/>)}
+        </colgroup>
+        <thead className="bg-slate-900 text-white">
+          <tr>
+            {rebarColumns.map(({label}) => (
+              <th key={label} scope="col" className={`${label === "Сумма" ? tableStyles.sumColumn : "text-center"}`}>
+                {label === "Действие" ? <span className="sr-only">{label}</span> : label}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>{children}</tbody>
+      </table>
+    </div>
   );
 }
 
