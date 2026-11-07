@@ -26,6 +26,7 @@ test('blur validates only the visited field and clears its error after correctio
     '@/lib/quoteValidation': readProjectData('lib/quoteValidation.ts'),
     '@/lib/quoteRequest': readProjectData('lib/quoteRequest.ts'),
     '@/lib/apiResponse': readProjectData('lib/apiResponse.ts'),
+    '@/lib/companyDetails': readProjectData('lib/companyDetails.ts'),
     './PhoneInput': {PhoneInput: 'phone'},
     './QuoteRequestContext': {useQuoteRequest: () => null},
     './QuoteRequestForm.module.css': {default: {form: 'form', error: 'error', messageMeta: 'messageMeta', counter: 'counter'}},

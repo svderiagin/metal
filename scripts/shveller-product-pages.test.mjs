@@ -23,7 +23,7 @@ const imports = {
   'react/jsx-runtime': {jsx, jsxs: jsx},
   '@/lib/catalog': catalog,
   '@/lib/catalogCoverImages': readProjectData('lib/catalogCoverImages.ts'),
-  '@/data/catalog-imported-description-copy': readProjectData('data/catalog-imported-description-copy.ts'),
+  '@/data/catalog-description-copy': readProjectData('data/catalog-description-copy.ts'),
   '@/lib/channelDescription': {getChannelProductDescription},
 };
 for (const name of ['Breadcrumbs', 'CatalogSidebar', 'CatalogDescription', 'CatalogProductDetail', 'ProductCatalogIntro', 'ProductTypeResults']) {

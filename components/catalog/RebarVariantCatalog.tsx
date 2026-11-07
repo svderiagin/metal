@@ -76,8 +76,6 @@ function MeasuredVariantCatalog({variants, kind = "rebar"}: {
   const isVgp = kind === "vgp";
   const isProfile = kind === "profile";
   const Table = kind === "rebar" ? RebarVariantTable : CatalogVariantTable;
-  const showPositionCount = kind !== "rebar" || (variants.length > 0
-    && variants.every(variant => variant.subcategoryId === "cat-arm-sub-1"));
   const [query, setQuery] = useState("");
   const deferredQuery = useDeferredValue(query);
   const index = useMemo(() => createCatalogSearchIndex(variants), [variants]);
@@ -144,9 +142,10 @@ function MeasuredVariantCatalog({variants, kind = "rebar"}: {
   return (
     <>
       <FilterPanel className="lg:col-start-2" query={query}
+        activeFilters={[diameter, form, length, availability, minimumPrice, maximumPrice].filter(Boolean).length}
         onQueryChange={value => {setQuery(value);setSort("relevance");}} onReset={resetFilters}
         extraControls={<PriceRangeFeedback message={priceRange.message}/>}
-        resultCount={showPositionCount ? {visible: results.length, total: variants.length, pending: query !== deferredQuery} : undefined}
+        resultCount={{visible: results.length, total: variants.length, pending: query !== deferredQuery}}
         sorting={
           <label className="text-sm font-semibold">
             Сортировка

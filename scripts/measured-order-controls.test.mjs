@@ -35,6 +35,7 @@ function setup(id, kind = 'beam') {
     '@/lib/quoteRequest': readProjectData('lib/quoteRequest.ts'),
     '@/lib/orderMeasurement': readProjectData('lib/orderMeasurement.ts'),
     '@/lib/catalogNumberInput': readProjectData('lib/catalogNumberInput.ts'),
+    '@/lib/catalogOffer': readProjectData('lib/catalogOffer.ts'),
     '@/lib/currency': readProjectData('lib/currency.ts'),
     '@/lib/numberFormat': readProjectData('lib/numberFormat.ts'),
     '@/hooks/useCart': {useCart: () => cart},

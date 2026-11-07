@@ -2,6 +2,7 @@ import {catalogImageUrl} from "@/lib/catalog-image";
 import Link from "next/link";
 import Image from "next/image";
 import type {Category} from "@/types/category";
+import {catalogDescriptionCopy} from "@/data/catalog-description-copy";
 
 export function CategoryCard({category}: { category: Category }) {
   const hasImage = Boolean(category.imageUrl && !category.imageUrl.endsWith(".svg"));
@@ -26,7 +27,7 @@ export function CategoryCard({category}: { category: Category }) {
             {category.name}
           </h3>
           <p className="mt-2 flex-1 text-sm leading-6 text-slate-600 dark:text-slate-300">
-            {category.shortDescription}
+            {catalogDescriptionCopy[category.id]?.intro ?? category.descriptionSections?.intro ?? category.shortDescription}
           </p>
         </div>
       </Link>

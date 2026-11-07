@@ -25,7 +25,7 @@ test('every remaining rebar category retains all rows and supports the reference
         inputMode: 'meter', meters: 100, weightTons: tons,
         pricePerTon: row.pricePerTon ?? 0, estimatedTotal: 0,
       }});
-      if (row.quoteOnly) {
+      if (row.quoteOnly || row.demo) {
         assert.ok(priced.invalidReason);
         assert.equal(priced.estimatedTotal, 0);
       } else {

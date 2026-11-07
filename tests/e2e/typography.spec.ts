@@ -55,7 +55,7 @@ test("fields use a blue-gray focus underline and reserve red for validation erro
   await expect(quantity).toHaveCSS("outline-color", neutral);
   await checkPointerFocus(quantity);
   await checkPointerFocus(page.getByLabel("Поиск товаров", {exact: true}));
-  await checkPointerFocus(page.getByRole("combobox").first());
+  await checkPointerFocus(page.getByRole("combobox", {name: "Сортировка", exact: true}));
   const quoteName = page.getByRole("textbox", {name: /^Имя \*/});
   await quoteName.fill("1");
   await quoteName.blur();
@@ -102,8 +102,8 @@ test("font fallback preserves the category and products", async ({page}) => {
   const products = page.getByRole("region", {name: "Типы продукции", exact: true});
   await expect(products.getByRole("article")).toHaveCount(4);
   await expect(products.getByRole("link").first()).toBeVisible();
-  await page.getByRole("link", {name: "Подробнее о категории", exact: true}).click();
-  await expect(page.getByRole("heading", {name: "Подробнее о категории «Арматура»", exact: true})).toBeInViewport();
+  await page.getByRole("link", {name: "Рекомендации по выбору ↓", exact: true}).click();
+  await expect(page.getByRole("heading", {name: "Как выбрать арматуру", exact: true})).toBeInViewport();
 });
 
 test("enlarged and spaced text preserves category content and actions", async ({page}) => {
@@ -127,10 +127,10 @@ test("enlarged and spaced text preserves category content and actions", async ({
   expect(overflow.page, JSON.stringify(overflow.elements)).toBe(false);
   const products = page.getByRole("region", {name: "Типы продукции", exact: true});
   await expect(products.getByRole("article")).toHaveCount(4);
-  const descriptionLink = page.getByRole("link", {name: "Подробнее о категории", exact: true});
+  const descriptionLink = page.getByRole("link", {name: "Рекомендации по выбору ↓", exact: true});
   await descriptionLink.focus();
   await descriptionLink.press("Enter");
-  await expect(page.getByRole("heading", {name: "Подробнее о категории «Арматура»", exact: true})).toBeInViewport();
-  await expect(page.getByRole("region", {name: "Подробнее о категории «Арматура»", exact: true}))
-    .toContainText("При выборе учитывают класс прочности, диаметр, длину и требования проекта.");
+  await expect(page.getByRole("heading", {name: "Как выбрать арматуру", exact: true})).toBeInViewport();
+  await expect(page.getByRole("region", {name: "Как выбрать арматуру", exact: true}))
+    .toContainText("Сопоставьте класс, профиль поверхности, диаметр и длину с проектом.");
 });

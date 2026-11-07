@@ -38,7 +38,7 @@ test('stored cart deduplicates IDs, validates unknown JSON and keeps fractional 
 });
 
 test('server and cart share current measured prices and ignore cached money', () => {
-  const product = productVariants.find(p => p.categoryId === 'cat-arm' && p.diameterMm === 12 && p.inStock);
+  const product = productVariants.find(p => p.categoryId === 'cat-arm' && !p.demo && p.diameterMm === 12 && p.inStock);
   const measurement = {inputMode:'meter', meters:100, weightTons:999, pricePerTon:1, estimatedTotal:1};
   const [item] = normalizeCartItems([{productId:product.id, quantity:999, measurement}]);
   assert.equal(item.quantity, 100);

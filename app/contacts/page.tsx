@@ -11,6 +11,26 @@ export const metadata: Metadata = {
 export default function ContactsPage() {
   return <PageContainer className="py-8 sm:py-10 lg:py-12"><Breadcrumbs items={[{label: "Контакты"}]}/><h1
     className="text-page-title">Контакты</h1>
+    <section className="mt-6 grid gap-4 sm:grid-cols-2" aria-label="Отдел продаж">
+      <div className="rounded-xl border border-slate-200 bg-white p-5 dark:border-slate-700 dark:bg-slate-900">
+        <h2 className="text-lg font-bold">Отдел продаж</h2>
+        <a href={`mailto:${companyDetails.salesEmail}`} className="mt-3 inline-flex min-h-11 items-center break-all font-semibold text-slate-700 underline underline-offset-4 dark:text-slate-200">{companyDetails.salesEmail}</a>
+        <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">{companyDetails.phonePlaceholder}</p>
+      </div>
+      <div className="rounded-xl border border-slate-200 bg-white p-5 dark:border-slate-700 dark:bg-slate-900">
+        <h2 className="text-lg font-bold">Доставка и самовывоз</h2>
+        <p className="mt-3 leading-7 text-slate-600 dark:text-slate-300">Укажите в письме адрес объекта, состав заказа и желаемую дату. Адрес и время самовывоза согласуйте перед поездкой.</p>
+      </div>
+    </section>
+    <section className="mt-8 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-5 shadow-sm sm:p-6 md:p-8">
+      <div className="grid gap-7 lg:grid-cols-[minmax(0,.8fr)_minmax(0,1.2fr)] lg:gap-10">
+        <div>
+          <h2 className="text-section-title">Связаться с нами</h2>
+          <p className="mt-3 leading-7 text-slate-600 dark:text-slate-300">Заполните форму, чтобы обсудить заказ, поставку или получить консультацию.</p>
+        </div>
+        <ContactForm/>
+      </div>
+    </section>
     <section id="details" className="mt-7 scroll-mt-6">
       <div className="max-w-3xl"><p className="text-eyebrow uppercase text-red-700 dark:text-red-400">Официальная информация</p>
         <h2 className="text-section-title mt-2">Реквизиты компании</h2>
@@ -30,15 +50,6 @@ export default function ContactsPage() {
         ]}/>
         <DetailsCard title="Юридический адрес" rows={[["Адрес", <Address key="legal-address"/>]]}/>
         <DetailsCard title="Руководитель" rows={[["Генеральный директор", companyDetails.generalDirector]]}/>
-      </div>
-    </section>
-    <section className="mt-8 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-5 shadow-sm sm:p-6 md:p-8">
-      <div className="grid gap-7 lg:grid-cols-[minmax(0,.8fr)_minmax(0,1.2fr)] lg:gap-10">
-        <div>
-          <h2 className="text-section-title">Связаться с нами</h2>
-          <p className="mt-3 leading-7 text-slate-600 dark:text-slate-300">Заполните форму, чтобы обсудить заказ, поставку или получить консультацию.</p>
-        </div>
-        <ContactForm/>
       </div>
     </section>
   </PageContainer>

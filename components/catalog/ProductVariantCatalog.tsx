@@ -1,6 +1,6 @@
 "use client";
 
-import {useState} from "react";
+import {type ReactNode, useState} from "react";
 import {QuoteRequestProvider} from "@/components/forms/QuoteRequestContext";
 import {RequestQuoteSection} from "@/components/home/RequestQuoteSection";
 import {useLinkedVariant} from "@/hooks/useLinkedVariant";
@@ -13,10 +13,12 @@ import {ProfileSheetVariantCatalog} from "./ProfileSheetVariantCatalog";
 import {MetalMeshVariantCatalog} from "./MetalMeshVariantCatalog";
 import {GenericProductVariantCatalog} from "./GenericProductVariantCatalog";
 import type {ProductVariant} from "@/types/product";
+import {storefrontVariant} from "@/lib/catalogOffer";
 
-export function ProductVariantCatalog(props: {variants: ProductVariant[]; categorySlug: string}) {
+export function ProductVariantCatalog({children, ...props}: {variants: ProductVariant[]; categorySlug: string; children?: ReactNode}) {
   return <QuoteRequestProvider>
-    <VariantCatalogContent {...props}/>
+    <VariantCatalogContent {...props} variants={props.variants.map(storefrontVariant)}/>
+    {children}
     <div className="min-w-0 lg:col-span-2"><RequestQuoteSection/></div>
   </QuoteRequestProvider>;
 }

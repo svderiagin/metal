@@ -5,6 +5,7 @@ import {Button} from "@/components/ui/Button";
 import {Input} from "@/components/ui/Input";
 import {Textarea} from "@/components/ui/Textarea";
 import {isApiSuccess, readApiError} from "@/lib/apiResponse";
+import {companyDetails} from "@/lib/companyDetails";
 
 export function ContactForm() {
   const [sent, setSent] = useState(false);
@@ -57,7 +58,8 @@ export function ContactForm() {
     className="flex items-start gap-2 text-sm"><input name="consent" type="checkbox" required
                                                        className="mt-1 size-4 shrink-0 accent-red-700"/><span>Я согласен на обработку персональных данных в соответствии с <Link href="/privacy" className="font-semibold text-red-700 dark:text-red-400 underline underline-offset-2">Политикой обработки персональных данных</Link>.</span></label>{sent &&
     <p role="status" className="text-sm font-semibold text-green-700 dark:text-green-300">Сообщение принято.</p>}{error &&
-    <p role="alert" className="text-sm font-semibold text-red-700 dark:text-red-400">{error}</p>}<Button type="submit"
+    <div role="alert" className="text-sm text-red-700 dark:text-red-400"><p className="font-semibold">{error}</p>
+      <p className="mt-2">Отправьте сообщение на <a href={`mailto:${companyDetails.salesEmail}`} className="underline underline-offset-2">{companyDetails.salesEmail}</a>.</p></div>}<Button type="submit"
                                                                                        disabled={submitting}>{submitting ? "Отправляем…" : "Отправить"}</Button>
   </form>
 }

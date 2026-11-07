@@ -1,4 +1,5 @@
 import {test, expect, openProduct, samples, visibleProduct} from "../browser";
+import {getProductIllustration} from "../../lib/productPreviewImage";
 
 test("thumbnail has no fractional gap; modal retains native zoom, keyboard pan and focus", async ({page}) => {
   await openProduct(page);
@@ -39,3 +40,22 @@ test("open modal survives table/card breakpoints and restores the visible thumbn
   await page.keyboard.press("Escape");
   await expect(visibleProduct(page, samples.shveller.id).getByRole("button", {name: "Увеличить изображение: Швеллер № 5", exact: true})).toBeFocused();
 });
+
+for (const family of ["balka", "profile", "vgp", "profnastil", "mesh", "shtaketnik"] as const) {
+  test(`${family}: the illustrated table shows the SKU dimensions in its thumbnail and viewer`, async ({page}) => {
+    const product = samples[family];
+    const illustration = getProductIllustration(product)!;
+    expect(illustration, "an approved illustration exists for the sample SKU").toBeTruthy();
+    await openProduct(page, product);
+    const thumbnail = visibleProduct(page, product.id).getByRole("button", {name: `Увеличить изображение: ${product.name}`, exact: true});
+    await expect.poll(() => thumbnail.getByRole("img").evaluate(element => {
+      const url = new URL((element as HTMLImageElement).src);
+      return (url.searchParams.get("url") ?? url.pathname).split("?")[0];
+    })).toBe(illustration.imageUrl);
+    await thumbnail.click();
+    const dialog = page.getByRole("dialog", {name: `Просмотр изображения: ${product.name}`, exact: true});
+    await expect.poll(() => dialog.getByRole("img").evaluate(element => decodeURI(new URL((element as HTMLImageElement).src).pathname))).toBe(illustration.imageUrl);
+    await page.keyboard.press("Escape");
+    await expect(thumbnail).toBeFocused();
+  });
+}

@@ -1,6 +1,7 @@
-import type {ReactNode} from "react";
+import {Fragment, type ReactNode} from "react";
 import type {ProductVariant} from "@/types/product";
 import {getProductIllustration} from "@/lib/productPreviewImage";
+import {isDemonstrationProduct} from "@/lib/catalogOffer";
 import {ProductImageViewer} from "./ProductImageViewer";
 import tableStyles from "./RebarTable.module.css";
 
@@ -47,15 +48,17 @@ export function CatalogVariantLayout({view, variant, name = variant.name, previe
   priceNote?: ReactNode;
   order: ReactNode;
 }) {
-  const illustration = getProductIllustration(variant);
+  const illustration = isDemonstrationProduct(variant) ? undefined : getProductIllustration(variant);
   const src = illustration?.imageUrl ?? variant.imageUrls[0];
   const image = preview ?? (src ? <ProductImageViewer src={src} name={variant.name}
-    previewSrc={illustration?.photoUrl} presentation={view} framed expanded/> : null);
+    presentation={view} framed expanded/> : null);
 
   if (view === "card") return <article id={`variant-mobile-${variant.id}`}
     className="min-w-0 break-words rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-900">
-    <h3 className="mb-3 text-lg font-bold">{name}</h3>
-    {image}
+    <div className="flex flex-wrap items-start gap-4">
+      <h3 className="min-w-0 flex-1 basis-28 text-lg font-bold">{name.split(/(×)/u).map((part, index) => <Fragment key={index}>{part}{part === "×" && <wbr/>}</Fragment>)}</h3>
+      {image && <div className="w-40 max-w-full shrink-0">{image}</div>}
+    </div>
     <div className="mt-4">{specifications}</div>
     <div className="mt-5 flex flex-wrap items-end justify-between gap-4 border-t border-slate-100 pt-4 dark:border-slate-800">
       <div>

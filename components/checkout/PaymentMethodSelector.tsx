@@ -3,7 +3,7 @@ import type {PaymentMethod} from "@/types/order";
 const options = [{
   v: "CARD" as const,
   l: "Банковская карта",
-  d: "После создания заказа пользователь будет перенаправлен на защищённую страницу платёжного провайдера."
+  d: "Онлайн-оплата пока недоступна. Сервис оплаты будет подключён позже."
 }, {
   v: "INVOICE" as const,
   l: "Счёт на оплату",
@@ -21,7 +21,7 @@ export function PaymentMethodSelector({value, onChange}: {
         {options.map((option) => (
           <label
             key={option.v}
-            className={`flex cursor-pointer gap-3 rounded-lg border p-4 transition-colors sm:p-5 ${
+            className={`flex gap-3 rounded-lg border p-4 transition-colors sm:p-5 ${option.v === "CARD" ? "cursor-not-allowed opacity-60" : "cursor-pointer"} ${
               value === option.v
                 ? "border-red-700 bg-red-50 dark:bg-red-950/40"
                 : "border-slate-200 dark:border-slate-700 hover:border-slate-400 dark:hover:border-slate-500"
@@ -30,12 +30,13 @@ export function PaymentMethodSelector({value, onChange}: {
             <input
               type="radio"
               name="paymentMethod"
+              disabled={option.v === "CARD"}
               checked={value === option.v}
               onChange={() => onChange(option.v)}
               className="mt-1 size-4 shrink-0 accent-red-700"
             />
             <span>
-              <strong className="block">{option.l}</strong>
+              <strong className="block">{option.l}{option.v === "CARD" ? " — скоро" : ""}</strong>
               <span className="mt-1 block text-sm leading-6 text-slate-600 dark:text-slate-300">{option.d}</span>
             </span>
           </label>

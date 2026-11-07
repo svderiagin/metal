@@ -24,7 +24,7 @@ export const samples = {
   galvanizedSheet: products.find(p => p.id === "rozmet-2199")!,
   coldRolledSheet: products.find(p => p.id === "rozmet-2185")!,
   hotRolledSheet: products.find(p => p.id === "rozmet-2190")!,
-  armatura: products.find(p => p.categoryId === "cat-arm" && p.diameterMm === 12 && p.inStock)!,
+  armatura: products.find(p => p.categoryId === "cat-arm" && !p.demo && p.diameterMm === 12 && p.inStock)!,
   balka: products.find(p => p.categoryId === "cat-bal" && p.imported)!,
   profile: products.find(p => p.categoryId === "cat-trp" && p.profileWidthMm === 40 && p.profileHeightMm === 40 && p.wallThicknessMm === 2)!,
   vgp: products.find(p => p.categoryId === "cat-trk" && p.weightPerMeterKg)!,
@@ -74,4 +74,9 @@ export async function settleImages(page: Page) {
     await Promise.all(visible.map(image => image.decode()));
   });
   await page.mouse.move(0, 0);
+}
+
+export async function openFilters(page: Page) {
+  const summary = page.locator('summary').filter({hasText: /^Параметры подбора/}).first();
+  if (!(await summary.locator('..').evaluate(element => element.hasAttribute('open')))) await summary.click();
 }

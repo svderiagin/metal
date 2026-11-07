@@ -6,6 +6,8 @@ const legalAddressLines = [
 ] as const;
 
 export const companyDetails = {
+  salesEmail: "sales@rwb-metal.ru",
+  phonePlaceholder: "Телефон скоро появится",
   legalName: 'Общество с ограниченной ответственностью «РВБ»',
   shortName: 'ООО «РВБ»',
   ogrn: "1247700471919",

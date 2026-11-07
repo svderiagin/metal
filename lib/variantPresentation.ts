@@ -1,6 +1,7 @@
 import type {ProductAttributeKey, ProductVariant} from "@/types/product";
 import {getSquareProductParameters} from "./squarePresentation";
 import {getSheetParameters} from "./sheetPresentation";
+import {hasUnverifiedSalesUnit} from "./catalogOffer";
 
 const defaultFilterKeys: ProductAttributeKey[] = ["material", "standard", "size", "grade", "length"];
 const filterKeysByCategory: Record<string, ProductAttributeKey[]> = {
@@ -44,6 +45,7 @@ function specification(variant: ProductVariant, names: string[]) {
 }
 
 export function getQuantityUnit(variant: ProductVariant) {
+  if (hasUnverifiedSalesUnit(variant)) return "ед.";
   if (variant.unit === "square_meter") return "м²";
   if (variant.unit === "meter") return "м";
   if (variant.unit === "ton") return "т";

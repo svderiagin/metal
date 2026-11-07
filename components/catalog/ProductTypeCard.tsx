@@ -5,6 +5,7 @@ import {formatUnitPrice} from "@/lib/currency";
 import {getProductTypeSummary} from "@/lib/productTypeSummary";
 import type {ProductType, ProductVariant} from "@/types/product";
 import {RebarStandardHelp} from "./RebarStandardHelp";
+import {catalogDescriptionCopy} from "@/data/catalog-description-copy";
 
 export function ProductTypeCard({
   productType,
@@ -43,7 +44,7 @@ export function ProductTypeCard({
             </Link>
           </h2>
           <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
-            {productType.shortDescription}
+            {catalogDescriptionCopy[productType.subcategoryId]?.intro ?? productType.shortDescription}
           </p>
           {standard !== "Уточняется" && <div className="mt-3 flex items-center gap-1 text-sm leading-6 text-slate-600 dark:text-slate-300">
             <span className="min-w-0">{standard}</span>

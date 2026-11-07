@@ -64,7 +64,7 @@ or generate extra variants solely to satisfy this checklist.
 `data/product-illustration-sources.json` maps reviewed source photos to a product
 or a product type. Keep these images free of printed dimensions from the donor
 SKU. See [photo sources](product-illustration-sources.md). The table thumbnail
-shows the photo. The product viewer opens the annotated 2400 × 1800 WebP,
+and the product viewer both show the annotated 2400 × 1800 WebP,
 with native zoom and pan. The approved sheet, channel, angle and square sets
 retain their separate production images and renderers.
 

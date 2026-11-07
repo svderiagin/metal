@@ -34,6 +34,7 @@ function setup(overrides = {}, componentProps = {}) {
     '@/lib/quoteRequest': readProjectData('lib/quoteRequest.ts'),
     '@/lib/orderMeasurement': readProjectData('lib/orderMeasurement.ts'),
     '@/lib/catalogNumberInput': readProjectData('lib/catalogNumberInput.ts'),
+    '@/lib/catalogOffer': readProjectData('lib/catalogOffer.ts'),
     '@/lib/currency': readProjectData('lib/currency.ts'),
     './CatalogVariantLayout': {
       CatalogVariantOrder: ({quantity, action, total, status}) => jsx('order', {children: [quantity, total, action, status]}),

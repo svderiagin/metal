@@ -11,6 +11,7 @@ import {useQuoteRequest} from "./QuoteRequestContext";
 import styles from "./QuoteRequestForm.module.css";
 import {buildQuoteMessage} from "@/lib/quoteRequest";
 import {isApiSuccess, readApiError} from "@/lib/apiResponse";
+import {companyDetails} from "@/lib/companyDetails";
 
 export function QuoteRequestForm() {
   const formId = useId();
@@ -149,7 +150,8 @@ export function QuoteRequestForm() {
       </label>
       {fieldError("consent")}
     </div>
-    {error && <p role="alert" className="text-sm font-semibold text-red-700 dark:text-red-400 sm:col-span-2">{error}</p>}
+    {error && <div role="alert" className="text-sm text-red-700 dark:text-red-400 sm:col-span-2"><p className="font-semibold">{error}</p>
+      <p className="mt-2">Отправьте заявку на <a href={`mailto:${companyDetails.salesEmail}`} className="underline underline-offset-2">{companyDetails.salesEmail}</a>. Введённые данные сохранены в форме.</p></div>}
     <Button type="submit" disabled={submitting} className="sm:w-fit">{submitting ? "Отправляем…" : "Отправить заявку"}</Button>
   </form>;
 }

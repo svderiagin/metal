@@ -2,6 +2,7 @@ import type {ProductAttributeKey, ProductVariant} from "@/types/product";
 import {comparePrices, parseCatalogPrice} from "./catalogFilters";
 import {getVariantAttribute} from "./variantPresentation";
 import {getSheetDesignation, isIllustratedSheet, isPlainHotRolledSheet, sheetFormatLabel} from "./sheetPresentation";
+import {requiresOfferConfirmation} from "./catalogOffer";
 
 export type VariantSort = "relevance" | "availability" | "price-asc" | "price-desc" | "size" | "name";
 export const referenceCategorySlugs = ["shveller", "ugolok", "kvadrat"] as const;
@@ -43,12 +44,12 @@ export function selectVariants(variants: ProductVariant[], options: {
   const maximum = parseCatalogPrice(options.maximumPrice);
   return variants.filter(variant => options.filterKeys.every(key => !options.filters[key] || getVariantAttribute(variant, key) === options.filters[key])
     && (!options.stockOnly || variant.inStock)
-    && (minimum === null || (!variant.quoteOnly && variant.price !== null && variant.price >= minimum))
-    && (maximum === null || (!variant.quoteOnly && variant.price !== null && variant.price <= maximum)))
+    && (minimum === null || (!requiresOfferConfirmation(variant) && !variant.quoteOnly && variant.price !== null && variant.price >= minimum))
+    && (maximum === null || (!requiresOfferConfirmation(variant) && !variant.quoteOnly && variant.price !== null && variant.price <= maximum)))
     .sort((left, right) => {
       if (options.sort === "relevance") return 0;
       if (options.sort === "name") return sortDesignation(left).localeCompare(sortDesignation(right), "ru", {numeric: true});
-      if (options.sort === "price-asc" || options.sort === "price-desc") return comparePrices(left.quoteOnly ? null : left.price, right.quoteOnly ? null : right.price, options.sort === "price-desc");
+      if (options.sort === "price-asc" || options.sort === "price-desc") return comparePrices(left.quoteOnly || requiresOfferConfirmation(left) ? null : left.price, right.quoteOnly || requiresOfferConfirmation(right) ? null : right.price, options.sort === "price-desc");
       if (options.sort === "size") return getVariantAttribute(left, "size").localeCompare(getVariantAttribute(right, "size"), "ru", {numeric: true});
       return Number(right.inStock) - Number(left.inStock);
     });

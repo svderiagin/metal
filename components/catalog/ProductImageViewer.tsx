@@ -38,11 +38,11 @@ export function ProductImageViewer({src, previewSrc = src, name, presentation = 
   const triggerSizes = presentation === "table" ? "176px"
     : presentation === "compact" ? "96px"
       : presentation === "catalog" ? "auto, (max-width: 640px) 90vw, 360px"
-        : presentation === "card" ? "(max-width: 640px) 80vw, 320px" : imageSizes;
+        : presentation === "card" ? "160px" : imageSizes;
   const triggerLayout = presentation === "table" ? "w-44 max-w-full"
     : presentation === "compact" ? "mb-2 h-16 w-24 max-w-full"
       : presentation === "catalog" ? "mb-5 w-full"
-        : presentation === "card" ? "mb-4 w-full" : "mt-6 w-full max-w-2xl";
+        : presentation === "card" ? "w-full" : "mt-6 w-full max-w-2xl";
 
   function show() {
     setZoomed(false);

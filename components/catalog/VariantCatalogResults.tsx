@@ -15,6 +15,7 @@ import {getSheetDesignation, getSheetSpecifications} from "@/lib/sheetPresentati
 import {Button} from "@/components/ui/Button";
 import {ResetFiltersButton} from "./ResetFiltersButton";
 import {CatalogVariantLayout, CatalogVariantTable} from "./CatalogVariantLayout";
+import {hasUnverifiedSalesUnit, isDemonstrationProduct} from "@/lib/catalogOffer";
 
 export function VariantCatalogResults({visible, categorySlug, isSheetCatalog, resultsCount, currentPage, pages, onPageChange, onReset}: {
   visible: ProductVariant[]; categorySlug: string; isSheetCatalog: boolean; resultsCount: number; currentPage: number; pages: number;
@@ -71,11 +72,13 @@ function Availability({availability}: {availability: ProductVariant["availabilit
 }
 
 function VariantSpecifications({variant, showDetails = true}: {variant: ProductVariant; showDetails?: boolean}) {
+  if (isDemonstrationProduct(variant)) return <p className="text-sm text-slate-600 dark:text-slate-400">Характеристики и наличие требуют подтверждения перед заказом.</p>;
   const specifications = (variant.categoryId === "rozmet-cat-kvadrat" ? getSquareProductSpecifications(variant)
     : variant.categoryId === "rozmet-cat-ugolok" ? getAngleProductSpecifications(variant) : getSheetSpecifications(variant))
     .filter(s => !["Полное обозначение", "Условия цены", "Условия оплаты"].includes(s.name))
     .map(s => variant.categoryId === "rozmet-cat-ugolok" ? {...s, value: formatAngleSpecificationValue(s.value)} : s);
   return <>
+    {hasUnverifiedSalesUnit(variant) && <p className="mb-3 text-sm text-slate-600 dark:text-slate-400">Единица продажи и цена уточняются. Укажите нужное количество в запросе.</p>}
     <dl className="space-y-1.5 text-sm">{specifications.map((s, i) => <div key={`${s.name}-${i}`}><dt className="inline text-slate-600 dark:text-slate-400">{s.name}: </dt><dd className="inline font-medium tabular-nums">{s.value}</dd></div>)}{variant.weight && <div><dt className="inline text-slate-600 dark:text-slate-400">Теоретическая масса: </dt><dd className="inline font-medium tabular-nums">{formatNumber(variant.weight.value)} {variant.weight.unit}</dd></div>}</dl>
     {showDetails && variant.id.startsWith("rozmet-") && (variant.description || variant.imageUrls.length > 1) && <details className="mt-3 text-sm">
       <summary className="cursor-pointer font-semibold">Подробнее о товаре</summary>

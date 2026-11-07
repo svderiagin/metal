@@ -5,6 +5,7 @@ import {isVgpVariant, wholeVgpOrder} from "./vgp";
 import {hasConfirmedProfilePipePrice, isProfilePipeVariant, profilePipeOrder} from "./profilePipe";
 import {isProfileSheetVariant} from "./profileSheet";
 import {requiresWholeMetalMeshQuantity, requiresWholeRozmetQuantity} from "./variantPresentation";
+import {isDemonstrationProduct, requiresOfferConfirmation} from "./catalogOffer";
 
 type PriceInput = {quantity: number; measurement?: Pick<CartMeasurement, "inputMode" | "meters" | "weightTons">; pieceOrder?: CartPieceOrder};
 
@@ -25,7 +26,7 @@ export function revalidateCartPrice(product: ProductVariant, item: PriceInput) {
       estimatedTotal: invalidReason ? 0 : order?.estimatedTotal ?? 0,
     };
   }
-  let invalidReason = product.price === null || !Number.isFinite(product.price) || product.price < 0 || product.quoteOnly || product.priceQualifier === "from"
+  let invalidReason = requiresOfferConfirmation(product) || product.price === null || !Number.isFinite(product.price) || product.price < 0 || product.quoteOnly || product.priceQualifier === "from"
     ? "Цена требует уточнения. Отправьте запрос на расчёт." : undefined;
   let measurement: CartMeasurement | undefined;
   if (item.pieceOrder) invalidReason = "Количество целых труб не применимо к этой позиции.";
@@ -48,7 +49,7 @@ export function revalidateCartPrice(product: ProductVariant, item: PriceInput) {
     const input = item.measurement;
     if (input.inputMode !== "meter" && input.inputMode !== "ton") {
       invalidReason = "Не удалось определить единицу измерения.";
-    } else if (!product.pricePerTon || !product.weightPerMeterKg) {
+    } else if (isDemonstrationProduct(product) || !product.pricePerTon || !product.weightPerMeterKg) {
       invalidReason = "Недостаточно данных для пересчёта массы и стоимости. Уточните позицию.";
     } else {
       const meters = input.inputMode === "meter" ? input.meters : tonsToMeters(input.weightTons, product.weightPerMeterKg);

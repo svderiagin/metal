@@ -83,19 +83,17 @@ test('owner-approved 35GS offers are in stock at 50000 per tonne without certify
   assert.equal(getProductTypeSummary(type, unconfirmed).minimumPrice, null);
 });
 
-test('minimum is taken from the supplied filtered subset; other categories keep their material and standard', () => {
+test('minimum uses the supplied subset while unverified legacy profile offers require a quote', () => {
   const type = types[2];
   const row = products.find(p => p.id === 'local-80044');
   assert.equal(getProductTypeSummary(type, [row]).minimumPrice, 69750);
   const otherType = catalog.getAllProductTypes().find(t => t.subcategoryId === 'cat-trp-sub-1');
   const rows = products.filter(p => p.productTypeId === otherType.id && !p.profileWidthMm);
   const summary = getProductTypeSummary(otherType, rows);
-  for (const [key, field] of [['material','material'], ['standard','standard']]) {
-    const expectedValues = [...new Set(rows.flatMap(p => p.attributes.filter(a => a.key === key).map(a => a.value)))].join(', ');
-    assert.equal(summary[field], expectedValues);
-  }
+  assert.equal(summary.material, 'Уточняется');
+  assert.equal(summary.standard, 'Уточняется');
   assert.equal(summary.standardLabel, 'Стандарт');
-  assert.equal(summary.minimumPrice, Math.min(...rows.map(p => p.price)));
+  assert.equal(summary.minimumPrice, null);
 });
 
 test('isolated re-import preserves card guidance for imported and local-only families and leaves supplier facts and prices unchanged', () => {

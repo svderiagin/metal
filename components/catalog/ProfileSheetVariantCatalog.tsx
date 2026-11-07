@@ -51,6 +51,7 @@ export function ProfileSheetVariantCatalog({variants}: {variants: ProfileSheetVa
 
   return <>
     <FilterPanel className="lg:col-start-2" query={query}
+      activeFilters={[thickness, coating].filter(Boolean).length}
       onQueryChange={setQuery} onReset={reset} resultCount={{visible: results.length, total: variants.length}}
       sorting={<label className="text-sm font-semibold">
         Сортировка

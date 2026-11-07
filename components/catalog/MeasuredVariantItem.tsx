@@ -18,6 +18,7 @@ import {calculateLineTotal, formatDecimal, metersToTons, tonsToMeters} from "@/l
 import {correctOrderQuantity, formatCatalogNumber, parseOrderQuantity} from "@/lib/catalogNumberInput";
 import type {OrderInputMode} from "@/types/cart";
 import type {ProductVariant} from "@/types/product";
+import {isDemonstrationProduct} from "@/lib/catalogOffer";
 
 export function MeasuredVariantItem({
   variant, view, kind,
@@ -36,7 +37,7 @@ function TonnageMeasuredVariantItem({
   view: "table" | "card";
 }) {
   const {addItem, updateQuantity, removeItem, lines, hydrated} = useCart();
-  const hasMass = variant.weightPerMeterKg !== undefined && variant.weightPerMeterKg > 0;
+  const hasMass = !isDemonstrationProduct(variant) && variant.weightPerMeterKg !== undefined && variant.weightPerMeterKg > 0;
   const mass = variant.weightPerMeterKg ?? 0;
   const isRebar = kind === "rebar";
   const isVgp = kind === "vgp";
@@ -92,7 +93,8 @@ function TonnageMeasuredVariantItem({
         : hasChanges && canPurchase ? filterStyles.updateCartButton
           : filterStyles.cartButton;
   const status = message || (invalidDraft ? "Проверьте введённое значение."
-    : hasChanges ? "Не сохранено" : isVgp && pipeOrder && pipeOrder.pieces > 0 ? `${pipeOrder.pieces} шт. · ${formatNumber(pipeOrder.meters)} м` : "");
+    : hasChanges ? "Не сохранено" : isVgp && pipeOrder && pipeOrder.pieces > 0 ? `${pipeOrder.pieces} шт. · ${formatNumber(pipeOrder.meters)} м`
+      : isDemonstrationProduct(variant) ? "Масса и марка стали уточняются. Объём в метрах — по запросу." : "");
 
   function quantityOptions(mode: OrderInputMode) {
     return {
@@ -226,7 +228,9 @@ function TonnageMeasuredVariantItem({
       aria-label={`Подробности: ${variant.name}`} onClick={() => setDetailsOpen(!detailsOpen)}
       className="mt-2 cursor-pointer rounded-sm text-sm font-semibold text-slate-600 underline decoration-slate-300 underline-offset-4 hover:text-red-700 focus-visible:outline-2 focus-visible:outline-red-700 dark:text-slate-300 dark:decoration-slate-500 dark:hover:text-red-400 dark:focus-visible:outline-red-300">Подробнее о товаре</button>;
   return <>
-    <CatalogVariantLayout view={view} variant={variant} specifications={<>{specifications}{isVgp && moreDetails}</>}
+    <CatalogVariantLayout view={view} variant={variant} specifications={isDemonstrationProduct(variant)
+      ? <p className="text-sm text-slate-600 dark:text-slate-400">Характеристики требуют подтверждения перед заказом.</p>
+      : <>{specifications}{isVgp && moreDetails}</>}
       price={price} order={order}/>
     {isVgp && view === "table" && <tr id={`vgp-details-${variant.id}`} hidden={!detailsOpen}
       className="border-t border-slate-200 bg-slate-50 dark:border-slate-700 dark:bg-slate-800/50"><td colSpan={8} className="p-4">{details}</td></tr>}
@@ -241,7 +245,9 @@ function RebarVariantLayout({view, variant, price, order}: {
 }) {
   const diameter = formatNumber(variant.diameterMm ?? 0);
   const form = formLabel(variant.form ?? "bar");
-  const mass = variant.weightPerMeterKg;
+  const unverified = isDemonstrationProduct(variant);
+  const mass = unverified ? undefined : variant.weightPerMeterKg;
+  const steelGrade = unverified ? "Уточняется" : variant.steelGrade ?? "—";
   const length = variant.lengthMeters;
 
   if (view === "card") return (
@@ -251,7 +257,7 @@ function RebarVariantLayout({view, variant, price, order}: {
         {[
           ["Диаметр", `${diameter} мм`],
           ["Форма", form],
-          ["Марка стали", variant.steelGrade ?? "—"],
+          ["Марка стали", steelGrade],
           ["Вес", mass !== undefined && mass > 0 ? `${formatNumber(mass)} кг/м` : "—"],
           ["Длина", length === undefined ? "—" : `${formatNumber(length)} м`],
           ["Цена", price],
@@ -270,7 +276,7 @@ function RebarVariantLayout({view, variant, price, order}: {
     <tr id={`variant-${variant.id}`} title={variant.name} className="align-middle border-t border-slate-200 dark:border-slate-700">
       <td className="font-bold">{diameter}</td>
       <td>{form}</td>
-      <td>{variant.steelGrade}</td>
+      <td>{steelGrade}</td>
       <td className="font-semibold tabular-nums">{price}</td>
       <td>{mass !== undefined && mass > 0 ? formatNumber(mass) : "—"}</td>
       <td>{length === undefined ? "—" : formatNumber(length)}</td>

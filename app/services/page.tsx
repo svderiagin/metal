@@ -1,6 +1,7 @@
 import type {Metadata} from "next";
 import {PageContainer} from "@/components/layout/PageContainer";
 import {Breadcrumbs} from "@/components/catalog/Breadcrumbs";
+import {companyDetails} from "@/lib/companyDetails";
 
 export const metadata: Metadata = {
   title: "Услуги",
@@ -27,5 +28,10 @@ export default function ServicesPage() {
         className="text-2xl font-bold text-red-700 dark:text-red-400">0{i + 1}</span><h2
         className="text-xl font-bold">{x.t}</h2><p className="leading-7 text-slate-600 dark:text-slate-300">{x.d}</p>
       </section>)}</div>
+    <section className="mt-8 max-w-3xl rounded-xl bg-slate-100 p-6 dark:bg-slate-800" aria-labelledby="service-request-heading">
+      <h2 id="service-request-heading" className="text-section-title">Что приложить к запросу</h2>
+      <p className="mt-4 leading-7 text-slate-700 dark:text-slate-300">Укажите материал, сечение и количество заготовок. Для резки подготовьте ведомость длин; для гибки, сверления и изготовления — чертёж с размерами, допусками и требованиями к обработке.</p>
+      <p className="mt-4 leading-7">Направьте документы на <a href={`mailto:${companyDetails.salesEmail}`} className="font-semibold underline underline-offset-4">{companyDetails.salesEmail}</a>. Возможность выполнения, сроки и стоимость работ согласуются по техническому заданию.</p>
+    </section>
   </PageContainer>
 }

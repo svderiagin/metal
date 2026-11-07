@@ -9,7 +9,7 @@ import {ProductCatalogIntro} from "@/components/catalog/ProductCatalogIntro";
 import {ProductTypeResults} from "@/components/catalog/ProductTypeResults";
 import {PageContainer} from "@/components/layout/PageContainer";
 import {getCatalogCoverImages} from "@/lib/catalogCoverImages";
-import {importedCatalogDescriptionCopy} from "@/data/catalog-imported-description-copy";
+import {catalogDescriptionCopy} from "@/data/catalog-description-copy";
 import {getChannelProductDescription} from "@/lib/channelDescription";
 import {
   getAllCategories,
@@ -61,7 +61,7 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
   }
   return subcategory ? {
     title: subcategory.name,
-    description: importedCatalogDescriptionCopy[subcategory.id]?.intro ?? subcategory.shortDescription,
+    description: catalogDescriptionCopy[subcategory.id]?.intro ?? subcategory.shortDescription,
   } : {title: "Каталог"};
 }
 
@@ -75,7 +75,7 @@ export default async function SubcategoryPage({params}: Props) {
     if (currentSubcategory.internal) redirect(`/catalog/${category.slug}`);
     const productTypes = getProductTypesBySubcategoryId(currentSubcategory.id);
     const [productType] = productTypes;
-    const copy = importedCatalogDescriptionCopy[currentSubcategory.id];
+    const copy = catalogDescriptionCopy[currentSubcategory.id];
     const intro = copy?.intro ?? currentSubcategory.description;
     const coverImages = productTypes.length === 1
       ? getCatalogCoverImages(productType.id, productType.imageUrl ?? "")

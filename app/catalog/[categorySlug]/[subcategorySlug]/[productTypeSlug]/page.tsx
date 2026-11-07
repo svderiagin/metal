@@ -1,13 +1,12 @@
 import type {Metadata} from "next";
-import {Suspense} from "react";
 import {notFound, redirect} from "next/navigation";
 import {Breadcrumbs} from "@/components/catalog/Breadcrumbs";
-import {CatalogSidebar} from "@/components/catalog/CatalogSidebar";
+import {CatalogListingNavigation} from "@/components/catalog/CatalogListingNavigation";
 import {CatalogDescription} from "@/components/catalog/CatalogDescription";
 import {ProductVariantCatalog} from "@/components/catalog/ProductVariantCatalog";
 import {ProductCatalogIntro} from "@/components/catalog/ProductCatalogIntro";
 import {getCatalogCoverImages} from "@/lib/catalogCoverImages";
-import {importedCatalogDescriptionCopy} from "@/data/catalog-imported-description-copy";
+import {catalogDescriptionCopy} from "@/data/catalog-description-copy";
 import {getSheetPresentation} from "@/lib/sheetPresentation";
 import {PageContainer} from "@/components/layout/PageContainer";
 import {
@@ -59,7 +58,7 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
   const sheet = getSheetPresentation(productType.subcategoryId);
   return {
     title: productType.name,
-    description: importedCatalogDescriptionCopy[productType.subcategoryId]?.intro ?? sheet?.intro ?? productType.shortDescription,
+    description: catalogDescriptionCopy[productType.subcategoryId]?.intro ?? sheet?.intro ?? productType.shortDescription,
   };
 }
 
@@ -72,9 +71,9 @@ export default async function ProductTypePage({params}: Props) {
   if (category.directProducts) redirect(`/catalog/${category.slug}`);
   const variants = getProductVariantsByTypeId(productType.id);
   const sheet = getSheetPresentation(productType.subcategoryId);
-  const copy = importedCatalogDescriptionCopy[productType.subcategoryId];
+  const copy = catalogDescriptionCopy[productType.subcategoryId];
   const title = productType.name;
-  const intro = copy?.intro ?? (sheet ? sheet.intro ?? productType.shortDescription : productType.description);
+  const intro = copy?.intro ?? (sheet ? sheet.intro ?? productType.shortDescription : productType.shortDescription);
   const sourceDetails = productType.description.startsWith(productType.shortDescription)
     ? productType.description.slice(productType.shortDescription.length).trim()
     : productType.description;
@@ -93,19 +92,17 @@ export default async function ProductTypePage({params}: Props) {
         ]}
       />
 
-      <div className="grid gap-7 lg:grid-cols-[280px_minmax(0,1fr)] lg:grid-rows-[max-content_minmax(0,1fr)]">
-        <div className="lg:row-span-2 lg:[&>aside]:h-full">
-          <Suspense fallback={<div className="h-96 animate-pulse rounded-xl bg-slate-200 dark:bg-slate-700"/>}>
-            <CatalogSidebar activeSlug={category.slug}/>
-          </Suspense>
-        </div>
+      <div className="flex flex-col gap-6">
+        <CatalogListingNavigation category={category} currentTypeId={productType.id}/>
         <ProductCatalogIntro key={productType.id} title={rebarHeadings[productType.subcategoryId] ?? title}
+          detailsId={detailsTitle && details ? "product-type-details-heading" : undefined}
           label={sheet || copy ? "Подкатегория" : "Тип продукции"} images={images} description={intro} coverName={title}/>
-        <ProductVariantCatalog variants={variants} categorySlug={category.slug}/>
-        {detailsTitle && details && <section className="min-w-0 max-w-[800px] lg:col-start-2" aria-labelledby="product-type-details-heading">
-          <h2 id="product-type-details-heading" className="text-section-title leading-tight">{detailsTitle}</h2>
-          <CatalogDescription description={details} variant="categoryDetails" className="mt-4"/>
-        </section>}
+        <ProductVariantCatalog variants={variants} categorySlug={category.slug}>
+          {detailsTitle && details && <section className="min-w-0 max-w-[800px] lg:col-start-2" aria-labelledby="product-type-details-heading">
+            <h2 id="product-type-details-heading" className="text-section-title leading-tight">{detailsTitle}</h2>
+            <CatalogDescription description={details} variant="categoryDetails" className="mt-4"/>
+          </section>}
+        </ProductVariantCatalog>
       </div>
     </PageContainer>
   );

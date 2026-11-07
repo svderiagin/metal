@@ -14,6 +14,7 @@ import {formatCurrency} from "@/lib/currency";
 import {CatalogVariantOrder, CatalogVariantQuantity} from "./CatalogVariantLayout";
 import styles from "./FilterPanel.module.css";
 import tableStyles from "./RebarTable.module.css";
+import {hasUnverifiedSalesUnit} from "@/lib/catalogOffer";
 
 export function ProductOrderControls({variant, view, showUnit = true, allowBackorder = false,
   wholeQuantity = requiresWholeRozmetQuantity(variant)}: {
@@ -75,7 +76,7 @@ export function ProductOrderControls({variant, view, showUnit = true, allowBacko
   const actionClass = `${view === "card" ? "w-full" : tableStyles.tableAction} px-3`;
   const quoteQuantity = valid && (draft !== null || line || !needsQuote) ? quantity : null;
   const weightPerMeter = variant.weightPerMeterKg ?? (variant.weight?.unit === "кг/м" ? variant.weight.value : undefined);
-  const quoteTons = quoteQuantity === null ? null : variant.unit === "ton" ? quoteQuantity
+  const quoteTons = quoteQuantity === null || hasUnverifiedSalesUnit(variant) ? null : variant.unit === "ton" ? quoteQuantity
     : variant.unit === "kg" ? quoteQuantity / 1000
       : variant.unit === "meter" && weightPerMeter !== undefined ? quoteQuantity * weightPerMeter / 1000 : null;
   const action = !canPurchase && !shouldRemove && !removed ? (

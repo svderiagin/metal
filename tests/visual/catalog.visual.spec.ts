@@ -55,7 +55,7 @@ test("rounded product viewer fits the original and zooms 1:1", async ({page}) =>
   await expect(dialog).toHaveScreenshot("image-viewer-native.png");
 });
 
-test("profile pipe uses a clean thumbnail and shows the annotated product in its viewer", async ({page}) => {
+test("profile pipe shows its dimensions in both the thumbnail and the viewer", async ({page}) => {
   const product = samples.profile;
   const illustration = getProductIllustration(product)!;
   await openProduct(page, product);
@@ -63,7 +63,7 @@ test("profile pipe uses a clean thumbnail and shows the annotated product in its
   await expect.poll(() => thumbnail.getByRole("img").evaluate(element => {
     const address = new URL((element as HTMLImageElement).src);
     return decodeURI((address.searchParams.get("url") ?? address.pathname).split("?")[0]);
-  })).toBe(illustration.photoUrl);
+  })).toBe(illustration.imageUrl);
   await thumbnail.click();
   const dialog = page.getByRole("dialog", {name: `Просмотр изображения: ${product.name}`, exact: true});
   const image = dialog.getByRole("img");

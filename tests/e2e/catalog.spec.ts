@@ -1,4 +1,4 @@
-import {test, expect, openProduct, samples, visibleProduct, productPath} from "../browser";
+import {test, expect, openProduct, samples, visibleProduct, productPath, openFilters} from "../browser";
 import {getAllCategories, getAllProductTypes, getAllProductVariants} from "../../lib/catalog";
 
 test("every category and product-family route responds without a missing page", async ({request}) => {
@@ -53,6 +53,7 @@ for (const family of ["shveller", "ugolok", "kvadrat", "armatura", "balka", "pro
 test("channel section filter contains profile numbers and is independent of length", async ({page}) => {
   await openProduct(page);
   await page.getByRole("button", {name: "Сбросить фильтры", exact: true}).first().click();
+  await openFilters(page);
   const section = page.getByRole("combobox", {name: "Номер профиля", exact: true});
   await section.selectOption("6,5");
   await expect(visibleProduct(page, "rozmet-2236")).toBeVisible();
@@ -67,6 +68,7 @@ for (const {family, high, normalizedHigh, low} of [
   test(`${family}: price filters normalize input and correct invalid ranges`, async ({page}) => {
     const product = samples[family];
     await openProduct(page, product);
+    await openFilters(page);
     const minimum = page.getByRole("textbox", {name: /^Минимальная цена/});
     const maximum = page.getByRole("textbox", {name: /^Максимальная цена/});
     const row = visibleProduct(page, product.id);
@@ -101,6 +103,7 @@ for (const {family, high, normalizedHigh, low} of [
 test("tread plate filters use the table dimensions and keep the ordering units", async ({page}) => {
   await page.goto(productPath(samples.treadPlate, false));
   await expect(page.getByRole("heading", {name: "Лист рифлёный", level: 1})).toBeVisible();
+  await openFilters(page);
   const format = page.getByRole("combobox", {name: "Размер листа", exact: true});
   const thickness = page.getByRole("combobox", {name: "Толщина", exact: true});
   const sheet = visibleProduct(page, "rozmet-28952");
@@ -123,6 +126,7 @@ test("galvanized sheets filter decimal thickness and keep per-sheet ordering wit
   await page.goto(productPath(samples.galvanizedSheet, false));
   await expect(page.getByRole("heading", {name: "Лист оцинкованный", level: 1})).toBeVisible();
   const thickness = page.getByRole("combobox", {name: "Толщина", exact: true});
+  await openFilters(page);
   const format = page.getByRole("combobox", {name: "Размер листа", exact: true});
   const thin = visibleProduct(page, "rozmet-2181");
   const selected = visibleProduct(page, samples.galvanizedSheet.id);
@@ -172,12 +176,12 @@ test("search resolves a technical query to a visible linked product", async ({pa
 test("mobile category navigation is compact and menu supports Escape", async ({page, isMobile}) => {
   test.skip(!isMobile, "mobile navigation contract");
   await page.goto("/catalog/shveller");
-  const categoryToggle = page.locator("details").filter({has: page.locator("summary", {hasText: "Разделы каталога"})}).first();
+  const categoryToggle = page.locator("details").filter({has: page.locator("summary", {hasText: "Все разделы"})}).first();
   await expect(categoryToggle).not.toHaveAttribute("open");
   const heading = await page.getByRole("heading", {name: "Швеллер", exact: true, level: 1}).boundingBox();
   expect(heading!.y).toBeLessThan(600);
   await categoryToggle.locator("summary").click();
-  await expect(categoryToggle.getByRole("navigation", {name: "Категории"})).toBeVisible();
+  await expect(categoryToggle.getByRole("link", {name: "Арматура", exact: true})).toBeVisible();
   await page.getByRole("button", {name: "Открыть меню", exact: true}).click();
   await expect(page.getByRole("navigation", {name: "Мобильная навигация"})).toBeVisible();
   await page.keyboard.press("Escape");
@@ -187,36 +191,27 @@ test("mobile category navigation is compact and menu supports Escape", async ({p
 test("profile-sheet guidance follows product families in the rendered page", async ({page}) => {
   await page.goto("/catalog/profnastil");
   const families = await page.getByRole("region", {name: "Типы продукции", exact: true}).boundingBox();
-  const details = await page.getByRole("heading", {name: "Как выбрать профнастил", exact: true}).boundingBox();
+  const details = await page.getByRole("heading", {name: "Как подобрать профнастил", exact: true}).boundingBox();
   expect(families!.y + families!.height).toBeLessThanOrEqual(details!.y);
 });
 
 for (const family of ["armatura", "balka", "profile", "vgp", "profnastil", "mesh", "shveller", "ugolok", "kvadrat", "shtaketnik", "treadPlate", "galvanizedSheet", "coldRolledSheet", "hotRolledSheet"] as const) {
-  test(`${family}: wide title photo keeps filters beside the catalog`, async ({page, isMobile}) => {
+  test(`${family}: compact introduction brings products forward with collapsed parameters`, async ({page, isMobile}) => {
     const route = ["shveller", "ugolok", "kvadrat"].includes(family)
       ? `/catalog/${family}` : productPath(samples[family], false);
     await page.goto(route);
     const photo = page.getByRole("main").locator('button[aria-haspopup="dialog"]').first();
     await expect(photo).toBeVisible();
     await page.evaluate(() => document.fonts.ready);
-    const imageWidth = await photo.evaluate(element => {
-      // Measure the header panel, not the gallery wrapper, which could itself shrink.
-      let panel = element.parentElement!;
-      while (!panel.querySelector("h1") && panel.parentElement) panel = panel.parentElement;
-      const style = getComputedStyle(panel);
-      const available = panel.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
-      return {actual: element.getBoundingClientRect().width, available};
-    });
-    expect(Math.abs(imageWidth.actual - imageWidth.available), "title photo fills the content width").toBeLessThan(1);
-    if (!isMobile) {
-      const sidebar = page.getByRole("complementary");
-      await expect(sidebar.getByRole("navigation", {name: "Категории", exact: true})).toBeVisible();
-      const sidebarBox = (await sidebar.boundingBox())!;
-      const filters = page.getByRole("heading", {name: "Фильтры", exact: true}).locator("..");
-      const filterBox = (await filters.boundingBox())!;
-      expect(filterBox.x).toBeGreaterThan(sidebarBox.x + sidebarBox.width);
-      expect(filterBox.y + filterBox.height).toBeLessThanOrEqual(sidebarBox.y + sidebarBox.height + 1);
-    }
+    const imageBox = (await photo.boundingBox())!;
+    expect(imageBox.width).toBeLessThanOrEqual(isMobile ? 192 : 320);
+    const headingBox = (await page.getByRole("heading", {level: 1}).boundingBox())!;
+    expect(headingBox.y).toBeLessThan(imageBox.y + imageBox.height);
+    await expect(page.getByRole("complementary")).toHaveCount(0);
+    const filters = page.locator("details").filter({has: page.locator("summary", {hasText: "Параметры подбора"})}).first();
+    await expect(filters).not.toHaveAttribute("open");
+    const results = page.locator('[id^="variant-"]:visible').first();
+    expect((await results.boundingBox())!.y).toBeLessThan(isMobile ? 1300 : 1200);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   });
 }

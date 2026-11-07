@@ -68,6 +68,7 @@ export function MetalMeshVariantCatalog({variants}: {variants: MetalMeshVariant[
 
   return <>
     <FilterPanel className="lg:col-start-2" query={query}
+      activeFilters={[cellSize, wireDiameter, format].filter(Boolean).length}
       onQueryChange={setQuery} onReset={reset} resultCount={{visible: results.length, total: variants.length}}
       sorting={<label className="text-sm font-semibold">
         Сортировка
