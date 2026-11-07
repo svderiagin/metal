@@ -24,7 +24,7 @@ export function ProductTypeCard({
     : formatUnitPrice(minimumPrice, priceUnit).replace(/,00(?=\s*₽)/u, "").split(/\s+(?=₽)/u);
 
   return (
-    <article className="relative flex h-full min-h-80 flex-col overflow-hidden rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-slate-400 dark:hover:border-slate-500 hover:shadow-md">
+    <article className="relative flex h-full min-h-80 flex-col overflow-hidden rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-sm transition duration-200 hover:border-slate-400 dark:hover:border-slate-500 hover:shadow-sm">
       {productType.imageUrl ? <div className="relative aspect-[2/1] w-full shrink-0 bg-white">
         <Image src={catalogImageUrl(productType.imageUrl)} alt={productType.name} fill
           sizes="auto, (min-width: 1280px) 422px, (min-width: 640px) calc((100vw - 56px) / 2), calc(100vw - 34px)"
@@ -39,7 +39,7 @@ export function ProductTypeCard({
         <div className="flex-1">
           <h2 className="text-card-title text-slate-950 dark:text-slate-100">
             <Link href={`/catalog/${categorySlug}/${subcategorySlug}/${productType.slug}`}
-              className="cursor-pointer after:absolute after:inset-0 after:rounded-xl focus-visible:after:outline-2 focus-visible:after:-outline-offset-2 focus-visible:after:outline-slate-600 dark:focus-visible:after:outline-red-300">
+              className="cursor-pointer after:absolute after:inset-0 after:rounded-xl focus-visible:after:outline-2 focus-visible:after:-outline-offset-2 focus-visible:after:outline-slate-600 dark:focus-visible:after:outline-brand-300">
               {productType.name}
             </Link>
           </h2>

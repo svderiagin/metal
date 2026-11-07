@@ -38,7 +38,7 @@ const advantages = [
 export default function AboutPage() {
   return <PageContainer className="py-6 sm:py-8"><Breadcrumbs items={[{label: "О компании"}]}/>
     <article className="overflow-hidden rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-5 shadow-sm sm:p-6 lg:p-7">
-      <p className="text-eyebrow uppercase text-red-700 dark:text-red-400">Поставщик металлопроката</p>
+      <p className="text-eyebrow uppercase text-brand-700 dark:text-brand-400">Поставщик металлопроката</p>
       <h1 className="mt-1.5 text-page-title">О компании {companyDetails.shortName}</h1>
       <div className="mt-4 max-w-5xl space-y-2.5 leading-7 text-slate-600 dark:text-slate-300">
         <p>{companyDetails.shortName} поставляет металлопрокат для строительства, производства и частных проектов. В каталоге — арматура, трубы, листовой, сортовой и фасонный прокат в различных размерах, марках стали и стандартах.</p>
@@ -50,7 +50,7 @@ export default function AboutPage() {
         <div className="mt-4 grid gap-px overflow-hidden rounded-lg bg-slate-200 dark:bg-slate-700 sm:grid-cols-2 lg:grid-cols-3">
           {advantages.map((advantage, index) => <div key={advantage.title} className="bg-white dark:bg-slate-900 px-3 py-3.5 sm:px-4">
             <div className="flex items-baseline gap-2.5">
-              <span className="text-sm font-bold text-red-700 dark:text-red-400">0{index + 1}</span>
+              <span className="text-sm font-bold text-brand-700 dark:text-brand-400">0{index + 1}</span>
               <h3 className="font-bold">{advantage.title}</h3>
             </div>
             <p className="mt-1.5 text-sm leading-6 text-slate-600 dark:text-slate-300">{advantage.description}</p>

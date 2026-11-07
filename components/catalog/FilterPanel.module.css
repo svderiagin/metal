@@ -27,14 +27,14 @@
 }
 
 .panel input[type="checkbox"]:checked {
-  border-color: var(--color-red-700);
-  background-color: var(--color-red-700);
+  border-color: var(--action-background);
+  background-color: var(--action-background);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m4 10 4 4 8-8'/%3E%3C/svg%3E");
 }
 
 .panel input[type="checkbox"]:checked:hover {
-  border-color: var(--color-red-800);
-  background-color: var(--color-red-800);
+  border-color: var(--action-hover);
+  background-color: var(--action-hover);
 }
 
 @media (forced-colors: active) {
@@ -56,8 +56,16 @@
   font-weight: 500;
 }
 
+.savedCartButton,
+.updateCartButton,
+.removeCartButton,
+.removedCartButton {
+  border-color: transparent;
+}
+
 .cartButton {
   background-color: var(--action-background);
+  color: var(--action-text);
 }
 
 .field[type="number"] {
@@ -81,7 +89,7 @@
 
 .quoteButton {
   background-color: var(--action-background);
-  color: #fff;
+  color: var(--action-text);
   padding-inline: 12px;
 }
 

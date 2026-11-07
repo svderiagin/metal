@@ -14,7 +14,7 @@ export function CartItemRow({line}: { line: CartLine }) {
       <div>
         {line.slug ? <Link
           href={catalogProductPath(line.categorySlug, line.subcategorySlug, line.productTypeSlug, line.productId)}
-          className="inline-block font-bold transition-colors hover:text-red-700 dark:hover:text-red-400"
+          className="inline-block font-bold transition-colors hover:text-brand-700 dark:hover:text-brand-300"
         >
           {line.name}
         </Link> : <p className="font-bold">{line.name}</p>}

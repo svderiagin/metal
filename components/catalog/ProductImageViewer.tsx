@@ -145,7 +145,7 @@ export function ProductImageViewer({src, previewSrc = src, name, presentation = 
       <button ref={triggerRef} type="button" onClick={show} aria-haspopup="dialog"
         aria-label={`Увеличить изображение: ${name}`}
         style={presentation === "table" ? {width: 176} : undefined}
-        className={`group mx-auto block cursor-pointer rounded-xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-slate-600 dark:focus-visible:outline-red-300 ${triggerLayout}`}>
+        className={`group mx-auto block cursor-pointer rounded-xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-slate-600 dark:focus-visible:outline-brand-300 ${triggerLayout}`}>
         <span className={`relative block overflow-hidden rounded-xl bg-white ${presentation === "compact" ? "h-full w-full" : isReferencePreview ? "aspect-[4/3]" : "aspect-[2/1]"} ${isReferencePreview ? framed ? "shadow-[0_1px_3px_rgba(15,23,42,0.12)]" : "ring-1 ring-inset ring-slate-200" : ""}`}>
           <Image src={catalogImageUrl(previewSrc)} alt={name} fill sizes={triggerSizes}
             className={`object-contain object-center ${isReferencePreview && !framed ? "p-1.5" : ""}`}/>
@@ -170,11 +170,11 @@ export function ProductImageViewer({src, previewSrc = src, name, presentation = 
             <h2 className="min-w-0 flex-1 truncate text-left text-sm font-semibold sm:text-base" title={name}>{name}</h2>
             <button type="button" onClick={event => toggleImageZoom(event)} disabled={(!geometry.canZoom && !zoomed) || failed}
               aria-label={zoomed ? "Вписать изображение в экран" : "Показать оригинал в масштабе 1:1"} aria-pressed={zoomed}
-              className="min-h-11 shrink-0 cursor-pointer rounded-lg border border-slate-300 px-3 text-sm font-semibold hover:bg-slate-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-600 disabled:cursor-default disabled:opacity-50 dark:border-slate-600 dark:hover:bg-slate-800 dark:focus-visible:outline-red-300">
+              className="min-h-11 shrink-0 cursor-pointer rounded-lg border border-slate-300 px-3 text-sm font-semibold hover:bg-slate-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-600 disabled:cursor-default disabled:opacity-50 dark:border-slate-600 dark:hover:bg-slate-800 dark:focus-visible:outline-brand-300">
               {zoomed ? "Вписать" : "100%"}
             </button>
             <button type="button" onClick={close} aria-label="Закрыть просмотр"
-              className="flex h-11 w-11 shrink-0 cursor-pointer items-center justify-center rounded-lg hover:bg-slate-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-600 dark:hover:bg-slate-800 dark:focus-visible:outline-red-300">
+              className="flex h-11 w-11 shrink-0 cursor-pointer items-center justify-center rounded-lg hover:bg-slate-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-600 dark:hover:bg-slate-800 dark:focus-visible:outline-brand-300">
               <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-5 w-5"><path d="m6 6 12 12M6 18 18 6"/></svg>
             </button>
           </div>}
@@ -184,7 +184,7 @@ export function ProductImageViewer({src, previewSrc = src, name, presentation = 
               disabled={(!geometry.canZoom && !zoomed) || failed}
               onPointerDown={beginImageGesture} onPointerMove={moveImageGesture} onPointerUp={endImageGesture}
               onPointerCancel={() => {imageGesture.current.moved = true; imageGesture.current.pointerId = null;}}
-              className={`absolute inset-0 block h-full w-full touch-none select-none border-0 bg-transparent p-0 focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-slate-600 dark:focus-visible:outline-red-300 ${zoomed ? "cursor-zoom-out active:cursor-grabbing" : geometry.canZoom ? "cursor-zoom-in" : "cursor-default"}`}>
+              className={`absolute inset-0 block h-full w-full touch-none select-none border-0 bg-transparent p-0 focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-slate-600 dark:focus-visible:outline-brand-300 ${zoomed ? "cursor-zoom-out active:cursor-grabbing" : geometry.canZoom ? "cursor-zoom-in" : "cursor-default"}`}>
               <span className="pointer-events-none absolute left-1/2 top-1/2 block" style={{width: geometry.width || "100%", height: geometry.height || "100%",
                 transform: `translate(calc(-50% + ${visiblePan.x}px), calc(-50% + ${visiblePan.y}px))`}}>
                 <Image src={imageUrl} alt={name} fill unoptimized draggable={false} loading="eager" sizes="100vw"

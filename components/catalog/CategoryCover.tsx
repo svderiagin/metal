@@ -17,7 +17,7 @@ export function CategoryCover({name, images, summary, descriptionId}: {
           </p>
         </div>
         <a href={`#${descriptionId}`}
-          className="inline-flex min-h-11 w-fit items-center rounded-sm text-sm font-semibold text-red-700 underline decoration-red-700/40 underline-offset-4 hover:decoration-current focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-700 dark:text-red-400 dark:decoration-red-400/40 dark:focus-visible:outline-red-400">
+          className="inline-flex min-h-11 w-fit items-center rounded-sm text-sm font-semibold text-brand-700 underline decoration-brand-700/40 underline-offset-4 hover:decoration-current focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-700 dark:text-brand-400 dark:decoration-brand-400/40 dark:focus-visible:outline-brand-400">
           Подробнее о категории
           <span aria-hidden="true" className="ml-2">↓</span>
         </a>

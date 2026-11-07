@@ -6,7 +6,7 @@ export function ResetFiltersButton({onClick}: ResetFiltersButtonProps) {
   return <button
     type="button"
     onClick={onClick}
-    className="min-h-11 cursor-pointer rounded-lg border border-red-700 dark:border-red-400 bg-white dark:bg-slate-900 px-4 py-2.5 text-sm font-semibold text-red-700 dark:text-red-400 transition-colors hover:bg-red-50 dark:hover:bg-red-950/40 hover:text-red-900 dark:hover:text-red-300 active:bg-red-100 dark:active:bg-red-950/60 active:text-red-950 dark:active:text-red-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-600 dark:focus-visible:ring-red-300 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900"
+    className="min-h-11 cursor-pointer rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition-colors hover:border-slate-400 hover:bg-slate-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-600 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800 dark:focus-visible:outline-brand-300"
   >
     Сбросить фильтры
   </button>;

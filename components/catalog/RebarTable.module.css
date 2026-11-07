@@ -3,7 +3,7 @@
   --cell-padding-x: 0.5rem;
   --edge-padding-x: 1rem;
   --heading-padding-y: 0.75rem;
-  --cell-padding-y: 1rem;
+  --cell-padding-y: 0.875rem;
   --control-padding-y: 0.75rem;
   --control-height: 2.75rem;
   --action-width: 8rem;
@@ -25,6 +25,15 @@
   white-space: normal;
   overflow-wrap: normal;
 }
+
+.table > thead {
+  background: var(--table-header);
+  color: var(--table-header-text);
+}
+
+.table > tbody > tr:nth-child(even) { background: var(--table-stripe); }
+.table > tbody > tr:hover,
+.table > tbody > tr:focus-within { background: var(--table-hover); }
 
 .table > tbody > tr > :is(th, td):not([colspan]) {
   padding: var(--cell-padding-y) var(--cell-padding-x);

@@ -25,7 +25,7 @@ export default function ServicesPage() {
     <div
       className="mt-8 divide-y divide-slate-200 dark:divide-slate-700 overflow-hidden rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900">{items.map((x, i) =>
       <section key={x.t} className="grid gap-3 p-6 md:grid-cols-[80px_260px_1fr]"><span
-        className="text-2xl font-bold text-red-700 dark:text-red-400">0{i + 1}</span><h2
+        className="text-2xl font-bold text-brand-700 dark:text-brand-400">0{i + 1}</span><h2
         className="text-xl font-bold">{x.t}</h2><p className="leading-7 text-slate-600 dark:text-slate-300">{x.d}</p>
       </section>)}</div>
     <section className="mt-8 max-w-3xl rounded-xl bg-slate-100 p-6 dark:bg-slate-800" aria-labelledby="service-request-heading">

@@ -112,7 +112,7 @@ export function HeroCarousel({slides, children}: {slides: HeroSlide[]; children:
         onError={() => {if (mounted.current) setStatus(previous => ({...previous, [slide.id]: "failed"}));}}/>)}
       <div className={styles.shade}/>
     </div>
-    <PageContainer className="relative flex min-h-[530px] flex-col justify-center py-12 pb-28 sm:min-h-[550px] sm:py-16 sm:pb-28 lg:min-h-[600px] lg:py-20 lg:pb-28">
+    <PageContainer className="relative flex min-h-[480px] flex-col justify-center py-10 pb-24 sm:py-12 sm:pb-24 lg:py-14 lg:pb-24">
       {canRotate && <div className="absolute bottom-6 right-4 flex items-center gap-3 sm:bottom-8 sm:right-6 lg:right-8" role="group" aria-label="Управление фотографиями">
         <button type="button" className={circle} aria-label={enabled ? "Приостановить слайд-шоу" : "Запустить слайд-шоу"}
           onClick={() => setEnabled(value => !value)}>

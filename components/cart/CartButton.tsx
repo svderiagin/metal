@@ -12,7 +12,7 @@ export function CartButton() {
       <span aria-hidden>▣</span>
       Корзина
       <span
-        className="min-w-6 rounded-full bg-red-700 px-2 py-0.5 text-center text-xs"
+        className="min-w-6 rounded-full bg-brand-700 px-2 py-0.5 text-center text-xs"
         aria-label={formatPositionCount(lineItemCount)}
       >
         {lineItemCount}

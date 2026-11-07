@@ -56,7 +56,7 @@ export function ContactForm() {
     className="absolute -left-[10000px]" aria-hidden>Сайт<Input name="website" tabIndex={-1}
                                                                 autoComplete="off"/></label><label
     className="flex items-start gap-2 text-sm"><input name="consent" type="checkbox" required
-                                                       className="mt-1 size-4 shrink-0 accent-red-700"/><span>Я согласен на обработку персональных данных в соответствии с <Link href="/privacy" className="font-semibold text-red-700 dark:text-red-400 underline underline-offset-2">Политикой обработки персональных данных</Link>.</span></label>{sent &&
+                                                       className="mt-1 size-4 shrink-0 accent-brand-700"/><span>Я согласен на обработку персональных данных в соответствии с <Link href="/privacy" className="font-semibold text-brand-700 dark:text-brand-300 underline underline-offset-2">Политикой обработки персональных данных</Link>.</span></label>{sent &&
     <p role="status" className="text-sm font-semibold text-green-700 dark:text-green-300">Сообщение принято.</p>}{error &&
     <div role="alert" className="text-sm text-red-700 dark:text-red-400"><p className="font-semibold">{error}</p>
       <p className="mt-2">Отправьте сообщение на <a href={`mailto:${companyDetails.salesEmail}`} className="underline underline-offset-2">{companyDetails.salesEmail}</a>.</p></div>}<Button type="submit"

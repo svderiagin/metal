@@ -114,7 +114,7 @@ export function QuoteRequestForm() {
   function fieldError(field: QuoteField, spacing = "mt-1") {
     return fieldErrors[field] && <span id={`${formId}-${field}-error`} className={`${styles.error} ${spacing}`} aria-live="polite">{fieldErrors[field]}</span>;
   }
-  return <form onSubmit={submit} onBlur={validateOnBlur} onChange={clearResolvedError} noValidate className={`${styles.form} grid items-start gap-4 sm:grid-cols-2 [&_input::placeholder]:opacity-80 [&_textarea::placeholder]:opacity-80`}>
+  return <form onSubmit={submit} onBlur={validateOnBlur} onChange={clearResolvedError} noValidate className={`${styles.form} grid items-start gap-4 sm:grid-cols-2`}>
     <label className="text-sm font-semibold">Имя *
       <Input name="name" required maxLength={QUOTE_LIMITS.name} className="mt-1" autoComplete="name" {...validationProps("name")}/>
       {fieldError("name")}
@@ -145,8 +145,8 @@ export function QuoteRequestForm() {
     </label>
     <div className="sm:col-span-2">
       <label className="flex items-start gap-2 text-sm">
-        <input name="consent" type="checkbox" required className="mt-1 size-4 shrink-0 accent-red-700" {...validationProps("consent")}/>
-        <span>Я согласен на обработку персональных данных для ответа на заявку в соответствии с <Link href="/privacy" className="font-semibold text-red-700 dark:text-red-400 underline underline-offset-2">Политикой обработки персональных данных</Link>.</span>
+        <input name="consent" type="checkbox" required className="mt-1 size-4 shrink-0 accent-brand-700" {...validationProps("consent")}/>
+        <span>Я согласен на обработку персональных данных для ответа на заявку в соответствии с <Link href="/privacy" className="font-semibold text-brand-700 dark:text-brand-300 underline underline-offset-2">Политикой обработки персональных данных</Link>.</span>
       </label>
       {fieldError("consent")}
     </div>

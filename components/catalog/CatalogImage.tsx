@@ -12,7 +12,7 @@ export function CatalogImage({src, name, compact = false, href}: {src?: string; 
     </div>
   );
   return <Link href={href} aria-label={`Открыть товар: ${name}`}
-    className={`block rounded-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-slate-600 dark:focus-visible:outline-red-300 ${compact ? "mx-auto w-fit max-w-full" : "w-full"}`}>
+    className={`block rounded-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-slate-600 dark:focus-visible:outline-brand-300 ${compact ? "mx-auto w-fit max-w-full" : "w-full"}`}>
     {image}
   </Link>;
 }

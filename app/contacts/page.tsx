@@ -32,7 +32,7 @@ export default function ContactsPage() {
       </div>
     </section>
     <section id="details" className="mt-7 scroll-mt-6">
-      <div className="max-w-3xl"><p className="text-eyebrow uppercase text-red-700 dark:text-red-400">Официальная информация</p>
+      <div className="max-w-3xl"><p className="text-eyebrow uppercase text-brand-700 dark:text-brand-400">Официальная информация</p>
         <h2 className="text-section-title mt-2">Реквизиты компании</h2>
         <p className="mt-3 leading-7 text-slate-600 dark:text-slate-300">Юридические и банковские данные организации.</p></div>
       <div className="mt-6 grid gap-5 md:grid-cols-2">

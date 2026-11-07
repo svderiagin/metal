@@ -47,7 +47,7 @@ export function CatalogCoverGallery({images, name, layout = "wide", className = 
     <div className={`relative w-full ${layout === "wide" ? "mt-6" : ""} ${className}`}>
       <button ref={trigger} type="button" aria-haspopup="dialog" aria-expanded={open}
         aria-label={`Увеличить титульное изображение: ${name}`} onClick={() => setOpen(true)}
-        className="group block w-full cursor-zoom-in rounded-xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-700 dark:focus-visible:outline-red-300">
+        className="group block w-full cursor-zoom-in rounded-xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-700 dark:focus-visible:outline-brand-300">
         <span className={`relative block aspect-[2/1] overflow-hidden rounded-xl bg-white ${layout === "banner" ? "sm:aspect-[5/2]" : ""}`}>
           <Image key={src} src={catalogImageUrl(src)} alt={photoName} fill sizes={imageSizes[layout]}
             loading={eager ? "eager" : undefined} fetchPriority={eager ? "high" : undefined}

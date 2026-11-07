@@ -10,7 +10,7 @@ export function CategoryCard({category}: { category: Category }) {
     <article className="h-full">
       <Link
         href={`/catalog/${category.slug}`}
-        className="group flex h-full min-h-52 flex-col rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-slate-400 dark:hover:border-slate-500 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-600 dark:focus-visible:outline-red-300"
+        className="group flex h-full min-h-52 flex-col rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-sm transition duration-200 hover:border-slate-400 dark:hover:border-slate-500 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-600 dark:focus-visible:outline-brand-300"
       >
         {hasImage && category.imageUrl ? <div className="relative aspect-[2/1] w-full shrink-0 overflow-hidden rounded-t-xl bg-white">
           <Image src={catalogImageUrl(category.imageUrl)} alt={category.name} fill
@@ -23,7 +23,7 @@ export function CategoryCard({category}: { category: Category }) {
           {category.name.slice(0, 2).toUpperCase()}
         </div>}
         <div className={`flex flex-1 flex-col px-5 pb-5 sm:px-6 sm:pb-6 ${hasImage ? "pt-4 sm:pt-5" : "pt-5 sm:pt-6"}`}>
-          <h3 className={`text-card-title ${category.slug === "shtaketnik" ? "text-red-700 dark:text-red-400" : "text-slate-950 dark:text-slate-100"}`}>
+          <h3 className="text-card-title text-slate-950 dark:text-slate-100">
             {category.name}
           </h3>
           <p className="mt-2 flex-1 text-sm leading-6 text-slate-600 dark:text-slate-300">

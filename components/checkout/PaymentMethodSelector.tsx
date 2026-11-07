@@ -23,7 +23,7 @@ export function PaymentMethodSelector({value, onChange}: {
             key={option.v}
             className={`flex gap-3 rounded-lg border p-4 transition-colors sm:p-5 ${option.v === "CARD" ? "cursor-not-allowed opacity-60" : "cursor-pointer"} ${
               value === option.v
-                ? "border-red-700 bg-red-50 dark:bg-red-950/40"
+                ? "border-brand-700 bg-brand-50 dark:bg-brand-950/40"
                 : "border-slate-200 dark:border-slate-700 hover:border-slate-400 dark:hover:border-slate-500"
             }`}
           >
@@ -33,7 +33,7 @@ export function PaymentMethodSelector({value, onChange}: {
               disabled={option.v === "CARD"}
               checked={value === option.v}
               onChange={() => onChange(option.v)}
-              className="mt-1 size-4 shrink-0 accent-red-700"
+              className="mt-1 size-4 shrink-0 accent-brand-700"
             />
             <span>
               <strong className="block">{option.l}{option.v === "CARD" ? " — скоро" : ""}</strong>

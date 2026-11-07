@@ -9,13 +9,13 @@ export const metadata: Metadata = {
   description: `Политика ${companyDetails.shortName} в отношении обработки персональных данных пользователей сайта.`,
 };
 
-const listClass = "mt-3 list-disc space-y-2 pl-5 text-slate-600 dark:text-slate-300 marker:text-red-700 dark:marker:text-red-400";
+const listClass = "mt-3 list-disc space-y-2 pl-5 text-slate-600 dark:text-slate-300 marker:text-brand-700 dark:marker:text-brand-400";
 
 export default function PrivacyPage() {
   return <PageContainer className="py-8 sm:py-10 lg:py-12">
     <Breadcrumbs items={[{label: "Политика обработки персональных данных"}]}/>
     <article className="max-w-4xl rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-5 shadow-sm sm:p-7 lg:p-9">
-      <p className="text-eyebrow uppercase text-red-700 dark:text-red-400">Правовая информация</p>
+      <p className="text-eyebrow uppercase text-brand-700 dark:text-brand-400">Правовая информация</p>
       <h1 className="mt-2 text-page-title">Политика в отношении обработки персональных данных</h1>
       <p className="mt-4 leading-7 text-slate-600 dark:text-slate-300">Настоящая Политика описывает, какие персональные данные получает {companyDetails.shortName} через сайт, для каких целей и на каких условиях они обрабатываются.</p>
 

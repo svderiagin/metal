@@ -88,7 +88,7 @@ export function GenericProductVariantCatalog({
         } extraControls={<>
           <label className="flex min-h-11 cursor-pointer items-center gap-3 text-sm font-semibold">
             <input type="checkbox" checked={stockOnly} onChange={event => {setStockOnly(event.target.checked); setPage(1);}}
-              className="size-5 shrink-0 accent-red-700"/>
+              className="size-5 shrink-0 accent-brand-700"/>
             Только в наличии
           </label>
           <PriceRangeFeedback message={priceRange.message}/>

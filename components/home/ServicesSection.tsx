@@ -12,7 +12,7 @@ export function ServicesSection() {
             key={service.id}
             className="flex gap-5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-5 shadow-sm sm:p-6"
           >
-            <span className="text-2xl font-bold text-red-700 dark:text-red-400">{service.marker}</span>
+            <span className="text-2xl font-bold text-brand-700 dark:text-brand-400">{service.marker}</span>
             <div>
               <h3 className="font-bold">{service.name}</h3>
               <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">{service.description}</p>
@@ -22,7 +22,7 @@ export function ServicesSection() {
       </div>
       <Link
         href="/services"
-        className="mt-5 inline-flex min-h-11 items-center font-bold text-red-700 dark:text-red-400 transition-colors hover:text-red-800 dark:hover:text-red-300"
+        className="mt-5 inline-flex min-h-11 items-center font-bold text-brand-700 dark:text-brand-400 transition-colors hover:text-brand-800 dark:hover:text-brand-300"
       >
         Все услуги →
       </Link>

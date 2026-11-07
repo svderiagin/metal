@@ -15,7 +15,7 @@ export function CustomerTypeSelector({value, onChange}: { value: CustomerType; o
             key={option.value}
             className={`flex min-h-14 cursor-pointer items-center gap-3 rounded-lg border p-4 transition-colors ${
               value === option.value
-                ? "border-red-700 bg-red-50 dark:bg-red-950/40"
+                ? "border-brand-700 bg-brand-50 dark:bg-brand-950/40"
                 : "border-slate-200 dark:border-slate-700 hover:border-slate-400 dark:hover:border-slate-500"
             }`}
           >
@@ -24,7 +24,7 @@ export function CustomerTypeSelector({value, onChange}: { value: CustomerType; o
               name="customerType"
               checked={value === option.value}
               onChange={() => onChange(option.value)}
-              className="size-4 accent-red-700"
+              className="size-4 accent-brand-700"
             />
             <span className="font-medium">{option.label}</span>
           </label>

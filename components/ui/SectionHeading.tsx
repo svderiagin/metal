@@ -6,7 +6,7 @@ export function SectionHeading({eyebrow, title, description}: {
   return (
     <div className="mb-6 max-w-3xl sm:mb-8">
       {eyebrow && (
-        <p className="mb-2 text-eyebrow uppercase text-red-700 dark:text-red-400">
+        <p className="mb-2 text-eyebrow uppercase text-brand-700 dark:text-brand-400">
           {eyebrow}
         </p>
       )}

@@ -222,11 +222,11 @@ function TonnageMeasuredVariantItem({
     {label: "Длина", value: variant.lengthMeters === undefined ? "—" : `${formatNumber(variant.lengthMeters)} м`},
   ]}/>;
   const moreDetails = view === "card"
-    ? <details className="mt-3 text-sm"><summary className="cursor-pointer font-semibold text-slate-600 focus-visible:outline-2 focus-visible:outline-red-700 dark:text-slate-300 dark:focus-visible:outline-red-300">Подробнее о товаре</summary>
+    ? <details className="mt-3 text-sm"><summary className="cursor-pointer font-semibold text-slate-600 focus-visible:outline-2 focus-visible:outline-brand-700 dark:text-slate-300 dark:focus-visible:outline-brand-300">Подробнее о товаре</summary>
       <div className="mt-3">{details}</div></details>
     : <button type="button" aria-expanded={detailsOpen} aria-controls={`vgp-details-${variant.id}`}
       aria-label={`Подробности: ${variant.name}`} onClick={() => setDetailsOpen(!detailsOpen)}
-      className="mt-2 cursor-pointer rounded-sm text-sm font-semibold text-slate-600 underline decoration-slate-300 underline-offset-4 hover:text-red-700 focus-visible:outline-2 focus-visible:outline-red-700 dark:text-slate-300 dark:decoration-slate-500 dark:hover:text-red-400 dark:focus-visible:outline-red-300">Подробнее о товаре</button>;
+      className="mt-2 cursor-pointer rounded-sm text-sm font-semibold text-slate-600 underline decoration-slate-300 underline-offset-4 hover:text-brand-700 focus-visible:outline-2 focus-visible:outline-brand-700 dark:text-slate-300 dark:decoration-slate-500 dark:hover:text-brand-400 dark:focus-visible:outline-brand-300">Подробнее о товаре</button>;
   return <>
     <CatalogVariantLayout view={view} variant={variant} specifications={isDemonstrationProduct(variant)
       ? <p className="text-sm text-slate-600 dark:text-slate-400">Характеристики требуют подтверждения перед заказом.</p>

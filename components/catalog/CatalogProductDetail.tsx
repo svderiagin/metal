@@ -26,7 +26,7 @@ export function CatalogProductDetail({category, variant}: {category: Category; v
       </Suspense>
       <div className="min-w-0">
         <div className="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-5 shadow-sm sm:p-6 lg:p-8">
-          <p className="text-eyebrow uppercase text-red-700 dark:text-red-400">Товар</p>
+          <p className="text-eyebrow uppercase text-brand-700 dark:text-brand-400">Товар</p>
           <h1 className="mt-2 break-words text-page-title">{variant.name}</h1>
           {variant.imageUrls[0] && <ProductImageViewer src={variant.imageUrls[0]} name={variant.name}/>}
           {description && <CatalogDescription description={description}/>}
@@ -42,7 +42,7 @@ export function CatalogProductDetail({category, variant}: {category: Category; v
           </section>}
           {variant.imageUrls.slice(1).map((src, index) => <ProductImageViewer key={src} src={src} name={`${variant.name} — фото ${index + 2}`}/>)}
         </div>
-        <Link href={`/catalog/${category.slug}`} className="mt-6 inline-flex min-h-11 items-center font-semibold text-red-700 dark:text-red-400 hover:underline">
+        <Link href={`/catalog/${category.slug}`} className="mt-6 inline-flex min-h-11 items-center font-semibold text-brand-700 dark:text-brand-400 hover:underline">
           Вернуться к категории «{category.name}»
         </Link>
       </div>

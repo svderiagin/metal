@@ -17,7 +17,7 @@ type Props = {
 
 export function FilterPanel({query, onQueryChange, onReset, children, sorting, resultCount, extraControls, className = "", activeFilters = 0}: Props) {
   return (
-    <div className={`${styles.panel} min-w-0 self-start rounded-xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-900 sm:p-5 ${className}`}>
+    <div className={`${styles.panel} w-full min-w-0 self-start rounded-xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-900 sm:p-5 ${className}`}>
       <h2 className="sr-only">Фильтры</h2>
       <div className="grid items-end gap-4 sm:grid-cols-[minmax(0,1fr)_minmax(220px,.55fr)]">
         <label className="block min-w-0 text-sm font-semibold">

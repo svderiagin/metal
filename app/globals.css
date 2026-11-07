@@ -2,54 +2,100 @@
 @import "./typography.css";
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
+@theme {
+  --color-slate-50: #f7f8f9;
+  --color-slate-100: #edf0f2;
+  --color-slate-200: #dce2e6;
+  --color-slate-300: #c4cdd3;
+  --color-slate-400: #92a1ac;
+  --color-slate-500: #5e707c;
+  --color-slate-600: #586975;
+  --color-slate-700: #455561;
+  --color-slate-800: #303e49;
+  --color-slate-900: #202b34;
+  --color-slate-950: #15212a;
+  --color-brand-50: #eff5f7;
+  --color-brand-100: #deebf0;
+  --color-brand-200: #bdd6e0;
+  --color-brand-300: #94bacb;
+  --color-brand-400: #6699b0;
+  --color-brand-500: #457d96;
+  --color-brand-600: #32667e;
+  --color-brand-700: #24566d;
+  --color-brand-800: #1d4457;
+  --color-brand-900: #173543;
+  --color-brand-950: #102630;
+  --radius-sm: 0.125rem;
+  --radius-md: 0.1875rem;
+  --radius-lg: 0.25rem;
+  --radius-xl: 0.375rem;
+  --radius-2xl: 0.5rem;
+  --shadow-sm: 0 1px 2px rgb(21 33 42 / 0.03);
+  --shadow-md: 0 3px 10px rgb(21 33 42 / 0.08);
+}
+
 :root {
   color-scheme: light;
-  --background: #f1f5f9;
-  --foreground: #172033;
+  --background: #f2f4f5;
+  --foreground: #202b34;
   --focus: #475569;
   --field-accent: #475569;
   --control-surface: #fff;
-  --control-border: #cbd5e1;
-  --action-background: #0f172a;
-  --action-hover: #1e293b;
+  --control-border: #83949f;
+  --control-hover-border: #586975;
+  --action-background: #24566d;
+  --action-hover: #1d4457;
+  --action-border: #24566d;
+  --action-text: #fff;
+  --table-header: #e7edef;
+  --table-header-text: #283d49;
+  --table-stripe: #fafbfc;
+  --table-hover: #eff5f7;
   --success-background: #dcfce7;
   --success-text: #166534;
-  --update-background: #eff6ff;
-  --update-hover: #dbeafe;
-  --update-text: #1e40af;
+  --update-background: #eff5f7;
+  --update-hover: #deebf0;
+  --update-text: #24566d;
   --danger-background: #fef2f2;
   --danger-hover: #fee2e2;
   --danger-text: #b91c1c;
-  --inactive-background: #f1f5f9;
-  --inactive-text: #475569;
+  --inactive-background: #edf0f2;
+  --inactive-text: #586975;
   --error-ring: #fee2e2;
   --error-border: #dc2626;
-  --counter-text: #64748b;
+  --counter-text: #586975;
 }
 
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --background: #0b1120;
-  --foreground: #f1f5f9;
-  --focus: #fca5a5;
+  --background: #141d25;
+  --foreground: #edf0f2;
+  --focus: #94a3b8;
   --field-accent: #94a3b8;
-  --control-surface: #020617;
-  --control-border: #64748b;
-  --action-background: #334155;
-  --action-hover: #475569;
+  --control-surface: #15212a;
+  --control-border: #6a7c88;
+  --control-hover-border: #92a1ac;
+  --action-background: #3b7a90;
+  --action-hover: #326b7f;
+  --action-border: #7096a4;
+  --action-text: #fff;
+  --table-header: #303e49;
+  --table-header-text: #edf0f2;
+  --table-stripe: #232f39;
+  --table-hover: #293c47;
   --success-background: #052e16;
   --success-text: #86efac;
-  --update-background: #172554;
-  --update-hover: #1e3a8a;
-  --update-text: #93c5fd;
+  --update-background: #173543;
+  --update-hover: #1d4457;
+  --update-text: #bdd6e0;
   --danger-background: #450a0a;
   --danger-hover: #7f1d1d;
   --danger-text: #fca5a5;
-  --inactive-background: #1e293b;
-  --inactive-text: #cbd5e1;
+  --inactive-background: #303e49;
+  --inactive-text: #c4cdd3;
   --error-ring: #7f1d1d;
   --error-border: #f87171;
-  --counter-text: #94a3b8;
+  --counter-text: #92a1ac;
 }
 
 * { box-sizing: border-box; }
@@ -61,8 +107,12 @@ html:not([data-keyboard-navigation]) :is(input, textarea, select):focus {
 }
 .form-control {
   --field-underline: transparent;
+  border-color: var(--control-border);
   box-shadow: inset 0 -2px 0 var(--field-underline), var(--tw-shadow, 0 0 #0000);
   transition: color 150ms, background-color 150ms, border-color 150ms, box-shadow 150ms;
+}
+.form-control:hover:not(:disabled):not([aria-invalid="true"]) {
+  border-color: var(--control-hover-border);
 }
 .form-control:focus:not(:disabled) {
   --field-underline: var(--field-accent);
@@ -75,7 +125,18 @@ html:not([data-keyboard-navigation]) :is(input, textarea, select):focus {
 @media (prefers-reduced-motion: reduce) {
   .form-control { transition-duration: 0s; }
 }
-::selection { background: #fecaca; color: #450a0a; }
+::selection { background: #bdd6e0; color: #15212a; }
+
+@layer components {
+/* Status controls retain their own semantic colors in CSS Modules. */
+.action-primary {
+  background-color: var(--action-background);
+  border-color: var(--action-border);
+  color: var(--action-text);
+}
+.action-primary:hover { background-color: var(--action-hover); }
+.brand-wordmark { color: #94bacb; }
+}
 
 @layer base {
   a { color: inherit; text-decoration: none; }

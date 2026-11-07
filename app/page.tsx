@@ -14,7 +14,7 @@ export default function Home() {
   return (
     <>
       <HeroSection/>
-      <PageContainer className="space-y-16 py-12 sm:py-16 lg:space-y-20 lg:py-20">
+      <PageContainer className="space-y-12 py-10 sm:py-12 lg:space-y-16 lg:py-14">
         <CatalogSection/>
         <section>
           <SectionHeading

@@ -9,7 +9,7 @@ export function ProductCatalogIntro({title, label, images, description, coverNam
   coverName?: string;
   detailsId?: string;
 }) {
-  return <div className="min-w-0 rounded-xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-900 sm:p-6">
+  return <div className="min-w-0 rounded-xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-900 sm:p-5">
     <div className={`grid items-start gap-4 sm:gap-6 ${images.length ? "sm:grid-cols-[minmax(0,1fr)_200px] lg:grid-cols-[minmax(0,1fr)_320px]" : ""}`}>
       <div className="min-w-0">
         <p className="text-eyebrow uppercase text-slate-500 dark:text-slate-400">{label}</p>

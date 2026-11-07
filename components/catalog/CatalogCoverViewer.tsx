@@ -111,7 +111,7 @@ function CoverPhoto({src, name, index, count, onPrevious, onNext, onClose}: Acti
       onClick={event => {if (!gesture.current.moved || event.detail === 0) onClose();}}
       onPointerDown={start} onPointerMove={move} onPointerUp={end}
       onPointerCancel={() => {gesture.current.id = null; gesture.current.moved = true;}}
-      className={`absolute inset-0 block size-full cursor-zoom-out touch-none select-none rounded-2xl bg-transparent p-0 focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-red-700 dark:focus-visible:outline-red-300 ${zoomed ? "active:cursor-grabbing" : ""}`}>
+      className={`absolute inset-0 block size-full cursor-zoom-out touch-none select-none rounded-2xl bg-transparent p-0 focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-brand-700 dark:focus-visible:outline-brand-300 ${zoomed ? "active:cursor-grabbing" : ""}`}>
       <span className="pointer-events-none absolute left-1/2 top-1/2 block" style={{width: geometry.width || "100%", height: geometry.height || "100%",
         transform: `translate(calc(-50% + ${visiblePan.x}px), calc(-50% + ${visiblePan.y}px))`}}>
         <Image src={catalogImageUrl(src)} alt={index === 0 ? name : `${name} — фото ${index + 1}`} fill unoptimized draggable={false}
