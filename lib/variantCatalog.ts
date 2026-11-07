@@ -1,11 +1,10 @@
 import type {ProductAttributeKey, ProductVariant} from "@/types/product";
-import {comparePrices} from "./catalogFilters";
+import {comparePrices, parseCatalogPrice} from "./catalogFilters";
 import {getVariantAttribute} from "./variantPresentation";
 import {getSheetDesignation, isIllustratedSheet, isPlainHotRolledSheet, sheetFormatLabel} from "./sheetPresentation";
 
 export type VariantSort = "relevance" | "availability" | "price-asc" | "price-desc" | "size" | "name";
 export const referenceCategorySlugs = ["shveller", "ugolok", "kvadrat"] as const;
-export const referenceColumnWidths = [12, 24, 27, 13, 11, 13] as const;
 
 export function referenceProfileName(name: string, categorySlug: string) {
   if (categorySlug === "shveller") {
@@ -40,8 +39,8 @@ export function selectVariants(variants: ProductVariant[], options: {
   maximumPrice: string;
   sort: VariantSort;
 }) {
-  const minimum = parsePrice(options.minimumPrice);
-  const maximum = parsePrice(options.maximumPrice);
+  const minimum = parseCatalogPrice(options.minimumPrice);
+  const maximum = parseCatalogPrice(options.maximumPrice);
   return variants.filter(variant => options.filterKeys.every(key => !options.filters[key] || getVariantAttribute(variant, key) === options.filters[key])
     && (!options.stockOnly || variant.inStock)
     && (minimum === null || (!variant.quoteOnly && variant.price !== null && variant.price >= minimum))
@@ -57,10 +56,4 @@ export function selectVariants(variants: ProductVariant[], options: {
 
 function sortDesignation(variant: ProductVariant) {
   return isPlainHotRolledSheet(variant) ? getSheetDesignation(variant) : variant.name;
-}
-
-function parsePrice(value: string) {
-  if (!value.trim()) return null;
-  const number = Number(value.replace(",", "."));
-  return Number.isFinite(number) && number >= 0 ? number : null;
 }

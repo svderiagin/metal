@@ -9,14 +9,6 @@
   margin-top: auto;
 }
 
-.panel :is(input:not([type="checkbox"]), select):focus,
-.field:focus {
-  border-color: var(--focus);
-  outline: 2px solid var(--focus);
-  outline-offset: 2px;
-  box-shadow: none;
-}
-
 .panel input[type="checkbox"] {
   appearance: none;
   margin: 0;
@@ -43,15 +35,6 @@
 .panel input[type="checkbox"]:checked:hover {
   border-color: var(--color-red-800);
   background-color: var(--color-red-800);
-}
-
-.panel input[type="checkbox"]:focus:not(:focus-visible) {
-  outline: none;
-}
-
-.panel input[type="checkbox"]:focus-visible {
-  outline: 2px solid var(--focus);
-  outline-offset: 3px;
 }
 
 @media (forced-colors: active) {

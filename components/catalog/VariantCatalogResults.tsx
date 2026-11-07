@@ -30,9 +30,9 @@ export function VariantCatalogResults({visible, categorySlug, isSheetCatalog, re
       preview={isChannel ? <ChannelProductPreview variant={variant} compact={view === "table"}/> : undefined}
       specifications={<VariantSpecifications variant={variant} showDetails={showSupplierDetails}/>}
       price={price}
-      priceNote={isSheetCatalog ? <SheetPriceNote variant={variant}/> : showSupplierDetails
+      priceNote={showSupplierDetails
         ? <div className="mt-2"><Availability availability={variant.availability}/></div> : undefined}
-      order={<ProductOrderControls variant={variant} view={view} referenceStyle={view === "table"}
+      order={<ProductOrderControls variant={variant} view={view}
         showUnit={view === "card" || !hasMetreQuantities}/>}/>;
   }
   return (
@@ -68,11 +68,6 @@ function Availability({availability}: {availability: ProductVariant["availabilit
       {availability === "UNKNOWN" ? "Наличие уточняется" : availability === "IN_STOCK" ? "В наличии" : "Под заказ"}
     </span>
   );
-}
-
-function SheetPriceNote({variant}: {variant: ProductVariant}) {
-  const terms = variant.specifications.find(item => item.name === "Условия цены")?.value;
-  return terms ? <p className="mt-1 text-xs text-slate-600 dark:text-slate-400">{terms}</p> : null;
 }
 
 function VariantSpecifications({variant, showDetails = true}: {variant: ProductVariant; showDetails?: boolean}) {

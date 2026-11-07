@@ -1,26 +1,34 @@
 import type {ReactNode} from "react";
 import type {ProductVariant} from "@/types/product";
-import {referenceColumnWidths} from "@/lib/variantCatalog";
 import {getProductIllustration} from "@/lib/productPreviewImage";
 import {ProductImageViewer} from "./ProductImageViewer";
 import tableStyles from "./RebarTable.module.css";
 
 type View = "table" | "card";
 
-export function CatalogVariantTable({children, quantityHeading = "Кол-во"}: {
+const quantityColumnWidths = [12, 20, 22, 11, 10, 12, 13];
+const measuredColumnWidths = [13, 15, 21, 10, 8, 8, 12, 13];
+
+export function CatalogVariantTable({children, quantityHeading = "Кол-во", measured = false}: {
   children: ReactNode;
   quantityHeading?: string;
+  measured?: boolean;
 }) {
+  const columnWidths = measured ? measuredColumnWidths : quantityColumnWidths;
   return <div className="hidden overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-900 xl:block">
     <table className={`${tableStyles.table} text-center text-sm`}>
-      <colgroup>{referenceColumnWidths.map((width, index) => <col key={index} style={{width: `${width}%`}}/>)}</colgroup>
+      <colgroup>{columnWidths.map((width, index) => <col key={index} style={{width: `${width}%`}}/>)}</colgroup>
       <thead className="bg-slate-900 text-white">
         <tr>
           <th scope="col">Наименование</th>
           <th scope="col">Изображение</th>
           <th scope="col" className="text-left">Характеристики</th>
           <th scope="col">Цена</th>
-          <th scope="col">{quantityHeading}</th>
+          {measured ? <>
+            <th scope="col">Заказ, м</th>
+            <th scope="col">Заказ, т</th>
+          </> : <th scope="col">{quantityHeading}</th>}
+          <th scope="col" className={tableStyles.sumColumn}>Сумма</th>
           <th scope="col"><span className="sr-only">Действие</span></th>
         </tr>
       </thead>
@@ -88,23 +96,31 @@ export function CatalogVariantQuantity({unit, children}: {unit: string; children
   </span>;
 }
 
-export function CatalogVariantOrder({view, quantity, action, total, status}: {
+export function CatalogVariantOrder({view, quantity, secondaryQuantity, action, total, status}: {
   view: View;
   quantity: ReactNode;
+  secondaryQuantity?: ReactNode;
   action: ReactNode;
   total: ReactNode;
   status?: ReactNode;
 }) {
-  const actionGroup = <div className="min-w-0 space-y-2">
-    {action}
-    <p className="text-xs text-slate-600 dark:text-slate-400">Сумма: {total}</p>
-    {status}
-  </div>;
-
   return view === "table"
-    ? <><td>{quantity}</td><td>{actionGroup}</td></>
-    : <div className="mt-4 grid grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)] items-start gap-3">
-      {quantity}
-      {actionGroup}
-    </div>;
+    ? <>
+      <td>{quantity}</td>
+      {secondaryQuantity && <td>{secondaryQuantity}</td>}
+      <td className={tableStyles.sumColumn}>{total}</td>
+      <td className="text-center">{action}{status}</td>
+    </>
+    : <>
+      <div className={`mt-4 grid gap-3 border-t border-slate-100 pt-4 dark:border-slate-800 ${secondaryQuantity ? "grid-cols-2" : ""}`}>
+        {quantity}
+        {secondaryQuantity}
+      </div>
+      <p className="mt-4 flex items-baseline justify-between gap-3 text-sm text-slate-900 dark:text-slate-100">
+        <span>Сумма:</span>
+        {total}
+      </p>
+      <div className="mt-4">{action}</div>
+      {status}
+    </>;
 }

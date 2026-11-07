@@ -3,7 +3,8 @@ import {test, expect, openProduct, samples, visibleProduct, seedCart, fillChecko
 test("cart adds a product, updates its quantity and survives reload", async ({page}) => {
   await openProduct(page);
   const row = visibleProduct(page, samples.shveller.id);
-  await row.getByRole("spinbutton", {name: /Количество Швеллер № 5/}).fill("3");
+  await row.getByRole("textbox", {name: /Количество Швеллер № 5/}).fill("3");
+  await expect(row.getByLabel(/^Сумма заказа для/)).toHaveText(/1\s605,00\s₽/);
   await row.getByRole("button", {name: "В корзину", exact: true}).click();
   await page.goto("/cart");
   await expect(page.getByRole("link", {name: "Швеллер № 5", exact: true})).toBeVisible();
@@ -34,6 +35,91 @@ test("cart adds a product, updates its quantity and survives reload", async ({pa
   }
   await page.getByRole("button", {name: "Очистить корзину", exact: true}).click();
   await expect(page.getByRole("heading", {name: "Корзина пуста", exact: true})).toBeVisible();
+});
+
+test("galvanized sheet limits quantity while typing and pasting, before blur", async ({page}) => {
+  const product = samples.galvanizedSheet;
+  await openProduct(page, product);
+  const row = visibleProduct(page, product.id);
+  const quantity = row.getByRole("textbox", {name: /^Количество /});
+  await quantity.fill("");
+  await quantity.pressSequentially("0000000");
+  await expect(quantity).toBeFocused();
+  await expect(quantity).toHaveValue("0");
+  await expect(row.getByRole("button", {name: "В корзину", exact: true})).toBeDisabled();
+  await quantity.fill("");
+  await quantity.pressSequentially("99999");
+  await expect(quantity).toBeFocused();
+  await expect(quantity).toHaveValue("999");
+  await expect(row.getByText("Значение ограничено максимумом 999.")).toBeVisible();
+  await quantity.fill("0003");
+  await expect(quantity).toHaveValue("3");
+  await row.getByRole("button", {name: "В корзину", exact: true}).click();
+  await quantity.fill("9".repeat(400));
+  await expect(quantity).toHaveValue("999");
+  expect(await page.evaluate(() => JSON.parse(localStorage.getItem("metal-store-cart-v1")!)[0].quantity)).toBe(3);
+});
+
+for (const family of ["mesh", "profnastil"] as const) {
+  test(`${family}: the total follows whole quantities, and zero removes the saved line`, async ({page}) => {
+    const product = samples[family];
+    await openProduct(page, product);
+    const row = visibleProduct(page, product.id);
+    const quantity = row.getByRole("textbox");
+    const total = row.getByLabel(/^Сумма заказа для/);
+    const formattedTotal = new Intl.NumberFormat("ru-RU", {style: "currency", currency: "RUB"}).format(product.price! * 2);
+    await expect(quantity).toHaveAttribute("inputmode", "numeric");
+    await quantity.fill("1,5");
+    await expect(row.getByRole("button", {name: "В корзину", exact: true})).toBeDisabled();
+    await quantity.press("Tab");
+    await expect(quantity).toHaveValue("2");
+    await expect(row.getByText("Количество округлено вверх до 2.")).toBeVisible();
+    await expect(total).toHaveText(formattedTotal);
+    await row.getByRole("button", {name: "В корзину", exact: true}).click();
+    await expect(row.getByRole("button", {name: "✓ В корзине", exact: true})).toBeDisabled();
+    await quantity.fill("3");
+    await expect(row.getByText("Не сохранено", {exact: true})).toBeVisible();
+    await row.getByRole("button", {name: "Обновить", exact: true}).click();
+    await expect(row.getByRole("button", {name: "✓ В корзине", exact: true})).toBeDisabled();
+    await quantity.fill("-5");
+    await quantity.blur();
+    await expect(quantity).toHaveValue("");
+    await expect(row.getByRole("button", {name: "Удалить", exact: true})).toHaveCount(0);
+    await quantity.fill("1 000");
+    await quantity.blur();
+    await expect(quantity).toHaveValue("999");
+    await expect(row.getByText("Значение ограничено максимумом 999.")).toBeVisible();
+    expect(await page.evaluate(() => JSON.parse(localStorage.getItem("metal-store-cart-v1")!)[0].quantity)).toBe(3);
+    await quantity.fill("0");
+    await row.getByRole("button", {name: "Удалить", exact: true}).click();
+    await expect(row.getByRole("button", {name: "Удалено", exact: true})).toBeDisabled();
+    await page.goto("/cart");
+    await expect(page.getByRole("heading", {name: "Корзина пуста", exact: true})).toBeVisible();
+  });
+}
+
+test("VGP keeps separate order fields, rounds to whole pipes and recalculates the total", async ({page}) => {
+  await openProduct(page, samples.vgp);
+  const row = visibleProduct(page, samples.vgp.id);
+  const meters = row.getByRole("textbox", {name: /^Длина заказа для/});
+  const tons = row.getByRole("textbox", {name: /^Вес заказа в тоннах для/});
+  await meters.fill("0,0000000001");
+  await meters.blur();
+  await expect(meters).toHaveValue("6");
+  await meters.fill("6,001");
+  await meters.blur();
+  await expect(meters).toHaveValue("12");
+  await expect(tons).toHaveValue("0.01536");
+  await expect(row.getByLabel(/^Сумма заказа для/)).toHaveText(/823,91\s₽/);
+  await tons.fill("0,02");
+  await tons.blur();
+  await expect(meters).toHaveValue("18");
+  await expect(tons).toHaveValue("0.02304");
+  await row.getByRole("button", {name: "В корзину", exact: true}).click();
+  const measurement = await page.evaluate(() => JSON.parse(localStorage.getItem("metal-store-cart-v1")!)[0].measurement);
+  expect(measurement.inputMode).toBe("ton");
+  expect(measurement.meters).toBe(18);
+  expect(measurement.weightTons).toBeCloseTo(0.02304);
 });
 
 test("checkout refusal preserves the entered data and the real cart", async ({page}) => {

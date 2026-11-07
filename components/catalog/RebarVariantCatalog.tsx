@@ -8,14 +8,14 @@ import {hasConfirmedProfilePipePrice, profilePipeSize} from "@/lib/profilePipe";
 
 import {FilterPanel} from "./FilterPanel";
 import {CatalogVariantTable} from "./CatalogVariantLayout";
-import {PriceInput} from "./PriceInput";
+import {PriceRangeFeedback, PriceRangeInputs, useCatalogPriceRange} from "./PriceInput";
 import tableStyles from "./RebarTable.module.css";
 
 import {createCatalogSearchIndex} from "@/lib/search";
 import {useDeferredValue, useMemo, useState, type ReactNode} from "react";
 import {Select} from "@/components/ui/Select";
 import {useLinkedVariant} from "@/hooks/useLinkedVariant";
-import {comparePrices} from "@/lib/catalogFilters";
+import {comparePrices, parseCatalogPrice} from "@/lib/catalogFilters";
 import type {ProductVariant} from "@/types/product";
 
 type RebarVariant = ProductVariant & Required<Pick<
@@ -76,8 +76,8 @@ function MeasuredVariantCatalog({variants, kind = "rebar"}: {
   const isVgp = kind === "vgp";
   const isProfile = kind === "profile";
   const Table = kind === "rebar" ? RebarVariantTable : CatalogVariantTable;
-  const showPositionCount = kind === "rebar" && variants.length > 0
-    && variants.every(variant => variant.subcategoryId === "cat-arm-sub-1");
+  const showPositionCount = kind !== "rebar" || (variants.length > 0
+    && variants.every(variant => variant.subcategoryId === "cat-arm-sub-1"));
   const [query, setQuery] = useState("");
   const deferredQuery = useDeferredValue(query);
   const index = useMemo(() => createCatalogSearchIndex(variants), [variants]);
@@ -85,8 +85,8 @@ function MeasuredVariantCatalog({variants, kind = "rebar"}: {
   const [diameter, setDiameter] = useState("");
   const [form, setForm] = useState("");
   const [length, setLength] = useState("");
-  const [minimumPrice, setMinimumPrice] = useState("");
-  const [maximumPrice, setMaximumPrice] = useState("");
+  const priceRange = useCatalogPriceRange();
+  const {minimumPrice, maximumPrice} = priceRange;
   const [availability, setAvailability] = useState("");
   const [sort, setSort] = useState<SortMode>("diameter-asc");
   useLinkedVariant(variants, variant => {resetFilters(); setQuery(variant.name);});
@@ -113,8 +113,8 @@ function MeasuredVariantCatalog({variants, kind = "rebar"}: {
     const sizeValue = (variant: ProductVariant) => isProfile ? profilePipeSize(variant) : isVgp ? vgpSize(variant) : isBeam ? beamProfile(variant) : String(variant.diameterMm ?? "");
     const formValue = (variant: ProductVariant) => isProfile ? String(variant.wallThicknessMm).replace(".", ",") : isVgp ? vgpSeries(variant) : isBeam ? beamKind(variant) : variant.form;
     const priceValue = (variant: ProductVariant) => isProfile ? hasConfirmedProfilePipePrice(variant) ? variant.price ?? undefined : undefined : variant.pricePerTon;
-    const min = parseOptionalNumber(minimumPrice);
-    const max = parseOptionalNumber(maximumPrice);
+    const min = parseCatalogPrice(minimumPrice);
+    const max = parseCatalogPrice(maximumPrice);
     return (deferredQuery.trim() ? hits.map(hit => hit.product) : variants).filter((variant) =>
       (!diameter || sizeValue(variant) === diameter)
       && (!form || formValue(variant) === form)
@@ -136,8 +136,7 @@ function MeasuredVariantCatalog({variants, kind = "rebar"}: {
     setDiameter("");
     setForm("");
     setLength("");
-    setMinimumPrice("");
-    setMaximumPrice("");
+    priceRange.reset();
     setAvailability("");
     setSort("diameter-asc");
   }
@@ -146,14 +145,8 @@ function MeasuredVariantCatalog({variants, kind = "rebar"}: {
     <>
       <FilterPanel className="lg:col-start-2" query={query}
         onQueryChange={value => {setQuery(value);setSort("relevance");}} onReset={resetFilters}
-        resultSummary={showPositionCount && (
-          <p role="status" aria-atomic="true" aria-busy={query !== deferredQuery}
-            className="text-sm text-slate-600 dark:text-slate-400">
-            {results.length === variants.length ? "Позиций в таблице: " : "Найдено: "}
-            <span className="font-semibold tabular-nums text-slate-900 dark:text-slate-100">{results.length}</span>
-            {results.length !== variants.length && <> из <span className="tabular-nums">{variants.length}</span></>}
-          </p>
-        )}
+        extraControls={<PriceRangeFeedback message={priceRange.message}/>}
+        resultCount={showPositionCount ? {visible: results.length, total: variants.length, pending: query !== deferredQuery} : undefined}
         sorting={
           <label className="text-sm font-semibold">
             Сортировка
@@ -180,18 +173,7 @@ function MeasuredVariantCatalog({variants, kind = "rebar"}: {
           <Filter label="Длина, м" value={length} onChange={setLength}>
             {lengths.map((value) => <option key={value} value={value}>{value}</option>)}
           </Filter>
-          <label className="text-sm font-semibold">
-            Минимальная цена за {isProfile ? "метр" : "тонну"}
-            <PriceInput type="number" min={0} value={minimumPrice}
-              onChange={(event) => setMinimumPrice(event.target.value)}
-               placeholder="От"/>
-          </label>
-          <label className="text-sm font-semibold">
-            Максимальная цена за {isProfile ? "метр" : "тонну"}
-            <PriceInput type="number" min={0} value={maximumPrice}
-              onChange={(event) => setMaximumPrice(event.target.value)}
-               placeholder="До"/>
-          </label>
+          <PriceRangeInputs range={priceRange} unit={isProfile ? "метр" : "тонну"}/>
           <Filter label="Наличие" value={availability} onChange={setAvailability}>
             <option value="IN_STOCK">В наличии</option>
             <option value="ON_ORDER">Под заказ</option>
@@ -202,7 +184,7 @@ function MeasuredVariantCatalog({variants, kind = "rebar"}: {
       <section className="min-w-0 lg:col-span-2" aria-label="Продукция">
       {results.length ? (
         <>
-        <Table>
+        <Table measured={isBeam || isVgp}>
           {results.map(variant => <MeasuredVariantItem key={variant.id} variant={variant} kind={kind} view="table"/>)}
         </Table>
         <div className="grid gap-4 sm:grid-cols-2 xl:hidden">
@@ -272,10 +254,4 @@ function formLabel(form: "coil" | "bar") {
 
 function uniqueNumbers(values: number[]) {
   return [...new Set(values)].sort((left, right) => left - right);
-}
-
-function parseOptionalNumber(value: string) {
-  if (value === "") return null;
-  const parsed = Number(value);
-  return Number.isFinite(parsed) && parsed >= 0 ? parsed : null;
 }

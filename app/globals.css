@@ -7,6 +7,7 @@
   --background: #f1f5f9;
   --foreground: #172033;
   --focus: #475569;
+  --field-accent: #475569;
   --control-surface: #fff;
   --control-border: #cbd5e1;
   --action-background: #0f172a;
@@ -31,6 +32,7 @@
   --background: #0b1120;
   --foreground: #f1f5f9;
   --focus: #fca5a5;
+  --field-accent: #94a3b8;
   --control-surface: #020617;
   --control-border: #64748b;
   --action-background: #334155;
@@ -54,6 +56,25 @@
 html { scroll-behavior: smooth; }
 body { margin: 0; background: var(--background); color: var(--foreground); text-rendering: optimizeLegibility; }
 :focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+html:not([data-keyboard-navigation]) :is(input, textarea, select):focus {
+  outline: none;
+}
+.form-control {
+  --field-underline: transparent;
+  box-shadow: inset 0 -2px 0 var(--field-underline), var(--tw-shadow, 0 0 #0000);
+  transition: color 150ms, background-color 150ms, border-color 150ms, box-shadow 150ms;
+}
+.form-control:focus:not(:disabled) {
+  --field-underline: var(--field-accent);
+  outline-color: var(--field-accent);
+}
+.form-control[aria-invalid="true"]:focus:not(:disabled) {
+  --field-underline: var(--error-border);
+  outline-color: var(--error-border);
+}
+@media (prefers-reduced-motion: reduce) {
+  .form-control { transition-duration: 0s; }
+}
 ::selection { background: #fecaca; color: #450a0a; }
 
 @layer base {

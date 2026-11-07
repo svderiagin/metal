@@ -2,7 +2,7 @@
 
 import {useDeferredValue, useMemo, useState} from "react";
 import {FilterPanel} from "./FilterPanel";
-import {PriceInput} from "./PriceInput";
+import {PriceRangeFeedback, PriceRangeInputs, useCatalogPriceRange} from "./PriceInput";
 import {Select} from "@/components/ui/Select";
 import {createCatalogSearchIndex} from "@/lib/search";
 import {useLinkedVariant} from "@/hooks/useLinkedVariant";
@@ -23,10 +23,10 @@ export function GenericProductVariantCatalog({
   const filterKeys = isSheetCatalog ? sheetFilterKeys : getVariantFilterKeys(categorySlug);
   const [filters, setFilters] = useState<Partial<Record<ProductAttributeKey, string>>>({});
   const [stockOnly, setStockOnly] = useState(false);
-  const [minimumPrice, setMinimumPrice] = useState("");
-  const [maximumPrice, setMaximumPrice] = useState("");
   const [sort, setSort] = useState<VariantSort>("name");
   const [page, setPage] = useState(1);
+  const priceRange = useCatalogPriceRange(() => setPage(1));
+  const {minimumPrice, maximumPrice} = priceRange;
   const [query, setQuery] = useState("");
   const deferredQuery = useDeferredValue(query);
   const index = useMemo(() => createCatalogSearchIndex(variants), [variants]);
@@ -57,8 +57,7 @@ export function GenericProductVariantCatalog({
   function reset() {
     setFilters({});
     setStockOnly(false);
-    setMinimumPrice("");
-    setMaximumPrice("");
+    priceRange.reset();
     setSort("name");
     setPage(1);
     setQuery("");
@@ -68,6 +67,7 @@ export function GenericProductVariantCatalog({
     <>
       <FilterPanel className="lg:col-start-2" query={query}
         onQueryChange={value => {setQuery(value);setSort("relevance");setPage(1);}} onReset={reset}
+        resultCount={{visible: results.length, total: variants.length, pending: query !== deferredQuery}}
         sorting={
           <label className="text-sm font-semibold">
             Сортировка
@@ -84,13 +84,14 @@ export function GenericProductVariantCatalog({
               <option value="size">По размеру</option>
             </Select>
           </label>
-        } extraControls={
+        } extraControls={<>
           <label className="flex min-h-11 cursor-pointer items-center gap-3 text-sm font-semibold">
             <input type="checkbox" checked={stockOnly} onChange={event => {setStockOnly(event.target.checked); setPage(1);}}
               className="size-5 shrink-0 accent-red-700"/>
             Только в наличии
           </label>
-        }>
+          <PriceRangeFeedback message={priceRange.message}/>
+        </>}>
           {filterKeys.filter(key => (filterOptions.get(key)?.length ?? 0) > 0).map((key) => (
             <label key={key} className="min-w-0 text-sm font-semibold">
               {variantFilterLabel(variants, key)}
@@ -106,28 +107,7 @@ export function GenericProductVariantCatalog({
               </Select>
             </label>
           ))}
-          <label className="text-sm font-semibold">
-            Минимальная цена
-            <PriceInput
-              type="number"
-              min={0}
-              value={minimumPrice}
-              onChange={(event) => {setMinimumPrice(event.target.value); setPage(1);}}
-
-              placeholder="От"
-            />
-          </label>
-          <label className="text-sm font-semibold">
-            Максимальная цена
-            <PriceInput
-              type="number"
-              min={0}
-              value={maximumPrice}
-              onChange={(event) => {setMaximumPrice(event.target.value); setPage(1);}}
-
-              placeholder="До"
-            />
-          </label>
+          <PriceRangeInputs range={priceRange}/>
       </FilterPanel>
 
       <VariantCatalogResults visible={visible} categorySlug={categorySlug} isSheetCatalog={isSheetCatalog} resultsCount={results.length}

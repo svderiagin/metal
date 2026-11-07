@@ -2,11 +2,6 @@
   border-color: #f87171;
 }
 
-.form :is(input:not([type="checkbox"]), textarea)[aria-invalid="true"]:focus {
-  border-color: var(--error-border);
-  box-shadow: 0 0 0 2px var(--error-ring);
-}
-
 .error {
   display: block;
   color: var(--danger-text);

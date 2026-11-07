@@ -74,6 +74,7 @@ test('all seven VGP rows convert whole pipes precisely and reject fractional len
       assert.equal(line.estimatedTotal, Math.round(byMeters.weightTons * p.price * 100) / 100);
     }
     assert.equal(wholeVgpOrder(p, p.lengthMeters + 0.01, 'meter').pieces, 2);
+    assert.equal(wholeVgpOrder(p, 1e-10, 'meter').pieces, 1);
     for (const mode of ['meter', 'ton']) {
       const partialMeters = p.lengthMeters / 2;
       const priced = revalidateCartPrice(p, {quantity:partialMeters, measurement:{inputMode:mode,

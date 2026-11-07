@@ -4,6 +4,7 @@ import {useEffect, useState} from "react";
 import {useCart} from "@/hooks/useCart";
 import {Button} from "@/components/ui/Button";
 import {Input} from "@/components/ui/Input";
+import {correctOrderQuantity, formatCatalogNumber, parseOrderQuantity} from "@/lib/catalogNumberInput";
 import {formatCurrency, formatUnitPrice} from "@/lib/currency";
 import {formatNumber} from "@/lib/numberFormat";
 import {hasConfirmedProfilePipePrice, profilePipeOrder, profilePipeSize} from "@/lib/profilePipe";
@@ -19,16 +20,19 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
   const savedLength = line?.pieceOrder?.lengthMeters ?? variant.lengthMeters;
   const savedPieces = line?.pieceOrder?.pieces ?? (line && savedLength ? line.quantity / savedLength : undefined);
   const [draft, setDraft] = useState<{pieces: string; length: string} | null>(null);
+  const [message, setMessage] = useState<string>();
   const [removed, setRemoved] = useState(false);
   const piecesText = draft?.pieces ?? (savedPieces === undefined ? "" : String(savedPieces));
   const lengthText = draft?.length ?? (savedLength === undefined ? "" : String(savedLength));
-  const pieces = piecesText === "" ? null : Number(piecesText);
-  const length = lengthText === "" ? undefined : Number(lengthText.replace(",", "."));
-  const order = pieces === null ? null : profilePipeOrder(variant, pieces, length);
-  const validLength = variant.lengthMeters ?? (variant.lengthRangeMeters && length !== undefined && Number.isFinite(length)
-    && length >= variant.lengthRangeMeters[0] && length <= variant.lengthRangeMeters[1] ? length : undefined);
+  const pieces = parseOrderQuantity(piecesText);
+  const length = parseOrderQuantity(lengthText);
+  const range = variant.lengthRangeMeters;
+  const validPieces = pieces !== null && Number.isSafeInteger(pieces) && pieces > 0 && pieces <= 999 ? pieces : null;
+  const validLength = variant.lengthMeters ?? (range && length !== null
+    && length >= range[0] && length <= range[1] ? length : undefined);
+  const order = validPieces !== null && validLength !== undefined ? profilePipeOrder(variant, validPieces, validLength) : null;
   const confirmedPrice = hasConfirmedProfilePipePrice(variant);
-  const saved = !!line && !line.invalidReason && !!order && order.pieces > 0
+  const saved = !!line && !line.invalidReason && !!order
     && order.pieces === savedPieces && order.lengthMeters === savedLength;
   const shouldRemove = !!line && pieces === 0;
   const label = removed ? "Удалено" : shouldRemove ? "Удалить" : saved ? "✓ В корзине" : line ? "Обновить" : "В корзину";
@@ -36,8 +40,10 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
     : saved ? filterStyles.savedCartButton : line ? filterStyles.updateCartButton : filterStyles.cartButton;
   const actionSize = view === "card" ? "w-full" : tableStyles.tableAction;
   const priceLabel = confirmedPrice ? formatUnitPrice(variant.price, variant.priceUnit) : "Цена уточняется";
-  const totalLabel = !confirmedPrice ? "Цена уточняется" : order?.estimatedTotal === null || !order || order.pieces <= 0
-    ? variant.lengthRangeMeters && length === undefined ? "Выберите длину" : "Укажите количество" : formatCurrency(order.estimatedTotal);
+  const totalLabel = !confirmedPrice ? "Цена уточняется" : !order || order.estimatedTotal === null
+    ? range && validLength === undefined ? "Выберите длину" : "Укажите количество" : formatCurrency(order.estimatedTotal);
+  const status = message ?? (line && !saved ? "Не сохранено" : "");
+  const statusId = `profile-pipe-order-status-${view}-${variant.id}`;
 
   useEffect(() => {
     if (!removed) return;
@@ -45,42 +51,62 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
     return () => window.clearTimeout(timer);
   }, [removed]);
 
-  function changePieces(value: string) {
-    if (value !== "" && !/^\d+$/u.test(value)) return;
-    setDraft({pieces: value, length: lengthText});
+  function settlePieces() {
+    if (!draft) return;
+    const corrected = correctOrderQuantity(piecesText, {whole: true, maximum: 999});
+    if (corrected.value !== piecesText) setDraft({...draft, pieces: corrected.value});
+    if (corrected.message) setMessage(corrected.message);
+  }
+
+  function settleLength() {
+    if (!draft || !range || !lengthText.trim()) return;
+    if (length === null) {
+      setDraft({...draft, length: ""});
+      setMessage("Некорректная длина очищена.");
+      return;
+    }
+    const adjusted = Math.max(range[0], Math.min(range[1], length));
+    if (adjusted !== length) setMessage(`Длина скорректирована до ${formatNumber(adjusted)} м.`);
+    const normalized = formatCatalogNumber(adjusted);
+    if (normalized !== lengthText) setDraft({...draft, length: normalized});
   }
 
   function submit() {
     if (!hydrated || saved || removed) return;
-    if (shouldRemove) {removeItem(variant.id); setDraft(null); setRemoved(true); return;}
-    if (!confirmedPrice || !order || order.pieces <= 0 || order.estimatedTotal === null) return;
+    if (shouldRemove) {removeItem(variant.id); setDraft(null); setMessage(undefined); setRemoved(true); return;}
+    if (!confirmedPrice || !order || order.estimatedTotal === null) return;
     addItem(variant.id, order.meters, undefined, {pieces: order.pieces, lengthMeters: order.lengthMeters});
     setDraft(null);
+    setMessage(undefined);
   }
 
   const action = !confirmedPrice && !shouldRemove && !removed ? <QuoteRequestButton label="Запросить цену"
     order={{product: validLength ? `${variant.name}, длина ${formatNumber(validLength)} м` : variant.name,
-      quantity: order?.pieces ?? (pieces !== null && Number.isSafeInteger(pieces) && pieces > 0 && pieces <= 999 ? pieces : null),
-      unit: "шт.", meters: order?.pieces ? order.meters : null}}
+      quantity: validPieces, unit: "шт.", meters: order?.meters ?? null}}
     className={`${filterStyles.quoteButton} ${actionSize} px-3`}/>
     : <Button type="button" onClick={submit}
-      disabled={!hydrated || saved || removed || (!shouldRemove && (!order || order.pieces <= 0 || order.estimatedTotal === null))}
+      disabled={!hydrated || saved || removed || (!shouldRemove && (!order || order.estimatedTotal === null))}
       className={`${buttonClass} ${actionSize} px-3`}>{label}</Button>;
 
-  const quantityInput = <Input type="number" inputMode="numeric" min={0} max={999} step={1}
+  const quantityInput = <Input type="text" inputMode="numeric"
     aria-label={`Количество целых труб для ${variant.name}`} value={piecesText}
-    onChange={event => changePieces(event.target.value)} className={`${filterStyles.field} min-w-0 px-7 text-center tabular-nums`}/>;
-  const lengthField = variant.lengthRangeMeters ? <Input type="number" min={variant.lengthRangeMeters[0]}
-    max={variant.lengthRangeMeters[1]} step="any" inputMode="decimal"
+    aria-invalid={!!piecesText.trim() && !shouldRemove && validPieces === null}
+    aria-describedby={status ? statusId : undefined}
+    onChange={event => {setDraft({pieces: event.target.value, length: lengthText}); setMessage(undefined);}}
+    onBlur={settlePieces} className={`${filterStyles.field} min-w-0 px-7 text-center tabular-nums`}/>;
+  const lengthField = range ? <Input type="text" inputMode="decimal"
     aria-label={`Длина одной трубы для ${variant.name}`} value={lengthText}
-    placeholder={`${variant.lengthRangeMeters[0]}–${variant.lengthRangeMeters[1]}`}
-    onChange={event => setDraft({pieces: piecesText, length: event.target.value})}
+    aria-invalid={!!lengthText.trim() && validLength === undefined}
+    aria-describedby={status ? statusId : undefined}
+    placeholder={`${range[0]}–${range[1]}`}
+    onChange={event => {setDraft({pieces: piecesText, length: event.target.value}); setMessage(undefined);}}
+    onBlur={settleLength}
     className={`${filterStyles.field} min-w-0 px-2 text-center tabular-nums`}/>
     : null;
   const mass = variant.weightConfirmed && variant.weightPerMeterKg !== undefined ? formatNumber(variant.weightPerMeterKg) : "—";
-  const metersLabel = order && order.pieces > 0 ? formatNumber(order.meters) : "—";
+  const metersLabel = order ? formatNumber(order.meters) : "—";
   const total = <output aria-label={`Сумма заказа для ${variant.name}`} aria-live="polite"
-    className={order?.estimatedTotal !== null && order?.estimatedTotal !== undefined && order.pieces > 0
+    className={order && order.estimatedTotal !== null
       ? "font-semibold tabular-nums text-slate-900 dark:text-slate-100" : "text-xs font-normal text-slate-500 dark:text-slate-400"}>{totalLabel}</output>;
 
   const lengths = variant.lengthRangeMeters?.map(value => formatNumber(value)).join("–")
@@ -102,5 +128,7 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
   </div>;
 
   return <CatalogVariantLayout view={view} variant={variant} specifications={specifications} price={priceLabel}
-    order={<CatalogVariantOrder view={view} quantity={quantity} action={action} total={total}/>}/>;
+    order={<CatalogVariantOrder view={view} quantity={quantity} action={action} total={total}
+      status={<span id={statusId} className={status ? "mt-1 block text-xs text-slate-500 dark:text-slate-400" : "sr-only"}
+        aria-live="polite" aria-atomic="true">{status}</span>}/>}/>;
 }

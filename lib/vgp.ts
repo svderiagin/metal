@@ -26,8 +26,9 @@ export function wholeVgpOrder(product: ProductVariant, quantity: number, mode: O
   const requestedPieces = requestedMeters / length;
   // Tolerate floating point noise at an exact whole-pipe boundary, never a real fraction.
   const nearest = Math.round(requestedPieces);
-  const pieces = Math.abs(requestedPieces - nearest) <= 1e-9 ? nearest : Math.ceil(requestedPieces);
-  if (!Number.isSafeInteger(pieces) || (quantity > 0 && pieces === 0)) return null;
+  const rounded = Math.abs(requestedPieces - nearest) <= 1e-9 ? nearest : Math.ceil(requestedPieces);
+  const pieces = quantity > 0 ? Math.max(1, rounded) : 0;
+  if (!Number.isSafeInteger(pieces)) return null;
   const meters = pieces * length;
   const weightTons = metersToTons(meters, mass);
   return weightTons === null ? null : {pieces, meters, weightTons};

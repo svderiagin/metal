@@ -8,25 +8,34 @@ import {getQuantityUnit, requiresWholeRozmetQuantity} from "@/lib/variantPresent
 import type {ProductVariant} from "@/types/product";
 import {QuoteRequestButton} from "./QuoteRequestButton";
 import {formatQuoteProductName} from "@/lib/quoteRequest";
+import {constrainOrderQuantityInput, correctOrderQuantity, formatCatalogNumber, parseOrderQuantity} from "@/lib/catalogNumberInput";
+import {calculateLineTotal} from "@/lib/orderMeasurement";
+import {formatCurrency} from "@/lib/currency";
+import {CatalogVariantOrder, CatalogVariantQuantity} from "./CatalogVariantLayout";
 import styles from "./FilterPanel.module.css";
 import tableStyles from "./RebarTable.module.css";
 
-export function ProductOrderControls({variant, view, referenceStyle = false, showUnit = !referenceStyle}: {
-  variant: ProductVariant; view: "table" | "card"; referenceStyle?: boolean; showUnit?: boolean;
+export function ProductOrderControls({variant, view, showUnit = true, allowBackorder = false,
+  wholeQuantity = requiresWholeRozmetQuantity(variant)}: {
+  variant: ProductVariant; view: "table" | "card"; showUnit?: boolean; allowBackorder?: boolean; wholeQuantity?: boolean;
 }) {
   const {lines, hydrated, addItem, updateQuantity, removeItem} = useCart();
   const line = lines.find(item => item.productId === variant.id);
   const [draft, setDraft] = useState<string | null>(null);
+  const [correction, setCorrection] = useState("");
   const [removed, setRemoved] = useState(false);
-  const value = draft ?? String(line?.quantity ?? 1);
-  const quantity = value.trim() === "" ? NaN : Number(value);
-  const needsQuote = variant.price === null || variant.quoteOnly || variant.priceQualifier === "from";
-  const canPurchase = !needsQuote && (variant.inStock || (variant.imported && variant.availability !== "ON_ORDER"));
+  const value = draft ?? formatCatalogNumber(line?.quantity ?? 1);
+  const quantity = parseOrderQuantity(value);
+  const needsQuote = variant.price === null || !Number.isFinite(variant.price) || variant.price < 0
+    || variant.quoteOnly || variant.priceQualifier === "from";
+  const canPurchase = !needsQuote && (allowBackorder || variant.inStock || (variant.imported && variant.availability !== "ON_ORDER"));
   const shouldRemove = !!line && quantity === 0;
   const saved = !!line && !line.invalidReason && quantity === line.quantity;
-  const wholeQuantity = requiresWholeRozmetQuantity(variant);
-  const valid = Number.isFinite(quantity) && quantity > 0 && quantity <= 999
+  const valid = quantity !== null && quantity > 0 && quantity <= 999
     && (!wholeQuantity || Number.isInteger(quantity));
+  const total = !variant.quoteOnly && variant.price !== null && (valid || shouldRemove)
+    ? calculateLineTotal(quantity, variant.price) : null;
+  const quantityUnit = getQuantityUnit(variant);
 
   useEffect(() => {
     if (!removed) return;
@@ -39,13 +48,22 @@ export function ProductOrderControls({variant, view, referenceStyle = false, sho
     if (shouldRemove) {
       removeItem(variant.id);
       setDraft(null);
+      setCorrection("");
       setRemoved(true);
       return;
     }
-    if (!canPurchase || !valid) return;
+    if (!canPurchase || !valid || total === null) return;
     if (line) updateQuantity(variant.id, quantity);
     else addItem(variant.id, quantity);
     setDraft(null);
+    setCorrection("");
+  }
+
+  function correctQuantity() {
+    if (draft === null) return;
+    const next = correctOrderQuantity(draft, {whole: wholeQuantity, maximum: 999});
+    if (next.value !== draft) setDraft(next.value);
+    if (next.message) setCorrection(next.message);
   }
 
   const stateClass = removed ? styles.removedCartButton
@@ -55,7 +73,7 @@ export function ProductOrderControls({variant, view, referenceStyle = false, sho
   const label = removed ? "Удалено" : shouldRemove ? "Удалить" : !canPurchase ? "Под заказ"
     : saved ? "✓ В корзине" : line ? "Обновить" : "В корзину";
   const actionClass = `${view === "card" ? "w-full" : tableStyles.tableAction} px-3`;
-  const quoteQuantity = draft !== null || line || !needsQuote ? quantity : null;
+  const quoteQuantity = valid && (draft !== null || line || !needsQuote) ? quantity : null;
   const weightPerMeter = variant.weightPerMeterKg ?? (variant.weight?.unit === "кг/м" ? variant.weight.value : undefined);
   const quoteTons = quoteQuantity === null ? null : variant.unit === "ton" ? quoteQuantity
     : variant.unit === "kg" ? quoteQuantity / 1000
@@ -66,25 +84,33 @@ export function ProductOrderControls({variant, view, referenceStyle = false, sho
       className={`${styles.quoteButton} ${actionClass}`}/>
   ) : (
     <Button type="button" onClick={submit}
-      disabled={!hydrated || saved || removed || (!shouldRemove && (!canPurchase || !valid))}
+      disabled={!hydrated || saved || removed || (!shouldRemove && (!canPurchase || !valid || total === null))}
       className={`${stateClass} ${actionClass}`}>{label}</Button>
   );
-  const inlineUnit = referenceStyle && showUnit;
-  const quantityInput = <Input type="number" inputMode={wholeQuantity ? "numeric" : "decimal"} min={0} max={999} step={wholeQuantity ? 1 : "any"} value={value}
-        onChange={event => setDraft(event.target.value)}
-        className={`${styles.field} min-w-0 ${inlineUnit ? "px-7" : "px-2"} ${referenceStyle ? "text-center tabular-nums focus:placeholder:text-transparent" : ""}`}
-        placeholder={referenceStyle ? "0" : undefined}/>;
-  const input = (
-    <label className="flex min-w-0 flex-col items-start gap-1">
-      <span className="sr-only">Количество {variant.name}</span>
-      {inlineUnit ? <span className="relative w-full">
-        {quantityInput}
-        <span className="pointer-events-none absolute inset-y-0 right-2 flex items-center text-xs text-slate-600 dark:text-slate-400">{getQuantityUnit(variant)}</span>
-      </span> : <>{quantityInput}{showUnit && <span className="text-xs text-slate-500 dark:text-slate-400">{getQuantityUnit(variant)}</span>}</>}
-    </label>
-  );
-  return view === "table" ? <>
-    <td className="px-2 py-3">{input}</td>
-    <td className="px-2 py-3 text-center">{action}</td>
-  </> : <div className="mt-4 grid grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)] items-start gap-3">{input}{action}</div>;
+  const quantityError = draft !== null && value.trim() !== "" && !valid && !shouldRemove;
+  const statusId = `quantity-status-${view}-${variant.id}`;
+  const quantityInput = <Input type="text" inputMode={wholeQuantity ? "numeric" : "decimal"} value={value}
+        aria-label={`Количество ${variant.name}`}
+        aria-invalid={quantityError || undefined}
+        aria-describedby={statusId}
+        onChange={event => {
+          const next = constrainOrderQuantityInput(event.target.value, 999);
+          setDraft(next.value);
+          setCorrection(next.message ?? "");
+        }}
+        onBlur={correctQuantity}
+        className={`${styles.field} min-w-0 ${showUnit ? "pl-2 pr-10" : "px-2"} text-center tabular-nums focus:placeholder:text-transparent`}
+        placeholder="0"/>;
+  const input = showUnit ? <CatalogVariantQuantity unit={quantityUnit}>{quantityInput}</CatalogVariantQuantity> : quantityInput;
+  const totalOutput = <output aria-label={`Сумма заказа для ${variant.name}`} aria-live="polite"
+    className={total === null ? "text-xs text-slate-500 dark:text-slate-400" : "font-semibold tabular-nums"}>
+    {total === null ? variant.price === null || variant.quoteOnly ? "По запросу" : "Укажите количество"
+      : `${variant.priceQualifier === "from" ? "от " : ""}${formatCurrency(total)}`}
+  </output>;
+  const status = <span id={statusId} aria-live="polite" className={`mt-1 block text-xs ${quantityError
+    ? "text-red-700 dark:text-red-400" : "text-slate-500 dark:text-slate-400"}`}>
+    {correction || (quantityError ? wholeQuantity ? "Введите целое количество от 1 до 999." : "Введите количество больше 0 и не больше 999."
+      : line && !saved ? "Не сохранено" : "")}
+  </span>;
+  return <CatalogVariantOrder view={view} quantity={input} total={totalOutput} action={action} status={status}/>;
 }

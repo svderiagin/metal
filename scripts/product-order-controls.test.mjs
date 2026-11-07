@@ -17,7 +17,7 @@ function setup(overrides = {}, componentProps = {}) {
     updateQuantity(id, quantity) { calls.push('update'); cart.lines.find(l => l.productId === id).quantity = quantity; },
     removeItem(id) { calls.push('remove'); cart.lines = cart.lines.filter(l => l.productId !== id); },
   };
-  const jsx = (type, props) => type === 'quote'
+  const jsx = (type, props) => typeof type === 'function' ? type(props) : type === 'quote'
     ? {type: 'link', props: {...props, children: props.label ?? 'Запросить цену'}}
     : {type, props};
   const imports = {
@@ -32,6 +32,13 @@ function setup(overrides = {}, componentProps = {}) {
     '@/lib/variantPresentation': {getQuantityUnit: () => 'т', requiresWholeRozmetQuantity: () => false},
     './QuoteRequestButton': {QuoteRequestButton: 'quote'},
     '@/lib/quoteRequest': readProjectData('lib/quoteRequest.ts'),
+    '@/lib/orderMeasurement': readProjectData('lib/orderMeasurement.ts'),
+    '@/lib/catalogNumberInput': readProjectData('lib/catalogNumberInput.ts'),
+    '@/lib/currency': readProjectData('lib/currency.ts'),
+    './CatalogVariantLayout': {
+      CatalogVariantOrder: ({quantity, action, total, status}) => jsx('order', {children: [quantity, total, action, status]}),
+      CatalogVariantQuantity: ({unit, children}) => jsx('quantity', {children: [children, jsx('unit', {children: unit})]}),
+    },
     './FilterPanel.module.css': new Proxy({}, {get: (_, key) => key}),
     './RebarTable.module.css': new Proxy({}, {get: (_, key) => key}),
   };
@@ -75,7 +82,9 @@ test('saved cart quantity, hydration, stock, quote and invalid input are respect
   const h = setup(); h.cart.lines = [{productId: 'product', quantity: 7}];
   assert.equal(h.render().input.value, '7');
   assert.equal(h.render().action.children, '✓ В корзине');
-  h.change('1000'); assert.equal(h.render().action.disabled, true);
+  h.change('1000'); assert.equal(h.render().input.value, '999');
+  assert.equal(h.render().action.children, 'Обновить');
+  assert.equal(h.cart.lines[0].quantity, 7);
   h.change('2'); h.cart.hydrated = false; assert.equal(h.render().action.disabled, true);
   assert.equal(setup({inStock: false}).render().action.children, 'Под заказ');
   assert.equal(setup({quoteOnly: true}).render().action.children, 'Запросить цену');
@@ -91,7 +100,7 @@ test('quote button receives only explicitly entered or saved order quantities', 
   assert.equal(h.render().action.order.unit, 'т');
   assert.equal(h.render().action.order.product, 'Товар');
   h.change('');
-  assert.ok(Number.isNaN(h.render().action.order.quantity));
+  assert.equal(h.render().action.order.quantity, null);
 });
 
 test('on-order action is a quote link carrying quantity and calculable weight', () => {
@@ -114,7 +123,7 @@ test('on-order action is a quote link carrying quantity and calculable weight', 
 });
 
 test('reference table quantity matches the centered rebar input format', () => {
-  const rendered = setup({}, {referenceStyle: true}).render();
+  const rendered = setup({}, {showUnit: false}).render();
   assert.equal(rendered.input.inputMode, 'decimal');
   assert.equal(rendered.input.placeholder, '0');
   assert.match(rendered.input.className, /text-center/);

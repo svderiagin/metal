@@ -141,13 +141,10 @@ test('quantity and current per-piece price are revalidated in the cart', () => {
   assert.match(revalidateCartPrice(product, {quantity: 1.5}).invalidReason, /целое количество листов/);
 });
 
-test('the shared catalog presentation retains sheet specifications and whole-number input', () => {
+test('the shared catalog presentation retains sheet specifications', () => {
   const source = fs.readFileSync('components/catalog/ProfileSheetVariantCatalog.tsx', 'utf8');
   assert.match(source, /<CatalogVariantTable>/);
   for (const label of ['Толщина, мм', 'Цвет / покрытие', 'Размер листа, м']) assert.ok(source.includes(label), label);
-  assert.match(source, /inputMode="numeric"/);
-  assert.match(source, /step=\{1\}/);
-  assert.match(source, /Number\.isInteger\(quantity\)/);
 });
 
 test('each profile family and product uses its existing matching image asset', () => {

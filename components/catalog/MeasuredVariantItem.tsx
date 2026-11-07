@@ -7,16 +7,16 @@ import {QuoteRequestButton} from "./QuoteRequestButton";
 import {formatQuoteProductName} from "@/lib/quoteRequest";
 import filterStyles from "./FilterPanel.module.css";
 import tableStyles from "./RebarTable.module.css";
-import {CatalogVariantLayout, CatalogVariantOrder, CatalogVariantQuantity, CatalogVariantSpecifications} from "./CatalogVariantLayout";
+import {CatalogVariantLayout, CatalogVariantOrder, CatalogVariantSpecifications} from "./CatalogVariantLayout";
 import {Button} from "@/components/ui/Button";
 import {Input} from "@/components/ui/Input";
 import {ProfilePipeVariantItem} from "./ProfilePipeVariantItem";
 import {useCart} from "@/hooks/useCart";
 import {formatCurrency, formatUnitPrice} from "@/lib/currency";
 import {formatNumber} from "@/lib/numberFormat";
-import {
-  calculateLineTotal, formatDecimal, metersToTons, parseNonNegativeDecimal, tonsToMeters,
-} from "@/lib/orderMeasurement";
+import {calculateLineTotal, formatDecimal, metersToTons, tonsToMeters} from "@/lib/orderMeasurement";
+import {correctOrderQuantity, formatCatalogNumber, parseOrderQuantity} from "@/lib/catalogNumberInput";
+import type {OrderInputMode} from "@/types/cart";
 import type {ProductVariant} from "@/types/product";
 
 export function MeasuredVariantItem({
@@ -40,14 +40,16 @@ function TonnageMeasuredVariantItem({
   const mass = variant.weightPerMeterKg ?? 0;
   const isRebar = kind === "rebar";
   const isVgp = kind === "vgp";
+  const tonDigits = isVgp ? 6 : 3;
   const [detailsOpen, setDetailsOpen] = useState(false);
   const cartLine = lines.find((line) => line.productId === variant.id);
   const savedMeasurement = cartLine?.measurement;
-  const [draft, setDraft] = useState<{meters: string; tons: string; inputMode: "meter" | "ton"} | null>(null);
+  const [draft, setDraft] = useState<{meters: string; tons: string; inputMode: OrderInputMode; exactQuantity?: number} | null>(null);
   const inputMode = draft?.inputMode ?? (savedMeasurement?.inputMode ?? "meter");
   const savedMeters = savedMeasurement?.meters ?? (cartLine && hasMass && variant.unit === "ton" ? tonsToMeters(cartLine.quantity, mass) : null);
-  const meters = draft?.meters ?? (savedMeters === null ? "" : formatDecimal(savedMeters, 2));
-  const tons = draft?.tons ?? (savedMeasurement ? formatDecimal(savedMeasurement.weightTons, isVgp ? 6 : 3) : cartLine && variant.unit === "ton" ? formatDecimal(cartLine.quantity, isVgp ? 6 : 3) : "");
+  const savedTons = savedMeasurement?.weightTons ?? (cartLine && variant.unit === "ton" ? cartLine.quantity : null);
+  const meters = draft?.meters ?? formatMeasuredQuantity(savedMeters, 2);
+  const tons = draft?.tons ?? formatMeasuredQuantity(savedTons, tonDigits);
   const [message, setMessage] = useState("");
   const [removed, setRemoved] = useState(false);
 
@@ -58,8 +60,8 @@ function TonnageMeasuredVariantItem({
   }, [removed]);
 
   // Calculate from the edited field, preserving precision before display rounding.
-  const enteredMeters = draft === null && cartLine ? savedMeters : parseNonNegativeDecimal(meters);
-  const enteredTons = draft === null && savedMeasurement ? savedMeasurement.weightTons : draft === null && cartLine && variant.unit === "ton" ? cartLine.quantity : parseNonNegativeDecimal(tons);
+  const enteredMeters = draft === null ? savedMeters : readQuantity(meters, "meter");
+  const enteredTons = draft === null ? savedTons : readQuantity(tons, "ton");
   const pipeQuantity = inputMode === "meter" ? enteredMeters : enteredTons;
   const pipeOrder = isVgp && pipeQuantity !== null ? wholeVgpOrder(variant, pipeQuantity, inputMode) : null;
   const parsedMeters = isVgp ? pipeOrder?.meters ?? null : !hasMass ? enteredMeters : inputMode === "meter" ? enteredMeters : enteredTons === null ? null : tonsToMeters(enteredTons, mass);
@@ -79,38 +81,66 @@ function TonnageMeasuredVariantItem({
     && (hasMass || !(enteredMeters && enteredMeters > 0));
   const hasChanges = !!cartLine && !isSaved;
   const shouldRemove = !!cartLine && enteredQuantity === 0;
+  const activeValue = inputMode === "meter" ? meters : tons;
+  const cannotCalculate = enteredQuantity !== null && enteredQuantity > 0 &&
+    ((hasMass && (!parsedMeters || !parsedTons)) || (pricePerTon !== undefined && !variant.quoteOnly && parsedTons !== null && estimatedTotal === null));
+  const invalidDraft = draft !== null && activeValue.trim() !== "" && (enteredQuantity === null || cannotCalculate);
   const buttonLabel = removed ? "Удалено" : !canPurchase ? "Под заказ" : shouldRemove ? "Удалить" : isSaved ? "✓ В корзине" : hasChanges ? "Обновить" : "В корзину";
   const buttonClassName = removed ? filterStyles.removedCartButton
     : shouldRemove ? filterStyles.removeCartButton
       : isSaved ? filterStyles.savedCartButton
         : hasChanges && canPurchase ? filterStyles.updateCartButton
           : filterStyles.cartButton;
-  const status = message || (hasChanges ? "Не сохранено" : isVgp && pipeOrder && pipeOrder.pieces > 0 ? `${pipeOrder.pieces} шт. · ${formatNumber(pipeOrder.meters)} м` : "");
+  const status = message || (invalidDraft ? "Проверьте введённое значение."
+    : hasChanges ? "Не сохранено" : isVgp && pipeOrder && pipeOrder.pieces > 0 ? `${pipeOrder.pieces} шт. · ${formatNumber(pipeOrder.meters)} м` : "");
 
-  function updateMeters(value: string) {
-    const parsed = parseNonNegativeDecimal(value);
-    if (value !== "" && parsed === null) return;
-    if (!hasMass) {setDraft({inputMode: "meter", meters: value, tons}); setMessage(""); return;}
-    const converted = parsed === null ? null : isVgp ? wholeVgpOrder(variant, parsed, "meter")?.weightTons ?? null : metersToTons(parsed, mass);
-    setDraft({inputMode: "meter", meters: value, tons: converted === null ? "" : formatDecimal(converted, isVgp ? 6 : 3)});
+  function quantityOptions(mode: OrderInputMode) {
+    return {
+      maximum: mode === "ton" && !hasMass ? 999 : undefined,
+      decimalPlaces: isVgp ? undefined : mode === "meter" ? 2 : tonDigits,
+    };
+  }
+
+  function readQuantity(value: string, mode: OrderInputMode) {
+    if (draft?.inputMode === mode && draft.exactQuantity !== undefined) return draft.exactQuantity;
+    return correctOrderQuantity(value, quantityOptions(mode)).message ? null : parseOrderQuantity(value);
+  }
+
+  function updateQuantityField(mode: OrderInputMode, value: string) {
+    const parsed = correctOrderQuantity(value, quantityOptions(mode)).message ? null : parseOrderQuantity(value);
+    const whole = isVgp && parsed !== null ? wholeVgpOrder(variant, parsed, mode) : null;
+    if (mode === "meter") {
+      const converted = parsed === null ? null : isVgp ? whole?.weightTons ?? null : metersToTons(parsed, mass);
+      setDraft({inputMode: mode, meters: value, tons: hasMass ? formatMeasuredQuantity(converted, tonDigits) : tons});
+    } else {
+      const converted = parsed === null ? null : isVgp ? whole?.meters ?? null : tonsToMeters(parsed, mass);
+      setDraft({inputMode: mode, tons: value, meters: hasMass ? formatMeasuredQuantity(converted, 2) : meters});
+    }
     setMessage("");
   }
 
-  function updateTons(value: string) {
-    const parsed = parseNonNegativeDecimal(value);
-    if (value !== "" && parsed === null) return;
-    if (!hasMass) {setDraft({inputMode: "ton", tons: value, meters}); setMessage(""); return;}
-    const converted = parsed === null ? null : isVgp ? wholeVgpOrder(variant, parsed, "ton")?.meters ?? null : tonsToMeters(parsed, mass);
-    setDraft({inputMode: "ton", tons: value, meters: converted === null ? "" : formatDecimal(converted, 2)});
-    setMessage("");
-  }
-
-  function settlePipeOrder() {
-    if (isVgp && pipeOrder) setDraft({inputMode, meters: formatDecimal(pipeOrder.meters, 2), tons: formatDecimal(pipeOrder.weightTons, 6)});
+  function settleQuantity(mode: OrderInputMode) {
+    if (draft?.inputMode !== mode || draft.exactQuantity !== undefined) return;
+    const next = correctOrderQuantity(activeValue, quantityOptions(mode));
+    if (cannotCalculate) {
+      updateQuantityField(mode, "");
+      setMessage("Значение очищено. Не удалось рассчитать объём.");
+    } else if (isVgp && pipeOrder) {
+      // Keep the exact whole-pipe volume as the source even when the input display rounds it.
+      const exactQuantity = mode === "meter" ? pipeOrder.meters : pipeOrder.weightTons;
+      setDraft({inputMode: mode, meters: formatMeasuredQuantity(pipeOrder.meters, 2),
+        tons: formatMeasuredQuantity(pipeOrder.weightTons, tonDigits), exactQuantity});
+      if (exactQuantity > (enteredQuantity ?? 0) && Math.abs(exactQuantity - (enteredQuantity ?? 0)) > exactQuantity * 1e-9) {
+        setMessage(`Объём округлён вверх до целых труб · ${pipeOrder.pieces} шт.`);
+      }
+    } else if (next.value !== activeValue) {
+      updateQuantityField(mode, next.value);
+      if (next.message) setMessage(next.message);
+    }
   }
 
   function addToCart() {
-    if (!hydrated || isSaved || removed) return;
+    if (!hydrated || isSaved || removed || invalidDraft) return;
     if (shouldRemove) {
       removeItem(variant.id);
       setDraft(null);
@@ -147,30 +177,32 @@ function TonnageMeasuredVariantItem({
   const actionSizeClassName = view === "card" ? "w-full" : tableStyles.tableAction;
   const action = !canPurchase && !shouldRemove && !removed ? (
     <QuoteRequestButton label={needsQuote ? "Запросить цену" : "Под заказ"}
-      order={{product: formatQuoteProductName(variant), meters: parsedMeters, tons: parsedTons}}
+      order={{product: formatQuoteProductName(variant), meters: invalidDraft ? null : parsedMeters, tons: invalidDraft ? null : parsedTons}}
       className={`${filterStyles.quoteButton} ${actionSizeClassName} px-3`}/>
   ) : (
-    <Button type="button" disabled={!hydrated || isSaved || removed || (!canPurchase && !shouldRemove)} onClick={addToCart}
+    <Button type="button" disabled={!hydrated || isSaved || removed || invalidDraft || (!canPurchase && !shouldRemove)} onClick={addToCart}
       className={`${buttonClassName} ${actionSizeClassName} whitespace-nowrap px-3`}>
       {shouldRemove ? "Удалить" : buttonLabel}
     </Button>
   );
 
-  const showOrderLabels = isRebar && view === "card";
-  const meterInput = <OrderInput label={`Длина заказа для ${variant.name}`} unit={isRebar ? undefined : "м"}
-    visibleLabel={showOrderLabels ? "Заказ, м" : undefined} value={meters} onChange={updateMeters}
-    step={isVgp ? variant.lengthMeters : undefined} onBlur={settlePipeOrder}/>;
-  const tonInput = <OrderInput label={`Вес заказа в тоннах для ${variant.name}`} unit={isRebar ? undefined : "т"}
-    visibleLabel={showOrderLabels ? "Заказ, т" : undefined} value={tons} onChange={updateTons}
-    decimalPlaces={isVgp ? 6 : 3} onBlur={settlePipeOrder}/>;
+  const showOrderLabels = view === "card";
+  const statusId = `measured-order-status-${view}-${variant.id}`;
+  const meterInput = <OrderInput label={`Длина заказа для ${variant.name}`}
+    visibleLabel={showOrderLabels ? "Заказ, м" : undefined} value={meters} invalid={invalidDraft && inputMode === "meter"} statusId={statusId}
+    onChange={value => updateQuantityField("meter", value)} onBlur={() => settleQuantity("meter")}/>;
+  const tonInput = <OrderInput label={`Вес заказа в тоннах для ${variant.name}`}
+    visibleLabel={showOrderLabels ? "Заказ, т" : undefined} value={tons} invalid={invalidDraft && inputMode === "ton"} statusId={statusId}
+    onChange={value => updateQuantityField("ton", value)} onBlur={() => settleQuantity("ton")}/>;
   const price = `${variant.priceQualifier === "from" ? "от " : ""}${formatUnitPrice(pricePerTon ?? null, "за тонну")}`;
   const total = <output aria-label={`Сумма заказа для ${variant.name}`} aria-live="polite" className={totalClassName}>{totalLabel}</output>;
-  const statusColor = message ? "text-red-700 dark:text-red-400" : "text-slate-500 dark:text-slate-400";
-  const statusSpacing = isRebar ? view === "table" ? "mx-auto mt-1 max-w-32" : "mt-1" : "";
-  const orderStatus = <span aria-live="polite" className={`block text-xs ${statusSpacing} ${statusColor}`}>{status}</span>;
+  const statusColor = invalidDraft ? "text-red-700 dark:text-red-400" : "text-slate-500 dark:text-slate-400";
+  const statusSpacing = view === "table" ? "mx-auto mt-1 max-w-32" : "mt-1";
+  const orderStatus = <span id={statusId} aria-live="polite" className={`block text-xs ${statusSpacing} ${statusColor}`}>{status}</span>;
+  const order = <CatalogVariantOrder view={view} quantity={meterInput} secondaryQuantity={tonInput}
+    action={action} total={total} status={orderStatus}/>;
 
-  if (isRebar) return <RebarVariantLayout view={view} variant={variant} price={price}
-    meterInput={meterInput} tonInput={tonInput} total={total} action={action} orderStatus={orderStatus}/>;
+  if (isRebar) return <RebarVariantLayout view={view} variant={variant} price={price} order={order}/>;
 
   const details = <div className="space-y-2 text-left text-sm font-normal text-slate-600 dark:text-slate-300">
     <p className="font-bold text-slate-900 dark:text-slate-100">{variant.name}</p>
@@ -193,26 +225,19 @@ function TonnageMeasuredVariantItem({
     : <button type="button" aria-expanded={detailsOpen} aria-controls={`vgp-details-${variant.id}`}
       aria-label={`Подробности: ${variant.name}`} onClick={() => setDetailsOpen(!detailsOpen)}
       className="mt-2 cursor-pointer rounded-sm text-sm font-semibold text-slate-600 underline decoration-slate-300 underline-offset-4 hover:text-red-700 focus-visible:outline-2 focus-visible:outline-red-700 dark:text-slate-300 dark:decoration-slate-500 dark:hover:text-red-400 dark:focus-visible:outline-red-300">Подробнее о товаре</button>;
-  const quantity = <div className="grid gap-2">{meterInput}{tonInput}</div>;
-
   return <>
     <CatalogVariantLayout view={view} variant={variant} specifications={<>{specifications}{isVgp && moreDetails}</>}
-      price={price}
-      order={<CatalogVariantOrder view={view} quantity={quantity} action={action} total={total} status={orderStatus}/>}/>
+      price={price} order={order}/>
     {isVgp && view === "table" && <tr id={`vgp-details-${variant.id}`} hidden={!detailsOpen}
-      className="border-t border-slate-200 bg-slate-50 dark:border-slate-700 dark:bg-slate-800/50"><td colSpan={6} className="p-4">{details}</td></tr>}
+      className="border-t border-slate-200 bg-slate-50 dark:border-slate-700 dark:bg-slate-800/50"><td colSpan={8} className="p-4">{details}</td></tr>}
   </>;
 }
 
-function RebarVariantLayout({view, variant, price, meterInput, tonInput, total, action, orderStatus}: {
+function RebarVariantLayout({view, variant, price, order}: {
   view: "table" | "card";
   variant: ProductVariant;
   price: string;
-  meterInput: ReactNode;
-  tonInput: ReactNode;
-  total: ReactNode;
-  action: ReactNode;
-  orderStatus: ReactNode;
+  order: ReactNode;
 }) {
   const diameter = formatNumber(variant.diameterMm ?? 0);
   const form = formLabel(variant.form ?? "bar");
@@ -237,16 +262,7 @@ function RebarVariantLayout({view, variant, price, meterInput, tonInput, total, 
           </div>
         ))}
       </dl>
-      <div className="mt-4 grid grid-cols-2 gap-3 border-t border-slate-100 pt-4 dark:border-slate-800">
-        {meterInput}
-        {tonInput}
-      </div>
-      <p className="mt-4 flex items-baseline justify-between gap-3 text-sm text-slate-900 dark:text-slate-100">
-        <span>Сумма:</span>
-        {total}
-      </p>
-      <div className="mt-4">{action}</div>
-      {orderStatus}
+      {order}
     </article>
   );
 
@@ -258,51 +274,45 @@ function RebarVariantLayout({view, variant, price, meterInput, tonInput, total, 
       <td className="font-semibold tabular-nums">{price}</td>
       <td>{mass !== undefined && mass > 0 ? formatNumber(mass) : "—"}</td>
       <td>{length === undefined ? "—" : formatNumber(length)}</td>
-      <td>{meterInput}</td>
-      <td>{tonInput}</td>
-      <td className={tableStyles.sumColumn}>{total}</td>
-      <td className="text-center">
-        {action}
-        {orderStatus}
-      </td>
+      {order}
     </tr>
   );
 }
 
 function OrderInput({
-  decimalPlaces = 2,
   label,
-  unit,
   visibleLabel,
   value,
   onChange,
   onBlur,
-  step,
+  invalid,
+  statusId,
 }: {
   label: string;
-  decimalPlaces?: number;
-  unit?: string;
   visibleLabel?: string;
   value: string;
   onChange: (value: string) => void;
-  onBlur?: () => void;
-  step?: number;
+  onBlur: () => void;
+  invalid: boolean;
+  statusId: string;
 }) {
-  const alignment = unit ? "pr-5 pl-2 text-center" : visibleLabel ? "px-2" : "px-2 text-center";
-  const input = <Input aria-label={label} type="number" inputMode="decimal" min={0} step={step ?? 10 ** -decimalPlaces} onBlur={onBlur}
-    value={value} onChange={(event) => {
-      const next = event.target.value;
-      if (next === "" || new RegExp(`^\\d+(?:[.,]\\d{0,${decimalPlaces}})?$`).test(next)) onChange(next);
-    }}
+  const alignment = visibleLabel ? "px-2" : "px-2 text-center";
+  const input = <Input aria-label={label} aria-invalid={invalid || undefined} aria-describedby={statusId} type="text" inputMode="decimal" onBlur={onBlur}
+    value={value} onChange={event => onChange(event.target.value)}
     className={`${filterStyles.field} w-full min-w-0 ${alignment} tabular-nums focus:placeholder:text-transparent`} placeholder="0"/>;
-  if (unit) return <CatalogVariantQuantity unit={unit}>{input}</CatalogVariantQuantity>;
-
   return (
     <label className="block text-sm font-semibold">
       {visibleLabel && <span className="mb-1 block">{visibleLabel}</span>}
       {input}
     </label>
   );
+}
+
+function formatMeasuredQuantity(value: number | null, decimalPlaces: number) {
+  if (value === null) return "";
+  if (value >= 1e21) return formatCatalogNumber(value);
+  const formatted = formatDecimal(value, decimalPlaces);
+  return value > 0 && Number(formatted) === 0 ? formatCatalogNumber(value) : formatted;
 }
 
 function formLabel(form: "coil" | "bar") {

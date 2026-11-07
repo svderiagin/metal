@@ -1,19 +1,15 @@
 "use client";
 
 import {useMemo, useState} from "react";
-import {Button} from "@/components/ui/Button";
-import {Input} from "@/components/ui/Input";
 import {Select} from "@/components/ui/Select";
-import {useCart} from "@/hooks/useCart";
 import {useLinkedVariant} from "@/hooks/useLinkedVariant";
 import {comparePrices} from "@/lib/catalogFilters";
-import {formatCurrency, formatUnitPrice} from "@/lib/currency";
+import {formatUnitPrice} from "@/lib/currency";
 import {formatNumber} from "@/lib/numberFormat";
 import {profileSheetCoatingLabel, type ProfileSheetVariant} from "@/lib/profileSheet";
+import {ProductOrderControls} from "./ProductOrderControls";
 import {FilterPanel} from "./FilterPanel";
-import {CatalogVariantLayout, CatalogVariantOrder, CatalogVariantQuantity, CatalogVariantSpecifications, CatalogVariantTable} from "./CatalogVariantLayout";
-import filterStyles from "./FilterPanel.module.css";
-import tableStyles from "./RebarTable.module.css";
+import {CatalogVariantLayout, CatalogVariantSpecifications, CatalogVariantTable} from "./CatalogVariantLayout";
 
 type SortMode = "thickness-asc" | "thickness-desc" | "price-asc" | "price-desc";
 
@@ -55,7 +51,7 @@ export function ProfileSheetVariantCatalog({variants}: {variants: ProfileSheetVa
 
   return <>
     <FilterPanel className="lg:col-start-2" query={query}
-      onQueryChange={setQuery} onReset={reset}
+      onQueryChange={setQuery} onReset={reset} resultCount={{visible: results.length, total: variants.length}}
       sorting={<label className="text-sm font-semibold">
         Сортировка
         <Select value={sort} onChange={(event) => setSort(event.target.value as SortMode)} className="mt-1">
@@ -98,51 +94,13 @@ export function ProfileSheetVariantCatalog({variants}: {variants: ProfileSheetVa
 }
 
 function ProfileSheetItem({variant, view}: {variant: ProfileSheetVariant; view: "table" | "card"}) {
-  const {addItem, updateQuantity, lines, hydrated} = useCart();
-  const line = lines.find((item) => item.productId === variant.id);
-  const [draft, setDraft] = useState<string | null>(null);
-  const value = draft ?? String(line?.quantity ?? 1);
-  const quantity = Number(value);
-  const valid = /^\d+$/.test(value) && Number.isInteger(quantity) && quantity > 0 && quantity <= 999;
-  const saved = !!line && !line.invalidReason && valid && quantity === line.quantity;
-  const total = valid && variant.price !== null ? quantity * variant.price : null;
-  const buttonClassName = saved ? filterStyles.savedCartButton
-    : line ? filterStyles.updateCartButton : filterStyles.cartButton;
-  const buttonLabel = saved ? "✓ В корзине" : line ? "Обновить" : "В корзину";
-
-  function submit() {
-    if (!hydrated || !valid || saved) return;
-    if (line) updateQuantity(variant.id, quantity);
-    else addItem(variant.id, quantity);
-    setDraft(null);
-  }
-
-  const quantityInput = <CatalogVariantQuantity unit="шт.">
-    <Input aria-label={`Количество листов для ${variant.name}`} type="number" inputMode="numeric"
-      min={1} max={999} step={1} value={value}
-      onChange={(event) => {
-        const next = event.target.value;
-        if (next === "" || /^\d+$/.test(next)) setDraft(next);
-      }}
-      className={`${filterStyles.field} w-full min-w-0 px-7 text-center tabular-nums`} />
-  </CatalogVariantQuantity>;
-  const totalOutput = <output aria-label={`Сумма заказа для ${variant.name}`} aria-live="polite"
-    className={total === null ? "text-xs text-slate-500 dark:text-slate-400" : "font-semibold tabular-nums text-slate-900 dark:text-slate-100"}>
-    {total === null ? "Укажите количество" : formatCurrency(total)}
-  </output>;
-  const action = <Button type="button" disabled={!hydrated || !valid || saved} onClick={submit}
-    className={`${buttonClassName} ${view === "card" ? "w-full" : tableStyles.tableAction} px-3`}>
-    {buttonLabel}
-  </Button>;
-
   const specifications = <CatalogVariantSpecifications items={[
     {label: "Толщина, мм", value: formatNumber(variant.wallThicknessMm)},
     {label: "Цвет / покрытие", value: profileSheetCoatingLabel(variant)},
     {label: "Размер листа, м", value: variant.sheetSizeMeters},
   ]}/>;
-  const status = !valid && <p role="alert" className="text-xs text-red-700 dark:text-red-400">Введите целое количество от 1 до 999.</p>;
 
   return <CatalogVariantLayout view={view} variant={variant} specifications={specifications}
     price={formatUnitPrice(variant.price, variant.priceUnit)}
-    order={<CatalogVariantOrder view={view} quantity={quantityInput} action={action} total={totalOutput} status={status}/>}/>;
+    order={<ProductOrderControls view={view} variant={variant} allowBackorder wholeQuantity={true}/>}/>;
 }

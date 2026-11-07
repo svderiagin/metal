@@ -1,23 +1,19 @@
 "use client";
 
 import {useMemo, useState} from "react";
-import {Button} from "@/components/ui/Button";
-import {Input} from "@/components/ui/Input";
 import {Select} from "@/components/ui/Select";
-import {useCart} from "@/hooks/useCart";
 import {useLinkedVariant} from "@/hooks/useLinkedVariant";
 import {comparePrices} from "@/lib/catalogFilters";
-import {formatCurrency, formatUnitPrice} from "@/lib/currency";
+import {formatUnitPrice} from "@/lib/currency";
 import {
   metalMeshFormat,
   metalMeshSpecification,
   type MetalMeshVariant,
 } from "@/lib/metalMesh";
-import {getQuantityUnit, requiresWholeMetalMeshQuantity} from "@/lib/variantPresentation";
+import {requiresWholeMetalMeshQuantity} from "@/lib/variantPresentation";
+import {ProductOrderControls} from "./ProductOrderControls";
 import {FilterPanel} from "./FilterPanel";
-import {CatalogVariantLayout, CatalogVariantOrder, CatalogVariantQuantity, CatalogVariantSpecifications, CatalogVariantTable} from "./CatalogVariantLayout";
-import filterStyles from "./FilterPanel.module.css";
-import tableStyles from "./RebarTable.module.css";
+import {CatalogVariantLayout, CatalogVariantSpecifications, CatalogVariantTable} from "./CatalogVariantLayout";
 
 type SortMode = "name" | "cell-asc" | "price-asc" | "price-desc";
 
@@ -72,7 +68,7 @@ export function MetalMeshVariantCatalog({variants}: {variants: MetalMeshVariant[
 
   return <>
     <FilterPanel className="lg:col-start-2" query={query}
-      onQueryChange={setQuery} onReset={reset}
+      onQueryChange={setQuery} onReset={reset} resultCount={{visible: results.length, total: variants.length}}
       sorting={<label className="text-sm font-semibold">
         Сортировка
         <Select value={sort} onChange={(event) => setSort(event.target.value as SortMode)} className="mt-1">
@@ -104,57 +100,15 @@ export function MetalMeshVariantCatalog({variants}: {variants: MetalMeshVariant[
 }
 
 function MetalMeshItem({variant, view}: {variant: MetalMeshVariant; view: "table" | "card"}) {
-  const {addItem, updateQuantity, lines, hydrated} = useCart();
-  const line = lines.find((item) => item.productId === variant.id);
-  const [draft, setDraft] = useState<string | null>(null);
-  const value = draft ?? String(line?.quantity ?? 1);
-  const quantity = Number(value);
-  const whole = requiresWholeMetalMeshQuantity(variant);
-  const valid = value.trim() !== "" && Number.isFinite(quantity) && quantity > 0 && quantity <= 999
-    && (!whole || Number.isInteger(quantity));
-  const saved = !!line && !line.invalidReason && valid && quantity === line.quantity;
-  const total = valid && variant.price !== null ? quantity * variant.price : null;
-  const quantityUnit = getQuantityUnit(variant);
-  const buttonClassName = saved ? filterStyles.savedCartButton
-    : line ? filterStyles.updateCartButton : filterStyles.cartButton;
-  const buttonLabel = saved ? "✓ В корзине" : line ? "Обновить" : "В корзину";
-  const cell = metalMeshSpecification(variant, "Размер ячейки");
-  const wire = metalMeshSpecification(variant, "Диаметр проволоки");
-  const productFormat = metalMeshFormat(variant);
-
-  function submit() {
-    if (!hydrated || !valid || saved) return;
-    if (line) updateQuantity(variant.id, quantity);
-    else addItem(variant.id, quantity);
-    setDraft(null);
-  }
-
-  const quantityInput = <CatalogVariantQuantity unit={quantityUnit}>
-    <Input aria-label={`Количество для ${variant.name}`} type="number"
-      inputMode={whole ? "numeric" : "decimal"} min={whole ? 1 : 0.1} max={999} step={whole ? 1 : 0.1}
-      value={value} onChange={(event) => setDraft(event.target.value)}
-      className={`${filterStyles.field} w-full min-w-0 pl-2 pr-10 text-center tabular-nums`}/>
-  </CatalogVariantQuantity>;
-  const totalOutput = <output aria-label={`Сумма заказа для ${variant.name}`} aria-live="polite"
-    className={total === null ? "text-xs text-slate-500 dark:text-slate-400" : "font-semibold tabular-nums text-slate-900 dark:text-slate-100"}>
-    {total === null ? "Укажите количество" : formatCurrency(total)}
-  </output>;
-  const action = <Button type="button" disabled={!hydrated || !valid || saved} onClick={submit}
-    className={`${buttonClassName} ${view === "card" ? "w-full" : tableStyles.tableAction} px-3`}>
-    {buttonLabel}
-  </Button>;
-  const error = whole ? "Введите целое количество от 1 до 999." : "Введите количество от 0,1 до 999.";
-
   const specifications = <CatalogVariantSpecifications items={[
-    {label: "Размер ячейки", value: cell},
-    {label: "Диаметр проволоки", value: wire},
-    {label: "Размер рулона / карты", value: productFormat},
+    {label: "Размер ячейки", value: metalMeshSpecification(variant, "Размер ячейки")},
+    {label: "Диаметр проволоки", value: metalMeshSpecification(variant, "Диаметр проволоки")},
+    {label: "Размер рулона / карты", value: metalMeshFormat(variant)},
   ]}/>;
-  const status = !valid && <p role="alert" className="text-xs text-red-700 dark:text-red-400">{error}</p>;
 
   return <CatalogVariantLayout view={view} variant={variant} specifications={specifications}
     price={formatUnitPrice(variant.price, variant.priceUnit)}
-    order={<CatalogVariantOrder view={view} quantity={quantityInput} action={action} total={totalOutput} status={status}/>}/>;
+    order={<ProductOrderControls view={view} variant={variant} allowBackorder wholeQuantity={requiresWholeMetalMeshQuantity(variant)}/>}/>;
 }
 
 function MeshFilter({label, value, values, onChange}: {

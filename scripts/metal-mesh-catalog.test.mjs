@@ -100,8 +100,6 @@ test('metal mesh uses its dedicated catalog table and quantity rules', () => {
   for (const specification of ['Размер ячейки', 'Диаметр проволоки', 'Размер рулона / карты']) {
     assert.ok(tableSource.includes(specification), `missing specification: ${specification}`);
   }
-  assert.match(tableSource, /inputMode=\{whole \? "numeric" : "decimal"\}/);
-  assert.match(tableSource, /<CatalogVariantQuantity unit=\{quantityUnit\}>/);
   assert.match(cartSource, /requiresWholeMetalMeshQuantity\(product\)/);
   assert.match(pricingSource, /Укажите целое количество рулонов/);
 });

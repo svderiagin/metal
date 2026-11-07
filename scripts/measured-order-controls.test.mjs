@@ -34,6 +34,7 @@ function setup(id, kind = 'beam') {
     '@/lib/vgp': readProjectData('lib/vgp.ts'),
     '@/lib/quoteRequest': readProjectData('lib/quoteRequest.ts'),
     '@/lib/orderMeasurement': readProjectData('lib/orderMeasurement.ts'),
+    '@/lib/catalogNumberInput': readProjectData('lib/catalogNumberInput.ts'),
     '@/lib/currency': readProjectData('lib/currency.ts'),
     '@/lib/numberFormat': readProjectData('lib/numberFormat.ts'),
     '@/hooks/useCart': {useCart: () => cart},
@@ -43,8 +44,7 @@ function setup(id, kind = 'beam') {
     './CatalogVariantLayout': {
       CatalogVariantLayout: ({specifications, order}) => jsx('row', {children: [specifications, order]}),
       CatalogVariantSpecifications: 'specifications',
-      CatalogVariantOrder: ({quantity, action, total}) => jsx('order', {children: [quantity, total, action]}),
-      CatalogVariantQuantity: 'quantity',
+      CatalogVariantOrder: ({quantity, secondaryQuantity, action, total}) => jsx('order', {children: [quantity, secondaryQuantity, total, action]}),
     },
     './ProfilePipeVariantItem': {ProfilePipeVariantItem: () => null},
     './FilterPanel.module.css': {default: {}}, './RebarTable.module.css': {default: {}},

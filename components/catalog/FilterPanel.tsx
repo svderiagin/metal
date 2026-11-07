@@ -9,12 +9,12 @@ type Props = {
   onReset: () => void;
   children: ReactNode;
   sorting: ReactNode;
-  resultSummary?: ReactNode;
+  resultCount?: {visible: number; total: number; pending?: boolean};
   extraControls?: ReactNode;
   className?: string;
 };
 
-export function FilterPanel({query, onQueryChange, onReset, children, sorting, resultSummary, extraControls, className = ""}: Props) {
+export function FilterPanel({query, onQueryChange, onReset, children, sorting, resultCount, extraControls, className = ""}: Props) {
   return (
     <div className={`${styles.panel} min-w-0 self-start rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-5 shadow-sm sm:p-6 lg:self-stretch ${className}`}>
       <h2 className="text-xl font-bold">Фильтры</h2>
@@ -31,9 +31,14 @@ export function FilterPanel({query, onQueryChange, onReset, children, sorting, r
           <div className="min-w-0 [&>label]:block">
             {sorting}
           </div>
-          {resultSummary ? (
+          {resultCount ? (
             <div className="flex flex-wrap items-center justify-between gap-3 sm:col-span-2 xl:col-span-3">
-              {resultSummary}
+              <p role="status" aria-atomic="true" aria-busy={resultCount.pending ?? false}
+                className="text-sm text-slate-600 dark:text-slate-400">
+                {resultCount.visible === resultCount.total ? "Позиций в таблице: " : "Найдено: "}
+                <span className="font-semibold tabular-nums text-slate-900 dark:text-slate-100">{resultCount.visible}</span>
+                {resultCount.visible !== resultCount.total && <> из <span className="tabular-nums">{resultCount.total}</span></>}
+              </p>
               <div className="ml-auto"><ResetFiltersButton onClick={onReset}/></div>
             </div>
           ) : (

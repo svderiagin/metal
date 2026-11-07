@@ -1,4 +1,76 @@
-import {test, expect} from "../browser";
+import {test, expect, openProduct, samples, visibleProduct, seedCart} from "../browser";
+import type {Locator} from "@playwright/test";
+
+test("fields use a blue-gray focus underline and reserve red for validation errors", async ({page}, testInfo) => {
+  const dark = testInfo.project.name.endsWith("dark");
+  const neutral = dark ? "rgb(148, 163, 184)" : "rgb(71, 85, 105)";
+  const error = dark ? "rgb(248, 113, 113)" : "rgb(220, 38, 38)";
+  const underline = (color: string) => new RegExp(`${color.replace(/[()]/g, "\\$&")} 0px -2px 0px 0px inset`);
+  await page.addInitScript(() => {
+    document.addEventListener("DOMContentLoaded", () => {
+      const style = document.createElement("style");
+      style.textContent = "* { transition: none !important; }";
+      document.head.append(style);
+    });
+  });
+  async function checkPointerFocus(control: Locator) {
+    await control.blur();
+    await control.hover();
+    const before = await control.evaluate(element => {
+      const style = getComputedStyle(element);
+      const {width, height} = element.getBoundingClientRect();
+      return {border: style.borderColor, width, height};
+    });
+    await control.click();
+    if (await control.evaluate(element => element.tagName === "SELECT")) await control.press("Escape");
+    await expect(control).toBeFocused();
+    await expect(control).toHaveCSS("outline-style", "none");
+    const active = await control.evaluate(element => {
+      const style = getComputedStyle(element);
+      const {width, height} = element.getBoundingClientRect();
+      return {border: style.borderColor, width, height};
+    });
+    expect(active).toEqual(before);
+    const accent = await control.getAttribute("aria-invalid") === "true" ? error : neutral;
+    await expect(control).toHaveCSS("box-shadow", underline(accent));
+  }
+
+  await seedCart(page);
+  await openProduct(page, samples.treadPlate);
+  const quantity = visibleProduct(page, samples.treadPlate.id).getByRole("textbox");
+  await checkPointerFocus(quantity);
+  await testInfo.attach("focused-product-field", {body: await visibleProduct(page, samples.treadPlate.id).screenshot(), contentType: "image/png"});
+  await quantity.fill("-1");
+  await expect(quantity).toHaveCSS("box-shadow", underline(error));
+  await quantity.fill("2");
+  await expect(quantity).toHaveCSS("box-shadow", underline(neutral));
+  await quantity.blur();
+  await expect(quantity).toHaveCSS("box-shadow", /rgba\(0, 0, 0, 0\) 0px -2px 0px 0px inset/);
+  await quantity.click();
+  await quantity.press("Tab");
+  await page.keyboard.press("Shift+Tab");
+  await expect(quantity).toBeFocused();
+  await expect(quantity).toHaveCSS("outline-style", "solid");
+  await expect(quantity).toHaveCSS("outline-width", "3px");
+  await expect(quantity).toHaveCSS("outline-color", neutral);
+  await checkPointerFocus(quantity);
+  await checkPointerFocus(page.getByLabel("Поиск товаров", {exact: true}));
+  await checkPointerFocus(page.getByRole("combobox").first());
+  const quoteName = page.getByRole("textbox", {name: /^Имя \*/});
+  await quoteName.fill("1");
+  await quoteName.blur();
+  await expect(quoteName).toHaveAttribute("aria-invalid", "true");
+  await checkPointerFocus(quoteName);
+  await checkPointerFocus(page.getByRole("textbox", {name: /^Что требуется рассчитать/}));
+
+  await page.goto("/contacts");
+  await checkPointerFocus(page.getByRole("textbox", {name: "Сообщение", exact: true}));
+  await page.goto("/cart");
+  await checkPointerFocus(page.getByLabel("Количество товара", {exact: true}));
+  await page.goto("/checkout");
+  await checkPointerFocus(page.getByLabel("ФИО *", {exact: true}));
+  await checkPointerFocus(page.getByLabel("Комментарий", {exact: true}));
+});
 
 test("local Cyrillic font loads and catalog controls keep readable text", async ({page}) => {
   const fontRequests: string[] = [];
