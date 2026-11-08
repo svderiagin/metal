@@ -1,0 +1,451 @@
+{
+  "reviewedAt": "2026-11-07",
+  "unit": "кг/м",
+  "basis": "Published reference theoretical mass for the exact outer section and nominal wall; not the measured mass or manufacturing-standard certification of a supplied batch.",
+  "sources": {
+    "gost8639": {
+      "title": "ГОСТ 8639-82, таблица 1",
+      "url": "https://files.stroyinf.ru/Data/38/3826.pdf",
+      "registryUrl": "https://protect.gost.ru/gost/details/0378ad57-4059-45f2-87df-0fa22890f646",
+      "column": "Масса 1 м, кг"
+    },
+    "gost8639am4": {
+      "title": "ГОСТ 8639-82, изменение № 4: дополнение таблицы 1",
+      "url": "https://files.stroyinf.ru/Data/38/3826.pdf",
+      "registryUrl": "https://protect.gost.ru/gost/changesdetails/df599357-f148-4c09-a7a5-99fa5f331d5d",
+      "column": "Масса 1 м, кг"
+    },
+    "gost8645": {
+      "title": "ГОСТ 8645-68, таблица сортамента",
+      "url": "https://www.apex-metal.ru/gost/truba/gost_8645-68.pdf",
+      "column": "Масса 1 м, кг"
+    },
+    "gost8645am4": {
+      "title": "ГОСТ 8645-68, изменение № 4: дополнение таблицы",
+      "url": "https://www.apex-metal.ru/gost/truba/gost_8645-68.pdf",
+      "column": "Масса 1 м, кг"
+    },
+    "gost30245": {
+      "title": "ГОСТ 30245-2003, таблица 1",
+      "url": "https://ntpz.ru/gosty/upload/%D0%93%D0%9E%D0%A1%D0%A2%2030245-2003.%20%D0%9F%D1%80%D0%BE%D1%84%D0%B8%D0%BB%D0%B8%20%D1%81%D1%82%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5%20%D0%B3%D0%BD%D1%83%D1%82%D1%8B%D0%B5%20%D0%B7%D0%B0%D0%BC%D0%BA%D0%BD%D1%83%D1%82%D1%8B%D0%B5%20%D1%81%D0%B2%D0%B0%D1%80%D0%BD%D1%8B%D0%B5%20%D0%BA%D0%B2%D0%B0%D0%B4%D1%80%D0%B0%D1%82%D0%BD%D1%8B%D0%B5%20%D0%B8%20%D0%BF%D1%80%D1%8F%D0%BC%D0%BE%D1%83%D0%B3%D0%BE%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5%20%D0%B4%D0%BB%D1%8F%20%D1%81%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D1%85%20%D0%BA%D0%BE%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%86%D0%B8%D0%B9.pdf",
+      "registryUrl": "https://protect.gost.ru/gost/details/18e29a0a-53b2-4e7f-97bc-f3433e46896d",
+      "column": "Масса 1 м, кг"
+    },
+    "bortrub2025": {
+      "title": "Борский трубный завод: Сводная таблица по ширине лент и массе труб, 25.02.2025",
+      "url": "https://files.bortrub.ru/TU/%D0%A8%D0%B8%D1%80%D0%B8%D0%BD%D0%B0%20%D0%BB%D0%B5%D0%BD%D1%82%20%D0%B8%20%D0%BC%D0%B0%D1%81%D1%81%D0%B0%20%D1%82%D1%80%D1%83%D0%B1%20%D0%BE%D1%82%2025.02.25.pdf",
+      "column": "Масса трубы по ГОСТ и ТУ пм, кг",
+      "note": "Значения взяты из колонки ГОСТ и ТУ, а не из соседних расчётных колонок; строки без оцинковки и без пометки DIN."
+    }
+  },
+  "rows": [
+    {
+      "widthMm": 15,
+      "heightMm": 15,
+      "wallThicknessMm": 1.5,
+      "massKgPerMeter": 0.605,
+      "sourceId": "gost8639",
+      "pdfPage": 3
+    },
+    {
+      "widthMm": 20,
+      "heightMm": 20,
+      "wallThicknessMm": 1.5,
+      "massKgPerMeter": 0.841,
+      "sourceId": "gost8639",
+      "pdfPage": 3
+    },
+    {
+      "widthMm": 20,
+      "heightMm": 20,
+      "wallThicknessMm": 2,
+      "massKgPerMeter": 1.075,
+      "sourceId": "gost8639",
+      "pdfPage": 3
+    },
+    {
+      "widthMm": 25,
+      "heightMm": 25,
+      "wallThicknessMm": 1.5,
+      "massKgPerMeter": 1.07,
+      "sourceId": "gost8639",
+      "pdfPage": 3
+    },
+    {
+      "widthMm": 25,
+      "heightMm": 25,
+      "wallThicknessMm": 2,
+      "massKgPerMeter": 1.39,
+      "sourceId": "gost8639",
+      "pdfPage": 3
+    },
+    {
+      "widthMm": 30,
+      "heightMm": 30,
+      "wallThicknessMm": 1.5,
+      "massKgPerMeter": 1.31,
+      "sourceId": "gost8639am4",
+      "pdfPage": 8
+    },
+    {
+      "widthMm": 30,
+      "heightMm": 30,
+      "wallThicknessMm": 2,
+      "massKgPerMeter": 1.7,
+      "sourceId": "gost8639",
+      "pdfPage": 3
+    },
+    {
+      "widthMm": 40,
+      "heightMm": 40,
+      "wallThicknessMm": 1.5,
+      "massKgPerMeter": 1.78,
+      "sourceId": "gost8639am4",
+      "pdfPage": 9
+    },
+    {
+      "widthMm": 40,
+      "heightMm": 40,
+      "wallThicknessMm": 2,
+      "massKgPerMeter": 2.33,
+      "sourceId": "gost8639",
+      "pdfPage": 3
+    },
+    {
+      "widthMm": 40,
+      "heightMm": 40,
+      "wallThicknessMm": 3,
+      "massKgPerMeter": 3.36,
+      "sourceId": "gost8639",
+      "pdfPage": 3
+    },
+    {
+      "widthMm": 50,
+      "heightMm": 50,
+      "wallThicknessMm": 1.5,
+      "massKgPerMeter": 2.254,
+      "sourceId": "bortrub2025",
+      "pdfPage": 10
+    },
+    {
+      "widthMm": 50,
+      "heightMm": 50,
+      "wallThicknessMm": 2,
+      "massKgPerMeter": 2.96,
+      "sourceId": "gost8639am4",
+      "pdfPage": 9
+    },
+    {
+      "widthMm": 50,
+      "heightMm": 50,
+      "wallThicknessMm": 3,
+      "massKgPerMeter": 4.31,
+      "sourceId": "gost8639",
+      "pdfPage": 3
+    },
+    {
+      "widthMm": 50,
+      "heightMm": 50,
+      "wallThicknessMm": 4,
+      "massKgPerMeter": 5.56,
+      "sourceId": "gost8639",
+      "pdfPage": 3
+    },
+    {
+      "widthMm": 60,
+      "heightMm": 60,
+      "wallThicknessMm": 1.5,
+      "massKgPerMeter": 2.725,
+      "sourceId": "bortrub2025",
+      "pdfPage": 11
+    },
+    {
+      "widthMm": 60,
+      "heightMm": 60,
+      "wallThicknessMm": 2,
+      "massKgPerMeter": 3.59,
+      "sourceId": "gost8639am4",
+      "pdfPage": 9
+    },
+    {
+      "widthMm": 60,
+      "heightMm": 60,
+      "wallThicknessMm": 3,
+      "massKgPerMeter": 5.25,
+      "sourceId": "gost8639am4",
+      "pdfPage": 9
+    },
+    {
+      "widthMm": 60,
+      "heightMm": 60,
+      "wallThicknessMm": 4,
+      "massKgPerMeter": 6.82,
+      "sourceId": "gost8639",
+      "pdfPage": 3
+    },
+    {
+      "widthMm": 80,
+      "heightMm": 80,
+      "wallThicknessMm": 2,
+      "massKgPerMeter": 4.844,
+      "sourceId": "bortrub2025",
+      "pdfPage": 12
+    },
+    {
+      "widthMm": 80,
+      "heightMm": 80,
+      "wallThicknessMm": 3,
+      "massKgPerMeter": 7.13,
+      "sourceId": "gost8639am4",
+      "pdfPage": 9
+    },
+    {
+      "widthMm": 80,
+      "heightMm": 80,
+      "wallThicknessMm": 4,
+      "massKgPerMeter": 9.33,
+      "sourceId": "gost8639",
+      "pdfPage": 3
+    },
+    {
+      "widthMm": 100,
+      "heightMm": 100,
+      "wallThicknessMm": 3,
+      "massKgPerMeter": 9.02,
+      "sourceId": "gost8639am4",
+      "pdfPage": 9
+    },
+    {
+      "widthMm": 100,
+      "heightMm": 100,
+      "wallThicknessMm": 4,
+      "massKgPerMeter": 11.84,
+      "sourceId": "gost8639am4",
+      "pdfPage": 9
+    },
+    {
+      "widthMm": 100,
+      "heightMm": 100,
+      "wallThicknessMm": 5,
+      "massKgPerMeter": 14.58,
+      "sourceId": "gost8639am4",
+      "pdfPage": 9
+    },
+    {
+      "widthMm": 120,
+      "heightMm": 120,
+      "wallThicknessMm": 3,
+      "massKgPerMeter": 10.84,
+      "sourceId": "gost30245",
+      "pdfPage": 8
+    },
+    {
+      "widthMm": 120,
+      "heightMm": 120,
+      "wallThicknessMm": 4,
+      "massKgPerMeter": 14.25,
+      "sourceId": "gost30245",
+      "pdfPage": 8
+    },
+    {
+      "widthMm": 140,
+      "heightMm": 140,
+      "wallThicknessMm": 4,
+      "massKgPerMeter": 16.76,
+      "sourceId": "gost30245",
+      "pdfPage": 8
+    },
+    {
+      "widthMm": 160,
+      "heightMm": 160,
+      "wallThicknessMm": 4,
+      "massKgPerMeter": 19.27,
+      "sourceId": "gost30245",
+      "pdfPage": 9
+    },
+    {
+      "widthMm": 30,
+      "heightMm": 20,
+      "wallThicknessMm": 2,
+      "massKgPerMeter": 1.39,
+      "sourceId": "gost8645",
+      "pdfPage": 4
+    },
+    {
+      "widthMm": 40,
+      "heightMm": 20,
+      "wallThicknessMm": 1.5,
+      "massKgPerMeter": 1.31,
+      "sourceId": "gost8645am4",
+      "pdfPage": 13
+    },
+    {
+      "widthMm": 40,
+      "heightMm": 20,
+      "wallThicknessMm": 2,
+      "massKgPerMeter": 1.7,
+      "sourceId": "gost8645",
+      "pdfPage": 4
+    },
+    {
+      "widthMm": 40,
+      "heightMm": 20,
+      "wallThicknessMm": 3,
+      "massKgPerMeter": 2.42,
+      "sourceId": "gost8645",
+      "pdfPage": 4
+    },
+    {
+      "widthMm": 40,
+      "heightMm": 25,
+      "wallThicknessMm": 1.5,
+      "massKgPerMeter": 1.43,
+      "sourceId": "gost8645am4",
+      "pdfPage": 13
+    },
+    {
+      "widthMm": 40,
+      "heightMm": 25,
+      "wallThicknessMm": 2,
+      "massKgPerMeter": 1.86,
+      "sourceId": "gost8645",
+      "pdfPage": 4
+    },
+    {
+      "widthMm": 50,
+      "heightMm": 25,
+      "wallThicknessMm": 1.5,
+      "massKgPerMeter": 1.67,
+      "sourceId": "gost8645am4",
+      "pdfPage": 13
+    },
+    {
+      "widthMm": 50,
+      "heightMm": 25,
+      "wallThicknessMm": 2,
+      "massKgPerMeter": 2.17,
+      "sourceId": "gost8645",
+      "pdfPage": 5
+    },
+    {
+      "widthMm": 50,
+      "heightMm": 25,
+      "wallThicknessMm": 3,
+      "massKgPerMeter": 3.13,
+      "sourceId": "gost8645",
+      "pdfPage": 5
+    },
+    {
+      "widthMm": 60,
+      "heightMm": 30,
+      "wallThicknessMm": 1.5,
+      "massKgPerMeter": 2.02,
+      "sourceId": "gost8645am4",
+      "pdfPage": 13
+    },
+    {
+      "widthMm": 60,
+      "heightMm": 30,
+      "wallThicknessMm": 2,
+      "massKgPerMeter": 2.65,
+      "sourceId": "gost8645am4",
+      "pdfPage": 13
+    },
+    {
+      "widthMm": 60,
+      "heightMm": 30,
+      "wallThicknessMm": 3,
+      "massKgPerMeter": 3.83,
+      "sourceId": "gost8645",
+      "pdfPage": 6
+    },
+    {
+      "widthMm": 60,
+      "heightMm": 40,
+      "wallThicknessMm": 1.5,
+      "massKgPerMeter": 2.25,
+      "sourceId": "gost8645am4",
+      "pdfPage": 13
+    },
+    {
+      "widthMm": 60,
+      "heightMm": 40,
+      "wallThicknessMm": 2,
+      "massKgPerMeter": 2.96,
+      "sourceId": "gost8645am4",
+      "pdfPage": 13
+    },
+    {
+      "widthMm": 60,
+      "heightMm": 40,
+      "wallThicknessMm": 3,
+      "massKgPerMeter": 4.3,
+      "sourceId": "gost8645",
+      "pdfPage": 6
+    },
+    {
+      "widthMm": 60,
+      "heightMm": 40,
+      "wallThicknessMm": 4,
+      "massKgPerMeter": 5.56,
+      "sourceId": "gost8645",
+      "pdfPage": 6
+    },
+    {
+      "widthMm": 80,
+      "heightMm": 40,
+      "wallThicknessMm": 2,
+      "massKgPerMeter": 3.59,
+      "sourceId": "gost8645am4",
+      "pdfPage": 13
+    },
+    {
+      "widthMm": 80,
+      "heightMm": 40,
+      "wallThicknessMm": 3,
+      "massKgPerMeter": 5.25,
+      "sourceId": "gost8645",
+      "pdfPage": 6
+    },
+    {
+      "widthMm": 80,
+      "heightMm": 60,
+      "wallThicknessMm": 2,
+      "massKgPerMeter": 4.216,
+      "sourceId": "bortrub2025",
+      "pdfPage": 5
+    },
+    {
+      "widthMm": 80,
+      "heightMm": 60,
+      "wallThicknessMm": 3,
+      "massKgPerMeter": 6.19,
+      "sourceId": "bortrub2025",
+      "pdfPage": 5
+    },
+    {
+      "widthMm": 100,
+      "heightMm": 50,
+      "wallThicknessMm": 2,
+      "massKgPerMeter": 4.53,
+      "sourceId": "bortrub2025",
+      "pdfPage": 6
+    },
+    {
+      "widthMm": 100,
+      "heightMm": 50,
+      "wallThicknessMm": 3,
+      "massKgPerMeter": 6.661,
+      "sourceId": "bortrub2025",
+      "pdfPage": 6
+    },
+    {
+      "widthMm": 100,
+      "heightMm": 60,
+      "wallThicknessMm": 3,
+      "massKgPerMeter": 7.13,
+      "sourceId": "gost8645am4",
+      "pdfPage": 13
+    }
+  ]
+}

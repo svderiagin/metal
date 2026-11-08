@@ -1,0 +1,79 @@
+[
+  {
+    "id": "N05",
+    "group": "А400 · 35ГС / 25Г2С",
+    "kind": "Связки / крупный план",
+    "sourceName": "KazGroupMetal",
+    "source": "https://kazgroupmetal.kz/product/armatura-sda-7eca672454",
+    "image": "https://kazgroupmetal.kz/media/catalog/rebar.webp",
+    "note": "Общее фото группы в карточках 25Г2С и 35ГС",
+    "width": 1600,
+    "height": 1000
+  },
+  {
+    "id": "N09",
+    "group": "А400 · 35ГС / 25Г2С",
+    "kind": "Рифлёные прутки / склад",
+    "sourceName": "МеталлСклад С-З",
+    "source": "https://mssz.spb.ru/chernyij-metalloprokat/armatura/armatura-a3-25g2s-35gs/",
+    "image": "https://mssz.spb.ru/assets/files/article_foto/armatura.jpg",
+    "note": "Фото на общей странице А3 25Г2С / 35ГС",
+    "width": 960,
+    "height": 540
+  },
+  {
+    "id": "N12",
+    "group": "Общие складские кадры",
+    "kind": "Промышленный склад",
+    "sourceName": "Пресс-служба Правительства Казахстана / Caspian Steel QZ",
+    "source": "https://primeminister.kz/ru/news/olzhas-bektenov-na-industrialnoy-zone-kostanayskoy-oblasti-proveril-ispolnenie-porucheniy-prezidenta-po-razvitiyu-promyshlennosti-29499",
+    "image": "https://primeminister.kz/assets/media/psx-20241219-122549.jpg",
+    "note": "Промышленный склад. Марка и класс партии на фото не установлены",
+    "width": 2000,
+    "height": 1125
+  },
+  {
+    "id": "N13",
+    "group": "Общие складские кадры",
+    "kind": "Связки на складе завода",
+    "sourceName": "Jiangsu Hongtai Steel",
+    "source": "https://www.jshtsteel.com/index/Index/goods",
+    "image": "https://www.jshtsteel.com/uploads/20260516/dea61689ceeba26fefa55640a2123631.jpg",
+    "note": "Фото производителя арматуры; марка 35ГС/25Г2С не подтверждена",
+    "width": 1702,
+    "height": 1276
+  },
+  {
+    "id": "N07",
+    "group": "Общие складские кадры",
+    "kind": "Склад / отгрузка",
+    "sourceName": "Метинвест-СМЦ",
+    "source": "https://metinvest-smc.com/ua/articles/osoblivosti-posuku-analogiv-stalei-za-dstu-gost-v-miznarodnix-standartax/",
+    "image": "https://metinvest-smc.com/uploads/files/filemanager/2024/2024-12/poisk_analogov_stali_3.jpg",
+    "note": "Публикация поставщика о сталях; точная марка арматуры на фото не подтверждена",
+    "width": 1000,
+    "height": 667
+  },
+  {
+    "id": "N11",
+    "group": "Общие складские кадры",
+    "kind": "Вертикальный складской ракурс",
+    "sourceName": "Leroy Merlin Portugal",
+    "source": "https://www.leroymerlin.pt/produtos/varao-para-betao-a400-12x6000-mm-500-kg-83612424.html",
+    "image": "https://media.adeo.com/media/2302783/media.jpeg",
+    "note": "Карточка A400 12 мм; обозначение по иностранному стандарту, точная марка 35ГС/25Г2С не подтверждена",
+    "width": 2599,
+    "height": 3321
+  },
+  {
+    "id": "N08",
+    "group": "Общие складские кадры",
+    "kind": "Открытый склад",
+    "sourceName": "Купи-Арматуру",
+    "source": "https://kupi-armaturu.ru/catalog/armatura-25-mm/",
+    "image": "https://kupi-armaturu.ru/upload/iblock/b32/b324b3de3f31bc770086269e04c2adc0.JPG",
+    "note": "Карточка арматуры 25 мм; точную марку партии необходимо уточнить; резервный вариант из-за небольшого оригинала",
+    "width": 700,
+    "height": 472
+  }
+]

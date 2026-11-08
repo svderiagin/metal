@@ -67,6 +67,8 @@ SKU. See [photo sources](product-illustration-sources.md). The table thumbnail
 and the product viewer both show the annotated 2400 × 1800 WebP,
 with native zoom and pan. The approved sheet, channel, angle and square sets
 retain their separate production images and renderers.
+The owner's square profile-pipe template also has a dedicated renderer; the
+generic script excludes `type-cat-trp-sub-1`.
 
 Run `node --import tsx scripts/render-product-illustrations.mjs <product-id>` to
 generate previews under `.tmp/product-illustrations/`. After visual review, run
@@ -76,6 +78,31 @@ palette above. Put confirmed sizes and properties on the illustration. Keep
 ambiguous supplier dimensions under the catalog designation and leave out
 unverified weights. The product lookup verifies the catalog signature and falls
 back to the existing product photo if the data has changed.
+
+For a targeted production update, pass the reviewed product IDs together with
+`--write`. Only those files and manifest entries are replaced; other families
+are preserved. Omitting IDs keeps the existing complete-set generation mode.
+Profile-pipe reference masses and their exact source pages are documented in
+[profile-pipe-weights.md](profile-pipe-weights.md).
+
+### Square profile-pipe illustrations
+
+The 28 parameterized square pipes use the owner's clean and marked photographs
+under `public/images/catalog/truby-profilnye/trubi_kvadratnie/`. The source files
+are retained. `scripts/render-profile-square-images.mjs` replaces only variable
+numeric labels on the 2400 × 1800 marked reference, using clean-photo patches
+and the confirmed catalog dimensions, wall thickness, length and theoretical
+mass. Fixed captions, arrows and all pixels outside those patches stay exact.
+The output is lossless WebP at the existing product URLs and is connected through
+`data/product-illustrations.json`, including the current catalog signature.
+
+Preview a non-reference item with
+`node scripts/render-profile-square-images.mjs --preview profile-pipe-square-100x100x5`.
+After visual review, generate with `--write` and refresh image versions. See the
+[template notes](../imports/profile-square-image-template/README.md) and
+`imports/profile-square-image-template/rendered.json` for patch geometry, exact
+labels, typography and protected-pixel checks. This renderer leaves rectangular
+pipe images unchanged.
 
 ## Historical supplier mapping
 

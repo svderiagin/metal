@@ -1,4 +1,5 @@
 import type {ProductVariantSource} from "@/types/product";
+import profilePipeWeights from "../profile-pipe-weights.json";
 
 export const trubyProfilnyeProducts: ProductVariantSource[] = [
   {
@@ -284,8 +285,12 @@ export const trubyProfilnyeProducts: ProductVariantSource[] = [
 ];
 
 // Reference prices are kept separately in imports/profile-pipe-reference-prices.json.
-// These offers require commercial price confirmation; no mass, steel grade or stock is inferred.
+// Masses are published table values for the exact section and wall; see source/page evidence in profile-pipe-weights.json.
+// These offers require commercial price confirmation; steel grade, manufacturing standard and stock are not inferred.
 // The optional fifth value may be filled only with an owner-confirmed commercial price per metre.
+const profilePipeWeightBySize = new Map(profilePipeWeights.rows.map(row => [
+  `${row.widthMm}x${row.heightMm}x${row.wallThicknessMm}`, row.massKgPerMeter,
+]));
 const profilePipeRows: [width: number, height: number, wall: number, length: number | [number, number], confirmedPrice?: number][] = [
   [15, 15, 1.5, 6],
   [20, 20, 1.5, 6],
@@ -347,6 +352,7 @@ export const profilePipeProducts: ProductVariantSource[] = profilePipeRows.map((
   const size = `${width}×${height}`;
   const thickness = String(wall).replace(".", ",");
   const key = `${width}x${height}x${String(wall).replace(".", "-")}`;
+  const theoreticalMass = profilePipeWeightBySize.get(`${width}x${height}x${wall}`);
   const lengthLabel = Array.isArray(length) ? `${length[0]}–${length[1]} м` : `${length} м`;
   return {
     id: `profile-pipe-${shape}-${key}`,
@@ -357,6 +363,7 @@ export const profilePipeProducts: ProductVariantSource[] = profilePipeRows.map((
     description: "Цена и характеристики поставки уточняются при согласовании заказа.",
     price: confirmedPrice ?? null, quoteOnly: confirmedPrice === undefined, priceConfirmed: confirmedPrice !== undefined, priceUnit: "за метр",
     profileWidthMm: width, profileHeightMm: height, wallThicknessMm: wall,
+    weightPerMeterKg: theoreticalMass, weightConfirmed: theoreticalMass !== undefined,
     ...(Array.isArray(length) ? {lengthRangeMeters: length} : {lengthMeters: length}),
     inStock: false, availability: "UNKNOWN", featured: false, imageUrls: [],
     attributes: [
@@ -368,6 +375,9 @@ export const profilePipeProducts: ProductVariantSource[] = profilePipeRows.map((
       {name: "Размер", value: `${size} мм`},
       {name: "Стенка", value: `${thickness} мм`},
       {name: "Длина поставки", value: lengthLabel},
+      ...(theoreticalMass === undefined ? [] : [{
+        name: "Теоретическая масса", value: `${String(theoreticalMass).replace(".", ",")} кг/м`,
+      }]),
     ],
   };
 });

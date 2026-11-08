@@ -1,0 +1,2708 @@
+{
+  "renderer": "scripts/render-profile-square-images.mjs",
+  "reference": "public/images/catalog/truby-profilnye/trubi_kvadratnie/truba_kvadratnaya_2400_1800_marked.jpg",
+  "cleanPhoto": "public/images/catalog/truby-profilnye/trubi_kvadratnie/truba_kvadratnaya_1448_1086_original.jpg",
+  "typography": {
+    "family": "Inter",
+    "fontFile": "imports/shveller-image-template/fonts/Inter-variable.ttf",
+    "backend": "fontconfig",
+    "text": "#41464D",
+    "lines": "#59636F"
+  },
+  "patches": {
+    "title": {
+      "left": 735,
+      "top": 222,
+      "width": 765,
+      "height": 108
+    },
+    "height": {
+      "left": 835,
+      "top": 1000,
+      "width": 240,
+      "height": 90
+    },
+    "width": {
+      "left": 1210,
+      "top": 1456,
+      "width": 260,
+      "height": 80
+    },
+    "thickness": {
+      "left": 1676,
+      "top": 1056,
+      "width": 300,
+      "height": 124
+    },
+    "length": {
+      "left": 590,
+      "top": 1550,
+      "width": 460,
+      "height": 70
+    },
+    "mass": {
+      "left": 590,
+      "top": 1620,
+      "width": 500,
+      "height": 75
+    }
+  },
+  "method": "Owner marked reference; clean photograph patches and deterministic labels from confirmed public catalog parameters. Lossless WebP; no generative editing.",
+  "illustration": "Shared family photograph. Nominal dimensions are labels, not scaled manufacturing geometry.",
+  "records": [
+    {
+      "id": "profile-pipe-square-15x15x1-5",
+      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-15x15x1-5.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/trubi_kvadratnie/truba_kvadratnaya_1448_1086_original.jpg",
+      "signature": "41a5e8e6",
+      "labels": [
+        {
+          "key": "title",
+          "text": "15 x 15 x 1,5"
+        },
+        {
+          "key": "height",
+          "text": "15 мм"
+        },
+        {
+          "key": "width",
+          "text": "15 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "1,5 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "0,605 кг/м"
+        }
+      ],
+      "changedLabels": [],
+      "placements": [],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/product-illustrations/profile-pipe-square-15x15x1-5.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "4fb1e0fb6c13e373a2d07274f741300802c78776f57c4d86da9d235cbb523203"
+    },
+    {
+      "id": "profile-pipe-square-20x20x1-5",
+      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-20x20x1-5.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/trubi_kvadratnie/truba_kvadratnaya_1448_1086_original.jpg",
+      "signature": "d7556fae",
+      "labels": [
+        {
+          "key": "title",
+          "text": "20 x 20 x 1,5"
+        },
+        {
+          "key": "height",
+          "text": "20 мм"
+        },
+        {
+          "key": "width",
+          "text": "20 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "1,5 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "0,841 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "height",
+        "width",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "20 x 20 x 1,5",
+          "size": 84,
+          "weight": 700,
+          "left": 749,
+          "top": 237,
+          "width": 471,
+          "height": 75
+        },
+        {
+          "key": "height",
+          "text": "20 мм",
+          "size": 56,
+          "center": 954,
+          "top": 1022,
+          "left": 877,
+          "width": 155,
+          "height": 43
+        },
+        {
+          "key": "width",
+          "text": "20 мм",
+          "size": 56,
+          "center": 1338,
+          "top": 1478,
+          "left": 1261,
+          "width": 155,
+          "height": 43
+        },
+        {
+          "key": "mass",
+          "text": "0,841 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 608,
+          "top": 1634,
+          "width": 209,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/product-illustrations/profile-pipe-square-20x20x1-5.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "893a9ebbd4f693c381ef7754f224c1cba5af5a8b4d4ddca0e60d6056c550b786"
+    },
+    {
+      "id": "profile-pipe-square-20x20x2",
+      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-20x20x2.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/trubi_kvadratnie/truba_kvadratnaya_1448_1086_original.jpg",
+      "signature": "1f53f64f",
+      "labels": [
+        {
+          "key": "title",
+          "text": "20 x 20 x 2"
+        },
+        {
+          "key": "height",
+          "text": "20 мм"
+        },
+        {
+          "key": "width",
+          "text": "20 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "2 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "1,075 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "height",
+        "width",
+        "thickness",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "20 x 20 x 2",
+          "size": 84,
+          "weight": 700,
+          "left": 749,
+          "top": 237,
+          "width": 416,
+          "height": 63
+        },
+        {
+          "key": "height",
+          "text": "20 мм",
+          "size": 56,
+          "center": 954,
+          "top": 1022,
+          "left": 877,
+          "width": 155,
+          "height": 43
+        },
+        {
+          "key": "width",
+          "text": "20 мм",
+          "size": 56,
+          "center": 1338,
+          "top": 1478,
+          "left": 1261,
+          "width": 155,
+          "height": 43
+        },
+        {
+          "key": "thickness",
+          "text": "2 мм",
+          "size": 56,
+          "left": 1692,
+          "top": 1084,
+          "width": 121,
+          "height": 42
+        },
+        {
+          "key": "mass",
+          "text": "1,075 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 608,
+          "top": 1634,
+          "width": 206,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/product-illustrations/profile-pipe-square-20x20x2.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "1899d16914291a1fdfad6fa9e525998f39eece4ed5222e816b760d204d87f5a1"
+    },
+    {
+      "id": "profile-pipe-square-25x25x1-5",
+      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-25x25x1-5.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/trubi_kvadratnie/truba_kvadratnaya_1448_1086_original.jpg",
+      "signature": "27a314b4",
+      "labels": [
+        {
+          "key": "title",
+          "text": "25 x 25 x 1,5"
+        },
+        {
+          "key": "height",
+          "text": "25 мм"
+        },
+        {
+          "key": "width",
+          "text": "25 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "1,5 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "1,07 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "height",
+        "width",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "25 x 25 x 1,5",
+          "size": 84,
+          "weight": 700,
+          "left": 749,
+          "top": 237,
+          "width": 461,
+          "height": 75
+        },
+        {
+          "key": "height",
+          "text": "25 мм",
+          "size": 56,
+          "center": 954,
+          "top": 1022,
+          "left": 878,
+          "width": 153,
+          "height": 43
+        },
+        {
+          "key": "width",
+          "text": "25 мм",
+          "size": 56,
+          "center": 1338,
+          "top": 1478,
+          "left": 1262,
+          "width": 153,
+          "height": 43
+        },
+        {
+          "key": "mass",
+          "text": "1,07 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 608,
+          "top": 1634,
+          "width": 179,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/product-illustrations/profile-pipe-square-25x25x1-5.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "8b6bee02cbf4d7ca5d0a0a452d170da6a6f7c3fd780141a8616febe21bb54c81"
+    },
+    {
+      "id": "profile-pipe-square-25x25x2",
+      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-25x25x2.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/trubi_kvadratnie/truba_kvadratnaya_1448_1086_original.jpg",
+      "signature": "ecda5f51",
+      "labels": [
+        {
+          "key": "title",
+          "text": "25 x 25 x 2"
+        },
+        {
+          "key": "height",
+          "text": "25 мм"
+        },
+        {
+          "key": "width",
+          "text": "25 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "2 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "1,39 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "height",
+        "width",
+        "thickness",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "25 x 25 x 2",
+          "size": 84,
+          "weight": 700,
+          "left": 749,
+          "top": 237,
+          "width": 406,
+          "height": 62
+        },
+        {
+          "key": "height",
+          "text": "25 мм",
+          "size": 56,
+          "center": 954,
+          "top": 1022,
+          "left": 878,
+          "width": 153,
+          "height": 43
+        },
+        {
+          "key": "width",
+          "text": "25 мм",
+          "size": 56,
+          "center": 1338,
+          "top": 1478,
+          "left": 1262,
+          "width": 153,
+          "height": 43
+        },
+        {
+          "key": "thickness",
+          "text": "2 мм",
+          "size": 56,
+          "left": 1692,
+          "top": 1084,
+          "width": 121,
+          "height": 42
+        },
+        {
+          "key": "mass",
+          "text": "1,39 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 608,
+          "top": 1634,
+          "width": 181,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/product-illustrations/profile-pipe-square-25x25x2.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "814242cdcfb51326c02ceaeb8d37a59b96e927cbf7780f25cd602749a8621b76"
+    },
+    {
+      "id": "profile-pipe-square-30x30x1-5",
+      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-30x30x1-5.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/trubi_kvadratnie/truba_kvadratnaya_1448_1086_original.jpg",
+      "signature": "b3c695a8",
+      "labels": [
+        {
+          "key": "title",
+          "text": "30 x 30 x 1,5"
+        },
+        {
+          "key": "height",
+          "text": "30 мм"
+        },
+        {
+          "key": "width",
+          "text": "30 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "1,5 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "1,31 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "height",
+        "width",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "30 x 30 x 1,5",
+          "size": 84,
+          "weight": 700,
+          "left": 749,
+          "top": 237,
+          "width": 475,
+          "height": 75
+        },
+        {
+          "key": "height",
+          "text": "30 мм",
+          "size": 56,
+          "center": 954,
+          "top": 1022,
+          "left": 876,
+          "width": 157,
+          "height": 44
+        },
+        {
+          "key": "width",
+          "text": "30 мм",
+          "size": 56,
+          "center": 1338,
+          "top": 1478,
+          "left": 1260,
+          "width": 157,
+          "height": 44
+        },
+        {
+          "key": "mass",
+          "text": "1,31 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 608,
+          "top": 1634,
+          "width": 171,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/product-illustrations/profile-pipe-square-30x30x1-5.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "42ed6d8756b48bc0eedcd6c810dac7fd71b9173efcd257ad4af15e311a4e58a7"
+    },
+    {
+      "id": "profile-pipe-square-30x30x2",
+      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-30x30x2.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/trubi_kvadratnie/truba_kvadratnaya_1448_1086_original.jpg",
+      "signature": "35451d91",
+      "labels": [
+        {
+          "key": "title",
+          "text": "30 x 30 x 2"
+        },
+        {
+          "key": "height",
+          "text": "30 мм"
+        },
+        {
+          "key": "width",
+          "text": "30 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "2 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "1,7 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "height",
+        "width",
+        "thickness",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "30 x 30 x 2",
+          "size": 84,
+          "weight": 700,
+          "left": 749,
+          "top": 237,
+          "width": 420,
+          "height": 63
+        },
+        {
+          "key": "height",
+          "text": "30 мм",
+          "size": 56,
+          "center": 954,
+          "top": 1022,
+          "left": 876,
+          "width": 157,
+          "height": 44
+        },
+        {
+          "key": "width",
+          "text": "30 мм",
+          "size": 56,
+          "center": 1338,
+          "top": 1478,
+          "left": 1260,
+          "width": 157,
+          "height": 44
+        },
+        {
+          "key": "thickness",
+          "text": "2 мм",
+          "size": 56,
+          "left": 1692,
+          "top": 1084,
+          "width": 121,
+          "height": 42
+        },
+        {
+          "key": "mass",
+          "text": "1,7 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 608,
+          "top": 1634,
+          "width": 150,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/product-illustrations/profile-pipe-square-30x30x2.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "17a51c2fcb38ad4c40bcaad5338b08fe4da7d53707fe29ac8d297dc8a684c847"
+    },
+    {
+      "id": "profile-pipe-square-40x40x1-5",
+      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-40x40x1-5.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/trubi_kvadratnie/truba_kvadratnaya_1448_1086_original.jpg",
+      "signature": "2a8df31c",
+      "labels": [
+        {
+          "key": "title",
+          "text": "40 x 40 x 1,5"
+        },
+        {
+          "key": "height",
+          "text": "40 мм"
+        },
+        {
+          "key": "width",
+          "text": "40 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "1,5 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "1,78 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "height",
+        "width",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "40 x 40 x 1,5",
+          "size": 84,
+          "weight": 700,
+          "left": 749,
+          "top": 237,
+          "width": 482,
+          "height": 75
+        },
+        {
+          "key": "height",
+          "text": "40 мм",
+          "size": 56,
+          "center": 954,
+          "top": 1022,
+          "left": 874,
+          "width": 160,
+          "height": 43
+        },
+        {
+          "key": "width",
+          "text": "40 мм",
+          "size": 56,
+          "center": 1338,
+          "top": 1478,
+          "left": 1258,
+          "width": 160,
+          "height": 43
+        },
+        {
+          "key": "mass",
+          "text": "1,78 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 608,
+          "top": 1634,
+          "width": 177,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/product-illustrations/profile-pipe-square-40x40x1-5.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "99170320c5d63b78f16d8ef0eff79dac178022cbfa13bb1e416436c057e958e0"
+    },
+    {
+      "id": "profile-pipe-square-40x40x2",
+      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-40x40x2.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/trubi_kvadratnie/truba_kvadratnaya_1448_1086_original.jpg",
+      "signature": "f7f62845",
+      "labels": [
+        {
+          "key": "title",
+          "text": "40 x 40 x 2"
+        },
+        {
+          "key": "height",
+          "text": "40 мм"
+        },
+        {
+          "key": "width",
+          "text": "40 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "2 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "2,33 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "height",
+        "width",
+        "thickness",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "40 x 40 x 2",
+          "size": 84,
+          "weight": 700,
+          "left": 749,
+          "top": 237,
+          "width": 427,
+          "height": 63
+        },
+        {
+          "key": "height",
+          "text": "40 мм",
+          "size": 56,
+          "center": 954,
+          "top": 1022,
+          "left": 874,
+          "width": 160,
+          "height": 43
+        },
+        {
+          "key": "width",
+          "text": "40 мм",
+          "size": 56,
+          "center": 1338,
+          "top": 1478,
+          "left": 1258,
+          "width": 160,
+          "height": 43
+        },
+        {
+          "key": "thickness",
+          "text": "2 мм",
+          "size": 56,
+          "left": 1692,
+          "top": 1084,
+          "width": 121,
+          "height": 42
+        },
+        {
+          "key": "mass",
+          "text": "2,33 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 608,
+          "top": 1634,
+          "width": 189,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/product-illustrations/profile-pipe-square-40x40x2.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "c7b41d531322860221f3f9071307eda69a691300d3e6a867a5bb588281223fda"
+    },
+    {
+      "id": "profile-pipe-square-40x40x3",
+      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-40x40x3.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/trubi_kvadratnie/truba_kvadratnaya_1448_1086_original.jpg",
+      "signature": "f1143a05",
+      "labels": [
+        {
+          "key": "title",
+          "text": "40 x 40 x 3"
+        },
+        {
+          "key": "height",
+          "text": "40 мм"
+        },
+        {
+          "key": "width",
+          "text": "40 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "3 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "3,36 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "height",
+        "width",
+        "thickness",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "40 x 40 x 3",
+          "size": 84,
+          "weight": 700,
+          "left": 749,
+          "top": 237,
+          "width": 430,
+          "height": 63
+        },
+        {
+          "key": "height",
+          "text": "40 мм",
+          "size": 56,
+          "center": 954,
+          "top": 1022,
+          "left": 874,
+          "width": 160,
+          "height": 43
+        },
+        {
+          "key": "width",
+          "text": "40 мм",
+          "size": 56,
+          "center": 1338,
+          "top": 1478,
+          "left": 1258,
+          "width": 160,
+          "height": 43
+        },
+        {
+          "key": "thickness",
+          "text": "3 мм",
+          "size": 56,
+          "left": 1692,
+          "top": 1084,
+          "width": 123,
+          "height": 44
+        },
+        {
+          "key": "mass",
+          "text": "3,36 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 608,
+          "top": 1634,
+          "width": 190,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/product-illustrations/profile-pipe-square-40x40x3.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "7762b90b3652f4c622ff6d6903e44839f5aaa85e8162dac0300e7be6557fe6fb"
+    },
+    {
+      "id": "profile-pipe-square-50x50x1-5",
+      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-50x50x1-5.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/trubi_kvadratnie/truba_kvadratnaya_1448_1086_original.jpg",
+      "signature": "ced60ef2",
+      "labels": [
+        {
+          "key": "title",
+          "text": "50 x 50 x 1,5"
+        },
+        {
+          "key": "height",
+          "text": "50 мм"
+        },
+        {
+          "key": "width",
+          "text": "50 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "1,5 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "2,254 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "height",
+        "width",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "50 x 50 x 1,5",
+          "size": 84,
+          "weight": 700,
+          "left": 749,
+          "top": 237,
+          "width": 471,
+          "height": 75
+        },
+        {
+          "key": "height",
+          "text": "50 мм",
+          "size": 56,
+          "center": 954,
+          "top": 1022,
+          "left": 876,
+          "width": 156,
+          "height": 43
+        },
+        {
+          "key": "width",
+          "text": "50 мм",
+          "size": 56,
+          "center": 1338,
+          "top": 1478,
+          "left": 1260,
+          "width": 156,
+          "height": 43
+        },
+        {
+          "key": "mass",
+          "text": "2,254 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 608,
+          "top": 1634,
+          "width": 219,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/product-illustrations/profile-pipe-square-50x50x1-5.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "186d51008792cbd65af409cd0e90b9a8315055f8e380296f499be1034492e5a4"
+    },
+    {
+      "id": "profile-pipe-square-50x50x2",
+      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-50x50x2.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/trubi_kvadratnie/truba_kvadratnaya_1448_1086_original.jpg",
+      "signature": "5cfb7515",
+      "labels": [
+        {
+          "key": "title",
+          "text": "50 x 50 x 2"
+        },
+        {
+          "key": "height",
+          "text": "50 мм"
+        },
+        {
+          "key": "width",
+          "text": "50 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "2 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "2,96 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "height",
+        "width",
+        "thickness",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "50 x 50 x 2",
+          "size": 84,
+          "weight": 700,
+          "left": 749,
+          "top": 237,
+          "width": 416,
+          "height": 63
+        },
+        {
+          "key": "height",
+          "text": "50 мм",
+          "size": 56,
+          "center": 954,
+          "top": 1022,
+          "left": 876,
+          "width": 156,
+          "height": 43
+        },
+        {
+          "key": "width",
+          "text": "50 мм",
+          "size": 56,
+          "center": 1338,
+          "top": 1478,
+          "left": 1260,
+          "width": 156,
+          "height": 43
+        },
+        {
+          "key": "thickness",
+          "text": "2 мм",
+          "size": 56,
+          "left": 1692,
+          "top": 1084,
+          "width": 121,
+          "height": 42
+        },
+        {
+          "key": "mass",
+          "text": "2,96 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 608,
+          "top": 1634,
+          "width": 189,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/product-illustrations/profile-pipe-square-50x50x2.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "d621ad178b25cd464336e66e01729856e836ca45fe1a37836ce9a6f3601e1df1"
+    },
+    {
+      "id": "profile-pipe-square-50x50x3",
+      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-50x50x3.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/trubi_kvadratnie/truba_kvadratnaya_1448_1086_original.jpg",
+      "signature": "cd92dd21",
+      "labels": [
+        {
+          "key": "title",
+          "text": "50 x 50 x 3"
+        },
+        {
+          "key": "height",
+          "text": "50 мм"
+        },
+        {
+          "key": "width",
+          "text": "50 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "3 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "4,31 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "height",
+        "width",
+        "thickness",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "50 x 50 x 3",
+          "size": 84,
+          "weight": 700,
+          "left": 749,
+          "top": 237,
+          "width": 419,
+          "height": 63
+        },
+        {
+          "key": "height",
+          "text": "50 мм",
+          "size": 56,
+          "center": 954,
+          "top": 1022,
+          "left": 876,
+          "width": 156,
+          "height": 43
+        },
+        {
+          "key": "width",
+          "text": "50 мм",
+          "size": 56,
+          "center": 1338,
+          "top": 1478,
+          "left": 1260,
+          "width": 156,
+          "height": 43
+        },
+        {
+          "key": "thickness",
+          "text": "3 мм",
+          "size": 56,
+          "left": 1692,
+          "top": 1084,
+          "width": 123,
+          "height": 44
+        },
+        {
+          "key": "mass",
+          "text": "4,31 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 608,
+          "top": 1634,
+          "width": 181,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/product-illustrations/profile-pipe-square-50x50x3.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "57fc35c0f6b689414b460a41834b76644797b944a5cc2502f9074eff0eb512df"
+    },
+    {
+      "id": "profile-pipe-square-50x50x4",
+      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-50x50x4.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/trubi_kvadratnie/truba_kvadratnaya_1448_1086_original.jpg",
+      "signature": "26e41d69",
+      "labels": [
+        {
+          "key": "title",
+          "text": "50 x 50 x 4"
+        },
+        {
+          "key": "height",
+          "text": "50 мм"
+        },
+        {
+          "key": "width",
+          "text": "50 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "4 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "5,56 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "height",
+        "width",
+        "thickness",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "50 x 50 x 4",
+          "size": 84,
+          "weight": 700,
+          "left": 749,
+          "top": 237,
+          "width": 422,
+          "height": 63
+        },
+        {
+          "key": "height",
+          "text": "50 мм",
+          "size": 56,
+          "center": 954,
+          "top": 1022,
+          "left": 876,
+          "width": 156,
+          "height": 43
+        },
+        {
+          "key": "width",
+          "text": "50 мм",
+          "size": 56,
+          "center": 1338,
+          "top": 1478,
+          "left": 1260,
+          "width": 156,
+          "height": 43
+        },
+        {
+          "key": "thickness",
+          "text": "4 мм",
+          "size": 56,
+          "left": 1692,
+          "top": 1084,
+          "width": 126,
+          "height": 41
+        },
+        {
+          "key": "mass",
+          "text": "5,56 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 608,
+          "top": 1634,
+          "width": 190,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/product-illustrations/profile-pipe-square-50x50x4.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "9292bba615ded7fbf6fcb8a14ee380021233c807eeaaa8ed4b0ea0f0313f47bf"
+    },
+    {
+      "id": "profile-pipe-square-60x60x1-5",
+      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-60x60x1-5.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/trubi_kvadratnie/truba_kvadratnaya_1448_1086_original.jpg",
+      "signature": "69865d40",
+      "labels": [
+        {
+          "key": "title",
+          "text": "60 x 60 x 1,5"
+        },
+        {
+          "key": "height",
+          "text": "60 мм"
+        },
+        {
+          "key": "width",
+          "text": "60 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "1,5 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "2,725 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "height",
+        "width",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "60 x 60 x 1,5",
+          "size": 84,
+          "weight": 700,
+          "left": 749,
+          "top": 237,
+          "width": 475,
+          "height": 75
+        },
+        {
+          "key": "height",
+          "text": "60 мм",
+          "size": 56,
+          "center": 954,
+          "top": 1022,
+          "left": 876,
+          "width": 157,
+          "height": 43
+        },
+        {
+          "key": "width",
+          "text": "60 мм",
+          "size": 56,
+          "center": 1338,
+          "top": 1478,
+          "left": 1260,
+          "width": 157,
+          "height": 43
+        },
+        {
+          "key": "mass",
+          "text": "2,725 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 608,
+          "top": 1634,
+          "width": 212,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/product-illustrations/profile-pipe-square-60x60x1-5.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "2b573e17997305f1d318dc3cd857b69646e4d883bff7949778510652a4ef4c6f"
+    },
+    {
+      "id": "profile-pipe-square-60x60x2",
+      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-60x60x2.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/trubi_kvadratnie/truba_kvadratnaya_1448_1086_original.jpg",
+      "signature": "4cd8b4f9",
+      "labels": [
+        {
+          "key": "title",
+          "text": "60 x 60 x 2"
+        },
+        {
+          "key": "height",
+          "text": "60 мм"
+        },
+        {
+          "key": "width",
+          "text": "60 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "2 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "3,59 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "height",
+        "width",
+        "thickness",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "60 x 60 x 2",
+          "size": 84,
+          "weight": 700,
+          "left": 749,
+          "top": 237,
+          "width": 420,
+          "height": 63
+        },
+        {
+          "key": "height",
+          "text": "60 мм",
+          "size": 56,
+          "center": 954,
+          "top": 1022,
+          "left": 876,
+          "width": 157,
+          "height": 43
+        },
+        {
+          "key": "width",
+          "text": "60 мм",
+          "size": 56,
+          "center": 1338,
+          "top": 1478,
+          "left": 1260,
+          "width": 157,
+          "height": 43
+        },
+        {
+          "key": "thickness",
+          "text": "2 мм",
+          "size": 56,
+          "left": 1692,
+          "top": 1084,
+          "width": 121,
+          "height": 42
+        },
+        {
+          "key": "mass",
+          "text": "3,59 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 608,
+          "top": 1634,
+          "width": 191,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/product-illustrations/profile-pipe-square-60x60x2.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "998ae62a5bf296c1732e3a6a4ccfea1b6d59c40dfa3df49a3f0039bf7ad293bc"
+    },
+    {
+      "id": "profile-pipe-square-60x60x3",
+      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-60x60x3.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/trubi_kvadratnie/truba_kvadratnaya_1448_1086_original.jpg",
+      "signature": "f294cd69",
+      "labels": [
+        {
+          "key": "title",
+          "text": "60 x 60 x 3"
+        },
+        {
+          "key": "height",
+          "text": "60 мм"
+        },
+        {
+          "key": "width",
+          "text": "60 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "3 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "5,25 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "height",
+        "width",
+        "thickness",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "60 x 60 x 3",
+          "size": 84,
+          "weight": 700,
+          "left": 749,
+          "top": 237,
+          "width": 423,
+          "height": 63
+        },
+        {
+          "key": "height",
+          "text": "60 мм",
+          "size": 56,
+          "center": 954,
+          "top": 1022,
+          "left": 876,
+          "width": 157,
+          "height": 43
+        },
+        {
+          "key": "width",
+          "text": "60 мм",
+          "size": 56,
+          "center": 1338,
+          "top": 1478,
+          "left": 1260,
+          "width": 157,
+          "height": 43
+        },
+        {
+          "key": "thickness",
+          "text": "3 мм",
+          "size": 56,
+          "left": 1692,
+          "top": 1084,
+          "width": 123,
+          "height": 44
+        },
+        {
+          "key": "mass",
+          "text": "5,25 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 608,
+          "top": 1634,
+          "width": 190,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/product-illustrations/profile-pipe-square-60x60x3.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "9209a7063e276434297bfe8256c56a3bfcaa3733601c59e3c6545ed2a1747d5f"
+    },
+    {
+      "id": "profile-pipe-square-60x60x4",
+      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-60x60x4.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/trubi_kvadratnie/truba_kvadratnaya_1448_1086_original.jpg",
+      "signature": "7f3139ad",
+      "labels": [
+        {
+          "key": "title",
+          "text": "60 x 60 x 4"
+        },
+        {
+          "key": "height",
+          "text": "60 мм"
+        },
+        {
+          "key": "width",
+          "text": "60 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "4 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "6,82 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "height",
+        "width",
+        "thickness",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "60 x 60 x 4",
+          "size": 84,
+          "weight": 700,
+          "left": 749,
+          "top": 237,
+          "width": 426,
+          "height": 63
+        },
+        {
+          "key": "height",
+          "text": "60 мм",
+          "size": 56,
+          "center": 954,
+          "top": 1022,
+          "left": 876,
+          "width": 157,
+          "height": 43
+        },
+        {
+          "key": "width",
+          "text": "60 мм",
+          "size": 56,
+          "center": 1338,
+          "top": 1478,
+          "left": 1260,
+          "width": 157,
+          "height": 43
+        },
+        {
+          "key": "thickness",
+          "text": "4 мм",
+          "size": 56,
+          "left": 1692,
+          "top": 1084,
+          "width": 126,
+          "height": 41
+        },
+        {
+          "key": "mass",
+          "text": "6,82 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 608,
+          "top": 1634,
+          "width": 190,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/product-illustrations/profile-pipe-square-60x60x4.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "f05dbe1ac35905ceeb5632ff98b857328b34b21f5429ac9ae52ce4d2e2f5c5dc"
+    },
+    {
+      "id": "profile-pipe-square-80x80x2",
+      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-80x80x2.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/trubi_kvadratnie/truba_kvadratnaya_1448_1086_original.jpg",
+      "signature": "cb772bdc",
+      "labels": [
+        {
+          "key": "title",
+          "text": "80 x 80 x 2"
+        },
+        {
+          "key": "height",
+          "text": "80 мм"
+        },
+        {
+          "key": "width",
+          "text": "80 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "2 мм"
+        },
+        {
+          "key": "length",
+          "text": "6–12 м"
+        },
+        {
+          "key": "mass",
+          "text": "4,844 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "height",
+        "width",
+        "thickness",
+        "length",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "80 x 80 x 2",
+          "size": 84,
+          "weight": 700,
+          "left": 749,
+          "top": 237,
+          "width": 420,
+          "height": 64
+        },
+        {
+          "key": "height",
+          "text": "80 мм",
+          "size": 56,
+          "center": 954,
+          "top": 1022,
+          "left": 876,
+          "width": 157,
+          "height": 44
+        },
+        {
+          "key": "width",
+          "text": "80 мм",
+          "size": 56,
+          "center": 1338,
+          "top": 1478,
+          "left": 1260,
+          "width": 157,
+          "height": 44
+        },
+        {
+          "key": "thickness",
+          "text": "2 мм",
+          "size": 56,
+          "left": 1692,
+          "top": 1084,
+          "width": 121,
+          "height": 42
+        },
+        {
+          "key": "length",
+          "text": "6–12 м",
+          "size": 44,
+          "weight": 700,
+          "left": 608,
+          "top": 1568,
+          "width": 132,
+          "height": 33
+        },
+        {
+          "key": "mass",
+          "text": "4,844 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 608,
+          "top": 1634,
+          "width": 223,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/product-illustrations/profile-pipe-square-80x80x2.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "17fb8198405be18b2e41a1c5fbd5644905c37eab38db931609eb64df6565f5b8"
+    },
+    {
+      "id": "profile-pipe-square-80x80x3",
+      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-80x80x3.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/trubi_kvadratnie/truba_kvadratnaya_1448_1086_original.jpg",
+      "signature": "3e6935dd",
+      "labels": [
+        {
+          "key": "title",
+          "text": "80 x 80 x 3"
+        },
+        {
+          "key": "height",
+          "text": "80 мм"
+        },
+        {
+          "key": "width",
+          "text": "80 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "3 мм"
+        },
+        {
+          "key": "length",
+          "text": "12 м"
+        },
+        {
+          "key": "mass",
+          "text": "7,13 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "height",
+        "width",
+        "thickness",
+        "length",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "80 x 80 x 3",
+          "size": 84,
+          "weight": 700,
+          "left": 749,
+          "top": 237,
+          "width": 423,
+          "height": 64
+        },
+        {
+          "key": "height",
+          "text": "80 мм",
+          "size": 56,
+          "center": 954,
+          "top": 1022,
+          "left": 876,
+          "width": 157,
+          "height": 44
+        },
+        {
+          "key": "width",
+          "text": "80 мм",
+          "size": 56,
+          "center": 1338,
+          "top": 1478,
+          "left": 1260,
+          "width": 157,
+          "height": 44
+        },
+        {
+          "key": "thickness",
+          "text": "3 мм",
+          "size": 56,
+          "left": 1692,
+          "top": 1084,
+          "width": 123,
+          "height": 44
+        },
+        {
+          "key": "length",
+          "text": "12 м",
+          "size": 44,
+          "weight": 700,
+          "left": 608,
+          "top": 1568,
+          "width": 84,
+          "height": 32
+        },
+        {
+          "key": "mass",
+          "text": "7,13 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 608,
+          "top": 1634,
+          "width": 168,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/product-illustrations/profile-pipe-square-80x80x3.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "e1c70f2f60c916cd0ee5b23115bc2a33af9fdaf798fb432f0894eb78e10b3182"
+    },
+    {
+      "id": "profile-pipe-square-80x80x4",
+      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-80x80x4.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/trubi_kvadratnie/truba_kvadratnaya_1448_1086_original.jpg",
+      "signature": "2d6944db",
+      "labels": [
+        {
+          "key": "title",
+          "text": "80 x 80 x 4"
+        },
+        {
+          "key": "height",
+          "text": "80 мм"
+        },
+        {
+          "key": "width",
+          "text": "80 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "4 мм"
+        },
+        {
+          "key": "length",
+          "text": "12 м"
+        },
+        {
+          "key": "mass",
+          "text": "9,33 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "height",
+        "width",
+        "thickness",
+        "length",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "80 x 80 x 4",
+          "size": 84,
+          "weight": 700,
+          "left": 749,
+          "top": 237,
+          "width": 426,
+          "height": 64
+        },
+        {
+          "key": "height",
+          "text": "80 мм",
+          "size": 56,
+          "center": 954,
+          "top": 1022,
+          "left": 876,
+          "width": 157,
+          "height": 44
+        },
+        {
+          "key": "width",
+          "text": "80 мм",
+          "size": 56,
+          "center": 1338,
+          "top": 1478,
+          "left": 1260,
+          "width": 157,
+          "height": 44
+        },
+        {
+          "key": "thickness",
+          "text": "4 мм",
+          "size": 56,
+          "left": 1692,
+          "top": 1084,
+          "width": 126,
+          "height": 41
+        },
+        {
+          "key": "length",
+          "text": "12 м",
+          "size": 44,
+          "weight": 700,
+          "left": 608,
+          "top": 1568,
+          "width": 84,
+          "height": 32
+        },
+        {
+          "key": "mass",
+          "text": "9,33 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 608,
+          "top": 1634,
+          "width": 189,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/product-illustrations/profile-pipe-square-80x80x4.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "6a95679d1cf85290ad968653fdd857c32b585e928a41c75abe1e60175562069c"
+    },
+    {
+      "id": "profile-pipe-square-100x100x3",
+      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-100x100x3.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/trubi_kvadratnie/truba_kvadratnaya_1448_1086_original.jpg",
+      "signature": "3c922d1d",
+      "labels": [
+        {
+          "key": "title",
+          "text": "100 x 100 x 3"
+        },
+        {
+          "key": "height",
+          "text": "100 мм"
+        },
+        {
+          "key": "width",
+          "text": "100 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "3 мм"
+        },
+        {
+          "key": "length",
+          "text": "12 м"
+        },
+        {
+          "key": "mass",
+          "text": "9,02 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "height",
+        "width",
+        "thickness",
+        "length",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "100 x 100 x 3",
+          "size": 84,
+          "weight": 700,
+          "left": 749,
+          "top": 237,
+          "width": 497,
+          "height": 63
+        },
+        {
+          "key": "height",
+          "text": "100 мм",
+          "size": 56,
+          "center": 954,
+          "top": 1022,
+          "left": 865,
+          "width": 179,
+          "height": 43
+        },
+        {
+          "key": "width",
+          "text": "100 мм",
+          "size": 56,
+          "center": 1338,
+          "top": 1478,
+          "left": 1249,
+          "width": 179,
+          "height": 43
+        },
+        {
+          "key": "thickness",
+          "text": "3 мм",
+          "size": 56,
+          "left": 1692,
+          "top": 1084,
+          "width": 123,
+          "height": 44
+        },
+        {
+          "key": "length",
+          "text": "12 м",
+          "size": 44,
+          "weight": 700,
+          "left": 608,
+          "top": 1568,
+          "width": 84,
+          "height": 32
+        },
+        {
+          "key": "mass",
+          "text": "9,02 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 608,
+          "top": 1634,
+          "width": 191,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/product-illustrations/profile-pipe-square-100x100x3.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "9b2fd821493fcb90964ead3fae08cfe0889b792cfcc93537499bfc9b88c54173"
+    },
+    {
+      "id": "profile-pipe-square-100x100x4",
+      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-100x100x4.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/trubi_kvadratnie/truba_kvadratnaya_1448_1086_original.jpg",
+      "signature": "2acff91f",
+      "labels": [
+        {
+          "key": "title",
+          "text": "100 x 100 x 4"
+        },
+        {
+          "key": "height",
+          "text": "100 мм"
+        },
+        {
+          "key": "width",
+          "text": "100 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "4 мм"
+        },
+        {
+          "key": "length",
+          "text": "12 м"
+        },
+        {
+          "key": "mass",
+          "text": "11,84 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "height",
+        "width",
+        "thickness",
+        "length",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "100 x 100 x 4",
+          "size": 84,
+          "weight": 700,
+          "left": 749,
+          "top": 237,
+          "width": 500,
+          "height": 63
+        },
+        {
+          "key": "height",
+          "text": "100 мм",
+          "size": 56,
+          "center": 954,
+          "top": 1022,
+          "left": 865,
+          "width": 179,
+          "height": 43
+        },
+        {
+          "key": "width",
+          "text": "100 мм",
+          "size": 56,
+          "center": 1338,
+          "top": 1478,
+          "left": 1249,
+          "width": 179,
+          "height": 43
+        },
+        {
+          "key": "thickness",
+          "text": "4 мм",
+          "size": 56,
+          "left": 1692,
+          "top": 1084,
+          "width": 126,
+          "height": 41
+        },
+        {
+          "key": "length",
+          "text": "12 м",
+          "size": 44,
+          "weight": 700,
+          "left": 608,
+          "top": 1568,
+          "width": 84,
+          "height": 32
+        },
+        {
+          "key": "mass",
+          "text": "11,84 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 608,
+          "top": 1634,
+          "width": 201,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/product-illustrations/profile-pipe-square-100x100x4.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "829edaa9f83d8089620805345fb293d6db7f094ae1efca16aa82b3cd07873424"
+    },
+    {
+      "id": "profile-pipe-square-100x100x5",
+      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-100x100x5.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/trubi_kvadratnie/truba_kvadratnaya_1448_1086_original.jpg",
+      "signature": "75e70e1f",
+      "labels": [
+        {
+          "key": "title",
+          "text": "100 x 100 x 5"
+        },
+        {
+          "key": "height",
+          "text": "100 мм"
+        },
+        {
+          "key": "width",
+          "text": "100 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "5 мм"
+        },
+        {
+          "key": "length",
+          "text": "12 м"
+        },
+        {
+          "key": "mass",
+          "text": "14,58 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "height",
+        "width",
+        "thickness",
+        "length",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "100 x 100 x 5",
+          "size": 84,
+          "weight": 700,
+          "left": 749,
+          "top": 237,
+          "width": 496,
+          "height": 63
+        },
+        {
+          "key": "height",
+          "text": "100 мм",
+          "size": 56,
+          "center": 954,
+          "top": 1022,
+          "left": 865,
+          "width": 179,
+          "height": 43
+        },
+        {
+          "key": "width",
+          "text": "100 мм",
+          "size": 56,
+          "center": 1338,
+          "top": 1478,
+          "left": 1249,
+          "width": 179,
+          "height": 43
+        },
+        {
+          "key": "thickness",
+          "text": "5 мм",
+          "size": 56,
+          "left": 1692,
+          "top": 1084,
+          "width": 122,
+          "height": 42
+        },
+        {
+          "key": "length",
+          "text": "12 м",
+          "size": 44,
+          "weight": 700,
+          "left": 608,
+          "top": 1568,
+          "width": 84,
+          "height": 32
+        },
+        {
+          "key": "mass",
+          "text": "14,58 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 608,
+          "top": 1634,
+          "width": 210,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/product-illustrations/profile-pipe-square-100x100x5.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "7be243477d4497920ac697c5fe9dbd1ce47b5b2200c83d6cbd8eb84303bdfa6d"
+    },
+    {
+      "id": "profile-pipe-square-120x120x3",
+      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-120x120x3.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/trubi_kvadratnie/truba_kvadratnaya_1448_1086_original.jpg",
+      "signature": "88c3b02b",
+      "labels": [
+        {
+          "key": "title",
+          "text": "120 x 120 x 3"
+        },
+        {
+          "key": "height",
+          "text": "120 мм"
+        },
+        {
+          "key": "width",
+          "text": "120 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "3 мм"
+        },
+        {
+          "key": "length",
+          "text": "12 м"
+        },
+        {
+          "key": "mass",
+          "text": "10,84 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "height",
+        "width",
+        "thickness",
+        "length",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "120 x 120 x 3",
+          "size": 84,
+          "weight": 700,
+          "left": 749,
+          "top": 237,
+          "width": 487,
+          "height": 63
+        },
+        {
+          "key": "height",
+          "text": "120 мм",
+          "size": 56,
+          "center": 954,
+          "top": 1022,
+          "left": 866,
+          "width": 176,
+          "height": 43
+        },
+        {
+          "key": "width",
+          "text": "120 мм",
+          "size": 56,
+          "center": 1338,
+          "top": 1478,
+          "left": 1250,
+          "width": 176,
+          "height": 43
+        },
+        {
+          "key": "thickness",
+          "text": "3 мм",
+          "size": 56,
+          "left": 1692,
+          "top": 1084,
+          "width": 123,
+          "height": 44
+        },
+        {
+          "key": "length",
+          "text": "12 м",
+          "size": 44,
+          "weight": 700,
+          "left": 608,
+          "top": 1568,
+          "width": 84,
+          "height": 32
+        },
+        {
+          "key": "mass",
+          "text": "10,84 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 608,
+          "top": 1634,
+          "width": 212,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/product-illustrations/profile-pipe-square-120x120x3.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "b04099a046e97ee3b232ffd48bedc1b591de8970106d9ef7ab9b5bac241c39e5"
+    },
+    {
+      "id": "profile-pipe-square-120x120x4",
+      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-120x120x4.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/trubi_kvadratnie/truba_kvadratnaya_1448_1086_original.jpg",
+      "signature": "f328e5ef",
+      "labels": [
+        {
+          "key": "title",
+          "text": "120 x 120 x 4"
+        },
+        {
+          "key": "height",
+          "text": "120 мм"
+        },
+        {
+          "key": "width",
+          "text": "120 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "4 мм"
+        },
+        {
+          "key": "length",
+          "text": "12 м"
+        },
+        {
+          "key": "mass",
+          "text": "14,25 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "height",
+        "width",
+        "thickness",
+        "length",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "120 x 120 x 4",
+          "size": 84,
+          "weight": 700,
+          "left": 749,
+          "top": 237,
+          "width": 490,
+          "height": 63
+        },
+        {
+          "key": "height",
+          "text": "120 мм",
+          "size": 56,
+          "center": 954,
+          "top": 1022,
+          "left": 866,
+          "width": 176,
+          "height": 43
+        },
+        {
+          "key": "width",
+          "text": "120 мм",
+          "size": 56,
+          "center": 1338,
+          "top": 1478,
+          "left": 1250,
+          "width": 176,
+          "height": 43
+        },
+        {
+          "key": "thickness",
+          "text": "4 мм",
+          "size": 56,
+          "left": 1692,
+          "top": 1084,
+          "width": 126,
+          "height": 41
+        },
+        {
+          "key": "length",
+          "text": "12 м",
+          "size": 44,
+          "weight": 700,
+          "left": 608,
+          "top": 1568,
+          "width": 84,
+          "height": 32
+        },
+        {
+          "key": "mass",
+          "text": "14,25 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 608,
+          "top": 1634,
+          "width": 210,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/product-illustrations/profile-pipe-square-120x120x4.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "bc77b53e9636ce6521a88ee6e2e573e851fb9fe450e039e9c0c0463b8930aa77"
+    },
+    {
+      "id": "profile-pipe-square-140x140x4",
+      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-140x140x4.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/trubi_kvadratnie/truba_kvadratnaya_1448_1086_original.jpg",
+      "signature": "36dd7317",
+      "labels": [
+        {
+          "key": "title",
+          "text": "140 x 140 x 4"
+        },
+        {
+          "key": "height",
+          "text": "140 мм"
+        },
+        {
+          "key": "width",
+          "text": "140 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "4 мм"
+        },
+        {
+          "key": "length",
+          "text": "12 м"
+        },
+        {
+          "key": "mass",
+          "text": "16,76 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "height",
+        "width",
+        "thickness",
+        "length",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "140 x 140 x 4",
+          "size": 84,
+          "weight": 700,
+          "left": 749,
+          "top": 237,
+          "width": 500,
+          "height": 63
+        },
+        {
+          "key": "height",
+          "text": "140 мм",
+          "size": 56,
+          "center": 954,
+          "top": 1022,
+          "left": 864,
+          "width": 180,
+          "height": 43
+        },
+        {
+          "key": "width",
+          "text": "140 мм",
+          "size": 56,
+          "center": 1338,
+          "top": 1478,
+          "left": 1248,
+          "width": 180,
+          "height": 43
+        },
+        {
+          "key": "thickness",
+          "text": "4 мм",
+          "size": 56,
+          "left": 1692,
+          "top": 1084,
+          "width": 126,
+          "height": 41
+        },
+        {
+          "key": "length",
+          "text": "12 м",
+          "size": 44,
+          "weight": 700,
+          "left": 608,
+          "top": 1568,
+          "width": 84,
+          "height": 32
+        },
+        {
+          "key": "mass",
+          "text": "16,76 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 608,
+          "top": 1634,
+          "width": 203,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/product-illustrations/profile-pipe-square-140x140x4.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "5ebb068d9d640792c4e54aded17b978c729b0e673d4d7473117aae12ff5c5395"
+    },
+    {
+      "id": "profile-pipe-square-160x160x4",
+      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-160x160x4.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/trubi_kvadratnie/truba_kvadratnaya_1448_1086_original.jpg",
+      "signature": "14ca35e3",
+      "labels": [
+        {
+          "key": "title",
+          "text": "160 x 160 x 4"
+        },
+        {
+          "key": "height",
+          "text": "160 мм"
+        },
+        {
+          "key": "width",
+          "text": "160 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "4 мм"
+        },
+        {
+          "key": "length",
+          "text": "12 м"
+        },
+        {
+          "key": "mass",
+          "text": "19,27 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "height",
+        "width",
+        "thickness",
+        "length",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "160 x 160 x 4",
+          "size": 84,
+          "weight": 700,
+          "left": 749,
+          "top": 237,
+          "width": 494,
+          "height": 63
+        },
+        {
+          "key": "height",
+          "text": "160 мм",
+          "size": 56,
+          "center": 954,
+          "top": 1022,
+          "left": 865,
+          "width": 178,
+          "height": 43
+        },
+        {
+          "key": "width",
+          "text": "160 мм",
+          "size": 56,
+          "center": 1338,
+          "top": 1478,
+          "left": 1249,
+          "width": 178,
+          "height": 43
+        },
+        {
+          "key": "thickness",
+          "text": "4 мм",
+          "size": 56,
+          "left": 1692,
+          "top": 1084,
+          "width": 126,
+          "height": 41
+        },
+        {
+          "key": "length",
+          "text": "12 м",
+          "size": 44,
+          "weight": 700,
+          "left": 608,
+          "top": 1568,
+          "width": 84,
+          "height": 32
+        },
+        {
+          "key": "mass",
+          "text": "19,27 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 608,
+          "top": 1634,
+          "width": 205,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/product-illustrations/profile-pipe-square-160x160x4.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "69985fe0a605cdc0268a54d18c8d3369b9def1551cb6172f0186bf6cbff06d28"
+    }
+  ]
+}

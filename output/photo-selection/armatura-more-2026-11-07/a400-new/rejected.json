@@ -1,0 +1,62 @@
+[
+  {
+    "id": "N01",
+    "group": "А400 · 35ГС",
+    "kind": "Крупный план связок",
+    "sourceName": "АйронПолимер",
+    "source": "https://ironpolimer.ru/armatura-35gs/",
+    "image": "https://ironpolimer.ru/assets/images/gallery/metalloprokat/armatura-35gs.jpg",
+    "note": "Фото на странице арматуры 35ГС",
+    "reason": "Предметная иллюстрация вместо складского кадра"
+  },
+  {
+    "id": "N02",
+    "group": "А400 · 35ГС",
+    "kind": "Связки арматуры",
+    "sourceName": "IRONCC",
+    "source": "https://www.ironcc.kz/catalog/armatura_1/1077/",
+    "image": "https://www.ironcc.kz/upload/iblock/663/6x8l0jiq7ebzdt8hc3n0b2gvkhdu9a9p.png",
+    "note": "Карточка арматуры 12 мм 35ГС",
+    "reason": "Повтор прежней фотографии А400 35ГС"
+  },
+  {
+    "id": "N03",
+    "group": "А400 · 35ГС",
+    "kind": "Крупный план",
+    "sourceName": "ГК МеталлургПром",
+    "source": "https://gkmp-spb.ru/armatura/35gs/armatura-a3-35gs-16mm-1/",
+    "image": "https://gkmp-spb.ru/files/gallery/854/big/35gs_1617284874_1626259310.jpg",
+    "note": "Карточка А3 35ГС 16 мм",
+    "reason": "Предметная иллюстрация вместо складского кадра"
+  },
+  {
+    "id": "N04",
+    "group": "А400 · 35ГС",
+    "kind": "Складской ракурс",
+    "sourceName": "Металон 2017",
+    "source": "https://metalon2017.kz/p131286590-armatura-35gs.html",
+    "image": "https://images.satu.kz/240836473_w640_h640_armatura-a3-36.jpg",
+    "note": "Карточка А3 36 мм 35ГС",
+    "reason": "Предметная иллюстрация вместо складского кадра"
+  },
+  {
+    "id": "N06",
+    "group": "Для обеих подкатегорий",
+    "kind": "Связки на складе",
+    "sourceName": "Везу Металл",
+    "source": "https://vezumetall.ru/catalog/armatura/",
+    "image": "https://vezumetall.ru/upload/dev2fun.imagecompress/webp/iblock/c81/utsutnohh0f6dqxrm2veppcbx4zqw0xv.webp",
+    "note": "Общая иллюстрация арматуры; точная марка партии не подтверждена",
+    "reason": "Предметная иллюстрация вместо складского кадра"
+  },
+  {
+    "id": "N14",
+    "group": "Для обеих подкатегорий",
+    "kind": "Склад Узметкомбината",
+    "sourceName": "Kun.uz / Узметкомбинат",
+    "source": "https://kun.uz/ru/06672684",
+    "image": "https://storage.kun.uz/source/3/1GOp1A-0GcGQXUe0mKN9yGSFVqq2LFrd.jpg",
+    "note": "Публикация о продукции комбината. Точная марка партии не установлена",
+    "reason": "В кадре преобладает другой сортовой прокат"
+  }
+]

@@ -17,9 +17,11 @@ const illustrationSourcesDirectory = "/images/catalog/illustration-sources";
 
 export const catalogCoverGalleries: Partial<Record<string, {cover?: string; additional: readonly string[]}>> = {
   "cat-arm": {
+    cover: `${rebarCoverDirectory}/a400-warehouse-berlion.webp`,
     additional: [
+      `${rebarCoverDirectory}/a400-production-veles.jpg`,
+      "/images/catalog/armatura.jpg",
       `${rebarCoverDirectory}/a500c-warehouse-meg.webp`,
-      `${rebarCoverDirectory}/a400-35gs-stock-moststal.jpg`,
       `${rebarCoverDirectory}/a240-stock-citymet.jpg`,
     ],
   },
@@ -27,24 +29,28 @@ export const catalogCoverGalleries: Partial<Record<string, {cover?: string; addi
     additional: [
       `${rebarCoverDirectory}/a500c-warehouse-meg.webp`,
       `${rebarCoverDirectory}/a500c-bundle-tag.jpg`,
+      `${rebarCoverDirectory}/a500c-stock-van-metall.png`,
+      `${rebarCoverDirectory}/a500c-yard-metallobaza.jpg`,
     ],
   },
   "type-cat-arm-sub-2": {
     additional: [
       `${rebarCoverDirectory}/a400-35gs-stock-moststal.jpg`,
+      `${rebarCoverDirectory}/rebar-warehouse-arcelormittal.jpg`,
     ],
   },
   "type-cat-arm-sub-3": {
     additional: [
       `${rebarCoverDirectory}/a400-25g2s-stock-pkfsst.jpg`,
       `${rebarCoverDirectory}/a400-25g2s-bundles-metallmk.jpg`,
+      `${rebarCoverDirectory}/rebar-warehouse-made-in-china.jpg`,
     ],
   },
   "type-cat-arm-sub-4": {
     additional: [
-      `${rebarCoverDirectory}/a240-stock-citymet.jpg`,
       `${rebarCoverDirectory}/a240-bundle-citymet.jpg`,
       `${rebarCoverDirectory}/a240-rods-metallrs.webp`,
+      `${rebarCoverDirectory}/a240-stock-metall-dk.jpg`,
     ],
   },
   "cat-trp": {
@@ -52,13 +58,10 @@ export const catalogCoverGalleries: Partial<Record<string, {cover?: string; addi
     additional: [
       `${profileTubeCoverDirectory}/robmetalstal-square-warehouse.webp`,
       `${profileTubeCoverDirectory}/marketstal-rectangular-bundle.jpg`,
-      `${profileTubeCoverDirectory}/stroy-partner-square-ends.jpg`,
-      `${profileTubeCoverDirectory}/mecafluid-rectangular-ends.jpg`,
     ],
   },
   "type-cat-trp-sub-1": {
     additional: [
-      `${profileTubeCoverDirectory}/robmetalstal-square-warehouse.webp`,
       `${profileTubeCoverDirectory}/stroy-partner-square-ends.jpg`,
       `${profileTubeCoverDirectory}/metamoll-square-detail.jpg`,
     ],
@@ -67,7 +70,6 @@ export const catalogCoverGalleries: Partial<Record<string, {cover?: string; addi
     additional: [
       `${profileTubeCoverDirectory}/marketstal-rectangular-bundle.jpg`,
       `${profileTubeCoverDirectory}/gradstal-rectangular-stack.jpg`,
-      `${profileTubeCoverDirectory}/mecafluid-rectangular-ends.jpg`,
     ],
   },
   "cat-trk": {

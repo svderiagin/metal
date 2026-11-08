@@ -536,8 +536,8 @@
     "rozmet-cat-otvodi": "/images/catalog/rozmet/491b84f66b91687b66e9.jpg"
   },
   "types": {
-    "type-cat-arm-sub-2": "/images/catalog/armatura/armatura_a400_35g.jpg",
-    "type-cat-arm-sub-3": "/images/catalog/armatura/armatura_a400_25g2c.jpg",
+    "type-cat-arm-sub-2": "/images/catalog/armatura/cover/a400-ribbed-detail-expo.jpg",
+    "type-cat-arm-sub-3": "/images/catalog/armatura/cover/a400-ribbed-detail-expo.jpg",
     "type-cat-bal-sub-1": "/images/catalog/balka/balka-regular.jpg",
     "type-cat-bal-sub-2": "/images/catalog/balka/balka-shirokopolochnaya.jpg",
     "type-cat-bal-sub-3": "/images/catalog/balka/balka-kolonnaya.jpg",
@@ -550,7 +550,7 @@
     "type-cat-mesh-sub-3": "/images/catalog/setka-metallicheskaya/setka-svarnaya-karty.jpg",
     "type-cat-trp-sub-1": "/images/catalog/truby-profilnye/truby-kvadratnie.jpg",
     "type-cat-trp-sub-2": "/images/catalog/truby-profilnye/truby-priamougolnie.jpg",
-    "type-cat-arm-sub-1": "/images/catalog/armatura/armatura_а500с.jpg",
+    "type-cat-arm-sub-1": "/images/catalog/armatura/cover/a500c-balakovo-warehouse.jpg",
     "type-cat-arm-sub-4": "/images/catalog/armatura/armatura_a240_a1.jpg",
     "type-cat-trk-sub-3": "/images/catalog/truba-kruglaya/truba-vodogazoprovodnaya-cink.jpg",
     "type-cat-trk-sub-4": "/images/catalog/truba-kruglaya/truba-elektrosvarnaya-cink.jpg",

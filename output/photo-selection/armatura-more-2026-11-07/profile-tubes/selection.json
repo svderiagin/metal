@@ -1,0 +1,113 @@
+[
+  {
+    "id": "P03",
+    "group": "Корневая категория",
+    "kind": "Стальной прокат на складе",
+    "sourceName": "Central Plate Services",
+    "source": "https://www.centralplateservices.com/",
+    "image": "https://irp.cdn-website.com/3ed056fa/dms3rep/multi/Central-plate_steel2.jpg",
+    "note": "Основной кандидат: крупный складской план и запас разрешения для большого экрана. Также подходит для квадратных труб.",
+    "width": 1920,
+    "height": 1280
+  },
+  {
+    "id": "K04",
+    "group": "Квадратные трубы",
+    "kind": "Крупные квадратные сечения",
+    "sourceName": "Поставщик Alibaba",
+    "source": "https://www.alibaba.com/showroom/200x200-square-hollow-pipe.html",
+    "image": "https://s.alicdn.com/%40sc04/kf/H3dda1761138745a681f2b721a1633b821/SHS-Hollow-Square-Carbon-Steel-Tube-Hot-Sale-25x25-to-200x200-for-Construction-and-Structural-Applications-Black-Square-Pipe.png",
+    "note": "Основной кандидат для квадратных труб: хорошо видны торцы и длина.",
+    "width": 1440,
+    "height": 1080
+  },
+  {
+    "id": "P07",
+    "group": "Прямоугольные трубы",
+    "kind": "Прямоугольное сечение крупным планом",
+    "sourceName": "Asmuss",
+    "source": "https://www.asmuss.co.nz/steel/products/steel",
+    "image": "https://www.asmuss.co.nz/hs-fs/hubfs/Manufacturing%20and%20Engineering%20-%20Web%20%284%29.jpeg?height=1080&name=Manufacturing+and+Engineering+-+Web+%284%29.jpeg&width=1618",
+    "note": "Основной кандидат для прямоугольных труб: хорошо видна форма сечения, высокое разрешение.",
+    "width": 1618,
+    "height": 1080
+  },
+  {
+    "id": "P01",
+    "group": "Корневая категория",
+    "kind": "Профильные трубы на складе",
+    "sourceName": "North Shore Steel",
+    "source": "https://www.nssco.com/media-gallery/",
+    "image": "https://www.nssco.com/assets/images/content/StructureSteel_RectSquare_Tube_1.jpg",
+    "note": "Общий складской ракурс: квадратные и прямоугольные профили, перспектива склада.",
+    "width": 1000,
+    "height": 523
+  },
+  {
+    "id": "R04",
+    "group": "Корневая категория",
+    "kind": "Склад квадратных и прямоугольных труб",
+    "sourceName": "St52 Kutu Profil",
+    "source": "https://www.st52kutuprofil.com/",
+    "image": "https://www.st52kutuprofil.com/images/st52-kutu-profil.webp",
+    "note": "Квадратные и прямоугольные сечения вместе. Дополнительный кадр для общей категории.",
+    "width": 850,
+    "height": 623
+  },
+  {
+    "id": "K06",
+    "group": "Корневая категория",
+    "kind": "Технический крупный план профиля",
+    "sourceName": "SSAB",
+    "source": "https://www.ssab.com/en/brands-and-products/steel-categories/hollow-sections",
+    "image": "https://www.ssab.com/-/media/images/hollow-sectons/new-start-page/1920x1080-hollow-section-hero.jpg?m=20220818084857",
+    "note": "Тёмный технический крупный план замкнутых профилей. Дополнительный кадр для общей категории.",
+    "width": 1920,
+    "height": 1080
+  },
+  {
+    "id": "K05",
+    "group": "Квадратные трубы",
+    "kind": "Стеллажи с профильными трубами",
+    "sourceName": "TJMC Steel",
+    "source": "https://www.tjmcsteel.com/square-rectangular-steel-tube/",
+    "image": "https://www.tjmcsteel.com/data/watermark/main/20241220/6764e4e29fee0_.webp",
+    "note": "Складские пачки квадратных труб. Дополнительный ракурс.",
+    "width": 800,
+    "height": 800
+  },
+  {
+    "id": "K07",
+    "group": "Квадратные трубы",
+    "kind": "Квадратные торцы крупным планом",
+    "sourceName": "SteelM ABC",
+    "source": "https://steelm-abc.com/index.php/gallery/86-products/130-hollow-sections",
+    "image": "https://steelm-abc.com/images/gallery/Hollow-sections.jpg",
+    "note": "Чистый крупный план квадратного сечения на складском стеллаже.",
+    "width": 940,
+    "height": 540,
+    "previousId": "R05"
+  },
+  {
+    "id": "K01",
+    "group": "Квадратные трубы",
+    "kind": "Пачки квадратных труб",
+    "sourceName": "Siano Steel",
+    "source": "https://sianosteel.en.made-in-china.com/product/edpGqiwufNkn/China-ASTM-A36-Black-Square-Tube-Hollow-Structural-Steel-Profile.html",
+    "image": "https://image.made-in-china.com/2f0j00cdilWTyFMVqb/ASTM-A36-Black-Square-Tube-Hollow-Structural-Steel-Profile.webp",
+    "note": "Вертикальный складской ракурс. Для дополнительного кадра галереи.",
+    "width": 800,
+    "height": 800
+  },
+  {
+    "id": "R02",
+    "group": "Прямоугольные трубы",
+    "kind": "Профильные трубы на складе",
+    "sourceName": "Bestar Steel",
+    "source": "https://www.bestartubes.com/rectangular-and-square-tube-product/",
+    "image": "https://www.bestartubes.com/uploads/square-tube.jpg",
+    "note": "Пачки прямоугольных профилей на складе. Альтернативный общий ракурс.",
+    "width": 1000,
+    "height": 750
+  }
+]

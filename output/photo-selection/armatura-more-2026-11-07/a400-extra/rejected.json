@@ -1,0 +1,72 @@
+[
+  {
+    "id": "N20",
+    "group": "А400 · 35ГС",
+    "kind": "Связки арматуры 35ГС",
+    "sourceName": "СтальТрейд",
+    "source": "https://staltrade.uz/product/sort-prokat/armatura/armatura-riflenaya-36-mm-a400-35gs/",
+    "image": "https://staltrade.uz/upload/medialibrary/00a/sbco13j9xlnf3dv37882pnmv6z61o5rd/armature_ridj_36_a400_35gs_gost5781_82.jpg",
+    "note": "Карточка А400 35ГС 36 мм",
+    "reason": "Техническая иллюстрация с размерами вместо фотографии"
+  },
+  {
+    "id": "N22",
+    "group": "Общие складские кадры",
+    "kind": "Складской ракурс",
+    "sourceName": "Металлопрокат №1",
+    "source": "https://metalloprokat-n1.ru/",
+    "image": "https://metalloprokat-n1.ru/img/18840502.jpg",
+    "note": "Склад поставщика металлопроката; точная марка партии не установлена",
+    "reason": "Композиция слишком близка к ранее показанным складским кадрам"
+  },
+  {
+    "id": "N27",
+    "group": "Общие складские кадры",
+    "kind": "Пачки арматуры",
+    "sourceName": "Shandong Quansheng",
+    "source": "https://sdqscljt.en.made-in-china.com/product/sTPpQSCAhBhu/China-Premium-Grade-40-60-Steel-Rebars-for-Construction-Projects.html",
+    "image": "https://image.made-in-china.com/2f0j00EgFMHsihEucm/Premium-Grade-40-60-Steel-Rebars-for-Construction-Projects.jpg",
+    "note": "Карточка поставщика; иностранные стандарты, марка 35ГС/25Г2С не подтверждена",
+    "reason": "Композиция похожа на N23; оставлен горизонтальный ракурс N23"
+  },
+  {
+    "id": "N32",
+    "group": "Общие складские кадры",
+    "kind": "Ракурс из галереи",
+    "sourceName": "Gardizi Group",
+    "source": "https://www.gardizigroup.com/photo-gallery",
+    "image": "https://static.wixstatic.com/media/af5783_f5cc637d63264219bf844d031411d834~mv2.jpg/v1/fill/w_988%2Ch_659%2Cq_90%2Cenc_avif%2Cquality_auto/af5783_f5cc637d63264219bf844d031411d834~mv2.jpg",
+    "note": "Дополнительное фото из галереи компании; марка партии не установлена",
+    "reason": "Стальная заготовка вместо арматуры"
+  },
+  {
+    "id": "N33",
+    "group": "Общие складские кадры",
+    "kind": "Ракурс из галереи",
+    "sourceName": "Gardizi Group",
+    "source": "https://www.gardizigroup.com/photo-gallery",
+    "image": "https://static.wixstatic.com/media/af5783_6ac8ce16e2ae45ddb88e62629a19abd7~mv2.jpg/v1/fill/w_988%2Ch_659%2Cq_90%2Cenc_avif%2Cquality_auto/af5783_6ac8ce16e2ae45ddb88e62629a19abd7~mv2.jpg",
+    "note": "Дополнительное фото из галереи компании; марка партии не установлена",
+    "reason": "Профильные трубы вместо арматуры"
+  },
+  {
+    "id": "N34",
+    "group": "Общие складские кадры",
+    "kind": "Ракурс из галереи",
+    "sourceName": "Gardizi Group",
+    "source": "https://www.gardizigroup.com/photo-gallery",
+    "image": "https://static.wixstatic.com/media/cb6332_cd993420cc9e4dc19f9b2e28e1e6617c~mv2.jpg/v1/fill/w_988%2Ch_480%2Cq_90%2Cenc_avif%2Cquality_auto/cb6332_cd993420cc9e4dc19f9b2e28e1e6617c~mv2.jpg",
+    "note": "Дополнительное фото из галереи компании; марка партии не установлена",
+    "reason": "Не относится к металлопрокату"
+  },
+  {
+    "id": "N35",
+    "group": "Общие складские кадры",
+    "kind": "Ракурс из галереи",
+    "sourceName": "Gardizi Group",
+    "source": "https://www.gardizigroup.com/photo-gallery",
+    "image": "https://static.wixstatic.com/media/af5783_42ce8c1fa6c5441582ce7c91ffdef523~mv2.jpg/v1/fill/w_988%2Ch_550%2Cq_90%2Cenc_avif%2Cquality_auto/af5783_42ce8c1fa6c5441582ce7c91ffdef523~mv2.jpg",
+    "note": "Дополнительное фото из галереи компании; марка партии не установлена",
+    "reason": "Офис компании вместо фотографии арматуры"
+  }
+]

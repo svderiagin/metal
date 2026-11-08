@@ -1,0 +1,200 @@
+{
+  "date": "2026-11-07",
+  "tool": "image_gen.imagegen (built-in)",
+  "purpose": "Clean 4:3 photo templates with no annotations; prepared separately from existing table illustrations.",
+  "status": "prepared-template",
+  "records": [
+    {
+      "kind": "square",
+      "original": "public/images/catalog/illustration-sources/square-steel-tube.jpg",
+      "compositionReference": "imports/kvadrat-image-template/photo.jpg",
+      "generatedOriginal": "/Users/sergei/.codex/generated_images/01a1b06b-2e78-7042-bb0c-13a40f3ae00d/exec-cc428be7-5e78-445c-a3de-01249b4bca95.png",
+      "output": "imports/profile-pipe-image-template/square-photo-4x3.png",
+      "width": 1448,
+      "height": 1086,
+      "aspectRatio": "4:3",
+      "prompt": "Use case: precise-object-edit.\nAsset type: clean technical product-photo template for a construction steel catalog.\nInput image 1 is the EDIT TARGET: the original square hollow steel tube; the opening is SQUARE, with the same rounded corners and thin visible wall as the target photograph. Input image 2 is a COMPOSITION REFERENCE ONLY: a clean solid steel square bar in a landscape 4:3 layout.\nProduce ONE landscape image in exact 4:3 aspect ratio, ideally 2400 x 1800 pixels. Recompose the target tube to match the reference's placement and scale: a large clearly visible cut end in the lower-right half, its front face spanning roughly x=1100..1680 and y=740..1350 on a 2400x1800 canvas, the long tube receding diagonally toward and continuing beyond the upper-right edge. Leave a broad calm near-white studio background on the left and upper-left for future technical annotations, and open space below-left.\nPreserve the target tube's hollow section, proportions, actual rounded edges, dark opening, steel finish, texture, wall thickness, perspective and realistic cut face. Do not substitute the reference's SOLID bar, do not close the opening, do not invent labels or markings, do not make the tube chrome, do not smooth away its surface character. Only adjust overall scale and placement uniformly and extend the light studio background to the required canvas. Match soft neutral studio lighting and a subtle contact shadow/reflection like the reference.\nNo text, no numerals, no arrows, no dimension lines, no diagrams, no logos, no watermark, no border, no extra objects. This is a clean background photo plate, not an annotated product card."
+    },
+    {
+      "kind": "rectangular",
+      "original": "public/images/catalog/illustration-sources/rectangular-steel-tube.jpg",
+      "compositionReference": "imports/kvadrat-image-template/photo.jpg",
+      "generatedOriginal": "/Users/sergei/.codex/generated_images/01a1b06b-2e78-7042-bb0c-13a40f3ae00d/exec-7e9aa44f-35a0-4e0c-beda-751434b37128.png",
+      "output": "imports/profile-pipe-image-template/rectangular-photo-4x3-raised-white.png",
+      "width": 1448,
+      "height": 1086,
+      "aspectRatio": "4:3",
+      "prompt": "Use case: precise-object-edit.\nAsset type: clean technical product-photo template for a construction steel catalog.\nInput image 1 is the EDIT TARGET: the original rectangular hollow steel tube; the opening is wider than it is tall, approximately 2:1, with the same rounded corners and thin visible wall as the target photograph. Input image 2 is a COMPOSITION REFERENCE ONLY: a clean solid steel square bar in a landscape 4:3 layout.\nProduce ONE landscape image in exact 4:3 aspect ratio, ideally 2400 x 1800 pixels. Recompose the target tube to match the reference's placement and scale: a large clearly visible cut end in the lower-right half, its front face spanning roughly x=1100..1680 and y=740..1350 on a 2400x1800 canvas, the long tube receding diagonally toward and continuing beyond the upper-right edge. Leave a broad calm near-white studio background on the left and upper-left for future technical annotations, and open space below-left.\nPreserve the target tube's hollow section, proportions, actual rounded edges, dark opening, steel finish, texture, wall thickness, perspective and realistic cut face. Do not substitute the reference's SOLID bar, do not close the opening, do not invent labels or markings, do not make the tube chrome, do not smooth away its surface character. Only adjust overall scale and placement uniformly and extend the light studio background to the required canvas. Match soft neutral studio lighting and a subtle contact shadow/reflection like the reference.\nNo text, no numerals, no arrows, no dimension lines, no diagrams, no logos, no watermark, no border, no extra objects. This is a clean background photo plate, not an annotated product card.",
+      "edits": [
+        {
+          "date": "2026-11-07",
+          "tool": "image_gen.imagegen background plate + lossless original-pixel composition",
+          "source": "imports/profile-pipe-image-template/rectangular-photo-4x3.png",
+          "backgroundPlate": "/Users/sergei/.codex/generated_images/01a1b06b-2e78-7042-bb0c-13a40f3ae00d/exec-767bcf11-9520-4b8a-9a96-62e56820c010.png",
+          "output": "imports/profile-pipe-image-template/rectangular-photo-4x3-raised.png",
+          "shiftUpPixels": 90,
+          "width": 1448,
+          "height": 1086,
+          "method": "Remove only the top 90 pixels of empty background. Copy every retained original RGB pixel without resampling. Extend the floor by 90 pixels below, blending only inside that new background strip.",
+          "retainedRegion": {
+            "sourceTop": 90,
+            "targetTop": 0,
+            "width": 1448,
+            "height": 996,
+            "changedChannelValues": 0
+          },
+          "prompt": "Use case: precise-object-edit. Edit target: the supplied clean rectangular steel tube photograph. Keep a landscape 4:3 canvas. Move the existing composition straight UP by exactly 90 pixels relative to a 1448 x 1086 canvas, removing only 90 pixels of empty near-white background from the top. Preserve the original tube's scale, horizontal position, shape, perspective, dark opening, wall thickness, metal texture, edges and reflection. Fill the newly empty bottom 90-pixel band with a seamless continuation of the existing pale studio floor, matching the very light neutral gray-white tone and soft illumination at the bottom edge. Do not add text, dimensions, arrows, extra objects or borders. Do not redraw or retouch the tube. The result will be used ONLY as a background plate for the bottom strip: the complete retained original image region will be copied back verbatim, so only the new bottom background needs synthesis. Output the same 4:3 aspect ratio and ideally the same 1448 x 1086 dimensions."
+        },
+        {
+          "date": "2026-11-07",
+          "tool": "image_gen.imagegen white background plate + protected original-pixel composition",
+          "source": "imports/profile-pipe-image-template/rectangular-photo-4x3-raised.png",
+          "plate": "imports/profile-pipe-image-template/rectangular-white-background-plate.png",
+          "output": "imports/profile-pipe-image-template/rectangular-photo-4x3-raised-white.png",
+          "width": 1448,
+          "height": 1086,
+          "hardTubePolygon": "1448,12 610,447 598,470 598,669 616,696 993,812 1014,806 1448,517",
+          "reflectionPolygon": "620,704 982,809 990,910 625,808",
+          "softPolygon": "1448,0 588,425 562,458 562,711 1040,920 1448,630",
+          "blur": 32,
+          "protectedPixels": 437626,
+          "changedProtectedPixels": 0,
+          "backgroundRGB": {
+            "before": [
+              247.8,
+              246.7,
+              248.8
+            ],
+            "after": [
+              254.1,
+              253.9,
+              253.9
+            ]
+          },
+          "method": "Replace gray/lavender empty background using the generated neutral white plate. Copy all protected original tube pixels and the reflection core unchanged; feather only the surrounding background and shadow transition. Canvas, scale and raised placement are unchanged.",
+          "prompt": "Use case: precise-object-edit.\nAsset type: clean unannotated steel catalog photograph, 4:3.\nEdit target: supplied rectangular hollow steel tube image, 1448 x 1086. Change ONLY the background: remove the gray/lavender vignette and restore a clean neutral WHITE studio background, especially the empty left half, upper-left and bottom margins. The open empty background should be white #FFFFFF, with only natural contact shadow and existing subtle floor reflection near the tube.\nKeep the rectangular tube EXACTLY as supplied: same coordinates, size, perspective, 2:1 opening, front cut face, rounded edges, dark interior, gray steel texture, scratches and tonal values. Do not relight or brighten the metal. Do not move, crop, scale or redraw the tube. Preserve its current raised placement, contact shadow and reflection. Keep the entire 4:3 canvas, ideally exactly 1448 x 1086. No text, arrows, dimensions, logos, border or new objects.\nThe output will be used as a white-background plate: the original tube and its close shadow/reflection will be composited back over it without retouching, so focus on neutral white margins and a seamless transition around the unchanged product.",
+          "visualReview": "Compared complete original and corrected image and a native cut-face/reflection crop; original surface detail is retained, open margins are neutral white."
+        }
+      ]
+    },
+    {
+      "date": "2026-11-07",
+      "kind": "rectangular-r06",
+      "sourceId": "R06",
+      "sourcePage": "https://www.metallshopper.de/rohre/stahl/",
+      "sourceUrl": "https://www.metallshopper.de/-uploads/images/webcart/cache/rechthoek1-2_24.jpg_card-CEFE3790.jpg",
+      "original": "public/images/catalog/illustration-sources/rectangular-steel-tube-r06-metallshopper.jpg",
+      "sourceWidth": 660,
+      "sourceHeight": 648,
+      "backgroundPlate": "imports/profile-pipe-image-template/rectangular-r06-background-plate.png",
+      "nativeOutput": "imports/profile-pipe-image-template/rectangular-r06-photo-4x3-native.png",
+      "nativeWidth": 864,
+      "nativeHeight": 648,
+      "output": "imports/profile-pipe-image-template/rectangular-r06-photo-4x3.png",
+      "width": 1448,
+      "height": 1086,
+      "aspectRatio": "4:3",
+      "sourcePixelChanges": 0,
+      "preservedSourcePixels": 427680,
+      "method": "Copy the complete source at x=0,y=0 on an 864x648 canvas without resampling, mirroring or retouching. Add only 204 pixels of pale background to the right. Blend the first 32 new columns against the last original background column; no original pixels are modified. Export a uniformly resized 1448x1086 derivative matching the square template dimensions.",
+      "sha256": "b208ea49726ceabf18859176c3f5f86d2d0e2ad8c767051e44ee4c7970f026be",
+      "tool": "image_gen.imagegen background outpaint + lossless original-photo composition",
+      "visualReview": "Complete source and native 4:3 output reviewed, plus native cut-face/interior and background-seam crops. Full source is pixel-identical; inner wall detail, cut edge, perspective, original direction and shadows are preserved. No annotations added.",
+      "promptFile": "imports/profile-pipe-image-template/r06-outpaint-prompt.txt"
+    },
+    {
+      "date": "2026-11-07",
+      "kind": "rectangular-r06-right",
+      "source": "imports/profile-pipe-image-template/rectangular-r06-photo-4x3-native.png",
+      "backgroundPlate": "imports/profile-pipe-image-template/rectangular-r06-right-background-plate.png",
+      "nativeOutput": "imports/profile-pipe-image-template/rectangular-r06-photo-4x3-right-native.png",
+      "nativeWidth": 864,
+      "nativeHeight": 648,
+      "output": "imports/profile-pipe-image-template/rectangular-r06-photo-4x3-right.png",
+      "width": 1448,
+      "height": 1086,
+      "aspectRatio": "4:3",
+      "transform": {
+        "mirrorHorizontal": true,
+        "shiftRightPixels": 180,
+        "cropOnlyAtCanvasRight": true
+      },
+      "protectedRegion": {
+        "left": 180,
+        "top": 0,
+        "width": 684,
+        "height": 648,
+        "pixelChanges": 0
+      },
+      "method": "Mirror the complete native R06 photograph, move it 180 pixels right to place the cut face in the right half, and crop only the receding length at the canvas edge. Copy the retained mirrored photo pixels exactly; add a pale background strip on the left. Feather only inside the new background. Uniformly resize the 864x648 master to 1448x1086; no product retouching, perspective warp or generative metal.",
+      "sha256": "ebac178bbb90d32d5570b6092fe8f91e6d46b3758dd8c23cc42fe41e9e9bf7d2",
+      "promptFile": "imports/profile-pipe-image-template/r06-right-background-prompt.txt",
+      "tool": "image_gen.imagegen left background plate + lossless mirrored source composition",
+      "visualReview": "Reviewed complete 4:3 native composition and native cut-face/interior crop against the mirrored original. Retained image pixels are exact; metal, interior walls and shadows are preserved."
+    },
+    {
+      "date": "2026-11-07",
+      "kind": "rectangular-r06-diagonal",
+      "original": "public/images/catalog/illustration-sources/rectangular-steel-tube-r06-metallshopper.jpg",
+      "backgroundPlate": "imports/profile-pipe-image-template/rectangular-r06-diagonal-background-plate.png",
+      "nativeOutput": "imports/profile-pipe-image-template/rectangular-r06-photo-4x3-diagonal-native.png",
+      "nativeWidth": 864,
+      "nativeHeight": 648,
+      "output": "imports/profile-pipe-image-template/rectangular-r06-photo-4x3-diagonal.png",
+      "width": 1448,
+      "height": 1086,
+      "aspectRatio": "4:3",
+      "transform": {
+        "mirrorHorizontal": true,
+        "uniformResize": [
+          561,
+          551
+        ],
+        "rotateDegreesClockwise": -24,
+        "translate": [
+          310,
+          -80
+        ],
+        "perspectiveWarp": false
+      },
+      "protectedMask": {
+        "productPolygon": "0,126 625,235 650,239 654,252 652,495 641,511 338,539 323,523 0,344",
+        "shadowPolygon": "0,335 320,527 340,548 280,545 0,453",
+        "sourceFrameFeatherPixels": 24,
+        "softBackgroundBlurPixels": 14,
+        "protectedPixels": 134051,
+        "protectedPixelChanges": 0
+      },
+      "method": "Deterministic uniform scaling, horizontal mirror and 24-degree counterclockwise rotation of the original photograph. Retain transformed original metal, cut face, inner walls and contact shadow. Use the generated plate only for new outer background and its feathered joins; no generated product pixels. Lossless native PNG and a uniformly enlarged 1448x1086 derivative.",
+      "sha256": "852da307718728310d75059572b5f3c9c40d79e1ae7a69c0e05ea1404ffafb67",
+      "promptFile": "imports/profile-pipe-image-template/r06-diagonal-background-prompt.txt",
+      "tool": "image_gen.imagegen outer background plate + deterministic original-photograph rotation",
+      "backgroundOnlyAdjustment": {
+        "grayscale": true,
+        "brightnessOffset": 6
+      },
+      "visualReview": "Compared full square reference and diagonal R06 at the same 864x648 scale. Reviewed native cut-face crops against the deterministically transformed source: section, metal texture, inner walls and real shadow detail retained. Removed rotated-photo borders in background; no generated product pixels in the protected mask."
+    },
+    {
+      "date": "2026-11-07",
+      "kind": "rectangular-realistic-interior",
+      "source": "imports/profile-pipe-image-template/rectangular-photo-4x3-raised-white.png",
+      "reference": "imports/profile-pipe-image-template/square-photo-4x3.png",
+      "generated": "imports/profile-pipe-image-template/rectangular-realistic-interior-generated.png",
+      "output": "imports/profile-pipe-image-template/rectangular-photo-4x3-realistic-interior.png",
+      "width": 1448,
+      "height": 1086,
+      "aspectRatio": "4:3",
+      "mask": "imports/profile-pipe-image-template/rectangular-interior-edit-mask.png",
+      "editablePixels": 75096,
+      "outsidePixelChanges": 0,
+      "maskMethod": "Dark connected inner cavity in source ROI, enclosed original speckles filled; 1.2px feather clipped strictly to the original opening. The rim and all exterior pixels are restored exactly.",
+      "method": "AI reconstruction restricted to visible inner left/bottom steel walls and their natural gradient into the dark recess, using the approved square cavity as lighting/material reference. The original rectangular section, front rim, outer metal, position, background, contact shadow and reflection are retained pixel-for-pixel outside the opening.",
+      "sha256": "bdb6fff615e977a5a28bf16969cd399797cd5c0b356dacd0021bd524a3e5d6e1",
+      "promptFile": "imports/profile-pipe-image-template/rectangular-interior-prompt.txt",
+      "tool": "image_gen.imagegen localized cavity edit + exact original pixels outside inner-opening mask",
+      "visualReview": "Reviewed complete images and native before/after cut-face crops against the square reference. Inner lower/left walls now show matte steel grain and a soft gradient into deep shadow. Original front rim, rectangular proportions, outer metal, pose, white background and floor reflection are unchanged outside the 75096-pixel cavity mask."
+    }
+  ],
+  "selectedRectangularTemplate": "imports/profile-pipe-image-template/rectangular-photo-4x3-realistic-interior.png"
+}

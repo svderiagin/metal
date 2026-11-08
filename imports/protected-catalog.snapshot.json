@@ -6853,6 +6853,8 @@
       "profileWidthMm": 15,
       "profileHeightMm": 15,
       "wallThicknessMm": 1.5,
+      "weightPerMeterKg": 0.605,
+      "weightConfirmed": true,
       "lengthMeters": 6,
       "inStock": false,
       "availability": "UNKNOWN",
@@ -6887,12 +6889,20 @@
         {
           "name": "Длина поставки",
           "value": "6 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "0,605 кг/м"
         }
       ],
       "productTypeId": "type-cat-trp-sub-1",
       "unit": "meter",
       "material": "",
-      "standard": ""
+      "standard": "",
+      "weight": {
+        "value": 0.605,
+        "unit": "кг/м"
+      }
     },
     {
       "id": "profile-pipe-square-20x20x1-5",
@@ -6910,6 +6920,8 @@
       "profileWidthMm": 20,
       "profileHeightMm": 20,
       "wallThicknessMm": 1.5,
+      "weightPerMeterKg": 0.841,
+      "weightConfirmed": true,
       "lengthMeters": 6,
       "inStock": false,
       "availability": "UNKNOWN",
@@ -6944,12 +6956,20 @@
         {
           "name": "Длина поставки",
           "value": "6 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "0,841 кг/м"
         }
       ],
       "productTypeId": "type-cat-trp-sub-1",
       "unit": "meter",
       "material": "",
-      "standard": ""
+      "standard": "",
+      "weight": {
+        "value": 0.841,
+        "unit": "кг/м"
+      }
     },
     {
       "id": "profile-pipe-square-20x20x2",
@@ -6967,6 +6987,8 @@
       "profileWidthMm": 20,
       "profileHeightMm": 20,
       "wallThicknessMm": 2,
+      "weightPerMeterKg": 1.075,
+      "weightConfirmed": true,
       "lengthMeters": 6,
       "inStock": false,
       "availability": "UNKNOWN",
@@ -7001,12 +7023,20 @@
         {
           "name": "Длина поставки",
           "value": "6 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "1,075 кг/м"
         }
       ],
       "productTypeId": "type-cat-trp-sub-1",
       "unit": "meter",
       "material": "",
-      "standard": ""
+      "standard": "",
+      "weight": {
+        "value": 1.075,
+        "unit": "кг/м"
+      }
     },
     {
       "id": "profile-pipe-square-25x25x1-5",
@@ -7024,6 +7054,8 @@
       "profileWidthMm": 25,
       "profileHeightMm": 25,
       "wallThicknessMm": 1.5,
+      "weightPerMeterKg": 1.07,
+      "weightConfirmed": true,
       "lengthMeters": 6,
       "inStock": false,
       "availability": "UNKNOWN",
@@ -7058,12 +7090,20 @@
         {
           "name": "Длина поставки",
           "value": "6 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "1,07 кг/м"
         }
       ],
       "productTypeId": "type-cat-trp-sub-1",
       "unit": "meter",
       "material": "",
-      "standard": ""
+      "standard": "",
+      "weight": {
+        "value": 1.07,
+        "unit": "кг/м"
+      }
     },
     {
       "id": "profile-pipe-square-25x25x2",
@@ -7081,6 +7121,8 @@
       "profileWidthMm": 25,
       "profileHeightMm": 25,
       "wallThicknessMm": 2,
+      "weightPerMeterKg": 1.39,
+      "weightConfirmed": true,
       "lengthMeters": 6,
       "inStock": false,
       "availability": "UNKNOWN",
@@ -7115,12 +7157,20 @@
         {
           "name": "Длина поставки",
           "value": "6 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "1,39 кг/м"
         }
       ],
       "productTypeId": "type-cat-trp-sub-1",
       "unit": "meter",
       "material": "",
-      "standard": ""
+      "standard": "",
+      "weight": {
+        "value": 1.39,
+        "unit": "кг/м"
+      }
     },
     {
       "id": "profile-pipe-square-30x30x1-5",
@@ -7138,6 +7188,8 @@
       "profileWidthMm": 30,
       "profileHeightMm": 30,
       "wallThicknessMm": 1.5,
+      "weightPerMeterKg": 1.31,
+      "weightConfirmed": true,
       "lengthMeters": 6,
       "inStock": false,
       "availability": "UNKNOWN",
@@ -7172,12 +7224,20 @@
         {
           "name": "Длина поставки",
           "value": "6 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "1,31 кг/м"
         }
       ],
       "productTypeId": "type-cat-trp-sub-1",
       "unit": "meter",
       "material": "",
-      "standard": ""
+      "standard": "",
+      "weight": {
+        "value": 1.31,
+        "unit": "кг/м"
+      }
     },
     {
       "id": "profile-pipe-square-30x30x2",
@@ -7195,6 +7255,8 @@
       "profileWidthMm": 30,
       "profileHeightMm": 30,
       "wallThicknessMm": 2,
+      "weightPerMeterKg": 1.7,
+      "weightConfirmed": true,
       "lengthMeters": 6,
       "inStock": false,
       "availability": "UNKNOWN",
@@ -7229,12 +7291,20 @@
         {
           "name": "Длина поставки",
           "value": "6 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "1,7 кг/м"
         }
       ],
       "productTypeId": "type-cat-trp-sub-1",
       "unit": "meter",
       "material": "",
-      "standard": ""
+      "standard": "",
+      "weight": {
+        "value": 1.7,
+        "unit": "кг/м"
+      }
     },
     {
       "id": "profile-pipe-square-40x40x1-5",
@@ -7252,6 +7322,8 @@
       "profileWidthMm": 40,
       "profileHeightMm": 40,
       "wallThicknessMm": 1.5,
+      "weightPerMeterKg": 1.78,
+      "weightConfirmed": true,
       "lengthMeters": 6,
       "inStock": false,
       "availability": "UNKNOWN",
@@ -7286,12 +7358,20 @@
         {
           "name": "Длина поставки",
           "value": "6 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "1,78 кг/м"
         }
       ],
       "productTypeId": "type-cat-trp-sub-1",
       "unit": "meter",
       "material": "",
-      "standard": ""
+      "standard": "",
+      "weight": {
+        "value": 1.78,
+        "unit": "кг/м"
+      }
     },
     {
       "id": "profile-pipe-square-40x40x2",
@@ -7309,6 +7389,8 @@
       "profileWidthMm": 40,
       "profileHeightMm": 40,
       "wallThicknessMm": 2,
+      "weightPerMeterKg": 2.33,
+      "weightConfirmed": true,
       "lengthMeters": 6,
       "inStock": false,
       "availability": "UNKNOWN",
@@ -7343,12 +7425,20 @@
         {
           "name": "Длина поставки",
           "value": "6 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "2,33 кг/м"
         }
       ],
       "productTypeId": "type-cat-trp-sub-1",
       "unit": "meter",
       "material": "",
-      "standard": ""
+      "standard": "",
+      "weight": {
+        "value": 2.33,
+        "unit": "кг/м"
+      }
     },
     {
       "id": "profile-pipe-square-40x40x3",
@@ -7366,6 +7456,8 @@
       "profileWidthMm": 40,
       "profileHeightMm": 40,
       "wallThicknessMm": 3,
+      "weightPerMeterKg": 3.36,
+      "weightConfirmed": true,
       "lengthMeters": 6,
       "inStock": false,
       "availability": "UNKNOWN",
@@ -7400,12 +7492,20 @@
         {
           "name": "Длина поставки",
           "value": "6 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "3,36 кг/м"
         }
       ],
       "productTypeId": "type-cat-trp-sub-1",
       "unit": "meter",
       "material": "",
-      "standard": ""
+      "standard": "",
+      "weight": {
+        "value": 3.36,
+        "unit": "кг/м"
+      }
     },
     {
       "id": "profile-pipe-square-50x50x1-5",
@@ -7423,6 +7523,8 @@
       "profileWidthMm": 50,
       "profileHeightMm": 50,
       "wallThicknessMm": 1.5,
+      "weightPerMeterKg": 2.254,
+      "weightConfirmed": true,
       "lengthMeters": 6,
       "inStock": false,
       "availability": "UNKNOWN",
@@ -7457,12 +7559,20 @@
         {
           "name": "Длина поставки",
           "value": "6 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "2,254 кг/м"
         }
       ],
       "productTypeId": "type-cat-trp-sub-1",
       "unit": "meter",
       "material": "",
-      "standard": ""
+      "standard": "",
+      "weight": {
+        "value": 2.254,
+        "unit": "кг/м"
+      }
     },
     {
       "id": "profile-pipe-square-50x50x2",
@@ -7480,6 +7590,8 @@
       "profileWidthMm": 50,
       "profileHeightMm": 50,
       "wallThicknessMm": 2,
+      "weightPerMeterKg": 2.96,
+      "weightConfirmed": true,
       "lengthMeters": 6,
       "inStock": false,
       "availability": "UNKNOWN",
@@ -7514,12 +7626,20 @@
         {
           "name": "Длина поставки",
           "value": "6 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "2,96 кг/м"
         }
       ],
       "productTypeId": "type-cat-trp-sub-1",
       "unit": "meter",
       "material": "",
-      "standard": ""
+      "standard": "",
+      "weight": {
+        "value": 2.96,
+        "unit": "кг/м"
+      }
     },
     {
       "id": "profile-pipe-square-50x50x3",
@@ -7537,6 +7657,8 @@
       "profileWidthMm": 50,
       "profileHeightMm": 50,
       "wallThicknessMm": 3,
+      "weightPerMeterKg": 4.31,
+      "weightConfirmed": true,
       "lengthMeters": 6,
       "inStock": false,
       "availability": "UNKNOWN",
@@ -7571,12 +7693,20 @@
         {
           "name": "Длина поставки",
           "value": "6 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "4,31 кг/м"
         }
       ],
       "productTypeId": "type-cat-trp-sub-1",
       "unit": "meter",
       "material": "",
-      "standard": ""
+      "standard": "",
+      "weight": {
+        "value": 4.31,
+        "unit": "кг/м"
+      }
     },
     {
       "id": "profile-pipe-square-50x50x4",
@@ -7594,6 +7724,8 @@
       "profileWidthMm": 50,
       "profileHeightMm": 50,
       "wallThicknessMm": 4,
+      "weightPerMeterKg": 5.56,
+      "weightConfirmed": true,
       "lengthMeters": 6,
       "inStock": false,
       "availability": "UNKNOWN",
@@ -7628,12 +7760,20 @@
         {
           "name": "Длина поставки",
           "value": "6 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "5,56 кг/м"
         }
       ],
       "productTypeId": "type-cat-trp-sub-1",
       "unit": "meter",
       "material": "",
-      "standard": ""
+      "standard": "",
+      "weight": {
+        "value": 5.56,
+        "unit": "кг/м"
+      }
     },
     {
       "id": "profile-pipe-square-60x60x1-5",
@@ -7651,6 +7791,8 @@
       "profileWidthMm": 60,
       "profileHeightMm": 60,
       "wallThicknessMm": 1.5,
+      "weightPerMeterKg": 2.725,
+      "weightConfirmed": true,
       "lengthMeters": 6,
       "inStock": false,
       "availability": "UNKNOWN",
@@ -7685,12 +7827,20 @@
         {
           "name": "Длина поставки",
           "value": "6 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "2,725 кг/м"
         }
       ],
       "productTypeId": "type-cat-trp-sub-1",
       "unit": "meter",
       "material": "",
-      "standard": ""
+      "standard": "",
+      "weight": {
+        "value": 2.725,
+        "unit": "кг/м"
+      }
     },
     {
       "id": "profile-pipe-square-60x60x2",
@@ -7708,6 +7858,8 @@
       "profileWidthMm": 60,
       "profileHeightMm": 60,
       "wallThicknessMm": 2,
+      "weightPerMeterKg": 3.59,
+      "weightConfirmed": true,
       "lengthMeters": 6,
       "inStock": false,
       "availability": "UNKNOWN",
@@ -7742,12 +7894,20 @@
         {
           "name": "Длина поставки",
           "value": "6 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "3,59 кг/м"
         }
       ],
       "productTypeId": "type-cat-trp-sub-1",
       "unit": "meter",
       "material": "",
-      "standard": ""
+      "standard": "",
+      "weight": {
+        "value": 3.59,
+        "unit": "кг/м"
+      }
     },
     {
       "id": "profile-pipe-square-60x60x3",
@@ -7765,6 +7925,8 @@
       "profileWidthMm": 60,
       "profileHeightMm": 60,
       "wallThicknessMm": 3,
+      "weightPerMeterKg": 5.25,
+      "weightConfirmed": true,
       "lengthMeters": 6,
       "inStock": false,
       "availability": "UNKNOWN",
@@ -7799,12 +7961,20 @@
         {
           "name": "Длина поставки",
           "value": "6 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "5,25 кг/м"
         }
       ],
       "productTypeId": "type-cat-trp-sub-1",
       "unit": "meter",
       "material": "",
-      "standard": ""
+      "standard": "",
+      "weight": {
+        "value": 5.25,
+        "unit": "кг/м"
+      }
     },
     {
       "id": "profile-pipe-square-60x60x4",
@@ -7822,6 +7992,8 @@
       "profileWidthMm": 60,
       "profileHeightMm": 60,
       "wallThicknessMm": 4,
+      "weightPerMeterKg": 6.82,
+      "weightConfirmed": true,
       "lengthMeters": 6,
       "inStock": false,
       "availability": "UNKNOWN",
@@ -7856,12 +8028,20 @@
         {
           "name": "Длина поставки",
           "value": "6 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "6,82 кг/м"
         }
       ],
       "productTypeId": "type-cat-trp-sub-1",
       "unit": "meter",
       "material": "",
-      "standard": ""
+      "standard": "",
+      "weight": {
+        "value": 6.82,
+        "unit": "кг/м"
+      }
     },
     {
       "id": "profile-pipe-square-80x80x2",
@@ -7879,6 +8059,8 @@
       "profileWidthMm": 80,
       "profileHeightMm": 80,
       "wallThicknessMm": 2,
+      "weightPerMeterKg": 4.844,
+      "weightConfirmed": true,
       "lengthRangeMeters": [
         6,
         12
@@ -7916,12 +8098,20 @@
         {
           "name": "Длина поставки",
           "value": "6–12 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "4,844 кг/м"
         }
       ],
       "productTypeId": "type-cat-trp-sub-1",
       "unit": "meter",
       "material": "",
-      "standard": ""
+      "standard": "",
+      "weight": {
+        "value": 4.844,
+        "unit": "кг/м"
+      }
     },
     {
       "id": "profile-pipe-square-80x80x3",
@@ -7939,6 +8129,8 @@
       "profileWidthMm": 80,
       "profileHeightMm": 80,
       "wallThicknessMm": 3,
+      "weightPerMeterKg": 7.13,
+      "weightConfirmed": true,
       "lengthMeters": 12,
       "inStock": false,
       "availability": "UNKNOWN",
@@ -7973,12 +8165,20 @@
         {
           "name": "Длина поставки",
           "value": "12 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "7,13 кг/м"
         }
       ],
       "productTypeId": "type-cat-trp-sub-1",
       "unit": "meter",
       "material": "",
-      "standard": ""
+      "standard": "",
+      "weight": {
+        "value": 7.13,
+        "unit": "кг/м"
+      }
     },
     {
       "id": "profile-pipe-square-80x80x4",
@@ -7996,6 +8196,8 @@
       "profileWidthMm": 80,
       "profileHeightMm": 80,
       "wallThicknessMm": 4,
+      "weightPerMeterKg": 9.33,
+      "weightConfirmed": true,
       "lengthMeters": 12,
       "inStock": false,
       "availability": "UNKNOWN",
@@ -8030,12 +8232,20 @@
         {
           "name": "Длина поставки",
           "value": "12 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "9,33 кг/м"
         }
       ],
       "productTypeId": "type-cat-trp-sub-1",
       "unit": "meter",
       "material": "",
-      "standard": ""
+      "standard": "",
+      "weight": {
+        "value": 9.33,
+        "unit": "кг/м"
+      }
     },
     {
       "id": "profile-pipe-square-100x100x3",
@@ -8053,6 +8263,8 @@
       "profileWidthMm": 100,
       "profileHeightMm": 100,
       "wallThicknessMm": 3,
+      "weightPerMeterKg": 9.02,
+      "weightConfirmed": true,
       "lengthMeters": 12,
       "inStock": false,
       "availability": "UNKNOWN",
@@ -8087,12 +8299,20 @@
         {
           "name": "Длина поставки",
           "value": "12 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "9,02 кг/м"
         }
       ],
       "productTypeId": "type-cat-trp-sub-1",
       "unit": "meter",
       "material": "",
-      "standard": ""
+      "standard": "",
+      "weight": {
+        "value": 9.02,
+        "unit": "кг/м"
+      }
     },
     {
       "id": "profile-pipe-square-100x100x4",
@@ -8110,6 +8330,8 @@
       "profileWidthMm": 100,
       "profileHeightMm": 100,
       "wallThicknessMm": 4,
+      "weightPerMeterKg": 11.84,
+      "weightConfirmed": true,
       "lengthMeters": 12,
       "inStock": false,
       "availability": "UNKNOWN",
@@ -8144,12 +8366,20 @@
         {
           "name": "Длина поставки",
           "value": "12 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "11,84 кг/м"
         }
       ],
       "productTypeId": "type-cat-trp-sub-1",
       "unit": "meter",
       "material": "",
-      "standard": ""
+      "standard": "",
+      "weight": {
+        "value": 11.84,
+        "unit": "кг/м"
+      }
     },
     {
       "id": "profile-pipe-square-100x100x5",
@@ -8167,6 +8397,8 @@
       "profileWidthMm": 100,
       "profileHeightMm": 100,
       "wallThicknessMm": 5,
+      "weightPerMeterKg": 14.58,
+      "weightConfirmed": true,
       "lengthMeters": 12,
       "inStock": false,
       "availability": "UNKNOWN",
@@ -8201,12 +8433,20 @@
         {
           "name": "Длина поставки",
           "value": "12 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "14,58 кг/м"
         }
       ],
       "productTypeId": "type-cat-trp-sub-1",
       "unit": "meter",
       "material": "",
-      "standard": ""
+      "standard": "",
+      "weight": {
+        "value": 14.58,
+        "unit": "кг/м"
+      }
     },
     {
       "id": "profile-pipe-square-120x120x3",
@@ -8224,6 +8464,8 @@
       "profileWidthMm": 120,
       "profileHeightMm": 120,
       "wallThicknessMm": 3,
+      "weightPerMeterKg": 10.84,
+      "weightConfirmed": true,
       "lengthMeters": 12,
       "inStock": false,
       "availability": "UNKNOWN",
@@ -8258,12 +8500,20 @@
         {
           "name": "Длина поставки",
           "value": "12 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "10,84 кг/м"
         }
       ],
       "productTypeId": "type-cat-trp-sub-1",
       "unit": "meter",
       "material": "",
-      "standard": ""
+      "standard": "",
+      "weight": {
+        "value": 10.84,
+        "unit": "кг/м"
+      }
     },
     {
       "id": "profile-pipe-square-120x120x4",
@@ -8281,6 +8531,8 @@
       "profileWidthMm": 120,
       "profileHeightMm": 120,
       "wallThicknessMm": 4,
+      "weightPerMeterKg": 14.25,
+      "weightConfirmed": true,
       "lengthMeters": 12,
       "inStock": false,
       "availability": "UNKNOWN",
@@ -8315,12 +8567,20 @@
         {
           "name": "Длина поставки",
           "value": "12 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "14,25 кг/м"
         }
       ],
       "productTypeId": "type-cat-trp-sub-1",
       "unit": "meter",
       "material": "",
-      "standard": ""
+      "standard": "",
+      "weight": {
+        "value": 14.25,
+        "unit": "кг/м"
+      }
     },
     {
       "id": "profile-pipe-square-140x140x4",
@@ -8338,6 +8598,8 @@
       "profileWidthMm": 140,
       "profileHeightMm": 140,
       "wallThicknessMm": 4,
+      "weightPerMeterKg": 16.76,
+      "weightConfirmed": true,
       "lengthMeters": 12,
       "inStock": false,
       "availability": "UNKNOWN",
@@ -8372,12 +8634,20 @@
         {
           "name": "Длина поставки",
           "value": "12 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "16,76 кг/м"
         }
       ],
       "productTypeId": "type-cat-trp-sub-1",
       "unit": "meter",
       "material": "",
-      "standard": ""
+      "standard": "",
+      "weight": {
+        "value": 16.76,
+        "unit": "кг/м"
+      }
     },
     {
       "id": "profile-pipe-square-160x160x4",
@@ -8395,6 +8665,8 @@
       "profileWidthMm": 160,
       "profileHeightMm": 160,
       "wallThicknessMm": 4,
+      "weightPerMeterKg": 19.27,
+      "weightConfirmed": true,
       "lengthMeters": 12,
       "inStock": false,
       "availability": "UNKNOWN",
@@ -8429,12 +8701,20 @@
         {
           "name": "Длина поставки",
           "value": "12 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "19,27 кг/м"
         }
       ],
       "productTypeId": "type-cat-trp-sub-1",
       "unit": "meter",
       "material": "",
-      "standard": ""
+      "standard": "",
+      "weight": {
+        "value": 19.27,
+        "unit": "кг/м"
+      }
     },
     {
       "id": "profile-pipe-rectangular-30x20x2",
@@ -8452,6 +8732,8 @@
       "profileWidthMm": 30,
       "profileHeightMm": 20,
       "wallThicknessMm": 2,
+      "weightPerMeterKg": 1.39,
+      "weightConfirmed": true,
       "lengthMeters": 6,
       "inStock": false,
       "availability": "UNKNOWN",
@@ -8486,12 +8768,20 @@
         {
           "name": "Длина поставки",
           "value": "6 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "1,39 кг/м"
         }
       ],
       "productTypeId": "type-cat-trp-sub-2",
       "unit": "meter",
       "material": "",
-      "standard": ""
+      "standard": "",
+      "weight": {
+        "value": 1.39,
+        "unit": "кг/м"
+      }
     },
     {
       "id": "profile-pipe-rectangular-40x20x1-5",
@@ -8509,6 +8799,8 @@
       "profileWidthMm": 40,
       "profileHeightMm": 20,
       "wallThicknessMm": 1.5,
+      "weightPerMeterKg": 1.31,
+      "weightConfirmed": true,
       "lengthMeters": 6,
       "inStock": false,
       "availability": "UNKNOWN",
@@ -8543,12 +8835,20 @@
         {
           "name": "Длина поставки",
           "value": "6 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "1,31 кг/м"
         }
       ],
       "productTypeId": "type-cat-trp-sub-2",
       "unit": "meter",
       "material": "",
-      "standard": ""
+      "standard": "",
+      "weight": {
+        "value": 1.31,
+        "unit": "кг/м"
+      }
     },
     {
       "id": "profile-pipe-rectangular-40x20x2",
@@ -8566,6 +8866,8 @@
       "profileWidthMm": 40,
       "profileHeightMm": 20,
       "wallThicknessMm": 2,
+      "weightPerMeterKg": 1.7,
+      "weightConfirmed": true,
       "lengthMeters": 6,
       "inStock": false,
       "availability": "UNKNOWN",
@@ -8600,12 +8902,20 @@
         {
           "name": "Длина поставки",
           "value": "6 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "1,7 кг/м"
         }
       ],
       "productTypeId": "type-cat-trp-sub-2",
       "unit": "meter",
       "material": "",
-      "standard": ""
+      "standard": "",
+      "weight": {
+        "value": 1.7,
+        "unit": "кг/м"
+      }
     },
     {
       "id": "profile-pipe-rectangular-40x20x3",
@@ -8623,6 +8933,8 @@
       "profileWidthMm": 40,
       "profileHeightMm": 20,
       "wallThicknessMm": 3,
+      "weightPerMeterKg": 2.42,
+      "weightConfirmed": true,
       "lengthMeters": 6,
       "inStock": false,
       "availability": "UNKNOWN",
@@ -8657,12 +8969,20 @@
         {
           "name": "Длина поставки",
           "value": "6 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "2,42 кг/м"
         }
       ],
       "productTypeId": "type-cat-trp-sub-2",
       "unit": "meter",
       "material": "",
-      "standard": ""
+      "standard": "",
+      "weight": {
+        "value": 2.42,
+        "unit": "кг/м"
+      }
     },
     {
       "id": "profile-pipe-rectangular-40x25x1-5",
@@ -8680,6 +9000,8 @@
       "profileWidthMm": 40,
       "profileHeightMm": 25,
       "wallThicknessMm": 1.5,
+      "weightPerMeterKg": 1.43,
+      "weightConfirmed": true,
       "lengthMeters": 6,
       "inStock": false,
       "availability": "UNKNOWN",
@@ -8714,12 +9036,20 @@
         {
           "name": "Длина поставки",
           "value": "6 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "1,43 кг/м"
         }
       ],
       "productTypeId": "type-cat-trp-sub-2",
       "unit": "meter",
       "material": "",
-      "standard": ""
+      "standard": "",
+      "weight": {
+        "value": 1.43,
+        "unit": "кг/м"
+      }
     },
     {
       "id": "profile-pipe-rectangular-40x25x2",
@@ -8737,6 +9067,8 @@
       "profileWidthMm": 40,
       "profileHeightMm": 25,
       "wallThicknessMm": 2,
+      "weightPerMeterKg": 1.86,
+      "weightConfirmed": true,
       "lengthMeters": 6,
       "inStock": false,
       "availability": "UNKNOWN",
@@ -8771,12 +9103,20 @@
         {
           "name": "Длина поставки",
           "value": "6 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "1,86 кг/м"
         }
       ],
       "productTypeId": "type-cat-trp-sub-2",
       "unit": "meter",
       "material": "",
-      "standard": ""
+      "standard": "",
+      "weight": {
+        "value": 1.86,
+        "unit": "кг/м"
+      }
     },
     {
       "id": "profile-pipe-rectangular-50x25x1-5",
@@ -8794,6 +9134,8 @@
       "profileWidthMm": 50,
       "profileHeightMm": 25,
       "wallThicknessMm": 1.5,
+      "weightPerMeterKg": 1.67,
+      "weightConfirmed": true,
       "lengthMeters": 6,
       "inStock": false,
       "availability": "UNKNOWN",
@@ -8828,12 +9170,20 @@
         {
           "name": "Длина поставки",
           "value": "6 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "1,67 кг/м"
         }
       ],
       "productTypeId": "type-cat-trp-sub-2",
       "unit": "meter",
       "material": "",
-      "standard": ""
+      "standard": "",
+      "weight": {
+        "value": 1.67,
+        "unit": "кг/м"
+      }
     },
     {
       "id": "profile-pipe-rectangular-50x25x2",
@@ -8851,6 +9201,8 @@
       "profileWidthMm": 50,
       "profileHeightMm": 25,
       "wallThicknessMm": 2,
+      "weightPerMeterKg": 2.17,
+      "weightConfirmed": true,
       "lengthMeters": 6,
       "inStock": false,
       "availability": "UNKNOWN",
@@ -8885,12 +9237,20 @@
         {
           "name": "Длина поставки",
           "value": "6 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "2,17 кг/м"
         }
       ],
       "productTypeId": "type-cat-trp-sub-2",
       "unit": "meter",
       "material": "",
-      "standard": ""
+      "standard": "",
+      "weight": {
+        "value": 2.17,
+        "unit": "кг/м"
+      }
     },
     {
       "id": "profile-pipe-rectangular-50x25x3",
@@ -8908,6 +9268,8 @@
       "profileWidthMm": 50,
       "profileHeightMm": 25,
       "wallThicknessMm": 3,
+      "weightPerMeterKg": 3.13,
+      "weightConfirmed": true,
       "lengthMeters": 6,
       "inStock": false,
       "availability": "UNKNOWN",
@@ -8942,12 +9304,20 @@
         {
           "name": "Длина поставки",
           "value": "6 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "3,13 кг/м"
         }
       ],
       "productTypeId": "type-cat-trp-sub-2",
       "unit": "meter",
       "material": "",
-      "standard": ""
+      "standard": "",
+      "weight": {
+        "value": 3.13,
+        "unit": "кг/м"
+      }
     },
     {
       "id": "profile-pipe-rectangular-60x30x1-5",
@@ -8965,6 +9335,8 @@
       "profileWidthMm": 60,
       "profileHeightMm": 30,
       "wallThicknessMm": 1.5,
+      "weightPerMeterKg": 2.02,
+      "weightConfirmed": true,
       "lengthMeters": 6,
       "inStock": false,
       "availability": "UNKNOWN",
@@ -8999,12 +9371,20 @@
         {
           "name": "Длина поставки",
           "value": "6 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "2,02 кг/м"
         }
       ],
       "productTypeId": "type-cat-trp-sub-2",
       "unit": "meter",
       "material": "",
-      "standard": ""
+      "standard": "",
+      "weight": {
+        "value": 2.02,
+        "unit": "кг/м"
+      }
     },
     {
       "id": "profile-pipe-rectangular-60x30x2",
@@ -9022,6 +9402,8 @@
       "profileWidthMm": 60,
       "profileHeightMm": 30,
       "wallThicknessMm": 2,
+      "weightPerMeterKg": 2.65,
+      "weightConfirmed": true,
       "lengthMeters": 6,
       "inStock": false,
       "availability": "UNKNOWN",
@@ -9056,12 +9438,20 @@
         {
           "name": "Длина поставки",
           "value": "6 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "2,65 кг/м"
         }
       ],
       "productTypeId": "type-cat-trp-sub-2",
       "unit": "meter",
       "material": "",
-      "standard": ""
+      "standard": "",
+      "weight": {
+        "value": 2.65,
+        "unit": "кг/м"
+      }
     },
     {
       "id": "profile-pipe-rectangular-60x30x3",
@@ -9079,6 +9469,8 @@
       "profileWidthMm": 60,
       "profileHeightMm": 30,
       "wallThicknessMm": 3,
+      "weightPerMeterKg": 3.83,
+      "weightConfirmed": true,
       "lengthMeters": 6,
       "inStock": false,
       "availability": "UNKNOWN",
@@ -9113,12 +9505,20 @@
         {
           "name": "Длина поставки",
           "value": "6 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "3,83 кг/м"
         }
       ],
       "productTypeId": "type-cat-trp-sub-2",
       "unit": "meter",
       "material": "",
-      "standard": ""
+      "standard": "",
+      "weight": {
+        "value": 3.83,
+        "unit": "кг/м"
+      }
     },
     {
       "id": "profile-pipe-rectangular-60x40x1-5",
@@ -9136,6 +9536,8 @@
       "profileWidthMm": 60,
       "profileHeightMm": 40,
       "wallThicknessMm": 1.5,
+      "weightPerMeterKg": 2.25,
+      "weightConfirmed": true,
       "lengthMeters": 6,
       "inStock": false,
       "availability": "UNKNOWN",
@@ -9170,12 +9572,20 @@
         {
           "name": "Длина поставки",
           "value": "6 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "2,25 кг/м"
         }
       ],
       "productTypeId": "type-cat-trp-sub-2",
       "unit": "meter",
       "material": "",
-      "standard": ""
+      "standard": "",
+      "weight": {
+        "value": 2.25,
+        "unit": "кг/м"
+      }
     },
     {
       "id": "profile-pipe-rectangular-60x40x2",
@@ -9193,6 +9603,8 @@
       "profileWidthMm": 60,
       "profileHeightMm": 40,
       "wallThicknessMm": 2,
+      "weightPerMeterKg": 2.96,
+      "weightConfirmed": true,
       "lengthMeters": 6,
       "inStock": false,
       "availability": "UNKNOWN",
@@ -9227,12 +9639,20 @@
         {
           "name": "Длина поставки",
           "value": "6 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "2,96 кг/м"
         }
       ],
       "productTypeId": "type-cat-trp-sub-2",
       "unit": "meter",
       "material": "",
-      "standard": ""
+      "standard": "",
+      "weight": {
+        "value": 2.96,
+        "unit": "кг/м"
+      }
     },
     {
       "id": "profile-pipe-rectangular-60x40x3",
@@ -9250,6 +9670,8 @@
       "profileWidthMm": 60,
       "profileHeightMm": 40,
       "wallThicknessMm": 3,
+      "weightPerMeterKg": 4.3,
+      "weightConfirmed": true,
       "lengthMeters": 6,
       "inStock": false,
       "availability": "UNKNOWN",
@@ -9284,12 +9706,20 @@
         {
           "name": "Длина поставки",
           "value": "6 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "4,3 кг/м"
         }
       ],
       "productTypeId": "type-cat-trp-sub-2",
       "unit": "meter",
       "material": "",
-      "standard": ""
+      "standard": "",
+      "weight": {
+        "value": 4.3,
+        "unit": "кг/м"
+      }
     },
     {
       "id": "profile-pipe-rectangular-60x40x4",
@@ -9307,6 +9737,8 @@
       "profileWidthMm": 60,
       "profileHeightMm": 40,
       "wallThicknessMm": 4,
+      "weightPerMeterKg": 5.56,
+      "weightConfirmed": true,
       "lengthMeters": 6,
       "inStock": false,
       "availability": "UNKNOWN",
@@ -9341,12 +9773,20 @@
         {
           "name": "Длина поставки",
           "value": "6 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "5,56 кг/м"
         }
       ],
       "productTypeId": "type-cat-trp-sub-2",
       "unit": "meter",
       "material": "",
-      "standard": ""
+      "standard": "",
+      "weight": {
+        "value": 5.56,
+        "unit": "кг/м"
+      }
     },
     {
       "id": "profile-pipe-rectangular-80x40x2",
@@ -9364,6 +9804,8 @@
       "profileWidthMm": 80,
       "profileHeightMm": 40,
       "wallThicknessMm": 2,
+      "weightPerMeterKg": 3.59,
+      "weightConfirmed": true,
       "lengthMeters": 6,
       "inStock": false,
       "availability": "UNKNOWN",
@@ -9398,12 +9840,20 @@
         {
           "name": "Длина поставки",
           "value": "6 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "3,59 кг/м"
         }
       ],
       "productTypeId": "type-cat-trp-sub-2",
       "unit": "meter",
       "material": "",
-      "standard": ""
+      "standard": "",
+      "weight": {
+        "value": 3.59,
+        "unit": "кг/м"
+      }
     },
     {
       "id": "profile-pipe-rectangular-80x40x3",
@@ -9421,6 +9871,8 @@
       "profileWidthMm": 80,
       "profileHeightMm": 40,
       "wallThicknessMm": 3,
+      "weightPerMeterKg": 5.25,
+      "weightConfirmed": true,
       "lengthMeters": 6,
       "inStock": false,
       "availability": "UNKNOWN",
@@ -9455,12 +9907,20 @@
         {
           "name": "Длина поставки",
           "value": "6 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "5,25 кг/м"
         }
       ],
       "productTypeId": "type-cat-trp-sub-2",
       "unit": "meter",
       "material": "",
-      "standard": ""
+      "standard": "",
+      "weight": {
+        "value": 5.25,
+        "unit": "кг/м"
+      }
     },
     {
       "id": "profile-pipe-rectangular-80x60x2",
@@ -9478,6 +9938,8 @@
       "profileWidthMm": 80,
       "profileHeightMm": 60,
       "wallThicknessMm": 2,
+      "weightPerMeterKg": 4.216,
+      "weightConfirmed": true,
       "lengthMeters": 6,
       "inStock": false,
       "availability": "UNKNOWN",
@@ -9512,12 +9974,20 @@
         {
           "name": "Длина поставки",
           "value": "6 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "4,216 кг/м"
         }
       ],
       "productTypeId": "type-cat-trp-sub-2",
       "unit": "meter",
       "material": "",
-      "standard": ""
+      "standard": "",
+      "weight": {
+        "value": 4.216,
+        "unit": "кг/м"
+      }
     },
     {
       "id": "profile-pipe-rectangular-80x60x3",
@@ -9535,6 +10005,8 @@
       "profileWidthMm": 80,
       "profileHeightMm": 60,
       "wallThicknessMm": 3,
+      "weightPerMeterKg": 6.19,
+      "weightConfirmed": true,
       "lengthMeters": 6,
       "inStock": false,
       "availability": "UNKNOWN",
@@ -9569,12 +10041,20 @@
         {
           "name": "Длина поставки",
           "value": "6 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "6,19 кг/м"
         }
       ],
       "productTypeId": "type-cat-trp-sub-2",
       "unit": "meter",
       "material": "",
-      "standard": ""
+      "standard": "",
+      "weight": {
+        "value": 6.19,
+        "unit": "кг/м"
+      }
     },
     {
       "id": "profile-pipe-rectangular-100x50x2",
@@ -9592,6 +10072,8 @@
       "profileWidthMm": 100,
       "profileHeightMm": 50,
       "wallThicknessMm": 2,
+      "weightPerMeterKg": 4.53,
+      "weightConfirmed": true,
       "lengthMeters": 6,
       "inStock": false,
       "availability": "UNKNOWN",
@@ -9626,12 +10108,20 @@
         {
           "name": "Длина поставки",
           "value": "6 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "4,53 кг/м"
         }
       ],
       "productTypeId": "type-cat-trp-sub-2",
       "unit": "meter",
       "material": "",
-      "standard": ""
+      "standard": "",
+      "weight": {
+        "value": 4.53,
+        "unit": "кг/м"
+      }
     },
     {
       "id": "profile-pipe-rectangular-100x50x3",
@@ -9649,6 +10139,8 @@
       "profileWidthMm": 100,
       "profileHeightMm": 50,
       "wallThicknessMm": 3,
+      "weightPerMeterKg": 6.661,
+      "weightConfirmed": true,
       "lengthMeters": 6,
       "inStock": false,
       "availability": "UNKNOWN",
@@ -9683,12 +10175,20 @@
         {
           "name": "Длина поставки",
           "value": "6 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "6,661 кг/м"
         }
       ],
       "productTypeId": "type-cat-trp-sub-2",
       "unit": "meter",
       "material": "",
-      "standard": ""
+      "standard": "",
+      "weight": {
+        "value": 6.661,
+        "unit": "кг/м"
+      }
     },
     {
       "id": "profile-pipe-rectangular-100x60x3",
@@ -9706,6 +10206,8 @@
       "profileWidthMm": 100,
       "profileHeightMm": 60,
       "wallThicknessMm": 3,
+      "weightPerMeterKg": 7.13,
+      "weightConfirmed": true,
       "lengthMeters": 6,
       "inStock": false,
       "availability": "UNKNOWN",
@@ -9740,12 +10242,20 @@
         {
           "name": "Длина поставки",
           "value": "6 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "7,13 кг/м"
         }
       ],
       "productTypeId": "type-cat-trp-sub-2",
       "unit": "meter",
       "material": "",
-      "standard": ""
+      "standard": "",
+      "weight": {
+        "value": 7.13,
+        "unit": "кг/м"
+      }
     },
     {
       "id": "local--995",

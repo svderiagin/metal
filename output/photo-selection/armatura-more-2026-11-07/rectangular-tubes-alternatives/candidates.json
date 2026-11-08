@@ -1,0 +1,56 @@
+[
+  {
+    "id": "R06",
+    "name": "Metallshopper",
+    "image": "https://www.metallshopper.de/-uploads/images/webcart/cache/rechthoek1-2_24.jpg_card-CEFE3790.jpg",
+    "source": "https://www.metallshopper.de/rohre/stahl/",
+    "width": 660,
+    "height": 648,
+    "note": "Лучше всего читаются нижняя и боковая внутренние стенки. Естественный свет и фактура; исходник небольшой."
+  },
+  {
+    "id": "R04",
+    "name": "МеталлЛидер",
+    "image": "https://www.metallider.ru/uploads/products/1776761038704-got3sy.webp",
+    "source": "https://metallider.ru/blog/profilnaya-truba-razmery-ves-tablitsa",
+    "width": 2048,
+    "height": 2048,
+    "note": "Крупный исходник для дальнейшей подготовки. Светлый металл, на нижней внутренней стенке заметен переход в тень."
+  },
+  {
+    "id": "R02",
+    "name": "Cut My",
+    "image": "https://www.cutmy.co.uk/media/catalog/variant/m/i/mild_steel_rectangular_box_section_13.jpg",
+    "source": "https://www.cutmy.co.uk/metal/mild-steel/box-sections/",
+    "width": 1000,
+    "height": 1000,
+    "note": "Короткий отрезок трубы: внутри видны освещение и продольный шов. Подходит для крупного плана торца."
+  },
+  {
+    "id": "R07",
+    "name": "Steel and Pipes · толстая стенка",
+    "image": "https://core.steelandpipes.com/cdn/shop/products/1.24x8BS_dcdb1d6c-ce40-42db-9612-d1467eef551f_800x.png?v=1670439215",
+    "source": "https://core.steelandpipes.com/products/black-steel-rectangle-tubing-3",
+    "width": 800,
+    "height": 800,
+    "note": "Хорошо видны глубина и нижняя внутренняя стенка. У этого образца заметно более толстая стенка."
+  },
+  {
+    "id": "R09",
+    "name": "Yuantai Derun",
+    "image": "https://www.ytdrintl.com/uploads/rectangular-steel-tube-0.jpg",
+    "source": "https://www.ytdrintl.com/",
+    "width": 700,
+    "height": 700,
+    "note": "Читаются фактура и переход света внутри полости. Исходник небольшой."
+  },
+  {
+    "id": "R14",
+    "name": "K I Metals",
+    "image": "https://kimetals.co.uk/wp-content/uploads/2021/04/mild-steel-box-rectangle-black.jpg",
+    "source": "https://kimetals.co.uk/materials/mild-steel/mild-steel-box-section",
+    "width": 1000,
+    "height": 1000,
+    "note": "Другой ракурс торца; видна боковая внутренняя стенка. Более тёмная наружная поверхность."
+  }
+]

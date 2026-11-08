@@ -1,0 +1,90 @@
+[
+  {
+    "id": "N21",
+    "group": "Складские ракурсы",
+    "kind": "Склад / связки",
+    "sourceName": "Регион-Арматура",
+    "source": "https://region-armatura.ru/",
+    "image": "https://region-armatura.ru/img/17177385.jpg",
+    "note": "Общее фото арматуры поставщика; точная марка партии не установлена",
+    "width": 998,
+    "height": 745
+  },
+  {
+    "id": "N23",
+    "group": "Складские ракурсы",
+    "kind": "Связки на крытом складе",
+    "sourceName": "Gardizi Group",
+    "source": "https://www.gardizigroup.com/photo-gallery",
+    "image": "https://static.wixstatic.com/media/af5783_5ab089ffc6114fa0bcbf815470bfdba4~mv2.jpeg/v1/fill/w_988%2Ch_741%2Cq_90%2Cenc_avif%2Cquality_auto/af5783_5ab089ffc6114fa0bcbf815470bfdba4~mv2.jpeg",
+    "note": "Галерея компании; точная марка партии не установлена",
+    "width": 988,
+    "height": 741
+  },
+  {
+    "id": "N25",
+    "group": "Складские ракурсы",
+    "kind": "Склад / погрузка",
+    "sourceName": "Металл-ДК",
+    "source": "https://metall-dk.ru/articles/chem-otlichaetsya-armatura-a400-ot-a500/",
+    "image": "https://metall-dk.ru/upload/medialibrary/d3b/2b59uh17e2gm1y130tqczjojhlll0iuj.jpg",
+    "note": "Статья об А400 и А500; точная марка партии на снимке не установлена",
+    "width": 1024,
+    "height": 768
+  },
+  {
+    "id": "N31",
+    "group": "Складские ракурсы",
+    "kind": "Пачки арматуры сверху",
+    "sourceName": "Gardizi Group",
+    "source": "https://www.gardizigroup.com/photo-gallery",
+    "image": "https://static.wixstatic.com/media/af5783_81a2cba75558422e90f99e482e1b995d~mv2.jpg/v1/fill/w_988%2Ch_751%2Cq_90%2Cenc_avif%2Cquality_auto/af5783_81a2cba75558422e90f99e482e1b995d~mv2.jpg",
+    "note": "Складской ракурс с торцами, бирками и рифлением. Марка партии не установлена",
+    "width": 988,
+    "height": 751
+  },
+  {
+    "id": "N26",
+    "group": "Складские ракурсы",
+    "kind": "Склад производителя",
+    "sourceName": "ArcelorMittal Canada",
+    "source": "https://long-canada.arcelormittal.com/fr/barres-darmature/",
+    "image": "https://long-canada.arcelormittal.com/sites/default/files/styles/fb/public/2019-10/ARCELOR%20MITTAL_Contrecoeur_2juin-8973.jpg?itok=3uBvvrRj",
+    "note": "Страница производителя арматуры; иностранные стандарты, марка 35ГС/25Г2С не подтверждена",
+    "width": 945,
+    "height": 630
+  },
+  {
+    "id": "N28",
+    "group": "Складские ракурсы",
+    "kind": "Заводской склад",
+    "sourceName": "Made-in-China · карточка поставщика",
+    "source": "https://m.made-in-china.com/product/High-Load-Bearing-Capacity-Steel-Bars-and-Threaded-Steel-Bars-Can-Be-Cut-and-Customized-6-8-10-12-14-16-18-20-22-25-28-32-2108164665.html",
+    "image": "https://image.made-in-china.com/2f0j00jZPoHIKJSbqD/High-Load-Bearing-Capacity-Steel-Bars-and-Threaded-Steel-Bars-Can-Be-Cut-and-Customized-6-8-10-12-14-16-18-20-22-25-28-32.jpg",
+    "note": "Общая иллюстрация арматуры; марка 35ГС/25Г2С не подтверждена",
+    "width": 750,
+    "height": 750
+  },
+  {
+    "id": "N24",
+    "group": "Крупные планы",
+    "kind": "Крупный план арматуры",
+    "sourceName": "Металл-РС",
+    "source": "https://metall-rs.ru/armatura",
+    "image": "https://metall-rs.ru/images/upload/1744015595.jpg",
+    "note": "Крупный план рифления и торцов. Небольшой оригинал — резерв для компактного блока",
+    "width": 602,
+    "height": 603
+  },
+  {
+    "id": "N30",
+    "group": "Арматура на стройплощадке",
+    "kind": "Арматура на стройплощадке",
+    "sourceName": "Gardizi Group",
+    "source": "https://www.gardizigroup.com/photo-gallery",
+    "image": "https://static.wixstatic.com/media/cb6332_5bc177cca20c436da974f1f5f6529752~mv2.jpg/v1/fill/w_960%2Ch_350%2Cal_c%2Cq_80%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/cb6332_5bc177cca20c436da974f1f5f6529752~mv2.jpg",
+    "note": "Дополнительный тематический кадр: прутки на фоне строительства; марка партии не установлена",
+    "width": 960,
+    "height": 350
+  }
+]

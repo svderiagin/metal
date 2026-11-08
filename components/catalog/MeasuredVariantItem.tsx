@@ -94,7 +94,7 @@ function TonnageMeasuredVariantItem({
           : filterStyles.cartButton;
   const status = message || (invalidDraft ? "Проверьте введённое значение."
     : hasChanges ? "Не сохранено" : isVgp && pipeOrder && pipeOrder.pieces > 0 ? `${pipeOrder.pieces} шт. · ${formatNumber(pipeOrder.meters)} м`
-      : isDemonstrationProduct(variant) ? "Масса и марка стали уточняются. Объём в метрах — по запросу." : "");
+      : "");
 
   function quantityOptions(mode: OrderInputMode) {
     return {

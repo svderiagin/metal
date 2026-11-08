@@ -1,0 +1,5 @@
+Use case: precise-object-edit.
+Asset type: unannotated rectangular steel tube catalog photo, exact 4:3.
+Edit target: supplied composition preview. The tube has already been mirrored and positioned to recede toward the RIGHT, like the other approved catalog profiles. KEEP THIS COMPOSITION EXACTLY: no mirror, rotation, crop, scaling, perspective change or relighting. Preserve the metal, cut face, visible inner walls and real shadows.
+Change ONLY the empty LEFT 180 pixels of this 864 x 648 canvas: make that added strip a seamless continuation of the existing very pale neutral studio wall and floor next to it, removing any flat or banded outpaint seam. If outputting at a larger size, the protected existing photograph begins at 20.8333% of canvas width and runs to the right edge. Keep all of that protected region unchanged. No added metal in the left strip, no text, arrows, dimensions, logo or border.
+This is ONLY a background plate: the complete protected mirrored photo region will be copied back verbatim. The tube itself MUST NOT be redrawn or retouched.

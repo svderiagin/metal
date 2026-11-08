@@ -112,16 +112,105 @@
 
 ### Арматура и балки
 
+Основное фото А500С в карточке вида, на странице подкатегории и странице семейства —
+`a500c-balakovo-warehouse.jpg` (1920 × 1164), выбранное владельцем 07.11.2026.
+Файл сохранён в исходных байтах; размеры для миниатюр создаёт Next.js Image,
+увеличенный просмотр загружает оригинал. Прежнее основное фото сохранено для
+существующих товарных иллюстраций.
+Источник — [публикация о продукции МЗ «Балаково»](https://metall.life/news/1800),
+[оригинал фотографии](https://metall.life/uploads/main/00t/8b9d755e4595cf7835cf87eaca606ff805745908054a948171307955963f8863/dsc09423_2.jpg).
+Свободная лицензия на коммерческое использование не подтверждена. Это иллюстрация
+вида продукции; фото не подтверждает наличие, производителя или параметры партии.
+
+Проверка замены: исходник, карточка, обе страницы А500С, просмотр вписанного кадра
+и 1:1 на desktop/mobile в обеих темах; оптимизированные миниатюры отдаются в AVIF,
+оригинал — 1920 × 1164. Фокусные проверки: 13 unit прошли (2 пропуска без
+необязательного архива поставщика), 12 E2E прошли, четыре эталона категории
+обновлены после просмотра diff и повторно прошли сравнение. Снимки проверки:
+`.tmp/a500c-image-review/`.
+
+07.11.2026 по выбору владельца в галерею А500С добавлены складские кадры
+S12 (`a500c-stock-van-metall.png`, 1000 × 1000) и S13
+(`a500c-yard-metallobaza.jpg`, 3648 × 2736). Они идут четвёртым и пятым
+после трёх существующих фотографий. Оригиналы сохранены без пересжатия,
+Next.js Image создаёт миниатюры. S13 — общий складской ракурс; марка партии
+на снимке не подтверждена. Варианты G02/G03 из подборки оставлены для возможных
+карточек товаров: в категории и подкатегории они не добавлены.
+Вручную просмотрены миниатюры и полные кадры на странице А500С при обычной
+ширине и 450 px; S13 также открыт в масштабе 1:1. Снимок страницы:
+`.tmp/a500c-selected-photos/s13-on-page.png`. Автоматические тесты не запускались
+по просьбе владельца.
+
+Для А400 (35ГС) и А400 (25Г2С) владелец 07.11.2026 выбрал общий крупный план
+`a400-ribbed-detail-expo.jpg` для карточек и обложек.
+Основным кадром титульной галереи категории «Арматура» выбран
+`a400-warehouse-berlion.webp`, ранее пятый в галерее. Прежняя обложка
+`/images/catalog/armatura.jpg` сохранена третьим кадром, а
+`a400-production-veles.jpg` с двумя рабочими в жёлтых касках — вторым.
+В галереях подкатегорий кадра с рабочими нет.
+Вертикальное фото `a400-35gs-stock-moststal.jpg` исключено из галереи категории
+«Арматура» по просьбе владельца; в подкатегории А400 (35ГС) оно сохранено.
+В подкатегории А240 (А1) из галереи исключено второе фото
+`a240-stock-citymet.jpg`; в общей категории «Арматура» этот кадр сохранён.
+По выбору владельца 07.11.2026 четвёртым кадром А240 (А1) добавлен A07 —
+`a240-stock-metall-dk.jpg` (750 × 750): связки гладких прутков на складе.
+Оригинал сохранён без пересжатия; в миниатюре видна центральная часть,
+в увеличенном просмотре — полный кадр.
+Вручную просмотрены миниатюра и оригинал A07 на компьютере и узком экране.
+Снимок страницы: `.tmp/a240-selected-photo/a07-on-page.jpg`.
+Автоматические тесты не запускались по просьбе владельца.
+Файлы сохранены без изменения исходных байтов и пропорций. Старые дополнительные
+кадры и фотографии товарных иллюстраций сохранены. Новые кадры иллюстрируют вид
+продукции и упаковку; конкретные марки 35ГС/25Г2С и принадлежность производства
+ими не подтверждаются. Коммерческая лицензия не подтверждена.
+
+Дополнительно владелец выбрал три кадра из галереи «Берлион», каждый 1400 × 933.
+В А400 (35ГС) по просьбе владельца исключена вторая фотография — связка
+`a400-bundle-berlion.webp`. После обложки осталось вертикальное складское фото
+`a400-35gs-stock-moststal.jpg`. Другой складской кадр ранее перенесён из этой
+галереи в категорию «Арматура» и сделан её основной обложкой.
+Из галереи А400 (25Г2С) по просьбе владельца
+исключены крупный план рифления `a400-ribs-berlion.webp` и складской кадр
+`a400-warehouse-berlion.webp`; после обложки идут прежние фотографии поставщиков.
+Прежние обложки
+и дополнительные фотографии сохранены. Файлы скачаны без пересжатия и ретуши.
+Поставщик использует эту общую галерею на страницах
+[35ГС](https://berlion.ru/armatura/riflenaya/35gs-12mm) и
+[25Г2С](https://berlion.ru/armatura/riflenaya/25g2s-25mm); изображения иллюстрируют
+товарную группу, а не подтверждают марку стали, размер или наличие конкретной партии.
+Условия коммерческого использования не подтверждены.
+По выбору владельца 07.11.2026 добавлено по одному складскому кадру:
+N26 (`rebar-warehouse-arcelormittal.jpg`, 945 × 630) третьим в А400 (35ГС),
+N28 (`rebar-warehouse-made-in-china.jpg`, 750 × 750) четвёртым в А400 (25Г2С).
+Файлы сохранены без пересжатия. Это иллюстрации рифлёной арматуры;
+марки 35ГС/25Г2С и происхождение конкретной партии ими не подтверждаются.
+N26 и N28 вручную просмотрены на страницах своих подкатегорий: миниатюры
+и полные версионированные оригиналы 945 × 630 и 750 × 750. N28 также просмотрен
+на узком экране. Автоматические тесты не запускались по просьбе владельца.
+Вручную просмотрены новые кадры на сайте: миниатюры обеих подкатегорий и
+увеличенные фотографии на компьютере и при ширине 390 px. Оригинал связки
+открыт в масштабе 1:1. Автоматические тесты не запускались по просьбе владельца.
+
 | Файл | Размер | Источник |
 | --- | --- | --- |
+| `a400-bundle-berlion.webp` | 1400 × 933 | [Галерея 35ГС, кадр 2](https://berlion.ru/armatura/riflenaya/35gs-12mm) · [оригинал](https://berlion.ru/images/catalog/armatura-a3-gallery-2.webp?v=80bf5c49) |
+| `a400-ribs-berlion.webp` | 1400 × 933 | [Галерея 25Г2С, кадр 3](https://berlion.ru/armatura/riflenaya/25g2s-25mm) · [оригинал](https://berlion.ru/images/catalog/armatura-a3-gallery-3.webp?v=60293ec5) |
+| `a400-warehouse-berlion.webp` | 1400 × 933 | [Галерея 35ГС, кадр 5](https://berlion.ru/armatura/riflenaya/35gs-12mm) · [оригинал](https://berlion.ru/images/catalog/armatura-a3-gallery-5.webp?v=a8f8152e) |
+| `rebar-warehouse-arcelormittal.jpg` (N26) | 945 × 630 | [ArcelorMittal Canada, арматура](https://long-canada.arcelormittal.com/fr/barres-darmature/) · [оригинал](https://long-canada.arcelormittal.com/sites/default/files/styles/fb/public/2019-10/ARCELOR%20MITTAL_Contrecoeur_2juin-8973.jpg?itok=3uBvvrRj) |
+| `rebar-warehouse-made-in-china.jpg` (N28) | 750 × 750 | [Карточка поставщика Made-in-China](https://m.made-in-china.com/product/High-Load-Bearing-Capacity-Steel-Bars-and-Threaded-Steel-Bars-Can-Be-Cut-and-Customized-6-8-10-12-14-16-18-20-22-25-28-32-2108164665.html) · [оригинал](https://image.made-in-china.com/2f0j00jZPoHIKJSbqD/High-Load-Bearing-Capacity-Steel-Bars-and-Threaded-Steel-Bars-Can-Be-Cut-and-Customized-6-8-10-12-14-16-18-20-22-25-28-32.jpg) |
+| `a400-ribbed-detail-expo.jpg` | 1000 × 667 | [Карточка арматуры А3](https://expo-snab.kz/p54942527-armatura.html) · [фото](https://images.satu.kz/82121969_armatura-36-mm.jpg) |
+| `a400-production-veles.jpg` | 1910 × 1000 | [Галерея на странице А400](https://metalloprokat.velesark.ru/armatura/a400s) · [фото](https://metalloprokat.velesark.ru/assets/template/images/work_photos/originals/2.jpg) |
 | `a500c-warehouse-meg.webp` | 1024 × 576 | [Карточка поставщика](https://spb.metexpro.ru/catalog/chernyy-prokat/armatura/armatura-12-a500s/) · [фото](https://spb.metexpro.ru/static/handoff/assets/photos/cat/armatura.webp) |
 | `a500c-bundle-tag.jpg` | 960 × 1280 | [Карточка поставщика](https://www.prom.uz/ads/armatura-a500s-34028-2016-rossiya-25/) · [фото](https://devel.prom.uz/upload/products/2026/1/12/1/2-2.jpg) |
+| `a500c-stock-van-metall.png` (S12) | 1000 × 1000 | [Металлопт, А500С 16 мм](https://van-metall.ru/domodedovo/catalog-tovarov/armatura/armatura-a3-500c/armatura-a500s-f-16-0006-a/) · [оригинал](https://van-metall.ru/image/cache/catalog/armature/varilla-corrugada-3-8-hlf-romero-1000x1000.png) |
+| `a500c-yard-metallobaza.jpg` (S13) | 3648 × 2736 | [Металлобаза ТД, арматура](https://metallobaza-td.ru/armatura-moskva/) · [оригинал](https://metallobaza-td.ru/img/11554908.jpg) |
 | `a400-35gs-stock-moststal.jpg` | 607 × 1080 | [Карточка поставщика](https://moststal.ru/magazin/armatura-a3-a400-35gs-12-mm) · [фото](https://moststal.ru/assets/images/products/2318/a400.jpeg) |
 | `a400-25g2s-stock-pkfsst.jpg` | 836 × 627 | [Карточка поставщика](https://pkfsst.ru/armatura-40-mm-a3-a400-riflenaya-25g2s) · [фото](https://pkfsst.ru/img/static/329276/armatura-a3-2.jpeg) |
 | `a400-25g2s-bundles-metallmk.jpg` | 600 × 800 | [Карточка поставщика](https://metallmk.ru/armatura/armatura-riflenaya/armatura-16-mm-a3-a400-riflenaya-25g2s/) · [фото](https://metallmk.ru/image/catalog/products_images/products/armatura-riflenaya4.jpg) |
 | `a240-stock-citymet.jpg` | 3130 × 2495 | [Карточка поставщика](https://citymet.ru/armatura-gladkaya-a1) · [фото](https://citymet.ru/assets/mgr/images/armatura-gladkaya-a1/armatura-gladkaya.jpg) |
 | `a240-bundle-citymet.jpg` | 1342 × 890 | [Карточка поставщика](https://citymet.ru/armatura-gladkaya-a1) · [фото](https://citymet.ru/assets/mgr/images/armatura-gladkaya-a1/armatura-a1-2.jpg) |
 | `a240-rods-metallrs.webp` | 963 × 1280 | [Карточка поставщика](https://metall-rs.ru/armatura-gladkaya/armatura-gladkaya-25-mm-a240) · [фото](https://metall-rs.ru/images/product/25/armatura-gladkaya-25-mm-a240-191746512067-1.webp) |
+| `a240-stock-metall-dk.jpg` (A07) | 750 × 750 | [Металл-ДК, А240 и А240С](https://metall-dk.ru/articles/chem-otlichaetsya-armatura-a240-ot-a240s/) · [оригинал](https://metall-dk.ru/upload/medialibrary/585/duek18w2bpakw4n59dnhgrhazascnafi.jpg) |
 | `normal-parallel-flanges-expo.jpg` | 1280 × 760 | [Карточка поставщика](https://expo-snab.kz/p58327210-balka-30b1-30b2.html) · [фото](https://images.satu.kz/89460171_balka-30b1-30b2.jpg) |
 | `wide-flanges-betall.jpg` | 568 × 426 | [Карточка поставщика](https://proflist.moscow/shirokopolochnyj-dvutavr/sh1) · [фото](https://proflist.moscow/wp-content/uploads/1970/01/shirokopolochnyj-dvutavr-sh1_2.jpg) |
 | `wide-stock-betall.jpg` | 568 × 426 | [Карточка поставщика](https://proflist.moscow/shirokopolochnyj-dvutavr/sh1) · [фото](https://proflist.moscow/wp-content/uploads/1970/01/shirokopolochnyj-dvutavr-sh1_3.jpg) |
@@ -131,6 +220,24 @@
 ### Профильные и круглые трубы
 
 Категория «Трубы профильные» использует существующий общий складской кадр `trubi-main.jpg`. Категория «Труба круглая» и шесть видов сохраняют свои текущие первые кадры. Обзорные галереи используют несколько фотографий из соответствующих видов.
+
+В категории «Трубы профильные» оставлены три кадра: `trubi-main.jpg`,
+`robmetalstal-square-warehouse.webp` и `marketstal-rectangular-bundle.jpg`.
+По выбору владельца четвёртый кадр `stroy-partner-square-ends.jpg` убран из
+категории и сохранён в подкатегории квадратных труб (теперь вторым, без дубликата).
+Последний кадр `mecafluid-rectangular-ends.jpg` также убран из категории;
+по дополнительному выбору владельца он убран и из подкатегории прямоугольных
+труб как неподходящий кадр на белом фоне. В этой подкатегории оставлены три
+фото: основное, `marketstal-rectangular-bundle.jpg` и
+`gradstal-rectangular-stack.jpg`.
+
+После переноса и удаления кадров состав галерей проверен вручную на сайте:
+в категории и в обеих подкатегориях по три фото. Второй кадр квадратных труб
+`robmetalstal-square-warehouse.webp` по выбору владельца убран из этой
+подкатегории; в корневой категории он сохранён.
+Кадр `stroy-partner-square-ends.jpg` проверен в миниатюре и увеличенном
+просмотре на компьютере; у прямоугольных труб последний кадр —
+`gradstal-rectangular-stack.jpg`. Автотесты по просьбе владельца не запускались.
 
 | Тип | Файл | Источник | Примечание |
 | --- | --- | --- | --- |

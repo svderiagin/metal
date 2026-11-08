@@ -1,0 +1,134 @@
+[
+  {
+    "id": "S02",
+    "group": "А500С",
+    "kind": "Крупный план рифления",
+    "sourceName": "МЗ Балаково",
+    "source": "https://www.balmetall.ru/news/na-mz-balakovo-osvoen-prokat-armatury-periodicheskogo-profilya-8-go-diametra-v-motkakh-iz-stali-mark/",
+    "image": "https://www.balmetall.ru/upload/iblock/5e3/5e39b48e202a11df5327e5032575a5f3.jpg",
+    "note": "Иллюстрация из публикации производителя об А500С",
+    "width": 1200,
+    "height": 800
+  },
+  {
+    "id": "S12",
+    "group": "А500С",
+    "kind": "Склад / прутки на прокладках",
+    "sourceName": "Металлопт",
+    "source": "https://van-metall.ru/domodedovo/catalog-tovarov/armatura/armatura-a3-500c/armatura-a500s-f-16-0006-a/",
+    "image": "https://van-metall.ru/image/cache/catalog/armature/varilla-corrugada-3-8-hlf-romero-1000x1000.png",
+    "note": "Галерея на странице А500С 16 мм",
+    "width": 1000,
+    "height": 1000
+  },
+  {
+    "id": "S13",
+    "group": "А500С",
+    "kind": "Склад / связки",
+    "sourceName": "Металлобаза ТД",
+    "source": "https://metallobaza-td.ru/armatura-moskva/",
+    "image": "https://metallobaza-td.ru/img/11554908.jpg",
+    "note": "Общий складской кадр из раздела арматуры. Марка партии на фото не подтверждена",
+    "width": 3648,
+    "height": 2736
+  },
+  {
+    "id": "S03",
+    "group": "А500С",
+    "kind": "Связка / торцы",
+    "sourceName": "Тонмет",
+    "source": "https://tonmetholding.com.ua/uk/produkciya-2/p/armatura-25/",
+    "image": "https://tonmetholding.com.ua/images/products/607/1680097868284_z.jpg",
+    "note": "Карточка арматуры 25 мм А500С. Поверхностная ржавчина; резервный вариант",
+    "width": 693,
+    "height": 660
+  },
+  {
+    "id": "G02",
+    "group": "А400 · 35ГС",
+    "kind": "Связка на тёмном фоне",
+    "sourceName": "Берлион",
+    "source": "https://berlion.ru/armatura/riflenaya/35gs-12mm",
+    "image": "https://berlion.ru/images/catalog/armatura-a3-gallery-1.webp?v=dbca9860",
+    "note": "Неиспользованный ракурс из ранее просмотренной галереи",
+    "width": 1400,
+    "height": 933
+  },
+  {
+    "id": "G03",
+    "group": "А400 · 35ГС",
+    "kind": "Предметный крупный план",
+    "sourceName": "Берлион",
+    "source": "https://berlion.ru/armatura/riflenaya/35gs-12mm",
+    "image": "https://berlion.ru/images/catalog/armatura-a3-gallery-4.webp?v=ea99ecf0",
+    "note": "Неиспользованный ракурс из ранее просмотренной галереи",
+    "width": 1400,
+    "height": 933
+  },
+  {
+    "id": "G04",
+    "group": "А400 · 35ГС",
+    "kind": "Склад / крупный план",
+    "sourceName": "Металл-Вес",
+    "source": "https://metall-ves.ru/catalog/armatura-18-mm-a3-35g-11-7-m/",
+    "image": "https://metall-ves.ru/upload/iblock/09f/uiofrx047x7ytxch4ao3qho5y5savvn8.jpg",
+    "note": "Источник называет товар «А3 35Г». Точная марка партии по фотографии не подтверждена",
+    "width": 1000,
+    "height": 750
+  },
+  {
+    "id": "T07",
+    "group": "А400 · 25Г2С",
+    "kind": "Открытый склад / крановая эстакада",
+    "sourceName": "СпецСтальТрейд",
+    "source": "https://pkfsst.ru/armatura-40-mm-a3-a400-riflenaya-25g2s",
+    "image": "https://pkfsst.ru/img/static/329276/armatura-a3-3.jpeg",
+    "note": "Дополнительный ракурс из карточки А400 25Г2С",
+    "width": 836,
+    "height": 627
+  },
+  {
+    "id": "T06",
+    "group": "А400 · 25Г2С",
+    "kind": "Предметный снимок связок",
+    "sourceName": "СпецСтальТрейд",
+    "source": "https://pkfsst.ru/armatura-40-mm-a3-a400-riflenaya-25g2s",
+    "image": "https://pkfsst.ru/img/static/329276/armatura-a3-1.jpeg",
+    "note": "Обтравленный кадр из карточки А400 25Г2С. Для компактного изображения",
+    "width": 640,
+    "height": 640
+  },
+  {
+    "id": "A07",
+    "group": "А240 · А1",
+    "kind": "Склад / торцы гладких прутков",
+    "sourceName": "Металл-ДК",
+    "source": "https://metall-dk.ru/articles/chem-otlichaetsya-armatura-a240-ot-a240s/",
+    "image": "https://metall-dk.ru/upload/medialibrary/585/duek18w2bpakw4n59dnhgrhazascnafi.jpg",
+    "note": "Гладкие прутки на складе. Лучший из новых вариантов А240; оригинал 750 × 750",
+    "width": 750,
+    "height": 750
+  },
+  {
+    "id": "A09",
+    "group": "А240 · А1",
+    "kind": "Прутки на складе",
+    "sourceName": "Сплав 500",
+    "source": "https://splav500.com.ua/metalloprokat/armatura-a240-krug/armatura-a240-krug-8mm/",
+    "image": "https://splav500.com.ua/wa-data/public/shop/products/14/19/1914/images/371/371.600.jpg",
+    "note": "Гладкая арматура 8 мм А240. Небольшой оригинал: дополнительный кадр",
+    "width": 600,
+    "height": 426
+  },
+  {
+    "id": "A04",
+    "group": "А240 · А1",
+    "kind": "Крупный план связок",
+    "sourceName": "Беталл",
+    "source": "https://proflist.moscow/armatura_a1/a240",
+    "image": "https://proflist.moscow/wp-content/uploads/2015/07/armatura_5mm_3.jpg",
+    "note": "Гладкие прутки. Небольшой оригинал: резерв для компактного блока",
+    "width": 568,
+    "height": 426
+  }
+]

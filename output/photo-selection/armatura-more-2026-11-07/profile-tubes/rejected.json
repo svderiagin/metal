@@ -1,0 +1,102 @@
+[
+  {
+    "id": "P02",
+    "group": "Корневая категория",
+    "kind": "Складской план",
+    "sourceName": "BM Steel · Aberdeen",
+    "source": "https://www.bmsteel.co.uk/depot/aberdeen",
+    "image": "https://www.bmsteel.co.uk/images/pages/1471-266-PXL_20231016_100114499.jpg",
+    "note": "Иллюстрация формы и хранения. Размеры, марка стали и стандарт нашей партии подтверждаются документами.",
+    "reason": "Небольшой вертикальный исходник; выбраны более подходящие широкие кадры"
+  },
+  {
+    "id": "P04",
+    "group": "Корневая категория",
+    "kind": "Склад металлобазы",
+    "sourceName": "Профметалл СПб",
+    "source": "https://profmetall-spb.ru/",
+    "image": "https://profmetall-spb.ru/images/Gallery/gl-03.jpg",
+    "note": "Иллюстрация формы и хранения. Размеры, марка стали и стандарт нашей партии подтверждаются документами.",
+    "reason": "Много ржавчины и слабый акцент на товаре"
+  },
+  {
+    "id": "P05",
+    "group": "Корневая категория",
+    "kind": "Складской ракурс профильных труб",
+    "sourceName": "Профметалл СПб",
+    "source": "https://profmetall-spb.ru/",
+    "image": "https://profmetall-spb.ru/images/Foto/21-04-2022/01.jpg",
+    "note": "Иллюстрация формы и хранения. Размеры, марка стали и стандарт нашей партии подтверждаются документами.",
+    "reason": "Недостаточная контрастность и резкость"
+  },
+  {
+    "id": "P06",
+    "group": "Корневая категория",
+    "kind": "Квадратные и прямоугольные сечения",
+    "sourceName": "Thai Hardware Solution",
+    "source": "https://www.thaihardwaresolution.com/content/6902/blog-%E0%B9%80%E0%B8%AB%E0%B8%A5%E0%B9%87%E0%B8%81%E0%B8%81%E0%B8%A5%E0%B9%88%E0%B8%AD%E0%B8%87%E0%B9%81%E0%B8%9A%E0%B8%99-vs-%E0%B9%80%E0%B8%AB%E0%B8%A5%E0%B9%87%E0%B8%81%E0%B8%81%E0%B8%A5%E0%B9%88%E0%B8%AD%E0%B8%87%E0%B8%AA%E0%B8%B5%E0%B9%88%E0%B9%80%E0%B8%AB%E0%B8%A5%E0%B8%B5%E0%B9%88%E0%B8%A2%E0%B8%A1",
+    "image": "https://image.makewebcdn.com/makeweb/m_1200x600/oEyAfoka5/DefaultData/blog_3.jpeg",
+    "note": "Иллюстрация формы и хранения. Размеры, марка стали и стандарт нашей партии подтверждаются документами.",
+    "reason": "Для крупного плана выбран более выразительный кадр P07"
+  },
+  {
+    "id": "K02",
+    "group": "Квадратные трубы",
+    "kind": "Профильные трубы крупным планом",
+    "sourceName": "Jingsheng Steel",
+    "source": "https://www.jingshengsteel.com/products/hollowsections.html",
+    "image": "https://www.jingshengsteel.com/Upfiles/Prod_X/202141024221.jpg",
+    "note": "Иллюстрация формы и хранения. Размеры, марка стали и стандарт нашей партии подтверждаются документами.",
+    "reason": "Источник не отдаёт фотографию"
+  },
+  {
+    "id": "K03",
+    "group": "Квадратные трубы",
+    "kind": "Склад квадратного профиля",
+    "sourceName": "Юнион Металл",
+    "source": "https://umc.market/knowledge/kvadratnyy-profil/",
+    "image": "https://umc.market/upload/%D0%BA%D0%B2%D0%B0%D0%B4%D1%80%D0%B0%D1%82%D0%BD%D1%8B%D0%B9_%D0%BF%D1%80%D0%BE%D1%84%D0%B8%D0%BB%D1%8C_%D1%82%D1%80%D1%83%D0%B1%D1%8B.webp",
+    "note": "Иллюстрация формы и хранения. Размеры, марка стали и стандарт нашей партии подтверждаются документами.",
+    "reason": "Источник не отдаёт фотографию"
+  },
+  {
+    "id": "R01",
+    "group": "Прямоугольные трубы",
+    "kind": "Пачки прямоугольных труб",
+    "sourceName": "Louisiana Steel",
+    "source": "https://www.louisianasteel.com/rectangular-steel-tubing.html",
+    "image": "https://www.louisianasteel.com/cmss_files/imagelibrary/Gallery-Slider-Images/Gallery-Rectangular-Tube-Stacks.jpg",
+    "note": "Иллюстрация формы и хранения. Размеры, марка стали и стандарт нашей партии подтверждаются документами.",
+    "reason": "Небольшой исходник 636 × 628"
+  },
+  {
+    "id": "R03",
+    "group": "Прямоугольные трубы",
+    "kind": "Прямоугольные трубы крупным планом",
+    "sourceName": "YSW Metal",
+    "source": "https://www.yswmetal.com/cold-formed-mild-steel-rectangular-hollow-section-standard-size.html",
+    "image": "https://img.yfisher.com/m4975/1695799568599-rhs012/jpg100-t3-scale100.webp",
+    "note": "Иллюстрация формы и хранения. Размеры, марка стали и стандарт нашей партии подтверждаются документами.",
+    "reason": "Небольшой и тёмный исходник 600 × 600"
+  },
+  {
+    "id": "R06",
+    "group": "Прямоугольные трубы",
+    "kind": "Замкнутые профили на стеллажах",
+    "sourceName": "Industrial Metal Services",
+    "source": "https://www.industrialmetal.co.uk/",
+    "image": "https://www.industrialmetal.co.uk/images/categories/56.jpg",
+    "note": "Иллюстрация формы и хранения; параметры нашей партии сверяются по документам.",
+    "reason": "Слишком маленький исходник 500 × 500"
+  },
+  {
+    "id": "R07",
+    "group": "Прямоугольные трубы",
+    "kind": "Пачки прямоугольных труб",
+    "sourceName": "Jianning Metals",
+    "source": "https://www.jianningmetals.com/shaped-tube/square-and-rectangular-steel-tube/rectangular-hollow-steel-tube-for-structural.html",
+    "image": "https://www.jianningmetals.com/uploads/44445/products/p20250630143410bd39e.jpg?size=800x0",
+    "note": "Иллюстрация формы и хранения; параметры нашей партии сверяются по документам.",
+    "reason": "Преобладает квадратное сечение, грязная поверхность"
+  }
+]

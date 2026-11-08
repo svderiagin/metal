@@ -21,6 +21,8 @@ const sources = JSON.parse(await fs.readFile("data/product-illustration-sources.
 const protectedCategories = new Set([
   "rozmet-cat-shveller", "rozmet-cat-ugolok", "rozmet-cat-kvadrat", "rozmet-cat-listovoy-prokat",
 ]);
+// Owner-approved square-pipe template has a separate lossless label renderer.
+const protectedProductTypes = new Set(["type-cat-trp-sub-1"]);
 const width = 2400;
 const height = 1800;
 const textColor = "#41464D";
@@ -29,9 +31,9 @@ const white = "#ffffff";
 const production = "public/images/catalog/product-illustrations";
 const write = process.argv.includes("--write");
 const samples = process.argv.slice(2).filter(argument => !argument.startsWith("--"));
-assert(!write || samples.length === 0, "Production must be rendered as a complete set");
 
 const products = productVariants.filter(product => !protectedCategories.has(product.categoryId)
+  && !protectedProductTypes.has(product.productTypeId)
   && (!samples.length || samples.includes(product.id)));
 assert(products.length > 0, "No matching products to illustrate");
 const output = await fs.mkdtemp(path.join(temp, "render-"));
@@ -161,7 +163,10 @@ for (let start = 0; start < products.length; start += batch) {
 if (write) {
   await fs.mkdir(production, {recursive: true});
   for (const [id] of result) await fs.rename(path.join(output, `${id}.webp`), path.join(production, `${id}.webp`));
-  const manifest = JSON.stringify(Object.fromEntries(result), null, 2) + "\n";
+  // Keep dedicated family illustrations, including square pipes, in both full
+  // and targeted generic renders.
+  const previous = JSON.parse(await fs.readFile("data/product-illustrations.json", "utf8"));
+  const manifest = JSON.stringify({...previous, ...Object.fromEntries(result)}, null, 2) + "\n";
   const temporaryManifest = path.join(output, "product-illustrations.json");
   await fs.writeFile(temporaryManifest, manifest);
   await fs.rename(temporaryManifest, "data/product-illustrations.json");
