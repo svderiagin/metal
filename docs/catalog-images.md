@@ -61,6 +61,20 @@ or generate extra variants solely to satisfy this checklist.
 
 ## Product illustrations for the remaining categories
 
+Owner-requested corrections from 08.11.2026 remove the number sign from all 152
+active product illustrations that contained it. Dedicated templates keep the
+original following raster glyphs and shift them left; generic illustrations
+replace only their text-only heading region. All product-photo pixels stay exact.
+The renderers retain these corrections on regeneration. The cold-rolled 0.5 mm
+sheet also uses the shared text and dimension-line palette through an annotation
+mask that protects the metal photograph. Original marked reference files remain
+archived intact; the first tread plate uses a corrected WebP. See
+[the correction record](../imports/number-sign-removal/README.md) for scope,
+patches, saved before/after comparisons and visual verification.
+
+Family-specific descriptions below document the original numeric annotation
+pass. The final heading and palette corrections described above follow it.
+
 `data/product-illustration-sources.json` maps reviewed source photos to a product
 or a product type. Keep these images free of printed dimensions from the donor
 SKU. See [photo sources](product-illustration-sources.md). The table thumbnail

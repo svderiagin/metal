@@ -58,7 +58,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "Квадрат стальной № 8x8"
+          "text": "Квадрат стальной 8x8"
         },
         {
           "key": "height",
@@ -78,13 +78,23 @@
         }
       ],
       "changedLabels": [],
-      "referenceUnmodified": true,
+      "referenceUnmodified": false,
       "placements": [],
       "protectedPixelChanges": 0,
       "output": "public/images/catalog/kvadrat/kvadrat-8x8-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "8872a272e09070272beb708422695cb3ffe3bfa28799876bf01e69d0f7c321aa"
+      "sha256": "2ad2d00e1844436e45e09899c6ff392d3ad37d2d6f8545d10154ca6cfc0c2a1a",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 904,
+          "top": 110,
+          "width": 281,
+          "height": 108
+        },
+        "shiftLeft": 109
+      }
     },
     {
       "id": "rozmet-2205",
@@ -94,7 +104,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "Квадрат стальной № 10x10"
+          "text": "Квадрат стальной 10x10"
         },
         {
           "key": "height",
@@ -166,7 +176,17 @@
       "output": "public/images/catalog/kvadrat/kvadrat-10x10-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "bc303c055508130c0db8fa7fe68ccaa51acc39857bb2dbe1ebf62f35fe0d9fea"
+      "sha256": "b643644e64a9916a850173815e4b6c5dec65499bc1813a089fd1cd4c392093d2",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 879,
+          "top": 110,
+          "width": 346,
+          "height": 108
+        },
+        "shiftLeft": 105
+      }
     },
     {
       "id": "rozmet-2206",
@@ -176,7 +196,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "Квадрат стальной № 12x12"
+          "text": "Квадрат стальной 12x12"
         },
         {
           "key": "height",
@@ -248,7 +268,17 @@
       "output": "public/images/catalog/kvadrat/kvadrat-12x12-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "2b4b2c68111bb8f2c6dae61ee4126eb7eb3d14efbc13e9bf385076a711c4e8c7"
+      "sha256": "69a5640f98723d939d72a5c098f15d7a3673369dc1924459c5268cd514d1e017",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 879,
+          "top": 110,
+          "width": 335,
+          "height": 108
+        },
+        "shiftLeft": 105
+      }
     },
     {
       "id": "rozmet-2207",
@@ -258,7 +288,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "Квадрат стальной № 14x14"
+          "text": "Квадрат стальной 14x14"
         },
         {
           "key": "height",
@@ -330,7 +360,17 @@
       "output": "public/images/catalog/kvadrat/kvadrat-14x14-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "e050cb6dd77993d445298cbc963575ea872722a45e1b786ad0ba253a2b3ea85f"
+      "sha256": "a706314e1d799138723cbe7d942c7a1a7a2e038f791a3ac903ca5426a032734e",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 879,
+          "top": 110,
+          "width": 346,
+          "height": 108
+        },
+        "shiftLeft": 105
+      }
     },
     {
       "id": "rozmet-26579",
@@ -340,7 +380,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "Квадрат стальной № 16x16"
+          "text": "Квадрат стальной 16x16"
         },
         {
           "key": "height",
@@ -412,7 +452,17 @@
       "output": "public/images/catalog/kvadrat/kvadrat-16x16-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "34bd277159fb55634f68645f284879343c2116754ce5d1520a1992edfcd74b9c"
+      "sha256": "317d31e1e316a40356278cd2b4e192224447aa00fd314b391ccb6e880c5d79e3",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 879,
+          "top": 110,
+          "width": 340,
+          "height": 108
+        },
+        "shiftLeft": 105
+      }
     },
     {
       "id": "rozmet-28995",
@@ -422,7 +472,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "Квадрат стальной № 18x18"
+          "text": "Квадрат стальной 18x18"
         },
         {
           "key": "height",
@@ -494,7 +544,17 @@
       "output": "public/images/catalog/kvadrat/kvadrat-18x18-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "a834596f09dcea5052bfcdd75c187b8138e00ff2f561eefcf35bf6ba9ee487c6"
+      "sha256": "f6ae4c9153c2a57abd5c0de773c73a8850621933197dbc7118fc5150af6fd1fa",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 879,
+          "top": 110,
+          "width": 339,
+          "height": 108
+        },
+        "shiftLeft": 105
+      }
     },
     {
       "id": "rozmet-2208",
@@ -504,7 +564,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "Квадрат стальной № 20x20"
+          "text": "Квадрат стальной 20x20"
         },
         {
           "key": "height",
@@ -576,7 +636,17 @@
       "output": "public/images/catalog/kvadrat/kvadrat-20x20-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "747c644fb750b2d33365b548356b692d9b42736cfdb32816befd72246c2a79bc"
+      "sha256": "00d5ede5ade1cbdb6c908328eae394c6a6070a5d1fd494c6835430eb0bbcf030",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 879,
+          "top": 110,
+          "width": 380,
+          "height": 108
+        },
+        "shiftLeft": 106
+      }
     }
   ]
 }

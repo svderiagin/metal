@@ -58,7 +58,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "прямоугольная № 30 x 20 x 2"
+          "text": "прямоугольная 30 x 20 x 2"
         },
         {
           "key": "height",
@@ -100,7 +100,18 @@
       "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-30x20x2.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "d1720ba119bba57d994bc68dec1239c111bc6e449b9167c0156f9528a36461a0"
+      "sha256": "f33334d0e995fb62ad720f32cb69af7ba2d25380dc5e95986e3834d84a7875b8",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 770,
+          "top": 222,
+          "width": 548,
+          "height": 112
+        },
+        "shiftLeft": 106
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "profile-pipe-rectangular-40x20x1-5",
@@ -110,7 +121,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "прямоугольная № 40 x 20 x 1,5"
+          "text": "прямоугольная 40 x 20 x 1,5"
         },
         {
           "key": "height",
@@ -184,7 +195,18 @@
       "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-40x20x1-5.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "7fef6bf2d977d25f2f3b807725e85e720eb121bb11fcdb80a4d49eb93a42d333"
+      "sha256": "25dff9a733e27f4f4cf4f46467afff829699b691abd92ce0601ae00099d61bf8",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 770,
+          "top": 222,
+          "width": 605,
+          "height": 112
+        },
+        "shiftLeft": 106
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "profile-pipe-rectangular-40x20x2",
@@ -194,7 +216,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "прямоугольная № 40 x 20 x 2"
+          "text": "прямоугольная 40 x 20 x 2"
         },
         {
           "key": "height",
@@ -258,7 +280,18 @@
       "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-40x20x2.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "6eac5131efeee68b384828aacb62946bcd16a1f7db183f1a9123003154437967"
+      "sha256": "6eb4d3f8959fd48cb0de7fa4293f2b9a3f9be6a3f7bbc24bdcf599ae47704a4c",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 770,
+          "top": 222,
+          "width": 551,
+          "height": 112
+        },
+        "shiftLeft": 106
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "profile-pipe-rectangular-40x20x3",
@@ -268,7 +301,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "прямоугольная № 40 x 20 x 3"
+          "text": "прямоугольная 40 x 20 x 3"
         },
         {
           "key": "height",
@@ -342,7 +375,18 @@
       "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-40x20x3.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "bd0feb81caca29d7fb07e55663f40752d6d6fdd670a25ff99d7bbfc53612e16c"
+      "sha256": "1b31320409dd5beb76a85d5da76af67006a367501f068f289a60d131ca9e22ae",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 770,
+          "top": 222,
+          "width": 553,
+          "height": 112
+        },
+        "shiftLeft": 106
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "profile-pipe-rectangular-40x25x1-5",
@@ -352,7 +396,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "прямоугольная № 40 x 25 x 1,5"
+          "text": "прямоугольная 40 x 25 x 1,5"
         },
         {
           "key": "height",
@@ -437,7 +481,18 @@
       "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-40x25x1-5.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "0df03b1af19c52c10d92a5764913ed4522d84b7bf78fae496332f343aac67100"
+      "sha256": "b85aeb9fe7ce87030fcee3d6f2abfe41d8237c0046f514afcbd0ad1a76153750",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 770,
+          "top": 222,
+          "width": 600,
+          "height": 112
+        },
+        "shiftLeft": 106
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "profile-pipe-rectangular-40x25x2",
@@ -447,7 +502,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "прямоугольная № 40 x 25 x 2"
+          "text": "прямоугольная 40 x 25 x 2"
         },
         {
           "key": "height",
@@ -522,7 +577,18 @@
       "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-40x25x2.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "eac48857ed758c6aec2adad23f660e31eb5d0f62f45064246d4fee64b2e96f3b"
+      "sha256": "63d377b8b01a095f766cb0d4e83aeccebae2e87e784690a1449b595ae548cf9d",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 770,
+          "top": 222,
+          "width": 546,
+          "height": 112
+        },
+        "shiftLeft": 106
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "profile-pipe-rectangular-50x25x1-5",
@@ -532,7 +598,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "прямоугольная № 50 x 25 x 1,5"
+          "text": "прямоугольная 50 x 25 x 1,5"
         },
         {
           "key": "height",
@@ -617,7 +683,18 @@
       "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-50x25x1-5.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "899c35f9ec23ba9664f6b458807cc05dc9ec40420375cd64072370e1d8885087"
+      "sha256": "378a496cba1161768db11bb240695c9000c121885c428981a783cb4fbf319dd0",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 770,
+          "top": 222,
+          "width": 595,
+          "height": 112
+        },
+        "shiftLeft": 106
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "profile-pipe-rectangular-50x25x2",
@@ -627,7 +704,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "прямоугольная № 50 x 25 x 2"
+          "text": "прямоугольная 50 x 25 x 2"
         },
         {
           "key": "height",
@@ -702,7 +779,18 @@
       "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-50x25x2.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "dd3541328242886872922c7d70c7604a9483a54699d0f72a1336f2f617f16a35"
+      "sha256": "081d531fc3cc4736b9a344587c123f1ba1284aad1e4c43f55f215db0b216d434",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 770,
+          "top": 222,
+          "width": 541,
+          "height": 112
+        },
+        "shiftLeft": 106
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "profile-pipe-rectangular-50x25x3",
@@ -712,7 +800,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "прямоугольная № 50 x 25 x 3"
+          "text": "прямоугольная 50 x 25 x 3"
         },
         {
           "key": "height",
@@ -797,7 +885,18 @@
       "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-50x25x3.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "7b248f59644a0a6844e5357cea88fb34d827c32cda087a115c82ccc6850f9215"
+      "sha256": "7da657cf330029f65bbf05697945dfeafa968c309b851ee90d9928072ef02e14",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 770,
+          "top": 222,
+          "width": 543,
+          "height": 112
+        },
+        "shiftLeft": 106
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "profile-pipe-rectangular-60x30x1-5",
@@ -807,7 +906,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "прямоугольная № 60 x 30 x 1,5"
+          "text": "прямоугольная 60 x 30 x 1,5"
         },
         {
           "key": "height",
@@ -892,7 +991,18 @@
       "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-60x30x1-5.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "91a6048145c0e41df94a99b0d46b8b119d0409a804e9d181dd26da0ee31e0791"
+      "sha256": "4899edf653ec5ad02622d160aecfb560dd5c2cedbba4382815583632c2eb17ee",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 770,
+          "top": 222,
+          "width": 604,
+          "height": 112
+        },
+        "shiftLeft": 106
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "profile-pipe-rectangular-60x30x2",
@@ -902,7 +1012,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "прямоугольная № 60 x 30 x 2"
+          "text": "прямоугольная 60 x 30 x 2"
         },
         {
           "key": "height",
@@ -977,7 +1087,18 @@
       "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-60x30x2.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "6454be0e632f104a8ef8048c74e104191629405b85a661a7a9f11a37bb5897bc"
+      "sha256": "b80fec361c974324b7a416427d6d33aeb7b1495c5ec902168b981cf9d1af91a7",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 770,
+          "top": 222,
+          "width": 550,
+          "height": 112
+        },
+        "shiftLeft": 106
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "profile-pipe-rectangular-60x30x3",
@@ -987,7 +1108,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "прямоугольная № 60 x 30 x 3"
+          "text": "прямоугольная 60 x 30 x 3"
         },
         {
           "key": "height",
@@ -1072,7 +1193,18 @@
       "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-60x30x3.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "8f2e202b04c1040aaa1d7efdea12fba2def148fb3202f2bcb27e4d34907b6cad"
+      "sha256": "f8501c758fd9e52f4f4a8286e7ed02fd206fc76e30d92bce9ad0da5b93264fb8",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 770,
+          "top": 222,
+          "width": 552,
+          "height": 112
+        },
+        "shiftLeft": 106
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "profile-pipe-rectangular-60x40x1-5",
@@ -1082,7 +1214,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "прямоугольная № 60 x 40 x 1,5"
+          "text": "прямоугольная 60 x 40 x 1,5"
         },
         {
           "key": "height",
@@ -1167,7 +1299,18 @@
       "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-60x40x1-5.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "235c84891c819b071a8ee147096e157fb4e7c5d70d3f7e4f83dc8552df67b989"
+      "sha256": "bd0299fe92e8a0390c8f81f263582b4a8476debd2ae324567c76b5d1e5090b27",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 770,
+          "top": 222,
+          "width": 607,
+          "height": 112
+        },
+        "shiftLeft": 106
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "profile-pipe-rectangular-60x40x2",
@@ -1177,7 +1320,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "прямоугольная № 60 x 40 x 2"
+          "text": "прямоугольная 60 x 40 x 2"
         },
         {
           "key": "height",
@@ -1252,7 +1395,18 @@
       "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-60x40x2.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "83fc85f937917cf468d958b181429edb4b84c19826e4aaff44426a7789522817"
+      "sha256": "3cf446e2731dd786a71417ba7da76df96a4e58d8cccd1165e449328dcd6722bb",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 770,
+          "top": 222,
+          "width": 553,
+          "height": 112
+        },
+        "shiftLeft": 106
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "profile-pipe-rectangular-60x40x3",
@@ -1262,7 +1416,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "прямоугольная № 60 x 40 x 3"
+          "text": "прямоугольная 60 x 40 x 3"
         },
         {
           "key": "height",
@@ -1347,7 +1501,18 @@
       "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-60x40x3.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "9066a344499ee70345d9e6f480aedbedfec35008db79f8992b33514286bf9702"
+      "sha256": "2cadf89b82a8eb516f9f2400aaed2719eafd721358680c1f983337281571bae3",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 770,
+          "top": 222,
+          "width": 555,
+          "height": 112
+        },
+        "shiftLeft": 106
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "profile-pipe-rectangular-60x40x4",
@@ -1357,7 +1522,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "прямоугольная № 60 x 40 x 4"
+          "text": "прямоугольная 60 x 40 x 4"
         },
         {
           "key": "height",
@@ -1442,7 +1607,18 @@
       "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-60x40x4.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "873aa952baf81fe86824ff4899d4305fc64eb93d2dabb84c39fe5546a662f569"
+      "sha256": "3843846c302b276bf8af65b6ceef662846a323ff9a0dafcd0a73a05099ea6f8a",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 770,
+          "top": 222,
+          "width": 559,
+          "height": 112
+        },
+        "shiftLeft": 106
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "profile-pipe-rectangular-80x40x2",
@@ -1452,7 +1628,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "прямоугольная № 80 x 40 x 2"
+          "text": "прямоугольная 80 x 40 x 2"
         },
         {
           "key": "height",
@@ -1527,7 +1703,18 @@
       "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-80x40x2.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "26faab2cbd44cbc6d44c8d1696403a0fbccacbbdd57fd5756a15ed79c894cc53"
+      "sha256": "16f31eaee7989e8964fe3b96e1c06f872a93a53524d0a9b87a34c2c0c7c67559",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 770,
+          "top": 222,
+          "width": 553,
+          "height": 112
+        },
+        "shiftLeft": 106
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "profile-pipe-rectangular-80x40x3",
@@ -1537,7 +1724,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "прямоугольная № 80 x 40 x 3"
+          "text": "прямоугольная 80 x 40 x 3"
         },
         {
           "key": "height",
@@ -1622,7 +1809,18 @@
       "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-80x40x3.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "3b0131980a066b6826826219f7e16056ccf4a973b5905dd216899efd46674736"
+      "sha256": "a0835850733593f21c3600751bd2e142b75eb4027130d8f1a6b7234f3ad6973c",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 770,
+          "top": 222,
+          "width": 555,
+          "height": 112
+        },
+        "shiftLeft": 106
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "profile-pipe-rectangular-80x60x2",
@@ -1632,7 +1830,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "прямоугольная № 80 x 60 x 2"
+          "text": "прямоугольная 80 x 60 x 2"
         },
         {
           "key": "height",
@@ -1707,7 +1905,18 @@
       "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-80x60x2.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "aa1ea0f79508a893689240430e2e69229a65b85663ad7cc4cef6729ec4bd419a"
+      "sha256": "24b5df123683f592344d1a41a2e7c5bb393a974bc7fb38f3232445d09df27fbe",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 770,
+          "top": 222,
+          "width": 550,
+          "height": 112
+        },
+        "shiftLeft": 106
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "profile-pipe-rectangular-80x60x3",
@@ -1717,7 +1926,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "прямоугольная № 80 x 60 x 3"
+          "text": "прямоугольная 80 x 60 x 3"
         },
         {
           "key": "height",
@@ -1802,7 +2011,18 @@
       "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-80x60x3.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "ec36b864b9f58e5d25af758a1369108b67e4f64959de5bdbe883d097995e7dca"
+      "sha256": "e43e1e26cdd6a5350a9b2ed57526fce90e8644bd887bbf1192cb888108add0f6",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 770,
+          "top": 222,
+          "width": 552,
+          "height": 112
+        },
+        "shiftLeft": 106
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "profile-pipe-rectangular-100x50x2",
@@ -1812,7 +2032,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "прямоугольная № 100 x 50 x 2"
+          "text": "прямоугольная 100 x 50 x 2"
         },
         {
           "key": "height",
@@ -1887,7 +2107,18 @@
       "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-100x50x2.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "a9a0b8ddfdcddef1c3793a51c5bc54047ee071c1fd050e358266fc974058e2d0"
+      "sha256": "ca1b06c5c3a04fb326b08dd03f0abf4694cc7c04faacd627e792c372b7d07796",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 770,
+          "top": 222,
+          "width": 584,
+          "height": 112
+        },
+        "shiftLeft": 105
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "profile-pipe-rectangular-100x50x3",
@@ -1897,7 +2128,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "прямоугольная № 100 x 50 x 3"
+          "text": "прямоугольная 100 x 50 x 3"
         },
         {
           "key": "height",
@@ -1982,7 +2213,18 @@
       "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-100x50x3.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "5371eb1a90e62cbc71690bce0b4c4fd258cfbced63c339567756404a348cfdcc"
+      "sha256": "f3b3fd811ac34e4c32c1edf7d105ceed55fdeca83152e05629eb6a221ab6e8f6",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 770,
+          "top": 222,
+          "width": 586,
+          "height": 112
+        },
+        "shiftLeft": 105
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "profile-pipe-rectangular-100x60x3",
@@ -1992,7 +2234,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "прямоугольная № 100 x 60 x 3"
+          "text": "прямоугольная 100 x 60 x 3"
         },
         {
           "key": "height",
@@ -2077,7 +2319,18 @@
       "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-100x60x3.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "a8893f4f7271f4c95dd28c5fc28c36e0bc7e22e66333a875275ebe067a28ce3e"
+      "sha256": "4073151f1c409f24b74af4b2ef2a96781c86deffdc7e9122db04359f9d643ae5",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 770,
+          "top": 222,
+          "width": 588,
+          "height": 112
+        },
+        "shiftLeft": 105
+      },
+      "referenceUnmodified": false
     }
   ]
 }

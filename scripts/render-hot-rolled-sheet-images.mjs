@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {readProjectData} from './project-data.mjs';
+import {removeImageNumberSign} from './image-number-sign.mjs';
 
 const directory = 'public/images/catalog/listovoy-prokat/list_goriachekataniy';
 const temporaryDirectory = path.resolve('.tmp/hot-rolled-sheet-catalog');
@@ -83,7 +84,7 @@ for (const product of sheets) {
   assert.ok(expectedPixels.equals(pixels), `${product.id}: pixels changed outside label patches`);
   const thickness = values.thickness.replace(',', '.');
   const file = `${directory}/list-goriachekataniy-${thickness}-${values.width}x${values.length}-${product.id}.webp`;
-  outputs.push({product, file, image});
+  outputs.push({product, file, image: await removeImageNumberSign(sharp, image, product.id)});
 }
 
 for (const {file, image} of outputs) {

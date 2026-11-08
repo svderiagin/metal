@@ -126,8 +126,9 @@ async function render(product) {
     return rendered.info.height;
   }
   const titleWidth = 1710;
-  const largeTitle = await ink(product.name, 76, 700, titleWidth);
-  const titleHeight = await place(product.name, largeTitle.info.height <= 254 ? 76 : 63, 700, titleWidth, 128, 124);
+  const title = product.name.replace(/№\s*/gu, '');
+  const largeTitle = await ink(title, 76, 700, titleWidth);
+  const titleHeight = await place(title, largeTitle.info.height <= 254 ? 76 : 63, 700, titleWidth, 128, 124);
   assert(titleHeight <= 254, `${product.id}: oversized heading`);
   const top = Math.max(365, 182 + titleHeight);
   let row = top;

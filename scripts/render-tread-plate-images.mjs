@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {readProjectData} from './project-data.mjs';
+import {removeImageNumberSign} from './image-number-sign.mjs';
 
 const directory = 'public/images/catalog/listovoy-prokat/list-refleniy';
 const temporaryDirectory = path.resolve('.tmp/list-refleniy-qa');
@@ -48,7 +49,8 @@ for (const product of plates) {
   const values = getSheetParameters(product);
   assert.ok(values, `${product.id}: missing thickness, format or mass`);
   if (product === referenceProduct) {
-    outputs.push({product, file: marked});
+    const file = `${directory}/list-refleniy-${values.thickness.replace(',', '.')}-${values.width}x${values.length}-${product.id}.webp`;
+    outputs.push({product, file, image: await removeImageNumberSign(sharp, marked, product.id)});
     continue;
   }
 
@@ -88,7 +90,7 @@ for (const product of plates) {
   assert.ok(expectedPixels.equals(pixels), `${product.id}: pixels changed outside label patches`);
 
   const file = `${directory}/list-refleniy-${values.thickness.replace(',', '.')}-${values.width}x${values.length}-${product.id}.webp`;
-  outputs.push({product, file, image});
+  outputs.push({product, file, image: await removeImageNumberSign(sharp, image, product.id)});
 }
 
 for (const {file, image} of outputs) {

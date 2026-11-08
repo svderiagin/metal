@@ -60,7 +60,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "Угол стальной № 25x25x3"
+          "text": "Угол стальной 25x25x3"
         },
         {
           "key": "firstLeg",
@@ -102,7 +102,18 @@
       "output": "public/images/catalog/ugolok/ugolok-25x25x3-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "c4418870ec508c7af664b607177e80aa44a742607d1872b205c1f448bbd0e335"
+      "sha256": "9004df6b366470cb1bf1ede220ee0031de56577f4f3cd3206d1efb901b9e8acc",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 744,
+          "top": 110,
+          "width": 481,
+          "height": 108
+        },
+        "shiftLeft": 109
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "rozmet-2210",
@@ -112,7 +123,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "Угол стальной № 32x32x3"
+          "text": "Угол стальной 32x32x3"
         },
         {
           "key": "firstLeg",
@@ -187,7 +198,18 @@
       "output": "public/images/catalog/ugolok/ugolok-32x32x3-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "ce3003ef09276f1f576c0bbc3162aede1a4bfa0f94aca682326add35725e8523"
+      "sha256": "6e686392c859fd292d2ee0580f33d705b6187d2ae90947c74d88dc11e8b85670",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 727,
+          "top": 110,
+          "width": 480,
+          "height": 108
+        },
+        "shiftLeft": 106
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "rozmet-20157",
@@ -197,7 +219,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "Угол стальной № 35x35x4"
+          "text": "Угол стальной 35x35x4"
         },
         {
           "key": "firstLeg",
@@ -282,7 +304,18 @@
       "output": "public/images/catalog/ugolok/ugolok-35x35x4-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "9bd684a0134fd548620ced9673fd7fb06a8d87e96b8ddc41cd88e0d8af94ce4f"
+      "sha256": "a84b8d13d5e3c62ef93f374224d8950c7c5f91236afe7e64fa59e953a7a24090",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 727,
+          "top": 110,
+          "width": 484,
+          "height": 108
+        },
+        "shiftLeft": 106
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "rozmet-2211",
@@ -292,7 +325,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "Угол стальной № 40x40x3"
+          "text": "Угол стальной 40x40x3"
         },
         {
           "key": "firstLeg",
@@ -367,7 +400,18 @@
       "output": "public/images/catalog/ugolok/ugolok-40x40x3-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "c82d74475ec39fcb2e950c73285ca40ef9fa7cda9b539031ff5693b122112b21"
+      "sha256": "373d5e61ec79b2b106d53514dfbca9551d3123b1c7f400278f13fb388b153319",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 727,
+          "top": 110,
+          "width": 496,
+          "height": 108
+        },
+        "shiftLeft": 106
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "rozmet-2212",
@@ -377,7 +421,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "Угол стальной № 40x40x4"
+          "text": "Угол стальной 40x40x4"
         },
         {
           "key": "firstLeg",
@@ -462,7 +506,18 @@
       "output": "public/images/catalog/ugolok/ugolok-40x40x4-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "11bae4a8fce0f6037abf245f91a2cae0bc016075592d4674c4c2fc082e38b4cb"
+      "sha256": "21f33cb46b365aaa389eea431d9226d67ad46dfecc322bc400f845c9210ebb0f",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 727,
+          "top": 110,
+          "width": 500,
+          "height": 108
+        },
+        "shiftLeft": 106
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "rozmet-2213",
@@ -472,7 +527,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "Угол стальной № 45x45x4"
+          "text": "Угол стальной 45x45x4"
         },
         {
           "key": "firstLeg",
@@ -568,7 +623,18 @@
       "output": "public/images/catalog/ugolok/ugolok-45x45x4-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "58a799b784fd95fa6d1d173bdae5db612cd7f532bc80292a7b878391b08c5f77"
+      "sha256": "9b75383fa0c10c0554988ce3afd3147757e247c4b443833b4e30af4fcafbb5f6",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 727,
+          "top": 110,
+          "width": 490,
+          "height": 108
+        },
+        "shiftLeft": 106
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "rozmet-2214",
@@ -578,7 +644,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "Угол стальной № 50x50x4"
+          "text": "Угол стальной 50x50x4"
         },
         {
           "key": "firstLeg",
@@ -663,7 +729,18 @@
       "output": "public/images/catalog/ugolok/ugolok-50x50x4-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "23de9b98b848fa3ee60dd18cd5c9c1977d7765609423031bbb3077cfda295328"
+      "sha256": "65cc97b6cdb45b807d92532fe57c2f6b3c0878d7dd7ae79b74768499c80bcbd9",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 727,
+          "top": 110,
+          "width": 490,
+          "height": 108
+        },
+        "shiftLeft": 106
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "rozmet-2215",
@@ -673,7 +750,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "Угол стальной № 50x50x5"
+          "text": "Угол стальной 50x50x5"
         },
         {
           "key": "firstLeg",
@@ -769,7 +846,18 @@
       "output": "public/images/catalog/ugolok/ugolok-50x50x5-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "9db8673c0a95a75d5d2601bef5e62a2cb1b0aae46f16da7ac4d59421702dac58"
+      "sha256": "e006c2b43c3356c11a1f952d135bcf6a514c9ca83b5265b81cc155807dd09e6e",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 727,
+          "top": 110,
+          "width": 485,
+          "height": 108
+        },
+        "shiftLeft": 106
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "rozmet-2216",
@@ -779,7 +867,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "Угол стальной № 63x63x4"
+          "text": "Угол стальной 63x63x4"
         },
         {
           "key": "firstLeg",
@@ -875,7 +963,18 @@
       "output": "public/images/catalog/ugolok/ugolok-63x63x4-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "d4efc8d2d31c5ee658ed961ff268e46f4e48db7e2dbe3de9ac29fb83ad9921ac"
+      "sha256": "6d6319bc17bf10350b4b8fcd1c9b6323d05bcf4a985d056cefcd92dadd4c9cc4",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 727,
+          "top": 110,
+          "width": 488,
+          "height": 108
+        },
+        "shiftLeft": 106
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "rozmet-2217",
@@ -885,7 +984,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "Угол стальной № 63x63x5"
+          "text": "Угол стальной 63x63x5"
         },
         {
           "key": "firstLeg",
@@ -981,7 +1080,18 @@
       "output": "public/images/catalog/ugolok/ugolok-63x63x5-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "8a85111c31ee049600a93e5806892304b9ffb7385405edf9ed6098c4e74b5ca9"
+      "sha256": "7d0cb1e4f32c2ccbf2f6c63b4111bd945491bb7bff8fd2758a719f591ca232b2",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 727,
+          "top": 110,
+          "width": 483,
+          "height": 108
+        },
+        "shiftLeft": 106
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "rozmet-2218",
@@ -991,7 +1101,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "Угол стальной № 75x75x5"
+          "text": "Угол стальной 75x75x5"
         },
         {
           "key": "firstLeg",
@@ -1087,7 +1197,18 @@
       "output": "public/images/catalog/ugolok/ugolok-75x75x5-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "175d6a876e4f1ebdb491b43be1cbed7cd7d372a9804217e5f3a1ad3f06533c46"
+      "sha256": "c18c5e7e00b80c3595fa9dd920f10b587bdba218b9b32ef12829544e3a31c876",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 727,
+          "top": 110,
+          "width": 465,
+          "height": 108
+        },
+        "shiftLeft": 105
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "rozmet-20160",
@@ -1097,7 +1218,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "Угол стальной № 75x75x6"
+          "text": "Угол стальной 75x75x6"
         },
         {
           "key": "firstLeg",
@@ -1182,7 +1303,18 @@
       "output": "public/images/catalog/ugolok/ugolok-75x75x6-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "ba5da93fcb15a39d18552640609439d16af65eb31cf070f3e40cddd17455ffdd"
+      "sha256": "af1d6094cc190d2ba9d19e0522f5619d22136c4883e91c7e420ada01aebfa172",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 727,
+          "top": 110,
+          "width": 467,
+          "height": 108
+        },
+        "shiftLeft": 105
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "rozmet-2220",
@@ -1192,7 +1324,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "Угол стальной № 90x90x6"
+          "text": "Угол стальной 90x90x6"
         },
         {
           "key": "firstLeg",
@@ -1288,7 +1420,18 @@
       "output": "public/images/catalog/ugolok/ugolok-90x90x6-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "410595af01e0ff6e96285156deb15c5606ccf4ec6975bd480a2cffb8326c8db9"
+      "sha256": "8421221f34e36b6861bf3303d594b157cddf0a1779b3b604f71d5df70e6dc77a",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 727,
+          "top": 110,
+          "width": 491,
+          "height": 108
+        },
+        "shiftLeft": 106
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "rozmet-2219",
@@ -1298,7 +1441,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "Угол стальной № 100x63x6"
+          "text": "Угол стальной 100x63x6"
         },
         {
           "key": "firstLeg",
@@ -1394,7 +1537,18 @@
       "output": "public/images/catalog/ugolok/ugolok-100x63x6-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "092d00c7529385229fdeb0ee774c2ec94f435e01df5db542f9819538c937dab2"
+      "sha256": "119001e25a09f8416093f87a5872a0c1aae167a50e9883f41d9fccb6a6c5941e",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 727,
+          "top": 110,
+          "width": 524,
+          "height": 108
+        },
+        "shiftLeft": 105
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "rozmet-2221",
@@ -1404,7 +1558,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "Угол стальной № 100x100x7"
+          "text": "Угол стальной 100x100x7"
         },
         {
           "key": "firstLeg",
@@ -1500,7 +1654,18 @@
       "output": "public/images/catalog/ugolok/ugolok-100x100x7-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "05e5f656a63ecf3242069cee5ed7c177ed4b8803abc1b63fc189e4652a693d3e"
+      "sha256": "9532baadc84626df77ae3ef35f503c606858281abd3d11eca8b2fe40b5e68ee1",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 727,
+          "top": 110,
+          "width": 558,
+          "height": 108
+        },
+        "shiftLeft": 105
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "rozmet-2222",
@@ -1510,7 +1675,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "Угол стальной № 100x100x8"
+          "text": "Угол стальной 100x100x8"
         },
         {
           "key": "firstLeg",
@@ -1606,7 +1771,18 @@
       "output": "public/images/catalog/ugolok/ugolok-100x100x8-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "0b8e69d279935c0d2b5524ff4557775f72ee8ed7c4787934c8234ed0b3defb22"
+      "sha256": "459e54bd00ec5bdf033af14a277aa9c2975c3d8d3151ef45a1dfa8a7cc859140",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 727,
+          "top": 110,
+          "width": 562,
+          "height": 108
+        },
+        "shiftLeft": 105
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "rozmet-20368",
@@ -1616,7 +1792,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "Угол стальной № 100x100x10"
+          "text": "Угол стальной 100x100x10"
         },
         {
           "key": "firstLeg",
@@ -1712,7 +1888,18 @@
       "output": "public/images/catalog/ugolok/ugolok-100x100x10-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "ad9e2aca8f7f1fa1eb0ad682e15b9f477a7184648e2310710e57e8c8a0bbb5f6"
+      "sha256": "f88bb4c9e75774f56a2f23423cb55211532b978b3f7cb508593181f59690ac3d",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 727,
+          "top": 110,
+          "width": 599,
+          "height": 108
+        },
+        "shiftLeft": 105
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "rozmet-2223",
@@ -1722,7 +1909,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "Угол стальной № 125x125x8"
+          "text": "Угол стальной 125x125x8"
         },
         {
           "key": "firstLeg",
@@ -1818,7 +2005,18 @@
       "output": "public/images/catalog/ugolok/ugolok-125x125x8-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "82a4fd742f1fb3cdbeab643eab2202d28515e42ecfa798fe7f5f98b1b3f5f99e"
+      "sha256": "b4feeb33dca625907885fd374f0e1594fb9e716d4eb5f913410fd0b95a36085b",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 727,
+          "top": 110,
+          "width": 542,
+          "height": 108
+        },
+        "shiftLeft": 105
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "rozmet-29030",
@@ -1828,7 +2026,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "Угол стальной № 125x125x10"
+          "text": "Угол стальной 125x125x10"
         },
         {
           "key": "firstLeg",
@@ -1924,7 +2122,18 @@
       "output": "public/images/catalog/ugolok/ugolok-125x125x10-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "ce9d340cbb4cefbb254b8343c623233144423795c9f0268639fdcc4a093dd2e4"
+      "sha256": "0b94a8ee11da8c12067efb9d1ad8352ef9709cdc5e45464b0b6add41724e267b",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 727,
+          "top": 110,
+          "width": 579,
+          "height": 108
+        },
+        "shiftLeft": 105
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "rozmet-2224",
@@ -1934,7 +2143,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "Угол стальной № 140x140x10"
+          "text": "Угол стальной 140x140x10"
         },
         {
           "key": "firstLeg",
@@ -2030,7 +2239,18 @@
       "output": "public/images/catalog/ugolok/ugolok-140x140x10-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "c8593897966163cad245329e03bb5cf4381aba50c4279b814356758f6a8c2c69"
+      "sha256": "fd0a39440c591a2d2404e8d58a8bd4ca9ef0aeba680de436fe74aa5a4cfba4da",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 727,
+          "top": 110,
+          "width": 599,
+          "height": 108
+        },
+        "shiftLeft": 105
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "rozmet-2225",
@@ -2040,7 +2260,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "Угол стальной № 160x160x10"
+          "text": "Угол стальной 160x160x10"
         },
         {
           "key": "firstLeg",
@@ -2136,7 +2356,18 @@
       "output": "public/images/catalog/ugolok/ugolok-160x160x10-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "5d8e0947d5ab0989a3b0eee78a45e87eed4e1b16aa55206ebc849af3ff9638a0"
+      "sha256": "e0527dd705ba7ffc22c52a84893ca8a2968503eaddad4df6b0ce42c0c12890c6",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 727,
+          "top": 110,
+          "width": 593,
+          "height": 108
+        },
+        "shiftLeft": 105
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "rozmet-16726",
@@ -2146,7 +2377,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "Угол стальной № 160x100x10"
+          "text": "Угол стальной 160x100x10"
         },
         {
           "key": "firstLeg",
@@ -2242,7 +2473,18 @@
       "output": "public/images/catalog/ugolok/ugolok-160x100x10-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "b92f6e51ccc885b0384720f5d135b8c1de33624a4cd67333b9d825684aabbe8e"
+      "sha256": "cc21083a0c680c00e0e83ce93f1bb20f982337f89db1274b8c7a698d49cd5d37",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 727,
+          "top": 110,
+          "width": 596,
+          "height": 108
+        },
+        "shiftLeft": 105
+      },
+      "referenceUnmodified": false
     }
   ]
 }

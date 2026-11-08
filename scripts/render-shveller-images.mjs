@@ -4,6 +4,7 @@ import {fileURLToPath} from 'node:url';
 import {createHash} from 'node:crypto';
 import assert from 'node:assert/strict';
 import {readProjectData} from './project-data.mjs';
+import {numberSignRemovalTargets, removeImageNumberSign} from './image-number-sign.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 process.chdir(root);
@@ -122,19 +123,25 @@ async function render(product) {
   }
   const output = write ? `public${expectedPath}` : `${previewDirectory}/shveller-${number.replace(',', '-')}.webp`;
   // Lossless source assets preserve the photograph; next/image delivers smaller variants.
-  const result = await sharp(image).webp({lossless: true, effort: 6}).toBuffer();
+  const result = await removeImageNumberSign(sharp, await sharp(image).webp({lossless: true, effort: 6}).toBuffer(), product.id);
   const mask = Buffer.alloc(WIDTH * HEIGHT);
   for (const {key} of changedLabels) {
     const box = patches[key];
     for (let y = box.top; y < box.top + box.height; y++) mask.fill(1, y * WIDTH + box.left, y * WIDTH + box.left + box.width);
   }
   const renderedPixels = await sharp(result).removeAlpha().raw().toBuffer();
+  const correction = numberSignRemovalTargets.find(({id}) => id === product.id);
+  if (correction) {
+    const box = correction.box;
+    for (let y=box.top;y<box.top+box.height;y++) mask.fill(1,y*WIDTH+box.left,y*WIDTH+box.left+box.width);
+  }
   let protectedPixelChanges = 0;
   for (let p = 0; p < mask.length; p++) if (!mask[p] && (referencePixels[p * 3] !== renderedPixels[p * 3] || referencePixels[p * 3 + 1] !== renderedPixels[p * 3 + 1] || referencePixels[p * 3 + 2] !== renderedPixels[p * 3 + 2])) protectedPixelChanges++;
   assert.equal(protectedPixelChanges, 0, `${product.id}: pixels changed outside variable-label regions`);
   await fs.writeFile(output, result);
-  return {id: product.id, number, imageUrl: expectedPath, values, labels: labels.map(({key, text}) => ({key, text})),
-    sourceReference: referencePath, referenceUnmodified: changedLabels.length === 0,
+  return {id: product.id, number, imageUrl: expectedPath, values, labels: labels.map(({key, text}) => ({key, text: key==='title'?text.replace(/№\s*/gu,''):text})),
+    sourceReference: referencePath, referenceUnmodified: changedLabels.length === 0 && !correction,
+    ...(correction?{headingCorrection:{removed:'№',box:correction.box,shiftLeft:correction.shiftLeft}}:{}),
     changedLabels: changedLabels.map(label => label.key), placements, protectedPixelChanges, output, width: WIDTH, height: HEIGHT,
     format: 'lossless WebP', bytes: result.length, sha256: createHash('sha256').update(result).digest('hex')};
 }

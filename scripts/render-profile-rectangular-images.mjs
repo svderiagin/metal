@@ -4,6 +4,7 @@ import {fileURLToPath} from 'node:url';
 import {createHash} from 'node:crypto';
 import assert from 'node:assert/strict';
 import {readProjectData} from './project-data.mjs';
+import {numberSignRemovalTargets, removeImageNumberSign} from './image-number-sign.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 process.chdir(root);
@@ -121,13 +122,18 @@ for (const product of products) {
       {input: svg(`<g stroke="#59636F" stroke-width="4" fill="none">${lines.join('')}</g>`), left: 0, top: 0}, ...layers,
     ]).png().toBuffer();
   }
-  const image = await sharp(renderedReference).webp({lossless: true, effort: 6}).toBuffer();
+  const image = await removeImageNumberSign(sharp, await sharp(renderedReference).webp({lossless: true, effort: 6}).toBuffer(), product.id);
   const mask = Buffer.alloc(WIDTH * HEIGHT);
   for (const {key} of changed) {
     const box = patches[key];
     for (let y = box.top; y < box.top + box.height; y++) mask.fill(1, y * WIDTH + box.left, y * WIDTH + box.left + box.width);
   }
   const renderedPixels = await sharp(image).removeAlpha().raw().toBuffer();
+  const correction = numberSignRemovalTargets.find(({id}) => id === product.id);
+  if (correction) {
+    const box = correction.box;
+    for (let y=box.top;y<box.top+box.height;y++) mask.fill(1,y*WIDTH+box.left,y*WIDTH+box.left+box.width);
+  }
   let protectedPixelChanges = 0;
   for (let p = 0; p < mask.length; p++) if (!mask[p] && (referencePixels[p * 3] !== renderedPixels[p * 3]
     || referencePixels[p * 3 + 1] !== renderedPixels[p * 3 + 1] || referencePixels[p * 3 + 2] !== renderedPixels[p * 3 + 2])) protectedPixelChanges++;
@@ -137,7 +143,8 @@ for (const product of products) {
   await fs.writeFile(output, image);
   records.push({id: product.id, imageUrl: `/images/catalog/product-illustrations/${filename}`,
     photoUrl: photoPath.replace(/^public/, ''), signature: productIllustrationSignature(product),
-    labels: labels.map(({key, text}) => ({key, text})), changedLabels: changed.map(label => label.key),
+    labels: labels.map(({key, text}) => ({key, text: key==='title'?text.replace(/№\s*/gu,''):text})), changedLabels: changed.map(label => label.key),
+    ...(correction?{headingCorrection:{removed:'№',box:correction.box,shiftLeft:correction.shiftLeft}}:{}),
     placements, protectedPixelChanges, output, width: WIDTH, height: HEIGHT,
     sha256: createHash('sha256').update(image).digest('hex')});
   console.log(`${product.id}: ${output}; protectedPixelChanges=${protectedPixelChanges}`);

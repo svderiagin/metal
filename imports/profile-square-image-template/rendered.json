@@ -87,7 +87,18 @@
       "output": "public/images/catalog/product-illustrations/profile-pipe-square-15x15x1-5.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "4fb1e0fb6c13e373a2d07274f741300802c78776f57c4d86da9d235cbb523203"
+      "sha256": "0bc40cd2ea5de4f138e144f075e6c537d6a729bb2dcc2cb9c51b81e6b271cc03",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 630,
+          "top": 222,
+          "width": 592,
+          "height": 108
+        },
+        "shiftLeft": 109
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "profile-pipe-square-20x20x1-5",
@@ -172,7 +183,18 @@
       "output": "public/images/catalog/product-illustrations/profile-pipe-square-20x20x1-5.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "893a9ebbd4f693c381ef7754f224c1cba5af5a8b4d4ddca0e60d6056c550b786"
+      "sha256": "48077b186aedb070c1cd04a822b977b5a41ac06eba2dad1fe24c4d6a49bfc389",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 632,
+          "top": 222,
+          "width": 601,
+          "height": 108
+        },
+        "shiftLeft": 107
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "profile-pipe-square-20x20x2",
@@ -267,7 +289,18 @@
       "output": "public/images/catalog/product-illustrations/profile-pipe-square-20x20x2.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "1899d16914291a1fdfad6fa9e525998f39eece4ed5222e816b760d204d87f5a1"
+      "sha256": "a95882d7eb965588b38b76351a670a2af2e614e2e1cd93f82fbd22417afd4dba",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 632,
+          "top": 222,
+          "width": 547,
+          "height": 108
+        },
+        "shiftLeft": 107
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "profile-pipe-square-25x25x1-5",
@@ -352,7 +385,18 @@
       "output": "public/images/catalog/product-illustrations/profile-pipe-square-25x25x1-5.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "8b6bee02cbf4d7ca5d0a0a452d170da6a6f7c3fd780141a8616febe21bb54c81"
+      "sha256": "6d76cdf7c2d74be3594841efc0c170ed011ce46748e27137d50c3147a5b8b066",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 632,
+          "top": 222,
+          "width": 591,
+          "height": 108
+        },
+        "shiftLeft": 107
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "profile-pipe-square-25x25x2",
@@ -447,7 +491,18 @@
       "output": "public/images/catalog/product-illustrations/profile-pipe-square-25x25x2.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "814242cdcfb51326c02ceaeb8d37a59b96e927cbf7780f25cd602749a8621b76"
+      "sha256": "d9d7ed4cdac744c1b8e8c88245007c4dc436ec784a1d642368a75921217c4fc1",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 632,
+          "top": 222,
+          "width": 537,
+          "height": 108
+        },
+        "shiftLeft": 107
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "profile-pipe-square-30x30x1-5",
@@ -532,7 +587,18 @@
       "output": "public/images/catalog/product-illustrations/profile-pipe-square-30x30x1-5.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "42ed6d8756b48bc0eedcd6c810dac7fd71b9173efcd257ad4af15e311a4e58a7"
+      "sha256": "dd10ceb3b880804ad59d76e489629588c826750ae42790b547dbdcd91ea27453",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 632,
+          "top": 222,
+          "width": 605,
+          "height": 108
+        },
+        "shiftLeft": 107
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "profile-pipe-square-30x30x2",
@@ -627,7 +693,18 @@
       "output": "public/images/catalog/product-illustrations/profile-pipe-square-30x30x2.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "17a51c2fcb38ad4c40bcaad5338b08fe4da7d53707fe29ac8d297dc8a684c847"
+      "sha256": "2d6dd5c3daa36c0697642ea76c63d4e62d003939c213f288d72e172c6278dc2f",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 632,
+          "top": 222,
+          "width": 551,
+          "height": 108
+        },
+        "shiftLeft": 107
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "profile-pipe-square-40x40x1-5",
@@ -712,7 +789,18 @@
       "output": "public/images/catalog/product-illustrations/profile-pipe-square-40x40x1-5.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "99170320c5d63b78f16d8ef0eff79dac178022cbfa13bb1e416436c057e958e0"
+      "sha256": "91692280747a97f2a2641c9ecb6a10d240de9b4fa5d9c91ef41659d6e4ebc5b9",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 632,
+          "top": 222,
+          "width": 612,
+          "height": 108
+        },
+        "shiftLeft": 108
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "profile-pipe-square-40x40x2",
@@ -807,7 +895,18 @@
       "output": "public/images/catalog/product-illustrations/profile-pipe-square-40x40x2.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "c7b41d531322860221f3f9071307eda69a691300d3e6a867a5bb588281223fda"
+      "sha256": "0eb09cb00d88a00118462293142262ae25583a3602404f33bd0f8ee5896d6397",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 632,
+          "top": 222,
+          "width": 558,
+          "height": 108
+        },
+        "shiftLeft": 108
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "profile-pipe-square-40x40x3",
@@ -902,7 +1001,18 @@
       "output": "public/images/catalog/product-illustrations/profile-pipe-square-40x40x3.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "7762b90b3652f4c622ff6d6903e44839f5aaa85e8162dac0300e7be6557fe6fb"
+      "sha256": "96daff71520f28703c88e796f8a8e779962b5ed84d33f5f5180452903a3fe3d4",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 632,
+          "top": 222,
+          "width": 560,
+          "height": 108
+        },
+        "shiftLeft": 108
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "profile-pipe-square-50x50x1-5",
@@ -987,7 +1097,18 @@
       "output": "public/images/catalog/product-illustrations/profile-pipe-square-50x50x1-5.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "186d51008792cbd65af409cd0e90b9a8315055f8e380296f499be1034492e5a4"
+      "sha256": "0b249b9cc0773ba935f9b75c263ed4d38c0ec3e15ca031a96357ef6368f1b1d4",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 632,
+          "top": 222,
+          "width": 601,
+          "height": 108
+        },
+        "shiftLeft": 107
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "profile-pipe-square-50x50x2",
@@ -1082,7 +1203,18 @@
       "output": "public/images/catalog/product-illustrations/profile-pipe-square-50x50x2.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "d621ad178b25cd464336e66e01729856e836ca45fe1a37836ce9a6f3601e1df1"
+      "sha256": "96aec923f39c118a75973ed5b2cf679071d536c575503aaf12cb3848776fafc8",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 632,
+          "top": 222,
+          "width": 547,
+          "height": 108
+        },
+        "shiftLeft": 107
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "profile-pipe-square-50x50x3",
@@ -1177,7 +1309,18 @@
       "output": "public/images/catalog/product-illustrations/profile-pipe-square-50x50x3.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "57fc35c0f6b689414b460a41834b76644797b944a5cc2502f9074eff0eb512df"
+      "sha256": "064e6c3317e68d5fa3d56334107a181836640498af6f691353234f0edfc6739b",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 632,
+          "top": 222,
+          "width": 549,
+          "height": 108
+        },
+        "shiftLeft": 107
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "profile-pipe-square-50x50x4",
@@ -1272,7 +1415,18 @@
       "output": "public/images/catalog/product-illustrations/profile-pipe-square-50x50x4.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "9292bba615ded7fbf6fcb8a14ee380021233c807eeaaa8ed4b0ea0f0313f47bf"
+      "sha256": "8d0f129aacdddbd1a940f11c832be3293a402b1a8440f9175e3788a677629d06",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 632,
+          "top": 222,
+          "width": 553,
+          "height": 108
+        },
+        "shiftLeft": 107
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "profile-pipe-square-60x60x1-5",
@@ -1357,7 +1511,18 @@
       "output": "public/images/catalog/product-illustrations/profile-pipe-square-60x60x1-5.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "2b573e17997305f1d318dc3cd857b69646e4d883bff7949778510652a4ef4c6f"
+      "sha256": "6f1c7e55d426c5c8e745cf2b06e0d003e8bc702f624315bf66024932188f8a44",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 632,
+          "top": 222,
+          "width": 605,
+          "height": 108
+        },
+        "shiftLeft": 107
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "profile-pipe-square-60x60x2",
@@ -1452,7 +1617,18 @@
       "output": "public/images/catalog/product-illustrations/profile-pipe-square-60x60x2.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "998ae62a5bf296c1732e3a6a4ccfea1b6d59c40dfa3df49a3f0039bf7ad293bc"
+      "sha256": "f32e14afeab4e773b374d3a7acb269df9a91b5516cb42bf9a8231b551e3725d0",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 632,
+          "top": 222,
+          "width": 551,
+          "height": 108
+        },
+        "shiftLeft": 107
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "profile-pipe-square-60x60x3",
@@ -1547,7 +1723,18 @@
       "output": "public/images/catalog/product-illustrations/profile-pipe-square-60x60x3.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "9209a7063e276434297bfe8256c56a3bfcaa3733601c59e3c6545ed2a1747d5f"
+      "sha256": "3f30eeeabfb982dffb9ab9c6a3bbb634c6429ef539581fd6540f7107e78f5d48",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 632,
+          "top": 222,
+          "width": 553,
+          "height": 108
+        },
+        "shiftLeft": 107
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "profile-pipe-square-60x60x4",
@@ -1642,7 +1829,18 @@
       "output": "public/images/catalog/product-illustrations/profile-pipe-square-60x60x4.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "f05dbe1ac35905ceeb5632ff98b857328b34b21f5429ac9ae52ce4d2e2f5c5dc"
+      "sha256": "ed064e3f106dff9be2c239d15bd4faf921e236f6bb531305234a389e467797fd",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 632,
+          "top": 222,
+          "width": 557,
+          "height": 108
+        },
+        "shiftLeft": 107
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "profile-pipe-square-80x80x2",
@@ -1748,7 +1946,18 @@
       "output": "public/images/catalog/product-illustrations/profile-pipe-square-80x80x2.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "17fb8198405be18b2e41a1c5fbd5644905c37eab38db931609eb64df6565f5b8"
+      "sha256": "4d03b3bc9a4e436492a2a346746258b1bcf32415d9ee4785554d63339e5eacc4",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 632,
+          "top": 222,
+          "width": 551,
+          "height": 108
+        },
+        "shiftLeft": 107
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "profile-pipe-square-80x80x3",
@@ -1854,7 +2063,18 @@
       "output": "public/images/catalog/product-illustrations/profile-pipe-square-80x80x3.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "e1c70f2f60c916cd0ee5b23115bc2a33af9fdaf798fb432f0894eb78e10b3182"
+      "sha256": "f793ee9f3a466f3a4401cb043c76c4389fc019dc767d8b5fab805b3df5fe5b24",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 632,
+          "top": 222,
+          "width": 553,
+          "height": 108
+        },
+        "shiftLeft": 107
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "profile-pipe-square-80x80x4",
@@ -1960,7 +2180,18 @@
       "output": "public/images/catalog/product-illustrations/profile-pipe-square-80x80x4.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "6a95679d1cf85290ad968653fdd857c32b585e928a41c75abe1e60175562069c"
+      "sha256": "9aae8a53b2649fa2631e5663d4ee0a0bfdb2b069505dc74db567f11823c9f313",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 632,
+          "top": 222,
+          "width": 557,
+          "height": 108
+        },
+        "shiftLeft": 107
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "profile-pipe-square-100x100x3",
@@ -2066,7 +2297,18 @@
       "output": "public/images/catalog/product-illustrations/profile-pipe-square-100x100x3.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "9b2fd821493fcb90964ead3fae08cfe0889b792cfcc93537499bfc9b88c54173"
+      "sha256": "59a4b69837ca3c8cb989daf13f415e302eeab9aff2c31296c388cb2171d929b9",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 632,
+          "top": 222,
+          "width": 627,
+          "height": 108
+        },
+        "shiftLeft": 108
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "profile-pipe-square-100x100x4",
@@ -2172,7 +2414,18 @@
       "output": "public/images/catalog/product-illustrations/profile-pipe-square-100x100x4.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "829edaa9f83d8089620805345fb293d6db7f094ae1efca16aa82b3cd07873424"
+      "sha256": "fae237257dfbe7848b8339b325993625768ae665ff1c58e2129941bcf73ec943",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 632,
+          "top": 222,
+          "width": 631,
+          "height": 108
+        },
+        "shiftLeft": 108
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "profile-pipe-square-100x100x5",
@@ -2278,7 +2531,18 @@
       "output": "public/images/catalog/product-illustrations/profile-pipe-square-100x100x5.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "7be243477d4497920ac697c5fe9dbd1ce47b5b2200c83d6cbd8eb84303bdfa6d"
+      "sha256": "241599b8c3cda2be025057d8d6f12c1f4d57c8570b62017423db163df38b0790",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 632,
+          "top": 222,
+          "width": 626,
+          "height": 108
+        },
+        "shiftLeft": 108
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "profile-pipe-square-120x120x3",
@@ -2384,7 +2648,18 @@
       "output": "public/images/catalog/product-illustrations/profile-pipe-square-120x120x3.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "b04099a046e97ee3b232ffd48bedc1b591de8970106d9ef7ab9b5bac241c39e5"
+      "sha256": "a837efd29eb3d2668a0d41dd82d106d259cf9f4f4a8283dd6134c41c491bb61c",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 632,
+          "top": 222,
+          "width": 617,
+          "height": 108
+        },
+        "shiftLeft": 108
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "profile-pipe-square-120x120x4",
@@ -2490,7 +2765,18 @@
       "output": "public/images/catalog/product-illustrations/profile-pipe-square-120x120x4.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "bc77b53e9636ce6521a88ee6e2e573e851fb9fe450e039e9c0c0463b8930aa77"
+      "sha256": "b9d5c4cfc51ba3300e5a2929c394e0f777356e960a736cccc41b3115b8f2510f",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 632,
+          "top": 222,
+          "width": 621,
+          "height": 108
+        },
+        "shiftLeft": 108
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "profile-pipe-square-140x140x4",
@@ -2596,7 +2882,18 @@
       "output": "public/images/catalog/product-illustrations/profile-pipe-square-140x140x4.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "5ebb068d9d640792c4e54aded17b978c729b0e673d4d7473117aae12ff5c5395"
+      "sha256": "e36999751292f637febb2e891d48e6e414fbd8116b7475c81c4d93993386ad5e",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 632,
+          "top": 222,
+          "width": 631,
+          "height": 108
+        },
+        "shiftLeft": 108
+      },
+      "referenceUnmodified": false
     },
     {
       "id": "profile-pipe-square-160x160x4",
@@ -2702,7 +2999,18 @@
       "output": "public/images/catalog/product-illustrations/profile-pipe-square-160x160x4.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "69985fe0a605cdc0268a54d18c8d3369b9def1551cb6172f0186bf6cbff06d28"
+      "sha256": "6b208aa431feb7a16be0ac28c0b438c8234d5e34ba498fb3f3a743e3ef843841",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 632,
+          "top": 222,
+          "width": 625,
+          "height": 108
+        },
+        "shiftLeft": 108
+      },
+      "referenceUnmodified": false
     }
   ]
 }

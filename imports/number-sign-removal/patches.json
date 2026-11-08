@@ -1,0 +1,2556 @@
+{
+  "baselineCommit": "4d639ef",
+  "width": 2400,
+  "height": 1800,
+  "scope": "All active annotated product illustrations containing the number sign. Owner marked originals are preserved.",
+  "targets": [
+    {
+      "id": "rozmet-2235",
+      "name": "Швеллер № 5",
+      "clean": "imports/shveller-image-template/photo.png",
+      "box": {
+        "left": 524,
+        "top": 110,
+        "width": 177,
+        "height": 108
+      },
+      "tailLeft": 638,
+      "shiftLeft": 109,
+      "inputPatchSha256": "36ac634d1dbf6b7e8819c17dbe4a4c51815d00d7f2cba0eeecf9bc522617f096",
+      "productionFile": "public/images/catalog/shveller/shveller-5-clean.webp",
+      "outputFile": "public/images/catalog/shveller/shveller-5-clean.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2235.webp",
+      "metadata": "imports/shveller-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-2236",
+      "name": "Швеллер № 6.5",
+      "clean": "imports/shveller-image-template/photo.png",
+      "box": {
+        "left": 514,
+        "top": 110,
+        "width": 245,
+        "height": 108
+      },
+      "tailLeft": 625,
+      "shiftLeft": 106,
+      "inputPatchSha256": "c4fed98dc1bfac1b8d55ccbcaca86761d220c58911c5cc5f5a0f7a62f4a8d755",
+      "productionFile": "public/images/catalog/shveller/shveller-6-5-clean.webp",
+      "outputFile": "public/images/catalog/shveller/shveller-6-5-clean.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2236.webp",
+      "metadata": "imports/shveller-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-2237",
+      "name": "Швеллер № 8",
+      "clean": "imports/shveller-image-template/photo.png",
+      "box": {
+        "left": 514,
+        "top": 110,
+        "width": 176,
+        "height": 108
+      },
+      "tailLeft": 625,
+      "shiftLeft": 106,
+      "inputPatchSha256": "0887d2374c74a316b52bfdddd45c0f911a3e49f2a3b767ebcea24c85b1e0d389",
+      "productionFile": "public/images/catalog/shveller/shveller-8-clean.webp",
+      "outputFile": "public/images/catalog/shveller/shveller-8-clean.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2237.webp",
+      "metadata": "imports/shveller-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-2238",
+      "name": "Швеллер № 10",
+      "clean": "imports/shveller-image-template/photo.png",
+      "box": {
+        "left": 514,
+        "top": 110,
+        "width": 213,
+        "height": 108
+      },
+      "tailLeft": 624,
+      "shiftLeft": 105,
+      "inputPatchSha256": "3ed26eb6ae463f8513815d39c91b65a1e10f0fe7f0f22b18d6c6fdf743936fdf",
+      "productionFile": "public/images/catalog/shveller/shveller-10-clean.webp",
+      "outputFile": "public/images/catalog/shveller/shveller-10-clean.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2238.webp",
+      "metadata": "imports/shveller-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-2239",
+      "name": "Швеллер № 12",
+      "clean": "imports/shveller-image-template/photo.png",
+      "box": {
+        "left": 514,
+        "top": 110,
+        "width": 207,
+        "height": 108
+      },
+      "tailLeft": 624,
+      "shiftLeft": 105,
+      "inputPatchSha256": "6babaf03cc7296b5e60c61bc3f884ff48dbb5162c5f400526b167596164d962e",
+      "productionFile": "public/images/catalog/shveller/shveller-12-clean.webp",
+      "outputFile": "public/images/catalog/shveller/shveller-12-clean.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2239.webp",
+      "metadata": "imports/shveller-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-2240",
+      "name": "Швеллер № 14",
+      "clean": "imports/shveller-image-template/photo.png",
+      "box": {
+        "left": 514,
+        "top": 110,
+        "width": 213,
+        "height": 108
+      },
+      "tailLeft": 624,
+      "shiftLeft": 105,
+      "inputPatchSha256": "1c509929aea258f8b34092b3f3406cc60708537d53421987082310d5e0c7f017",
+      "productionFile": "public/images/catalog/shveller/shveller-14-clean.webp",
+      "outputFile": "public/images/catalog/shveller/shveller-14-clean.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2240.webp",
+      "metadata": "imports/shveller-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-2241",
+      "name": "Швеллер № 16",
+      "clean": "imports/shveller-image-template/photo.png",
+      "box": {
+        "left": 514,
+        "top": 110,
+        "width": 210,
+        "height": 108
+      },
+      "tailLeft": 624,
+      "shiftLeft": 105,
+      "inputPatchSha256": "38554fe1049a86776a50ea355820657a987aea612de81a32e665e85d6df27206",
+      "productionFile": "public/images/catalog/shveller/shveller-16-clean.webp",
+      "outputFile": "public/images/catalog/shveller/shveller-16-clean.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2241.webp",
+      "metadata": "imports/shveller-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-2242",
+      "name": "Швеллер № 18",
+      "clean": "imports/shveller-image-template/photo.png",
+      "box": {
+        "left": 514,
+        "top": 110,
+        "width": 209,
+        "height": 108
+      },
+      "tailLeft": 624,
+      "shiftLeft": 105,
+      "inputPatchSha256": "00d6d1d44dbd068f1c0b4e8b2175d0bd1da6e3621e998b8b7ebd620ea64a8c71",
+      "productionFile": "public/images/catalog/shveller/shveller-18-clean.webp",
+      "outputFile": "public/images/catalog/shveller/shveller-18-clean.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2242.webp",
+      "metadata": "imports/shveller-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-2243",
+      "name": "Швеллер № 20",
+      "clean": "imports/shveller-image-template/photo.png",
+      "box": {
+        "left": 514,
+        "top": 110,
+        "width": 230,
+        "height": 108
+      },
+      "tailLeft": 625,
+      "shiftLeft": 106,
+      "inputPatchSha256": "9c622d26a6e5490a93c28c615e24ca0d8fac8f1a00866092dc5725c7a0e96c9e",
+      "productionFile": "public/images/catalog/shveller/shveller-20-clean.webp",
+      "outputFile": "public/images/catalog/shveller/shveller-20-clean.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2243.webp",
+      "metadata": "imports/shveller-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-2244",
+      "name": "Швеллер № 22",
+      "clean": "imports/shveller-image-template/photo.png",
+      "box": {
+        "left": 514,
+        "top": 110,
+        "width": 224,
+        "height": 108
+      },
+      "tailLeft": 625,
+      "shiftLeft": 106,
+      "inputPatchSha256": "1c0b779e82bf2b756e38454ee3b5a9f6ba584a01a789169f68462782a996c2c6",
+      "productionFile": "public/images/catalog/shveller/shveller-22-clean.webp",
+      "outputFile": "public/images/catalog/shveller/shveller-22-clean.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2244.webp",
+      "metadata": "imports/shveller-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-2245",
+      "name": "Швеллер № 24",
+      "clean": "imports/shveller-image-template/photo.png",
+      "box": {
+        "left": 514,
+        "top": 110,
+        "width": 229,
+        "height": 108
+      },
+      "tailLeft": 625,
+      "shiftLeft": 106,
+      "inputPatchSha256": "6e64d422a086218b9713521e37100a645f87eb2f5a69b6ad7027dac982c66747",
+      "productionFile": "public/images/catalog/shveller/shveller-24-clean.webp",
+      "outputFile": "public/images/catalog/shveller/shveller-24-clean.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2245.webp",
+      "metadata": "imports/shveller-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-2246",
+      "name": "Швеллер №27",
+      "clean": "imports/shveller-image-template/photo.png",
+      "box": {
+        "left": 514,
+        "top": 110,
+        "width": 222,
+        "height": 108
+      },
+      "tailLeft": 625,
+      "shiftLeft": 106,
+      "inputPatchSha256": "829d08c39f5140808af109b1b13d6d9689443fe632d467fd3cd3a135cf522ba9",
+      "productionFile": "public/images/catalog/shveller/shveller-27-clean.webp",
+      "outputFile": "public/images/catalog/shveller/shveller-27-clean.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2246.webp",
+      "metadata": "imports/shveller-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-2247",
+      "name": "Швеллер №30",
+      "clean": "imports/shveller-image-template/photo.png",
+      "box": {
+        "left": 514,
+        "top": 110,
+        "width": 232,
+        "height": 108
+      },
+      "tailLeft": 625,
+      "shiftLeft": 106,
+      "inputPatchSha256": "47811418213dc2cf4a5c7f7202ac255315d639ac66284dcf31dc69013c658b14",
+      "productionFile": "public/images/catalog/shveller/shveller-30-clean.webp",
+      "outputFile": "public/images/catalog/shveller/shveller-30-clean.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2247.webp",
+      "metadata": "imports/shveller-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-2248",
+      "name": "Швеллер №40",
+      "clean": "imports/shveller-image-template/photo.png",
+      "box": {
+        "left": 514,
+        "top": 110,
+        "width": 235,
+        "height": 108
+      },
+      "tailLeft": 625,
+      "shiftLeft": 106,
+      "inputPatchSha256": "ec22baadeed7d454a6f13b1045a13ca4990cd9683e04a3879c7ee05fe3c28770",
+      "productionFile": "public/images/catalog/shveller/shveller-40-clean.webp",
+      "outputFile": "public/images/catalog/shveller/shveller-40-clean.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2248.webp",
+      "metadata": "imports/shveller-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-2209",
+      "name": "Уголок металлический № 25х25х3",
+      "clean": "imports/ugolok-image-template/clean-background-generated.png",
+      "box": {
+        "left": 744,
+        "top": 110,
+        "width": 481,
+        "height": 108
+      },
+      "tailLeft": 858,
+      "shiftLeft": 109,
+      "inputPatchSha256": "80d2c275a9652e9ee318327466a989d8fc088715344621a3e5c287cbeb84c8b1",
+      "productionFile": "public/images/catalog/ugolok/ugolok-25x25x3-clean.webp",
+      "outputFile": "public/images/catalog/ugolok/ugolok-25x25x3-clean.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2209.webp",
+      "metadata": "imports/ugolok-image-template/rendered.json",
+      "kind": "rasterShift",
+      "background": "interpolateOriginal"
+    },
+    {
+      "id": "rozmet-2210",
+      "name": "Уголок металлический № 32х32х3",
+      "clean": "imports/ugolok-image-template/clean-background-generated.png",
+      "box": {
+        "left": 727,
+        "top": 110,
+        "width": 480,
+        "height": 108
+      },
+      "tailLeft": 838,
+      "shiftLeft": 106,
+      "inputPatchSha256": "2074e8078c2f8f035884eb654bf93494aa210e59fb40f2eedfede43386d6169c",
+      "productionFile": "public/images/catalog/ugolok/ugolok-32x32x3-clean.webp",
+      "outputFile": "public/images/catalog/ugolok/ugolok-32x32x3-clean.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2210.webp",
+      "metadata": "imports/ugolok-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-20157",
+      "name": "Уголок металлический № 35х35х4",
+      "clean": "imports/ugolok-image-template/clean-background-generated.png",
+      "box": {
+        "left": 727,
+        "top": 110,
+        "width": 484,
+        "height": 108
+      },
+      "tailLeft": 838,
+      "shiftLeft": 106,
+      "inputPatchSha256": "cbca502b3bc919f20131aad9808a529d5a2dc735b687aada8ec47787eba60ac2",
+      "productionFile": "public/images/catalog/ugolok/ugolok-35x35x4-clean.webp",
+      "outputFile": "public/images/catalog/ugolok/ugolok-35x35x4-clean.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-20157.webp",
+      "metadata": "imports/ugolok-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-2211",
+      "name": "Уголок металлический № 40х40х3",
+      "clean": "imports/ugolok-image-template/clean-background-generated.png",
+      "box": {
+        "left": 727,
+        "top": 110,
+        "width": 496,
+        "height": 108
+      },
+      "tailLeft": 838,
+      "shiftLeft": 106,
+      "inputPatchSha256": "f7977abfa4af5a1c658f7f891d73c1e0ecc3a822644a7fd12e11cafc6fc2bfad",
+      "productionFile": "public/images/catalog/ugolok/ugolok-40x40x3-clean.webp",
+      "outputFile": "public/images/catalog/ugolok/ugolok-40x40x3-clean.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2211.webp",
+      "metadata": "imports/ugolok-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-2212",
+      "name": "Уголок металлический № 40х40х4",
+      "clean": "imports/ugolok-image-template/clean-background-generated.png",
+      "box": {
+        "left": 727,
+        "top": 110,
+        "width": 500,
+        "height": 108
+      },
+      "tailLeft": 838,
+      "shiftLeft": 106,
+      "inputPatchSha256": "f7cba02998b6eac7ef6a98aa984ff5d49f5a66d2e05023a4a22a6357dd6b0bda",
+      "productionFile": "public/images/catalog/ugolok/ugolok-40x40x4-clean.webp",
+      "outputFile": "public/images/catalog/ugolok/ugolok-40x40x4-clean.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2212.webp",
+      "metadata": "imports/ugolok-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-2213",
+      "name": "Уголок металлический № 45х45х4",
+      "clean": "imports/ugolok-image-template/clean-background-generated.png",
+      "box": {
+        "left": 727,
+        "top": 110,
+        "width": 490,
+        "height": 108
+      },
+      "tailLeft": 838,
+      "shiftLeft": 106,
+      "inputPatchSha256": "e75ad390ea83f2483c90b42ae7b0119df426f8dee709133ae3f75c1469c2e3ac",
+      "productionFile": "public/images/catalog/ugolok/ugolok-45x45x4-clean.webp",
+      "outputFile": "public/images/catalog/ugolok/ugolok-45x45x4-clean.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2213.webp",
+      "metadata": "imports/ugolok-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-2214",
+      "name": "Уголок металлический № 50х50х4",
+      "clean": "imports/ugolok-image-template/clean-background-generated.png",
+      "box": {
+        "left": 727,
+        "top": 110,
+        "width": 490,
+        "height": 108
+      },
+      "tailLeft": 838,
+      "shiftLeft": 106,
+      "inputPatchSha256": "3caa33d7f2e8bd406c9935b140c7cfbb40ababb3cd9d0c0972fa3124df4fdb46",
+      "productionFile": "public/images/catalog/ugolok/ugolok-50x50x4-clean.webp",
+      "outputFile": "public/images/catalog/ugolok/ugolok-50x50x4-clean.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2214.webp",
+      "metadata": "imports/ugolok-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-2215",
+      "name": "Уголок металлический № 50х50х5",
+      "clean": "imports/ugolok-image-template/clean-background-generated.png",
+      "box": {
+        "left": 727,
+        "top": 110,
+        "width": 485,
+        "height": 108
+      },
+      "tailLeft": 838,
+      "shiftLeft": 106,
+      "inputPatchSha256": "bbca5cda3ce7fd081abfbdf8bce60af93e7e3ba6c4cf8939fc510de4e0f78c72",
+      "productionFile": "public/images/catalog/ugolok/ugolok-50x50x5-clean.webp",
+      "outputFile": "public/images/catalog/ugolok/ugolok-50x50x5-clean.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2215.webp",
+      "metadata": "imports/ugolok-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-2216",
+      "name": "Уголок металлический № 63х63х4",
+      "clean": "imports/ugolok-image-template/clean-background-generated.png",
+      "box": {
+        "left": 727,
+        "top": 110,
+        "width": 488,
+        "height": 108
+      },
+      "tailLeft": 838,
+      "shiftLeft": 106,
+      "inputPatchSha256": "65cd43b8a5013d4ba81c9659e65be785071d2b8d5b977e6c8483312c5a452cfc",
+      "productionFile": "public/images/catalog/ugolok/ugolok-63x63x4-clean.webp",
+      "outputFile": "public/images/catalog/ugolok/ugolok-63x63x4-clean.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2216.webp",
+      "metadata": "imports/ugolok-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-2217",
+      "name": "Уголок металлический № 63х63х5",
+      "clean": "imports/ugolok-image-template/clean-background-generated.png",
+      "box": {
+        "left": 727,
+        "top": 110,
+        "width": 483,
+        "height": 108
+      },
+      "tailLeft": 838,
+      "shiftLeft": 106,
+      "inputPatchSha256": "53f4da2ebce1a74954ba5440313e5e58983799ff5d1e5ee60cafa913005b7fdb",
+      "productionFile": "public/images/catalog/ugolok/ugolok-63x63x5-clean.webp",
+      "outputFile": "public/images/catalog/ugolok/ugolok-63x63x5-clean.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2217.webp",
+      "metadata": "imports/ugolok-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-2218",
+      "name": "Уголок металлический № 75х75х5",
+      "clean": "imports/ugolok-image-template/clean-background-generated.png",
+      "box": {
+        "left": 727,
+        "top": 110,
+        "width": 465,
+        "height": 108
+      },
+      "tailLeft": 837,
+      "shiftLeft": 105,
+      "inputPatchSha256": "5023aaa75b2510d5b004abdbf9f4a7c15c954c11ead095b6d8041a36a11c2db1",
+      "productionFile": "public/images/catalog/ugolok/ugolok-75x75x5-clean.webp",
+      "outputFile": "public/images/catalog/ugolok/ugolok-75x75x5-clean.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2218.webp",
+      "metadata": "imports/ugolok-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-20160",
+      "name": "Уголок металлический № 75х75х6",
+      "clean": "imports/ugolok-image-template/clean-background-generated.png",
+      "box": {
+        "left": 727,
+        "top": 110,
+        "width": 467,
+        "height": 108
+      },
+      "tailLeft": 837,
+      "shiftLeft": 105,
+      "inputPatchSha256": "1b171eaf5b6682aa2fe98089329691dcd27da409d5db84a090f5f3d692365e0c",
+      "productionFile": "public/images/catalog/ugolok/ugolok-75x75x6-clean.webp",
+      "outputFile": "public/images/catalog/ugolok/ugolok-75x75x6-clean.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-20160.webp",
+      "metadata": "imports/ugolok-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-2220",
+      "name": "Уголок металлический № 90х90х6",
+      "clean": "imports/ugolok-image-template/clean-background-generated.png",
+      "box": {
+        "left": 727,
+        "top": 110,
+        "width": 491,
+        "height": 108
+      },
+      "tailLeft": 838,
+      "shiftLeft": 106,
+      "inputPatchSha256": "4c659aaaf99c15bc07e18ab323fcb7fbc83593d47bcee1cdb54d9f0a93112fb7",
+      "productionFile": "public/images/catalog/ugolok/ugolok-90x90x6-clean.webp",
+      "outputFile": "public/images/catalog/ugolok/ugolok-90x90x6-clean.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2220.webp",
+      "metadata": "imports/ugolok-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-2219",
+      "name": "Уголок металлический № 100х63х6",
+      "clean": "imports/ugolok-image-template/clean-background-generated.png",
+      "box": {
+        "left": 727,
+        "top": 110,
+        "width": 524,
+        "height": 108
+      },
+      "tailLeft": 837,
+      "shiftLeft": 105,
+      "inputPatchSha256": "5957a7124cc52778599163e94ed087a866245b0b28218450eb8f3dd51c302870",
+      "productionFile": "public/images/catalog/ugolok/ugolok-100x63x6-clean.webp",
+      "outputFile": "public/images/catalog/ugolok/ugolok-100x63x6-clean.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2219.webp",
+      "metadata": "imports/ugolok-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-2221",
+      "name": "Уголок металлический № 100х100х7",
+      "clean": "imports/ugolok-image-template/clean-background-generated.png",
+      "box": {
+        "left": 727,
+        "top": 110,
+        "width": 558,
+        "height": 108
+      },
+      "tailLeft": 837,
+      "shiftLeft": 105,
+      "inputPatchSha256": "e0c0a39d0f194b95d4491b42ee471f6e8a1d5f264d1dd8ad7f06a38d3c3a81dc",
+      "productionFile": "public/images/catalog/ugolok/ugolok-100x100x7-clean.webp",
+      "outputFile": "public/images/catalog/ugolok/ugolok-100x100x7-clean.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2221.webp",
+      "metadata": "imports/ugolok-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-2222",
+      "name": "Уголок металлический № 100х100х8",
+      "clean": "imports/ugolok-image-template/clean-background-generated.png",
+      "box": {
+        "left": 727,
+        "top": 110,
+        "width": 562,
+        "height": 108
+      },
+      "tailLeft": 837,
+      "shiftLeft": 105,
+      "inputPatchSha256": "8b980c7d567307f28043c810f8b738656eb6b5c450f53545061d2f35337b321c",
+      "productionFile": "public/images/catalog/ugolok/ugolok-100x100x8-clean.webp",
+      "outputFile": "public/images/catalog/ugolok/ugolok-100x100x8-clean.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2222.webp",
+      "metadata": "imports/ugolok-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-20368",
+      "name": "Уголок металлический № 100х100х10",
+      "clean": "imports/ugolok-image-template/clean-background-generated.png",
+      "box": {
+        "left": 727,
+        "top": 110,
+        "width": 599,
+        "height": 108
+      },
+      "tailLeft": 837,
+      "shiftLeft": 105,
+      "inputPatchSha256": "033d7a9f126ead59036bd1db7e7f22417efcd748148405f893b3cad5ed50348a",
+      "productionFile": "public/images/catalog/ugolok/ugolok-100x100x10-clean.webp",
+      "outputFile": "public/images/catalog/ugolok/ugolok-100x100x10-clean.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-20368.webp",
+      "metadata": "imports/ugolok-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-2223",
+      "name": "Уголок металлический № 125х125х8",
+      "clean": "imports/ugolok-image-template/clean-background-generated.png",
+      "box": {
+        "left": 727,
+        "top": 110,
+        "width": 542,
+        "height": 108
+      },
+      "tailLeft": 837,
+      "shiftLeft": 105,
+      "inputPatchSha256": "b57423e669ad9ef6dfa2e8545ea5c0a741ce30fabe56eaa822f5dc8a6ff53bcb",
+      "productionFile": "public/images/catalog/ugolok/ugolok-125x125x8-clean.webp",
+      "outputFile": "public/images/catalog/ugolok/ugolok-125x125x8-clean.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2223.webp",
+      "metadata": "imports/ugolok-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-29030",
+      "name": "Уголок металлический № 125х125х10",
+      "clean": "imports/ugolok-image-template/clean-background-generated.png",
+      "box": {
+        "left": 727,
+        "top": 110,
+        "width": 579,
+        "height": 108
+      },
+      "tailLeft": 837,
+      "shiftLeft": 105,
+      "inputPatchSha256": "064bc4fd2d8d530b03ee4f1560340bbe24afcfdbdfd347ae3442f92ce7e20787",
+      "productionFile": "public/images/catalog/ugolok/ugolok-125x125x10-clean.webp",
+      "outputFile": "public/images/catalog/ugolok/ugolok-125x125x10-clean.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-29030.webp",
+      "metadata": "imports/ugolok-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-2224",
+      "name": "Уголок металлический № 140х140х10",
+      "clean": "imports/ugolok-image-template/clean-background-generated.png",
+      "box": {
+        "left": 727,
+        "top": 110,
+        "width": 599,
+        "height": 108
+      },
+      "tailLeft": 837,
+      "shiftLeft": 105,
+      "inputPatchSha256": "7442cb2e007d3262035af410055073a9f276ee4e718a9ed5901dfb6aea24fd28",
+      "productionFile": "public/images/catalog/ugolok/ugolok-140x140x10-clean.webp",
+      "outputFile": "public/images/catalog/ugolok/ugolok-140x140x10-clean.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2224.webp",
+      "metadata": "imports/ugolok-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-2225",
+      "name": "Уголок металлический № 160х160х10",
+      "clean": "imports/ugolok-image-template/clean-background-generated.png",
+      "box": {
+        "left": 727,
+        "top": 110,
+        "width": 593,
+        "height": 108
+      },
+      "tailLeft": 837,
+      "shiftLeft": 105,
+      "inputPatchSha256": "9079ededacab72825cc53e764acee91ef221d72403175d232c89832c18d3093e",
+      "productionFile": "public/images/catalog/ugolok/ugolok-160x160x10-clean.webp",
+      "outputFile": "public/images/catalog/ugolok/ugolok-160x160x10-clean.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2225.webp",
+      "metadata": "imports/ugolok-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-16726",
+      "name": "Уголок металлический № 160х100х10",
+      "clean": "imports/ugolok-image-template/clean-background-generated.png",
+      "box": {
+        "left": 727,
+        "top": 110,
+        "width": 596,
+        "height": 108
+      },
+      "tailLeft": 837,
+      "shiftLeft": 105,
+      "inputPatchSha256": "c9d30a4771cff81c61866fa6e3d77341cb949225befe95d4bd77e560b2b351d5",
+      "productionFile": "public/images/catalog/ugolok/ugolok-160x100x10-clean.webp",
+      "outputFile": "public/images/catalog/ugolok/ugolok-160x100x10-clean.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-16726.webp",
+      "metadata": "imports/ugolok-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-2204",
+      "name": "Квадрат стальной №8",
+      "clean": "imports/kvadrat-image-template/photo.jpg",
+      "box": {
+        "left": 904,
+        "top": 110,
+        "width": 281,
+        "height": 108
+      },
+      "tailLeft": 1018,
+      "shiftLeft": 109,
+      "inputPatchSha256": "39b71334845ca593985d770ee514a21e7b4cf0a5d3a2e00b96e2a8f829317bcd",
+      "productionFile": "public/images/catalog/kvadrat/kvadrat-8x8-clean.webp",
+      "outputFile": "public/images/catalog/kvadrat/kvadrat-8x8-clean.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2204.webp",
+      "metadata": "imports/kvadrat-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-2205",
+      "name": "Квадрат стальной №10",
+      "clean": "imports/kvadrat-image-template/photo.jpg",
+      "box": {
+        "left": 879,
+        "top": 110,
+        "width": 346,
+        "height": 108
+      },
+      "tailLeft": 989,
+      "shiftLeft": 105,
+      "inputPatchSha256": "2fdf85a64eeb7cb38e28303740b6f89d68bd69bbf9cdc3e95341129ea40ae2ca",
+      "productionFile": "public/images/catalog/kvadrat/kvadrat-10x10-clean.webp",
+      "outputFile": "public/images/catalog/kvadrat/kvadrat-10x10-clean.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2205.webp",
+      "metadata": "imports/kvadrat-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-2206",
+      "name": "Квадрат стальной №12",
+      "clean": "imports/kvadrat-image-template/photo.jpg",
+      "box": {
+        "left": 879,
+        "top": 110,
+        "width": 335,
+        "height": 108
+      },
+      "tailLeft": 989,
+      "shiftLeft": 105,
+      "inputPatchSha256": "7dc690d804ccf7f59c754b02a585535f49788ee925101b42b195c04bce386ce6",
+      "productionFile": "public/images/catalog/kvadrat/kvadrat-12x12-clean.webp",
+      "outputFile": "public/images/catalog/kvadrat/kvadrat-12x12-clean.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2206.webp",
+      "metadata": "imports/kvadrat-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-2207",
+      "name": "Квадрат стальной №14",
+      "clean": "imports/kvadrat-image-template/photo.jpg",
+      "box": {
+        "left": 879,
+        "top": 110,
+        "width": 346,
+        "height": 108
+      },
+      "tailLeft": 989,
+      "shiftLeft": 105,
+      "inputPatchSha256": "592274abcb67a5f3186308c104ad5861edae0df9777721d226d999e9f3b753d5",
+      "productionFile": "public/images/catalog/kvadrat/kvadrat-14x14-clean.webp",
+      "outputFile": "public/images/catalog/kvadrat/kvadrat-14x14-clean.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2207.webp",
+      "metadata": "imports/kvadrat-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-26579",
+      "name": "Квадрат стальной №16",
+      "clean": "imports/kvadrat-image-template/photo.jpg",
+      "box": {
+        "left": 879,
+        "top": 110,
+        "width": 340,
+        "height": 108
+      },
+      "tailLeft": 989,
+      "shiftLeft": 105,
+      "inputPatchSha256": "a752645c63e8513abf1c3220211af769445bb03abfd3db78fd0076fa4c262f92",
+      "productionFile": "public/images/catalog/kvadrat/kvadrat-16x16-clean.webp",
+      "outputFile": "public/images/catalog/kvadrat/kvadrat-16x16-clean.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-26579.webp",
+      "metadata": "imports/kvadrat-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-28995",
+      "name": "Квадрат стальной №18",
+      "clean": "imports/kvadrat-image-template/photo.jpg",
+      "box": {
+        "left": 879,
+        "top": 110,
+        "width": 339,
+        "height": 108
+      },
+      "tailLeft": 989,
+      "shiftLeft": 105,
+      "inputPatchSha256": "d92ba26acaa3e5b7341e87f0fb9f2f066baf62043033d4b7a17ac6bd093f6bb9",
+      "productionFile": "public/images/catalog/kvadrat/kvadrat-18x18-clean.webp",
+      "outputFile": "public/images/catalog/kvadrat/kvadrat-18x18-clean.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-28995.webp",
+      "metadata": "imports/kvadrat-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-2208",
+      "name": "Квадрат стальной №20",
+      "clean": "imports/kvadrat-image-template/photo.jpg",
+      "box": {
+        "left": 879,
+        "top": 110,
+        "width": 380,
+        "height": 108
+      },
+      "tailLeft": 990,
+      "shiftLeft": 106,
+      "inputPatchSha256": "2d37294219efd338db8e36710c2d28fd2119f797764341a35aa7bbe0109fdf1a",
+      "productionFile": "public/images/catalog/kvadrat/kvadrat-20x20-clean.webp",
+      "outputFile": "public/images/catalog/kvadrat/kvadrat-20x20-clean.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2208.webp",
+      "metadata": "imports/kvadrat-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "profile-pipe-square-15x15x1-5",
+      "name": "Труба квадратная 15×15×1,5 мм",
+      "clean": "public/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "box": {
+        "left": 630,
+        "top": 222,
+        "width": 592,
+        "height": 108
+      },
+      "tailLeft": 749,
+      "from": "квадратная № 15 x 15 x 1,5",
+      "to": "квадратная 15 x 15 x 1,5",
+      "shiftLeft": 109,
+      "inputPatchSha256": "50a0bde311702d301dd6ef1e62580c6648d92f622d307c84ebd6c84663661c3f",
+      "productionFile": "public/images/catalog/product-illustrations/profile-pipe-square-15x15x1-5.webp",
+      "outputFile": "public/images/catalog/product-illustrations/profile-pipe-square-15x15x1-5.webp",
+      "before": "output/image-edits/number-sign-removal/before/profile-pipe-square-15x15x1-5.webp",
+      "metadata": "imports/profile-square-image-template/rendered.json"
+    },
+    {
+      "id": "profile-pipe-square-20x20x1-5",
+      "name": "Труба профильная квадратная 20×20×1,5 мм",
+      "clean": "public/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "box": {
+        "left": 632,
+        "top": 222,
+        "width": 601,
+        "height": 108
+      },
+      "tailLeft": 744,
+      "shiftLeft": 107,
+      "inputPatchSha256": "026d8ccea6c745a09aca1442f0b77e62e9354fb4ed651c4af4b9a3fc08e8db35",
+      "productionFile": "public/images/catalog/product-illustrations/profile-pipe-square-20x20x1-5.webp",
+      "outputFile": "public/images/catalog/product-illustrations/profile-pipe-square-20x20x1-5.webp",
+      "before": "output/image-edits/number-sign-removal/before/profile-pipe-square-20x20x1-5.webp",
+      "metadata": "imports/profile-square-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "profile-pipe-square-20x20x2",
+      "name": "Труба профильная квадратная 20×20×2 мм",
+      "clean": "public/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "box": {
+        "left": 632,
+        "top": 222,
+        "width": 547,
+        "height": 108
+      },
+      "tailLeft": 744,
+      "shiftLeft": 107,
+      "inputPatchSha256": "a7a42de7128726ce59fe3368b9cffab4d31dbbe87be39ed33a66402d5ebfd5b6",
+      "productionFile": "public/images/catalog/product-illustrations/profile-pipe-square-20x20x2.webp",
+      "outputFile": "public/images/catalog/product-illustrations/profile-pipe-square-20x20x2.webp",
+      "before": "output/image-edits/number-sign-removal/before/profile-pipe-square-20x20x2.webp",
+      "metadata": "imports/profile-square-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "profile-pipe-square-25x25x1-5",
+      "name": "Труба профильная квадратная 25×25×1,5 мм",
+      "clean": "public/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "box": {
+        "left": 632,
+        "top": 222,
+        "width": 591,
+        "height": 108
+      },
+      "tailLeft": 744,
+      "shiftLeft": 107,
+      "inputPatchSha256": "dc7119efff84a9901489a4ae650f929ac91b4a781801cba377500e6bb5e255aa",
+      "productionFile": "public/images/catalog/product-illustrations/profile-pipe-square-25x25x1-5.webp",
+      "outputFile": "public/images/catalog/product-illustrations/profile-pipe-square-25x25x1-5.webp",
+      "before": "output/image-edits/number-sign-removal/before/profile-pipe-square-25x25x1-5.webp",
+      "metadata": "imports/profile-square-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "profile-pipe-square-25x25x2",
+      "name": "Труба профильная квадратная 25×25×2 мм",
+      "clean": "public/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "box": {
+        "left": 632,
+        "top": 222,
+        "width": 537,
+        "height": 108
+      },
+      "tailLeft": 744,
+      "shiftLeft": 107,
+      "inputPatchSha256": "4d7c32c84ec87397e26f845cda999ee2a1e0ea9fd3ab39e8564628629a22fc46",
+      "productionFile": "public/images/catalog/product-illustrations/profile-pipe-square-25x25x2.webp",
+      "outputFile": "public/images/catalog/product-illustrations/profile-pipe-square-25x25x2.webp",
+      "before": "output/image-edits/number-sign-removal/before/profile-pipe-square-25x25x2.webp",
+      "metadata": "imports/profile-square-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "profile-pipe-square-30x30x1-5",
+      "name": "Труба профильная квадратная 30×30×1,5 мм",
+      "clean": "public/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "box": {
+        "left": 632,
+        "top": 222,
+        "width": 605,
+        "height": 108
+      },
+      "tailLeft": 744,
+      "shiftLeft": 107,
+      "inputPatchSha256": "97fe0270a5e35eac4ab90fafefc0d47b0a87895a8c74dcf5bce25c8e2af6c2de",
+      "productionFile": "public/images/catalog/product-illustrations/profile-pipe-square-30x30x1-5.webp",
+      "outputFile": "public/images/catalog/product-illustrations/profile-pipe-square-30x30x1-5.webp",
+      "before": "output/image-edits/number-sign-removal/before/profile-pipe-square-30x30x1-5.webp",
+      "metadata": "imports/profile-square-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "profile-pipe-square-30x30x2",
+      "name": "Труба профильная квадратная 30×30×2 мм",
+      "clean": "public/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "box": {
+        "left": 632,
+        "top": 222,
+        "width": 551,
+        "height": 108
+      },
+      "tailLeft": 744,
+      "shiftLeft": 107,
+      "inputPatchSha256": "20e68b51d93db595dd5be3162790c267728269e48ecfba131663ec3c3310a577",
+      "productionFile": "public/images/catalog/product-illustrations/profile-pipe-square-30x30x2.webp",
+      "outputFile": "public/images/catalog/product-illustrations/profile-pipe-square-30x30x2.webp",
+      "before": "output/image-edits/number-sign-removal/before/profile-pipe-square-30x30x2.webp",
+      "metadata": "imports/profile-square-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "profile-pipe-square-40x40x1-5",
+      "name": "Труба профильная квадратная 40×40×1,5 мм",
+      "clean": "public/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "box": {
+        "left": 632,
+        "top": 222,
+        "width": 612,
+        "height": 108
+      },
+      "tailLeft": 745,
+      "shiftLeft": 108,
+      "inputPatchSha256": "0c9a64a273a3ba27862472c2df1174a9d6297c29255b4c8ec404b604fa0d5709",
+      "productionFile": "public/images/catalog/product-illustrations/profile-pipe-square-40x40x1-5.webp",
+      "outputFile": "public/images/catalog/product-illustrations/profile-pipe-square-40x40x1-5.webp",
+      "before": "output/image-edits/number-sign-removal/before/profile-pipe-square-40x40x1-5.webp",
+      "metadata": "imports/profile-square-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "profile-pipe-square-40x40x2",
+      "name": "Труба профильная квадратная 40×40×2 мм",
+      "clean": "public/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "box": {
+        "left": 632,
+        "top": 222,
+        "width": 558,
+        "height": 108
+      },
+      "tailLeft": 745,
+      "shiftLeft": 108,
+      "inputPatchSha256": "cf733b2af073dbe7a19e0b703649b63c23fd041cd0b443d7a1efb0ab0494deea",
+      "productionFile": "public/images/catalog/product-illustrations/profile-pipe-square-40x40x2.webp",
+      "outputFile": "public/images/catalog/product-illustrations/profile-pipe-square-40x40x2.webp",
+      "before": "output/image-edits/number-sign-removal/before/profile-pipe-square-40x40x2.webp",
+      "metadata": "imports/profile-square-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "profile-pipe-square-40x40x3",
+      "name": "Труба профильная квадратная 40×40×3 мм",
+      "clean": "public/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "box": {
+        "left": 632,
+        "top": 222,
+        "width": 560,
+        "height": 108
+      },
+      "tailLeft": 745,
+      "shiftLeft": 108,
+      "inputPatchSha256": "1f6b080da2ea9ffaf1e521387c60fffeceaaa6c29a09c7de58d67137b8771131",
+      "productionFile": "public/images/catalog/product-illustrations/profile-pipe-square-40x40x3.webp",
+      "outputFile": "public/images/catalog/product-illustrations/profile-pipe-square-40x40x3.webp",
+      "before": "output/image-edits/number-sign-removal/before/profile-pipe-square-40x40x3.webp",
+      "metadata": "imports/profile-square-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "profile-pipe-square-50x50x1-5",
+      "name": "Труба профильная квадратная 50×50×1,5 мм",
+      "clean": "public/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "box": {
+        "left": 632,
+        "top": 222,
+        "width": 601,
+        "height": 108
+      },
+      "tailLeft": 744,
+      "shiftLeft": 107,
+      "inputPatchSha256": "fb5cec077a44c3856a5ce1cddc49236fe23cba1a9eb24205f5ab9f0a503ae9af",
+      "productionFile": "public/images/catalog/product-illustrations/profile-pipe-square-50x50x1-5.webp",
+      "outputFile": "public/images/catalog/product-illustrations/profile-pipe-square-50x50x1-5.webp",
+      "before": "output/image-edits/number-sign-removal/before/profile-pipe-square-50x50x1-5.webp",
+      "metadata": "imports/profile-square-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "profile-pipe-square-50x50x2",
+      "name": "Труба профильная квадратная 50×50×2 мм",
+      "clean": "public/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "box": {
+        "left": 632,
+        "top": 222,
+        "width": 547,
+        "height": 108
+      },
+      "tailLeft": 744,
+      "shiftLeft": 107,
+      "inputPatchSha256": "65745e34a562100fe2bdf07269a706caa19661b598571b3f7fed28ec2ec7aef5",
+      "productionFile": "public/images/catalog/product-illustrations/profile-pipe-square-50x50x2.webp",
+      "outputFile": "public/images/catalog/product-illustrations/profile-pipe-square-50x50x2.webp",
+      "before": "output/image-edits/number-sign-removal/before/profile-pipe-square-50x50x2.webp",
+      "metadata": "imports/profile-square-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "profile-pipe-square-50x50x3",
+      "name": "Труба профильная квадратная 50×50×3 мм",
+      "clean": "public/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "box": {
+        "left": 632,
+        "top": 222,
+        "width": 549,
+        "height": 108
+      },
+      "tailLeft": 744,
+      "shiftLeft": 107,
+      "inputPatchSha256": "3754aa6c191db9f5f4c1ce0526140717d377c965ab24dd2a43b90418e974c5e2",
+      "productionFile": "public/images/catalog/product-illustrations/profile-pipe-square-50x50x3.webp",
+      "outputFile": "public/images/catalog/product-illustrations/profile-pipe-square-50x50x3.webp",
+      "before": "output/image-edits/number-sign-removal/before/profile-pipe-square-50x50x3.webp",
+      "metadata": "imports/profile-square-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "profile-pipe-square-50x50x4",
+      "name": "Труба профильная квадратная 50×50×4 мм",
+      "clean": "public/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "box": {
+        "left": 632,
+        "top": 222,
+        "width": 553,
+        "height": 108
+      },
+      "tailLeft": 744,
+      "shiftLeft": 107,
+      "inputPatchSha256": "ee996c4dc5b02db9b6985336c157da497855f74eee1b64882dcd2197f9a9cee6",
+      "productionFile": "public/images/catalog/product-illustrations/profile-pipe-square-50x50x4.webp",
+      "outputFile": "public/images/catalog/product-illustrations/profile-pipe-square-50x50x4.webp",
+      "before": "output/image-edits/number-sign-removal/before/profile-pipe-square-50x50x4.webp",
+      "metadata": "imports/profile-square-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "profile-pipe-square-60x60x1-5",
+      "name": "Труба профильная квадратная 60×60×1,5 мм",
+      "clean": "public/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "box": {
+        "left": 632,
+        "top": 222,
+        "width": 605,
+        "height": 108
+      },
+      "tailLeft": 744,
+      "shiftLeft": 107,
+      "inputPatchSha256": "0b15447ab19a2e4e70e874224c643a116155bd4a738c9db7bf5a9c58f5785a11",
+      "productionFile": "public/images/catalog/product-illustrations/profile-pipe-square-60x60x1-5.webp",
+      "outputFile": "public/images/catalog/product-illustrations/profile-pipe-square-60x60x1-5.webp",
+      "before": "output/image-edits/number-sign-removal/before/profile-pipe-square-60x60x1-5.webp",
+      "metadata": "imports/profile-square-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "profile-pipe-square-60x60x2",
+      "name": "Труба профильная квадратная 60×60×2 мм",
+      "clean": "public/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "box": {
+        "left": 632,
+        "top": 222,
+        "width": 551,
+        "height": 108
+      },
+      "tailLeft": 744,
+      "shiftLeft": 107,
+      "inputPatchSha256": "d29728228390f176a261c2c0df7cce9a84080de08e2411b754b3fecc762471e2",
+      "productionFile": "public/images/catalog/product-illustrations/profile-pipe-square-60x60x2.webp",
+      "outputFile": "public/images/catalog/product-illustrations/profile-pipe-square-60x60x2.webp",
+      "before": "output/image-edits/number-sign-removal/before/profile-pipe-square-60x60x2.webp",
+      "metadata": "imports/profile-square-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "profile-pipe-square-60x60x3",
+      "name": "Труба профильная квадратная 60×60×3 мм",
+      "clean": "public/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "box": {
+        "left": 632,
+        "top": 222,
+        "width": 553,
+        "height": 108
+      },
+      "tailLeft": 744,
+      "shiftLeft": 107,
+      "inputPatchSha256": "13c23f1f9d4ee1ed3a246a07b168736c66633c2601cff5a89a1b609d15af08f5",
+      "productionFile": "public/images/catalog/product-illustrations/profile-pipe-square-60x60x3.webp",
+      "outputFile": "public/images/catalog/product-illustrations/profile-pipe-square-60x60x3.webp",
+      "before": "output/image-edits/number-sign-removal/before/profile-pipe-square-60x60x3.webp",
+      "metadata": "imports/profile-square-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "profile-pipe-square-60x60x4",
+      "name": "Труба профильная квадратная 60×60×4 мм",
+      "clean": "public/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "box": {
+        "left": 632,
+        "top": 222,
+        "width": 557,
+        "height": 108
+      },
+      "tailLeft": 744,
+      "shiftLeft": 107,
+      "inputPatchSha256": "0ab84c4f6983545011bd7e16aee898a4d1d350b1904a0dd241d5d7c9a60a2a9e",
+      "productionFile": "public/images/catalog/product-illustrations/profile-pipe-square-60x60x4.webp",
+      "outputFile": "public/images/catalog/product-illustrations/profile-pipe-square-60x60x4.webp",
+      "before": "output/image-edits/number-sign-removal/before/profile-pipe-square-60x60x4.webp",
+      "metadata": "imports/profile-square-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "profile-pipe-square-80x80x2",
+      "name": "Труба профильная квадратная 80×80×2 мм",
+      "clean": "public/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "box": {
+        "left": 632,
+        "top": 222,
+        "width": 551,
+        "height": 108
+      },
+      "tailLeft": 744,
+      "shiftLeft": 107,
+      "inputPatchSha256": "b35dcae9cd1334c9b6d5fc9c7948bca04034a0239104bdb8c2122135f33ba47a",
+      "productionFile": "public/images/catalog/product-illustrations/profile-pipe-square-80x80x2.webp",
+      "outputFile": "public/images/catalog/product-illustrations/profile-pipe-square-80x80x2.webp",
+      "before": "output/image-edits/number-sign-removal/before/profile-pipe-square-80x80x2.webp",
+      "metadata": "imports/profile-square-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "profile-pipe-square-80x80x3",
+      "name": "Труба профильная квадратная 80×80×3 мм",
+      "clean": "public/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "box": {
+        "left": 632,
+        "top": 222,
+        "width": 553,
+        "height": 108
+      },
+      "tailLeft": 744,
+      "shiftLeft": 107,
+      "inputPatchSha256": "d3de3b23ea895e297952bdc2de3d5a179e4b0b812a43e92035f992f80ee298e7",
+      "productionFile": "public/images/catalog/product-illustrations/profile-pipe-square-80x80x3.webp",
+      "outputFile": "public/images/catalog/product-illustrations/profile-pipe-square-80x80x3.webp",
+      "before": "output/image-edits/number-sign-removal/before/profile-pipe-square-80x80x3.webp",
+      "metadata": "imports/profile-square-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "profile-pipe-square-80x80x4",
+      "name": "Труба профильная квадратная 80×80×4 мм",
+      "clean": "public/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "box": {
+        "left": 632,
+        "top": 222,
+        "width": 557,
+        "height": 108
+      },
+      "tailLeft": 744,
+      "shiftLeft": 107,
+      "inputPatchSha256": "a1be5754883fa80c23be5d6b9ad0469aa17bf4988eea3e0cb14359e7ed8644a3",
+      "productionFile": "public/images/catalog/product-illustrations/profile-pipe-square-80x80x4.webp",
+      "outputFile": "public/images/catalog/product-illustrations/profile-pipe-square-80x80x4.webp",
+      "before": "output/image-edits/number-sign-removal/before/profile-pipe-square-80x80x4.webp",
+      "metadata": "imports/profile-square-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "profile-pipe-square-100x100x3",
+      "name": "Труба профильная квадратная 100×100×3 мм",
+      "clean": "public/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "box": {
+        "left": 632,
+        "top": 222,
+        "width": 627,
+        "height": 108
+      },
+      "tailLeft": 745,
+      "shiftLeft": 108,
+      "inputPatchSha256": "1128ddfce534afc1aa7bdda501df27d23b958bbc5b5f43d5c4a93e746cfd1cfd",
+      "productionFile": "public/images/catalog/product-illustrations/profile-pipe-square-100x100x3.webp",
+      "outputFile": "public/images/catalog/product-illustrations/profile-pipe-square-100x100x3.webp",
+      "before": "output/image-edits/number-sign-removal/before/profile-pipe-square-100x100x3.webp",
+      "metadata": "imports/profile-square-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "profile-pipe-square-100x100x4",
+      "name": "Труба профильная квадратная 100×100×4 мм",
+      "clean": "public/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "box": {
+        "left": 632,
+        "top": 222,
+        "width": 631,
+        "height": 108
+      },
+      "tailLeft": 745,
+      "shiftLeft": 108,
+      "inputPatchSha256": "f02c4faec27115b976e62c5e39e2fb363295cb358c75f4991dc863f5274774ab",
+      "productionFile": "public/images/catalog/product-illustrations/profile-pipe-square-100x100x4.webp",
+      "outputFile": "public/images/catalog/product-illustrations/profile-pipe-square-100x100x4.webp",
+      "before": "output/image-edits/number-sign-removal/before/profile-pipe-square-100x100x4.webp",
+      "metadata": "imports/profile-square-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "profile-pipe-square-100x100x5",
+      "name": "Труба профильная квадратная 100×100×5 мм",
+      "clean": "public/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "box": {
+        "left": 632,
+        "top": 222,
+        "width": 626,
+        "height": 108
+      },
+      "tailLeft": 745,
+      "shiftLeft": 108,
+      "inputPatchSha256": "517784f72ba1faa1df125e3099588dfa7b53150dcdcdd38f7863acafde6014a2",
+      "productionFile": "public/images/catalog/product-illustrations/profile-pipe-square-100x100x5.webp",
+      "outputFile": "public/images/catalog/product-illustrations/profile-pipe-square-100x100x5.webp",
+      "before": "output/image-edits/number-sign-removal/before/profile-pipe-square-100x100x5.webp",
+      "metadata": "imports/profile-square-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "profile-pipe-square-120x120x3",
+      "name": "Труба профильная квадратная 120×120×3 мм",
+      "clean": "public/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "box": {
+        "left": 632,
+        "top": 222,
+        "width": 617,
+        "height": 108
+      },
+      "tailLeft": 745,
+      "shiftLeft": 108,
+      "inputPatchSha256": "63f6b9dd5ffdf17e88d08d917c93eb486f53e3ab7c74ba3ccb376ce7b05d1e7e",
+      "productionFile": "public/images/catalog/product-illustrations/profile-pipe-square-120x120x3.webp",
+      "outputFile": "public/images/catalog/product-illustrations/profile-pipe-square-120x120x3.webp",
+      "before": "output/image-edits/number-sign-removal/before/profile-pipe-square-120x120x3.webp",
+      "metadata": "imports/profile-square-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "profile-pipe-square-120x120x4",
+      "name": "Труба профильная квадратная 120×120×4 мм",
+      "clean": "public/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "box": {
+        "left": 632,
+        "top": 222,
+        "width": 621,
+        "height": 108
+      },
+      "tailLeft": 745,
+      "shiftLeft": 108,
+      "inputPatchSha256": "250f7a1ac601f0e147fec4a955475a2df30b48d835ab43295be885e032a5fd95",
+      "productionFile": "public/images/catalog/product-illustrations/profile-pipe-square-120x120x4.webp",
+      "outputFile": "public/images/catalog/product-illustrations/profile-pipe-square-120x120x4.webp",
+      "before": "output/image-edits/number-sign-removal/before/profile-pipe-square-120x120x4.webp",
+      "metadata": "imports/profile-square-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "profile-pipe-square-140x140x4",
+      "name": "Труба профильная квадратная 140×140×4 мм",
+      "clean": "public/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "box": {
+        "left": 632,
+        "top": 222,
+        "width": 631,
+        "height": 108
+      },
+      "tailLeft": 745,
+      "shiftLeft": 108,
+      "inputPatchSha256": "f6b03513a82885992291e80a669ac1da71f757235f3214e1cad4e5c8b69a8e2c",
+      "productionFile": "public/images/catalog/product-illustrations/profile-pipe-square-140x140x4.webp",
+      "outputFile": "public/images/catalog/product-illustrations/profile-pipe-square-140x140x4.webp",
+      "before": "output/image-edits/number-sign-removal/before/profile-pipe-square-140x140x4.webp",
+      "metadata": "imports/profile-square-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "profile-pipe-square-160x160x4",
+      "name": "Труба профильная квадратная 160×160×4 мм",
+      "clean": "public/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "box": {
+        "left": 632,
+        "top": 222,
+        "width": 625,
+        "height": 108
+      },
+      "tailLeft": 745,
+      "shiftLeft": 108,
+      "inputPatchSha256": "0515595f499fc7a712f88cfef41664e94626dea84b637ea761f7f149ffd84728",
+      "productionFile": "public/images/catalog/product-illustrations/profile-pipe-square-160x160x4.webp",
+      "outputFile": "public/images/catalog/product-illustrations/profile-pipe-square-160x160x4.webp",
+      "before": "output/image-edits/number-sign-removal/before/profile-pipe-square-160x160x4.webp",
+      "metadata": "imports/profile-square-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "profile-pipe-rectangular-30x20x2",
+      "name": "Труба профильная прямоугольная 30×20×2 мм",
+      "clean": "public/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "box": {
+        "left": 770,
+        "top": 222,
+        "width": 548,
+        "height": 112
+      },
+      "tailLeft": 881,
+      "shiftLeft": 106,
+      "inputPatchSha256": "2f841ea0028b776dc43c9eb94dc89a40e06743f537ae11bcdde6fcda61ba3322",
+      "productionFile": "public/images/catalog/product-illustrations/profile-pipe-rectangular-30x20x2.webp",
+      "outputFile": "public/images/catalog/product-illustrations/profile-pipe-rectangular-30x20x2.webp",
+      "before": "output/image-edits/number-sign-removal/before/profile-pipe-rectangular-30x20x2.webp",
+      "metadata": "imports/profile-rectangular-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "profile-pipe-rectangular-40x20x1-5",
+      "name": "Труба профильная прямоугольная 40×20×1,5 мм",
+      "clean": "public/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "box": {
+        "left": 770,
+        "top": 222,
+        "width": 605,
+        "height": 112
+      },
+      "tailLeft": 881,
+      "shiftLeft": 106,
+      "inputPatchSha256": "fd6cf8babec40e18a6cd848d78b93173d5435465a1f452feee41d5c4a234f75e",
+      "productionFile": "public/images/catalog/product-illustrations/profile-pipe-rectangular-40x20x1-5.webp",
+      "outputFile": "public/images/catalog/product-illustrations/profile-pipe-rectangular-40x20x1-5.webp",
+      "before": "output/image-edits/number-sign-removal/before/profile-pipe-rectangular-40x20x1-5.webp",
+      "metadata": "imports/profile-rectangular-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "profile-pipe-rectangular-40x20x2",
+      "name": "Труба профильная прямоугольная 40×20×2 мм",
+      "clean": "public/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "box": {
+        "left": 770,
+        "top": 222,
+        "width": 551,
+        "height": 112
+      },
+      "tailLeft": 881,
+      "shiftLeft": 106,
+      "inputPatchSha256": "1f3633c5dca8d23d689a3ee415f08b8e9f403871de6f969f8842489743ada528",
+      "productionFile": "public/images/catalog/product-illustrations/profile-pipe-rectangular-40x20x2.webp",
+      "outputFile": "public/images/catalog/product-illustrations/profile-pipe-rectangular-40x20x2.webp",
+      "before": "output/image-edits/number-sign-removal/before/profile-pipe-rectangular-40x20x2.webp",
+      "metadata": "imports/profile-rectangular-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "profile-pipe-rectangular-40x20x3",
+      "name": "Труба профильная прямоугольная 40×20×3 мм",
+      "clean": "public/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "box": {
+        "left": 770,
+        "top": 222,
+        "width": 553,
+        "height": 112
+      },
+      "tailLeft": 881,
+      "shiftLeft": 106,
+      "inputPatchSha256": "0537f0eba4c23f04c8d15865f76b3500175b2f4eb5ad40a9b3c65916d9005be0",
+      "productionFile": "public/images/catalog/product-illustrations/profile-pipe-rectangular-40x20x3.webp",
+      "outputFile": "public/images/catalog/product-illustrations/profile-pipe-rectangular-40x20x3.webp",
+      "before": "output/image-edits/number-sign-removal/before/profile-pipe-rectangular-40x20x3.webp",
+      "metadata": "imports/profile-rectangular-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "profile-pipe-rectangular-40x25x1-5",
+      "name": "Труба профильная прямоугольная 40×25×1,5 мм",
+      "clean": "public/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "box": {
+        "left": 770,
+        "top": 222,
+        "width": 600,
+        "height": 112
+      },
+      "tailLeft": 881,
+      "shiftLeft": 106,
+      "inputPatchSha256": "ebf6ea9b0802523e007ddb50a0488247cde3ba2234ba149c625bc5ef390405bf",
+      "productionFile": "public/images/catalog/product-illustrations/profile-pipe-rectangular-40x25x1-5.webp",
+      "outputFile": "public/images/catalog/product-illustrations/profile-pipe-rectangular-40x25x1-5.webp",
+      "before": "output/image-edits/number-sign-removal/before/profile-pipe-rectangular-40x25x1-5.webp",
+      "metadata": "imports/profile-rectangular-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "profile-pipe-rectangular-40x25x2",
+      "name": "Труба профильная прямоугольная 40×25×2 мм",
+      "clean": "public/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "box": {
+        "left": 770,
+        "top": 222,
+        "width": 546,
+        "height": 112
+      },
+      "tailLeft": 881,
+      "shiftLeft": 106,
+      "inputPatchSha256": "7bbbd7837e937f1a2d58f801c5be70a741568199da7e3a6353dc612aefb8a036",
+      "productionFile": "public/images/catalog/product-illustrations/profile-pipe-rectangular-40x25x2.webp",
+      "outputFile": "public/images/catalog/product-illustrations/profile-pipe-rectangular-40x25x2.webp",
+      "before": "output/image-edits/number-sign-removal/before/profile-pipe-rectangular-40x25x2.webp",
+      "metadata": "imports/profile-rectangular-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "profile-pipe-rectangular-50x25x1-5",
+      "name": "Труба профильная прямоугольная 50×25×1,5 мм",
+      "clean": "public/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "box": {
+        "left": 770,
+        "top": 222,
+        "width": 595,
+        "height": 112
+      },
+      "tailLeft": 881,
+      "shiftLeft": 106,
+      "inputPatchSha256": "39c7cb3d0b89b55d24a52c223995166e27ef687d0a4ea1f5c96366c1841894b2",
+      "productionFile": "public/images/catalog/product-illustrations/profile-pipe-rectangular-50x25x1-5.webp",
+      "outputFile": "public/images/catalog/product-illustrations/profile-pipe-rectangular-50x25x1-5.webp",
+      "before": "output/image-edits/number-sign-removal/before/profile-pipe-rectangular-50x25x1-5.webp",
+      "metadata": "imports/profile-rectangular-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "profile-pipe-rectangular-50x25x2",
+      "name": "Труба профильная прямоугольная 50×25×2 мм",
+      "clean": "public/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "box": {
+        "left": 770,
+        "top": 222,
+        "width": 541,
+        "height": 112
+      },
+      "tailLeft": 881,
+      "shiftLeft": 106,
+      "inputPatchSha256": "a96ad2ffd24a7634f74cb51dd6e84b0e5bf4921562623a2a054da50402a75cb7",
+      "productionFile": "public/images/catalog/product-illustrations/profile-pipe-rectangular-50x25x2.webp",
+      "outputFile": "public/images/catalog/product-illustrations/profile-pipe-rectangular-50x25x2.webp",
+      "before": "output/image-edits/number-sign-removal/before/profile-pipe-rectangular-50x25x2.webp",
+      "metadata": "imports/profile-rectangular-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "profile-pipe-rectangular-50x25x3",
+      "name": "Труба профильная прямоугольная 50×25×3 мм",
+      "clean": "public/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "box": {
+        "left": 770,
+        "top": 222,
+        "width": 543,
+        "height": 112
+      },
+      "tailLeft": 881,
+      "shiftLeft": 106,
+      "inputPatchSha256": "4182b18ed0d22c1f980cfc05e59c2a286b2d1d10157d671a195a0b4dff81bfdc",
+      "productionFile": "public/images/catalog/product-illustrations/profile-pipe-rectangular-50x25x3.webp",
+      "outputFile": "public/images/catalog/product-illustrations/profile-pipe-rectangular-50x25x3.webp",
+      "before": "output/image-edits/number-sign-removal/before/profile-pipe-rectangular-50x25x3.webp",
+      "metadata": "imports/profile-rectangular-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "profile-pipe-rectangular-60x30x1-5",
+      "name": "Труба профильная прямоугольная 60×30×1,5 мм",
+      "clean": "public/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "box": {
+        "left": 770,
+        "top": 222,
+        "width": 604,
+        "height": 112
+      },
+      "tailLeft": 881,
+      "shiftLeft": 106,
+      "inputPatchSha256": "74d6fb32e38117df206e4597c7cf5aadf86e0d3c266e69f180f6ba496ee6c95f",
+      "productionFile": "public/images/catalog/product-illustrations/profile-pipe-rectangular-60x30x1-5.webp",
+      "outputFile": "public/images/catalog/product-illustrations/profile-pipe-rectangular-60x30x1-5.webp",
+      "before": "output/image-edits/number-sign-removal/before/profile-pipe-rectangular-60x30x1-5.webp",
+      "metadata": "imports/profile-rectangular-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "profile-pipe-rectangular-60x30x2",
+      "name": "Труба профильная прямоугольная 60×30×2 мм",
+      "clean": "public/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "box": {
+        "left": 770,
+        "top": 222,
+        "width": 550,
+        "height": 112
+      },
+      "tailLeft": 881,
+      "shiftLeft": 106,
+      "inputPatchSha256": "ee51660e8f1dc2a13ca5b5d51706db22a7a4179e0a875a3bfba912549e357712",
+      "productionFile": "public/images/catalog/product-illustrations/profile-pipe-rectangular-60x30x2.webp",
+      "outputFile": "public/images/catalog/product-illustrations/profile-pipe-rectangular-60x30x2.webp",
+      "before": "output/image-edits/number-sign-removal/before/profile-pipe-rectangular-60x30x2.webp",
+      "metadata": "imports/profile-rectangular-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "profile-pipe-rectangular-60x30x3",
+      "name": "Труба профильная прямоугольная 60×30×3 мм",
+      "clean": "public/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "box": {
+        "left": 770,
+        "top": 222,
+        "width": 552,
+        "height": 112
+      },
+      "tailLeft": 881,
+      "shiftLeft": 106,
+      "inputPatchSha256": "b7f7fe32aa0fa2d877d48ffcf63c594ed25d26b7f4ba9b84e3028f911be159c0",
+      "productionFile": "public/images/catalog/product-illustrations/profile-pipe-rectangular-60x30x3.webp",
+      "outputFile": "public/images/catalog/product-illustrations/profile-pipe-rectangular-60x30x3.webp",
+      "before": "output/image-edits/number-sign-removal/before/profile-pipe-rectangular-60x30x3.webp",
+      "metadata": "imports/profile-rectangular-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "profile-pipe-rectangular-60x40x1-5",
+      "name": "Труба профильная прямоугольная 60×40×1,5 мм",
+      "clean": "public/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "box": {
+        "left": 770,
+        "top": 222,
+        "width": 607,
+        "height": 112
+      },
+      "tailLeft": 881,
+      "shiftLeft": 106,
+      "inputPatchSha256": "164ddbada820698b02a67e333d5e7e87a8e6c8b723676b30e324be139eb7486e",
+      "productionFile": "public/images/catalog/product-illustrations/profile-pipe-rectangular-60x40x1-5.webp",
+      "outputFile": "public/images/catalog/product-illustrations/profile-pipe-rectangular-60x40x1-5.webp",
+      "before": "output/image-edits/number-sign-removal/before/profile-pipe-rectangular-60x40x1-5.webp",
+      "metadata": "imports/profile-rectangular-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "profile-pipe-rectangular-60x40x2",
+      "name": "Труба профильная прямоугольная 60×40×2 мм",
+      "clean": "public/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "box": {
+        "left": 770,
+        "top": 222,
+        "width": 553,
+        "height": 112
+      },
+      "tailLeft": 881,
+      "shiftLeft": 106,
+      "inputPatchSha256": "05645674570a263dae6dc1e28978746696e879d15f791a5cc71fe6b2e95133c5",
+      "productionFile": "public/images/catalog/product-illustrations/profile-pipe-rectangular-60x40x2.webp",
+      "outputFile": "public/images/catalog/product-illustrations/profile-pipe-rectangular-60x40x2.webp",
+      "before": "output/image-edits/number-sign-removal/before/profile-pipe-rectangular-60x40x2.webp",
+      "metadata": "imports/profile-rectangular-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "profile-pipe-rectangular-60x40x3",
+      "name": "Труба профильная прямоугольная 60×40×3 мм",
+      "clean": "public/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "box": {
+        "left": 770,
+        "top": 222,
+        "width": 555,
+        "height": 112
+      },
+      "tailLeft": 881,
+      "shiftLeft": 106,
+      "inputPatchSha256": "d4446370215d932e9966028ce52cb125d44522f1de4417cef835f1f899814443",
+      "productionFile": "public/images/catalog/product-illustrations/profile-pipe-rectangular-60x40x3.webp",
+      "outputFile": "public/images/catalog/product-illustrations/profile-pipe-rectangular-60x40x3.webp",
+      "before": "output/image-edits/number-sign-removal/before/profile-pipe-rectangular-60x40x3.webp",
+      "metadata": "imports/profile-rectangular-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "profile-pipe-rectangular-60x40x4",
+      "name": "Труба профильная прямоугольная 60×40×4 мм",
+      "clean": "public/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "box": {
+        "left": 770,
+        "top": 222,
+        "width": 559,
+        "height": 112
+      },
+      "tailLeft": 881,
+      "shiftLeft": 106,
+      "inputPatchSha256": "18b66a391f22e055050ea8da0cbd5081676723869e0bf34832517375dc249b4b",
+      "productionFile": "public/images/catalog/product-illustrations/profile-pipe-rectangular-60x40x4.webp",
+      "outputFile": "public/images/catalog/product-illustrations/profile-pipe-rectangular-60x40x4.webp",
+      "before": "output/image-edits/number-sign-removal/before/profile-pipe-rectangular-60x40x4.webp",
+      "metadata": "imports/profile-rectangular-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "profile-pipe-rectangular-80x40x2",
+      "name": "Труба профильная прямоугольная 80×40×2 мм",
+      "clean": "public/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "box": {
+        "left": 770,
+        "top": 222,
+        "width": 553,
+        "height": 112
+      },
+      "tailLeft": 881,
+      "shiftLeft": 106,
+      "inputPatchSha256": "437d71c4ffc46d78dd487b6acf84a6b11add4f52630412d61ba2f6b79b76b28e",
+      "productionFile": "public/images/catalog/product-illustrations/profile-pipe-rectangular-80x40x2.webp",
+      "outputFile": "public/images/catalog/product-illustrations/profile-pipe-rectangular-80x40x2.webp",
+      "before": "output/image-edits/number-sign-removal/before/profile-pipe-rectangular-80x40x2.webp",
+      "metadata": "imports/profile-rectangular-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "profile-pipe-rectangular-80x40x3",
+      "name": "Труба профильная прямоугольная 80×40×3 мм",
+      "clean": "public/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "box": {
+        "left": 770,
+        "top": 222,
+        "width": 555,
+        "height": 112
+      },
+      "tailLeft": 881,
+      "shiftLeft": 106,
+      "inputPatchSha256": "5b1231f73cc8c23751ecb1accb8da3d9d3bbdfcc1e1852974ae6c5e3c30ac1dc",
+      "productionFile": "public/images/catalog/product-illustrations/profile-pipe-rectangular-80x40x3.webp",
+      "outputFile": "public/images/catalog/product-illustrations/profile-pipe-rectangular-80x40x3.webp",
+      "before": "output/image-edits/number-sign-removal/before/profile-pipe-rectangular-80x40x3.webp",
+      "metadata": "imports/profile-rectangular-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "profile-pipe-rectangular-80x60x2",
+      "name": "Труба профильная прямоугольная 80×60×2 мм",
+      "clean": "public/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "box": {
+        "left": 770,
+        "top": 222,
+        "width": 550,
+        "height": 112
+      },
+      "tailLeft": 881,
+      "shiftLeft": 106,
+      "inputPatchSha256": "a3a854f8d7cd01f6f364e3757adcb3e8d82d119c2eb7eeae8ee421fcf9686683",
+      "productionFile": "public/images/catalog/product-illustrations/profile-pipe-rectangular-80x60x2.webp",
+      "outputFile": "public/images/catalog/product-illustrations/profile-pipe-rectangular-80x60x2.webp",
+      "before": "output/image-edits/number-sign-removal/before/profile-pipe-rectangular-80x60x2.webp",
+      "metadata": "imports/profile-rectangular-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "profile-pipe-rectangular-80x60x3",
+      "name": "Труба профильная прямоугольная 80×60×3 мм",
+      "clean": "public/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "box": {
+        "left": 770,
+        "top": 222,
+        "width": 552,
+        "height": 112
+      },
+      "tailLeft": 881,
+      "shiftLeft": 106,
+      "inputPatchSha256": "c72e6f8000b4e1f87e7ea31dddb07b0b02a27b3e8f3a7111a61cecb5edc7b005",
+      "productionFile": "public/images/catalog/product-illustrations/profile-pipe-rectangular-80x60x3.webp",
+      "outputFile": "public/images/catalog/product-illustrations/profile-pipe-rectangular-80x60x3.webp",
+      "before": "output/image-edits/number-sign-removal/before/profile-pipe-rectangular-80x60x3.webp",
+      "metadata": "imports/profile-rectangular-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "profile-pipe-rectangular-100x50x2",
+      "name": "Труба профильная прямоугольная 100×50×2 мм",
+      "clean": "public/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "box": {
+        "left": 770,
+        "top": 222,
+        "width": 584,
+        "height": 112
+      },
+      "tailLeft": 880,
+      "shiftLeft": 105,
+      "inputPatchSha256": "e28170b2d522dbf401055ddb51673eb4ec71df14385f3274e827510c46ee26fc",
+      "productionFile": "public/images/catalog/product-illustrations/profile-pipe-rectangular-100x50x2.webp",
+      "outputFile": "public/images/catalog/product-illustrations/profile-pipe-rectangular-100x50x2.webp",
+      "before": "output/image-edits/number-sign-removal/before/profile-pipe-rectangular-100x50x2.webp",
+      "metadata": "imports/profile-rectangular-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "profile-pipe-rectangular-100x50x3",
+      "name": "Труба профильная прямоугольная 100×50×3 мм",
+      "clean": "public/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "box": {
+        "left": 770,
+        "top": 222,
+        "width": 586,
+        "height": 112
+      },
+      "tailLeft": 880,
+      "shiftLeft": 105,
+      "inputPatchSha256": "6371212683e5791311dd48cd7216f548e2952064c50b9366bf89bb9cc1eeb9e9",
+      "productionFile": "public/images/catalog/product-illustrations/profile-pipe-rectangular-100x50x3.webp",
+      "outputFile": "public/images/catalog/product-illustrations/profile-pipe-rectangular-100x50x3.webp",
+      "before": "output/image-edits/number-sign-removal/before/profile-pipe-rectangular-100x50x3.webp",
+      "metadata": "imports/profile-rectangular-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "profile-pipe-rectangular-100x60x3",
+      "name": "Труба профильная прямоугольная 100×60×3 мм",
+      "clean": "public/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "box": {
+        "left": 770,
+        "top": 222,
+        "width": 588,
+        "height": 112
+      },
+      "tailLeft": 880,
+      "shiftLeft": 105,
+      "inputPatchSha256": "ce9ca257c14c8346b924db349498a9240b30453e5a9c484a2fe56d2e457557bc",
+      "productionFile": "public/images/catalog/product-illustrations/profile-pipe-rectangular-100x60x3.webp",
+      "outputFile": "public/images/catalog/product-illustrations/profile-pipe-rectangular-100x60x3.webp",
+      "before": "output/image-edits/number-sign-removal/before/profile-pipe-rectangular-100x60x3.webp",
+      "metadata": "imports/profile-rectangular-image-template/rendered.json",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-2181",
+      "name": "Лист оцинкованный 0,5 мм",
+      "clean": "public/images/catalog/listovoy-prokat/list_ocinkovanniy/list_ocinkovanniy_2400_1800_original.jpg",
+      "box": {
+        "left": 985,
+        "top": 112,
+        "width": 261,
+        "height": 106
+      },
+      "tailLeft": 1100,
+      "from": "Лист оцинкованный № 0,5",
+      "to": "Лист оцинкованный 0,5",
+      "shiftLeft": 109,
+      "inputPatchSha256": "5f450bff6f8d4d22dcf554259258535c892e10307b21018f3f346761366d45fc",
+      "productionFile": "public/images/catalog/listovoy-prokat/list_ocinkovanniy/list-ocinkovanniy-0.5-1250x2500-rozmet-2181.webp",
+      "outputFile": "public/images/catalog/listovoy-prokat/list_ocinkovanniy/list-ocinkovanniy-0.5-1250x2500-rozmet-2181.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2181.webp"
+    },
+    {
+      "id": "rozmet-2199",
+      "name": "Лист № 0,7 оцинкованный",
+      "clean": "public/images/catalog/listovoy-prokat/list_ocinkovanniy/list_ocinkovanniy_2400_1800_original.jpg",
+      "box": {
+        "left": 988,
+        "top": 110,
+        "width": 245,
+        "height": 108
+      },
+      "tailLeft": 1102,
+      "shiftLeft": 109,
+      "inputPatchSha256": "35027dd5212169ae3de56f72089657c60c6dca4d293fef3f0920d16435a6b77b",
+      "productionFile": "public/images/catalog/listovoy-prokat/list_ocinkovanniy/list-ocinkovanniy-0.7-1250x2500-rozmet-2199.webp",
+      "outputFile": "public/images/catalog/listovoy-prokat/list_ocinkovanniy/list-ocinkovanniy-0.7-1250x2500-rozmet-2199.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2199.webp",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-2184",
+      "name": "Лист № 1 оцинкованный",
+      "clean": "public/images/catalog/listovoy-prokat/list_ocinkovanniy/list_ocinkovanniy_2400_1800_original.jpg",
+      "box": {
+        "left": 988,
+        "top": 110,
+        "width": 160,
+        "height": 108
+      },
+      "tailLeft": 1103,
+      "shiftLeft": 110,
+      "inputPatchSha256": "8dfee127b3fe7fa022ac829f12d54ebb48c704501ba28cada660970a95c0e5eb",
+      "productionFile": "public/images/catalog/listovoy-prokat/list_ocinkovanniy/list-ocinkovanniy-1-1250x2500-rozmet-2184.webp",
+      "outputFile": "public/images/catalog/listovoy-prokat/list_ocinkovanniy/list-ocinkovanniy-1-1250x2500-rozmet-2184.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2184.webp",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-2182",
+      "name": "Лист холоднокатаный 0,5 мм",
+      "clean": "public/images/catalog/listovoy-prokat/list_holodnokataniy/list_holodnokataniy_2400_1800_original.jpg",
+      "box": {
+        "left": 1075,
+        "top": 112,
+        "width": 260,
+        "height": 106
+      },
+      "tailLeft": 1189,
+      "from": "Лист холоднокатаный № 0,5",
+      "to": "Лист холоднокатаный 0,5",
+      "shiftLeft": 109,
+      "inputPatchSha256": "27d04965791b610a1cf10de94c8d18a22b396c598d60df494d636a3f973c3b2e",
+      "productionFile": "public/images/catalog/listovoy-prokat/list_holodnokataniy/list-holodnokataniy-0.5-1250x2500-rozmet-2182.webp",
+      "outputFile": "public/images/catalog/listovoy-prokat/list_holodnokataniy/list-holodnokataniy-0.5-1250x2500-rozmet-2182.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2182.webp"
+    },
+    {
+      "id": "rozmet-2185",
+      "name": "Лист № 1",
+      "clean": "public/images/catalog/listovoy-prokat/list_holodnokataniy/list_holodnokataniy_2400_1800_original.jpg",
+      "box": {
+        "left": 1076,
+        "top": 110,
+        "width": 159,
+        "height": 108
+      },
+      "tailLeft": 1189,
+      "shiftLeft": 108,
+      "inputPatchSha256": "b9dc030b0b31a364dadb075d6edce05e1ba59cadf25bddccb047689b98dd0214",
+      "productionFile": "public/images/catalog/listovoy-prokat/list_holodnokataniy/list-holodnokataniy-1-1250x2500-rozmet-2185.webp",
+      "outputFile": "public/images/catalog/listovoy-prokat/list_holodnokataniy/list-holodnokataniy-1-1250x2500-rozmet-2185.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2185.webp",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-2186",
+      "name": "Лист горячекатаный 1,5 мм",
+      "clean": "public/images/catalog/listovoy-prokat/list_goriachekataniy/list_goriachekataniy_2400_1800_original.jpg",
+      "box": {
+        "left": 1007,
+        "top": 110,
+        "width": 232,
+        "height": 108
+      },
+      "tailLeft": 1118,
+      "from": "Лист горячекатаный № 1,5",
+      "to": "Лист горячекатаный 1,5",
+      "shiftLeft": 109,
+      "inputPatchSha256": "b3217f6488652685dd944abd376d428244aa1a506c84d82a91c0d28155fb289a",
+      "productionFile": "public/images/catalog/listovoy-prokat/list_goriachekataniy/list-goriachekataniy-1.5-1250x2500-rozmet-2186.webp",
+      "outputFile": "public/images/catalog/listovoy-prokat/list_goriachekataniy/list-goriachekataniy-1.5-1250x2500-rozmet-2186.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2186.webp"
+    },
+    {
+      "id": "rozmet-2187",
+      "name": "Лист металлический 2 мм",
+      "clean": "public/images/catalog/listovoy-prokat/list_goriachekataniy/list_goriachekataniy_2400_1800_original.jpg",
+      "box": {
+        "left": 1008,
+        "top": 110,
+        "width": 177,
+        "height": 108
+      },
+      "tailLeft": 1122,
+      "shiftLeft": 109,
+      "inputPatchSha256": "7f50626a946a2d4c99adcd65bca59da7958b3086a8dd81fc8c941b664c76e103",
+      "productionFile": "public/images/catalog/listovoy-prokat/list_goriachekataniy/list-goriachekataniy-2-1250x2500-rozmet-2187.webp",
+      "outputFile": "public/images/catalog/listovoy-prokat/list_goriachekataniy/list-goriachekataniy-2-1250x2500-rozmet-2187.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2187.webp",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-28951",
+      "name": "Лист металлический 3 мм ТУ",
+      "clean": "public/images/catalog/listovoy-prokat/list_goriachekataniy/list_goriachekataniy_2400_1800_original.jpg",
+      "box": {
+        "left": 1008,
+        "top": 110,
+        "width": 306,
+        "height": 108
+      },
+      "tailLeft": 1121,
+      "shiftLeft": 108,
+      "inputPatchSha256": "71dcefb27213d008b2a7c1b843525cb46e52cd8376bf66ecae950c75a9705ff4",
+      "productionFile": "public/images/catalog/listovoy-prokat/list_goriachekataniy/list-goriachekataniy-3-1250x2500-rozmet-28951.webp",
+      "outputFile": "public/images/catalog/listovoy-prokat/list_goriachekataniy/list-goriachekataniy-3-1250x2500-rozmet-28951.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-28951.webp",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-2188",
+      "name": "Лист металлический 3 мм ГОСТ",
+      "clean": "public/images/catalog/listovoy-prokat/list_goriachekataniy/list_goriachekataniy_2400_1800_original.jpg",
+      "box": {
+        "left": 1008,
+        "top": 110,
+        "width": 418,
+        "height": 108
+      },
+      "tailLeft": 1121,
+      "shiftLeft": 108,
+      "inputPatchSha256": "3c0c7483fb7a5e6a9a4bb85b1addf681367e429f766ac239c0e5d1beb5d0fa49",
+      "productionFile": "public/images/catalog/listovoy-prokat/list_goriachekataniy/list-goriachekataniy-3-1250x2500-rozmet-2188.webp",
+      "outputFile": "public/images/catalog/listovoy-prokat/list_goriachekataniy/list-goriachekataniy-3-1250x2500-rozmet-2188.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2188.webp",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-2190",
+      "name": "Лист металлический 4 мм",
+      "clean": "public/images/catalog/listovoy-prokat/list_goriachekataniy/list_goriachekataniy_2400_1800_original.jpg",
+      "box": {
+        "left": 1008,
+        "top": 110,
+        "width": 183,
+        "height": 108
+      },
+      "tailLeft": 1122,
+      "shiftLeft": 109,
+      "inputPatchSha256": "502219a6ac538a523111386035f151358d1d5192b79a86f28f80e593ae6c4465",
+      "productionFile": "public/images/catalog/listovoy-prokat/list_goriachekataniy/list-goriachekataniy-4-1500x6000-rozmet-2190.webp",
+      "outputFile": "public/images/catalog/listovoy-prokat/list_goriachekataniy/list-goriachekataniy-4-1500x6000-rozmet-2190.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2190.webp",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-2191",
+      "name": "Лист металлический 5 мм",
+      "clean": "public/images/catalog/listovoy-prokat/list_goriachekataniy/list_goriachekataniy_2400_1800_original.jpg",
+      "box": {
+        "left": 1008,
+        "top": 110,
+        "width": 177,
+        "height": 108
+      },
+      "tailLeft": 1121,
+      "shiftLeft": 108,
+      "inputPatchSha256": "4d394d4a722ff8b8cbb45a8f9aaeb320fe5c028a80efffd82350a3b3b81d4d95",
+      "productionFile": "public/images/catalog/listovoy-prokat/list_goriachekataniy/list-goriachekataniy-5-1500x6000-rozmet-2191.webp",
+      "outputFile": "public/images/catalog/listovoy-prokat/list_goriachekataniy/list-goriachekataniy-5-1500x6000-rozmet-2191.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2191.webp",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-2192",
+      "name": "Лист металлический 6 мм",
+      "clean": "public/images/catalog/listovoy-prokat/list_goriachekataniy/list_goriachekataniy_2400_1800_original.jpg",
+      "box": {
+        "left": 1008,
+        "top": 110,
+        "width": 179,
+        "height": 108
+      },
+      "tailLeft": 1121,
+      "shiftLeft": 108,
+      "inputPatchSha256": "f1b76b14705e964c397f92a3d4882b22a76ed59136ca2b201c57e0dc0fcbb768",
+      "productionFile": "public/images/catalog/listovoy-prokat/list_goriachekataniy/list-goriachekataniy-6-1500x6000-rozmet-2192.webp",
+      "outputFile": "public/images/catalog/listovoy-prokat/list_goriachekataniy/list-goriachekataniy-6-1500x6000-rozmet-2192.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2192.webp",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-2194",
+      "name": "Лист металлический 8 мм",
+      "clean": "public/images/catalog/listovoy-prokat/list_goriachekataniy/list_goriachekataniy_2400_1800_original.jpg",
+      "box": {
+        "left": 1008,
+        "top": 110,
+        "width": 178,
+        "height": 108
+      },
+      "tailLeft": 1121,
+      "shiftLeft": 108,
+      "inputPatchSha256": "d30a4cc8be6faffa1c6570e229e7809c091d27d9eed64949834d7faa6893e5ef",
+      "productionFile": "public/images/catalog/listovoy-prokat/list_goriachekataniy/list-goriachekataniy-8-1500x6000-rozmet-2194.webp",
+      "outputFile": "public/images/catalog/listovoy-prokat/list_goriachekataniy/list-goriachekataniy-8-1500x6000-rozmet-2194.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2194.webp",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-2195",
+      "name": "Лист металлический 10 мм",
+      "clean": "public/images/catalog/listovoy-prokat/list_goriachekataniy/list_goriachekataniy_2400_1800_original.jpg",
+      "box": {
+        "left": 1008,
+        "top": 110,
+        "width": 217,
+        "height": 108
+      },
+      "tailLeft": 1122,
+      "shiftLeft": 109,
+      "inputPatchSha256": "98ae6f5499796639953fe07af7b7fce101fa4b1fe81af35c9ac1673e58a62677",
+      "productionFile": "public/images/catalog/listovoy-prokat/list_goriachekataniy/list-goriachekataniy-10-1500x6000-rozmet-2195.webp",
+      "outputFile": "public/images/catalog/listovoy-prokat/list_goriachekataniy/list-goriachekataniy-10-1500x6000-rozmet-2195.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2195.webp",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-2196",
+      "name": "Лист металлический 12 мм",
+      "clean": "public/images/catalog/listovoy-prokat/list_goriachekataniy/list_goriachekataniy_2400_1800_original.jpg",
+      "box": {
+        "left": 1008,
+        "top": 110,
+        "width": 211,
+        "height": 108
+      },
+      "tailLeft": 1122,
+      "shiftLeft": 109,
+      "inputPatchSha256": "1c8ce6e120da36f3c2abc4895ef36086fe0e30e5748b0d09cace8592ba9e941e",
+      "productionFile": "public/images/catalog/listovoy-prokat/list_goriachekataniy/list-goriachekataniy-12-1500x6000-rozmet-2196.webp",
+      "outputFile": "public/images/catalog/listovoy-prokat/list_goriachekataniy/list-goriachekataniy-12-1500x6000-rozmet-2196.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2196.webp",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-2197",
+      "name": "Лист металлический 14 мм",
+      "clean": "public/images/catalog/listovoy-prokat/list_goriachekataniy/list_goriachekataniy_2400_1800_original.jpg",
+      "box": {
+        "left": 1008,
+        "top": 110,
+        "width": 217,
+        "height": 108
+      },
+      "tailLeft": 1122,
+      "shiftLeft": 109,
+      "inputPatchSha256": "c21245cddc6823dc7463663bda3fed7ec0195a8d2b5d2f86ee47b82eee993b71",
+      "productionFile": "public/images/catalog/listovoy-prokat/list_goriachekataniy/list-goriachekataniy-14-1500x6000-rozmet-2197.webp",
+      "outputFile": "public/images/catalog/listovoy-prokat/list_goriachekataniy/list-goriachekataniy-14-1500x6000-rozmet-2197.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2197.webp",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-2198",
+      "name": "Лист металлический 16 мм",
+      "clean": "public/images/catalog/listovoy-prokat/list_goriachekataniy/list_goriachekataniy_2400_1800_original.jpg",
+      "box": {
+        "left": 1008,
+        "top": 110,
+        "width": 214,
+        "height": 108
+      },
+      "tailLeft": 1122,
+      "shiftLeft": 109,
+      "inputPatchSha256": "06a0cafbf09a4d8177fb96888c2c53c0234e1aef104664196ff54216fca25704",
+      "productionFile": "public/images/catalog/listovoy-prokat/list_goriachekataniy/list-goriachekataniy-16-1500x6000-rozmet-2198.webp",
+      "outputFile": "public/images/catalog/listovoy-prokat/list_goriachekataniy/list-goriachekataniy-16-1500x6000-rozmet-2198.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2198.webp",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-2200",
+      "name": "Лист металлический 20 мм",
+      "clean": "public/images/catalog/listovoy-prokat/list_goriachekataniy/list_goriachekataniy_2400_1800_original.jpg",
+      "box": {
+        "left": 1008,
+        "top": 110,
+        "width": 232,
+        "height": 108
+      },
+      "tailLeft": 1121,
+      "shiftLeft": 108,
+      "inputPatchSha256": "e2e22b0211e9112cbb14d45f0559b0d07d8dc22c11001b02e3ccf5d159c90596",
+      "productionFile": "public/images/catalog/listovoy-prokat/list_goriachekataniy/list-goriachekataniy-20-1500x6000-rozmet-2200.webp",
+      "outputFile": "public/images/catalog/listovoy-prokat/list_goriachekataniy/list-goriachekataniy-20-1500x6000-rozmet-2200.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2200.webp",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-28952",
+      "name": "Лист рифлёный 3 мм ТУ",
+      "clean": "public/images/catalog/listovoy-prokat/list-refleniy/list_refleniy_2400_1800_original.jpg",
+      "box": {
+        "left": 347,
+        "top": 110,
+        "width": 774,
+        "height": 106
+      },
+      "tailLeft": 458,
+      "from": "Лист № 3 ТУ рифленый",
+      "to": "Лист 3 ТУ рифленый",
+      "shiftLeft": 109,
+      "inputPatchSha256": "1ab793f8693fac0c9761b08a73e0aa7ecf57dedec7550182c978facd8ebbe7a2",
+      "productionFile": "public/images/catalog/listovoy-prokat/list-refleniy/list_refleniy_2400_1800_marked.jpg",
+      "outputFile": "public/images/catalog/listovoy-prokat/list-refleniy/list-refleniy-3-1250x2500-rozmet-28952.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-28952.jpg"
+    },
+    {
+      "id": "rozmet-2201",
+      "name": "Лист № 3 Ф рифленый",
+      "clean": "public/images/catalog/listovoy-prokat/list-refleniy/list_refleniy_2400_1800_original.jpg",
+      "box": {
+        "left": 344,
+        "top": 110,
+        "width": 702,
+        "height": 108
+      },
+      "tailLeft": 455,
+      "shiftLeft": 106,
+      "inputPatchSha256": "d5ef462b166f2b78ce93221ee1cda0a71c800809a147c023f8a4302484c9ae9f",
+      "productionFile": "public/images/catalog/listovoy-prokat/list-refleniy/list-refleniy-3-1250x2500-rozmet-2201.webp",
+      "outputFile": "public/images/catalog/listovoy-prokat/list-refleniy/list-refleniy-3-1250x2500-rozmet-2201.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2201.webp",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-2202",
+      "name": "Лист № 4 рифленый",
+      "clean": "public/images/catalog/listovoy-prokat/list-refleniy/list_refleniy_2400_1800_original.jpg",
+      "box": {
+        "left": 344,
+        "top": 110,
+        "width": 618,
+        "height": 108
+      },
+      "tailLeft": 455,
+      "shiftLeft": 106,
+      "inputPatchSha256": "229cb637aadad1570a98b9c5526f96e9efbedb1e273279db567f6bb06d5b9828",
+      "productionFile": "public/images/catalog/listovoy-prokat/list-refleniy/list-refleniy-4-1500x6000-rozmet-2202.webp",
+      "outputFile": "public/images/catalog/listovoy-prokat/list-refleniy/list-refleniy-4-1500x6000-rozmet-2202.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2202.webp",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-2203",
+      "name": "Лист № 5 рифленый",
+      "clean": "public/images/catalog/listovoy-prokat/list-refleniy/list_refleniy_2400_1800_original.jpg",
+      "box": {
+        "left": 344,
+        "top": 110,
+        "width": 613,
+        "height": 108
+      },
+      "tailLeft": 455,
+      "shiftLeft": 106,
+      "inputPatchSha256": "20732f85167d93b6912ab5e40ea34a6561cd23b36b9e4bf74f0a03b586c7a4b0",
+      "productionFile": "public/images/catalog/listovoy-prokat/list-refleniy/list-refleniy-5-1500x6000-rozmet-2203.webp",
+      "outputFile": "public/images/catalog/listovoy-prokat/list-refleniy/list-refleniy-5-1500x6000-rozmet-2203.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2203.webp",
+      "kind": "rasterShift"
+    },
+    {
+      "id": "rozmet-2168",
+      "name": "Полоса № 20х4",
+      "kind": "genericTitle",
+      "from": "Полоса № 20х4",
+      "to": "Полоса 20х4",
+      "productionFile": "public/images/catalog/product-illustrations/rozmet-2168.webp",
+      "outputFile": "public/images/catalog/product-illustrations/rozmet-2168.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2168.webp"
+    },
+    {
+      "id": "rozmet-2169",
+      "name": "Полоса № 25х4",
+      "kind": "genericTitle",
+      "from": "Полоса № 25х4",
+      "to": "Полоса 25х4",
+      "productionFile": "public/images/catalog/product-illustrations/rozmet-2169.webp",
+      "outputFile": "public/images/catalog/product-illustrations/rozmet-2169.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2169.webp"
+    },
+    {
+      "id": "rozmet-2170",
+      "name": "Полоса № 30х4",
+      "kind": "genericTitle",
+      "from": "Полоса № 30х4",
+      "to": "Полоса 30х4",
+      "productionFile": "public/images/catalog/product-illustrations/rozmet-2170.webp",
+      "outputFile": "public/images/catalog/product-illustrations/rozmet-2170.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2170.webp"
+    },
+    {
+      "id": "rozmet-29037",
+      "name": "Полоса № 40х3",
+      "kind": "genericTitle",
+      "from": "Полоса № 40х3",
+      "to": "Полоса 40х3",
+      "productionFile": "public/images/catalog/product-illustrations/rozmet-29037.webp",
+      "outputFile": "public/images/catalog/product-illustrations/rozmet-29037.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-29037.webp"
+    },
+    {
+      "id": "rozmet-2171",
+      "name": "Полоса № 40х4",
+      "kind": "genericTitle",
+      "from": "Полоса № 40х4",
+      "to": "Полоса 40х4",
+      "productionFile": "public/images/catalog/product-illustrations/rozmet-2171.webp",
+      "outputFile": "public/images/catalog/product-illustrations/rozmet-2171.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2171.webp"
+    },
+    {
+      "id": "rozmet-28942",
+      "name": "Полоса № 40х5",
+      "kind": "genericTitle",
+      "from": "Полоса № 40х5",
+      "to": "Полоса 40х5",
+      "productionFile": "public/images/catalog/product-illustrations/rozmet-28942.webp",
+      "outputFile": "public/images/catalog/product-illustrations/rozmet-28942.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-28942.webp"
+    },
+    {
+      "id": "rozmet-2172",
+      "name": "Полоса № 50х4",
+      "kind": "genericTitle",
+      "from": "Полоса № 50х4",
+      "to": "Полоса 50х4",
+      "productionFile": "public/images/catalog/product-illustrations/rozmet-2172.webp",
+      "outputFile": "public/images/catalog/product-illustrations/rozmet-2172.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2172.webp"
+    },
+    {
+      "id": "rozmet-16727",
+      "name": "Полоса № 50х5",
+      "kind": "genericTitle",
+      "from": "Полоса № 50х5",
+      "to": "Полоса 50х5",
+      "productionFile": "public/images/catalog/product-illustrations/rozmet-16727.webp",
+      "outputFile": "public/images/catalog/product-illustrations/rozmet-16727.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-16727.webp"
+    },
+    {
+      "id": "rozmet-2173",
+      "name": "Полоса № 60х5",
+      "kind": "genericTitle",
+      "from": "Полоса № 60х5",
+      "to": "Полоса 60х5",
+      "productionFile": "public/images/catalog/product-illustrations/rozmet-2173.webp",
+      "outputFile": "public/images/catalog/product-illustrations/rozmet-2173.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2173.webp"
+    },
+    {
+      "id": "rozmet-2174",
+      "name": "Полоса № 60х6",
+      "kind": "genericTitle",
+      "from": "Полоса № 60х6",
+      "to": "Полоса 60х6",
+      "productionFile": "public/images/catalog/product-illustrations/rozmet-2174.webp",
+      "outputFile": "public/images/catalog/product-illustrations/rozmet-2174.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2174.webp"
+    },
+    {
+      "id": "rozmet-28974",
+      "name": "Полоса № 80х4",
+      "kind": "genericTitle",
+      "from": "Полоса № 80х4",
+      "to": "Полоса 80х4",
+      "productionFile": "public/images/catalog/product-illustrations/rozmet-28974.webp",
+      "outputFile": "public/images/catalog/product-illustrations/rozmet-28974.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-28974.webp"
+    },
+    {
+      "id": "rozmet-28975",
+      "name": "Полоса № 80х5",
+      "kind": "genericTitle",
+      "from": "Полоса № 80х5",
+      "to": "Полоса 80х5",
+      "productionFile": "public/images/catalog/product-illustrations/rozmet-28975.webp",
+      "outputFile": "public/images/catalog/product-illustrations/rozmet-28975.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-28975.webp"
+    },
+    {
+      "id": "rozmet-2175",
+      "name": "Полоса № 80х6",
+      "kind": "genericTitle",
+      "from": "Полоса № 80х6",
+      "to": "Полоса 80х6",
+      "productionFile": "public/images/catalog/product-illustrations/rozmet-2175.webp",
+      "outputFile": "public/images/catalog/product-illustrations/rozmet-2175.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2175.webp"
+    },
+    {
+      "id": "rozmet-19707",
+      "name": "Полоса № 80х8",
+      "kind": "genericTitle",
+      "from": "Полоса № 80х8",
+      "to": "Полоса 80х8",
+      "productionFile": "public/images/catalog/product-illustrations/rozmet-19707.webp",
+      "outputFile": "public/images/catalog/product-illustrations/rozmet-19707.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-19707.webp"
+    },
+    {
+      "id": "rozmet-19708",
+      "name": "Полоса № 80х10",
+      "kind": "genericTitle",
+      "from": "Полоса № 80х10",
+      "to": "Полоса 80х10",
+      "productionFile": "public/images/catalog/product-illustrations/rozmet-19708.webp",
+      "outputFile": "public/images/catalog/product-illustrations/rozmet-19708.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-19708.webp"
+    },
+    {
+      "id": "rozmet-12050",
+      "name": "Полоса № 100х4",
+      "kind": "genericTitle",
+      "from": "Полоса № 100х4",
+      "to": "Полоса 100х4",
+      "productionFile": "public/images/catalog/product-illustrations/rozmet-12050.webp",
+      "outputFile": "public/images/catalog/product-illustrations/rozmet-12050.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-12050.webp"
+    },
+    {
+      "id": "rozmet-2177",
+      "name": "Полоса № 100х8",
+      "kind": "genericTitle",
+      "from": "Полоса № 100х8",
+      "to": "Полоса 100х8",
+      "productionFile": "public/images/catalog/product-illustrations/rozmet-2177.webp",
+      "outputFile": "public/images/catalog/product-illustrations/rozmet-2177.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2177.webp"
+    },
+    {
+      "id": "rozmet-2176",
+      "name": "Полоса № 100х6",
+      "kind": "genericTitle",
+      "from": "Полоса № 100х6",
+      "to": "Полоса 100х6",
+      "productionFile": "public/images/catalog/product-illustrations/rozmet-2176.webp",
+      "outputFile": "public/images/catalog/product-illustrations/rozmet-2176.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2176.webp"
+    },
+    {
+      "id": "rozmet-2178",
+      "name": "Полоса № 100х10",
+      "kind": "genericTitle",
+      "from": "Полоса № 100х10",
+      "to": "Полоса 100х10",
+      "productionFile": "public/images/catalog/product-illustrations/rozmet-2178.webp",
+      "outputFile": "public/images/catalog/product-illustrations/rozmet-2178.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-2178.webp"
+    },
+    {
+      "id": "rozmet-15504",
+      "name": "Отвод стальной короткий шовный № 15",
+      "kind": "genericTitle",
+      "from": "Отвод стальной короткий шовный № 15",
+      "to": "Отвод стальной короткий шовный 15",
+      "productionFile": "public/images/catalog/product-illustrations/rozmet-15504.webp",
+      "outputFile": "public/images/catalog/product-illustrations/rozmet-15504.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-15504.webp"
+    },
+    {
+      "id": "rozmet-15505",
+      "name": "Отвод стальной короткий шовный № 20",
+      "kind": "genericTitle",
+      "from": "Отвод стальной короткий шовный № 20",
+      "to": "Отвод стальной короткий шовный 20",
+      "productionFile": "public/images/catalog/product-illustrations/rozmet-15505.webp",
+      "outputFile": "public/images/catalog/product-illustrations/rozmet-15505.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-15505.webp"
+    },
+    {
+      "id": "rozmet-15506",
+      "name": "Отвод стальной короткий шовный № 25",
+      "kind": "genericTitle",
+      "from": "Отвод стальной короткий шовный № 25",
+      "to": "Отвод стальной короткий шовный 25",
+      "productionFile": "public/images/catalog/product-illustrations/rozmet-15506.webp",
+      "outputFile": "public/images/catalog/product-illustrations/rozmet-15506.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-15506.webp"
+    },
+    {
+      "id": "rozmet-15507",
+      "name": "Отвод стальной короткий шовный №32",
+      "kind": "genericTitle",
+      "from": "Отвод стальной короткий шовный №32",
+      "to": "Отвод стальной короткий шовный 32",
+      "productionFile": "public/images/catalog/product-illustrations/rozmet-15507.webp",
+      "outputFile": "public/images/catalog/product-illustrations/rozmet-15507.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-15507.webp"
+    },
+    {
+      "id": "rozmet-21512",
+      "name": "Отвод стальной короткий шовный №38",
+      "kind": "genericTitle",
+      "from": "Отвод стальной короткий шовный №38",
+      "to": "Отвод стальной короткий шовный 38",
+      "productionFile": "public/images/catalog/product-illustrations/rozmet-21512.webp",
+      "outputFile": "public/images/catalog/product-illustrations/rozmet-21512.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-21512.webp"
+    },
+    {
+      "id": "rozmet-15508",
+      "name": "Отвод стальной короткий шовный № 40",
+      "kind": "genericTitle",
+      "from": "Отвод стальной короткий шовный № 40",
+      "to": "Отвод стальной короткий шовный 40",
+      "productionFile": "public/images/catalog/product-illustrations/rozmet-15508.webp",
+      "outputFile": "public/images/catalog/product-illustrations/rozmet-15508.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-15508.webp"
+    },
+    {
+      "id": "rozmet-15509",
+      "name": "Отвод стальной короткий шовный № 57",
+      "kind": "genericTitle",
+      "from": "Отвод стальной короткий шовный № 57",
+      "to": "Отвод стальной короткий шовный 57",
+      "productionFile": "public/images/catalog/product-illustrations/rozmet-15509.webp",
+      "outputFile": "public/images/catalog/product-illustrations/rozmet-15509.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-15509.webp"
+    },
+    {
+      "id": "rozmet-15510",
+      "name": "Отвод стальной короткий шовный № 76",
+      "kind": "genericTitle",
+      "from": "Отвод стальной короткий шовный № 76",
+      "to": "Отвод стальной короткий шовный 76",
+      "productionFile": "public/images/catalog/product-illustrations/rozmet-15510.webp",
+      "outputFile": "public/images/catalog/product-illustrations/rozmet-15510.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-15510.webp"
+    },
+    {
+      "id": "rozmet-15511",
+      "name": "Отвод стальной короткий шовный № 89",
+      "kind": "genericTitle",
+      "from": "Отвод стальной короткий шовный № 89",
+      "to": "Отвод стальной короткий шовный 89",
+      "productionFile": "public/images/catalog/product-illustrations/rozmet-15511.webp",
+      "outputFile": "public/images/catalog/product-illustrations/rozmet-15511.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-15511.webp"
+    },
+    {
+      "id": "rozmet-26568",
+      "name": "Отвод стальной короткий шовный № 102",
+      "kind": "genericTitle",
+      "from": "Отвод стальной короткий шовный № 102",
+      "to": "Отвод стальной короткий шовный 102",
+      "productionFile": "public/images/catalog/product-illustrations/rozmet-26568.webp",
+      "outputFile": "public/images/catalog/product-illustrations/rozmet-26568.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-26568.webp"
+    },
+    {
+      "id": "rozmet-15512",
+      "name": "Отвод стальной короткий шовный № 108",
+      "kind": "genericTitle",
+      "from": "Отвод стальной короткий шовный № 108",
+      "to": "Отвод стальной короткий шовный 108",
+      "productionFile": "public/images/catalog/product-illustrations/rozmet-15512.webp",
+      "outputFile": "public/images/catalog/product-illustrations/rozmet-15512.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-15512.webp"
+    },
+    {
+      "id": "rozmet-15513",
+      "name": "Отвод стальной шовный оцинкованный № 15",
+      "kind": "genericTitle",
+      "from": "Отвод стальной шовный оцинкованный № 15",
+      "to": "Отвод стальной шовный оцинкованный 15",
+      "productionFile": "public/images/catalog/product-illustrations/rozmet-15513.webp",
+      "outputFile": "public/images/catalog/product-illustrations/rozmet-15513.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-15513.webp"
+    },
+    {
+      "id": "rozmet-15514",
+      "name": "Отвод стальной шовный оцинкованный № 20",
+      "kind": "genericTitle",
+      "from": "Отвод стальной шовный оцинкованный № 20",
+      "to": "Отвод стальной шовный оцинкованный 20",
+      "productionFile": "public/images/catalog/product-illustrations/rozmet-15514.webp",
+      "outputFile": "public/images/catalog/product-illustrations/rozmet-15514.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-15514.webp"
+    },
+    {
+      "id": "rozmet-15515",
+      "name": "Отвод стальной шовный оцинкованный № 25",
+      "kind": "genericTitle",
+      "from": "Отвод стальной шовный оцинкованный № 25",
+      "to": "Отвод стальной шовный оцинкованный 25",
+      "productionFile": "public/images/catalog/product-illustrations/rozmet-15515.webp",
+      "outputFile": "public/images/catalog/product-illustrations/rozmet-15515.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-15515.webp"
+    },
+    {
+      "id": "rozmet-15516",
+      "name": "Отвод стальной шовный оцинкованный № 32",
+      "kind": "genericTitle",
+      "from": "Отвод стальной шовный оцинкованный № 32",
+      "to": "Отвод стальной шовный оцинкованный 32",
+      "productionFile": "public/images/catalog/product-illustrations/rozmet-15516.webp",
+      "outputFile": "public/images/catalog/product-illustrations/rozmet-15516.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-15516.webp"
+    },
+    {
+      "id": "rozmet-15517",
+      "name": "Отвод стальной шовный оцинкованный № 40",
+      "kind": "genericTitle",
+      "from": "Отвод стальной шовный оцинкованный № 40",
+      "to": "Отвод стальной шовный оцинкованный 40",
+      "productionFile": "public/images/catalog/product-illustrations/rozmet-15517.webp",
+      "outputFile": "public/images/catalog/product-illustrations/rozmet-15517.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-15517.webp"
+    },
+    {
+      "id": "rozmet-15518",
+      "name": "Отвод стальной шовный оцинкованный № 57",
+      "kind": "genericTitle",
+      "from": "Отвод стальной шовный оцинкованный № 57",
+      "to": "Отвод стальной шовный оцинкованный 57",
+      "productionFile": "public/images/catalog/product-illustrations/rozmet-15518.webp",
+      "outputFile": "public/images/catalog/product-illustrations/rozmet-15518.webp",
+      "before": "output/image-edits/number-sign-removal/before/rozmet-15518.webp"
+    }
+  ]
+}

@@ -73,7 +73,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "Швеллер № 5"
+          "text": "Швеллер 5"
         },
         {
           "key": "flangeWidth",
@@ -101,7 +101,7 @@
         }
       ],
       "sourceReference": "imports/shveller-image-template/reference-5.jpg",
-      "referenceUnmodified": true,
+      "referenceUnmodified": false,
       "changedLabels": [],
       "placements": [],
       "protectedPixelChanges": 0,
@@ -110,7 +110,17 @@
       "height": 1800,
       "format": "lossless WebP",
       "bytes": 1090612,
-      "sha256": "620a97a328be7f9a0d4b6b84f6308f5f99a6f5354313c9bcf09ea8d9377bffd5"
+      "sha256": "425677f8984157a7f81583c18567c9a634525adb2d712b9696ae5e154d0dde1b",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 524,
+          "top": 110,
+          "width": 177,
+          "height": 108
+        },
+        "shiftLeft": 109
+      }
     },
     {
       "id": "rozmet-2236",
@@ -127,7 +137,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "Швеллер № 6,5"
+          "text": "Швеллер 6,5"
         },
         {
           "key": "flangeWidth",
@@ -232,7 +242,17 @@
       "height": 1800,
       "format": "lossless WebP",
       "bytes": 1104022,
-      "sha256": "b3ef29862fbdd080dc279220ce2ecd58887e17560cd7e614eb0847e8b0f3c0ac"
+      "sha256": "cddb2ee606616af170437ae2360bace5f8c83cc37f8c513148359333beaffa4f",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 514,
+          "top": 110,
+          "width": 245,
+          "height": 108
+        },
+        "shiftLeft": 106
+      }
     },
     {
       "id": "rozmet-2237",
@@ -249,7 +269,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "Швеллер № 8"
+          "text": "Швеллер 8"
         },
         {
           "key": "flangeWidth",
@@ -364,7 +384,17 @@
       "height": 1800,
       "format": "lossless WebP",
       "bytes": 1102852,
-      "sha256": "cf61714fde0f8943cc378373f4c71aeed67a819f50e88a583a1b7fa1945b0745"
+      "sha256": "8a1b540797154b885f6f30b45d7dcc06563634d14aba80349e5a4fc13db56959",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 514,
+          "top": 110,
+          "width": 176,
+          "height": 108
+        },
+        "shiftLeft": 106
+      }
     },
     {
       "id": "rozmet-2238",
@@ -381,7 +411,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "Швеллер № 10"
+          "text": "Швеллер 10"
         },
         {
           "key": "flangeWidth",
@@ -496,7 +526,17 @@
       "height": 1800,
       "format": "lossless WebP",
       "bytes": 1104828,
-      "sha256": "656feaa38df186328242befc8f608ace6c3b29eb571e3141b7622e676a46fbc3"
+      "sha256": "c8d8b682f4baae1f0d68f7d9499f00b71432017b8dfeacf9f6dd4ba90a9be1fa",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 514,
+          "top": 110,
+          "width": 213,
+          "height": 108
+        },
+        "shiftLeft": 105
+      }
     },
     {
       "id": "rozmet-2239",
@@ -513,7 +553,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "Швеллер № 12"
+          "text": "Швеллер 12"
         },
         {
           "key": "flangeWidth",
@@ -628,7 +668,17 @@
       "height": 1800,
       "format": "lossless WebP",
       "bytes": 1103190,
-      "sha256": "f544d9b6940ff599a7f12a48f4549a6b9919faf193efd6e581b0bc40e89db398"
+      "sha256": "4d55b0590f91eb8e6135b35187523dd240f6b9516aa34f5cf860ee27797ac82b",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 514,
+          "top": 110,
+          "width": 207,
+          "height": 108
+        },
+        "shiftLeft": 105
+      }
     },
     {
       "id": "rozmet-2240",
@@ -645,7 +695,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "Швеллер № 14"
+          "text": "Швеллер 14"
         },
         {
           "key": "flangeWidth",
@@ -760,7 +810,17 @@
       "height": 1800,
       "format": "lossless WebP",
       "bytes": 1104000,
-      "sha256": "48e68719d3fd4d202872625cf6df8479a2c47a3c422b0bc2a1a47ac70b4a887e"
+      "sha256": "25edff3e8cadbff1a7d4811e5e264914128cde1c6340bd68d4592aa6c3a44a44",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 514,
+          "top": 110,
+          "width": 213,
+          "height": 108
+        },
+        "shiftLeft": 105
+      }
     },
     {
       "id": "rozmet-2241",
@@ -777,7 +837,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "Швеллер № 16"
+          "text": "Швеллер 16"
         },
         {
           "key": "flangeWidth",
@@ -892,7 +952,17 @@
       "height": 1800,
       "format": "lossless WebP",
       "bytes": 1104354,
-      "sha256": "edac2ae0ec95e26f78b6f2c1e4a9013b8db156b607b49e1ae5e451a0ba541ce0"
+      "sha256": "5f58193134d670aaa0fab48840168b9c9a603d6db9fe72b612a1aaddea6cdca0",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 514,
+          "top": 110,
+          "width": 210,
+          "height": 108
+        },
+        "shiftLeft": 105
+      }
     },
     {
       "id": "rozmet-2242",
@@ -909,7 +979,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "Швеллер № 18"
+          "text": "Швеллер 18"
         },
         {
           "key": "flangeWidth",
@@ -1024,7 +1094,17 @@
       "height": 1800,
       "format": "lossless WebP",
       "bytes": 1104556,
-      "sha256": "087a4a6f4b8c5b41a3584b42356b19b2fdf4b6de220ce89e277fb78e4d7e2fc4"
+      "sha256": "ad1ab80ee1513bf79b27ed85c079bc82ea678b82d420142fde9f00d879ef7a84",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 514,
+          "top": 110,
+          "width": 209,
+          "height": 108
+        },
+        "shiftLeft": 105
+      }
     },
     {
       "id": "rozmet-2243",
@@ -1041,7 +1121,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "Швеллер № 20"
+          "text": "Швеллер 20"
         },
         {
           "key": "flangeWidth",
@@ -1156,7 +1236,17 @@
       "height": 1800,
       "format": "lossless WebP",
       "bytes": 1106958,
-      "sha256": "801f7148d7c8fa0214dcab06381919feaa892d1f502ea337fcb46ac98c88f937"
+      "sha256": "ab0dbddffdf1f6f21b47c570cf168d5dddaf970939db64c05fad69e66bc77292",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 514,
+          "top": 110,
+          "width": 230,
+          "height": 108
+        },
+        "shiftLeft": 106
+      }
     },
     {
       "id": "rozmet-2244",
@@ -1173,7 +1263,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "Швеллер № 22"
+          "text": "Швеллер 22"
         },
         {
           "key": "flangeWidth",
@@ -1288,7 +1378,17 @@
       "height": 1800,
       "format": "lossless WebP",
       "bytes": 1104682,
-      "sha256": "d1d8a5efd33650b5f0660bd956a65b5b972bc6c0758e2b1288e4bd0180923ad2"
+      "sha256": "0650dace6f36bf19da41ea789beb93dc7ca70bd4fa402624f0882a06b7b011c4",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 514,
+          "top": 110,
+          "width": 224,
+          "height": 108
+        },
+        "shiftLeft": 106
+      }
     },
     {
       "id": "rozmet-2245",
@@ -1305,7 +1405,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "Швеллер № 24"
+          "text": "Швеллер 24"
         },
         {
           "key": "flangeWidth",
@@ -1420,7 +1520,17 @@
       "height": 1800,
       "format": "lossless WebP",
       "bytes": 1106174,
-      "sha256": "b12ae96a6b03587eea34426a6bf49f3787a9bc9026184f8a976aeffe25063e49"
+      "sha256": "226d8d5231bfdf8c8800acdedea93901415734530e0faa20cad4330f8c51c180",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 514,
+          "top": 110,
+          "width": 229,
+          "height": 108
+        },
+        "shiftLeft": 106
+      }
     },
     {
       "id": "rozmet-2246",
@@ -1437,7 +1547,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "Швеллер № 27"
+          "text": "Швеллер 27"
         },
         {
           "key": "flangeWidth",
@@ -1552,7 +1662,17 @@
       "height": 1800,
       "format": "lossless WebP",
       "bytes": 1104610,
-      "sha256": "7b9a394e071229eb7ed197889ad62d63032014e4e844121c13c090dba3e618d5"
+      "sha256": "bf82778f8f79056fa8c54b213d655f4a34da94d75407b12fe8c11cde2e633ad9",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 514,
+          "top": 110,
+          "width": 222,
+          "height": 108
+        },
+        "shiftLeft": 106
+      }
     },
     {
       "id": "rozmet-2247",
@@ -1569,7 +1689,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "Швеллер № 30"
+          "text": "Швеллер 30"
         },
         {
           "key": "flangeWidth",
@@ -1684,7 +1804,17 @@
       "height": 1800,
       "format": "lossless WebP",
       "bytes": 1107690,
-      "sha256": "d95a8eb119b24e496b5572cc1fe21fd317c0460824b9109e4ca01f2b0e59f4de"
+      "sha256": "c5064643516669b5ff4dbe4c4c66a188aa52250d4643e90b54b04e0c146b2a0a",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 514,
+          "top": 110,
+          "width": 232,
+          "height": 108
+        },
+        "shiftLeft": 106
+      }
     },
     {
       "id": "rozmet-2248",
@@ -1701,7 +1831,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "Швеллер № 40"
+          "text": "Швеллер 40"
         },
         {
           "key": "flangeWidth",
@@ -1816,7 +1946,17 @@
       "height": 1800,
       "format": "lossless WebP",
       "bytes": 1103520,
-      "sha256": "bdd2a179d52ea7d7dc89516580d2bdfa61cafd870135687403139b17c6e45e16"
+      "sha256": "9a14eb4ee2be8897fd622463da3827961debd53412a09f5a0b749db82905e4dc",
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 514,
+          "top": 110,
+          "width": 235,
+          "height": 108
+        },
+        "shiftLeft": 106
+      }
     }
   ]
 }

@@ -4,6 +4,7 @@ import {fileURLToPath} from 'node:url';
 import {createHash} from 'node:crypto';
 import assert from 'node:assert/strict';
 import {readProjectData} from './project-data.mjs';
+import {numberSignRemovalTargets, removeImageNumberSign} from './image-number-sign.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 process.chdir(root);
@@ -120,10 +121,16 @@ for (const product of products) {
       {input: svg(`<g stroke="#59636F" stroke-width="4" fill="none">${lines.join('')}</g>`), left: 0, top: 0}, ...layers,
     ]).png().toBuffer();
   }
-  const image = await sharp(renderedReference).webp({lossless: true, effort: 6}).toBuffer();
+  const image = await removeImageNumberSign(sharp,
+    await sharp(renderedReference).webp({lossless: true, effort: 6}).toBuffer(), product.id);
+  const headingCorrection = numberSignRemovalTargets.find(({id}) => id === product.id);
   const mask = Buffer.alloc(WIDTH * HEIGHT);
   for (const {key} of changed) {
     const box = patches[key];
+    for (let y = box.top; y < box.top + box.height; y++) mask.fill(1, y * WIDTH + box.left, y * WIDTH + box.left + box.width);
+  }
+  if (headingCorrection) {
+    const box = headingCorrection.box;
     for (let y = box.top; y < box.top + box.height; y++) mask.fill(1, y * WIDTH + box.left, y * WIDTH + box.left + box.width);
   }
   const renderedPixels = await sharp(image).removeAlpha().raw().toBuffer();
@@ -138,6 +145,7 @@ for (const product of products) {
     photoUrl: photoPath.replace(/^public/, ''), signature: productIllustrationSignature(product),
     labels: labels.map(({key, text}) => ({key, text})), changedLabels: changed.map(label => label.key),
     placements, protectedPixelChanges, output, width: WIDTH, height: HEIGHT,
+    ...(headingCorrection ? {headingCorrection: {removed: '№', box: headingCorrection.box, shiftLeft: headingCorrection.shiftLeft}} : {}),
     sha256: createHash('sha256').update(image).digest('hex')});
   console.log(`${product.id}: ${output}; protectedPixelChanges=${protectedPixelChanges}`);
 }

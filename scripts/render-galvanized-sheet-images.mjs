@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {readProjectData} from './project-data.mjs';
+import {removeImageNumberSign} from './image-number-sign.mjs';
 
 const directory = 'public/images/catalog/listovoy-prokat/list_ocinkovanniy';
 const temporaryDirectory = path.resolve('.tmp/galvanized-sheet-catalog');
@@ -84,7 +85,7 @@ for (const product of sheets) {
     throw new Error(`${product.id}: pixels changed outside label patches at ${pixel % width}, ${Math.floor(pixel / width)} (${expectedPixels[offset]} → ${pixels[offset]})`);
   }
   const file = `${directory}/list-ocinkovanniy-${values.thickness.replace(',', '.')}-${values.width}x${values.length}-${product.id}.webp`;
-  outputs.push({product, file, image});
+  outputs.push({product, file, image: await removeImageNumberSign(sharp, image, product.id)});
 }
 
 for (const {file, image} of outputs) {
