@@ -8,7 +8,7 @@ const channelCoverDirectory = "/images/catalog/shveller/cover";
 const angleCoverDirectory = "/images/catalog/ugolok/cover";
 const squareCoverDirectory = "/images/catalog/kvadrat/cover";
 const rebarCoverDirectory = "/images/catalog/armatura/cover";
-const profileTubeCoverDirectory = "/images/catalog/truby-profilnye/cover";
+const profileTubeCoverDirectory = "/images/catalog/truba-profilnia/cover";
 const roundTubeCoverDirectory = "/images/catalog/truba-kruglaya/cover";
 const roofingCoverDirectory = "/images/catalog/profnastil/cover";
 const meshCoverDirectory = "/images/catalog/setka-metallicheskaya/cover";
@@ -54,7 +54,7 @@ export const catalogCoverGalleries: Partial<Record<string, {cover?: string; addi
     ],
   },
   "cat-trp": {
-    cover: "/images/catalog/truby-profilnye/trubi-main.jpg",
+    cover: "/images/catalog/truba-profilnia/truba-main.jpg",
     additional: [
       `${profileTubeCoverDirectory}/robmetalstal-square-warehouse.webp`,
       `${profileTubeCoverDirectory}/marketstal-rectangular-bundle.jpg`,

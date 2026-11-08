@@ -67,8 +67,8 @@ SKU. See [photo sources](product-illustration-sources.md). The table thumbnail
 and the product viewer both show the annotated 2400 × 1800 WebP,
 with native zoom and pan. The approved sheet, channel, angle and square sets
 retain their separate production images and renderers.
-The owner's square profile-pipe template also has a dedicated renderer; the
-generic script excludes `type-cat-trp-sub-1`.
+The owner's square and rectangular profile-pipe templates also have dedicated
+renderers; the generic script excludes `type-cat-trp-sub-1` and `type-cat-trp-sub-2`.
 
 Run `node --import tsx scripts/render-product-illustrations.mjs <product-id>` to
 generate previews under `.tmp/product-illustrations/`. After visual review, run
@@ -88,7 +88,7 @@ Profile-pipe reference masses and their exact source pages are documented in
 ### Square profile-pipe illustrations
 
 The 28 parameterized square pipes use the owner's clean and marked photographs
-under `public/images/catalog/truby-profilnye/trubi_kvadratnie/`. The source files
+under `public/images/catalog/truba-profilnia/truba_kvadratnaya/`. The source files
 are retained. `scripts/render-profile-square-images.mjs` replaces only variable
 numeric labels on the 2400 × 1800 marked reference, using clean-photo patches
 and the confirmed catalog dimensions, wall thickness, length and theoretical
@@ -103,6 +103,30 @@ After visual review, generate with `--write` and refresh image versions. See the
 `imports/profile-square-image-template/rendered.json` for patch geometry, exact
 labels, typography and protected-pixel checks. This renderer leaves rectangular
 pipe images unchanged.
+
+### Rectangular profile-pipe illustrations
+
+The 23 parameterized rectangular pipes use the owner's clean original and marked
+reference under `public/images/catalog/truba-profilnia/truba_priamougolnaya/`.
+`scripts/render-profile-rectangular-images.mjs` follows the square-pipe lossless
+patch workflow: confirmed catalog values replace only variable labels, and the
+supplied heading's leftover word “квадратная” is corrected to “прямоугольная”.
+The tube photograph, cut face, inner walls, arrows, shadow and reflection outside
+those patches remain exact. Outputs are 2400 × 1800 lossless WebP at the existing
+product URLs, merged into `data/product-illustrations.json`.
+
+Preview `profile-pipe-rectangular-100x60x3` with `--preview`, review the native
+details, then run `--write` and refresh image versions. See the
+[template notes](../imports/profile-rectangular-image-template/README.md) and
+`imports/profile-rectangular-image-template/rendered.json` for the exact sources,
+labels, typography and pixel-preservation evidence.
+
+The owner-renamed image directory is `public/images/catalog/truba-profilnia/`:
+the category title photo is `truba-main.jpg`, family photos are
+`truba-kvadratnaya.jpg` and `truba-priamougolnaya.jpg`, square templates are in
+`truba_kvadratnaya/`, rectangular templates in `truba_priamougolnaya/`, and title
+gallery photos in `cover/`. Image references use these names; public catalog page
+slugs retain `truby-profilnye`.
 
 ## Historical supplier mapping
 

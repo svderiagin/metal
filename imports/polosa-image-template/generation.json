@@ -1,0 +1,42 @@
+{
+  "sourcePage": "https://e-materials.pl/products/plaskownik-stalowy-40x4-mm-goracowalcowany-s235jrh",
+  "sourceUrl": "https://e-materials.pl/cdn/shop/files/plaskownik-stalowy-40x4-mm-goracowalcowany-s235JRH.jpg?v=1717765544",
+  "source": "imports/polosa-image-template/p02-e-materials-original.jpg",
+  "sourceSha256": "06272aba865a16be98408f167c7aeb8cc9a3ba84c6dc1354e4cd60b5c250ec96",
+  "sourceDimensions": {
+    "width": 2000,
+    "height": 2000
+  },
+  "transformedPhotograph": {
+    "horizontalMirror": true,
+    "proportionalResize": [
+      1400,
+      1400
+    ],
+    "crop": {
+      "left": 0,
+      "top": 250,
+      "width": 1400,
+      "height": 1150
+    },
+    "placement": {
+      "left": 600,
+      "top": 0
+    }
+  },
+  "method": "Built-in imagegen for background extension only; original transformed photograph copied over its entire rectangle. Seam corrections confined to added left and bottom background. No text or measurements.",
+  "protectedPixels": 1610000,
+  "protectedPixelChanges": 0,
+  "master": "imports/polosa-image-template/polosa_2000_1500_original.png",
+  "masterDimensions": {
+    "width": 2000,
+    "height": 1500
+  },
+  "delivered": "public/images/catalog/polosa/polosa_1448_1086_original.png",
+  "deliveredDimensions": {
+    "width": 1448,
+    "height": 1086
+  },
+  "aspectRatio": "4:3",
+  "productTableReplacement": false
+}

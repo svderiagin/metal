@@ -41,7 +41,7 @@ export default async function CategoryPage({params}: Props) {
   const productTypes = getProductTypesByCategoryId(category.id);
   const variants = getProductVariantsByCategoryId(category.id);
   const mainImageUrl = category.id === "cat-trp"
-    ? "/images/catalog/truby-profilnye/trubi-main.jpg"
+    ? "/images/catalog/truba-profilnia/truba-main.jpg"
     : category.imageUrl;
   const coverImages = getCatalogCoverImages(category.id,
     category.id === "cat-pnf" || mainImageUrl.endsWith(".svg") ? "" : mainImageUrl);

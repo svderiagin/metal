@@ -2,8 +2,8 @@
 
 Эталон владельца от 07.11.2026:
 
-- чистая фотография: `public/images/catalog/truby-profilnye/trubi_kvadratnie/truba_kvadratnaya_1448_1086_original.jpg` (1448 × 1086);
-- образец разметки: `public/images/catalog/truby-profilnye/trubi_kvadratnie/truba_kvadratnaya_2400_1800_marked.jpg` (2400 × 1800).
+- чистая фотография: `public/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg` (1448 × 1086);
+- образец разметки: `public/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_2400_1800_marked.jpg` (2400 × 1800).
 
 Оба исходника сохраняются. `scripts/render-profile-square-images.mjs` готовит 28 изображений 4:3 в lossless WebP. Основа — размеченный эталон; только изменяемые числовые подписи заменяются фрагментами чистой фотографии и текстом. Фотография за пределами этих областей, постоянные части заголовка, подписи строк, стрелки и отражение остаются попиксельно неизменными. Толщина 1,5 мм в эталоне указана корректно.
 

@@ -40,7 +40,7 @@
       "slug": "truby-profilnye",
       "shortDescription": "Профильные трубы с некруглым сечением. Сопоставляйте обе стороны профиля, толщину стенки, марку стали, стандарт и длину.",
       "description": "Стальные профильные трубы квадратного и прямоугольного сечения для изготовления каркасов, навесов, гаражей, ворот и ограждений. При выборе учитывают размеры профиля, толщину стенки и нагрузки на конструкцию.",
-      "imageUrl": "/images/catalog/truby-profilnye/truby-kvadratnie.jpg"
+      "imageUrl": "/images/catalog/truba-profilnia/truba-kvadratnaya.jpg"
     },
     {
       "id": "cat-trk",
@@ -6551,7 +6551,7 @@
       "inStock": true,
       "featured": false,
       "imageUrls": [
-        "/images/catalog/truby-profilnye/truby-kvadratnie.jpg"
+        "/images/catalog/truba-profilnia/truba-kvadratnaya.jpg"
       ],
       "attributes": [
         {
@@ -6626,7 +6626,7 @@
       "inStock": true,
       "featured": false,
       "imageUrls": [
-        "/images/catalog/truby-profilnye/truby-kvadratnie.jpg"
+        "/images/catalog/truba-profilnia/truba-kvadratnaya.jpg"
       ],
       "attributes": [
         {
@@ -6701,7 +6701,7 @@
       "inStock": true,
       "featured": false,
       "imageUrls": [
-        "/images/catalog/truby-profilnye/truby-priamougolnie.jpg"
+        "/images/catalog/truba-profilnia/truba-priamougolnaya.jpg"
       ],
       "attributes": [
         {
@@ -6776,7 +6776,7 @@
       "inStock": true,
       "featured": false,
       "imageUrls": [
-        "/images/catalog/truby-profilnye/truby-priamougolnie.jpg"
+        "/images/catalog/truba-profilnia/truba-priamougolnaya.jpg"
       ],
       "attributes": [
         {
@@ -17590,7 +17590,7 @@
       "slug": "truba-profilnaya-kvadratnaya",
       "shortDescription": "Квадратные стальные трубы для стоек, опор, каркасов, ворот и ограждений. Удобны для сборки металлоконструкций и крепления обшивки.",
       "description": "Квадратные профильные трубы применяются для изготовления стоек, каркасов навесов, гаражей, ворот и ограждений.\n\nОсновные параметры выбора — размер сечения, толщина стенки и длина. Для несущих конструкций профиль подбирают по расчётным нагрузкам.\n\nСортамент — ГОСТ 8639-82.",
-      "imageUrl": "/images/catalog/truby-profilnye/truby-kvadratnie.jpg"
+      "imageUrl": "/images/catalog/truba-profilnia/truba-kvadratnaya.jpg"
     },
     {
       "id": "type-cat-trp-sub-2",
@@ -17602,7 +17602,7 @@
       "slug": "truba-profilnaya-pryamougolnaya",
       "shortDescription": "Прямоугольные стальные трубы для рам, поперечин, обрешётки и каркасов навесов и гаражей. Подходят для конструкций, где важна жёсткость в определённом направлении.",
       "description": "Прямоугольные профильные трубы используются для изготовления рам, поперечин, каркасов навесов, гаражей и хозяйственных построек.\n\nПри выборе учитывают размеры сечения, толщину стенки и длину. Для несущих элементов важны расчётные нагрузки и ориентация профиля.\n\nСортамент — ГОСТ 8645-68.",
-      "imageUrl": "/images/catalog/truby-profilnye/truby-priamougolnie.jpg"
+      "imageUrl": "/images/catalog/truba-profilnia/truba-priamougolnaya.jpg"
     },
     {
       "id": "type-cat-bal-sub-4",
@@ -17691,7 +17691,7 @@
   ],
   "imagesSha256": {
     "/images/catalog/armatura.jpg": "13a9ec65a86f31aa784e3ef0df1a76a3ae994edf256b0e04eeb932320a0d464c",
-    "/images/catalog/truby-profilnye/truby-kvadratnie.jpg": "31231c6e4efe0ad19dcf0260628ff1c75058b4a885a147c66accec89a082e504",
+    "/images/catalog/truba-profilnia/truba-kvadratnaya.jpg": "31231c6e4efe0ad19dcf0260628ff1c75058b4a885a147c66accec89a082e504",
     "/images/catalog/truba-kruglaya/truba-category title.jpg": "a7d7d91d627449f8df111928fc28e7b4093f96199b361aa3eac7050c7ab530b9",
     "/images/catalog/profnastil/profnastil_c8.jpg": "af34af341d05a8569474b1369a9ae2625f96d3d5653157d0e1cb99ffaa77aa05",
     "/images/catalog/setka-metallicheskaya/setka-main.jpg": "48d3a83d3092b32627c6bf1d45d5e31dc5c1f5571789e995895f63dec4f6aa2b",
@@ -17704,7 +17704,7 @@
     "/images/catalog/setka-metallicheskaya/setka-svarnaya-rulony.jpg": "df1666208fa57b6ede3d6494fa4a35d785347fe4a317e9e09b20c0f8ee6cbfd8",
     "/images/catalog/setka-metallicheskaya/setka-svarnaya-karty.jpg": "a7e1d3a3f9309ee33ac2e294400eb2764f8efb06edc16446901395234d9f9e40",
     "/images/catalog/truba-kruglaya/truba-elektrosvarnaya.jpg": "18f9a81cb0da056a01e6f7950a0c2b10f95079456976639d2a74a1f3a6f47dfe",
-    "/images/catalog/truby-profilnye/truby-priamougolnie.jpg": "86f847182571125c9bcc0bfc69d8378134306dcac1765d5e799f28a674c668fc",
+    "/images/catalog/truba-profilnia/truba-priamougolnaya.jpg": "86f847182571125c9bcc0bfc69d8378134306dcac1765d5e799f28a674c668fc",
     "/images/catalog/truba-kruglaya/truba-vodogazoprovodnaya.jpg": "58cb5854753d8c45a5bcdcf770356e7149c13752cb2281893a493cc2f7e1e336",
     "/images/catalog/truba-kruglaya/truba-elektrosvarnaya-cink.jpg": "46b8e3178aea52352b038eb7dd148dc4c885131a4a689ccdc0663e4da63607c5",
     "/images/catalog/truba-kruglaya/truba-vodogazoprovodnaya-cink.jpg": "798e31909fb4b7a46dcb0288d288389f02aa16c9dda76409bbcb14fdda66efa7",

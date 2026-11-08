@@ -21,8 +21,8 @@ const sources = JSON.parse(await fs.readFile("data/product-illustration-sources.
 const protectedCategories = new Set([
   "rozmet-cat-shveller", "rozmet-cat-ugolok", "rozmet-cat-kvadrat", "rozmet-cat-listovoy-prokat",
 ]);
-// Owner-approved square-pipe template has a separate lossless label renderer.
-const protectedProductTypes = new Set(["type-cat-trp-sub-1"]);
+// Owner-approved profile-pipe templates have separate lossless label renderers.
+const protectedProductTypes = new Set(["type-cat-trp-sub-1", "type-cat-trp-sub-2"]);
 const width = 2400;
 const height = 1800;
 const textColor = "#41464D";

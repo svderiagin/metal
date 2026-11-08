@@ -1,0 +1,2083 @@
+{
+  "renderer": "scripts/render-profile-rectangular-images.mjs",
+  "reference": "public/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_2400_1800_marked.jpg",
+  "cleanPhoto": "public/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+  "typography": {
+    "family": "Inter",
+    "fontFile": "imports/shveller-image-template/fonts/Inter-variable.ttf",
+    "backend": "fontconfig",
+    "text": "#41464D",
+    "lines": "#59636F"
+  },
+  "patches": {
+    "title": {
+      "left": 110,
+      "top": 222,
+      "width": 1580,
+      "height": 112
+    },
+    "height": {
+      "left": 765,
+      "top": 910,
+      "width": 255,
+      "height": 100
+    },
+    "width": {
+      "left": 1190,
+      "top": 1408,
+      "width": 320,
+      "height": 90
+    },
+    "thickness": {
+      "left": 1774,
+      "top": 1056,
+      "width": 300,
+      "height": 124
+    },
+    "length": {
+      "left": 590,
+      "top": 1550,
+      "width": 460,
+      "height": 70
+    },
+    "mass": {
+      "left": 590,
+      "top": 1620,
+      "width": 500,
+      "height": 75
+    }
+  },
+  "method": "Owner marked reference; clean photograph patches and deterministic labels from confirmed public catalog parameters. Lossless WebP; no generative editing.",
+  "illustration": "Shared family photograph. Nominal dimensions are labels, not scaled manufacturing geometry.",
+  "records": [
+    {
+      "id": "profile-pipe-rectangular-30x20x2",
+      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-rectangular-30x20x2.webp",
+      "photoUrl": "/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "signature": "4df507f2",
+      "labels": [
+        {
+          "key": "title",
+          "text": "прямоугольная № 30 x 20 x 2"
+        },
+        {
+          "key": "height",
+          "text": "20 мм"
+        },
+        {
+          "key": "width",
+          "text": "30 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "2 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "1,39 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "прямоугольная № 30 x 20 x 2",
+          "size": 84,
+          "weight": 700,
+          "left": 132,
+          "top": 237,
+          "width": 1172,
+          "height": 79
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-30x20x2.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "d1720ba119bba57d994bc68dec1239c111bc6e449b9167c0156f9528a36461a0"
+    },
+    {
+      "id": "profile-pipe-rectangular-40x20x1-5",
+      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-rectangular-40x20x1-5.webp",
+      "photoUrl": "/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "signature": "5acb2369",
+      "labels": [
+        {
+          "key": "title",
+          "text": "прямоугольная № 40 x 20 x 1,5"
+        },
+        {
+          "key": "height",
+          "text": "20 мм"
+        },
+        {
+          "key": "width",
+          "text": "40 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "1,5 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "1,31 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "width",
+        "thickness",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "прямоугольная № 40 x 20 x 1,5",
+          "size": 84,
+          "weight": 700,
+          "left": 132,
+          "top": 237,
+          "width": 1230,
+          "height": 79
+        },
+        {
+          "key": "width",
+          "text": "40 мм",
+          "size": 56,
+          "center": 1344,
+          "top": 1425,
+          "left": 1264,
+          "width": 160,
+          "height": 43
+        },
+        {
+          "key": "thickness",
+          "text": "1,5 мм",
+          "size": 56,
+          "left": 1794,
+          "top": 1082,
+          "width": 155,
+          "height": 49
+        },
+        {
+          "key": "mass",
+          "text": "1,31 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 608,
+          "top": 1634,
+          "width": 171,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-40x20x1-5.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "7fef6bf2d977d25f2f3b807725e85e720eb121bb11fcdb80a4d49eb93a42d333"
+    },
+    {
+      "id": "profile-pipe-rectangular-40x20x2",
+      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-rectangular-40x20x2.webp",
+      "photoUrl": "/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "signature": "e8b7c242",
+      "labels": [
+        {
+          "key": "title",
+          "text": "прямоугольная № 40 x 20 x 2"
+        },
+        {
+          "key": "height",
+          "text": "20 мм"
+        },
+        {
+          "key": "width",
+          "text": "40 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "2 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "1,7 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "width",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "прямоугольная № 40 x 20 x 2",
+          "size": 84,
+          "weight": 700,
+          "left": 132,
+          "top": 237,
+          "width": 1175,
+          "height": 79
+        },
+        {
+          "key": "width",
+          "text": "40 мм",
+          "size": 56,
+          "center": 1344,
+          "top": 1425,
+          "left": 1264,
+          "width": 160,
+          "height": 43
+        },
+        {
+          "key": "mass",
+          "text": "1,7 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 608,
+          "top": 1634,
+          "width": 150,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-40x20x2.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "6eac5131efeee68b384828aacb62946bcd16a1f7db183f1a9123003154437967"
+    },
+    {
+      "id": "profile-pipe-rectangular-40x20x3",
+      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-rectangular-40x20x3.webp",
+      "photoUrl": "/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "signature": "385dcd34",
+      "labels": [
+        {
+          "key": "title",
+          "text": "прямоугольная № 40 x 20 x 3"
+        },
+        {
+          "key": "height",
+          "text": "20 мм"
+        },
+        {
+          "key": "width",
+          "text": "40 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "3 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "2,42 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "width",
+        "thickness",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "прямоугольная № 40 x 20 x 3",
+          "size": 84,
+          "weight": 700,
+          "left": 132,
+          "top": 237,
+          "width": 1178,
+          "height": 79
+        },
+        {
+          "key": "width",
+          "text": "40 мм",
+          "size": 56,
+          "center": 1344,
+          "top": 1425,
+          "left": 1264,
+          "width": 160,
+          "height": 43
+        },
+        {
+          "key": "thickness",
+          "text": "3 мм",
+          "size": 56,
+          "left": 1794,
+          "top": 1082,
+          "width": 123,
+          "height": 44
+        },
+        {
+          "key": "mass",
+          "text": "2,42 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 608,
+          "top": 1634,
+          "width": 192,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-40x20x3.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "bd0feb81caca29d7fb07e55663f40752d6d6fdd670a25ff99d7bbfc53612e16c"
+    },
+    {
+      "id": "profile-pipe-rectangular-40x25x1-5",
+      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-rectangular-40x25x1-5.webp",
+      "photoUrl": "/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "signature": "a73f9d35",
+      "labels": [
+        {
+          "key": "title",
+          "text": "прямоугольная № 40 x 25 x 1,5"
+        },
+        {
+          "key": "height",
+          "text": "25 мм"
+        },
+        {
+          "key": "width",
+          "text": "40 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "1,5 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "1,43 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "height",
+        "width",
+        "thickness",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "прямоугольная № 40 x 25 x 1,5",
+          "size": 84,
+          "weight": 700,
+          "left": 132,
+          "top": 237,
+          "width": 1225,
+          "height": 79
+        },
+        {
+          "key": "height",
+          "text": "25 мм",
+          "size": 56,
+          "center": 891,
+          "top": 934,
+          "left": 815,
+          "width": 153,
+          "height": 43
+        },
+        {
+          "key": "width",
+          "text": "40 мм",
+          "size": 56,
+          "center": 1344,
+          "top": 1425,
+          "left": 1264,
+          "width": 160,
+          "height": 43
+        },
+        {
+          "key": "thickness",
+          "text": "1,5 мм",
+          "size": 56,
+          "left": 1794,
+          "top": 1082,
+          "width": 155,
+          "height": 49
+        },
+        {
+          "key": "mass",
+          "text": "1,43 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 608,
+          "top": 1634,
+          "width": 184,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-40x25x1-5.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "0df03b1af19c52c10d92a5764913ed4522d84b7bf78fae496332f343aac67100"
+    },
+    {
+      "id": "profile-pipe-rectangular-40x25x2",
+      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-rectangular-40x25x2.webp",
+      "photoUrl": "/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "signature": "37bbd91e",
+      "labels": [
+        {
+          "key": "title",
+          "text": "прямоугольная № 40 x 25 x 2"
+        },
+        {
+          "key": "height",
+          "text": "25 мм"
+        },
+        {
+          "key": "width",
+          "text": "40 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "2 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "1,86 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "height",
+        "width",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "прямоугольная № 40 x 25 x 2",
+          "size": 84,
+          "weight": 700,
+          "left": 132,
+          "top": 237,
+          "width": 1170,
+          "height": 79
+        },
+        {
+          "key": "height",
+          "text": "25 мм",
+          "size": 56,
+          "center": 891,
+          "top": 934,
+          "left": 815,
+          "width": 153,
+          "height": 43
+        },
+        {
+          "key": "width",
+          "text": "40 мм",
+          "size": 56,
+          "center": 1344,
+          "top": 1425,
+          "left": 1264,
+          "width": 160,
+          "height": 43
+        },
+        {
+          "key": "mass",
+          "text": "1,86 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 608,
+          "top": 1634,
+          "width": 182,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-40x25x2.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "eac48857ed758c6aec2adad23f660e31eb5d0f62f45064246d4fee64b2e96f3b"
+    },
+    {
+      "id": "profile-pipe-rectangular-50x25x1-5",
+      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-rectangular-50x25x1-5.webp",
+      "photoUrl": "/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "signature": "47766c1d",
+      "labels": [
+        {
+          "key": "title",
+          "text": "прямоугольная № 50 x 25 x 1,5"
+        },
+        {
+          "key": "height",
+          "text": "25 мм"
+        },
+        {
+          "key": "width",
+          "text": "50 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "1,5 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "1,67 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "height",
+        "width",
+        "thickness",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "прямоугольная № 50 x 25 x 1,5",
+          "size": 84,
+          "weight": 700,
+          "left": 132,
+          "top": 237,
+          "width": 1220,
+          "height": 79
+        },
+        {
+          "key": "height",
+          "text": "25 мм",
+          "size": 56,
+          "center": 891,
+          "top": 934,
+          "left": 815,
+          "width": 153,
+          "height": 43
+        },
+        {
+          "key": "width",
+          "text": "50 мм",
+          "size": 56,
+          "center": 1344,
+          "top": 1425,
+          "left": 1266,
+          "width": 156,
+          "height": 43
+        },
+        {
+          "key": "thickness",
+          "text": "1,5 мм",
+          "size": 56,
+          "left": 1794,
+          "top": 1082,
+          "width": 155,
+          "height": 49
+        },
+        {
+          "key": "mass",
+          "text": "1,67 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 608,
+          "top": 1634,
+          "width": 178,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-50x25x1-5.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "899c35f9ec23ba9664f6b458807cc05dc9ec40420375cd64072370e1d8885087"
+    },
+    {
+      "id": "profile-pipe-rectangular-50x25x2",
+      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-rectangular-50x25x2.webp",
+      "photoUrl": "/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "signature": "cb70d482",
+      "labels": [
+        {
+          "key": "title",
+          "text": "прямоугольная № 50 x 25 x 2"
+        },
+        {
+          "key": "height",
+          "text": "25 мм"
+        },
+        {
+          "key": "width",
+          "text": "50 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "2 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "2,17 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "height",
+        "width",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "прямоугольная № 50 x 25 x 2",
+          "size": 84,
+          "weight": 700,
+          "left": 132,
+          "top": 237,
+          "width": 1165,
+          "height": 79
+        },
+        {
+          "key": "height",
+          "text": "25 мм",
+          "size": 56,
+          "center": 891,
+          "top": 934,
+          "left": 815,
+          "width": 153,
+          "height": 43
+        },
+        {
+          "key": "width",
+          "text": "50 мм",
+          "size": 56,
+          "center": 1344,
+          "top": 1425,
+          "left": 1266,
+          "width": 156,
+          "height": 43
+        },
+        {
+          "key": "mass",
+          "text": "2,17 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 608,
+          "top": 1634,
+          "width": 172,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-50x25x2.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "dd3541328242886872922c7d70c7604a9483a54699d0f72a1336f2f617f16a35"
+    },
+    {
+      "id": "profile-pipe-rectangular-50x25x3",
+      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-rectangular-50x25x3.webp",
+      "photoUrl": "/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "signature": "4a5430e0",
+      "labels": [
+        {
+          "key": "title",
+          "text": "прямоугольная № 50 x 25 x 3"
+        },
+        {
+          "key": "height",
+          "text": "25 мм"
+        },
+        {
+          "key": "width",
+          "text": "50 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "3 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "3,13 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "height",
+        "width",
+        "thickness",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "прямоугольная № 50 x 25 x 3",
+          "size": 84,
+          "weight": 700,
+          "left": 132,
+          "top": 237,
+          "width": 1168,
+          "height": 79
+        },
+        {
+          "key": "height",
+          "text": "25 мм",
+          "size": 56,
+          "center": 891,
+          "top": 934,
+          "left": 815,
+          "width": 153,
+          "height": 43
+        },
+        {
+          "key": "width",
+          "text": "50 мм",
+          "size": 56,
+          "center": 1344,
+          "top": 1425,
+          "left": 1266,
+          "width": 156,
+          "height": 43
+        },
+        {
+          "key": "thickness",
+          "text": "3 мм",
+          "size": 56,
+          "left": 1794,
+          "top": 1082,
+          "width": 123,
+          "height": 44
+        },
+        {
+          "key": "mass",
+          "text": "3,13 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 608,
+          "top": 1634,
+          "width": 176,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-50x25x3.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "7b248f59644a0a6844e5357cea88fb34d827c32cda087a115c82ccc6850f9215"
+    },
+    {
+      "id": "profile-pipe-rectangular-60x30x1-5",
+      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-rectangular-60x30x1-5.webp",
+      "photoUrl": "/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "signature": "9f7bdad1",
+      "labels": [
+        {
+          "key": "title",
+          "text": "прямоугольная № 60 x 30 x 1,5"
+        },
+        {
+          "key": "height",
+          "text": "30 мм"
+        },
+        {
+          "key": "width",
+          "text": "60 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "1,5 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "2,02 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "height",
+        "width",
+        "thickness",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "прямоугольная № 60 x 30 x 1,5",
+          "size": 84,
+          "weight": 700,
+          "left": 132,
+          "top": 237,
+          "width": 1229,
+          "height": 79
+        },
+        {
+          "key": "height",
+          "text": "30 мм",
+          "size": 56,
+          "center": 891,
+          "top": 934,
+          "left": 813,
+          "width": 157,
+          "height": 44
+        },
+        {
+          "key": "width",
+          "text": "60 мм",
+          "size": 56,
+          "center": 1344,
+          "top": 1425,
+          "left": 1266,
+          "width": 157,
+          "height": 43
+        },
+        {
+          "key": "thickness",
+          "text": "1,5 мм",
+          "size": 56,
+          "left": 1794,
+          "top": 1082,
+          "width": 155,
+          "height": 49
+        },
+        {
+          "key": "mass",
+          "text": "2,02 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 608,
+          "top": 1634,
+          "width": 191,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-60x30x1-5.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "91a6048145c0e41df94a99b0d46b8b119d0409a804e9d181dd26da0ee31e0791"
+    },
+    {
+      "id": "profile-pipe-rectangular-60x30x2",
+      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-rectangular-60x30x2.webp",
+      "photoUrl": "/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "signature": "fc70406e",
+      "labels": [
+        {
+          "key": "title",
+          "text": "прямоугольная № 60 x 30 x 2"
+        },
+        {
+          "key": "height",
+          "text": "30 мм"
+        },
+        {
+          "key": "width",
+          "text": "60 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "2 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "2,65 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "height",
+        "width",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "прямоугольная № 60 x 30 x 2",
+          "size": 84,
+          "weight": 700,
+          "left": 132,
+          "top": 237,
+          "width": 1174,
+          "height": 79
+        },
+        {
+          "key": "height",
+          "text": "30 мм",
+          "size": 56,
+          "center": 891,
+          "top": 934,
+          "left": 813,
+          "width": 157,
+          "height": 44
+        },
+        {
+          "key": "width",
+          "text": "60 мм",
+          "size": 56,
+          "center": 1344,
+          "top": 1425,
+          "left": 1266,
+          "width": 157,
+          "height": 43
+        },
+        {
+          "key": "mass",
+          "text": "2,65 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 608,
+          "top": 1634,
+          "width": 189,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-60x30x2.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "6454be0e632f104a8ef8048c74e104191629405b85a661a7a9f11a37bb5897bc"
+    },
+    {
+      "id": "profile-pipe-rectangular-60x30x3",
+      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-rectangular-60x30x3.webp",
+      "photoUrl": "/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "signature": "3894c0e8",
+      "labels": [
+        {
+          "key": "title",
+          "text": "прямоугольная № 60 x 30 x 3"
+        },
+        {
+          "key": "height",
+          "text": "30 мм"
+        },
+        {
+          "key": "width",
+          "text": "60 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "3 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "3,83 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "height",
+        "width",
+        "thickness",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "прямоугольная № 60 x 30 x 3",
+          "size": 84,
+          "weight": 700,
+          "left": 132,
+          "top": 237,
+          "width": 1177,
+          "height": 79
+        },
+        {
+          "key": "height",
+          "text": "30 мм",
+          "size": 56,
+          "center": 891,
+          "top": 934,
+          "left": 813,
+          "width": 157,
+          "height": 44
+        },
+        {
+          "key": "width",
+          "text": "60 мм",
+          "size": 56,
+          "center": 1344,
+          "top": 1425,
+          "left": 1266,
+          "width": 157,
+          "height": 43
+        },
+        {
+          "key": "thickness",
+          "text": "3 мм",
+          "size": 56,
+          "left": 1794,
+          "top": 1082,
+          "width": 123,
+          "height": 44
+        },
+        {
+          "key": "mass",
+          "text": "3,83 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 608,
+          "top": 1634,
+          "width": 191,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-60x30x3.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "8f2e202b04c1040aaa1d7efdea12fba2def148fb3202f2bcb27e4d34907b6cad"
+    },
+    {
+      "id": "profile-pipe-rectangular-60x40x1-5",
+      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-rectangular-60x40x1-5.webp",
+      "photoUrl": "/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "signature": "da9c7621",
+      "labels": [
+        {
+          "key": "title",
+          "text": "прямоугольная № 60 x 40 x 1,5"
+        },
+        {
+          "key": "height",
+          "text": "40 мм"
+        },
+        {
+          "key": "width",
+          "text": "60 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "1,5 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "2,25 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "height",
+        "width",
+        "thickness",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "прямоугольная № 60 x 40 x 1,5",
+          "size": 84,
+          "weight": 700,
+          "left": 132,
+          "top": 237,
+          "width": 1232,
+          "height": 79
+        },
+        {
+          "key": "height",
+          "text": "40 мм",
+          "size": 56,
+          "center": 891,
+          "top": 934,
+          "left": 811,
+          "width": 160,
+          "height": 43
+        },
+        {
+          "key": "width",
+          "text": "60 мм",
+          "size": 56,
+          "center": 1344,
+          "top": 1425,
+          "left": 1266,
+          "width": 157,
+          "height": 43
+        },
+        {
+          "key": "thickness",
+          "text": "1,5 мм",
+          "size": 56,
+          "left": 1794,
+          "top": 1082,
+          "width": 155,
+          "height": 49
+        },
+        {
+          "key": "mass",
+          "text": "2,25 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 608,
+          "top": 1634,
+          "width": 190,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-60x40x1-5.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "235c84891c819b071a8ee147096e157fb4e7c5d70d3f7e4f83dc8552df67b989"
+    },
+    {
+      "id": "profile-pipe-rectangular-60x40x2",
+      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-rectangular-60x40x2.webp",
+      "photoUrl": "/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "signature": "6e4b9b6a",
+      "labels": [
+        {
+          "key": "title",
+          "text": "прямоугольная № 60 x 40 x 2"
+        },
+        {
+          "key": "height",
+          "text": "40 мм"
+        },
+        {
+          "key": "width",
+          "text": "60 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "2 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "2,96 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "height",
+        "width",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "прямоугольная № 60 x 40 x 2",
+          "size": 84,
+          "weight": 700,
+          "left": 132,
+          "top": 237,
+          "width": 1177,
+          "height": 79
+        },
+        {
+          "key": "height",
+          "text": "40 мм",
+          "size": 56,
+          "center": 891,
+          "top": 934,
+          "left": 811,
+          "width": 160,
+          "height": 43
+        },
+        {
+          "key": "width",
+          "text": "60 мм",
+          "size": 56,
+          "center": 1344,
+          "top": 1425,
+          "left": 1266,
+          "width": 157,
+          "height": 43
+        },
+        {
+          "key": "mass",
+          "text": "2,96 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 608,
+          "top": 1634,
+          "width": 189,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-60x40x2.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "83fc85f937917cf468d958b181429edb4b84c19826e4aaff44426a7789522817"
+    },
+    {
+      "id": "profile-pipe-rectangular-60x40x3",
+      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-rectangular-60x40x3.webp",
+      "photoUrl": "/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "signature": "c0adc998",
+      "labels": [
+        {
+          "key": "title",
+          "text": "прямоугольная № 60 x 40 x 3"
+        },
+        {
+          "key": "height",
+          "text": "40 мм"
+        },
+        {
+          "key": "width",
+          "text": "60 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "3 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "4,3 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "height",
+        "width",
+        "thickness",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "прямоугольная № 60 x 40 x 3",
+          "size": 84,
+          "weight": 700,
+          "left": 132,
+          "top": 237,
+          "width": 1180,
+          "height": 79
+        },
+        {
+          "key": "height",
+          "text": "40 мм",
+          "size": 56,
+          "center": 891,
+          "top": 934,
+          "left": 811,
+          "width": 160,
+          "height": 43
+        },
+        {
+          "key": "width",
+          "text": "60 мм",
+          "size": 56,
+          "center": 1344,
+          "top": 1425,
+          "left": 1266,
+          "width": 157,
+          "height": 43
+        },
+        {
+          "key": "thickness",
+          "text": "3 мм",
+          "size": 56,
+          "left": 1794,
+          "top": 1082,
+          "width": 123,
+          "height": 44
+        },
+        {
+          "key": "mass",
+          "text": "4,3 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 608,
+          "top": 1634,
+          "width": 164,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-60x40x3.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "9066a344499ee70345d9e6f480aedbedfec35008db79f8992b33514286bf9702"
+    },
+    {
+      "id": "profile-pipe-rectangular-60x40x4",
+      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-rectangular-60x40x4.webp",
+      "photoUrl": "/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "signature": "cd0d2c8e",
+      "labels": [
+        {
+          "key": "title",
+          "text": "прямоугольная № 60 x 40 x 4"
+        },
+        {
+          "key": "height",
+          "text": "40 мм"
+        },
+        {
+          "key": "width",
+          "text": "60 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "4 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "5,56 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "height",
+        "width",
+        "thickness",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "прямоугольная № 60 x 40 x 4",
+          "size": 84,
+          "weight": 700,
+          "left": 132,
+          "top": 237,
+          "width": 1183,
+          "height": 79
+        },
+        {
+          "key": "height",
+          "text": "40 мм",
+          "size": 56,
+          "center": 891,
+          "top": 934,
+          "left": 811,
+          "width": 160,
+          "height": 43
+        },
+        {
+          "key": "width",
+          "text": "60 мм",
+          "size": 56,
+          "center": 1344,
+          "top": 1425,
+          "left": 1266,
+          "width": 157,
+          "height": 43
+        },
+        {
+          "key": "thickness",
+          "text": "4 мм",
+          "size": 56,
+          "left": 1794,
+          "top": 1082,
+          "width": 126,
+          "height": 41
+        },
+        {
+          "key": "mass",
+          "text": "5,56 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 608,
+          "top": 1634,
+          "width": 190,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-60x40x4.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "873aa952baf81fe86824ff4899d4305fc64eb93d2dabb84c39fe5546a662f569"
+    },
+    {
+      "id": "profile-pipe-rectangular-80x40x2",
+      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-rectangular-80x40x2.webp",
+      "photoUrl": "/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "signature": "28f9541e",
+      "labels": [
+        {
+          "key": "title",
+          "text": "прямоугольная № 80 x 40 x 2"
+        },
+        {
+          "key": "height",
+          "text": "40 мм"
+        },
+        {
+          "key": "width",
+          "text": "80 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "2 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "3,59 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "height",
+        "width",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "прямоугольная № 80 x 40 x 2",
+          "size": 84,
+          "weight": 700,
+          "left": 132,
+          "top": 237,
+          "width": 1177,
+          "height": 79
+        },
+        {
+          "key": "height",
+          "text": "40 мм",
+          "size": 56,
+          "center": 891,
+          "top": 934,
+          "left": 811,
+          "width": 160,
+          "height": 43
+        },
+        {
+          "key": "width",
+          "text": "80 мм",
+          "size": 56,
+          "center": 1344,
+          "top": 1425,
+          "left": 1266,
+          "width": 157,
+          "height": 44
+        },
+        {
+          "key": "mass",
+          "text": "3,59 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 608,
+          "top": 1634,
+          "width": 191,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-80x40x2.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "26faab2cbd44cbc6d44c8d1696403a0fbccacbbdd57fd5756a15ed79c894cc53"
+    },
+    {
+      "id": "profile-pipe-rectangular-80x40x3",
+      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-rectangular-80x40x3.webp",
+      "photoUrl": "/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "signature": "04e088e8",
+      "labels": [
+        {
+          "key": "title",
+          "text": "прямоугольная № 80 x 40 x 3"
+        },
+        {
+          "key": "height",
+          "text": "40 мм"
+        },
+        {
+          "key": "width",
+          "text": "80 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "3 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "5,25 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "height",
+        "width",
+        "thickness",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "прямоугольная № 80 x 40 x 3",
+          "size": 84,
+          "weight": 700,
+          "left": 132,
+          "top": 237,
+          "width": 1180,
+          "height": 79
+        },
+        {
+          "key": "height",
+          "text": "40 мм",
+          "size": 56,
+          "center": 891,
+          "top": 934,
+          "left": 811,
+          "width": 160,
+          "height": 43
+        },
+        {
+          "key": "width",
+          "text": "80 мм",
+          "size": 56,
+          "center": 1344,
+          "top": 1425,
+          "left": 1266,
+          "width": 157,
+          "height": 44
+        },
+        {
+          "key": "thickness",
+          "text": "3 мм",
+          "size": 56,
+          "left": 1794,
+          "top": 1082,
+          "width": 123,
+          "height": 44
+        },
+        {
+          "key": "mass",
+          "text": "5,25 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 608,
+          "top": 1634,
+          "width": 190,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-80x40x3.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "3b0131980a066b6826826219f7e16056ccf4a973b5905dd216899efd46674736"
+    },
+    {
+      "id": "profile-pipe-rectangular-80x60x2",
+      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-rectangular-80x60x2.webp",
+      "photoUrl": "/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "signature": "3cb8428c",
+      "labels": [
+        {
+          "key": "title",
+          "text": "прямоугольная № 80 x 60 x 2"
+        },
+        {
+          "key": "height",
+          "text": "60 мм"
+        },
+        {
+          "key": "width",
+          "text": "80 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "2 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "4,216 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "height",
+        "width",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "прямоугольная № 80 x 60 x 2",
+          "size": 84,
+          "weight": 700,
+          "left": 132,
+          "top": 237,
+          "width": 1174,
+          "height": 79
+        },
+        {
+          "key": "height",
+          "text": "60 мм",
+          "size": 56,
+          "center": 891,
+          "top": 934,
+          "left": 813,
+          "width": 157,
+          "height": 43
+        },
+        {
+          "key": "width",
+          "text": "80 мм",
+          "size": 56,
+          "center": 1344,
+          "top": 1425,
+          "left": 1266,
+          "width": 157,
+          "height": 44
+        },
+        {
+          "key": "mass",
+          "text": "4,216 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 608,
+          "top": 1634,
+          "width": 209,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-80x60x2.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "aa1ea0f79508a893689240430e2e69229a65b85663ad7cc4cef6729ec4bd419a"
+    },
+    {
+      "id": "profile-pipe-rectangular-80x60x3",
+      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-rectangular-80x60x3.webp",
+      "photoUrl": "/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "signature": "814714d8",
+      "labels": [
+        {
+          "key": "title",
+          "text": "прямоугольная № 80 x 60 x 3"
+        },
+        {
+          "key": "height",
+          "text": "60 мм"
+        },
+        {
+          "key": "width",
+          "text": "80 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "3 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "6,19 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "height",
+        "width",
+        "thickness",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "прямоугольная № 80 x 60 x 3",
+          "size": 84,
+          "weight": 700,
+          "left": 132,
+          "top": 237,
+          "width": 1177,
+          "height": 79
+        },
+        {
+          "key": "height",
+          "text": "60 мм",
+          "size": 56,
+          "center": 891,
+          "top": 934,
+          "left": 813,
+          "width": 157,
+          "height": 43
+        },
+        {
+          "key": "width",
+          "text": "80 мм",
+          "size": 56,
+          "center": 1344,
+          "top": 1425,
+          "left": 1266,
+          "width": 157,
+          "height": 44
+        },
+        {
+          "key": "thickness",
+          "text": "3 мм",
+          "size": 56,
+          "left": 1794,
+          "top": 1082,
+          "width": 123,
+          "height": 44
+        },
+        {
+          "key": "mass",
+          "text": "6,19 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 608,
+          "top": 1634,
+          "width": 175,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-80x60x3.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "ec36b864b9f58e5d25af758a1369108b67e4f64959de5bdbe883d097995e7dca"
+    },
+    {
+      "id": "profile-pipe-rectangular-100x50x2",
+      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-rectangular-100x50x2.webp",
+      "photoUrl": "/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "signature": "63b18198",
+      "labels": [
+        {
+          "key": "title",
+          "text": "прямоугольная № 100 x 50 x 2"
+        },
+        {
+          "key": "height",
+          "text": "50 мм"
+        },
+        {
+          "key": "width",
+          "text": "100 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "2 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "4,53 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "height",
+        "width",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "прямоугольная № 100 x 50 x 2",
+          "size": 84,
+          "weight": 700,
+          "left": 132,
+          "top": 237,
+          "width": 1208,
+          "height": 79
+        },
+        {
+          "key": "height",
+          "text": "50 мм",
+          "size": 56,
+          "center": 891,
+          "top": 934,
+          "left": 813,
+          "width": 156,
+          "height": 43
+        },
+        {
+          "key": "width",
+          "text": "100 мм",
+          "size": 56,
+          "center": 1344,
+          "top": 1425,
+          "left": 1255,
+          "width": 179,
+          "height": 43
+        },
+        {
+          "key": "mass",
+          "text": "4,53 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 608,
+          "top": 1634,
+          "width": 192,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-100x50x2.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "a9a0b8ddfdcddef1c3793a51c5bc54047ee071c1fd050e358266fc974058e2d0"
+    },
+    {
+      "id": "profile-pipe-rectangular-100x50x3",
+      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-rectangular-100x50x3.webp",
+      "photoUrl": "/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "signature": "9e5a0430",
+      "labels": [
+        {
+          "key": "title",
+          "text": "прямоугольная № 100 x 50 x 3"
+        },
+        {
+          "key": "height",
+          "text": "50 мм"
+        },
+        {
+          "key": "width",
+          "text": "100 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "3 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "6,661 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "height",
+        "width",
+        "thickness",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "прямоугольная № 100 x 50 x 3",
+          "size": 84,
+          "weight": 700,
+          "left": 132,
+          "top": 237,
+          "width": 1211,
+          "height": 79
+        },
+        {
+          "key": "height",
+          "text": "50 мм",
+          "size": 56,
+          "center": 891,
+          "top": 934,
+          "left": 813,
+          "width": 156,
+          "height": 43
+        },
+        {
+          "key": "width",
+          "text": "100 мм",
+          "size": 56,
+          "center": 1344,
+          "top": 1425,
+          "left": 1255,
+          "width": 179,
+          "height": 43
+        },
+        {
+          "key": "thickness",
+          "text": "3 мм",
+          "size": 56,
+          "left": 1794,
+          "top": 1082,
+          "width": 123,
+          "height": 44
+        },
+        {
+          "key": "mass",
+          "text": "6,661 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 608,
+          "top": 1634,
+          "width": 206,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-100x50x3.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "5371eb1a90e62cbc71690bce0b4c4fd258cfbced63c339567756404a348cfdcc"
+    },
+    {
+      "id": "profile-pipe-rectangular-100x60x3",
+      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-rectangular-100x60x3.webp",
+      "photoUrl": "/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "signature": "bfc1302c",
+      "labels": [
+        {
+          "key": "title",
+          "text": "прямоугольная № 100 x 60 x 3"
+        },
+        {
+          "key": "height",
+          "text": "60 мм"
+        },
+        {
+          "key": "width",
+          "text": "100 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "3 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "7,13 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "height",
+        "width",
+        "thickness",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "прямоугольная № 100 x 60 x 3",
+          "size": 84,
+          "weight": 700,
+          "left": 132,
+          "top": 237,
+          "width": 1213,
+          "height": 79
+        },
+        {
+          "key": "height",
+          "text": "60 мм",
+          "size": 56,
+          "center": 891,
+          "top": 934,
+          "left": 813,
+          "width": 157,
+          "height": 43
+        },
+        {
+          "key": "width",
+          "text": "100 мм",
+          "size": 56,
+          "center": 1344,
+          "top": 1425,
+          "left": 1255,
+          "width": 179,
+          "height": 43
+        },
+        {
+          "key": "thickness",
+          "text": "3 мм",
+          "size": 56,
+          "left": 1794,
+          "top": 1082,
+          "width": 123,
+          "height": 44
+        },
+        {
+          "key": "mass",
+          "text": "7,13 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 608,
+          "top": 1634,
+          "width": 168,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-100x60x3.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "a8893f4f7271f4c95dd28c5fc28c36e0bc7e22e66333a875275ebe067a28ce3e"
+    }
+  ]
+}

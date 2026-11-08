@@ -20,7 +20,7 @@ const {default: sharp} = await import('sharp');
 sharp.concurrency(2);
 
 const WIDTH = 2400, HEIGHT = 1800;
-const sourceDirectory = 'public/images/catalog/truby-profilnye/trubi_kvadratnie';
+const sourceDirectory = 'public/images/catalog/truba-profilnia/truba_kvadratnaya';
 const referencePath = `${sourceDirectory}/truba_kvadratnaya_2400_1800_marked.jpg`;
 const photoPath = `${sourceDirectory}/truba_kvadratnaya_1448_1086_original.jpg`;
 const reference = await fs.readFile(referencePath);

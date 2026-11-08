@@ -16,7 +16,7 @@ const retainedCategories: Category[] = [
     "slug": "truby-profilnye",
     "shortDescription": "Профильные трубы с некруглым сечением. Сопоставляйте обе стороны профиля, толщину стенки, марку стали, стандарт и длину.",
     "description": "Стальные профильные трубы квадратного и прямоугольного сечения для изготовления каркасов, навесов, гаражей, ворот и ограждений. При выборе учитывают размеры профиля, толщину стенки и нагрузки на конструкцию.",
-    "imageUrl": "/images/catalog/truby-profilnye/truby-kvadratnie.jpg"
+    "imageUrl": "/images/catalog/truba-profilnia/truba-kvadratnaya.jpg"
   },
   {
     "id": "cat-trk",

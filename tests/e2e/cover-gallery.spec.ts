@@ -131,7 +131,7 @@ const coverGalleryPages = [
   }),
   ...["shveller", "ugolok", "kvadrat", ...nestedGallerySlugs].map(slug => {
     const category = getCategoryBySlug(slug)!;
-    const cover = slug === "truby-profilnye" ? "/images/catalog/truby-profilnye/trubi-main.jpg" : category.imageUrl;
+    const cover = slug === "truby-profilnye" ? "/images/catalog/truba-profilnia/truba-main.jpg" : category.imageUrl;
     return {name: category.name, route: `/catalog/${slug}`, id: category.id, cover};
   }),
   ...nestedGalleryPages,

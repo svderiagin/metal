@@ -6,6 +6,11 @@ import {
 import {CatalogCategoryLink} from "./CatalogCategoryLink";
 import {CatalogSubcategoryLink} from "./CatalogSubcategoryLink";
 
+const subcategoryLabels: Readonly<Record<string, string>> = {
+  "cat-trp-sub-1": "Труба квадратная",
+  "cat-trp-sub-2": "Труба прямоугольная",
+};
+
 export function CatalogSidebar({activeSlug}: { activeSlug?: string }) {
   const navigation = <CatalogSidebarNavigation activeSlug={activeSlug}/>;
   return <>
@@ -44,7 +49,7 @@ function CatalogSidebarNavigation({activeSlug}: {activeSlug?: string}) {
                         <li key={subcategory.id}>
                           <CatalogSubcategoryLink
                             href={`/catalog/${category.slug}/${subcategory.slug}/${productType.slug}`}
-                            label={subcategory.name}
+                            label={subcategoryLabels[subcategory.id] ?? subcategory.name}
                           />
                         </li>,
                       ];
