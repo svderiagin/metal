@@ -53,11 +53,11 @@ function cartRow(page: Page, id: string) {
 }
 
 function metersInput(row: Locator) {
-  return row.getByRole("textbox", {name: /^Длина заказа /});
+  return row.getByRole("textbox", {name: /^Длина /});
 }
 
 function tonsInput(row: Locator) {
-  return row.getByRole("textbox", {name: /^Масса заказа /});
+  return row.getByRole("textbox", {name: /^Масса /});
 }
 
 function numberFromText(text: string) {
@@ -279,7 +279,7 @@ for (const [variant, maximumMeters, maximumTons, minimumMeters, minimumTons] of 
     await meters.press("Enter");
     await expectMeasurement(page, variant.id, maximumMeters, maximumTons, "meter");
     await expectNumber(tons, maximumTons);
-    for (const name of [/^Длина заказа /, /^Масса заказа /]) {
+    for (const name of [/^Длина /, /^Масса /]) {
       await expect(row.getByRole("group", {name}).getByRole("button", {name: "Увеличить количество", exact: true})).toBeDisabled();
     }
     // Change the physical volume first so the tonne maximum must persist a fresh state.
@@ -338,7 +338,7 @@ test("VGP rounds either input to whole pipes and steps by one pipe", async ({pag
   await tons.fill("0,02");
   await tons.press("Enter");
   await expectMeasurement(page, vgp.id, 18, 0.02304, "ton");
-  await row.getByRole("group", {name: /^Масса заказа /}).getByRole("button", {name: "Увеличить количество", exact: true}).click();
+  await row.getByRole("group", {name: /^Масса /}).getByRole("button", {name: "Увеличить количество", exact: true}).click();
   await expectMeasurement(page, vgp.id, 24, 0.03072, "ton");
 });
 
@@ -428,7 +428,7 @@ test("format-only changes and decimal steps preserve exact stored fractions", as
   await expect.poll(async () => (await storedItem(page, samples.shveller.id))!.quantity).toBe(2.234567);
   const row = cartRow(page, rebar6.id), tons = tonsInput(row);
   await tons.focus();
-  await row.getByRole("group", {name: /^Масса заказа /}).getByRole("button", {name: "Увеличить количество", exact: true}).click();
+  await row.getByRole("group", {name: /^Масса /}).getByRole("button", {name: "Увеличить количество", exact: true}).click();
   await expectMeasurement(page, rebar6.id, 14.5045045045045, 0.00322, "ton");
   await expect(tons).toHaveValue("0,00322");
 });
@@ -454,11 +454,11 @@ test("whole quantities round up, zero cannot delete, and the explicit removal ac
 test("keyboard commit, Escape, accessible groups and +/- remain usable", async ({page}) => {
   await openCart(page, [{productId: samples.shveller.id, quantity: 3}]);
   const row = cartRow(page, samples.shveller.id), input = metersInput(row);
-  await expect(input).toHaveAttribute("aria-label", `Длина заказа ${samples.shveller.name}, м`);
+  await expect(input).toHaveAttribute("aria-label", `Длина ${samples.shveller.name}, м`);
   const statusId = await input.getAttribute("aria-describedby");
   expect(statusId).toBeTruthy();
   await expect(page.locator(`[id="${statusId}"]`)).toHaveAttribute("aria-live", "polite");
-  const group = row.getByRole("group", {name: `Длина заказа ${samples.shveller.name}, м`, exact: true});
+  const group = row.getByRole("group", {name: `Длина ${samples.shveller.name}, м`, exact: true});
   await input.fill("4");
   await input.press("Escape");
   await expect(input).toHaveValue("3");

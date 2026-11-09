@@ -36,7 +36,7 @@ test("cart adds a product, updates its quantity and survives reload", async ({pa
   await page.goto("/cart");
   await expect(page.getByRole("link", {name: "Швеллер № 5", exact: true})).toBeVisible();
   const cartRow = page.locator(`[data-cart-row="${samples.shveller.id}"]`);
-  const cartQuantity = cartRow.getByRole("textbox", {name: /^Длина заказа /});
+  const cartQuantity = cartRow.getByRole("textbox", {name: /^Длина /});
   await cartRow.getByRole("button", {name: "Увеличить количество", exact: true}).click();
   await expect(cartQuantity).toHaveValue("4");
   await expect.poll(() => page.evaluate(id => {
@@ -163,7 +163,7 @@ test("checkout refusal preserves the entered data and the real cart", async ({pa
   await expect(page.locator("form").getByRole("alert")).toContainText("Тестовый отказ");
   await expect(page.getByLabel("ФИО *", {exact: true})).toHaveValue("Анна Тестовая");
   await page.goto("/cart");
-  await expect(page.locator(`[data-cart-row="${samples.shveller.id}"]`).getByRole("textbox", {name: /^Длина заказа /})).toHaveValue("3");
+  await expect(page.locator(`[data-cart-row="${samples.shveller.id}"]`).getByRole("textbox", {name: /^Длина /})).toHaveValue("3");
 });
 
 for (const storageBlocked of [false, true]) {

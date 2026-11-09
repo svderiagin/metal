@@ -57,7 +57,7 @@ export function CartItemRow({line}: { line: CartLine }) {
         <div className="space-y-2">
           {(["meter", "ton"] as const).map((mode: OrderInputMode) => {
             const options = mode === "meter" ? meterOptions : tonOptions;
-            return <QuantitySelector key={mode} fieldLabel={mode === "meter" ? "Длина заказа" : "Масса заказа"}
+            return <QuantitySelector key={mode} fieldLabel={mode === "meter" ? "Длина" : "Масса"}
               productName={line.name} unit={mode === "meter" ? "м" : "т"}
               value={mode === "meter" ? measurement.meters : measurement.weightTons}
               onChange={quantity => updateQuantity(line.productId, quantity, mode)} disabled={!product || !canConvert}
@@ -78,8 +78,8 @@ export function CartItemRow({line}: { line: CartLine }) {
           </p>}
         </div>
       ) : (
-        <QuantitySelector fieldLabel={product?.unit === "ton" || product?.unit === "kg" ? "Масса заказа"
-          : product?.unit === "meter" ? "Длина заказа" : "Количество"}
+        <QuantitySelector fieldLabel={product?.unit === "ton" || product?.unit === "kg" ? "Масса"
+          : product?.unit === "meter" ? "Длина" : "Количество"}
           productName={line.name} unit={line.quantityUnit} whole={line.wholeQuantity}
           step={!line.wholeQuantity && product?.unit === "ton" ? 0.001 : 1}
           disabled={!product} value={line.quantity} onChange={(value) => updateQuantity(line.productId, value)}/>

@@ -81,7 +81,7 @@ test("cart and checkout layout with a real catalog product", async ({page}) => {
   for (const [path, name] of [["/cart", "cart"], ["/checkout", "checkout"]]) {
     await page.goto(path);
     await expect(page.getByRole("heading", {level: 1})).toBeVisible();
-    if (name === "cart") await expect(page.locator(`[data-cart-row="${samples.shveller.id}"]`).getByRole("textbox", {name: /^Длина заказа /})).toHaveValue("3");
+    if (name === "cart") await expect(page.locator(`[data-cart-row="${samples.shveller.id}"]`).getByRole("textbox", {name: /^Длина /})).toHaveValue("3");
     else await expect(page.getByLabel("ФИО *", {exact: true})).toBeVisible();
     await settleImages(page);
     await expect(page.getByRole("main")).toHaveScreenshot(`${name}.png`);
