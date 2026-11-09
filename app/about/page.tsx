@@ -50,8 +50,8 @@ export default function AboutPage() {
         <div className="mt-4 grid gap-px overflow-hidden rounded-lg bg-slate-200 dark:bg-slate-700 sm:grid-cols-2 lg:grid-cols-3">
           {advantages.map((advantage, index) => <div key={advantage.title} className="bg-white dark:bg-slate-900 px-3 py-3.5 sm:px-4">
             <div className="flex items-baseline gap-2.5">
-              <span className="text-sm font-bold text-brand-700 dark:text-brand-400">0{index + 1}</span>
-              <h3 className="font-bold">{advantage.title}</h3>
+              <span aria-hidden="true" className="shrink-0 text-sm font-semibold tabular-nums text-brand-700 dark:text-brand-400">0{index + 1}</span>
+              <h3 className="min-w-0 text-card-title">{advantage.title}</h3>
             </div>
             <p className="mt-1.5 text-sm leading-6 text-slate-600 dark:text-slate-300">{advantage.description}</p>
           </div>)}

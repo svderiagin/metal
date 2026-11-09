@@ -25,9 +25,9 @@ export default function DeliveryPage() {
     className="text-page-title">Доставка и самовывоз</h1><p className="mt-3 max-w-3xl text-slate-600 dark:text-slate-300">Организуем
     перевозку с учётом габаритов металлопроката и условий на площадке.</p>
     <div className="mt-8 grid gap-4 md:grid-cols-2">{sections.map((s, i) => <section key={s.t}
-                                                                                     className="rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-6">
-      <span className="text-sm font-bold text-brand-700 dark:text-brand-400">0{i + 1}</span><h2
-      className="mt-3 text-xl font-bold">{s.t}</h2><p className="mt-2 leading-7 text-slate-600 dark:text-slate-300">{s.d}</p>
+                                                                                     className="min-w-0 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-5 sm:p-6">
+      <div className="flex items-baseline gap-3"><span aria-hidden="true" className="shrink-0 text-sm font-semibold tabular-nums text-brand-700 dark:text-brand-400">0{i + 1}</span><h2
+      className="min-w-0 text-card-title">{s.t}</h2></div><p className="mt-3 leading-7 text-slate-600 dark:text-slate-300">{s.d}</p>
     </section>)}</div>
     <section className="mt-8 max-w-3xl rounded-xl bg-slate-100 p-6 dark:bg-slate-800" aria-labelledby="delivery-request-heading">
       <h2 id="delivery-request-heading" className="text-section-title">Данные для расчёта доставки</h2>

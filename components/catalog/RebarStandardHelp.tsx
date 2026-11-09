@@ -24,7 +24,7 @@ export function RebarStandardHelp({standard}: {standard: string}) {
   return <>
     <button ref={trigger} type="button" aria-label={`Что означает этот ГОСТ? ${standard}`} aria-haspopup="dialog"
       onClick={() => dialog.current?.showModal()}
-      className="relative z-10 grid size-9 shrink-0 cursor-pointer place-items-center rounded-lg text-slate-600 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-brand-700 dark:text-slate-300 dark:hover:bg-slate-800 dark:focus-visible:outline-brand-300">
+      className="relative z-10 grid size-11 shrink-0 cursor-pointer place-items-center rounded-lg text-slate-600 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-brand-700 dark:text-slate-300 dark:hover:bg-slate-800 dark:focus-visible:outline-brand-300">
       <span aria-hidden="true" className="grid size-5 place-items-center rounded-full border border-current text-xs leading-none font-semibold">?</span>
     </button>
     <dialog ref={dialog} aria-labelledby={titleId}
@@ -36,7 +36,7 @@ export function RebarStandardHelp({standard}: {standard: string}) {
           <h2 id={titleId} className="min-w-0 pt-1.5 text-card-title">Что означает этот ГОСТ?</h2>
           <form method="dialog">
             <button type="submit" autoFocus aria-label="Закрыть пояснение"
-              className="grid size-9 cursor-pointer place-items-center rounded-lg text-slate-600 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-brand-700 dark:text-slate-300 dark:hover:bg-slate-800 dark:focus-visible:outline-brand-300">
+              className="grid size-11 cursor-pointer place-items-center rounded-lg text-slate-600 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-brand-700 dark:text-slate-300 dark:hover:bg-slate-800 dark:focus-visible:outline-brand-300">
               <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="size-5">
                 <path d="m6 6 12 12M6 18 18 6"/>
               </svg>

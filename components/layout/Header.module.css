@@ -1,0 +1,14 @@
+@media (max-width: 359px) {
+  .utilityRow { column-gap: 8px; }
+
+  .utilityRow > strong { display: none; }
+
+  .wordmark {
+    font-size: 1.25rem;
+    letter-spacing: normal;
+  }
+
+  .actions a[href="/cart"] { padding-inline: 6px; }
+
+  .actions a[href="/cart"] > span[aria-hidden] { display: none; }
+}

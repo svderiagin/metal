@@ -1,4 +1,5 @@
 import Link from "next/link";
+import focusStyles from "./CatalogFocus.module.css";
 
 export function CatalogCategoryLink({
   href,
@@ -14,7 +15,7 @@ export function CatalogCategoryLink({
       href={href}
       scroll={false}
       aria-current={active ? "page" : undefined}
-      className={`block min-h-12 px-5 py-3 text-sm font-semibold transition-colors hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:text-brand-700 dark:hover:text-brand-400 ${
+      className={`${focusStyles.inset} block min-h-12 px-5 py-3 text-sm font-semibold transition-colors hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:text-brand-700 dark:hover:text-brand-400 ${
         active ? "border-l-4 border-brand-700 bg-brand-50 dark:border-brand-300 dark:bg-brand-900/50 pl-4 text-slate-950 dark:text-slate-100" : ""
       }`}
     >

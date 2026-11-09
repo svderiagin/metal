@@ -24,9 +24,9 @@ export default function ServicesPage() {
     своей площадке.</p>
     <div
       className="mt-8 divide-y divide-slate-200 dark:divide-slate-700 overflow-hidden rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900">{items.map((x, i) =>
-      <section key={x.t} className="grid gap-3 p-6 md:grid-cols-[80px_260px_1fr]"><span
-        className="text-2xl font-bold text-brand-700 dark:text-brand-400">0{i + 1}</span><h2
-        className="text-xl font-bold">{x.t}</h2><p className="leading-7 text-slate-600 dark:text-slate-300">{x.d}</p>
+      <section key={x.t} className="grid grid-cols-[32px_minmax(0,1fr)] items-start gap-x-3 gap-y-2 p-5 sm:p-6 md:grid-cols-[48px_minmax(160px,.8fr)_minmax(0,1.6fr)] md:gap-x-5"><span
+        aria-hidden="true" className="text-card-title tabular-nums text-brand-700 dark:text-brand-400">0{i + 1}</span><h2
+        className="min-w-0 text-card-title">{x.t}</h2><p className="col-span-2 leading-7 text-slate-600 dark:text-slate-300 md:col-span-1">{x.d}</p>
       </section>)}</div>
     <section className="mt-8 max-w-3xl rounded-xl bg-slate-100 p-6 dark:bg-slate-800" aria-labelledby="service-request-heading">
       <h2 id="service-request-heading" className="text-section-title">Что приложить к запросу</h2>

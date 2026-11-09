@@ -6,6 +6,7 @@ import Image from "next/image";
 import {catalogImageUrl} from "@/lib/catalog-image";
 import {clampImagePan, imageViewGeometry, imageZoomPan, type ImageSize} from "@/lib/imageViewer";
 import {DesktopImagePreload} from "./DesktopImagePreload";
+import focusStyles from "./CatalogFocus.module.css";
 
 const imageSizes = "(min-width: 768px) 672px, (min-width: 640px) calc(100vw - 40px), calc(100vw - 32px)";
 
@@ -184,7 +185,7 @@ export function ProductImageViewer({src, previewSrc = src, name, presentation = 
               disabled={(!geometry.canZoom && !zoomed) || failed}
               onPointerDown={beginImageGesture} onPointerMove={moveImageGesture} onPointerUp={endImageGesture}
               onPointerCancel={() => {imageGesture.current.moved = true; imageGesture.current.pointerId = null;}}
-              className={`absolute inset-0 block h-full w-full touch-none select-none border-0 bg-transparent p-0 focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-slate-600 dark:focus-visible:outline-brand-300 ${zoomed ? "cursor-zoom-out active:cursor-grabbing" : geometry.canZoom ? "cursor-zoom-in" : "cursor-default"}`}>
+              className={`${focusStyles.inset} absolute inset-0 block h-full w-full touch-none select-none border-0 bg-transparent p-0 ${zoomed ? "cursor-zoom-out active:cursor-grabbing" : geometry.canZoom ? "cursor-zoom-in" : "cursor-default"}`}>
               <span className="pointer-events-none absolute left-1/2 top-1/2 block" style={{width: geometry.width || "100%", height: geometry.height || "100%",
                 transform: `translate(calc(-50% + ${visiblePan.x}px), calc(-50% + ${visiblePan.y}px))`}}>
                 <Image src={imageUrl} alt={name} fill unoptimized draggable={false} loading="eager" sizes="100vw"

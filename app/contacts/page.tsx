@@ -13,12 +13,12 @@ export default function ContactsPage() {
     className="text-page-title">Контакты</h1>
     <section className="mt-6 grid gap-4 sm:grid-cols-2" aria-label="Отдел продаж">
       <div className="rounded-xl border border-slate-200 bg-white p-5 dark:border-slate-700 dark:bg-slate-900">
-        <h2 className="text-lg font-bold">Отдел продаж</h2>
+        <h2 className="text-card-title">Отдел продаж</h2>
         <a href={`mailto:${companyDetails.salesEmail}`} className="mt-3 inline-flex min-h-11 items-center break-all font-semibold text-slate-700 underline underline-offset-4 dark:text-slate-200">{companyDetails.salesEmail}</a>
         <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">{companyDetails.phonePlaceholder}</p>
       </div>
       <div className="rounded-xl border border-slate-200 bg-white p-5 dark:border-slate-700 dark:bg-slate-900">
-        <h2 className="text-lg font-bold">Доставка и самовывоз</h2>
+        <h2 className="text-card-title">Доставка и самовывоз</h2>
         <p className="mt-3 leading-7 text-slate-600 dark:text-slate-300">Укажите в письме адрес объекта, состав заказа и желаемую дату. Адрес и время самовывоза согласуйте перед поездкой.</p>
       </div>
     </section>
@@ -61,7 +61,7 @@ function Address() {
 
 function DetailsCard({title, rows}: {title: string; rows: readonly (readonly [string, React.ReactNode])[]}) {
   return <article className="min-w-0 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-5 sm:p-6">
-    <h3 className="text-lg font-bold">{title}</h3>
+    <h3 className="text-card-title">{title}</h3>
     <dl className="mt-4 space-y-4">
       {rows.map(([label, value]) => <div key={label} className="min-w-0">
         <dt className="text-sm font-semibold text-slate-500 dark:text-slate-400">{label}</dt>

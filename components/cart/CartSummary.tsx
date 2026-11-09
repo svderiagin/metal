@@ -7,16 +7,16 @@ export function CartSummary() {
   const {lineItemCount, totalAmount, clearCart, lines} = useCart();
   const invalid = lines.some(line => line.invalidReason);
   return (
-    <aside className="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-5 shadow-sm sm:p-6 lg:sticky lg:top-6">
+    <aside className="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-5 shadow-sm sm:p-6">
       <h2 className="text-xl font-bold">Итого</h2>
       <dl className="mt-5 space-y-4 text-sm">
         <div className="flex justify-between gap-4">
           <dt>Позиций</dt>
           <dd>{lineItemCount}</dd>
         </div>
-        <div className="flex justify-between gap-4 border-t border-slate-200 dark:border-slate-700 pt-4 text-lg font-bold">
+        <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-t border-slate-200 dark:border-slate-700 pt-4 text-lg font-bold">
           <dt>Сумма</dt>
-          <dd>{invalid ? "Требует уточнения" : formatCurrency(totalAmount)}</dd>
+          <dd className="ml-auto max-w-full text-right tabular-nums">{invalid ? "Требует уточнения" : formatCurrency(totalAmount)}</dd>
         </div>
       </dl>
       <p className="mt-4 text-xs leading-5 text-slate-500 dark:text-slate-400">

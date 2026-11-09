@@ -10,8 +10,8 @@ import {QuantitySelector} from "./QuantitySelector";
 export function CartItemRow({line}: { line: CartLine }) {
   const {updateQuantity, removeItem} = useCart();
   return (
-    <article className="grid gap-4 border-b border-slate-200 dark:border-slate-700 py-5 last:border-0 sm:py-6 md:grid-cols-[minmax(0,1fr)_auto_auto] md:items-center md:gap-6">
-      <div>
+    <article className="grid min-w-0 gap-4 border-b border-slate-200 dark:border-slate-700 py-5 last:border-0 sm:py-6 md:grid-cols-[minmax(0,1fr)_auto_auto] md:items-center md:gap-6">
+      <div className="min-w-0 break-words">
         {line.slug ? <Link
           href={catalogProductPath(line.categorySlug, line.subcategorySlug, line.productTypeSlug, line.productId)}
           className="inline-block font-bold transition-colors hover:text-brand-700 dark:hover:text-brand-300"
@@ -25,7 +25,7 @@ export function CartItemRow({line}: { line: CartLine }) {
       </div>
       {line.pieceOrder ? (
         <div>
-          <QuantitySelector whole value={line.pieceOrder.pieces}
+          <QuantitySelector whole productName={line.name} value={line.pieceOrder.pieces}
             onChange={value => updateQuantity(line.productId, value * line.pieceOrder!.lengthMeters)}/>
           <span className="ml-2 text-sm text-slate-500 dark:text-slate-400">шт.</span>
           <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
@@ -40,11 +40,11 @@ export function CartItemRow({line}: { line: CartLine }) {
           Ввод: {line.measurement.inputMode === "meter" ? "метры" : "тонны"}
         </p>
       ) : (
-        <div><QuantitySelector whole={line.wholeQuantity} value={line.quantity} onChange={(value) => updateQuantity(line.productId, value)}/>
+        <div><QuantitySelector productName={line.name} whole={line.wholeQuantity} value={line.quantity} onChange={(value) => updateQuantity(line.productId, value)}/>
           <span className="ml-2 text-sm text-slate-500 dark:text-slate-400">{line.quantityUnit}</span></div>
       )}
-      <div className="flex items-center justify-between gap-5 md:block md:min-w-32 md:text-right">
-        <strong className="text-lg">{line.invalidReason ? "Расчёт недоступен" : formatCurrency(line.estimatedTotal)}</strong>
+      <div className="flex min-w-0 flex-wrap items-center justify-between gap-x-5 gap-y-1 md:block md:min-w-32 md:text-right">
+        <strong className="break-words text-lg tabular-nums">{line.invalidReason ? "Расчёт недоступен" : formatCurrency(line.estimatedTotal)}</strong>
         <button
           type="button"
           onClick={() => removeItem(line.productId)}

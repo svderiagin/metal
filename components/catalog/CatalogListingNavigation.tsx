@@ -3,6 +3,7 @@ import {getAllCategories, getProductTypesByCategoryId} from "@/lib/catalog";
 import {catalogProductPath} from "@/lib/catalogLinks";
 import type {Category} from "@/types/category";
 import {CatalogSectionMenu, CatalogTypeNavigation} from "./CatalogSectionMenu";
+import focusStyles from "./CatalogFocus.module.css";
 
 export function CatalogListingNavigation({category, currentTypeId}: {category: Category; currentTypeId?: string}) {
   const siblings = category.directProducts ? [] : getProductTypesByCategoryId(category.id);
@@ -17,7 +18,7 @@ export function CatalogListingNavigation({category, currentTypeId}: {category: C
     {siblings.length > 0 && <CatalogTypeNavigation>
     {siblings.map(type => <Link key={type.id} href={catalogProductPath(category.slug, type.subcategorySlug, type.slug)}
       aria-current={currentTypeId === type.id ? "page" : undefined}
-      className="flex min-h-11 shrink-0 items-center whitespace-nowrap rounded-lg px-3 text-sm font-medium text-slate-600 hover:bg-slate-100 aria-[current=page]:max-w-full aria-[current=page]:whitespace-normal aria-[current=page]:bg-slate-200 aria-[current=page]:text-slate-950 dark:text-slate-300 dark:hover:bg-slate-800 dark:aria-[current=page]:bg-slate-700 dark:aria-[current=page]:text-white">{type.name}</Link>)}
+      className={`${focusStyles.inset} flex min-h-11 shrink-0 items-center whitespace-nowrap rounded-lg px-3 text-sm font-medium text-slate-600 hover:bg-slate-100 aria-[current=page]:max-w-full aria-[current=page]:whitespace-normal aria-[current=page]:bg-slate-200 aria-[current=page]:text-slate-950 dark:text-slate-300 dark:hover:bg-slate-800 dark:aria-[current=page]:bg-slate-700 dark:aria-[current=page]:text-white`}>{type.name}</Link>)}
     </CatalogTypeNavigation>}
   </nav>;
 }

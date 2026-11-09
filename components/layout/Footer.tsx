@@ -2,12 +2,14 @@ import Link from "next/link";
 import {PageContainer} from "./PageContainer";
 import {getAllCategories} from "@/lib/catalog";
 import {companyDetails} from "@/lib/companyDetails";
+import styles from "./Navigation.module.css";
 
 export function Footer() {
-  const footerLinkClass = "inline-flex min-h-8 items-center transition-colors hover:text-white";
+  const footerLinkClass = "inline-flex min-h-8 items-center rounded-sm transition-colors hover:text-white";
+  const utilityLinkClass = "inline-flex min-h-6 items-center rounded-sm transition-colors hover:text-white";
 
   return (
-    <footer className="mt-auto border-t border-slate-700 bg-slate-950 text-slate-300">
+    <footer className={`${styles.darkSurface} mt-auto border-t border-slate-700 bg-slate-950 text-slate-300`}>
       <PageContainer className="grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-12 lg:py-14">
         <div>
           <p className="text-xl font-bold text-white">
@@ -18,7 +20,7 @@ export function Footer() {
             обработка и доставка.
           </p>
           <p className="mt-4 text-sm leading-6 text-slate-400">
-            <a href={`mailto:${companyDetails.salesEmail}`} className="text-slate-200 hover:text-white">{companyDetails.salesEmail}</a><br/>
+            <a href={`mailto:${companyDetails.salesEmail}`} className={`${utilityLinkClass} text-slate-200`}>{companyDetails.salesEmail}</a><br/>
             {companyDetails.shortName}<br/>
             ИНН {companyDetails.inn}
           </p>
@@ -60,7 +62,7 @@ export function Footer() {
         <PageContainer className="flex flex-col gap-3 py-5 text-xs sm:flex-row sm:items-center sm:justify-between">
           <p>© 2024 ООО РВБ — Металлоконструкции и металлопрокат</p>
           <div className="flex flex-wrap gap-x-5 gap-y-2">
-            <Link className="transition-colors hover:text-white" href="/privacy">Политика обработки персональных данных</Link>
+            <Link className={utilityLinkClass} href="/privacy">Политика обработки персональных данных</Link>
           </div>
         </PageContainer>
       </div>

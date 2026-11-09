@@ -12,7 +12,7 @@
 }
 
 .description {
-  padding-left: 8px;
+  padding-inline: 8px;
 }
 
 .standard {
@@ -21,4 +21,10 @@
 
 .footer {
   margin: 16px 8px 8px;
+}
+
+@media (min-width: 40rem) {
+  .description {
+    padding-right: 0;
+  }
 }

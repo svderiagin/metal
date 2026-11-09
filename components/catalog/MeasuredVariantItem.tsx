@@ -254,7 +254,7 @@ function RebarVariantLayout({view, variant, price, order}: {
 
   if (view === "card") return (
     <article id={`variant-mobile-${variant.id}`} className="min-w-0 break-words rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-900">
-      <h3 className="mt-1 font-bold">{variant.name}</h3>
+      <h3 className="text-card-title">{variant.name}</h3>
       <dl className="mt-4 grid grid-cols-2 gap-3 text-sm">
         {[
           ["Диаметр", `${diameter} мм`],
@@ -276,7 +276,7 @@ function RebarVariantLayout({view, variant, price, order}: {
 
   return (
     <tr id={`variant-${variant.id}`} title={variant.name} className="align-middle border-t border-slate-200 dark:border-slate-700">
-      <td className="font-bold">{diameter}</td>
+      <th scope="row" className="font-semibold">{diameter}</th>
       <td>{form}</td>
       <td>{steelGrade}</td>
       <td className="font-semibold tabular-nums">{price}</td>

@@ -11,7 +11,7 @@ const styles = [
 
 const variants = {
   primary: "action-primary",
-  secondary: "border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 shadow-none hover:bg-slate-100 dark:hover:bg-slate-800",
+  secondary: "border border-[var(--control-border)] bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 shadow-none hover:border-[var(--control-hover-border)] hover:bg-slate-100 dark:hover:bg-slate-800",
 };
 type ButtonVariant = keyof typeof variants;
 

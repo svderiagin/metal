@@ -14,7 +14,7 @@ export function CategoryCard({category}: { category: Category }) {
         className={`${styles.card} group flex h-full min-h-52 flex-col rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-sm transition-colors duration-200`}
       >
         {hasImage && category.imageUrl ? <div className="relative aspect-[2/1] w-full shrink-0 overflow-hidden rounded-t-xl bg-white">
-          <Image src={catalogImageUrl(category.imageUrl)} alt={category.name} fill
+          <Image src={catalogImageUrl(category.imageUrl)} alt="" fill
             sizes="auto, (min-width: 1280px) 422px, (min-width: 640px) calc((100vw - 56px) / 2), calc(100vw - 34px)"
             className="object-cover object-center"/>
         </div> : <div

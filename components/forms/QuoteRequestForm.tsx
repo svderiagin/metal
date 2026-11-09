@@ -66,6 +66,7 @@ export function QuoteRequestForm() {
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (submitting) return;
     const form = event.currentTarget;
     const data = new FormData(form);
     const payload = {
@@ -103,7 +104,7 @@ export function QuoteRequestForm() {
   if (success) return <div role="status"
                            className="rounded-lg border border-green-300 dark:border-green-800 bg-green-50 dark:bg-green-950/40 p-5 text-green-900 dark:text-green-200"><strong>Заявка
     принята.</strong><p className="mt-1 text-sm">Мы свяжемся с вами после обработки запроса.</p>
-    <button onClick={() => setSuccess(false)} className="mt-3 text-sm underline">Отправить ещё одну</button>
+    <button type="button" onClick={() => setSuccess(false)} className="mt-3 min-h-11 cursor-pointer rounded-lg text-sm underline underline-offset-2">Отправить ещё одну</button>
   </div>;
   function validationProps(field: QuoteField) {
     return {
@@ -114,38 +115,43 @@ export function QuoteRequestForm() {
   function fieldError(field: QuoteField, spacing = "mt-1") {
     return fieldErrors[field] && <span id={`${formId}-${field}-error`} className={`${styles.error} ${spacing}`} aria-live="polite">{fieldErrors[field]}</span>;
   }
-  return <form onSubmit={submit} onBlur={validateOnBlur} onChange={clearResolvedError} noValidate className={`${styles.form} grid items-start gap-4 sm:grid-cols-2`}>
-    <label className="text-sm font-semibold">Имя *
+  return <form onSubmit={submit} onBlur={validateOnBlur} onChange={clearResolvedError} noValidate aria-busy={submitting} className={`${styles.form} grid items-start gap-4 sm:grid-cols-2`}>
+    <div className="min-w-0"><label className="block text-sm font-semibold">Имя *
       <Input name="name" required maxLength={QUOTE_LIMITS.name} className="mt-1" autoComplete="name" {...validationProps("name")}/>
+      </label>
       {fieldError("name")}
-    </label>
-    <label className="text-sm font-semibold">Телефон *
+    </div>
+    <div className="min-w-0"><label className="block text-sm font-semibold">Телефон *
       <PhoneInput name="phone" required className="mt-1" {...validationProps("phone")}/>
+      </label>
       {fieldError("phone")}
-    </label>
-    <label className="text-sm font-semibold">Электронная почта *
+    </div>
+    <div className="min-w-0"><label className="block text-sm font-semibold">Электронная почта *
       <Input name="email" type="email" required maxLength={QUOTE_LIMITS.email} className="mt-1" autoComplete="email" {...validationProps("email")}/>
+      </label>
       {fieldError("email")}
-    </label>
-    <label className="text-sm font-semibold">Компания
+    </div>
+    <div className="min-w-0"><label className="block text-sm font-semibold">Компания
       <Input name="company" maxLength={QUOTE_LIMITS.company} className="mt-1" autoComplete="organization" {...validationProps("company")}/>
+      </label>
       {fieldError("company")}
-    </label>
-    <label className="text-sm font-semibold sm:col-span-2">Что требуется рассчитать? *
+    </div>
+    <div className="min-w-0 sm:col-span-2"><label className="block text-sm font-semibold">Что требуется рассчитать? *
       <Textarea name="message" required maxLength={QUOTE_LIMITS.message} rows={4} value={message}
         placeholder="Арматура рифлёная А500С, 12 мм, 100 м. Доставка в Истринский округ, СНТ «Берёзка», участок 10."
         onChange={event => setMessage(event.target.value.slice(0, QUOTE_LIMITS.message))} className="mt-1 block" {...validationProps("message")}/>
+      </label>
       <span className={styles.messageMeta}>
         {fieldError("message", "")}
         <span className={styles.counter}>{message.length} / {QUOTE_LIMITS.message}</span>
       </span>
-    </label>
+    </div>
     <label className="absolute -left-[10000px]" aria-hidden>Сайт
       <Input name="website" maxLength={QUOTE_LIMITS.website} tabIndex={-1} autoComplete="off"/>
     </label>
     <div className="sm:col-span-2">
       <label className="flex items-start gap-2 text-sm">
-        <input name="consent" type="checkbox" required className="mt-1 size-4 shrink-0 accent-brand-700" {...validationProps("consent")}/>
+        <input name="consent" type="checkbox" required className="mt-1 size-4 shrink-0 accent-brand-700 dark:accent-brand-300" {...validationProps("consent")}/>
         <span>Я согласен на обработку персональных данных для ответа на заявку в соответствии с <Link href="/privacy" className="font-semibold text-brand-700 dark:text-brand-300 underline underline-offset-2">Политикой обработки персональных данных</Link>.</span>
       </label>
       {fieldError("consent")}

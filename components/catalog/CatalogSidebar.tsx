@@ -5,6 +5,7 @@ import {
 } from "@/lib/catalog";
 import {CatalogCategoryLink} from "./CatalogCategoryLink";
 import {CatalogSubcategoryLink} from "./CatalogSubcategoryLink";
+import focusStyles from "./CatalogFocus.module.css";
 
 const subcategoryLabels: Readonly<Record<string, string>> = {
   "cat-trp-sub-1": "Труба квадратная",
@@ -15,7 +16,7 @@ export function CatalogSidebar({activeSlug}: { activeSlug?: string }) {
   const navigation = <CatalogSidebarNavigation activeSlug={activeSlug}/>;
   return <>
     <details className="h-fit overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-900 lg:hidden">
-      <summary className="cursor-pointer px-5 py-4 text-sm font-bold focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-brand-600">Разделы каталога</summary>
+      <summary className={`${focusStyles.inset} cursor-pointer px-5 py-4 text-sm font-bold`}>Разделы каталога</summary>
       {navigation}
     </details>
     <aside className="hidden h-fit overflow-hidden rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-sm lg:block">
