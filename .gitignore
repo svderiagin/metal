@@ -11,6 +11,8 @@
 /coverage/
 /playwright-report/
 /test-results/
+/output/invoice-review-*/
+/output/pdf/rwb-invoice-preview.pdf
 
 # Environment variables
 .env*
