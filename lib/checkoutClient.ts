@@ -1,5 +1,6 @@
 import type {CreateOrderInput, CreateOrderResponse, CreatePaymentResponse} from "@/types/order";
 import {isApiSuccess, readApiError} from "./apiResponse";
+import {parseInvoiceReceipt} from "./invoiceReceipt";
 
 export async function createOrder(input: CreateOrderInput): Promise<CreateOrderResponse> {
   const result = await post("/api/orders", input, "Не удалось создать заказ.");
@@ -40,5 +41,16 @@ function isOrderResult(value: unknown) {
   const order = value as Record<string, unknown>;
   return typeof order.reference === "string" && /^MS-[A-F0-9]{12}$/.test(order.reference)
     && typeof order.totalAmount === "number" && Number.isFinite(order.totalAmount) && order.totalAmount > 0
-    && (order.paymentMethod === "CARD" || order.paymentMethod === "INVOICE");
+    && (order.paymentMethod === "CARD" || order.paymentMethod === "INVOICE")
+    && (order.invoice === undefined || parseInvoiceReceipt(order.invoice, order.reference) !== null);
+}
+
+export async function fetchInvoice(orderReference: string, token: string): Promise<Blob> {
+  const response = await fetch(`/api/orders/${encodeURIComponent(orderReference)}/invoice`, {
+    headers: {authorization: `Bearer ${token}`}, cache: "no-store", referrerPolicy: "no-referrer",
+  });
+  if (!response.ok || !response.headers.get("content-type")?.startsWith("application/pdf")) {
+    throw new Error("Не удалось скачать счёт. Попробуйте ещё раз или свяжитесь с нами, указав номер заказа.");
+  }
+  return response.blob();
 }

@@ -44,6 +44,8 @@ export function CheckoutPageContent() {
             </li>
           ))}
         </ul>
+        <p className="mt-5 flex justify-between gap-4 text-sm text-slate-600 dark:text-slate-300"><span>Доставка</span><strong>Бесплатно</strong></p>
+        <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">НДС включён в цену.</p>
         <div className="mt-5 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-t border-slate-200 dark:border-slate-700 pt-5 text-lg font-bold">
           <span>Итого</span>
           <span className="ml-auto tabular-nums">{formatCurrency(totalAmount)}</span>

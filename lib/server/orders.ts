@@ -2,6 +2,9 @@ import {randomBytes} from "node:crypto";
 import {getProductVariantById} from "@/lib/catalog";
 import {revalidateCartPrice} from "@/lib/cartPricing";
 import type {CreateOrderInput, Order, OrderItem, PaymentStatus} from "@/types/order";
+import type {InvoiceEmailStatus} from "@/types/invoice";
+import {FileOrderRepository} from "./fileOrderRepository";
+import path from "node:path";
 
 export interface OrderRepository {
   save(order: Order): Promise<void>;
@@ -9,6 +12,7 @@ export interface OrderRepository {
   findByReference(reference: string): Promise<Order | null>;
 
   updatePaymentStatus(reference: string, status: PaymentStatus): Promise<void>;
+  updateInvoiceEmailStatus(reference: string, status: InvoiceEmailStatus): Promise<void>;
 }
 
 class DevelopmentOrderRepository implements OrderRepository {
@@ -25,6 +29,11 @@ class DevelopmentOrderRepository implements OrderRepository {
   async updatePaymentStatus(reference: string, status: PaymentStatus) {
     const order = this.orders.get(reference);
     if (order) this.orders.set(reference, {...order, paymentStatus: status});
+  }
+
+  async updateInvoiceEmailStatus(reference: string, status: InvoiceEmailStatus) {
+    const order = this.orders.get(reference);
+    if (order?.invoice) this.orders.set(reference, {...order, invoice: {...order.invoice, emailStatus: status}});
   }
 }
 
@@ -45,20 +54,28 @@ class UnconfiguredOrderRepository implements OrderRepository {
     this.unavailable();
   }
 
+  async updateInvoiceEmailStatus(reference: string, status: InvoiceEmailStatus) {
+    void reference;
+    void status;
+    this.unavailable();
+  }
+
   private unavailable(): never {
     throw new Error("ORDER_STORAGE_NOT_CONFIGURED");
   }
 }
 
-const developmentRepository = new DevelopmentOrderRepository();
+const developmentRepository = process.env.NODE_ENV === "development"
+  ? new FileOrderRepository(path.join(process.cwd(), ".local/orders")) : new DevelopmentOrderRepository();
 export const orderRepository: OrderRepository =
-  process.env.NODE_ENV === "production" ? new UnconfiguredOrderRepository() : developmentRepository;
+  process.env.ORDER_STORAGE_DIR ? new FileOrderRepository(process.env.ORDER_STORAGE_DIR) :
+    process.env.NODE_ENV === "production" ? new UnconfiguredOrderRepository() : developmentRepository;
 
-export function createTrustedOrder(input: CreateOrderInput): Order | null {
+export function createTrustedOrder(input: CreateOrderInput, lookupProduct = getProductVariantById): Order | null {
   if (input.consent !== true) return null;
   const items: OrderItem[] = [];
   for (const item of input.items) {
-    const product = getProductVariantById(item.productId);
+    const product = lookupProduct(item.productId);
     if (!product) return null;
     const {measurement, pieceOrder, estimatedTotal: subtotal, invalidReason} = revalidateCartPrice(product, item);
     if (invalidReason) return null;

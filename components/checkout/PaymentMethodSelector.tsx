@@ -8,7 +8,7 @@ const options = [{
 }, {
   v: "INVOICE" as const,
   l: "Счёт на оплату",
-  d: "Счёт будет сформирован после проверки заказа и отправлен на указанный email."
+  d: "PDF сформируется при создании заказа. Счёт можно скачать на странице подтверждения; копия отправляется на email."
 }];
 
 export function PaymentMethodSelector({value, onChange}: {

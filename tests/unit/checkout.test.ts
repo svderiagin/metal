@@ -1,7 +1,8 @@
 import test, {afterEach, mock} from "node:test";
 import assert from "node:assert/strict";
 import {isCheckoutFormValid, createOrderInput} from "../../lib/checkout";
-import {createOrder, createPayment, isPaymentRedirect} from "../../lib/checkoutClient";
+import {createOrder, createPayment, fetchInvoice, isPaymentRedirect} from "../../lib/checkoutClient";
+import {parseInvoiceReceipt} from "../../lib/invoiceReceipt";
 import {parseOrderConfirmation, readOrderConfirmation, rememberOrderConfirmation} from "../../lib/orderConfirmation";
 import {isValidPhone, isValidEmail} from "../../lib/validation";
 import type {CheckoutFormData} from "../../types/order";
@@ -67,4 +68,22 @@ test("receipt parsing rejects corrupt storage and blocked storage retains an acc
   assert.deepEqual(readOrderConfirmation(storage), confirmation);
   saved = JSON.stringify({orderNumber: "forged"});
   assert.equal(readOrderConfirmation(storage), null);
+});
+
+test("invoice capability survives receipt storage but rejects malformed tokens and wrong invoice numbers", async () => {
+  const invoice = {number: reference, downloadToken: "a".repeat(64), emailStatus: "FAILED" as const, isPreview: true};
+  const confirmation = {orderNumber: reference, paymentMethod: "INVOICE" as const, email: "audit@example.invalid", paymentPending: false, invoice};
+  assert.deepEqual(parseOrderConfirmation(confirmation), confirmation);
+  for (const changed of [{downloadToken: "https://example.invalid/"}, {number: "MS-000000000000"}, {emailStatus: "PENDING"}, {isPreview: undefined}]) {
+    assert.equal(parseInvoiceReceipt({...invoice, ...changed}, reference), null);
+    assert.equal(parseOrderConfirmation({...confirmation, invoice: {...invoice, ...changed}}), null);
+  }
+  const fetched = mock.method(globalThis, "fetch", async () => new Response("%PDF-1.7", {headers: {"content-type": "application/pdf"}}));
+  assert.equal(await (await fetchInvoice(reference, invoice.downloadToken)).text(), "%PDF-1.7");
+  assert.deepEqual(fetched.mock.calls[0].arguments[1], {
+    headers: {authorization: `Bearer ${invoice.downloadToken}`}, cache: "no-store", referrerPolicy: "no-referrer",
+  });
+  fetched.mock.restore();
+  mock.method(globalThis, "fetch", async () => Response.json({ok: false}, {status: 404}));
+  await assert.rejects(fetchInvoice(reference, invoice.downloadToken), /Не удалось скачать/);
 });

@@ -75,7 +75,8 @@ export function CheckoutForm() {
         orderNumber: result.order.reference,
         paymentMethod: form.paymentMethod,
         email: form.email,
-        paymentPending: form.paymentMethod === "CARD"
+        paymentPending: form.paymentMethod === "CARD",
+        ...(result.order.invoice ? {invoice: result.order.invoice} : {})
       };
       rememberOrderConfirmation(confirmation);
       if (form.paymentMethod === "INVOICE") {

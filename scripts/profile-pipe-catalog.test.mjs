@@ -1,9 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import vm from 'node:vm';
-import ts from 'typescript';
-import {randomBytes} from 'node:crypto';
+import {createTrustedOrder} from '../lib/server/orders.ts';
 import {readProjectData} from './project-data.mjs';
 
 const cache=new Map();
@@ -74,14 +72,13 @@ test('cart reload keeps selected length, replaces cached quantity and rejects ma
 });
 
 test('server order validation and payment totals use metres, not pieces or fabricated mass',()=>{
- const product=confirmed(find(40,40,2),157);const testModule={exports:{}};
- const source=ts.transpileModule(fs.readFileSync('lib/server/orders.ts','utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2020}}).outputText;
- vm.runInNewContext(source,{module:testModule,exports:testModule.exports,process:{env:{NODE_ENV:'test'}},require:name=>name==='node:crypto'?{randomBytes}:name==='@/lib/catalog'?{getProductVariantById:id=>id===product.id?product:undefined}:readProjectData(name.replace('@/','')+'.ts',cache)});
+ const product=confirmed(find(40,40,2),157);
+ const createOrder=input=>createTrustedOrder(input,id=>id===product.id?product:undefined);
  const body={consent:true,items:[{productId:product.id,quantity:12,pieceOrder:{pieces:2,lengthMeters:6}}],customer:{type:'INDIVIDUAL',fullName:'Тест',email:'test@example.invalid',phone:'+79000000000'},delivery:{address:'Тестовый адрес'},paymentMethod:'INVOICE'};
  const parsed=parseCreateOrderInput(body);assert.ok(parsed);assert.equal(parsed.items[0].pieceOrder.pieces,2);
- const order=testModule.exports.createTrustedOrder(parsed);assert.equal(order.totalAmount,1884);assert.equal(order.items[0].quantity,12);assert.equal(order.items[0].unitPrice,157);assert.equal(order.items[0].pieceOrder.pieces,2);assert.equal(hasValidOrderAmount(order),true);
+ const order=createOrder(parsed);assert.equal(order.totalAmount,1884);assert.equal(order.items[0].quantity,12);assert.equal(order.items[0].unitPrice,157);assert.equal(order.items[0].pieceOrder.pieces,2);assert.equal(hasValidOrderAmount(order),true);
  order.items[0].subtotal=314;assert.equal(hasValidOrderAmount(order),false);
- const big=parseCreateOrderInput({...body,items:[{productId:product.id,quantity:5994,pieceOrder:{pieces:999,lengthMeters:6}}]});assert.ok(big);assert.equal(testModule.exports.createTrustedOrder(big).items[0].quantity,5994);
+ const big=parseCreateOrderInput({...body,items:[{productId:product.id,quantity:5994,pieceOrder:{pieces:999,lengthMeters:6}}]});assert.ok(big);assert.equal(createOrder(big).items[0].quantity,5994);
  assert.equal(parseCreateOrderInput({...body,items:[{productId:product.id,quantity:12,pieceOrder:{pieces:1.5,lengthMeters:6}}]}),null);
- assert.equal(testModule.exports.createTrustedOrder({...parsed,items:[{productId:product.id,quantity:12,pieceOrder:{pieces:2,lengthMeters:12}}]}),null);
+ assert.equal(createOrder({...parsed,items:[{productId:product.id,quantity:12,pieceOrder:{pieces:2,lengthMeters:12}}]}),null);
 });

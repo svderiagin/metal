@@ -10,6 +10,8 @@ import {POST as quotePost} from "../../app/api/quote/route";
 import {POST as orderPost} from "../../app/api/orders/route";
 import {POST as paymentPost} from "../../app/api/payments/create/route";
 import {POST as webhookPost} from "../../app/api/payments/webhook/route";
+import {GET as invoiceGet} from "../../app/api/orders/[reference]/invoice/route";
+import {invoiceService} from "../../lib/server/invoices";
 
 afterEach(() => mock.restoreAll());
 const contact = {name: "Анна", email: "audit@example.invalid", phone: "+79000000000", message: "Тестовая заявка", consent: true};
@@ -60,15 +62,55 @@ test("contact and quote routes reject invalid input, honor honeypots and fail ho
   assert.equal((await quotePost(request(contact))).status, 200);
 });
 
-test("order endpoint uses current catalog prices and does not report success when delivery fails", async () => {
+test("order endpoint saves a PDF using current prices; mail failure preserves the accepted order and download", async () => {
   assert.equal((await orderPost(request({...order(), consent: false}))).status, 400);
   assert.equal((await orderPost(request({...order(), items: [{productId: "unknown", quantity: 1}]}))).status, 400);
-  assert.equal((await orderPost(request(order()))).status, 503);
+  const failed = await orderPost(request(order()));
+  assert.equal(failed.status, 201);
+  const failedResult = await failed.json();
+  assert.equal(failedResult.order.invoice.emailStatus, "FAILED");
+  const saved = await orderRepository.findByReference(failedResult.order.reference);
+  assert.equal(saved?.invoice?.emailStatus, "FAILED");
+  assert.ok(saved?.invoice?.pdfBase64);
+  const context = {params: Promise.resolve({reference: failedResult.order.reference})};
+  const download = () => invoiceGet(new Request("http://localhost/api/invoice", {
+    headers: {authorization: `Bearer ${failedResult.order.invoice.downloadToken}`},
+  }), context);
+  const first = await download();
+  assert.equal(first.status, 200);
+  assert.equal(first.headers.get("content-type"), "application/pdf");
+  assert.match(first.headers.get("cache-control")!, /no-store/);
+  const bytes = Buffer.from(await first.arrayBuffer());
+  assert.equal(bytes.subarray(0, 5).toString(), "%PDF-");
+  assert.deepEqual(Buffer.from(await (await download()).arrayBuffer()), bytes);
+  for (const token of [undefined, "0".repeat(64), failedResult.order.reference]) {
+    assert.equal((await invoiceGet(new Request("http://localhost/api/invoice", {
+      headers: token ? {authorization: `Bearer ${token}`} : {},
+    }), context)).status, 404);
+  }
   const sent = mock.method(notificationService, "sendOrderNotification", async () => {});
   const response = await orderPost(request(order()));
   assert.equal(response.status, 201);
   const result = await response.json();
   assert.equal(result.order.totalAmount, 1070);
+  assert.equal(result.order.invoice.emailStatus, "SENT");
+  assert.equal("pdfBase64" in result.order.invoice, false);
+  assert.equal("accessTokenHash" in result.order.invoice, false);
+  assert.equal(sent.mock.calls.length, 1);
+});
+
+test("PDF or storage failure rejects before sending mail; saved orders survive a mail-status write failure", async () => {
+  const sent = mock.method(notificationService, "sendOrderNotification", async () => {});
+  const brokenPdf = mock.method(invoiceService, "create", async () => {throw new Error("PDF failure");});
+  assert.equal((await orderPost(request(order()))).status, 503);
+  assert.equal(sent.mock.calls.length, 0);
+  brokenPdf.mock.restore();
+  const brokenStorage = mock.method(orderRepository, "save", async () => {throw new Error("Disk full");});
+  assert.equal((await orderPost(request(order()))).status, 503);
+  assert.equal(sent.mock.calls.length, 0);
+  brokenStorage.mock.restore();
+  mock.method(orderRepository, "updateInvoiceEmailStatus", async () => {throw new Error("Disk full");});
+  assert.equal((await orderPost(request(order()))).status, 201);
   assert.equal(sent.mock.calls.length, 1);
 });
 

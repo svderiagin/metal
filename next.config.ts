@@ -3,6 +3,7 @@ import type {NextConfig} from "next";
 const nextConfig: NextConfig = {
   distDir: process.env.METAL_TEST_DIST_DIR || ".next",
   allowedDevOrigins: ["127.0.0.1"],
+  outputFileTracingIncludes: {"/api/orders": ["./lib/server/invoice-fonts/*.ttf"]},
   async headers() {
     return [{
       source: "/images/:path*",

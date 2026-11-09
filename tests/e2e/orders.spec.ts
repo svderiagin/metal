@@ -1,4 +1,6 @@
 import {test, expect, openProduct, samples, visibleProduct, seedCart, fillCheckout} from "../browser";
+import {PDFDocument} from "pdf-lib";
+import path from "node:path";
 
 test("order drafts and totals survive table and card breakpoints before adding to cart", async ({page}) => {
   const product = samples.shveller;
@@ -167,7 +169,7 @@ test("checkout refusal preserves the entered data and the real cart", async ({pa
 });
 
 for (const storageBlocked of [false, true]) {
-  test(`accepted invoice clears cart and displays the receipt${storageBlocked ? " when session storage is blocked" : ""}`, async ({page}) => {
+  test(`accepted invoice clears cart and displays the receipt${storageBlocked ? " when session storage is blocked" : ""}`, async ({page}, testInfo) => {
     await seedCart(page);
     if (storageBlocked) await page.addInitScript(() => Object.defineProperty(window, "sessionStorage", {get() {throw new Error("blocked");}}));
     let submissions = 0;
@@ -176,7 +178,8 @@ for (const storageBlocked of [false, true]) {
       expect(body.consent).toBe(true);
       expect(body.items).toHaveLength(1);
       submissions++;
-      await route.fulfill({status: 201, json: {ok: true, order: {reference: "MS-A1B2C3D4E5F6", totalAmount: 1605, paymentMethod: "INVOICE"}}});
+      await route.fulfill({status: 201, json: {ok: true, order: {reference: "MS-A1B2C3D4E5F6", totalAmount: 1605, paymentMethod: "INVOICE",
+        invoice: {number: "MS-A1B2C3D4E5F6", downloadToken: "a".repeat(64), emailStatus: storageBlocked ? "SENT" : "FAILED", isPreview: true}}}});
     });
     await page.goto("/checkout");
     await fillCheckout(page);
@@ -186,6 +189,37 @@ for (const storageBlocked of [false, true]) {
     await expect(page.getByText("MS-A1B2C3D4E5F6", {exact: true})).toBeVisible();
     expect(submissions).toBe(1);
     expect(await page.evaluate(() => JSON.parse(localStorage.getItem("metal-store-cart-v1")!))).toEqual([]);
+    await expect(page.getByText("Образец счёта — не для оплаты", {exact: true})).toBeVisible();
+    const button = page.getByRole("button", {name: "Скачать счёт PDF", exact: true});
+    await expect(button).toBeVisible();
+    if (!storageBlocked) {
+      await expect(page.getByText(/Письмо отправить не удалось/)).toBeVisible();
+      await page.reload();
+      await expect(button).toBeVisible();
+    } else await expect(page.getByText(/передан почтовому сервису/)).toBeVisible();
+    await button.click();
+    const downloadError = page.getByRole("main").getByRole("alert");
+    await expect(downloadError).toContainText("Не удалось скачать счёт");
+    const pdf = await PDFDocument.create();
+    pdf.addPage();
+    await page.route("**/api/orders/MS-A1B2C3D4E5F6/invoice", async route => {
+      expect(route.request().headers().authorization).toBe(`Bearer ${"a".repeat(64)}`);
+      expect(route.request().url()).not.toContain("token=");
+      await route.fulfill({status: 200, contentType: "application/pdf", body: Buffer.from(await pdf.save())});
+    });
+    const downloading = page.waitForEvent("download");
+    await button.focus();
+    await page.keyboard.press("Enter");
+    expect((await downloading).suggestedFilename()).toBe("invoice-MS-A1B2C3D4E5F6.pdf");
+    await expect(downloadError).toHaveCount(0);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    await page.screenshot({path: path.join("output/invoice-review-2026-11-09", `${testInfo.project.name}-${storageBlocked ? "sent" : "failed"}.png`), fullPage: true});
+    if (testInfo.project.name.startsWith("mobile") && !storageBlocked) {
+      await page.setViewportSize({width: 320, height: 844});
+      await expect(button).toBeVisible();
+      expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+      await page.screenshot({path: path.join("output/invoice-review-2026-11-09", `${testInfo.project.name}-320.png`), fullPage: true});
+    }
   });
 }
 

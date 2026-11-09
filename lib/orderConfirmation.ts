@@ -1,6 +1,7 @@
 import type {OrderConfirmation} from "@/types/order";
 import {ORDER_STORAGE_KEY} from "./constants";
 import {isValidEmail} from "./validation";
+import {parseInvoiceReceipt} from "./invoiceReceipt";
 
 let memory: OrderConfirmation | null = null;
 
@@ -10,8 +11,10 @@ export function parseOrderConfirmation(value: unknown): OrderConfirmation | null
   if (typeof order.orderNumber !== "string" || !/^MS-[A-F0-9]{12}$/.test(order.orderNumber)
     || (order.paymentMethod !== "CARD" && order.paymentMethod !== "INVOICE")
     || typeof order.email !== "string" || !isValidEmail(order.email)) return null;
+  const invoice = order.invoice === undefined ? undefined : parseInvoiceReceipt(order.invoice, order.orderNumber);
+  if (invoice === null) return null;
   return {orderNumber: order.orderNumber, paymentMethod: order.paymentMethod, email: order.email,
-    paymentPending: order.paymentMethod === "CARD"};
+    paymentPending: order.paymentMethod === "CARD", ...(invoice ? {invoice} : {})};
 }
 
 export function rememberOrderConfirmation(order: OrderConfirmation, storage: () => Pick<Storage, "setItem"> = () => window.sessionStorage) {

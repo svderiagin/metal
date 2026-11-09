@@ -1,4 +1,5 @@
 import type {CartPieceOrder} from "./cart";
+import type {InvoiceReceipt, StoredInvoice} from "./invoice";
 
 export type CustomerType = "INDIVIDUAL" | "COMPANY";
 export type PaymentMethod = "CARD" | "INVOICE";
@@ -53,6 +54,7 @@ export interface Order {
   status: OrderStatus;
   paymentStatus: PaymentStatus;
   createdAt: string;
+  invoice?: StoredInvoice;
 }
 
 export interface CreateOrderResponse {
@@ -61,6 +63,7 @@ export interface CreateOrderResponse {
     reference: string;
     totalAmount: number;
     paymentMethod: PaymentMethod;
+    invoice?: InvoiceReceipt;
   };
 }
 
@@ -88,4 +91,5 @@ export interface OrderConfirmation {
   paymentMethod: PaymentMethod;
   email: string;
   paymentPending: boolean;
+  invoice?: InvoiceReceipt;
 }

@@ -1,9 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import fs from 'node:fs';
-import vm from 'node:vm';
-import ts from 'typescript';
-import {randomBytes} from 'node:crypto';
+import {createTrustedOrder} from '../lib/server/orders.ts';
 import {readProjectData} from './project-data.mjs';
 
 const cache = new Map();
@@ -14,15 +11,6 @@ const {revalidateCartPrice} = readProjectData('lib/cartPricing.ts', cache);
 const {hasValidOrderAmount} = readProjectData('lib/server/payments.ts', cache);
 const {comparePrices} = readProjectData('lib/catalogFilters.ts', cache);
 
-function serverModule(file, mocks = {}) {
-  const testModule = {exports: {}};
-  const source = ts.transpileModule(fs.readFileSync(file, 'utf8'), {compilerOptions: {module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020}}).outputText;
-  vm.runInNewContext(source, {module:testModule, exports: testModule.exports, process: {env: {NODE_ENV: 'test'}}, Response,
-    require: name => name in mocks ? mocks[name] : readProjectData(name.replace('@/', '') + '.ts', cache),
-  });
-  return testModule.exports;
-}
-const {createTrustedOrder} = serverModule('lib/server/orders.ts', {'node:crypto': {randomBytes}});
 
 test('stored cart deduplicates IDs, validates unknown JSON and keeps fractional units', () => {
   const product = productVariants.find(p => p.categoryId === 'cat-mesh' && p.price && p.unit === 'meter');
@@ -76,7 +64,7 @@ test('unknown prices sort last in both price directions', () => {
 
 test('unconfigured contact and quote routes fail honestly in local development', async () => {
   for (const endpoint of ['contact','quote']) {
-    const {POST} = serverModule(`app/api/${endpoint}/route.ts`);
+    const {POST} = await import(`../app/api/${endpoint}/route.ts`);
     const response = await POST(new Request(`http://localhost/api/${endpoint}`, {method:'POST', headers:{'content-type':'application/json'},
       body:JSON.stringify({name:'Тест', email:'audit@example.invalid', phone:'+79000000000', message:'Локальная проверка', consent:true})}));
     assert.equal(response.status, 503);

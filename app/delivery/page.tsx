@@ -11,8 +11,8 @@ const sections = [{
   t: "Самовывоз",
   d: "Получение со склада по предварительно согласованному времени. Для въезда потребуется номер заказа и данные автомобиля."
 }, {
-  t: "Расчёт доставки",
-  d: "Стоимость зависит от массы, длины продукции, типа машины, расстояния и ограничений на подъезд к объекту."
+  t: "Бесплатная доставка",
+  d: "Доставка заказа бесплатная. Тип транспорта и условия подъезда согласуем с учётом массы и длины продукции."
 }, {
   t: "Сроки",
   d: "Складские позиции обычно готовы к отгрузке после комплектации и подтверждения оплаты. Точный интервал сообщает менеджер."
@@ -30,13 +30,13 @@ export default function DeliveryPage() {
       className="min-w-0 text-card-title">{s.t}</h2></div><p className="mt-3 leading-7 text-slate-600 dark:text-slate-300">{s.d}</p>
     </section>)}</div>
     <section className="mt-8 max-w-3xl rounded-xl bg-slate-100 p-6 dark:bg-slate-800" aria-labelledby="delivery-request-heading">
-      <h2 id="delivery-request-heading" className="text-section-title">Данные для расчёта доставки</h2>
+      <h2 id="delivery-request-heading" className="text-section-title">Данные для организации доставки</h2>
       <ul className="mt-4 list-disc space-y-2 pl-5 leading-7 text-slate-700 dark:text-slate-300">
         <li>Перечень позиций, количество, масса и длина самых длинных изделий.</li>
         <li>Адрес объекта и желаемая дата получения.</li>
         <li>Ограничения подъезда, место разгрузки и доступная техника.</li>
       </ul>
-      <p className="mt-4 leading-7">Отправьте данные на <a href={`mailto:${companyDetails.salesEmail}`} className="font-semibold underline underline-offset-4">{companyDetails.salesEmail}</a>. Стоимость и возможность доставки по вашему адресу согласуются при расчёте заказа.</p>
+      <p className="mt-4 leading-7">Отправьте данные на <a href={`mailto:${companyDetails.salesEmail}`} className="font-semibold underline underline-offset-4">{companyDetails.salesEmail}</a>. Доставка бесплатная; возможность проезда и дату согласуем при подтверждении заказа.</p>
     </section>
   </PageContainer>
 }
