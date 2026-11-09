@@ -1,5 +1,6 @@
 import {services} from "@/data/services";
 import {ButtonLink} from "@/components/ui/Button";
+import {Icon} from "@/components/ui/Icon";
 
 export function ServicesSection() {
   return (
@@ -27,7 +28,7 @@ export function ServicesSection() {
         variant="secondary"
         className="mt-4 gap-2"
       >
-        Все услуги <span aria-hidden="true">→</span>
+        Все услуги <Icon name="arrow-right"/>
       </ButtonLink>
     </section>
   );

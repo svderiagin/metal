@@ -10,5 +10,4 @@
 
   .actions a[href="/cart"] { padding-inline: 6px; }
 
-  .actions a[href="/cart"] > span[aria-hidden] { display: none; }
 }

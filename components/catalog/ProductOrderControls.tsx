@@ -4,6 +4,7 @@ import {useEffect, useState} from "react";
 import {useCart} from "@/hooks/useCart";
 import {Button} from "@/components/ui/Button";
 import {Input} from "@/components/ui/Input";
+import {Icon} from "@/components/ui/Icon";
 import {getQuantityUnit, requiresWholeRozmetQuantity} from "@/lib/variantPresentation";
 import type {ProductVariant} from "@/types/product";
 import {QuoteRequestButton} from "./QuoteRequestButton";
@@ -90,7 +91,7 @@ export function ProductOrderControls({variant, view, showUnit = true, allowBacko
       : saved ? styles.savedCartButton
         : line && canPurchase ? styles.updateCartButton : styles.cartButton;
   const label = removed ? "Удалено" : shouldRemove ? "Удалить" : !canPurchase ? "Под заказ"
-    : saved ? "✓ В корзине" : line ? "Обновить" : "В корзину";
+    : saved ? <><Icon name="check"/><span className="whitespace-nowrap">В корзине</span></> : line ? "Обновить" : "В корзину";
   const actionClass = `${view === "card" ? "w-full" : tableStyles.tableAction} px-3`;
   const quoteQuantity = valid && (draft !== null || line || !needsQuote) ? quantity : null;
   const weightPerMeter = variant.weightPerMeterKg ?? (variant.weight?.unit === "кг/м" ? variant.weight.value : undefined);

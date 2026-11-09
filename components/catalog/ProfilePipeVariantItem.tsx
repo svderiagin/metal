@@ -4,6 +4,7 @@ import {useEffect, useState} from "react";
 import {useCart} from "@/hooks/useCart";
 import {Button} from "@/components/ui/Button";
 import {Input} from "@/components/ui/Input";
+import {Icon} from "@/components/ui/Icon";
 import {correctOrderQuantity, formatCatalogNumber, parseOrderQuantity} from "@/lib/catalogNumberInput";
 import {formatCurrency, formatUnitPrice} from "@/lib/currency";
 import {formatNumber} from "@/lib/numberFormat";
@@ -37,7 +38,8 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
   const saved = !!line && !line.invalidReason && !!order
     && order.pieces === savedPieces && order.lengthMeters === savedLength;
   const shouldRemove = !!line && pieces === 0;
-  const label = removed ? "Удалено" : shouldRemove ? "Удалить" : saved ? "✓ В корзине" : line ? "Обновить" : "В корзину";
+  const label = removed ? "Удалено" : shouldRemove ? "Удалить" : saved
+    ? <><Icon name="check"/><span className="whitespace-nowrap">В корзине</span></> : line ? "Обновить" : "В корзину";
   const buttonClass = removed ? filterStyles.removedCartButton : shouldRemove ? filterStyles.removeCartButton
     : saved ? filterStyles.savedCartButton : line ? filterStyles.updateCartButton : filterStyles.cartButton;
   const actionSize = view === "card" ? "w-full" : tableStyles.tableAction;

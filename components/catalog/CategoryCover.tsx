@@ -1,4 +1,5 @@
 import {CatalogCoverGallery} from "./CatalogCoverGallery";
+import {Icon} from "@/components/ui/Icon";
 
 export function CategoryCover({name, images, summary, descriptionId}: {
   name: string;
@@ -19,7 +20,7 @@ export function CategoryCover({name, images, summary, descriptionId}: {
         <a href={`#${descriptionId}`}
           className="inline-flex min-h-11 w-fit items-center rounded-sm text-sm font-semibold text-brand-700 underline decoration-brand-700/40 underline-offset-4 hover:decoration-current focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-700 dark:text-brand-400 dark:decoration-brand-400/40 dark:focus-visible:outline-brand-400">
           Подробнее о категории
-          <span aria-hidden="true" className="ml-2">↓</span>
+          <Icon name="arrow-down" className="ml-2"/>
         </a>
       </div>
     </header>

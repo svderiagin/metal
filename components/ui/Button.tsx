@@ -2,7 +2,7 @@ import Link from "next/link";
 import type {ButtonHTMLAttributes, MouseEventHandler, ReactNode} from "react";
 
 const styles = [
-  "inline-flex min-h-11 cursor-pointer items-center justify-center rounded-lg border px-5 py-2.5",
+  "inline-flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-lg border px-5 py-2.5",
   "text-center text-sm font-semibold",
   "transition-colors",
   "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-600 dark:focus-visible:outline-brand-300",

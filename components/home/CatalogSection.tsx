@@ -2,6 +2,7 @@ import {getAllCategories} from "@/lib/catalog";
 import Link from "next/link";
 import Image from "next/image";
 import {ButtonLink} from "@/components/ui/Button";
+import {Icon} from "@/components/ui/Icon";
 import {catalogImageUrl} from "@/lib/catalog-image";
 import {catalogCoverGalleries} from "@/data/catalog-cover-galleries";
 import cardStyles from "@/components/catalog/CatalogCard.module.css";
@@ -37,7 +38,7 @@ export function CatalogSection() {
           <h2 id="home-catalog-heading" className="text-section-title">Каталог металлопроката</h2>
           <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">Выберите группу, затем сравните размеры, характеристики и цены.</p>
         </div>
-        <ButtonLink href="/catalog" variant="secondary" className="gap-2">Все разделы <span className="tabular-nums text-slate-500 dark:text-slate-400">{categories.length}</span><span aria-hidden="true">→</span></ButtonLink>
+        <ButtonLink href="/catalog" variant="secondary" className="gap-2">Все разделы <span className="tabular-nums text-slate-500 dark:text-slate-400">{categories.length}</span><Icon name="arrow-right"/></ButtonLink>
       </div>
       <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {featured.map(({category, parameters}) => {

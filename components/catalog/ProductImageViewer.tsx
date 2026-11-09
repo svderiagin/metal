@@ -3,6 +3,7 @@
 import {useEffect, useRef, useState, type ReactNode, type MouseEvent, type PointerEvent, type KeyboardEvent} from "react";
 import {createPortal} from "react-dom";
 import Image from "next/image";
+import {Icon} from "@/components/ui/Icon";
 import {catalogImageUrl} from "@/lib/catalog-image";
 import {clampImagePan, imageViewGeometry, imageZoomPan, type ImageSize} from "@/lib/imageViewer";
 import {DesktopImagePreload} from "./DesktopImagePreload";
@@ -153,7 +154,7 @@ export function ProductImageViewer({src, previewSrc = src, name, presentation = 
           {/* Overlay the frame so it does not shrink the image's 4:3 content box. */}
           {isReferencePreview && framed && <span aria-hidden="true" className="pointer-events-none absolute inset-0 rounded-xl border border-slate-300 dark:border-slate-600"/>}
           {isPreview ? <span aria-hidden="true" className="absolute bottom-1.5 right-1.5 flex h-6 w-6 items-center justify-center rounded-md bg-slate-950/75 text-white transition group-hover:bg-slate-950">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" className="h-4 w-4"><path d="M9 3H3v6m12-6h6v6M3 15v6h6m12-6v6h-6"/></svg>
+            <Icon name="expand"/>
           </span> : <span aria-hidden="true" className="absolute bottom-3 right-3 rounded-lg bg-slate-950/80 px-3 py-1.5 text-xs font-semibold text-white transition group-hover:bg-slate-950">Увеличить</span>}
         </span>
       </button>
@@ -176,7 +177,7 @@ export function ProductImageViewer({src, previewSrc = src, name, presentation = 
             </button>
             <button type="button" onClick={close} aria-label="Закрыть просмотр"
               className="flex h-11 w-11 shrink-0 cursor-pointer items-center justify-center rounded-lg hover:bg-slate-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-600 dark:hover:bg-slate-800 dark:focus-visible:outline-brand-300">
-              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-5 w-5"><path d="m6 6 12 12M6 18 18 6"/></svg>
+              <Icon name="close"/>
             </button>
           </div>}
           <div ref={imageViewportRef} className={`relative min-h-0 flex-1 overflow-hidden ${isPreview ? "rounded-xl" : ""}`}>
@@ -203,7 +204,7 @@ export function ProductImageViewer({src, previewSrc = src, name, presentation = 
           </div>
           {isPreview && <button type="button" onClick={close} aria-label="Закрыть просмотр" title="Закрыть (Esc)"
             className="absolute right-2 top-2 z-10 flex h-11 w-11 cursor-pointer items-center justify-center rounded-lg border border-white/15 bg-slate-900/45 text-white/90 shadow-sm backdrop-blur-sm transition-colors hover:bg-slate-900/75 hover:text-white focus-visible:bg-slate-900/75 focus-visible:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white active:bg-slate-950/90">
-            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" className="h-5 w-5"><path strokeLinecap="round" d="m6 6 12 12M6 18 18 6"/></svg>
+            <Icon name="close"/>
           </button>}
           {caption && !expanded && <div className="max-h-[15dvh] shrink-0 overflow-y-auto border-t border-slate-200 px-4 py-2 text-sm text-slate-600 dark:border-slate-700 dark:text-slate-300">{caption}</div>}
         </div>}

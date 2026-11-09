@@ -8,7 +8,7 @@ import {formatNumber} from "@/lib/numberFormat";
 import {QuantitySelector} from "./QuantitySelector";
 import {getProductVariantById} from "@/lib/cartCatalog";
 import {formatDecimal, getMeasurementQuantityOptions} from "@/lib/orderMeasurement";
-import {formatCatalogNumber} from "@/lib/catalogNumberInput";
+import {formatCartQuantity} from "@/lib/cartQuantityInput";
 import {isVgpVariant, wholeVgpOrder} from "@/lib/vgp";
 
 export function CartItemRow({line}: { line: CartLine }) {
@@ -46,7 +46,7 @@ export function CartItemRow({line}: { line: CartLine }) {
             onChange={quantity => updateQuantity(line.productId, quantity)} disabled={!product}
             {...measurementOptions}
             step={vgp ? measurementOptions?.minimum : measurement.inputMode === "meter" ? 1 : 0.001}
-            formatValue={quantity => formatMeasuredQuantity(quantity, vgp ? undefined : measurement.inputMode === "meter" ? 2 : 3)}
+            formatValue={vgp ? quantity => formatCartQuantity(Number(quantity.toPrecision(12))) : undefined}
             normalizeQuantity={product && vgp ? quantity => {
               const order = wholeVgpOrder(product, quantity, measurement.inputMode);
               if (!order) return null;
@@ -55,7 +55,7 @@ export function CartItemRow({line}: { line: CartLine }) {
                 ? {message: `Объём округлён вверх до целых труб · ${order.pieces} шт.`} : {})};
             } : undefined}/>
           <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
-            {formatMeasuredQuantity(measurement.meters, 2).replace(".", ",")} м / {formatMeasuredQuantity(measurement.weightTons, 6).replace(".", ",")} т
+            {formatMeasuredQuantity(measurement.meters, 2)} м / {formatMeasuredQuantity(measurement.weightTons, 6)} т
           </p>
         </div>
       ) : (
@@ -79,5 +79,5 @@ export function CartItemRow({line}: { line: CartLine }) {
 
 function formatMeasuredQuantity(value: number, decimalPlaces?: number) {
   const text = decimalPlaces === undefined ? "" : formatDecimal(value, decimalPlaces);
-  return text && Number(text) > 0 ? text : formatCatalogNumber(Number(value.toPrecision(12)));
+  return formatCartQuantity(text && Number(text) > 0 ? Number(text) : Number(value.toPrecision(12)));
 }

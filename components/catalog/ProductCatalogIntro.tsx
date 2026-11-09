@@ -1,5 +1,6 @@
 import {CatalogCoverGallery} from "./CatalogCoverGallery";
 import {CatalogDescription} from "./CatalogDescription";
+import {Icon} from "@/components/ui/Icon";
 import styles from "./ProductCatalogIntro.module.css";
 
 export function ProductCatalogIntro({title, label, images, description, coverName = title, detailsId, summary, resultsHref, resultsLabel = "Размеры и цены"}: {
@@ -22,7 +23,7 @@ export function ProductCatalogIntro({title, label, images, description, coverNam
       <CatalogDescription description={description} className={`${styles.description} mt-0`}/>
       {images.length > 0 && <div className={styles.gallery}><CatalogCoverGallery images={images} name={coverName} layout="compact"/></div>}
       {(resultsHref || detailsId) && <div className={`${styles.actions} flex flex-wrap items-center gap-x-5 gap-y-1`}>
-        {resultsHref && <a href={resultsHref} className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-brand-700 hover:underline hover:underline-offset-4 dark:text-brand-300">{resultsLabel}<span aria-hidden="true">↓</span></a>}
+        {resultsHref && <a href={resultsHref} className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-brand-700 hover:underline hover:underline-offset-4 dark:text-brand-300">{resultsLabel}<Icon name="arrow-down"/></a>}
         {detailsId && <a href={`#${detailsId}`} className="inline-flex min-h-11 items-center text-sm text-slate-600 hover:underline hover:underline-offset-4 dark:text-slate-300">Как выбрать</a>}
       </div>}
     </div>

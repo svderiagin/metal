@@ -1,4 +1,5 @@
 import {ButtonLink} from "@/components/ui/Button";
+import {Icon} from "@/components/ui/Icon";
 import {existsSync, readFileSync} from "node:fs";
 import {createHash} from "node:crypto";
 import path from "node:path";
@@ -29,7 +30,7 @@ export function HeroSection() {
             строительных бригад и компаний.
           </p>
           <div className="mt-5 grid gap-3 min-[380px]:grid-cols-2 sm:flex sm:flex-wrap">
-            <ButtonLink href="/catalog" className={styles.primaryAction}>Каталог <span aria-hidden="true" className="ml-2">→</span></ButtonLink>
+            <ButtonLink href="/catalog" className={styles.primaryAction}>Каталог <Icon name="arrow-right"/></ButtonLink>
             <ButtonLink href="/#request" variant="secondary" className={styles.secondaryAction}>Расчёт заказа</ButtonLink>
           </div>
           <p className={`${styles.terms} mt-4 border-t pt-3 text-sm`}>Со склада и под заказ. Стоимость и сроки согласуем по спецификации.</p>

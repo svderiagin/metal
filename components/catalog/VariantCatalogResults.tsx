@@ -16,6 +16,7 @@ import {Button} from "@/components/ui/Button";
 import {ResetFiltersButton} from "./ResetFiltersButton";
 import {CatalogVariantLayout, CatalogVariantTable} from "./CatalogVariantLayout";
 import {isDemonstrationProduct} from "@/lib/catalogOffer";
+import {DetailsSummary} from "@/components/ui/DetailsSummary";
 
 export function VariantCatalogResults({visible, categorySlug, isSheetCatalog, resultsCount, currentPage, pages, onPageChange, onReset}: {
   visible: ProductVariant[]; categorySlug: string; isSheetCatalog: boolean; resultsCount: number; currentPage: number; pages: number;
@@ -81,7 +82,7 @@ function VariantSpecifications({variant, showDetails = true}: {variant: ProductV
   return <>
     <dl className="space-y-1.5 text-sm">{specifications.map((s, i) => <div key={`${s.name}-${i}`}><dt className="inline text-slate-600 dark:text-slate-400">{s.name}: </dt><dd className="inline font-medium tabular-nums">{s.value}</dd></div>)}{variant.weight && <div><dt className="inline text-slate-600 dark:text-slate-400">Теоретическая масса: </dt><dd className="inline font-medium tabular-nums">{formatNumber(variant.weight.value)} {variant.weight.unit}</dd></div>}</dl>
     {showDetails && variant.id.startsWith("rozmet-") && (variant.description || variant.imageUrls.length > 1) && <details className="mt-3 text-sm">
-      <summary className="cursor-pointer font-semibold">Подробнее о товаре</summary>
+      <DetailsSummary className="font-semibold">Подробнее о товаре</DetailsSummary>
       {variant.description && <CatalogDescription description={variant.description} className="mt-3"/>}
       {variant.imageUrls.slice(1).map(src => <CatalogImage key={src} src={src} name={variant.name} compact/>)}
     </details>}

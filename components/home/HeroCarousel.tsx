@@ -3,6 +3,7 @@
 import Image from "next/image";
 import {type CSSProperties, type ReactNode, useEffect, useMemo, useRef, useState} from "react";
 import {PageContainer} from "@/components/layout/PageContainer";
+import {Icon} from "@/components/ui/Icon";
 import {AUTO_ROTATE_MS, type HeroSlide} from "@/data/hero-slides";
 import styles from "./HeroCarousel.module.css";
 
@@ -120,18 +121,14 @@ export function HeroCarousel({slides, children}: {slides: HeroSlide[]; children:
             {canRotate && <div className="flex items-center gap-2" role="group" aria-label="Управление фотографиями">
               <button type="button" className={circle} aria-label={enabled ? "Приостановить слайд-шоу" : "Запустить слайд-шоу"}
                 onClick={() => setEnabled(value => !value)}>
-                <svg viewBox="0 0 24 24" fill="currentColor" className="size-5" aria-hidden="true">{enabled ? <path d="M7 5h4v14H7zm6 0h4v14h-4z"/> : <path d="m8 4 12 8-12 8z"/>}</svg>
+                <Icon name={enabled ? "pause" : "play"}/>
               </button>
-              <button type="button" className={circle} aria-label="Предыдущая фотография" onClick={() => move(-1)}><Arrow direction="left"/></button>
-              <button type="button" className={circle} aria-label="Следующая фотография" onClick={() => move(1)}><Arrow direction="right"/></button>
+              <button type="button" className={circle} aria-label="Предыдущая фотография" onClick={() => move(-1)}><Icon name="arrow-left"/></button>
+              <button type="button" className={circle} aria-label="Следующая фотография" onClick={() => move(1)}><Icon name="arrow-right"/></button>
             </div>}
           </div>
         </div>
       </div>
     </PageContainer>
   </section>;
-}
-
-function Arrow({direction}: {direction: "left" | "right"}) {
-  return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="size-5" aria-hidden="true"><path d={direction === "left" ? "M14 6l-6 6 6 6M8 12h12" : "M10 6l6 6-6 6M4 12h12"}/></svg>;
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import {useEffect, useRef, type ReactNode} from "react";
+import {DetailsSummary} from "@/components/ui/DetailsSummary";
 
 export function CatalogTypeNavigation({children}: {children: ReactNode}) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -66,10 +67,10 @@ export function CatalogSectionMenu({children}: {children: ReactNode}) {
         event.currentTarget.open = false;
       }
     }}>
-    <summary ref={summaryRef}
-      className="flex min-h-11 cursor-pointer list-none items-center gap-2 rounded-lg border border-slate-300 bg-white px-4 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600 dark:border-slate-600 dark:bg-slate-900 dark:focus-visible:outline-brand-300">
-      Все разделы <span aria-hidden="true" className="transition-transform group-open:rotate-180">⌄</span>
-    </summary>
+    <DetailsSummary ref={summaryRef}
+      className="rounded-lg border border-slate-300 bg-white px-4 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600 dark:border-slate-600 dark:bg-slate-900 dark:focus-visible:outline-brand-300">
+      Все разделы
+    </DetailsSummary>
     {children}
   </details>;
 }

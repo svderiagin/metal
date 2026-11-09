@@ -2,6 +2,7 @@
 
 import {type ReactNode, useId, useState} from "react";
 import {Input} from "@/components/ui/Input";
+import {Icon} from "@/components/ui/Icon";
 import {ResetFiltersButton} from "./ResetFiltersButton";
 import styles from "./FilterPanel.module.css";
 
@@ -38,9 +39,7 @@ export function FilterPanel({query, onQueryChange, onReset, children, sorting, r
           className={`${styles.toggle} flex min-h-11 w-full cursor-pointer items-center gap-2 rounded-lg text-left text-sm font-semibold lg:hidden`}>
           Параметры подбора
           {selectedCount}
-          <svg aria-hidden="true" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.75" className="ml-auto size-5 shrink-0">
-            <path d="m5 7.5 5 5 5-5"/>
-          </svg>
+          <Icon name="chevron-down" className="ml-auto"/>
         </button>
         <div id={parametersId} className={`${expanded ? "block" : "hidden"} lg:block`}>
           <div className={`${styles.fields} grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6`}>{children}</div>

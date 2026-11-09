@@ -15,6 +15,7 @@ import {GenericProductVariantCatalog} from "./GenericProductVariantCatalog";
 import type {ProductVariant} from "@/types/product";
 import {storefrontVariant} from "@/lib/catalogOffer";
 import {OrderDraftProvider} from "./OrderDraftProvider";
+import {DetailsSummary} from "@/components/ui/DetailsSummary";
 
 export function ProductVariantCatalog({children, ...props}: {variants: ProductVariant[]; categorySlug: string; children?: ReactNode}) {
   return <QuoteRequestProvider><OrderDraftProvider>
@@ -66,7 +67,7 @@ function LegacyProfilePipeCatalog({variants, categorySlug}: {variants: ProductVa
   useLinkedVariant(variants, () => setOpen(true));
   return <div className="min-w-0 lg:col-span-2">
     <details open={open} onToggle={event => setOpen(event.currentTarget.open)} className="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-5">
-      <summary className="cursor-pointer font-semibold">Другие позиции — параметры уточняются</summary>
+      <DetailsSummary className="font-semibold">Другие позиции — параметры уточняются</DetailsSummary>
       <GenericProductVariantCatalog variants={variants} categorySlug={categorySlug}/>
     </details>
   </div>;

@@ -10,6 +10,7 @@ import tableStyles from "./RebarTable.module.css";
 import {CatalogVariantLayout, CatalogVariantOrder, CatalogVariantSpecifications} from "./CatalogVariantLayout";
 import {Button} from "@/components/ui/Button";
 import {Input} from "@/components/ui/Input";
+import {Icon} from "@/components/ui/Icon";
 import {ProfilePipeVariantItem} from "./ProfilePipeVariantItem";
 import {useCart} from "@/hooks/useCart";
 import {formatCurrency, formatUnitPrice} from "@/lib/currency";
@@ -20,6 +21,7 @@ import type {OrderInputMode} from "@/types/cart";
 import type {ProductVariant} from "@/types/product";
 import {isDemonstrationProduct} from "@/lib/catalogOffer";
 import {useOrderDraft} from "./OrderDraftProvider";
+import {DetailsSummary} from "@/components/ui/DetailsSummary";
 
 export function MeasuredVariantItem({
   variant, view, kind,
@@ -89,7 +91,8 @@ function TonnageMeasuredVariantItem({
   const cannotCalculate = enteredQuantity !== null && enteredQuantity > 0 &&
     ((hasMass && (!parsedMeters || !parsedTons)) || (pricePerTon !== undefined && !variant.quoteOnly && parsedTons !== null && estimatedTotal === null));
   const invalidDraft = draft !== null && activeValue.trim() !== "" && (enteredQuantity === null || cannotCalculate);
-  const buttonLabel = removed ? "Удалено" : !canPurchase ? "Под заказ" : shouldRemove ? "Удалить" : isSaved ? "✓ В корзине" : hasChanges ? "Обновить" : "В корзину";
+  const buttonLabel = removed ? "Удалено" : !canPurchase ? "Под заказ" : shouldRemove ? "Удалить" : isSaved
+    ? <><Icon name="check"/><span className="whitespace-nowrap">В корзине</span></> : hasChanges ? "Обновить" : "В корзину";
   const buttonClassName = removed ? filterStyles.removedCartButton
     : shouldRemove ? filterStyles.removeCartButton
       : isSaved ? filterStyles.savedCartButton
@@ -244,7 +247,7 @@ function TonnageMeasuredVariantItem({
     {label: "Длина", value: variant.lengthMeters === undefined ? "—" : `${formatNumber(variant.lengthMeters)} м`},
   ]}/>;
   const moreDetails = view === "card"
-    ? <details className="mt-3 text-sm"><summary className="cursor-pointer font-semibold text-slate-600 focus-visible:outline-2 focus-visible:outline-brand-700 dark:text-slate-300 dark:focus-visible:outline-brand-300">Подробнее о товаре</summary>
+    ? <details className="mt-3 text-sm"><DetailsSummary className="font-semibold text-slate-600 focus-visible:outline-2 focus-visible:outline-brand-700 dark:text-slate-300 dark:focus-visible:outline-brand-300">Подробнее о товаре</DetailsSummary>
       <div className="mt-3">{details}</div></details>
     : <button type="button" aria-expanded={detailsOpen} aria-controls={`vgp-details-${variant.id}`}
       aria-label={`Подробности: ${variant.name}`} onClick={() => setDetailsOpen(!detailsOpen)}

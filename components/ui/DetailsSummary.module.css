@@ -1,0 +1,29 @@
+.summary {
+  display: flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 8px;
+  list-style: none;
+  cursor: pointer;
+}
+
+.summary::marker {
+  content: "";
+}
+
+.summary::-webkit-details-marker {
+  display: none;
+}
+
+.icon {
+  margin-inline-start: auto;
+  transition: transform 150ms ease;
+}
+
+:global(details[open]) > .summary > .icon {
+  transform: rotate(180deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .icon { transition: none; }
+}

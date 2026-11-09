@@ -1,6 +1,7 @@
 import {catalogImageUrl} from "@/lib/catalog-image";
 import Link from "next/link";
 import Image from "next/image";
+import {Icon} from "@/components/ui/Icon";
 import {formatUnitPrice} from "@/lib/currency";
 import {getProductTypeSummary} from "@/lib/productTypeSummary";
 import type {ProductType, ProductVariant} from "@/types/product";
@@ -62,7 +63,7 @@ export function ProductTypeCard({
             )}
             {minimumPrice === null && <strong className="text-base">{hasPrices ? "Цены в каталоге" : "Цена по запросу"}</strong>}
           </div>
-          <span aria-hidden="true" className="text-sm font-semibold text-brand-700 dark:text-brand-300">Размеры и цены <span className="ml-1">→</span></span>
+          <span aria-hidden="true" className="inline-flex items-center gap-1 text-sm font-semibold text-brand-700 dark:text-brand-300">Размеры и цены <Icon name="arrow-right"/></span>
           <p className="w-full text-xs text-slate-500 dark:text-slate-400">Позиций: {variants.length}</p>
         </div>
     </article>

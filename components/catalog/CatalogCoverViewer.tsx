@@ -2,6 +2,7 @@
 
 import {useEffect, useRef, useState, type KeyboardEvent, type PointerEvent, type RefObject} from "react";
 import Image from "next/image";
+import {Icon} from "@/components/ui/Icon";
 import {catalogImageUrl} from "@/lib/catalog-image";
 import {clampImagePan, imageViewGeometry, type ImageSize} from "@/lib/imageViewer";
 import {CoverGalleryNavigation} from "./CoverGalleryNavigation";
@@ -136,7 +137,7 @@ function CoverPhoto({src, name, index, count, onPrevious, onNext, onClose}: Acti
       </button>
       <button type="button" onClick={onClose} aria-label="Закрыть просмотр титульного фото"
         className="flex size-11 cursor-pointer items-center justify-center rounded-lg border border-white/20 bg-slate-900/70 text-white shadow-sm backdrop-blur-sm hover:bg-slate-900/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
-        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="size-5"><path d="m6 6 12 12M6 18 18 6" strokeLinecap="round"/></svg>
+        <Icon name="close"/>
       </button>
     </div>
     {zoomed && <p className={`pointer-events-none absolute left-1/2 max-w-[75%] -translate-x-1/2 rounded-lg bg-slate-950/75 px-3 py-2 text-center text-xs text-white ${count > 1 ? "bottom-14" : "bottom-3"}`}>

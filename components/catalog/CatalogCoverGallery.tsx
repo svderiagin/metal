@@ -3,6 +3,7 @@
 import {useRef, useState} from "react";
 import {createPortal} from "react-dom";
 import Image from "next/image";
+import {Icon} from "@/components/ui/Icon";
 import {catalogImageUrl} from "@/lib/catalog-image";
 import {coverGalleryImages, coverGalleryIndex} from "@/lib/catalogCoverGallery";
 import {DesktopImagePreload} from "./DesktopImagePreload";
@@ -53,9 +54,7 @@ export function CatalogCoverGallery({images, name, layout = "wide", className = 
             loading={eager ? "eager" : undefined} fetchPriority={eager ? "high" : undefined}
             className={layout === "banner" || hasSlides ? "object-cover object-center" : "object-contain object-center"}/>
           <span aria-hidden="true" className={`pointer-events-none absolute flex size-9 items-center justify-center rounded-full bg-slate-950/70 text-white shadow-sm transition-colors group-hover:bg-slate-950/90 ${layout === "compact" ? "bottom-1 right-1 sm:bottom-3 sm:right-3" : "bottom-3 right-3"}`}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="size-5">
-              <circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5M7.5 10.5h6m-3-3v6" strokeLinecap="round"/>
-            </svg>
+            <Icon name="zoom-in"/>
           </span>
         </span>
       </button>

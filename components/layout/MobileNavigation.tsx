@@ -4,6 +4,7 @@ import {usePathname} from "next/navigation";
 import {useId, useRef, useState} from "react";
 import {mainNavigation} from "@/lib/constants";
 import styles from "./Navigation.module.css";
+import {Icon} from "@/components/ui/Icon";
 
 export function MobileNavigation() {
   const pathname = usePathname();
@@ -24,7 +25,7 @@ export function MobileNavigation() {
         className="flex min-h-12 w-full cursor-pointer items-center justify-between px-4 font-bold text-white transition-colors hover:bg-slate-900 sm:px-6"
       >
         Меню
-        <span className="text-xl" aria-hidden>{open ? "×" : "☰"}</span>
+        <Icon name={open ? "close" : "menu"}/>
       </button>
       <nav id={navigationId} hidden={!open} aria-label="Мобильная навигация" className="mx-4 mb-3 overflow-hidden rounded-xl border border-slate-700 bg-slate-950 sm:mx-5">
         <ul>
