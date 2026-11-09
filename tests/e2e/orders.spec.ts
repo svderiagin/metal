@@ -35,10 +35,16 @@ test("cart adds a product, updates its quantity and survives reload", async ({pa
   await row.getByRole("button", {name: "В корзину", exact: true}).click();
   await page.goto("/cart");
   await expect(page.getByRole("link", {name: "Швеллер № 5", exact: true})).toBeVisible();
-  await page.getByRole("button", {name: "Увеличить количество", exact: true}).click();
-  await expect(page.getByLabel("Количество товара", {exact: true})).toHaveValue("4");
+  const cartRow = page.locator(`[data-cart-row="${samples.shveller.id}"]`);
+  const cartQuantity = cartRow.getByRole("textbox", {name: /^Длина заказа /});
+  await cartRow.getByRole("button", {name: "Увеличить количество", exact: true}).click();
+  await expect(cartQuantity).toHaveValue("4");
+  await expect.poll(() => page.evaluate(id => {
+    const items = JSON.parse(localStorage.getItem("metal-store-cart-v1") ?? "[]");
+    return items.find((item: {productId: string; quantity: number}) => item.productId === id)?.quantity;
+  }, samples.shveller.id)).toBe(4);
   await page.reload();
-  await expect(page.getByLabel("Количество товара", {exact: true})).toHaveValue("4");
+  await expect(cartQuantity).toHaveValue("4");
   for (const control of [page.getByRole("button", {name: "Очистить корзину", exact: true}), page.getByRole("link", {name: "Продолжить покупки", exact: true})]) {
     const contrast = await control.evaluate(element => {
       const style = getComputedStyle(element);
@@ -73,7 +79,7 @@ test("galvanized sheet limits quantity while typing and pasting, before blur", a
   await quantity.pressSequentially("0000000");
   await expect(quantity).toBeFocused();
   await expect(quantity).toHaveValue("0");
-  await expect(row.getByRole("button", {name: "В корзину", exact: true})).toBeDisabled();
+  await expect(row.getByRole("button", {name: "В корзину", exact: true})).toBeEnabled();
   await quantity.fill("");
   await quantity.pressSequentially("99999");
   await expect(quantity).toBeFocused();
@@ -97,20 +103,20 @@ for (const family of ["mesh", "profnastil"] as const) {
     const formattedTotal = new Intl.NumberFormat("ru-RU", {style: "currency", currency: "RUB"}).format(product.price! * 2);
     await expect(quantity).toHaveAttribute("inputmode", "numeric");
     await quantity.fill("1,5");
-    await expect(row.getByRole("button", {name: "В корзину", exact: true})).toBeDisabled();
+    await expect(row.getByRole("button", {name: "В корзину", exact: true})).toBeEnabled();
     await quantity.press("Tab");
     await expect(quantity).toHaveValue("2");
     await expect(row.getByText("Количество округлено вверх до 2.")).toBeVisible();
     await expect(total).toHaveText(formattedTotal);
     await row.getByRole("button", {name: "В корзину", exact: true}).click();
-    await expect(row.getByRole("button", {name: "✓ В корзине", exact: true})).toBeDisabled();
+    await expect(row.getByRole("button", {name: "В корзине", exact: true})).toBeDisabled();
     await quantity.fill("3");
     await expect(row.getByText("Не сохранено", {exact: true})).toBeVisible();
     await row.getByRole("button", {name: "Обновить", exact: true}).click();
-    await expect(row.getByRole("button", {name: "✓ В корзине", exact: true})).toBeDisabled();
+    await expect(row.getByRole("button", {name: "В корзине", exact: true})).toBeDisabled();
     await quantity.fill("-5");
     await quantity.blur();
-    await expect(quantity).toHaveValue("");
+    await expect(quantity).toHaveValue("1");
     await expect(row.getByRole("button", {name: "Удалить", exact: true})).toHaveCount(0);
     await quantity.fill("1 000");
     await quantity.blur();
@@ -157,7 +163,7 @@ test("checkout refusal preserves the entered data and the real cart", async ({pa
   await expect(page.locator("form").getByRole("alert")).toContainText("Тестовый отказ");
   await expect(page.getByLabel("ФИО *", {exact: true})).toHaveValue("Анна Тестовая");
   await page.goto("/cart");
-  await expect(page.getByLabel("Количество товара", {exact: true})).toHaveValue("3");
+  await expect(page.locator(`[data-cart-row="${samples.shveller.id}"]`).getByRole("textbox", {name: /^Длина заказа /})).toHaveValue("3");
 });
 
 for (const storageBlocked of [false, true]) {

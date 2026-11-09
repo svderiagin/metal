@@ -1,24 +1,33 @@
 "use client";
 import Link from "next/link";
 import {catalogProductPath} from "@/lib/catalogLinks";
-import type {CartLine} from "@/types/cart";
+import type {CartLine, OrderInputMode} from "@/types/cart";
 import {useCart} from "@/hooks/useCart";
 import {formatCurrency, formatUnitPrice} from "@/lib/currency";
 import {formatNumber} from "@/lib/numberFormat";
 import {QuantitySelector} from "./QuantitySelector";
 import {getProductVariantById} from "@/lib/cartCatalog";
-import {formatDecimal, getMeasurementQuantityOptions} from "@/lib/orderMeasurement";
+import {getCartMeasurementQuantityOptions, tonsToMeters} from "@/lib/orderMeasurement";
 import {formatCartQuantity} from "@/lib/cartQuantityInput";
 import {isVgpVariant, wholeVgpOrder} from "@/lib/vgp";
+import {isDemonstrationProduct, requiresOfferConfirmation} from "@/lib/catalogOffer";
+import {CartAmount} from "./CartAmount";
+import styles from "./CartItemRow.module.css";
 
 export function CartItemRow({line}: { line: CartLine }) {
-  const {updateQuantity, removeItem} = useCart();
+  const {updateQuantity, updatePieceOrder, removeItem} = useCart();
   const product = getProductVariantById(line.productId);
-  const measurement = line.measurement;
-  const measurementOptions = product && measurement ? getMeasurementQuantityOptions(product, measurement.inputMode) : undefined;
+  const canConvert = !!product && !isDemonstrationProduct(product) && Number.isFinite(product.weightPerMeterKg)
+    && (product.weightPerMeterKg ?? 0) > 0 && Number.isFinite(product.pricePerTon) && (product.pricePerTon ?? 0) > 0;
+  const measurement = line.measurement ?? (product?.unit === "ton" && canConvert ? {
+    inputMode: "ton" as const, meters: tonsToMeters(line.quantity, product.weightPerMeterKg!)!, weightTons: line.quantity,
+  } : undefined);
   const vgp = !!product && isVgpVariant(product);
+  const meterOptions = product && measurement ? getCartMeasurementQuantityOptions(product, "meter") : undefined;
+  const tonOptions = product && measurement ? getCartMeasurementQuantityOptions(product, "ton") : undefined;
+  const priceRequiresQuote = !product || requiresOfferConfirmation(product) || product.price === null || product.quoteOnly || product.priceQualifier === "from";
   return (
-    <article className="grid min-w-0 gap-4 border-b border-slate-200 dark:border-slate-700 py-5 last:border-0 sm:py-6 md:grid-cols-[minmax(0,1fr)_13.75rem_8rem] md:items-center md:gap-6">
+    <article data-cart-row={line.productId} className={`${styles.row} border-b border-slate-200 dark:border-slate-700 last:border-0`}>
       <div className="min-w-0 break-words">
         {line.slug ? <Link
           href={catalogProductPath(line.categorySlug, line.subcategorySlug, line.productTypeSlug, line.productId)}
@@ -27,57 +36,64 @@ export function CartItemRow({line}: { line: CartLine }) {
           {line.name}
         </Link> : <p className="font-bold">{line.name}</p>}
         <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
-          {line.invalidReason ? "Цена требует уточнения" : formatUnitPrice(line.price, line.priceUnit)}
+          {priceRequiresQuote ? "Цена требует уточнения" : <CartAmount>{formatUnitPrice(line.price, line.priceUnit)}</CartAmount>}
         </p>
         {line.invalidReason && <p role="alert" className="mt-2 text-sm text-amber-900 dark:text-amber-200">{line.invalidReason} <Link href="/#request" className="underline">Запросить расчёт</Link></p>}
       </div>
-      {line.pieceOrder ? (
-        <div>
-          <QuantitySelector whole productName={line.name} unit="шт." disabled={!product} value={line.pieceOrder.pieces}
-            onChange={value => updateQuantity(line.productId, value * line.pieceOrder!.lengthMeters)}/>
+      <div className={styles.order}>{line.pieceOrder ? (
+        <div className="space-y-2">
+          <QuantitySelector whole fieldLabel="Количество труб" productName={line.name} unit="шт." disabled={!product} value={line.pieceOrder.pieces}
+            onChange={pieces => updatePieceOrder(line.productId, pieces, line.pieceOrder!.lengthMeters)}/>
+          {product?.lengthRangeMeters ? <QuantitySelector fieldLabel="Длина одной трубы" productName={line.name} unit="м"
+            minimum={product.lengthRangeMeters[0]} maximum={product.lengthRangeMeters[1]}
+            value={line.pieceOrder.lengthMeters}
+            onChange={length => updatePieceOrder(line.productId, line.pieceOrder!.pieces, length)}/>
+            : <p className="text-sm text-slate-600 dark:text-slate-300">Длина трубы: {formatNumber(line.pieceOrder.lengthMeters)} м</p>}
           <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
-            {formatNumber(line.pieceOrder.pieces)} × {formatNumber(line.pieceOrder.lengthMeters)} м = {formatNumber(line.quantity)} м
+            Общая длина: {formatNumber(line.quantity)} м
           </p>
         </div>
       ) : measurement ? (
-        <div>
-          <QuantitySelector productName={line.name} unit={measurement.inputMode === "meter" ? "м" : "т"}
-            value={measurement.inputMode === "meter" ? measurement.meters : measurement.weightTons}
-            onChange={quantity => updateQuantity(line.productId, quantity)} disabled={!product}
-            {...measurementOptions}
-            step={vgp ? measurementOptions?.minimum : measurement.inputMode === "meter" ? 1 : 0.001}
-            formatValue={vgp ? quantity => formatCartQuantity(Number(quantity.toPrecision(12))) : undefined}
-            normalizeQuantity={product && vgp ? quantity => {
-              const order = wholeVgpOrder(product, quantity, measurement.inputMode);
-              if (!order) return null;
-              const exact = measurement.inputMode === "meter" ? order.meters : order.weightTons;
-              return {value: exact, ...(Math.abs(exact - quantity) > Math.max(1, quantity) * 1e-9
-                ? {message: `Объём округлён вверх до целых труб · ${order.pieces} шт.`} : {})};
-            } : undefined}/>
-          <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
-            {formatMeasuredQuantity(measurement.meters, 2)} м / {formatMeasuredQuantity(measurement.weightTons, 6)} т
-          </p>
+        <div className="space-y-2">
+          {(["meter", "ton"] as const).map((mode: OrderInputMode) => {
+            const options = mode === "meter" ? meterOptions : tonOptions;
+            return <QuantitySelector key={mode} fieldLabel={mode === "meter" ? "Длина заказа" : "Масса заказа"}
+              productName={line.name} unit={mode === "meter" ? "м" : "т"}
+              value={mode === "meter" ? measurement.meters : measurement.weightTons}
+              onChange={quantity => updateQuantity(line.productId, quantity, mode)} disabled={!product || !canConvert}
+              {...options}
+              step={vgp ? options?.minimum : mode === "meter" ? 1 : 0.001}
+              formatValue={quantity => formatCartQuantity(Number(quantity.toPrecision(8)))}
+              normalizeQuantity={product && vgp ? quantity => {
+                const order = wholeVgpOrder(product, quantity, mode);
+                if (!order) return null;
+                const exact = mode === "meter" ? order.meters : order.weightTons;
+                return {value: exact, ...(Math.abs(exact - quantity) > Math.max(1, quantity) * 1e-9
+                  ? {message: `Объём округлён вверх до целых труб · ${order.pieces} шт.`} : {})};
+              } : undefined}/>;
+          })}
+          {meterOptions && tonOptions && <p className="max-w-64 text-xs text-slate-600 dark:text-slate-400">
+            Максимум: {formatCartQuantity(tonOptions.maximum)} т
+            {vgp && product?.lengthMeters ? ` · целыми трубами по ${formatCartQuantity(product.lengthMeters)} м` : ""}
+          </p>}
         </div>
       ) : (
-        <QuantitySelector productName={line.name} unit={line.quantityUnit} whole={line.wholeQuantity}
+        <QuantitySelector fieldLabel={product?.unit === "ton" || product?.unit === "kg" ? "Масса заказа"
+          : product?.unit === "meter" ? "Длина заказа" : "Количество"}
+          productName={line.name} unit={line.quantityUnit} whole={line.wholeQuantity}
           step={!line.wholeQuantity && product?.unit === "ton" ? 0.001 : 1}
           disabled={!product} value={line.quantity} onChange={(value) => updateQuantity(line.productId, value)}/>
-      )}
-      <div className="flex min-w-0 flex-wrap items-center justify-between gap-x-5 gap-y-1 md:block md:min-w-32 md:text-right">
-        <strong className="break-words text-lg tabular-nums">{line.invalidReason ? "Расчёт недоступен" : formatCurrency(line.estimatedTotal)}</strong>
+      )}</div>
+      <div className={styles.price}>
+        <strong className={styles.total}>{line.invalidReason ? "Расчёт недоступен" : <CartAmount>{formatCurrency(line.estimatedTotal)}</CartAmount>}</strong>
         <button
           type="button"
           onClick={() => removeItem(line.productId)}
-          className="block min-h-11 text-sm font-medium text-red-700 dark:text-red-400 underline underline-offset-2 md:ml-auto md:mt-1"
+          className={`${styles.remove} block min-h-11 text-sm font-medium text-red-700 dark:text-red-400 underline underline-offset-2`}
         >
           Удалить
         </button>
       </div>
     </article>
   );
-}
-
-function formatMeasuredQuantity(value: number, decimalPlaces?: number) {
-  const text = decimalPlaces === undefined ? "" : formatDecimal(value, decimalPlaces);
-  return formatCartQuantity(text && Number(text) > 0 ? Number(text) : Number(value.toPrecision(12)));
 }

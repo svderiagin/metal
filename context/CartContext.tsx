@@ -2,9 +2,9 @@
 import {createContext, type ReactNode, useCallback, useEffect, useMemo, useState} from "react";
 import {CART_STORAGE_KEY} from "@/lib/constants";
 import {getProductVariantById} from "@/lib/cartCatalog";
-import type {CartItem, CartLine, CartMeasurement, CartPieceOrder} from "@/types/cart";
+import type {CartItem, CartLine, CartMeasurement, CartPieceOrder, OrderInputMode} from "@/types/cart";
 import {createCartLines, normalizeCartItems} from "@/lib/cart";
-import {addCartItem, updateCartItem} from "@/lib/cartMutations";
+import {addCartItem, updateCartItem, updateCartPieceOrder} from "@/lib/cartMutations";
 
 interface CartContextValue {
   items: CartItem[];
@@ -13,7 +13,8 @@ interface CartContextValue {
   lineItemCount: number;
   totalAmount: number;
   addItem: (id: string, q?: number, measurement?: CartMeasurement, pieceOrder?: CartPieceOrder) => void;
-  updateQuantity: (id: string, q: number) => void;
+  updateQuantity: (id: string, q: number, mode?: OrderInputMode) => void;
+  updatePieceOrder: (id: string, pieces: number, lengthMeters: number) => void;
   removeItem: (id: string) => void;
   clearCart: () => void;
 }
@@ -45,8 +46,11 @@ export function CartProvider({children}: { children: ReactNode }) {
   const addItem = useCallback((productId: string, quantity = 1, measurement?: CartMeasurement, pieceOrder?: CartPieceOrder) => {
     setItems(previous => addCartItem(previous, getProductVariantById(productId), quantity, measurement, pieceOrder));
   }, []);
-  const updateQuantity = useCallback((productId: string, quantity: number) => {
-    setItems(previous => updateCartItem(previous, getProductVariantById(productId), quantity));
+  const updateQuantity = useCallback((productId: string, quantity: number, mode?: OrderInputMode) => {
+    setItems(previous => updateCartItem(previous, getProductVariantById(productId), quantity, mode));
+  }, []);
+  const updatePieceOrder = useCallback((productId: string, pieces: number, lengthMeters: number) => {
+    setItems(previous => updateCartPieceOrder(previous, getProductVariantById(productId), pieces, lengthMeters));
   }, []);
   const removeItem = useCallback((productId: string) => setItems(prev => prev.filter(i => i.productId !== productId)), []);
   const clearCart = useCallback(() => setItems([]), []);
@@ -61,9 +65,10 @@ export function CartProvider({children}: { children: ReactNode }) {
     totalAmount,
     addItem,
     updateQuantity,
+    updatePieceOrder,
     removeItem,
     clearCart
-  }), [items, lines, hydrated, lineItemCount, totalAmount, addItem, updateQuantity, removeItem, clearCart]);
+  }), [items, lines, hydrated, lineItemCount, totalAmount, addItem, updateQuantity, updatePieceOrder, removeItem, clearCart]);
   return <CartContext value={value}>{children}</CartContext>
 }
 

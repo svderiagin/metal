@@ -4,6 +4,8 @@ import {getQuantityUnit, requiresWholeMetalMeshQuantity, requiresWholeRozmetQuan
 import type {CartItem, CartLine, CartMeasurement} from "@/types/cart";
 import {normalizePieceOrder} from "./profilePipe";
 import {isProfileSheetVariant} from "./profileSheet";
+import {isDemonstrationProduct} from "./catalogOffer";
+import {tonsToMeters} from "./orderMeasurement";
 
 export function normalizeCartItems(value: unknown): CartItem[] {
   if (!Array.isArray(value)) return [];
@@ -19,7 +21,7 @@ export function normalizeCartItems(value: unknown): CartItem[] {
       ? {productId: item.productId, quantity: pieceOrder.pieces * pieceOrder.lengthMeters, pieceOrder}
       : measurement
       ? {productId: item.productId, quantity: measurement.inputMode === "meter" ? measurement.meters : measurement.weightTons, measurement}
-      : {productId: item.productId, quantity: Math.min(item.quantity, 999)});
+      : {productId: item.productId, quantity: item.quantity});
   }
   return [...items.values()];
 }
@@ -41,9 +43,24 @@ export function createCartLines(items: CartItem[]): CartLine[] {
     const category = getCategoryById(product.categoryId);
     const subcategory = getSubcategoryById(product.subcategoryId);
     const productType = getProductTypeById(product.productTypeId);
+    let pricingInput = item;
+    if (!item.measurement && !item.pieceOrder && product.unit === "ton" && !isDemonstrationProduct(product)
+      && product.weightPerMeterKg !== undefined && Number.isFinite(product.weightPerMeterKg) && product.weightPerMeterKg > 0
+      && product.pricePerTon !== undefined && Number.isFinite(product.pricePerTon) && product.pricePerTon > 0) {
+      const meters = tonsToMeters(item.quantity, product.weightPerMeterKg);
+      // Derive a canonical order projection without rewriting saved state or correcting its volume.
+      if (meters !== null && meters > 0) pricingInput = {...item, measurement: {inputMode: "ton", meters,
+        weightTons: item.quantity, pricePerTon: 0, estimatedTotal: 0}};
+    }
+    const pricing = revalidateCartPrice(product, pricingInput);
+    // Keep the saved units visible if current catalog data can no longer convert them.
+    // Cached money still has no authority and an invalid line cannot reach checkout.
+    const measurement = pricing.measurement ?? (pricing.invalidReason && item.measurement
+      ? {...item.measurement, pricePerTon: 0, estimatedTotal: 0} : undefined);
     return {
       ...item,
-      ...revalidateCartPrice(product, item),
+      ...pricing,
+      measurement,
       name: product.name,
       slug: product.slug,
       categorySlug: category?.slug ?? "catalog",

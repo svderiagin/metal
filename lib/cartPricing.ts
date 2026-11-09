@@ -41,8 +41,10 @@ export function revalidateCartPrice(product: ProductVariant, item: PriceInput) {
       ? "Укажите целое количество рулонов."
       : "Укажите целое количество штук.";
   }
+  const legacyMeasuredTons = !item.measurement && product.unit === "ton" && !isDemonstrationProduct(product)
+    && product.weightPerMeterKg !== undefined && Number.isFinite(product.weightPerMeterKg) && product.weightPerMeterKg > 0;
   let estimatedTotal = calculateLineTotal(item.quantity, product.price ?? 0);
-  if (!Number.isFinite(item.quantity) || item.quantity <= 0 || (!item.measurement && item.quantity > 999)) {
+  if (!Number.isFinite(item.quantity) || item.quantity <= 0 || (!item.measurement && !legacyMeasuredTons && item.quantity > 999)) {
     invalidReason = "Не удалось пересчитать количество.";
   }
   if (item.measurement) {
@@ -78,6 +80,12 @@ export function revalidateCartPrice(product: ProductVariant, item: PriceInput) {
       if (estimatedTotal === null) invalidReason = "Не удалось пересчитать стоимость.";
       else measurement = {...measurement, meters: whole.meters, weightTons: whole.weightTons, estimatedTotal};
     }
+  }
+  const physicalMeters = measurement?.meters ?? (legacyMeasuredTons ? tonsToMeters(item.quantity, product.weightPerMeterKg!) : null);
+  const maximumMeters = getMeasurementQuantityOptions(product, "meter").maximum;
+  if (legacyMeasuredTons && physicalMeters === null) invalidReason = "Не удалось пересчитать количество.";
+  if (physicalMeters !== null && physicalMeters > maximumMeters + Math.max(1, maximumMeters) * 1e-9) {
+    invalidReason = "Объём превышает допустимое значение. Измените количество.";
   }
   if (invalidReason || estimatedTotal === null) estimatedTotal = 0;
   return {measurement, pieceOrder: undefined, invalidReason, estimatedTotal};

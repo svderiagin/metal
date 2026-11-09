@@ -1,0 +1,201 @@
+{
+  "note": "Manual CUA DOM measurements, prepared test suites were not run",
+  "cartTotal": "100 566 326,20 ₽",
+  "heavyBeamTotal": "100 439 675,03 ₽",
+  "dark": [
+    {
+      "amountIssues": [],
+      "inputIssues": [],
+      "pageOverflow": false,
+      "rows": [
+        {
+          "columns": "231px",
+          "width": 231
+        },
+        {
+          "columns": "231px",
+          "width": 231
+        },
+        {
+          "columns": "231px",
+          "width": 231
+        },
+        {
+          "columns": "231px",
+          "width": 231
+        }
+      ],
+      "theme": "dark",
+      "width": 320
+    },
+    {
+      "amountIssues": [],
+      "inputIssues": [],
+      "pageOverflow": false,
+      "rows": [
+        {
+          "columns": "301px",
+          "width": 301
+        },
+        {
+          "columns": "301px",
+          "width": 301
+        },
+        {
+          "columns": "301px",
+          "width": 301
+        },
+        {
+          "columns": "301px",
+          "width": 301
+        }
+      ],
+      "theme": "dark",
+      "width": 390
+    },
+    {
+      "amountIssues": [],
+      "inputIssues": [],
+      "pageOverflow": false,
+      "rows": [
+        {
+          "columns": "399px 240px",
+          "width": 663
+        },
+        {
+          "columns": "399px 240px",
+          "width": 663
+        },
+        {
+          "columns": "399px 240px",
+          "width": 663
+        },
+        {
+          "columns": "399px 240px",
+          "width": 663
+        }
+      ],
+      "theme": "dark",
+      "width": 768
+    },
+    {
+      "amountIssues": [],
+      "inputIssues": [],
+      "pageOverflow": false,
+      "rows": [
+        {
+          "columns": "439px 240px 184px",
+          "width": 911
+        },
+        {
+          "columns": "439px 240px 184px",
+          "width": 911
+        },
+        {
+          "columns": "439px 240px 184px",
+          "width": 911
+        },
+        {
+          "columns": "439px 240px 184px",
+          "width": 911
+        }
+      ],
+      "theme": "dark",
+      "width": 1024
+    },
+    {
+      "amountIssues": [],
+      "inputIssues": [],
+      "pageOverflow": false,
+      "rows": [
+        {
+          "columns": "311px 240px 184px",
+          "width": 783
+        },
+        {
+          "columns": "311px 240px 184px",
+          "width": 783
+        },
+        {
+          "columns": "311px 240px 184px",
+          "width": 783
+        },
+        {
+          "columns": "311px 240px 184px",
+          "width": 783
+        }
+      ],
+      "theme": "dark",
+      "width": 1280
+    },
+    {
+      "amountIssues": [],
+      "inputIssues": [],
+      "pageOverflow": false,
+      "rows": [
+        {
+          "columns": "406px 240px 184px",
+          "width": 878
+        },
+        {
+          "columns": "406px 240px 184px",
+          "width": 878
+        },
+        {
+          "columns": "406px 240px 184px",
+          "width": 878
+        },
+        {
+          "columns": "406px 240px 184px",
+          "width": 878
+        }
+      ],
+      "theme": "dark",
+      "width": 1440
+    }
+  ],
+  "light": [
+    {
+      "amountIssues": [],
+      "inputIssues": [],
+      "pageOverflow": false,
+      "theme": "light",
+      "width": 320
+    },
+    {
+      "amountIssues": [],
+      "inputIssues": [],
+      "pageOverflow": false,
+      "theme": "light",
+      "width": 390
+    },
+    {
+      "amountIssues": [],
+      "inputIssues": [],
+      "pageOverflow": false,
+      "theme": "light",
+      "width": 768
+    },
+    {
+      "amountIssues": [],
+      "inputIssues": [],
+      "pageOverflow": false,
+      "theme": "light",
+      "width": 1024
+    },
+    {
+      "amountIssues": [],
+      "inputIssues": [],
+      "pageOverflow": false,
+      "theme": "light",
+      "width": 1280
+    },
+    {
+      "amountIssues": [],
+      "inputIssues": [],
+      "pageOverflow": false,
+      "theme": "light",
+      "width": 1440
+    }
+  ]
+}

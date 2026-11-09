@@ -1,13 +1,13 @@
 "use client";
 
-import {useId, useRef, useState} from "react";
+import {useId, useRef, useState, type MouseEvent} from "react";
 import {Input} from "@/components/ui/Input";
 import {Icon} from "@/components/ui/Icon";
 import {correctOrderQuantity, formatCatalogNumber, parseCatalogNumber, parseOrderQuantity} from "@/lib/catalogNumberInput";
 import {formatCartQuantity, formatEditableCartQuantity, normalizeCartQuantityDraft, normalizeCartQuantityText, stepCartQuantity} from "@/lib/cartQuantityInput";
 import styles from "./QuantitySelector.module.css";
 
-export function QuantitySelector({value, onChange, whole = false, productName, unit,
+export function QuantitySelector({value, onChange, whole = false, productName, unit, fieldLabel,
   minimum = whole ? 1 : undefined, maximum = 999, decimalPlaces, step = 1, disabled = false,
   normalizeQuantity, formatValue = formatCartQuantity}: {
   value: number;
@@ -15,6 +15,7 @@ export function QuantitySelector({value, onChange, whole = false, productName, u
   whole?: boolean;
   productName?: string;
   unit?: string;
+  fieldLabel?: string;
   minimum?: number;
   maximum?: number;
   decimalPlaces?: number;
@@ -24,28 +25,40 @@ export function QuantitySelector({value, onChange, whole = false, productName, u
   formatValue?: (quantity: number) => string;
 }) {
   const statusId = useId();
+  const inputId = `${statusId}-input`;
+  const controls = useRef<HTMLDivElement>(null);
   const [draft, setDraft] = useState<string | null>(null);
   const [focused, setFocused] = useState(false);
   const [message, setMessage] = useState("");
   const selection = useRef<{start: number | null; end: number | null; direction: "forward" | "backward" | "none" | null}>
     ({start: null, end: null, direction: null});
-  const composition = useRef<({value: string} & typeof selection.current) | null>(null);
-  const label = `${productName ? `Количество ${productName}` : "Количество товара"}${unit ? `, ${unit}` : ""}`;
+  const composition = useRef<({value: string; draft: string | null} & typeof selection.current) | null>(null);
+  const label = `${fieldLabel ? `${fieldLabel}${productName ? ` ${productName}` : ""}`
+    : productName ? `Количество ${productName}` : "Количество товара"}${unit ? `, ${unit}` : ""}`;
   const text = draft ?? (focused ? formatEditableCartQuantity(value) : formatValue(value));
   const parsed = parseOrderQuantity(normalizeCartQuantityText(text));
   const options = {whole, minimum, maximum, decimalPlaces};
-  const invalid = draft !== null && text.trim() !== "" && !isSavedQuantity(parsed) && (parsed === null || parsed <= 0
-    || !!correctOrderQuantity(normalizeCartQuantityText(text), options).message);
+  const invalid = draft === null ? value > maximum + Math.max(1, maximum) * 1e-9
+    : text.trim() !== "" && !isSavedQuantity(parsed) && (parsed === null || parsed <= 0
+      || !!correctOrderQuantity(normalizeCartQuantityText(text), options).message);
   const current = draft === null ? value : parsed !== null && parsed > 0 ? parsed : value;
+  const lowerBound = minimum ?? step;
+  const atMinimum = current <= lowerBound + Math.abs(lowerBound) * 1e-12;
+  const atMaximum = current >= maximum - Math.abs(maximum) * 1e-12;
   const buttonClass = "inline-flex min-h-11 w-11 shrink-0 cursor-pointer items-center justify-center border border-slate-300 bg-slate-100 font-semibold transition-colors hover:bg-slate-200 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-slate-100 dark:border-slate-600 dark:bg-slate-800 dark:hover:bg-slate-700 dark:disabled:hover:bg-slate-800";
 
   function isSavedQuantity(quantity: number | null) {
     return quantity === value && value > 0 && value <= maximum && (!whole || Number.isInteger(value));
   }
 
+  function preserveOwnInputFocus(event: MouseEvent<HTMLButtonElement>) {
+    if (controls.current?.contains(document.activeElement)) event.preventDefault();
+  }
+
   function updateDraft(input: HTMLInputElement) {
     const previous = composition.current ?? {value: text, ...selection.current};
-    const previousDraft = normalizeCartQuantityDraft(previous.value, previous.start, previous.end, {maximum});
+    // Rejection must not silently clamp a historical order that exceeds a newly applied limit.
+    const previousDraft = normalizeCartQuantityDraft(previous.value, previous.start, previous.end);
     const next = normalizeCartQuantityDraft(input.value, input.selectionStart, input.selectionEnd, {maximum});
     const restored = previousDraft.accepted ? previousDraft : {
       value: formatEditableCartQuantity(value), selectionStart: null, selectionEnd: null,
@@ -58,9 +71,10 @@ export function QuantitySelector({value, onChange, whole = false, productName, u
       if (document.activeElement === input) input.setSelectionRange(accepted.selectionStart, accepted.selectionEnd, direction ?? undefined);
     }
     selection.current = {start: accepted.selectionStart, end: accepted.selectionEnd, direction};
-    setDraft(accepted.value);
+    const restoredDraft = previousDraft.accepted ? (composition.current ? composition.current.draft : draft) : null;
+    setDraft(next.accepted ? accepted.value : restoredDraft);
     setMessage(next.message ?? "");
-    return accepted.value;
+    return {value: accepted.value, accepted: next.accepted, restoredDraft};
   }
 
   function commit(direction = 0, rawInput?: string) {
@@ -109,13 +123,14 @@ export function QuantitySelector({value, onChange, whole = false, productName, u
       : `Введите количество больше 0 и не больше ${formatCartQuantity(maximum)}.`;
 
   return <div className={styles.editor}>
+    {fieldLabel && <label htmlFor={inputId} className={styles.label}>{fieldLabel}</label>}
     <div className={styles.row}>
-      <div className={styles.controls} role="group" aria-label={label}>
+      <div ref={controls} className={styles.controls} role="group" aria-label={label}>
         <button type="button" aria-label="Уменьшить количество" onClick={() => commit(-1)}
-          onMouseDown={event => event.preventDefault()} disabled={disabled || current <= (minimum ?? step)}
+          onMouseDown={preserveOwnInputFocus} disabled={disabled || atMinimum}
           className={`${buttonClass} rounded-l-lg border-r-0`}><Icon name="minus"/></button>
-        <Input aria-label={label} aria-invalid={invalid || undefined} aria-describedby={statusId}
-          type="text" inputMode={whole ? "numeric" : "decimal"} disabled={disabled} value={text}
+        <Input id={inputId} aria-label={label} aria-invalid={invalid || undefined} aria-describedby={statusId}
+          data-cart-input type="text" inputMode={whole ? "numeric" : "decimal"} disabled={disabled} value={text}
           autoComplete="off" spellCheck={false}
           onFocus={() => setFocused(true)}
           onSelect={event => {
@@ -126,16 +141,19 @@ export function QuantitySelector({value, onChange, whole = false, productName, u
             if (!composition.current) selection.current = {start: event.currentTarget.selectionStart,
               end: event.currentTarget.selectionEnd, direction: event.currentTarget.selectionDirection};
           }}
-          onCompositionStart={event => {composition.current = {value: text, start: event.currentTarget.selectionStart,
+          onCompositionStart={event => {composition.current = {value: text, draft, start: event.currentTarget.selectionStart,
             end: event.currentTarget.selectionEnd, direction: event.currentTarget.selectionDirection};}}
           onChange={event => {
             if ((event.nativeEvent as InputEvent).isComposing) {setDraft(event.currentTarget.value); setMessage("");}
             else updateDraft(event.currentTarget);
           }}
           onCompositionEnd={event => {
-            const accepted = updateDraft(event.currentTarget);
+            const result = updateDraft(event.currentTarget);
             composition.current = null;
-            if (document.activeElement !== event.currentTarget) commit(0, accepted);
+            // A rejected composition must not confirm or clamp an untouched historical order.
+            if (document.activeElement !== event.currentTarget && (result.accepted || result.restoredDraft !== null)) {
+              commit(0, result.value);
+            }
           }}
           onPaste={event => {
             const pasted = event.clipboardData.getData("text/plain").trim();
@@ -165,7 +183,7 @@ export function QuantitySelector({value, onChange, whole = false, productName, u
           }}
           className={`${styles.input} tabular-nums`}/>
         <button type="button" aria-label="Увеличить количество" onClick={() => commit(1)}
-          onMouseDown={event => event.preventDefault()} disabled={disabled || current >= maximum}
+          onMouseDown={preserveOwnInputFocus} disabled={disabled || atMaximum}
           className={`${buttonClass} rounded-r-lg border-l-0`}><Icon name="plus"/></button>
       </div>
       {unit && <span className="text-sm text-slate-500 dark:text-slate-400">{unit}</span>}

@@ -36,7 +36,7 @@ export function CheckoutForm() {
   const [submissionFailed, setSubmissionFailed] = useState(false);
   const [attempted, setAttempted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const {items, clearCart, totalAmount, lines} = useCart();
+  const {clearCart, totalAmount, lines} = useCart();
   const router = useRouter();
   const fieldErrors: CheckoutFieldErrors = attempted ? getCheckoutFieldErrors(form) : {};
   function updateField(key: keyof CheckoutFormData, value: string | boolean) {
@@ -64,7 +64,12 @@ export function CheckoutForm() {
     setSubmitting(true);
     setError("");
     try {
-      const orderInput = createOrderInput(form, items);
+      const orderInput = createOrderInput(form, lines.map(({productId, quantity, measurement, pieceOrder}) => ({
+        productId, quantity,
+        ...(measurement ? {measurement: {inputMode: measurement.inputMode, meters: measurement.meters,
+          weightTons: measurement.weightTons}} : {}),
+        ...(pieceOrder ? {pieceOrder: {pieces: pieceOrder.pieces, lengthMeters: pieceOrder.lengthMeters}} : {}),
+      })));
       const result = await createOrder(orderInput);
       const confirmation: OrderConfirmation = {
         orderNumber: result.order.reference,

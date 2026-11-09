@@ -4,6 +4,7 @@ import {CartItemRow} from "./CartItemRow";
 import {CartSummary} from "./CartSummary";
 import {EmptyState} from "@/components/ui/EmptyState";
 import {ButtonLink} from "@/components/ui/Button";
+import styles from "./CartPageContent.module.css";
 
 export function CartPageContent() {
   const {lines, hydrated} = useCart();
@@ -20,7 +21,7 @@ export function CartPageContent() {
   return (
     <div className="grid items-start gap-6 xl:grid-cols-[minmax(0,1fr)_22rem] xl:gap-8">
       <section
-        className="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-5 shadow-sm sm:px-6"
+        className={`${styles.items} rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-5 shadow-sm sm:px-6`}
         aria-label="Товары в корзине"
       >
         {lines.map((line) => (

@@ -24,7 +24,7 @@ export function parseOrderQuantity(value: string) {
 export function constrainOrderQuantityInput(value: string, maximum: number): {value: string; message?: string} {
   if (!decimalPattern.test(value.trim()) || value.trim().startsWith("-")) return {value};
   if (Number(normalizeDecimal(value)) > maximum) {
-    return {value: String(maximum), message: `Значение ограничено максимумом ${formatCatalogNumber(maximum)}.`};
+    return {value: String(maximum), message: `Значение ограничено максимумом ${formatCatalogNumber(maximum).replace(".", ",")}.`};
   }
   // Preserve the decimal separator and trailing fractional zeros while the user is typing.
   return {value: value.replace(/^(\s*)0+(?=\d)/u, "$1")};
@@ -51,17 +51,20 @@ export function correctOrderQuantity(value: string, {whole = false, minimum, max
     return {value: formatCatalogNumber(minimum), message: `Значение увеличено до минимума ${formatCatalogNumber(minimum).replace(".", ",")}.`};
   }
   if (maximum !== undefined && quantity > maximum) {
-    return {value: String(maximum), message: `Значение ограничено максимумом ${formatCatalogNumber(maximum)}.`};
+    return {value: String(maximum), message: `Значение ограничено максимумом ${formatCatalogNumber(maximum).replace(".", ",")}.`};
   }
+  // A converted ceiling can carry more precision than ordinary metre input.
+  if (maximum !== undefined && quantity === maximum) return {value: formatCatalogNumber(quantity)};
   if (whole && !Number.isInteger(quantity)) {
     const rounded = Math.ceil(quantity);
     return {value: String(rounded), message: `Количество округлено вверх до ${rounded}.`};
   }
   const normalized = normalizeDecimal(value);
   if (decimalPlaces !== undefined && (normalized.split(".")[1]?.length ?? 0) > decimalPlaces) {
-    const rounded = Number(new Intl.NumberFormat("en-US", {
+    const roundedInput = Number(new Intl.NumberFormat("en-US", {
       useGrouping: false, maximumFractionDigits: decimalPlaces,
     }).format(quantity));
+    const rounded = maximum === undefined ? roundedInput : Math.min(roundedInput, maximum);
     if (quantity > 0 && rounded === 0) {
       const minimum = formatCatalogNumber(10 ** -decimalPlaces).replace(".", ",");
       return {value: "", message: `Значение очищено. Минимум — ${minimum}.`};
