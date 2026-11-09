@@ -413,6 +413,22 @@ test("a valid legacy heavy-beam tonne order submits only canonical quantities an
   expect(await storedItems(page)).toEqual(items);
 });
 
+test("checkout preview keeps tiny measured quantities and whole-pipe weight visible without changing the order", async ({page}) => {
+  await openCart(page, [measuredItem(rebar6, 0.01), measuredItem(vgp, 18)]);
+  const before = await storedItems(page);
+  await page.getByRole("main").getByRole("link", {name: "Перейти к оформлению", exact: true}).click();
+  await expect(page).toHaveURL(/\/checkout$/);
+  const preview = page.getByRole("complementary");
+  await expect(preview.getByRole("heading", {name: "Ваш заказ", exact: true})).toBeVisible();
+  const rebarLine = preview.getByRole("listitem").filter({hasText: rebar6.name});
+  const vgpLine = preview.getByRole("listitem").filter({hasText: vgp.name});
+  await expect(rebarLine).toContainText(/0,01\s*м\s*\/\s*0,00000222\s*т/u);
+  await expect(rebarLine).toContainText(/0,16\s*₽/u);
+  await expect(vgpLine).toContainText(/18\s*м\s*\/\s*0,02304\s*т/u);
+  await expect(vgpLine).toContainText(/1\s*235,87\s*₽/u);
+  expect(await storedItems(page)).toEqual(before);
+});
+
 test("format-only changes and decimal steps preserve exact stored fractions", async ({page}) => {
   await openCart(page, [{productId: samples.shveller.id, quantity: 1.234567}, measuredItem(rebar6, 10)]);
   const genericRow = cartRow(page, samples.shveller.id), input = metersInput(genericRow);

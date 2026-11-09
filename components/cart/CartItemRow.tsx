@@ -27,7 +27,7 @@ export function CartItemRow({line}: { line: CartLine }) {
   const tonOptions = product && measurement ? getCartMeasurementQuantityOptions(product, "ton") : undefined;
   const priceRequiresQuote = !product || requiresOfferConfirmation(product) || product.price === null || product.quoteOnly || product.priceQualifier === "from";
   return (
-    <article data-cart-row={line.productId} className={`${styles.row} border-b border-slate-200 dark:border-slate-700 last:border-0`}>
+    <article data-cart-row={line.productId} className={`${styles.row} rounded-xl border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-900`}>
       <div className="min-w-0 break-words">
         {line.slug ? <Link
           href={catalogProductPath(line.categorySlug, line.subcategorySlug, line.productTypeSlug, line.productId)}

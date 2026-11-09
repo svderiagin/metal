@@ -1,0 +1,70 @@
+{
+  "mode": "Manual CUA DOM measurements",
+  "note": "Browser zoom 67%; actual minimum viewport was 358 CSS px.",
+  "cases": [
+    {
+      "amountIssues": [],
+      "cards": 4,
+      "inputClips": [],
+      "overflow": false,
+      "theme": "light",
+      "width": 358
+    },
+    {
+      "amountIssues": [],
+      "cards": 4,
+      "inputClips": [],
+      "overflow": false,
+      "theme": "light",
+      "width": 389
+    },
+    {
+      "amountIssues": [],
+      "cards": 4,
+      "inputClips": [],
+      "overflow": false,
+      "theme": "light",
+      "width": 769
+    },
+    {
+      "amountIssues": [],
+      "cards": 4,
+      "inputClips": [],
+      "overflow": false,
+      "theme": "light",
+      "width": 1024
+    },
+    {
+      "amountIssues": [],
+      "cards": 4,
+      "inputClips": [],
+      "overflow": false,
+      "theme": "light",
+      "width": 1280
+    },
+    {
+      "amountIssues": [],
+      "cards": 4,
+      "inputClips": [],
+      "overflow": false,
+      "theme": "light",
+      "width": 1440
+    },
+    {
+      "amountIssues": [],
+      "cards": 4,
+      "inputClips": [],
+      "overflow": false,
+      "theme": "dark",
+      "width": 358
+    },
+    {
+      "amountIssues": [],
+      "cards": 4,
+      "inputClips": [],
+      "overflow": false,
+      "theme": "dark",
+      "width": 1440
+    }
+  ]
+}

@@ -2,7 +2,7 @@
   display: grid;
   min-width: 0;
   gap: 16px;
-  padding-block: 20px;
+  padding: 20px;
 }
 
 .order {
@@ -33,7 +33,7 @@
   .row {
     grid-template-columns: minmax(0, 1fr) 15rem;
     column-gap: 24px;
-    padding-block: 24px;
+    padding: 24px;
   }
 
   .order {
