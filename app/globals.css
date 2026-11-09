@@ -118,11 +118,16 @@ html:not([data-keyboard-navigation]) :is(input, textarea, select):focus {
   --field-underline: var(--field-accent);
   outline-color: var(--field-accent);
 }
+.form-control[aria-invalid="true"] {
+  border-color: var(--error-border);
+  --field-underline: var(--error-border);
+}
 .form-control[aria-invalid="true"]:focus:not(:disabled) {
   --field-underline: var(--error-border);
   outline-color: var(--error-border);
 }
 @media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
   .form-control { transition-duration: 0s; }
 }
 ::selection { background: #bdd6e0; color: #15212a; }

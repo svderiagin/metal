@@ -13,7 +13,7 @@ type Layout = "banner" | "wide" | "compact";
 const imageSizes: Record<Layout, string> = {
   banner: "(min-width: 1360px) 1004px, (min-width: 1024px) calc(100vw - 356px), (min-width: 640px) calc(100vw - 40px), calc(100vw - 32px)",
   wide: "(min-width: 1360px) 938px, (min-width: 1024px) calc(100vw - 422px), (min-width: 640px) calc(100vw - 90px), calc(100vw - 74px)",
-  compact: "(min-width: 1024px) 320px, (min-width: 640px) 200px, 192px",
+  compact: "(min-width: 1024px) 320px, (min-width: 640px) 200px, 88px",
 };
 
 export function CatalogCoverGallery({images, name, layout = "wide", className = ""}: {
@@ -48,11 +48,11 @@ export function CatalogCoverGallery({images, name, layout = "wide", className = 
       <button ref={trigger} type="button" aria-haspopup="dialog" aria-expanded={open}
         aria-label={`Увеличить титульное изображение: ${name}`} onClick={() => setOpen(true)}
         className="group block w-full cursor-zoom-in rounded-xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-700 dark:focus-visible:outline-brand-300">
-        <span className={`relative block aspect-[2/1] overflow-hidden rounded-xl bg-white ${layout === "banner" ? "sm:aspect-[5/2]" : ""}`}>
+        <span className={`relative block overflow-hidden rounded-xl bg-white ${layout === "compact" ? "aspect-[4/3] sm:aspect-video" : "aspect-[2/1]"} ${layout === "banner" ? "sm:aspect-[5/2]" : ""}`}>
           <Image key={src} src={catalogImageUrl(src)} alt={photoName} fill sizes={imageSizes[layout]}
             loading={eager ? "eager" : undefined} fetchPriority={eager ? "high" : undefined}
             className={layout === "banner" || hasSlides ? "object-cover object-center" : "object-contain object-center"}/>
-          <span aria-hidden="true" className="pointer-events-none absolute bottom-3 right-3 flex size-9 items-center justify-center rounded-full bg-slate-950/70 text-white shadow-sm transition-colors group-hover:bg-slate-950/90">
+          <span aria-hidden="true" className={`pointer-events-none absolute flex size-9 items-center justify-center rounded-full bg-slate-950/70 text-white shadow-sm transition-colors group-hover:bg-slate-950/90 ${layout === "compact" ? "bottom-1 right-1 sm:bottom-3 sm:right-3" : "bottom-3 right-3"}`}>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="size-5">
               <circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5M7.5 10.5h6m-3-3v6" strokeLinecap="round"/>
             </svg>
@@ -60,8 +60,8 @@ export function CatalogCoverGallery({images, name, layout = "wide", className = 
         </span>
       </button>
       {hasSlides && <>
-        <CoverGalleryNavigation onPrevious={() => navigate(-1)} onNext={() => navigate(1)}/>
-        <p aria-live="polite" aria-atomic="true" className="pointer-events-none absolute bottom-3 left-3 rounded-full bg-slate-950/70 px-3 py-1 text-xs font-medium tabular-nums text-white">
+        <CoverGalleryNavigation onPrevious={() => navigate(-1)} onNext={() => navigate(1)} className={layout === "compact" ? "max-sm:hidden" : ""}/>
+        <p aria-live="polite" aria-atomic="true" className={`pointer-events-none absolute rounded-full bg-slate-950/70 py-1 text-xs font-medium tabular-nums text-white ${layout === "compact" ? "bottom-1 left-1 px-2 sm:bottom-3 sm:left-3 sm:px-3" : "bottom-3 left-3 px-3"}`}>
           <span className="sr-only">Фотография </span>{index + 1}<span aria-hidden="true"> / </span><span className="sr-only"> из </span>{slides.length}
         </p>
       </>}

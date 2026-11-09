@@ -51,15 +51,18 @@ export function useCatalogPriceRange(onChange?: () => void) {
 
 export function PriceRangeInputs({range, unit}: {range: ReturnType<typeof useCatalogPriceRange>; unit?: string}) {
   const suffix = unit ? ` за ${unit}` : "";
+  const unitLabel = unit === "тонну" ? "₽/т" : unit === "метр" ? "₽/м" : "₽";
   return <>
     <label className="text-sm font-semibold">
-      Минимальная цена{suffix}
+      Цена от, {unitLabel}
       <PriceInput value={range.minimumPrice} placeholder="От"
+        label={`Минимальная цена${suffix} в рублях`}
         onChange={value => range.edit("minimumPrice", value)} onCommit={() => range.commit("minimumPrice")}/>
     </label>
     <label className="text-sm font-semibold">
-      Максимальная цена{suffix}
+      Цена до, {unitLabel}
       <PriceInput value={range.maximumPrice} placeholder="До"
+        label={`Максимальная цена${suffix} в рублях`}
         onChange={value => range.edit("maximumPrice", value)} onCommit={() => range.commit("maximumPrice")}/>
     </label>
   </>;
@@ -70,15 +73,16 @@ export function PriceRangeFeedback({message}: {message: string}) {
     className={message ? "w-full text-xs text-slate-600 dark:text-slate-300" : "sr-only"}>{message}</p>;
 }
 
-function PriceInput({value, placeholder, onChange, onCommit}: {
+function PriceInput({value, placeholder, label, onChange, onCommit}: {
   value: string;
   placeholder: string;
+  label: string;
   onChange: (value: string) => void;
   onCommit: () => void;
 }) {
   return (
     <span className="relative mt-1 block">
-      <Input type="text" inputMode="decimal" value={value} placeholder={placeholder}
+      <Input type="text" inputMode="decimal" value={value} placeholder={placeholder} aria-label={label}
         aria-invalid={(!!value.trim() && parseCatalogPrice(value) === null) || undefined}
         onChange={event => onChange(event.currentTarget.value)} onBlur={onCommit}
         onKeyDown={event => {

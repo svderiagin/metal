@@ -84,24 +84,20 @@ export default async function SubcategoryPage({params}: Props) {
       .filter((variant) => variant.subcategoryId === currentSubcategory.id);
 
     return (
-      <PageContainer className="py-8 sm:py-10 lg:py-12">
+      <PageContainer className="py-5 sm:py-6 lg:py-7">
         <Breadcrumbs items={[
           {label: "Каталог", href: "/catalog"},
           {label: category.name, href: `/catalog/${category.slug}`},
           {label: currentSubcategory.name},
         ]}/>
-        <div className="grid gap-7 lg:grid-cols-[280px_minmax(0,1fr)]">
+        <div className="grid gap-5 lg:grid-cols-[244px_minmax(0,1fr)] lg:gap-6">
           <Suspense fallback={<div className="h-96 animate-pulse rounded-xl bg-slate-200 dark:bg-slate-700"/>}>
             <CatalogSidebar activeSlug={category.slug}/>
           </Suspense>
           <div className="min-w-0">
-            {coverImages.length > 1
-              ? <ProductCatalogIntro key={currentSubcategory.id} title={currentSubcategory.name} label="Подкатегория"
-                  images={coverImages} description={intro}/>
-              : <>
-                  <h1 className="text-page-title">{currentSubcategory.name}</h1>
-                  <CatalogDescription description={intro}/>
-                </>}
+            <ProductCatalogIntro key={currentSubcategory.id} title={currentSubcategory.name} label="Подкатегория"
+              summary={`Типов: ${productTypes.length}`} resultsHref="#catalog-types" resultsLabel="Выбрать продукцию"
+              detailsId={copy ? "subcategory-details-heading" : undefined} images={coverImages} description={intro}/>
             <ProductTypeResults productTypes={productTypes} variants={variants}/>
             {copy && <section className="mt-12 max-w-[800px]" aria-labelledby="subcategory-details-heading">
               <h2 id="subcategory-details-heading" className="text-section-title">{copy.title}</h2>

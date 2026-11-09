@@ -15,6 +15,7 @@ import {CatalogVariantOrder, CatalogVariantQuantity} from "./CatalogVariantLayou
 import styles from "./FilterPanel.module.css";
 import tableStyles from "./RebarTable.module.css";
 import {hasUnverifiedSalesUnit} from "@/lib/catalogOffer";
+import {useOrderDraft} from "./OrderDraftProvider";
 
 export function ProductOrderControls({variant, view, showUnit = true, allowBackorder = false,
   wholeQuantity = requiresWholeRozmetQuantity(variant)}: {
@@ -22,8 +23,7 @@ export function ProductOrderControls({variant, view, showUnit = true, allowBacko
 }) {
   const {lines, hydrated, addItem, updateQuantity, removeItem} = useCart();
   const line = lines.find(item => item.productId === variant.id);
-  const [draft, setDraft] = useState<string | null>(null);
-  const [correction, setCorrection] = useState("");
+  const {draft, setDraft, message: correction, setMessage: setCorrection} = useOrderDraft<string>(variant.id, "quantity", "");
   const [removed, setRemoved] = useState(false);
   const value = draft ?? formatCatalogNumber(line?.quantity ?? 1);
   const quantity = parseOrderQuantity(value);
@@ -91,7 +91,7 @@ export function ProductOrderControls({variant, view, showUnit = true, allowBacko
   const quantityError = draft !== null && value.trim() !== "" && !valid && !shouldRemove;
   const statusId = `quantity-status-${view}-${variant.id}`;
   const quantityInput = <Input type="text" inputMode={wholeQuantity ? "numeric" : "decimal"} value={value}
-        aria-label={`Количество ${variant.name}`}
+        aria-label={`Количество ${variant.name}, ${quantityUnit}`}
         aria-invalid={quantityError || undefined}
         aria-describedby={statusId}
         onChange={event => {

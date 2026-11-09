@@ -1,8 +1,4 @@
-"use client";
-
 import Link from "next/link";
-import {usePathname} from "next/navigation";
-import {useEffect, useRef} from "react";
 
 export function CatalogCategoryLink({
   href,
@@ -13,22 +9,8 @@ export function CatalogCategoryLink({
   label: string;
   active: boolean;
 }) {
-  const pathname = usePathname();
-  const linkRef = useRef<HTMLAnchorElement>(null);
-
-  useEffect(() => {
-    if (!active || pathname !== href || !linkRef.current) return;
-
-    linkRef.current.scrollIntoView({
-      behavior: "smooth",
-      block: "center",
-      inline: "nearest",
-    });
-  }, [active, href, pathname]);
-
   return (
     <Link
-      ref={linkRef}
       href={href}
       scroll={false}
       aria-current={active ? "page" : undefined}

@@ -11,7 +11,7 @@ import {formatUnitPrice} from "@/lib/currency";
 import {formatNumber} from "@/lib/numberFormat";
 import {formatAngleSpecificationValue, getAngleProductSpecifications} from "@/lib/anglePresentation";
 import {getSquareProductSpecifications} from "@/lib/squarePresentation";
-import {getSheetDesignation, getSheetSpecifications} from "@/lib/sheetPresentation";
+import {getSheetDesignation, getSheetSpecifications, isPlainHotRolledSheet} from "@/lib/sheetPresentation";
 import {Button} from "@/components/ui/Button";
 import {ResetFiltersButton} from "./ResetFiltersButton";
 import {CatalogVariantLayout, CatalogVariantTable} from "./CatalogVariantLayout";
@@ -27,7 +27,8 @@ export function VariantCatalogResults({visible, categorySlug, isSheetCatalog, re
   const displayName = (variant: ProductVariant) => isSheetCatalog ? getSheetDesignation(variant) : referenceProfileName(variant.name, categorySlug);
   function renderVariant(variant: ProductVariant, view: "table" | "card") {
     const price = variant.quoteOnly ? "Цена по запросу" : `${variant.priceQualifier === "from" ? "от " : ""}${formatUnitPrice(variant.price, variant.priceUnit)}`;
-    return <CatalogVariantLayout key={variant.id} variant={variant} view={view} name={displayName(variant)}
+    return <CatalogVariantLayout key={variant.id} variant={variant} view={view}
+      name={view === "card" && !isPlainHotRolledSheet(variant) ? variant.name : displayName(variant)}
       preview={isChannel ? <ChannelProductPreview variant={variant} compact={view === "table"}/> : undefined}
       specifications={<VariantSpecifications variant={variant} showDetails={showSupplierDetails}/>}
       price={price}

@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 export default function CatalogPage() {
   return <PageContainer className="py-8 sm:py-10 lg:py-12"><Breadcrumbs items={[{label: "Каталог"}]}/><h1
     className="text-page-title">Каталог металлопроката</h1><p className="mt-3 max-w-3xl text-slate-600 dark:text-slate-300">Выберите
-    раздел или просмотрите доступные складские позиции. Итоговые условия поставки зависят от объёма и обработки.</p>
+    раздел или найдите нужную позицию с помощью поиска. Итоговые условия поставки зависят от объёма и обработки.</p>
     <div className="mt-7 grid gap-7 lg:grid-cols-[250px_1fr]"><CatalogSidebar/>
       <div>
         <Suspense fallback={<div className="h-40 animate-pulse rounded-xl bg-slate-200 dark:bg-slate-700"/>}>
@@ -29,8 +29,8 @@ export default function CatalogPage() {
         <div className="mt-8">
           <CategoryGrid categories={getAllCategories()}/>
         </div>
-        <section className="mt-10"><SectionHeading title="Товары со склада"
-                                                   description="Популярные типы продукции из разных разделов каталога."/><ProductTypeGrid
+        <section className="mt-10"><SectionHeading title="Подбор продукции"
+                                                   description="Типы продукции из разных разделов каталога."/><ProductTypeGrid
           productTypes={getAllProductTypes().slice(0, 6)}
           variants={getAllProductVariants()}/></section>
       </div>

@@ -1,4 +1,5 @@
 import type {ProductSpecification, ProductVariant} from "@/types/product";
+import {flatSteelDimensions} from "./flatSteel";
 
 const displayLabels: Record<string, string> = {
   "Диаметр": "Диаметр",
@@ -55,10 +56,10 @@ export function productIllustrationFacts(product: ProductVariant): ProductSpecif
     add(product.categoryId === "cat-pnf" ? "Толщина металла" : "Толщина стенки", `${format(product.wallThicknessMm)} мм`);
   }
 
-  const flat = /^Полоса №\s*(\d+)[хx×](\d+)$/iu.exec(product.name);
+  const flat = flatSteelDimensions(product);
   if (flat) {
-    add("Ширина", `${flat[1]} мм`);
-    add("Толщина", `${flat[2]} мм`);
+    add("Ширина", `${flat.width} мм`);
+    add("Толщина", `${flat.thickness} мм`);
   }
   const pile = /^Винтовая свая (\d+)[хx×](\d+),/iu.exec(product.name);
   if (pile) {

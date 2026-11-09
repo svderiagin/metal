@@ -25,6 +25,14 @@ function setup(overrides = {}, componentProps = {}) {
       useState(initial) { const i = cursor++; if (!(i in state)) state[i] = initial; return [state[i], value => {state[i] = value;}]; },
       useEffect(effect) { effect(); },
     },
+    // Keep the legacy local state slots; shared drafts are exercised in browser tests.
+    './OrderDraftProvider': {
+      useOrderDraft(...args) {
+        const [draft, setDraft] = imports.react.useState(null);
+        const [message, setMessage] = imports.react.useState(args[2]);
+        return {draft, setDraft, message, setMessage};
+      },
+    },
     'react/jsx-runtime': {jsx, jsxs: jsx, Fragment: 'fragment'},
     '@/hooks/useCart': {useCart: () => cart},
     '@/components/ui/Button': {Button: 'button', ButtonLink: 'link'},

@@ -75,6 +75,15 @@ patches, saved before/after comparisons and visual verification.
 Family-specific descriptions below document the original numeric annotation
 pass. The final heading and palette corrections described above follow it.
 
+The steel strip category now displays «Полоса стальная», and its 19 products
+use names such as «Полоса стальная 40×4 мм». Their illustration headings match
+the public names; the photos, dimensions and other pixels remain unchanged.
+The supplier names and historical №-removal recipe stay archived intact.
+`node scripts/rename-flat-steel-illustrations.mjs` prepares bounded heading-only
+previews; `--apply-reviewed` publishes the reviewed files and updates their
+catalog signatures. Refresh image versions afterwards. Before/after files and
+the review record are in `output/image-edits/flat-steel-names/`.
+
 `data/product-illustration-sources.json` maps reviewed source photos to a product
 or a product type. Keep these images free of printed dimensions from the donor
 SKU. See [photo sources](product-illustration-sources.md). The table thumbnail

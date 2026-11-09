@@ -1,5 +1,32 @@
 import {test, expect, openProduct, samples, visibleProduct, seedCart, fillCheckout} from "../browser";
 
+test("order drafts and totals survive table and card breakpoints before adding to cart", async ({page}) => {
+  const product = samples.shveller;
+  const formatTotal = (quantity: number) => new Intl.NumberFormat("ru-RU", {
+    style: "currency", currency: "RUB",
+  }).format(product.price! * quantity);
+  await page.setViewportSize({width: 1440, height: 1000});
+  await openProduct(page, product);
+  const row = visibleProduct(page, product.id);
+  const quantity = row.getByRole("textbox", {name: /^Количество /});
+  const total = row.getByLabel(/^Сумма заказа для/);
+  await expect(row).toHaveJSProperty("tagName", "TR");
+  await quantity.fill("2.5");
+  await expect(total).toHaveText(formatTotal(2.5));
+
+  await page.setViewportSize({width: 390, height: 844});
+  await expect(row).toHaveJSProperty("tagName", "ARTICLE");
+  await expect(quantity).toHaveValue("2.5");
+  await expect(total).toHaveText(formatTotal(2.5));
+  await quantity.fill("4.5");
+
+  await page.setViewportSize({width: 1440, height: 1000});
+  await expect(row).toHaveJSProperty("tagName", "TR");
+  await expect(quantity).toHaveValue("4.5");
+  await expect(total).toHaveText(formatTotal(4.5));
+  expect(await page.evaluate(() => JSON.parse(localStorage.getItem("metal-store-cart-v1") ?? "[]"))).toEqual([]);
+});
+
 test("cart adds a product, updates its quantity and survives reload", async ({page}) => {
   await openProduct(page);
   const row = visibleProduct(page, samples.shveller.id);

@@ -14,13 +14,14 @@ import {MetalMeshVariantCatalog} from "./MetalMeshVariantCatalog";
 import {GenericProductVariantCatalog} from "./GenericProductVariantCatalog";
 import type {ProductVariant} from "@/types/product";
 import {storefrontVariant} from "@/lib/catalogOffer";
+import {OrderDraftProvider} from "./OrderDraftProvider";
 
 export function ProductVariantCatalog({children, ...props}: {variants: ProductVariant[]; categorySlug: string; children?: ReactNode}) {
-  return <QuoteRequestProvider>
+  return <QuoteRequestProvider><OrderDraftProvider>
     <VariantCatalogContent {...props} variants={props.variants.map(storefrontVariant)}/>
     {children}
     <div className="min-w-0 lg:col-span-2"><RequestQuoteSection/></div>
-  </QuoteRequestProvider>;
+  </OrderDraftProvider></QuoteRequestProvider>;
 }
 
 function VariantCatalogContent({

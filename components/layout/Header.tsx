@@ -13,7 +13,6 @@ export function Header() {
         <PageContainer className="flex flex-wrap items-center gap-x-5 gap-y-2 py-2">
           <strong className="text-white">{companyDetails.shortName}</strong>
           <a href={`mailto:${companyDetails.salesEmail}`} className="hover:text-white">{companyDetails.salesEmail}</a>
-          <span className="hidden sm:inline">{companyDetails.phonePlaceholder}</span>
           <Link className="ml-auto transition-colors hover:text-white" href="/contacts#details">
             Реквизиты
           </Link>

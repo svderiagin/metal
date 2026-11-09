@@ -83,7 +83,7 @@ export default async function ProductTypePage({params}: Props) {
     productType.imageUrl && !productType.imageUrl.endsWith(".svg") ? productType.imageUrl : "");
 
   return (
-    <PageContainer className="py-8 sm:py-10 lg:py-12">
+    <PageContainer className="py-5 sm:py-6 lg:py-7">
       <Breadcrumbs
         items={[
           {label: "Каталог", href: "/catalog"},
@@ -92,17 +92,20 @@ export default async function ProductTypePage({params}: Props) {
         ]}
       />
 
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-4">
         <CatalogListingNavigation category={category} currentTypeId={productType.id}/>
         <ProductCatalogIntro key={productType.id} title={rebarHeadings[productType.subcategoryId] ?? title}
+          summary={`Позиций: ${variants.length}`} resultsHref="#catalog-products"
           detailsId={detailsTitle && details ? "product-type-details-heading" : undefined}
           label={sheet || copy ? "Подкатегория" : "Тип продукции"} images={images} description={intro} coverName={title}/>
+        <section id="catalog-products" className="flex scroll-mt-6 flex-col gap-5" aria-label="Подбор и заказ продукции">
         <ProductVariantCatalog variants={variants} categorySlug={category.slug}>
           {detailsTitle && details && <section className="min-w-0 max-w-[800px] lg:col-start-2" aria-labelledby="product-type-details-heading">
             <h2 id="product-type-details-heading" className="text-section-title leading-tight">{detailsTitle}</h2>
             <CatalogDescription description={details} variant="categoryDetails" className="mt-4"/>
           </section>}
         </ProductVariantCatalog>
+        </section>
       </div>
     </PageContainer>
   );

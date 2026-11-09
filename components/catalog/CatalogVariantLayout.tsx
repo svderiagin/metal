@@ -16,7 +16,7 @@ export function CatalogVariantTable({children, quantityHeading = "Кол-во", 
   measured?: boolean;
 }) {
   const columnWidths = measured ? measuredColumnWidths : quantityColumnWidths;
-  return <div className="hidden overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-900 xl:block">
+  return <div className={`${tableStyles.frame} hidden rounded-xl border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-900 xl:block`}>
     <table className={`${tableStyles.table} text-center text-sm`}>
       <colgroup>{columnWidths.map((width, index) => <col key={index} style={{width: `${width}%`}}/>)}</colgroup>
       <thead className="bg-slate-900 text-white">
@@ -54,13 +54,13 @@ export function CatalogVariantLayout({view, variant, name = variant.name, previe
     presentation={view} framed expanded/> : null);
 
   if (view === "card") return <article id={`variant-mobile-${variant.id}`}
-    className="min-w-0 break-words rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-900">
-    <div className="flex flex-wrap items-start gap-4">
-      <h3 className="min-w-0 flex-1 basis-28 text-lg font-bold">{name.split(/(×)/u).map((part, index) => <Fragment key={index}>{part}{part === "×" && <wbr/>}</Fragment>)}</h3>
-      {image && <div className="w-40 max-w-full shrink-0">{image}</div>}
+    className={`${tableStyles.card} min-w-0 break-words rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-900`}>
+    <h3 className="text-card-title">{name.split(/(×)/u).map((part, index) => <Fragment key={index}>{part}{part === "×" && <wbr/>}</Fragment>)}</h3>
+    <div className={`mt-3 ${image ? tableStyles.cardDetails : ""}`}>
+      {image && <div className={tableStyles.cardImage}>{image}</div>}
+      <div className="min-w-0">{specifications}</div>
     </div>
-    <div className="mt-4">{specifications}</div>
-    <div className="mt-5 flex flex-wrap items-end justify-between gap-4 border-t border-slate-100 pt-4 dark:border-slate-800">
+    <div className="mt-4 flex flex-wrap items-end justify-between gap-3 border-t border-slate-100 pt-3 dark:border-slate-800">
       <div>
         <strong className="text-xl tabular-nums">{price}</strong>
         {priceNote}
@@ -71,7 +71,7 @@ export function CatalogVariantLayout({view, variant, name = variant.name, previe
 
   return <tr id={`variant-${variant.id}`} title={variant.name} className="align-middle border-t border-slate-200 dark:border-slate-700">
     <th scope="row" className="font-semibold">{name}</th>
-    <td>{image ?? <span className="text-slate-500 dark:text-slate-400">—</span>}</td>
+    <td>{image ? <div className={tableStyles.rowImage}>{image}</div> : <span className="text-slate-500 dark:text-slate-400">—</span>}</td>
     <td className="break-words text-left">{specifications}</td>
     <td className="break-words">
       <strong className="font-semibold tabular-nums">{price}</strong>

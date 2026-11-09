@@ -29,6 +29,14 @@ function setup(id, kind = 'beam') {
       useState(initial) {const i = cursor++; if (!(i in state)) state[i] = initial; return [state[i], value => {state[i] = value;}];},
       useEffect(effect) {effect();},
     },
+    // Keep the legacy local state slots; shared drafts are exercised in browser tests.
+    './OrderDraftProvider': {
+      useOrderDraft(...args) {
+        const [draft, setDraft] = imports.react.useState(null);
+        const [message, setMessage] = imports.react.useState(args[2]);
+        return {draft, setDraft, message, setMessage};
+      },
+    },
     'react/jsx-runtime': {jsx, jsxs: jsx},
     '@/lib/beam': readProjectData('lib/beam.ts'),
     '@/lib/vgp': readProjectData('lib/vgp.ts'),

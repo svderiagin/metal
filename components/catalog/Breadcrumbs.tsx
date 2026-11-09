@@ -7,18 +7,18 @@ export interface Crumb {
 
 export function Breadcrumbs({items}: { items: Crumb[] }) {
   return (
-    <nav aria-label="Хлебные крошки" className="mb-6 overflow-x-auto text-sm text-slate-500 dark:text-slate-400">
-      <ol className="flex min-w-max items-center gap-2">
+    <nav aria-label="Хлебные крошки" className="mb-4 text-sm text-slate-500 dark:text-slate-400">
+      <ol className="flex flex-wrap items-center gap-x-2 gap-y-1">
         <li>
-          <Link href="/" className="rounded-sm transition-colors hover:text-brand-700 dark:hover:text-brand-400">
+          <Link href="/" className="inline-flex min-h-6 items-center rounded-sm transition-colors hover:text-brand-700 dark:hover:text-brand-400">
             Главная
           </Link>
         </li>
         {items.map((item, index) => (
-          <li key={`${item.label}-${index}`} className="flex items-center gap-2">
+          <li key={`${item.label}-${index}`} className="flex min-w-0 items-center gap-2">
             <span aria-hidden>/</span>
             {item.href ? (
-              <Link href={item.href} className="rounded-sm transition-colors hover:text-brand-700 dark:hover:text-brand-400">
+              <Link href={item.href} className="inline-flex min-h-6 items-center rounded-sm transition-colors hover:text-brand-700 dark:hover:text-brand-400">
                 {item.label}
               </Link>
             ) : (

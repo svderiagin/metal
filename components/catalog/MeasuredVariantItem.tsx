@@ -19,6 +19,7 @@ import {correctOrderQuantity, formatCatalogNumber, parseOrderQuantity} from "@/l
 import type {OrderInputMode} from "@/types/cart";
 import type {ProductVariant} from "@/types/product";
 import {isDemonstrationProduct} from "@/lib/catalogOffer";
+import {useOrderDraft} from "./OrderDraftProvider";
 
 export function MeasuredVariantItem({
   variant, view, kind,
@@ -45,13 +46,14 @@ function TonnageMeasuredVariantItem({
   const [detailsOpen, setDetailsOpen] = useState(false);
   const cartLine = lines.find((line) => line.productId === variant.id);
   const savedMeasurement = cartLine?.measurement;
-  const [draft, setDraft] = useState<{meters: string; tons: string; inputMode: OrderInputMode; exactQuantity?: number} | null>(null);
+  const {draft, setDraft, message, setMessage} = useOrderDraft<{
+    meters: string; tons: string; inputMode: OrderInputMode; exactQuantity?: number;
+  }>(variant.id, `measured-${kind}`, "");
   const inputMode = draft?.inputMode ?? (savedMeasurement?.inputMode ?? "meter");
   const savedMeters = savedMeasurement?.meters ?? (cartLine && hasMass && variant.unit === "ton" ? tonsToMeters(cartLine.quantity, mass) : null);
   const savedTons = savedMeasurement?.weightTons ?? (cartLine && variant.unit === "ton" ? cartLine.quantity : null);
   const meters = draft?.meters ?? formatMeasuredQuantity(savedMeters, 2);
   const tons = draft?.tons ?? formatMeasuredQuantity(savedTons, tonDigits);
-  const [message, setMessage] = useState("");
   const [removed, setRemoved] = useState(false);
 
   useEffect(() => {

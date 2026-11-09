@@ -13,14 +13,16 @@ import {QuoteRequestButton} from "./QuoteRequestButton";
 import {CatalogVariantLayout, CatalogVariantOrder, CatalogVariantQuantity, CatalogVariantSpecifications} from "./CatalogVariantLayout";
 import filterStyles from "./FilterPanel.module.css";
 import tableStyles from "./RebarTable.module.css";
+import {useOrderDraft} from "./OrderDraftProvider";
 
 export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant; view: "table" | "card"}) {
   const {addItem, removeItem, lines, hydrated} = useCart();
   const line = lines.find(item => item.productId === variant.id);
   const savedLength = line?.pieceOrder?.lengthMeters ?? variant.lengthMeters;
   const savedPieces = line?.pieceOrder?.pieces ?? (line && savedLength ? line.quantity / savedLength : undefined);
-  const [draft, setDraft] = useState<{pieces: string; length: string} | null>(null);
-  const [message, setMessage] = useState<string>();
+  const {draft, setDraft, message, setMessage} = useOrderDraft<{
+    pieces: string; length: string;
+  }, string | undefined>(variant.id, "profile-pipe", undefined);
   const [removed, setRemoved] = useState(false);
   const piecesText = draft?.pieces ?? (savedPieces === undefined ? "" : String(savedPieces));
   const lengthText = draft?.length ?? (savedLength === undefined ? "" : String(savedLength));

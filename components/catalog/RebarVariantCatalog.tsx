@@ -9,6 +9,7 @@ import {hasConfirmedProfilePipePrice, profilePipeSize} from "@/lib/profilePipe";
 import {FilterPanel} from "./FilterPanel";
 import {CatalogVariantTable} from "./CatalogVariantLayout";
 import {PriceRangeFeedback, PriceRangeInputs, useCatalogPriceRange} from "./PriceInput";
+import {ResetFiltersButton} from "./ResetFiltersButton";
 import tableStyles from "./RebarTable.module.css";
 
 import {createCatalogSearchIndex} from "@/lib/search";
@@ -196,6 +197,7 @@ function MeasuredVariantCatalog({variants, kind = "rebar"}: {
         <div className="rounded-xl border border-dashed border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 p-8 text-center">
           <strong className="text-lg">Варианты не найдены</strong>
           <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">Измените или сбросьте фильтры.</p>
+          <div className="mt-4"><ResetFiltersButton onClick={resetFilters}/></div>
         </div>
       )}
       </section>
@@ -205,7 +207,7 @@ function MeasuredVariantCatalog({variants, kind = "rebar"}: {
 
 function RebarVariantTable({children}: {children: ReactNode}) {
   return (
-    <div className="hidden overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-900 xl:block">
+    <div className={`${tableStyles.frame} hidden rounded-xl border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-900 xl:block`}>
       <table className={`${tableStyles.table} text-center text-sm`}>
         <colgroup>
           {rebarColumns.map(({label, width}) => <col key={label} style={{width}}/>)}

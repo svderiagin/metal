@@ -1,6 +1,7 @@
 import type {Subcategory} from "@/types/category";
 import {coldRolledSheetSubcategoryId, treadPlateSubcategoryId} from "@/lib/sheetPresentation";
 import rozmetCatalog from "./rozmet-catalog.json";
+import {flatSteelCategoryId, flatSteelTitle} from "@/lib/flatSteel";
 
 const retainedSubcategories: Subcategory[] = [
   {
@@ -186,6 +187,7 @@ const sheetSubcategoryOverrides = new Map<string, Partial<Pick<Subcategory, "nam
 export const subcategories: Subcategory[] = [
   ...retainedSubcategories,
   ...rozmetCatalog.subcategories.map(subcategory => {
+    if (subcategory.categoryId === flatSteelCategoryId) return {...subcategory, name: flatSteelTitle};
     const override = sheetSubcategoryOverrides.get(subcategory.id);
     return override ? {...subcategory, ...override} : subcategory;
   }),

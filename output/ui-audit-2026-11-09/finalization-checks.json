@@ -1,0 +1,51 @@
+{
+  "typecheck": "tsc --noEmit --incremental false: passed",
+  "testSuitesRun": false,
+  "sticky": {
+    "rebar": {
+      "theadTop": 0,
+      "overflow": false
+    },
+    "channelDark": {
+      "theadTop": 0,
+      "background": "rgb(48, 62, 73)",
+      "overflow": false
+    },
+    "legacyTable": {
+      "frameWidth": 1175,
+      "tableWidth": 1173
+    }
+  },
+  "drafts": {
+    "rebar": {
+      "meters": "123.45",
+      "metersTotal": "5574.36 RUB",
+      "tonnes": "0.123",
+      "tonnesTotal": "6254.55 RUB",
+      "retainedAfterBreakpoint": true,
+      "retainedAfterFilter": true,
+      "cartSaveAndRemove": true
+    },
+    "profilePipe": {
+      "pieces": "7",
+      "length": "9",
+      "meters": "63",
+      "retainedAfterBreakpoint": true
+    },
+    "vgp": {
+      "enteredMeters": "7",
+      "correctedMeters": "12",
+      "tonnes": "0.01536",
+      "total": "823.91 RUB",
+      "retainedAfterBreakpoint": true
+    },
+    "channel": {
+      "quantity": "12.5",
+      "total": "6687.50 RUB",
+      "retainedAfterBreakpoint": true,
+      "maximumCorrection": "99999 -> 999",
+      "correctionMessageRetained": true
+    }
+  },
+  "cartAfterCheck": "empty"
+}

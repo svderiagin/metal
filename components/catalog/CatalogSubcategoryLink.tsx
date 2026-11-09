@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import {usePathname} from "next/navigation";
-import {useEffect, useRef} from "react";
 
 export function CatalogSubcategoryLink({
   href,
@@ -13,21 +12,9 @@ export function CatalogSubcategoryLink({
 }) {
   const pathname = usePathname();
   const active = pathname === href;
-  const linkRef = useRef<HTMLAnchorElement>(null);
-
-  useEffect(() => {
-    if (!active || !linkRef.current) return;
-
-    linkRef.current.scrollIntoView({
-      behavior: "smooth",
-      block: "center",
-      inline: "nearest",
-    });
-  }, [active]);
 
   return (
     <Link
-      ref={linkRef}
       href={href}
       scroll={false}
       aria-current={active ? "page" : undefined}

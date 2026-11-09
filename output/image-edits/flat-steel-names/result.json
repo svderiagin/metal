@@ -1,0 +1,214 @@
+{
+  "method": "Title-only lossless patch; every pixel outside the heading stays exact.",
+  "records": [
+    {
+      "id": "rozmet-2168",
+      "name": "Полоса стальная 20×4 мм",
+      "signature": "9c0cd715",
+      "production": "public/images/catalog/product-illustrations/rozmet-2168.webp",
+      "before": "output/image-edits/flat-steel-names/before/rozmet-2168.webp",
+      "after": "output/image-edits/flat-steel-names/after/rozmet-2168.webp",
+      "beforeSha256": "00d57e5a4700a72d9960468c99acbe0ffe99178256e31a46797e937a03ca56ea",
+      "afterSha256": "047d4abc8c49123e712cf8f10c25cd9489516edb39aea9f2acd9fa0db9490744",
+      "protectedPixelChanges": 0
+    },
+    {
+      "id": "rozmet-2169",
+      "name": "Полоса стальная 25×4 мм",
+      "signature": "e0142560",
+      "production": "public/images/catalog/product-illustrations/rozmet-2169.webp",
+      "before": "output/image-edits/flat-steel-names/before/rozmet-2169.webp",
+      "after": "output/image-edits/flat-steel-names/after/rozmet-2169.webp",
+      "beforeSha256": "a4a25082da416126b6bb2a00c9706d9ab83b6ebc35bd7f013a3c2e7eef278032",
+      "afterSha256": "4e98581eafc3ab12a46364522792ce592aeac8f75f6bf9f64eb6f4e54646b7e1",
+      "protectedPixelChanges": 0
+    },
+    {
+      "id": "rozmet-2170",
+      "name": "Полоса стальная 30×4 мм",
+      "signature": "aecb3ecc",
+      "production": "public/images/catalog/product-illustrations/rozmet-2170.webp",
+      "before": "output/image-edits/flat-steel-names/before/rozmet-2170.webp",
+      "after": "output/image-edits/flat-steel-names/after/rozmet-2170.webp",
+      "beforeSha256": "58c6a5febdfde7fc599ae2f27184fecc2bd31069fce571fd8e8fae414027c58e",
+      "afterSha256": "0c861b3418cde0f816572f4e402622028c16d0f00934ffc3f707459de6167083",
+      "protectedPixelChanges": 0
+    },
+    {
+      "id": "rozmet-29037",
+      "name": "Полоса стальная 40×3 мм",
+      "signature": "40c2a8ad",
+      "production": "public/images/catalog/product-illustrations/rozmet-29037.webp",
+      "before": "output/image-edits/flat-steel-names/before/rozmet-29037.webp",
+      "after": "output/image-edits/flat-steel-names/after/rozmet-29037.webp",
+      "beforeSha256": "210453438f36fc79f40cc51e549285450cca92f10e22d05c3978689d20b41a68",
+      "afterSha256": "ed948802392b2513c61a37e18085029fe8c6a19befd2e4aaf4c916d45fc13d88",
+      "protectedPixelChanges": 0
+    },
+    {
+      "id": "rozmet-2171",
+      "name": "Полоса стальная 40×4 мм",
+      "signature": "8694da91",
+      "production": "public/images/catalog/product-illustrations/rozmet-2171.webp",
+      "before": "output/image-edits/flat-steel-names/before/rozmet-2171.webp",
+      "after": "output/image-edits/flat-steel-names/after/rozmet-2171.webp",
+      "beforeSha256": "9d7d3f8e89f88e4d3436a4f90aebc11f210b43558430eedd585020109a847aad",
+      "afterSha256": "e720657d493d678e10ce209dc5c0e4d7f549236c1cf55e70239ddf24a1b41b80",
+      "protectedPixelChanges": 0
+    },
+    {
+      "id": "rozmet-28942",
+      "name": "Полоса стальная 40×5 мм",
+      "signature": "d1fb6253",
+      "production": "public/images/catalog/product-illustrations/rozmet-28942.webp",
+      "before": "output/image-edits/flat-steel-names/before/rozmet-28942.webp",
+      "after": "output/image-edits/flat-steel-names/after/rozmet-28942.webp",
+      "beforeSha256": "f1eafacdf40f2b0a9948f707df9122f5dabc7017340d583b8157a24e02c366a2",
+      "afterSha256": "3328630c837a7abecb59771da32b924f1e093f0ce4dd8ff77f7b9bf199b39583",
+      "protectedPixelChanges": 0
+    },
+    {
+      "id": "rozmet-2172",
+      "name": "Полоса стальная 50×4 мм",
+      "signature": "12a77f9f",
+      "production": "public/images/catalog/product-illustrations/rozmet-2172.webp",
+      "before": "output/image-edits/flat-steel-names/before/rozmet-2172.webp",
+      "after": "output/image-edits/flat-steel-names/after/rozmet-2172.webp",
+      "beforeSha256": "24343fee792a26e629a5a768512bb74470f60bb0e6615041151040fb70cc8dc2",
+      "afterSha256": "7a0d6afebf4fedd7b52eda7a02f65176f9b5a041203e5e8b755127c685316485",
+      "protectedPixelChanges": 0
+    },
+    {
+      "id": "rozmet-16727",
+      "name": "Полоса стальная 50×5 мм",
+      "signature": "a28f4959",
+      "production": "public/images/catalog/product-illustrations/rozmet-16727.webp",
+      "before": "output/image-edits/flat-steel-names/before/rozmet-16727.webp",
+      "after": "output/image-edits/flat-steel-names/after/rozmet-16727.webp",
+      "beforeSha256": "4a404931cd42f86283ca3d61cc1702ab56d481c8d4b7242072572a510c60bb86",
+      "afterSha256": "07475534e0c2fab3c63e87b0ed9f2b4ebcf5865506fdb75bd89057e77251d18c",
+      "protectedPixelChanges": 0
+    },
+    {
+      "id": "rozmet-2173",
+      "name": "Полоса стальная 60×5 мм",
+      "signature": "6ebbdd13",
+      "production": "public/images/catalog/product-illustrations/rozmet-2173.webp",
+      "before": "output/image-edits/flat-steel-names/before/rozmet-2173.webp",
+      "after": "output/image-edits/flat-steel-names/after/rozmet-2173.webp",
+      "beforeSha256": "669b1a4209a61908c1f908445ab92e094a662bf90f40c1acf33b93b522e72935",
+      "afterSha256": "a716d37a06fcd81583e42b401913caf0b93a4050034fd593273da7b2bc377b1c",
+      "protectedPixelChanges": 0
+    },
+    {
+      "id": "rozmet-2174",
+      "name": "Полоса стальная 60×6 мм",
+      "signature": "a192bf44",
+      "production": "public/images/catalog/product-illustrations/rozmet-2174.webp",
+      "before": "output/image-edits/flat-steel-names/before/rozmet-2174.webp",
+      "after": "output/image-edits/flat-steel-names/after/rozmet-2174.webp",
+      "beforeSha256": "49820b01870dbd4a8bc17ce7ece903162cfb2c95ad2d4e31499a8ced1c158e52",
+      "afterSha256": "cc9528561dfcafb114c388da12713c7e00e227a733aeec15541b9c2eb9a23ade",
+      "protectedPixelChanges": 0
+    },
+    {
+      "id": "rozmet-28974",
+      "name": "Полоса стальная 80×4 мм",
+      "signature": "bc68c854",
+      "production": "public/images/catalog/product-illustrations/rozmet-28974.webp",
+      "before": "output/image-edits/flat-steel-names/before/rozmet-28974.webp",
+      "after": "output/image-edits/flat-steel-names/after/rozmet-28974.webp",
+      "beforeSha256": "984319d6ba9bcac66745cba313c3a58064e0b6d3cb6c76297b2722293921a7da",
+      "afterSha256": "56b10c4350464c677c3a46395aa9fc61fc71e028953bf1d0d703621974679744",
+      "protectedPixelChanges": 0
+    },
+    {
+      "id": "rozmet-28975",
+      "name": "Полоса стальная 80×5 мм",
+      "signature": "5df60da9",
+      "production": "public/images/catalog/product-illustrations/rozmet-28975.webp",
+      "before": "output/image-edits/flat-steel-names/before/rozmet-28975.webp",
+      "after": "output/image-edits/flat-steel-names/after/rozmet-28975.webp",
+      "beforeSha256": "5ed7e5aae3719a45ff2d795d7c7f6d7e8ef2cbf5b87de5bea2791c64ff381842",
+      "afterSha256": "4ca599bdb7831a207548f02e926669f552304aaa604eae1932f9857fbd3b1fd7",
+      "protectedPixelChanges": 0
+    },
+    {
+      "id": "rozmet-2175",
+      "name": "Полоса стальная 80×6 мм",
+      "signature": "49d366eb",
+      "production": "public/images/catalog/product-illustrations/rozmet-2175.webp",
+      "before": "output/image-edits/flat-steel-names/before/rozmet-2175.webp",
+      "after": "output/image-edits/flat-steel-names/after/rozmet-2175.webp",
+      "beforeSha256": "ee2691174b0b826684ee06d26898cc0f667e0175b43a0940304977085a5947dc",
+      "afterSha256": "9af5dc3b080a9fe422d6b04c0382ca14e180c06f2cab564e16e56a989ad7c0b2",
+      "protectedPixelChanges": 0
+    },
+    {
+      "id": "rozmet-19707",
+      "name": "Полоса стальная 80×8 мм",
+      "signature": "7e49be76",
+      "production": "public/images/catalog/product-illustrations/rozmet-19707.webp",
+      "before": "output/image-edits/flat-steel-names/before/rozmet-19707.webp",
+      "after": "output/image-edits/flat-steel-names/after/rozmet-19707.webp",
+      "beforeSha256": "ac8283170cdeb31d62837b63b128a202279c384bbef4ccf9bac4db2c09a8ea75",
+      "afterSha256": "edcdfbd28edb623233a2a5d6cc3adfcba2156aea79da5d67930e2b3b141751e8",
+      "protectedPixelChanges": 0
+    },
+    {
+      "id": "rozmet-19708",
+      "name": "Полоса стальная 80×10 мм",
+      "signature": "a08f0d3f",
+      "production": "public/images/catalog/product-illustrations/rozmet-19708.webp",
+      "before": "output/image-edits/flat-steel-names/before/rozmet-19708.webp",
+      "after": "output/image-edits/flat-steel-names/after/rozmet-19708.webp",
+      "beforeSha256": "84d8a28c88141891880b9958dbeea7e45c692d5d27072d6beb654feef8b927a9",
+      "afterSha256": "87e8c32f08ad156a1d0cdfbd308465bb64146eaa84317770bf4a7d3feddcbd14",
+      "protectedPixelChanges": 0
+    },
+    {
+      "id": "rozmet-12050",
+      "name": "Полоса стальная 100×4 мм",
+      "signature": "4e87b992",
+      "production": "public/images/catalog/product-illustrations/rozmet-12050.webp",
+      "before": "output/image-edits/flat-steel-names/before/rozmet-12050.webp",
+      "after": "output/image-edits/flat-steel-names/after/rozmet-12050.webp",
+      "beforeSha256": "99b9b6cdde0a53a412a424a1c9fbacafd201cee50edce6214d91cf7891cca0f3",
+      "afterSha256": "d4b33029272955214daeff655011265b7b65551c5804a9b411399a4f2aae125f",
+      "protectedPixelChanges": 0
+    },
+    {
+      "id": "rozmet-2177",
+      "name": "Полоса стальная 100×8 мм",
+      "signature": "4ceba416",
+      "production": "public/images/catalog/product-illustrations/rozmet-2177.webp",
+      "before": "output/image-edits/flat-steel-names/before/rozmet-2177.webp",
+      "after": "output/image-edits/flat-steel-names/after/rozmet-2177.webp",
+      "beforeSha256": "26a351af696b1323873406f2c834301d42238c9887708195c67e32cdbf051950",
+      "afterSha256": "18f75c2cbd9962a74b6711ea40e758768b527df6d84f1d96ee2e4c0afed170b1",
+      "protectedPixelChanges": 0
+    },
+    {
+      "id": "rozmet-2176",
+      "name": "Полоса стальная 100×6 мм",
+      "signature": "9763ff45",
+      "production": "public/images/catalog/product-illustrations/rozmet-2176.webp",
+      "before": "output/image-edits/flat-steel-names/before/rozmet-2176.webp",
+      "after": "output/image-edits/flat-steel-names/after/rozmet-2176.webp",
+      "beforeSha256": "6e06829d10a8bd0c6535fcc85fc0cca75282506bfa6b10e61f2944a6dc4f365c",
+      "afterSha256": "9b3f6d35e1f306a0890eb9cfabf0317c39e7c74a9d2ecb9364e37792add919b3",
+      "protectedPixelChanges": 0
+    },
+    {
+      "id": "rozmet-2178",
+      "name": "Полоса стальная 100×10 мм",
+      "signature": "458c4b10",
+      "production": "public/images/catalog/product-illustrations/rozmet-2178.webp",
+      "before": "output/image-edits/flat-steel-names/before/rozmet-2178.webp",
+      "after": "output/image-edits/flat-steel-names/after/rozmet-2178.webp",
+      "beforeSha256": "b890df7b3c16bb3312e35abba66a336a0311b7ec53a46fc9b08a2606b940f123",
+      "afterSha256": "3da9341417bec71898346a2733d2b41c29c3530f858d753b8da7fb3d276c567f",
+      "protectedPixelChanges": 0
+    }
+  ]
+}

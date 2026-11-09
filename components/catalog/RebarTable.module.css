@@ -1,16 +1,28 @@
+.frame {
+  --table-border: var(--color-slate-200);
+  position: relative;
+  isolation: isolate;
+}
+
+:global(html[data-theme="dark"]) .frame {
+  --table-border: var(--color-slate-700);
+}
+
 .table {
   /* Общие параметры всех товарных таблиц; состав и ширина колонок задаются по категории. */
   --cell-padding-x: 0.5rem;
   --edge-padding-x: 1rem;
   --heading-padding-y: 0.75rem;
-  --cell-padding-y: 0.875rem;
+  --cell-padding-y: 0.75rem;
   --control-padding-y: 0.75rem;
   --control-height: 2.75rem;
   --action-width: 8rem;
   width: 100%;
-  min-width: 75rem;
+  min-width: min(75rem, 100%);
   table-layout: fixed;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: inherit;
   line-height: 1.5;
 }
 
@@ -27,13 +39,43 @@
 }
 
 .table > thead {
+  position: sticky;
+  top: 0;
+  z-index: 10;
   background: var(--table-header);
   color: var(--table-header-text);
+  border-top-left-radius: calc(var(--radius-xl) - 1px);
+  border-top-right-radius: calc(var(--radius-xl) - 1px);
+  box-shadow: 0 1px 0 var(--table-border);
 }
 
-.table > tbody > tr:nth-child(even) { background: var(--table-stripe); }
-.table > tbody > tr:hover,
-.table > tbody > tr:focus-within { background: var(--table-hover); }
+.table > thead > tr > th {
+  background: var(--table-header);
+}
+
+.table > thead > tr > th:first-child {
+  border-top-left-radius: calc(var(--radius-xl) - 1px);
+}
+
+.table > thead > tr > th:last-child {
+  border-top-right-radius: calc(var(--radius-xl) - 1px);
+}
+
+.table > tbody > tr > :is(th, td) {
+  border-top: 1px solid var(--table-border);
+}
+
+.table > tbody > tr:nth-child(even) > :is(th, td) { background: var(--table-stripe); }
+.table > tbody > tr:hover > :is(th, td),
+.table > tbody > tr:focus-within > :is(th, td) { background: var(--table-hover); }
+
+.table > tbody > tr:nth-last-child(1 of :not([hidden])) > :first-child {
+  border-bottom-left-radius: calc(var(--radius-xl) - 1px);
+}
+
+.table > tbody > tr:nth-last-child(1 of :not([hidden])) > :last-child {
+  border-bottom-right-radius: calc(var(--radius-xl) - 1px);
+}
 
 .table > tbody > tr > :is(th, td):not([colspan]) {
   padding: var(--cell-padding-y) var(--cell-padding-x);
@@ -78,4 +120,36 @@
   width: var(--action-width, 8rem);
   max-width: 100%;
   min-height: var(--control-height, 2.75rem);
+}
+
+.rowImage {
+  width: 9.25rem;
+  max-width: 100%;
+  margin-inline: auto;
+}
+
+.card {
+  container: catalog-card / inline-size;
+}
+
+.cardDetails {
+  display: grid;
+  gap: 0.75rem;
+  align-items: start;
+}
+
+.cardImage {
+  width: 10rem;
+  max-width: 100%;
+  margin-inline: auto;
+}
+
+@container catalog-card (min-width: 17rem) {
+  .cardDetails {
+    grid-template-columns: 9rem minmax(0, 1fr);
+  }
+
+  .cardImage {
+    width: 9rem;
+  }
 }

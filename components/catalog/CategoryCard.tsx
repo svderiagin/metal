@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import type {Category} from "@/types/category";
 import {catalogDescriptionCopy} from "@/data/catalog-description-copy";
+import styles from "./CatalogCard.module.css";
 
 export function CategoryCard({category}: { category: Category }) {
   const hasImage = Boolean(category.imageUrl && !category.imageUrl.endsWith(".svg"));
@@ -10,7 +11,7 @@ export function CategoryCard({category}: { category: Category }) {
     <article className="h-full">
       <Link
         href={`/catalog/${category.slug}`}
-        className="group flex h-full min-h-52 flex-col rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-sm transition duration-200 hover:border-slate-400 dark:hover:border-slate-500 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-600 dark:focus-visible:outline-brand-300"
+        className={`${styles.card} group flex h-full min-h-52 flex-col rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-sm transition-colors duration-200`}
       >
         {hasImage && category.imageUrl ? <div className="relative aspect-[2/1] w-full shrink-0 overflow-hidden rounded-t-xl bg-white">
           <Image src={catalogImageUrl(category.imageUrl)} alt={category.name} fill

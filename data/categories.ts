@@ -1,5 +1,6 @@
 import type {Category} from "@/types/category";
 import rozmetCatalog from "./rozmet-catalog.json";
+import {flatSteelCategoryId, flatSteelTitle} from "@/lib/flatSteel";
 
 const retainedCategories: Category[] = [
   {
@@ -57,5 +58,12 @@ const retainedCategories: Category[] = [
   }
 ];
 
-export const categories: Category[] = [...retainedCategories, ...rozmetCatalog.categories as Category[]];
+export const categories: Category[] = [
+  ...retainedCategories,
+  ...(rozmetCatalog.categories as Category[]).map(category => category.id === flatSteelCategoryId
+    ? {...category, name: flatSteelTitle, ...(category.descriptionSections ? {
+      descriptionSections: {...category.descriptionSections, title: `Подробнее о категории «${flatSteelTitle}»`},
+    } : {})}
+    : category),
+];
 export const originalCategories: Category[] = retainedCategories;

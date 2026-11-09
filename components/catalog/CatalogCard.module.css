@@ -1,0 +1,41 @@
+.card {
+  --catalog-card-highlight: var(--color-slate-500);
+  outline-color: var(--catalog-card-highlight);
+  transition: border-color 200ms ease, transform 200ms ease;
+}
+
+:global(html[data-theme="dark"]) .card {
+  --catalog-card-highlight: var(--color-slate-400);
+}
+
+.card:hover,
+.card:focus-visible,
+.card:has(.stretchedLink:focus-visible) {
+  border-color: var(--catalog-card-highlight);
+}
+
+.card:focus-visible {
+  outline: 2px solid var(--catalog-card-highlight);
+  outline-offset: 2px;
+}
+
+.stretchedLink:focus-visible {
+  outline: none;
+}
+
+.stretchedLink:focus-visible::after {
+  outline: 2px solid var(--catalog-card-highlight);
+  outline-offset: 2px;
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .card:hover {
+    transform: scale(1.02);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    transition: none;
+  }
+}

@@ -27,7 +27,7 @@ export function ProductTypeResults({
   );
 
   return (
-    <section className="mt-8" aria-label="Типы продукции">
+    <section id="catalog-types" className="mt-5 scroll-mt-6" aria-label="Типы продукции">
       <ProductTypeGrid productTypes={orderedTypes} variants={variants}/>
     </section>
   );

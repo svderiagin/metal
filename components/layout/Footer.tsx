@@ -19,7 +19,6 @@ export function Footer() {
           </p>
           <p className="mt-4 text-sm leading-6 text-slate-400">
             <a href={`mailto:${companyDetails.salesEmail}`} className="text-slate-200 hover:text-white">{companyDetails.salesEmail}</a><br/>
-            {companyDetails.phonePlaceholder}<br/>
             {companyDetails.shortName}<br/>
             ИНН {companyDetails.inn}
           </p>

@@ -52,13 +52,15 @@ export default async function CategoryPage({params}: Props) {
 
   if (category.directProducts) {
     return (
-      <PageContainer className="py-8 sm:py-10 lg:py-12">
+      <PageContainer className="py-5 sm:py-6 lg:py-7">
         <Breadcrumbs items={[{label: "Каталог", href: "/catalog"}, {label: category.name}]}/>
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-4">
           <CatalogListingNavigation category={category}/>
           <ProductCatalogIntro key={category.id} title={category.name} label="Категория"
+            summary={`Позиций: ${variants.length}`} resultsHref="#catalog-products"
             detailsId={detailedDescription ? `${category.id}-details-heading` : undefined}
             images={hasImage ? coverImages : []} description={introDescription}/>
+          <section id="catalog-products" className="flex scroll-mt-6 flex-col gap-5" aria-label="Подбор и заказ продукции">
           <ProductVariantCatalog variants={variants} categorySlug={category.slug}>
             <div className="min-w-0">
               {detailedDescription && <section className="max-w-[800px]" aria-labelledby={`${category.id}-details-heading`}>
@@ -69,20 +71,22 @@ export default async function CategoryPage({params}: Props) {
               </section>}
             </div>
           </ProductVariantCatalog>
+          </section>
         </div>
       </PageContainer>
     );
   }
 
   return (
-    <PageContainer className="py-8 sm:py-10 lg:py-12">
+    <PageContainer className="py-5 sm:py-6 lg:py-7">
       <Breadcrumbs items={[{label: "Каталог", href: "/catalog"}, {label: category.name}]}/>
-      <div className="grid gap-7 lg:grid-cols-[280px_1fr]">
+      <div className="grid gap-5 lg:grid-cols-[244px_minmax(0,1fr)] lg:gap-6">
         <Suspense fallback={<div className="h-96 animate-pulse rounded-xl bg-slate-200 dark:bg-slate-700"/>}>
           <CatalogSidebar activeSlug={category.slug}/>
         </Suspense>
         <div className="min-w-0">
           <ProductCatalogIntro key={category.id} title={category.name} label="Категория"
+            summary={`Типов: ${productTypes.length}`} resultsHref="#catalog-types" resultsLabel="Выбрать продукцию"
             detailsId={detailedDescription ? `${category.id}-details-heading` : undefined}
             images={hasImage ? coverImages : []} description={introDescription}/>
           <ProductTypeResults productTypes={productTypes} variants={variants}/>

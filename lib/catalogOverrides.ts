@@ -6,6 +6,7 @@ import treadPlateImages from "@/data/tread-plate-images.json";
 import galvanizedSheetImages from "@/data/galvanized-sheet-images.json";
 import coldRolledSheetImages from "@/data/cold-rolled-sheet-images.json";
 import hotRolledSheetImages from "@/data/hot-rolled-sheet-images.json";
+import {flatSteelDimensions, flatSteelTitle} from "./flatSteel";
 import {coldRolledSheetSubcategoryId, galvanizedSheetSubcategoryId, hotRolledSheetSubcategoryId, treadPlateSubcategoryId} from "./sheetPresentation";
 
 type ImageOverride = {sourceUrl: string; imageUrl: string};
@@ -20,6 +21,8 @@ const sheetImageOverrides = new Map<string, Record<string, ImageOverride>>([
 // The saved supplier catalog remains reproducible. Display corrections and
 // approved illustrations are applied only to the matching identity and source.
 export function applyCatalogOverrides(product: ProductVariant): ProductVariant {
+  const flatSteel = flatSteelDimensions(product);
+  if (flatSteel) return {...product, name: `${flatSteelTitle} ${flatSteel.width}×${flatSteel.thickness} мм`};
   const sheetImages = sheetImageOverrides.get(product.subcategoryId);
   if (sheetImages) {
     const image = sheetImages[product.id];
