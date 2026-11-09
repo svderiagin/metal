@@ -2,6 +2,11 @@ import fs from 'node:fs';
 import crypto from 'node:crypto';
 
 const source = JSON.parse(fs.readFileSync('imports/rozmet-source.json', 'utf8'));
+const retainedSlugs = new Set(JSON.parse(fs.readFileSync('data/rozmet-scope.json', 'utf8')).categorySlugs);
+for (const root of source.roots) {
+  const slug = new URL(root).pathname.split('/').filter(Boolean).at(-1).replaceAll('_', '-');
+  if (!retainedSlugs.has(slug)) throw new Error(`Source category is outside the approved catalog scope: ${slug}`);
+}
 const imageSources = [...new Set([...source.sections.map(section=>section.image), ...source.products.flatMap(product=>product.images)])]
   .filter(url=>url && !url.includes('tile-empty')).sort();
 const images = imageSources.map(url=>({source:url,local:`/images/catalog/rozmet/${crypto.createHash('sha256').update(url).digest('hex').slice(0,20)}${new URL(url).pathname.match(/\.[a-z0-9]+$/i)?.[0] ?? '.jpg'}`}));

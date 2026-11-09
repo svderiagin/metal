@@ -1,11 +1,9 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import {getAllProductVariants, getAllProductTypes} from "../../lib/catalog";
-import {hasUnverifiedSalesUnit, isDemonstrationProduct, storefrontVariant} from "../../lib/catalogOffer";
+import {isDemonstrationProduct, storefrontVariant} from "../../lib/catalogOffer";
 import {revalidateCartPrice} from "../../lib/cartPricing";
 import {getProductTypeSummary} from "../../lib/productTypeSummary";
-import {selectVariants} from "../../lib/variantCatalog";
-import {getQuantityUnit} from "../../lib/variantPresentation";
 import {projectCartProduct, cartPricingVariant} from "../../lib/cartProjection";
 
 const products = getAllProductVariants();
@@ -42,17 +40,5 @@ test("confirmed demo tonne prices remain usable without certifying their mass co
     const metreOrder = revalidateCartPrice(product, {quantity: 100, measurement: {inputMode: "meter", meters: 100, weightTons: 1}});
     assert.ok(metreOrder.invalidReason);
     assert.equal(metreOrder.estimatedTotal, 0);
-  }
-});
-
-test("ambiguous pack, roll and fitting sales units require a quote across display, filtering and pricing", () => {
-  const ambiguous = products.filter(hasUnverifiedSalesUnit);
-  assert.equal(ambiguous.length, 8);
-  for (const product of ambiguous) {
-    assert.equal(storefrontVariant(product).price, null);
-    assert.equal(getQuantityUnit(product), "ед.");
-    assert.ok(revalidateCartPrice(product, {quantity: 1}).invalidReason);
-    assert.ok(revalidateCartPrice(cartPricingVariant(projectCartProduct(product)), {quantity: 1}).invalidReason);
-    assert.deepEqual(selectVariants([product], {filters: {}, filterKeys: [], stockOnly: false, minimumPrice: "1", maximumPrice: "", sort: "price-asc"}), []);
   }
 });

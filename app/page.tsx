@@ -25,10 +25,10 @@ export default function Home() {
             <h2 id="home-products-heading" className="text-section-title">Размеры и цены</h2>
             <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">Характеристики и расчёт количества — в таблице выбранного типа продукции.</p>
           </div>
-          <div className="grid auto-rows-fr gap-4 md:grid-cols-2 xl:grid-cols-3">
+          <div className="grid auto-rows-fr gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {featuredProducts.map(productType => <ProductTypeCard key={productType.id} productType={productType}
               variants={variants.filter(variant => variant.productTypeId === productType.id)}
-              categorySlug={productType.categorySlug} subcategorySlug={productType.subcategorySlug}/>)}
+              categorySlug={productType.categorySlug} subcategorySlug={productType.subcategorySlug} appearance="home"/>)}
           </div>
         </section>
         <AdvantagesSection/>

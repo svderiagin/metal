@@ -61,58 +61,10 @@ export function productIllustrationFacts(product: ProductVariant): ProductSpecif
     add("Ширина", `${flat.width} мм`);
     add("Толщина", `${flat.thickness} мм`);
   }
-  const pile = /^Винтовая свая (\d+)[хx×](\d+),/iu.exec(product.name);
-  if (pile) {
-    add("Диаметр ствола", `${pile[1]} мм`);
-    add("Толщина стенки", `${pile[2]} мм`);
-  }
-  const outerCap = /^Оголовок винтовой сваи (\d+)[хx×](\d+)$/iu.exec(product.name);
-  if (outerCap) add("Размеры по обозначению", `${outerCap[1]} × ${outerCap[2]} мм`);
-  const innerCap = /^Оголовок внутренний (\d+)\s*мм \(на сваю (\d+)\s*мм\)$/iu.exec(product.name);
-  if (innerCap) {
-    add("Размер оголовка", `${innerCap[1]} мм`);
-    add("Диаметр сваи", `${innerCap[2]} мм`);
-  }
-  const cap = /^Заглушка стальная эллиптическая (\d+)[хx×](\d+(?:[.,]\d+)?)/iu.exec(product.name);
-  if (cap) {
-    add("Наружный диаметр", `${cap[1]} мм`);
-    add("Толщина стенки", `${cap[2]} мм`);
-  }
-  const boreFromName = /[\s(]Ду[\s-]*(\d+)/iu.exec(product.name);
-  if (boreFromName) add("Условный проход", `Ду ${boreFromName[1]}`);
-  const reinforcement = /^(?:Лягушка|Пэшка) из арматуры (\d+)\s*мм.*?(\d+)\/(\d+)\s*мм$/iu.exec(product.name);
-  if (reinforcement) {
-    add("Диаметр арматуры", `${reinforcement[1]} мм`);
-    add("Габариты по обозначению", `${reinforcement[2]} / ${reinforcement[3]} мм`);
-  }
-  const reducer = /^Переход стальной\s+(\d+[хx×]\d+(?:[.,]\d+)?(?:[-–]\d+[хx×]\d+(?:[.,]\d+)?)?)$/iu.exec(product.name);
-  if (reducer) add("Размеры по обозначению", `${reducer[1].replace(/[-–]/u, " – ")} мм`);
-  const hinge = /^Петля (?:гаражная с шаром d|каплевидная)\s*(\d+)[хx×](\d+)\s*мм/iu.exec(product.name);
-  if (hinge) {
-    add("Диаметр", `${hinge[1]} мм`);
-    add("Длина", `${hinge[2]} мм`);
-  }
-  const chair = /^Фиксатор арматуры "Стульчик" (\d+)\s*мм$/iu.exec(product.name);
-  if (chair) add("Защитный слой", `${chair[1]} мм`);
-  const tieredChair = /^Фиксатор арматуры многоуровневый ([\d, ]+)\s*мм$/iu.exec(product.name);
-  if (tieredChair) add("Защитный слой", `${tieredChair[1].trim()} мм`);
-  const insulation = /^Пеноплэкс (?:Комфорт|Фундамент) (\d+) мм \((\d+)[хx×](\d+)\), (?:упаковка )?(\d+) лист/iu.exec(product.name);
-  if (insulation) {
-    add("Толщина", `${insulation[1]} мм`);
-    add("Размер плиты", `${insulation[2]} × ${insulation[3]} мм`);
-    add("Листов в упаковке", insulation[4]);
-  }
   for (const {name, value} of product.specifications) {
-    const label = name === "Размер" && (flat || pile) ? "Длина" : displayLabels[name];
+    const label = name === "Размер" && flat ? "Длина" : displayLabels[name];
     if (!label || (name === "Размер" && (profileWidth || product.diameterMm))
-      || (name === "Размер" && (reinforcement || boreFromName || reducer || hinge || chair || tieredChair || insulation))
       || (name === "Диаметр, мм" && product.diameterMm)) continue;
-    // Wire's kg/kg value is a sales conversion. Imported weights for piles
-    // and fittings can be repeated or conflict across adjacent sizes.
-    const repeatedFittingMass = product.categoryId === "rozmet-cat-otvodi" && boreFromName
-      && /^2[.,]06\s*кг\s*\/\s*шт/iu.test(value);
-    const unverifiedPileMass = product.categoryId === "rozmet-cat-vintovye-svai" && !product.weightConfirmed;
-    if (name === "Вес" && (/кг\s*\/\s*кг/iu.test(value) || repeatedFittingMass || unverifiedPileMass)) continue;
     const unit = name.endsWith(", мм") ? "мм" : name.endsWith(", м") ? "м" : undefined;
     const bore = name === "ДУ" || name === "Условный проход (Ду)";
     const specification = bore && /^\d/u.test(value) ? `Ду ${value}` : value;

@@ -8,7 +8,7 @@ import {ThemeSwitch} from "./ThemeSwitch";
 
 export function Header() {
   return (
-    <header className="bg-slate-950 text-white">
+    <header className="border-b border-slate-700 bg-slate-950 text-white md:border-b-0">
       <div className="border-b border-slate-800 text-xs text-slate-300">
         <PageContainer className="flex flex-wrap items-center gap-x-5 gap-y-2 py-2">
           <strong className="text-white">{companyDetails.shortName}</strong>

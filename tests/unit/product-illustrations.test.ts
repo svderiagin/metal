@@ -13,23 +13,7 @@ const products = getAllProductVariants();
 const generatedProducts = products.filter(product => !approvedCategories.has(product.categoryId));
 const generated: Partial<Record<string, {imageUrl: string; photoUrl: string; signature: string}>> = illustrations;
 
-test("technical captions retain explicit reducer dimensions and do not repeat values", () => {
-  const product = (id: string) => products.find(item => item.id === id)!;
-  assert.deepEqual(productIllustrationFacts(product("rozmet-28660")), [
-    {name: "Размеры по обозначению", value: "40 × 2,5 – 35 × 2 мм"},
-  ]);
-  assert.deepEqual(productIllustrationFacts(product("rozmet-28670")), [
-    {name: "Размеры по обозначению", value: "159 × 108 мм"},
-  ]);
-  assert.deepEqual(productIllustrationFacts(product("rozmet-24357")), [
-    {name: "Условный проход", value: "Ду 15"},
-  ]);
-  assert.deepEqual(productIllustrationFacts(product("rozmet-23130")), [
-    {name: "Диаметр ствола", value: "57 мм"},
-    {name: "Толщина стенки", value: "3 мм"},
-    {name: "Длина", value: "1 м"},
-  ]);
-
+test("technical captions do not repeat values or units", () => {
   for (const item of generatedProducts) {
     const facts = productIllustrationFacts(item);
     assert.equal(new Set(facts.map(fact => fact.name)).size, facts.length, item.id);

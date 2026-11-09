@@ -2,6 +2,7 @@
 import Link from "next/link";
 import {useId, useRef, useState} from "react";
 import {mainNavigation} from "@/lib/constants";
+import styles from "./Navigation.module.css";
 
 export function MobileNavigation() {
   const [open, setOpen] = useState(false);
@@ -24,14 +25,14 @@ export function MobileNavigation() {
         <span className="text-xl" aria-hidden>{open ? "×" : "☰"}</span>
       </button>
       {open && (
-        <nav id={navigationId} aria-label="Мобильная навигация" className="border-t border-slate-700 bg-slate-900">
+        <nav id={navigationId} aria-label="Мобильная навигация" className="mx-4 mb-3 overflow-hidden rounded-xl border border-slate-700 bg-slate-950 sm:mx-5">
           <ul>
             {mainNavigation.map((item) => (
-              <li key={item.href} className="border-b border-slate-800 last:border-b-0">
+              <li key={item.href} className="border-b border-slate-700 last:border-b-0">
                 <Link
                   href={item.href}
                   onClick={() => setOpen(false)}
-                  className="flex min-h-12 items-center px-4 py-3 font-medium text-slate-100 transition-colors hover:bg-slate-800 sm:px-6"
+                  className={`${styles.link} flex min-h-12 items-center px-4 py-3 font-medium text-slate-100 transition-colors hover:bg-slate-800 sm:px-6`}
                 >
                   {item.label}
                 </Link>

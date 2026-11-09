@@ -1,0 +1,83 @@
+{
+  "date": "2026-11-09",
+  "removed": {
+    "categories": 8,
+    "subcategoriesAndTypes": 9,
+    "products": 198,
+    "publicImageFiles": 450,
+    "imageReviewArchiveFiles": 51,
+    "temporaryImagesAndSourceFiles": 1097,
+    "optimizedImageCacheEntries": 406
+  },
+  "remaining": {
+    "categories": 12,
+    "types": 29,
+    "products": 372
+  },
+  "verification": {
+    "retainedPublicDataChanged": {
+      "categories": 0,
+      "types": 0,
+      "products": 0
+    },
+    "retainedImageBytes": {
+      "checked": 649,
+      "missing": [],
+      "modified": []
+    },
+    "removedIdsInCartProjection": [],
+    "removedCartLines": {
+      "checked": 198,
+      "unavailable": 198
+    },
+    "removedCategoryRoutes": [
+      {
+        "slug": "provoloka-ok",
+        "notFound": true
+      },
+      {
+        "slug": "stulchik",
+        "notFound": true
+      },
+      {
+        "slug": "zaglushki-dlya-trub",
+        "notFound": true
+      },
+      {
+        "slug": "armaturnye-izdeliya",
+        "notFound": true
+      },
+      {
+        "slug": "stroymaterialy",
+        "notFound": true
+      },
+      {
+        "slug": "vintovye-svai",
+        "notFound": true
+      },
+      {
+        "slug": "petli-dlya-vorot",
+        "notFound": true
+      },
+      {
+        "slug": "otvodi",
+        "notFound": true
+      }
+    ],
+    "manualBrowser": {
+      "catalogCategories": 12,
+      "homeCategoryLinks": 12,
+      "removedProductSearchResults": 0,
+      "desktopWidth": 1280,
+      "mobileWidth": 390,
+      "horizontalOverflowObserved": false
+    },
+    "typescript": "passed",
+    "scopedEslint": "passed",
+    "pythonAndNodeSyntax": "passed",
+    "diffCheck": "passed",
+    "tests": "not run as requested"
+  },
+  "reimportPolicy": "Collector allows only data/rozmet-scope.json categories; importer rejects out-of-scope source roots.",
+  "historicalReports": "Dated full-page screenshots and audit summaries are historical evidence; removed catalog image assets, dedicated sources and rendered variants were deleted."
+}

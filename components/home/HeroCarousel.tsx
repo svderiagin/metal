@@ -76,7 +76,7 @@ export function HeroCarousel({slides, children}: {slides: HeroSlide[]; children:
     });
   }
 
-  const circle = `${styles.control} flex size-11 shrink-0 cursor-pointer items-center justify-center rounded-lg border border-slate-300 bg-white text-slate-700 transition-colors hover:bg-slate-100 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800`;
+  const circle = styles.control;
 
   return <section ref={hero} className={styles.hero} aria-labelledby="home-hero-title" aria-roledescription={canRotate ? "карусель" : undefined}
     onFocusCapture={event => {
@@ -99,32 +99,34 @@ export function HeroCarousel({slides, children}: {slides: HeroSlide[]; children:
       const dy = event.changedTouches[0].clientY - start.y;
       if (Math.abs(dx) >= 50 && Math.abs(dx) > Math.abs(dy) * 1.5) move(dx < 0 ? 1 : -1);
     }}>
-    <PageContainer className={styles.layout}>
-      <div className={styles.content}>{children}</div>
-      <div className={styles.media}>
-      <div className={styles.imageFrame} aria-hidden="true">
-      {slides.slice(0, requested).filter(slide => status[slide.id] !== "failed").map((slide, i) => <Image key={slide.id}
-        src={slide.src} alt="" fill sizes="(min-width: 1360px) 605px, (min-width: 1024px) 46vw, (min-width: 640px) 42vw, calc(100vw - 32px)" loading="eager" fetchPriority={i === 0 ? "high" : "low"}
-        className={styles.photograph} data-active={active?.id === slide.id}
-        style={{"--position-desktop": slide.desktopPosition, "--position-mobile": slide.mobilePosition} as CSSProperties}
-        onLoad={event => {
-          const image = event.currentTarget;
-          void image.decode().then(() => {if (mounted.current) setStatus(previous => ({...previous, [slide.id]: "ready"}));})
-            .catch(() => {if (mounted.current) setStatus(previous => ({...previous, [slide.id]: "failed"}));});
-        }}
-        onError={() => {if (mounted.current) setStatus(previous => ({...previous, [slide.id]: "failed"}));}}/>)}
-      </div>
-      <div className={styles.photoBar}>
-        <p className="max-w-44 text-xs font-medium text-slate-600 dark:text-slate-300">Металл и обработка</p>
-      {canRotate && <div className="flex items-center gap-1" role="group" aria-label="Управление фотографиями">
-        <button type="button" className={circle} aria-label={enabled ? "Приостановить слайд-шоу" : "Запустить слайд-шоу"}
-          onClick={() => setEnabled(value => !value)}>
-          <svg viewBox="0 0 24 24" fill="currentColor" className="size-5" aria-hidden="true">{enabled ? <path d="M7 5h4v14H7zm6 0h4v14h-4z"/> : <path d="m8 4 12 8-12 8z"/>}</svg>
-        </button>
-        <button type="button" className={circle} aria-label="Предыдущая фотография" onClick={() => move(-1)}><Arrow direction="left"/></button>
-        <button type="button" className={circle} aria-label="Следующая фотография" onClick={() => move(1)}><Arrow direction="right"/></button>
-      </div>}
-      </div>
+    <PageContainer>
+      <div className={styles.stage}>
+        <div className={styles.imageFrame} aria-hidden="true">
+          {slides.slice(0, requested).filter(slide => status[slide.id] !== "failed").map((slide, i) => <Image key={slide.id}
+            src={slide.src} alt="" fill sizes="(min-width: 1360px) 1312px, (min-width: 1024px) calc(100vw - 48px), (min-width: 640px) calc(100vw - 40px), calc(100vw - 32px)" loading="eager" fetchPriority={i === 0 ? "high" : "low"}
+            className={styles.photograph} data-active={active?.id === slide.id}
+            style={{"--position-desktop": slide.desktopPosition, "--position-mobile": slide.mobilePosition} as CSSProperties}
+            onLoad={event => {
+              const image = event.currentTarget;
+              void image.decode().then(() => {if (mounted.current) setStatus(previous => ({...previous, [slide.id]: "ready"}));})
+                .catch(() => {if (mounted.current) setStatus(previous => ({...previous, [slide.id]: "failed"}));});
+            }}
+            onError={() => {if (mounted.current) setStatus(previous => ({...previous, [slide.id]: "failed"}));}}/>)}
+        </div>
+        <div className={styles.shade} aria-hidden="true"/>
+        <div className={styles.layout}>
+          <div className={styles.content}>{children}</div>
+          <div className={styles.controls}>
+            {canRotate && <div className="flex items-center gap-2" role="group" aria-label="Управление фотографиями">
+              <button type="button" className={circle} aria-label={enabled ? "Приостановить слайд-шоу" : "Запустить слайд-шоу"}
+                onClick={() => setEnabled(value => !value)}>
+                <svg viewBox="0 0 24 24" fill="currentColor" className="size-5" aria-hidden="true">{enabled ? <path d="M7 5h4v14H7zm6 0h4v14h-4z"/> : <path d="m8 4 12 8-12 8z"/>}</svg>
+              </button>
+              <button type="button" className={circle} aria-label="Предыдущая фотография" onClick={() => move(-1)}><Arrow direction="left"/></button>
+              <button type="button" className={circle} aria-label="Следующая фотография" onClick={() => move(1)}><Arrow direction="right"/></button>
+            </div>}
+          </div>
+        </div>
       </div>
     </PageContainer>
   </section>;

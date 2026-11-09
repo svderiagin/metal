@@ -1,0 +1,32 @@
+{
+  "date": "2026-11-09",
+  "changes": {
+    "homeCategoryCards": 12,
+    "desktopCategoryRows": 4,
+    "otherCategoriesDisclosure": false,
+    "heroAndDesktopMenuEdgesAligned": true
+  },
+  "verification": {
+    "viewports": [
+      320,
+      390,
+      640,
+      767,
+      768,
+      1600
+    ],
+    "themes": [
+      "light",
+      "dark"
+    ],
+    "menuAndHeroDesktopEdges": {
+      "left": 136.5,
+      "right": 1448.5
+    },
+    "horizontalOverflowObserved": false,
+    "keyboardMenuNavigation": "verified",
+    "typescript": "passed",
+    "scopedEslint": "passed",
+    "tests": "not run as requested"
+  }
+}

@@ -38,7 +38,7 @@ const sheetDisplayNames = new Map([
 test('re-import from saved evidence is identical and does not duplicate products',()=>{
   const temporary=fs.mkdtempSync(path.join(os.tmpdir(),'metal-rozmet-import-'));
   try {
-    for(const file of ['imports/rozmet-source.json','imports/rozmet-protected.snapshot.json','data/catalog-images.json']) {
+    for(const file of ['imports/rozmet-source.json','imports/rozmet-protected.snapshot.json','data/catalog-images.json','data/rozmet-scope.json']) {
       const target=path.join(temporary,file);
       fs.mkdirSync(path.dirname(target),{recursive:true});
       fs.copyFileSync(file,target);
@@ -119,9 +119,9 @@ test('source leaves have no visible artificial level and real subcategories reso
   }
 });
 
-test('source piece quantities are integers while metre, square-metre and kilogram prices calculate correctly in cart and server',()=>{
+test('source piece quantities are integers while retained metre and square-metre prices calculate correctly in cart and server',()=>{
   const {formatUnitPrice}=readProjectData('lib/currency.ts');
-  for(const unit of ['piece','meter','square_meter','kg']) {
+  for(const unit of ['piece','meter','square_meter']) {
     const product=imported.products.find(item=>item.unit===unit&&item.availability==='IN_STOCK');
     assert.ok(product,unit);
     const quantity=unit==='piece'?3:2.5;

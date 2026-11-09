@@ -14,6 +14,7 @@ CACHE = ROOT / '.tmp/rozmet-source/pages'
 CACHE.mkdir(parents=True, exist_ok=True)
 ORIGIN = 'https://rozmet.ru'
 PROTECTED = {'armatura', 'truba_profilnaya', 'truba-vgp', 'profnastil', 'rabitsa', 'balka_dvutavrovaya'}
+RETAINED = set(json.loads((ROOT / 'data/rozmet-scope.json').read_text())['categorySlugs'])
 
 class Node:
     def __init__(self, tag='', attrs=(), parent=None):
@@ -167,7 +168,7 @@ def main():
     roots = []
     for a in dom.all('a','bx_catalog_tile_img'):
         slug = a.attrs.get('href','').strip('/').split('/')[-1]
-        if slug in PROTECTED: continue
+        if slug in PROTECTED or slug.replace('_', '-') not in RETAINED: continue
         img = re.search(r"url\(['\"]?([^)'\"]+)",a.attrs.get('style',''))
         roots.append((a.attrs['href'],a.attrs['title'],img[1] if img else ''))
     sections = {}

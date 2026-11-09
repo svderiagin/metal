@@ -61,8 +61,10 @@ or generate extra variants solely to satisfy this checklist.
 
 ## Product illustrations for the remaining categories
 
-Owner-requested corrections from 08.11.2026 remove the number sign from all 152
-active product illustrations that contained it. Dedicated templates keep the
+Owner-requested corrections from 08.11.2026 removed the number sign from all 152
+product illustrations that contained it at that date. This is the historical
+correction scope; the eight categories removed on 09.11.2026 and their image
+records are no longer part of the active catalog. Dedicated templates keep the
 original following raster glyphs and shift them left; generic illustrations
 replace only their text-only heading region. All product-photo pixels stay exact.
 The renderers retain these corrections on regeneration. The cold-rolled 0.5 mm
