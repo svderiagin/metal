@@ -1,31 +1,34 @@
-import Link from "next/link";
 import {services} from "@/data/services";
-import {SectionHeading} from "@/components/ui/SectionHeading";
+import {ButtonLink} from "@/components/ui/Button";
 
 export function ServicesSection() {
   return (
-    <section>
-      <SectionHeading eyebrow="Обработка и логистика" title="Услуги для комплектного заказа"/>
-      <div className="grid gap-4 md:grid-cols-2 lg:gap-6">
-        {services.map((service) => (
-          <article
-            key={service.id}
-            className="flex gap-5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-5 shadow-sm sm:p-6"
-          >
-            <span className="text-2xl font-bold text-brand-700 dark:text-brand-400">{service.marker}</span>
-            <div>
-              <h3 className="font-bold">{service.name}</h3>
-              <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">{service.description}</p>
-            </div>
-          </article>
-        ))}
+    <section aria-labelledby="home-services-heading">
+      <div className="mb-5">
+        <p className="mb-1 text-eyebrow uppercase text-slate-500 dark:text-slate-400">Услуги</p>
+        <h2 id="home-services-heading" className="text-section-title text-slate-950 dark:text-slate-100">Обработка и доставка</h2>
       </div>
-      <Link
+      <ul className="grid gap-px overflow-hidden rounded-lg border border-slate-200 bg-slate-200 dark:border-slate-700 dark:bg-slate-700 md:grid-cols-2">
+        {services.map((service) => (
+          <li
+            key={service.id}
+            className="grid grid-cols-[2rem_minmax(0,1fr)] items-start gap-3 bg-white p-4 dark:bg-slate-900 sm:p-5"
+          >
+            <span aria-hidden="true" className="grid size-8 place-items-center rounded-sm border border-slate-200 bg-slate-50 text-xs font-medium tabular-nums text-slate-600 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300">{service.marker}</span>
+            <div className="min-w-0">
+              <h3 className="text-card-title text-slate-950 dark:text-slate-100">{service.name}</h3>
+              <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">{service.description}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+      <ButtonLink
         href="/services"
-        className="mt-5 inline-flex min-h-11 items-center font-bold text-brand-700 dark:text-brand-400 transition-colors hover:text-brand-800 dark:hover:text-brand-300"
+        variant="secondary"
+        className="mt-4 gap-2"
       >
-        Все услуги →
-      </Link>
+        Все услуги <span aria-hidden="true">→</span>
+      </ButtonLink>
     </section>
   );
 }

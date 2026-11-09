@@ -17,20 +17,21 @@ export function HeroSection() {
   return (
     <HeroCarousel slides={slides}>
         <div>
-          <p className="text-eyebrow uppercase text-brand-300">
-            Комплектация со склада
+          <p className="text-eyebrow uppercase text-slate-500 dark:text-slate-400">
+            Поставка по спецификации
           </p>
-          <h1 id="home-hero-title" className="mt-4 max-w-3xl text-[2rem] font-bold leading-[1.15] tracking-[-0.02em] sm:text-[2.5rem] lg:text-5xl">
-            Металлоконструкции и металлопрокат со склада
+          <h1 id="home-hero-title" className="mt-2 text-[1.5rem] font-semibold leading-[1.15] tracking-[-0.025em] min-[360px]:text-[1.75rem] min-[380px]:text-[2rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem]">
+            Металлопрокат<br/>и металлоконструкции
           </h1>
-          <p className="mt-5 max-w-2xl leading-7 text-slate-100">
-            Поставляем металл компаниям и частным клиентам. Помогаем с комплектацией заказа,
-            выполняем резку и организуем доставку.
+          <p className="mt-4 max-w-xl text-slate-600 dark:text-slate-300">
+            Арматура, трубы, листовой и сортовой прокат для застройщиков,
+            строительных бригад и компаний.
           </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <ButtonLink href="/catalog">Перейти в каталог</ButtonLink>
-            <ButtonLink href="/#request" variant="secondary">Запросить расчёт</ButtonLink>
+          <div className="mt-5 grid gap-3 min-[380px]:grid-cols-2 sm:flex sm:flex-wrap">
+            <ButtonLink href="/catalog">Каталог <span aria-hidden="true" className="ml-2">→</span></ButtonLink>
+            <ButtonLink href="/#request" variant="secondary">Расчёт заказа</ButtonLink>
           </div>
+          <p className="mt-4 border-t border-slate-200 pt-3 text-sm text-slate-600 dark:border-slate-700 dark:text-slate-300">Со склада и под заказ. Стоимость и сроки согласуем по спецификации.</p>
         </div>
     </HeroCarousel>
   );

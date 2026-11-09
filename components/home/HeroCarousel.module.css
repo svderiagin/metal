@@ -1,10 +1,59 @@
 .hero {
   position: relative;
   isolation: isolate;
-  overflow: hidden;
-  background: #15212a;
-  color: white;
+  border-bottom: 1px solid var(--color-slate-200);
+  background: white;
   touch-action: pan-y pinch-zoom;
+}
+
+.layout {
+  display: grid;
+  align-items: center;
+  gap: 20px;
+  padding-block: 20px;
+}
+
+.content { min-width: 0; }
+
+.media {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--color-slate-200);
+  border-radius: var(--radius-lg);
+  background: var(--color-slate-100);
+}
+
+.imageFrame {
+  position: relative;
+  aspect-ratio: 16 / 7;
+  background: var(--color-slate-800);
+}
+
+.photoBar {
+  display: flex;
+  flex-wrap: wrap;
+  min-height: 60px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 7px 12px;
+  border-top: 1px solid var(--color-slate-200);
+  background: var(--color-slate-50);
+}
+
+.photoBar > p { flex: 1 0 10rem; max-width: 100%; }
+.photoBar > [role="group"] { margin-left: auto; }
+
+:global(html[data-theme="dark"]) .hero {
+  border-color: var(--color-slate-700);
+  background: var(--color-slate-900);
+}
+
+:global(html[data-theme="dark"]) .media,
+:global(html[data-theme="dark"]) .photoBar {
+  border-color: var(--color-slate-700);
+  background: var(--color-slate-950);
 }
 
 .photograph {
@@ -16,22 +65,36 @@
 
 .photograph[data-active="true"] { opacity: 1; }
 
-.shade {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, rgb(10 18 30 / 84%) 0%, rgb(10 18 30 / 70%) 42%, rgb(10 18 30 / 15%) 100%);
-  pointer-events: none;
+.control { width: 44px; height: 44px; }
+.control svg { width: 20px; height: 20px; }
+.control:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
 }
 
-.control:focus-visible {
-  outline: 3px solid white;
-  outline-offset: 4px;
-  box-shadow: 0 0 0 6px #24566d;
+@media (min-width: 640px) {
+  .layout { grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 24px; padding-block: 28px; }
+  .imageFrame { aspect-ratio: 4 / 3; }
+}
+
+@media (min-width: 1024px) {
+  .layout { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 40px; }
+  .imageFrame { aspect-ratio: 16 / 9; }
 }
 
 @media (max-width: 639px) {
   .photograph { object-position: var(--position-mobile, 50% 50%); }
-  .shade { background: linear-gradient(90deg, rgb(10 18 30 / 84%), rgb(10 18 30 / 64%) 70%, rgb(10 18 30 / 30%)); }
+  .photoBar {
+    position: absolute;
+    right: 8px;
+    bottom: 8px;
+    min-height: 44px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+  }
+  :global(html[data-theme="dark"]) .photoBar { background: transparent; }
+  .photoBar > p { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {

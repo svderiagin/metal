@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-09",
+  "route": "/",
+  "changes": [
+    "Separate technical introduction and unfiltered existing photo carousel",
+    "Nine compact category tiles and an expandable list of the remaining eleven categories",
+    "Three curated product types instead of unverified popularity and stock labels",
+    "Consistent spacing, small corner radii, borders and secondary buttons",
+    "Structured service, supply and home-only quote sections"
+  ],
+  "verification": {
+    "viewports": [320, 390, 640, 1280],
+    "themes": ["light", "dark"],
+    "horizontalOverflowObserved": false,
+    "categoryLinks": 20,
+    "heroPhotosDecoded": 5,
+    "carouselPauseAndArrowKeyboardOperation": "manually verified",
+    "additionalCategoriesKeyboardToggle": "manually verified",
+    "quoteAnchorAndEmailValidation": "manually verified without submitting",
+    "typecheck": "passed",
+    "scopedEslint": "passed",
+    "gitDiffCheck": "passed",
+    "tests": "not run as requested"
+  }
+}
