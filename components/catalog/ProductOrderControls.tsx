@@ -36,6 +36,10 @@ export function ProductOrderControls({variant, view, showUnit = true, allowBacko
   const total = !variant.quoteOnly && variant.price !== null && (valid || shouldRemove)
     ? calculateLineTotal(quantity, variant.price) : null;
   const quantityUnit = getQuantityUnit(variant);
+  const correctedQuantity = parseOrderQuantity(correctQuantityValue(value).value);
+  const canSubmitQuantity = correctedQuantity !== null && correctedQuantity > 0 && correctedQuantity <= 999
+    && (!wholeQuantity || Number.isInteger(correctedQuantity)) && variant.price !== null
+    && calculateLineTotal(correctedQuantity, variant.price) !== null;
 
   useEffect(() => {
     if (!removed) return;
@@ -43,25 +47,40 @@ export function ProductOrderControls({variant, view, showUnit = true, allowBacko
     return () => window.clearTimeout(timer);
   }, [removed]);
 
-  function submit() {
-    if (!hydrated || saved || removed) return;
-    if (shouldRemove) {
+  function correctQuantityValue(rawValue: string) {
+    const explicitRemoval = !!line && parseOrderQuantity(rawValue) === 0;
+    if (!line && parseOrderQuantity(rawValue) === 0) {
+      return {value: "1", message: "Для добавления количество заменено на 1."};
+    }
+    return correctOrderQuantity(rawValue, {whole: wholeQuantity, maximum: 999,
+      fallback: line?.quantity ?? 1, ...(wholeQuantity && !explicitRemoval ? {minimum: 1} : {})});
+  }
+
+  function submit(rawValue = value) {
+    if (!hydrated || removed) return;
+    const corrected = correctQuantityValue(rawValue);
+    const nextQuantity = parseOrderQuantity(corrected.value);
+    setDraft(corrected.value);
+    if (corrected.message) setCorrection(corrected.message);
+    if (line && parseOrderQuantity(rawValue) === 0) {
       removeItem(variant.id);
       setDraft(null);
       setCorrection("");
       setRemoved(true);
       return;
     }
-    if (!canPurchase || !valid || total === null) return;
-    if (line) updateQuantity(variant.id, quantity);
-    else addItem(variant.id, quantity);
+    if (!canPurchase || nextQuantity === null || nextQuantity <= 0 || nextQuantity > 999
+      || (wholeQuantity && !Number.isInteger(nextQuantity)) || variant.price === null
+      || calculateLineTotal(nextQuantity, variant.price) === null) return;
+    if (line && !line.invalidReason && nextQuantity === line.quantity) {setDraft(null); return;}
+    if (line) updateQuantity(variant.id, nextQuantity);
+    else addItem(variant.id, nextQuantity);
     setDraft(null);
-    setCorrection("");
   }
 
   function correctQuantity() {
     if (draft === null) return;
-    const next = correctOrderQuantity(draft, {whole: wholeQuantity, maximum: 999});
+    const next = correctQuantityValue(draft);
     if (next.value !== draft) setDraft(next.value);
     if (next.message) setCorrection(next.message);
   }
@@ -83,8 +102,8 @@ export function ProductOrderControls({variant, view, showUnit = true, allowBacko
       order={{product: formatQuoteProductName(variant), quantity: quoteQuantity, unit: getQuantityUnit(variant), tons: quoteTons}}
       className={`${styles.quoteButton} ${actionClass}`}/>
   ) : (
-    <Button type="button" onClick={submit}
-      disabled={!hydrated || saved || removed || (!shouldRemove && (!canPurchase || !valid || total === null))}
+    <Button type="button" onClick={() => submit()}
+      disabled={!hydrated || saved || removed || (!shouldRemove && (!canPurchase || !canSubmitQuantity))}
       className={`${stateClass} ${actionClass}`}>{label}</Button>
   );
   const quantityError = draft !== null && value.trim() !== "" && !valid && !shouldRemove;
@@ -99,6 +118,12 @@ export function ProductOrderControls({variant, view, showUnit = true, allowBacko
           setCorrection(next.message ?? "");
         }}
         onBlur={correctQuantity}
+        onKeyDown={event => {
+          if (event.key === "Enter" && !event.nativeEvent.isComposing) {
+            event.preventDefault();
+            event.currentTarget.blur();
+          }
+        }}
         className={`${styles.field} min-w-0 ${showUnit ? "pl-2 pr-10" : "px-2"} text-center tabular-nums focus:placeholder:text-transparent`}
         placeholder="0"/>;
   const input = showUnit ? <CatalogVariantQuantity unit={quantityUnit}>{quantityInput}</CatalogVariantQuantity> : quantityInput;

@@ -34,16 +34,16 @@ type SortMode =
   | "weight-desc";
 
 const rebarColumns = [
-  {label: "Диаметр, мм", width: "7%"},
+  {label: "Диаметр, мм", width: "8%"},
   {label: "Форма", width: "8%"},
   {label: "Марка стали", width: "8%"},
-  {label: "Цена, ₽/т", width: "12%"},
+  {label: "Цена, ₽/т", width: "11%"},
   {label: "Масса, кг/м", width: "8%"},
   {label: "Длина, м", width: "7%"},
-  {label: "Заказ, м", width: "11%"},
-  {label: "Заказ, т", width: "11%"},
+  {label: "Заказ, м", width: "10%"},
+  {label: "Заказ, т", width: "10%"},
   {label: "Сумма", width: "15%"},
-  {label: "Действие", width: "13%"},
+  {label: "Действие", width: "15%"},
 ] as const;
 
 export function isMeasuredRebarVariant(variant: ProductVariant): variant is RebarVariant {

@@ -3,6 +3,7 @@ import type {ProductVariant} from "@/types/product";
 import {normalizeMeasurement} from "./cart";
 import {revalidateCartPrice} from "./cartPricing";
 import {isProfilePipeVariant, normalizePieceOrder} from "./profilePipe";
+import {isVgpVariant, wholeVgpOrder} from "./vgp";
 
 export function addCartItem(items: CartItem[], product: ProductVariant | undefined, quantity = 1,
   measurement?: CartMeasurement, pieceOrder?: CartPieceOrder): CartItem[] {
@@ -24,11 +25,21 @@ export function updateCartItem(items: CartItem[], product: ProductVariant | unde
   let pieceOrder: CartPieceOrder | undefined;
   if (isProfilePipeVariant(product)) {
     const length = previous.pieceOrder?.lengthMeters ?? product.lengthMeters;
-    pieceOrder = length ? normalizePieceOrder({pieces: quantity / length, lengthMeters: length}) : undefined;
+    const requestedPieces = length ? quantity / length : NaN;
+    const nearest = Math.round(requestedPieces);
+    const pieces = Math.abs(requestedPieces - nearest) <= 1e-9 ? nearest : requestedPieces;
+    pieceOrder = length ? normalizePieceOrder({pieces, lengthMeters: length}) : undefined;
     if (!pieceOrder) return items;
+    quantity = pieceOrder.pieces * pieceOrder.lengthMeters;
   }
-  const measurement = previous.measurement ? {...previous.measurement,
+  let measurement = previous.measurement ? {...previous.measurement,
     ...(previous.measurement.inputMode === "meter" ? {meters: quantity} : {weightTons: quantity})} : undefined;
+  if (measurement && isVgpVariant(product)) {
+    const order = wholeVgpOrder(product, quantity, measurement.inputMode);
+    if (!order) return items;
+    measurement = {...measurement, meters: order.meters, weightTons: order.weightTons};
+    quantity = measurement.inputMode === "meter" ? order.meters : order.weightTons;
+  }
   const next = priceItem(product, {productId: product.id, quantity, measurement, pieceOrder});
   return next ? replace(items, next) : items;
 }

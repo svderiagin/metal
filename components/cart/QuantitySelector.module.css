@@ -1,0 +1,36 @@
+.editor {
+  max-width: 16rem;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.controls {
+  display: inline-flex;
+  min-width: 0;
+  align-items: stretch;
+}
+
+.input {
+  width: 6rem;
+  min-width: 0;
+  border-radius: 0;
+  padding-inline: 0.5rem;
+  text-align: center;
+}
+
+.status {
+  display: block;
+  min-height: 1.25rem;
+  margin-top: 0.25rem;
+  color: var(--counter-text);
+  font-size: 0.8125rem;
+  line-height: 1.25rem;
+}
+
+.error {
+  color: var(--danger-text);
+}

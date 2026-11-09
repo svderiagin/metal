@@ -14,9 +14,8 @@
   --edge-padding-x: 1rem;
   --heading-padding-y: 0.75rem;
   --cell-padding-y: 0.75rem;
-  --control-padding-y: 0.75rem;
-  --control-height: 2.75rem;
-  --action-width: 8rem;
+  --control-height: 2.875rem;
+  --action-width: 8.75rem;
   width: 100%;
   min-width: min(75rem, 100%);
   table-layout: fixed;
@@ -81,10 +80,6 @@
   padding: var(--cell-padding-y) var(--cell-padding-x);
 }
 
-.table > tbody > tr > td:has(input, .tableAction) {
-  padding-block: var(--control-padding-y);
-}
-
 .table > :is(thead, tbody) > tr > :is(th, td):first-child:not([colspan]) {
   padding-inline-start: var(--edge-padding-x);
 }
@@ -93,14 +88,13 @@
   padding-inline-end: var(--edge-padding-x);
 }
 
-.table td input {
+.table td :is(input, select) {
   min-height: var(--control-height);
   text-align: center;
   font-variant-numeric: tabular-nums;
 }
 
 .table > :is(thead, tbody) > tr > :is(th, td).sumColumn {
-  padding-inline: var(--edge-padding-x);
   text-align: center;
 }
 
@@ -112,14 +106,14 @@
 
 .table :is(button, a) {
   max-width: 100%;
-  white-space: normal;
-  overflow-wrap: anywhere;
 }
 
 .tableAction {
-  width: var(--action-width, 8rem);
+  width: var(--action-width, 8.75rem);
   max-width: 100%;
-  min-height: var(--control-height, 2.75rem);
+  min-height: var(--control-height, 2.875rem);
+  white-space: nowrap;
+  overflow-wrap: normal;
 }
 
 .rowImage {

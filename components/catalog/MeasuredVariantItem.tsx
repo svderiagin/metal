@@ -14,8 +14,8 @@ import {ProfilePipeVariantItem} from "./ProfilePipeVariantItem";
 import {useCart} from "@/hooks/useCart";
 import {formatCurrency, formatUnitPrice} from "@/lib/currency";
 import {formatNumber} from "@/lib/numberFormat";
-import {calculateLineTotal, formatDecimal, metersToTons, tonsToMeters} from "@/lib/orderMeasurement";
-import {correctOrderQuantity, formatCatalogNumber, parseOrderQuantity} from "@/lib/catalogNumberInput";
+import {calculateLineTotal, formatDecimal, getMeasurementQuantityOptions, metersToTons, tonsToMeters} from "@/lib/orderMeasurement";
+import {constrainOrderQuantityInput, correctOrderQuantity, formatCatalogNumber, parseOrderQuantity} from "@/lib/catalogNumberInput";
 import type {OrderInputMode} from "@/types/cart";
 import type {ProductVariant} from "@/types/product";
 import {isDemonstrationProduct} from "@/lib/catalogOffer";
@@ -42,7 +42,8 @@ function TonnageMeasuredVariantItem({
   const mass = variant.weightPerMeterKg ?? 0;
   const isRebar = kind === "rebar";
   const isVgp = kind === "vgp";
-  const tonDigits = isVgp ? 6 : 3;
+  // The converted weight needs more display precision than a directly entered tonne value.
+  const tonDigits = 6;
   const [detailsOpen, setDetailsOpen] = useState(false);
   const cartLine = lines.find((line) => line.productId === variant.id);
   const savedMeasurement = cartLine?.measurement;
@@ -99,83 +100,102 @@ function TonnageMeasuredVariantItem({
       : "");
 
   function quantityOptions(mode: OrderInputMode) {
-    return {
-      maximum: mode === "ton" && !hasMass ? 999 : undefined,
-      decimalPlaces: isVgp ? undefined : mode === "meter" ? 2 : tonDigits,
-    };
+    return getMeasurementQuantityOptions(variant, mode);
   }
 
   function readQuantity(value: string, mode: OrderInputMode) {
     if (draft?.inputMode === mode && draft.exactQuantity !== undefined) return draft.exactQuantity;
-    return correctOrderQuantity(value, quantityOptions(mode)).message ? null : parseOrderQuantity(value);
+    return correctOrderQuantity(value, {...quantityOptions(mode), minimum: 0}).message ? null : parseOrderQuantity(value);
   }
 
   function updateQuantityField(mode: OrderInputMode, value: string) {
-    const parsed = correctOrderQuantity(value, quantityOptions(mode)).message ? null : parseOrderQuantity(value);
+    const constrained = constrainOrderQuantityInput(value, quantityOptions(mode).maximum);
+    value = constrained.value;
+    const parsed = correctOrderQuantity(value, {...quantityOptions(mode), minimum: 0}).message ? null : parseOrderQuantity(value);
     const whole = isVgp && parsed !== null ? wholeVgpOrder(variant, parsed, mode) : null;
     if (mode === "meter") {
       const converted = parsed === null ? null : isVgp ? whole?.weightTons ?? null : metersToTons(parsed, mass);
-      setDraft({inputMode: mode, meters: value, tons: hasMass ? formatMeasuredQuantity(converted, tonDigits) : tons});
+      setDraft({inputMode: mode, meters: value, tons: hasMass ? formatMeasuredQuantity(converted, tonDigits) : ""});
     } else {
       const converted = parsed === null ? null : isVgp ? whole?.meters ?? null : tonsToMeters(parsed, mass);
-      setDraft({inputMode: mode, tons: value, meters: hasMass ? formatMeasuredQuantity(converted, 2) : meters});
+      setDraft({inputMode: mode, tons: value, meters: hasMass ? formatMeasuredQuantity(converted, 2) : ""});
     }
-    setMessage("");
+    setMessage(constrained.message ?? "");
+  }
+
+  function resolvedOrder(mode: OrderInputMode) {
+    const options = quantityOptions(mode);
+    const raw = mode === "meter" ? meters : tons;
+    const saved = mode === "meter" ? savedMeters : savedTons;
+    const exact = draft?.inputMode === mode ? draft.exactQuantity : undefined;
+    const corrected = correctOrderQuantity(exact === undefined ? raw : formatCatalogNumber(exact), {
+      ...options,
+      minimum: cartLine && parseOrderQuantity(raw) === 0 ? 0 : options.minimum,
+      decimalPlaces: exact === undefined ? options.decimalPlaces : undefined,
+      fallback: saved ?? (mode === "meter" ? Math.max(1, options.minimum) : options.minimum),
+    });
+    const quantity = parseOrderQuantity(corrected.value);
+    if (quantity === null) return null;
+    const whole = isVgp ? wholeVgpOrder(variant, quantity, mode) : null;
+    const nextMeters = isVgp ? whole?.meters ?? null : mode === "meter" ? quantity : hasMass ? tonsToMeters(quantity, mass) : null;
+    const nextTons = isVgp ? whole?.weightTons ?? null : mode === "ton" ? quantity : hasMass ? metersToTons(quantity, mass) : null;
+    const exactQuantity = isVgp && whole ? mode === "meter" ? whole.meters : whole.weightTons : quantity;
+    const roundedPipe = whole && exactQuantity - quantity > Math.max(1, exactQuantity) * 1e-9;
+    return {quantity: exactQuantity, meters: nextMeters, tons: nextTons,
+      draft: {inputMode: mode, meters: formatMeasuredQuantity(nextMeters, 2),
+        tons: formatMeasuredQuantity(nextTons, tonDigits), exactQuantity},
+      message: roundedPipe ? `Объём округлён вверх до целых труб · ${whole.pieces} шт.` : corrected.message};
   }
 
   function settleQuantity(mode: OrderInputMode) {
-    if (draft?.inputMode !== mode || draft.exactQuantity !== undefined) return;
-    const next = correctOrderQuantity(activeValue, quantityOptions(mode));
-    if (cannotCalculate) {
-      updateQuantityField(mode, "");
-      setMessage("Значение очищено. Не удалось рассчитать объём.");
-    } else if (isVgp && pipeOrder) {
-      // Keep the exact whole-pipe volume as the source even when the input display rounds it.
-      const exactQuantity = mode === "meter" ? pipeOrder.meters : pipeOrder.weightTons;
-      setDraft({inputMode: mode, meters: formatMeasuredQuantity(pipeOrder.meters, 2),
-        tons: formatMeasuredQuantity(pipeOrder.weightTons, tonDigits), exactQuantity});
-      if (exactQuantity > (enteredQuantity ?? 0) && Math.abs(exactQuantity - (enteredQuantity ?? 0)) > exactQuantity * 1e-9) {
-        setMessage(`Объём округлён вверх до целых труб · ${pipeOrder.pieces} шт.`);
-      }
-    } else if (next.value !== activeValue) {
-      updateQuantityField(mode, next.value);
-      if (next.message) setMessage(next.message);
-    }
+    if (draft?.inputMode !== mode) return;
+    const next = resolvedOrder(mode);
+    if (!next) return;
+    setDraft(next.draft);
+    if (next.message) setMessage(next.message);
   }
 
   function addToCart() {
-    if (!hydrated || isSaved || removed || invalidDraft) return;
-    if (shouldRemove) {
+    if (!hydrated || isSaved || removed) return;
+    if (draft === null && enteredQuantity === null) {
+      setMessage("Укажите длину или вес больше нуля.");
+      return;
+    }
+    const next = resolvedOrder(inputMode);
+    if (!next) return;
+    if (cartLine && next.quantity === 0) {
       removeItem(variant.id);
       setDraft(null);
       setMessage("");
       setRemoved(true);
       return;
     }
-    if (!parsedTons || (hasMass && !parsedMeters)) {
+    setDraft(next.draft);
+    if (next.message) setMessage(next.message);
+    const nextTotal = next.tons === null || pricePerTon === undefined ? null : calculateLineTotal(next.tons, pricePerTon);
+    if (!next.tons || (hasMass && !next.meters)) {
       setMessage("Укажите длину или вес больше нуля.");
       return;
     }
-    if (!canPurchase || estimatedTotal === null || pricePerTon === undefined) return;
-    if (!hasMass && parsedTons > 999) {setMessage("Укажите вес не более 999 т."); return;}
+    if (!canPurchase || nextTotal === null || pricePerTon === undefined || (!hasMass && inputMode === "meter")) return;
     if (!hasMass) {
-      if (cartLine) updateQuantity(variant.id, parsedTons);
-      else addItem(variant.id, parsedTons);
+      if (cartLine) updateQuantity(variant.id, next.tons);
+      else addItem(variant.id, next.tons);
     } else {
       addItem(
         variant.id,
-        inputMode === "meter" ? parsedMeters! : parsedTons,
+        inputMode === "meter" ? next.meters! : next.tons,
         {
           inputMode,
-          meters: parsedMeters!,
-          weightTons: parsedTons,
+          meters: next.meters!,
+          weightTons: next.tons,
           pricePerTon,
-          estimatedTotal,
+          estimatedTotal: nextTotal,
         },
       );
     }
     setDraft(null);
-    setMessage("");
+    setMessage(next.message ?? "");
   }
 
   const actionSizeClassName = view === "card" ? "w-full" : tableStyles.tableAction;
@@ -184,7 +204,7 @@ function TonnageMeasuredVariantItem({
       order={{product: formatQuoteProductName(variant), meters: invalidDraft ? null : parsedMeters, tons: invalidDraft ? null : parsedTons}}
       className={`${filterStyles.quoteButton} ${actionSizeClassName} px-3`}/>
   ) : (
-    <Button type="button" disabled={!hydrated || isSaved || removed || invalidDraft || (!canPurchase && !shouldRemove)} onClick={addToCart}
+    <Button type="button" disabled={!hydrated || isSaved || removed || (!canPurchase && !shouldRemove)} onClick={addToCart}
       className={`${buttonClassName} ${actionSizeClassName} whitespace-nowrap px-3`}>
       {shouldRemove ? "Удалить" : buttonLabel}
     </Button>
@@ -307,6 +327,7 @@ function OrderInput({
   const alignment = visibleLabel ? "px-2" : "px-2 text-center";
   const input = <Input aria-label={label} aria-invalid={invalid || undefined} aria-describedby={statusId} type="text" inputMode="decimal" onBlur={onBlur}
     value={value} onChange={event => onChange(event.target.value)}
+    onKeyDown={event => {if (event.key === "Enter" && !event.nativeEvent.isComposing) {event.preventDefault(); event.currentTarget.blur();}}}
     className={`${filterStyles.field} w-full min-w-0 ${alignment} tabular-nums focus:placeholder:text-transparent`} placeholder="0"/>;
   return (
     <label className="block text-sm font-semibold">
@@ -320,7 +341,7 @@ function formatMeasuredQuantity(value: number | null, decimalPlaces: number) {
   if (value === null) return "";
   if (value >= 1e21) return formatCatalogNumber(value);
   const formatted = formatDecimal(value, decimalPlaces);
-  return value > 0 && Number(formatted) === 0 ? formatCatalogNumber(value) : formatted;
+  return value > 0 && Number(formatted) === 0 ? formatCatalogNumber(Number(value.toPrecision(12))) : formatted;
 }
 
 function formLabel(form: "coil" | "bar") {

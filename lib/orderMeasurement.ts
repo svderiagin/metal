@@ -1,3 +1,20 @@
+import type {ProductVariant} from "@/types/product";
+import type {OrderInputMode} from "@/types/cart";
+
+// Input limits are shared by the catalog, cart editor and authoritative repricing.
+export function getMeasurementQuantityOptions(product: ProductVariant, mode: OrderInputMode) {
+  const maximum = mode === "meter" ? 9999 : 999;
+  const isVgp = product.categoryId === "cat-trk" && product.subcategoryId === "cat-trk-sub-1";
+  const length = product.lengthMeters;
+  const mass = product.weightPerMeterKg;
+  if (isVgp && length && mass) {
+    const pipeQuantity = mode === "meter" ? length : metersToTons(length, mass)!;
+    return {minimum: pipeQuantity, maximum: Math.floor(maximum / pipeQuantity) * pipeQuantity};
+  }
+  const decimalPlaces = mode === "meter" ? 2 : 3;
+  return {minimum: 10 ** -decimalPlaces, maximum, decimalPlaces};
+}
+
 export function metersToTons(meters: number, weightPerMeterKg: number) {
   if (!isNonNegativeFinite(meters) || !isPositiveFinite(weightPerMeterKg)) return null;
   // Length (m) × nominal linear mass (kg/m) / 1000 kg per tonne.

@@ -1,4 +1,4 @@
-import {calculateLineTotal, metersToTons, tonsToMeters} from "./orderMeasurement";
+import {calculateLineTotal, getMeasurementQuantityOptions, metersToTons, tonsToMeters} from "./orderMeasurement";
 import type {ProductVariant} from "@/types/product";
 import type {CartMeasurement, CartPieceOrder} from "@/types/cart";
 import {isVgpVariant, wholeVgpOrder} from "./vgp";
@@ -52,6 +52,12 @@ export function revalidateCartPrice(product: ProductVariant, item: PriceInput) {
     } else if (isDemonstrationProduct(product) || !product.pricePerTon || !product.weightPerMeterKg) {
       invalidReason = "Недостаточно данных для пересчёта массы и стоимости. Уточните позицию.";
     } else {
+      const entered = input.inputMode === "meter" ? input.meters : input.weightTons;
+      const {maximum} = getMeasurementQuantityOptions(product, input.inputMode);
+      // Enforce the input ceiling, while retaining valid legacy/conversion precision below the UI step.
+      if (entered > maximum + Math.max(1, maximum) * 1e-9) {
+        invalidReason = "Объём превышает допустимое значение. Измените количество.";
+      }
       const meters = input.inputMode === "meter" ? input.meters : tonsToMeters(input.weightTons, product.weightPerMeterKg);
       const weightTons = input.inputMode === "ton" ? input.weightTons : metersToTons(input.meters, product.weightPerMeterKg);
       if (meters === null || weightTons === null || meters <= 0 || weightTons <= 0) invalidReason = "Не удалось пересчитать количество.";

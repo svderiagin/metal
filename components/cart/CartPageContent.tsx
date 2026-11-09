@@ -18,7 +18,7 @@ export function CartPageContent() {
   }
 
   return (
-    <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-8">
+    <div className="grid items-start gap-6 xl:grid-cols-[minmax(0,1fr)_22rem] xl:gap-8">
       <section
         className="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-5 shadow-sm sm:px-6"
         aria-label="Товары в корзине"
@@ -27,7 +27,7 @@ export function CartPageContent() {
           <CartItemRow key={line.productId} line={line}/>
         ))}
       </section>
-      <div className="lg:sticky lg:top-6">
+      <div className="xl:sticky xl:top-6">
         <CartSummary/>
         <ButtonLink href="/catalog" variant="secondary" className="mt-3 w-full">
           Продолжить покупки

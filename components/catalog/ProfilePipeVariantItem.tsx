@@ -44,8 +44,13 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
   const priceLabel = confirmedPrice ? formatUnitPrice(variant.price, variant.priceUnit) : "Цена уточняется";
   const totalLabel = !confirmedPrice ? "Цена уточняется" : !order || order.estimatedTotal === null
     ? range && validLength === undefined ? "Выберите длину" : "Укажите количество" : formatCurrency(order.estimatedTotal);
-  const status = message ?? (line && !saved ? "Не сохранено" : "");
+  const piecesError = !!piecesText.trim() && !shouldRemove && validPieces === null;
+  const lengthError = !!range && !!lengthText.trim() && validLength === undefined;
+  const status = message ?? (piecesError ? "Введите целое количество труб от 1 до 999."
+    : lengthError ? `Введите длину от ${formatNumber(range![0])} до ${formatNumber(range![1])} м.`
+      : line && !saved ? "Не сохранено" : "");
   const statusId = `profile-pipe-order-status-${view}-${variant.id}`;
+  const correctedOrder = correctOrderValues().order;
 
   useEffect(() => {
     if (!removed) return;
@@ -53,56 +58,96 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
     return () => window.clearTimeout(timer);
   }, [removed]);
 
+  function correctPiecesValue(rawValue: string) {
+    const explicitRemoval = !!line && parseOrderQuantity(rawValue) === 0;
+    const fallback = savedPieces !== undefined && Number.isSafeInteger(savedPieces) && savedPieces > 0 && savedPieces <= 999
+      ? savedPieces : 1;
+    return correctOrderQuantity(rawValue, {whole: true, maximum: 999, fallback,
+      ...(!explicitRemoval ? {minimum: 1} : {})});
+  }
+
+  function correctLengthValue(rawValue: string): {value: string; message?: string} {
+    if (variant.lengthMeters !== undefined) return {value: formatCatalogNumber(variant.lengthMeters)};
+    if (!range) return {value: rawValue};
+    const corrected = correctOrderQuantity(rawValue, {minimum: range[0], maximum: range[1], fallback: savedLength ?? range[0]});
+    return {...corrected, message: corrected.message
+      ? `Длина трубы скорректирована до ${corrected.value.replace(".", ",")} м.` : undefined};
+  }
+
+  function correctOrderValues(rawPieces = piecesText, rawLength = lengthText) {
+    const nextPieces = correctPiecesValue(rawPieces);
+    const nextLength = correctLengthValue(rawLength);
+    const correctedPieces = parseOrderQuantity(nextPieces.value);
+    const correctedLength = parseOrderQuantity(nextLength.value);
+    const corrected = correctedPieces !== null && correctedPieces > 0 && correctedLength !== null
+      ? profilePipeOrder(variant, correctedPieces, correctedLength) : null;
+    return {pieces: nextPieces.value, length: nextLength.value, order: corrected,
+      message: [nextPieces.message, nextLength.message].filter(Boolean).join(" ")};
+  }
+
   function settlePieces() {
-    if (!draft) return;
-    const corrected = correctOrderQuantity(piecesText, {whole: true, maximum: 999});
-    if (corrected.value !== piecesText) setDraft({...draft, pieces: corrected.value});
+    const corrected = correctPiecesValue(piecesText);
+    if (corrected.value !== piecesText) setDraft({pieces: corrected.value, length: lengthText});
     if (corrected.message) setMessage(corrected.message);
   }
 
   function settleLength() {
-    if (!draft || !range || !lengthText.trim()) return;
-    if (length === null) {
-      setDraft({...draft, length: ""});
-      setMessage("Некорректная длина очищена.");
-      return;
-    }
-    const adjusted = Math.max(range[0], Math.min(range[1], length));
-    if (adjusted !== length) setMessage(`Длина скорректирована до ${formatNumber(adjusted)} м.`);
-    const normalized = formatCatalogNumber(adjusted);
-    if (normalized !== lengthText) setDraft({...draft, length: normalized});
+    if (!range) return;
+    const corrected = correctLengthValue(lengthText);
+    if (corrected.value !== lengthText) setDraft({pieces: piecesText, length: corrected.value});
+    if (corrected.message) setMessage(corrected.message);
   }
 
-  function submit() {
-    if (!hydrated || saved || removed) return;
-    if (shouldRemove) {removeItem(variant.id); setDraft(null); setMessage(undefined); setRemoved(true); return;}
-    if (!confirmedPrice || !order || order.estimatedTotal === null) return;
-    addItem(variant.id, order.meters, undefined, {pieces: order.pieces, lengthMeters: order.lengthMeters});
+  function submit(rawPieces = piecesText, rawLength = lengthText) {
+    if (!hydrated || removed) return;
+    const corrected = correctOrderValues(rawPieces, rawLength);
+    setDraft({pieces: corrected.pieces, length: corrected.length});
+    if (corrected.message) setMessage(corrected.message);
+    if (line && parseOrderQuantity(rawPieces) === 0) {
+      removeItem(variant.id); setDraft(null); setMessage(undefined); setRemoved(true); return;
+    }
+    const nextOrder = corrected.order;
+    if (!confirmedPrice || !nextOrder || nextOrder.estimatedTotal === null) return;
+    if (line && !line.invalidReason && nextOrder.pieces === savedPieces && nextOrder.lengthMeters === savedLength) {
+      setDraft(null); return;
+    }
+    addItem(variant.id, nextOrder.meters, undefined, {pieces: nextOrder.pieces, lengthMeters: nextOrder.lengthMeters});
     setDraft(null);
-    setMessage(undefined);
   }
 
   const action = !confirmedPrice && !shouldRemove && !removed ? <QuoteRequestButton label="Запросить цену"
     order={{product: validLength ? `${variant.name}, длина ${formatNumber(validLength)} м` : variant.name,
       quantity: validPieces, unit: "шт.", meters: order?.meters ?? null}}
     className={`${filterStyles.quoteButton} ${actionSize} px-3`}/>
-    : <Button type="button" onClick={submit}
-      disabled={!hydrated || saved || removed || (!shouldRemove && (!order || order.estimatedTotal === null))}
+    : <Button type="button" onClick={() => submit()}
+      disabled={!hydrated || saved || removed || (!shouldRemove && (!correctedOrder || correctedOrder.estimatedTotal === null))}
       className={`${buttonClass} ${actionSize} px-3`}>{label}</Button>;
 
   const quantityInput = <Input type="text" inputMode="numeric"
     aria-label={`Количество целых труб для ${variant.name}`} value={piecesText}
-    aria-invalid={!!piecesText.trim() && !shouldRemove && validPieces === null}
+    aria-invalid={piecesError || undefined}
     aria-describedby={status ? statusId : undefined}
     onChange={event => {setDraft({pieces: event.target.value, length: lengthText}); setMessage(undefined);}}
-    onBlur={settlePieces} className={`${filterStyles.field} min-w-0 px-7 text-center tabular-nums`}/>;
+    onBlur={settlePieces}
+    onKeyDown={event => {
+      if (event.key === "Enter" && !event.nativeEvent.isComposing) {
+        event.preventDefault();
+        event.currentTarget.blur();
+      }
+    }} className={`${filterStyles.field} min-w-0 px-7 text-center tabular-nums`}/>;
   const lengthField = range ? <Input type="text" inputMode="decimal"
     aria-label={`Длина одной трубы для ${variant.name}`} value={lengthText}
-    aria-invalid={!!lengthText.trim() && validLength === undefined}
+    aria-invalid={lengthError || undefined}
     aria-describedby={status ? statusId : undefined}
     placeholder={`${range[0]}–${range[1]}`}
     onChange={event => {setDraft({pieces: piecesText, length: event.target.value}); setMessage(undefined);}}
     onBlur={settleLength}
+    onKeyDown={event => {
+      if (event.key === "Enter" && !event.nativeEvent.isComposing) {
+        event.preventDefault();
+        event.currentTarget.blur();
+      }
+    }}
     className={`${filterStyles.field} min-w-0 px-2 text-center tabular-nums`}/>
     : null;
   const mass = variant.weightConfirmed && variant.weightPerMeterKg !== undefined ? formatNumber(variant.weightPerMeterKg) : "—";
@@ -131,6 +176,7 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
 
   return <CatalogVariantLayout view={view} variant={variant} specifications={specifications} price={priceLabel}
     order={<CatalogVariantOrder view={view} quantity={quantity} action={action} total={total}
-      status={<span id={statusId} className={status ? "mt-1 block text-xs text-slate-500 dark:text-slate-400" : "sr-only"}
+      status={<span id={statusId} className={status ? `mt-1 block text-xs ${piecesError || lengthError
+        ? "text-red-700 dark:text-red-400" : "text-slate-500 dark:text-slate-400"}` : "sr-only"}
         aria-live="polite" aria-atomic="true">{status}</span>}/>}/>;
 }

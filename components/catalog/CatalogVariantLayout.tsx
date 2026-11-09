@@ -7,8 +7,8 @@ import tableStyles from "./RebarTable.module.css";
 
 type View = "table" | "card";
 
-const quantityColumnWidths = [12, 20, 22, 11, 10, 12, 13];
-const measuredColumnWidths = [13, 15, 21, 10, 8, 8, 12, 13];
+const quantityColumnWidths = [11, 20, 21, 11, 10, 12, 15];
+const measuredColumnWidths = [12, 15, 20, 10, 8, 8, 12, 15];
 
 export function CatalogVariantTable({children, quantityHeading = "Кол-во", measured = false}: {
   children: ReactNode;

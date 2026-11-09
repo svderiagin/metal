@@ -30,14 +30,26 @@ export function constrainOrderQuantityInput(value: string, maximum: number): {va
   return {value: value.replace(/^(\s*)0+(?=\d)/u, "$1")};
 }
 
-export function correctOrderQuantity(value: string, {whole = false, maximum, decimalPlaces}: {
+export function correctOrderQuantity(value: string, {whole = false, minimum, maximum, decimalPlaces, fallback}: {
   whole?: boolean;
+  minimum?: number;
   maximum?: number;
   decimalPlaces?: number;
+  fallback?: number;
 } = {}): {value: string; message?: string} {
-  if (!value.trim()) return {value: ""};
-  const quantity = parseOrderQuantity(value);
-  if (quantity === null) return {value: "", message: "Некорректное значение очищено."};
+  const parsed = parseCatalogNumber(value);
+  if (!value.trim() || parsed === null || ((parsed < 0 || Object.is(parsed, -0)) && minimum === undefined)) {
+    if (fallback !== undefined && Number.isFinite(fallback) && fallback >= 0) {
+      // A saved quantity may carry exact converted precision beyond the input display.
+      const restored = correctOrderQuantity(formatCatalogNumber(fallback), {whole, minimum, maximum});
+      return {...restored, message: `Восстановлено количество ${restored.value.replace(".", ",")}.`};
+    }
+    return {value: "", ...(!value.trim() ? {} : {message: "Некорректное значение очищено."})};
+  }
+  const quantity = parsed;
+  if (minimum !== undefined && quantity < minimum) {
+    return {value: formatCatalogNumber(minimum), message: `Значение увеличено до минимума ${formatCatalogNumber(minimum).replace(".", ",")}.`};
+  }
   if (maximum !== undefined && quantity > maximum) {
     return {value: String(maximum), message: `Значение ограничено максимумом ${formatCatalogNumber(maximum)}.`};
   }

@@ -71,6 +71,10 @@
 .removeCartButton,
 .removedCartButton {
   font-weight: 500;
+  min-height: 2.875rem;
+  white-space: nowrap;
+  overflow-wrap: normal;
+  word-break: normal;
 }
 
 .savedCartButton,
