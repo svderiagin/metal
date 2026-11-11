@@ -1,8 +1,13 @@
+import type {Page} from "@playwright/test";
 import {test, expect, productPath, samples} from "../browser";
 import {getCategoryBySlug, getProductTypesByCategoryId} from "../../lib/catalog";
 import {getCatalogCoverImages} from "../../lib/catalogCoverImages";
 
-const titleButton = "button[aria-label^='Увеличить титульное изображение:']";
+// Next can stream a hidden copy of the cover while the visible route is resolving.
+function titleTrigger(page: Page) {
+  return page.getByRole("button", {name: /^Увеличить титульное изображение:/});
+}
+
 const titleDialog = {name: /^Просмотр титульных фотографий:/};
 
 for (const [layout, route] of [
@@ -12,7 +17,7 @@ for (const [layout, route] of [
 ] as const) {
   test(`${layout}: title opens above the page and closes with photo, Escape and close control`, async ({page, context}) => {
     await page.goto(route);
-    const trigger = page.locator(titleButton);
+    const trigger = titleTrigger(page);
     await expect(trigger).toBeVisible();
     await expect(trigger).toHaveCSS("cursor", "zoom-in");
     const url = page.url();
@@ -50,7 +55,7 @@ for (const [layout, route] of [
 
 test("title viewer fits narrow and landscape screens, pans at 1:1 and closes on the backdrop", async ({page}) => {
   await page.goto("/catalog/armatura");
-  await page.locator(titleButton).click();
+  await titleTrigger(page).click();
   const dialog = page.getByRole("dialog", titleDialog);
   const picture = dialog.getByRole("img");
   const zoom = dialog.getByRole("button", {name: "Показать титульное фото в масштабе 1:1", exact: true});
@@ -81,23 +86,23 @@ test("title viewer fits narrow and landscape screens, pans at 1:1 and closes on 
   }
   await page.mouse.click(2, 2);
   await expect(dialog).not.toBeVisible();
-  await expect(page.locator(titleButton)).toBeFocused();
+  await expect(titleTrigger(page)).toBeFocused();
 });
 
 test("failed full-size title photo remains dismissible", async ({page}) => {
   await page.goto("/catalog/armatura");
   await page.route(url => url.pathname.startsWith("/images/catalog/"), route => route.abort());
-  await page.locator(titleButton).click();
+  await titleTrigger(page).click();
   const dialog = page.getByRole("dialog", titleDialog);
   await expect(dialog.getByRole("alert")).toContainText("Не удалось загрузить фото");
   await dialog.getByRole("button", {name: /^Вернуть изображение на страницу:/}).click();
   await expect(dialog).not.toBeVisible();
-  await expect(page.locator(titleButton)).toBeFocused();
+  await expect(titleTrigger(page)).toBeFocused();
 });
 
 test("galvanized sheet title gallery cycles through its own photographs", async ({page}) => {
   await page.goto(productPath(samples.galvanizedSheet, false));
-  const trigger = page.locator(titleButton);
+  const trigger = titleTrigger(page);
   await trigger.click();
   const dialog = page.getByRole("dialog", titleDialog);
   const picture = dialog.getByRole("img");
@@ -142,7 +147,7 @@ for (const {name, route, id, cover} of coverGalleryPages) {
     const frames = getCatalogCoverImages(id, cover);
     expect(frames.length).toBeGreaterThan(1);
     await page.goto(route);
-    const trigger = page.locator(titleButton);
+    const trigger = titleTrigger(page);
     await trigger.click();
     const dialog = page.getByRole("dialog", titleDialog);
     const picture = dialog.getByRole("img");
@@ -166,7 +171,7 @@ test("subcategory overview shows the same title gallery as its product family", 
   const family = nestedGalleryPages.find(entry => entry.id === samples.armatura.productTypeId)!;
   const frames = getCatalogCoverImages(family.id, family.cover);
   await page.goto(family.subcategoryRoute);
-  const trigger = page.locator(titleButton);
+  const trigger = titleTrigger(page);
   await trigger.click();
   const dialog = page.getByRole("dialog", titleDialog);
   const picture = dialog.getByRole("img");

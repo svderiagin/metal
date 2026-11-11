@@ -2,7 +2,14 @@ import {test, expect, openProduct, samples, visibleProduct} from "../browser";
 import type {Locator} from "@playwright/test";
 
 async function readable(control: Locator, mode: "text" | "placeholder" | "border" = "text") {
-  const colors = await control.evaluate((element, mode) => {
+  const colors = await control.evaluate(async (element, mode) => {
+    // An action's accessible name changes before its new colors finish transitioning.
+    for (;;) {
+      const transitions = element.getAnimations().filter(animation =>
+        animation instanceof CSSTransition && (animation.pending || animation.playState === "running"));
+      if (transitions.length === 0) break;
+      await Promise.allSettled(transitions.map(transition => transition.finished));
+    }
     const context = document.createElement("canvas").getContext("2d", {willReadFrequently: true})!;
     const rgba = (color: string) => {
       context.clearRect(0, 0, 1, 1);
