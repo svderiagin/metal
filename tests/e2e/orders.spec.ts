@@ -231,12 +231,13 @@ test("visiting a receipt URL directly does not claim an order exists", async ({p
 
 test("contact error preserves the message and remains announced", async ({page}) => {
   await page.goto("/contacts");
-  const form = page.locator("form").filter({has: page.getByRole("heading", {name: "Написать нам", exact: true})});
-  await form.getByLabel("Имя", {exact: true}).fill("Анна");
-  await form.getByLabel("Электронная почта", {exact: true}).fill("audit@example.invalid");
-  await form.getByLabel("Сообщение", {exact: true}).fill("Тестовый расчёт поставки");
+  const form = page.getByRole("form", {name: "Связаться с нами", exact: true});
+  const message = form.getByLabel("Сообщение *", {exact: true});
+  await form.getByLabel("Имя *", {exact: true}).fill("Анна");
+  await form.getByLabel("Электронная почта *", {exact: true}).fill("audit@example.invalid");
+  await message.fill("Тестовый расчёт поставки");
   await form.getByRole("checkbox").check();
   await form.getByRole("button", {name: "Отправить", exact: true}).click();
   await expect(form.getByRole("alert")).toContainText("Тестовый отказ");
-  await expect(form.getByLabel("Сообщение", {exact: true})).toHaveValue("Тестовый расчёт поставки");
+  await expect(message).toHaveValue("Тестовый расчёт поставки");
 });

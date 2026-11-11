@@ -37,6 +37,7 @@ function setup(overrides = {}, componentProps = {}) {
     '@/hooks/useCart': {useCart: () => cart},
     '@/components/ui/Button': {Button: 'button', ButtonLink: 'link'},
     '@/components/ui/Input': {Input: 'input'},
+    '@/components/ui/Icon': {Icon: () => null},
     '@/lib/variantPresentation': {getQuantityUnit: () => 'т', requiresWholeRozmetQuantity: () => false},
     './QuoteRequestButton': {QuoteRequestButton: 'quote'},
     '@/lib/quoteRequest': readProjectData('lib/quoteRequest.ts'),
@@ -63,42 +64,49 @@ function setup(overrides = {}, componentProps = {}) {
   function render() {
     cursor = 0;
     const tree = nodes(testModule.exports.ProductOrderControls({variant, view: 'table', ...componentProps}));
-    return {tree, input: tree.find(n => n.type === 'input').props, action: tree.find(n => n.type === 'button' || n.type === 'link').props};
+    const action = tree.find(n => n.type === 'button' || n.type === 'link').props;
+    const actionText = [action.children, ...nodes(action.children).map(node => node.props.children)]
+      .filter(value => typeof value === 'string').join('');
+    return {tree, input: tree.find(n => n.type === 'input').props, action, actionText};
   }
   return {cart, calls, timers, render, change: value => render().input.onChange({target: {value}})};
 }
 
 test('add, replace quantity, restore saved state, delete zero and show removed for one second', () => {
   const h = setup();
-  assert.equal(h.render().action.children, 'В корзину');
+  assert.equal(h.render().actionText, 'В корзину');
   h.change('2'); h.render().action.onClick();
-  assert.equal(h.render().action.children, '✓ В корзине');
+  assert.equal(h.render().actionText, 'В корзине');
   assert.equal(h.render().action.disabled, true);
-  h.change('3.5'); assert.equal(h.render().action.children, 'Обновить');
+  h.change('3.5'); assert.equal(h.render().actionText, 'Обновить');
   h.render().action.onClick();
   assert.equal(h.cart.lines.length, 1);
   assert.equal(h.cart.lines[0].quantity, 3.5);
   assert.deepEqual(h.calls, ['add', 'update']);
-  h.change(''); assert.equal(h.render().action.disabled, true);
-  h.change('0'); assert.equal(h.render().action.children, 'Удалить');
+  h.change(''); h.render().input.onBlur();
+  assert.equal(h.render().input.value, '3.5');
+  assert.equal(h.render().actionText, 'В корзине');
+  assert.equal(h.render().action.disabled, true);
+  assert.deepEqual(h.calls, ['add', 'update']);
+  h.change('0'); assert.equal(h.render().actionText, 'Удалить');
   h.render().action.onClick();
   assert.equal(h.cart.lines.length, 0);
-  assert.equal(h.render().action.children, 'Удалено');
-  h.timers.at(-1)(); assert.equal(h.render().action.children, 'В корзину');
+  assert.equal(h.render().actionText, 'Удалено');
+  h.timers.at(-1)(); assert.equal(h.render().actionText, 'В корзину');
 });
 
 test('saved cart quantity, hydration, stock, quote and invalid input are respected', () => {
   const h = setup(); h.cart.lines = [{productId: 'product', quantity: 7}];
   assert.equal(h.render().input.value, '7');
-  assert.equal(h.render().action.children, '✓ В корзине');
+  assert.equal(h.render().actionText, 'В корзине');
   h.change('1000'); assert.equal(h.render().input.value, '999');
-  assert.equal(h.render().action.children, 'Обновить');
+  assert.equal(h.render().actionText, 'Обновить');
   assert.equal(h.cart.lines[0].quantity, 7);
   h.change('2'); h.cart.hydrated = false; assert.equal(h.render().action.disabled, true);
-  assert.equal(setup({inStock: false}).render().action.children, 'Под заказ');
-  assert.equal(setup({quoteOnly: true}).render().action.children, 'Запросить цену');
-  assert.equal(setup({price: null}).render().action.children, 'Запросить цену');
-  assert.equal(setup({priceQualifier: 'from'}).render().action.children, 'Запросить цену');
+  assert.equal(setup({inStock: false}).render().actionText, 'Под заказ');
+  assert.equal(setup({quoteOnly: true}).render().actionText, 'Запросить цену');
+  assert.equal(setup({price: null}).render().actionText, 'Запросить цену');
+  assert.equal(setup({priceQualifier: 'from'}).render().actionText, 'Запросить цену');
 });
 
 test('quote button receives only explicitly entered or saved order quantities', () => {
@@ -114,7 +122,7 @@ test('quote button receives only explicitly entered or saved order quantities', 
 
 test('on-order action is a quote link carrying quantity and calculable weight', () => {
   const h = setup({inStock: false, availability: 'ON_ORDER', unit: 'ton'});
-  assert.equal(h.render().action.children, 'Под заказ');
+  assert.equal(h.render().actionText, 'Под заказ');
   assert.equal(h.render().action.disabled, undefined);
   assert.equal(h.render().action.order.quantity, 1);
   h.change('2.5');
@@ -122,13 +130,13 @@ test('on-order action is a quote link carrying quantity and calculable weight', 
   assert.equal(h.render().action.order.tons, 2.5);
   assert.deepEqual(h.calls, []);
   const imported = setup({inStock: false, imported: true, availability: 'ON_ORDER'});
-  assert.equal(imported.render().action.children, 'Под заказ');
+  assert.equal(imported.render().actionText, 'Под заказ');
   const measured = setup({inStock: false, unit: 'meter', weight: {value: 0.888, unit: 'кг/м'}});
   measured.change('100');
   assert.equal(measured.render().action.order.tons, 0.0888);
   h.cart.lines = [{productId: 'product', quantity: 2.5}];
-  h.change('0'); assert.equal(h.render().action.children, 'Удалить');
-  h.render().action.onClick(); assert.equal(h.render().action.children, 'Удалено');
+  h.change('0'); assert.equal(h.render().actionText, 'Удалить');
+  h.render().action.onClick(); assert.equal(h.render().actionText, 'Удалено');
 });
 
 test('reference table quantity matches the centered rebar input format', () => {

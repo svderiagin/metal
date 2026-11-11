@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import sharp from 'sharp';
+import {assertReferencePixels} from './image-pixel-assertions.mjs';
 import {readProjectData} from './project-data.mjs';
 
 const source = JSON.parse(fs.readFileSync('data/rozmet-catalog.json', 'utf8'));
@@ -64,20 +64,6 @@ test('labels use catalog mass and length, and preserve distinct legs for unequal
 });
 
 test('every 2400 × 1800 lossless illustration preserves the reference outside changed label regions', async () => {
-  const reference = await sharp(manifest.reference).removeAlpha().raw().toBuffer({resolveWithObject: true});
   assert.equal(manifest.records.length, angles.length);
-  for (const record of manifest.records) {
-    const rendered = await sharp(`public${record.imageUrl}`).removeAlpha().raw().toBuffer({resolveWithObject: true});
-    assert.equal(rendered.info.width, 2400, record.id);
-    assert.equal(rendered.info.height, 1800, record.id);
-    assert.equal(rendered.info.channels, 3);
-    const allowed = Buffer.alloc(2400 * 1800);
-    for (const key of record.changedLabels) {
-      const box = manifest.patches[key];
-      for (let y = box.top; y < box.top + box.height; y++) allowed.fill(1, y * 2400 + box.left, y * 2400 + box.left + box.width);
-    }
-    let changes = 0;
-    for (let p = 0; p < allowed.length; p++) if (!allowed[p] && (reference.data[p * 3] !== rendered.data[p * 3] || reference.data[p * 3 + 1] !== rendered.data[p * 3 + 1] || reference.data[p * 3 + 2] !== rendered.data[p * 3 + 2])) changes++;
-    assert.equal(changes, 0, record.id);
-  }
+  await assertReferencePixels(manifest);
 });

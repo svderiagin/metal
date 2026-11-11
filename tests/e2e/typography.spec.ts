@@ -64,9 +64,10 @@ test("fields use a blue-gray focus underline and reserve red for validation erro
   await checkPointerFocus(page.getByRole("textbox", {name: /^Что требуется рассчитать/}));
 
   await page.goto("/contacts");
-  await checkPointerFocus(page.getByRole("textbox", {name: "Сообщение", exact: true}));
+  await checkPointerFocus(page.getByRole("textbox", {name: "Сообщение *", exact: true}));
   await page.goto("/cart");
-  await checkPointerFocus(page.getByLabel("Количество товара", {exact: true}));
+  const cartLine = page.locator(`[data-cart-row="${samples.shveller.id}"]`);
+  await checkPointerFocus(cartLine.getByRole("textbox", {name: `Длина ${samples.shveller.name}, м`, exact: true}));
   await page.goto("/checkout");
   await checkPointerFocus(page.getByLabel("ФИО *", {exact: true}));
   await checkPointerFocus(page.getByLabel("Комментарий", {exact: true}));
@@ -102,7 +103,7 @@ test("font fallback preserves the category and products", async ({page}) => {
   const products = page.getByRole("region", {name: "Типы продукции", exact: true});
   await expect(products.getByRole("article")).toHaveCount(4);
   await expect(products.getByRole("link").first()).toBeVisible();
-  await page.getByRole("link", {name: "Рекомендации по выбору ↓", exact: true}).click();
+  await page.getByRole("link", {name: "Как выбрать", exact: true}).click();
   await expect(page.getByRole("heading", {name: "Как выбрать арматуру", exact: true})).toBeInViewport();
 });
 
@@ -127,10 +128,11 @@ test("enlarged and spaced text preserves category content and actions", async ({
   expect(overflow.page, JSON.stringify(overflow.elements)).toBe(false);
   const products = page.getByRole("region", {name: "Типы продукции", exact: true});
   await expect(products.getByRole("article")).toHaveCount(4);
-  const descriptionLink = page.getByRole("link", {name: "Рекомендации по выбору ↓", exact: true});
+  const descriptionLink = page.getByRole("link", {name: "Как выбрать", exact: true});
   await descriptionLink.focus();
   await descriptionLink.press("Enter");
-  await expect(page.getByRole("heading", {name: "Как выбрать арматуру", exact: true})).toBeInViewport();
-  await expect(page.getByRole("region", {name: "Как выбрать арматуру", exact: true}))
+  const detailsHeading = page.getByRole("heading", {name: "Как выбрать арматуру", exact: true});
+  await expect(detailsHeading).toBeInViewport();
+  await expect(page.getByRole("region").filter({has: detailsHeading}))
     .toContainText("Сопоставьте класс, профиль поверхности, диаметр и длину с проектом.");
 });

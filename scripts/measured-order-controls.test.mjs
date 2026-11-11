@@ -37,7 +37,7 @@ function setup(id, kind = 'beam') {
         return {draft, setDraft, message, setMessage};
       },
     },
-    'react/jsx-runtime': {jsx, jsxs: jsx},
+    'react/jsx-runtime': {jsx, jsxs: jsx, Fragment: 'fragment'},
     '@/lib/beam': readProjectData('lib/beam.ts'),
     '@/lib/vgp': readProjectData('lib/vgp.ts'),
     '@/lib/quoteRequest': readProjectData('lib/quoteRequest.ts'),
@@ -49,6 +49,8 @@ function setup(id, kind = 'beam') {
     '@/hooks/useCart': {useCart: () => cart},
     '@/components/ui/Button': {Button: 'button'},
     '@/components/ui/Input': {Input: 'input'},
+    '@/components/ui/Icon': {Icon: () => null},
+    '@/components/ui/DetailsSummary': {DetailsSummary: 'summary'},
     './QuoteRequestButton': {QuoteRequestButton: 'quote'},
     './CatalogVariantLayout': {
       CatalogVariantLayout: ({specifications, order}) => jsx('row', {children: [specifications, order]}),
@@ -69,7 +71,10 @@ function setup(id, kind = 'beam') {
   function render() {
     cursor = 0;
     const tree = nodes(testModule.exports.MeasuredVariantItem({variant, kind, view: 'table'}));
-    return {inputs: tree.filter(n => n.type === 'input').map(n => n.props), action: tree.filter(n => ['button', 'link'].includes(n.type)).at(-1).props};
+    const action = nodes(tree.find(n => n.type === 'order')).find(n => ['button', 'link'].includes(n.type)).props;
+    const actionText = [action.children, ...nodes(action.children).map(node => node.props.children)]
+      .filter(value => typeof value === 'string').join('');
+    return {inputs: tree.filter(n => n.type === 'input').map(n => n.props), action, actionText};
   }
   return {cart, timers, render, change(index, value) {render().inputs[index].onChange({target: {value}});}};
 }
@@ -77,29 +82,31 @@ function setup(id, kind = 'beam') {
 test('beam reference table converts, adds, replaces and deletes a measured order', () => {
   const h = setup('local-122247');
   h.change(0, '100'); assert.equal(h.render().inputs[1].value, '4.42');
-  h.render().action.onClick(); assert.equal(h.render().action.children, '✓ В корзине');
+  h.render().action.onClick(); assert.equal(h.render().actionText, 'В корзине');
   assert.equal(h.cart.lines[0].measurement.weightTons, 4.42);
   h.change(1, '8.84'); assert.equal(h.render().inputs[0].value, '200');
-  assert.equal(h.render().action.children, 'Обновить');
+  assert.equal(h.render().actionText, 'Обновить');
   h.render().action.onClick(); assert.equal(h.cart.lines.length, 1);
   assert.equal(h.cart.lines[0].measurement.meters, 200);
-  h.change(0, '0'); assert.equal(h.render().action.children, 'Удалить');
+  h.change(0, '0'); assert.equal(h.render().actionText, 'Удалить');
   h.render().action.onClick(); assert.equal(h.cart.lines.length, 0);
-  assert.equal(h.render().action.children, 'Удалено');
-  h.timers.at(-1)(); assert.equal(h.render().action.children, 'В корзину');
+  assert.equal(h.render().actionText, 'Удалено');
+  h.timers.at(-1)(); assert.equal(h.render().actionText, 'В корзину');
 });
 
 test('missing mass never fabricates conversion; tonne orders still replace and metre orders request quotes', () => {
   const h = setup('local-65599');
   h.change(1, '2'); assert.equal(h.render().inputs[0].value, '');
-  h.render().action.onClick(); assert.equal(h.render().action.children, '✓ В корзине');
+  h.render().action.onClick(); assert.equal(h.render().actionText, 'В корзине');
   h.change(1, '3'); h.render().action.onClick();
   assert.equal(h.cart.lines.length, 1); assert.equal(h.cart.lines[0].quantity, 3);
   h.change(0, '100');
-  assert.equal(h.render().action.children, 'Запросить цену');
+  assert.equal(h.render().actionText, 'Запросить цену');
   assert.equal(h.render().action.order.meters, 100);
-  assert.equal(h.render().action.order.tons, 3);
-  h.change(0, '0'); assert.equal(h.render().action.children, 'Удалить');
+  assert.equal(h.render().inputs[1].value, '');
+  assert.equal(h.render().action.order.tons, null);
+  assert.equal(h.cart.lines[0].quantity, 3);
+  h.change(0, '0'); assert.equal(h.render().actionText, 'Удалить');
   assert.equal(h.render().action.disabled, false);
   h.render().action.onClick(); assert.equal(h.cart.lines.length, 0);
 });
@@ -108,13 +115,13 @@ test('existing generic tonne carts hydrate into measured controls and rebar keep
   const h = setup('local-122247');
   h.cart.lines = [{productId: 'local-122247', quantity: 4.42}];
   assert.equal(h.render().inputs[0].value, '100');
-  assert.equal(h.render().action.children, '✓ В корзине');
+  assert.equal(h.render().actionText, 'В корзине');
   h.change(0, '200'); h.render().action.onClick();
   assert.equal(h.cart.lines.length, 1);
   assert.equal(h.cart.lines[0].measurement.weightTons, 8.84);
   const rebar = productVariants.find(p => p.categoryId === 'cat-arm' && p.diameterMm === 6 && p.pricePerTon && !p.quoteOnly);
   const r = setup(rebar.id, 'rebar'); r.change(0, '100');
-  assert.equal(r.render().inputs[1].value, '0.022');
+  assert.equal(r.render().inputs[1].value, '0.0222');
   r.render().action.onClick();
   assert.ok(Math.abs(r.cart.lines[0].measurement.weightTons - 0.0222) < 1e-12);
 });
@@ -126,7 +133,7 @@ test('VGP orders round up to whole pipes, retain exact mass and update or remove
   h.render().inputs[0].onBlur();
   assert.equal(h.render().inputs[0].value, '12');
   h.render().action.onClick();
-  assert.equal(h.render().action.children, '✓ В корзине');
+  assert.equal(h.render().actionText, 'В корзине');
   assert.equal(h.cart.lines[0].measurement.meters, 12);
   assert.ok(Math.abs(h.cart.lines[0].measurement.weightTons - 0.01536) < 1e-12);
   assert.equal(h.cart.lines[0].measurement.estimatedTotal, 823.91);
@@ -139,7 +146,7 @@ test('VGP orders round up to whole pipes, retain exact mass and update or remove
   assert.equal(h.cart.lines[0].measurement.meters, 18);
   assert.equal(h.cart.lines[0].measurement.inputMode, 'ton');
   h.change(0, '0');
-  assert.equal(h.render().action.children, 'Удалить');
+  assert.equal(h.render().actionText, 'Удалить');
   h.render().action.onClick();
   assert.equal(h.cart.lines.length, 0);
 });
@@ -149,7 +156,7 @@ test('VGP empty inputs cannot purchase; legacy fractional tonne orders require e
   h.render().action.onClick();
   assert.equal(h.cart.lines.length, 0);
   h.cart.lines = [{productId: 'local-277', quantity: 0.1, invalidReason: 'Whole pipes required'}];
-  assert.equal(h.render().action.children, 'Обновить');
+  assert.equal(h.render().actionText, 'Обновить');
   h.render().action.onClick();
   assert.equal(h.cart.lines.length, 1);
   assert.equal(h.cart.lines[0].measurement.meters, 36);

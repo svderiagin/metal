@@ -64,6 +64,12 @@ function numberFromText(text: string) {
   return Number(text.replace(/[\s\u202f]/gu, "").replace(",", "."));
 }
 
+async function fillQuantity(input: Locator, value: string) {
+  // Focus exposes the exact editable value before Playwright selects the text to replace.
+  await input.focus();
+  await input.fill(value);
+}
+
 async function expectNumber(input: Locator, expected: number) {
   await expect.poll(async () => numberFromText(await input.inputValue())).toBeCloseTo(expected, 10);
 }
@@ -246,19 +252,19 @@ test("metres and tonnes share exact state and focusing the other field cannot re
   for (const input of [meters, tons]) {await input.focus(); await input.blur();}
   expect(await storedItems(page)).toEqual(initial);
   expect((await storedItem(page, rebar6.id))!.measurement).toBeUndefined();
-  await meters.fill("12,5");
+  await fillQuantity(meters, "12,5");
   await meters.press("Enter");
   await expectMeasurement(page, rebar6.id, 12.5, 0.002775, "meter");
   await expect(row.getByText(/203,41\s*₽/)).toBeVisible();
-  await meters.fill("100,25");
+  await fillQuantity(meters, "100,25");
   await tons.click();
   await expectNumber(tons, 0.0222555);
   await tons.blur();
   await expectMeasurement(page, rebar6.id, 100.25, 0.0222555, "meter");
-  await tons.fill("0,01");
+  await fillQuantity(tons, "0,01");
   await tons.press("Enter");
   await expectMeasurement(page, rebar6.id, 45.04504504504504, 0.01, "ton");
-  await meters.fill("0,01");
+  await fillQuantity(meters, "0,01");
   await meters.press("Enter");
   await expectMeasurement(page, rebar6.id, 0.01, 0.00000222, "meter");
   await expectNumber(tons, 0.00000222);
@@ -273,7 +279,7 @@ for (const [variant, maximumMeters, maximumTons, minimumMeters, minimumTons] of 
   test(`${variant.id}: both units have the same physical minimum and exact maximum`, async ({page}) => {
     await openCart(page, [measuredItem(variant, 12)]);
     const row = cartRow(page, variant.id), meters = metersInput(row), tons = tonsInput(row);
-    await meters.fill(String(maximumMeters + 1));
+    await fillQuantity(meters, String(maximumMeters + 1));
     await expectNumber(meters, maximumMeters);
     expect((await storedItem(page, variant.id))!.measurement!.meters).toBe(12);
     await meters.press("Enter");
@@ -283,21 +289,21 @@ for (const [variant, maximumMeters, maximumTons, minimumMeters, minimumTons] of 
       await expect(row.getByRole("group", {name}).getByRole("button", {name: "Увеличить количество", exact: true})).toBeDisabled();
     }
     // Change the physical volume first so the tonne maximum must persist a fresh state.
-    await meters.fill(String(minimumMeters).replace(".", ","));
+    await fillQuantity(meters, String(minimumMeters).replace(".", ","));
     await meters.press("Enter");
     await expectMeasurement(page, variant.id, minimumMeters, minimumTons, "meter");
-    await tons.fill(String(maximumTons).replace(".", ","));
+    await fillQuantity(tons, String(maximumTons).replace(".", ","));
     await tons.press("Enter");
     await expectMeasurement(page, variant.id, maximumMeters, maximumTons, "ton");
     await expectNumber(meters, maximumMeters);
     const capped = await storedItems(page);
     for (const input of [meters, tons]) {await input.focus(); await input.blur();}
     expect(await storedItems(page)).toEqual(capped);
-    await tons.fill("1000");
+    await fillQuantity(tons, "1000");
     await expectNumber(tons, maximumTons);
     await tons.press("Enter");
     await expectNumber(meters, maximumMeters);
-    await tons.fill("0");
+    await fillQuantity(tons, "0");
     await tons.press("Enter");
     await expectMeasurement(page, variant.id, minimumMeters, minimumTons, "ton");
     await expectNumber(meters, minimumMeters);
@@ -309,7 +315,7 @@ test("a fractional metre ceiling preserves the full 999 tonnes through commit an
   const maximumMeters = 999000 / 0.617;
   await openCart(page, [measuredItem(rebar10, 12)]);
   const row = cartRow(page, rebar10.id), meters = metersInput(row), tons = tonsInput(row);
-  await meters.fill(String(maximumMeters + 1));
+  await fillQuantity(meters, String(maximumMeters + 1));
   await expectNumber(meters, maximumMeters);
   expect((await storedItem(page, rebar10.id))!.measurement!.meters).toBe(12);
   await meters.press("Enter");
@@ -332,10 +338,10 @@ test("a fractional metre ceiling preserves the full 999 tonnes through commit an
 test("VGP rounds either input to whole pipes and steps by one pipe", async ({page}) => {
   await openCart(page, [measuredItem(vgp, 6)]);
   const row = cartRow(page, vgp.id), meters = metersInput(row), tons = tonsInput(row);
-  await meters.fill("7");
+  await fillQuantity(meters, "7");
   await meters.press("Enter");
   await expectMeasurement(page, vgp.id, 12, 0.01536, "meter");
-  await tons.fill("0,02");
+  await fillQuantity(tons, "0,02");
   await tons.press("Enter");
   await expectMeasurement(page, vgp.id, 18, 0.02304, "ton");
   await row.getByRole("group", {name: /^Масса /}).getByRole("button", {name: "Увеличить количество", exact: true}).click();
@@ -355,7 +361,7 @@ for (const legacy of [true, false]) {
       await input.focus(); await input.pressSequentially("ю"); await input.blur();
     }
     expect(await storedItems(page)).toEqual(before);
-    await meters.fill("1000");
+    await fillQuantity(meters, "1000");
     await meters.press("Enter");
     await expectMeasurement(page, rebar6.id, 1000, 0.222, "meter");
     await expect(row.getByRole("alert")).toHaveCount(0);

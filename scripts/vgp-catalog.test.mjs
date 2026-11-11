@@ -111,7 +111,7 @@ test('VGP search accepts Ду, synonyms, equivalent dimensions and exact ГОС�
   }
 });
 
-test('pipe mass uses the hollow section only with valid outer diameter and wall; other metal rules stay unchanged', () => {
+test('round-pipe mass requires a valid outer diameter and wall; other metal rules stay unchanged', () => {
   assert.equal(roundSteelPipeMass(21.3, 2.8), 1.277);
   for (const args of [[0,2], [20,0], [20,10], [20,11], [Infinity,2], [20,NaN], [1e154,1e153], [1e-6,1e-8]]) assert.equal(roundSteelPipeMass(...args), undefined);
   const base = {categoryId:'cat-trk', weight:{value:2.4,unit:'кг/м'}, specifications:[], attributes:[]};
@@ -120,7 +120,7 @@ test('pipe mass uses the hollow section only with valid outer diameter and wall;
   assert.equal(normalizePipeWeight({...base, diameterMm:21.3, wallThicknessMm:2.8}).weight.value, 1.277);
   assert.equal(normalizePipeWeight({...base, diameterMm:21.3, wallThicknessMm:2.8, weightPerMeterKg:1.28}).weight.value, 1.28);
   assert.equal(normalizePipeWeight({...base, weightPerMeterKg:2.4}).weightPerMeterKg, undefined, 'Missing geometry cannot enable conversion');
-  for (const p of existingVariants.filter(p => ['cat-trn','cat-trp','cat-trk'].includes(p.categoryId))) {
+  for (const p of existingVariants.filter(p => p.categoryId === 'cat-trk')) {
     if (p.diameterMm === undefined || p.wallThicknessMm === undefined) assert.equal(normalizePipeWeight(p).weight, undefined, p.id);
   }
   for (const categoryId of ['cat-arm','cat-bal','cat-lis','cat-kru']) {

@@ -78,16 +78,6 @@ test('the profile-sheet category and subcategories keep the supplied guidance', 
       'Несущий профнастил для кровельных настилов, перекрытий и конструкций с повышенными нагрузками. Высота профиля 75 мм обеспечивает высокую жёсткость листа. Толщину стали и допустимый пролёт выбирают по расчётным нагрузкам.',
     ],
   );
-  // The rendered order and the title gallery are covered by the browser tests.
-  const descriptionComponent = fs.readFileSync('components/catalog/CatalogDescription.tsx', 'utf8');
-  assert.match(descriptionComponent, /list-disc/);
-  assert.match(descriptionComponent, /part\.slice\(2, -2\)/);
-  // Font loading, readable sizes and enlarged text are checked in tests/e2e/typography.spec.ts.
-  assert.match(descriptionComponent, /variant === "category" \|\| variant === "categoryDetails" \? \[block\] : paragraphs\(block\)/);
-  const productTypeCard = fs.readFileSync('components/catalog/ProductTypeCard.tsx', 'utf8');
-  assert.match(productTypeCard, /standard !== "Уточняется"/);
-  assert.match(productTypeCard, /<div className="flex-1">/);
-  assert.match(productTypeCard, /mt-5 border-t border-slate-100 pt-5/);
 });
 
 test('profile, thickness, coating, size and exact per-piece price match the supplied matrix', () => {

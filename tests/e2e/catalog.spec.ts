@@ -18,7 +18,7 @@ for (const family of ["shveller", "ugolok", "kvadrat", "armatura", "balka", "pro
         await expect(headers).toHaveText([
           "Диаметр, мм", "Форма", "Марка стали", "Цена, ₽/т", "Масса, кг/м", "Длина, м", "Заказ, м", "Заказ, т", "Сумма", "Действие",
         ]);
-        await expect(productItem.getByRole("cell").first()).toHaveText(String(product.diameterMm));
+        await expect(productItem.getByRole("rowheader")).toHaveText(String(product.diameterMm));
       } else {
         await expect(headers).toHaveText([
           "Наименование", "Изображение", "Характеристики", "Цена",
@@ -100,7 +100,7 @@ for (const {family, high, normalizedHigh, low} of [
   });
 }
 
-test("tread plate filters use the table dimensions and keep the ordering units", async ({page}) => {
+test("tread plate filters use the table dimensions and keep the ordering units", async ({page, isMobile}) => {
   await page.goto(productPath(samples.treadPlate, false));
   await expect(page.getByRole("heading", {name: "Лист рифлёный", level: 1})).toBeVisible();
   await openFilters(page);
@@ -108,13 +108,15 @@ test("tread plate filters use the table dimensions and keep the ordering units",
   const thickness = page.getByRole("combobox", {name: "Толщина", exact: true});
   const sheet = visibleProduct(page, "rozmet-28952");
   const area = visibleProduct(page, samples.treadPlate.id);
-  await expect(sheet.getByText("№ 3 ТУ", {exact: true})).toBeVisible();
+  await expect(sheet.getByRole(isMobile ? "heading" : "rowheader", {
+    name: isMobile ? "Лист № 3 ТУ рифленый" : "№ 3 ТУ", exact: true,
+  })).toBeVisible();
   await expect(sheet.getByText("Только при оплате наличными", {exact: true})).toHaveCount(0);
-  await expect(sheet.getByText("шт.", {exact: true})).toBeVisible();
+  await expect(sheet.getByRole("textbox", {name: /^Количество .+, шт\.$/})).toBeVisible();
   await format.selectOption("1500 × 6000 мм");
   await expect(sheet).toHaveCount(0);
   await expect(area.getByText("1500 × 6000 мм", {exact: true})).toBeVisible();
-  await expect(area.getByText("м²", {exact: true})).toBeVisible();
+  await expect(area.getByRole("textbox", {name: /^Количество .+, м²$/})).toBeVisible();
   await thickness.selectOption("3 мм");
   await expect(page.getByText("Варианты не найдены", {exact: true})).toBeVisible();
   await page.getByRole("button", {name: "Сбросить фильтры", exact: true}).first().click();
@@ -122,7 +124,7 @@ test("tread plate filters use the table dimensions and keep the ordering units",
   await expect(area).toBeVisible();
 });
 
-test("galvanized sheets filter decimal thickness and keep per-sheet ordering without cash conditions", async ({page}) => {
+test("galvanized sheets filter decimal thickness and keep per-sheet ordering without cash conditions", async ({page, isMobile}) => {
   await page.goto(productPath(samples.galvanizedSheet, false));
   await expect(page.getByRole("heading", {name: "Лист оцинкованный", level: 1})).toBeVisible();
   const thickness = page.getByRole("combobox", {name: "Толщина", exact: true});
@@ -137,10 +139,11 @@ test("galvanized sheets filter decimal thickness and keep per-sheet ordering wit
   await thickness.selectOption("0,7 мм");
   await expect(thin).toHaveCount(0);
   await expect(thick).toHaveCount(0);
-  await expect(selected.getByText("№ 0,7", {exact: true})).toBeVisible();
+  await expect(selected.getByRole(isMobile ? "heading" : "rowheader", {
+    name: isMobile ? "Лист № 0,7 оцинкованный" : "№ 0,7", exact: true,
+  })).toBeVisible();
   await expect(selected.getByText("1250 × 2500 мм", {exact: true})).toBeVisible();
-  await expect(selected.getByText("шт.", {exact: true})).toBeVisible();
-  await expect(selected.getByRole("textbox")).toHaveAttribute("inputmode", "numeric");
+  await expect(selected.getByRole("textbox", {name: /^Количество .+, шт\.$/})).toHaveAttribute("inputmode", "numeric");
   await expect(selected.getByText("Только при оплате наличными", {exact: true})).toHaveCount(0);
   await page.getByRole("button", {name: "Сбросить фильтры", exact: true}).first().click();
   await expect(thin).toBeVisible();
@@ -190,13 +193,21 @@ test("mobile category navigation is compact and menu supports Escape", async ({p
 
 test("profile-sheet guidance follows product families in the rendered page", async ({page}) => {
   await page.goto("/catalog/profnastil");
-  const families = await page.getByRole("region", {name: "Типы продукции", exact: true}).boundingBox();
-  const details = await page.getByRole("heading", {name: "Как подобрать профнастил", exact: true}).boundingBox();
-  expect(families!.y + families!.height).toBeLessThanOrEqual(details!.y);
+  const families = page.getByRole("region", {name: "Типы продукции", exact: true});
+  await expect(families.getByRole("heading", {level: 2})).toHaveText(["Профнастил С8", "Профнастил С20", "Профнастил Н75"]);
+  await expect(families.getByText("Уточняется", {exact: true})).toHaveCount(0);
+  const details = page.getByRole("region", {name: "Как подобрать профнастил", exact: true});
+  await expect(details.getByRole("paragraph")).toHaveText([
+    /Для расчёта площади учитывайте полезную ширину и нахлёсты/,
+    /Для кровли и несущего настила дополнительно проверяют схему опирания, пролёты и расчётные нагрузки/,
+  ]);
+  const familiesBox = await families.boundingBox();
+  const detailsBox = await details.boundingBox();
+  expect(familiesBox!.y + familiesBox!.height).toBeLessThanOrEqual(detailsBox!.y);
 });
 
 for (const family of ["armatura", "balka", "profile", "vgp", "profnastil", "mesh", "shveller", "ugolok", "kvadrat", "shtaketnik", "treadPlate", "galvanizedSheet", "coldRolledSheet", "hotRolledSheet"] as const) {
-  test(`${family}: compact introduction brings products forward with collapsed parameters`, async ({page, isMobile}) => {
+  test(`${family}: compact introduction keeps filters and results near the top`, async ({page, isMobile}) => {
     const route = ["shveller", "ugolok", "kvadrat"].includes(family)
       ? `/catalog/${family}` : productPath(samples[family], false);
     await page.goto(route);
@@ -208,8 +219,9 @@ for (const family of ["armatura", "balka", "profile", "vgp", "profnastil", "mesh
     const headingBox = (await page.getByRole("heading", {level: 1}).boundingBox())!;
     expect(headingBox.y).toBeLessThan(imageBox.y + imageBox.height);
     await expect(page.getByRole("complementary")).toHaveCount(0);
-    const filters = page.locator("details").filter({has: page.locator("summary", {hasText: "Параметры подбора"})}).first();
-    await expect(filters).not.toHaveAttribute("open");
+    const parameters = page.getByRole("button", {name: "Параметры подбора", exact: true});
+    if (isMobile) await expect(parameters).toHaveAttribute("aria-expanded", "false");
+    else await expect(parameters).toBeHidden();
     const results = page.locator('[id^="variant-"]:visible').first();
     expect((await results.boundingBox())!.y).toBeLessThan(isMobile ? 1300 : 1200);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);

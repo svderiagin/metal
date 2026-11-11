@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import sharp from 'sharp';
+import {assertReferencePixels} from './image-pixel-assertions.mjs';
 
 const labelBox = {left: 125, top: 1550, width: 1150, height: 160};
 for (const [name, image] of [
@@ -25,21 +26,6 @@ for (const [name, image] of [
 
 test('all 14 channel illustrations preserve the photo outside their variable label regions', async () => {
   const manifest = JSON.parse(await fs.readFile('imports/shveller-image-template/rendered.json', 'utf8'));
-  const reference = await sharp(manifest.reference).removeAlpha().raw().toBuffer();
   assert.equal(manifest.records.length, 14);
-  for (const record of manifest.records) {
-    const rendered = await sharp(`public${record.imageUrl}`).removeAlpha().raw().toBuffer({resolveWithObject: true});
-    assert.equal(rendered.info.width, 2400, record.id);
-    assert.equal(rendered.info.height, 1800, record.id);
-    const allowed = Buffer.alloc(2400 * 1800);
-    for (const key of record.changedLabels) {
-      const box = manifest.patches[key];
-      assert.ok(box.left >= 0 && box.top >= 0 && box.left + box.width <= 2400 && box.top + box.height <= 1800);
-      for (let y = box.top; y < box.top + box.height; y++) allowed.fill(1, y * 2400 + box.left, y * 2400 + box.left + box.width);
-    }
-    let changed = 0;
-    for (let p = 0; p < allowed.length; p++) if (!allowed[p] && (reference[p * 3] !== rendered.data[p * 3] || reference[p * 3 + 1] !== rendered.data[p * 3 + 1] || reference[p * 3 + 2] !== rendered.data[p * 3 + 2])) changed++;
-    assert.equal(changed, 0, record.id);
-    if (record.number === '5') assert.equal(reference.equals(rendered.data), true, 'preserve the approved No. 5 reference');
-  }
+  await assertReferencePixels(manifest, 'rozmet-2235');
 });

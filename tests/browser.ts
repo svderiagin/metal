@@ -77,6 +77,6 @@ export async function settleImages(page: Page) {
 }
 
 export async function openFilters(page: Page) {
-  const summary = page.locator('summary').filter({hasText: /^Параметры подбора/}).first();
-  if (!(await summary.locator('..').evaluate(element => element.hasAttribute('open')))) await summary.click();
+  const collapsed = page.getByRole("button", {name: /^Параметры подбора/, expanded: false});
+  if (await collapsed.isVisible()) await collapsed.click();
 }

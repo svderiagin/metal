@@ -10,6 +10,7 @@ import {readProjectData} from './project-data.mjs';
 const json = file=>JSON.parse(fs.readFileSync(file,'utf8'));
 const source=json('imports/rozmet-source.json'), imported=json('data/rozmet-catalog.json');
 const baseline=json('imports/rozmet-protected.snapshot.json');
+const retainedCatalog=json('imports/protected-catalog.snapshot.json');
 const imageCorrections=json('imports/protected-image-corrections.json');
 const cache=new Map();
 const {categories}=readProjectData('data/categories.ts',cache);
@@ -34,6 +35,12 @@ const sheetDisplayNames = new Map([
   ['rozmet-sub-listovoy-prokat-list-riflennyj', 'Лист рифлёный'],
   ['rozmet-sub-listovoy-prokat-list-goryachekatanyj', 'Лист горячекатаный'],
 ]);
+// The rebar covers and sourced profile-pipe weights were approved in ea29cc3.
+const rebarTypeCovers = new Map([
+  ['type-cat-arm-sub-1', '/images/catalog/armatura/cover/a500c-balakovo-warehouse.jpg'],
+  ['type-cat-arm-sub-2', '/images/catalog/armatura/cover/a400-ribbed-detail-expo.jpg'],
+  ['type-cat-arm-sub-3', '/images/catalog/armatura/cover/a400-ribbed-detail-expo.jpg'],
+]);
 
 test('re-import from saved evidence is identical and does not duplicate products',()=>{
   const temporary=fs.mkdtempSync(path.join(os.tmpdir(),'metal-rozmet-import-'));
@@ -50,10 +57,18 @@ test('re-import from saved evidence is identical and does not duplicate products
   } finally {fs.rmSync(temporary,{recursive:true,force:true});}
 });
 
-test('all protected category positions, data, product types and image bytes are unchanged',()=>{
-  for(const [key,actual] of [['categories',categories],['subcategories',subcategories],['products',productVariants],['types',productTypes]]) {
+test('protected catalog data and image bytes match their approved versions',()=>{
+  const expectedTypes=baseline.types.map(type=>rebarTypeCovers.has(type.id)
+    ? {...type,imageUrl:rebarTypeCovers.get(type.id)}
+    : type);
+  for(const [key,actual,expected] of [
+    ['categories',categories,baseline.categories],
+    ['subcategories',subcategories,baseline.subcategories],
+    ['products',productVariants,retainedCatalog.products],
+    ['types',productTypes,expectedTypes],
+  ]) {
     const selected=actual.filter(item=>protectedIds.has(key==='categories'?item.id:item.categoryId));
-    assert.equal(JSON.stringify(selected),JSON.stringify(baseline[key]),key);
+    assert.equal(JSON.stringify(selected),JSON.stringify(expected),key);
   }
   for(const {id,index} of baseline.categoryOrder) assert.equal(categories[index].id,id);
   for(const [image,hash] of Object.entries(baseline.imagesSha256)) {
@@ -78,7 +93,7 @@ test('every discovered source section and unique product is imported once under 
     assert.ok(section,product.id);
     const sourceName=parent.categoryId==='rozmet-cat-kvadrat'?squareDisplayText(section.name):section.name;
     assert.equal(imported.subcategories.find(item=>item.id===parent.id).name,sourceName);
-    assert.equal(parent.name,sheetDisplayNames.get(parent.id)??sourceName);
+    assert.equal(parent.name,parent.categoryId==='rozmet-cat-polosa'?'Полоса стальная':sheetDisplayNames.get(parent.id)??sourceName);
     assert.equal(catalog.getProductTypeById(product.productTypeId)?.name,parent.name);
   }
 });

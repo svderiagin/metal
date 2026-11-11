@@ -133,6 +133,9 @@ test('verification overlay leaves other imported fields unchanged and respects a
   const galvanizedSheetImages = JSON.parse(fs.readFileSync('data/galvanized-sheet-images.json', 'utf8')).products;
   const coldRolledSheetImages = JSON.parse(fs.readFileSync('data/cold-rolled-sheet-images.json', 'utf8')).products;
   const hotRolledSheetImages = JSON.parse(fs.readFileSync('data/hot-rolled-sheet-images.json', 'utf8')).products;
+  const flatSteelNames = new Map(JSON.parse(fs.readFileSync('output/image-edits/flat-steel-names/renamed-products.json', 'utf8'))
+    .map(rename => [rename.id, rename]));
+  assert.equal(flatSteelNames.size, rawCatalog.products.filter(item => item.categoryId === 'rozmet-cat-polosa').length);
   for (const original of rawCatalog.products.filter(item => item.categoryId !== category.id && isPublicProduct(item))) {
     const actual = catalog.getAllProductVariants().find(item => item.id === original.id);
     const image = angleImages[original.id] ?? squareImages[original.id] ?? treadPlateImages[original.id]
@@ -144,7 +147,16 @@ test('verification overlay leaves other imported fields unchanged and respects a
     if (coldRolledSheetImages[original.id]) assert.equal(original.subcategoryId, 'rozmet-sub-listovoy-prokat-list-ocynkovannyj');
     if (hotRolledSheetImages[original.id]) assert.equal(original.subcategoryId, 'rozmet-sub-listovoy-prokat-list-goryachekatanyj');
     if (image) assert.equal(image.sourceUrl, original.sourceReference);
-    assert.deepEqual(JSON.parse(JSON.stringify(actual)), image ? {...original, imageUrls: [image.imageUrl], specifications: original.specifications.map(item =>
-      original.categoryId === 'rozmet-cat-ugolok' && item.name === 'Вес' ? {...item, name:'Теоретическая масса'} : item)} : original, original.id);
+    const rename = flatSteelNames.get(original.id);
+    if (rename) {
+      assert.equal(original.categoryId, 'rozmet-cat-polosa');
+      assert.equal(original.name, rename.from);
+    }
+    const expected = {...original, ...(rename ? {name: rename.to} : {}), ...(image ? {
+      imageUrls: [image.imageUrl],
+      specifications: original.specifications.map(item => original.categoryId === 'rozmet-cat-ugolok' && item.name === 'Вес'
+        ? {...item, name:'Теоретическая масса'} : item),
+    } : {})};
+    assert.deepEqual(JSON.parse(JSON.stringify(actual)), expected, original.id);
   }
 });

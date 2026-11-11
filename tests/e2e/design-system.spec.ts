@@ -32,8 +32,9 @@ async function readable(control: Locator, mode: "text" | "placeholder" | "border
 
 test("primary and secondary actions keep contrast and restrained corners in both themes", async ({page}) => {
   await page.goto("/");
-  const primary = page.getByRole("main").getByRole("link", {name: "Перейти в каталог", exact: true});
-  const secondary = page.getByRole("main").getByRole("link", {name: "Запросить расчёт", exact: true}).first();
+  const hero = page.getByRole("region", {name: /^Металлопрокат/});
+  const primary = hero.getByRole("link", {name: "Каталог", exact: true});
+  const secondary = hero.getByRole("link", {name: "Расчёт заказа", exact: true});
   for (const action of [primary, secondary]) {
     await readable(action);
     expect((await action.boundingBox())!.height).toBeGreaterThanOrEqual(44);
@@ -47,7 +48,7 @@ test("table actions preserve contrast across add, saved, update and remove state
   const quantity = row.getByRole("textbox", {name: /^Количество /});
   await readable(row.getByRole("button", {name: "В корзину", exact: true}));
   await row.getByRole("button", {name: "В корзину", exact: true}).click();
-  await readable(row.getByRole("button", {name: "✓ В корзине", exact: true}));
+  await readable(row.getByRole("button", {name: "В корзине", exact: true}));
   await quantity.fill("2");
   await readable(row.getByRole("button", {name: "Обновить", exact: true}));
   await quantity.fill("0");

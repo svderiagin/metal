@@ -1,8 +1,8 @@
 import {test} from "node:test";
 import assert from "node:assert/strict";
+import {createRequire} from "node:module";
 import {createElement} from "react";
 import {renderToStaticMarkup} from "react-dom/server";
-import {CatalogCoverGallery} from "../../components/catalog/CatalogCoverGallery";
 import {coverGalleryImages, coverGalleryIndex} from "../../lib/catalogCoverGallery";
 import {getCatalogCoverImages} from "../../lib/catalogCoverImages";
 
@@ -23,6 +23,17 @@ test("gallery cycles in either direction and handles a single or missing photo",
 });
 
 test("one-photo cover has no inactive navigation; supplied photos enable both controls", () => {
+  // Next normally compiles CSS modules before the gallery reaches React.
+  const load = createRequire(import.meta.url);
+  const cssLoader = load.extensions[".css"];
+  load.extensions[".css"] = module => { module.exports = {}; };
+  let CatalogCoverGallery: typeof import("../../components/catalog/CatalogCoverGallery").CatalogCoverGallery;
+  try {
+    ({CatalogCoverGallery} = load("../../components/catalog/CatalogCoverGallery"));
+  } finally {
+    if (cssLoader) load.extensions[".css"] = cssLoader;
+    else delete load.extensions[".css"];
+  }
   const render = (images: string[]) => renderToStaticMarkup(createElement(CatalogCoverGallery, {images, name: "Категория"}));
   const single = render(["/cover.jpg", "/cover.jpg"]);
   assert.doesNotMatch(single, /Следующее фото|Предыдущее фото/);

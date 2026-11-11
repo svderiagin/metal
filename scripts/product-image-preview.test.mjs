@@ -41,9 +41,11 @@ function previewHarness(props = {}) {
     'react/jsx-runtime': {jsx, jsxs: jsx, Fragment: 'fragment'},
     'react-dom': {createPortal: children => children},
     'next/image': {default: 'image'},
+    '@/components/ui/Icon': {Icon: 'icon'},
     '@/lib/catalog-image': {catalogImageUrl: src => src},
     '@/lib/imageViewer': readProjectData('lib/imageViewer.ts'),
     './DesktopImagePreload': {DesktopImagePreload: 'preload'},
+    './CatalogFocus.module.css': {default: {inset: 'focus-inset'}},
   }, {document, ResizeObserver: class {
     constructor(callback) {resize = callback;}
     observe() {resize();}

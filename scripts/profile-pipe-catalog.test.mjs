@@ -14,6 +14,7 @@ const {hasValidOrderAmount}=readProjectData('lib/server/payments.ts',cache);
 const {normalizePipeWeight}=readProjectData('lib/pipeWeight.ts',cache);
 const {trubyProfilnyeProducts}=readProjectData('data/products/trubyProfilnye.ts',cache);
 const reference=JSON.parse(fs.readFileSync('imports/profile-pipe-reference-prices.json','utf8'));
+const weightReference=JSON.parse(fs.readFileSync('data/profile-pipe-weights.json','utf8'));
 const products=catalog.getProductVariantsByCategoryId('cat-trp').filter(pipe.isProfilePipeVariant);
 const find=(width,height,wall)=>products.find(p=>p.profileWidthMm===width&&p.profileHeightMm===height&&p.wallThicknessMm===wall);
 const confirmed=(product,price)=>({...product,price,quoteOnly:false,priceConfirmed:true});
@@ -24,10 +25,18 @@ test('exactly 28 square and 23 rectangular combinations retain every supplied re
  assert.equal(products.length,51);assert.equal(products.filter(p=>p.subcategoryId==='cat-trp-sub-1').length,28);assert.equal(products.filter(p=>p.subcategoryId==='cat-trp-sub-2').length,23);
  assert.equal(new Set(products.map(p=>`${pipe.profilePipeSize(p)}×${p.wallThicknessMm}`)).size,51);
  assert.equal(reference.priceStatus,'unconfirmed-reference');assert.equal(reference.rows.length,51);
+ assert.equal(weightReference.rows.length,51);
  for(const expected of [expectedSquare,expectedRect])for(const [size,walls]of Object.entries(expected))for(const [wall,price]of Object.entries(walls)){
   const [width,height]=size.split('×').map(Number);const product=find(width,height,Number(wall));assert.ok(product,`${size}×${wall}`);
   const row=reference.rows.find(r=>r.widthMm===width&&r.heightMm===height&&r.wallThicknessMm===Number(wall));assert.equal(row.referencePricePerMeter,price);
-  assert.equal(product.price,null);assert.equal(product.quoteOnly,true);assert.equal(product.priceConfirmed,false);assert.equal(product.unit,'meter');assert.equal(product.priceUnit,'за метр');assert.equal(product.availability,'UNKNOWN');assert.equal(product.inStock,false);assert.equal(product.weightPerMeterKg,undefined);assert.equal(product.weight,undefined);assert.equal(product.standard,'');assert.equal(product.material,'');assert.equal(product.steelGrade,undefined);assert.ok(!('referencePricePerMeter' in product));
+  assert.equal(product.price,null);assert.equal(product.quoteOnly,true);assert.equal(product.priceConfirmed,false);assert.equal(product.unit,'meter');assert.equal(product.priceUnit,'за метр');assert.equal(product.availability,'UNKNOWN');assert.equal(product.inStock,false);assert.equal(product.standard,'');assert.equal(product.material,'');assert.equal(product.steelGrade,undefined);assert.ok(!('referencePricePerMeter' in product));
+  const weightRow=weightReference.rows.find(r=>r.widthMm===width&&r.heightMm===height&&r.wallThicknessMm===Number(wall));
+  assert.ok(weightRow,`${size}×${wall}: missing mass reference`);
+  assert.ok(weightReference.sources[weightRow.sourceId], `${size}×${wall}: missing mass provenance`);
+  assert.equal(product.weightConfirmed,true);
+  assert.equal(product.weightPerMeterKg,weightRow.massKgPerMeter);
+  assert.equal(product.weight?.value,weightRow.massKgPerMeter);
+  assert.equal(product.weight?.unit,'кг/м');
   if(width===height&&width===80&&Number(wall)===2){assert.equal(product.lengthMeters,undefined);assert.deepEqual(Array.from(product.lengthRangeMeters),[6,12]);}
   else assert.equal(product.lengthMeters,width!==height||width<=60?6:12);
  }
@@ -58,8 +67,17 @@ test('fractional pieces, ambiguous lengths, false totals, unknown prices and uns
  for(const variant of [{...product,priceConfirmed:false},{...product,quoteOnly:true},{...product,priceQualifier:'from'},{...product,price:NaN},{...product,price:Infinity},{...product,unit:'ton'},{...product,priceUnit:'за тонну'}])assert.equal(pipe.profilePipeOrder(variant,2).estimatedTotal,null);
  for(const item of [{quantity:2,pieceOrder:{pieces:2,lengthMeters:6}},{quantity:12,pieceOrder:{pieces:1.5,lengthMeters:8}},{quantity:12,pieceOrder:{pieces:1,lengthMeters:12}},{quantity:0},{quantity:Infinity},{quantity:12,measurement:{inputMode:'meter',meters:12,weightTons:1}}])assert.ok(revalidateCartPrice(product,item).invalidReason);
  const overflow=revalidateCartPrice({...product,price:Number.MAX_VALUE},{quantity:12,pieceOrder:{pieces:2,lengthMeters:6}});assert.ok(overflow.invalidReason);assert.equal(overflow.estimatedTotal,0);
- const weight=normalizePipeWeight({...product,weightPerMeterKg:2});assert.equal(weight.weightPerMeterKg,undefined);
- assert.equal(normalizePipeWeight({...product,weightPerMeterKg:2,weightConfirmed:true}).weightPerMeterKg,2);
+});
+
+test('profile pipes use positive documented mass and do not infer missing mass from their dimensions',()=>{
+ const product=find(40,40,2);
+ const unverified={...product,weightConfirmed:false};
+ assert.equal(normalizePipeWeight(unverified).weightPerMeterKg,undefined);
+ assert.equal(normalizePipeWeight(unverified).weight,undefined);
+ for(const value of [undefined,0,-1,NaN,Infinity]) {
+  assert.equal(normalizePipeWeight({...product,weightPerMeterKg:value}).weight,undefined);
+ }
+ assert.equal(normalizePipeWeight(product).weight?.value,product.weightPerMeterKg);
 });
 
 test('cart reload keeps selected length, replaces cached quantity and rejects malformed piece metadata',()=>{
