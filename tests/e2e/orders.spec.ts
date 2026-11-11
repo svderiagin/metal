@@ -196,7 +196,7 @@ for (const storageBlocked of [false, true]) {
       await expect(page.getByText(/Письмо отправить не удалось/)).toBeVisible();
       await page.reload();
       await expect(button).toBeVisible();
-    } else await expect(page.getByText(/передан почтовому сервису/)).toBeVisible();
+    } else await expect(page.getByText(/Копия счёта отправлена на/)).toBeVisible();
     await button.click();
     const downloadError = page.getByRole("main").getByRole("alert");
     await expect(downloadError).toContainText("Не удалось скачать счёт");

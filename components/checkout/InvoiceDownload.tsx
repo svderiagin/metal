@@ -1,6 +1,6 @@
 "use client";
 import {useState} from "react";
-import {Button} from "@/components/ui/Button";
+import {Button, ButtonLink} from "@/components/ui/Button";
 import {fetchInvoice} from "@/lib/checkoutClient";
 import type {InvoiceReceipt} from "@/types/invoice";
 
@@ -25,17 +25,20 @@ export function InvoiceDownload({reference, invoice, email}: {reference: string;
       setError("Не удалось скачать счёт. Попробуйте ещё раз или свяжитесь с нами, указав номер заказа.");
     } finally {setDownloading(false);}
   }
-  return <div className="mt-5 space-y-4 text-left">
+  return <div className="mt-6 space-y-5 text-left">
     {invoice.isPreview && <p className="rounded-lg border border-red-300 bg-red-50 p-4 text-sm leading-6 text-red-800 dark:border-red-800 dark:bg-red-950/50 dark:text-red-200">
       <strong className="block">Образец счёта — не для оплаты</strong>
-      Платёжные реквизиты и ставка НДС пока не заполнены. В PDF эти строки выделены красным.
+      Реквизиты и ставка НДС не подтверждены. Этот PDF нельзя оплачивать.
     </p>}
     <p className="break-words text-sm leading-6 text-slate-600 dark:text-slate-300">{invoice.emailStatus === "SENT"
-      ? `Счёт PDF передан почтовому сервису для отправки на ${email}.`
-      : "Заказ сохранён, счёт сформирован. Письмо отправить не удалось. Скачайте PDF здесь; повторно оформлять заказ не нужно."}</p>
-    <Button onClick={download} disabled={downloading} className="w-full sm:w-auto" aria-busy={downloading}>
-      {downloading ? "Скачиваем…" : "Скачать счёт PDF"}
-    </Button>
+      ? `Копия счёта отправлена на ${email}. PDF также можно скачать здесь.`
+      : "Счёт готов к скачиванию. Письмо отправить не удалось. Повторно оформлять заказ не нужно."}</p>
+    <div className="grid gap-3 sm:grid-cols-2">
+      <Button onClick={download} disabled={downloading} className="w-full" aria-busy={downloading}>
+        {downloading ? "Скачиваем…" : "Скачать счёт PDF"}
+      </Button>
+      <ButtonLink href="/catalog" variant="secondary" className="w-full">Вернуться в каталог</ButtonLink>
+    </div>
     {error && <p role="alert" className="text-sm leading-6 text-red-700 dark:text-red-300">{error}</p>}
   </div>;
 }
