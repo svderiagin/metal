@@ -1,6 +1,58 @@
 import {test, expect, openProduct, samples, visibleProduct} from "../browser";
 import {getProductIllustration} from "../../lib/productPreviewImage";
 
+test("landing photos use responsive static AVIF and WebP files", async ({page, request}) => {
+  await page.goto("/");
+  const hero = page.locator('section[aria-labelledby="home-hero-title"] img[data-active="true"]');
+  await expect(hero).toHaveAttribute("fetchpriority", "high");
+  const heroSource = await hero.evaluate(async element => {
+    const image = element as HTMLImageElement;
+    await image.decode();
+    return {avif: image.currentSrc, webp: image.src};
+  });
+  expect(heroSource.avif).toMatch(/\/images\/prepared\/hero\/1\/\d+-[a-f0-9]+\.avif$/);
+  expect(heroSource.webp).toMatch(/\/images\/prepared\/hero\/1\/\d+-[a-f0-9]+\.webp$/);
+  for (const [format, url] of Object.entries(heroSource)) {
+    const response = await request.get(url);
+    expect(response.ok()).toBeTruthy();
+    expect(response.headers()["content-type"]).toBe(`image/${format}`);
+    expect(response.headers()["cache-control"]).toContain("immutable");
+  }
+
+  await page.getByRole("button", {name: "Следующая фотография"}).click();
+  await expect.poll(() => hero.evaluate(image => (image as HTMLImageElement).currentSrc)).toContain("/images/prepared/hero/2/");
+
+  for (const path of ["/", "/catalog", "/catalog/armatura"]) {
+    await page.goto(path);
+    const photo = page.locator('main img[loading="lazy"]').first();
+    await photo.scrollIntoViewIfNeeded();
+    await expect.poll(() => photo.evaluate(async element => {
+      const image = element as HTMLImageElement;
+      await image.decode();
+      return image.currentSrc;
+    })).toContain("/images/prepared/catalog/");
+  }
+});
+
+test("carousel recovers a first frame that loaded before hydration", async ({page}) => {
+  let releaseScripts!: () => void;
+  const scriptsReady = new Promise<void>(resolve => { releaseScripts = resolve; });
+  await page.route("**/_next/static/**/*.js", async route => {
+    await scriptsReady;
+    await route.continue();
+  });
+  const firstFrame = page.locator('section[aria-labelledby="home-hero-title"] img[data-active="true"]');
+  try {
+    await page.goto("/", {waitUntil: "commit"});
+    await firstFrame.evaluate(image => (image as HTMLImageElement).decode());
+    await expect(page.getByRole("button", {name: "Следующая фотография"})).toHaveCount(0);
+  } finally {
+    releaseScripts();
+  }
+  await expect(page.getByRole("button", {name: "Следующая фотография"})).toBeVisible();
+  await expect.poll(() => firstFrame.evaluate(image => (image as HTMLImageElement).currentSrc)).toContain("/images/prepared/hero/1/");
+});
+
 test("thumbnail has no fractional gap; modal retains native zoom, keyboard pan and focus", async ({page}) => {
   await openProduct(page);
   const thumbnail = visibleProduct(page, samples.shveller.id).getByRole("button", {name: "Увеличить изображение: Швеллер № 5", exact: true});

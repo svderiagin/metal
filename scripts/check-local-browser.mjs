@@ -32,8 +32,9 @@ socket.addEventListener('message', event => {
   if (message.method === 'Network.loadingFailed' && !message.params.canceled) failures.push({error: message.params.errorText, type: message.params.type});
   if (message.method === 'Fetch.requestPaused') {
     const request = message.params;
-    const source = new URL(request.request.url).searchParams.get('url') ?? '';
-    const number = Number(source.match(/\/(\d)\.jpg/)?.[1]);
+    const address = new URL(request.request.url);
+    const source = address.searchParams.get('url') ?? address.pathname;
+    const number = Number(source.match(/\/hero\/(\d+)(?:\.jpg|\/)/)?.[1]);
     if (number <= heroImagesAllowed) void call('Fetch.continueRequest', {requestId:request.requestId});
     else void call('Fetch.fulfillRequest', {requestId:request.requestId, responseCode:200, responseHeaders:[{name:'Content-Type',value:'image/jpeg'}], body:Buffer.from('Invalid image: local browser fixture').toString('base64')});
   }
@@ -249,13 +250,16 @@ try {
   });
   await check('hero skips decoding errors and handles zero, one and three usable images', async () => {
     await call('Network.setCacheDisabled', {cacheDisabled:true});
-    await call('Fetch.enable', {patterns:[{urlPattern:'*%2Fimages%2Fhero%2F*',requestStage:'Request'}]});
+    await call('Fetch.enable', {patterns:[
+      {urlPattern:'*%2Fimages%2Fhero%2F*',requestStage:'Request'},
+      {urlPattern:'*/images/prepared/hero/*',requestStage:'Request'},
+    ]});
     for (const count of [0,1,3]) {
       heroImagesAllowed = count;
       await go('/');
       await delay(1800);
       await wait(`${hero}.querySelectorAll('img').length === ${count}`);
-      assert.equal(await evaluate(`${hero}.querySelectorAll('button').length`), count > 1 ? 2 : 0);
+      assert.equal(await evaluate(`${hero}.querySelectorAll('button').length`), count > 1 ? 3 : 0);
       assert.ok(await evaluate(`Boolean(${hero}.querySelector('h1') && ${hero}.querySelector('a[href="/catalog"]'))`));
       assert.equal(await evaluate(`document.documentElement.scrollWidth > innerWidth`), false);
     }

@@ -2,8 +2,9 @@
 
 import {useRef, useState} from "react";
 import {createPortal} from "react-dom";
-import Image from "next/image";
 import {Icon} from "@/components/ui/Icon";
+import {PreparedPhoto} from "@/components/ui/PreparedPhoto";
+import type {PreparedPhoto as Photo} from "@/lib/server/preparedPhotos";
 import {catalogImageUrl} from "@/lib/catalog-image";
 import {coverGalleryImages, coverGalleryIndex} from "@/lib/catalogCoverGallery";
 import {DesktopImagePreload} from "./DesktopImagePreload";
@@ -17,11 +18,12 @@ const imageSizes: Record<Layout, string> = {
   compact: "(min-width: 1024px) 320px, (min-width: 640px) 200px, 88px",
 };
 
-export function CatalogCoverGallery({images, name, layout = "wide", className = ""}: {
+export function CatalogCoverGallery({images, name, layout = "wide", className = "", coverPhoto}: {
   images: readonly string[];
   name: string;
   layout?: Layout;
   className?: string;
+  coverPhoto?: Photo;
 }) {
   const slides = coverGalleryImages("", images);
   const [selected, setSelected] = useState(0);
@@ -44,13 +46,16 @@ export function CatalogCoverGallery({images, name, layout = "wide", className = 
   if (!src) return null;
 
   return <>
-    {!eager && <DesktopImagePreload src={catalogImageUrl(slides[0])} sizes={imageSizes[layout]}/>}
+    {!eager && (coverPhoto
+      ? <link rel="preload" as="image" type="image/avif" media="(min-width: 1024px)"
+          imageSrcSet={coverPhoto.avif} imageSizes={imageSizes[layout]} fetchPriority="high"/>
+      : <DesktopImagePreload src={catalogImageUrl(slides[0])} sizes={imageSizes[layout]}/>)}
     <div className={`relative w-full ${layout === "wide" ? "mt-6" : ""} ${className}`}>
       <button ref={trigger} type="button" aria-haspopup="dialog" aria-expanded={open}
         aria-label={`Увеличить титульное изображение: ${name}`} onClick={() => setOpen(true)}
         className="group block w-full cursor-zoom-in rounded-xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-700 dark:focus-visible:outline-brand-300">
         <span className={`relative block overflow-hidden rounded-xl bg-white ${layout === "compact" ? "aspect-[4/3] sm:aspect-video" : "aspect-[2/1]"} ${layout === "banner" ? "sm:aspect-[5/2]" : ""}`}>
-          <Image key={src} src={catalogImageUrl(src)} alt={photoName} fill sizes={imageSizes[layout]}
+          <PreparedPhoto key={src} photo={index === 0 ? coverPhoto : undefined} src={catalogImageUrl(src)} alt={photoName} fill sizes={imageSizes[layout]}
             loading={eager ? "eager" : undefined} fetchPriority={eager ? "high" : undefined}
             className={layout === "banner" || hasSlides ? "object-cover object-center" : "object-contain object-center"}/>
           <span aria-hidden="true" className={`pointer-events-none absolute flex size-9 items-center justify-center rounded-full bg-slate-950/70 text-white shadow-sm transition-colors group-hover:bg-slate-950/90 ${layout === "compact" ? "bottom-1 right-1 sm:bottom-3 sm:right-3" : "bottom-3 right-3"}`}>

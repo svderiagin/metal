@@ -1,9 +1,10 @@
 import {getAllCategories} from "@/lib/catalog";
 import Link from "next/link";
-import Image from "next/image";
 import {ButtonLink} from "@/components/ui/Button";
 import {Icon} from "@/components/ui/Icon";
 import {catalogImageUrl} from "@/lib/catalog-image";
+import {getPreparedPhoto} from "@/lib/server/preparedPhotos";
+import {PreparedPhoto} from "@/components/ui/PreparedPhoto";
 import {catalogCoverGalleries} from "@/data/catalog-cover-galleries";
 import cardStyles from "@/components/catalog/CatalogCard.module.css";
 import styles from "./CatalogSection.module.css";
@@ -50,7 +51,7 @@ export function CatalogSection() {
                 <h3 className="text-card-title">{category.name}</h3>
                 <p className="mt-2 text-xs text-slate-600 dark:text-slate-300">{parameters}</p>
               </div>
-              {hasImage && <div className={`${styles.picture} rounded-sm bg-white`}><Image src={catalogImageUrl(src)} alt="" fill sizes="(min-width: 1280px) 128px, (min-width: 1024px) 11vw, (min-width: 640px) 16vw, 32vw" className="object-cover object-center"/></div>}
+              {hasImage && <div className={`${styles.picture} rounded-sm bg-white`}><PreparedPhoto photo={getPreparedPhoto(src)} src={catalogImageUrl(src)} alt="" fill sizes="auto, 128px" className="object-cover object-center"/></div>}
             </Link>
           </li>;
         })}

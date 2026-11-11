@@ -4,6 +4,7 @@ import {existsSync, readFileSync} from "node:fs";
 import {createHash} from "node:crypto";
 import path from "node:path";
 import {HERO_SLIDES} from "@/data/hero-slides";
+import {getPreparedPhoto} from "@/lib/server/preparedPhotos";
 import {HeroCarousel} from "./HeroCarousel";
 import styles from "./HeroCarousel.module.css";
 
@@ -14,7 +15,7 @@ export function HeroSection() {
     if (!existsSync(file)) return [];
     // Замена файла с тем же именем должна обновлять и кэш next/image.
     const version = createHash("sha256").update(readFileSync(file)).digest("hex").slice(0, 12);
-    return [{...slide, src: `${slide.src}?v=${version}`}];
+    return [{...slide, src: `${slide.src}?v=${version}`, photo: getPreparedPhoto(slide.src)}];
   });
   return (
     <HeroCarousel slides={slides}>

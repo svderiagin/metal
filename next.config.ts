@@ -6,6 +6,9 @@ const nextConfig: NextConfig = {
   outputFileTracingIncludes: {"/api/orders": ["./lib/server/invoice-fonts/*.ttf"]},
   async headers() {
     return [{
+      source: "/images/prepared/:path*",
+      headers: [{key: "Cache-Control", value: "public, max-age=31536000, immutable"}],
+    }, {
       source: "/images/:path*",
       has: [{type: "query", key: "v", value: "[a-f0-9]{12}"}],
       headers: [{key: "Cache-Control", value: "public, max-age=31536000, immutable"}],

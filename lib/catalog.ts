@@ -17,6 +17,8 @@ export const getSubcategoriesByCategoryId = (categoryId: string) =>
   subcategories.filter((item) => item.categoryId === categoryId);
 
 export const getAllProductTypes = () => productTypes;
+export const getFeaturedProductTypes = () => ["armatura-a500s", "truba-profilnaya-kvadratnaya", "galvanized-steel-sheet"]
+  .flatMap(slug => productTypes.filter(productType => productType.slug === slug));
 export const getProductTypeById = (id: string) =>
   productTypes.find((item) => item.id === id);
 export const getProductTypeBySlug = (subcategoryId: string, slug: string) =>

@@ -6,6 +6,7 @@
 /.next-test/
 /out/
 /build/
+/public/images/prepared/
 
 # Testing
 /coverage/

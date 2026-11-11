@@ -1,10 +1,11 @@
 import {catalogImageUrl} from "@/lib/catalog-image";
 import Link from "next/link";
-import Image from "next/image";
+import {PreparedPhoto} from "@/components/ui/PreparedPhoto";
 import {Icon} from "@/components/ui/Icon";
 import {formatUnitPrice} from "@/lib/currency";
 import {getProductTypeSummary} from "@/lib/productTypeSummary";
 import type {ProductType, ProductVariant} from "@/types/product";
+import type {PreparedPhoto as Photo} from "@/lib/server/preparedPhotos";
 import {RebarStandardHelp} from "./RebarStandardHelp";
 import {catalogDescriptionCopy} from "@/data/catalog-description-copy";
 import styles from "./CatalogCard.module.css";
@@ -16,12 +17,14 @@ export function ProductTypeCard({
   categorySlug,
   subcategorySlug,
   appearance = "default",
+  photo,
 }: {
   productType: ProductType;
   variants: ProductVariant[];
   categorySlug: string;
   subcategorySlug: string;
   appearance?: "default" | "home";
+  photo?: Photo;
 }) {
   const isHome = appearance === "home";
   const Heading = isHome ? "h3" : "h2";
@@ -40,8 +43,8 @@ export function ProductTypeCard({
             </Link>
           </Heading>
           {productType.imageUrl && <div className={`relative row-span-1 aspect-[4/3] overflow-hidden bg-white sm:row-span-2 ${isHome ? "rounded-sm" : "rounded-lg"}`}>
-            <Image src={catalogImageUrl(productType.imageUrl)} alt="" fill
-              sizes={isHome ? "(min-width: 1280px) 128px, (min-width: 1024px) 11vw, (min-width: 640px) 16vw, 32vw" : "(min-width: 640px) 112px, 96px"}
+            <PreparedPhoto photo={photo} src={catalogImageUrl(productType.imageUrl)} alt="" fill
+              sizes={isHome ? "auto, 128px" : "(min-width: 640px) 112px, 96px"}
               className="object-cover object-center"/>
           </div>}
           <p className={`${isHome ? homeStyles.description : ""} col-start-1 mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300 ${productType.imageUrl ? "col-span-2 sm:col-span-1" : "col-span-2"}`}>

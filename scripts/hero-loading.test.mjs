@@ -13,7 +13,9 @@ const source=ts.transpileModule(fs.readFileSync('components/home/HeroCarousel.ts
 }).outputText;
 const componentModule={exports:{}};
 const imports={
- react:React,'react/jsx-runtime':jsxRuntime,'next/image':Image,
+ react:React,'react/jsx-runtime':jsxRuntime,
+ '@/components/ui/PreparedPhoto':{PreparedPhoto:Image.default},
+ '@/components/ui/Icon':{Icon:()=>null},
  '@/components/layout/PageContainer':{PageContainer:({children})=>React.createElement('div',null,children)},
  '@/data/hero-slides':{AUTO_ROTATE_MS:2000},
  './HeroCarousel.module.css':{hero:'hero',photograph:'photograph',shade:'shade',control:'control'},

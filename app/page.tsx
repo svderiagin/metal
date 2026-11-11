@@ -6,14 +6,13 @@ import {ServicesSection} from "@/components/home/ServicesSection";
 import {RequestQuoteSection} from "@/components/home/RequestQuoteSection";
 import {PageContainer} from "@/components/layout/PageContainer";
 import {ProductTypeCard} from "@/components/catalog/ProductTypeCard";
-import {getAllProductTypes, getAllProductVariants} from "@/lib/catalog";
+import {getAllProductVariants, getFeaturedProductTypes} from "@/lib/catalog";
+import {getPreparedPhoto} from "@/lib/server/preparedPhotos";
 
 export const metadata: Metadata = {title: {absolute: "ООО РВБ — Металлоконструкции и металлопрокат"}};
 export default function Home() {
-  const productTypes = getAllProductTypes();
   const variants = getAllProductVariants();
-  const featuredProducts = ["armatura-a500s", "truba-profilnaya-kvadratnaya", "galvanized-steel-sheet"]
-    .flatMap(slug => productTypes.filter(productType => productType.slug === slug));
+  const featuredProducts = getFeaturedProductTypes();
   return (
     <>
       <HeroSection/>
@@ -28,6 +27,7 @@ export default function Home() {
           <div className="grid auto-rows-fr gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {featuredProducts.map(productType => <ProductTypeCard key={productType.id} productType={productType}
               variants={variants.filter(variant => variant.productTypeId === productType.id)}
+              photo={getPreparedPhoto(productType.imageUrl)}
               categorySlug={productType.categorySlug} subcategorySlug={productType.subcategorySlug} appearance="home"/>)}
           </div>
         </section>

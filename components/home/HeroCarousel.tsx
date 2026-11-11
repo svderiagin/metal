@@ -1,18 +1,20 @@
 "use client";
 
-import Image from "next/image";
 import {type CSSProperties, type ReactNode, useEffect, useMemo, useRef, useState} from "react";
 import {PageContainer} from "@/components/layout/PageContainer";
 import {Icon} from "@/components/ui/Icon";
+import {PreparedPhoto} from "@/components/ui/PreparedPhoto";
 import {AUTO_ROTATE_MS, type HeroSlide} from "@/data/hero-slides";
+import type {PreparedPhoto as Photo} from "@/lib/server/preparedPhotos";
 import styles from "./HeroCarousel.module.css";
 
 type ImageStatus = "ready" | "failed";
 
-export function HeroCarousel({slides, children}: {slides: HeroSlide[]; children: ReactNode}) {
+export function HeroCarousel({slides, children}: {slides: (HeroSlide & {photo?: Photo})[]; children: ReactNode}) {
   const hero = useRef<HTMLElement>(null);
   const mounted = useRef(true);
   const gesture = useRef<{x: number; y: number} | null>(null);
+  const decoding = useRef(new WeakMap<HTMLImageElement, string>());
   // Первый элемент должен монтироваться и после обновления из пустого списка.
   const [requested, setRequested] = useState(1);
   const [status, setStatus] = useState<Record<string, ImageStatus>>({});
@@ -77,6 +79,21 @@ export function HeroCarousel({slides, children}: {slides: HeroSlide[]; children:
     });
   }
 
+  function markImage(id: string, state: ImageStatus) {
+    if (mounted.current) setStatus(previous => previous[id] === state ? previous : {...previous, [id]: state});
+  }
+
+  function decodeImage(image: HTMLImageElement, id: string) {
+    const source = image.currentSrc;
+    if (decoding.current.get(image) === source) return;
+    decoding.current.set(image, source);
+    void image.decode().then(() => {
+      if (image.currentSrc === source) markImage(id, "ready");
+    }).catch(() => {
+      if (image.currentSrc === source) markImage(id, "failed");
+    });
+  }
+
   const circle = styles.control;
 
   return <section ref={hero} className={styles.hero} aria-labelledby="home-hero-title" aria-roledescription={canRotate ? "карусель" : undefined}
@@ -103,16 +120,16 @@ export function HeroCarousel({slides, children}: {slides: HeroSlide[]; children:
     <PageContainer>
       <div className={styles.stage}>
         <div className={styles.imageFrame} aria-hidden="true">
-          {slides.slice(0, requested).filter(slide => status[slide.id] !== "failed").map((slide, i) => <Image key={slide.id}
-            src={slide.src} alt="" fill sizes="(min-width: 1360px) 1312px, (min-width: 1024px) calc(100vw - 48px), (min-width: 640px) calc(100vw - 40px), calc(100vw - 32px)" loading="eager" fetchPriority={i === 0 ? "high" : "low"}
+          {slides.slice(0, requested).filter(slide => status[slide.id] !== "failed").map((slide, i) => <PreparedPhoto key={slide.id}
+            photo={slide.photo} src={slide.src} alt="" fill sizes="(min-width: 1360px) 1312px, (min-width: 1024px) calc(100vw - 48px), (min-width: 640px) calc(100vw - 40px), calc(100vw - 32px)" loading="eager" fetchPriority={i === 0 ? "high" : "low"}
             className={styles.photograph} data-active={active?.id === slide.id}
             style={{"--position-desktop": slide.desktopPosition, "--position-mobile": slide.mobilePosition} as CSSProperties}
-            onLoad={event => {
-              const image = event.currentTarget;
-              void image.decode().then(() => {if (mounted.current) setStatus(previous => ({...previous, [slide.id]: "ready"}));})
-                .catch(() => {if (mounted.current) setStatus(previous => ({...previous, [slide.id]: "failed"}));});
+            ref={image => {
+              // A cached image can complete before React attaches the load listener.
+              if (image?.complete && image.currentSrc) decodeImage(image, slide.id);
             }}
-            onError={() => {if (mounted.current) setStatus(previous => ({...previous, [slide.id]: "failed"}));}}/>)}
+            onLoad={event => decodeImage(event.currentTarget, slide.id)}
+            onError={() => markImage(slide.id, "failed")}/>)}
         </div>
         <div className={styles.shade} aria-hidden="true"/>
         <div className={styles.layout}>
