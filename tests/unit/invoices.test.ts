@@ -14,7 +14,7 @@ import {notificationService} from "../../lib/server/notifications";
 import {smtpMailer, readSmtpConfig} from "../../lib/server/smtp";
 
 let createTrustedOrder: typeof import("../../lib/server/orders").createTrustedOrder;
-const testEnvironment = {NODE_ENV: "test", ORDER_STORAGE_DIR: "", INVOICE_MODE: "preview", INVOICE_PAYMENT_DAYS: "3"};
+const testEnvironment = {NODE_ENV: "test", ORDER_STORAGE_DIR: "", ORDER_DATABASE_URL: "", INVOICE_MODE: "preview", INVOICE_PAYMENT_DAYS: "3"};
 const previousEnvironment = Object.keys(testEnvironment).map(key => [key, process.env[key]] as const);
 before(async () => {
   Object.assign(process.env, testEnvironment);

@@ -4,6 +4,7 @@ import {revalidateCartPrice} from "@/lib/cartPricing";
 import type {CreateOrderInput, Order, OrderItem, PaymentStatus} from "@/types/order";
 import type {InvoiceEmailStatus} from "@/types/invoice";
 import {FileOrderRepository} from "./fileOrderRepository";
+import {PostgresOrderRepository} from "./postgresOrderRepository";
 import path from "node:path";
 
 export interface OrderRepository {
@@ -67,9 +68,15 @@ class UnconfiguredOrderRepository implements OrderRepository {
 
 const developmentRepository = process.env.NODE_ENV === "development"
   ? new FileOrderRepository(path.join(process.cwd(), ".local/orders")) : new DevelopmentOrderRepository();
-export const orderRepository: OrderRepository =
-  process.env.ORDER_STORAGE_DIR ? new FileOrderRepository(process.env.ORDER_STORAGE_DIR) :
-    process.env.NODE_ENV === "production" ? new UnconfiguredOrderRepository() : developmentRepository;
+
+function createOrderRepository(): OrderRepository {
+  const {ORDER_STORAGE_DIR, ORDER_DATABASE_URL, ORDER_DATABASE_CA, NODE_ENV} = process.env;
+  if (ORDER_STORAGE_DIR) return new FileOrderRepository(ORDER_STORAGE_DIR);
+  if (ORDER_DATABASE_URL) return new PostgresOrderRepository(ORDER_DATABASE_URL, ORDER_DATABASE_CA);
+  return NODE_ENV === "production" ? new UnconfiguredOrderRepository() : developmentRepository;
+}
+
+export const orderRepository = createOrderRepository();
 
 export function createTrustedOrder(input: CreateOrderInput, lookupProduct = getProductVariantById): Order | null {
   if (input.consent !== true) return null;

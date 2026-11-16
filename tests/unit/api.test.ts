@@ -14,7 +14,8 @@ let orderPost: typeof import("../../app/api/orders/route").POST;
 let paymentPost: typeof import("../../app/api/payments/create/route").POST;
 let webhookPost: typeof import("../../app/api/payments/webhook/route").POST;
 let invoiceGet: typeof import("../../app/api/orders/[reference]/invoice/route").GET;
-const testEnvironment = {NODE_ENV: "test", ORDER_STORAGE_DIR: "", NOTIFICATION_PROVIDER: "", INVOICE_MODE: "preview", INVOICE_PAYMENT_DAYS: "3"};
+const testEnvironment = {NODE_ENV: "test", ORDER_STORAGE_DIR: "", ORDER_DATABASE_URL: "",
+  NOTIFICATION_PROVIDER: "", INVOICE_MODE: "preview", INVOICE_PAYMENT_DAYS: "3"};
 const previousEnvironment = Object.keys(testEnvironment).map(key => [key, process.env[key]] as const);
 
 before(async () => {
