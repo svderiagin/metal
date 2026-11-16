@@ -56,13 +56,14 @@ test('profile table recalculates 2 pipes into 12 metres and 1884 rubles, replace
  const h=setup();
  assert.equal(h.render().inputs[0].value,'');
  h.blur(0);
- assert.equal(h.render().inputs[0].value,'1');
+ assert.equal(h.render().inputs[0].value,'');
+ assert.equal(h.render().action.disabled,true);
  assert.equal(h.cart.lines.length,0);
  h.change(0,'2');assert.equal(h.render().inputs[0].inputMode,'numeric');assert.equal(h.render().outputs[0].children,'12');assert.equal(h.render().outputs[1].children.replace(/\s/gu,''),'1884,00₽');
  h.render().action.onClick();assert.equal(h.cart.lines[0].quantity,12);assert.equal(h.cart.lines[0].pieceOrder.pieces,2);assert.equal(h.cart.lines[0].estimatedTotal,1884);assert.equal(h.render().actionText,'В корзине');
  h.change(0,'1,5');assert.equal(h.render().inputs[0].value,'1,5');
  h.blur(0);assert.equal(h.render().inputs[0].value,'2');
- h.change(0,'-0');h.blur(0);assert.equal(h.render().inputs[0].value,'1');assert.notEqual(h.render().actionText,'Удалить');
+ h.change(0,'-0');h.blur(0);assert.equal(h.render().inputs[0].value,'-0');assert.equal(h.render().action.disabled,true);
  assert.equal(h.cart.lines[0].pieceOrder.pieces,2);
  h.change(0,'3');assert.equal(h.render().actionText,'Обновить');h.render().action.onClick();assert.equal(h.cart.lines.length,1);assert.equal(h.cart.lines[0].quantity,18);assert.equal(h.cart.lines[0].estimatedTotal,2826);
  h.change(0,'0');assert.equal(h.render().actionText,'Удалить');h.render().action.onClick();assert.equal(h.cart.lines.length,0);assert.equal(h.render().actionText,'Удалено');h.timers.at(-1)();assert.equal(h.render().actionText,'В корзину');
@@ -73,11 +74,16 @@ test('reference prices stay quote-only while requests carry whole pieces and cor
  assert.equal(h.render('card').inputs[0].inputMode,'numeric');
 });
 
-test('80 by 80 by 2 previews a selected length, defaults to the minimum on submit and clamps out-of-range lengths',()=>{
+test('80 by 80 by 2 requires a selected length and clamps positive out-of-range lengths',()=>{
  const product=rows.find(p=>p.profileWidthMm===80&&p.wallThicknessMm===2);
  const h=setup({...product,price:343,priceConfirmed:true,quoteOnly:false});
  h.change(1,'2');
  assert.equal(h.render().outputs[0].children,'—');
+ assert.equal(h.render().action.disabled,true);
+ h.change(0,'abc');h.blur(0);
+ assert.equal(h.render().inputs[0].value,'abc');
+ assert.equal(h.render().action.disabled,true);
+ h.change(0,'6');
  assert.equal(h.render().action.disabled,false);
  h.render().action.onClick();
  assert.equal(h.cart.lines[0].pieceOrder.lengthMeters,6);

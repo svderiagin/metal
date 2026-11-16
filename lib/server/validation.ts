@@ -1,24 +1,17 @@
 import type {ContactRequest, QuoteRequest} from "@/types/forms";
-import type {CreateOrderInput, CustomerType, PaymentMethod} from "@/types/order";
+import type {CheckoutFormData, CreateOrderInput, CustomerType, PaymentMethod} from "@/types/order";
+import {createOrderInput, isCheckoutFormValid} from "@/lib/checkout";
+import {validateContactFields} from "@/lib/contactValidation";
 import {validateQuoteFields} from "@/lib/quoteValidation";
 import {normalizePieceOrder} from "@/lib/profilePipe";
-import {isValidEmail, isValidPhone} from "@/lib/validation";
 
 const productIdPattern = /^[a-zA-Z0-9-]{1,80}$/;
 
 const isRecord = (value: unknown): value is Record<string, unknown> =>
   typeof value === "object" && value !== null && !Array.isArray(value);
 
-const text = (value: unknown, max: number) => {
-  if (typeof value !== "string") return null;
-  const normalized = value.trim().replace(/\s+/g, " ");
-  return normalized.length > 0 && normalized.length <= max ? normalized : null;
-};
-
-const optionalText = (value: unknown, max: number) => {
-  if (value === undefined || value === null || value === "") return undefined;
-  return text(value, max) ?? null;
-};
+const stringField = (value: unknown) => typeof value === "string" ? value : "";
+const singleLine = (value: unknown) => stringField(value).trim().replace(/\s+/g, " ");
 
 const isCustomerType = (value: unknown): value is CustomerType =>
   value === "INDIVIDUAL" || value === "COMPANY";
@@ -49,31 +42,21 @@ export function parseCreateOrderInput(value: unknown): CreateOrderInput | null {
     });
   }
   if (!isCustomerType(value.customer.type) || !isPaymentMethod(value.paymentMethod)) return null;
-  const fullName = text(value.customer.fullName, 120);
-  const email = text(value.customer.email, 254);
-  const phone = text(value.customer.phone, 30);
-  const address = text(value.delivery.address, 300);
-  const comment = optionalText(value.delivery.comment, 1000);
-  const companyName = optionalText(value.customer.companyName, 180);
-  const taxNumber = optionalText(value.customer.taxNumber, 20);
-  const legalAddress = optionalText(value.customer.legalAddress, 300);
-  if (!fullName || !email || !isValidEmail(email) || !phone || !isValidPhone(phone) || !address || comment === null || companyName === null || taxNumber === null || legalAddress === null) return null;
-  if (value.customer.type === "COMPANY" && (!companyName || !taxNumber || !legalAddress)) return null;
-  return {
-    consent: true,
-    items,
-    customer: {
-      type: value.customer.type,
-      fullName,
-      email: email.toLowerCase(),
-      phone,
-      companyName,
-      taxNumber,
-      legalAddress
-    },
-    delivery: {address, comment},
+  if (value.delivery.comment != null && typeof value.delivery.comment !== "string") return null;
+  const form: CheckoutFormData = {
+    customerType: value.customer.type,
     paymentMethod: value.paymentMethod,
+    consentAccepted: true,
+    fullName: stringField(value.customer.fullName),
+    email: stringField(value.customer.email),
+    phone: stringField(value.customer.phone),
+    companyName: stringField(value.customer.companyName),
+    taxNumber: stringField(value.customer.taxNumber),
+    legalAddress: stringField(value.customer.legalAddress),
+    deliveryAddress: stringField(value.delivery.address),
+    comment: stringField(value.delivery.comment),
   };
+  return isCheckoutFormValid(form) ? createOrderInput(form, items) : null;
 }
 
 function parseMeasurement(value: unknown): CreateOrderInput["items"][number]["measurement"] | null {
@@ -92,15 +75,10 @@ function positiveFinite(value: unknown): value is number {
 }
 
 export function parseContactRequest(value: unknown): ContactRequest | null {
-  if (!isRecord(value)) return null;
-  const name = text(value.name, 120);
-  const email = text(value.email, 254);
-  const phone = optionalText(value.phone, 30);
-  const message = text(value.message, 2000);
-  const website = optionalText(value.website, 200);
-  if (!name || !email || !isValidEmail(email) || !message || value.consent !== true || phone === null || website === null) return null;
-  if (phone && !isValidPhone(phone)) return null;
-  return {name, email: email.toLowerCase(), phone, message, consent: true, website};
+  if (!isRecord(value) || Object.keys(validateContactFields(value)).length) return null;
+  return {name: singleLine(value.name), email: stringField(value.email).trim().toLowerCase(),
+    phone: singleLine(value.phone) || undefined, message: singleLine(value.message), consent: true,
+    website: singleLine(value.website) || undefined};
 }
 
 export function parseQuoteRequest(value: unknown): QuoteRequest | null {

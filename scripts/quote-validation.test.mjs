@@ -6,13 +6,17 @@ const {normalizeRussianPhone, validateQuoteFields, QUOTE_LIMITS} = readProjectDa
 const {parseQuoteRequest} = readProjectData('lib/server/validation.ts');
 const valid = () => ({name: 'Анна-Мария', phone: '+79115556677', email: 'anna+metal@example.ru', company: '', message: 'Арматура рифлёная А500С\nДлина: 100 м', consent: true, website: ''});
 
-test('telephone typing and formatted paste use +7 and at most ten national digits', () => {
+test('telephone normalization accepts Russian mobile formats without truncating a pasted number', () => {
   for (const [input, expected] of [
     ['', ''], ['+', '+7'], ['7', '+7'], ['8', '+7'], ['9', '+79'],
     ['9115556677', '+79115556677'], ['89115556677', '+79115556677'],
-    ['+7 (911) 555-66-77', '+79115556677'], ['+791155566779999', '+79115556677'],
+    ['+7 (911) 555-66-77', '+79115556677'], ['+791155566779999', '+791155566779999'],
     ['+7911', '+7911'],
   ]) assert.equal(normalizeRussianPhone(input), expected);
+  for (const phone of ['+7 (911) 555-66-77 0', '+7)911(5556677', '+7911555667x', '+1 919 555 6677']) {
+    assert.equal(normalizeRussianPhone(phone), phone);
+    assert.ok(validateQuoteFields({...valid(), phone}).phone);
+  }
 });
 
 test('client and server accept the same valid quote and preserve line breaks', () => {

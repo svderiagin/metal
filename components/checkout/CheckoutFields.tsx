@@ -1,6 +1,6 @@
 import type {ReactNode} from "react";
 import type {CheckoutFormData} from "@/types/order";
-import {CHECKOUT_LIMITS} from "@/lib/checkout";
+import {CHECKOUT_LIMITS, type CheckoutFieldErrors} from "@/lib/checkout";
 import {Input} from "@/components/ui/Input";
 import {Textarea} from "@/components/ui/Textarea";
 
@@ -10,8 +10,6 @@ const contactFields = [
   {key: "phone", label: "Телефон *", autoComplete: "tel", type: "tel"},
   {key: "deliveryAddress", label: "Адрес доставки *", autoComplete: "street-address", type: "text"},
 ] as const;
-
-export type CheckoutFieldErrors = Partial<Record<keyof CheckoutFormData, string>>;
 
 export function CheckoutFields({form, onChange, errors, formId}: {
   form: CheckoutFormData;

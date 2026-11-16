@@ -38,7 +38,7 @@ export function ProductOrderControls({variant, view, showUnit = true, allowBacko
     ? calculateLineTotal(quantity, variant.price) : null;
   const quantityUnit = getQuantityUnit(variant);
   const correctedQuantity = parseOrderQuantity(correctQuantityValue(value).value);
-  const canSubmitQuantity = correctedQuantity !== null && correctedQuantity > 0 && correctedQuantity <= 999
+  const canSubmitQuantity = quantity !== null && correctedQuantity !== null && correctedQuantity > 0 && correctedQuantity <= 999
     && (!wholeQuantity || Number.isInteger(correctedQuantity)) && variant.price !== null
     && calculateLineTotal(correctedQuantity, variant.price) !== null;
 
@@ -49,21 +49,20 @@ export function ProductOrderControls({variant, view, showUnit = true, allowBacko
   }, [removed]);
 
   function correctQuantityValue(rawValue: string) {
-    const explicitRemoval = !!line && parseOrderQuantity(rawValue) === 0;
-    if (!line && parseOrderQuantity(rawValue) === 0) {
-      return {value: "1", message: "Для добавления количество заменено на 1."};
-    }
-    return correctOrderQuantity(rawValue, {whole: wholeQuantity, maximum: 999,
-      fallback: line?.quantity ?? 1, ...(wholeQuantity && !explicitRemoval ? {minimum: 1} : {})});
+    if (!rawValue.trim() && line) return {value: formatCatalogNumber(line.quantity)};
+    const numeric = parseOrderQuantity(rawValue);
+    if (numeric === null || numeric === 0) return {value: rawValue};
+    return correctOrderQuantity(rawValue, {whole: wholeQuantity, maximum: 999});
   }
 
   function submit(rawValue = value) {
-    if (!hydrated || removed) return;
+    const rawQuantity = parseOrderQuantity(rawValue);
+    if (!hydrated || removed || rawQuantity === null) return;
     const corrected = correctQuantityValue(rawValue);
     const nextQuantity = parseOrderQuantity(corrected.value);
     setDraft(corrected.value);
     if (corrected.message) setCorrection(corrected.message);
-    if (line && parseOrderQuantity(rawValue) === 0) {
+    if (line && rawQuantity === 0) {
       removeItem(variant.id);
       setDraft(null);
       setCorrection("");
@@ -107,7 +106,8 @@ export function ProductOrderControls({variant, view, showUnit = true, allowBacko
       disabled={!hydrated || saved || removed || (!shouldRemove && (!canPurchase || !canSubmitQuantity))}
       className={`${stateClass} ${actionClass}`}>{label}</Button>
   );
-  const quantityError = draft !== null && value.trim() !== "" && !valid && !shouldRemove;
+  const amountTooSmall = canPurchase && valid && total === null;
+  const quantityError = draft !== null && value.trim() !== "" && (!valid || amountTooSmall) && !shouldRemove;
   const statusId = `quantity-status-${view}-${variant.id}`;
   const quantityInput = <Input type="text" inputMode={wholeQuantity ? "numeric" : "decimal"} value={value}
         aria-label={`Количество ${variant.name}, ${quantityUnit}`}
@@ -135,7 +135,8 @@ export function ProductOrderControls({variant, view, showUnit = true, allowBacko
   </output>;
   const status = <span id={statusId} aria-live="polite" className={`mt-1 block text-xs ${quantityError
     ? "text-red-700 dark:text-red-400" : "text-slate-500 dark:text-slate-400"}`}>
-    {correction || (quantityError ? wholeQuantity ? "Введите целое количество от 1 до 999." : "Введите количество больше 0 и не больше 999."
+    {amountTooSmall ? "Увеличьте количество. Сумма позиции должна быть больше 0 ₽."
+      : correction || (quantityError ? wholeQuantity ? "Введите целое количество от 1 до 999." : "Введите количество больше 0 и не больше 999."
       : line && !saved ? "Не сохранено" : "")}
   </span>;
   return <CatalogVariantOrder view={view} quantity={input} total={totalOutput} action={action} status={status}/>;

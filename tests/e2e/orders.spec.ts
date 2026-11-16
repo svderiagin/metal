@@ -80,7 +80,7 @@ test("galvanized sheet limits quantity while typing or replacing the field, befo
   await quantity.pressSequentially("0000000");
   await expect(quantity).toBeFocused();
   await expect(quantity).toHaveValue("0");
-  await expect(row.getByRole("button", {name: "В корзину", exact: true})).toBeEnabled();
+  await expect(row.getByRole("button", {name: "В корзину", exact: true})).toBeDisabled();
   await quantity.fill("");
   await quantity.pressSequentially("99999");
   await expect(quantity).toBeFocused();
@@ -117,7 +117,8 @@ for (const family of ["mesh", "profnastil"] as const) {
     await expect(row.getByRole("button", {name: "В корзине", exact: true})).toBeDisabled();
     await quantity.fill("-5");
     await quantity.blur();
-    await expect(quantity).toHaveValue("1");
+    await expect(quantity).toHaveValue("-5");
+    await expect(row.getByRole("button", {name: "Обновить", exact: true})).toBeDisabled();
     await expect(row.getByRole("button", {name: "Удалить", exact: true})).toHaveCount(0);
     await quantity.fill("1 000");
     await quantity.blur();

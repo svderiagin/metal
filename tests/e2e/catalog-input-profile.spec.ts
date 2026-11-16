@@ -12,6 +12,10 @@ test("ranged profile pipe uses the corrected length and whole pipes in the quote
   await length.fill("-3");
   await expect(length).toHaveAttribute("aria-invalid", "true");
   await length.press("Tab");
+  await expect(length).toHaveValue("-3");
+  await expect(length).toHaveAttribute("aria-invalid", "true");
+  await length.fill("3");
+  await length.press("Tab");
   await expect(length).toHaveValue("6");
   await expect(row.getByText("Длина трубы скорректирована до 6 м.", {exact: true})).toBeVisible();
   await length.fill("20");

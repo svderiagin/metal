@@ -19,14 +19,24 @@ test("checkout validates consent, contacts, company requirements and server fiel
     {deliveryAddress: ""}, {comment: "x".repeat(1001)}, {customerType: "COMPANY" as const}]) {
     assert.equal(isCheckoutFormValid({...form(), ...changed}), false);
   }
-  assert.equal(isCheckoutFormValid({...form(), customerType: "COMPANY", companyName: "Тест", taxNumber: "1234567890", legalAddress: "Адрес"}), true);
+  const company = {...form(), customerType: "COMPANY" as const, companyName: "Тест", taxNumber: "1234567894", legalAddress: "Адрес"};
+  assert.equal(isCheckoutFormValid(company), true);
+  for (const taxNumber of ["abc", "0000000000", "1234567890", "12345678940"]) {
+    assert.equal(isCheckoutFormValid({...company, taxNumber}), false);
+  }
   assert.equal(isValidPhone("(((((((((("), false);
   assert.equal(isValidPhone("+7 (900) 000-00-00"), true);
   assert.equal(isValidPhone("call 79000000000"), false);
+  assert.equal(isValidPhone("+7)900(0000000"), false);
+  assert.equal(isValidPhone("+1 (202) 555-0123"), true);
   assert.equal(isValidEmail(" a@example.invalid "), true);
-  const input = createOrderInput({...form(), fullName: " Анна ", email: " AUDIT@EXAMPLE.INVALID "}, [{productId: "test", quantity: 1}]);
+  assert.equal(isValidEmail("a..b@example.invalid"), false);
+  assert.equal(isValidEmail("a@-example.invalid"), false);
+  const input = createOrderInput({...company, customerType: "INDIVIDUAL", fullName: " Анна ", email: " AUDIT@EXAMPLE.INVALID "},
+    [{productId: "test", quantity: 1}]);
   assert.equal(input.customer.email, "audit@example.invalid");
   assert.equal(input.customer.fullName, "Анна");
+  for (const field of ["taxNumber", "companyName", "legalAddress"]) assert.equal(field in input.customer, false);
   assert.equal(input.consent, true);
 });
 

@@ -2,12 +2,12 @@
 
 import {useState, type ComponentProps} from "react";
 import {Input} from "@/components/ui/Input";
-import {normalizeRussianPhone, QUOTE_LIMITS} from "@/lib/quoteValidation";
+import {normalizeRussianPhone} from "@/lib/quoteValidation";
 
 export function PhoneInput(props: Omit<ComponentProps<typeof Input>, "value" | "onChange" | "type" | "maxLength">) {
   const [value, setValue] = useState("");
   return <Input {...props} type="tel" inputMode="tel" autoComplete="tel" placeholder="+7 900 000-00-00"
-    maxLength={QUOTE_LIMITS.phone} value={value}
+    maxLength={30} value={value}
     onFocus={() => {if (!value) setValue("+7");}}
     onBlur={() => {if (value === "+7") setValue("");}}
     onChange={event => setValue(normalizeRussianPhone(event.target.value))}

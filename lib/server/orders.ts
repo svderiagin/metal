@@ -111,13 +111,15 @@ export function createTrustedOrder(input: CreateOrderInput, lookupProduct = getP
       subtotal,
     });
   }
+  const totalAmount = items.reduce((sum, item) => sum + Math.round(item.subtotal * 100), 0) / 100;
+  if (!Number.isFinite(totalAmount) || totalAmount <= 0) return null;
   return {
     reference: `MS-${randomBytes(6).toString("hex").toUpperCase()}`,
     items,
     customer: input.customer,
     delivery: input.delivery,
     paymentMethod: input.paymentMethod,
-    totalAmount: items.reduce((sum, item) => sum + Math.round(item.subtotal * 100), 0) / 100,
+    totalAmount,
     status: "SUBMITTED",
     paymentStatus: "PENDING",
     createdAt: new Date().toISOString(),

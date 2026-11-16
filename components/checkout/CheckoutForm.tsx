@@ -8,12 +8,11 @@ import {Button} from "@/components/ui/Button";
 import {formatCurrency} from "@/lib/currency";
 import {CustomerTypeSelector} from "./CustomerTypeSelector";
 import {PaymentMethodSelector} from "./PaymentMethodSelector";
-import {CHECKOUT_LIMITS, createOrderInput, isCheckoutFormValid} from "@/lib/checkout";
+import {createOrderInput, getCheckoutFieldErrors} from "@/lib/checkout";
 import {createOrder, createPayment} from "@/lib/checkoutClient";
 import {rememberOrderConfirmation} from "@/lib/orderConfirmation";
-import {CheckoutFields, type CheckoutFieldErrors} from "./CheckoutFields";
+import {CheckoutFields} from "./CheckoutFields";
 import {companyDetails} from "@/lib/companyDetails";
-import {isValidEmail, isValidPhone} from "@/lib/validation";
 
 const initial: CheckoutFormData = {
   customerType: "INDIVIDUAL",
@@ -38,7 +37,7 @@ export function CheckoutForm() {
   const [submitting, setSubmitting] = useState(false);
   const {clearCart, totalAmount, lines} = useCart();
   const router = useRouter();
-  const fieldErrors: CheckoutFieldErrors = attempted ? getCheckoutFieldErrors(form) : {};
+  const fieldErrors = attempted ? getCheckoutFieldErrors(form) : {};
   function updateField(key: keyof CheckoutFormData, value: string | boolean) {
     setForm((currentForm) => ({...currentForm, [key]: value}));
     setError("");
@@ -49,15 +48,16 @@ export function CheckoutForm() {
     event.preventDefault();
     if (submitting) return;
     setSubmissionFailed(false);
-    if (!lines.length || lines.some(line => line.invalidReason)) {
+    if (!lines.length || totalAmount <= 0 || lines.some(line => line.invalidReason)) {
       setError("Проверьте корзину: часть позиций требует уточнения цены или характеристик.");
       return;
     }
-    if (!isCheckoutFormValid(form)) {
+    const errors = getCheckoutFieldErrors(form);
+    const firstInvalid = Object.keys(errors)[0];
+    if (firstInvalid) {
       setAttempted(true);
       setError("Проверьте обязательные поля, контактные данные и согласие.");
-      const firstInvalid = Object.keys(getCheckoutFieldErrors(form))[0];
-      const field = firstInvalid ? event.currentTarget.elements.namedItem(firstInvalid) : null;
+      const field = event.currentTarget.elements.namedItem(firstInvalid);
       if (field instanceof HTMLElement) field.focus();
       return
     }
@@ -112,23 +112,3 @@ export function CheckoutForm() {
                                                                                  disabled={submitting} className="w-full sm:w-auto">{submitting ? "Создаём заказ…" : `Создать заказ на ${formatCurrency(totalAmount)}`}</Button>
   </form>
 }
-
-function getCheckoutFieldErrors(form: CheckoutFormData): CheckoutFieldErrors {
-  const errors: CheckoutFieldErrors = {};
-  if (!form.fullName.trim()) errors.fullName = "Укажите ФИО.";
-  if (!isValidEmail(form.email)) errors.email = "Введите корректный адрес электронной почты.";
-  if (!isValidPhone(form.phone)) errors.phone = "Введите телефон, содержащий от 10 до 15 цифр.";
-  if (!form.deliveryAddress.trim()) errors.deliveryAddress = "Укажите адрес доставки.";
-  if (form.customerType === "COMPANY") {
-    if (!form.companyName.trim()) errors.companyName = "Укажите название компании.";
-    if (!form.taxNumber.trim()) errors.taxNumber = "Укажите ИНН.";
-    if (!form.legalAddress.trim()) errors.legalAddress = "Укажите юридический адрес.";
-  }
-  for (const [key, maximum] of Object.entries(CHECKOUT_LIMITS)) {
-    const field = key as keyof typeof CHECKOUT_LIMITS;
-    if (form[field].trim().length > maximum) errors[field] = `Максимум ${maximum} символов.`;
-  }
-  if (!form.consentAccepted) errors.consentAccepted = "Подтвердите согласие на обработку персональных данных.";
-  return errors;
-}
-

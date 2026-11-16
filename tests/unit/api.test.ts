@@ -82,6 +82,9 @@ test("contact validates input and ignores the honeypot before notifying", async 
   const sent = mock.method(notificationService, "sendContactRequest", async () => {});
   assert.equal((await contactPost(request({...contact, consent: false}))).status, 400);
   assert.equal((await contactPost(request({...contact, phone: "letters1234567890"}))).status, 400);
+  for (const fields of [{name: "12345"}, {email: "a..b@example.invalid"}, {phone: "+7)900(0000000"}]) {
+    assert.equal((await contactPost(request({...contact, ...fields}))).status, 400);
+  }
   assert.equal((await contactPost(new Request("http://localhost", {method: "POST", body: "not-json"}))).status, 400);
   assert.equal((await contactPost(request({...contact, website: "spam.invalid"}))).status, 200);
   assert.equal(sent.mock.calls.length, 0);
@@ -90,6 +93,29 @@ test("contact validates input and ignores the honeypot before notifying", async 
   assert.equal(accepted.status, 200);
   assert.deepEqual(await accepted.json(), {ok: true});
   assert.equal(sent.mock.calls.length, 1);
+});
+
+test("order rejects invalid contact fields and zero-priced lines before saving, and strips hidden company details", async ({mock}) => {
+  const original = order();
+  const company = {type: "COMPANY", companyName: "ООО Тест", taxNumber: "1234567894", legalAddress: "Тестовый адрес"};
+  assert.ok(parseCreateOrderInput({...original, customer: {...original.customer, ...company}}));
+  const save = mock.method(orders.orderRepository, "save", async () => {});
+  const notify = mock.method(notificationService, "sendOrderNotification", async () => {});
+  const smallQuantity = {...original.items[0], quantity: 0.000001};
+  for (const invalid of [
+    {...original, items: [smallQuantity]},
+    {...original, items: [...original.items, {...smallQuantity, productId: "rozmet-2209"}]},
+    ...[{fullName: "12345"}, {email: "audit@-example.invalid"}, {phone: "+7)900(0000000"}]
+      .map(fields => ({...original, customer: {...original.customer, ...fields}})),
+    ...["abc", "1234567890", "12345678940"].map(taxNumber =>
+      ({...original, customer: {...original.customer, ...company, taxNumber}})),
+  ]) assert.equal((await orderPost(request(invalid))).status, 400);
+  assert.equal(save.mock.calls.length, 0);
+  assert.equal(notify.mock.calls.length, 0);
+
+  const response = await orderPost(request({...original, customer: {...company, ...original.customer}}));
+  assert.equal(response.status, 201);
+  assert.deepEqual(save.mock.calls[0].arguments[0]?.customer, original.customer);
 });
 
 test("quote reports invalid fields, ignores the honeypot and sends the normalized message", async ({mock}) => {

@@ -48,7 +48,7 @@ export function tonsToMeters(tons: number, weightPerMeterKg: number) {
 export function calculateLineTotal(weightTons: number, pricePerTon: number) {
   if (!isNonNegativeFinite(weightTons) || !isNonNegativeFinite(pricePerTon)) return null;
   const total = round(weightTons * pricePerTon, 2);
-  return Number.isFinite(total) ? total : null;
+  return Number.isFinite(total) && (weightTons === 0 || total > 0) ? total : null;
 }
 
 export function parseNonNegativeDecimal(value: string) {

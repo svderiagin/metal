@@ -61,17 +61,14 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
   }, [removed]);
 
   function correctPiecesValue(rawValue: string) {
-    const explicitRemoval = !!line && parseOrderQuantity(rawValue) === 0;
-    const fallback = savedPieces !== undefined && Number.isSafeInteger(savedPieces) && savedPieces > 0 && savedPieces <= 999
-      ? savedPieces : 1;
-    return correctOrderQuantity(rawValue, {whole: true, maximum: 999, fallback,
-      ...(!explicitRemoval ? {minimum: 1} : {})});
+    if (!parseOrderQuantity(rawValue)) return {value: rawValue};
+    return correctOrderQuantity(rawValue, {whole: true, maximum: 999});
   }
 
   function correctLengthValue(rawValue: string): {value: string; message?: string} {
     if (variant.lengthMeters !== undefined) return {value: formatCatalogNumber(variant.lengthMeters)};
-    if (!range) return {value: rawValue};
-    const corrected = correctOrderQuantity(rawValue, {minimum: range[0], maximum: range[1], fallback: savedLength ?? range[0]});
+    if (!range || !parseOrderQuantity(rawValue)) return {value: rawValue};
+    const corrected = correctOrderQuantity(rawValue, {minimum: range[0], maximum: range[1]});
     return {...corrected, message: corrected.message
       ? `Длина трубы скорректирована до ${corrected.value.replace(".", ",")} м.` : undefined};
   }

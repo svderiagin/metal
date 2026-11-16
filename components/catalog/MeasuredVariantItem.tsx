@@ -88,6 +88,7 @@ function TonnageMeasuredVariantItem({
   const hasChanges = !!cartLine && !isSaved;
   const shouldRemove = !!cartLine && enteredQuantity === 0;
   const activeValue = inputMode === "meter" ? meters : tons;
+  const usableDraft = draft === null || shouldRemove || (draft.exactQuantity ?? parseOrderQuantity(activeValue) ?? 0) > 0;
   const cannotCalculate = enteredQuantity !== null && enteredQuantity > 0 &&
     ((hasMass && (!parsedMeters || !parsedTons)) || (pricePerTon !== undefined && !variant.quoteOnly && parsedTons !== null && estimatedTotal === null));
   const invalidDraft = draft !== null && activeValue.trim() !== "" && (enteredQuantity === null || cannotCalculate);
@@ -129,13 +130,13 @@ function TonnageMeasuredVariantItem({
   function resolvedOrder(mode: OrderInputMode) {
     const options = quantityOptions(mode);
     const raw = mode === "meter" ? meters : tons;
-    const saved = mode === "meter" ? savedMeters : savedTons;
     const exact = draft?.inputMode === mode ? draft.exactQuantity : undefined;
+    const entered = exact ?? parseOrderQuantity(raw);
+    if (entered === null || (entered === 0 && !cartLine)) return null;
     const corrected = correctOrderQuantity(exact === undefined ? raw : formatCatalogNumber(exact), {
       ...options,
-      minimum: cartLine && parseOrderQuantity(raw) === 0 ? 0 : options.minimum,
+      minimum: entered === 0 ? 0 : options.minimum,
       decimalPlaces: exact === undefined ? options.decimalPlaces : undefined,
-      fallback: saved ?? (mode === "meter" ? Math.max(1, options.minimum) : options.minimum),
     });
     const quantity = parseOrderQuantity(corrected.value);
     if (quantity === null) return null;
@@ -207,7 +208,7 @@ function TonnageMeasuredVariantItem({
       order={{product: formatQuoteProductName(variant), meters: invalidDraft ? null : parsedMeters, tons: invalidDraft ? null : parsedTons}}
       className={`${filterStyles.quoteButton} ${actionSizeClassName} px-3`}/>
   ) : (
-    <Button type="button" disabled={!hydrated || isSaved || removed || (!canPurchase && !shouldRemove)} onClick={addToCart}
+    <Button type="button" disabled={!hydrated || isSaved || removed || !usableDraft || (!canPurchase && !shouldRemove)} onClick={addToCart}
       className={`${buttonClassName} ${actionSizeClassName} whitespace-nowrap px-3`}>
       {shouldRemove ? "Удалить" : buttonLabel}
     </Button>
