@@ -34,19 +34,23 @@ const sample = () => createTrustedOrder({consent: true,
   delivery: {address: "Тестовый адрес"}, paymentMethod: "INVOICE"})!;
 const smtp = {NOTIFICATION_PROVIDER: "smtp", SMTP_HOST: "smtp.example.invalid", SMTP_PORT: "465", SMTP_USER: "test", SMTP_PASSWORD: "test",
   SMTP_FROM: "sales@example.invalid", NOTIFICATION_RECIPIENT_EMAIL: "manager@example.invalid"};
+// The account is a synthetic checksum fixture.
+const liveInvoiceEnvironment = {INVOICE_MODE: "live", INVOICE_BANK_ACCOUNT: "40702810500000000000", INVOICE_VAT_RATE: "22",
+  INVOICE_PRICES_INCLUDE_VAT: "true"};
 
-test("preview marks unconfirmed bank and VAT; live mode rejects missing, short or invalid bank and tax configuration", () => {
+test("preview uses fictional seller IDs and bank details, and live validates the bank and tax configuration", () => {
   const preview = readInvoiceConfig({});
   assert.equal(preview.isPreview, true);
-  assert.equal(preview.vat, null);
-  assert.match(preview.seller.bank.account, /УКАЖИТЕ/);
-  const valid = {INVOICE_MODE: "live", INVOICE_BANK_ACCOUNT: "40702810500000000000", INVOICE_VAT_RATE: "22", INVOICE_PRICES_INCLUDE_VAT: "true"};
-  // This is a synthetic account with the correct BIK checksum, never a payment fixture.
-  assert.equal(isValidBankAccount(valid.INVOICE_BANK_ACCOUNT, "044525450"), true);
-  assert.equal(readInvoiceConfig(valid).vat, 22);
-  for (const changes of [{INVOICE_BANK_ACCOUNT: "4070281080000020353"}, {INVOICE_BANK_ACCOUNT: "1".repeat(20)},
+  assert.equal(preview.vat, 22);
+  assert.equal(preview.seller.inn, "0".repeat(10));
+  assert.equal(preview.seller.kpp, "0".repeat(9));
+  assert.deepEqual(preview.seller.bank, {name: "АО «Банк Пример»", bik: "0".repeat(9),
+    correspondentAccount: "0".repeat(20), account: "0".repeat(20)});
+  assert.equal(isValidBankAccount(preview.seller.bank.account, preview.seller.bank.bik), false);
+  assert.equal(readInvoiceConfig(liveInvoiceEnvironment).vat, 22);
+  for (const changes of [{INVOICE_BANK_ACCOUNT: "1".repeat(19)}, {INVOICE_BANK_ACCOUNT: "1".repeat(20)}, {INVOICE_BANK_ACCOUNT: "0".repeat(20)},
     {INVOICE_VAT_RATE: ""}, {INVOICE_VAT_RATE: "20"}, {INVOICE_PRICES_INCLUDE_VAT: "false"}, {INVOICE_MODE: "typo"}]) {
-    assert.throws(() => readInvoiceConfig({...valid, ...changes}), /CONFIGURATION/);
+    assert.throws(() => readInvoiceConfig({...liveInvoiceEnvironment, ...changes}), /CONFIGURATION/);
   }
 });
 
@@ -75,6 +79,7 @@ test("PDF embeds Cyrillic fonts, fits a small order on A4 and paginates 100 long
   const parsed = await PDFDocument.load(pdf);
   assert.equal(parsed.getPageCount(), 1);
   assert.match(parsed.getTitle()!, new RegExp(order.reference));
+  assert.equal(parsed.getSubject(), "Образец - не для оплаты");
   const page = parsed.getPage(0);
   assert.deepEqual({width: Math.round(page.getWidth()), height: Math.round(page.getHeight())}, {width: 595, height: 842});
   const fonts = page.node.Resources()?.lookup(PDFName.of("Font"), PDFDict);
@@ -89,7 +94,7 @@ test("PDF embeds Cyrillic fonts, fits a small order on A4 and paginates 100 long
     assert.match(new TextDecoder().decode(decodePDFRawStream(unicode).decode()), /<[a-f0-9]+>\s*<04[a-f0-9]{2}>/i,
       "The font must map used Cyrillic glyphs to Unicode");
   }
-  const live = await PDFDocument.load(await renderInvoicePdf(order, {...readInvoiceConfig({}), isPreview: false, vat: 22}));
+  const live = await PDFDocument.load(await renderInvoicePdf(order, readInvoiceConfig(liveInvoiceEnvironment)));
   assert.equal(live.getPageCount(), 1);
   order.items = Array.from({length: 100}, (_, index) => ({...order.items[index % 2],
     name: `Позиция ${index + 1}: ${"Длинное наименование металлопроката ".repeat(6)} 😀`}));

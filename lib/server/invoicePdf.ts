@@ -70,7 +70,7 @@ export async function renderInvoicePdf(order: Order, config: InvoiceConfig): Pro
     for (const line of lines) {ensure(size + 4); text(line, margin, y, size, font, color); y -= size + 4;}
     y -= 4;
   }
-  function placeholder(value: string) {
+  function previewBanner(value: string) {
     const lines = wrap(value, content - 16, 10, bold);
     const blockHeight = lines.length * 15 + 14;
     ensure(blockHeight + 5);
@@ -82,32 +82,29 @@ export async function renderInvoicePdf(order: Order, config: InvoiceConfig): Pro
   text("RWB-METAL", margin, y, 17, bold);
   text(config.seller.email, width - margin - regular.widthOfTextAtSize(config.seller.email, 10), y + -3, 10, regular, muted);
   y -= 34;
-  if (config.isPreview) placeholder("ОБРАЗЕЦ - НЕ ДЛЯ ОПЛАТЫ. Реквизиты и НДС не подтверждены.");
-  paragraph(`Счёт на оплату № ${order.reference}`, 18, bold);
-  paragraph(`от ${date(order.createdAt)} · Заказ ${order.reference}`, 10, regular, muted);
-  y -= 6;
+  if (config.isPreview) previewBanner("ОБРАЗЕЦ - НЕ ДЛЯ ОПЛАТЫ. Реквизиты условные, НДС приведён для примера.");
+  paragraph("Реквизиты получателя", 10, bold);
 
   const bankTop = y;
   const bankRows = [
     [`${config.seller.bank.name}\nБанк получателя`, `БИК ${config.seller.bank.bik}\nК/с ${config.seller.bank.correspondentAccount}`],
     [`ИНН ${config.seller.inn} / КПП ${config.seller.kpp}`, `Р/с ${config.seller.bank.account}`],
-    [config.seller.name, "Получатель"],
+    [`${config.seller.name}\nПолучатель`, ""],
   ];
   const bankLeft = content * .57;
   for (const [left, right] of bankRows) {
     const a = wrap(left, bankLeft - 16, 9), b = wrap(right, content - bankLeft - 16, 9);
     const rowHeight = Math.max(a.length, b.length) * 13 + 14;
     page.drawRectangle({x: margin, y: y - rowHeight, width: content, height: rowHeight, borderColor: border, borderWidth: .6});
-    page.drawLine({start: {x: margin + bankLeft, y}, end: {x: margin + bankLeft, y: y - rowHeight}, color: border, thickness: .6});
-    if (config.isPreview && right.startsWith("Р/с")) page.drawRectangle({x: margin + bankLeft + 1, y: y - rowHeight + 1,
-      width: content - bankLeft - 2, height: rowHeight - 2, color: rgb(1, .9, .9)});
+    if (right) page.drawLine({start: {x: margin + bankLeft, y}, end: {x: margin + bankLeft, y: y - rowHeight}, color: border, thickness: .6});
     a.forEach((line, i) => text(line, margin + 8, y - 7 - i * 13, 9));
-    b.forEach((line, i) => text(line, margin + bankLeft + 8, y - 7 - i * 13, 9, regular,
-      config.isPreview && right.startsWith("Р/с") ? rgb(.65, .06, .06) : ink));
+    b.forEach((line, i) => text(line, margin + bankLeft + 8, y - 7 - i * 13, 9));
     y -= rowHeight;
   }
   if (bankTop - y > 180) throw new Error("INVOICE_BANK_LAYOUT_OVERFLOW");
   y -= 18;
+  paragraph(`Счёт на оплату № ${order.reference} от ${date(order.createdAt)}`, 18, bold);
+  y -= 4;
   paragraph(`Поставщик: ${config.seller.name}, ИНН ${config.seller.inn}, КПП ${config.seller.kpp}. ${config.seller.address}`, 9);
   const customer = order.customer;
   paragraph(`Покупатель: ${customer.type === "COMPANY" ? `${customer.companyName}, ИНН ${customer.taxNumber}. ${customer.legalAddress}` : customer.fullName}`, 9);
@@ -148,24 +145,24 @@ export async function renderInvoicePdf(order: Order, config: InvoiceConfig): Pro
   ensure(95);
   paragraph(`Итого за товары: ${money(order.totalAmount)} руб.`, 11, bold);
   paragraph("Доставка: бесплатно (0,00 руб.)", 10);
-  if (config.vat === null) placeholder("НДС включён в цену. [УКАЖИТЕ СТАВКУ И СУММУ НДС]");
-  else paragraph(config.vat === "NONE" ? "Без НДС" : `В том числе НДС ${config.vat}%: ${money(includedVat(order.items.map(item => item.subtotal), config.vat))} руб.`, 10);
+  const vatLine = config.vat === "NONE" ? "Без НДС."
+    : `В том числе НДС ${config.vat}%: ${money(includedVat(order.items.map(item => item.subtotal), config.vat))} руб.`;
+  paragraph(`${vatLine}${config.isPreview ? " (пример расчёта)" : ""}`);
   paragraph(`Всего к оплате: ${money(order.totalAmount)} руб.`, 13, bold);
   paragraph(`Всего наименований: ${order.items.length}. ${amountInWords(order.totalAmount)}.`, 10);
   y -= 8;
   const deadline = new Date(order.createdAt);
   deadline.setTime(deadline.getTime() + config.paymentDays * 86_400_000);
-  if (config.isPreview) paragraph("Образец не для оплаты. Окончательный счёт будет выпущен после подтверждения реквизитов и ставки НДС.", 9, bold);
-  else {
-    paragraph(`Назначение платежа: Оплата по счёту № ${order.reference} от ${date(order.createdAt)} за металлопрокат. ${config.vat === "NONE" ? "Без НДС." : `В том числе НДС ${config.vat}%.`}`, 9);
-    paragraph(`Счёт действителен по ${date(deadline)} включительно. Предоплата 100%. Доставка бесплатная. Дата и условия отгрузки согласуются с покупателем.`, 9);
-  }
+  paragraph(config.isPreview ? "Пример назначения платежа" : "Назначение платежа", 9, bold);
+  paragraph(`Оплата по счёту № ${order.reference} от ${date(order.createdAt)} за металлопрокат. ${vatLine}`, 9);
+  paragraph(`Счёт действителен по ${date(deadline)} включительно. Предоплата 100%. Дата и условия отгрузки согласуются с покупателем.`, 9);
   if (!config.isPreview) paragraph("Счёт на оплату не подтверждает поступление денежных средств.", 9, regular, muted);
   pages.forEach((current, index) => {
     current.drawLine({start: {x: margin, y: 43}, end: {x: width - margin, y: 43}, color: border, thickness: .5});
     current.drawText(`${order.reference}${config.isPreview ? "  |  Образец - не для оплаты" : ""}  |  ${index + 1} / ${pages.length}`, {x: margin, y: 28, size: 8, font: regular, color: muted});
   });
   doc.setTitle(`Счёт на оплату ${order.reference}`);
+  if (config.isPreview) doc.setSubject("Образец - не для оплаты");
   doc.setAuthor(config.seller.name);
   doc.setCreationDate(new Date(order.createdAt));
   return Buffer.from(await doc.save());
