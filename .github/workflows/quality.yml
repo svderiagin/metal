@@ -26,7 +26,7 @@ jobs:
       - run: npm ci
       - run: npm run lint
       - run: npx tsc --noEmit --incremental false
-      - run: npm run test:unit
+      - run: npm run test:unit:legacy
       - run: npm run test:coverage
       - run: npm audit
       - run: npx playwright install --with-deps chromium

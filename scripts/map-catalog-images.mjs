@@ -165,9 +165,9 @@ No uncertain matches are automatically assigned. Medium confidence means a revie
 ## Validation
 
 - \`node --test scripts/images.test.mjs\`: image paths, decoding, source byte identity, incompatible subtype exclusions and preservation of every non-image product field.
-- \`npm run catalog:check\`: catalog and cart checks, including byte-identical re-import.
+- \`npm run catalog:check\`: catalog and cart checks. Set \`CATALOG_IMPORT_CHECK=1\` to verify replay in a temporary copy.
 - \`npm run lint -- --ignore-pattern 'brokinvest.ru/**'\`: application lint. Unscoped lint also scans downloaded donor JavaScript, which contains unrelated lint errors.
 - \`npm run build\`: production build and TypeScript validation.
-- \`node scripts/check-catalog-images-browser.mjs\`: running local server on port 3000 and headless Chrome debugging on port 9223; desktop/mobile checks for loaded images, alt text, expected mapping, preserved aspect ratio and horizontal overflow.
+- After \`npm run test:build\`, run \`npx playwright test tests/e2e/images.spec.ts tests/e2e/cover-gallery\` to verify loaded images, galleries and viewer behavior.
 `);
 console.log(summary);

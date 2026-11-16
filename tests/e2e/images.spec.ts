@@ -1,9 +1,17 @@
+import type {Page} from "@playwright/test";
 import {test, expect, openProduct, samples, visibleProduct} from "../browser";
+import {AUTO_ROTATE_MS, HERO_SLIDES} from "../../data/hero-slides";
 import {getProductIllustration} from "../../lib/productPreviewImage";
+
+const heroSelector = 'section[aria-labelledby="home-hero-title"]';
+const heroFrameRequest = /\/images\/prepared\/hero\/(\d+)\/[^/]+$/;
+const activeFrame = (page: Page) => page.locator(`${heroSelector} img[data-active="true"]`);
+const activeSource = (page: Page) => activeFrame(page).evaluateAll(images => (images[0] as HTMLImageElement | undefined)?.currentSrc ?? "");
+const nextFrame = (page: Page) => page.getByRole("button", {name: "Следующая фотография", exact: true});
 
 test("landing photos use responsive static AVIF and WebP files", async ({page, request}) => {
   await page.goto("/");
-  const hero = page.locator('section[aria-labelledby="home-hero-title"] img[data-active="true"]');
+  const hero = activeFrame(page);
   await expect(hero).toHaveAttribute("fetchpriority", "high");
   const heroSource = await hero.evaluate(async element => {
     const image = element as HTMLImageElement;
@@ -18,9 +26,6 @@ test("landing photos use responsive static AVIF and WebP files", async ({page, r
     expect(response.headers()["content-type"]).toBe(`image/${format}`);
     expect(response.headers()["cache-control"]).toContain("immutable");
   }
-
-  await page.getByRole("button", {name: "Следующая фотография"}).click();
-  await expect.poll(() => hero.evaluate(image => (image as HTMLImageElement).currentSrc)).toContain("/images/prepared/hero/2/");
 
   for (const path of ["/", "/catalog", "/catalog/armatura"]) {
     await page.goto(path);
@@ -41,17 +46,80 @@ test("carousel recovers a first frame that loaded before hydration", async ({pag
     await scriptsReady;
     await route.continue();
   });
-  const firstFrame = page.locator('section[aria-labelledby="home-hero-title"] img[data-active="true"]');
   try {
     await page.goto("/", {waitUntil: "commit"});
-    await firstFrame.evaluate(image => (image as HTMLImageElement).decode());
-    await expect(page.getByRole("button", {name: "Следующая фотография"})).toHaveCount(0);
+    await activeFrame(page).evaluate(image => (image as HTMLImageElement).decode());
+    await expect(page.locator(`${heroSelector} img`)).toHaveCount(1);
+    await expect(nextFrame(page)).toHaveCount(0);
   } finally {
     releaseScripts();
   }
-  await expect(page.getByRole("button", {name: "Следующая фотография"})).toBeVisible();
-  await expect.poll(() => firstFrame.evaluate(image => (image as HTMLImageElement).currentSrc)).toContain("/images/prepared/hero/1/");
+  await expect(nextFrame(page)).toBeVisible();
+  await expect.poll(() => activeSource(page)).toContain("/images/prepared/hero/1/");
 });
+
+test("carousel rotates through every frame, pauses on focus and supports keyboard navigation", async ({page}) => {
+  await page.emulateMedia({reducedMotion: "no-preference"});
+  await page.clock.install();
+  await page.goto("/");
+  for (const index of HERO_SLIDES.keys()) {
+    await expect.poll(() => activeSource(page)).toContain(`/images/prepared/hero/${index + 1}/`);
+  }
+  await nextFrame(page).focus();
+  await expect(nextFrame(page)).toBeFocused();
+  const paused = await activeSource(page);
+  await page.clock.fastForward(AUTO_ROTATE_MS * 2);
+  expect(await activeSource(page)).toBe(paused);
+  await nextFrame(page).press("Enter");
+  await expect.poll(() => activeSource(page)).toContain("/images/prepared/hero/1/");
+});
+
+test("reduced motion prepares the next frame without requesting the rest or advancing", async ({page}) => {
+  await page.clock.install();
+  const loaded = new Set<number>();
+  page.on("request", request => {
+    const frame = request.url().match(heroFrameRequest);
+    if (frame) loaded.add(Number(frame[1]));
+  });
+  await page.goto("/");
+  await expect(nextFrame(page)).toBeVisible();
+  await page.clock.fastForward(AUTO_ROTATE_MS * 2);
+  await expect.poll(() => activeSource(page)).toContain("/images/prepared/hero/1/");
+  expect([...loaded]).toEqual([1, 2]);
+  await nextFrame(page).click();
+  await expect.poll(() => activeSource(page)).toContain("/images/prepared/hero/2/");
+});
+
+for (const usable of [[], [2], [2, 4, 5]]) {
+  test(`carousel recovers with ${usable.length} decodable frames`, async ({page}) => {
+    const requests = new Set<number>();
+    await page.route(heroFrameRequest, async route => {
+      const index = Number(route.request().url().match(heroFrameRequest)![1]);
+      requests.add(index);
+      if (usable.includes(index)) await route.continue();
+      else await route.fulfill({contentType: "image/avif", body: "Undecodable photo"});
+    });
+    await page.goto("/");
+    const hero = page.locator(heroSelector);
+    await expect(hero.getByRole("heading", {level: 1})).toBeVisible();
+    await expect(hero.getByRole("link", {name: "Каталог", exact: true})).toBeVisible();
+    if (usable.length < 2) {
+      await expect.poll(() => requests.size).toBe(HERO_SLIDES.length);
+      await expect(hero.locator("img")).toHaveCount(usable.length);
+      await expect(nextFrame(page)).toHaveCount(0);
+      if (usable.length) await expect.poll(() => activeSource(page)).toContain("/images/prepared/hero/2/");
+      return;
+    }
+
+    await expect.poll(() => activeSource(page)).toContain("/images/prepared/hero/2/");
+    await nextFrame(page).click();
+    await expect.poll(() => activeSource(page)).toContain("/images/prepared/hero/4/");
+    await expect.poll(() => hero.locator("img").evaluateAll(images =>
+      images.filter(image => image instanceof HTMLImageElement && image.complete && image.naturalWidth > 0).length)).toBe(usable.length);
+    await nextFrame(page).click();
+    await expect.poll(() => activeSource(page)).toContain("/images/prepared/hero/5/");
+  });
+}
 
 test("thumbnail has no fractional gap; modal retains native zoom, keyboard pan and focus", async ({page}) => {
   await openProduct(page);

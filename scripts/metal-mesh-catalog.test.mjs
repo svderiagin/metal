@@ -81,25 +81,14 @@ test('mesh dimensions and exact totals use the transferred data', () => {
   const rollLine = createCartLines([{productId: chainLink.id, quantity: 2}])[0];
   assert.equal(rollLine.quantityUnit, 'рул.');
   assert.equal(rollLine.estimatedTotal, 2200);
+  const fractionalRoll = createCartLines([{productId: chainLink.id, quantity: 1.5}])[0];
+  assert.match(fractionalRoll.invalidReason, /целое количество рулонов/);
+  assert.equal(fractionalRoll.estimatedTotal, 0);
 
   const byMeter = mesh.find(product => product.id === 'mesh-21517');
-  const meterLine = createCartLines([{productId: byMeter.id, quantity: 3}])[0];
+  const meterLine = createCartLines([{productId: byMeter.id, quantity: 2.5}])[0];
   assert.equal(byMeter.unit, 'meter');
   assert.equal(meterLine.quantityUnit, 'м');
-  assert.equal(meterLine.estimatedTotal, 615);
-});
-
-test('metal mesh uses its dedicated catalog table and quantity rules', () => {
-  const catalogSource = fs.readFileSync('components/catalog/ProductVariantCatalog.tsx', 'utf8');
-  const tableSource = fs.readFileSync('components/catalog/MetalMeshVariantCatalog.tsx', 'utf8');
-  const cartSource = fs.readFileSync('lib/cart.ts', 'utf8');
-  const pricingSource = fs.readFileSync('lib/cartPricing.ts', 'utf8');
-
-  assert.match(catalogSource, /variants\.every\(isMetalMeshVariant\)/);
-  assert.match(tableSource, /<CatalogVariantTable>/);
-  for (const specification of ['Размер ячейки', 'Диаметр проволоки', 'Размер рулона / карты']) {
-    assert.ok(tableSource.includes(specification), `missing specification: ${specification}`);
-  }
-  assert.match(cartSource, /requiresWholeMetalMeshQuantity\(product\)/);
-  assert.match(pricingSource, /Укажите целое количество рулонов/);
+  assert.equal(meterLine.invalidReason, undefined);
+  assert.equal(meterLine.estimatedTotal, 512.5);
 });

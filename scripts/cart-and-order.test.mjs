@@ -61,13 +61,3 @@ test('unknown prices sort last in both price directions', () => {
     assert.deepEqual(prices.slice(0,2), descending ? [200,100] : [100,200]);
   }
 });
-
-test('unconfigured contact and quote routes fail honestly in local development', async () => {
-  for (const endpoint of ['contact','quote']) {
-    const {POST} = await import(`../app/api/${endpoint}/route.ts`);
-    const response = await POST(new Request(`http://localhost/api/${endpoint}`, {method:'POST', headers:{'content-type':'application/json'},
-      body:JSON.stringify({name:'Тест', email:'audit@example.invalid', phone:'+79000000000', message:'Локальная проверка', consent:true})}));
-    assert.equal(response.status, 503);
-    assert.equal((await response.json()).ok, false);
-  }
-});

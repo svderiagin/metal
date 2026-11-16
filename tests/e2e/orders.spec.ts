@@ -1,6 +1,5 @@
 import {test, expect, openProduct, samples, visibleProduct, seedCart, fillCheckout} from "../browser";
 import {PDFDocument} from "pdf-lib";
-import path from "node:path";
 
 test("order drafts and totals survive table and card breakpoints before adding to cart", async ({page}) => {
   const product = samples.shveller;
@@ -72,7 +71,7 @@ test("cart adds a product, updates its quantity and survives reload", async ({pa
   await expect(page.getByRole("heading", {name: "Корзина пуста", exact: true})).toBeVisible();
 });
 
-test("galvanized sheet limits quantity while typing and pasting, before blur", async ({page}) => {
+test("galvanized sheet limits quantity while typing or replacing the field, before blur", async ({page}) => {
   const product = samples.galvanizedSheet;
   await openProduct(page, product);
   const row = visibleProduct(page, product.id);
@@ -157,19 +156,8 @@ test("VGP keeps separate order fields, rounds to whole pipes and recalculates th
   expect(measurement.weightTons).toBeCloseTo(0.02304);
 });
 
-test("checkout refusal preserves the entered data and the real cart", async ({page}) => {
-  await seedCart(page);
-  await page.goto("/checkout");
-  await fillCheckout(page);
-  await page.getByRole("button", {name: /^Создать заказ на/}).click();
-  await expect(page.locator("form").getByRole("alert")).toContainText("Тестовый отказ");
-  await expect(page.getByLabel("ФИО *", {exact: true})).toHaveValue("Анна Тестовая");
-  await page.goto("/cart");
-  await expect(page.locator(`[data-cart-row="${samples.shveller.id}"]`).getByRole("textbox", {name: /^Длина /})).toHaveValue("3");
-});
-
 for (const storageBlocked of [false, true]) {
-  test(`accepted invoice clears cart and displays the receipt${storageBlocked ? " when session storage is blocked" : ""}`, async ({page}, testInfo) => {
+  test(`accepted invoice clears cart and displays the receipt${storageBlocked ? " when session storage is blocked" : ""}`, async ({page, isMobile}) => {
     await seedCart(page);
     if (storageBlocked) await page.addInitScript(() => Object.defineProperty(window, "sessionStorage", {get() {throw new Error("blocked");}}));
     let submissions = 0;
@@ -213,12 +201,10 @@ for (const storageBlocked of [false, true]) {
     expect((await downloading).suggestedFilename()).toBe("invoice-MS-A1B2C3D4E5F6.pdf");
     await expect(downloadError).toHaveCount(0);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-    await page.screenshot({path: path.join("output/invoice-review-2026-11-09", `${testInfo.project.name}-${storageBlocked ? "sent" : "failed"}.png`), fullPage: true});
-    if (testInfo.project.name.startsWith("mobile") && !storageBlocked) {
+    if (isMobile && !storageBlocked) {
       await page.setViewportSize({width: 320, height: 844});
       await expect(button).toBeVisible();
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-      await page.screenshot({path: path.join("output/invoice-review-2026-11-09", `${testInfo.project.name}-320.png`), fullPage: true});
     }
   });
 }

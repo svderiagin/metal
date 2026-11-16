@@ -79,6 +79,7 @@ function MeasuredVariantCatalog({variants, kind = "rebar"}: {
   const Table = kind === "rebar" ? RebarVariantTable : CatalogVariantTable;
   const [query, setQuery] = useState("");
   const deferredQuery = useDeferredValue(query);
+  const resultsPending = query !== deferredQuery;
   const index = useMemo(() => createCatalogSearchIndex(variants), [variants]);
   const hits = useMemo(() => index.search(deferredQuery).hits, [index, deferredQuery]);
   const [diameter, setDiameter] = useState("");
@@ -88,7 +89,7 @@ function MeasuredVariantCatalog({variants, kind = "rebar"}: {
   const {minimumPrice, maximumPrice} = priceRange;
   const [availability, setAvailability] = useState("");
   const [sort, setSort] = useState<SortMode>("diameter-asc");
-  useLinkedVariant(variants, variant => {resetFilters(); setQuery(variant.name);});
+  useLinkedVariant(variants, variant => {resetFilters(); setQuery(variant.name);}, resultsPending);
 
   const diameters = useMemo(
     () => [...new Set(variants.map(variant => isProfile ? profilePipeSize(variant) : isVgp ? vgpSize(variant) : isBeam ? beamProfile(variant) : String(variant.diameterMm ?? "")))].sort((a, b) => a.localeCompare(b, "ru", {numeric: true})),
@@ -146,7 +147,7 @@ function MeasuredVariantCatalog({variants, kind = "rebar"}: {
         activeFilters={[diameter, form, length, availability, minimumPrice, maximumPrice].filter(Boolean).length}
         onQueryChange={value => {setQuery(value);setSort("relevance");}} onReset={resetFilters}
         extraControls={<PriceRangeFeedback message={priceRange.message}/>}
-        resultCount={{visible: results.length, total: variants.length, pending: query !== deferredQuery}}
+        resultCount={{visible: results.length, total: variants.length, pending: resultsPending}}
         sorting={
           <label className="text-sm font-semibold">
             Сортировка

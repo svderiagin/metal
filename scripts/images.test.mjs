@@ -15,10 +15,12 @@ const {isPublicProduct}=readProjectData('data/catalog-visibility.ts');
 const imported=read('data/imported-catalog.json');
 const {productVariants,existingVariants}=readProjectData('data/products/index.ts');
 const retainedProductVariants=productVariants.filter(product=>!product.id.startsWith('rozmet-'));
-const original=[
+// The legacy mapper reads editable products and the supplier import before public visibility filtering.
+const mapperProducts=[
  ...existingVariants.filter(p=>!imported.matchedIds.includes(p.id)),
  ...imported.products,
-].filter(isPublicProduct).map(normalizeRebarVariant).map(normalizeBeamVariant).map(normalizePipeWeight);
+];
+const original=mapperProducts.filter(isPublicProduct).map(normalizeRebarVariant).map(normalizeBeamVariant).map(normalizePipeWeight);
 const digest=b=>crypto.createHash('sha256').update(b).digest('hex');
 
 test('image overlay preserves every product field other than image references',()=>{
@@ -36,7 +38,8 @@ test('all public catalog images exist and decode on case-sensitive filesystems',
   assert(url.startsWith('/images/'),url);assert(fs.existsSync('public'+url),url);
   let directory='public';
   for(const part of url.slice(1).split('/')){assert(fs.readdirSync(directory).includes(part),'Exact path case: '+url);directory+='/'+part;}
-  const metadata=await sharp('public'+url).metadata();assert(metadata.width>1&&metadata.height>1,url);
+  const {info}=await sharp('public'+url).raw().toBuffer({resolveWithObject:true});
+  assert(info.width>1&&info.height>1,url);
  }
 });
 
@@ -91,14 +94,34 @@ test('incompatible forms keep fallbacks instead of inheriting generic category i
  }
  if(report)assert(!report.records.some(r=>r.sourceImage.endsWith('0b3ca4e2-f21f-4255-857a-cc70976cbacf.jpeg')),'ambiguous strip photo must be rejected');
 });
-test('report covers every product and mapped family, with provenance and confidence',{skip:evidenceSkip},()=>{
- const assigned=report.records.filter(r=>r.targetKind==='product');
- assert.equal(assigned.length,Object.keys(mapping.products).length);
- assert.equal(assigned.length+report.unmatched.length,productVariants.length);
- assert.equal(new Set([...assigned.map(p=>p.targetId),...report.unmatched.map(p=>p.id)]).size,productVariants.length);
- for(const r of report.records){assert(r.sourcePages.length);assert(r.evidence.length);assert(['high','medium'].includes(r.confidence));assert(fs.existsSync('brokinvest.ru/'+r.sourcePages[0]));}
- for(const [id,url] of Object.entries(mapping.types)){
-  const members=productVariants.filter(p=>p.productTypeId===id);assert(members.length);assert(members.every(p=>mapping.products[p.id]));
-  assert(assigned.some(r=>r.targetImage===url));
- }
+test('supplier report covers the mapper input and justifies each family image', {skip:evidenceSkip}, () => {
+  const assigned = report.records.filter(record => record.targetKind === 'product');
+  const assignmentsByProduct = new Map(assigned.map(record => [record.targetId, record]));
+  const ids = [...assigned.map(record => record.targetId), ...report.unmatched.map(record => record.id)];
+  assert.deepEqual(ids.sort(), mapperProducts.map(product => product.id).sort());
+  assert.equal(report.summary.totalProducts, mapperProducts.length);
+  assert.equal(report.summary.productsUpdated, assigned.length);
+
+  for (const record of report.records) {
+    assert.ok(record.sourcePages.length, record.targetId);
+    assert.ok(record.evidence.length, record.targetId);
+    assert.ok(['high', 'medium'].includes(record.confidence), record.targetId);
+    for (const sourcePage of record.sourcePages) {
+      assert.ok(fs.existsSync(`brokinvest.ru/${sourcePage}`), sourcePage);
+    }
+  }
+
+  const reportedFamilies = report.records.filter(record => record.targetKind === 'productType');
+  const familiesByType = new Map(imported.families.map(family => [`type-${family.id}`, family]));
+  assert.equal(report.summary.productTypesUpdated, reportedFamilies.length);
+  assert.equal(new Set(reportedFamilies.map(record => record.targetId)).size, reportedFamilies.length);
+  for (const record of reportedFamilies) {
+    const family = familiesByType.get(record.targetId);
+    assert.ok(family, record.targetId);
+    const members = mapperProducts.filter(product => product.subcategoryId === family.id);
+    assert.ok(members.length, record.targetId);
+    const matches = members.map(product => assignmentsByProduct.get(product.id));
+    assert.ok(matches.every(match => match && match.role === record.role), record.targetId);
+    assert.ok(matches.some(match => match.targetImage === record.targetImage && match.sourceImage === record.sourceImage), record.targetId);
+  }
 });

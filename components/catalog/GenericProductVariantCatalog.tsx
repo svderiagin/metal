@@ -29,9 +29,10 @@ export function GenericProductVariantCatalog({
   const {minimumPrice, maximumPrice} = priceRange;
   const [query, setQuery] = useState("");
   const deferredQuery = useDeferredValue(query);
+  const resultsPending = query !== deferredQuery;
   const index = useMemo(() => createCatalogSearchIndex(variants), [variants]);
   const search = useMemo(() => index.search(deferredQuery), [index, deferredQuery]);
-  useLinkedVariant(variants, variant => {reset(); setQuery(variant.name);});
+  useLinkedVariant(variants, variant => {reset(); setQuery(variant.name);}, resultsPending);
 
   const filterOptions = useMemo(
     () => new Map(
@@ -68,7 +69,7 @@ export function GenericProductVariantCatalog({
       <FilterPanel className="lg:col-start-2" query={query}
         activeFilters={Object.values(filters).filter(Boolean).length + Number(stockOnly) + [minimumPrice, maximumPrice].filter(Boolean).length}
         onQueryChange={value => {setQuery(value);setSort("relevance");setPage(1);}} onReset={reset}
-        resultCount={{visible: results.length, total: variants.length, pending: query !== deferredQuery}}
+        resultCount={{visible: results.length, total: variants.length, pending: resultsPending}}
         sorting={
           <label className="text-sm font-semibold">
             Сортировка

@@ -8,35 +8,53 @@ import {createCartLines, normalizeCartItems} from "../../lib/cart";
 import {revalidateCartPrice} from "../../lib/cartPricing";
 import {applyCatalogOverrides} from "../../lib/catalogOverrides";
 import {storefrontDescription} from "../../lib/catalogContent";
-import type {ProductVariant} from "../../types/product";
 
 const products = getAllProductVariants();
 const channels = products.filter(product => product.categoryId === "rozmet-cat-shveller");
 const options = {filters: {}, filterKeys: [], stockOnly: false, minimumPrice: "", maximumPrice: "", sort: "name" as const};
 
 test("channel filters distinguish section numbers and supplier lengths", () => {
+  const channel = channels.find(p => p.id === "rozmet-2235")!;
+  const onOrder = {...channel, id: "channel-5-6m", inStock: false,
+    availability: "ON_ORDER" as const, specifications: [{name: "Длина", value: "6 м"}]};
+  const differentSection = {...onOrder, id: "channel-10-6m", name: "Швеллер № 10"};
   assert.deepEqual(getVariantFilterKeys("shveller"), ["size", "length"]);
-  assert.equal(getVariantAttribute(channels[0], "size"), "5");
-  assert.equal(getVariantAttribute(channels[0], "length"), "11,7 м");
+  assert.equal(getVariantAttribute(channel, "size"), "5");
+  assert.equal(getVariantAttribute(channel, "length"), "11,7 м");
   assert.equal(variantFilterLabel(channels, "size"), "Номер профиля");
   assert.equal(variantFilterLabel(channels, "length"), "Длина по каталогу");
   assert.equal(uniqueAttributeValues(channels, "size").length, 14);
-  assert.deepEqual(selectVariants(channels, {...options, filterKeys: ["size"], filters: {size: "5"}}).map(p => p.id), ["rozmet-2235"]);
-  assert.deepEqual(selectVariants(channels, {...options, stockOnly: true}).every(p => p.inStock), true);
+  const filter = {...options, filterKeys: getVariantFilterKeys("shveller"), filters: {size: "5", length: "6 м"}};
+  const variants = [onOrder, differentSection, ...channels];
+  assert.deepEqual(selectVariants(variants, filter), [onOrder]);
+  assert.deepEqual(selectVariants(variants, {...filter, stockOnly: true}), []);
+  assert.deepEqual(selectVariants([onOrder, channel], {...options, sort: "availability"}), [channel, onOrder]);
 });
 
-test("dimensions sort by every side; unknown and quote prices stay last", () => {
+test("dimensions sort by every side", () => {
   const first = {...channels[0], attributes: [{key: "size" as const, label: "Размер", value: "100×30"}], categoryId: "test"};
   const second = {...first, id: "second", attributes: [{key: "size" as const, label: "Размер", value: "100×20"}]};
   assert.equal(selectVariants([first, second], {...options, sort: "size"})[0].id, "second");
-  const prices = [{...first, price: null}, {...first, id: "cheap", price: 10}, {...first, id: "expensive", price: 20}];
-  for (const sort of ["price-asc", "price-desc"] as const) assert.equal(selectVariants(prices, {...options, sort}).at(-1)?.price, null);
-  assert.equal(selectVariants(prices, {...options, minimumPrice: "10,5", maximumPrice: "21"})[0].id, "expensive");
-  assert.equal(selectVariants(prices, {...options, minimumPrice: "30", maximumPrice: "20"}).length, 0);
-  assert.equal(selectVariants(prices, {...options, minimumPrice: "broken"}).length, 3);
-  assert.equal(selectVariants([{...first, quoteOnly: true}], {...options, maximumPrice: "1000"}).length, 0);
   assert.equal(referenceProfileName("Швеллер № 6.5", "shveller"), "№ 6,5");
   assert.equal(referenceProfileName("Уголок стальной 25×25×3", "ugolok"), "25×25×3");
+});
+
+test("price sorting and filtering treat quote and unconfirmed demo offers as unknown", () => {
+  const first = channels[0];
+  const prices = [
+    {...first, id: "unknown", price: null},
+    {...first, id: "quote", price: 15, quoteOnly: true},
+    {...first, id: "demo", price: 15, demo: true, priceConfirmed: false},
+    {...first, id: "expensive", price: 20},
+    {...first, id: "cheap", price: 10},
+  ];
+  assert.deepEqual(selectVariants(prices, {...options, sort: "price-asc"}).map(p => p.id),
+    ["cheap", "expensive", "unknown", "quote", "demo"]);
+  assert.deepEqual(selectVariants(prices, {...options, sort: "price-desc"}).map(p => p.id),
+    ["expensive", "cheap", "unknown", "quote", "demo"]);
+  assert.deepEqual(selectVariants(prices, {...options, minimumPrice: "10,5", maximumPrice: "20"}).map(p => p.id), ["expensive"]);
+  assert.deepEqual(selectVariants(prices, {...options, minimumPrice: "30", maximumPrice: "20"}), []);
+  assert.deepEqual(selectVariants(prices, {...options, minimumPrice: "broken", sort: "relevance"}), prices);
 });
 
 test("image/specification overrides require matching category, identity and source URL", () => {
@@ -80,14 +98,4 @@ test("measured cart mutations ignore cached money and reprice the edited quantit
   assert.ok(revalidateCartPrice({...rebar, price: NaN}, {quantity: 1}).invalidReason);
   const unknown = createCartLines(normalizeCartItems([{productId: "removed-product", quantity: 2}]))[0];
   assert.ok(unknown.invalidReason);
-});
-
-test("profile pipes preserve selected length and reject fractional pieces", () => {
-  const original = products.find(p => p.categoryId === "cat-trp" && p.lengthMeters === 6 && p.profileWidthMm === 40)!;
-  const pipe: ProductVariant = {...original, price: 157, priceConfirmed: true, quoteOnly: false, priceQualifier: "exact", unit: "meter", priceUnit: "за метр"};
-  const items = addCartItem([], pipe, 12, undefined, {pieces: 2, lengthMeters: 6});
-  assert.equal(items[0].pieceOrder?.pieces, 2);
-  assert.equal(updateCartItem(items, pipe, 15), items);
-  assert.equal(updateCartItem(items, pipe, 24)[0].pieceOrder?.pieces, 4);
-  assert.equal(addCartItem(items, pipe, 12, undefined, {pieces: 2, lengthMeters: 12}), items);
 });

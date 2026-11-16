@@ -322,6 +322,7 @@ test("fixed-length profile pipes reject alternate lengths and fractional pieces 
   }
   assert.equal(updateCartItem(items, product, 15), items);
   assert.deepEqual(updateCartItem(items, product, 24)[0].pieceOrder, {pieces: 4, lengthMeters: 6});
+  assert.equal(addCartItem(items, product, 24, undefined, {pieces: 2, lengthMeters: 12}), items);
   assert.equal(original.quoteOnly, true);
   assert.equal(original.price, null);
 });

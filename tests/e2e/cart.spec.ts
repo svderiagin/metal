@@ -460,10 +460,11 @@ test("whole quantities round up, zero cannot delete, and the explicit removal ac
   await openCart(page, [{productId: item.id, quantity: 3}]);
   const row = cartRow(page, item.id), input = row.getByRole("textbox", {name: /^Количество /});
   await expect(input).toHaveAttribute("inputmode", "numeric");
-  await input.fill("2,3");
+  await input.fill("3,2");
   expect((await storedItem(page, item.id))!.quantity).toBe(3);
   await input.press("Enter");
-  await expectNumber(input, 3);
+  await expectNumber(input, 4);
+  await expect.poll(async () => (await storedItem(page, item.id))!.quantity).toBe(4);
   await input.fill("0");
   await input.press("Enter");
   await expect.poll(async () => (await storedItem(page, item.id))!.quantity).toBe(1);

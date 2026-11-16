@@ -1,20 +1,41 @@
-import test, {afterEach, mock} from "node:test";
+import test, {after, before} from "node:test";
 import assert from "node:assert/strict";
 import {readJsonBody} from "../../lib/server/request";
-import {parseCreateOrderInput, parseContactRequest, parseQuoteRequest} from "../../lib/server/validation";
-import {createTrustedOrder, orderRepository} from "../../lib/server/orders";
+import {parseCreateOrderInput} from "../../lib/server/validation";
 import {notificationService} from "../../lib/server/notifications";
+import {smtpMailer} from "../../lib/server/smtp";
 import {paymentProvider, hasValidOrderAmount} from "../../lib/server/payments";
 import {POST as contactPost} from "../../app/api/contact/route";
 import {POST as quotePost} from "../../app/api/quote/route";
-import {POST as orderPost} from "../../app/api/orders/route";
-import {POST as paymentPost} from "../../app/api/payments/create/route";
-import {POST as webhookPost} from "../../app/api/payments/webhook/route";
-import {GET as invoiceGet} from "../../app/api/orders/[reference]/invoice/route";
 import {invoiceService} from "../../lib/server/invoices";
 
-afterEach(() => mock.restoreAll());
+let orders: typeof import("../../lib/server/orders");
+let orderPost: typeof import("../../app/api/orders/route").POST;
+let paymentPost: typeof import("../../app/api/payments/create/route").POST;
+let webhookPost: typeof import("../../app/api/payments/webhook/route").POST;
+let invoiceGet: typeof import("../../app/api/orders/[reference]/invoice/route").GET;
+const testEnvironment = {NODE_ENV: "test", ORDER_STORAGE_DIR: "", NOTIFICATION_PROVIDER: "", INVOICE_MODE: "preview", INVOICE_PAYMENT_DAYS: "3"};
+const previousEnvironment = Object.keys(testEnvironment).map(key => [key, process.env[key]] as const);
+
+before(async () => {
+  // The order module chooses its repository at import time. Tests use its in-memory repository.
+  Object.assign(process.env, testEnvironment);
+  orders = await import("../../lib/server/orders");
+  orderPost = (await import("../../app/api/orders/route")).POST;
+  paymentPost = (await import("../../app/api/payments/create/route")).POST;
+  webhookPost = (await import("../../app/api/payments/webhook/route")).POST;
+  invoiceGet = (await import("../../app/api/orders/[reference]/invoice/route")).GET;
+});
+
+after(() => {
+  for (const [key, value] of previousEnvironment) {
+    if (value === undefined) delete process.env[key];
+    else process.env[key] = value;
+  }
+});
+
 const contact = {name: "Анна", email: "audit@example.invalid", phone: "+79000000000", message: "Тестовая заявка", consent: true};
+const quote = {...contact, name: " Анна-Мария ", email: "AUDIT@example.invalid", message: "Арматура рифлёная А500С\nДлина: 100 м"};
 const order = () => ({consent: true, items: [{productId: "rozmet-2235", quantity: 2}],
   customer: {type: "INDIVIDUAL" as const, fullName: "Анна", email: "audit@example.invalid", phone: "+79000000000"},
   delivery: {address: "Тестовый адрес"}, paymentMethod: "INVOICE" as "INVOICE" | "CARD"});
@@ -42,34 +63,66 @@ test("order schema rejects missing consent, duplicate IDs, invalid contact and b
     {...order(), items: [{productId: "rozmet-2235", quantity: 1, measurement: {inputMode: "wrong", meters: 1, weightTons: 1}}]}]) {
     assert.equal(parseCreateOrderInput(value), null);
   }
-  assert.equal(parseContactRequest({...contact, phone: "letters1234567890"}), null);
-  assert.equal(parseQuoteRequest({...contact, consent: false}), null);
-  assert.equal(createTrustedOrder({...order(), consent: false}), null);
+  assert.equal(orders.createTrustedOrder({...order(), consent: false}), null);
   assert.equal(hasValidOrderAmount({items: [], totalAmount: 0} as never), false);
 });
 
-test("contact and quote routes reject invalid input, honor honeypots and fail honestly without providers", async () => {
+test("contact and quote return 503 without a notification provider", async ({mock}) => {
+  const send = mock.method(smtpMailer, "send", async () => {});
   for (const post of [contactPost, quotePost]) {
-    assert.equal((await post(request({...contact, consent: false}))).status, 400);
-    assert.equal((await post(request({...contact, website: "spam.invalid"}))).status, 200);
-    assert.equal((await post(request(contact))).status, 503);
-    assert.equal((await post(new Request("http://localhost", {method: "POST", body: "not-json"}))).status, 400);
+    const response = await post(request(contact));
+    assert.equal(response.status, 503);
+    assert.equal((await response.json()).ok, false);
   }
-  const sent = mock.method(notificationService, "sendContactRequest", async () => {});
-  assert.equal((await contactPost(request(contact))).status, 200);
-  assert.equal(sent.mock.calls.length, 1);
-  mock.method(notificationService, "sendQuoteRequest", async () => {});
-  assert.equal((await quotePost(request(contact))).status, 200);
+  assert.equal(send.mock.calls.length, 0);
 });
 
-test("order endpoint saves a PDF using current prices; mail failure preserves the accepted order and download", async () => {
+test("contact validates input and ignores the honeypot before notifying", async ({mock}) => {
+  const sent = mock.method(notificationService, "sendContactRequest", async () => {});
+  assert.equal((await contactPost(request({...contact, consent: false}))).status, 400);
+  assert.equal((await contactPost(request({...contact, phone: "letters1234567890"}))).status, 400);
+  assert.equal((await contactPost(new Request("http://localhost", {method: "POST", body: "not-json"}))).status, 400);
+  assert.equal((await contactPost(request({...contact, website: "spam.invalid"}))).status, 200);
+  assert.equal(sent.mock.calls.length, 0);
+
+  const accepted = await contactPost(request(contact));
+  assert.equal(accepted.status, 200);
+  assert.deepEqual(await accepted.json(), {ok: true});
+  assert.equal(sent.mock.calls.length, 1);
+});
+
+test("quote reports invalid fields, ignores the honeypot and sends the normalized message", async ({mock}) => {
+  const sent = mock.method(notificationService, "sendQuoteRequest", async () => {});
+  const rejected = await quotePost(request({...quote, phone: "+7911", message: "а".repeat(2001), consent: false}));
+  assert.equal(rejected.status, 400);
+  const errors = await rejected.json();
+  assert.equal(errors.ok, false);
+  assert.equal(errors.fieldErrors.phone, "Неверный формат");
+  assert.match(errors.fieldErrors.message, /2000/);
+  assert.ok(errors.fieldErrors.consent);
+  assert.equal((await quotePost(new Request("http://localhost", {method: "POST", body: "not-json"}))).status, 400);
+  assert.equal((await quotePost(request({...quote, website: "spam.invalid"}))).status, 200);
+  assert.equal(sent.mock.calls.length, 0);
+
+  const accepted = await quotePost(request(quote));
+  assert.equal(accepted.status, 200);
+  assert.deepEqual(await accepted.json(), {ok: true});
+  assert.equal(sent.mock.calls.length, 1);
+  const payload = sent.mock.calls[0].arguments[0];
+  assert.ok(payload);
+  assert.equal(payload.name, "Анна-Мария");
+  assert.equal(payload.email, "audit@example.invalid");
+  assert.equal(payload.message, quote.message);
+});
+
+test("order endpoint saves a PDF using current prices; mail failure preserves the accepted order and download", async ({mock}) => {
   assert.equal((await orderPost(request({...order(), consent: false}))).status, 400);
   assert.equal((await orderPost(request({...order(), items: [{productId: "unknown", quantity: 1}]}))).status, 400);
   const failed = await orderPost(request(order()));
   assert.equal(failed.status, 201);
   const failedResult = await failed.json();
   assert.equal(failedResult.order.invoice.emailStatus, "FAILED");
-  const saved = await orderRepository.findByReference(failedResult.order.reference);
+  const saved = await orders.orderRepository.findByReference(failedResult.order.reference);
   assert.equal(saved?.invoice?.emailStatus, "FAILED");
   assert.ok(saved?.invoice?.pdfBase64);
   const context = {params: Promise.resolve({reference: failedResult.order.reference})};
@@ -99,7 +152,8 @@ test("order endpoint saves a PDF using current prices; mail failure preserves th
   assert.equal(sent.mock.calls.length, 1);
 });
 
-test("PDF or storage failure rejects before sending mail; saved orders survive a mail-status write failure", async () => {
+test("PDF or storage failure rejects before sending mail; saved orders survive a mail-status write failure", async ({mock}) => {
+  const {orderRepository} = orders;
   const sent = mock.method(notificationService, "sendOrderNotification", async () => {});
   const brokenPdf = mock.method(invoiceService, "create", async () => {throw new Error("PDF failure");});
   assert.equal((await orderPost(request(order()))).status, 503);
@@ -110,11 +164,17 @@ test("PDF or storage failure rejects before sending mail; saved orders survive a
   assert.equal(sent.mock.calls.length, 0);
   brokenStorage.mock.restore();
   mock.method(orderRepository, "updateInvoiceEmailStatus", async () => {throw new Error("Disk full");});
-  assert.equal((await orderPost(request(order()))).status, 201);
+  const accepted = await orderPost(request(order()));
+  assert.equal(accepted.status, 201);
   assert.equal(sent.mock.calls.length, 1);
+  const {order: result} = await accepted.json();
+  const saved = await orderRepository.findByReference(result.reference);
+  assert.ok(saved?.invoice?.pdfBase64);
+  assert.equal(saved.invoice.emailStatus, "PENDING");
 });
 
-test("payment and webhook delegate to providers; duplicate verified events update the order once", async () => {
+test("payment and webhook delegate to providers; duplicate verified events update the order once", async ({mock}) => {
+  const {createTrustedOrder, orderRepository} = orders;
   assert.equal((await paymentPost(request({orderReference: "broken"}))).status, 400);
   assert.equal((await paymentPost(request({orderReference: "MS-000000000000"}))).status, 404);
   const accepted = createTrustedOrder({...order(), paymentMethod: "CARD"})!;

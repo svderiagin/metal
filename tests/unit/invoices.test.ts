@@ -1,11 +1,10 @@
-import test, {afterEach, mock} from "node:test";
+import test, {after, before} from "node:test";
 import assert from "node:assert/strict";
 import {mkdtemp, rm, stat} from "node:fs/promises";
 import {tmpdir} from "node:os";
 import path from "node:path";
-import {PDFDocument} from "pdf-lib";
+import {PDFArray, PDFDict, PDFDocument, PDFName, PDFRawStream, PDFStream, decodePDFRawStream} from "pdf-lib";
 import nodemailer from "nodemailer";
-import {createTrustedOrder} from "../../lib/server/orders";
 import {FileOrderRepository} from "../../lib/server/fileOrderRepository";
 import {readInvoiceConfig, isValidBankAccount} from "../../lib/server/invoiceConfig";
 import {renderInvoicePdf, invoiceLine} from "../../lib/server/invoicePdf";
@@ -14,13 +13,26 @@ import {invoiceService} from "../../lib/server/invoices";
 import {notificationService} from "../../lib/server/notifications";
 import {smtpMailer, readSmtpConfig} from "../../lib/server/smtp";
 
-afterEach(() => mock.restoreAll());
+let createTrustedOrder: typeof import("../../lib/server/orders").createTrustedOrder;
+const testEnvironment = {NODE_ENV: "test", ORDER_STORAGE_DIR: "", INVOICE_MODE: "preview", INVOICE_PAYMENT_DAYS: "3"};
+const previousEnvironment = Object.keys(testEnvironment).map(key => [key, process.env[key]] as const);
+before(async () => {
+  Object.assign(process.env, testEnvironment);
+  ({createTrustedOrder} = await import("../../lib/server/orders"));
+});
+after(() => {
+  for (const [key, value] of previousEnvironment) {
+    if (value === undefined) delete process.env[key];
+    else process.env[key] = value;
+  }
+});
+
 const sample = () => createTrustedOrder({consent: true,
   items: [{productId: "local-258", quantity: 18, measurement: {inputMode: "meter", meters: 18, weightTons: .02304}},
     {productId: "rozmet-2199", quantity: 3}],
   customer: {type: "INDIVIDUAL", fullName: "Анна Тестовая", email: "audit@example.invalid", phone: "+79000000000"},
   delivery: {address: "Тестовый адрес"}, paymentMethod: "INVOICE"})!;
-const smtp = {NOTIFICATION_PROVIDER: "smtp", SMTP_HOST: "smtp.example.invalid", SMTP_USER: "test", SMTP_PASSWORD: "test",
+const smtp = {NOTIFICATION_PROVIDER: "smtp", SMTP_HOST: "smtp.example.invalid", SMTP_PORT: "465", SMTP_USER: "test", SMTP_PASSWORD: "test",
   SMTP_FROM: "sales@example.invalid", NOTIFICATION_RECIPIENT_EMAIL: "manager@example.invalid"};
 
 test("preview marks unconfirmed bank and VAT; live mode rejects missing, short or invalid bank and tax configuration", () => {
@@ -63,7 +75,20 @@ test("PDF embeds Cyrillic fonts, fits a small order on A4 and paginates 100 long
   const parsed = await PDFDocument.load(pdf);
   assert.equal(parsed.getPageCount(), 1);
   assert.match(parsed.getTitle()!, new RegExp(order.reference));
-  assert.equal(Math.round(parsed.getPage(0).getWidth()), 595);
+  const page = parsed.getPage(0);
+  assert.deepEqual({width: Math.round(page.getWidth()), height: Math.round(page.getHeight())}, {width: 595, height: 842});
+  const fonts = page.node.Resources()?.lookup(PDFName.of("Font"), PDFDict);
+  assert.ok(fonts && fonts.keys().length > 0);
+  for (const key of fonts.keys()) {
+    const font = fonts.lookup(key, PDFDict);
+    const descendant = font.lookup(PDFName.of("DescendantFonts"), PDFArray).lookup(0, PDFDict);
+    const descriptor = descendant.lookup(PDFName.of("FontDescriptor"), PDFDict);
+    assert.ok(descriptor.lookupMaybe(PDFName.of("FontFile2"), PDFStream), "TrueType font must be embedded");
+    const unicode = font.lookup(PDFName.of("ToUnicode"), PDFStream);
+    assert.ok(unicode instanceof PDFRawStream);
+    assert.match(new TextDecoder().decode(decodePDFRawStream(unicode).decode()), /<[a-f0-9]+>\s*<04[a-f0-9]{2}>/i,
+      "The font must map used Cyrillic glyphs to Unicode");
+  }
   const live = await PDFDocument.load(await renderInvoicePdf(order, {...readInvoiceConfig({}), isPreview: false, vat: 22}));
   assert.equal(live.getPageCount(), 1);
   order.items = Array.from({length: 100}, (_, index) => ({...order.items[index % 2],
@@ -95,7 +120,7 @@ test("private file repository survives re-opening and keeps invoice bytes across
   } finally {await rm(directory, {recursive: true, force: true});}
 });
 
-test("SMTP sends the exact saved PDF to the customer with a manager copy and marks rejected recipients as failure", async () => {
+test("SMTP sends the exact saved PDF to the customer with a manager copy and marks rejected recipients as failure", async ({mock}) => {
   const previous = {...process.env};
   Object.assign(process.env, smtp);
   try {
@@ -108,7 +133,7 @@ test("SMTP sends the exact saved PDF to the customer with a manager copy and mar
     assert.equal(message.bcc, smtp.NOTIFICATION_RECIPIENT_EMAIL);
     assert.match(message.subject!, /Образец счёта/);
     assert.deepEqual(message.attachments?.[0].content, Buffer.from(order.invoice.pdfBase64, "base64"));
-    mock.restoreAll();
+    send.mock.restore();
     let options: unknown;
     let accept = true;
     mock.method(nodemailer, "createTransport", (config: unknown) => {

@@ -1,4 +1,4 @@
-import {test as base, expect, type Page} from "@playwright/test";
+import {test as base, expect, type Locator, type Page} from "@playwright/test";
 import {getAllProductTypes, getAllProductVariants} from "../lib/catalog";
 import {catalogProductPath} from "../lib/catalogLinks";
 
@@ -64,16 +64,22 @@ export async function fillCheckout(page: Page) {
   await page.getByRole("checkbox").check();
 }
 
-export async function settleImages(page: Page) {
-  await page.evaluate(async () => {
-    await document.fonts.ready;
-    const visible = [...document.images].filter(image => {
-      const rect = image.getBoundingClientRect();
-      return rect.width > 0 && rect.height > 0 && rect.bottom > 0 && rect.top < innerHeight;
-    });
-    await Promise.all(visible.map(image => image.decode()));
-  });
+export async function settleImages(page: Page, area: Locator = page.locator("body")) {
   await page.mouse.move(0, 0);
+  await expect.poll(() => area.evaluate(element => {
+    const visible = [...element.querySelectorAll("img")].filter(image => {
+      const rect = image.getBoundingClientRect();
+      return image.checkVisibility({opacityProperty: true, visibilityProperty: true})
+        && rect.width > 0 && rect.height > 0 && rect.bottom > 0 && rect.top < innerHeight
+        && rect.right > 0 && rect.left < innerWidth;
+    });
+    // Request only the images included in the snapshot, even in a lazy-loaded table.
+    for (const image of visible) if (image.loading === "lazy") image.loading = "eager";
+    const pending = visible.filter(image => !image.complete || !image.naturalWidth)
+      .map(image => image.currentSrc || image.src);
+    if (document.fonts.status !== "loaded") pending.push("web fonts");
+    return pending;
+  }), {message: "visible screenshot assets are loaded"}).toEqual([]);
 }
 
 export async function openFilters(page: Page) {

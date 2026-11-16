@@ -26,13 +26,11 @@ build command `npm run build`, run command `npm run start` и Node.js 22.x из 
 Локальная production-проверка:
 
 ```sh
-npm test
+npm run test:unit
 npm run lint
-npm run build
-npm run start -- --hostname 127.0.0.1 --port 3100
-node scripts/check-local-browser.mjs
+npm run test:build
+npm run test:e2e
 ```
 
-Последняя команда требует Chrome с CDP на `127.0.0.1:9224`. Другие адреса задаются через `AUDIT_URL` и `AUDIT_CDP`.
-Проверки открывают отдельную вкладку, подменяют отправку форм в браузере и сохраняют результаты в `.tmp/local-audit/`.
-Не запускайте их для публичного сервиса: предназначены для локального тестового экземпляра.
+Playwright запускает локальную production-сборку на `127.0.0.1:3100` и подменяет
+запросы форм. Отчёт доступен через `npx playwright show-report`.

@@ -30,6 +30,3 @@ for(const format of ['avif','webp']){
 }
 fs.mkdirSync('.tmp/local-audit', {recursive:true});
 fs.writeFileSync('.tmp/local-audit/hero-image-files.json', JSON.stringify(imageReport,null,2)+'\n');
-process.env.AUDIT_URL ??= base;
-process.env.AUDIT_CDP ??= 'http://127.0.0.1:9223';
-await import('./check-local-browser.mjs');

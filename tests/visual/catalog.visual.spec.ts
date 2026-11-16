@@ -1,15 +1,15 @@
 import {test, expect, openProduct, samples, seedCart, settleImages, visibleProduct} from "../browser";
-import {getProductIllustration} from "../../lib/productPreviewImage";
+import {ORDER_STORAGE_KEY} from "../../lib/constants";
 
-test("home and catalog first-screen layout", async ({page}) => {
-  for (const [path, name] of [["/", "home"], ["/catalog", "catalog"]]) {
+for (const [path, name] of [["/", "home"], ["/catalog", "catalog"]]) {
+  test(`${name} first-screen layout`, async ({page}) => {
     await page.goto(path);
     await expect(page.getByRole("heading", {level: 1})).toBeVisible();
     if (name === "home") await expect(page.getByRole("button", {name: "Следующая фотография", exact: true})).toBeVisible();
     await settleImages(page);
     await expect(page).toHaveScreenshot(`${name}.png`);
-  }
-});
+  });
+}
 
 test("armatura category cover and introduction", async ({page}) => {
   await page.goto("/catalog/armatura");
@@ -33,7 +33,7 @@ for (const family of ["shveller", "ugolok", "kvadrat", "armatura", "balka", "pro
     const regionName = family === "mesh" ? "Сетка металлическая" : family === "profnastil" ? "Профнастил" : "Продукция";
     const region = page.getByRole("region", {name: regionName, exact: true});
     await region.scrollIntoViewIfNeeded();
-    await settleImages(page);
+    await settleImages(page, region);
     if (family === "shveller" && process.env.VISUAL_REGRESSION_PROBE === "1") {
       await page.addStyleTag({content: "table th:first-child, table td:first-child { padding-left: 48px !important; }"});
     }
@@ -47,43 +47,48 @@ test("rounded product viewer fits the original and zooms 1:1", async ({page}) =>
   const dialog = page.getByRole("dialog", {name: "Просмотр изображения: Швеллер № 5", exact: true});
   const zoom = dialog.getByRole("button", {name: "Увеличение изображения", exact: true});
   await expect(zoom).toBeEnabled();
-  await settleImages(page);
+  await settleImages(page, dialog);
   await expect(dialog).toHaveScreenshot("image-viewer-fit.png");
   await zoom.click();
   await expect(zoom).toHaveAttribute("aria-pressed", "true");
-  await settleImages(page);
+  await settleImages(page, dialog);
   await expect(dialog).toHaveScreenshot("image-viewer-native.png");
 });
 
-test("profile pipe shows its dimensions in both the thumbnail and the viewer", async ({page}) => {
+test("profile pipe illustration in the viewer", async ({page}) => {
   const product = samples.profile;
-  const illustration = getProductIllustration(product)!;
   await openProduct(page, product);
   const thumbnail = visibleProduct(page, product.id).getByRole("button", {name: `Увеличить изображение: ${product.name}`, exact: true});
-  await expect.poll(() => thumbnail.getByRole("img").evaluate(element => {
-    const address = new URL((element as HTMLImageElement).src);
-    return decodeURI((address.searchParams.get("url") ?? address.pathname).split("?")[0]);
-  })).toBe(illustration.imageUrl);
   await thumbnail.click();
   const dialog = page.getByRole("dialog", {name: `Просмотр изображения: ${product.name}`, exact: true});
-  const image = dialog.getByRole("img");
-  await expect.poll(() => image.evaluate(element => decodeURI(new URL((element as HTMLImageElement).src).pathname))).toBe(illustration.imageUrl);
   await expect(dialog.getByRole("button", {name: "Увеличение изображения", exact: true})).toBeEnabled();
-  await image.evaluate(element => (element as HTMLImageElement).decode());
-  await page.mouse.move(0, 0);
+  await settleImages(page, dialog);
   // Isolate the dialog corners from unrelated scroll and content behind the overlay.
   await page.addStyleTag({content: "dialog[open]::backdrop { background-color: #000; }"});
   await expect(dialog).toHaveScreenshot("annotated-profile-viewer.png");
 });
 
-test("cart and checkout layout with a real catalog product", async ({page}) => {
-  await seedCart(page);
-  for (const [path, name] of [["/cart", "cart"], ["/checkout", "checkout"]]) {
+for (const [path, name] of [["/cart", "cart"], ["/checkout", "checkout"]]) {
+  test(`${name} layout with a catalog product`, async ({page}) => {
+    await seedCart(page);
     await page.goto(path);
     await expect(page.getByRole("heading", {level: 1})).toBeVisible();
     if (name === "cart") await expect(page.locator(`[data-cart-row="${samples.shveller.id}"]`).getByRole("textbox", {name: /^Длина /})).toHaveValue("3");
     else await expect(page.getByLabel("ФИО *", {exact: true})).toBeVisible();
     await settleImages(page);
     await expect(page.getByRole("main")).toHaveScreenshot(`${name}.png`);
-  }
+  });
+}
+
+test("invoice confirmation with preview notice and download action", async ({page}) => {
+  await page.addInitScript(key => {
+    const number = "MS-A1B2C3D4E5F6";
+    sessionStorage.setItem(key, JSON.stringify({orderNumber: number, paymentMethod: "INVOICE",
+      email: "audit@example.invalid", invoice: {number, downloadToken: "a".repeat(64), emailStatus: "FAILED", isPreview: true}}));
+  }, ORDER_STORAGE_KEY);
+  await page.goto("/order/success");
+  await expect(page.getByRole("button", {name: "Скачать счёт PDF", exact: true})).toBeVisible();
+  const main = page.getByRole("main");
+  await settleImages(page, main);
+  await expect(main).toHaveScreenshot("invoice-confirmation.png");
 });

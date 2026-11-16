@@ -131,12 +131,6 @@ test('quantity and current per-piece price are revalidated in the cart', () => {
   assert.match(revalidateCartPrice(product, {quantity: 1.5}).invalidReason, /целое количество листов/);
 });
 
-test('the shared catalog presentation retains sheet specifications', () => {
-  const source = fs.readFileSync('components/catalog/ProfileSheetVariantCatalog.tsx', 'utf8');
-  assert.match(source, /<CatalogVariantTable>/);
-  for (const label of ['Толщина, мм', 'Цвет / покрытие', 'Размер листа, м']) assert.ok(source.includes(label), label);
-});
-
 test('each profile family and product uses its existing matching image asset', () => {
   const images = {С8: 'profnastil_c8.jpg', С20: 'profnastil_c20.jpg', Н75: 'profnastil_h75.jpg'};
   for (const product of profnastil) assert.match(mappings.products[product.id], new RegExp(`${images[product.profileMark]}$`));

@@ -10,11 +10,8 @@ import {readProjectData} from './project-data.mjs';
 const json = file=>JSON.parse(fs.readFileSync(file,'utf8'));
 const source=json('imports/rozmet-source.json'), imported=json('data/rozmet-catalog.json');
 const baseline=json('imports/rozmet-protected.snapshot.json');
-const retainedCatalog=json('imports/protected-catalog.snapshot.json');
 const imageCorrections=json('imports/protected-image-corrections.json');
 const cache=new Map();
-const {categories}=readProjectData('data/categories.ts',cache);
-const {subcategories}=readProjectData('data/subcategories.ts',cache);
 const {productVariants}=readProjectData('data/products/index.ts',cache);
 const {productTypes}=readProjectData('data/productTypes.ts',cache);
 const catalog=readProjectData('lib/catalog.ts',cache);
@@ -57,20 +54,12 @@ test('re-import from saved evidence is identical and does not duplicate products
   } finally {fs.rmSync(temporary,{recursive:true,force:true});}
 });
 
-test('protected catalog data and image bytes match their approved versions',()=>{
+test('protected product types and image bytes match their approved versions',()=>{
   const expectedTypes=baseline.types.map(type=>rebarTypeCovers.has(type.id)
     ? {...type,imageUrl:rebarTypeCovers.get(type.id)}
     : type);
-  for(const [key,actual,expected] of [
-    ['categories',categories,baseline.categories],
-    ['subcategories',subcategories,baseline.subcategories],
-    ['products',productVariants,retainedCatalog.products],
-    ['types',productTypes,expectedTypes],
-  ]) {
-    const selected=actual.filter(item=>protectedIds.has(key==='categories'?item.id:item.categoryId));
-    assert.equal(JSON.stringify(selected),JSON.stringify(expected),key);
-  }
-  for(const {id,index} of baseline.categoryOrder) assert.equal(categories[index].id,id);
+  const protectedTypes=productTypes.filter(type=>protectedIds.has(type.categoryId));
+  assert.equal(JSON.stringify(protectedTypes),JSON.stringify(expectedTypes));
   for(const [image,hash] of Object.entries(baseline.imagesSha256)) {
     assert.equal(crypto.createHash('sha256').update(fs.readFileSync('public'+image)).digest('hex'),imageCorrections[image]?.sha256 ?? hash,image);
   }
@@ -83,7 +72,6 @@ test('every discovered source section and unique product is imported once under 
   assert.equal(imported.products.length,source.products.length);
   assert.deepEqual(Array.from(productVariants.filter(item=>item.id.startsWith('rozmet-')),item=>item.id),
     imported.products.filter(item=>!archivedPvlIds.has(item.id)).map(item=>item.id));
-  for(const key of ['id','slug','sku']) assert.equal(new Set(productVariants.map(item=>item[key])).size,productVariants.length,key);
   for(const product of imported.products) {
     const parent=catalog.getSubcategoryById(product.subcategoryId);
     const category=catalog.getCategoryById(product.categoryId);

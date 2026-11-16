@@ -13,7 +13,7 @@ Examples: `профильных труб`, `строительную армат�
 Validation:
 
 - `npm run search:check`: morphology, synonyms, technical constraints, corrections, partial input, every real product name, filters/pagination and full-catalog timing.
-- `node scripts/check-search-browser.mjs`: requires the local site on port 3000 and Chrome CDP on 9223; checks desktop/mobile live queries, typing focus, category empty states and variant tables. It uses the shared current-interface suite; results go to `.tmp/local-audit/`, without modifying supplier evidence.
+- After `npm run test:build`, run `npx playwright test tests/e2e/catalog.spec.ts` for search, technical queries, linked products, filters and empty results on desktop and mobile.
 - `npm run catalog:check`, `node --test scripts/images.test.mjs`, application ESLint (downloaded `brokinvest.ru/**` is already ignored) and `npm run build`.
 
 Measured index construction: approximately 65 ms. Repeated full-catalog queries: approximately 4 ms each on the development machine; timings vary by device.

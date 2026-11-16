@@ -81,17 +81,54 @@ test('retained supplier products remain priced per tonne',()=>{
  assert.equal(products.find(p=>p.id==='local-258').price,53640);
  assert.equal(products.find(p=>p.id==='local-65599').price,79470);
 });
-test('re-import is byte-identical and preserves editable local products', {skip: process.env.CATALOG_IMPORT_CHECK !== '1' ? 'Explicit opt-in; never regenerate the working catalog during checks' : false}, () => {
- const files=['data/imported-catalog.json','imports/catalog-manifest.json'];const before=files.map(p=>fs.readFileSync(p,'utf8'));
- const temporary=fs.mkdtempSync(path.join(os.tmpdir(),'metal-import-check-'));
- try {
-  for(const directory of ['data','lib','imports'])fs.cpSync(directory,path.join(temporary,directory),{recursive:true});
-  execFileSync(process.execPath,[path.resolve('scripts/import-catalog.mjs')],{cwd:temporary});
-  files.forEach((p,i)=>assert.equal(fs.readFileSync(path.join(temporary,p),'utf8'),before[i]));
- } finally {fs.rmSync(temporary,{recursive:true,force:true});}
- const data=readProjectData('data/products/index.ts');
- assert.equal(data.productVariants.length,new Set(data.productVariants.map(p=>p.id)).size);
- for(const p of data.existingVariants)assert(data.productVariants.some(v=>v.id===p.id)||read('data/imported-catalog.json').matchedIds.includes(p.id));
+test('isolated catalogue import is reproducible and preserves supplier rows and editable products', {
+  skip: process.env.CATALOG_IMPORT_CHECK !== '1' ? 'Explicit opt-in for the isolated import audit' : false,
+}, () => {
+  const script = path.resolve('scripts/import-catalog.mjs');
+  const catalogPath = 'data/imported-catalog.json';
+  const manifestPath = 'imports/catalog-manifest.json';
+  const editableFiles = ['data/categories.ts', 'data/subcategories.ts',
+    ...fs.readdirSync('data/products', {recursive: true})
+      .filter(file => file.endsWith('.ts')).map(file => path.join('data/products', file))];
+  const editableContents = editableFiles.map(file => fs.readFileSync(file));
+  const approved = read(catalogPath);
+  const temporary = fs.mkdtempSync(path.join(os.tmpdir(), 'metal-import-check-'));
+
+  try {
+    for (const directory of ['data', 'lib', 'imports']) {
+      fs.cpSync(directory, path.join(temporary, directory), {recursive: true});
+    }
+    execFileSync(process.execPath, [script], {cwd: temporary});
+    const outputs = [catalogPath, manifestPath];
+    const firstPass = outputs.map(file => fs.readFileSync(path.join(temporary, file)));
+    execFileSync(process.execPath, [script], {cwd: temporary});
+    for (const [index, file] of outputs.entries()) {
+      assert.ok(fs.readFileSync(path.join(temporary, file)).equals(firstPass[index]), `${file}: repeated import changed the output`);
+    }
+    for (const [index, file] of editableFiles.entries()) {
+      assert.ok(fs.readFileSync(path.join(temporary, file)).equals(editableContents[index]), `${file}: importer changed an editable source`);
+    }
+
+    const catalog = read(path.join(temporary, catalogPath));
+    assert.deepEqual(catalog.products.map(product => product.id), approved.products.map(product => product.id));
+    for (const [index, product] of catalog.products.entries()) {
+      assert.deepEqual(product, approved.products[index], product.id);
+    }
+    assert.deepEqual(catalog.matchedIds, approved.matchedIds);
+
+    const cache = new Map();
+    const {originalCategories} = readProjectData('data/categories.ts', cache);
+    const {originalSubcategories} = readProjectData('data/subcategories.ts', cache);
+    const {existingVariants} = readProjectData('data/products/index.ts', cache);
+    const {isPublicProduct} = readProjectData('data/catalog-visibility.ts', cache);
+    assert.deepEqual(catalog.categories.map(category => category.id), Array.from(originalCategories, category => category.id));
+    assert.deepEqual(catalog.families.map(family => family.id), Array.from(originalSubcategories, family => family.id));
+    const retained = existingVariants.filter(product => isPublicProduct(product) && !catalog.matchedIds.includes(product.id));
+    const manifest = read(path.join(temporary, manifestPath));
+    assert.equal(manifest.counts.after.variants, retained.length + catalog.products.length);
+  } finally {
+    fs.rmSync(temporary, {recursive: true, force: true});
+  }
 });
 test('mass conversion keeps precision; incomplete data cannot convert',()=>{
  const {metersToTons,tonsToMeters,calculateLineTotal}=readProjectData('lib/orderMeasurement.ts');

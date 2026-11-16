@@ -26,13 +26,17 @@ test('Exact dimensions, equivalent notation, incompatible dimensions excluded',(
  assert.ok(hits('арматура ф12').length);assert.deepEqual(hits('арматура ф12').map(h=>h.product.id),hits('арматура Ø12').map(h=>h.product.id));
  assert.ok(hits('40х40х999').length===0);
  assert.ok(hits('40х40х2').every(h=>buildTechnicalDocument(h.product).dimensions.some(d=>d.slice(0,3).join('x')==='40x40x2')));
- assert.ok(hits('арматура 12').every(h=>buildTechnicalDocument(h.product).primary.has('12')));
+ const rebar=hits('арматура 12');
+ assert.ok(rebar.length,'арматура 12');
+ assert.ok(rebar.every(h=>buildTechnicalDocument(h.product).primary.has('12')));
 });
 test('Grades and standards are never fuzzy',()=>{
  assert.ok(hits('09Г2С').length); assert.ok(hits('ст3').length);
  assert.equal(hits('09Г2С999').length,0);assert.equal(hits('ГОСТ 999999999').length,0);
  assert.ok(hits('09Г2С').every(h=>buildTechnicalDocument(h.product).grades.has('09г2с')));
- assert.ok(hits('ГОСТ 8639').every(h=>[...buildTechnicalDocument(h.product).standards].some(s=>s.split('-')[0]==='8639')));
+ const matches=hits('ГОСТ 3262');
+ assert.ok(matches.length,'ГОСТ 3262');
+ assert.ok(matches.every(h=>[...buildTechnicalDocument(h.product).standards].some(s=>s.split('-')[0]==='3262')));
 });
 test('Controlled spelling corrections and partial input',()=>{
  for(const q of ['профилная труба','арматруа','оцинкованый профнастил','труба проф']) assert.ok(hits(q).length,q);
@@ -54,13 +58,27 @@ test('Exact real product names rank first across every category',()=>{
  for(const p of products) assert.equal(hits(p.sku)[0]?.product.sku,p.sku,p.sku);
 });
 test('Filters and pagination operate on ranked results',()=>{
- const all=index.search('труба',{categoryId:'cat-trp',inStock:true});
- assert.ok(all.total);assert.ok(all.hits.every(h=>h.product.categoryId==='cat-trp'&&h.product.inStock));
- assert.deepEqual(index.search('труба',{categoryId:'cat-trp',inStock:true,offset:2,limit:3}).hits.map(h=>h.product.id),all.hits.slice(2,5).map(h=>h.product.id));
- const sample=all.hits[0].product;
- assert.ok(index.search('труба',{standard:sample.standard}).hits.every(h=>h.product.standard===sample.standard));
- const material=sample.attributes.find(a=>a.key==='material')?.value;
- if(material) assert.ok(index.search('труба',{material}).hits.every(h=>h.product.attributes.some(a=>a.key==='material'&&a.value===material)));
+ const query='труба';
+ const all=hits(query);
+ const ids=results=>results.map(({product})=>product.id);
+ const availability={categoryId:'cat-trp',inStock:true};
+ const available=all.filter(({product})=>product.categoryId===availability.categoryId&&product.inStock);
+ const offset=1,limit=2;
+ assert.ok(available.length>offset+limit,'fixture must have results before and after the test page');
+ assert.deepEqual(ids(index.search(query,availability).hits),ids(available));
+ const page=index.search(query,{...availability,offset,limit});
+ assert.equal(page.total,available.length);
+ assert.deepEqual(ids(page.hits),ids(available.slice(offset,offset+limit)));
+
+ const standard='ГОСТ 3262-75';
+ const byStandard=all.filter(({product})=>product.standard===standard);
+ assert.ok(byStandard.length,standard);
+ assert.deepEqual(ids(index.search(query,{standard}).hits),ids(byStandard));
+
+ const material='Углеродистая сталь';
+ const byMaterial=all.filter(({product})=>product.attributes.some(attribute=>attribute.key==='material'&&attribute.value===material));
+ assert.ok(byMaterial.length,material);
+ assert.deepEqual(ids(index.search(query,{material}).hits),ids(byMaterial));
  assert.equal(index.search('труба',{categoryId:'unknown'}).total,0);
 });
 test('Full catalog query performance',()=>{

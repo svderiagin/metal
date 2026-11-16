@@ -1,9 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readProjectData} from './project-data.mjs';
-import fs from 'node:fs';
-import vm from 'node:vm';
-import ts from 'typescript';
 
 const {normalizeRussianPhone, validateQuoteFields, QUOTE_LIMITS} = readProjectData('lib/quoteValidation.ts');
 const {parseQuoteRequest} = readProjectData('lib/server/validation.ts');
@@ -60,34 +57,4 @@ test('malformed phone, email, name and consent cannot be submitted directly to t
   assert.ok(validateQuoteFields({...valid(), consent: 'true'}).consent);
   assert.equal(parseQuoteRequest(null), null);
   assert.equal(parseQuoteRequest({...valid(), name: {text: 'Анна'}}), null);
-});
-
-test('API returns specific validation errors without sending an invalid quote', async () => {
-  const sent = [];
-  const testModule = {exports: {}};
-  const imports = {
-    '@/lib/server/request': readProjectData('lib/server/request.ts'),
-    '@/lib/server/notifications': {notificationService: {sendQuoteRequest: async quote => sent.push(quote)}},
-    '@/lib/server/validation': {parseQuoteRequest},
-    '@/lib/quoteValidation': {validateQuoteFields},
-  };
-  const source = ts.transpileModule(fs.readFileSync('app/api/quote/route.ts', 'utf8'), {
-    compilerOptions: {module: ts.ModuleKind.CommonJS},
-  }).outputText;
-  vm.runInNewContext(source, {module: testModule, exports: testModule.exports, Response, require: name => {
-    assert.ok(name in imports, name); return imports[name];
-  }});
-  const submit = body => testModule.exports.POST(new Request('http://localhost/api/quote', {
-    method: 'POST', body: JSON.stringify(body), headers: {'content-type': 'application/json'},
-  }));
-  const rejected = await submit({...valid(), phone: '+7911', message: 'а'.repeat(2001)});
-  assert.equal(rejected.status, 400);
-  const errors = await rejected.json();
-  assert.equal(errors.fieldErrors.phone, 'Неверный формат');
-  assert.match(errors.fieldErrors.message, /2000/);
-  assert.equal(sent.length, 0);
-  const accepted = await submit(valid());
-  assert.equal(accepted.status, 200);
-  assert.equal(sent.length, 1);
-  assert.equal(sent[0].message, valid().message);
 });

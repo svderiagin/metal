@@ -7,6 +7,8 @@ import sharp from 'sharp';
 const base=process.env.PERF_URL??'http://127.0.0.1:3100';
 const label=process.env.PERF_LABEL??'before';
 const runs=Number(process.env.PERF_RUNS??3);
+const windowMs = Number(process.env.PERF_WINDOW_MS ?? 8000);
+if (!Number.isFinite(windowMs) || windowMs < 8000) throw new Error('PERF_WINDOW_MS must be at least 8000');
 const pages=(process.env.PERF_PAGES??'/,/catalog,/catalog/armatura,/catalog/armatura/armatura-a500s/armatura-a500s,/catalog/shveller/shveller-stalnoy/shveller-stalnoy').split(',');
 const profiles=[{name:'desktop',width:1440,height:1000,dpr:1},{name:'mobile',width:390,height:844,dpr:2}].filter(p=>!process.env.PERF_PROFILE||p.name===process.env.PERF_PROFILE);
 const folder='.tmp/image-performance/'+label;fs.mkdirSync(folder,{recursive:true});
@@ -44,13 +46,34 @@ function call(method,params={}){return new Promise((resolve,reject)=>{
 async function evaluate(expression){const r=await call('Runtime.evaluate',{expression,returnByValue:true,awaitPromise:true});if(r.exceptionDetails)throw Error(r.exceptionDetails.exception?.description??r.exceptionDetails.text);return r.result.value;}
 const delay=ms=>new Promise(resolve=>setTimeout(resolve,ms));
 const observer=`(()=>{
- window.__perf={lcp:[],shifts:[],longTasks:[],firstImage:null,firstFullImage:null,imageLoads:[],elementPaints:[]};
+ const hero = {controlsMs: null, frames: []};
+ window.__perf={lcp:[],shifts:[],longTasks:[],firstImage:null,firstFullImage:null,imageLoads:[],elementPaints:[],hero};
  new PerformanceObserver(list=>list.getEntries().forEach(e=>window.__perf.lcp.push({time:e.startTime,size:e.size,url:e.url,element:e.element?.tagName,text:e.element?.textContent?.slice(0,80)}))).observe({type:'largest-contentful-paint',buffered:true});
  new PerformanceObserver(list=>list.getEntries().forEach(e=>{if(!e.hadRecentInput)window.__perf.shifts.push({time:e.startTime,value:e.value,sources:e.sources.map(s=>({node:s.node?.tagName,className:s.node?.className,text:s.node?.textContent?.slice(0,80),previous:s.previousRect.toJSON(),current:s.currentRect.toJSON()}))});})).observe({type:'layout-shift',buffered:true});
  new PerformanceObserver(list=>list.getEntries().forEach(e=>window.__perf.longTasks.push({start:e.startTime,duration:e.duration}))).observe({type:'longtask',buffered:true});
  new PerformanceObserver(list=>list.getEntries().forEach(e=>window.__perf.elementPaints.push({time:e.renderTime||e.loadTime,url:e.url,identifier:e.identifier}))).observe({type:'element',buffered:true});
  const observe=()=>document.querySelectorAll('main img').forEach(img=>{if(img.dataset.perfObserved)return;img.dataset.perfObserved='true';img.setAttribute('elementtiming','photo');img.addEventListener('load',()=>window.__perf.imageLoads.push({time:performance.now(),url:img.currentSrc,complete:img.complete}));});
  new MutationObserver(observe).observe(document,{childList:true,subtree:true});
+ const observeHero = () => {
+   const section = document.querySelector('section[aria-labelledby="home-hero-title"]');
+   const control = section?.querySelector('button[aria-label="Следующая фотография"]');
+   if (hero.controlsMs === null && control?.checkVisibility() && !control.disabled) hero.controlsMs = performance.now();
+   const image = section?.querySelector('img[data-active="true"]');
+   if (image?.complete && image.naturalWidth && image.checkVisibility()) {
+     const rect = image.getBoundingClientRect();
+     const opacity = Number(getComputedStyle(image).opacity);
+     if (rect.bottom > 0 && rect.top < innerHeight && opacity > 0.01) {
+       let frame = hero.frames.find(frame => frame.url === image.currentSrc);
+       if (!frame) {
+         frame = {url: image.currentSrc, firstVisibleMs: performance.now(), fullOpacityMs: null};
+         hero.frames.push(frame);
+       }
+       if (frame.fullOpacityMs === null && opacity >= 0.99) frame.fullOpacityMs = performance.now();
+     }
+   }
+   requestAnimationFrame(observeHero);
+ };
+ requestAnimationFrame(observeHero);
  const visible=()=>{const imgs=[...document.querySelectorAll('main img')];const img=imgs.find(img=>{const r=img.getBoundingClientRect(),s=getComputedStyle(img);return img.complete&&img.naturalWidth>0&&r.width>100&&r.height>40&&r.bottom>0&&r.top<innerHeight&&s.visibility!=='hidden'&&Number(s.opacity)>0.01;});if(img){const entry={time:performance.now(),url:img.currentSrc,opacity:getComputedStyle(img).opacity};window.__perf.firstImage??=entry;if(Number(entry.opacity)>0.99)window.__perf.firstFullImage??=entry;}requestAnimationFrame(visible);};requestAnimationFrame(visible);
  })();`;
 async function traceEnd(file){const complete=new Promise(resolve=>traceResolve=resolve);await call('Tracing.end');const handle=await complete;const chunks=[];for(;;){const r=await call('IO.read',{handle,size:65536});chunks.push(r.base64Encoded?Buffer.from(r.data,'base64'):Buffer.from(r.data));if(r.eof)break;}await call('IO.close',{handle});fs.writeFileSync(file,Buffer.concat(chunks));traceResolve=undefined;}
@@ -63,13 +86,13 @@ async function measure(profile,page,run,warm=false){
  const tracing=process.env.PERF_TRACE==='1'&&page==='/'&&run===0&&!warm;
  if(tracing)await call('Tracing.start',{categories:'devtools.timeline,blink.user_timing,loading,disabled-by-default-devtools.timeline',transferMode:'ReturnAsStream'});
  await call('Page.navigate',{url:base+page});
- // Fixed 8-second initial window; requests continue naturally, no interaction or scroll.
- await delay(8000);
+ // Observe without interaction or scroll, including optional additional carousel frames.
+ await delay(windowMs);
  const state=await evaluate(`(()=>{const perf=window.__perf;return {...perf,paints:performance.getEntriesByType('paint').map(e=>e.toJSON()),domElements:document.querySelectorAll('*').length,tableRows:document.querySelectorAll('tbody tr').length,navigation:performance.getEntriesByType('navigation').map(e=>e.toJSON()),resources:performance.getEntriesByType('resource').map(e=>e.toJSON()),ready:document.readyState,overflow:document.documentElement.scrollWidth>innerWidth,images:[...document.querySelectorAll('main img')].map(img=>{const r=img.getBoundingClientRect(),s=getComputedStyle(img);return {src:img.getAttribute('src'),currentSrc:img.currentSrc,srcset:img.srcset,sizes:img.sizes,loading:img.loading,fetchPriority:img.fetchPriority,complete:img.complete,naturalWidth:img.naturalWidth,naturalHeight:img.naturalHeight,renderedWidth:r.width,renderedHeight:r.height,top:r.top,bottom:r.bottom,opacity:s.opacity,position:s.objectPosition,fit:s.objectFit};})};})()`);
  if(tracing)await traceEnd(folder+'/'+profile.name+'-trace.json');
  const network=[...requests.values()].map(r=>({...r,startMs:(r.start-navigation)*1000,endMs:r.end?(r.end-navigation)*1000:null,ttfbMs:r.timing?r.timing.receiveHeadersStart-r.timing.sendEnd:null}));
  const initial=network.filter(r=>r.type==='Image'&&r.startMs<8000);
- const entry={profile,page,run,warm,settings:{downloadBytesPerSecond:200000,uploadBytesPerSecond:93750,latencyMs:150,cpuSlowdown:4,windowMs:8000},state,network,summary:{fcpMs:state.paints?.find(e=>e.name==='first-contentful-paint')?.startTime??null,blockingTimeMs:state.longTasks?.reduce((sum,t)=>sum+Math.max(0,t.duration-50),0)??0,lcpMs:state.lcp?.at(-1)?.time??null,cls:state.shifts?.reduce((a,e)=>a+e.value,0)??null,firstImageMs:state.firstImage?.time??null,firstFullImageMs:state.firstFullImage?.time??null,imageRequests8s:initial.length,imageBytes8s:initial.reduce((a,r)=>a+(r.transferred??((r.received??0)+(r.encodedDataLength??0))),0),imageBytesTotal:network.filter(r=>r.type==='Image').reduce((a,r)=>a+(r.transferred??0),0),scriptBytes:network.filter(r=>r.type==='Script').reduce((a,r)=>a+(r.transferred??0),0),longTaskMs:state.longTasks?.reduce((a,t)=>a+t.duration,0)??0,failures:network.filter(r=>r.failure||r.status>=400).map(r=>({url:r.url,status:r.status,failure:r.failure}))}};
+ const entry={profile,page,run,warm,settings:{downloadBytesPerSecond:200000,uploadBytesPerSecond:93750,latencyMs:150,cpuSlowdown:4,windowMs},state,network,summary:{fcpMs:state.paints?.find(e=>e.name==='first-contentful-paint')?.startTime??null,blockingTimeMs:state.longTasks?.reduce((sum,t)=>sum+Math.max(0,t.duration-50),0)??0,lcpMs:state.lcp?.at(-1)?.time??null,cls:state.shifts?.reduce((a,e)=>a+e.value,0)??null,firstImageMs:state.firstImage?.time??null,firstFullImageMs:state.firstFullImage?.time??null,hero:state.hero,imageRequests8s:initial.length,imageBytes8s:initial.reduce((a,r)=>a+(r.transferred??((r.received??0)+(r.encodedDataLength??0))),0),imageBytesTotal:network.filter(r=>r.type==='Image').reduce((a,r)=>a+(r.transferred??0),0),scriptBytes:network.filter(r=>r.type==='Script').reduce((a,r)=>a+(r.transferred??0),0),longTaskMs:state.longTasks?.reduce((a,t)=>a+t.duration,0)??0,failures:network.filter(r=>r.failure||r.status>=400).map(r=>({url:r.url,status:r.status,failure:r.failure}))}};
  results.push(entry);console.log(JSON.stringify({profile:profile.name,page,run,warm,...entry.summary}));fs.writeFileSync(folder+'/measurements.json',JSON.stringify({base,label,results,errors},null,2));
  if(run===0&&!warm){const screenshot=await call('Page.captureScreenshot',{format:'png'});fs.writeFileSync(folder+'/'+profile.name+'-'+page.replaceAll('/','_')+'.png',Buffer.from(screenshot.data,'base64'));}
  // Record actual delivered dimensions/format once per URL; no extra HTTP request.
@@ -84,6 +107,7 @@ try{
  await call('Page.addScriptToEvaluateOnNewDocument',{source:observer});
  await call('Network.emulateNetworkConditions',{offline:false,latency:150,downloadThroughput:200000,uploadThroughput:93750,connectionType:'cellular4g'});
  await call('Emulation.setCPUThrottlingRate',{rate:4});
+ await call('Emulation.setEmulatedMedia',{features:[{name:'prefers-reduced-motion',value:'no-preference'}]});
  for(const profile of profiles){
   await call('Emulation.setDeviceMetricsOverride',{width:profile.width,height:profile.height,deviceScaleFactor:profile.dpr,mobile:profile.name==='mobile'});
   for(const page of pages){for(let run=0;run<runs;run++)await measure(profile,page,run);await call('Network.setCacheDisabled',{cacheDisabled:false});await call('Page.navigate',{url:base+page});await delay(8000);await measure(profile,page,runs,true);}
