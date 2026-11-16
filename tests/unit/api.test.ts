@@ -37,6 +37,7 @@ after(() => {
 
 const contact = {name: "Анна", email: "audit@example.invalid", phone: "+79000000000", message: "Тестовая заявка", consent: true};
 const quote = {...contact, name: " Анна-Мария ", email: "AUDIT@example.invalid", message: "Арматура рифлёная А500С\nДлина: 100 м"};
+const overlongPhone = "+7 (900)   123  -  4567 - 89012";
 const order = () => ({consent: true, items: [{productId: "rozmet-2235", quantity: 2}],
   customer: {type: "INDIVIDUAL" as const, fullName: "Анна", email: "audit@example.invalid", phone: "+79000000000"},
   delivery: {address: "Тестовый адрес"}, paymentMethod: "INVOICE" as "INVOICE" | "CARD"});
@@ -82,7 +83,7 @@ test("contact validates input and ignores the honeypot before notifying", async 
   const sent = mock.method(notificationService, "sendContactRequest", async () => {});
   assert.equal((await contactPost(request({...contact, consent: false}))).status, 400);
   assert.equal((await contactPost(request({...contact, phone: "letters1234567890"}))).status, 400);
-  for (const fields of [{name: "12345"}, {email: "a..b@example.invalid"}, {phone: "+7)900(0000000"}]) {
+  for (const fields of [{name: "12345"}, {email: "a..b@example.invalid"}, {phone: "+7)900(0000000"}, {phone: overlongPhone}]) {
     assert.equal((await contactPost(request({...contact, ...fields}))).status, 400);
   }
   assert.equal((await contactPost(new Request("http://localhost", {method: "POST", body: "not-json"}))).status, 400);
@@ -95,7 +96,7 @@ test("contact validates input and ignores the honeypot before notifying", async 
   assert.equal(sent.mock.calls.length, 1);
 });
 
-test("order rejects invalid contact fields and zero-priced lines before saving, and strips hidden company details", async ({mock}) => {
+test("order rejects invalid fields, unavailable card payment and zero-priced lines before saving", async ({mock}) => {
   const original = order();
   const company = {type: "COMPANY", companyName: "ООО Тест", taxNumber: "1234567894", legalAddress: "Тестовый адрес"};
   assert.ok(parseCreateOrderInput({...original, customer: {...original.customer, ...company}}));
@@ -105,7 +106,8 @@ test("order rejects invalid contact fields and zero-priced lines before saving, 
   for (const invalid of [
     {...original, items: [smallQuantity]},
     {...original, items: [...original.items, {...smallQuantity, productId: "rozmet-2209"}]},
-    ...[{fullName: "12345"}, {email: "audit@-example.invalid"}, {phone: "+7)900(0000000"}]
+    {...original, paymentMethod: "CARD"},
+    ...[{fullName: "12345"}, {email: "audit@-example.invalid"}, {phone: "+7)900(0000000"}, {phone: overlongPhone}]
       .map(fields => ({...original, customer: {...original.customer, ...fields}})),
     ...["abc", "1234567890", "12345678940"].map(taxNumber =>
       ({...original, customer: {...original.customer, ...company, taxNumber}})),
@@ -116,6 +118,23 @@ test("order rejects invalid contact fields and zero-priced lines before saving, 
   const response = await orderPost(request({...original, customer: {...company, ...original.customer}}));
   assert.equal(response.status, 201);
   assert.deepEqual(save.mock.calls[0].arguments[0]?.customer, original.customer);
+});
+
+test("order, contact and quote preserve the same valid international email through validation and delivery", async ({mock}) => {
+  const email = "İ".repeat(32) + "@example.invalid";
+  const original = order();
+  const save = mock.method(orders.orderRepository, "save", async () => {});
+  const sendOrder = mock.method(notificationService, "sendOrderNotification", async () => {});
+  const sendContact = mock.method(notificationService, "sendContactRequest", async () => {});
+  const sendQuote = mock.method(notificationService, "sendQuoteRequest", async () => {});
+
+  assert.equal((await orderPost(request({...original, customer: {...original.customer, email}}))).status, 201);
+  assert.equal((await contactPost(request({...contact, email}))).status, 200);
+  assert.equal((await quotePost(request({...quote, email}))).status, 200);
+  assert.equal(save.mock.calls[0].arguments[0]?.customer.email, email);
+  assert.equal(sendOrder.mock.calls[0].arguments[0]?.customer.email, email);
+  assert.equal(sendContact.mock.calls[0].arguments[0]?.email, email);
+  assert.equal(sendQuote.mock.calls[0].arguments[0]?.email, email);
 });
 
 test("quote reports invalid fields, ignores the honeypot and sends the normalized message", async ({mock}) => {

@@ -5,7 +5,8 @@ import {useCart} from "@/hooks/useCart";
 import {Button} from "@/components/ui/Button";
 import {Input} from "@/components/ui/Input";
 import {Icon} from "@/components/ui/Icon";
-import {correctOrderQuantity, formatCatalogNumber, parseOrderQuantity} from "@/lib/catalogNumberInput";
+import {constrainOrderQuantityInput, correctOrderQuantity, formatCatalogNumber, parseOrderQuantity} from "@/lib/catalogNumberInput";
+import {quantityTransferHandlers} from "@/lib/cartQuantityInput";
 import {formatCurrency, formatUnitPrice} from "@/lib/currency";
 import {formatNumber} from "@/lib/numberFormat";
 import {hasConfirmedProfilePipePrice, profilePipeOrder, profilePipeSize} from "@/lib/profilePipe";
@@ -68,9 +69,9 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
   function correctLengthValue(rawValue: string): {value: string; message?: string} {
     if (variant.lengthMeters !== undefined) return {value: formatCatalogNumber(variant.lengthMeters)};
     if (!range || !parseOrderQuantity(rawValue)) return {value: rawValue};
-    const corrected = correctOrderQuantity(rawValue, {minimum: range[0], maximum: range[1]});
-    return {...corrected, message: corrected.message
-      ? `Длина трубы скорректирована до ${corrected.value.replace(".", ",")} м.` : undefined};
+    const corrected = correctOrderQuantity(rawValue, {minimum: range[0], maximum: range[1], decimalPlaces: 2});
+    const value = corrected.value.replace(".", ",");
+    return {value, message: corrected.message ? `Длина трубы скорректирована до ${value} м.` : undefined};
   }
 
   function correctOrderValues(rawPieces = piecesText, rawLength = lengthText) {
@@ -126,7 +127,12 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
     aria-label={`Количество целых труб для ${variant.name}`} value={piecesText}
     aria-invalid={piecesError || undefined}
     aria-describedby={status ? statusId : undefined}
-    onChange={event => {setDraft({pieces: event.target.value, length: lengthText}); setMessage(undefined);}}
+    {...quantityTransferHandlers(setMessage)}
+    onChange={event => {
+      const next = constrainOrderQuantityInput(event.target.value, 999);
+      setDraft({pieces: next.value, length: lengthText});
+      setMessage(next.message);
+    }}
     onBlur={settlePieces}
     onKeyDown={event => {
       if (event.key === "Enter" && !event.nativeEvent.isComposing) {
@@ -138,6 +144,7 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
     aria-label={`Длина одной трубы для ${variant.name}`} value={lengthText}
     aria-invalid={lengthError || undefined}
     aria-describedby={status ? statusId : undefined}
+    {...quantityTransferHandlers(setMessage)}
     placeholder={`${range[0]}–${range[1]}`}
     onChange={event => {setDraft({pieces: piecesText, length: event.target.value}); setMessage(undefined);}}
     onBlur={settleLength}

@@ -30,6 +30,11 @@
   text-align: center;
 }
 
+.wideInput {
+  width: 8rem;
+  padding-inline: 0.25rem;
+}
+
 .status {
   display: block;
   min-height: 1.25rem;

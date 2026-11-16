@@ -1,4 +1,5 @@
 import {formatCatalogNumber} from "./catalogNumberInput";
+import type {OrderInputMode} from "@/types/cart";
 
 const quantityFormatter = new Intl.NumberFormat("ru-RU", {
   useGrouping: true,
@@ -13,14 +14,32 @@ export function formatEditableCartQuantity(value: number) {
   return formatCatalogNumber(value).replace(".", ",");
 }
 
+const compactQuantityFormatters = new Map<string, Intl.NumberFormat>();
+
+export function formatQuantityForInput(value: number, grouped = false, fractionDigits = 6) {
+  const key = `${grouped}-${fractionDigits}`;
+  let formatter = compactQuantityFormatters.get(key);
+  if (!formatter) {
+    formatter = new Intl.NumberFormat("ru-RU", {useGrouping: grouped, maximumFractionDigits: fractionDigits});
+    compactQuantityFormatters.set(key, formatter);
+  }
+  const formatted = formatter.format(value).replace(/\u00a0/gu, "\u202f");
+  // Keep tiny positive conversions and legacy quantities distinguishable from zero.
+  return value > 0 && formatted === "0" ? formatEditableCartQuantity(Number(value.toPrecision(3))) : formatted;
+}
+
+export function formatMeasuredQuantity(value: number, mode: OrderInputMode, grouped = false) {
+  return formatQuantityForInput(value, grouped, mode === "meter" ? 2 : value < 0.001 ? 8 : 6);
+}
+
 export function normalizeCartQuantityText(value: string) {
   // Keep grouping boundaries for validation; never join unrelated numbers or spreadsheet cells.
   return value.trim().replace(/[ \u00a0\u202f\u2009]+/gu, " ");
 }
 
 export function normalizeCartQuantityDraft(value: string, selectionStart: number | null, selectionEnd: number | null,
-  {maximum = Infinity}: {maximum?: number} = {}): {
-    accepted: boolean; value: string; selectionStart: number | null; selectionEnd: number | null; message?: string;
+  {maximum = Infinity, formatMaximum = formatEditableCartQuantity}: {maximum?: number; formatMaximum?: (value: number) => string} = {}): {
+    accepted: boolean; value: string; selectionStart: number | null; selectionEnd: number | null; message?: string; capped?: boolean;
   } {
   const normalized = normalizeCartQuantityText(value);
   const reject = (message: string) => ({accepted: false, value, selectionStart, selectionEnd, message});
@@ -48,11 +67,24 @@ export function normalizeCartQuantityDraft(value: string, selectionStart: number
   }
   // Check overflow as well: a long positive digit sequence can become Infinity.
   if (Number(next.replace(",", ".")) > maximum) {
-    const limited = formatEditableCartQuantity(maximum);
-    return {accepted: true, value: limited, selectionStart: limited.length, selectionEnd: limited.length,
-      message: `Значение ограничено максимумом ${formatCartQuantity(maximum)}.`};
+    const limited = formatMaximum(maximum);
+    return {accepted: true, value: limited, selectionStart: limited.length, selectionEnd: limited.length, capped: true,
+      message: `Значение ограничено максимумом ${limited}.`};
   }
   return {accepted: true, value: next, selectionStart: start, selectionEnd: end};
+}
+
+type QuantityTransfer = {preventDefault(): void} & ({clipboardData: DataTransfer} | {dataTransfer: DataTransfer});
+
+export function quantityTransferHandlers(onReject: (message: string) => void) {
+  function check(event: QuantityTransfer) {
+    const data = "clipboardData" in event ? event.clipboardData : event.dataTransfer;
+    const result = normalizeCartQuantityDraft(data.getData("text/plain"), null, null);
+    if (result.accepted) return;
+    event.preventDefault();
+    onReject(result.message ?? "Вставьте одно число.");
+  }
+  return {onPaste: check, onDrop: check};
 }
 
 export function stepCartQuantity(value: number, step: number, direction: number) {

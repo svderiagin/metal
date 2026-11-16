@@ -1,12 +1,13 @@
 import type {ProductVariant} from "@/types/product";
 import type {OrderInputMode} from "@/types/cart";
+import {isDemonstrationProduct} from "./catalogOffer";
 
 // Input limits are shared by the catalog, cart editor and authoritative repricing.
 export function getMeasurementQuantityOptions(product: ProductVariant, mode: OrderInputMode) {
   const isVgp = product.categoryId === "cat-trk" && product.subcategoryId === "cat-trk-sub-1";
   const length = product.lengthMeters;
-  const mass = product.weightPerMeterKg;
-  const wholePipes = isVgp && length !== undefined && isPositiveFinite(length);
+  const mass = isDemonstrationProduct(product) ? undefined : product.weightPerMeterKg;
+  const wholePipes = isVgp && mass !== undefined && isPositiveFinite(mass) && length !== undefined && isPositiveFinite(length);
   const minimumMeters = wholePipes ? length : 0.01;
   const maximumTons = 999;
   const convertedMaximum = mass !== undefined && isPositiveFinite(mass) ? tonsToMeters(maximumTons, mass) : null;

@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import {formatCartQuantity, formatEditableCartQuantity, normalizeCartQuantityDraft,
+import {formatCartQuantity, formatEditableCartQuantity, formatMeasuredQuantity, normalizeCartQuantityDraft,
   normalizeCartQuantityText, stepCartQuantity} from "../../lib/cartQuantityInput";
 import {correctOrderQuantity, formatCatalogNumber, parseOrderQuantity} from "../../lib/catalogNumberInput";
 import {getProductVariantById} from "../../lib/cartCatalog";
@@ -96,6 +96,19 @@ test("overflow clamps a valid number to the exact product ceiling and puts the c
   const boundary = normalizeCartQuantityDraft("2,219778", 3, 3, {maximum: 2.219778});
   assert.equal(boundary.value, "2,219778");
   assert.equal(boundary.message, undefined);
+});
+
+test("a converted limit can be displayed compactly without losing its exact value on commit", () => {
+  const maximum = 999_000 / 0.617;
+  const result = normalizeCartQuantityDraft("2000000", 7, 7, {
+    maximum, formatMaximum: value => formatMeasuredQuantity(value, "meter"),
+  });
+  assert.equal(result.value, "1619124,8");
+  assert.equal(result.capped, true);
+  assert.notEqual(parseOrderQuantity(result.value), maximum);
+  assert.equal(formatMeasuredQuantity(maximum, "meter", true), "1\u202f619\u202f124,8");
+  assert.equal(formatMeasuredQuantity(0.0222555, "ton"), "0,022256");
+  assert.equal(formatMeasuredQuantity(0.00000222, "ton"), "0,00000222");
 });
 
 test("commit corrections respect whole units and product bounds while preserving exact saved fallback", () => {

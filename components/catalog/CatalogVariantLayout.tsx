@@ -8,7 +8,7 @@ import tableStyles from "./RebarTable.module.css";
 type View = "table" | "card";
 
 const quantityColumnWidths = [11, 20, 21, 11, 10, 12, 15];
-const measuredColumnWidths = [12, 15, 20, 10, 8, 8, 12, 15];
+const measuredColumnWidths = [13, 12, 15, 11, 11, 11, 12, 15];
 
 export function CatalogVariantTable({children, quantityHeading = "Кол-во", measured = false}: {
   children: ReactNode;
@@ -115,7 +115,7 @@ export function CatalogVariantOrder({view, quantity, secondaryQuantity, action, 
       <td className="text-center">{action}{status}</td>
     </>
     : <>
-      <div className={`mt-4 grid gap-3 border-t border-slate-100 pt-4 dark:border-slate-800 ${secondaryQuantity ? "grid-cols-2" : ""}`}>
+      <div className={`mt-4 grid gap-3 border-t border-slate-100 pt-4 dark:border-slate-800 ${secondaryQuantity ? tableStyles.measurementFields : ""}`}>
         {quantity}
         {secondaryQuantity}
       </div>

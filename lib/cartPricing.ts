@@ -44,7 +44,7 @@ export function revalidateCartPrice(product: ProductVariant, item: PriceInput) {
   const legacyMeasuredTons = !item.measurement && product.unit === "ton" && !isDemonstrationProduct(product)
     && product.weightPerMeterKg !== undefined && Number.isFinite(product.weightPerMeterKg) && product.weightPerMeterKg > 0;
   let estimatedTotal = calculateLineTotal(item.quantity, product.price ?? 0);
-  if (!Number.isFinite(item.quantity) || item.quantity <= 0 || (!item.measurement && !legacyMeasuredTons && item.quantity > 999)) {
+  if (!Number.isFinite(item.quantity) || item.quantity <= 0 || (!item.measurement && item.quantity > 999)) {
     invalidReason = "Не удалось пересчитать количество.";
   }
   if (item.measurement) {
@@ -56,8 +56,9 @@ export function revalidateCartPrice(product: ProductVariant, item: PriceInput) {
     } else {
       const entered = input.inputMode === "meter" ? input.meters : input.weightTons;
       const {maximum} = getMeasurementQuantityOptions(product, input.inputMode);
-      // Enforce the input ceiling, while retaining valid legacy/conversion precision below the UI step.
-      if (entered > maximum + Math.max(1, maximum) * 1e-9) {
+      // Whole-pipe weight is itself converted and may carry floating-point noise.
+      const tolerance = isVgpVariant(product) && input.inputMode === "ton" ? conversionTolerance(maximum) : 0;
+      if (entered > maximum + tolerance) {
         invalidReason = "Объём превышает допустимое значение. Измените количество.";
       }
       const meters = input.inputMode === "meter" ? input.meters : tonsToMeters(input.weightTons, product.weightPerMeterKg);
@@ -84,9 +85,13 @@ export function revalidateCartPrice(product: ProductVariant, item: PriceInput) {
   const physicalMeters = measurement?.meters ?? (legacyMeasuredTons ? tonsToMeters(item.quantity, product.weightPerMeterKg!) : null);
   const maximumMeters = getMeasurementQuantityOptions(product, "meter").maximum;
   if (legacyMeasuredTons && physicalMeters === null) invalidReason = "Не удалось пересчитать количество.";
-  if (physicalMeters !== null && physicalMeters > maximumMeters + Math.max(1, maximumMeters) * 1e-9) {
+  if (physicalMeters !== null && physicalMeters > maximumMeters + conversionTolerance(maximumMeters)) {
     invalidReason = "Объём превышает допустимое значение. Измените количество.";
   }
   if (invalidReason || estimatedTotal === null) estimatedTotal = 0;
   return {measurement, pieceOrder: undefined, invalidReason, estimatedTotal};
+}
+
+function conversionTolerance(maximum: number) {
+  return Math.max(1, maximum) * Number.EPSILON * 32;
 }

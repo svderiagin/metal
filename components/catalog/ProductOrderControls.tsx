@@ -9,7 +9,8 @@ import {getQuantityUnit, requiresWholeRozmetQuantity} from "@/lib/variantPresent
 import type {ProductVariant} from "@/types/product";
 import {QuoteRequestButton} from "./QuoteRequestButton";
 import {formatQuoteProductName} from "@/lib/quoteRequest";
-import {constrainOrderQuantityInput, correctOrderQuantity, formatCatalogNumber, parseOrderQuantity} from "@/lib/catalogNumberInput";
+import {constrainOrderQuantityInput, correctOrderQuantity, parseOrderQuantity} from "@/lib/catalogNumberInput";
+import {formatQuantityForInput, quantityTransferHandlers} from "@/lib/cartQuantityInput";
 import {calculateLineTotal} from "@/lib/orderMeasurement";
 import {formatCurrency} from "@/lib/currency";
 import {CatalogVariantOrder, CatalogVariantQuantity} from "./CatalogVariantLayout";
@@ -25,8 +26,9 @@ export function ProductOrderControls({variant, view, showUnit = true, allowBacko
   const line = lines.find(item => item.productId === variant.id);
   const {draft, setDraft, message: correction, setMessage: setCorrection} = useOrderDraft<string>(variant.id, "quantity", "");
   const [removed, setRemoved] = useState(false);
-  const value = draft ?? formatCatalogNumber(line?.quantity ?? 1);
-  const quantity = parseOrderQuantity(value);
+  const savedValue = formatQuantityForInput(line?.quantity ?? 1);
+  const value = draft ?? savedValue;
+  const quantity = chosenQuantity(value);
   const needsQuote = variant.price === null || !Number.isFinite(variant.price) || variant.price < 0
     || variant.quoteOnly || variant.priceQualifier === "from";
   const canPurchase = !needsQuote && (allowBackorder || variant.inStock || (variant.imported && variant.availability !== "ON_ORDER"));
@@ -48,18 +50,25 @@ export function ProductOrderControls({variant, view, showUnit = true, allowBacko
     return () => window.clearTimeout(timer);
   }, [removed]);
 
+  function chosenQuantity(rawValue: string) {
+    const parsed = parseOrderQuantity(rawValue);
+    return line && parsed === parseOrderQuantity(savedValue) ? line.quantity : parsed;
+  }
+
   function correctQuantityValue(rawValue: string) {
-    if (!rawValue.trim() && line) return {value: formatCatalogNumber(line.quantity)};
-    const numeric = parseOrderQuantity(rawValue);
+    if (!rawValue.trim() && line) return {value: savedValue};
+    const numeric = chosenQuantity(rawValue);
     if (numeric === null || numeric === 0) return {value: rawValue};
-    return correctOrderQuantity(rawValue, {whole: wholeQuantity, maximum: 999});
+    if (numeric === line?.quantity && numeric <= 999 && (!wholeQuantity || Number.isInteger(numeric))) return {value: savedValue};
+    const corrected = correctOrderQuantity(rawValue, {whole: wholeQuantity, maximum: 999, decimalPlaces: numeric >= 0.000001 ? 6 : undefined});
+    return {...corrected, value: corrected.value.replace(".", ",")};
   }
 
   function submit(rawValue = value) {
-    const rawQuantity = parseOrderQuantity(rawValue);
+    const rawQuantity = chosenQuantity(rawValue);
     if (!hydrated || removed || rawQuantity === null) return;
     const corrected = correctQuantityValue(rawValue);
-    const nextQuantity = parseOrderQuantity(corrected.value);
+    const nextQuantity = chosenQuantity(corrected.value);
     setDraft(corrected.value);
     if (corrected.message) setCorrection(corrected.message);
     if (line && rawQuantity === 0) {
@@ -113,6 +122,7 @@ export function ProductOrderControls({variant, view, showUnit = true, allowBacko
         aria-label={`Количество ${variant.name}, ${quantityUnit}`}
         aria-invalid={quantityError || undefined}
         aria-describedby={statusId}
+        {...quantityTransferHandlers(setCorrection)}
         onChange={event => {
           const next = constrainOrderQuantityInput(event.target.value, 999);
           setDraft(next.value);

@@ -12,18 +12,18 @@ test("order drafts and totals survive table and card breakpoints before adding t
   const quantity = row.getByRole("textbox", {name: /^Количество /});
   const total = row.getByLabel(/^Сумма заказа для/);
   await expect(row).toHaveJSProperty("tagName", "TR");
-  await quantity.fill("2.5");
+  await quantity.fill("2,5");
   await expect(total).toHaveText(formatTotal(2.5));
 
   await page.setViewportSize({width: 390, height: 844});
   await expect(row).toHaveJSProperty("tagName", "ARTICLE");
-  await expect(quantity).toHaveValue("2.5");
+  await expect(quantity).toHaveValue("2,5");
   await expect(total).toHaveText(formatTotal(2.5));
-  await quantity.fill("4.5");
+  await quantity.fill("4,5");
 
   await page.setViewportSize({width: 1440, height: 1000});
   await expect(row).toHaveJSProperty("tagName", "TR");
-  await expect(quantity).toHaveValue("4.5");
+  await expect(quantity).toHaveValue("4,5");
   await expect(total).toHaveText(formatTotal(4.5));
   expect(await page.evaluate(() => JSON.parse(localStorage.getItem("metal-store-cart-v1") ?? "[]"))).toEqual([]);
 });
@@ -144,12 +144,12 @@ test("VGP keeps separate order fields, rounds to whole pipes and recalculates th
   await meters.fill("6,001");
   await meters.blur();
   await expect(meters).toHaveValue("12");
-  await expect(tons).toHaveValue("0.01536");
+  await expect(tons).toHaveValue("0,01536");
   await expect(row.getByLabel(/^Сумма заказа для/)).toHaveText(/823,91\s₽/);
   await tons.fill("0,02");
   await tons.blur();
   await expect(meters).toHaveValue("18");
-  await expect(tons).toHaveValue("0.02304");
+  await expect(tons).toHaveValue("0,02304");
   await row.getByRole("button", {name: "В корзину", exact: true}).click();
   const measurement = await page.evaluate(() => JSON.parse(localStorage.getItem("metal-store-cart-v1")!)[0].measurement);
   expect(measurement.inputMode).toBe("ton");

@@ -4,7 +4,7 @@ import {EmptyState} from "@/components/ui/EmptyState";
 import {CheckoutForm} from "./CheckoutForm";
 import {formatCurrency} from "@/lib/currency";
 import {formatNumber} from "@/lib/numberFormat";
-import {formatCartQuantity} from "@/lib/cartQuantityInput";
+import {formatMeasuredQuantity} from "@/lib/cartQuantityInput";
 import {ButtonLink} from "@/components/ui/Button";
 
 export function CheckoutPageContent() {
@@ -37,7 +37,7 @@ export function CheckoutPageContent() {
                 {line.pieceOrder
                   ? ` — ${formatNumber(line.pieceOrder.pieces)} шт. × ${formatNumber(line.pieceOrder.lengthMeters)} м = ${formatNumber(line.quantity)} м`
                   : line.measurement
-                  ? ` — ${formatMeasuredQuantity(line.measurement.meters)} м / ${formatMeasuredQuantity(line.measurement.weightTons)} т`
+                  ? ` — ${formatMeasuredQuantity(line.measurement.meters, "meter", true)} м / ${formatMeasuredQuantity(line.measurement.weightTons, "ton", true)} т`
                   : ` × ${line.quantity} (${line.priceUnit})`}
               </span>
               <strong className="ml-auto shrink-0 whitespace-nowrap tabular-nums">{formatCurrency(line.estimatedTotal)}</strong>
@@ -53,8 +53,4 @@ export function CheckoutPageContent() {
       </aside>
     </div>
   );
-}
-
-function formatMeasuredQuantity(value: number) {
-  return formatCartQuantity(Number(value.toPrecision(8)));
 }

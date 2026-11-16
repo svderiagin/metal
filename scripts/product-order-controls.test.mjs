@@ -43,6 +43,7 @@ function setup(overrides = {}, componentProps = {}) {
     '@/lib/quoteRequest': readProjectData('lib/quoteRequest.ts'),
     '@/lib/orderMeasurement': readProjectData('lib/orderMeasurement.ts'),
     '@/lib/catalogNumberInput': readProjectData('lib/catalogNumberInput.ts'),
+    '@/lib/cartQuantityInput': readProjectData('lib/cartQuantityInput.ts'),
     '@/lib/catalogOffer': readProjectData('lib/catalogOffer.ts'),
     '@/lib/currency': readProjectData('lib/currency.ts'),
     './CatalogVariantLayout': {
@@ -84,7 +85,7 @@ test('add, replace quantity, restore saved state, delete zero and show removed f
   assert.equal(h.cart.lines[0].quantity, 3.5);
   assert.deepEqual(h.calls, ['add', 'update']);
   h.change(''); h.render().input.onBlur();
-  assert.equal(h.render().input.value, '3.5');
+  assert.equal(h.render().input.value, '3,5');
   assert.equal(h.render().actionText, 'В корзине');
   assert.equal(h.render().action.disabled, true);
   assert.deepEqual(h.calls, ['add', 'update']);

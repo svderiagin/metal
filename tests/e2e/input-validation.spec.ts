@@ -4,6 +4,7 @@ test("checkout rejects malformed contact details and INN, and scopes company det
   await seedCart(page);
   await page.goto("/checkout");
   await fillCheckout(page);
+  await expect(page.getByRole("radio", {name: /Банковская карта/})).toBeDisabled();
   const submissions: {customer: Record<string, unknown>}[] = [];
   await page.route("**/api/orders", async route => {
     submissions.push(route.request().postDataJSON());
@@ -80,6 +81,60 @@ test("contact form points to invalid fields and accepts a corrected message with
   expect(submissions).toEqual([expect.objectContaining({phone: ""})]);
 });
 
+for (const endpoint of ["orders", "contact"] as const) {
+  test(`${endpoint} keeps all 16 inserted phone digits and rejects the number before sending`, async ({page, isMobile}) => {
+    if (isMobile) await page.setViewportSize({width: 320, height: 844});
+    if (endpoint === "orders") {
+      await seedCart(page);
+      await page.goto("/checkout");
+      await fillCheckout(page);
+    } else {
+      await page.goto("/contacts");
+      const form = page.getByRole("form", {name: "Связаться с нами"});
+      await form.getByLabel("Имя *", {exact: true}).fill("Анна Тестовая");
+      await form.getByLabel("Электронная почта *", {exact: true}).fill("audit@example.invalid");
+      await form.getByLabel("Сообщение *", {exact: true}).fill("Проверка телефона");
+      await form.getByRole("checkbox").check();
+    }
+    const phone = page.locator('main [name="phone"]');
+    const submit = page.getByRole("button", {name: endpoint === "orders" ? /^Создать заказ на/ : /^Отправить$/});
+    let requests = 0;
+    await page.route(`**/api/${endpoint}`, async route => {
+      requests++;
+      await route.fulfill({status: 503, json: {ok: false, error: "Тестовый отказ сервиса"}});
+    });
+
+    const overlong = "+7 (900)   123  -  4567 - 89012";
+    await phone.fill("");
+    await page.keyboard.insertText(overlong);
+    await expect(phone).toHaveValue(overlong);
+    await submit.click();
+    await expect(phone).toHaveAttribute("aria-invalid", "true");
+    await expect(phone).toBeFocused();
+    expect(requests).toBe(0);
+
+    const corrected = "+7 (900) 000-00-00";
+    await phone.fill(corrected);
+    const pending = page.waitForRequest(req => req.method() === "POST" && req.url().endsWith(`/api/${endpoint}`));
+    await submit.click();
+    const body = (await pending).postDataJSON();
+    expect(endpoint === "orders" ? body.customer.phone : body.phone).toBe(corrected);
+    await expect(phone).not.toHaveAttribute("aria-invalid", "true");
+  });
+}
+
+test("checkout sends a valid international address without expanding its local part", async ({page}) => {
+  await seedCart(page);
+  await page.goto("/checkout");
+  await fillCheckout(page);
+  const email = "İ".repeat(32) + "@example.invalid";
+  await page.getByLabel("Электронная почта *", {exact: true}).fill(email);
+  await page.route("**/api/orders", route => route.fulfill({status: 503, json: {ok: false, error: "Тестовый отказ сервиса"}}));
+  const pending = page.waitForRequest(req => req.method() === "POST" && req.url().endsWith("/api/orders"));
+  await page.getByRole("button", {name: /^Создать заказ на/}).click();
+  expect((await pending).postDataJSON().customer.email).toBe(email);
+});
+
 test("quote requires correction of an overlong pasted phone and normalizes a valid formatted number", async ({page}) => {
   await page.goto("/#request");
   const submit = page.getByRole("button", {name: "Отправить заявку", exact: true});
@@ -116,6 +171,47 @@ test("quote requires correction of an overlong pasted phone and normalizes a val
   await expect(page.getByRole("status").filter({hasText: "Заявка принята."})).toBeVisible();
 });
 
+test("quote validates consent on its first click from an invalid phone and clears a sent message", async ({page, isMobile}) => {
+  if (isMobile) await page.setViewportSize({width: 320, height: 844});
+  await page.goto("/#request");
+  const submit = page.getByRole("button", {name: "Отправить заявку", exact: true});
+  const form = page.locator("form").filter({has: submit});
+  const name = form.getByLabel("Имя *", {exact: true});
+  const message = form.getByLabel(/Что требуется рассчитать/);
+  const phone = form.getByLabel("Телефон *", {exact: true});
+  const consent = form.getByRole("checkbox");
+  let requests = 0;
+  await page.route("**/api/quote", async route => {
+    requests++;
+    await route.fulfill({json: {ok: true}});
+  });
+  await name.fill("Анна Тестовая");
+  await form.getByLabel("Электронная почта *", {exact: true}).fill("audit@example.invalid");
+  await message.fill("Арматура для первого запроса");
+  await phone.fill("123");
+  await expect(phone).toBeFocused();
+  await expect(phone).toHaveAttribute("aria-invalid", "false");
+  if (isMobile) await submit.tap();
+  else await submit.click();
+  await expect(consent).toHaveAttribute("aria-invalid", "true");
+  await expect(phone).toHaveAttribute("aria-invalid", "true");
+  await expect(phone).toBeFocused();
+  expect(requests).toBe(0);
+
+  await phone.fill("8 (900) 000-00-00");
+  await consent.press("Space");
+  await expect(consent).toBeChecked();
+  if (isMobile) await submit.tap();
+  else await submit.click();
+  const repeat = page.getByRole("button", {name: "Отправить ещё одну", exact: true});
+  await expect(repeat).toBeVisible();
+  expect(requests).toBe(1);
+  await repeat.click();
+  await expect(name).toHaveValue("");
+  await expect(message).toHaveValue("");
+  await expect(consent).not.toBeChecked();
+});
+
 test("catalog blocks malformed quantities and positive quantities that round to zero", async ({page}) => {
   await openProduct(page);
   const row = visibleProduct(page, samples.shveller.id);
@@ -144,6 +240,25 @@ test("rows already saved with a zero total are blocked at checkout", async ({pag
   await expect(page.getByRole("heading", {name: "Расчёт заказа требует уточнения"})).toBeVisible();
   await expect(page.getByRole("button", {name: /^Создать заказ на/})).toHaveCount(0);
   await expect(page.getByRole("link", {name: "Проверить корзину"})).toHaveAttribute("href", "/cart");
+});
+
+test("cart explains why a positive quantity with a zero total was rejected and allows correction", async ({page}) => {
+  await seedCart(page, 3);
+  await page.goto("/cart");
+  const row = page.locator(`[data-cart-row="${samples.shveller.id}"]`);
+  const quantity = row.getByRole("textbox", {name: /^Длина /});
+  await expect(quantity).toHaveValue("3");
+  await quantity.fill("0,000001");
+  await quantity.press("Enter");
+  await expect(quantity).toHaveValue("3");
+  await expect(row.getByText(/Сумма позиции должна быть больше 0 ₽/)).toBeVisible();
+
+  await quantity.fill("2,5");
+  await quantity.press("Enter");
+  await expect(quantity).toHaveValue("2,5");
+  await expect(row.getByText(/Сумма позиции должна быть больше 0 ₽/)).toHaveCount(0);
+  await page.reload();
+  await expect(quantity).toHaveValue("2,5");
 });
 
 test("measured catalog rejects malformed input and still rounds a valid VGP length to whole pipes", async ({page}) => {

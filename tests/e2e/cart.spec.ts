@@ -258,7 +258,7 @@ test("metres and tonnes share exact state and focusing the other field cannot re
   await expect(row.getByText(/203,41\s*₽/)).toBeVisible();
   await fillQuantity(meters, "100,25");
   await tons.click();
-  await expectNumber(tons, 0.0222555);
+  await expectNumber(tons, 0.022256);
   await tons.blur();
   await expectMeasurement(page, rebar6.id, 100.25, 0.0222555, "meter");
   await fillQuantity(tons, "0,01");
@@ -313,20 +313,23 @@ for (const [variant, maximumMeters, maximumTons, minimumMeters, minimumTons] of 
 
 test("a fractional metre ceiling preserves the full 999 tonnes through commit and untouched focus changes", async ({page}) => {
   const maximumMeters = 999000 / 0.617;
+  const displayedMeters = Number(maximumMeters.toFixed(2));
   await openCart(page, [measuredItem(rebar10, 12)]);
   const row = cartRow(page, rebar10.id), meters = metersInput(row), tons = tonsInput(row);
   await fillQuantity(meters, String(maximumMeters + 1));
-  await expectNumber(meters, maximumMeters);
+  await expectNumber(meters, displayedMeters);
   expect((await storedItem(page, rebar10.id))!.measurement!.meters).toBe(12);
   await meters.press("Enter");
   await expectMeasurement(page, rebar10.id, maximumMeters, 999, "meter");
-  await expectNumber(meters, Number(maximumMeters.toPrecision(8)));
+  await expectNumber(meters, displayedMeters);
   await expectNumber(tons, 999);
   await expect(row.getByRole("alert")).toHaveCount(0);
   await expect(page.getByRole("main").getByRole("link", {name: "Перейти к оформлению", exact: true})).toBeVisible();
   const capped = await storedItems(page);
   await meters.focus();
-  await expectNumber(meters, maximumMeters);
+  await expectNumber(meters, displayedMeters);
+  await meters.press("End");
+  await meters.pressSequentially("0");
   await meters.blur();
   await tons.focus();
   await tons.blur();
@@ -372,14 +375,14 @@ for (const legacy of [true, false]) {
 test("a valid legacy heavy-beam tonne order submits only canonical quantities and survives an API refusal", async ({page}) => {
   const items: CartItem[] = [{productId: heavyBeam.id, quantity: 900}];
   const expectedMeters = 900 * 1000 / heavyBeam.weightPerMeterKg!;
+  const displayedMeters = Number(expectedMeters.toFixed(2));
   await openCart(page, items);
   const row = cartRow(page, heavyBeam.id);
-  // Resting measured fields show eight significant digits; focus exposes the exact editable value.
-  await expectNumber(metersInput(row), Number(expectedMeters.toPrecision(8)));
+  await expectNumber(metersInput(row), displayedMeters);
   await expectNumber(tonsInput(row), 900);
   await expect(row.getByRole("alert")).toHaveCount(0);
   await metersInput(row).focus();
-  await expectNumber(metersInput(row), expectedMeters);
+  await expectNumber(metersInput(row), displayedMeters);
   await metersInput(row).blur();
   await tonsInput(row).focus();
   await expectNumber(tonsInput(row), 900);
@@ -413,7 +416,7 @@ test("a valid legacy heavy-beam tonne order submits only canonical quantities an
   expect(await storedItems(page)).toEqual(items);
 
   await page.goto("/cart");
-  await expectNumber(metersInput(cartRow(page, heavyBeam.id)), Number(expectedMeters.toPrecision(8)));
+  await expectNumber(metersInput(cartRow(page, heavyBeam.id)), displayedMeters);
   await expectNumber(tonsInput(cartRow(page, heavyBeam.id)), 900);
   await expect(cartRow(page, heavyBeam.id).getByRole("alert")).toHaveCount(0);
   expect(await storedItems(page)).toEqual(items);

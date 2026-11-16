@@ -7,8 +7,8 @@ import {formatCurrency, formatUnitPrice} from "@/lib/currency";
 import {formatNumber} from "@/lib/numberFormat";
 import {QuantitySelector} from "./QuantitySelector";
 import {getProductVariantById} from "@/lib/cartCatalog";
-import {getCartMeasurementQuantityOptions, tonsToMeters} from "@/lib/orderMeasurement";
-import {formatCartQuantity} from "@/lib/cartQuantityInput";
+import {calculateLineTotal, getCartMeasurementQuantityOptions, metersToTons, tonsToMeters} from "@/lib/orderMeasurement";
+import {formatCartQuantity, formatMeasuredQuantity, formatQuantityForInput} from "@/lib/cartQuantityInput";
 import {isVgpVariant, wholeVgpOrder} from "@/lib/vgp";
 import {isDemonstrationProduct, requiresOfferConfirmation} from "@/lib/catalogOffer";
 import {CartAmount} from "./CartAmount";
@@ -46,6 +46,7 @@ export function CartItemRow({line}: { line: CartLine }) {
             onChange={pieces => updatePieceOrder(line.productId, pieces, line.pieceOrder!.lengthMeters)}/>
           {product?.lengthRangeMeters ? <QuantitySelector fieldLabel="Длина одной трубы" productName={line.name} unit="м"
             minimum={product.lengthRangeMeters[0]} maximum={product.lengthRangeMeters[1]}
+            decimalPlaces={2} formatValue={(quantity, grouped) => formatQuantityForInput(quantity, grouped, 2)}
             value={line.pieceOrder.lengthMeters}
             onChange={length => updatePieceOrder(line.productId, line.pieceOrder!.pieces, length)}/>
             : <p className="text-sm text-slate-600 dark:text-slate-300">Длина трубы: {formatNumber(line.pieceOrder.lengthMeters)} м</p>}
@@ -59,11 +60,16 @@ export function CartItemRow({line}: { line: CartLine }) {
             const options = mode === "meter" ? meterOptions : tonOptions;
             return <QuantitySelector key={mode} fieldLabel={mode === "meter" ? "Длина" : "Масса"}
               productName={line.name} unit={mode === "meter" ? "м" : "т"}
+              wideInput
               value={mode === "meter" ? measurement.meters : measurement.weightTons}
               onChange={quantity => updateQuantity(line.productId, quantity, mode)} disabled={!product || !canConvert}
               {...options}
               step={vgp ? options?.minimum : mode === "meter" ? 1 : 0.001}
-              formatValue={quantity => formatCartQuantity(Number(quantity.toPrecision(8)))}
+              formatValue={(quantity, grouped) => formatMeasuredQuantity(quantity, mode, grouped)}
+              hasPositiveTotal={canConvert && !priceRequiresQuote ? quantity => {
+                const weightTons = mode === "meter" ? metersToTons(quantity, product.weightPerMeterKg!) : quantity;
+                return weightTons !== null && calculateLineTotal(weightTons, product.pricePerTon!) !== null;
+              } : undefined}
               normalizeQuantity={product && vgp ? quantity => {
                 const order = wholeVgpOrder(product, quantity, mode);
                 if (!order) return null;
@@ -73,7 +79,7 @@ export function CartItemRow({line}: { line: CartLine }) {
               } : undefined}/>;
           })}
           {meterOptions && tonOptions && <p className="max-w-64 text-xs text-slate-600 dark:text-slate-400">
-            Максимум: {formatCartQuantity(tonOptions.maximum)} т
+            Максимум: {formatMeasuredQuantity(tonOptions.maximum, "ton", true)} т
             {vgp && product?.lengthMeters ? ` · целыми трубами по ${formatCartQuantity(product.lengthMeters)} м` : ""}
           </p>}
         </div>
@@ -82,6 +88,7 @@ export function CartItemRow({line}: { line: CartLine }) {
           : product?.unit === "meter" ? "Длина" : "Количество"}
           productName={line.name} unit={line.quantityUnit} whole={line.wholeQuantity}
           step={!line.wholeQuantity && product?.unit === "ton" ? 0.001 : 1}
+          hasPositiveTotal={priceRequiresQuote ? undefined : quantity => calculateLineTotal(quantity, product.price!) !== null}
           disabled={!product} value={line.quantity} onChange={(value) => updateQuantity(line.productId, value)}/>
       )}</div>
       <div className={styles.price}>

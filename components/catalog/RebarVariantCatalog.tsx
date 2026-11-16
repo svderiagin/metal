@@ -35,14 +35,14 @@ type SortMode =
 
 const rebarColumns = [
   {label: "Диаметр, мм", width: "8%"},
-  {label: "Форма", width: "8%"},
+  {label: "Форма", width: "7%"},
   {label: "Марка стали", width: "8%"},
-  {label: "Цена, ₽/т", width: "11%"},
-  {label: "Масса, кг/м", width: "8%"},
-  {label: "Длина, м", width: "7%"},
-  {label: "Заказ, м", width: "10%"},
-  {label: "Заказ, т", width: "10%"},
-  {label: "Сумма", width: "15%"},
+  {label: "Цена, ₽/т", width: "10%"},
+  {label: "Масса, кг/м", width: "7%"},
+  {label: "Длина, м", width: "6%"},
+  {label: "Заказ, м", width: "13%"},
+  {label: "Заказ, т", width: "13%"},
+  {label: "Сумма", width: "13%"},
   {label: "Действие", width: "15%"},
 ] as const;
 

@@ -83,7 +83,7 @@ export function ContactForm() {
       </div>
       <div>
         <label className="block text-sm font-semibold">Телефон
-          <Input type="tel" maxLength={CONTACT_LIMITS.phone} autoComplete="tel" className="mt-1" {...fieldProps("phone")}/>
+          <Input type="tel" autoComplete="tel" className="mt-1" {...fieldProps("phone")}/>
         </label>
         {fieldError("phone")}
       </div>

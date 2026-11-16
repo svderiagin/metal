@@ -92,6 +92,7 @@ export function QuoteRequestForm() {
       });
       const result: unknown = await response.json();
       if (!response.ok || !isApiSuccess(result)) throw new Error(readApiError(result, "Не удалось отправить заявку."));
+      setMessage("");
       setSuccess(true);
       form.reset();
     } catch (caught) {
@@ -158,6 +159,9 @@ export function QuoteRequestForm() {
     </div>
     {error && <div role="alert" className="text-sm text-red-700 dark:text-red-400 sm:col-span-2"><p className="font-semibold">{error}</p>
       <p className="mt-2">Отправьте заявку на <a href={`mailto:${companyDetails.salesEmail}`} className="underline underline-offset-2">{companyDetails.salesEmail}</a>. Введённые данные сохранены в форме.</p></div>}
-    <Button type="submit" disabled={submitting} className="sm:w-fit">{submitting ? "Отправляем…" : "Отправить заявку"}</Button>
+    <Button type="submit" disabled={submitting} className="sm:w-fit" onMouseDown={event => {
+      // Showing a blur error can move the button before the click reaches it.
+      if (event.currentTarget.form?.contains(document.activeElement)) event.preventDefault();
+    }}>{submitting ? "Отправляем…" : "Отправить заявку"}</Button>
   </form>;
 }

@@ -43,6 +43,7 @@ function setup(id, kind = 'beam') {
     '@/lib/quoteRequest': readProjectData('lib/quoteRequest.ts'),
     '@/lib/orderMeasurement': readProjectData('lib/orderMeasurement.ts'),
     '@/lib/catalogNumberInput': readProjectData('lib/catalogNumberInput.ts'),
+    '@/lib/cartQuantityInput': readProjectData('lib/cartQuantityInput.ts'),
     '@/lib/catalogOffer': readProjectData('lib/catalogOffer.ts'),
     '@/lib/currency': readProjectData('lib/currency.ts'),
     '@/lib/numberFormat': readProjectData('lib/numberFormat.ts'),
@@ -81,7 +82,7 @@ function setup(id, kind = 'beam') {
 
 test('beam reference table converts, adds, replaces and deletes a measured order', () => {
   const h = setup('local-122247');
-  h.change(0, '100'); assert.equal(h.render().inputs[1].value, '4.42');
+  h.change(0, '100'); assert.equal(h.render().inputs[1].value, '4,42');
   h.render().action.onClick(); assert.equal(h.render().actionText, 'В корзине');
   assert.equal(h.cart.lines[0].measurement.weightTons, 4.42);
   h.change(1, '8.84'); assert.equal(h.render().inputs[0].value, '200');
@@ -121,7 +122,7 @@ test('existing generic tonne carts hydrate into measured controls and rebar keep
   assert.equal(h.cart.lines[0].measurement.weightTons, 8.84);
   const rebar = productVariants.find(p => p.categoryId === 'cat-arm' && p.diameterMm === 6 && p.pricePerTon && !p.quoteOnly);
   const r = setup(rebar.id, 'rebar'); r.change(0, '100');
-  assert.equal(r.render().inputs[1].value, '0.0222');
+  assert.equal(r.render().inputs[1].value, '0,0222');
   r.render().action.onClick();
   assert.ok(Math.abs(r.cart.lines[0].measurement.weightTons - 0.0222) < 1e-12);
 });
@@ -129,7 +130,7 @@ test('existing generic tonne carts hydrate into measured controls and rebar keep
 test('VGP orders round up to whole pipes, retain exact mass and update or remove one cart line', () => {
   const h = setup('local-258', 'vgp');
   h.change(0, '7');
-  assert.equal(h.render().inputs[1].value, '0.01536');
+  assert.equal(h.render().inputs[1].value, '0,01536');
   h.render().inputs[0].onBlur();
   assert.equal(h.render().inputs[0].value, '12');
   h.render().action.onClick();
@@ -140,7 +141,7 @@ test('VGP orders round up to whole pipes, retain exact mass and update or remove
   h.change(1, '0.02');
   assert.equal(h.render().inputs[0].value, '18');
   h.render().inputs[1].onBlur();
-  assert.equal(h.render().inputs[1].value, '0.02304');
+  assert.equal(h.render().inputs[1].value, '0,02304');
   h.render().action.onClick();
   assert.equal(h.cart.lines.length, 1);
   assert.equal(h.cart.lines[0].measurement.meters, 18);

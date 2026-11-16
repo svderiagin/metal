@@ -26,7 +26,7 @@ export function CheckoutFields({form, onChange, errors, formId}: {
   }
   return <div className="grid items-start gap-4 sm:grid-cols-2">
     {contactFields.map(field => <Field key={field.key} label={field.label} {...errorProps(field.key)}>
-      <Input required type={field.type} autoComplete={field.autoComplete} maxLength={CHECKOUT_LIMITS[field.key]}
+      <Input required type={field.type} autoComplete={field.autoComplete} maxLength={field.key === "phone" ? undefined : CHECKOUT_LIMITS[field.key]}
         value={form[field.key]} onChange={event => onChange(field.key, event.target.value)} {...validationProps(field.key)}/>
     </Field>)}
     {form.customerType === "COMPANY" && <>

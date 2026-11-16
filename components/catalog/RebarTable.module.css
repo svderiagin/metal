@@ -94,6 +94,10 @@
   font-variant-numeric: tabular-nums;
 }
 
+.table td .measurementInput {
+  padding-inline: 0.25rem;
+}
+
 .table > :is(thead, tbody) > tr > :is(th, td).sumColumn {
   text-align: center;
 }
@@ -139,6 +143,10 @@
 }
 
 @container catalog-card (min-width: 17rem) {
+  .measurementFields {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .cardDetails {
     grid-template-columns: 9rem minmax(0, 1fr);
   }

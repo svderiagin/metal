@@ -1,9 +1,10 @@
 import type {ContactRequest, QuoteRequest} from "@/types/forms";
-import type {CheckoutFormData, CreateOrderInput, CustomerType, PaymentMethod} from "@/types/order";
-import {createOrderInput, isCheckoutFormValid} from "@/lib/checkout";
+import type {CheckoutFormData, CreateOrderInput, CustomerType} from "@/types/order";
+import {createOrderInput, isCheckoutFormValid, isCheckoutPaymentAvailable} from "@/lib/checkout";
 import {validateContactFields} from "@/lib/contactValidation";
 import {validateQuoteFields} from "@/lib/quoteValidation";
 import {normalizePieceOrder} from "@/lib/profilePipe";
+import {normalizeEmail} from "@/lib/validation";
 
 const productIdPattern = /^[a-zA-Z0-9-]{1,80}$/;
 
@@ -15,9 +16,6 @@ const singleLine = (value: unknown) => stringField(value).trim().replace(/\s+/g,
 
 const isCustomerType = (value: unknown): value is CustomerType =>
   value === "INDIVIDUAL" || value === "COMPANY";
-
-const isPaymentMethod = (value: unknown): value is PaymentMethod =>
-  value === "CARD" || value === "INVOICE";
 
 export function parseCreateOrderInput(value: unknown): CreateOrderInput | null {
   if (!isRecord(value) || !Array.isArray(value.items) || !isRecord(value.customer) || !isRecord(value.delivery)) return null;
@@ -41,7 +39,7 @@ export function parseCreateOrderInput(value: unknown): CreateOrderInput | null {
       ...(pieceOrder ? {pieceOrder} : {}),
     });
   }
-  if (!isCustomerType(value.customer.type) || !isPaymentMethod(value.paymentMethod)) return null;
+  if (!isCustomerType(value.customer.type) || !isCheckoutPaymentAvailable(value.paymentMethod)) return null;
   if (value.delivery.comment != null && typeof value.delivery.comment !== "string") return null;
   const form: CheckoutFormData = {
     customerType: value.customer.type,
@@ -76,7 +74,7 @@ function positiveFinite(value: unknown): value is number {
 
 export function parseContactRequest(value: unknown): ContactRequest | null {
   if (!isRecord(value) || Object.keys(validateContactFields(value)).length) return null;
-  return {name: singleLine(value.name), email: stringField(value.email).trim().toLowerCase(),
+  return {name: singleLine(value.name), email: normalizeEmail(stringField(value.email)),
     phone: singleLine(value.phone) || undefined, message: singleLine(value.message), consent: true,
     website: singleLine(value.website) || undefined};
 }
@@ -85,7 +83,7 @@ export function parseQuoteRequest(value: unknown): QuoteRequest | null {
   if (!isRecord(value) || Object.keys(validateQuoteFields(value)).length) return null;
   return {
     name: (value.name as string).trim(), phone: (value.phone as string).trim(),
-    email: (value.email as string).trim().toLowerCase(),
+    email: normalizeEmail(value.email as string),
     company: typeof value.company === "string" ? value.company.trim() || undefined : undefined,
     message: (value.message as string).trim(), consent: true,
     website: typeof value.website === "string" ? value.website.trim() || undefined : undefined,

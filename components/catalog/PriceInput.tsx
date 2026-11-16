@@ -1,14 +1,12 @@
 import {useState} from "react";
 import {Input} from "@/components/ui/Input";
 import {parseCatalogPrice} from "@/lib/catalogFilters";
-import {formatCatalogNumber} from "@/lib/catalogNumberInput";
+import {quantityTransferHandlers} from "@/lib/cartQuantityInput";
 
 const emptyRange = {minimumPrice: "", maximumPrice: ""};
 type PriceBound = keyof typeof emptyRange;
 
-function formatPrice(value: number) {
-  return formatCatalogNumber(value).replace(".", ",");
-}
+const {format: formatPrice} = new Intl.NumberFormat("ru-RU", {useGrouping: false, maximumFractionDigits: 2});
 
 export function useCatalogPriceRange(onChange?: () => void) {
   const [range, setRange] = useState(emptyRange);
@@ -46,7 +44,7 @@ export function useCatalogPriceRange(onChange?: () => void) {
     setMessage("");
   }
 
-  return {...range, edit, commit, reset, message};
+  return {...range, edit, commit, reset, message, onRejectedTransfer: setMessage};
 }
 
 export function PriceRangeInputs({range, unit}: {range: ReturnType<typeof useCatalogPriceRange>; unit?: string}) {
@@ -57,12 +55,14 @@ export function PriceRangeInputs({range, unit}: {range: ReturnType<typeof useCat
       Цена от, {unitLabel}
       <PriceInput value={range.minimumPrice} placeholder="От"
         label={`Минимальная цена${suffix} в рублях`}
+        onRejectedTransfer={range.onRejectedTransfer}
         onChange={value => range.edit("minimumPrice", value)} onCommit={() => range.commit("minimumPrice")}/>
     </label>
     <label className="text-sm font-semibold">
       Цена до, {unitLabel}
       <PriceInput value={range.maximumPrice} placeholder="До"
         label={`Максимальная цена${suffix} в рублях`}
+        onRejectedTransfer={range.onRejectedTransfer}
         onChange={value => range.edit("maximumPrice", value)} onCommit={() => range.commit("maximumPrice")}/>
     </label>
   </>;
@@ -73,17 +73,19 @@ export function PriceRangeFeedback({message}: {message: string}) {
     className={message ? "w-full text-xs text-slate-600 dark:text-slate-300" : "sr-only"}>{message}</p>;
 }
 
-function PriceInput({value, placeholder, label, onChange, onCommit}: {
+function PriceInput({value, placeholder, label, onChange, onCommit, onRejectedTransfer}: {
   value: string;
   placeholder: string;
   label: string;
   onChange: (value: string) => void;
   onCommit: () => void;
+  onRejectedTransfer: (message: string) => void;
 }) {
   return (
     <span className="relative mt-1 block">
       <Input type="text" inputMode="decimal" value={value} placeholder={placeholder} aria-label={label}
         aria-invalid={(!!value.trim() && parseCatalogPrice(value) === null) || undefined}
+        {...quantityTransferHandlers(onRejectedTransfer)}
         onChange={event => onChange(event.currentTarget.value)} onBlur={onCommit}
         onKeyDown={event => {
           if (event.key === "Enter" && !event.nativeEvent.isComposing) {

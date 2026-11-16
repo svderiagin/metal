@@ -1,11 +1,15 @@
 import type {CheckoutFormData, CreateOrderInput, OrderItemInput} from "@/types/order";
-import {isValidCompanyInn, isValidEmail, isValidPersonName, isValidPhone} from "./validation";
+import {isValidCompanyInn, isValidEmail, isValidPersonName, isValidPhone, normalizeEmail} from "./validation";
 
 export const CHECKOUT_LIMITS = {fullName: 120, email: 254, phone: 30, companyName: 180,
   taxNumber: 20, legalAddress: 300, deliveryAddress: 300, comment: 1000} as const;
 export type CheckoutFieldErrors = Partial<Record<keyof CheckoutFormData, string>>;
 const companyFields = new Set<keyof CheckoutFormData>(["companyName", "taxNumber", "legalAddress"]);
 const singleLine = (value: string) => value.trim().replace(/\s+/g, " ");
+
+export function isCheckoutPaymentAvailable(method: unknown): method is "INVOICE" {
+  return method === "INVOICE";
+}
 
 export function isCheckoutFormValid(form: CheckoutFormData): boolean {
   return Object.keys(getCheckoutFieldErrors(form)).length === 0;
@@ -28,14 +32,14 @@ export function getCheckoutFieldErrors(form: CheckoutFormData): CheckoutFieldErr
     if (!errors[field] && form[field].trim().length > maximum) errors[field] = `Максимум ${maximum} символов.`;
   }
   if (!form.consentAccepted) errors.consentAccepted = "Подтвердите согласие на обработку персональных данных.";
-  if (form.paymentMethod !== "CARD" && form.paymentMethod !== "INVOICE") errors.paymentMethod = "Выберите способ оплаты.";
+  if (!isCheckoutPaymentAvailable(form.paymentMethod)) errors.paymentMethod = "Выберите счёт на оплату.";
   if (form.customerType !== "INDIVIDUAL" && form.customerType !== "COMPANY") errors.customerType = "Выберите тип покупателя.";
   return errors;
 }
 
 export function createOrderInput(form: CheckoutFormData, items: OrderItemInput[]): CreateOrderInput {
   return {items, consent: form.consentAccepted,
-    customer: {type: form.customerType, fullName: singleLine(form.fullName), email: form.email.trim().toLowerCase(),
+    customer: {type: form.customerType, fullName: singleLine(form.fullName), email: normalizeEmail(form.email),
       phone: singleLine(form.phone), ...(form.customerType === "COMPANY" ? {
         companyName: singleLine(form.companyName), taxNumber: form.taxNumber.trim(), legalAddress: singleLine(form.legalAddress),
       } : {})},

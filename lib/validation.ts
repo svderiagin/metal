@@ -1,3 +1,9 @@
+export function normalizeEmail(value: string) {
+  const email = value.trim();
+  // Unicode case mapping can change an internationalized address and its UTF-8 length.
+  return /^\p{ASCII}*$/u.test(email) ? email.toLowerCase() : email;
+}
+
 export function isValidEmail(value: string) {
   const email = value.trim();
   const [local, domain, extra] = email.split("@");

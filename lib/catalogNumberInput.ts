@@ -1,8 +1,9 @@
-const decimalPattern = /^-?(?:(?:\d+|\d{1,3}(?:[ \u00a0\u202f]\d{3})+)(?:[.,]\d*)?|[.,]\d+)$/u;
+const decimalPattern = /^-?(?:(?:\d+|\d{1,3}(?:[ \u00a0\u202f\u2009]+\d{3})+)(?:[.,]\d*)?|[.,]\d+)$/u;
 const plainNumber = new Intl.NumberFormat("en-US", {useGrouping: false, maximumSignificantDigits: 21});
+const localizedNumber = (quantity: number) => formatCatalogNumber(quantity).replace(".", ",");
 
 function normalizeDecimal(value: string) {
-  return value.trim().replace(/[ \u00a0\u202f]/gu, "").replace(",", ".");
+  return value.trim().replace(/[ \u00a0\u202f\u2009]/gu, "").replace(",", ".");
 }
 
 export function parseCatalogNumber(value: string): number | null {
@@ -21,37 +22,42 @@ export function parseOrderQuantity(value: string) {
   return quantity !== null && quantity >= 0 && !Object.is(quantity, -0) ? quantity : null;
 }
 
-export function constrainOrderQuantityInput(value: string, maximum: number): {value: string; message?: string} {
+export function constrainOrderQuantityInput(value: string, maximum: number,
+  formatMaximum = localizedNumber):
+  {value: string; message?: string; capped?: boolean} {
   if (!decimalPattern.test(value.trim()) || value.trim().startsWith("-")) return {value};
   if (Number(normalizeDecimal(value)) > maximum) {
-    return {value: String(maximum), message: `Значение ограничено максимумом ${formatCatalogNumber(maximum).replace(".", ",")}.`};
+    const limited = formatMaximum(maximum);
+    return {value: limited, message: `Значение ограничено максимумом ${limited}.`, capped: true};
   }
   // Preserve the decimal separator and trailing fractional zeros while the user is typing.
   return {value: value.replace(/^(\s*)0+(?=\d)/u, "$1")};
 }
 
-export function correctOrderQuantity(value: string, {whole = false, minimum, maximum, decimalPlaces, fallback}: {
+export function correctOrderQuantity(value: string, {whole = false, minimum, maximum, decimalPlaces, fallback,
+  formatFeedback = localizedNumber}: {
   whole?: boolean;
   minimum?: number;
   maximum?: number;
   decimalPlaces?: number;
   fallback?: number;
+  formatFeedback?: (quantity: number) => string;
 } = {}): {value: string; message?: string} {
   const parsed = parseCatalogNumber(value);
   if (!value.trim() || parsed === null || ((parsed < 0 || Object.is(parsed, -0)) && minimum === undefined)) {
     if (fallback !== undefined && Number.isFinite(fallback) && fallback >= 0) {
       // A saved quantity may carry exact converted precision beyond the input display.
-      const restored = correctOrderQuantity(formatCatalogNumber(fallback), {whole, minimum, maximum});
-      return {...restored, message: `Восстановлено количество ${restored.value.replace(".", ",")}.`};
+      const restored = correctOrderQuantity(formatCatalogNumber(fallback), {whole, minimum, maximum, formatFeedback});
+      return {...restored, message: `Восстановлено количество ${formatFeedback(Number(restored.value))}.`};
     }
     return {value: "", ...(!value.trim() ? {} : {message: "Некорректное значение очищено."})};
   }
   const quantity = parsed;
   if (minimum !== undefined && quantity < minimum) {
-    return {value: formatCatalogNumber(minimum), message: `Значение увеличено до минимума ${formatCatalogNumber(minimum).replace(".", ",")}.`};
+    return {value: formatCatalogNumber(minimum), message: `Значение увеличено до минимума ${formatFeedback(minimum)}.`};
   }
   if (maximum !== undefined && quantity > maximum) {
-    return {value: String(maximum), message: `Значение ограничено максимумом ${formatCatalogNumber(maximum).replace(".", ",")}.`};
+    return {value: formatCatalogNumber(maximum), message: `Значение ограничено максимумом ${formatFeedback(maximum)}.`};
   }
   // A converted ceiling can carry more precision than ordinary metre input.
   if (maximum !== undefined && quantity === maximum) return {value: formatCatalogNumber(quantity)};
@@ -70,7 +76,7 @@ export function correctOrderQuantity(value: string, {whole = false, minimum, max
       return {value: "", message: `Значение очищено. Минимум — ${minimum}.`};
     }
     if (rounded !== quantity) {
-      return {value: formatCatalogNumber(rounded), message: `Значение округлено до ${formatCatalogNumber(rounded).replace(".", ",")}.`};
+      return {value: formatCatalogNumber(rounded), message: `Значение округлено до ${formatFeedback(rounded)}.`};
     }
   }
   return {value: formatCatalogNumber(quantity)};

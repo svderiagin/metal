@@ -66,8 +66,8 @@ test("channel section filter contains profile numbers and is independent of leng
 });
 
 for (const {family, high, normalizedHigh, low} of [
-  {family: "shveller", high: "1 000.5", normalizedHigh: "1000,5", low: "500"},
-  {family: "vgp", high: "54 000.5", normalizedHigh: "54000,5", low: "53000"},
+  {family: "shveller", high: "1 000.51234", normalizedHigh: "1000,51", low: "500"},
+  {family: "vgp", high: "54 000.51234", normalizedHigh: "54000,51", low: "53000"},
 ] as const) {
   test(`${family}: price filters normalize input and correct invalid ranges`, async ({page}) => {
     const product = samples[family];
@@ -88,6 +88,15 @@ for (const {family, high, normalizedHigh, low} of [
     await expect(maximum).toHaveValue(normalizedHigh);
     await expect(page.getByText("Границы цены поменялись местами.")).toBeVisible();
     await expect(row).toBeVisible();
+    for (const [field, value] of [[minimum, low], [maximum, normalizedHigh]] as const) {
+      const accepted = await field.evaluate(element => {
+        const clipboardData = new DataTransfer();
+        clipboardData.setData("text/plain", "1\t2");
+        return element.dispatchEvent(new ClipboardEvent("paste", {clipboardData, bubbles: true, cancelable: true}));
+      });
+      expect(accepted).toBe(false);
+      await expect(field).toHaveValue(value);
+    }
 
     await minimum.fill("-1");
     await minimum.blur();

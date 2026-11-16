@@ -232,6 +232,15 @@ test("all purchasable measured variants share their physical caps across cart an
     const oversizedTons = oversizedMeters * product.weightPerMeterKg! / 1000;
     assert.equal(updateCartItem(fromTons, product, oversizedMeters, "meter"), fromTons, product.id);
     assert.equal(updateCartItem(fromTons, product, oversizedTons, "ton"), fromTons, product.id);
+    if (!isVgpVariant(product)) {
+      const justAbove = 999.000000001;
+      assert.equal(updateCartItem(fromTons, product, justAbove, "ton"), fromTons, product.id);
+      const parsed = parseCreateOrderInput(orderInput([{productId: product.id, quantity: justAbove,
+        measurement: {inputMode: "ton", meters: justAbove * 1_000 / product.weightPerMeterKg!,
+          weightTons: justAbove, pricePerTon: 1, estimatedTotal: 1}}]));
+      assert.ok(parsed, product.id);
+      assert.equal(createTrustedOrder(parsed), null, product.id);
+    }
     const oversized: CartItem = {productId: product.id, quantity: oversizedTons,
       measurement: {inputMode: "ton", meters: oversizedMeters, weightTons: oversizedTons, pricePerTon: 1, estimatedTotal: 1}};
     const parsed = parseCreateOrderInput(orderInput([oversized]));
