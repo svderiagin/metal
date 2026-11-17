@@ -219,6 +219,27 @@ test("PDF or storage failure rejects before sending mail; saved orders survive a
   assert.equal(saved.invoice.emailStatus, "PENDING");
 });
 
+test("a measured order rounds an exact half-kopeck up and keeps previously issued amounts payable", async ({mock}) => {
+  mock.method(notificationService, "sendOrderNotification", async () => {});
+  const response = await orderPost(request({...order(), items: [{
+    productId: "local-110542", quantity: 12.5,
+    measurement: {inputMode: "meter", meters: 12.5, weightTons: 0.8575},
+  }]}));
+  assert.equal(response.status, 201);
+  const {order: receipt} = await response.json();
+  assert.equal(receipt.totalAmount, 68145.53);
+  const saved = await orders.orderRepository.findByReference(receipt.reference);
+  assert.ok(saved);
+  assert.equal(saved.items[0].subtotal, 68145.53);
+  assert.equal(hasValidOrderAmount(saved), true);
+
+  const previousItem = {...saved.items[0], weightPerMeterKg: undefined, subtotal: 68145.52};
+  const previousOrder = {...saved, pricingVersion: undefined, items: [previousItem], totalAmount: previousItem.subtotal};
+  assert.equal(hasValidOrderAmount(previousOrder), true);
+  assert.equal(hasValidOrderAmount({...saved, items: [previousItem], totalAmount: previousItem.subtotal}), false);
+  assert.equal(hasValidOrderAmount({...saved, items: [{...saved.items[0], subtotal: 68145.52}], totalAmount: 68145.52}), false);
+});
+
 test("payment and webhook delegate to providers; duplicate verified events update the order once", async ({mock}) => {
   const {createTrustedOrder, orderRepository} = orders;
   assert.equal((await paymentPost(request({orderReference: "broken"}))).status, 400);

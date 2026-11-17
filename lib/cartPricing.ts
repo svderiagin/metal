@@ -1,4 +1,4 @@
-import {calculateLineTotal, getMeasurementQuantityOptions, metersToTons, tonsToMeters} from "./orderMeasurement";
+import {calculateLineTotal, calculateMeasuredLineTotal, getMeasurementQuantityOptions, metersToTons, tonsToMeters} from "./orderMeasurement";
 import type {ProductVariant} from "@/types/product";
 import type {CartMeasurement, CartPieceOrder} from "@/types/cart";
 import {isVgpVariant, wholeVgpOrder} from "./vgp";
@@ -65,7 +65,9 @@ export function revalidateCartPrice(product: ProductVariant, item: PriceInput) {
       const weightTons = input.inputMode === "ton" ? input.weightTons : metersToTons(input.meters, product.weightPerMeterKg);
       if (meters === null || weightTons === null || meters <= 0 || weightTons <= 0) invalidReason = "Не удалось пересчитать количество.";
       else {
-        estimatedTotal = calculateLineTotal(weightTons, product.pricePerTon);
+        estimatedTotal = input.inputMode === "meter"
+          ? calculateMeasuredLineTotal(meters, product.weightPerMeterKg, product.pricePerTon)
+          : calculateLineTotal(weightTons, product.pricePerTon);
         if (estimatedTotal !== null) measurement = {inputMode: input.inputMode, meters, weightTons, pricePerTon: product.pricePerTon, estimatedTotal};
       }
     }
@@ -77,7 +79,7 @@ export function revalidateCartPrice(product: ProductVariant, item: PriceInput) {
       invalidReason = "Выберите объём целыми трубами в таблице товара.";
     } else {
       // Recompute from the whole length to avoid drift after a tonne/metre round trip.
-      estimatedTotal = calculateLineTotal(whole.weightTons, product.pricePerTon ?? 0);
+      estimatedTotal = calculateMeasuredLineTotal(whole.meters, product.weightPerMeterKg!, product.pricePerTon ?? 0);
       if (estimatedTotal === null) invalidReason = "Не удалось пересчитать стоимость.";
       else measurement = {...measurement, meters: whole.meters, weightTons: whole.weightTons, estimatedTotal};
     }

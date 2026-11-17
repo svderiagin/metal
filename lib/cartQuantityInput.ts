@@ -1,4 +1,5 @@
 import {formatCatalogNumber} from "./catalogNumberInput";
+import {MAX_ORDER_TONS} from "./constants";
 import type {OrderInputMode} from "@/types/cart";
 
 const quantityFormatter = new Intl.NumberFormat("ru-RU", {
@@ -29,7 +30,10 @@ export function formatQuantityForInput(value: number, grouped = false, fractionD
 }
 
 export function formatMeasuredQuantity(value: number, mode: OrderInputMode, grouped = false) {
-  return formatQuantityForInput(value, grouped, mode === "meter" ? 2 : value < 0.001 ? 8 : 6);
+  if (mode === "meter") return formatQuantityForInput(value, grouped, 2);
+  // A rounded display of 999 would make it impossible to explicitly enter the limit.
+  const display = value < MAX_ORDER_TONS ? Math.min(value, MAX_ORDER_TONS - 0.000001) : value;
+  return formatQuantityForInput(display, grouped, value < 0.001 ? 8 : 6);
 }
 
 export function normalizeCartQuantityText(value: string) {

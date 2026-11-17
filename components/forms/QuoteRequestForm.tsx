@@ -1,12 +1,11 @@
 "use client";
-import {type FocusEvent, type FormEvent, useId, useState} from "react";
+import {type FocusEvent, type FormEvent, useEffect, useId, useRef, useState} from "react";
 import Link from "next/link";
 import {Button} from "@/components/ui/Button";
 import {Input} from "@/components/ui/Input";
 import {Textarea} from "@/components/ui/Textarea";
 import {QUOTE_LIMITS, validateQuoteFields, type QuoteErrors, type QuoteField} from "@/lib/quoteValidation";
 import {PhoneInput} from "./PhoneInput";
-import {useEffect} from "react";
 import {useQuoteRequest} from "./QuoteRequestContext";
 import styles from "./QuoteRequestForm.module.css";
 import {buildQuoteMessage} from "@/lib/quoteRequest";
@@ -20,10 +19,14 @@ export function QuoteRequestForm() {
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [localMessage, setLocalMessage] = useState("");
+  const confirmation = useRef<HTMLDivElement>(null);
   const quote = useQuoteRequest();
   const message = quote?.message ?? localMessage;
   const setMessage = quote?.setMessage ?? setLocalMessage;
   const requestVersion = quote?.requestVersion ?? 0;
+  useEffect(() => {
+    if (success) confirmation.current?.focus();
+  }, [success]);
   useEffect(() => {
     if (!requestVersion) return;
     const timer = window.setTimeout(() => {setSuccess(false); setError(""); setFieldErrors({});}, 0);
@@ -102,7 +105,7 @@ export function QuoteRequestForm() {
     }
   }
 
-  if (success) return <div role="status"
+  if (success) return <div ref={confirmation} role="status" tabIndex={-1}
                            className="rounded-lg border border-green-300 dark:border-green-800 bg-green-50 dark:bg-green-950/40 p-5 text-green-900 dark:text-green-200"><strong>Заявка
     принята.</strong><p className="mt-1 text-sm">Мы свяжемся с вами после обработки запроса.</p>
     <button type="button" onClick={() => setSuccess(false)} className="mt-3 min-h-11 cursor-pointer rounded-lg text-sm underline underline-offset-2">Отправить ещё одну</button>

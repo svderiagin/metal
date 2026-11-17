@@ -185,6 +185,28 @@ test("search resolves a technical query to a visible linked product", async ({pa
   await expect(visibleProduct(page, id)).toBeInViewport();
 });
 
+test("catalog search ignores whitespace and keeps a long no-result query readable", async ({page, isMobile}) => {
+  if (isMobile) await page.setViewportSize({width: 320, height: 568});
+  await page.goto("/catalog");
+  const query = page.getByRole("searchbox", {name: "Поисковый запрос"});
+  await expect(query).toBeInViewport({ratio: 1});
+  const results = page.getByRole("heading", {name: "Результаты поиска", exact: true});
+  await query.fill("   ");
+  await expect(results).toHaveCount(0);
+  await query.press("Enter");
+  await expect(query).toHaveValue("");
+  const longQuery = "я".repeat(250);
+  await query.fill(longQuery);
+  await expect(page.getByRole("heading", {name: "Товары не найдены", exact: true})).toBeVisible();
+  const status = page.getByRole("status").filter({hasText: "Найдено товаров"});
+  await expect(status).toHaveText("Найдено товаров: 0");
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(await page.evaluate(() => innerWidth));
+  await page.getByRole("button", {name: "Очистить поиск", exact: true}).click();
+  await expect(query).toHaveValue("");
+  await expect(query).toBeFocused();
+  await expect(results).toHaveCount(0);
+});
+
 test("mobile category navigation is compact and menu supports Escape", async ({page, isMobile}) => {
   test.skip(!isMobile, "mobile navigation contract");
   await page.goto("/catalog/shveller");
@@ -194,10 +216,23 @@ test("mobile category navigation is compact and menu supports Escape", async ({p
   expect(heading!.y).toBeLessThan(600);
   await categoryToggle.locator("summary").click();
   await expect(categoryToggle.getByRole("link", {name: "Арматура", exact: true})).toBeVisible();
-  await page.getByRole("button", {name: "Открыть меню", exact: true}).click();
-  await expect(page.getByRole("navigation", {name: "Мобильная навигация"})).toBeVisible();
+  const openMenu = page.getByRole("button", {name: "Открыть меню", exact: true});
+  const menu = page.getByRole("navigation", {name: "Мобильная навигация"});
+  await openMenu.click();
+  await expect(menu).toBeVisible();
   await page.keyboard.press("Escape");
-  await expect(page.getByRole("button", {name: "Открыть меню", exact: true})).toBeFocused();
+  await expect(openMenu).toBeFocused();
+  await openMenu.click();
+  await page.getByRole("heading", {name: "Швеллер", exact: true, level: 1}).click();
+  await expect(menu).toBeHidden();
+  await openMenu.click();
+  const quoteLink = menu.getByRole("link", {name: "Запросить расчёт", exact: true});
+  await quoteLink.press("Tab");
+  await expect(menu).toBeHidden();
+  await openMenu.click();
+  await quoteLink.click();
+  await expect(page).toHaveURL(/\/#request$/u);
+  await expect(page.locator("#request")).toBeInViewport();
 });
 
 test("profile-sheet guidance follows product families in the rendered page", async ({page}) => {

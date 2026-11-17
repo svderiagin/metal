@@ -14,10 +14,10 @@ export const metadata: Metadata = {
   description: "Трубы, листовой и сортовой прокат, нержавеющая сталь, метизы и цветные металлы."
 };
 export default function CatalogPage() {
-  return <PageContainer className="py-8 sm:py-10 lg:py-12"><Breadcrumbs items={[{label: "Каталог"}]}/><h1
-    className="text-page-title">Каталог металлопроката</h1><p className="mt-3 max-w-3xl text-slate-600 dark:text-slate-300">Выберите
-    раздел или найдите нужную позицию с помощью поиска. Итоговые условия поставки зависят от объёма и обработки.</p>
-    <div className="mt-7 grid gap-7 lg:grid-cols-[250px_1fr]"><CatalogSidebar/>
+  return <PageContainer className="py-8 sm:py-10 lg:py-12">
+    <Breadcrumbs items={[{label: "Каталог"}]}/>
+    <h1 className="text-page-title">Каталог металлопроката</h1>
+    <div className="mt-5 grid gap-4 lg:mt-7 lg:grid-cols-[250px_minmax(0,1fr)] lg:gap-7"><CatalogSidebar/>
       <div>
         <Suspense fallback={<div className="h-40 animate-pulse rounded-xl bg-slate-200 dark:bg-slate-700"/>}>
           <CatalogSearch

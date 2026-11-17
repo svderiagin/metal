@@ -7,15 +7,15 @@ import {formatCurrency, formatUnitPrice} from "@/lib/currency";
 import {formatNumber} from "@/lib/numberFormat";
 import {QuantitySelector} from "./QuantitySelector";
 import {getProductVariantById} from "@/lib/cartCatalog";
-import {calculateLineTotal, getCartMeasurementQuantityOptions, metersToTons, tonsToMeters} from "@/lib/orderMeasurement";
+import {calculateLineTotal, calculateMeasuredLineTotal, getCartMeasurementQuantityOptions, tonsToMeters} from "@/lib/orderMeasurement";
 import {formatCartQuantity, formatMeasuredQuantity, formatQuantityForInput} from "@/lib/cartQuantityInput";
 import {isVgpVariant, wholeVgpOrder} from "@/lib/vgp";
 import {isDemonstrationProduct, requiresOfferConfirmation} from "@/lib/catalogOffer";
 import {CartAmount} from "./CartAmount";
 import styles from "./CartItemRow.module.css";
 
-export function CartItemRow({line}: { line: CartLine }) {
-  const {updateQuantity, updatePieceOrder, removeItem} = useCart();
+export function CartItemRow({line, onRemove}: {line: CartLine; onRemove: () => void}) {
+  const {updateQuantity, updatePieceOrder} = useCart();
   const product = getProductVariantById(line.productId);
   const canConvert = !!product && !isDemonstrationProduct(product) && Number.isFinite(product.weightPerMeterKg)
     && (product.weightPerMeterKg ?? 0) > 0 && Number.isFinite(product.pricePerTon) && (product.pricePerTon ?? 0) > 0;
@@ -66,10 +66,9 @@ export function CartItemRow({line}: { line: CartLine }) {
               {...options}
               step={vgp ? options?.minimum : mode === "meter" ? 1 : 0.001}
               formatValue={(quantity, grouped) => formatMeasuredQuantity(quantity, mode, grouped)}
-              hasPositiveTotal={canConvert && !priceRequiresQuote ? quantity => {
-                const weightTons = mode === "meter" ? metersToTons(quantity, product.weightPerMeterKg!) : quantity;
-                return weightTons !== null && calculateLineTotal(weightTons, product.pricePerTon!) !== null;
-              } : undefined}
+              hasPositiveTotal={canConvert && !priceRequiresQuote ? quantity => (mode === "meter"
+                ? calculateMeasuredLineTotal(quantity, product.weightPerMeterKg!, product.pricePerTon!)
+                : calculateLineTotal(quantity, product.pricePerTon!)) !== null : undefined}
               normalizeQuantity={product && vgp ? quantity => {
                 const order = wholeVgpOrder(product, quantity, mode);
                 if (!order) return null;
@@ -95,7 +94,9 @@ export function CartItemRow({line}: { line: CartLine }) {
         <strong className={styles.total}>{line.invalidReason ? "Расчёт недоступен" : <CartAmount>{formatCurrency(line.estimatedTotal)}</CartAmount>}</strong>
         <button
           type="button"
-          onClick={() => removeItem(line.productId)}
+          id={`cart-remove-${line.productId}`}
+          aria-label={`Удалить ${line.name} из корзины`}
+          onClick={onRemove}
           className={`${styles.remove} block min-h-11 text-sm font-medium text-red-700 dark:text-red-400 underline underline-offset-2`}
         >
           Удалить

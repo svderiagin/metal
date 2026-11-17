@@ -1,6 +1,7 @@
 import {randomBytes} from "node:crypto";
 import {getProductVariantById} from "@/lib/catalog";
 import {revalidateCartPrice} from "@/lib/cartPricing";
+import {isVgpVariant} from "@/lib/vgp";
 import type {CreateOrderInput, Order, OrderItem, PaymentStatus} from "@/types/order";
 import type {InvoiceEmailStatus} from "@/types/invoice";
 import {FileOrderRepository} from "./fileOrderRepository";
@@ -92,6 +93,7 @@ export function createTrustedOrder(input: CreateOrderInput, lookupProduct = getP
         productId: product.id,
         quantity: measurement.inputMode === "meter" ? meters : weightTons,
         measurement: {inputMode: measurement.inputMode, meters, weightTons},
+        ...(measurement.inputMode === "meter" || isVgpVariant(product) ? {weightPerMeterKg: product.weightPerMeterKg} : {}),
         name: product.name,
         sku: product.sku,
         unitPrice: measurement.pricePerTon,
@@ -123,5 +125,6 @@ export function createTrustedOrder(input: CreateOrderInput, lookupProduct = getP
     status: "SUBMITTED",
     paymentStatus: "PENDING",
     createdAt: new Date().toISOString(),
+    pricingVersion: "decimal",
   };
 }

@@ -68,6 +68,8 @@ test("cart adds a product, updates its quantity and survives reload", async ({pa
     expect(contrast, "secondary action text contrast").toBeGreaterThanOrEqual(4.5);
   }
   await page.getByRole("button", {name: "Очистить корзину", exact: true}).click();
+  await page.getByRole("dialog", {name: "Очистить корзину?", exact: true})
+    .getByRole("button", {name: "Удалить всё", exact: true}).click();
   await expect(page.getByRole("heading", {name: "Корзина пуста", exact: true})).toBeVisible();
 });
 

@@ -11,7 +11,7 @@ test('blur validates only the visited field and clears its error after correctio
   class InputElement {constructor(name) {this.name = name;}}
   const imports = {
     react: {
-      useId: () => 'quote', useEffect() {},
+      useId: () => 'quote', useEffect() {}, useRef: current => ({current}),
       useState(initial) {
         const i = cursor++;
         if (!(i in state)) state[i] = initial;

@@ -17,6 +17,7 @@ const rebar10 = product("rebar-a500c-10-bar");
 const rebar12 = product("rebar-a500c-12-bar");
 const vgp = product("local-258");
 const heavyBeam = product("local-115970");
+const beamHalfKopeck = product("local-110542");
 const rangePipe = product("profile-pipe-square-80x80x2");
 
 function measuredItem(variant: ProductVariant, meters: number): CartItem {
@@ -115,6 +116,124 @@ async function compositionInput(input: Locator, text: string) {
     }));
   }, text);
 }
+
+for (const delayedSync of [false, true]) {
+  test(`a second tab cannot restore deleted rebar${delayedSync ? " even before its storage event" : ""}`,
+    async ({page, context, isMobile}) => {
+      const otherTab = await context.newPage();
+      if (isMobile) {
+        await page.setViewportSize({width: 320, height: 740});
+        await otherTab.setViewportSize({width: 320, height: 740});
+      }
+      await seedItems(page, [measuredItem(rebar6, 12.5), {productId: samples.shveller.id, quantity: 3}]);
+      await openProduct(page, rebar6);
+      if (delayedSync) await otherTab.addInitScript(() => {
+        window.addEventListener("storage", event => event.stopImmediatePropagation(), true);
+      });
+      await openProduct(otherTab, rebar6);
+      const firstRow = visibleProduct(page, rebar6.id), secondRow = visibleProduct(otherTab, rebar6.id);
+      await expect(secondRow.getByRole("button", {name: "В корзине", exact: true})).toBeDisabled();
+      const beforeRemoval = await storedItems(page);
+      if (delayedSync) {
+        await secondRow.getByRole("textbox", {name: /^Длина заказа/}).fill("25");
+        await expect(secondRow.getByRole("button", {name: "Обновить", exact: true})).toBeEnabled();
+        await page.goto("/cart");
+        await cartRow(page, rebar6.id).getByRole("button", {name: /^Удалить /}).click();
+      } else {
+        await firstRow.getByRole("textbox", {name: /^Длина заказа/}).fill("0");
+        await firstRow.getByRole("button", {name: "Удалить", exact: true}).click();
+      }
+      await expect.poll(() => storedItem(page, rebar6.id)).toBeUndefined();
+      if (delayedSync) {
+        // Reproduce an old cart snapshot being written after the deletion.
+        await otherTab.evaluate(({key, items}) => localStorage.setItem(key, JSON.stringify(items)),
+          {key: cartKey, items: beforeRemoval});
+        await page.reload();
+        await expect(cartRow(page, samples.shveller.id)).toBeVisible();
+        await expect(cartRow(page, rebar6.id)).toHaveCount(0);
+        await secondRow.getByRole("button", {name: "Обновить", exact: true}).click();
+      }
+      await expect(secondRow.getByRole("button", {name: "В корзину", exact: true})).toBeVisible();
+
+      await otherTab.goto("/cart");
+      const remaining = metersInput(cartRow(otherTab, samples.shveller.id));
+      await fillQuantity(remaining, "4,25");
+      await remaining.press("Enter");
+      await expect.poll(() => storedItems(otherTab)).toEqual([{productId: samples.shveller.id, quantity: 4.25}]);
+      await page.goto("/cart");
+      await expect(cartRow(page, rebar6.id)).toHaveCount(0);
+      await expect(metersInput(cartRow(page, samples.shveller.id))).toHaveValue("4,25");
+      await otherTab.reload();
+      await expect(cartRow(otherTab, rebar6.id)).toHaveCount(0);
+      await expect(remaining).toHaveValue("4,25");
+    });
+}
+
+test("a double click on add leaves one cart line at the selected quantity", async ({page}) => {
+  const product = samples.shveller;
+  await openProduct(page, product);
+  const row = visibleProduct(page, product.id);
+  await row.getByRole("textbox", {name: /^Количество /}).fill("3");
+  await row.getByRole("button", {name: "В корзину", exact: true}).dblclick();
+  await expect(row.getByRole("button", {name: "В корзине", exact: true})).toBeDisabled();
+  await page.goto("/cart");
+  await expect(metersInput(cartRow(page, product.id))).toHaveValue("3");
+  expect(await storedItems(page)).toEqual([{productId: product.id, quantity: 3}]);
+});
+
+test("the rebar table can update from just below the 999 tonne limit to the full limit", async ({page, isMobile}) => {
+  if (isMobile) await page.setViewportSize({width: 320, height: 740});
+  await openProduct(page, rebar6);
+  const row = visibleProduct(page, rebar6.id);
+  const tons = row.getByRole("textbox", {name: /^Вес заказа в тоннах/});
+  const meters = row.getByRole("textbox", {name: /^Длина заказа/});
+  const total = row.getByLabel(/^Сумма заказа/);
+  await tons.fill("998,9999992");
+  await expect(total).toHaveText("73 226 699,94 ₽");
+  await row.getByRole("button", {name: "В корзину", exact: true}).click();
+  await expect.poll(async () => (await storedItem(page, rebar6.id))?.quantity).toBe(998.9999992);
+  await expect(row.getByRole("button", {name: "В корзине", exact: true})).toBeDisabled();
+  await tons.fill("999");
+  await expectNumber(meters, 4_500_000);
+  await expect(total).toHaveText("73 226 700,00 ₽");
+  const update = row.getByRole("button", {name: "Обновить", exact: true});
+  await expect(update).toBeEnabled();
+  await update.click();
+  await expectMeasurement(page, rebar6.id, 4_500_000, 999, "ton");
+
+  await tons.fill("998,9999999");
+  await update.click();
+  await expect.poll(async () => (await storedItem(page, rebar6.id))?.quantity).toBe(998.9999999);
+  await expectNumber(tons, 998.999999);
+  await expect(total).toHaveText("73 226 699,99 ₽");
+  await tons.fill("999");
+  await expect(update).toBeEnabled();
+  await update.click();
+  await expectMeasurement(page, rebar6.id, 4_500_000, 999, "ton");
+
+  await tons.fill("1000");
+  await expect(tons).toHaveValue("999");
+  await expect(row.getByRole("button", {name: "В корзине", exact: true})).toBeDisabled();
+  await page.goto("/cart");
+  await expect(cartRow(page, rebar6.id).getByText("73 226 700,00 ₽", {exact: true})).toBeVisible();
+});
+
+test("an exact half-kopeck rounds up in the measured row, cart and checkout", async ({page, isMobile}) => {
+  if (isMobile) await page.setViewportSize({width: 320, height: 740});
+  await openProduct(page, beamHalfKopeck);
+  const row = visibleProduct(page, beamHalfKopeck.id);
+  const total = "68 145,53 ₽";
+  await row.getByRole("textbox", {name: /^Длина заказа/}).fill("12,5");
+  await row.getByRole("textbox", {name: /^Вес заказа в тоннах/}).fill("0,85750");
+  await expect(row.getByLabel(/^Сумма заказа/)).toHaveText(total);
+  await row.getByRole("button", {name: "В корзину", exact: true}).click();
+  await expectMeasurement(page, beamHalfKopeck.id, 12.5, 0.8575, "meter");
+  await page.goto("/cart");
+  await expect(cartRow(page, beamHalfKopeck.id).getByText(total, {exact: true})).toBeVisible();
+  await expect(page.getByRole("complementary").getByText(total, {exact: true})).toBeVisible();
+  await page.getByRole("main").getByRole("link", {name: "Перейти к оформлению", exact: true}).click();
+  await expect(page.getByRole("complementary").getByText(total, {exact: true}).filter({visible: true}).first()).toBeVisible();
+});
 
 test("strict drafts reject letters, preserve decimals and constrain zeros and overflow before commit", async ({page}) => {
   await openCart(page, [{productId: samples.shveller.id, quantity: 3}]);
@@ -422,13 +541,25 @@ test("a valid legacy heavy-beam tonne order submits only canonical quantities an
   expect(await storedItems(page)).toEqual(items);
 });
 
-test("checkout preview keeps tiny measured quantities and whole-pipe weight visible without changing the order", async ({page}) => {
+test("checkout preview keeps tiny measured quantities and whole-pipe weight visible without changing the order", async ({page, isMobile}) => {
+  if (isMobile) await page.setViewportSize({width: 320, height: 844});
   await openCart(page, [measuredItem(rebar6, 0.01), measuredItem(vgp, 18)]);
   const before = await storedItems(page);
   await page.getByRole("main").getByRole("link", {name: "Перейти к оформлению", exact: true}).click();
   await expect(page).toHaveURL(/\/checkout$/);
   const preview = page.getByRole("complementary");
   await expect(preview.getByRole("heading", {name: "Ваш заказ", exact: true})).toBeVisible();
+  if (isMobile) {
+    const breakdown = preview.getByRole("button", {name: "Состав заказа", exact: true});
+    await expect(breakdown).toHaveAttribute("aria-expanded", "false");
+    await expect(preview.getByRole("list")).toBeHidden();
+    await expect(preview.getByText(/1\s*236,03\s*₽/u).filter({visible: true})).toBeVisible();
+    const summaryBox = await preview.boundingBox();
+    const formBox = await page.getByLabel("ФИО *", {exact: true}).boundingBox();
+    expect(summaryBox!.y).toBeLessThan(formBox!.y);
+    await breakdown.press("Enter");
+    await expect(breakdown).toHaveAttribute("aria-expanded", "true");
+  }
   const rebarLine = preview.getByRole("listitem").filter({hasText: rebar6.name});
   const vgpLine = preview.getByRole("listitem").filter({hasText: vgp.name});
   await expect(rebarLine).toContainText(/0,01\s*м\s*\/\s*0,00000222\s*т/u);
@@ -472,8 +603,8 @@ test("whole quantities round up, zero cannot delete, and the explicit removal ac
   await input.press("Enter");
   await expect.poll(async () => (await storedItem(page, item.id))!.quantity).toBe(1);
   await expect(row).toBeVisible();
-  await row.getByRole("button", {name: "Удалить", exact: true}).click();
-  await expect(page.getByRole("heading", {name: "Корзина пуста", exact: true})).toBeVisible();
+  await row.getByRole("button", {name: /^Удалить /}).press("Enter");
+  await expect(page.getByRole("heading", {name: "Корзина пуста", exact: true})).toBeFocused();
   await expect.poll(() => storedItems(page)).toEqual([]);
 });
 
@@ -514,17 +645,27 @@ test("reload retains both fields and saved pieces, while quote-only pipe data ne
   expect((await storedItem(page, rangePipe.id))!.pieceOrder).toEqual({pieces: 2, lengthMeters: 7.5});
 });
 
-test("unknown products remain visible and removable, and clear survives reload", async ({page}) => {
+test("cart removal keeps focus, and clearing all items requires confirmation", async ({page}) => {
   const unknown = "unavailable-cart-fixture";
   await openCart(page, [{productId: samples.shveller.id, quantity: 3}, {productId: unknown, quantity: 2}]);
   const row = cartRow(page, unknown);
   await expect(row.getByText("Позиция больше не доступна в каталоге", {exact: true})).toBeVisible();
   await expect(row.getByRole("textbox")).toBeDisabled();
-  await row.getByRole("button", {name: "Удалить", exact: true}).click();
+  await row.getByRole("button", {name: /^Удалить /}).press("Enter");
   await expect(row).toHaveCount(0);
-  await expect(cartRow(page, samples.shveller.id)).toBeVisible();
-  await page.getByRole("button", {name: "Очистить корзину", exact: true}).click();
-  await expect(page.getByRole("heading", {name: "Корзина пуста", exact: true})).toBeVisible();
+  const remaining = cartRow(page, samples.shveller.id);
+  await expect(remaining.getByRole("button", {name: `Удалить ${samples.shveller.name} из корзины`, exact: true})).toBeFocused();
+  const clear = page.getByRole("button", {name: "Очистить корзину", exact: true});
+  const dialog = page.getByRole("dialog", {name: "Очистить корзину?", exact: true});
+  await clear.press("Enter");
+  await expect(dialog.getByRole("button", {name: "Отмена", exact: true})).toBeFocused();
+  await page.keyboard.press("Escape");
+  await expect(dialog).toBeHidden();
+  await expect(clear).toBeFocused();
+  await expect(remaining).toBeVisible();
+  await clear.click();
+  await dialog.getByRole("button", {name: "Удалить всё", exact: true}).click();
+  await expect(page.getByRole("heading", {name: "Корзина пуста", exact: true})).toBeFocused();
   await expect.poll(() => storedItems(page)).toEqual([]);
   await page.reload();
   await expect(page.getByRole("heading", {name: "Корзина пуста", exact: true})).toBeVisible();

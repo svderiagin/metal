@@ -11,7 +11,8 @@ export function QuoteRequestButton({order, className, label = "Запросит�
       if (!quote || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
       event.preventDefault();
       quote.request(buildQuoteMessage(order));
-      // Also scroll when the anchor is already present after a previous request.
-      document.getElementById("request")?.scrollIntoView({behavior: "smooth", block: "start"});
+      const section = document.getElementById("request");
+      section?.focus({preventScroll: true});
+      section?.scrollIntoView({block: "start"});
     }} className={className}>{label}</ButtonLink>;
 }

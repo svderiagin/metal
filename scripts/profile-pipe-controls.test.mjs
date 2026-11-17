@@ -21,7 +21,22 @@ function evaluateModule(file,imports,globals={}) {
 }
 
 function setup(variant={...base,price:157,priceConfirmed:true,quoteOnly:false}) {
- let cursor=0;const state=[];const timers=[];const cart={hydrated:true,lines:[],addItem(productId,quantity,measurement,pieceOrder){assert.equal(measurement,undefined);const result=revalidateCartPrice(variant,{quantity,pieceOrder});assert.equal(result.invalidReason,undefined);cart.lines=[{productId,quantity,...result}];},removeItem(){cart.lines=[];}};
+ let cursor=0;const state=[];const timers=[];
+ const cart={
+   hydrated:true,
+   lines:[],
+   addItem(productId,quantity,measurement,pieceOrder){
+     assert.equal(measurement,undefined);
+     const result=revalidateCartPrice(variant,{quantity,pieceOrder});
+     assert.equal(result.invalidReason,undefined);
+     cart.lines=[{productId,quantity,...result}];
+   },
+   updatePieceOrder(productId,pieces,lengthMeters){
+     assert.equal(cart.lines[0]?.productId,productId);
+     cart.addItem(productId,pieces*lengthMeters,undefined,{pieces,lengthMeters});
+   },
+   removeItem(){cart.lines=[];},
+ };
  const jsx=(type,props)=>typeof type==='function'?type(props):{type,props};
  const layout = {
    CatalogVariantLayout: ({specifications, order}) => jsx('row', {children: [specifications, order]}),
@@ -96,17 +111,21 @@ test('80 by 80 by 2 requires a selected length and clamps positive out-of-range 
 
 test('the real cart provider replaces piece orders, preserves length and rejects fractional updates',()=>{
  const product={...base,price:157,priceConfirmed:true,quoteOnly:false};let cursor=0;const state=[];const timers=[];const storage=new Map();
- const react={createContext:()=>({}),useState(initial){const i=cursor++;if(!(i in state))state[i]=initial;return [state[i],value=>{state[i]=typeof value==='function'?value(state[i]):value;}];},useEffect(effect){effect();},useMemo:fn=>fn(),useCallback:fn=>fn};
+ const react={createContext:()=>({}),useState(initial){const i=cursor++;if(!(i in state))state[i]=initial;return [state[i],value=>{state[i]=typeof value==='function'?value(state[i]):value;}];},useEffect(effect){effect();},useMemo:fn=>fn(),useCallback:fn=>fn,useRef(initial){const i=cursor++;return state[i]??={current:initial};}};
  const mockCatalog={...catalog,getProductVariantById:id=>id===product.id?product:catalog.getProductVariantById(id)};
  const cart=evaluateModule('lib/cart.ts',{'./cartCatalog':mockCatalog,'./cartPricing':{revalidateCartPrice},'./variantPresentation':readProjectData('lib/variantPresentation.ts'),'./profilePipe':pipe,'./profileSheet':profileSheet,'./catalogOffer':catalogOffer,'./orderMeasurement':orderMeasurement});
  const mutations=evaluateModule('lib/cartMutations.ts',{'./cart':cart,'./cartPricing':{revalidateCartPrice},'./profilePipe':pipe,'./vgp':vgp,'./catalogOffer':catalogOffer,'./orderMeasurement':orderMeasurement});
  const imports={'@/lib/cartMutations':mutations,react,'react/jsx-runtime':{jsx:(type,props)=>({type,props})},'@/lib/constants':readProjectData('lib/constants.ts'),'@/lib/cartCatalog':mockCatalog,'@/lib/cart':cart,'@/lib/profilePipe':pipe,'@/lib/profileSheet':profileSheet,'@/lib/cartPricing':{revalidateCartPrice}};
- const {CartProvider}=evaluateModule('context/CartContext.tsx',imports,{window:{setTimeout(fn){timers.push(fn);},clearTimeout(){}},localStorage:{getItem:key=>storage.get(key),setItem:(key,value)=>storage.set(key,value)}});
+ const {CartProvider}=evaluateModule('context/CartContext.tsx',imports,{window:{setTimeout(fn){timers.push(fn);},clearTimeout(){},addEventListener(){},removeEventListener(){}},localStorage:{
+   get length(){return storage.size;},key:index=>[...storage.keys()][index]??null,
+   getItem:key=>storage.get(key)??null,setItem:(key,value)=>storage.set(key,value),removeItem:key=>storage.delete(key),
+ }});
  const render=()=>{cursor=0;return CartProvider({children:null}).props.value;};render();timers.shift()();
  render().addItem(product.id,12,undefined,{pieces:2,lengthMeters:6});assert.equal(render().lines[0].estimatedTotal,1884);
- render().addItem(product.id,18,undefined,{pieces:3,lengthMeters:6});assert.equal(render().items.length,1);assert.equal(render().lines[0].estimatedTotal,2826);
+ render().addItem(product.id,12,undefined,{pieces:2,lengthMeters:6});assert.equal(render().lines[0].quantity,12);
+ render().updatePieceOrder(product.id,3,6);assert.equal(render().items.length,1);assert.equal(render().lines[0].estimatedTotal,2826);
  render().updateQuantity(product.id,15);assert.equal(render().lines[0].quantity,18);
  render().updateQuantity(product.id,24);assert.equal(render().lines[0].pieceOrder.pieces,4);assert.equal(render().totalAmount,3768);
- render().addItem(product.id,12,undefined,{pieces:2,lengthMeters:12});assert.equal(render().lines[0].quantity,24);
+ render().updatePieceOrder(product.id,2,12);assert.equal(render().lines[0].quantity,24);
  render().removeItem(product.id);assert.equal(render().items.length,0);
 });

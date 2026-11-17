@@ -6,21 +6,28 @@ import ts from 'typescript';
 import {readProjectData} from './project-data.mjs';
 
 const {productVariants} = readProjectData('data/products/index.ts');
+const {createCartLines} = readProjectData('lib/cart.ts');
+const {addCartItem, updateCartItem} = readProjectData('lib/cartMutations.ts');
 function setup(id, kind = 'beam') {
   const variant = productVariants.find(p => p.id === id);
   assert.ok(variant, id);
   let cursor = 0;
   const state = [];
   const timers = [];
+  let items = [];
   const cart = {
-    hydrated: true, lines: [],
+    hydrated: true,
+    get lines() {return createCartLines(items);},
+    set lines(value) {items = value;},
     addItem(productId, quantity, measurement) {
-      const line = cart.lines.find(l => l.productId === productId);
-      if (line && !measurement) line.quantity += quantity;
-      else cart.lines = [...cart.lines.filter(l => l.productId !== productId), {productId, quantity, measurement}];
+      assert.equal(productId, id);
+      items = addCartItem(items, variant, quantity, measurement);
     },
-    updateQuantity(productId, quantity) {cart.lines.find(l => l.productId === productId).quantity = quantity;},
-    removeItem(productId) {cart.lines = cart.lines.filter(l => l.productId !== productId);},
+    updateQuantity(productId, quantity, mode) {
+      assert.equal(productId, id);
+      items = updateCartItem(items, variant, quantity, mode);
+    },
+    removeItem(productId) {items = items.filter(item => item.productId !== productId);},
   };
   const jsx = (type, props) => typeof type === 'function' ? type(props) : type === 'quote'
     ? {type: 'link', props: {...props, children: props.label}} : {type, props};

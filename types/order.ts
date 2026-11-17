@@ -42,6 +42,7 @@ export interface OrderItem extends OrderItemInput {
   unitPrice: number;
   priceUnit: string;
   subtotal: number;
+  weightPerMeterKg?: number;
 }
 
 export interface Order {
@@ -54,6 +55,7 @@ export interface Order {
   status: OrderStatus;
   paymentStatus: PaymentStatus;
   createdAt: string;
+  pricingVersion?: "decimal";
   invoice?: StoredInvoice;
 }
 

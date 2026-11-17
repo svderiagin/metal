@@ -18,7 +18,7 @@ import tableStyles from "./RebarTable.module.css";
 import {useOrderDraft} from "./OrderDraftProvider";
 
 export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant; view: "table" | "card"}) {
-  const {addItem, removeItem, lines, hydrated} = useCart();
+  const {addItem, updatePieceOrder, removeItem, lines, hydrated} = useCart();
   const line = lines.find(item => item.productId === variant.id);
   const savedLength = line?.pieceOrder?.lengthMeters ?? variant.lengthMeters;
   const savedPieces = line?.pieceOrder?.pieces ?? (line && savedLength ? line.quantity / savedLength : undefined);
@@ -111,7 +111,8 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
     if (line && !line.invalidReason && nextOrder.pieces === savedPieces && nextOrder.lengthMeters === savedLength) {
       setDraft(null); return;
     }
-    addItem(variant.id, nextOrder.meters, undefined, {pieces: nextOrder.pieces, lengthMeters: nextOrder.lengthMeters});
+    if (line) updatePieceOrder(variant.id, nextOrder.pieces, nextOrder.lengthMeters);
+    else addItem(variant.id, nextOrder.meters, undefined, {pieces: nextOrder.pieces, lengthMeters: nextOrder.lengthMeters});
     setDraft(null);
   }
 

@@ -12,6 +12,8 @@ import type {ProductType, ProductVariant} from "@/types/product";
 import type {Category} from "@/types/category";
 import focusStyles from "./CatalogFocus.module.css";
 
+const queryLimit = 250;
+
 export function CatalogSearch({
   productTypes,
   variants,
@@ -24,10 +26,11 @@ export function CatalogSearch({
   const router = useRouter();
   const formRef = useRef<HTMLFormElement>(null);
   const searchParams = useSearchParams();
-  const urlQuery = searchParams.get("q")?.trim() ?? "";
+  const urlQuery = searchParams.get("q")?.trim().slice(0, queryLimit) ?? "";
   const [draft, setDraft] = useState({urlQuery, value: urlQuery});
   const query = draft.urlQuery === urlQuery ? draft.value : urlQuery;
-  const deferredQuery = useDeferredValue(query);
+  const cleanQuery = query.trim();
+  const deferredQuery = useDeferredValue(cleanQuery);
   // Keep the index for subsequent queries, but do not normalize the whole catalog
   // until a visitor actually searches. Empty-state results are never displayed.
   const index = useMemo(() => {
@@ -56,7 +59,7 @@ export function CatalogSearch({
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const nextQuery = String(formData.get("query") ?? "").trim();
-
+    setDraft({urlQuery, value: nextQuery});
     navigate(nextQuery);
   }
 
@@ -70,22 +73,19 @@ export function CatalogSearch({
     <section aria-labelledby="catalog-search-heading">
       <div className="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-5 shadow-sm sm:p-6">
         <h2 id="catalog-search-heading" className="text-xl font-bold">Поиск по каталогу</h2>
-        <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
-          Найдите тип продукции по названию, размеру, материалу или стандарту.
-        </p>
-        <form ref={formRef} onSubmit={submit} role="search" className="mt-5 flex flex-col gap-3 sm:flex-row">
-          <label className="flex-1">
+        <form ref={formRef} onSubmit={submit} role="search" className="mt-4 grid grid-cols-2 gap-3 sm:flex">
+          <label className="col-span-2 min-w-0 sm:flex-1">
             <span className="sr-only">Поисковый запрос</span>
             <Input
               name="query"
               type="search"
               value={query}
               onChange={e => {setDraft({urlQuery, value: e.target.value});setLimit(20);}}
-              maxLength={250}
-              placeholder="Например, арматура рифлёная А500С"
+              maxLength={queryLimit}
+              placeholder="Арматура 12 мм"
             />
           </label>
-          <Button type="submit" className="sm:min-w-32">Найти</Button>
+          <Button type="submit" className={`sm:min-w-32 ${query ? "" : "col-span-2"}`}>Найти</Button>
           {query && (
             <Button
               type="button"
@@ -99,12 +99,12 @@ export function CatalogSearch({
         </form>
       </div>
 
-      {query && (
-        <div className="mt-8" aria-busy={query !== deferredQuery}>
+      {cleanQuery && (
+        <div className="mt-8" aria-busy={cleanQuery !== deferredQuery}>
           <div className="mb-5 flex flex-wrap items-baseline justify-between gap-3">
             <h2 className="text-xl font-bold">Результаты поиска</h2>
             <p role="status" aria-atomic="true" className="text-sm text-slate-600 dark:text-slate-300">
-              По запросу «{deferredQuery}» найдено товаров: {search.total}
+              Найдено товаров: {search.total}
             </p>
           </div>
           {results.length ? (
@@ -119,7 +119,7 @@ export function CatalogSearch({
             </>
           ) : (
             <div className="rounded-xl border border-dashed border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 px-5 py-10 text-center">
-              <strong className="text-lg">Типы продукции не найдены</strong>
+              <h3 className="text-lg font-bold">Товары не найдены</h3>
               <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
                 Проверьте запрос или попробуйте указать меньше параметров.
               </p>

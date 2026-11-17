@@ -1,6 +1,7 @@
 import type {ProductVariant} from "@/types/product";
 import type {OrderInputMode} from "@/types/cart";
 import {isDemonstrationProduct} from "./catalogOffer";
+import {MAX_ORDER_TONS} from "./constants";
 
 // Input limits are shared by the catalog, cart editor and authoritative repricing.
 export function getMeasurementQuantityOptions(product: ProductVariant, mode: OrderInputMode) {
@@ -9,7 +10,7 @@ export function getMeasurementQuantityOptions(product: ProductVariant, mode: Ord
   const mass = isDemonstrationProduct(product) ? undefined : product.weightPerMeterKg;
   const wholePipes = isVgp && mass !== undefined && isPositiveFinite(mass) && length !== undefined && isPositiveFinite(length);
   const minimumMeters = wholePipes ? length : 0.01;
-  const maximumTons = 999;
+  const maximumTons = MAX_ORDER_TONS;
   const convertedMaximum = mass !== undefined && isPositiveFinite(mass) ? tonsToMeters(maximumTons, mass) : null;
   const maximumMeters = convertedMaximum !== null
     ? wholePipes ? Math.floor(convertedMaximum / length + 1e-9) * length : convertedMaximum
@@ -25,7 +26,7 @@ export function getMeasurementQuantityOptions(product: ProductVariant, mode: Ord
       return {minimum: Number(minimumTons.toPrecision(15)), maximum: Number(wholeMaximumTons.toPrecision(15)), decimalPlaces: undefined};
     }
   }
-  return {minimum: 0.001, maximum: 999, decimalPlaces: 3};
+  return {minimum: 0.001, maximum: MAX_ORDER_TONS, decimalPlaces: 3};
 }
 
 export function getCartMeasurementQuantityOptions(product: ProductVariant, mode: OrderInputMode) {
@@ -34,6 +35,8 @@ export function getCartMeasurementQuantityOptions(product: ProductVariant, mode:
 
 export function metersToTons(meters: number, weightPerMeterKg: number) {
   if (!isNonNegativeFinite(meters) || !isPositiveFinite(weightPerMeterKg)) return null;
+  // The exact metre limit converts back to 999 t even with a fractional linear weight.
+  if (meters === tonsToMeters(MAX_ORDER_TONS, weightPerMeterKg)) return MAX_ORDER_TONS;
   // Length (m) × nominal linear mass (kg/m) / 1000 kg per tonne.
   const result = meters * weightPerMeterKg / 1000;
   return Number.isFinite(result) ? result : null;
@@ -46,10 +49,18 @@ export function tonsToMeters(tons: number, weightPerMeterKg: number) {
   return Number.isFinite(result) ? result : null;
 }
 
-export function calculateLineTotal(weightTons: number, pricePerTon: number) {
-  if (!isNonNegativeFinite(weightTons) || !isNonNegativeFinite(pricePerTon)) return null;
-  const total = round(weightTons * pricePerTon, 2);
-  return Number.isFinite(total) && (weightTons === 0 || total > 0) ? total : null;
+export function calculateLineTotal(quantity: number, unitPrice: number) {
+  return roundPriceProduct([quantity, unitPrice]);
+}
+
+export function calculateMeasuredLineTotal(meters: number, weightPerMeterKg: number, pricePerTon: number) {
+  if (!isPositiveFinite(weightPerMeterKg)) return null;
+  return roundPriceProduct([meters, weightPerMeterKg, pricePerTon], 3);
+}
+
+export function calculatePieceLineTotal(pieces: number, lengthMeters: number, pricePerMeter: number) {
+  if (!isPositiveFinite(lengthMeters)) return null;
+  return roundPriceProduct([pieces, lengthMeters, pricePerMeter]);
 }
 
 export function parseNonNegativeDecimal(value: string) {
@@ -62,9 +73,21 @@ export function formatDecimal(value: number, maximumFractionDigits: number) {
   return value.toFixed(maximumFractionDigits).replace(/\.?0+$/, "");
 }
 
-function round(value: number, digits: number) {
-  const factor = 10 ** digits;
-  return Math.round((value + Number.EPSILON) * factor) / factor;
+function roundPriceProduct(factors: readonly number[], conversionScale = 0) {
+  let coefficient = BigInt(1);
+  let scale = conversionScale;
+  // Keep decimal factors exact until the final half-up rounding to kopecks.
+  for (const factor of factors) {
+    if (!isNonNegativeFinite(factor)) return null;
+    const [digits, exponent = "0"] = factor.toString().split("e");
+    const [whole, fraction = ""] = digits.split(".");
+    coefficient *= BigInt(whole + fraction);
+    scale += fraction.length - Number(exponent);
+  }
+  const power = BigInt(10) ** BigInt(Math.abs(2 - scale));
+  const kopecks = scale <= 2 ? coefficient * power : (coefficient + power / BigInt(2)) / power;
+  const total = Number(kopecks) / 100;
+  return Number.isFinite(total) && (factors[0] === 0 || total > 0) ? total : null;
 }
 
 function isNonNegativeFinite(value: number) {

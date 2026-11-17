@@ -205,6 +205,7 @@ test("quote validates consent on its first click from an invalid phone and clear
   else await submit.click();
   const repeat = page.getByRole("button", {name: "Отправить ещё одну", exact: true});
   await expect(repeat).toBeVisible();
+  await expect(page.getByRole("status").filter({hasText: "Заявка принята."})).toBeFocused();
   expect(requests).toBe(1);
   await repeat.click();
   await expect(name).toHaveValue("");

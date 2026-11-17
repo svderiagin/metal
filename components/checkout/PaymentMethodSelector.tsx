@@ -3,13 +3,13 @@ import {isCheckoutPaymentAvailable} from "@/lib/checkout";
 import styles from "./CheckoutChoices.module.css";
 
 const options = [{
-  v: "CARD" as const,
-  l: "Банковская карта",
-  d: "Онлайн-оплата пока недоступна. Сервис оплаты будет подключён позже."
-}, {
   v: "INVOICE" as const,
   l: "Счёт на оплату",
-  d: "PDF сформируется при создании заказа. Счёт можно скачать на странице подтверждения; копия отправляется на email."
+  d: "PDF можно скачать после создания заказа. Копия отправляется на электронную почту."
+}, {
+  v: "CARD" as const,
+  l: "Банковская карта",
+  d: "Онлайн-оплата пока недоступна."
 }];
 
 export function PaymentMethodSelector({value, onChange}: {
@@ -41,7 +41,7 @@ export function PaymentMethodSelector({value, onChange}: {
               className={`${styles.radio} mt-1 size-4 shrink-0 accent-brand-700 dark:accent-brand-300`}
             />
             <span>
-              <strong className="block">{option.l}{available ? "" : " — скоро"}</strong>
+              <strong className="block">{option.l}</strong>
               <span className="mt-1 block text-sm leading-6 text-slate-600 dark:text-slate-300">{option.d}</span>
             </span>
           </label>

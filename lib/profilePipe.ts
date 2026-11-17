@@ -1,6 +1,6 @@
 import type {ProductVariant} from "@/types/product";
 import type {CartPieceOrder} from "@/types/cart";
-import {calculateLineTotal} from "./orderMeasurement";
+import {calculatePieceLineTotal} from "./orderMeasurement";
 
 export function isProfilePipeVariant(product: ProductVariant): boolean {
   return product.categoryId === "cat-trp"
@@ -41,6 +41,6 @@ export function profilePipeOrder(product: ProductVariant, pieces: number, select
   const meters = pieces * length;
   if (!Number.isFinite(meters)) return null;
   const estimatedTotal = hasConfirmedProfilePipePrice(product)
-    ? calculateLineTotal(meters, product.price!) : null;
+    ? calculatePieceLineTotal(pieces, length, product.price!) : null;
   return {pieces, lengthMeters: length, meters, estimatedTotal};
 }

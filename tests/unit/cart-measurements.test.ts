@@ -5,7 +5,8 @@ import {getAllProductVariants} from "../../lib/catalog";
 import {addCartItem, updateCartItem, updateCartPieceOrder} from "../../lib/cartMutations";
 import {createCartLines, normalizeCartItems} from "../../lib/cart";
 import {revalidateCartPrice} from "../../lib/cartPricing";
-import {getCartMeasurementQuantityOptions, getMeasurementQuantityOptions, tonsToMeters} from "../../lib/orderMeasurement";
+import {calculateLineTotal, calculateMeasuredLineTotal, calculatePieceLineTotal,
+  getCartMeasurementQuantityOptions, getMeasurementQuantityOptions, tonsToMeters} from "../../lib/orderMeasurement";
 import {isDemonstrationProduct} from "../../lib/catalogOffer";
 import {isVgpVariant} from "../../lib/vgp";
 import {parseCreateOrderInput} from "../../lib/server/validation";
@@ -32,6 +33,16 @@ function orderInput(items: CartItem[]): CreateOrderInput {
     customer: {type: "INDIVIDUAL", fullName: "Тест корзины", email: "cart@example.invalid", phone: "+79000000000"},
     delivery: {address: "Локальная проверка без отправки"}};
 }
+
+test("decimal line pricing only rounds at the half-kopeck boundary", () => {
+  assert.equal(calculateLineTotal(1, 1.005), 1.01);
+  assert.equal(calculateLineTotal(1, 1.004999999999999), 1);
+  assert.equal(calculateLineTotal(5e-7, 1e4), 0.01);
+  assert.equal(calculateLineTotal(4e-7, 1e4), null);
+  assert.equal(calculateMeasuredLineTotal(12.5, 68.6, 79470), 68145.53);
+  assert.equal(calculateMeasuredLineTotal(12.499999999, 68.6, 79470), 68145.52);
+  assert.equal(calculatePieceLineTotal(3, 1.15, 0.1), 0.35);
+});
 
 test("the 999 tonne limit gives each rebar diameter its corresponding metre limit", () => {
   for (const [id, maximumMeters, minimumTons] of [

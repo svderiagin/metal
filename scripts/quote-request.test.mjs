@@ -46,7 +46,7 @@ test('quote button targets the local form, scrolls on every click and replaces t
   }).outputText;
   vm.runInNewContext(source, {module: testModule, exports: testModule.exports, require: name => {
     assert.ok(name in imports, name); return imports[name];
-  }, document: {getElementById(id) {assert.equal(id, 'request'); return {scrollIntoView() {scrolls++;}};}}});
+  }, document: {getElementById(id) {assert.equal(id, 'request'); return {focus() {}, scrollIntoView() {scrolls++;}};}}});
   const button = (order, label) => testModule.exports.QuoteRequestButton({order, label, className: ''}).props;
   const first = button({product: 'Арматура', meters: 100, tons: 0.089});
   assert.equal(first.href, '#request');

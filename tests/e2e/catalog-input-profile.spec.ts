@@ -28,7 +28,8 @@ test("ranged profile pipe uses the corrected length and whole pipes in the quote
   await quantity.press("Tab");
   await expect(quantity).toHaveValue("2");
   await expect(row.getByLabel(/^Заказ в метрах для/)).toHaveText("24");
-  await row.getByRole("link", {name: "Запросить цену", exact: true}).click();
+  await row.getByRole("link", {name: "Запросить цену", exact: true}).press("Enter");
+  await expect(page.getByRole("region", {name: "Запросите расчёт поставки", exact: true})).toBeFocused();
   const message = page.getByRole("textbox", {name: /^Что требуется рассчитать\?/});
   await expect(message).toHaveValue(/длина 12 м\nОбщая длина: 24 м\nКоличество: 2 шт\./u);
 });
