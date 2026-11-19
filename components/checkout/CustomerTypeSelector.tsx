@@ -4,7 +4,7 @@ import styles from "./CheckoutChoices.module.css";
 export function CustomerTypeSelector({value, onChange}: { value: CustomerType; onChange: (v: CustomerType) => void }) {
   const options = [
     {value: "INDIVIDUAL", label: "Физическое лицо"},
-    {value: "COMPANY", label: "Организация"},
+    {value: "COMPANY", label: "Организация или ИП"},
   ] as const;
 
   return (

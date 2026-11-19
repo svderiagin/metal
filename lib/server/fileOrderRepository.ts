@@ -1,9 +1,11 @@
-import {link, mkdir, readFile, rename, unlink, writeFile} from "node:fs/promises";
+import {link, mkdir, readFile, readdir, rename, unlink, writeFile} from "node:fs/promises";
 import {randomBytes} from "node:crypto";
 import path from "node:path";
 import type {Order, PaymentStatus} from "@/types/order";
 import type {InvoiceEmailStatus} from "@/types/invoice";
 import type {OrderRepository} from "./orders";
+import {FIRST_INVOICE_NUMBER, isInvoiceNumber} from "@/lib/invoiceNumber";
+import {isOrderReference} from "@/lib/orderReference";
 
 // For a Node server with a persistent, private volume. Never put this directory in public/.
 export class FileOrderRepository implements OrderRepository {
@@ -19,8 +21,26 @@ export class FileOrderRepository implements OrderRepository {
   }
 
   private file(reference: string) {
-    if (!/^MS-[A-F0-9]{12}$/.test(reference)) throw new Error("INVALID_ORDER_REFERENCE");
+    if (!isOrderReference(reference)) throw new Error("INVALID_ORDER_REFERENCE");
     return path.join(this.directory, `${reference}.json`);
+  }
+
+  async reserveInvoiceNumber() {
+    const directory = path.join(this.directory, "invoice-numbers");
+    await mkdir(directory, {recursive: true, mode: 0o700});
+    const reserved = await readdir(directory);
+    let number = reserved.reduce((largest, name) => isInvoiceNumber(name)
+      ? Math.max(largest, Number(name)) : largest, FIRST_INVOICE_NUMBER - 1) + 1;
+    while (isInvoiceNumber(String(number))) {
+      try {
+        await writeFile(path.join(directory, String(number)), "", {flag: "wx", mode: 0o600});
+        return number;
+      } catch (error) {
+        if ((error as NodeJS.ErrnoException).code !== "EEXIST") throw error;
+        number++;
+      }
+    }
+    throw new Error("INVOICE_NUMBER_RANGE_EXHAUSTED");
   }
 
   async save(order: Order) {

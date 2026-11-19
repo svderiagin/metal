@@ -2,13 +2,14 @@ import type {OrderConfirmation} from "@/types/order";
 import {ORDER_STORAGE_KEY} from "./constants";
 import {isValidEmail} from "./validation";
 import {parseInvoiceReceipt} from "./invoiceReceipt";
+import {isOrderReference} from "./orderReference";
 
 let memory: OrderConfirmation | null = null;
 
 export function parseOrderConfirmation(value: unknown): OrderConfirmation | null {
   if (!value || typeof value !== "object") return null;
   const order = value as Partial<OrderConfirmation>;
-  if (typeof order.orderNumber !== "string" || !/^MS-[A-F0-9]{12}$/.test(order.orderNumber)
+  if (!isOrderReference(order.orderNumber)
     || (order.paymentMethod !== "CARD" && order.paymentMethod !== "INVOICE")
     || typeof order.email !== "string" || !isValidEmail(order.email)) return null;
   const invoice = order.invoice === undefined ? undefined : parseInvoiceReceipt(order.invoice, order.orderNumber);

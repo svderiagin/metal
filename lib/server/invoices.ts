@@ -3,14 +3,17 @@ import type {StoredInvoice} from "@/types/invoice";
 import {createInvoiceAccess} from "./invoiceAccess";
 import {readInvoiceConfig} from "./invoiceConfig";
 import {renderInvoicePdf} from "./invoicePdf";
+import {invoiceFileName, isInvoiceNumber} from "@/lib/invoiceNumber";
 
 export const invoiceService = {
-  async create(order: Order): Promise<{invoice: StoredInvoice; downloadToken: string}> {
+  async create(order: Order, reserveNumber: () => Promise<number>): Promise<{invoice: StoredInvoice; downloadToken: string}> {
     const config = readInvoiceConfig();
-    const pdf = await renderInvoicePdf(order, config);
+    const number = String(await reserveNumber());
+    if (!isInvoiceNumber(number)) throw new Error("INVALID_INVOICE_NUMBER");
+    const pdf = await renderInvoicePdf(order, config, number);
     const access = createInvoiceAccess();
-    return {invoice: {number: order.reference, fileName: `invoice-${order.reference}.pdf`,
-      pdfBase64: pdf.toString("base64"), accessTokenHash: access.hash, emailStatus: "PENDING", isPreview: config.isPreview},
+    return {invoice: {number, fileName: invoiceFileName(number, order.reference),
+      pdfBase64: pdf.toString("base64"), accessTokenHash: access.hash, emailStatus: "PENDING", isPreview: false},
       downloadToken: access.token};
   },
 };

@@ -1,7 +1,8 @@
-import {randomBytes} from "node:crypto";
+import {randomInt} from "node:crypto";
 import {getProductVariantById} from "@/lib/catalog";
 import {revalidateCartPrice} from "@/lib/cartPricing";
 import {isVgpVariant} from "@/lib/vgp";
+import {FIRST_INVOICE_NUMBER} from "@/lib/invoiceNumber";
 import type {CreateOrderInput, Order, OrderItem, PaymentStatus} from "@/types/order";
 import type {InvoiceEmailStatus} from "@/types/invoice";
 import {FileOrderRepository} from "./fileOrderRepository";
@@ -9,6 +10,8 @@ import {PostgresOrderRepository} from "./postgresOrderRepository";
 import path from "node:path";
 
 export interface OrderRepository {
+  reserveInvoiceNumber(): Promise<number>;
+
   save(order: Order): Promise<void>;
 
   findByReference(reference: string): Promise<Order | null>;
@@ -19,8 +22,14 @@ export interface OrderRepository {
 
 class DevelopmentOrderRepository implements OrderRepository {
   private readonly orders = new Map<string, Order>();
+  private nextInvoiceNumber = FIRST_INVOICE_NUMBER;
+
+  async reserveInvoiceNumber() {
+    return this.nextInvoiceNumber++;
+  }
 
   async save(order: Order) {
+    if (this.orders.has(order.reference)) throw Object.assign(new Error("ORDER_REFERENCE_EXISTS"), {code: "EEXIST"});
     this.orders.set(order.reference, order);
   }
 
@@ -40,6 +49,10 @@ class DevelopmentOrderRepository implements OrderRepository {
 }
 
 class UnconfiguredOrderRepository implements OrderRepository {
+  async reserveInvoiceNumber() {
+    return this.unavailable();
+  }
+
   async save(order: Order) {
     void order;
     this.unavailable();
@@ -79,6 +92,23 @@ function createOrderRepository(): OrderRepository {
 
 export const orderRepository = createOrderRepository();
 
+function newOrderReference() {
+  return String(randomInt(1_000_000_000, 10_000_000_000));
+}
+
+export async function saveNewOrder(order: Order) {
+  for (let attempt = 0; ; attempt++) {
+    try {
+      await orderRepository.save(order);
+      return;
+    } catch (error) {
+      const code = (error as {code?: string} | undefined)?.code;
+      if (attempt >= 3 || (code !== "EEXIST" && code !== "23505")) throw error;
+      order.reference = newOrderReference();
+    }
+  }
+}
+
 export function createTrustedOrder(input: CreateOrderInput, lookupProduct = getProductVariantById): Order | null {
   if (input.consent !== true) return null;
   const items: OrderItem[] = [];
@@ -116,7 +146,7 @@ export function createTrustedOrder(input: CreateOrderInput, lookupProduct = getP
   const totalAmount = items.reduce((sum, item) => sum + Math.round(item.subtotal * 100), 0) / 100;
   if (!Number.isFinite(totalAmount) || totalAmount <= 0) return null;
   return {
-    reference: `MS-${randomBytes(6).toString("hex").toUpperCase()}`,
+    reference: newOrderReference(),
     items,
     customer: input.customer,
     delivery: input.delivery,

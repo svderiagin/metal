@@ -1,5 +1,6 @@
 import nodemailer, {type SendMailOptions} from "nodemailer";
 import {isValidEmail} from "@/lib/validation";
+import {companyDetails} from "@/lib/companyDetails";
 
 export function readSmtpConfig(env: Record<string, string | undefined> = process.env) {
   const port = Number(env.SMTP_PORT || "465");
@@ -22,7 +23,7 @@ export const smtpMailer = {
     const config = readSmtpConfig();
     const transport = nodemailer.createTransport(config.options);
     try {
-      const result = await transport.sendMail({...message, from: {name: "RWB-METAL", address: config.from}});
+      const result = await transport.sendMail({...message, from: {name: companyDetails.brandName, address: config.from}});
       const to = typeof message.to === "string" ? message.to : "";
       const accepted = result.accepted;
       if (!accepted.includes(to)) throw new Error("EMAIL_RECIPIENT_REJECTED");

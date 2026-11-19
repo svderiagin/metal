@@ -15,7 +15,8 @@ let paymentPost: typeof import("../../app/api/payments/create/route").POST;
 let webhookPost: typeof import("../../app/api/payments/webhook/route").POST;
 let invoiceGet: typeof import("../../app/api/orders/[reference]/invoice/route").GET;
 const testEnvironment = {NODE_ENV: "test", ORDER_STORAGE_DIR: "", ORDER_DATABASE_URL: "",
-  NOTIFICATION_PROVIDER: "", INVOICE_MODE: "preview", INVOICE_PAYMENT_DAYS: "3"};
+  NOTIFICATION_PROVIDER: "", INVOICE_MODE: "live", INVOICE_PAYMENT_DAYS: "3",
+  INVOICE_BANK_ACCOUNT: "40702810500000000000", INVOICE_VAT_RATE: "22", INVOICE_PRICES_INCLUDE_VAT: "true"};
 const previousEnvironment = Object.keys(testEnvironment).map(key => [key, process.env[key]] as const);
 
 before(async () => {
@@ -167,6 +168,9 @@ test("order endpoint saves a PDF using current prices; mail failure preserves th
   const failed = await orderPost(request(order()));
   assert.equal(failed.status, 201);
   const failedResult = await failed.json();
+  assert.match(failedResult.order.reference, /^[1-9]\d{9}$/);
+  assert.match(failedResult.order.invoice.number, /^[1-9]\d{9}$/);
+  assert.equal(failedResult.order.invoice.isPreview, false);
   assert.equal(failedResult.order.invoice.emailStatus, "FAILED");
   const saved = await orders.orderRepository.findByReference(failedResult.order.reference);
   assert.equal(saved?.invoice?.emailStatus, "FAILED");
@@ -178,6 +182,7 @@ test("order endpoint saves a PDF using current prices; mail failure preserves th
   const first = await download();
   assert.equal(first.status, 200);
   assert.equal(first.headers.get("content-type"), "application/pdf");
+  assert.match(first.headers.get("content-disposition")!, /filename\*=UTF-8''/);
   assert.match(first.headers.get("cache-control")!, /no-store/);
   const bytes = Buffer.from(await first.arrayBuffer());
   assert.equal(bytes.subarray(0, 5).toString(), "%PDF-");
@@ -192,10 +197,26 @@ test("order endpoint saves a PDF using current prices; mail failure preserves th
   assert.equal(response.status, 201);
   const result = await response.json();
   assert.equal(result.order.totalAmount, 1070);
+  assert.equal(Number(result.order.invoice.number), Number(failedResult.order.invoice.number) + 1);
   assert.equal(result.order.invoice.emailStatus, "SENT");
   assert.equal("pdfBase64" in result.order.invoice, false);
   assert.equal("accessTokenHash" in result.order.invoice, false);
   assert.equal(sent.mock.calls.length, 1);
+});
+
+test("invalid beneficiary details stop invoice issuance before reservation or notification", async ({mock}) => {
+  const reserve = mock.method(orders.orderRepository, "reserveInvoiceNumber", async () => 2677024476);
+  const save = mock.method(orders.orderRepository, "save", async () => {});
+  const send = mock.method(notificationService, "sendOrderNotification", async () => {});
+  process.env.INVOICE_BANK_ACCOUNT = "4070281080000020353";
+  try {
+    assert.equal((await orderPost(request(order()))).status, 503);
+    assert.equal(reserve.mock.calls.length, 0);
+    assert.equal(save.mock.calls.length, 0);
+    assert.equal(send.mock.calls.length, 0);
+  } finally {
+    process.env.INVOICE_BANK_ACCOUNT = testEnvironment.INVOICE_BANK_ACCOUNT;
+  }
 });
 
 test("PDF or storage failure rejects before sending mail; saved orders survive a mail-status write failure", async ({mock}) => {

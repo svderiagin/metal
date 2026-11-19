@@ -1,6 +1,7 @@
 import {readJsonBody} from "@/lib/server/request";
 import {orderRepository} from "@/lib/server/orders";
 import {hasValidOrderAmount, paymentProvider} from "@/lib/server/payments";
+import {isOrderReference} from "@/lib/orderReference";
 
 const error = (message: string, status: number) =>
   Response.json({ok: false, error: message}, {status});
@@ -9,7 +10,7 @@ export async function POST(request: Request) {
   const parsed = await readJsonBody(request);
   if (!parsed.ok) return parsed.response;
   const body = parsed.value;
-  if (typeof body !== "object" || body === null || !("orderReference" in body) || typeof body.orderReference !== "string" || !/^MS-[A-F0-9]{12}$/.test(body.orderReference)) {
+  if (typeof body !== "object" || body === null || !("orderReference" in body) || !isOrderReference(body.orderReference)) {
     return error("Некорректный номер заказа.", 400);
   }
   try {

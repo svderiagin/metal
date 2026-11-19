@@ -1,6 +1,6 @@
 import {readJsonBody} from "@/lib/server/request";
 import {notificationService} from "@/lib/server/notifications";
-import {createTrustedOrder, orderRepository} from "@/lib/server/orders";
+import {createTrustedOrder, orderRepository, saveNewOrder} from "@/lib/server/orders";
 import {parseCreateOrderInput} from "@/lib/server/validation";
 import {invoiceService} from "@/lib/server/invoices";
 import type {InvoiceEmailStatus} from "@/types/invoice";
@@ -21,12 +21,15 @@ export async function POST(request: Request) {
   let downloadToken: string | undefined;
   try {
     if (order.paymentMethod === "INVOICE") {
-      const created = await invoiceService.create(order);
+      const created = await invoiceService.create(order, () => orderRepository.reserveInvoiceNumber());
       order.invoice = created.invoice;
       downloadToken = created.downloadToken;
     }
-    await orderRepository.save(order);
-  } catch {
+    await saveNewOrder(order);
+  } catch (caught) {
+    if (caught instanceof Error && caught.message === "INVOICE_CONFIGURATION_INVALID") {
+      console.error("INVOICE_CONFIGURATION_INVALID");
+    }
     return error("Оформление временно недоступно. Свяжитесь с нами для расчёта поставки.", 503);
   }
   let emailStatus: InvoiceEmailStatus = "SENT";

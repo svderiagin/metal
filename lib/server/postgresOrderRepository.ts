@@ -2,6 +2,7 @@ import postgres, {type Sql} from "postgres";
 import type {InvoiceEmailStatus} from "@/types/invoice";
 import type {Order, PaymentStatus} from "@/types/order";
 import type {OrderRepository} from "./orders";
+import {FIRST_INVOICE_NUMBER} from "@/lib/invoiceNumber";
 
 export class PostgresOrderRepository implements OrderRepository {
   private readonly sql: Sql;
@@ -21,6 +22,17 @@ export class PostgresOrderRepository implements OrderRepository {
     } catch {
       throw new Error("ORDER_DATABASE_CONFIGURATION_INVALID");
     }
+  }
+
+  async reserveInvoiceNumber() {
+    await this.ensureSchema();
+    const [row] = await this.sql<{number: string}[]>`
+      INSERT INTO public.rwb_invoice_counter (singleton, last_number)
+      VALUES (true, ${FIRST_INVOICE_NUMBER})
+      ON CONFLICT (singleton) DO UPDATE SET last_number = rwb_invoice_counter.last_number + 1
+      RETURNING last_number::text AS number
+    `;
+    return Number(row.number);
   }
 
   async save(order: Order) {
@@ -67,7 +79,8 @@ export class PostgresOrderRepository implements OrderRepository {
 
   private async createTable() {
     const [table] = await this.sql<{ready: boolean}[]>`
-      SELECT to_regclass('public.rwb_orders') IS NOT NULL AS ready
+      SELECT to_regclass('public.rwb_orders') IS NOT NULL
+        AND to_regclass('public.rwb_invoice_counter') IS NOT NULL AS ready
     `;
     if (table.ready) return;
 
@@ -78,6 +91,12 @@ export class PostgresOrderRepository implements OrderRepository {
         CREATE TABLE IF NOT EXISTS public.rwb_orders (
           reference text PRIMARY KEY,
           order_data jsonb NOT NULL
+        )
+      `;
+      await transaction`
+        CREATE TABLE IF NOT EXISTS public.rwb_invoice_counter (
+          singleton boolean PRIMARY KEY CHECK (singleton),
+          last_number bigint NOT NULL CHECK (last_number BETWEEN 1000000000 AND 9999999999)
         )
       `;
     });

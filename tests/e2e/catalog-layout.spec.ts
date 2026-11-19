@@ -39,11 +39,12 @@ test("selected filters are counted and reset from the responsive parameters pane
   await expect(profile).toHaveValue("");
 });
 
-test("sales email is available while card payment remains an explicit placeholder", async ({page}) => {
+test("sales email and invoice payment are available to customers", async ({page}) => {
   await seedCart(page);
   await page.goto("/contacts");
   await expect(page.getByRole("main").getByRole("link", {name: "sales@rwb-metal.ru", exact: true}).first()).toHaveAttribute("href", "mailto:sales@rwb-metal.ru");
-  await expect(page.getByRole("main").getByText("Телефон скоро появится", {exact: true})).toBeVisible();
+  await expect(page.getByRole("main").getByText("Телефон скоро появится", {exact: true})).toHaveCount(0);
+  await expect(page.getByText("Указан в счёте на оплату", {exact: true})).toBeVisible();
   await page.goto("/checkout");
   await expect(page.getByRole("radio", {name: /Банковская карта/})).toBeDisabled();
   await expect(page.getByRole("radio", {name: /Счёт на оплату/})).toBeChecked();

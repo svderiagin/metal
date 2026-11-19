@@ -33,7 +33,10 @@ test("unconfirmed demo offers cannot contribute prices or accept a stale cart pu
 test("confirmed demo tonne prices remain usable without certifying their mass conversions", () => {
   for (const id of ["prd-003", "prd-004"]) {
     const product = find(id);
-    assert.equal(storefrontVariant(product), product);
+    const displayed = storefrontVariant(product);
+    assert.equal(displayed.price, product.price);
+    assert.doesNotMatch(displayed.description, /демонстрацион/u);
+    assert.match(displayed.description, /подтверждаются при согласовании заказа/u);
     const tonneOrder = revalidateCartPrice(product, {quantity: 2});
     assert.equal(tonneOrder.invalidReason, undefined);
     assert.equal(tonneOrder.estimatedTotal, 100000);

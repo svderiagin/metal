@@ -1,9 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readProjectData} from './project-data.mjs';
+import {parseQuoteRequest} from '../lib/server/validation.ts';
 
 const {normalizeRussianPhone, validateQuoteFields, QUOTE_LIMITS} = readProjectData('lib/quoteValidation.ts');
-const {parseQuoteRequest} = readProjectData('lib/server/validation.ts');
 const valid = () => ({name: 'Анна-Мария', phone: '+79115556677', email: 'anna+metal@example.ru', company: '', message: 'Арматура рифлёная А500С\nДлина: 100 м', consent: true, website: ''});
 
 test('telephone normalization accepts Russian mobile formats without truncating a pasted number', () => {

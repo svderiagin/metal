@@ -10,14 +10,14 @@ test("checkout rejects malformed contact details and INN, and scopes company det
     submissions.push(route.request().postDataJSON());
     await route.fulfill({status: 503, json: {ok: false, error: "Тестовый отказ сервиса"}});
   });
-  await page.getByRole("radio", {name: "Организация", exact: true}).check();
+  await page.getByRole("radio", {name: "Организация или ИП", exact: true}).check();
   const name = page.getByLabel("ФИО *", {exact: true});
   const email = page.getByLabel("Электронная почта *", {exact: true});
   const phone = page.getByLabel("Телефон *", {exact: true});
   const inn = page.getByLabel("ИНН *", {exact: true});
   const submit = page.getByRole("button", {name: /^Создать заказ на/});
-  await page.getByLabel("Название компании *", {exact: true}).fill("ООО Тест");
-  await page.getByLabel("Юридический адрес *", {exact: true}).fill("Тестовый юридический адрес");
+  await page.getByLabel("Название организации или имя ИП *", {exact: true}).fill("ИП Анна Тестовая");
+  await page.getByLabel("Адрес регистрации *", {exact: true}).fill("Тестовый юридический адрес");
   await name.fill("12345");
   await email.fill("audit@-example.invalid");
   await phone.fill("+7)900(0000000");
@@ -37,10 +37,15 @@ test("checkout rejects malformed contact details and INN, and scopes company det
   await expect(inn).toHaveAttribute("aria-invalid", "true");
   expect(submissions).toHaveLength(0);
 
-  await inn.fill("1234567894");
+  await phone.fill("8 (900) 000‑00‑00");
+  await phone.blur();
+  await expect(phone).toHaveValue("+7 900 000 00 00");
+  await inn.fill("1234 5678 9047");
+  await inn.blur();
+  await expect(inn).toHaveValue("123456789047");
   await submit.click();
   await expect(page.getByRole("alert").filter({hasText: "Тестовый отказ сервиса"})).toBeVisible();
-  expect(submissions[0].customer).toMatchObject({type: "COMPANY", taxNumber: "1234567894"});
+  expect(submissions[0].customer).toMatchObject({type: "COMPANY", taxNumber: "123456789047", phone: "+79000000000"});
 
   await page.getByRole("radio", {name: "Физическое лицо", exact: true}).check();
   await expect(inn).toHaveCount(0);
@@ -118,7 +123,8 @@ for (const endpoint of ["orders", "contact"] as const) {
     const pending = page.waitForRequest(req => req.method() === "POST" && req.url().endsWith(`/api/${endpoint}`));
     await submit.click();
     const body = (await pending).postDataJSON();
-    expect(endpoint === "orders" ? body.customer.phone : body.phone).toBe(corrected);
+    if (endpoint === "orders") expect(body.customer.phone).toBe("+79000000000");
+    else expect(body.phone).toBe(corrected);
     await expect(phone).not.toHaveAttribute("aria-invalid", "true");
   });
 }

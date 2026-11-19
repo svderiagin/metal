@@ -169,18 +169,19 @@ for (const storageBlocked of [false, true]) {
       expect(body.consent).toBe(true);
       expect(body.items).toHaveLength(1);
       submissions++;
-      await route.fulfill({status: 201, json: {ok: true, order: {reference: "MS-A1B2C3D4E5F6", totalAmount: 1605, paymentMethod: "INVOICE",
-        invoice: {number: "MS-A1B2C3D4E5F6", downloadToken: "a".repeat(64), emailStatus: storageBlocked ? "SENT" : "FAILED", isPreview: true}}}});
+      await route.fulfill({status: 201, json: {ok: true, order: {reference: "3645789245", totalAmount: 1605, paymentMethod: "INVOICE",
+        invoice: {number: "2677024476", downloadToken: "a".repeat(64), emailStatus: storageBlocked ? "SENT" : "FAILED", isPreview: false}}}});
     });
     await page.goto("/checkout");
     await fillCheckout(page);
     await page.getByRole("button", {name: /^Создать заказ на/}).click();
     await expect(page).toHaveURL(/\/order\/success$/);
     await expect(page.getByRole("heading", {name: "Заказ создан", exact: true})).toBeVisible();
-    await expect(page.getByText("MS-A1B2C3D4E5F6", {exact: true})).toBeVisible();
+    await expect(page.getByText("3645789245", {exact: true})).toBeVisible();
+    await expect(page.getByText("2677024476", {exact: true})).toBeVisible();
     expect(submissions).toBe(1);
     expect(await page.evaluate(() => JSON.parse(localStorage.getItem("metal-store-cart-v1")!))).toEqual([]);
-    await expect(page.getByText("Образец счёта — не для оплаты", {exact: true})).toBeVisible();
+    await expect(page.getByText("Образец счёта — не для оплаты", {exact: true})).toHaveCount(0);
     const button = page.getByRole("button", {name: "Скачать счёт PDF", exact: true});
     await expect(button).toBeVisible();
     if (!storageBlocked) {
@@ -193,7 +194,7 @@ for (const storageBlocked of [false, true]) {
     await expect(downloadError).toContainText("Не удалось скачать счёт");
     const pdf = await PDFDocument.create();
     pdf.addPage();
-    await page.route("**/api/orders/MS-A1B2C3D4E5F6/invoice", async route => {
+    await page.route("**/api/orders/3645789245/invoice", async route => {
       expect(route.request().headers().authorization).toBe(`Bearer ${"a".repeat(64)}`);
       expect(route.request().url()).not.toContain("token=");
       await route.fulfill({status: 200, contentType: "application/pdf", body: Buffer.from(await pdf.save())});
@@ -201,7 +202,7 @@ for (const storageBlocked of [false, true]) {
     const downloading = page.waitForEvent("download");
     await button.focus();
     await page.keyboard.press("Enter");
-    expect((await downloading).suggestedFilename()).toBe("invoice-MS-A1B2C3D4E5F6.pdf");
+    expect((await downloading).suggestedFilename()).toBe("Счёт-2677024476.pdf");
     await expect(downloadError).toHaveCount(0);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     if (isMobile && !storageBlocked) {

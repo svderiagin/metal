@@ -1,6 +1,7 @@
 import type {CreateOrderInput, CreateOrderResponse, CreatePaymentResponse} from "@/types/order";
 import {isApiSuccess, readApiError} from "./apiResponse";
 import {parseInvoiceReceipt} from "./invoiceReceipt";
+import {isOrderReference} from "./orderReference";
 
 export async function createOrder(input: CreateOrderInput): Promise<CreateOrderResponse> {
   const result = await post("/api/orders", input, "Не удалось создать заказ.");
@@ -39,7 +40,7 @@ async function post(url: string, input: unknown, fallback: string) {
 function isOrderResult(value: unknown) {
   if (!value || typeof value !== "object") return false;
   const order = value as Record<string, unknown>;
-  return typeof order.reference === "string" && /^MS-[A-F0-9]{12}$/.test(order.reference)
+  return isOrderReference(order.reference)
     && typeof order.totalAmount === "number" && Number.isFinite(order.totalAmount) && order.totalAmount > 0
     && (order.paymentMethod === "CARD" || order.paymentMethod === "INVOICE")
     && (order.invoice === undefined || parseInvoiceReceipt(order.invoice, order.reference) !== null);

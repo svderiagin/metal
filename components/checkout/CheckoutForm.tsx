@@ -8,7 +8,7 @@ import {Button} from "@/components/ui/Button";
 import {formatCurrency} from "@/lib/currency";
 import {CustomerTypeSelector} from "./CustomerTypeSelector";
 import {PaymentMethodSelector} from "./PaymentMethodSelector";
-import {createOrderInput, getCheckoutFieldErrors} from "@/lib/checkout";
+import {createOrderInput, formatCheckoutField, getCheckoutFieldErrors, type CheckoutFieldErrors, type CheckoutTextField} from "@/lib/checkout";
 import {createOrder, createPayment} from "@/lib/checkoutClient";
 import {rememberOrderConfirmation} from "@/lib/orderConfirmation";
 import {CheckoutFields} from "./CheckoutFields";
@@ -34,10 +34,18 @@ export function CheckoutForm() {
   const [error, setError] = useState("");
   const [submissionFailed, setSubmissionFailed] = useState(false);
   const [attempted, setAttempted] = useState(false);
+  const [visited, setVisited] = useState<Partial<Record<CheckoutTextField, true>>>({});
   const [submitting, setSubmitting] = useState(false);
   const {clearCart, totalAmount, lines} = useCart();
   const router = useRouter();
-  const fieldErrors = attempted ? getCheckoutFieldErrors(form) : {};
+  const errors = getCheckoutFieldErrors(form);
+  const fieldErrors: CheckoutFieldErrors = attempted ? errors
+    : Object.fromEntries(Object.entries(errors).filter(([key]) => visited[key as CheckoutTextField]));
+  function blurField(key: CheckoutTextField, value: string) {
+    const formatted = formatCheckoutField(key, value);
+    if (formatted !== value) setForm(current => ({...current, [key]: formatted}));
+    if (value.trim()) setVisited(current => ({...current, [key]: true}));
+  }
   function updateField(key: keyof CheckoutFormData, value: string | boolean) {
     setForm((currentForm) => ({...currentForm, [key]: value}));
     setError("");
@@ -97,7 +105,7 @@ export function CheckoutForm() {
 
   return <form onSubmit={submit} noValidate aria-busy={submitting} className="space-y-7"><CustomerTypeSelector value={form.customerType}
                                                                                         onChange={(v: CustomerType) => updateField("customerType", v)}/>
-    <CheckoutFields form={form} onChange={updateField} errors={fieldErrors} formId={formId}/>
+    <CheckoutFields form={form} onChange={updateField} onBlur={blurField} errors={fieldErrors} formId={formId}/>
     <PaymentMethodSelector value={form.paymentMethod}
                            onChange={(v: PaymentMethod) => updateField("paymentMethod", v)}/><div><label
       className="flex items-start gap-2 text-sm"><input type="checkbox" name="consentAccepted" checked={form.consentAccepted}

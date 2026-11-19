@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {createTrustedOrder} from '../lib/server/orders.ts';
+import {parseCreateOrderInput} from '../lib/server/validation.ts';
 import {readProjectData} from './project-data.mjs';
 
 const cache=new Map();
@@ -9,7 +10,6 @@ const catalog=readProjectData('lib/catalog.ts',cache);
 const pipe=readProjectData('lib/profilePipe.ts',cache);
 const {normalizeCartItems,createCartLines}=readProjectData('lib/cart.ts',cache);
 const {revalidateCartPrice}=readProjectData('lib/cartPricing.ts',cache);
-const {parseCreateOrderInput}=readProjectData('lib/server/validation.ts',cache);
 const {hasValidOrderAmount}=readProjectData('lib/server/payments.ts',cache);
 const {normalizePipeWeight}=readProjectData('lib/pipeWeight.ts',cache);
 const {trubyProfilnyeProducts}=readProjectData('data/products/trubyProfilnye.ts',cache);

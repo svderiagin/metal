@@ -3,6 +3,7 @@ import path from "node:path";
 import {PDFDocument, rgb, type PDFFont, type PDFPage} from "pdf-lib";
 import fontkit from "@pdf-lib/fontkit";
 import type {Order, OrderItem} from "@/types/order";
+import {companyDetails} from "@/lib/companyDetails";
 import type {InvoiceConfig} from "./invoiceConfig";
 import {amountInWords, includedVat} from "./invoiceAmounts";
 
@@ -18,14 +19,13 @@ export function invoiceLine(item: OrderItem) {
     "за погонный метр": "м", "за метр": "м", "за квадратный метр": "м²"};
   const unit = item.measurement ? "т" : units[item.priceUnit];
   if (!unit) throw new Error("UNKNOWN_INVOICE_UNIT");
-  const details = [item.sku ? `Артикул: ${item.sku}` : "",
-    item.measurement ? `Длина: ${secondaryQuantity(item.measurement.meters)} м` : "",
+  const details = [item.measurement ? `Длина: ${secondaryQuantity(item.measurement.meters)} м` : "",
     item.pieceOrder ? `${item.pieceOrder.pieces} шт. по ${quantity(item.pieceOrder.lengthMeters)} м` : ""].filter(Boolean);
   return {description: [item.name, ...details].join("\n"),
     quantity: quantity(item.measurement?.weightTons ?? item.quantity), unit, price: money(item.unitPrice), subtotal: money(item.subtotal)};
 }
 
-export async function renderInvoicePdf(order: Order, config: InvoiceConfig): Promise<Buffer> {
+export async function renderInvoicePdf(order: Order, config: InvoiceConfig, number: string): Promise<Buffer> {
   const doc = await PDFDocument.create();
   doc.registerFontkit(fontkit);
   const fontDirectory = path.join(process.cwd(), "lib/server/invoice-fonts");
@@ -70,19 +70,9 @@ export async function renderInvoicePdf(order: Order, config: InvoiceConfig): Pro
     for (const line of lines) {ensure(size + 4); text(line, margin, y, size, font, color); y -= size + 4;}
     y -= 4;
   }
-  function previewBanner(value: string) {
-    const lines = wrap(value, content - 16, 10, bold);
-    const blockHeight = lines.length * 15 + 14;
-    ensure(blockHeight + 5);
-    page.drawRectangle({x: margin, y: y - blockHeight, width: content, height: blockHeight, color: rgb(1, .9, .9)});
-    lines.forEach((line, i) => text(line, margin + 8, y - 7 - i * 15, 10, bold, rgb(.65, .06, .06)));
-    y -= blockHeight + 8;
-  }
   newPage();
-  text("RWB-METAL", margin, y, 17, bold);
-  text(config.seller.email, width - margin - regular.widthOfTextAtSize(config.seller.email, 10), y + -3, 10, regular, muted);
+  text(companyDetails.brandName, margin, y, 17, bold, rgb(.11, .28, .36));
   y -= 34;
-  if (config.isPreview) previewBanner("ОБРАЗЕЦ - НЕ ДЛЯ ОПЛАТЫ. Реквизиты условные, НДС приведён для примера.");
   paragraph("Реквизиты получателя", 10, bold);
 
   const bankTop = y;
@@ -103,12 +93,12 @@ export async function renderInvoicePdf(order: Order, config: InvoiceConfig): Pro
   }
   if (bankTop - y > 180) throw new Error("INVOICE_BANK_LAYOUT_OVERFLOW");
   y -= 18;
-  paragraph(`Счёт на оплату № ${order.reference} от ${date(order.createdAt)}`, 18, bold);
+  paragraph(`Счёт на оплату № ${number} от ${date(order.createdAt)}`, 18, bold);
   y -= 4;
-  paragraph(`Поставщик: ${config.seller.name}, ИНН ${config.seller.inn}, КПП ${config.seller.kpp}. ${config.seller.address}`, 9);
+  paragraph(`Поставщик: ${config.seller.name}, ИНН ${config.seller.inn}, КПП ${config.seller.kpp}, ОГРН ${config.seller.ogrn}. ${config.seller.address}`, 9);
   const customer = order.customer;
   paragraph(`Покупатель: ${customer.type === "COMPANY" ? `${customer.companyName}, ИНН ${customer.taxNumber}. ${customer.legalAddress}` : customer.fullName}`, 9);
-  paragraph(`Контактное лицо: ${customer.fullName}; ${customer.phone}; ${customer.email}`, 9);
+  paragraph(customer.type === "COMPANY" ? `Контактное лицо: ${customer.fullName}, ${customer.phone}` : `Телефон: ${customer.phone}`, 9);
   paragraph(`Адрес доставки: ${order.delivery.address}`, 9);
   y -= 4;
 
@@ -138,7 +128,7 @@ export async function renderInvoicePdf(order: Order, config: InvoiceConfig): Pro
     const line = invoiceLine(item);
     const cells = [String(index + 1), line.description, line.quantity, line.unit, line.price, line.subtotal];
     const needed = Math.max(...cells.map((cell, i) => wrap(cell, columns[i] - 10, 9).length)) * 12 + 10;
-    if (y - needed < 62) {newPage(); paragraph(`Счёт № ${order.reference} от ${date(order.createdAt)} (продолжение)`, 10, bold); header();}
+    if (y - needed < 62) {newPage(); paragraph(`Счёт № ${number} от ${date(order.createdAt)} (продолжение)`, 10, bold); header();}
     row(cells);
   }
   y -= 18;
@@ -147,22 +137,20 @@ export async function renderInvoicePdf(order: Order, config: InvoiceConfig): Pro
   paragraph("Доставка: бесплатно (0,00 руб.)", 10);
   const vatLine = config.vat === "NONE" ? "Без НДС."
     : `В том числе НДС ${config.vat}%: ${money(includedVat(order.items.map(item => item.subtotal), config.vat))} руб.`;
-  paragraph(`${vatLine}${config.isPreview ? " (пример расчёта)" : ""}`);
+  paragraph(vatLine);
   paragraph(`Всего к оплате: ${money(order.totalAmount)} руб.`, 13, bold);
   paragraph(`Всего наименований: ${order.items.length}. ${amountInWords(order.totalAmount)}.`, 10);
   y -= 8;
   const deadline = new Date(order.createdAt);
   deadline.setTime(deadline.getTime() + config.paymentDays * 86_400_000);
-  paragraph(config.isPreview ? "Пример назначения платежа" : "Назначение платежа", 9, bold);
-  paragraph(`Оплата по счёту № ${order.reference} от ${date(order.createdAt)} за металлопрокат. ${vatLine}`, 9);
+  paragraph("Назначение платежа", 9, bold);
+  paragraph(`Оплата по счёту № ${number} от ${date(order.createdAt)} за металлопрокат. ${vatLine}`, 9);
   paragraph(`Счёт действителен по ${date(deadline)} включительно. Предоплата 100%. Дата и условия отгрузки согласуются с покупателем.`, 9);
-  if (!config.isPreview) paragraph("Счёт на оплату не подтверждает поступление денежных средств.", 9, regular, muted);
   pages.forEach((current, index) => {
     current.drawLine({start: {x: margin, y: 43}, end: {x: width - margin, y: 43}, color: border, thickness: .5});
-    current.drawText(`${order.reference}${config.isPreview ? "  |  Образец - не для оплаты" : ""}  |  ${index + 1} / ${pages.length}`, {x: margin, y: 28, size: 8, font: regular, color: muted});
+    current.drawText(`Счёт № ${number}  |  Стр. ${index + 1} из ${pages.length}`, {x: margin, y: 28, size: 8, font: regular, color: muted});
   });
-  doc.setTitle(`Счёт на оплату ${order.reference}`);
-  if (config.isPreview) doc.setSubject("Образец - не для оплаты");
+  doc.setTitle(`Счёт на оплату № ${number}`);
   doc.setAuthor(config.seller.name);
   doc.setCreationDate(new Date(order.createdAt));
   return Buffer.from(await doc.save());

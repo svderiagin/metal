@@ -1,6 +1,6 @@
 import test, {afterEach, mock} from "node:test";
 import assert from "node:assert/strict";
-import {isCheckoutFormValid, createOrderInput} from "../../lib/checkout";
+import {isCheckoutFormValid, createOrderInput, formatCheckoutField} from "../../lib/checkout";
 import {createOrder, createPayment, fetchInvoice, isPaymentRedirect} from "../../lib/checkoutClient";
 import {parseInvoiceReceipt} from "../../lib/invoiceReceipt";
 import {parseOrderConfirmation, readOrderConfirmation, rememberOrderConfirmation} from "../../lib/orderConfirmation";
@@ -38,6 +38,30 @@ test("checkout validates consent, contacts, company requirements and server fiel
   assert.equal(input.customer.fullName, "Анна");
   for (const field of ["taxNumber", "companyName", "legalAddress"]) assert.equal(field in input.customer, false);
   assert.equal(input.consent, true);
+});
+
+test("invoice checkout formats valid phone numbers and verifies both types of INN", () => {
+  for (const [input, display, canonical] of [
+    ["8 (900) 000‑00‑00", "+7 900 000 00 00", "+79000000000"],
+    ["74951234567", "+7 495 123 45 67", "+74951234567"],
+    ["9000000000", "+7 900 000 00 00", "+79000000000"],
+    ["+1 (202) 555-0123", "+1 202 555 0123", "+12025550123"],
+  ]) {
+    assert.equal(isCheckoutFormValid({...form(), phone: input}), true, input);
+    assert.equal(formatCheckoutField("phone", input), display);
+    assert.equal(createOrderInput({...form(), phone: input}, []).customer.phone, canonical);
+  }
+  for (const phone of ["8 900 000-00-00 12", "+7 000 000-00-00", "+7 8 916 123-45-67", "звонить +79000000000",
+    "+7 900 000-00-00 доб. 2", "+7)900(0000000"]) {
+    assert.equal(isCheckoutFormValid({...form(), phone}), false, phone);
+    assert.equal(formatCheckoutField("phone", phone), phone);
+  }
+  const business = {...form(), customerType: "COMPANY" as const, companyName: "ИП Анна Тестовая",
+    taxNumber: "1234 5678 9047", legalAddress: "Москва, ул. Тестовая, д. 1"};
+  assert.ok(isCheckoutFormValid(business));
+  assert.equal(createOrderInput(business, []).customer.taxNumber, "123456789047");
+  assert.equal(isCheckoutFormValid({...business, taxNumber: "123456789048"}), false);
+  assert.equal(isCheckoutFormValid({...form(), deliveryAddress: "..."}), false);
 });
 
 test("order HTTP client requires successful status, success flag and a valid receipt contract", async () => {
@@ -84,6 +108,8 @@ test("invoice capability survives receipt storage but rejects malformed tokens a
   const invoice = {number: reference, downloadToken: "a".repeat(64), emailStatus: "FAILED" as const, isPreview: true};
   const confirmation = {orderNumber: reference, paymentMethod: "INVOICE" as const, email: "audit@example.invalid", paymentPending: false, invoice};
   assert.deepEqual(parseOrderConfirmation(confirmation), confirmation);
+  const issued = {...confirmation, orderNumber: "3645789245", invoice: {...invoice, number: "2677024476", isPreview: false}};
+  assert.deepEqual(parseOrderConfirmation(issued), issued);
   for (const changed of [{downloadToken: "https://example.invalid/"}, {number: "MS-000000000000"}, {emailStatus: "PENDING"}, {isPreview: undefined}]) {
     assert.equal(parseInvoiceReceipt({...invoice, ...changed}, reference), null);
     assert.equal(parseOrderConfirmation({...confirmation, invoice: {...invoice, ...changed}}), null);

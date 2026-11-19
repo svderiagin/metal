@@ -12,9 +12,13 @@ import {amountInWords, includedVat} from "../../lib/server/invoiceAmounts";
 import {invoiceService} from "../../lib/server/invoices";
 import {notificationService} from "../../lib/server/notifications";
 import {smtpMailer, readSmtpConfig} from "../../lib/server/smtp";
+import {FIRST_INVOICE_NUMBER} from "../../lib/invoiceNumber";
 
 let createTrustedOrder: typeof import("../../lib/server/orders").createTrustedOrder;
-const testEnvironment = {NODE_ENV: "test", ORDER_STORAGE_DIR: "", ORDER_DATABASE_URL: "", INVOICE_MODE: "preview", INVOICE_PAYMENT_DAYS: "3"};
+// The account is a synthetic checksum fixture.
+const liveInvoiceEnvironment = {INVOICE_MODE: "live", INVOICE_BANK_ACCOUNT: "40702810500000000000", INVOICE_VAT_RATE: "22",
+  INVOICE_PRICES_INCLUDE_VAT: "true"};
+const testEnvironment = {NODE_ENV: "test", ORDER_STORAGE_DIR: "", ORDER_DATABASE_URL: "", INVOICE_PAYMENT_DAYS: "3", ...liveInvoiceEnvironment};
 const previousEnvironment = Object.keys(testEnvironment).map(key => [key, process.env[key]] as const);
 before(async () => {
   Object.assign(process.env, testEnvironment);
@@ -34,22 +38,17 @@ const sample = () => createTrustedOrder({consent: true,
   delivery: {address: "Тестовый адрес"}, paymentMethod: "INVOICE"})!;
 const smtp = {NOTIFICATION_PROVIDER: "smtp", SMTP_HOST: "smtp.example.invalid", SMTP_PORT: "465", SMTP_USER: "test", SMTP_PASSWORD: "test",
   SMTP_FROM: "sales@example.invalid", NOTIFICATION_RECIPIENT_EMAIL: "manager@example.invalid"};
-// The account is a synthetic checksum fixture.
-const liveInvoiceEnvironment = {INVOICE_MODE: "live", INVOICE_BANK_ACCOUNT: "40702810500000000000", INVOICE_VAT_RATE: "22",
-  INVOICE_PRICES_INCLUDE_VAT: "true"};
-
-test("preview uses fictional seller IDs and bank details, and live validates the bank and tax configuration", () => {
-  const preview = readInvoiceConfig({});
-  assert.equal(preview.isPreview, true);
-  assert.equal(preview.vat, 22);
-  assert.equal(preview.seller.inn, "0".repeat(10));
-  assert.equal(preview.seller.kpp, "0".repeat(9));
-  assert.deepEqual(preview.seller.bank, {name: "АО «Банк Пример»", bik: "0".repeat(9),
-    correspondentAccount: "0".repeat(20), account: "0".repeat(20)});
-  assert.equal(isValidBankAccount(preview.seller.bank.account, preview.seller.bank.bik), false);
-  assert.equal(readInvoiceConfig(liveInvoiceEnvironment).vat, 22);
+test("invoice creation requires bank and tax configuration and uses the company details", () => {
+  assert.throws(() => readInvoiceConfig({}), /CONFIGURATION/);
+  assert.equal(isValidBankAccount("4070281080000020353", "044525450"), false);
+  const config = readInvoiceConfig(liveInvoiceEnvironment);
+  assert.equal(config.vat, 22);
+  assert.equal(config.seller.inn, "9714053621");
+  assert.equal(config.seller.kpp, "507401001");
+  assert.deepEqual(config.seller.bank, {name: "ООО «ВБ Банк»", bik: "044525450",
+    correspondentAccount: "30101810245250000450", account: liveInvoiceEnvironment.INVOICE_BANK_ACCOUNT});
   for (const changes of [{INVOICE_BANK_ACCOUNT: "1".repeat(19)}, {INVOICE_BANK_ACCOUNT: "1".repeat(20)}, {INVOICE_BANK_ACCOUNT: "0".repeat(20)},
-    {INVOICE_VAT_RATE: ""}, {INVOICE_VAT_RATE: "20"}, {INVOICE_PRICES_INCLUDE_VAT: "false"}, {INVOICE_MODE: "typo"}]) {
+    {INVOICE_VAT_RATE: ""}, {INVOICE_VAT_RATE: "20"}, {INVOICE_PRICES_INCLUDE_VAT: "false"}, {INVOICE_MODE: "preview"}, {INVOICE_MODE: "typo"}]) {
     assert.throws(() => readInvoiceConfig({...liveInvoiceEnvironment, ...changes}), /CONFIGURATION/);
   }
 });
@@ -75,11 +74,13 @@ test("invoice uses authoritative tonne quantity with tonne price, preserves smal
 
 test("PDF embeds Cyrillic fonts, fits a small order on A4 and paginates 100 long product rows", async () => {
   const order = sample();
-  const pdf = await renderInvoicePdf(order, readInvoiceConfig({}));
+  const number = String(FIRST_INVOICE_NUMBER);
+  const config = readInvoiceConfig(liveInvoiceEnvironment);
+  const pdf = await renderInvoicePdf(order, config, number);
   const parsed = await PDFDocument.load(pdf);
   assert.equal(parsed.getPageCount(), 1);
-  assert.match(parsed.getTitle()!, new RegExp(order.reference));
-  assert.equal(parsed.getSubject(), "Образец - не для оплаты");
+  assert.equal(parsed.getTitle(), `Счёт на оплату № ${number}`);
+  assert.equal(parsed.getSubject(), undefined);
   const page = parsed.getPage(0);
   assert.deepEqual({width: Math.round(page.getWidth()), height: Math.round(page.getHeight())}, {width: 595, height: 842});
   const fonts = page.node.Resources()?.lookup(PDFName.of("Font"), PDFDict);
@@ -94,12 +95,10 @@ test("PDF embeds Cyrillic fonts, fits a small order on A4 and paginates 100 long
     assert.match(new TextDecoder().decode(decodePDFRawStream(unicode).decode()), /<[a-f0-9]+>\s*<04[a-f0-9]{2}>/i,
       "The font must map used Cyrillic glyphs to Unicode");
   }
-  const live = await PDFDocument.load(await renderInvoicePdf(order, readInvoiceConfig(liveInvoiceEnvironment)));
-  assert.equal(live.getPageCount(), 1);
   order.items = Array.from({length: 100}, (_, index) => ({...order.items[index % 2],
     name: `Позиция ${index + 1}: ${"Длинное наименование металлопроката ".repeat(6)} 😀`}));
   order.totalAmount = order.items.reduce((sum, item) => sum + Math.round(item.subtotal * 100), 0) / 100;
-  const many = await PDFDocument.load(await renderInvoicePdf(order, readInvoiceConfig({})));
+  const many = await PDFDocument.load(await renderInvoicePdf(order, config, number));
   assert.ok(many.getPageCount() > 5);
 });
 
@@ -108,10 +107,15 @@ test("private file repository survives re-opening and keeps invoice bytes across
   try {
     const first = new FileOrderRepository(directory);
     const order = sample();
-    order.invoice = (await invoiceService.create(order)).invoice;
+    order.invoice = (await invoiceService.create(order, () => first.reserveInvoiceNumber())).invoice;
+    assert.equal(order.invoice.number, String(FIRST_INVOICE_NUMBER));
     await first.save(order);
     await assert.rejects(first.save(order), /EEXIST/);
     const second = new FileOrderRepository(directory);
+    const concurrentNumbers = await Promise.all(Array.from({length: 12}, (_, index) =>
+      (index % 2 ? first : second).reserveInvoiceNumber()));
+    assert.deepEqual(concurrentNumbers.sort((a, b) => a - b), Array.from({length: 12}, (_, index) => FIRST_INVOICE_NUMBER + 1 + index));
+    assert.equal(await new FileOrderRepository(directory).reserveInvoiceNumber(), FIRST_INVOICE_NUMBER + 13);
     assert.deepEqual(await second.findByReference(order.reference), order);
     await Promise.all([second.updatePaymentStatus(order.reference, "PAID"), second.updateInvoiceEmailStatus(order.reference, "SENT")]);
     const saved = await second.findByReference(order.reference);
@@ -130,13 +134,13 @@ test("SMTP sends the exact saved PDF to the customer with a manager copy and mar
   Object.assign(process.env, smtp);
   try {
     const order = sample();
-    order.invoice = (await invoiceService.create(order)).invoice;
+    order.invoice = (await invoiceService.create(order, async () => FIRST_INVOICE_NUMBER)).invoice;
     const send = mock.method(smtpMailer, "send", async () => {});
     await notificationService.sendOrderNotification(order);
     const message = send.mock.calls[0].arguments[0]!;
     assert.equal(message.to, order.customer.email);
     assert.equal(message.bcc, smtp.NOTIFICATION_RECIPIENT_EMAIL);
-    assert.match(message.subject!, /Образец счёта/);
+    assert.equal(message.subject, `Счёт на оплату № ${FIRST_INVOICE_NUMBER} — РВБ-МЕТАЛЛ`);
     assert.deepEqual(message.attachments?.[0].content, Buffer.from(order.invoice.pdfBase64, "base64"));
     send.mock.restore();
     let options: unknown;

@@ -15,7 +15,6 @@ export default function ContactsPage() {
       <div className="rounded-xl border border-slate-200 bg-white p-5 dark:border-slate-700 dark:bg-slate-900">
         <h2 className="text-card-title">Отдел продаж</h2>
         <a href={`mailto:${companyDetails.salesEmail}`} className="mt-3 inline-flex min-h-11 items-center break-all font-semibold text-slate-700 underline underline-offset-4 dark:text-slate-200">{companyDetails.salesEmail}</a>
-        <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">{companyDetails.phonePlaceholder}</p>
       </div>
       <div className="rounded-xl border border-slate-200 bg-white p-5 dark:border-slate-700 dark:bg-slate-900">
         <h2 className="text-card-title">Доставка и самовывоз</h2>
@@ -43,7 +42,7 @@ export default function ContactsPage() {
           ["КПП", companyDetails.kpp],
         ]}/>
         <DetailsCard title="Банковские реквизиты" rows={[
-          ["Расчётный счёт", companyDetails.bank.account],
+          ["Расчётный счёт", "Указан в счёте на оплату"],
           ["Банк", companyDetails.bank.name],
           ["Корреспондентский счёт", companyDetails.bank.correspondentAccount],
           ["БИК", companyDetails.bank.bik],

@@ -80,11 +80,10 @@ for (const [path, name] of [["/cart", "cart"], ["/checkout", "checkout"]]) {
   });
 }
 
-test("invoice confirmation with preview notice and download action", async ({page}) => {
+test("invoice confirmation with separate numbers and download action", async ({page}) => {
   await page.addInitScript(key => {
-    const number = "MS-A1B2C3D4E5F6";
-    sessionStorage.setItem(key, JSON.stringify({orderNumber: number, paymentMethod: "INVOICE",
-      email: "audit@example.invalid", invoice: {number, downloadToken: "a".repeat(64), emailStatus: "FAILED", isPreview: true}}));
+    sessionStorage.setItem(key, JSON.stringify({orderNumber: "3645789245", paymentMethod: "INVOICE",
+      email: "audit@example.invalid", invoice: {number: "2677024476", downloadToken: "a".repeat(64), emailStatus: "FAILED", isPreview: false}}));
   }, ORDER_STORAGE_KEY);
   await page.goto("/order/success");
   await expect(page.getByRole("button", {name: "Скачать счёт PDF", exact: true})).toBeVisible();

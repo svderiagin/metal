@@ -12,6 +12,9 @@ export function requiresOfferConfirmation(product: Pick<ProductVariant, "id" | "
 }
 
 export function storefrontVariant(product: ProductVariant): ProductVariant {
-  if (!requiresOfferConfirmation(product)) return product;
-  return {...product, price: null, pricePerTon: undefined, quoteOnly: true};
+  if (!isDemonstrationProduct(product)) return product;
+  const description = product.description.replace(" — оригинальная демонстрационная позиция каталога ООО «РВБ».", ".");
+  return requiresOfferConfirmation(product)
+    ? {...product, description, price: null, pricePerTon: undefined, quoteOnly: true}
+    : {...product, description};
 }
