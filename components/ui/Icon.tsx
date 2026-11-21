@@ -16,6 +16,7 @@ const glyphs = {
   "zoom-in": <><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5M10.5 7.5v6m-3-3h6"/></>,
   "zoom-out": <><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5M7.5 10.5h6"/></>,
   help: <><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 4.25 1.8C12.65 11.55 12 12 12 13.5M12 17h.01"/></>,
+  info: <><circle cx="12" cy="12" r="9"/><path d="M12 11v5m0-8h.01"/></>,
   pause: <path d="M8 5h2v14H8zM14 5h2v14h-2z"/>,
   play: <path d="m8 5 11 7-11 7z"/>,
   sun: <><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></>,
@@ -26,7 +27,7 @@ const glyphs = {
 
 export type IconName = keyof typeof glyphs;
 
-/** Decorative action icon. Its surrounding control supplies the accessible name. */
+/** Decorative icon. The surrounding text or control supplies any accessible name. */
 export function Icon({name, className = ""}: {name: IconName; className?: string}) {
   return <svg aria-hidden="true" focusable="false" data-ui-icon={name}
     width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"

@@ -16,6 +16,7 @@ import tableStyles from "./RebarTable.module.css";
 
 import {createCatalogSearchIndex} from "@/lib/search";
 import {useDeferredValue, useMemo, useState, type ReactNode} from "react";
+import {Icon} from "@/components/ui/Icon";
 import {Select} from "@/components/ui/Select";
 import {useLinkedVariant} from "@/hooks/useLinkedVariant";
 import {comparePrices, parseCatalogPrice} from "@/lib/catalogFilters";
@@ -98,6 +99,12 @@ function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
   const isProfile = kind === "profile";
   const isElectrowelded = kind === "pipe";
   const isGalvanized = isElectrowelded && variants.every(isGalvanizedElectroweldedVariant);
+  const electroweldedNote = isGalvanized
+    ? <>Для пересчёта используется масса стальной трубы <strong>без цинкового покрытия</strong> по таблице 1 ГОСТ 10704-91.</>
+    : <>Масса и стоимость заказа по длине рассчитываются по <strong>теоретической массе</strong> из таблицы 1 ГОСТ 10704-91.</>;
+  const orderNote = isVgp
+    ? <><strong>Заказ округляется вверх до целых труб.</strong> Итоговый метраж — в поле «Заказ, м».</>
+    : isElectrowelded ? electroweldedNote : null;
   const pipeColumns = isElectrowelded ? [
     {label: "Наружный Ø × стенка, мм", width: 10},
     {label: "Фото", width: 10},
@@ -223,13 +230,9 @@ function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
       <section className="min-w-0 lg:col-span-2" aria-label="Продукция">
       {results.length ? (
         <>
-        {isElectrowelded && <p className="mb-3 text-sm text-slate-600 dark:text-slate-300">
-          {isGalvanized
-            ? "Для пересчёта используется масса стальной трубы без цинкового покрытия по таблице 1 ГОСТ 10704-91."
-            : "Масса и стоимость заказа по длине рассчитываются по теоретической массе из таблицы 1 ГОСТ 10704-91."}
-        </p>}
-        {isVgp && <p className="mb-3 text-sm text-slate-600 dark:text-slate-300">
-          Ду — условный проход. Заказ рассчитывается целыми трубами по каталожной длине.
+        {orderNote && <p className="mb-3 flex items-start gap-2.5 rounded-lg border border-brand-200 bg-brand-50 px-3 py-2.5 text-sm text-slate-700 sm:px-4 dark:border-brand-800 dark:bg-brand-950 dark:text-slate-200">
+          <Icon name="info" className="mt-0.5 text-brand-700 dark:text-brand-300"/>
+          <span className="min-w-0">{orderNote}</span>
         </p>}
         <Table measured={isBeam} columns={isVgp ? vgpColumns : pipeColumns}>
           {results.map(variant => <MeasuredVariantItem key={variant.id} variant={variant} name={names?.get(variant.id)} kind={kind} view="table"/>)}

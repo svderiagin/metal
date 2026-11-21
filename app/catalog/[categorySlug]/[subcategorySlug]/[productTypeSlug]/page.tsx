@@ -2,7 +2,7 @@ import type {Metadata} from "next";
 import {notFound, redirect} from "next/navigation";
 import {Breadcrumbs} from "@/components/catalog/Breadcrumbs";
 import {CatalogListingNavigation} from "@/components/catalog/CatalogListingNavigation";
-import {CatalogDescription} from "@/components/catalog/CatalogDescription";
+import {CatalogBuyingGuide} from "@/components/catalog/CatalogBuyingGuide";
 import {ProductVariantCatalog} from "@/components/catalog/ProductVariantCatalog";
 import {ProductCatalogIntro} from "@/components/catalog/ProductCatalogIntro";
 import {getCatalogCoverImages} from "@/lib/catalogCoverImages";
@@ -100,10 +100,8 @@ export default async function ProductTypePage({params}: Props) {
           label={sheet || copy ? "Подкатегория" : "Тип продукции"} images={images} description={intro} coverName={title}/>
         <section id="catalog-products" className="flex scroll-mt-6 flex-col gap-5" aria-label="Подбор и заказ продукции">
         <ProductVariantCatalog variants={variants} categorySlug={category.slug}>
-          {detailsTitle && details && <section className="min-w-0 max-w-[800px] lg:col-start-2" aria-labelledby="product-type-details-heading">
-            <h2 id="product-type-details-heading" className="text-section-title leading-tight">{detailsTitle}</h2>
-            <CatalogDescription description={details} variant="categoryDetails" className="mt-4"/>
-          </section>}
+          {detailsTitle && details && <CatalogBuyingGuide headingId="product-type-details-heading"
+            title={detailsTitle} description={details}/>}
         </ProductVariantCatalog>
         </section>
       </div>

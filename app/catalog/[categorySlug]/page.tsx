@@ -5,6 +5,7 @@ import {Suspense} from "react";
 import {notFound} from "next/navigation";
 import {Breadcrumbs} from "@/components/catalog/Breadcrumbs";
 import {CatalogSidebar} from "@/components/catalog/CatalogSidebar";
+import {CatalogBuyingGuide} from "@/components/catalog/CatalogBuyingGuide";
 import {CatalogDescription} from "@/components/catalog/CatalogDescription";
 import {CatalogListingNavigation} from "@/components/catalog/CatalogListingNavigation";
 import {ProductTypeResults} from "@/components/catalog/ProductTypeResults";
@@ -62,14 +63,8 @@ export default async function CategoryPage({params}: Props) {
             images={hasImage ? coverImages : []} description={introDescription}/>
           <section id="catalog-products" className="flex scroll-mt-6 flex-col gap-5" aria-label="Подбор и заказ продукции">
           <ProductVariantCatalog variants={variants} categorySlug={category.slug}>
-            <div className="min-w-0">
-              {detailedDescription && <section className="max-w-[800px]" aria-labelledby={`${category.id}-details-heading`}>
-                <h2 id={`${category.id}-details-heading`} className="text-section-title leading-tight">
-                  {description?.title ?? `Подробнее о категории «${category.name}»`}
-                </h2>
-                <CatalogDescription description={detailedDescription} variant="categoryDetails" className="mt-4"/>
-              </section>}
-            </div>
+            {detailedDescription && <CatalogBuyingGuide headingId={`${category.id}-details-heading`}
+              title={description?.title ?? `Подробнее о категории «${category.name}»`} description={detailedDescription}/>}
           </ProductVariantCatalog>
           </section>
         </div>
