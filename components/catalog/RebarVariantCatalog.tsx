@@ -2,7 +2,7 @@
 
 import {MeasuredVariantItem} from "./MeasuredVariantItem";
 
-import {beamProfile, beamKind} from "@/lib/beam";
+import {beamProfile, beamKind, beamReferenceMassKg, beamTableNames} from "@/lib/beam";
 import {vgpSize, vgpSeries} from "@/lib/vgp";
 import {hasConfirmedProfilePipePrice, profilePipeSize} from "@/lib/profilePipe";
 
@@ -58,7 +58,8 @@ export function RebarVariantCatalog({variants}: {variants: RebarVariant[]}) {
 }
 
 export function BeamVariantCatalog({variants}: {variants: ProductVariant[]}) {
-  return <MeasuredVariantCatalog variants={variants} kind="beam"/>;
+  const names = useMemo(() => beamTableNames(variants), [variants]);
+  return <MeasuredVariantCatalog variants={variants} kind="beam" names={names}/>;
 }
 
 export function VgpVariantCatalog({variants}: {variants: ProductVariant[]}) {
@@ -69,9 +70,10 @@ export function ProfilePipeVariantCatalog({variants}: {variants: ProductVariant[
   return <MeasuredVariantCatalog variants={variants} kind="profile"/>;
 }
 
-function MeasuredVariantCatalog({variants, kind = "rebar"}: {
+function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
   variants: ProductVariant[];
   kind?: "rebar" | "beam" | "vgp" | "profile";
+  names?: ReadonlyMap<string, string>;
 }) {
   const isBeam = kind === "beam";
   const isVgp = kind === "vgp";
@@ -113,6 +115,7 @@ function MeasuredVariantCatalog({variants, kind = "rebar"}: {
     const sizeValue = (variant: ProductVariant) => isProfile ? profilePipeSize(variant) : isVgp ? vgpSize(variant) : isBeam ? beamProfile(variant) : String(variant.diameterMm ?? "");
     const formValue = (variant: ProductVariant) => isProfile ? String(variant.wallThicknessMm).replace(".", ",") : isVgp ? vgpSeries(variant) : isBeam ? beamKind(variant) : variant.form;
     const priceValue = (variant: ProductVariant) => isProfile ? hasConfirmedProfilePipePrice(variant) ? variant.price ?? undefined : undefined : variant.pricePerTon;
+    const massValue = (variant: ProductVariant) => variant.weightPerMeterKg ?? beamReferenceMassKg(variant);
     const min = parseCatalogPrice(minimumPrice);
     const max = parseCatalogPrice(maximumPrice);
     return (deferredQuery.trim() ? hits.map(hit => hit.product) : variants).filter((variant) =>
@@ -126,8 +129,8 @@ function MeasuredVariantCatalog({variants, kind = "rebar"}: {
       if (sort === "relevance") return 0;
       if (sort === "diameter-desc") return sizeValue(right).localeCompare(sizeValue(left), "ru", {numeric: true});
       if (sort === "price-asc" || sort === "price-desc") return comparePrices(priceValue(left), priceValue(right), sort === "price-desc");
-      if (sort === "weight-asc") return (left.weightPerMeterKg ?? Infinity) - (right.weightPerMeterKg ?? Infinity);
-      if (sort === "weight-desc") return (right.weightPerMeterKg ?? -Infinity) - (left.weightPerMeterKg ?? -Infinity);
+      if (sort === "weight-asc") return (massValue(left) ?? Infinity) - (massValue(right) ?? Infinity);
+      if (sort === "weight-desc") return (massValue(right) ?? -Infinity) - (massValue(left) ?? -Infinity);
       return sizeValue(left).localeCompare(sizeValue(right), "ru", {numeric: true});
     });
   }, [hits, deferredQuery, availability, diameter, form, length, maximumPrice, minimumPrice, sort, variants, isBeam, isVgp, isProfile]);
@@ -186,11 +189,11 @@ function MeasuredVariantCatalog({variants, kind = "rebar"}: {
       {results.length ? (
         <>
         <Table measured={isBeam || isVgp}>
-          {results.map(variant => <MeasuredVariantItem key={variant.id} variant={variant} kind={kind} view="table"/>)}
+          {results.map(variant => <MeasuredVariantItem key={variant.id} variant={variant} name={names?.get(variant.id)} kind={kind} view="table"/>)}
         </Table>
         <div className="grid gap-4 sm:grid-cols-2 xl:hidden">
           {results.map((variant) => (
-            <MeasuredVariantItem key={variant.id} variant={variant} kind={kind} view="card"/>
+            <MeasuredVariantItem key={variant.id} variant={variant} name={names?.get(variant.id)} kind={kind} view="card"/>
           ))}
         </div>
         </>

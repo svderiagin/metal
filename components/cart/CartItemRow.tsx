@@ -77,10 +77,9 @@ export function CartItemRow({line, onRemove}: {line: CartLine; onRemove: () => v
                   ? {message: `Объём округлён вверх до целых труб · ${order.pieces} шт.`} : {})};
               } : undefined}/>;
           })}
-          {meterOptions && tonOptions && <p className="max-w-64 text-xs text-slate-600 dark:text-slate-400">
-            Максимум: {formatMeasuredQuantity(tonOptions.maximum, "ton", true)} т
-            {vgp && product?.lengthMeters ? ` · целыми трубами по ${formatCartQuantity(product.lengthMeters)} м` : ""}
-          </p>}
+          {vgp && product?.lengthMeters ? <p className="max-w-64 text-xs text-slate-600 dark:text-slate-400">
+            Целыми трубами по {formatCartQuantity(product.lengthMeters)} м
+          </p> : null}
         </div>
       ) : (
         <QuantitySelector fieldLabel={product?.unit === "ton" || product?.unit === "kg" ? "Масса"

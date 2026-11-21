@@ -126,7 +126,7 @@ export function ProductOrderControls({variant, view, showUnit = true, allowBacko
         onChange={event => {
           const next = constrainOrderQuantityInput(event.target.value, 999);
           setDraft(next.value);
-          setCorrection(next.message ?? "");
+          setCorrection("");
         }}
         onBlur={correctQuantity}
         onKeyDown={event => {

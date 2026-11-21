@@ -19,6 +19,7 @@ sharp.concurrency(2);
 
 const sources = JSON.parse(await fs.readFile("data/product-illustration-sources.json", "utf8"));
 const protectedCategories = new Set([
+  "cat-bal",
   "rozmet-cat-shveller", "rozmet-cat-ugolok", "rozmet-cat-kvadrat", "rozmet-cat-listovoy-prokat",
 ]);
 // Owner-approved profile-pipe templates have separate lossless label renderers.

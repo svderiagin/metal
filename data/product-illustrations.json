@@ -116,8 +116,9 @@
   },
   "prd-012": {
     "imageUrl": "/images/catalog/product-illustrations/prd-012.webp",
-    "photoUrl": "/images/catalog/balka/cover/wide-flanges-betall.jpg",
-    "signature": "e784d554"
+    "photoUrl": "/images/catalog/balka/shirokopolochnaya/balka_shirokopolochnaya_2400_1800_marked.jpg",
+    "signature": "911d4881",
+    "showForDemo": true
   },
   "profnastil-c8-03-ral-3005": {
     "imageUrl": "/images/catalog/product-illustrations/profnastil-c8-03-ral-3005.webp",
@@ -941,33 +942,33 @@
   },
   "local-65599": {
     "imageUrl": "/images/catalog/product-illustrations/local-65599.webp",
-    "photoUrl": "/images/catalog/balka/cover/normal-parallel-flanges-expo.jpg",
-    "signature": "ee774f10"
+    "photoUrl": "/images/catalog/balka/normalnaya/balka_normalnaya_2400_1800_marked.jpg",
+    "signature": "66a00ba0"
   },
   "local-67138": {
     "imageUrl": "/images/catalog/product-illustrations/local-67138.webp",
-    "photoUrl": "/images/catalog/balka/cover/normal-parallel-flanges-expo.jpg",
-    "signature": "436bb3d7"
+    "photoUrl": "/images/catalog/balka/normalnaya/balka_normalnaya_2400_1800_marked.jpg",
+    "signature": "406a806c"
   },
   "local-67139": {
     "imageUrl": "/images/catalog/product-illustrations/local-67139.webp",
-    "photoUrl": "/images/catalog/illustration-sources/beam-column-rosmet.png",
-    "signature": "4d9a113e"
+    "photoUrl": "/images/catalog/balka/kolonnaya/balka_kolonnaya_2400_1800_marked.jpg",
+    "signature": "05243749"
   },
   "local-69066": {
     "imageUrl": "/images/catalog/product-illustrations/local-69066.webp",
-    "photoUrl": "/images/catalog/illustration-sources/beam-column-rosmet.png",
-    "signature": "983594fb"
+    "photoUrl": "/images/catalog/balka/kolonnaya/balka_kolonnaya_2400_1800_marked.jpg",
+    "signature": "b0749a43"
   },
   "local-69356": {
     "imageUrl": "/images/catalog/product-illustrations/local-69356.webp",
-    "photoUrl": "/images/catalog/balka/cover/monorail-taper-expo.jpg",
-    "signature": "5693099b"
+    "photoUrl": "/images/catalog/balka/monorelsovaya/balka_monorelsovaya_2400_1800_marked.jpg",
+    "signature": "c5e94466"
   },
   "local-69883": {
     "imageUrl": "/images/catalog/product-illustrations/local-69883.webp",
-    "photoUrl": "/images/catalog/balka/cover/normal-parallel-flanges-expo.jpg",
-    "signature": "19fa26e4"
+    "photoUrl": "/images/catalog/balka/normalnaya/balka_normalnaya_2400_1800_marked.jpg",
+    "signature": "4ef22450"
   },
   "local-73160": {
     "imageUrl": "/images/catalog/product-illustrations/local-73160.webp",
@@ -976,8 +977,8 @@
   },
   "local-73573": {
     "imageUrl": "/images/catalog/product-illustrations/local-73573.webp",
-    "photoUrl": "/images/catalog/balka/cover/wide-flanges-betall.jpg",
-    "signature": "6dafab06"
+    "photoUrl": "/images/catalog/balka/shirokopolochnaya/balka_shirokopolochnaya_2400_1800_marked.jpg",
+    "signature": "fd500860"
   },
   "local-80044": {
     "imageUrl": "/images/catalog/product-illustrations/local-80044.webp",
@@ -986,83 +987,83 @@
   },
   "local-83922": {
     "imageUrl": "/images/catalog/product-illustrations/local-83922.webp",
-    "photoUrl": "/images/catalog/balka/cover/normal-parallel-flanges-expo.jpg",
-    "signature": "798fd66a"
+    "photoUrl": "/images/catalog/balka/normalnaya/balka_normalnaya_2400_1800_marked.jpg",
+    "signature": "4ca29edf"
   },
   "local-86552": {
     "imageUrl": "/images/catalog/product-illustrations/local-86552.webp",
-    "photoUrl": "/images/catalog/balka/cover/monorail-taper-expo.jpg",
-    "signature": "ef7e4bcb"
+    "photoUrl": "/images/catalog/balka/monorelsovaya/balka_monorelsovaya_2400_1800_marked.jpg",
+    "signature": "1f7302d6"
   },
   "local-87267": {
     "imageUrl": "/images/catalog/product-illustrations/local-87267.webp",
-    "photoUrl": "/images/catalog/balka/cover/monorail-taper-expo.jpg",
-    "signature": "78eb14bc"
+    "photoUrl": "/images/catalog/balka/monorelsovaya/balka_monorelsovaya_2400_1800_marked.jpg",
+    "signature": "52a3465b"
   },
   "local-92441": {
     "imageUrl": "/images/catalog/product-illustrations/local-92441.webp",
-    "photoUrl": "/images/catalog/balka/cover/monorail-taper-expo.jpg",
-    "signature": "be6691ff"
+    "photoUrl": "/images/catalog/balka/monorelsovaya/balka_monorelsovaya_2400_1800_marked.jpg",
+    "signature": "87b70272"
   },
   "local-106617": {
     "imageUrl": "/images/catalog/product-illustrations/local-106617.webp",
-    "photoUrl": "/images/catalog/illustration-sources/beam-column-rosmet.png",
-    "signature": "c870f1d2"
+    "photoUrl": "/images/catalog/balka/kolonnaya/balka_kolonnaya_2400_1800_marked.jpg",
+    "signature": "d155a76f"
   },
   "local-108395": {
     "imageUrl": "/images/catalog/product-illustrations/local-108395.webp",
-    "photoUrl": "/images/catalog/balka/cover/wide-flanges-betall.jpg",
-    "signature": "415224f5"
+    "photoUrl": "/images/catalog/balka/shirokopolochnaya/balka_shirokopolochnaya_2400_1800_marked.jpg",
+    "signature": "441afd44"
   },
   "local-110259": {
     "imageUrl": "/images/catalog/product-illustrations/local-110259.webp",
-    "photoUrl": "/images/catalog/balka/cover/wide-flanges-betall.jpg",
-    "signature": "65903e52"
+    "photoUrl": "/images/catalog/balka/shirokopolochnaya/balka_shirokopolochnaya_2400_1800_marked.jpg",
+    "signature": "1fd9abef"
   },
   "local-110534": {
     "imageUrl": "/images/catalog/product-illustrations/local-110534.webp",
-    "photoUrl": "/images/catalog/illustration-sources/beam-column-rosmet.png",
-    "signature": "9d38f51f"
+    "photoUrl": "/images/catalog/balka/kolonnaya/balka_kolonnaya_2400_1800_marked.jpg",
+    "signature": "b7357bca"
   },
   "local-110539": {
     "imageUrl": "/images/catalog/product-illustrations/local-110539.webp",
-    "photoUrl": "/images/catalog/balka/cover/wide-flanges-betall.jpg",
-    "signature": "d108ae1b"
+    "photoUrl": "/images/catalog/balka/shirokopolochnaya/balka_shirokopolochnaya_2400_1800_marked.jpg",
+    "signature": "3a0eda3e"
   },
   "local-110542": {
     "imageUrl": "/images/catalog/product-illustrations/local-110542.webp",
-    "photoUrl": "/images/catalog/balka/cover/wide-flanges-betall.jpg",
-    "signature": "e54e4ea1"
+    "photoUrl": "/images/catalog/balka/shirokopolochnaya/balka_shirokopolochnaya_2400_1800_marked.jpg",
+    "signature": "e5ba0348"
   },
   "local-110545": {
     "imageUrl": "/images/catalog/product-illustrations/local-110545.webp",
-    "photoUrl": "/images/catalog/balka/cover/normal-parallel-flanges-expo.jpg",
-    "signature": "678511cb"
+    "photoUrl": "/images/catalog/balka/normalnaya/balka_normalnaya_2400_1800_marked.jpg",
+    "signature": "655563ce"
   },
   "local-110546": {
     "imageUrl": "/images/catalog/product-illustrations/local-110546.webp",
-    "photoUrl": "/images/catalog/balka/cover/normal-parallel-flanges-expo.jpg",
-    "signature": "f6a5b040"
+    "photoUrl": "/images/catalog/balka/normalnaya/balka_normalnaya_2400_1800_marked.jpg",
+    "signature": "5f246cc1"
   },
   "local-110554": {
     "imageUrl": "/images/catalog/product-illustrations/local-110554.webp",
-    "photoUrl": "/images/catalog/illustration-sources/beam-column-rosmet.png",
-    "signature": "a0788f00"
+    "photoUrl": "/images/catalog/balka/kolonnaya/balka_kolonnaya_2400_1800_marked.jpg",
+    "signature": "c89c3781"
   },
   "local-110555": {
     "imageUrl": "/images/catalog/product-illustrations/local-110555.webp",
-    "photoUrl": "/images/catalog/balka/cover/normal-parallel-flanges-expo.jpg",
-    "signature": "a15ff4a1"
+    "photoUrl": "/images/catalog/balka/normalnaya/balka_normalnaya_2400_1800_marked.jpg",
+    "signature": "d93b8148"
   },
   "local-110556": {
     "imageUrl": "/images/catalog/product-illustrations/local-110556.webp",
-    "photoUrl": "/images/catalog/balka/cover/normal-parallel-flanges-expo.jpg",
-    "signature": "4e807fc8"
+    "photoUrl": "/images/catalog/balka/normalnaya/balka_normalnaya_2400_1800_marked.jpg",
+    "signature": "c74cf569"
   },
   "local-110557": {
     "imageUrl": "/images/catalog/product-illustrations/local-110557.webp",
-    "photoUrl": "/images/catalog/balka/cover/wide-flanges-betall.jpg",
-    "signature": "b49535b9"
+    "photoUrl": "/images/catalog/balka/shirokopolochnaya/balka_shirokopolochnaya_2400_1800_marked.jpg",
+    "signature": "ecc52180"
   },
   "local-110937": {
     "imageUrl": "/images/catalog/product-illustrations/local-110937.webp",
@@ -1116,53 +1117,53 @@
   },
   "local-113874": {
     "imageUrl": "/images/catalog/product-illustrations/local-113874.webp",
-    "photoUrl": "/images/catalog/balka/cover/normal-parallel-flanges-expo.jpg",
-    "signature": "49779524"
+    "photoUrl": "/images/catalog/balka/normalnaya/balka_normalnaya_2400_1800_marked.jpg",
+    "signature": "267aa54d"
   },
   "local-115970": {
     "imageUrl": "/images/catalog/product-illustrations/local-115970.webp",
-    "photoUrl": "/images/catalog/balka/cover/wide-flanges-betall.jpg",
-    "signature": "af3c2051"
+    "photoUrl": "/images/catalog/balka/shirokopolochnaya/balka_shirokopolochnaya_2400_1800_marked.jpg",
+    "signature": "f68ebe58"
   },
   "local-115971": {
     "imageUrl": "/images/catalog/product-illustrations/local-115971.webp",
-    "photoUrl": "/images/catalog/illustration-sources/beam-column-rosmet.png",
-    "signature": "368da98a"
+    "photoUrl": "/images/catalog/balka/kolonnaya/balka_kolonnaya_2400_1800_marked.jpg",
+    "signature": "d510fca7"
   },
   "local-115972": {
     "imageUrl": "/images/catalog/product-illustrations/local-115972.webp",
-    "photoUrl": "/images/catalog/balka/cover/normal-parallel-flanges-expo.jpg",
-    "signature": "3d0c2038"
+    "photoUrl": "/images/catalog/balka/normalnaya/balka_normalnaya_2400_1800_marked.jpg",
+    "signature": "e3876339"
   },
   "local-115976": {
     "imageUrl": "/images/catalog/product-illustrations/local-115976.webp",
-    "photoUrl": "/images/catalog/balka/cover/wide-flanges-betall.jpg",
-    "signature": "d87f2eb0"
+    "photoUrl": "/images/catalog/balka/shirokopolochnaya/balka_shirokopolochnaya_2400_1800_marked.jpg",
+    "signature": "a5921011"
   },
   "local-115977": {
     "imageUrl": "/images/catalog/product-illustrations/local-115977.webp",
-    "photoUrl": "/images/catalog/balka/cover/normal-parallel-flanges-expo.jpg",
-    "signature": "e68b1cd0"
+    "photoUrl": "/images/catalog/balka/normalnaya/balka_normalnaya_2400_1800_marked.jpg",
+    "signature": "4f3645b1"
   },
   "local-115982": {
     "imageUrl": "/images/catalog/product-illustrations/local-115982.webp",
-    "photoUrl": "/images/catalog/balka/cover/wide-flanges-betall.jpg",
-    "signature": "19f73e47"
+    "photoUrl": "/images/catalog/balka/shirokopolochnaya/balka_shirokopolochnaya_2400_1800_marked.jpg",
+    "signature": "2a8bcc52"
   },
   "local-116009": {
     "imageUrl": "/images/catalog/product-illustrations/local-116009.webp",
-    "photoUrl": "/images/catalog/balka/cover/normal-parallel-flanges-expo.jpg",
-    "signature": "a2f32fc1"
+    "photoUrl": "/images/catalog/balka/normalnaya/balka_normalnaya_2400_1800_marked.jpg",
+    "signature": "0f5d7f68"
   },
   "local-117670": {
     "imageUrl": "/images/catalog/product-illustrations/local-117670.webp",
-    "photoUrl": "/images/catalog/balka/cover/normal-parallel-flanges-expo.jpg",
-    "signature": "76ceaedf"
+    "photoUrl": "/images/catalog/balka/normalnaya/balka_normalnaya_2400_1800_marked.jpg",
+    "signature": "3d3c418a"
   },
   "local-118168": {
     "imageUrl": "/images/catalog/product-illustrations/local-118168.webp",
-    "photoUrl": "/images/catalog/balka/cover/wide-flanges-betall.jpg",
-    "signature": "f17e6c6f"
+    "photoUrl": "/images/catalog/balka/shirokopolochnaya/balka_shirokopolochnaya_2400_1800_marked.jpg",
+    "signature": "736c1e7a"
   },
   "local-118826": {
     "imageUrl": "/images/catalog/product-illustrations/local-118826.webp",
@@ -1171,18 +1172,18 @@
   },
   "local-122247": {
     "imageUrl": "/images/catalog/product-illustrations/local-122247.webp",
-    "photoUrl": "/images/catalog/balka/cover/wide-flanges-betall.jpg",
-    "signature": "1c30ada8"
+    "photoUrl": "/images/catalog/balka/shirokopolochnaya/balka_shirokopolochnaya_2400_1800_marked.jpg",
+    "signature": "8234abc9"
   },
   "local-122248": {
     "imageUrl": "/images/catalog/product-illustrations/local-122248.webp",
-    "photoUrl": "/images/catalog/balka/cover/normal-parallel-flanges-expo.jpg",
-    "signature": "a40f9cc6"
+    "photoUrl": "/images/catalog/balka/normalnaya/balka_normalnaya_2400_1800_marked.jpg",
+    "signature": "4a91450b"
   },
   "local-122249": {
     "imageUrl": "/images/catalog/product-illustrations/local-122249.webp",
-    "photoUrl": "/images/catalog/illustration-sources/beam-column-rosmet.png",
-    "signature": "2f1772a0"
+    "photoUrl": "/images/catalog/balka/kolonnaya/balka_kolonnaya_2400_1800_marked.jpg",
+    "signature": "64fcada1"
   },
   "local-122766": {
     "imageUrl": "/images/catalog/product-illustrations/local-122766.webp",
@@ -1196,8 +1197,8 @@
   },
   "local-11123500": {
     "imageUrl": "/images/catalog/product-illustrations/local-11123500.webp",
-    "photoUrl": "/images/catalog/illustration-sources/beam-column-rosmet.png",
-    "signature": "8ddf1483"
+    "photoUrl": "/images/catalog/balka/kolonnaya/balka_kolonnaya_2400_1800_marked.jpg",
+    "signature": "9f8fdb66"
   },
   "rozmet-29270": {
     "imageUrl": "/images/catalog/product-illustrations/rozmet-29270.webp",

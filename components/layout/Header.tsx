@@ -33,7 +33,7 @@ export function Header() {
           <ThemeSwitch/>
           <Link
             href="/#request"
-            className="hidden min-h-11 items-center rounded-lg action-primary border px-5 text-sm font-semibold transition-colors sm:inline-flex"
+            className="hidden min-h-11 items-center rounded-lg border border-slate-600 px-5 text-sm font-semibold text-white transition-colors hover:border-slate-400 hover:bg-slate-800 sm:inline-flex"
           >
             Запросить расчёт
           </Link>

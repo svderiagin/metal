@@ -48,8 +48,9 @@ export function CatalogVariantLayout({view, variant, name = variant.name, previe
   priceNote?: ReactNode;
   order: ReactNode;
 }) {
-  const illustration = isDemonstrationProduct(variant) ? undefined : getProductIllustration(variant);
-  const src = illustration?.imageUrl ?? variant.imageUrls[0];
+  const illustration = getProductIllustration(variant);
+  const src = illustration && (!isDemonstrationProduct(variant) || illustration.showForDemo)
+    ? illustration.imageUrl : variant.imageUrls[0];
   const image = preview ?? (src ? <ProductImageViewer src={src} name={variant.name}
     presentation={view} framed expanded/> : null);
 

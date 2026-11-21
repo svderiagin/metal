@@ -1,0 +1,34 @@
+{
+  "local-115977": {
+    "profile": "30Б1",
+    "standard": "35087",
+    "sectionMm": {"height": 298, "width": 149, "web": 5.5, "flange": 8},
+    "face": {"left": 1163, "top": 401, "baseLeft": 1293, "right": 1618, "baseRight": 1370},
+    "webEdges": [1373, 1395],
+    "flangeGauge": [1507, 452, 488]
+  },
+  "local-115982": {
+    "profile": "30Ш1",
+    "standard": "35087",
+    "sectionMm": {"height": 294, "width": 200, "web": 8, "flange": 12},
+    "face": {"left": 1098, "top": 366, "baseLeft": 1192, "right": 1671, "baseRight": 1298},
+    "webEdges": [1351, 1387],
+    "flangeGauge": [1515, 443, 484]
+  },
+  "local-110554": {
+    "profile": "30К1",
+    "standard": "35087",
+    "sectionMm": {"height": 298, "width": 299, "web": 9, "flange": 14},
+    "face": {"left": 920, "top": 354, "baseLeft": 1241, "right": 1776, "baseRight": 1406},
+    "webEdges": [1328, 1360],
+    "flangeGauge": [1562, 472, 521]
+  },
+  "local-86552": {
+    "profile": "30М",
+    "standard": "19425",
+    "sectionMm": {"height": 300, "width": 130, "web": 9, "flange": 15},
+    "face": {"left": 1175, "top": 372, "baseLeft": 1288, "right": 1574, "baseRight": 1354},
+    "webEdges": [1357, 1387],
+    "flangeGauge": [1478, 426, 481]
+  }
+}

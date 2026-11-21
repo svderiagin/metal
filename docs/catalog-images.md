@@ -59,6 +59,16 @@ or generate extra variants solely to satisfy this checklist.
    mismatch. Matching incoming files to stored files alone is insufficient to
    declare the existing image set visually correct.
 
+## Beam product illustrations
+
+The 38 beam rows use the four marked 2400 × 1800 JPGs supplied for Б, Ш, К and М.
+The dedicated renderer preserves reference pixels outside changed labels and
+checks each SKU's assortment standard before printing numerical dimensions.
+The seven supplier rows with a reference mass show the catalogue calculator's
+kg/m value under «Справочная масса» and keep symbolic dimension labels.
+The [beam template guide](../imports/beam-image-template/README.md) lists the
+source tables, preview and write commands, and treatment of incomplete records.
+
 ## Product illustrations for the remaining categories
 
 Owner-requested corrections from 08.11.2026 removed the number sign from all 152

@@ -8,6 +8,7 @@ import {readProjectData} from './project-data.mjs';
 const {productVariants} = readProjectData('data/products/index.ts');
 const {createCartLines} = readProjectData('lib/cart.ts');
 const {addCartItem, updateCartItem} = readProjectData('lib/cartMutations.ts');
+const {formatCurrency} = readProjectData('lib/currency.ts');
 function setup(id, kind = 'beam') {
   const variant = productVariants.find(p => p.id === id);
   assert.ok(variant, id);
@@ -82,7 +83,8 @@ function setup(id, kind = 'beam') {
     const action = nodes(tree.find(n => n.type === 'order')).find(n => ['button', 'link'].includes(n.type)).props;
     const actionText = [action.children, ...nodes(action.children).map(node => node.props.children)]
       .filter(value => typeof value === 'string').join('');
-    return {inputs: tree.filter(n => n.type === 'input').map(n => n.props), action, actionText};
+    const total = tree.find(n => n.type === 'output').props.children;
+    return {inputs: tree.filter(n => n.type === 'input').map(n => n.props), action, actionText, total};
   }
   return {cart, timers, render, change(index, value) {render().inputs[index].onChange({target: {value}});}};
 }
@@ -102,21 +104,55 @@ test('beam reference table converts, adds, replaces and deletes a measured order
   h.timers.at(-1)(); assert.equal(h.render().actionText, 'В корзину');
 });
 
-test('missing mass never fabricates conversion; tonne orders still replace and metre orders request quotes', () => {
-  const h = setup('local-65599');
-  h.change(1, '2'); assert.equal(h.render().inputs[0].value, '');
+test('20Б2 shows the reference conversion with metre quotes and unmeasured tonne purchases', () => {
+  const h = setup('local-67138');
+  const pricePerTon = productVariants.find(p => p.id === 'local-67138').pricePerTon;
+  h.change(0, '12');
+  assert.equal(h.render().inputs[1].value, '0,3036');
+  h.render().inputs[0].onBlur();
+  assert.equal(h.render().inputs[1].value, '0,3036');
+  assert.equal(h.render().actionText, 'Запросить цену');
+  assert.equal(h.render().total, `≈ ${formatCurrency(0.3036 * pricePerTon)}`);
+  assert.equal(h.render().action.order.meters, 12);
+  assert.equal(h.render().action.order.tons, null);
+  h.change(1, '2');
+  assert.equal(h.render().inputs[0].value, '79,05');
+  assert.equal(h.render().total, formatCurrency(2 * pricePerTon));
   h.render().action.onClick(); assert.equal(h.render().actionText, 'В корзине');
+  assert.equal(h.cart.lines[0].measurement, undefined);
+  assert.equal(h.cart.lines[0].estimatedTotal, 2 * pricePerTon);
   h.change(1, '3'); h.render().action.onClick();
   assert.equal(h.cart.lines.length, 1); assert.equal(h.cart.lines[0].quantity, 3);
+  assert.equal(h.cart.lines[0].measurement, undefined);
   h.change(0, '100');
   assert.equal(h.render().actionText, 'Запросить цену');
   assert.equal(h.render().action.order.meters, 100);
-  assert.equal(h.render().inputs[1].value, '');
+  assert.equal(h.render().inputs[1].value, '2,53');
   assert.equal(h.render().action.order.tons, null);
   assert.equal(h.cart.lines[0].quantity, 3);
   h.change(0, '0'); assert.equal(h.render().actionText, 'Удалить');
   assert.equal(h.render().action.disabled, false);
   h.render().action.onClick(); assert.equal(h.cart.lines.length, 0);
+});
+
+test('35К1 remains on inquiry for either unit and the unnamed demo has no conversion', () => {
+  const column = setup('local-69066');
+  column.change(0, '10');
+  assert.equal(column.render().inputs[1].value, '1,091');
+  assert.equal(column.render().actionText, 'Запросить цену');
+  assert.equal(column.render().action.order.meters, 10);
+  assert.equal(column.render().action.order.tons, null);
+  column.change(1, '2');
+  assert.equal(column.render().inputs[0].value, '18,33');
+  assert.equal(column.render().actionText, 'Запросить цену');
+  assert.equal(column.render().action.order.meters, null);
+  assert.equal(column.render().action.order.tons, 2);
+
+  const demo = setup('prd-012');
+  demo.change(0, '12');
+  assert.equal(demo.render().inputs[1].value, '');
+  assert.equal(demo.render().action.order.meters, 12);
+  assert.equal(demo.render().action.order.tons, null);
 });
 
 test('existing generic tonne carts hydrate into measured controls and rebar keeps its precision', () => {

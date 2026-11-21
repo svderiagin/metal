@@ -4,7 +4,7 @@ import {useId, useRef, useState, type MouseEvent} from "react";
 import {Input} from "@/components/ui/Input";
 import {Icon} from "@/components/ui/Icon";
 import {correctOrderQuantity, formatCatalogNumber, parseCatalogNumber, parseOrderQuantity} from "@/lib/catalogNumberInput";
-import {formatQuantityForInput, normalizeCartQuantityDraft, normalizeCartQuantityText, stepCartQuantity} from "@/lib/cartQuantityInput";
+import {cartMaximumMessage, formatQuantityForInput, normalizeCartQuantityDraft, normalizeCartQuantityText, stepCartQuantity} from "@/lib/cartQuantityInput";
 import styles from "./QuantitySelector.module.css";
 
 type QuantityDraft = {text: string; capped?: boolean};
@@ -44,7 +44,7 @@ export function QuantitySelector({value, onChange, whole = false, productName, u
   const parsed = draft?.capped ? maximum : parseOrderQuantity(normalizeCartQuantityText(text));
   const options = {whole, minimum, maximum, decimalPlaces, formatFeedback: (quantity: number) => formatValue(quantity, true)};
   const invalid = draft === null ? value > maximum + Math.max(1, maximum) * Number.EPSILON * 32
-    : text.trim() !== "" && !isSavedQuantity(parsed) && (parsed === null || parsed <= 0
+    : text.trim() !== "" && !isSavedQuantity(parsed) && (parsed === null || parsed <= 0 || parsed > maximum
       || !!correctOrderQuantity(normalizeCartQuantityText(text), options).message);
   const current = draft === null ? value : parsed !== null && parsed > 0 ? parsed : value;
   const lowerBound = minimum ?? step;
@@ -102,7 +102,9 @@ export function QuantitySelector({value, onChange, whole = false, productName, u
       ...options, fallback: value,
     });
     let next = parseOrderQuantity(corrected.value);
-    let feedback = corrected.message ?? "";
+    const feedbackFor = (result: {message?: string; capped?: boolean}) =>
+      result.capped ? cartMaximumMessage(maximum, formatValue(maximum, true)) ?? "" : result.message ?? "";
+    let feedback = feedbackFor(corrected);
     if (next === null || next <= 0) {
       next = value;
       feedback = `Восстановлено количество ${formatValue(value, true)}.`;
@@ -112,7 +114,7 @@ export function QuantitySelector({value, onChange, whole = false, productName, u
         ...options, decimalPlaces: undefined, fallback: value,
       });
       next = parseOrderQuantity(stepped.value) ?? value;
-      feedback = stepped.message ?? "";
+      feedback = feedbackFor(stepped);
     }
     const normalized = normalizeQuantity?.(next);
     if (normalizeQuantity && !normalized) {

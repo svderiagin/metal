@@ -1,0 +1,22 @@
+{
+  "Б": {
+    "folder": "normalnaya", "clean": "30b1", "profile": "30Б1",
+    "height": [1018, 846], "width": [1388, 1490],
+    "web": [1269, 626], "flange": [1657, 463]
+  },
+  "Ш": {
+    "folder": "shirokopolochnaya", "clean": "30sh1", "profile": "30Ш1",
+    "height": [953, 780], "width": [1384, 1446],
+    "web": [1245, 623], "flange": [1696, 465]
+  },
+  "К": {
+    "folder": "kolonnaya", "clean": "30k1", "profile": "30К1",
+    "height": [778, 799], "width": [1351, 1552],
+    "web": [1224, 602], "flange": [1798, 509]
+  },
+  "М": {
+    "folder": "monorelsovaya", "clean": "30m", "profile": "30М",
+    "height": [1033, 830], "width": [1382, 1499],
+    "web": [1253, 602], "flange": [1618, 441]
+  }
+}

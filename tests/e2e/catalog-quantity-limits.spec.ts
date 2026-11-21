@@ -1,4 +1,5 @@
 import type {Locator} from "@playwright/test";
+import {beamReferenceMassKg} from "../../lib/beam";
 import {getAllProductVariants} from "../../lib/catalog";
 import {isDemonstrationProduct} from "../../lib/catalogOffer";
 import {isProfilePipeVariant} from "../../lib/profilePipe";
@@ -10,7 +11,7 @@ const formatMetres = new Intl.NumberFormat("ru-RU", {useGrouping: false, maximum
 const formatTons = new Intl.NumberFormat("ru-RU", {useGrouping: false, maximumFractionDigits: 6});
 
 function maximumMeasurement(variant: ProductVariant) {
-  const mass = isDemonstrationProduct(variant) ? undefined : variant.weightPerMeterKg;
+  const mass = isDemonstrationProduct(variant) ? undefined : variant.weightPerMeterKg ?? beamReferenceMassKg(variant);
   if (!mass) return {meters: null, tons: 999};
   const pipe = variant.subcategoryId === "cat-trk-sub-1" ? variant.lengthMeters : undefined;
   const meters = pipe ? Math.floor(999_000 / (mass * pipe)) * pipe : 999_000 / mass;
@@ -79,6 +80,7 @@ for (const [path, variants] of variantsByPage) {
 
         await tons.fill("1000");
         await expect(tons).toHaveValue(displayedTons);
+        await expect(row).not.toContainText("Значение ограничено максимумом");
         await tons.blur();
         await expect(meters).toHaveValue(displayedMeters);
         if (maximumMeters !== null) {
@@ -93,6 +95,7 @@ for (const [path, variants] of variantsByPage) {
           await expect(meters).toHaveValue("9999");
           await expect(tons).toHaveValue("");
         }
+        await expect(row).not.toContainText("Значение ограничено максимумом");
         return;
       }
 
@@ -102,6 +105,7 @@ for (const [path, variants] of variantsByPage) {
         await input.fill("9999");
         await input.blur();
         await expect(input).toHaveValue(formatMetres.format(maximum));
+        await expect(row).not.toContainText("Значение ограничено максимумом");
         await expect(input).not.toHaveAttribute("aria-invalid", "true");
         await expectFits(input);
       }

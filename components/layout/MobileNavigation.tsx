@@ -65,7 +65,7 @@ export function MobileNavigation() {
           ))}
           <li>
             <Link href="/#request" onClick={() => setOpenPath(null)}
-              className={`${styles.link} flex min-h-12 items-center px-4 py-3 font-semibold text-white underline underline-offset-4 hover:bg-slate-800 sm:px-6`}>
+              className={`${styles.link} flex min-h-12 items-center px-4 py-3 font-medium text-slate-100 transition-colors hover:bg-slate-800 sm:px-6`}>
               Запросить расчёт
             </Link>
           </li>

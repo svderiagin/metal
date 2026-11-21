@@ -71,7 +71,7 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
     if (!range || !parseOrderQuantity(rawValue)) return {value: rawValue};
     const corrected = correctOrderQuantity(rawValue, {minimum: range[0], maximum: range[1], decimalPlaces: 2});
     const value = corrected.value.replace(".", ",");
-    return {value, message: corrected.message ? `Длина трубы скорректирована до ${value} м.` : undefined};
+    return {value, message: corrected.capped || corrected.message ? `Длина трубы скорректирована до ${value} м.` : undefined};
   }
 
   function correctOrderValues(rawPieces = piecesText, rawLength = lengthText) {
@@ -132,7 +132,7 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
     onChange={event => {
       const next = constrainOrderQuantityInput(event.target.value, 999);
       setDraft({pieces: next.value, length: lengthText});
-      setMessage(next.message);
+      setMessage(undefined);
     }}
     onBlur={settlePieces}
     onKeyDown={event => {

@@ -9,12 +9,12 @@ export function CartButton() {
   return (
     <Link
       href="/cart"
-      className={`${styles.button} relative inline-flex min-h-11 items-center gap-2 rounded-lg border border-slate-600 px-4 font-bold text-white transition-colors max-[380px]:gap-1 max-[380px]:px-2 max-[380px]:text-sm`}
+      className={`${styles.button} action-primary relative inline-flex min-h-11 items-center gap-2 rounded-lg border px-4 font-bold transition-colors max-[380px]:gap-1 max-[380px]:px-2 max-[380px]:text-sm`}
     >
       <Icon name="cart"/>
       <span className="max-[359px]:sr-only">Корзина</span>
       <span
-        className="min-w-6 rounded-full bg-brand-700 px-2 py-0.5 text-center text-xs"
+        className="min-w-6 rounded-full bg-brand-50 px-2 py-0.5 text-center text-xs text-brand-900"
         aria-label={formatPositionCount(lineItemCount)}
       >
         {lineItemCount}

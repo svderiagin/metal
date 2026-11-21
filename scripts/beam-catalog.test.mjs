@@ -4,10 +4,23 @@ import fs from 'node:fs';
 import {readProjectData} from './project-data.mjs';
 
 const {productVariants} = readProjectData('data/products/index.ts');
-const {normalizeBeamVariant, beamProfile, beamSeries} = readProjectData('lib/beam.ts');
+const {normalizeBeamVariant, beamProfile, beamReferenceMassKg, beamSeries, beamTableNames} = readProjectData('lib/beam.ts');
 const {revalidateCartPrice} = readProjectData('lib/cartPricing.ts');
 const {metersToTons, tonsToMeters, calculateLineTotal} = readProjectData('lib/orderMeasurement.ts');
 const beams = productVariants.filter(p => p.categoryId === 'cat-bal');
+
+test('beam table names distinguish matching profiles by grade and declared standards', () => {
+  const names = beamTableNames(beams);
+  assert.equal(new Set(names.values()).size, beams.length);
+  assert.equal(names.get('local-115977'), 'Балка нормальная 30Б1, С255');
+  assert.equal(names.get('local-115982'), 'Балка широкополочная 30Ш1, С255');
+  assert.equal(names.get('local-86552'), 'Балка монорельсовая 30М, С255');
+  assert.equal(names.get('local-106617'), 'Балка колонная 20К1, С355');
+  assert.equal(names.get('local-11123500'), 'Балка колонная 20К1, С255');
+  assert.equal(names.get('local-65599'), 'Балка нормальная 40Б1, С255 (ГОСТ\u00a027772)');
+  assert.equal(names.get('local-116009'), 'Балка нормальная 40Б1, С255 (ГОСТ\u00a035087, ГОСТ\u00a027772)');
+  assert.equal(names.get('prd-012'), 'Балка широкополочная 10 мм');
+});
 
 test('confirmed 20B1 duplicate is removed while its replacement and B2 remain', () => {
   assert.equal(beams.find(p => p.id === 'local-65601'), undefined);
@@ -138,6 +151,31 @@ test('specified assortment standards supply nominal mass, steel grade standards 
   assert.equal(beams.find(p => p.id === 'local-73573').weightPerMeterKg, undefined);
   assert.equal(beams.find(p => p.id === 'prd-012').weight, undefined);
   assert.equal(beams.filter(p => p.weightPerMeterKg > 0).length, 30);
+});
+
+test('seven identified beams have reference masses without asserting a delivery standard or purchase weight', () => {
+  const referenceMasses = new Map([
+    ['local-67138', 25.3], ['local-65599', 56.6], ['local-83922', 72.5], ['local-69883', 89],
+    ['local-73573', 38.8], ['local-69066', 109.1], ['local-67139', 146.7],
+  ]);
+  for (const row of beams) {
+    assert.equal(beamReferenceMassKg(row), referenceMasses.get(row.id), row.id);
+    if (!referenceMasses.has(row.id)) continue;
+    assert.equal(row.standard, 'ГОСТ 27772');
+    assert.equal(row.weightPerMeterKg, undefined);
+    assert.equal(row.weight, undefined);
+    const measuredOrder = revalidateCartPrice(row, {
+      quantity: 12,
+      measurement: {inputMode: 'meter', meters: 12, weightTons: 12 * referenceMasses.get(row.id) / 1000},
+    });
+    assert.ok(measuredOrder.invalidReason);
+    assert.equal(measuredOrder.measurement, undefined);
+  }
+  const normal = beams.find(p => p.id === 'local-67138');
+  for (const change of [{id: 'new-20b2'}, {name: 'Балка 20Б1х12000'}, {standard: 'ГОСТ 26020'},
+    {weightPerMeterKg: 22.4}, {categoryId: 'cat-arm'}]) {
+    assert.equal(beamReferenceMassKg({...normal, ...change}), undefined);
+  }
 });
 
 test('beam conversions and persisted totals use the same exact nominal mass', () => {

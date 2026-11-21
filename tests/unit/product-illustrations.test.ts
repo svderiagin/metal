@@ -40,6 +40,9 @@ test("every new illustration belongs to the exact SKU and is a full-size product
     assert.equal(image.imageUrl, `/images/catalog/product-illustrations/${product.id}.webp`, product.id);
     assert.deepEqual(getProductIllustration(product), image, product.id);
     assert.equal(getProductIllustration({...product, name: `${product.name} — изменённая позиция`}), undefined, product.id);
+    if (product.categoryId === "cat-bal") {
+      assert.equal(getProductIllustration({...product, standard: "другой стандарт сортамента"}), undefined, product.id);
+    }
     assert.match(image.photoUrl, /^\/images\/catalog\//u, product.id);
     assert.notEqual(image.photoUrl, image.imageUrl, product.id);
     assert.ok(existsSync(join("public", image.photoUrl)), product.id);

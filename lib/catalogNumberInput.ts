@@ -24,11 +24,10 @@ export function parseOrderQuantity(value: string) {
 
 export function constrainOrderQuantityInput(value: string, maximum: number,
   formatMaximum = localizedNumber):
-  {value: string; message?: string; capped?: boolean} {
+  {value: string; capped?: boolean} {
   if (!decimalPattern.test(value.trim()) || value.trim().startsWith("-")) return {value};
   if (Number(normalizeDecimal(value)) > maximum) {
-    const limited = formatMaximum(maximum);
-    return {value: limited, message: `Значение ограничено максимумом ${limited}.`, capped: true};
+    return {value: formatMaximum(maximum), capped: true};
   }
   // Preserve the decimal separator and trailing fractional zeros while the user is typing.
   return {value: value.replace(/^(\s*)0+(?=\d)/u, "$1")};
@@ -42,13 +41,13 @@ export function correctOrderQuantity(value: string, {whole = false, minimum, max
   decimalPlaces?: number;
   fallback?: number;
   formatFeedback?: (quantity: number) => string;
-} = {}): {value: string; message?: string} {
+} = {}): {value: string; message?: string; capped?: boolean} {
   const parsed = parseCatalogNumber(value);
   if (!value.trim() || parsed === null || ((parsed < 0 || Object.is(parsed, -0)) && minimum === undefined)) {
     if (fallback !== undefined && Number.isFinite(fallback) && fallback >= 0) {
       // A saved quantity may carry exact converted precision beyond the input display.
       const restored = correctOrderQuantity(formatCatalogNumber(fallback), {whole, minimum, maximum, formatFeedback});
-      return {...restored, message: `Восстановлено количество ${formatFeedback(Number(restored.value))}.`};
+      return {value: restored.value, message: `Восстановлено количество ${formatFeedback(Number(restored.value))}.`};
     }
     return {value: "", ...(!value.trim() ? {} : {message: "Некорректное значение очищено."})};
   }
@@ -57,7 +56,7 @@ export function correctOrderQuantity(value: string, {whole = false, minimum, max
     return {value: formatCatalogNumber(minimum), message: `Значение увеличено до минимума ${formatFeedback(minimum)}.`};
   }
   if (maximum !== undefined && quantity > maximum) {
-    return {value: formatCatalogNumber(maximum), message: `Значение ограничено максимумом ${formatFeedback(maximum)}.`};
+    return {value: formatCatalogNumber(maximum), capped: true};
   }
   // A converted ceiling can carry more precision than ordinary metre input.
   if (maximum !== undefined && quantity === maximum) return {value: formatCatalogNumber(quantity)};

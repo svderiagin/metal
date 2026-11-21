@@ -14,7 +14,7 @@ test("quantity limits apply while typing without destroying an unfinished decima
   assert.equal(constrainOrderQuantityInput("0000000", 999).value, "0");
   assert.equal(constrainOrderQuantityInput("0005", 999).value, "5");
   for (const value of ["99999", "1 000", "9".repeat(400), "999,1"]) {
-    assert.equal(constrainOrderQuantityInput(value, 999).value, "999");
+    assert.deepEqual(constrainOrderQuantityInput(value, 999), {value: "999", capped: true});
   }
   for (const value of ["", "0,", "1.0", "1,05", ".", ",", "-000", "1e3", "abc"]) {
     assert.equal(constrainOrderQuantityInput(value, 999).value, value);
@@ -30,7 +30,7 @@ test("order corrections preserve only explicit zero for removal", () => {
   }
   assert.deepEqual(correctOrderQuantity("", {whole: true}), {value: ""});
   assert.equal(correctOrderQuantity("0,5", {whole: true}).value, "1");
-  assert.equal(correctOrderQuantity("1 000", {whole: true, maximum: 999}).value, "999");
+  assert.deepEqual(correctOrderQuantity("1 000", {whole: true, maximum: 999}), {value: "999", capped: true});
   assert.equal(correctOrderQuantity("0,003", {decimalPlaces: 2}).value, "");
   assert.equal(correctOrderQuantity("1,236", {decimalPlaces: 2}).value, "1.24");
   assert.equal(correctOrderQuantity("1,005", {decimalPlaces: 2}).value, "1.01");

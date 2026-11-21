@@ -87,7 +87,7 @@ test("galvanized sheet limits quantity while typing or replacing the field, befo
   await quantity.pressSequentially("99999");
   await expect(quantity).toBeFocused();
   await expect(quantity).toHaveValue("999");
-  await expect(row.getByText("Значение ограничено максимумом 999.")).toBeVisible();
+  await expect(row).not.toContainText("Значение ограничено максимумом");
   await quantity.fill("0003");
   await expect(quantity).toHaveValue("3");
   await row.getByRole("button", {name: "В корзину", exact: true}).click();
@@ -125,7 +125,7 @@ for (const family of ["mesh", "profnastil"] as const) {
     await quantity.fill("1 000");
     await quantity.blur();
     await expect(quantity).toHaveValue("999");
-    await expect(row.getByText("Значение ограничено максимумом 999.")).toBeVisible();
+    await expect(row).not.toContainText("Значение ограничено максимумом");
     expect(await page.evaluate(() => JSON.parse(localStorage.getItem("metal-store-cart-v1")!)[0].quantity)).toBe(3);
     await quantity.fill("0");
     await row.getByRole("button", {name: "Удалить", exact: true}).click();

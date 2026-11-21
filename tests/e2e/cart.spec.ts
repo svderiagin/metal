@@ -420,7 +420,9 @@ for (const [variant, maximumMeters, maximumTons, minimumMeters, minimumTons] of 
     expect(await storedItems(page)).toEqual(capped);
     await fillQuantity(tons, "1000");
     await expectNumber(tons, maximumTons);
+    await expect(row).not.toContainText("Значение ограничено максимумом 999.");
     await tons.press("Enter");
+    await expect(row).not.toContainText("Значение ограничено максимумом 999.");
     await expectNumber(meters, maximumMeters);
     await fillQuantity(tons, "0");
     await tons.press("Enter");

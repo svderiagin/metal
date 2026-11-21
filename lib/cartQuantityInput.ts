@@ -41,6 +41,10 @@ export function normalizeCartQuantityText(value: string) {
   return value.trim().replace(/[ \u00a0\u202f\u2009]+/gu, " ");
 }
 
+export function cartMaximumMessage(maximum: number, formatted: string) {
+  return maximum === 999 ? undefined : `Значение ограничено максимумом ${formatted}.`;
+}
+
 export function normalizeCartQuantityDraft(value: string, selectionStart: number | null, selectionEnd: number | null,
   {maximum = Infinity, formatMaximum = formatEditableCartQuantity}: {maximum?: number; formatMaximum?: (value: number) => string} = {}): {
     accepted: boolean; value: string; selectionStart: number | null; selectionEnd: number | null; message?: string; capped?: boolean;
@@ -73,7 +77,7 @@ export function normalizeCartQuantityDraft(value: string, selectionStart: number
   if (Number(next.replace(",", ".")) > maximum) {
     const limited = formatMaximum(maximum);
     return {accepted: true, value: limited, selectionStart: limited.length, selectionEnd: limited.length, capped: true,
-      message: `Значение ограничено максимумом ${limited}.`};
+      message: cartMaximumMessage(maximum, limited)};
   }
   return {accepted: true, value: next, selectionStart: start, selectionEnd: end};
 }

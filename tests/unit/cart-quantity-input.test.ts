@@ -91,7 +91,9 @@ test("overflow clamps a valid number to the exact product ceiling and puts the c
     assert.equal(result.value, expected);
     assert.equal(result.selectionStart, expected.length);
     assert.equal(result.selectionEnd, expected.length);
-    assert.ok(result.message);
+    assert.equal(result.capped, true);
+    if (maximum === 999) assert.equal(result.message, undefined);
+    else assert.ok(result.message);
   }
   const boundary = normalizeCartQuantityDraft("2,219778", 3, 3, {maximum: 2.219778});
   assert.equal(boundary.value, "2,219778");
