@@ -49,6 +49,7 @@ function setup(id, kind = 'beam') {
     '@/lib/beam': readProjectData('lib/beam.ts'),
     '@/lib/vgp': readProjectData('lib/vgp.ts'),
     '@/lib/wholePipeOrder': readProjectData('lib/wholePipeOrder.ts'),
+    '@/lib/pipeFamily': readProjectData('lib/pipeFamily.ts'),
     '@/lib/quoteRequest': readProjectData('lib/quoteRequest.ts'),
     '@/lib/orderMeasurement': readProjectData('lib/orderMeasurement.ts'),
     '@/lib/catalogNumberInput': readProjectData('lib/catalogNumberInput.ts'),

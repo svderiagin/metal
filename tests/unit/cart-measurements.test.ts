@@ -403,7 +403,7 @@ test("a legal legacy beam reaches checkout canonically and saved orders over 999
 });
 
 test("missing current mass preserves a saved measured order's units without trusting its money", () => {
-  const product = fixture("local-302");
+  const product = fixture("local-65599");
   assert.equal(product.unit, "ton");
   assert.equal(product.weightPerMeterKg, undefined);
   assert.equal(isDemonstrationProduct(product), false);

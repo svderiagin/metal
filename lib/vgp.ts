@@ -1,5 +1,6 @@
 import type {ProductVariant} from "@/types/product";
 import galvanized from "@/data/vgp-galvanized-specifications.json";
+import {formatMassPerMeter, formatNumber} from "./numberFormat";
 
 export {isVgpVariant} from "./pipeFamily";
 export {wholePipeOrder as wholeVgpOrder} from "./wholePipeOrder";
@@ -15,7 +16,7 @@ export function normalizeGalvanizedVgpVariant(product: ProductVariant): ProductV
     {name: "Толщина стенки, мм", value: "2,8"},
     {name: "Серия по толщине стенки", value: "Лёгкая"},
     {name: "Покрытие", value: "Цинковое"},
-    {name: "Теоретическая масса", value: "2,18 кг/м"},
+    {name: "Теоретическая масса", value: `${formatMassPerMeter(galvanized.weightPerMeterKg)} кг/м`},
     {name: "Длина по каталогу", value: "7,8 м (±150 мм по данным поставщика)"},
     {name: "Стандарт", value: "ГОСТ 3262-75"},
     {name: "Полное обозначение", value: galvanized.sourceProductName},
@@ -25,10 +26,11 @@ export function normalizeGalvanizedVgpVariant(product: ProductVariant): ProductV
     name: "Труба ВГП оцинкованная Ду25×2,8×7800",
     sourceProductName: galvanized.sourceProductName,
     shortDescription: "Оцинкованная ВГП-труба Ду25, наружный диаметр 33,5 мм, стенка 2,8 мм. Длина по каталогу 7,8 м.",
-    description: "Лёгкая оцинкованная ВГП-труба Ду25×2,8 по ГОСТ 3262-75. Наружный диаметр — 33,5 мм. Теоретическая масса с учётом оцинковки — 2,1836 кг/м (2,12 × 1,03); в характеристиках округлена до 2,18 кг/м. Расчёт использует полное значение. Длина одной трубы по каталогу — 7,8 м; в исходном предложении указан допуск ±150 мм. Заказ рассчитывается в целых трубах по номинальной длине. Фактическую длину, массу партии, цену и наличие подтверждает поставщик.",
+    description: "Теоретическая масса с учётом цинкового покрытия рассчитана по ГОСТ 3262-75. Допуск ±150 мм указан поставщиком для каталожной длины 7,8 м. Вид длины, фактическую длину и параметры покрытия подтверждают документы поставки.",
     standard: "ГОСТ 3262-75", coatingType: "galvanized",
     nominalBoreMm: galvanized.nominalBoreMm, diameterMm: galvanized.diameterMm,
     wallThicknessMm: galvanized.wallThicknessMm, lengthMeters: galvanized.lengthMeters,
+    supplierLengthToleranceMm: galvanized.supplierLengthToleranceMm,
     weightPerMeterKg: galvanized.weightPerMeterKg, weightConfirmed: true,
     attributes: [
       ...product.attributes.filter(a => !["standard", "size", "length", "wallThickness"].includes(a.key)),
@@ -41,7 +43,8 @@ export function normalizeGalvanizedVgpVariant(product: ProductVariant): ProductV
 }
 
 export function vgpSize(product: ProductVariant): string {
-  return `${product.nominalBoreMm}×${String(product.wallThicknessMm).replace(".", ",")}`;
+  if (product.nominalBoreMm === undefined || product.wallThicknessMm === undefined) return "—";
+  return `${formatNumber(product.nominalBoreMm)} × ${formatNumber(product.wallThicknessMm)}`;
 }
 
 export function vgpSeries(product: ProductVariant): string {

@@ -2,6 +2,7 @@ import type {ProductVariant} from "@/types/product";
 import {normalizeText} from "./russian";
 import {beamProfile, beamSeries, type BeamSeries} from "@/lib/beam";
 import {getSheetParameters, isPlainHotRolledSheet} from "@/lib/sheetPresentation";
+import {isMeasuredElectroweldedVariant} from "@/lib/pipeFamily";
 
 const number = "\\d+(?:\\.\\d+)?";
 const dimensionPattern = new RegExp(`(?<![а-яa-z\\d.])${number}(?:x${number})+(?![а-яa-z\\d.])`, "g");
@@ -27,7 +28,8 @@ export function buildTechnicalDocument(product: ProductVariant): TechnicalDocume
   const specs = product.specifications;
   const gradeText = [product.steelGrade ?? "", ...product.attributes.filter(a => a.key === "grade" || a.key === "class").map(a => a.value), ...specs.filter(s => /марка|класс/i.test(s.name)).map(s => s.value)].join(" ");
   const stdText = [product.standard, product.name, ...specs.filter(s => /стандарт|гост/i.test(s.name)).map(s => s.value)].join(" ");
-  const chains = dimensions(product.name);
+  const offerName = isMeasuredElectroweldedVariant(product) ? product.sourceProductName ?? "" : "";
+  const chains = dimensions(`${product.name} ${offerName}`);
   for (const spec of specs.filter(s => /профил|размер|сечение/i.test(s.name))) chains.push(...dimensions(spec.value));
   const primary = new Set(chains.map(chain => chain[0]));
   if (product.diameterMm !== undefined) primary.add(String(product.diameterMm));
@@ -42,7 +44,7 @@ export function buildTechnicalDocument(product: ProductVariant): TechnicalDocume
   for (const attr of product.attributes.filter(a => a.key === "size")) {
     const match = normalizeText(attr.value).match(/^(\d+(?:\.\d+)?)\s*(?:мм)?$/);if (match) primary.add(canonicalNumber(match[1]));
   }
-  const grades = new Set([...identifiers(gradeText), ...identifiers(product.name).filter(t => !/^[\d.]+х[\dх.]+$/.test(t))]);
+  const grades = new Set([...identifiers(gradeText), ...identifiers(`${product.name} ${offerName}`).filter(t => !/^[\d.]+х[\dх.]+$/.test(t))]);
   if (product.categoryId === "cat-bal") {
     const profile = beamProfile(product);
     if (/^\d+(?:[.,]\d+)?[БШКМ]\d*$/.test(profile)) grades.add(canonicalIdentifier(profile));

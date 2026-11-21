@@ -55,9 +55,8 @@ const variants = products.map(product => {
   assert.equal(Math.round(0.0246615 * (diameterMm - wallThicknessMm) * wallThicknessMm * 100) / 100, weightPerMeterKg);
   if (product.weightPerMeterKg !== undefined) assert.equal(product.weightPerMeterKg, weightPerMeterKg);
   const lengthMeters = product.lengthMeters ?? catalogNumber(product, 'Длина, мм') / 1000;
-  const range = product.name.match(/н\/д\s*\((\d+(?:[.,]\d+)?)\s*[-–]\s*(\d+(?:[.,]\d+)?)\s*м\)/iu);
   const lengthLabel = lengthMeters > 0 ? `${number.format(lengthMeters)} м`
-    : range ? `${range[1].replace('.', ',')}–${range[2].replace('.', ',')} м` : undefined;
+    : product.lengthRangeMeters ? `${product.lengthRangeMeters.map(value => number.format(value)).join('–')} м` : undefined;
   assert.ok(lengthLabel, `${product.id}: no confirmed length`);
   const sectionLabel = `${number.format(diameterMm)} × ${number.format(wallThicknessMm)}`;
   return {...template, id: product.id, filename: `${product.id}.jpg`, unverified,

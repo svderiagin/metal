@@ -2,8 +2,9 @@
 
 import {useEffect, useState, type ReactNode} from "react";
 import {beamProfile, beamKind, beamReferenceMassKg, beamStandardLabel} from "@/lib/beam";
-import {vgpSize, vgpSeries} from "@/lib/vgp";
+import {vgpSize} from "@/lib/vgp";
 import {wholePipeOrder} from "@/lib/wholePipeOrder";
+import {isWholePipeVariant} from "@/lib/pipeFamily";
 import {QuoteRequestButton} from "./QuoteRequestButton";
 import {formatQuoteProductName} from "@/lib/quoteRequest";
 import filterStyles from "./FilterPanel.module.css";
@@ -50,7 +51,8 @@ function TonnageMeasuredVariantItem({
   const isRebar = kind === "rebar";
   const isVgp = kind === "vgp";
   const isPipe = isVgp || kind === "pipe";
-  const roundToWholePipes = isPipe && hasMass && Number.isFinite(variant.lengthMeters) && (variant.lengthMeters ?? 0) > 0;
+  const wholePipe = isWholePipeVariant(variant);
+  const roundToWholePipes = wholePipe && hasMass && Number.isFinite(variant.lengthMeters) && (variant.lengthMeters ?? 0) > 0;
   const [detailsOpen, setDetailsOpen] = useState(false);
   const cartLine = lines.find((line) => line.productId === variant.id);
   const savedMeasurement = cartLine?.measurement;
@@ -83,7 +85,7 @@ function TonnageMeasuredVariantItem({
   const referenceMeters = referenceMass !== undefined && parsedTons !== null ? tonsToMeters(parsedTons, referenceMass) : null;
   const pricePerTon = variant.pricePerTon;
   const needsQuote = pricePerTon === undefined || variant.quoteOnly || variant.priceQualifier === "from"
-    || (isPipe && !roundToWholePipes) || (!hasMass && enteredMeters !== null && enteredMeters > 0);
+    || (wholePipe && !roundToWholePipes) || (!hasMass && enteredMeters !== null && enteredMeters > 0);
   const canPurchase = !needsQuote && (variant.inStock || (variant.imported && variant.availability === "UNKNOWN"));
   const estimatedTotal = variant.quoteOnly ? null
     : referenceMass !== undefined && parsedMeters !== null && pricePerTon !== undefined ? calculateMeasuredLineTotal(parsedMeters, referenceMass, pricePerTon)
@@ -118,7 +120,7 @@ function TonnageMeasuredVariantItem({
         : hasChanges && canPurchase ? filterStyles.updateCartButton
           : filterStyles.cartButton;
   const status = message || (invalidDraft ? "Проверьте введённое значение."
-    : hasChanges ? "Не сохранено" : isPipe && pipeOrder && pipeOrder.pieces > 0 ? `${pipeOrder.pieces} шт. · ${formatNumber(pipeOrder.meters)} м`
+    : hasChanges ? "Не сохранено" : pipeOrder && pipeOrder.pieces > 0 ? `${pipeOrder.pieces} шт.`
       : "");
 
   function estimateTotal(orderMeters: number | null, orderTons: number | null) {
@@ -289,37 +291,62 @@ function TonnageMeasuredVariantItem({
     <p>{variant.availability === "UNKNOWN" ? "Наличие уточняется" : variant.availability === "IN_STOCK" ? "В наличии" : "Под заказ"}</p>
     <p>{variant.shortDescription}</p>
     <p>{variant.description}</p>
+    {isVgp && <p>Марка стали, исполнение резьбы и наличие муфт уточняются по документам поставки.</p>}
+    {isPipe && variant.sourceProductName && <p>Обозначение поставщика — {variant.sourceProductName}</p>}
   </div>;
 
-  const specifications = <CatalogVariantSpecifications items={kind === "pipe" ? [
-    {label: "Наружный Ø × стенка, мм", value: `${formatNumber(variant.diameterMm ?? 0)}×${formatNumber(variant.wallThicknessMm ?? 0)}`},
-    {label: "Стандарт", value: variant.standard},
-    {label: "Теоретическая масса без цинкового покрытия", value: hasMass ? `${formatNumber(mass)} кг/м` : "—"},
-    {label: "Длина по каталогу", value: variant.lengthMeters === undefined ? "—" : `${formatNumber(variant.lengthMeters)} м`},
+  const outsideDiameter = variant.diameterMm === undefined ? "—" : formatNumber(variant.diameterMm);
+  const pipeSize = isVgp ? vgpSize(variant) : `${outsideDiameter} × ${formatNumber(variant.wallThicknessMm ?? 0)}`;
+  const pipeLength = variant.lengthRangeMeters?.map(formatNumber).join("–")
+    ?? (variant.lengthMeters === undefined ? undefined : formatNumber(variant.lengthMeters));
+  const pipeTolerance = variant.supplierLengthToleranceMm === undefined ? undefined
+    : `±${formatNumber(variant.supplierLengthToleranceMm)} мм`;
+  const pipeMass = hasMass ? formatNumber(mass) : undefined;
+  const pipeMassLabel = kind === "pipe" && variant.coatingType === "galvanized"
+    ? "Теоретическая масса без цинкового покрытия" : "Теоретическая масса";
+  const lengthWithUnit = pipeLength ? <>
+    <span className="whitespace-nowrap">{pipeLength} м</span>
+    {pipeTolerance && <> <span className="whitespace-nowrap">({pipeTolerance})</span></>}
+  </> : "—";
+  const specifications = <CatalogVariantSpecifications items={isPipe ? [
+    {label: isVgp ? "Ду × стенка, мм" : "Наружный Ø × стенка, мм", value: <span className="whitespace-nowrap">{pipeSize}</span>},
+    isVgp ? {label: "Наружный Ø, мм", value: outsideDiameter}
+      : {label: "Марка стали", value: variant.steelGrade ?? "Уточняется"},
+    {label: "Длина по каталогу", value: lengthWithUnit},
+    ...(!isVgp ? [{label: pipeMassLabel, value: pipeMass ? `${pipeMass} кг/м` : "—"}] : []),
   ] : [
-    {label: isVgp ? "Ду × стенка, мм" : "Профиль", value: isVgp ? vgpSize(variant) : beamProfile(variant)},
-    {label: isVgp ? "Серия" : "Тип балки", value: isVgp ? vgpSeries(variant) : beamKind(variant)},
-    {label: isVgp ? "Наружный Ø, мм" : "Сталь / класс",
-      value: isVgp ? formatNumber(variant.diameterMm ?? 0) : variant.steelGrade ?? "—"},
-    ...(kind === "beam" && variant.standard ? [{label: "Стандарт", value: beamStandardLabel(variant)}] : []),
+    {label: "Профиль", value: beamProfile(variant)},
+    {label: "Тип балки", value: beamKind(variant)},
+    {label: "Сталь / класс", value: variant.steelGrade ?? "—"},
+    ...(variant.standard ? [{label: "Стандарт", value: beamStandardLabel(variant)}] : []),
     referenceMass !== undefined
       ? {label: "Справочная масса по ГОСТ 35087-2024", value: `${formatNumber(referenceMass)} кг/м`}
-      : {label: "Теоретическая масса", value: hasMass ? `${formatNumber(isVgp ? Math.round(mass * 100) / 100 : mass)} кг/м` : "—"},
+      : {label: "Теоретическая масса", value: hasMass ? `${formatNumber(mass)} кг/м` : "—"},
     {label: "Длина", value: variant.lengthMeters === undefined ? "—" : `${formatNumber(variant.lengthMeters)} м`},
   ]}/>;
+  const detailsLabel = isVgp ? "Подробнее" : "Подробнее о товаре";
   const moreDetails = view === "card"
-    ? <details className="mt-3 text-sm"><DetailsSummary className="font-semibold text-slate-600 focus-visible:outline-2 focus-visible:outline-brand-700 dark:text-slate-300 dark:focus-visible:outline-brand-300">Подробнее о товаре</DetailsSummary>
+    ? <details className="mt-3 text-sm"><DetailsSummary className="font-semibold text-slate-600 focus-visible:outline-2 focus-visible:outline-brand-700 dark:text-slate-300 dark:focus-visible:outline-brand-300">{detailsLabel}</DetailsSummary>
       <div className="mt-3">{details}</div></details>
-    : <button type="button" aria-expanded={detailsOpen} aria-controls={`vgp-details-${variant.id}`}
+    : <button type="button" aria-expanded={detailsOpen} aria-controls={`pipe-details-${variant.id}`}
       aria-label={`Подробности: ${variant.name}`} onClick={() => setDetailsOpen(!detailsOpen)}
-      className="mt-2 cursor-pointer rounded-sm text-sm font-semibold text-slate-600 underline decoration-slate-300 underline-offset-4 hover:text-brand-700 focus-visible:outline-2 focus-visible:outline-brand-700 dark:text-slate-300 dark:decoration-slate-500 dark:hover:text-brand-400 dark:focus-visible:outline-brand-300">Подробнее о товаре</button>;
+      className={`mt-2 cursor-pointer rounded-sm font-semibold text-slate-600 underline decoration-slate-300 underline-offset-4 hover:text-brand-700 focus-visible:outline-2 focus-visible:outline-brand-700 dark:text-slate-300 dark:decoration-slate-500 dark:hover:text-brand-400 dark:focus-visible:outline-brand-300 ${isVgp ? "whitespace-nowrap text-xs" : "text-sm"}`}>{detailsLabel}</button>;
+  const tableSpecifications = isPipe ? {
+    heading: <><span className="block">{pipeSize}</span>{moreDetails}</>,
+    cells: <>
+      {isVgp ? <td className="tabular-nums">{outsideDiameter}</td>
+        : <td>{variant.steelGrade ?? <><span aria-hidden="true">—</span><span className="sr-only">Уточняется</span></>}</td>}
+      <td className="tabular-nums">{pipeLength ?? "—"}{pipeTolerance && <small className="block whitespace-nowrap text-xs font-normal text-slate-600 dark:text-slate-400">{pipeTolerance}</small>}</td>
+      {!isVgp && <td className="tabular-nums">{pipeMass ?? "—"}</td>}
+    </>,
+  } : undefined;
   return <>
-    <CatalogVariantLayout view={view} variant={variant} name={name} specifications={isDemonstrationProduct(variant)
+    <CatalogVariantLayout view={view} variant={variant} name={name} tableSpecifications={tableSpecifications} specifications={isDemonstrationProduct(variant)
       ? <p className="text-sm text-slate-600 dark:text-slate-400">Характеристики требуют подтверждения перед заказом.</p>
       : <>{specifications}{isPipe && moreDetails}</>}
       price={price} order={order}/>
-    {isPipe && view === "table" && <tr id={`vgp-details-${variant.id}`} hidden={!detailsOpen}
-      className="border-t border-slate-200 bg-slate-50 dark:border-slate-700 dark:bg-slate-800/50"><td colSpan={8} className="p-4">{details}</td></tr>}
+    {isPipe && view === "table" && <tr id={`pipe-details-${variant.id}`} hidden={!detailsOpen}
+      className="border-t border-slate-200 bg-slate-50 dark:border-slate-700 dark:bg-slate-800/50"><td colSpan={isVgp ? 9 : 10} className="p-4">{details}</td></tr>}
   </>;
 }
 

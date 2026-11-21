@@ -1,4 +1,4 @@
-import {test, expect, openProduct, samples, seedCart, settleImages, visibleProduct} from "../browser";
+import {test, expect, openProduct, productPath, samples, seedCart, settleImages, visibleProduct} from "../browser";
 import {ORDER_STORAGE_KEY} from "../../lib/constants";
 
 for (const [path, name] of [["/", "home"], ["/catalog", "catalog"]]) {
@@ -29,10 +29,19 @@ test("title photo viewer uses a rounded frame and the original aspect ratio", as
 
 for (const family of ["shveller", "ugolok", "kvadrat", "armatura", "balka", "profile", "vgp", "profnastil", "mesh"] as const) {
   test(`${family} table or card geometry`, async ({page}) => {
-    await openProduct(page, samples[family]);
     const regionName = family === "mesh" ? "Сетка металлическая" : family === "profnastil" ? "Профнастил" : "Продукция";
     const region = page.getByRole("region", {name: regionName, exact: true});
-    await region.scrollIntoViewIfNeeded();
+    if (family === "vgp") {
+      // Capture the header in table flow. The product anchor can scroll it into its sticky position.
+      await page.goto(productPath(samples.vgp, false));
+      await page.getByLabel("Поиск товаров", {exact: true}).filter({visible: true}).fill(samples.vgp.sku);
+      await expect(region.locator('tbody tr[id^="variant-"]:visible, article[id^="variant-mobile-"]:visible')).toHaveCount(1);
+      await page.evaluate(() => document.fonts.ready);
+      await region.evaluate(element => element.scrollIntoView({block: "center", behavior: "instant"}));
+    } else {
+      await openProduct(page, samples[family]);
+      await region.scrollIntoViewIfNeeded();
+    }
     await settleImages(page, region);
     if (family === "shveller" && process.env.VISUAL_REGRESSION_PROBE === "1") {
       await page.addStyleTag({content: "table th:first-child, table td:first-child { padding-left: 48px !important; }"});

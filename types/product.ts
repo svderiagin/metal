@@ -74,6 +74,7 @@ export interface ProductVariant {
   ralCode?: string;
   coatingType?: "galvanized" | "painted";
   lengthRangeMeters?: [number, number];
+  supplierLengthToleranceMm?: number;
   weightConfirmed?: boolean;
   form?: "coil" | "bar";
   steelGrade?: string;

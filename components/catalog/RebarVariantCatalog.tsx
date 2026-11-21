@@ -5,6 +5,8 @@ import {MeasuredVariantItem} from "./MeasuredVariantItem";
 import {beamProfile, beamKind, beamReferenceMassKg, beamTableNames} from "@/lib/beam";
 import {vgpSize, vgpSeries} from "@/lib/vgp";
 import {hasConfirmedProfilePipePrice, profilePipeSize} from "@/lib/profilePipe";
+import {isGalvanizedElectroweldedVariant} from "@/lib/pipeFamily";
+import {formatNumber} from "@/lib/numberFormat";
 
 import {FilterPanel} from "./FilterPanel";
 import {CatalogVariantTable} from "./CatalogVariantLayout";
@@ -46,6 +48,18 @@ const rebarColumns = [
   {label: "Действие", width: "15%"},
 ] as const;
 
+const vgpColumns = [
+  {label: "Ду × стенка, мм", width: 11},
+  {label: "Фото", width: 10},
+  {label: "Наружный Ø, мм", width: 11},
+  {label: "Длина, м", width: 8},
+  {label: "Цена, ₽/т", width: 11},
+  {label: "Заказ, м", width: 12},
+  {label: "Заказ, т", width: 12},
+  {label: "Сумма", width: 11, className: tableStyles.sumColumn},
+  {label: "Действие", width: 14, visuallyHidden: true},
+] as const;
+
 export function isMeasuredRebarVariant(variant: ProductVariant): variant is RebarVariant {
   return variant.diameterMm !== undefined
     && variant.form !== undefined
@@ -83,6 +97,19 @@ function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
   const isVgp = kind === "vgp";
   const isProfile = kind === "profile";
   const isElectrowelded = kind === "pipe";
+  const isGalvanized = isElectrowelded && variants.every(isGalvanizedElectroweldedVariant);
+  const pipeColumns = isElectrowelded ? [
+    {label: "Наружный Ø × стенка, мм", width: 10},
+    {label: "Фото", width: 10},
+    {label: "Марка стали", width: 7},
+    {label: "Длина по каталогу, м", width: 9},
+    {label: isGalvanized ? "Масса стали," : "Масса,", unit: "кг/м", width: 8},
+    {label: "Цена, ₽/т", width: 11},
+    {label: "Заказ, м", width: 10},
+    {label: "Заказ, т", width: 10},
+    {label: "Сумма", width: 10, className: tableStyles.sumColumn},
+    {label: "Действие", width: 15, visuallyHidden: true},
+  ] : undefined;
   const Table = kind === "rebar" ? RebarVariantTable : CatalogVariantTable;
   const [query, setQuery] = useState("");
   const deferredQuery = useDeferredValue(query);
@@ -121,22 +148,25 @@ function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
     const formValue = (variant: ProductVariant) => (isProfile || isElectrowelded) ? String(variant.wallThicknessMm).replace(".", ",") : isVgp ? vgpSeries(variant) : isBeam ? beamKind(variant) : variant.form;
     const priceValue = (variant: ProductVariant) => isProfile ? hasConfirmedProfilePipePrice(variant) ? variant.price ?? undefined : undefined : variant.pricePerTon;
     const massValue = (variant: ProductVariant) => variant.weightPerMeterKg ?? beamReferenceMassKg(variant);
+    const compareSizes = (left: ProductVariant, right: ProductVariant) =>
+      sizeValue(left).localeCompare(sizeValue(right), "ru", {numeric: true})
+      || (isElectrowelded ? (left.wallThicknessMm ?? 0) - (right.wallThicknessMm ?? 0) : 0);
     const min = parseCatalogPrice(minimumPrice);
     const max = parseCatalogPrice(maximumPrice);
     return (deferredQuery.trim() ? hits.map(hit => hit.product) : variants).filter((variant) =>
       (!diameter || sizeValue(variant) === diameter)
       && (!form || formValue(variant) === form)
-      && (!length || variant.lengthMeters === Number(length) || (isProfile && variant.lengthRangeMeters && Number(length) >= variant.lengthRangeMeters[0] && Number(length) <= variant.lengthRangeMeters[1]))
+      && (!length || variant.lengthMeters === Number(length) || (variant.lengthRangeMeters && Number(length) >= variant.lengthRangeMeters[0] && Number(length) <= variant.lengthRangeMeters[1]))
       && (!availability || variant.availability === availability)
       && (min === null || (priceValue(variant) !== undefined && priceValue(variant)! >= min))
       && (max === null || (priceValue(variant) !== undefined && priceValue(variant)! <= max)),
     ).sort((left, right) => {
       if (sort === "relevance") return 0;
-      if (sort === "diameter-desc") return sizeValue(right).localeCompare(sizeValue(left), "ru", {numeric: true});
+      if (sort === "diameter-desc") return compareSizes(right, left);
       if (sort === "price-asc" || sort === "price-desc") return comparePrices(priceValue(left), priceValue(right), sort === "price-desc");
       if (sort === "weight-asc") return (massValue(left) ?? Infinity) - (massValue(right) ?? Infinity);
       if (sort === "weight-desc") return (massValue(right) ?? -Infinity) - (massValue(left) ?? -Infinity);
-      return sizeValue(left).localeCompare(sizeValue(right), "ru", {numeric: true});
+      return compareSizes(left, right);
     });
   }, [hits, deferredQuery, availability, diameter, form, length, maximumPrice, minimumPrice, sort, variants, isBeam, isVgp, isProfile, isElectrowelded]);
   function resetFilters() {
@@ -171,7 +201,7 @@ function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
             </Select>
           </label>
         }>
-          <Filter label={isProfile ? "Размер, мм" : isVgp ? "Ду × стенка, мм" : isBeam ? "Профиль" : "Диаметр, мм"} value={diameter} onChange={setDiameter}>
+          <Filter label={isProfile ? "Размер, мм" : isVgp ? "Ду × стенка, мм" : isBeam ? "Профиль" : isElectrowelded ? "Наружный Ø, мм" : "Диаметр, мм"} value={diameter} onChange={setDiameter}>
             {diameters.map((value) => <option key={value} value={value}>{value}</option>)}
           </Filter>
           <Filter label={isProfile || isElectrowelded ? "Стенка, мм" : isVgp ? "Серия" : isBeam ? "Тип балки" : "Форма продукции"} value={form} onChange={setForm}>
@@ -180,7 +210,7 @@ function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
             ))}
           </Filter>
           <Filter label="Длина, м" value={length} onChange={setLength}>
-            {lengths.map((value) => <option key={value} value={value}>{value}</option>)}
+            {lengths.map((value) => <option key={value} value={value}>{formatNumber(value)}</option>)}
           </Filter>
           <PriceRangeInputs range={priceRange} unit={isProfile ? "метр" : "тонну"}/>
           <Filter label="Наличие" value={availability} onChange={setAvailability}>
@@ -193,7 +223,15 @@ function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
       <section className="min-w-0 lg:col-span-2" aria-label="Продукция">
       {results.length ? (
         <>
-        <Table measured={isBeam || isVgp || isElectrowelded}>
+        {isElectrowelded && <p className="mb-3 text-sm text-slate-600 dark:text-slate-300">
+          {isGalvanized
+            ? "Для пересчёта используется масса стальной трубы без цинкового покрытия по таблице 1 ГОСТ 10704-91."
+            : "Масса и стоимость заказа по длине рассчитываются по теоретической массе из таблицы 1 ГОСТ 10704-91."}
+        </p>}
+        {isVgp && <p className="mb-3 text-sm text-slate-600 dark:text-slate-300">
+          Ду — условный проход. Заказ рассчитывается целыми трубами по каталожной длине.
+        </p>}
+        <Table measured={isBeam} columns={isVgp ? vgpColumns : pipeColumns}>
           {results.map(variant => <MeasuredVariantItem key={variant.id} variant={variant} name={names?.get(variant.id)} kind={kind} view="table"/>)}
         </Table>
         <div className="grid gap-4 sm:grid-cols-2 xl:hidden">

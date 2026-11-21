@@ -12,7 +12,7 @@ const {normalizeRebarVariant}=readProjectData('lib/rebar.ts');
 const {normalizeBeamVariant}=readProjectData('lib/beam.ts');
 const {normalizePipeWeight}=readProjectData('lib/pipeWeight.ts');
 const {normalizeGalvanizedVgpVariant}=readProjectData('lib/vgp.ts');
-const {normalizeGalvanizedElectroweldedVariant}=readProjectData('lib/electroweldedPipe.ts');
+const {normalizeElectroweldedVariant,normalizeGalvanizedElectroweldedVariant}=readProjectData('lib/electroweldedPipe.ts');
 const {isPublicProduct}=readProjectData('data/catalog-visibility.ts');
 const imported=read('data/imported-catalog.json');
 const {productVariants,existingVariants}=readProjectData('data/products/index.ts');
@@ -22,7 +22,7 @@ const mapperProducts=[
  ...existingVariants.filter(p=>!imported.matchedIds.includes(p.id)),
  ...imported.products,
 ];
-const original=mapperProducts.filter(isPublicProduct).map(normalizeRebarVariant).map(normalizeBeamVariant).map(normalizeGalvanizedVgpVariant).map(normalizeGalvanizedElectroweldedVariant).map(normalizePipeWeight);
+const original=mapperProducts.filter(isPublicProduct).map(normalizeRebarVariant).map(normalizeBeamVariant).map(normalizeGalvanizedVgpVariant).map(normalizeElectroweldedVariant).map(normalizeGalvanizedElectroweldedVariant).map(normalizePipeWeight);
 const digest=b=>crypto.createHash('sha256').update(b).digest('hex');
 
 test('image overlay preserves every product field other than image references',()=>{

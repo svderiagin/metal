@@ -21,6 +21,7 @@ test("galvanized DN25 uses the GOST outside diameter and zinc-adjusted nominal m
   assert.equal(pipe.weight?.value, 2.1836);
   assert.equal(pipe.specifications.find(s => s.name === "Теоретическая масса")?.value, "2,18 кг/м");
   assert.equal(pipe.lengthMeters, 7.8);
+  assert.equal(pipe.supplierLengthToleranceMm, 150);
   assert.match(pipe.description, /±150 мм/);
   assert.equal(pipe.standard, "ГОСТ 3262-75");
   for (const key of ["id", "sku", "slug", "categoryId", "subcategoryId", "productTypeId", "price", "priceUnit", "unit", "quoteOnly", "availability", "inStock"] as const) {

@@ -8,6 +8,13 @@ export function isGalvanizedElectroweldedVariant(product: ProductVariant): boole
   return product.categoryId === "cat-trk" && product.subcategoryId === "cat-trk-sub-4";
 }
 
+export function isMeasuredElectroweldedVariant(product: ProductVariant): boolean {
+  return product.categoryId === "cat-trk"
+    && ["cat-trk-sub-2", "cat-trk-sub-4"].includes(product.subcategoryId)
+    && product.diameterMm !== undefined && product.wallThicknessMm !== undefined
+    && product.weightPerMeterKg !== undefined;
+}
+
 export function isWholePipeVariant(product: ProductVariant): boolean {
   return isVgpVariant(product) || isGalvanizedElectroweldedVariant(product);
 }

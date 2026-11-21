@@ -6,21 +6,26 @@ import {ProductImageViewer} from "./ProductImageViewer";
 import tableStyles from "./RebarTable.module.css";
 
 type View = "table" | "card";
+type CatalogColumn = {label: string; width: number; unit?: string; className?: string; visuallyHidden?: boolean};
 
 const quantityColumnWidths = [11, 20, 21, 11, 10, 12, 15];
 const measuredColumnWidths = [13, 12, 15, 11, 11, 11, 12, 15];
 
-export function CatalogVariantTable({children, quantityHeading = "Кол-во", measured = false}: {
+export function CatalogVariantTable({children, quantityHeading = "Кол-во", measured = false, columns}: {
   children: ReactNode;
   quantityHeading?: string;
   measured?: boolean;
+  columns?: readonly CatalogColumn[];
 }) {
-  const columnWidths = measured ? measuredColumnWidths : quantityColumnWidths;
+  const columnWidths = columns?.map(({width}) => width) ?? (measured ? measuredColumnWidths : quantityColumnWidths);
   return <div className={`${tableStyles.frame} hidden rounded-xl border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-900 xl:block`}>
     <table className={`${tableStyles.table} text-center text-sm`}>
       <colgroup>{columnWidths.map((width, index) => <col key={index} style={{width: `${width}%`}}/>)}</colgroup>
       <thead className="bg-slate-900 text-white">
-        <tr>
+        <tr>{columns ? columns.map(({label, unit, className, visuallyHidden}) => <th key={label} scope="col" className={className}>
+          {visuallyHidden ? <span className="sr-only">{label}</span> : label}
+          {unit && <> <span className="whitespace-nowrap">{unit}</span></>}
+        </th>) : <>
           <th scope="col">Наименование</th>
           <th scope="col">Изображение</th>
           <th scope="col" className="text-left">Характеристики</th>
@@ -31,19 +36,20 @@ export function CatalogVariantTable({children, quantityHeading = "Кол-во", 
           </> : <th scope="col">{quantityHeading}</th>}
           <th scope="col" className={tableStyles.sumColumn}>Сумма</th>
           <th scope="col"><span className="sr-only">Действие</span></th>
-        </tr>
+        </>}</tr>
       </thead>
       <tbody>{children}</tbody>
     </table>
   </div>;
 }
 
-export function CatalogVariantLayout({view, variant, name = variant.name, preview, specifications, price, priceNote, order}: {
+export function CatalogVariantLayout({view, variant, name = variant.name, preview, specifications, tableSpecifications, price, priceNote, order}: {
   view: View;
   variant: ProductVariant;
   name?: string;
   preview?: ReactNode;
   specifications: ReactNode;
+  tableSpecifications?: {heading: ReactNode; cells: ReactNode};
   price: ReactNode;
   priceNote?: ReactNode;
   order: ReactNode;
@@ -71,9 +77,9 @@ export function CatalogVariantLayout({view, variant, name = variant.name, previe
   </article>;
 
   return <tr id={`variant-${variant.id}`} title={variant.name} className="align-middle border-t border-slate-200 dark:border-slate-700">
-    <th scope="row" className="font-semibold">{name}</th>
+    <th scope="row" className="font-semibold">{tableSpecifications?.heading ?? name}</th>
     <td>{image ? <div className={tableStyles.rowImage}>{image}</div> : <span className="text-slate-500 dark:text-slate-400">—</span>}</td>
-    <td className="break-words text-left">{specifications}</td>
+    {tableSpecifications?.cells ?? <td className="break-words text-left">{specifications}</td>}
     <td className="break-words">
       <strong className="font-semibold tabular-nums">{price}</strong>
       {priceNote}
