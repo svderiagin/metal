@@ -19,7 +19,7 @@ test('beam table names distinguish matching profiles by grade and declared stand
   assert.equal(names.get('local-11123500'), 'Балка колонная 20К1, С255');
   assert.equal(names.get('local-65599'), 'Балка нормальная 40Б1, С255 (ГОСТ\u00a027772)');
   assert.equal(names.get('local-116009'), 'Балка нормальная 40Б1, С255 (ГОСТ\u00a035087, ГОСТ\u00a027772)');
-  assert.equal(names.get('prd-012'), 'Балка широкополочная 10 мм');
+  assert.equal(names.get('prd-012'), 'Балка широкополочная — профиль уточняется');
 });
 
 test('confirmed 20B1 duplicate is removed while its replacement and B2 remain', () => {
@@ -134,11 +134,12 @@ test('monorail subcategory contains all four M profiles with valid catalog route
 test('all thirty-eight retained beams keep their prices and rows; lengths are expressed in metres', () => {
   assert.equal(beams.length, 38);
   assert.equal(new Set(beams.map(p => p.id)).size, 38);
-  assert.ok(beams.every(p => p.lengthMeters === 6 || p.lengthMeters === 12));
+  assert.ok(beams.filter(p => p.id !== 'prd-012').every(p => p.lengthMeters === 6 || p.lengthMeters === 12));
+  assert.equal(beams.find(p => p.id === 'prd-012').lengthMeters, undefined);
   for (const row of beams) {
     assert.ok(beamProfile(row));
     assert.equal(row.pricePerTon, row.price === null ? undefined : row.price);
-    assert.ok(row.steelGrade);
+    if (row.id !== 'prd-012') assert.ok(row.steelGrade);
   }
 });
 
@@ -221,7 +222,7 @@ test('equivalent profile spellings classify consistently without inventing demo 
     assert.equal(row.id, source.id);
     assert.equal(row.price, source.price);
   }
-  assert.equal(beamProfile(beams.find(p => p.id === 'prd-012')), '10 мм');
+  assert.equal(beamProfile(beams.find(p => p.id === 'prd-012')), '—');
 });
 
 test('beam names, series and individual profiles work in global and table search', () => {

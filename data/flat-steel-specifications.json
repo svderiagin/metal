@@ -1,0 +1,358 @@
+{
+  "checkedOn": "2026-11-21",
+  "densityKgPerCubicMeter": 7850,
+  "massPrecisionDecimals": 3,
+  "standardRegistry": "https://protect.gost.ru/gost/details/064ca219-49fa-4879-a5ee-8f424dbd71da",
+  "standardText": "https://www.metall-energy.ru/data/file/gosty/polosa/gost_103-2006.pdf",
+  "basis": "Номинальное прямоугольное сечение. ГОСТ 103-2006, таблица 1, примечание 1. Размеры 80×4 и 100×4 предусмотрены пунктом 2.3 по согласованию. Для 40×3 используется геометрический расчёт. Соответствие партии ГОСТ, марка стали, способ изготовления и класс точности требуют документов на партию.",
+  "products": {
+    "rozmet-2168": {
+      "sourceUrl": "https://rozmet.ru/production/polosa/polosa-20x4/",
+      "sourceProductName": "Полоса № 20х4",
+      "sourcePageSha256": "2d3638ccf836cd6912e76573704aec9e983207254e9d149d66091fdd84cb9a5d",
+      "widthMm": 20,
+      "thicknessMm": 4,
+      "lengthRangeMeters": [
+        6,
+        6
+      ],
+      "sourceMassKgPerMeter": 0.63,
+      "theoreticalMassKgPerMeter": 0.628,
+      "displayMassKgPerMeter": 0.63,
+      "massDiscrepancy": "none",
+      "gost103Section": "table-1",
+      "incorrectDescriptionSizes": [],
+      "outdatedStandardInDescription": false
+    },
+    "rozmet-2169": {
+      "sourceUrl": "https://rozmet.ru/production/polosa/polosa-25x4/",
+      "sourceProductName": "Полоса № 25х4",
+      "sourcePageSha256": "f666aa247f8852f5a6be377f10fea172340a6a88846ce780797f6cf8e5ed9794",
+      "widthMm": 25,
+      "thicknessMm": 4,
+      "lengthRangeMeters": [
+        6,
+        6
+      ],
+      "sourceMassKgPerMeter": 0.78,
+      "theoreticalMassKgPerMeter": 0.785,
+      "displayMassKgPerMeter": 0.79,
+      "massDiscrepancy": "rounding",
+      "gost103Section": "table-1",
+      "incorrectDescriptionSizes": [],
+      "outdatedStandardInDescription": false
+    },
+    "rozmet-2170": {
+      "sourceUrl": "https://rozmet.ru/production/polosa/polosa-30x4/",
+      "sourceProductName": "Полоса № 30х4",
+      "sourcePageSha256": "ffc18809929ad955acfe8b14240556078e813c0f9968124b2c6097e2d3466e08",
+      "widthMm": 30,
+      "thicknessMm": 4,
+      "lengthRangeMeters": [
+        6,
+        6
+      ],
+      "sourceMassKgPerMeter": 0.94,
+      "theoreticalMassKgPerMeter": 0.942,
+      "displayMassKgPerMeter": 0.94,
+      "massDiscrepancy": "none",
+      "gost103Section": "table-1",
+      "incorrectDescriptionSizes": [],
+      "outdatedStandardInDescription": false
+    },
+    "rozmet-29037": {
+      "sourceUrl": "https://rozmet.ru/production/polosa/polosa_40kh3/",
+      "sourceProductName": "Полоса № 40х3",
+      "sourcePageSha256": "0c1e362753a736752c242c2d1c7671dd2cb6fa8f6b478ab00be7368e929ded67",
+      "widthMm": 40,
+      "thicknessMm": 3,
+      "lengthRangeMeters": [
+        6,
+        6
+      ],
+      "sourceMassKgPerMeter": 1.26,
+      "theoreticalMassKgPerMeter": 0.942,
+      "displayMassKgPerMeter": 0.94,
+      "massDiscrepancy": "substantial",
+      "gost103Section": "outside-scope",
+      "incorrectDescriptionSizes": [],
+      "outdatedStandardInDescription": false
+    },
+    "rozmet-2171": {
+      "sourceUrl": "https://rozmet.ru/production/polosa/polosa-40x4/",
+      "sourceProductName": "Полоса № 40х4",
+      "sourcePageSha256": "aaf269b539b5c1750375973f07e95a568f8c2e395678cdb02b3e93507709b70c",
+      "widthMm": 40,
+      "thicknessMm": 4,
+      "lengthRangeMeters": [
+        6,
+        6
+      ],
+      "sourceMassKgPerMeter": 1.26,
+      "theoreticalMassKgPerMeter": 1.256,
+      "displayMassKgPerMeter": 1.26,
+      "massDiscrepancy": "none",
+      "gost103Section": "table-1",
+      "incorrectDescriptionSizes": [],
+      "outdatedStandardInDescription": false
+    },
+    "rozmet-28942": {
+      "sourceUrl": "https://rozmet.ru/production/polosa/polosa_40x5/",
+      "sourceProductName": "Полоса № 40х5",
+      "sourcePageSha256": "db018a49f881df4e7809a954956a60d3333e2ff44c97083fa99743c9094b5d71",
+      "widthMm": 40,
+      "thicknessMm": 5,
+      "lengthRangeMeters": [
+        6,
+        6
+      ],
+      "sourceMassKgPerMeter": 1.26,
+      "theoreticalMassKgPerMeter": 1.57,
+      "displayMassKgPerMeter": 1.57,
+      "massDiscrepancy": "substantial",
+      "gost103Section": "table-1",
+      "incorrectDescriptionSizes": [],
+      "outdatedStandardInDescription": false
+    },
+    "rozmet-2172": {
+      "sourceUrl": "https://rozmet.ru/production/polosa/polosa-50x4/",
+      "sourceProductName": "Полоса № 50х4",
+      "sourcePageSha256": "e4cabd8eeb00644ea363c1f190771d8d55fdc141d8f57e2a1640418c703b14ef",
+      "widthMm": 50,
+      "thicknessMm": 4,
+      "lengthRangeMeters": [
+        6,
+        6
+      ],
+      "sourceMassKgPerMeter": 1.56,
+      "theoreticalMassKgPerMeter": 1.57,
+      "displayMassKgPerMeter": 1.57,
+      "massDiscrepancy": "rounding",
+      "gost103Section": "table-1",
+      "incorrectDescriptionSizes": [
+        "40×4"
+      ],
+      "outdatedStandardInDescription": false
+    },
+    "rozmet-16727": {
+      "sourceUrl": "https://rozmet.ru/production/polosa/polosa_50kh5/",
+      "sourceProductName": "Полоса № 50х5",
+      "sourcePageSha256": "71898b7d04fb1f1fbcae230954ca00955189c87bc9e21bea7b1d562f3c485ef0",
+      "widthMm": 50,
+      "thicknessMm": 5,
+      "lengthRangeMeters": [
+        6,
+        6
+      ],
+      "sourceMassKgPerMeter": 1.96,
+      "theoreticalMassKgPerMeter": 1.963,
+      "displayMassKgPerMeter": 1.96,
+      "massDiscrepancy": "none",
+      "gost103Section": "table-1",
+      "incorrectDescriptionSizes": [],
+      "outdatedStandardInDescription": false
+    },
+    "rozmet-2173": {
+      "sourceUrl": "https://rozmet.ru/production/polosa/polosa_60x5/",
+      "sourceProductName": "Полоса № 60х5",
+      "sourcePageSha256": "bf2f6644040f009eb24afaf2da3641cb8ad2915f6e04658db95da46e9e67c5de",
+      "widthMm": 60,
+      "thicknessMm": 5,
+      "lengthRangeMeters": [
+        6,
+        6
+      ],
+      "sourceMassKgPerMeter": 1.88,
+      "theoreticalMassKgPerMeter": 2.355,
+      "displayMassKgPerMeter": 2.36,
+      "massDiscrepancy": "substantial",
+      "gost103Section": "table-1",
+      "incorrectDescriptionSizes": [],
+      "outdatedStandardInDescription": false
+    },
+    "rozmet-2174": {
+      "sourceUrl": "https://rozmet.ru/production/polosa/polosa_60x6/",
+      "sourceProductName": "Полоса № 60х6",
+      "sourcePageSha256": "23f4328a5ea1487544c55317dbb1374b1e64142dab282b6d685d2b2ea5085bb8",
+      "widthMm": 60,
+      "thicknessMm": 6,
+      "lengthRangeMeters": [
+        6,
+        6
+      ],
+      "sourceMassKgPerMeter": 1.88,
+      "theoreticalMassKgPerMeter": 2.826,
+      "displayMassKgPerMeter": 2.83,
+      "massDiscrepancy": "substantial",
+      "gost103Section": "table-1",
+      "incorrectDescriptionSizes": [],
+      "outdatedStandardInDescription": false
+    },
+    "rozmet-28974": {
+      "sourceUrl": "https://rozmet.ru/production/polosa/polosa_80x4/",
+      "sourceProductName": "Полоса № 80х4",
+      "sourcePageSha256": "2164c6bbb06ed925bf6d35d783647b6f55ac1c58814e8df95ead2edb1f80093c",
+      "widthMm": 80,
+      "thicknessMm": 4,
+      "lengthRangeMeters": [
+        6,
+        6
+      ],
+      "sourceMassKgPerMeter": 3.77,
+      "theoreticalMassKgPerMeter": 2.512,
+      "displayMassKgPerMeter": 2.51,
+      "massDiscrepancy": "substantial",
+      "gost103Section": "clause-2.3",
+      "incorrectDescriptionSizes": [],
+      "outdatedStandardInDescription": false
+    },
+    "rozmet-28975": {
+      "sourceUrl": "https://rozmet.ru/production/polosa/polosa_80x5/",
+      "sourceProductName": "Полоса № 80х5",
+      "sourcePageSha256": "c5565a26b2599c67d6edfb4cd347a0a71810a188289300d0238dbb0c040c0ad7",
+      "widthMm": 80,
+      "thicknessMm": 5,
+      "lengthRangeMeters": [
+        6,
+        6
+      ],
+      "sourceMassKgPerMeter": 3.77,
+      "theoreticalMassKgPerMeter": 3.14,
+      "displayMassKgPerMeter": 3.14,
+      "massDiscrepancy": "substantial",
+      "gost103Section": "table-1",
+      "incorrectDescriptionSizes": [],
+      "outdatedStandardInDescription": false
+    },
+    "rozmet-2175": {
+      "sourceUrl": "https://rozmet.ru/production/polosa/polosa_80x6/",
+      "sourceProductName": "Полоса № 80х6",
+      "sourcePageSha256": "fc3faa4a38b072028e41a263ac3692677063925dc0204e17d5ec0e87b6cc3b0f",
+      "widthMm": 80,
+      "thicknessMm": 6,
+      "lengthRangeMeters": [
+        6,
+        6
+      ],
+      "sourceMassKgPerMeter": 3.77,
+      "theoreticalMassKgPerMeter": 3.768,
+      "displayMassKgPerMeter": 3.77,
+      "massDiscrepancy": "none",
+      "gost103Section": "table-1",
+      "incorrectDescriptionSizes": [],
+      "outdatedStandardInDescription": false
+    },
+    "rozmet-19707": {
+      "sourceUrl": "https://rozmet.ru/production/polosa/polosa_80x8/",
+      "sourceProductName": "Полоса № 80х8",
+      "sourcePageSha256": "832e826f481d0a54ae415abbea4751cc781397744907c2977cf842fbce41ddb2",
+      "widthMm": 80,
+      "thicknessMm": 8,
+      "lengthRangeMeters": [
+        6,
+        6
+      ],
+      "sourceMassKgPerMeter": 5.02,
+      "theoreticalMassKgPerMeter": 5.024,
+      "displayMassKgPerMeter": 5.02,
+      "massDiscrepancy": "none",
+      "gost103Section": "table-1",
+      "incorrectDescriptionSizes": [],
+      "outdatedStandardInDescription": false
+    },
+    "rozmet-19708": {
+      "sourceUrl": "https://rozmet.ru/production/polosa/polosa_80x10/",
+      "sourceProductName": "Полоса № 80х10",
+      "sourcePageSha256": "a426a2bf909a15c48337c1cde949e30d30a371e1c3579635384bcb8134872a6c",
+      "widthMm": 80,
+      "thicknessMm": 10,
+      "lengthRangeMeters": [
+        6,
+        6
+      ],
+      "sourceMassKgPerMeter": 5.02,
+      "theoreticalMassKgPerMeter": 6.28,
+      "displayMassKgPerMeter": 6.28,
+      "massDiscrepancy": "substantial",
+      "gost103Section": "table-1",
+      "incorrectDescriptionSizes": [],
+      "outdatedStandardInDescription": false
+    },
+    "rozmet-12050": {
+      "sourceUrl": "https://rozmet.ru/production/polosa/band_no_100kh4/",
+      "sourceProductName": "Полоса № 100х4",
+      "sourcePageSha256": "14d755367982914684faa4ee51d3f0ebc2e40cd3ca0c18ebb27808ec1ce8225a",
+      "widthMm": 100,
+      "thicknessMm": 4,
+      "lengthRangeMeters": [
+        5.85,
+        6
+      ],
+      "sourceMassKgPerMeter": 3.14,
+      "theoreticalMassKgPerMeter": 3.14,
+      "displayMassKgPerMeter": 3.14,
+      "massDiscrepancy": "none",
+      "gost103Section": "clause-2.3",
+      "incorrectDescriptionSizes": [
+        "100×8"
+      ],
+      "outdatedStandardInDescription": true
+    },
+    "rozmet-2177": {
+      "sourceUrl": "https://rozmet.ru/production/polosa/Polosa-100x8/",
+      "sourceProductName": "Полоса № 100х8",
+      "sourcePageSha256": "b8c8649f78ac6bd31e3f2c3b7dbd1084b4afb8afe91cd13282a88752d63e7bb3",
+      "widthMm": 100,
+      "thicknessMm": 8,
+      "lengthRangeMeters": [
+        6,
+        6
+      ],
+      "sourceMassKgPerMeter": 6.28,
+      "theoreticalMassKgPerMeter": 6.28,
+      "displayMassKgPerMeter": 6.28,
+      "massDiscrepancy": "none",
+      "gost103Section": "table-1",
+      "incorrectDescriptionSizes": [],
+      "outdatedStandardInDescription": true
+    },
+    "rozmet-2176": {
+      "sourceUrl": "https://rozmet.ru/production/polosa/Polosa-100x6/",
+      "sourceProductName": "Полоса № 100х6",
+      "sourcePageSha256": "19fe36261585afb7d90c4f47edd9cd747ea12b365253fd1b4dd451b594257f3b",
+      "widthMm": 100,
+      "thicknessMm": 6,
+      "lengthRangeMeters": [
+        6,
+        6
+      ],
+      "sourceMassKgPerMeter": 4.71,
+      "theoreticalMassKgPerMeter": 4.71,
+      "displayMassKgPerMeter": 4.71,
+      "massDiscrepancy": "none",
+      "gost103Section": "table-1",
+      "incorrectDescriptionSizes": [
+        "100×8"
+      ],
+      "outdatedStandardInDescription": true
+    },
+    "rozmet-2178": {
+      "sourceUrl": "https://rozmet.ru/production/polosa/polosa_100kh10/",
+      "sourceProductName": "Полоса № 100х10",
+      "sourcePageSha256": "0ee7ae16f915cd4c992a0334becbaae58c07f279953f360c373250110d7a5e43",
+      "widthMm": 100,
+      "thicknessMm": 10,
+      "lengthRangeMeters": [
+        6,
+        6
+      ],
+      "sourceMassKgPerMeter": 7.85,
+      "theoreticalMassKgPerMeter": 7.85,
+      "displayMassKgPerMeter": 7.85,
+      "massDiscrepancy": "none",
+      "gost103Section": "table-1",
+      "incorrectDescriptionSizes": [],
+      "outdatedStandardInDescription": true
+    }
+  }
+}

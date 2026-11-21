@@ -77,14 +77,6 @@
           "text": "0,5 кг/м"
         }
       ],
-      "changedLabels": [],
-      "referenceUnmodified": false,
-      "placements": [],
-      "protectedPixelChanges": 0,
-      "output": "public/images/catalog/kvadrat/kvadrat-8x8-clean.webp",
-      "width": 2400,
-      "height": 1800,
-      "sha256": "2ad2d00e1844436e45e09899c6ff392d3ad37d2d6f8545d10154ca6cfc0c2a1a",
       "headingCorrection": {
         "removed": "№",
         "box": {
@@ -94,7 +86,15 @@
           "height": 108
         },
         "shiftLeft": 109
-      }
+      },
+      "changedLabels": [],
+      "referenceUnmodified": false,
+      "placements": [],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/kvadrat/kvadrat-8x8-clean.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "2ad2d00e1844436e45e09899c6ff392d3ad37d2d6f8545d10154ca6cfc0c2a1a"
     },
     {
       "id": "rozmet-2205",
@@ -123,6 +123,16 @@
           "text": "0,79 кг/м"
         }
       ],
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 879,
+          "top": 110,
+          "width": 346,
+          "height": 108
+        },
+        "shiftLeft": 105
+      },
       "changedLabels": [
         "title",
         "height",
@@ -176,17 +186,7 @@
       "output": "public/images/catalog/kvadrat/kvadrat-10x10-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "b643644e64a9916a850173815e4b6c5dec65499bc1813a089fd1cd4c392093d2",
-      "headingCorrection": {
-        "removed": "№",
-        "box": {
-          "left": 879,
-          "top": 110,
-          "width": 346,
-          "height": 108
-        },
-        "shiftLeft": 105
-      }
+      "sha256": "b643644e64a9916a850173815e4b6c5dec65499bc1813a089fd1cd4c392093d2"
     },
     {
       "id": "rozmet-2206",
@@ -215,6 +215,16 @@
           "text": "1,13 кг/м"
         }
       ],
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 879,
+          "top": 110,
+          "width": 335,
+          "height": 108
+        },
+        "shiftLeft": 105
+      },
       "changedLabels": [
         "title",
         "height",
@@ -268,17 +278,7 @@
       "output": "public/images/catalog/kvadrat/kvadrat-12x12-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "69a5640f98723d939d72a5c098f15d7a3673369dc1924459c5268cd514d1e017",
-      "headingCorrection": {
-        "removed": "№",
-        "box": {
-          "left": 879,
-          "top": 110,
-          "width": 335,
-          "height": 108
-        },
-        "shiftLeft": 105
-      }
+      "sha256": "69a5640f98723d939d72a5c098f15d7a3673369dc1924459c5268cd514d1e017"
     },
     {
       "id": "rozmet-2207",
@@ -307,6 +307,16 @@
           "text": "1,54 кг/м"
         }
       ],
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 879,
+          "top": 110,
+          "width": 346,
+          "height": 108
+        },
+        "shiftLeft": 105
+      },
       "changedLabels": [
         "title",
         "height",
@@ -360,17 +370,7 @@
       "output": "public/images/catalog/kvadrat/kvadrat-14x14-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "a706314e1d799138723cbe7d942c7a1a7a2e038f791a3ac903ca5426a032734e",
-      "headingCorrection": {
-        "removed": "№",
-        "box": {
-          "left": 879,
-          "top": 110,
-          "width": 346,
-          "height": 108
-        },
-        "shiftLeft": 105
-      }
+      "sha256": "a706314e1d799138723cbe7d942c7a1a7a2e038f791a3ac903ca5426a032734e"
     },
     {
       "id": "rozmet-26579",
@@ -396,9 +396,19 @@
         },
         {
           "key": "mass",
-          "text": "1,54 кг/м"
+          "text": "2,01 кг/м"
         }
       ],
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 879,
+          "top": 110,
+          "width": 340,
+          "height": 108
+        },
+        "shiftLeft": 105
+      },
       "changedLabels": [
         "title",
         "height",
@@ -439,12 +449,12 @@
         },
         {
           "key": "mass",
-          "text": "1,54 кг/м",
+          "text": "2,01 кг/м",
           "size": 44,
           "weight": 750,
           "left": 610,
           "top": 1634,
-          "width": 184,
+          "width": 181,
           "height": 40
         }
       ],
@@ -452,17 +462,7 @@
       "output": "public/images/catalog/kvadrat/kvadrat-16x16-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "317d31e1e316a40356278cd2b4e192224447aa00fd314b391ccb6e880c5d79e3",
-      "headingCorrection": {
-        "removed": "№",
-        "box": {
-          "left": 879,
-          "top": 110,
-          "width": 340,
-          "height": 108
-        },
-        "shiftLeft": 105
-      }
+      "sha256": "61114f5cf317960e39567668ffbdc8d6a9442509d9827f8e0268c1de6b81de8b"
     },
     {
       "id": "rozmet-28995",
@@ -491,6 +491,16 @@
           "text": "2,54 кг/м"
         }
       ],
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 879,
+          "top": 110,
+          "width": 339,
+          "height": 108
+        },
+        "shiftLeft": 105
+      },
       "changedLabels": [
         "title",
         "height",
@@ -544,17 +554,7 @@
       "output": "public/images/catalog/kvadrat/kvadrat-18x18-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "f6ae4c9153c2a57abd5c0de773c73a8850621933197dbc7118fc5150af6fd1fa",
-      "headingCorrection": {
-        "removed": "№",
-        "box": {
-          "left": 879,
-          "top": 110,
-          "width": 339,
-          "height": 108
-        },
-        "shiftLeft": 105
-      }
+      "sha256": "f6ae4c9153c2a57abd5c0de773c73a8850621933197dbc7118fc5150af6fd1fa"
     },
     {
       "id": "rozmet-2208",
@@ -583,6 +583,16 @@
           "text": "3,14 кг/м"
         }
       ],
+      "headingCorrection": {
+        "removed": "№",
+        "box": {
+          "left": 879,
+          "top": 110,
+          "width": 380,
+          "height": 108
+        },
+        "shiftLeft": 106
+      },
       "changedLabels": [
         "title",
         "height",
@@ -636,17 +646,7 @@
       "output": "public/images/catalog/kvadrat/kvadrat-20x20-clean.webp",
       "width": 2400,
       "height": 1800,
-      "sha256": "00d5ede5ade1cbdb6c908328eae394c6a6070a5d1fd494c6835430eb0bbcf030",
-      "headingCorrection": {
-        "removed": "№",
-        "box": {
-          "left": 879,
-          "top": 110,
-          "width": 380,
-          "height": 108
-        },
-        "shiftLeft": 106
-      }
+      "sha256": "00d5ede5ade1cbdb6c908328eae394c6a6070a5d1fd494c6835430eb0bbcf030"
     }
   ]
 }

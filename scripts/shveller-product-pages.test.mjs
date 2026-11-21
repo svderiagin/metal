@@ -97,7 +97,7 @@ test('all channel specifications match the verified standard and supplier length
   assert.equal(verified.rows.length, 14);
   assert.equal(supplier.products.length, 14);
   const format = value => String(value).replace('.', ',');
-  const commercialData = product => JSON.parse(JSON.stringify(Object.fromEntries(Object.entries(product).filter(([key]) => !['specifications', 'imageUrls'].includes(key)))));
+  const commercialData = product => JSON.parse(JSON.stringify(Object.fromEntries(Object.entries(product).filter(([key]) => ["id","sku","slug","categoryId","subcategoryId","productTypeId","sourceReference","price","priceQualifier","currency","priceUnit","unit","availability","inStock","quoteOnly","featured"].includes(key)))));
   for (const product of products) {
     const original = rawCatalog.products.find(item => item.id === product.id);
     assert.deepEqual(commercialData(product), commercialData(original), product.id);
@@ -133,11 +133,24 @@ test('verification overlay leaves other imported fields unchanged and respects a
   const galvanizedSheetImages = JSON.parse(fs.readFileSync('data/galvanized-sheet-images.json', 'utf8')).products;
   const coldRolledSheetImages = JSON.parse(fs.readFileSync('data/cold-rolled-sheet-images.json', 'utf8')).products;
   const hotRolledSheetImages = JSON.parse(fs.readFileSync('data/hot-rolled-sheet-images.json', 'utf8')).products;
-  const flatSteelNames = new Map(JSON.parse(fs.readFileSync('output/image-edits/flat-steel-names/renamed-products.json', 'utf8'))
-    .map(rename => [rename.id, rename]));
-  assert.equal(flatSteelNames.size, rawCatalog.products.filter(item => item.categoryId === 'rozmet-cat-polosa').length);
+  const flatSteel = JSON.parse(fs.readFileSync('data/flat-steel-specifications.json', 'utf8')).products;
+  assert.equal(Object.keys(flatSteel).length, rawCatalog.products.filter(item => item.categoryId === 'rozmet-cat-polosa').length);
   for (const original of rawCatalog.products.filter(item => item.categoryId !== category.id && isPublicProduct(item))) {
     const actual = catalog.getAllProductVariants().find(item => item.id === original.id);
+    if (['rozmet-cat-ugolok', 'rozmet-cat-kvadrat'].includes(original.categoryId)) {
+      for (const key of ["id","sku","slug","categoryId","subcategoryId","productTypeId","sourceReference","price","priceQualifier","currency","priceUnit","unit","availability","inStock","quoteOnly","featured"]) assert.deepEqual(actual[key], original[key], original.id + ': ' + key);
+      const image = angleImages[original.id] ?? squareImages[original.id];
+      assert.equal(actual.imageUrls[0], image.imageUrl);
+      continue;
+    }
+    if (original.categoryId === 'rozmet-cat-polosa') {
+      assert.equal(flatSteel[original.id].sourceUrl, original.sourceReference);
+      // Technical corrections have their own flat-steel catalog tests.
+      for (const key of ['id', 'sku', 'slug', 'sourceReference', 'price', 'priceUnit', 'unit', 'availability', 'imageUrls']) {
+        assert.deepEqual(JSON.parse(JSON.stringify(actual[key])), original[key], `${original.id}: ${key}`);
+      }
+      continue;
+    }
     const image = angleImages[original.id] ?? squareImages[original.id] ?? treadPlateImages[original.id]
       ?? galvanizedSheetImages[original.id] ?? coldRolledSheetImages[original.id] ?? hotRolledSheetImages[original.id];
     if (angleImages[original.id]) assert.equal(original.categoryId, 'rozmet-cat-ugolok');
@@ -147,12 +160,7 @@ test('verification overlay leaves other imported fields unchanged and respects a
     if (coldRolledSheetImages[original.id]) assert.equal(original.subcategoryId, 'rozmet-sub-listovoy-prokat-list-ocynkovannyj');
     if (hotRolledSheetImages[original.id]) assert.equal(original.subcategoryId, 'rozmet-sub-listovoy-prokat-list-goryachekatanyj');
     if (image) assert.equal(image.sourceUrl, original.sourceReference);
-    const rename = flatSteelNames.get(original.id);
-    if (rename) {
-      assert.equal(original.categoryId, 'rozmet-cat-polosa');
-      assert.equal(original.name, rename.from);
-    }
-    const expected = {...original, ...(rename ? {name: rename.to} : {}), ...(image ? {
+    const expected = {...original, ...(image ? {
       imageUrls: [image.imageUrl],
       specifications: original.specifications.map(item => original.categoryId === 'rozmet-cat-ugolok' && item.name === 'Вес'
         ? {...item, name:'Теоретическая масса'} : item),

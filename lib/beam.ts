@@ -103,6 +103,17 @@ export function beamSubcategoryId(product: ProductVariant): string | undefined {
 
 export function normalizeBeamVariant(product: ProductVariant): ProductVariant {
   if (product.categoryId !== "cat-bal") return product;
+  // This legacy placeholder has no actual profile. Its 10 mm dimension and
+  // reinforcing-steel GOST 5781 must never be published as beam specifications.
+  if (product.id === "prd-012" && product.sku === "MS-0012") return {
+    ...product, name: "Балка широкополочная — профиль уточняется", standard: "",
+    shortDescription: "Широкополочная балка. Профиль, размеры и марка стали уточняются при заказе.",
+    description: "Профиль и технические характеристики этой позиции требуют подтверждения поставщика. Размеры, масса, длина и стандарт поставки указываются после выбора конкретного профиля.",
+    attributes: product.attributes.filter(a => !["standard", "size", "grade", "length"].includes(a.key)),
+    specifications: [{name: "Профиль и характеристики", value: "Требуют подтверждения"}],
+    weightPerMeterKg: undefined, weight: undefined, lengthMeters: undefined, steelGrade: undefined,
+    pricePerTon: product.pricePerTon ?? (product.unit === "ton" && product.price !== null ? product.price : undefined),
+  };
   const profile = beamProfile(product);
   // GOST 27772 specifies steel properties, not the beam assortment. Do not guess its mass.
   const nominalMass = /35087/.test(product.standard) ? masses35087[profile]

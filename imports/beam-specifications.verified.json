@@ -1,0 +1,376 @@
+{
+  "checkedOn": "2026-11-21",
+  "sources": [
+    {
+      "url": "https://meganorm.ru/mega_doc/norm_update_04112024/gost_gosudarstvennyj-standart/0/gost_35087-2024_mezhgosudarstvennyy_standart_dvutavry.html",
+      "location": "ГОСТ 35087-2024, таблица 1",
+      "statusUrl": "https://protect.gost.ru/gost/details/63278470-4edb-4de1-88ca-2da45c12d7d4"
+    },
+    {
+      "url": "https://files.stroyinf.ru/Data2/1/4294852/4294852659.htm",
+      "location": "ГОСТ 19425-74, таблица 1",
+      "statusUrl": "https://protect.gost.ru/gost/details/9b171867-7cb9-4c45-9e14-7bad51c8483e"
+    }
+  ],
+  "note": "30 товарных позиций с указанным стандартом сортамента: размеры разметки и масса совпадают. Для семи позиций только с ГОСТ 27772 масса остаётся справочной по 35087, размеры партии не подтверждены. prd-012: неподтвержденный демонстрационный товар, ГОСТ 5781 и размер 10 мм исключены из публичных характеристик.",
+  "amendments35087": [
+    {"issue": "ИУС 4-2025", "url": "https://base.garant.ru/411318665/", "scope": "Допуски в таблице 2, обозначения классов прочности в пункте 9.10.1 и пример заказа 20У; номинальные размеры и массы таблицы 1 не меняются."},
+    {"issue": "ИУС 12-2025", "url": "https://gostam.ru/pdfs/gost-35087.pdf", "scope": "Таблица согласования: Азербайджан."},
+    {"issue": "ИУС 4-2026", "url": "https://base.garant.ru/413783136/", "scope": "Статический момент Sy профиля 90Ш1; профиль отсутствует в каталоге, размеры и массы проверяемых профилей не меняются."},
+    {"issue": "ИУС 10-2026", "url": "https://base.garant.ru/415119671/", "scope": "Таблица согласования: Казахстан."}
+  ],
+  "sections": {
+    "20Б1": {
+      "standard": "ГОСТ 35087-2024",
+      "heightMm": 200,
+      "flangeWidthMm": 100,
+      "webThicknessMm": 5.5,
+      "flangeThicknessMm": 8,
+      "massKgPerMeter": 21.3
+    },
+    "20Б2": {
+      "standard": "ГОСТ 35087-2024",
+      "heightMm": 203,
+      "flangeWidthMm": 101,
+      "webThicknessMm": 6.5,
+      "flangeThicknessMm": 9.5,
+      "massKgPerMeter": 25.3
+    },
+    "25Б1": {
+      "standard": "ГОСТ 35087-2024",
+      "heightMm": 248,
+      "flangeWidthMm": 124,
+      "webThicknessMm": 5,
+      "flangeThicknessMm": 8,
+      "massKgPerMeter": 25.7
+    },
+    "25Б2": {
+      "standard": "ГОСТ 35087-2024",
+      "heightMm": 250,
+      "flangeWidthMm": 125,
+      "webThicknessMm": 6,
+      "flangeThicknessMm": 9,
+      "massKgPerMeter": 29.6
+    },
+    "30Б1": {
+      "standard": "ГОСТ 35087-2024",
+      "heightMm": 298,
+      "flangeWidthMm": 149,
+      "webThicknessMm": 5.5,
+      "flangeThicknessMm": 8,
+      "massKgPerMeter": 32
+    },
+    "30Б2": {
+      "standard": "ГОСТ 35087-2024",
+      "heightMm": 300,
+      "flangeWidthMm": 150,
+      "webThicknessMm": 6.5,
+      "flangeThicknessMm": 9,
+      "massKgPerMeter": 36.7
+    },
+    "35Б1": {
+      "standard": "ГОСТ 35087-2024",
+      "heightMm": 346,
+      "flangeWidthMm": 174,
+      "webThicknessMm": 6,
+      "flangeThicknessMm": 9,
+      "massKgPerMeter": 41.4
+    },
+    "35Б2": {
+      "standard": "ГОСТ 35087-2024",
+      "heightMm": 350,
+      "flangeWidthMm": 175,
+      "webThicknessMm": 7,
+      "flangeThicknessMm": 11,
+      "massKgPerMeter": 49.6
+    },
+    "40Б1": {
+      "standard": "ГОСТ 35087-2024",
+      "heightMm": 396,
+      "flangeWidthMm": 199,
+      "webThicknessMm": 7,
+      "flangeThicknessMm": 11,
+      "massKgPerMeter": 56.6
+    },
+    "40Б2": {
+      "standard": "ГОСТ 35087-2024",
+      "heightMm": 400,
+      "flangeWidthMm": 200,
+      "webThicknessMm": 8,
+      "flangeThicknessMm": 13,
+      "massKgPerMeter": 66
+    },
+    "45Б1": {
+      "standard": "ГОСТ 35087-2024",
+      "heightMm": 446,
+      "flangeWidthMm": 199,
+      "webThicknessMm": 8,
+      "flangeThicknessMm": 12,
+      "massKgPerMeter": 66.2
+    },
+    "45Б2": {
+      "standard": "ГОСТ 35087-2024",
+      "heightMm": 450,
+      "flangeWidthMm": 200,
+      "webThicknessMm": 9,
+      "flangeThicknessMm": 14,
+      "massKgPerMeter": 76
+    },
+    "50Б1": {
+      "standard": "ГОСТ 35087-2024",
+      "heightMm": 492,
+      "flangeWidthMm": 199,
+      "webThicknessMm": 8.8,
+      "flangeThicknessMm": 12,
+      "massKgPerMeter": 72.5
+    },
+    "50Б2": {
+      "standard": "ГОСТ 35087-2024",
+      "heightMm": 496,
+      "flangeWidthMm": 199,
+      "webThicknessMm": 9,
+      "flangeThicknessMm": 14,
+      "massKgPerMeter": 79.5
+    },
+    "55Б1": {
+      "standard": "ГОСТ 35087-2024",
+      "heightMm": 543,
+      "flangeWidthMm": 220,
+      "webThicknessMm": 9.5,
+      "flangeThicknessMm": 13.5,
+      "massKgPerMeter": 89
+    },
+    "55Б2": {
+      "standard": "ГОСТ 35087-2024",
+      "heightMm": 547,
+      "flangeWidthMm": 220,
+      "webThicknessMm": 10,
+      "flangeThicknessMm": 15.5,
+      "massKgPerMeter": 97.9
+    },
+    "20Ш1": {
+      "standard": "ГОСТ 35087-2024",
+      "heightMm": 194,
+      "flangeWidthMm": 150,
+      "webThicknessMm": 6,
+      "flangeThicknessMm": 9,
+      "massKgPerMeter": 30.6
+    },
+    "20Ш2": {
+      "standard": "ГОСТ 35087-2024",
+      "heightMm": 199,
+      "flangeWidthMm": 151,
+      "webThicknessMm": 7.5,
+      "flangeThicknessMm": 11.5,
+      "massKgPerMeter": 38.8
+    },
+    "25Ш1": {
+      "standard": "ГОСТ 35087-2024",
+      "heightMm": 244,
+      "flangeWidthMm": 175,
+      "webThicknessMm": 7,
+      "flangeThicknessMm": 11,
+      "massKgPerMeter": 44.2
+    },
+    "25Ш2": {
+      "standard": "ГОСТ 35087-2024",
+      "heightMm": 249,
+      "flangeWidthMm": 176,
+      "webThicknessMm": 8.5,
+      "flangeThicknessMm": 13.5,
+      "massKgPerMeter": 53.8
+    },
+    "30Ш1": {
+      "standard": "ГОСТ 35087-2024",
+      "heightMm": 294,
+      "flangeWidthMm": 200,
+      "webThicknessMm": 8,
+      "flangeThicknessMm": 12,
+      "massKgPerMeter": 56.8
+    },
+    "30Ш2": {
+      "standard": "ГОСТ 35087-2024",
+      "heightMm": 300,
+      "flangeWidthMm": 201,
+      "webThicknessMm": 9,
+      "flangeThicknessMm": 15,
+      "massKgPerMeter": 68.6
+    },
+    "35Ш1": {
+      "standard": "ГОСТ 35087-2024",
+      "heightMm": 334,
+      "flangeWidthMm": 249,
+      "webThicknessMm": 8,
+      "flangeThicknessMm": 11,
+      "massKgPerMeter": 65.3
+    },
+    "35Ш2": {
+      "standard": "ГОСТ 35087-2024",
+      "heightMm": 340,
+      "flangeWidthMm": 250,
+      "webThicknessMm": 9,
+      "flangeThicknessMm": 14,
+      "massKgPerMeter": 79.7
+    },
+    "40Ш1": {
+      "standard": "ГОСТ 35087-2024",
+      "heightMm": 383,
+      "flangeWidthMm": 299,
+      "webThicknessMm": 9.5,
+      "flangeThicknessMm": 12.5,
+      "massKgPerMeter": 88.6
+    },
+    "40Ш2": {
+      "standard": "ГОСТ 35087-2024",
+      "heightMm": 390,
+      "flangeWidthMm": 300,
+      "webThicknessMm": 10,
+      "flangeThicknessMm": 16,
+      "massKgPerMeter": 106.7
+    },
+    "45Ш1": {
+      "standard": "ГОСТ 35087-2024",
+      "heightMm": 440,
+      "flangeWidthMm": 300,
+      "webThicknessMm": 11,
+      "flangeThicknessMm": 18,
+      "massKgPerMeter": 123.6
+    },
+    "45Ш2": {
+      "standard": "ГОСТ 35087-2024",
+      "heightMm": 446,
+      "flangeWidthMm": 302,
+      "webThicknessMm": 13,
+      "flangeThicknessMm": 21,
+      "massKgPerMeter": 144.7
+    },
+    "50Ш1": {
+      "standard": "ГОСТ 35087-2024",
+      "heightMm": 482,
+      "flangeWidthMm": 300,
+      "webThicknessMm": 11,
+      "flangeThicknessMm": 15,
+      "massKgPerMeter": 114.2
+    },
+    "50Ш2": {
+      "standard": "ГОСТ 35087-2024",
+      "heightMm": 487,
+      "flangeWidthMm": 300,
+      "webThicknessMm": 14.5,
+      "flangeThicknessMm": 17.5,
+      "massKgPerMeter": 138.4
+    },
+    "20К1": {
+      "standard": "ГОСТ 35087-2024",
+      "heightMm": 196,
+      "flangeWidthMm": 199,
+      "webThicknessMm": 6.5,
+      "flangeThicknessMm": 10,
+      "massKgPerMeter": 41.4
+    },
+    "20К2": {
+      "standard": "ГОСТ 35087-2024",
+      "heightMm": 200,
+      "flangeWidthMm": 200,
+      "webThicknessMm": 8,
+      "flangeThicknessMm": 12,
+      "massKgPerMeter": 49.9
+    },
+    "25К1": {
+      "standard": "ГОСТ 35087-2024",
+      "heightMm": 246,
+      "flangeWidthMm": 249,
+      "webThicknessMm": 8,
+      "flangeThicknessMm": 12,
+      "massKgPerMeter": 62.6
+    },
+    "25К2": {
+      "standard": "ГОСТ 35087-2024",
+      "heightMm": 250,
+      "flangeWidthMm": 250,
+      "webThicknessMm": 9,
+      "flangeThicknessMm": 14,
+      "massKgPerMeter": 72.4
+    },
+    "30К1": {
+      "standard": "ГОСТ 35087-2024",
+      "heightMm": 298,
+      "flangeWidthMm": 299,
+      "webThicknessMm": 9,
+      "flangeThicknessMm": 14,
+      "massKgPerMeter": 87
+    },
+    "30К2": {
+      "standard": "ГОСТ 35087-2024",
+      "heightMm": 300,
+      "flangeWidthMm": 300,
+      "webThicknessMm": 10,
+      "flangeThicknessMm": 15,
+      "massKgPerMeter": 94
+    },
+    "35К1": {
+      "standard": "ГОСТ 35087-2024",
+      "heightMm": 342,
+      "flangeWidthMm": 348,
+      "webThicknessMm": 10,
+      "flangeThicknessMm": 15,
+      "massKgPerMeter": 109.1
+    },
+    "35К2": {
+      "standard": "ГОСТ 35087-2024",
+      "heightMm": 350,
+      "flangeWidthMm": 350,
+      "webThicknessMm": 12,
+      "flangeThicknessMm": 19,
+      "massKgPerMeter": 136.5
+    },
+    "40К1": {
+      "standard": "ГОСТ 35087-2024",
+      "heightMm": 394,
+      "flangeWidthMm": 398,
+      "webThicknessMm": 11,
+      "flangeThicknessMm": 18,
+      "massKgPerMeter": 146.7
+    },
+    "40К2": {
+      "standard": "ГОСТ 35087-2024",
+      "heightMm": 400,
+      "flangeWidthMm": 400,
+      "webThicknessMm": 13,
+      "flangeThicknessMm": 21,
+      "massKgPerMeter": 171.7
+    },
+    "24М": {
+      "standard": "ГОСТ 19425-74",
+      "heightMm": 240,
+      "flangeWidthMm": 110,
+      "webThicknessMm": 8.2,
+      "flangeThicknessMm": 14,
+      "massKgPerMeter": 38.3
+    },
+    "30М": {
+      "standard": "ГОСТ 19425-74",
+      "heightMm": 300,
+      "flangeWidthMm": 130,
+      "webThicknessMm": 9,
+      "flangeThicknessMm": 15,
+      "massKgPerMeter": 50.2
+    },
+    "36М": {
+      "standard": "ГОСТ 19425-74",
+      "heightMm": 360,
+      "flangeWidthMm": 130,
+      "webThicknessMm": 9.5,
+      "flangeThicknessMm": 16,
+      "massKgPerMeter": 57.9
+    },
+    "45М": {
+      "standard": "ГОСТ 19425-74",
+      "heightMm": 450,
+      "flangeWidthMm": 150,
+      "webThicknessMm": 10.5,
+      "flangeThicknessMm": 18,
+      "massKgPerMeter": 77.6
+    }
+  }
+}

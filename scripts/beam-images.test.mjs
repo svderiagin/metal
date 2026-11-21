@@ -11,7 +11,10 @@ const references = [
 ];
 const illustration = id => `public/images/catalog/product-illustrations/${id}.webp`;
 const reference = folder => `public/images/catalog/balka/${folder}/balka_${folder}_2400_1800_marked.jpg`;
-const clean = profile => `public/images/catalog/balka/originals/balka-${profile}.png`;
+const clean = profile => {
+  const folder = {'30b1': 'normalnaya', '30sh1': 'shirokopolochnaya', '30k1': 'kolonnaya', '30m': 'monorelsovaya'}[profile];
+  return `public/images/catalog/balka/${folder}/balka_${folder}_2400_1800_original.jpg`;
+};
 
 function pixels(file, region) {
   const image = sharp(file).toColourspace('srgb').removeAlpha();

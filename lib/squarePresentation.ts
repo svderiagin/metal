@@ -4,8 +4,10 @@ import {formatAngleSpecificationValue} from "./anglePresentation";
 export function getSquareProductParameters(variant: ProductVariant) {
   if (variant.categoryId !== "rozmet-cat-kvadrat") return null;
   const side = variant.name.match(/№\s*(\d+(?:[.,]\d+)?)/u)?.[1];
-  const length = variant.specifications.find(s => s.name === "Размер")?.value;
-  const mass = variant.specifications.find(s => s.name === "Вес")?.value;
+  const length = variant.specifications.find(s => s.name === "Длина по каталогу")?.value
+    ?? variant.specifications.find(s => s.name === "Размер")?.value;
+  const mass = variant.specifications.find(s => s.name === "Теоретическая масса")?.value
+    ?? variant.specifications.find(s => s.name === "Вес")?.value;
   if (!side || !length || !mass) return null;
   const formattedSide = side.replace(".", ",");
   return {
@@ -24,5 +26,6 @@ export function getSquareProductSpecifications(variant: ProductVariant) {
     {name: "Сечение", value: parameters.section},
     {name: "Длина по каталогу", value: parameters.length},
     {name: "Теоретическая масса", value: parameters.mass},
+    ...variant.specifications.filter(s => !["Размер", "Вес", "Сечение", "Длина по каталогу", "Теоретическая масса"].includes(s.name)),
   ] : variant.specifications;
 }

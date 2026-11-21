@@ -21,6 +21,7 @@ const displayLabels: Record<string, string> = {
   "Размер карты": "Размер карты",
   "Размер листа, м": "Размер листа",
   "Длина": "Длина",
+  "Длина по каталогу": "Длина",
   "Длина, мм": "Длина",
   "Фиксированная длина": "Длина",
   "Длина поставки": "Длина",
@@ -62,7 +63,8 @@ export function productIllustrationFacts(product: ProductVariant): ProductSpecif
     add("Толщина", `${flat.thickness} мм`);
   }
   for (const {name, value} of product.specifications) {
-    const label = name === "Размер" && flat ? "Длина" : displayLabels[name];
+    const label = name === "Размер" && flat ? "Длина"
+      : name === "Теоретическая масса" && flat ? "Масса погонного метра" : displayLabels[name];
     if (!label || (name === "Размер" && (profileWidth || product.diameterMm))
       || (name === "Диаметр, мм" && product.diameterMm)) continue;
     const unit = name.endsWith(", мм") ? "мм" : name.endsWith(", м") ? "м" : undefined;

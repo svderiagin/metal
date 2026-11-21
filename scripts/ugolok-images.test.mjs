@@ -26,7 +26,7 @@ test('displayed angle type follows its explicit leg dimensions without changing 
   assert.equal(getAngleProductSpecifications(other), other.specifications);
 });
 
-test('all 22 angles preserve supplier values with approved illustrations and display mass labels', () => {
+test('all 22 angles preserve supplier commercial terms with approved illustrations and display mass labels', () => {
   assert.equal(angles.length, 22);
   assert.equal(Object.keys(mapping.products).length, angles.length);
   assert.equal(new Set(angles.map(p => p.imageUrls[0])).size, angles.length);
@@ -35,8 +35,7 @@ test('all 22 angles preserve supplier values with approved illustrations and dis
     const original = source.products.find(p => p.id === product.id);
     const {imageUrls: originalImages, ...expected} = original;
     assert.ok(originalImages.length);
-    assert.deepEqual(JSON.parse(JSON.stringify(actual)), {...expected, specifications: expected.specifications.map(item =>
-      item.name === 'Вес' ? {...item, name:'Теоретическая масса'} : item)}, product.id);
+    for (const key of ["id","sku","slug","categoryId","subcategoryId","productTypeId","sourceReference","price","priceQualifier","currency","priceUnit","unit","availability","inStock","quoteOnly","featured"]) assert.deepEqual(actual[key], expected[key], product.id + ': ' + key);
     assert.equal(mapping.products[product.id].sourceUrl, product.sourceReference);
     assert.equal(imageUrls.length, 1);
     assert.equal(imageUrls[0], mapping.products[product.id].imageUrl);
@@ -50,7 +49,7 @@ test('labels use catalog mass and length, and preserve distinct legs for unequal
     const record = manifest.records.find(r => r.id === product.id);
     const values = labels(record.profile);
     assert.equal(values.mass, formatAngleSpecificationValue(product.specifications.find(s => s.name === 'Теоретическая масса').value));
-    assert.equal(values.length, formatAngleSpecificationValue(product.specifications.find(s => s.name === 'Размер').value));
+    assert.equal(values.length, formatAngleSpecificationValue(product.specifications.find(s => s.name === 'Длина по каталогу').value));
   }
   const smallest = labels('25x25x3');
   assert.equal(smallest.mass, '1,12\u00a0кг/м');
@@ -59,7 +58,7 @@ test('labels use catalog mass and length, and preserve distinct legs for unequal
   assert.equal(unequal.firstLeg, '100\u00a0мм');
   assert.equal(unequal.secondLeg, '63\u00a0мм');
   assert.equal(unequal.thickness, '6\u00a0мм');
-  assert.equal(unequal.mass, '7,52\u00a0кг/м');
+  assert.equal(unequal.mass, '7,53\u00a0кг/м');
   assert.equal(labels('160x100x10').length, '12\u00a0м');
 });
 

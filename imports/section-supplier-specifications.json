@@ -1,0 +1,1089 @@
+{
+  "checkedOn": "2026-11-21",
+  "products": [
+    {
+      "id": "rozmet-2235",
+      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_5/",
+      "status": "200",
+      "properties": [
+        {
+          "name": "Размер",
+          "value": "11,7 м"
+        },
+        {
+          "name": "Вес",
+          "value": "4.84 кг/м.п."
+        }
+      ],
+      "title": "Швеллер № 5"
+    },
+    {
+      "id": "rozmet-2236",
+      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_6.5/",
+      "status": "200",
+      "properties": [
+        {
+          "name": "Размер",
+          "value": "6-12 м"
+        },
+        {
+          "name": "Вес",
+          "value": "5.9 кг/м.п."
+        }
+      ],
+      "title": "Швеллер № 6.5"
+    },
+    {
+      "id": "rozmet-2237",
+      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_8/",
+      "status": "200",
+      "properties": [
+        {
+          "name": "Размер",
+          "value": "6-12 м"
+        },
+        {
+          "name": "Вес",
+          "value": "7.05 кг/м.п."
+        }
+      ],
+      "title": "Швеллер № 8"
+    },
+    {
+      "id": "rozmet-2238",
+      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_10/",
+      "status": "200",
+      "properties": [
+        {
+          "name": "Размер",
+          "value": "12 м"
+        },
+        {
+          "name": "Ширина",
+          "value": "46 мм"
+        },
+        {
+          "name": "Вес",
+          "value": "8.59 кг/м.п."
+        },
+        {
+          "name": "Высота",
+          "value": "100 мм"
+        },
+        {
+          "name": "Длина",
+          "value": "12 м"
+        }
+      ],
+      "title": "Швеллер № 10"
+    },
+    {
+      "id": "rozmet-2239",
+      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_12/",
+      "status": "200",
+      "properties": [
+        {
+          "name": "Размер",
+          "value": "12 м"
+        },
+        {
+          "name": "Ширина",
+          "value": "52 мм"
+        },
+        {
+          "name": "Вес",
+          "value": "10.4 кг/м.п."
+        },
+        {
+          "name": "Высота",
+          "value": "120 мм"
+        },
+        {
+          "name": "Длина",
+          "value": "12 м"
+        }
+      ],
+      "title": "Швеллер № 12"
+    },
+    {
+      "id": "rozmet-2240",
+      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_14/",
+      "status": "200",
+      "properties": [
+        {
+          "name": "Размер",
+          "value": "12 м"
+        },
+        {
+          "name": "Ширина",
+          "value": "58 мм"
+        },
+        {
+          "name": "Вес",
+          "value": "12.3 кг/м.п."
+        },
+        {
+          "name": "Высота",
+          "value": "140 мм"
+        },
+        {
+          "name": "Длина",
+          "value": "12 м"
+        }
+      ],
+      "title": "Швеллер № 14"
+    },
+    {
+      "id": "rozmet-2241",
+      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_16/",
+      "status": "200",
+      "properties": [
+        {
+          "name": "Размер",
+          "value": "12 м"
+        },
+        {
+          "name": "Ширина",
+          "value": "64 мм"
+        },
+        {
+          "name": "Вес",
+          "value": "14.2 кг/м.п."
+        },
+        {
+          "name": "Высота",
+          "value": "160 мм"
+        },
+        {
+          "name": "Длина",
+          "value": "11,7-12 м"
+        }
+      ],
+      "title": "Швеллер № 16"
+    },
+    {
+      "id": "rozmet-2242",
+      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_18/",
+      "status": "200",
+      "properties": [
+        {
+          "name": "Размер",
+          "value": "12 м"
+        },
+        {
+          "name": "Ширина",
+          "value": "70 мм"
+        },
+        {
+          "name": "Вес",
+          "value": "16.3 кг/м.п."
+        },
+        {
+          "name": "Высота",
+          "value": "180 мм"
+        },
+        {
+          "name": "Длина",
+          "value": "12 м"
+        }
+      ],
+      "title": "Швеллер № 18"
+    },
+    {
+      "id": "rozmet-2243",
+      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_20/",
+      "status": "200",
+      "properties": [
+        {
+          "name": "Размер",
+          "value": "12 м"
+        },
+        {
+          "name": "Ширина",
+          "value": "76 мм"
+        },
+        {
+          "name": "Вес",
+          "value": "18.4 кг/м.п."
+        },
+        {
+          "name": "Высота",
+          "value": "200 мм"
+        },
+        {
+          "name": "Длина",
+          "value": "12 м"
+        }
+      ],
+      "title": "Швеллер № 20"
+    },
+    {
+      "id": "rozmet-2244",
+      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_22/",
+      "status": "200",
+      "properties": [
+        {
+          "name": "Размер",
+          "value": "12 м"
+        },
+        {
+          "name": "Ширина",
+          "value": "82 мм"
+        },
+        {
+          "name": "Вес",
+          "value": "21 кг/м.п."
+        },
+        {
+          "name": "Высота",
+          "value": "220 мм"
+        },
+        {
+          "name": "Длина",
+          "value": "12 м"
+        }
+      ],
+      "title": "Швеллер № 22"
+    },
+    {
+      "id": "rozmet-2245",
+      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_24/",
+      "status": "200",
+      "properties": [
+        {
+          "name": "Размер",
+          "value": "12 м"
+        },
+        {
+          "name": "Ширина",
+          "value": "90 мм"
+        },
+        {
+          "name": "Вес",
+          "value": "24 кг/м.п."
+        },
+        {
+          "name": "Высота",
+          "value": "240 мм"
+        },
+        {
+          "name": "Длина",
+          "value": "12 м"
+        }
+      ],
+      "title": "Швеллер № 24"
+    },
+    {
+      "id": "rozmet-2246",
+      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_27/",
+      "status": "200",
+      "properties": [
+        {
+          "name": "Размер",
+          "value": "12 м"
+        },
+        {
+          "name": "Ширина",
+          "value": "95 мм"
+        },
+        {
+          "name": "Вес",
+          "value": "27.7 кг/м.п."
+        },
+        {
+          "name": "Высота",
+          "value": "270 мм"
+        },
+        {
+          "name": "Длина",
+          "value": "12 м"
+        }
+      ],
+      "title": "Швеллер №27"
+    },
+    {
+      "id": "rozmet-2247",
+      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_30/",
+      "status": "200",
+      "properties": [
+        {
+          "name": "Размер",
+          "value": "12 м"
+        },
+        {
+          "name": "Ширина",
+          "value": "100 мм"
+        },
+        {
+          "name": "Вес",
+          "value": "31.8 кг/м.п."
+        },
+        {
+          "name": "Высота",
+          "value": "300 мм"
+        },
+        {
+          "name": "Длина",
+          "value": "12 м"
+        }
+      ],
+      "title": "Швеллер №30"
+    },
+    {
+      "id": "rozmet-2248",
+      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_40/",
+      "status": "200",
+      "properties": [
+        {
+          "name": "Размер",
+          "value": "12 м"
+        },
+        {
+          "name": "Ширина",
+          "value": "115 мм"
+        },
+        {
+          "name": "Вес",
+          "value": "48.3 кг/м.п."
+        },
+        {
+          "name": "Высота",
+          "value": "400 мм"
+        },
+        {
+          "name": "Длина",
+          "value": "12 м"
+        }
+      ],
+      "title": "Швеллер №40"
+    },
+    {
+      "id": "rozmet-2209",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_25x25x3/",
+      "status": "200",
+      "properties": [
+        {
+          "name": "Тип уголка",
+          "value": "Равнополочный"
+        },
+        {
+          "name": "Размеры уголка",
+          "value": "25х25"
+        },
+        {
+          "name": "Вес",
+          "value": "1.12 кг/м.п."
+        },
+        {
+          "name": "Толщина полок уголка",
+          "value": "3 мм"
+        },
+        {
+          "name": "Размер",
+          "value": "6 м"
+        }
+      ],
+      "title": "Уголок металлический № 25х25х3"
+    },
+    {
+      "id": "rozmet-2210",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_32x32x3/",
+      "status": "200",
+      "properties": [
+        {
+          "name": "Тип уголка",
+          "value": "Равнополочный"
+        },
+        {
+          "name": "Размеры уголка",
+          "value": "32х32"
+        },
+        {
+          "name": "Вес",
+          "value": "1.46 кг/м.п."
+        },
+        {
+          "name": "Толщина полок уголка",
+          "value": "3 мм"
+        },
+        {
+          "name": "Размер",
+          "value": "6 м"
+        }
+      ],
+      "title": "Уголок металлический № 32х32х3"
+    },
+    {
+      "id": "rozmet-20157",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_35x35x4/",
+      "status": "200",
+      "properties": [
+        {
+          "name": "Тип уголка",
+          "value": "Равнополочный"
+        },
+        {
+          "name": "Размеры уголка",
+          "value": "35х35"
+        },
+        {
+          "name": "Вес",
+          "value": "2.1 кг/м.п."
+        },
+        {
+          "name": "Толщина полок уголка",
+          "value": "4 мм"
+        },
+        {
+          "name": "Размер",
+          "value": "6 м"
+        }
+      ],
+      "title": "Уголок металлический № 35х35х4"
+    },
+    {
+      "id": "rozmet-2211",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_40x40x3/",
+      "status": "200",
+      "properties": [
+        {
+          "name": "Тип уголка",
+          "value": "Равнополочный"
+        },
+        {
+          "name": "Размеры уголка",
+          "value": "40х40"
+        },
+        {
+          "name": "Вес",
+          "value": "1.85 кг/м.п."
+        },
+        {
+          "name": "Толщина полок уголка",
+          "value": "3 мм"
+        },
+        {
+          "name": "Размер",
+          "value": "6 м"
+        }
+      ],
+      "title": "Уголок металлический № 40х40х3"
+    },
+    {
+      "id": "rozmet-2212",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_40x40x4/",
+      "status": "200",
+      "properties": [
+        {
+          "name": "Тип уголка",
+          "value": "Равнополочный"
+        },
+        {
+          "name": "Размеры уголка",
+          "value": "40х40"
+        },
+        {
+          "name": "Вес",
+          "value": "2.42 кг/м.п."
+        },
+        {
+          "name": "Толщина полок уголка",
+          "value": "4 мм"
+        },
+        {
+          "name": "Размер",
+          "value": "6 м"
+        }
+      ],
+      "title": "Уголок металлический № 40х40х4"
+    },
+    {
+      "id": "rozmet-2213",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_45x45x4/",
+      "status": "200",
+      "properties": [
+        {
+          "name": "Тип уголка",
+          "value": "Равнополочный"
+        },
+        {
+          "name": "Размеры уголка",
+          "value": "45х45"
+        },
+        {
+          "name": "Вес",
+          "value": "2.73 кг/м.п."
+        },
+        {
+          "name": "Толщина полок уголка",
+          "value": "4 мм"
+        },
+        {
+          "name": "Размер",
+          "value": "12 м"
+        }
+      ],
+      "title": "Уголок металлический № 45х45х4"
+    },
+    {
+      "id": "rozmet-2214",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_50x50x4/",
+      "status": "200",
+      "properties": [
+        {
+          "name": "Тип уголка",
+          "value": "Равнополочный"
+        },
+        {
+          "name": "Размеры уголка",
+          "value": "50х50"
+        },
+        {
+          "name": "Вес",
+          "value": "3.05 кг/м.п."
+        },
+        {
+          "name": "Толщина полок уголка",
+          "value": "4 мм"
+        },
+        {
+          "name": "Размер",
+          "value": "6 м"
+        }
+      ],
+      "title": "Уголок металлический № 50х50х4"
+    },
+    {
+      "id": "rozmet-2215",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_50x50x5/",
+      "status": "200",
+      "properties": [
+        {
+          "name": "Тип уголка",
+          "value": "Равнополочный"
+        },
+        {
+          "name": "Размеры уголка",
+          "value": "50х50"
+        },
+        {
+          "name": "Вес",
+          "value": "3.77 кг/м.п."
+        },
+        {
+          "name": "Толщина полок уголка",
+          "value": "5 мм"
+        },
+        {
+          "name": "Размер",
+          "value": "12 м"
+        }
+      ],
+      "title": "Уголок металлический № 50х50х5"
+    },
+    {
+      "id": "rozmet-2216",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_63x63x4/",
+      "status": "200",
+      "properties": [
+        {
+          "name": "Тип уголка",
+          "value": "Равнополочный"
+        },
+        {
+          "name": "Размеры уголка",
+          "value": "63х63"
+        },
+        {
+          "name": "Вес",
+          "value": "3.91 кг/м.п."
+        },
+        {
+          "name": "Толщина полок уголка",
+          "value": "4 мм"
+        },
+        {
+          "name": "Размер",
+          "value": "12 м"
+        }
+      ],
+      "title": "Уголок металлический № 63х63х4"
+    },
+    {
+      "id": "rozmet-2217",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_63x63x5/",
+      "status": "200",
+      "properties": [
+        {
+          "name": "Тип уголка",
+          "value": "Равнополочный"
+        },
+        {
+          "name": "Размеры уголка",
+          "value": "63х63"
+        },
+        {
+          "name": "Вес",
+          "value": "4.81 кг/м.п."
+        },
+        {
+          "name": "Толщина полок уголка",
+          "value": "5 мм"
+        },
+        {
+          "name": "Размер",
+          "value": "12 м"
+        }
+      ],
+      "title": "Уголок металлический № 63х63х5"
+    },
+    {
+      "id": "rozmet-2218",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_75x75x5/",
+      "status": "200",
+      "properties": [
+        {
+          "name": "Тип уголка",
+          "value": "Равнополочный"
+        },
+        {
+          "name": "Размеры уголка",
+          "value": "75х75"
+        },
+        {
+          "name": "Вес",
+          "value": "5.379 кг/м.п."
+        },
+        {
+          "name": "Толщина полок уголка",
+          "value": "5 мм"
+        },
+        {
+          "name": "Размер",
+          "value": "12 м"
+        }
+      ],
+      "title": "Уголок металлический № 75х75х5"
+    },
+    {
+      "id": "rozmet-20160",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_75x75x6/",
+      "status": "200",
+      "properties": [
+        {
+          "name": "Тип уголка",
+          "value": "Равнополочный"
+        },
+        {
+          "name": "Размеры уголка",
+          "value": "75х75"
+        },
+        {
+          "name": "Вес",
+          "value": "6.89 кг/м.п."
+        },
+        {
+          "name": "Толщина полок уголка",
+          "value": "6 мм"
+        },
+        {
+          "name": "Размер",
+          "value": "6 м"
+        }
+      ],
+      "title": "Уголок металлический № 75х75х6"
+    },
+    {
+      "id": "rozmet-2220",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_90x90x6/",
+      "status": "200",
+      "properties": [
+        {
+          "name": "Тип уголка",
+          "value": "Равнополочный"
+        },
+        {
+          "name": "Размеры уголка",
+          "value": "90х90"
+        },
+        {
+          "name": "Вес",
+          "value": "8.33 кг/м.п."
+        },
+        {
+          "name": "Толщина полок уголка",
+          "value": "6 мм"
+        },
+        {
+          "name": "Размер",
+          "value": "12 м"
+        }
+      ],
+      "title": "Уголок металлический № 90х90х6"
+    },
+    {
+      "id": "rozmet-2219",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok-75kh75kh6/",
+      "status": "200",
+      "properties": [
+        {
+          "name": "Тип уголка",
+          "value": "Неравнополочный"
+        },
+        {
+          "name": "Размеры уголка",
+          "value": "100х63"
+        },
+        {
+          "name": "Вес",
+          "value": "7.52 кг/м.п."
+        },
+        {
+          "name": "Толщина полок уголка",
+          "value": "6 мм"
+        },
+        {
+          "name": "Размер",
+          "value": "12 м"
+        }
+      ],
+      "title": "Уголок металлический № 100х63х6"
+    },
+    {
+      "id": "rozmet-2221",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_100x100x7/",
+      "status": "200",
+      "properties": [
+        {
+          "name": "Тип уголка",
+          "value": "Равнополочный"
+        },
+        {
+          "name": "Размеры уголка",
+          "value": "100х100"
+        },
+        {
+          "name": "Вес",
+          "value": "10.8 кг/м.п."
+        },
+        {
+          "name": "Толщина полок уголка",
+          "value": "7 мм"
+        },
+        {
+          "name": "Размер",
+          "value": "12 м"
+        }
+      ],
+      "title": "Уголок металлический № 100х100х7"
+    },
+    {
+      "id": "rozmet-2222",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_100x100x8/",
+      "status": "200",
+      "properties": [
+        {
+          "name": "Тип уголка",
+          "value": "Равнополочный"
+        },
+        {
+          "name": "Размеры уголка",
+          "value": "100х100"
+        },
+        {
+          "name": "Вес",
+          "value": "14.3 кг/м.п."
+        },
+        {
+          "name": "Толщина полок уголка",
+          "value": "8 мм"
+        },
+        {
+          "name": "Размер",
+          "value": "12 м"
+        }
+      ],
+      "title": "Уголок металлический № 100х100х8"
+    },
+    {
+      "id": "rozmet-20368",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_100x100x10/",
+      "status": "200",
+      "properties": [
+        {
+          "name": "Тип уголка",
+          "value": "Равнополочный"
+        },
+        {
+          "name": "Размеры уголка",
+          "value": "100х100"
+        },
+        {
+          "name": "Вес",
+          "value": "15.1 кг/м.п."
+        },
+        {
+          "name": "Толщина полок уголка",
+          "value": "10 мм"
+        },
+        {
+          "name": "Размер",
+          "value": "12 м"
+        }
+      ],
+      "title": "Уголок металлический № 100х100х10"
+    },
+    {
+      "id": "rozmet-2223",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_125x125x8/",
+      "status": "200",
+      "properties": [
+        {
+          "name": "Тип уголка",
+          "value": "Равнополочный"
+        },
+        {
+          "name": "Размеры уголка",
+          "value": "125х125"
+        },
+        {
+          "name": "Вес",
+          "value": "15.46 кг/м.п."
+        },
+        {
+          "name": "Толщина полок уголка",
+          "value": "8 мм"
+        },
+        {
+          "name": "Размер",
+          "value": "12 м"
+        }
+      ],
+      "title": "Уголок металлический № 125х125х8"
+    },
+    {
+      "id": "rozmet-29030",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_125kh125kh10/",
+      "status": "200",
+      "properties": [
+        {
+          "name": "Тип уголка",
+          "value": "Равнополочный"
+        },
+        {
+          "name": "Размеры уголка",
+          "value": "125х125"
+        },
+        {
+          "name": "Вес",
+          "value": "15.46 кг/м.п."
+        },
+        {
+          "name": "Толщина полок уголка",
+          "value": "10 мм"
+        },
+        {
+          "name": "Размер",
+          "value": "12 м"
+        }
+      ],
+      "title": "Уголок металлический № 125х125х10"
+    },
+    {
+      "id": "rozmet-2224",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_140x140x10/",
+      "status": "200",
+      "properties": [
+        {
+          "name": "Тип уголка",
+          "value": "Равнополочный"
+        },
+        {
+          "name": "Размеры уголка",
+          "value": "140х140"
+        },
+        {
+          "name": "Вес",
+          "value": "21.5 кг/м.п."
+        },
+        {
+          "name": "Толщина полок уголка",
+          "value": "10 мм"
+        },
+        {
+          "name": "Размер",
+          "value": "12 м"
+        }
+      ],
+      "title": "Уголок металлический № 140х140х10"
+    },
+    {
+      "id": "rozmet-2225",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_160x160x10/",
+      "status": "200",
+      "properties": [
+        {
+          "name": "Тип уголка",
+          "value": "Равнополочный"
+        },
+        {
+          "name": "Размеры уголка",
+          "value": "160х160"
+        },
+        {
+          "name": "Вес",
+          "value": "24.7 кг/м.п."
+        },
+        {
+          "name": "Толщина полок уголка",
+          "value": "10 мм"
+        },
+        {
+          "name": "Размер",
+          "value": "12 м"
+        }
+      ],
+      "title": "Уголок металлический № 160х160х10"
+    },
+    {
+      "id": "rozmet-16726",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_100kh100kh10/",
+      "status": "200",
+      "properties": [
+        {
+          "name": "Тип уголка",
+          "value": "Равнополочный"
+        },
+        {
+          "name": "Размеры уголка",
+          "value": "160х100"
+        },
+        {
+          "name": "Вес",
+          "value": "19.85 кг/м.п."
+        },
+        {
+          "name": "Толщина полок уголка",
+          "value": "10 мм"
+        },
+        {
+          "name": "Размер",
+          "value": "12 м"
+        }
+      ],
+      "title": "Уголок металлический № 160х100х10"
+    },
+    {
+      "id": "rozmet-2204",
+      "sourceUrl": "https://rozmet.ru/production/kvadrat/kvadrat_8/",
+      "status": "200",
+      "properties": [
+        {
+          "name": "Размер",
+          "value": "6 м"
+        },
+        {
+          "name": "Вес",
+          "value": "0.5 кг/м.п."
+        }
+      ],
+      "title": "Квадрат стальной №8"
+    },
+    {
+      "id": "rozmet-2205",
+      "sourceUrl": "https://rozmet.ru/production/kvadrat/kvadrat_10/",
+      "status": "200",
+      "properties": [
+        {
+          "name": "Размер",
+          "value": "6 м"
+        },
+        {
+          "name": "Вес",
+          "value": "0.79 кг/м.п."
+        }
+      ],
+      "title": "Квадрат стальной №10"
+    },
+    {
+      "id": "rozmet-2206",
+      "sourceUrl": "https://rozmet.ru/production/kvadrat/kvadrat_12/",
+      "status": "200",
+      "properties": [
+        {
+          "name": "Размер",
+          "value": "6 м"
+        },
+        {
+          "name": "Вес",
+          "value": "1.13 кг/м.п."
+        }
+      ],
+      "title": "Квадрат стальной №12"
+    },
+    {
+      "id": "rozmet-2207",
+      "sourceUrl": "https://rozmet.ru/production/kvadrat/kvadrat_14/",
+      "status": "200",
+      "properties": [
+        {
+          "name": "Размер",
+          "value": "6 м"
+        },
+        {
+          "name": "Вес",
+          "value": "1.54 кг/м.п."
+        }
+      ],
+      "title": "Квадрат стальной №14"
+    },
+    {
+      "id": "rozmet-26579",
+      "sourceUrl": "https://rozmet.ru/production/kvadrat/kvadrat_16/",
+      "status": "200",
+      "properties": [
+        {
+          "name": "Размер",
+          "value": "6 м"
+        },
+        {
+          "name": "Вес",
+          "value": "1.54 кг/м.п."
+        }
+      ],
+      "title": "Квадрат стальной №16"
+    },
+    {
+      "id": "rozmet-28995",
+      "sourceUrl": "https://rozmet.ru/production/kvadrat/kvadrat_18/",
+      "status": "200",
+      "properties": [
+        {
+          "name": "Размер",
+          "value": "6 м"
+        },
+        {
+          "name": "Вес",
+          "value": "2.54 кг/м.п."
+        }
+      ],
+      "title": "Квадрат стальной №18"
+    },
+    {
+      "id": "rozmet-2208",
+      "sourceUrl": "https://rozmet.ru/production/kvadrat/kvadrat_20/",
+      "status": "200",
+      "properties": [
+        {
+          "name": "Размер",
+          "value": "6 м"
+        },
+        {
+          "name": "Вес",
+          "value": "3.14 кг/м.п."
+        }
+      ],
+      "title": "Квадрат стальной №20"
+    }
+  ]
+}

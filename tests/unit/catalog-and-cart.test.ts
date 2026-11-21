@@ -61,7 +61,7 @@ test("image/specification overrides require matching category, identity and sour
   const angle = products.find(product => product.id === "rozmet-2209")!;
   const raw = {...angle, specifications: angle.specifications.map(s => s.name === "Теоретическая масса" ? {...s, name: "Вес"} : s)};
   const displayed = applyCatalogOverrides(raw);
-  assert.equal(displayed.specifications.find(s => s.name === "Теоретическая масса")?.value, "1.12 кг/м.п.");
+  assert.equal(displayed.specifications.find(s => s.name === "Теоретическая масса")?.value, "1,12 кг/м");
   for (const mismatch of [{...raw, id: "unknown"}, {...raw, sourceReference: "https://example.invalid/other"}, {...raw, categoryId: "other"}]) {
     assert.equal(applyCatalogOverrides(mismatch), mismatch);
   }

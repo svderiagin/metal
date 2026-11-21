@@ -88,7 +88,7 @@ for (const product of products) {
     {key: 'firstLeg', text: `${legs[1]}\u00a0мм`, size: 56, center: 837, top: 862},
     {key: 'secondLeg', text: `${legs[2]}\u00a0мм`, size: 56, center: 1348, top: 1454},
     {key: 'thickness', text: `${thickness}\u00a0мм`, size: 56, left: 1940, top: 1342},
-    {key: 'length', text: normalize(specification('Размер')), size: 44, weight: 750, left: 610, top: 1568},
+    {key: 'length', text: normalize(specification('Длина по каталогу')), size: 44, weight: 750, left: 610, top: 1568},
     {key: 'mass', text: normalize(specification('Теоретическая масса')), size: 44, weight: 750, left: 610, top: 1634},
   ];
   const changed = labels.filter(label => label.text !== referenceLabels[label.key]);

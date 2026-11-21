@@ -21,9 +21,13 @@ const {productIllustrationSignature} = readProjectData('lib/productPreviewImage.
 const products = productVariants.filter(product => product.categoryId === flatSteelCategoryId
   && (!selectedIds.length || selectedIds.includes(product.id)));
 assert.ok(products.length, 'No matching steel strip products');
+const manifest = JSON.parse(await fs.readFile('data/product-illustrations.json', 'utf8'));
+for (const product of products) {
+  assert.equal(manifest[product.id]?.photoUrl, '/images/catalog/illustration-sources/flat-steel.jpg',
+    `${product.id}: the heading migration requires the old generic artwork. Use render-flat-steel-images.mjs for the owner's template.`);
+}
 await fs.mkdir(`${directory}/before`, {recursive: true});
 await fs.mkdir(`${directory}/after`, {recursive: true});
-const manifest = JSON.parse(await fs.readFile('data/product-illustrations.json', 'utf8'));
 const reviewed = apply ? JSON.parse(await fs.readFile(`${directory}/result.json`, 'utf8')) : undefined;
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
 const records = [];

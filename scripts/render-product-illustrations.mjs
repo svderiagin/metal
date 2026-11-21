@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import path from "node:path";
 import {productVariants} from "../data/products/index.ts";
+import {flatSteelCategoryId} from "../lib/flatSteel.ts";
 import {productIllustrationFacts} from "../lib/productIllustrationFacts.ts";
 import {productIllustrationSignature} from "../lib/productPreviewImage.ts";
 
@@ -19,11 +20,11 @@ sharp.concurrency(2);
 
 const sources = JSON.parse(await fs.readFile("data/product-illustration-sources.json", "utf8"));
 const protectedCategories = new Set([
-  "cat-bal",
+  "cat-bal", flatSteelCategoryId,
   "rozmet-cat-shveller", "rozmet-cat-ugolok", "rozmet-cat-kvadrat", "rozmet-cat-listovoy-prokat",
 ]);
-// Owner-approved profile-pipe templates have separate lossless label renderers.
-const protectedProductTypes = new Set(["type-cat-trp-sub-1", "type-cat-trp-sub-2"]);
+// Owner-approved pipe templates have separate lossless label renderers.
+const protectedProductTypes = new Set(["type-cat-trp-sub-1", "type-cat-trp-sub-2", "type-cat-trk-sub-1"]);
 const width = 2400;
 const height = 1800;
 const textColor = "#41464D";
@@ -64,7 +65,7 @@ function productPhoto(url) {
   return cachedPhotos.get(url);
 }
 
-function sectionDiagram(product, facts) {
+function sectionDiagram(product) {
   const unit = value => `${String(value).replace(".", ",")} мм`;
   const line = (x1, y1, x2, y2, arrow = false) => `<path d="M${x1} ${y1}L${x2} ${y2}"${arrow ? ' marker-start="url(#start)" marker-end="url(#end)"' : ""}/>`;
   const text = (value, x, y) => `<text x="${x}" y="${y}" stroke="none" fill="${textColor}" text-anchor="middle">${escaped(value)}</text>`;
@@ -87,16 +88,6 @@ function sectionDiagram(product, facts) {
       + (hollow ? '<circle cx="263" cy="114" r="73" fill="white"/>' : "")
       + line(169, 114, 169, 251) + line(357, 114, 357, 251) + line(174, 244, 352, 244, true)
       + text(`Ø ${unit(product.diameterMm)}`, 263, 288);
-  } else if (product.categoryId === "rozmet-cat-polosa") {
-    const widthLabel = facts.find(fact => fact.name === "Ширина")?.value;
-    const thicknessLabel = facts.find(fact => fact.name === "Толщина")?.value;
-    if (widthLabel && thicknessLabel) {
-      shape = '<rect x="125" y="105" width="320" height="67" rx="4" fill="#e9ecef"/>'
-        + line(125, 173, 125, 244) + line(445, 173, 445, 244) + line(130, 237, 440, 237, true)
-        + text(widthLabel, 285, 284)
-        + line(445, 105, 498, 105) + line(445, 172, 498, 172)
-        + line(490, 110, 490, 167, true) + text(thicknessLabel, 574, 150);
-    }
   }
   if (!shape) return;
   return Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="700" height="315">
@@ -138,7 +129,7 @@ async function render(product) {
     const valueHeight = await place(value, 57, 750, 855, 128, row + labelHeight + 12);
     row += labelHeight + valueHeight + 48;
   }
-  const diagram = sectionDiagram(product, facts);
+  const diagram = sectionDiagram(product);
   if (diagram && row < 1350) {
     const diagramTop = Math.max(1040, row + 16);
     layers.push({input: diagram, left: 130, top: diagramTop});

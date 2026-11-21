@@ -1,0 +1,677 @@
+{
+  "checkedOn": "2026-11-21",
+  "scope": "43 позиции. Сортамент — справочная основа номинальных размеров и теоретической массы, не подтверждение стандарта поставки конкретной партии. Длины — из вкладки характеристик поставщика; цены и исходный импорт сохраняются.",
+  "sources": [
+    {
+      "standard": "ГОСТ 8509-93",
+      "url": "https://metallas.ru/gost/gost8509-93.pdf",
+      "location": "Таблица 1, печатные страницы 2–3",
+      "statusUrl": "https://protect.gost.ru/gost/details/c12253e4-5eaa-4175-a644-9ee4b3c1c948"
+    },
+    {
+      "standard": "ГОСТ 8510-86",
+      "url": "https://arion-metal.ru/upload/gost/gost8510-86.pdf",
+      "location": "Таблица 1",
+      "statusUrl": "https://protect.gost.ru/gost/details/3ada63d9-9b02-4d2e-a73d-dcd47ecff4a4"
+    },
+    {
+      "standard": "ГОСТ 2591-2006",
+      "url": "https://skkss.kz/sites/default/files/gost_2591-2006_kvadrat_1.pdf",
+      "location": "Таблица 1; масса до 0,001 кг/м, подписи округлены до 0,01 кг/м",
+      "statusUrl": "https://protect.gost.ru/gost/details/51ac67eb-1e64-4946-91c0-71502662b74e"
+    },
+    {
+      "standard": "ГОСТ 8240-97",
+      "url": "https://www.metall-energy.ru/data/file/gosty/shveller/gost_8240-97.pdf",
+      "location": "Таблицы 1 и 2; параметры указанных номеров У/П совпадают",
+      "statusUrl": "https://protect.gost.ru/gost/details/83e3d647-9d84-48cd-b105-72378de872a5"
+    }
+  ],
+  "products": {
+    "rozmet-2235": {
+      "categoryId": "rozmet-cat-shveller",
+      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_5/",
+      "sourceProductName": "Швеллер № 5",
+      "section": "5",
+      "referenceStandard": "ГОСТ 8240-97",
+      "theoreticalMassKgPerMeter": 4.84,
+      "displayMassKgPerMeter": 4.84,
+      "lengthRangeMeters": [
+        11.7,
+        11.7
+      ],
+      "supplierMassKgPerMeter": 4.84,
+      "supplierPageSha256": "c0b9f450339138dc020828f72adb6289a1ad7f69e9344efea95e36116347d1a6"
+    },
+    "rozmet-2236": {
+      "categoryId": "rozmet-cat-shveller",
+      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_6.5/",
+      "sourceProductName": "Швеллер № 6.5",
+      "section": "6.5",
+      "referenceStandard": "ГОСТ 8240-97",
+      "theoreticalMassKgPerMeter": 5.9,
+      "displayMassKgPerMeter": 5.9,
+      "lengthRangeMeters": [
+        6,
+        12
+      ],
+      "supplierMassKgPerMeter": 5.9,
+      "supplierPageSha256": "292efa28e7ca51af2d95abab221b8042b815b946271adf4a4db4dbc9cf67cbe1"
+    },
+    "rozmet-2237": {
+      "categoryId": "rozmet-cat-shveller",
+      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_8/",
+      "sourceProductName": "Швеллер № 8",
+      "section": "8",
+      "referenceStandard": "ГОСТ 8240-97",
+      "theoreticalMassKgPerMeter": 7.05,
+      "displayMassKgPerMeter": 7.05,
+      "lengthRangeMeters": [
+        6,
+        12
+      ],
+      "supplierMassKgPerMeter": 7.05,
+      "supplierPageSha256": "409dcf7a8179d0a1e2e02298777debefc932e46204627bb944bc14c4ef90d4e8"
+    },
+    "rozmet-2238": {
+      "categoryId": "rozmet-cat-shveller",
+      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_10/",
+      "sourceProductName": "Швеллер № 10",
+      "section": "10",
+      "referenceStandard": "ГОСТ 8240-97",
+      "theoreticalMassKgPerMeter": 8.59,
+      "displayMassKgPerMeter": 8.59,
+      "lengthRangeMeters": [
+        12,
+        12
+      ],
+      "supplierMassKgPerMeter": 8.59,
+      "supplierPageSha256": "98c670865519b2bef422cb68daab01c0a27a30f7e2185b7611c8a4e97b833f08"
+    },
+    "rozmet-2239": {
+      "categoryId": "rozmet-cat-shveller",
+      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_12/",
+      "sourceProductName": "Швеллер № 12",
+      "section": "12",
+      "referenceStandard": "ГОСТ 8240-97",
+      "theoreticalMassKgPerMeter": 10.4,
+      "displayMassKgPerMeter": 10.4,
+      "lengthRangeMeters": [
+        12,
+        12
+      ],
+      "supplierMassKgPerMeter": 10.4,
+      "supplierPageSha256": "c67f7000ddd4c3f8ba607ca556bd70962a7908ab3ed165022caa1fa039f8f755"
+    },
+    "rozmet-2240": {
+      "categoryId": "rozmet-cat-shveller",
+      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_14/",
+      "sourceProductName": "Швеллер № 14",
+      "section": "14",
+      "referenceStandard": "ГОСТ 8240-97",
+      "theoreticalMassKgPerMeter": 12.3,
+      "displayMassKgPerMeter": 12.3,
+      "lengthRangeMeters": [
+        12,
+        12
+      ],
+      "supplierMassKgPerMeter": 12.3,
+      "supplierPageSha256": "9bd6db80933f852e5b1d36541070c9c085bdac1e100484b7538024f1e46b0aaf"
+    },
+    "rozmet-2241": {
+      "categoryId": "rozmet-cat-shveller",
+      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_16/",
+      "sourceProductName": "Швеллер № 16",
+      "section": "16",
+      "referenceStandard": "ГОСТ 8240-97",
+      "theoreticalMassKgPerMeter": 14.2,
+      "displayMassKgPerMeter": 14.2,
+      "lengthRangeMeters": [
+        11.7,
+        12
+      ],
+      "supplierMassKgPerMeter": 14.2,
+      "supplierPageSha256": "27a004cee48c577f15eaea09e95661052bdda118401742e24aa5c70b71bdca00"
+    },
+    "rozmet-2242": {
+      "categoryId": "rozmet-cat-shveller",
+      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_18/",
+      "sourceProductName": "Швеллер № 18",
+      "section": "18",
+      "referenceStandard": "ГОСТ 8240-97",
+      "theoreticalMassKgPerMeter": 16.3,
+      "displayMassKgPerMeter": 16.3,
+      "lengthRangeMeters": [
+        12,
+        12
+      ],
+      "supplierMassKgPerMeter": 16.3,
+      "supplierPageSha256": "84c1159cdf7393b3442e71b06a3fa7e662dc8e71a6c2a2d49f6853760a6359df"
+    },
+    "rozmet-2243": {
+      "categoryId": "rozmet-cat-shveller",
+      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_20/",
+      "sourceProductName": "Швеллер № 20",
+      "section": "20",
+      "referenceStandard": "ГОСТ 8240-97",
+      "theoreticalMassKgPerMeter": 18.4,
+      "displayMassKgPerMeter": 18.4,
+      "lengthRangeMeters": [
+        12,
+        12
+      ],
+      "supplierMassKgPerMeter": 18.4,
+      "supplierPageSha256": "0f8ff9b12dcb17349451e913cf7be9fc417959c26c513b1082e495f08f01b16f"
+    },
+    "rozmet-2244": {
+      "categoryId": "rozmet-cat-shveller",
+      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_22/",
+      "sourceProductName": "Швеллер № 22",
+      "section": "22",
+      "referenceStandard": "ГОСТ 8240-97",
+      "theoreticalMassKgPerMeter": 21,
+      "displayMassKgPerMeter": 21,
+      "lengthRangeMeters": [
+        12,
+        12
+      ],
+      "supplierMassKgPerMeter": 21,
+      "supplierPageSha256": "22dd819166d7fd51058722f9d45f7a257aad04b05f9b2de96e704132cf38fd47"
+    },
+    "rozmet-2245": {
+      "categoryId": "rozmet-cat-shveller",
+      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_24/",
+      "sourceProductName": "Швеллер № 24",
+      "section": "24",
+      "referenceStandard": "ГОСТ 8240-97",
+      "theoreticalMassKgPerMeter": 24,
+      "displayMassKgPerMeter": 24,
+      "lengthRangeMeters": [
+        12,
+        12
+      ],
+      "supplierMassKgPerMeter": 24,
+      "supplierPageSha256": "8c99b3d42f8cbe2780dc92cc95cba7207f064a3ba9cafca778170aead50abcc9"
+    },
+    "rozmet-2246": {
+      "categoryId": "rozmet-cat-shveller",
+      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_27/",
+      "sourceProductName": "Швеллер №27",
+      "section": "27",
+      "referenceStandard": "ГОСТ 8240-97",
+      "theoreticalMassKgPerMeter": 27.7,
+      "displayMassKgPerMeter": 27.7,
+      "lengthRangeMeters": [
+        12,
+        12
+      ],
+      "supplierMassKgPerMeter": 27.7,
+      "supplierPageSha256": "694bef17de8c2d607da44495380773961c57e030daaef365e0a7003f81d10fe3"
+    },
+    "rozmet-2247": {
+      "categoryId": "rozmet-cat-shveller",
+      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_30/",
+      "sourceProductName": "Швеллер №30",
+      "section": "30",
+      "referenceStandard": "ГОСТ 8240-97",
+      "theoreticalMassKgPerMeter": 31.8,
+      "displayMassKgPerMeter": 31.8,
+      "lengthRangeMeters": [
+        12,
+        12
+      ],
+      "supplierMassKgPerMeter": 31.8,
+      "supplierPageSha256": "7f819306bcfce21cc3ef5a95d875f948f46f8eeef4332d7390e3bdd9f834b60a"
+    },
+    "rozmet-2248": {
+      "categoryId": "rozmet-cat-shveller",
+      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_40/",
+      "sourceProductName": "Швеллер №40",
+      "section": "40",
+      "referenceStandard": "ГОСТ 8240-97",
+      "theoreticalMassKgPerMeter": 48.3,
+      "displayMassKgPerMeter": 48.3,
+      "lengthRangeMeters": [
+        12,
+        12
+      ],
+      "supplierMassKgPerMeter": 48.3,
+      "supplierPageSha256": "3c331113f29154f35966343c044c8ad503127a2ec1eb43b3a32a9f2e5d6d1cdc"
+    },
+    "rozmet-2209": {
+      "categoryId": "rozmet-cat-ugolok",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_25x25x3/",
+      "sourceProductName": "Уголок металлический № 25х25х3",
+      "section": "25x25x3",
+      "referenceStandard": "ГОСТ 8509-93",
+      "theoreticalMassKgPerMeter": 1.12,
+      "displayMassKgPerMeter": 1.12,
+      "lengthRangeMeters": [
+        6,
+        6
+      ],
+      "supplierMassKgPerMeter": 1.12,
+      "supplierPageSha256": "956809b256899281d29f68ba384f5bfa497b5112ff77661159075da5e2e2da88"
+    },
+    "rozmet-2210": {
+      "categoryId": "rozmet-cat-ugolok",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_32x32x3/",
+      "sourceProductName": "Уголок металлический № 32х32х3",
+      "section": "32x32x3",
+      "referenceStandard": "ГОСТ 8509-93",
+      "theoreticalMassKgPerMeter": 1.46,
+      "displayMassKgPerMeter": 1.46,
+      "lengthRangeMeters": [
+        6,
+        6
+      ],
+      "supplierMassKgPerMeter": 1.46,
+      "supplierPageSha256": "0560fc7eb84a9eec7e1e8002ab205f5979580fa8141f3f54f0c2057b86e56b98"
+    },
+    "rozmet-20157": {
+      "categoryId": "rozmet-cat-ugolok",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_35x35x4/",
+      "sourceProductName": "Уголок металлический № 35х35х4",
+      "section": "35x35x4",
+      "referenceStandard": "ГОСТ 8509-93",
+      "theoreticalMassKgPerMeter": 2.1,
+      "displayMassKgPerMeter": 2.1,
+      "lengthRangeMeters": [
+        6,
+        6
+      ],
+      "supplierMassKgPerMeter": 2.1,
+      "supplierPageSha256": "164b87e4d15656c192ca3d09296980de8d15ce83d75c4c57f0c8b42d020002b9"
+    },
+    "rozmet-2211": {
+      "categoryId": "rozmet-cat-ugolok",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_40x40x3/",
+      "sourceProductName": "Уголок металлический № 40х40х3",
+      "section": "40x40x3",
+      "referenceStandard": "ГОСТ 8509-93",
+      "theoreticalMassKgPerMeter": 1.85,
+      "displayMassKgPerMeter": 1.85,
+      "lengthRangeMeters": [
+        6,
+        6
+      ],
+      "supplierMassKgPerMeter": 1.85,
+      "supplierPageSha256": "323084d5911a8925e7341d1c6fc9566c952c43ca22faf46e5d652be108ce60c9"
+    },
+    "rozmet-2212": {
+      "categoryId": "rozmet-cat-ugolok",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_40x40x4/",
+      "sourceProductName": "Уголок металлический № 40х40х4",
+      "section": "40x40x4",
+      "referenceStandard": "ГОСТ 8509-93",
+      "theoreticalMassKgPerMeter": 2.42,
+      "displayMassKgPerMeter": 2.42,
+      "lengthRangeMeters": [
+        6,
+        6
+      ],
+      "supplierMassKgPerMeter": 2.42,
+      "supplierPageSha256": "02ae48231e0e54bd5982f42ad325d21f197f6455fce21ca520661b1fedd9561d"
+    },
+    "rozmet-2213": {
+      "categoryId": "rozmet-cat-ugolok",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_45x45x4/",
+      "sourceProductName": "Уголок металлический № 45х45х4",
+      "section": "45x45x4",
+      "referenceStandard": "ГОСТ 8509-93",
+      "theoreticalMassKgPerMeter": 2.73,
+      "displayMassKgPerMeter": 2.73,
+      "lengthRangeMeters": [
+        12,
+        12
+      ],
+      "supplierMassKgPerMeter": 2.73,
+      "supplierPageSha256": "ac935f1e2f82cd6d1bdc71a4c598684c238c488b5dce1cb26fa27193a2a5b34b"
+    },
+    "rozmet-2214": {
+      "categoryId": "rozmet-cat-ugolok",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_50x50x4/",
+      "sourceProductName": "Уголок металлический № 50х50х4",
+      "section": "50x50x4",
+      "referenceStandard": "ГОСТ 8509-93",
+      "theoreticalMassKgPerMeter": 3.05,
+      "displayMassKgPerMeter": 3.05,
+      "lengthRangeMeters": [
+        6,
+        6
+      ],
+      "supplierMassKgPerMeter": 3.05,
+      "supplierPageSha256": "421c1fa872795bdb96714633b4ae84e685f8d977d47011824ca4b0f68cbed126"
+    },
+    "rozmet-2215": {
+      "categoryId": "rozmet-cat-ugolok",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_50x50x5/",
+      "sourceProductName": "Уголок металлический № 50х50х5",
+      "section": "50x50x5",
+      "referenceStandard": "ГОСТ 8509-93",
+      "theoreticalMassKgPerMeter": 3.77,
+      "displayMassKgPerMeter": 3.77,
+      "lengthRangeMeters": [
+        12,
+        12
+      ],
+      "supplierMassKgPerMeter": 3.77,
+      "supplierPageSha256": "90a4f09de58da6a4f03d418ee6f61179cf3c93db853d5bd5a2e16277cd823805"
+    },
+    "rozmet-2216": {
+      "categoryId": "rozmet-cat-ugolok",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_63x63x4/",
+      "sourceProductName": "Уголок металлический № 63х63х4",
+      "section": "63x63x4",
+      "referenceStandard": "ГОСТ 8509-93",
+      "theoreticalMassKgPerMeter": 3.9,
+      "displayMassKgPerMeter": 3.9,
+      "lengthRangeMeters": [
+        12,
+        12
+      ],
+      "supplierMassKgPerMeter": 3.91,
+      "supplierPageSha256": "4395684cee9e5edc0e48bed865d90d73b4a9de1ebd6b84d1f6bf0e3107b36e9d"
+    },
+    "rozmet-2217": {
+      "categoryId": "rozmet-cat-ugolok",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_63x63x5/",
+      "sourceProductName": "Уголок металлический № 63х63х5",
+      "section": "63x63x5",
+      "referenceStandard": "ГОСТ 8509-93",
+      "theoreticalMassKgPerMeter": 4.81,
+      "displayMassKgPerMeter": 4.81,
+      "lengthRangeMeters": [
+        12,
+        12
+      ],
+      "supplierMassKgPerMeter": 4.81,
+      "supplierPageSha256": "6d425f8e46a14037ce5328d92af4b7225dc21b254af7dc5f35380bd5fff86670"
+    },
+    "rozmet-2218": {
+      "categoryId": "rozmet-cat-ugolok",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_75x75x5/",
+      "sourceProductName": "Уголок металлический № 75х75х5",
+      "section": "75x75x5",
+      "referenceStandard": "ГОСТ 8509-93",
+      "theoreticalMassKgPerMeter": 5.8,
+      "displayMassKgPerMeter": 5.8,
+      "lengthRangeMeters": [
+        12,
+        12
+      ],
+      "supplierMassKgPerMeter": 5.379,
+      "supplierPageSha256": "2ac1e59e237668060c3ff026cafaf7eda2d85321b00a1ddb6b92f3fd525c82f5"
+    },
+    "rozmet-20160": {
+      "categoryId": "rozmet-cat-ugolok",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_75x75x6/",
+      "sourceProductName": "Уголок металлический № 75х75х6",
+      "section": "75x75x6",
+      "referenceStandard": "ГОСТ 8509-93",
+      "theoreticalMassKgPerMeter": 6.89,
+      "displayMassKgPerMeter": 6.89,
+      "lengthRangeMeters": [
+        6,
+        6
+      ],
+      "supplierMassKgPerMeter": 6.89,
+      "supplierPageSha256": "9754008475bba2c37ad91fa6d2cbc7115363497c4d73a9a82a34dd977c6d2e98"
+    },
+    "rozmet-2220": {
+      "categoryId": "rozmet-cat-ugolok",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_90x90x6/",
+      "sourceProductName": "Уголок металлический № 90х90х6",
+      "section": "90x90x6",
+      "referenceStandard": "ГОСТ 8509-93",
+      "theoreticalMassKgPerMeter": 8.33,
+      "displayMassKgPerMeter": 8.33,
+      "lengthRangeMeters": [
+        12,
+        12
+      ],
+      "supplierMassKgPerMeter": 8.33,
+      "supplierPageSha256": "f9388cb863298c2cb83381dfeddc1c707c30a27c2e2349dd23a2ea5ee8beab5b"
+    },
+    "rozmet-2219": {
+      "categoryId": "rozmet-cat-ugolok",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok-75kh75kh6/",
+      "sourceProductName": "Уголок металлический № 100х63х6",
+      "section": "100x63x6",
+      "referenceStandard": "ГОСТ 8510-86",
+      "theoreticalMassKgPerMeter": 7.53,
+      "displayMassKgPerMeter": 7.53,
+      "lengthRangeMeters": [
+        12,
+        12
+      ],
+      "supplierMassKgPerMeter": 7.52,
+      "supplierPageSha256": "40f6605fadd1650576f89fe8eeb67668df0b2bf0d2b67917cc8ea3975486b06c"
+    },
+    "rozmet-2221": {
+      "categoryId": "rozmet-cat-ugolok",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_100x100x7/",
+      "sourceProductName": "Уголок металлический № 100х100х7",
+      "section": "100x100x7",
+      "referenceStandard": "ГОСТ 8509-93",
+      "theoreticalMassKgPerMeter": 10.79,
+      "displayMassKgPerMeter": 10.79,
+      "lengthRangeMeters": [
+        12,
+        12
+      ],
+      "supplierMassKgPerMeter": 10.8,
+      "supplierPageSha256": "68e597f436d7c071cdbe364d815146fda43e0392e1b97477656783447bca20c3"
+    },
+    "rozmet-2222": {
+      "categoryId": "rozmet-cat-ugolok",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_100x100x8/",
+      "sourceProductName": "Уголок металлический № 100х100х8",
+      "section": "100x100x8",
+      "referenceStandard": "ГОСТ 8509-93",
+      "theoreticalMassKgPerMeter": 12.25,
+      "displayMassKgPerMeter": 12.25,
+      "lengthRangeMeters": [
+        12,
+        12
+      ],
+      "supplierMassKgPerMeter": 14.3,
+      "supplierPageSha256": "092d274a9471b887944e0e3e6df0edab4a9c3081613028d559c362df90d02675"
+    },
+    "rozmet-20368": {
+      "categoryId": "rozmet-cat-ugolok",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_100x100x10/",
+      "sourceProductName": "Уголок металлический № 100х100х10",
+      "section": "100x100x10",
+      "referenceStandard": "ГОСТ 8509-93",
+      "theoreticalMassKgPerMeter": 15.1,
+      "displayMassKgPerMeter": 15.1,
+      "lengthRangeMeters": [
+        12,
+        12
+      ],
+      "supplierMassKgPerMeter": 15.1,
+      "supplierPageSha256": "515a028e16cca65e1311604f6ae124c398f0ec0ecffa852a0cbcbd5922c3a9e8"
+    },
+    "rozmet-2223": {
+      "categoryId": "rozmet-cat-ugolok",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_125x125x8/",
+      "sourceProductName": "Уголок металлический № 125х125х8",
+      "section": "125x125x8",
+      "referenceStandard": "ГОСТ 8509-93",
+      "theoreticalMassKgPerMeter": 15.46,
+      "displayMassKgPerMeter": 15.46,
+      "lengthRangeMeters": [
+        12,
+        12
+      ],
+      "supplierMassKgPerMeter": 15.46,
+      "supplierPageSha256": "89a2e8b628467893fde576c3d123a6c73d98604e0e9fe17d6bface8206129b9c"
+    },
+    "rozmet-29030": {
+      "categoryId": "rozmet-cat-ugolok",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_125kh125kh10/",
+      "sourceProductName": "Уголок металлический № 125х125х10",
+      "section": "125x125x10",
+      "referenceStandard": "ГОСТ 8509-93",
+      "theoreticalMassKgPerMeter": 19.1,
+      "displayMassKgPerMeter": 19.1,
+      "lengthRangeMeters": [
+        12,
+        12
+      ],
+      "supplierMassKgPerMeter": 15.46,
+      "supplierPageSha256": "e201315d3e3ad3f4e4680ad4a35fd0ccfe799454821c30fb67ef656da3bbd60e"
+    },
+    "rozmet-2224": {
+      "categoryId": "rozmet-cat-ugolok",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_140x140x10/",
+      "sourceProductName": "Уголок металлический № 140х140х10",
+      "section": "140x140x10",
+      "referenceStandard": "ГОСТ 8509-93",
+      "theoreticalMassKgPerMeter": 21.45,
+      "displayMassKgPerMeter": 21.45,
+      "lengthRangeMeters": [
+        12,
+        12
+      ],
+      "supplierMassKgPerMeter": 21.5,
+      "supplierPageSha256": "37b848df4c6c5c9fd31fe4cf42f565533b0f1fd04491153d4ffc036186eecc9f"
+    },
+    "rozmet-2225": {
+      "categoryId": "rozmet-cat-ugolok",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_160x160x10/",
+      "sourceProductName": "Уголок металлический № 160х160х10",
+      "section": "160x160x10",
+      "referenceStandard": "ГОСТ 8509-93",
+      "theoreticalMassKgPerMeter": 24.67,
+      "displayMassKgPerMeter": 24.67,
+      "lengthRangeMeters": [
+        12,
+        12
+      ],
+      "supplierMassKgPerMeter": 24.7,
+      "supplierPageSha256": "2412b1c4dae26b77f0d77d8694899446476776286aa34a5790c263889e77121b"
+    },
+    "rozmet-16726": {
+      "categoryId": "rozmet-cat-ugolok",
+      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_100kh100kh10/",
+      "sourceProductName": "Уголок металлический № 160х100х10",
+      "section": "160x100x10",
+      "referenceStandard": "ГОСТ 8510-86",
+      "theoreticalMassKgPerMeter": 19.85,
+      "displayMassKgPerMeter": 19.85,
+      "lengthRangeMeters": [
+        12,
+        12
+      ],
+      "supplierMassKgPerMeter": 19.85,
+      "supplierPageSha256": "ce6b9eb445f8d0bf7f150ad9df2bdf8aeb127a99955924082589127124036307"
+    },
+    "rozmet-2204": {
+      "categoryId": "rozmet-cat-kvadrat",
+      "sourceUrl": "https://rozmet.ru/production/kvadrat/kvadrat_8/",
+      "sourceProductName": "Квадрат стальной №8",
+      "section": "8",
+      "referenceStandard": "ГОСТ 2591-2006",
+      "theoreticalMassKgPerMeter": 0.502,
+      "displayMassKgPerMeter": 0.5,
+      "lengthRangeMeters": [
+        6,
+        6
+      ],
+      "supplierMassKgPerMeter": 0.5,
+      "supplierPageSha256": "47caf4988c4d742a21dc321d6190f51df43e654ff74a8f7174c3c39abca81cc4"
+    },
+    "rozmet-2205": {
+      "categoryId": "rozmet-cat-kvadrat",
+      "sourceUrl": "https://rozmet.ru/production/kvadrat/kvadrat_10/",
+      "sourceProductName": "Квадрат стальной №10",
+      "section": "10",
+      "referenceStandard": "ГОСТ 2591-2006",
+      "theoreticalMassKgPerMeter": 0.785,
+      "displayMassKgPerMeter": 0.79,
+      "lengthRangeMeters": [
+        6,
+        6
+      ],
+      "supplierMassKgPerMeter": 0.79,
+      "supplierPageSha256": "757e4ca1c363a81851d3774bd6287ddb1fe877cc1b2094f7743b086ee960bae0"
+    },
+    "rozmet-2206": {
+      "categoryId": "rozmet-cat-kvadrat",
+      "sourceUrl": "https://rozmet.ru/production/kvadrat/kvadrat_12/",
+      "sourceProductName": "Квадрат стальной №12",
+      "section": "12",
+      "referenceStandard": "ГОСТ 2591-2006",
+      "theoreticalMassKgPerMeter": 1.13,
+      "displayMassKgPerMeter": 1.13,
+      "lengthRangeMeters": [
+        6,
+        6
+      ],
+      "supplierMassKgPerMeter": 1.13,
+      "supplierPageSha256": "7be242a90481c1962323b9b3c59c0cf9ea72fb6eca93a08885ac7d3ec55923a8"
+    },
+    "rozmet-2207": {
+      "categoryId": "rozmet-cat-kvadrat",
+      "sourceUrl": "https://rozmet.ru/production/kvadrat/kvadrat_14/",
+      "sourceProductName": "Квадрат стальной №14",
+      "section": "14",
+      "referenceStandard": "ГОСТ 2591-2006",
+      "theoreticalMassKgPerMeter": 1.539,
+      "displayMassKgPerMeter": 1.54,
+      "lengthRangeMeters": [
+        6,
+        6
+      ],
+      "supplierMassKgPerMeter": 1.54,
+      "supplierPageSha256": "fe93a819503ecdef3752c3cf08a07a1e455690e74b642dbc97e2dc8b21efe9a2"
+    },
+    "rozmet-26579": {
+      "categoryId": "rozmet-cat-kvadrat",
+      "sourceUrl": "https://rozmet.ru/production/kvadrat/kvadrat_16/",
+      "sourceProductName": "Квадрат стальной №16",
+      "section": "16",
+      "referenceStandard": "ГОСТ 2591-2006",
+      "theoreticalMassKgPerMeter": 2.01,
+      "displayMassKgPerMeter": 2.01,
+      "lengthRangeMeters": [
+        6,
+        6
+      ],
+      "supplierMassKgPerMeter": 1.54,
+      "supplierPageSha256": "ebdb52fbea008ba0c930a88dbacbab6f4ddca5d5bff0128dbb4cb57bb4ffeb32"
+    },
+    "rozmet-28995": {
+      "categoryId": "rozmet-cat-kvadrat",
+      "sourceUrl": "https://rozmet.ru/production/kvadrat/kvadrat_18/",
+      "sourceProductName": "Квадрат стальной №18",
+      "section": "18",
+      "referenceStandard": "ГОСТ 2591-2006",
+      "theoreticalMassKgPerMeter": 2.543,
+      "displayMassKgPerMeter": 2.54,
+      "lengthRangeMeters": [
+        6,
+        6
+      ],
+      "supplierMassKgPerMeter": 2.54,
+      "supplierPageSha256": "0340e5c0f11d6895380eab72f25b7ff9af325cbd0e385d3174fbb2cc3d2dcdfd"
+    },
+    "rozmet-2208": {
+      "categoryId": "rozmet-cat-kvadrat",
+      "sourceUrl": "https://rozmet.ru/production/kvadrat/kvadrat_20/",
+      "sourceProductName": "Квадрат стальной №20",
+      "section": "20",
+      "referenceStandard": "ГОСТ 2591-2006",
+      "theoreticalMassKgPerMeter": 3.14,
+      "displayMassKgPerMeter": 3.14,
+      "lengthRangeMeters": [
+        6,
+        6
+      ],
+      "supplierMassKgPerMeter": 3.14,
+      "supplierPageSha256": "365e686a340694545a8c275074493ef557ff7eeefa5f912934298b12b2e1be42"
+    }
+  }
+}

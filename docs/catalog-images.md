@@ -59,6 +59,18 @@ or generate extra variants solely to satisfy this checklist.
    mismatch. Matching incoming files to stored files alone is insufficient to
    declare the existing image set visually correct.
 
+## VGP pipe product illustrations
+
+The ВГП table uses the owner's marked and clean 2400 × 1800 photographs in
+`public/images/catalog/truba-kruglaya/vgp/`. The bottom dimension shows the
+outside diameter from `diameterMm`. The Ду15 master has «50 мм» at this location.
+The published Ду15 illustration uses its catalog value «Ø 21,3 мм».
+The upper-left arrows mark one wall. All variants retain the same photograph.
+
+Preview a variant with `node scripts/render-vgp-images.mjs --preview local-54870`.
+Use `--write` to refresh the table images and their catalog signatures, then run
+`node scripts/catalog-image-versions.mjs` to refresh image versions.
+
 ## Beam product illustrations
 
 The 38 beam rows use the four marked 2400 × 1800 JPGs supplied for Б, Ш, К and М.
@@ -68,6 +80,36 @@ The seven supplier rows with a reference mass show the catalogue calculator's
 kg/m value under «Справочная масса» and keep symbolic dimension labels.
 The [beam template guide](../imports/beam-image-template/README.md) lists the
 source tables, preview and write commands, and treatment of incomplete records.
+
+## Steel strip product illustrations
+
+The 19 «Полоса стальная» rows use the owner's 20×4 mm marked reference and
+clean photograph from `public/images/catalog/polosa/`. Each row shows its
+width below the cut face and its thickness on the left. The length comes
+from the product specifications, including the 5,85–6 м range for 100×4 mm.
+
+All 19 supplier cards were checked on 21.11.2026. Their source URLs, page
+hashes, dimensions, delivery lengths and mass discrepancies are recorded in
+`data/flat-steel-specifications.json`. Seven masses differ substantially from
+the nominal calculation and two differ by 0.01 kg/m. The public catalog applies
+these verified parameters by ID, source URL and section through `lib/flatSteel.ts`.
+It also supplies the mass to the compact cart catalog. The image renderer reads
+the same mass, rounding its label to two decimals. Product characteristics keep
+three-decimal precision, matching the standard's tables.
+
+The nominal formula is `width × thickness × 0.00785` kg/m for dimensions in
+millimetres. The density convention (7 850 kg/m³) comes from
+[ГОСТ 103-2006, Table 1, Note 1](https://www.metall-energy.ru/data/file/gosty/polosa/gost_103-2006.pdf).
+40×3 lies outside this standard's thickness scope and uses a geometric mass
+calculation. Clause 2.3 covers 80×4 and 100×4 by agreed specification.
+The public descriptions use each product's confirmed dimensions and remove
+copied sizes and obsolete ГОСТ 103-76 claims. Steel grade, manufacturing method,
+accuracy class and the shipment's actual standard require supplier documentation.
+
+Preview the 100×4 mm image with
+`node scripts/render-flat-steel-images.mjs --preview rozmet-12050`.
+After visual review run `node scripts/render-flat-steel-images.mjs --write`,
+then `node scripts/catalog-image-versions.mjs`.
 
 ## Product illustrations for the remaining categories
 
@@ -86,15 +128,6 @@ patches, saved before/after comparisons and visual verification.
 
 Family-specific descriptions below document the original numeric annotation
 pass. The final heading and palette corrections described above follow it.
-
-The steel strip category now displays «Полоса стальная», and its 19 products
-use names such as «Полоса стальная 40×4 мм». Their illustration headings match
-the public names; the photos, dimensions and other pixels remain unchanged.
-The supplier names and historical №-removal recipe stay archived intact.
-`node scripts/rename-flat-steel-illustrations.mjs` prepares bounded heading-only
-previews; `--apply-reviewed` publishes the reviewed files and updates their
-catalog signatures. Refresh image versions afterwards. Before/after files and
-the review record are in `output/image-edits/flat-steel-names/`.
 
 `data/product-illustration-sources.json` maps reviewed source photos to a product
 or a product type. Keep these images free of printed dimensions from the donor

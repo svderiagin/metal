@@ -31,11 +31,11 @@ async function pixels(source) {
 }
 
 async function loadTemplate(layout) {
-  const {folder, clean, profile} = layout;
+  const {folder, profile} = layout;
   const root = "/images/catalog/balka";
   const photoUrl = `${root}/${folder}/balka_${folder}_2400_1800_marked.jpg`;
   const [markedPixels, cleanPixels] = await Promise.all([
-    pixels(`public${photoUrl}`), pixels(`public${root}/originals/balka-${clean}.png`),
+    pixels(`public${photoUrl}`), pixels(`public${root}/${folder}/balka_${folder}_2400_1800_original.jpg`),
   ]);
   const section = sections[profile];
   return {layout, photoUrl, markedPixels, cleanPixels, labels: {

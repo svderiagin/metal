@@ -12,7 +12,7 @@ const {getSquareProductParameters, getSquareProductSpecifications} = readProject
 const {getVariantAttribute, getVariantFilterKeys} = readProjectData('lib/variantPresentation.ts');
 const squares = productVariants.filter(p => p.categoryId === 'rozmet-cat-kvadrat');
 
-test('all seven squares have distinct illustrations without changing source product fields', () => {
+test('all seven squares have distinct illustrations without changing source commercial fields', () => {
   assert.equal(squares.length, 7);
   assert.equal(Object.keys(mapping.products).length, squares.length);
   assert.equal(new Set(squares.map(p => p.imageUrls[0])).size, squares.length);
@@ -20,7 +20,7 @@ test('all seven squares have distinct illustrations without changing source prod
     const {imageUrls, ...actual} = product;
     const {imageUrls: originalImages, ...expected} = source.products.find(p => p.id === product.id);
     assert.ok(originalImages.length);
-    assert.deepEqual(actual, expected, product.id);
+    for (const key of ["id","sku","slug","categoryId","subcategoryId","productTypeId","sourceReference","price","priceQualifier","currency","priceUnit","unit","availability","inStock","quoteOnly","featured"]) assert.deepEqual(actual[key], expected[key], product.id + ': ' + key);
     assert.equal(imageUrls.length, 1);
     assert.equal(imageUrls[0], mapping.products[product.id].imageUrl);
     assert.equal(mapping.products[product.id].sourceUrl, product.sourceReference);
@@ -43,7 +43,7 @@ test('square table, filters and image labels agree on section, catalog length an
     assert.equal(getVariantAttribute(product, 'size'), parameters.section);
   }
   const sixteen = getSquareProductParameters(squares.find(p => p.id === 'rozmet-26579'));
-  assert.equal(sixteen.mass, '1,54\u00a0кг/м', 'do not silently replace supplier mass with a formula');
+  assert.equal(sixteen.mass, '2,01\u00a0кг/м', 'GOST 2591-2006 table 1: 16 mm square');
   assert.equal(getSquareProductParameters({...squares[0], name: 'Нет номера'}), null);
 });
 
