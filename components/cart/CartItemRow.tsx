@@ -9,7 +9,8 @@ import {QuantitySelector} from "./QuantitySelector";
 import {getProductVariantById} from "@/lib/cartCatalog";
 import {calculateLineTotal, calculateMeasuredLineTotal, getCartMeasurementQuantityOptions, tonsToMeters} from "@/lib/orderMeasurement";
 import {formatCartQuantity, formatMeasuredQuantity, formatQuantityForInput} from "@/lib/cartQuantityInput";
-import {isVgpVariant, wholeVgpOrder} from "@/lib/vgp";
+import {isWholePipeVariant} from "@/lib/pipeFamily";
+import {wholePipeOrder} from "@/lib/wholePipeOrder";
 import {isDemonstrationProduct, requiresOfferConfirmation} from "@/lib/catalogOffer";
 import {CartAmount} from "./CartAmount";
 import styles from "./CartItemRow.module.css";
@@ -22,7 +23,7 @@ export function CartItemRow({line, onRemove}: {line: CartLine; onRemove: () => v
   const measurement = line.measurement ?? (product?.unit === "ton" && canConvert ? {
     inputMode: "ton" as const, meters: tonsToMeters(line.quantity, product.weightPerMeterKg!)!, weightTons: line.quantity,
   } : undefined);
-  const vgp = !!product && isVgpVariant(product);
+  const wholePipe = !!product && isWholePipeVariant(product);
   const meterOptions = product && measurement ? getCartMeasurementQuantityOptions(product, "meter") : undefined;
   const tonOptions = product && measurement ? getCartMeasurementQuantityOptions(product, "ton") : undefined;
   const priceRequiresQuote = !product || requiresOfferConfirmation(product) || product.price === null || product.quoteOnly || product.priceQualifier === "from";
@@ -64,20 +65,20 @@ export function CartItemRow({line, onRemove}: {line: CartLine; onRemove: () => v
               value={mode === "meter" ? measurement.meters : measurement.weightTons}
               onChange={quantity => updateQuantity(line.productId, quantity, mode)} disabled={!product || !canConvert}
               {...options}
-              step={vgp ? options?.minimum : mode === "meter" ? 1 : 0.001}
+              step={wholePipe ? options?.minimum : mode === "meter" ? 1 : 0.001}
               formatValue={(quantity, grouped) => formatMeasuredQuantity(quantity, mode, grouped)}
               hasPositiveTotal={canConvert && !priceRequiresQuote ? quantity => (mode === "meter"
                 ? calculateMeasuredLineTotal(quantity, product.weightPerMeterKg!, product.pricePerTon!)
                 : calculateLineTotal(quantity, product.pricePerTon!)) !== null : undefined}
-              normalizeQuantity={product && vgp ? quantity => {
-                const order = wholeVgpOrder(product, quantity, mode);
+              normalizeQuantity={product && wholePipe ? quantity => {
+                const order = wholePipeOrder(product, quantity, mode);
                 if (!order) return null;
                 const exact = mode === "meter" ? order.meters : order.weightTons;
                 return {value: exact, ...(Math.abs(exact - quantity) > Math.max(1, quantity) * 1e-9
                   ? {message: `Объём округлён вверх до целых труб · ${order.pieces} шт.`} : {})};
               } : undefined}/>;
           })}
-          {vgp && product?.lengthMeters ? <p className="max-w-64 text-xs text-slate-600 dark:text-slate-400">
+          {wholePipe && product?.lengthMeters ? <p className="max-w-64 text-xs text-slate-600 dark:text-slate-400">
             Целыми трубами по {formatCartQuantity(product.lengthMeters)} м
           </p> : null}
         </div>

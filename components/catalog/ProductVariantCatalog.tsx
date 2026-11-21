@@ -4,8 +4,8 @@ import {type ReactNode, useState} from "react";
 import {QuoteRequestProvider} from "@/components/forms/QuoteRequestContext";
 import {RequestQuoteSection} from "@/components/home/RequestQuoteSection";
 import {useLinkedVariant} from "@/hooks/useLinkedVariant";
-import {BeamVariantCatalog, isMeasuredRebarVariant, RebarVariantCatalog, VgpVariantCatalog, ProfilePipeVariantCatalog} from "./RebarVariantCatalog";
-import {isVgpVariant} from "@/lib/vgp";
+import {BeamVariantCatalog, isMeasuredRebarVariant, RebarVariantCatalog, VgpVariantCatalog, ElectroweldedPipeVariantCatalog, ProfilePipeVariantCatalog} from "./RebarVariantCatalog";
+import {isVgpVariant, isGalvanizedElectroweldedVariant} from "@/lib/pipeFamily";
 import {isProfilePipeVariant} from "@/lib/profilePipe";
 import {isProfileSheetVariant} from "@/lib/profileSheet";
 import {isMetalMeshVariant} from "@/lib/metalMesh";
@@ -48,6 +48,7 @@ function VariantCatalogContent({
   }
   if (categorySlug === "balka") return <BeamVariantCatalog variants={variants}/>;
   if (variants.length > 0 && variants.every(isVgpVariant)) return <VgpVariantCatalog variants={variants}/>;
+  if (variants.length > 0 && variants.every(isGalvanizedElectroweldedVariant)) return <ElectroweldedPipeVariantCatalog variants={variants}/>;
   const isA500c = categorySlug === "armatura" && variants.every(v => v.subcategoryId === "cat-arm-sub-1");
   if (categorySlug === "armatura" && variants.every(isMeasuredRebarVariant)) {
     return <RebarVariantCatalog variants={variants}/>;

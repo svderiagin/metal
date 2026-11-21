@@ -395,16 +395,6 @@
     "photoUrl": "/images/catalog/setka-metallicheskaya/setka-svarnaya-karty.jpg",
     "signature": "624768d0"
   },
-  "prd-073": {
-    "imageUrl": "/images/catalog/product-illustrations/prd-073.webp",
-    "photoUrl": "/images/catalog/illustration-sources/round-steel-tube.jpg",
-    "signature": "606b9da3"
-  },
-  "prd-074": {
-    "imageUrl": "/images/catalog/product-illustrations/prd-074.webp",
-    "photoUrl": "/images/catalog/illustration-sources/round-steel-tube.jpg",
-    "signature": "fc675115"
-  },
   "prd-087": {
     "imageUrl": "/images/catalog/product-illustrations/prd-087.webp",
     "photoUrl": "/images/catalog/illustration-sources/square-steel-tube.jpg",
@@ -736,59 +726,59 @@
     "signature": "6ca85fb9"
   },
   "local-302": {
-    "imageUrl": "/images/catalog/product-illustrations/local-302.webp",
-    "photoUrl": "/images/catalog/illustration-sources/round-steel-tube.jpg",
+    "imageUrl": "/images/catalog/truba-kruglaya/elektrosvarnaya/local-302.jpg",
+    "photoUrl": "/images/catalog/truba-kruglaya/elektrosvarnaya/truba_elektrosvarnaya_2400_1800_original.jpg",
     "signature": "7841919b"
   },
   "local-305": {
-    "imageUrl": "/images/catalog/product-illustrations/local-305.webp",
-    "photoUrl": "/images/catalog/illustration-sources/round-steel-tube.jpg",
+    "imageUrl": "/images/catalog/truba-kruglaya/elektrosvarnaya/local-305.jpg",
+    "photoUrl": "/images/catalog/truba-kruglaya/elektrosvarnaya/truba_elektrosvarnaya_2400_1800_original.jpg",
     "signature": "12e70cc1"
   },
   "local-309": {
-    "imageUrl": "/images/catalog/product-illustrations/local-309.webp",
-    "photoUrl": "/images/catalog/illustration-sources/round-steel-tube.jpg",
+    "imageUrl": "/images/catalog/truba-kruglaya/elektrosvarnaya/local-309.jpg",
+    "photoUrl": "/images/catalog/truba-kruglaya/elektrosvarnaya/truba_elektrosvarnaya_2400_1800_original.jpg",
     "signature": "bc876e01"
   },
   "local-311": {
-    "imageUrl": "/images/catalog/product-illustrations/local-311.webp",
-    "photoUrl": "/images/catalog/illustration-sources/round-steel-tube.jpg",
+    "imageUrl": "/images/catalog/truba-kruglaya/elektrosvarnaya/local-311.jpg",
+    "photoUrl": "/images/catalog/truba-kruglaya/elektrosvarnaya/truba_elektrosvarnaya_2400_1800_original.jpg",
     "signature": "c754db6b"
   },
   "local-313": {
-    "imageUrl": "/images/catalog/product-illustrations/local-313.webp",
-    "photoUrl": "/images/catalog/illustration-sources/round-steel-tube.jpg",
+    "imageUrl": "/images/catalog/truba-kruglaya/elektrosvarnaya/local-313.jpg",
+    "photoUrl": "/images/catalog/truba-kruglaya/elektrosvarnaya/truba_elektrosvarnaya_2400_1800_original.jpg",
     "signature": "08e135db"
   },
   "local-316": {
-    "imageUrl": "/images/catalog/product-illustrations/local-316.webp",
-    "photoUrl": "/images/catalog/illustration-sources/round-steel-tube.jpg",
+    "imageUrl": "/images/catalog/truba-kruglaya/elektrosvarnaya/local-316.jpg",
+    "photoUrl": "/images/catalog/truba-kruglaya/elektrosvarnaya/truba_elektrosvarnaya_2400_1800_original.jpg",
     "signature": "86622584"
   },
   "local-318": {
-    "imageUrl": "/images/catalog/product-illustrations/local-318.webp",
-    "photoUrl": "/images/catalog/illustration-sources/round-steel-tube.jpg",
+    "imageUrl": "/images/catalog/truba-kruglaya/elektrosvarnaya/local-318.jpg",
+    "photoUrl": "/images/catalog/truba-kruglaya/elektrosvarnaya/truba_elektrosvarnaya_2400_1800_original.jpg",
     "signature": "15453b0c"
   },
   "local-333": {
-    "imageUrl": "/images/catalog/product-illustrations/local-333.webp",
-    "photoUrl": "/images/catalog/illustration-sources/round-steel-tube.jpg",
+    "imageUrl": "/images/catalog/truba-kruglaya/elektrosvarnaya/local-333.jpg",
+    "photoUrl": "/images/catalog/truba-kruglaya/elektrosvarnaya/truba_elektrosvarnaya_2400_1800_original.jpg",
     "signature": "0c0e0838"
   },
   "local-337": {
-    "imageUrl": "/images/catalog/product-illustrations/local-337.webp",
-    "photoUrl": "/images/catalog/illustration-sources/round-steel-tube.jpg",
+    "imageUrl": "/images/catalog/truba-kruglaya/elektrosvarnaya/local-337.jpg",
+    "photoUrl": "/images/catalog/truba-kruglaya/elektrosvarnaya/truba_elektrosvarnaya_2400_1800_original.jpg",
     "signature": "3b1756b5"
   },
   "local-443": {
-    "imageUrl": "/images/catalog/product-illustrations/local-443.webp",
-    "photoUrl": "/images/catalog/truba-kruglaya/cover/hotoks-galvanized-welded-seam.webp",
-    "signature": "be9a2c75"
+    "imageUrl": "/images/catalog/truba-kruglaya/elektrosvarnaya_ocinkovannaya/local-443.jpg",
+    "photoUrl": "/images/catalog/truba-kruglaya/elektrosvarnaya_ocinkovannaya/truba_elektrosvarnaya_ocinkovannaya_2400_1800_original.jpg",
+    "signature": "5803685a"
   },
   "local-984": {
-    "imageUrl": "/images/catalog/product-illustrations/local-984.webp",
-    "photoUrl": "/images/catalog/truba-kruglaya/cover/steel-expert-galvanized-vgp-ends.jpg",
-    "signature": "b8fb2ef1"
+    "imageUrl": "/images/catalog/truba-kruglaya/vgp_ocinkovannaya/truba_vgp_ocinkovannaya_2400_1800_marked.jpg",
+    "photoUrl": "/images/catalog/truba-kruglaya/vgp_ocinkovannaya/truba_vgp_ocinkovannaya_2400_1800_original.jpg",
+    "signature": "37ade87f"
   },
   "local-1421": {
     "imageUrl": "/images/catalog/product-illustrations/local-1421.webp",
@@ -811,8 +801,8 @@
     "signature": "4a698cd3"
   },
   "local-3963": {
-    "imageUrl": "/images/catalog/product-illustrations/local-3963.webp",
-    "photoUrl": "/images/catalog/illustration-sources/round-steel-tube.jpg",
+    "imageUrl": "/images/catalog/truba-kruglaya/elektrosvarnaya/local-3963.jpg",
+    "photoUrl": "/images/catalog/truba-kruglaya/elektrosvarnaya/truba_elektrosvarnaya_2400_1800_original.jpg",
     "signature": "f6025c18"
   },
   "local-6123": {
@@ -861,8 +851,8 @@
     "signature": "ed56bf2d"
   },
   "local-9211": {
-    "imageUrl": "/images/catalog/product-illustrations/local-9211.webp",
-    "photoUrl": "/images/catalog/illustration-sources/round-steel-tube.jpg",
+    "imageUrl": "/images/catalog/truba-kruglaya/elektrosvarnaya/local-9211.jpg",
+    "photoUrl": "/images/catalog/truba-kruglaya/elektrosvarnaya/truba_elektrosvarnaya_2400_1800_original.jpg",
     "signature": "95be9b28"
   },
   "local-17091": {
@@ -881,13 +871,13 @@
     "signature": "ac67bec8"
   },
   "local-40706": {
-    "imageUrl": "/images/catalog/product-illustrations/local-40706.webp",
-    "photoUrl": "/images/catalog/illustration-sources/round-steel-tube.jpg",
+    "imageUrl": "/images/catalog/truba-kruglaya/elektrosvarnaya/local-40706.jpg",
+    "photoUrl": "/images/catalog/truba-kruglaya/elektrosvarnaya/truba_elektrosvarnaya_2400_1800_original.jpg",
     "signature": "57c75d99"
   },
   "local-40707": {
-    "imageUrl": "/images/catalog/product-illustrations/local-40707.webp",
-    "photoUrl": "/images/catalog/illustration-sources/round-steel-tube.jpg",
+    "imageUrl": "/images/catalog/truba-kruglaya/elektrosvarnaya/local-40707.jpg",
+    "photoUrl": "/images/catalog/truba-kruglaya/elektrosvarnaya/truba_elektrosvarnaya_2400_1800_original.jpg",
     "signature": "a9c9f127"
   },
   "local-44188": {
@@ -896,13 +886,13 @@
     "signature": "fcc2add0"
   },
   "local-52334": {
-    "imageUrl": "/images/catalog/product-illustrations/local-52334.webp",
-    "photoUrl": "/images/catalog/illustration-sources/round-steel-tube.jpg",
+    "imageUrl": "/images/catalog/truba-kruglaya/elektrosvarnaya/local-52334.jpg",
+    "photoUrl": "/images/catalog/truba-kruglaya/elektrosvarnaya/truba_elektrosvarnaya_2400_1800_original.jpg",
     "signature": "d916cd76"
   },
   "local-53918": {
-    "imageUrl": "/images/catalog/product-illustrations/local-53918.webp",
-    "photoUrl": "/images/catalog/illustration-sources/round-steel-tube.jpg",
+    "imageUrl": "/images/catalog/truba-kruglaya/elektrosvarnaya/local-53918.jpg",
+    "photoUrl": "/images/catalog/truba-kruglaya/elektrosvarnaya/truba_elektrosvarnaya_2400_1800_original.jpg",
     "signature": "a7adb6d0"
   },
   "local-54870": {
@@ -916,18 +906,18 @@
     "signature": "28ff752c"
   },
   "local-58627": {
-    "imageUrl": "/images/catalog/product-illustrations/local-58627.webp",
-    "photoUrl": "/images/catalog/illustration-sources/round-steel-tube.jpg",
+    "imageUrl": "/images/catalog/truba-kruglaya/elektrosvarnaya/local-58627.jpg",
+    "photoUrl": "/images/catalog/truba-kruglaya/elektrosvarnaya/truba_elektrosvarnaya_2400_1800_original.jpg",
     "signature": "86e8477b"
   },
   "local-58631": {
-    "imageUrl": "/images/catalog/product-illustrations/local-58631.webp",
-    "photoUrl": "/images/catalog/illustration-sources/round-steel-tube.jpg",
+    "imageUrl": "/images/catalog/truba-kruglaya/elektrosvarnaya/local-58631.jpg",
+    "photoUrl": "/images/catalog/truba-kruglaya/elektrosvarnaya/truba_elektrosvarnaya_2400_1800_original.jpg",
     "signature": "e99f478d"
   },
   "local-58634": {
-    "imageUrl": "/images/catalog/product-illustrations/local-58634.webp",
-    "photoUrl": "/images/catalog/illustration-sources/round-steel-tube.jpg",
+    "imageUrl": "/images/catalog/truba-kruglaya/elektrosvarnaya/local-58634.jpg",
+    "photoUrl": "/images/catalog/truba-kruglaya/elektrosvarnaya/truba_elektrosvarnaya_2400_1800_original.jpg",
     "signature": "f685b568"
   },
   "local-61299": {
@@ -936,8 +926,8 @@
     "signature": "c15ea635"
   },
   "local-62388": {
-    "imageUrl": "/images/catalog/product-illustrations/local-62388.webp",
-    "photoUrl": "/images/catalog/illustration-sources/round-steel-tube.jpg",
+    "imageUrl": "/images/catalog/truba-kruglaya/elektrosvarnaya/local-62388.jpg",
+    "photoUrl": "/images/catalog/truba-kruglaya/elektrosvarnaya/truba_elektrosvarnaya_2400_1800_original.jpg",
     "signature": "17e38e9c"
   },
   "local-65599": {
@@ -1191,8 +1181,8 @@
     "signature": "1b21a707"
   },
   "local-125936": {
-    "imageUrl": "/images/catalog/product-illustrations/local-125936.webp",
-    "photoUrl": "/images/catalog/illustration-sources/round-steel-tube.jpg",
+    "imageUrl": "/images/catalog/truba-kruglaya/elektrosvarnaya/local-125936.jpg",
+    "photoUrl": "/images/catalog/truba-kruglaya/elektrosvarnaya/truba_elektrosvarnaya_2400_1800_original.jpg",
     "signature": "085ad539"
   },
   "local-11123500": {

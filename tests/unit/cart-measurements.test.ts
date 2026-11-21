@@ -8,7 +8,7 @@ import {revalidateCartPrice} from "../../lib/cartPricing";
 import {calculateLineTotal, calculateMeasuredLineTotal, calculatePieceLineTotal,
   getCartMeasurementQuantityOptions, getMeasurementQuantityOptions, tonsToMeters} from "../../lib/orderMeasurement";
 import {isDemonstrationProduct} from "../../lib/catalogOffer";
-import {isVgpVariant} from "../../lib/vgp";
+import {isWholePipeVariant} from "../../lib/pipeFamily";
 import {parseCreateOrderInput} from "../../lib/server/validation";
 import {createTrustedOrder} from "../../lib/server/orders";
 import {createOrderInput} from "../../lib/checkout";
@@ -210,7 +210,7 @@ test("all purchasable measured variants share their physical caps across cart an
     assert.ok(tonOptions.maximum > 0 && tonOptions.maximum <= 999, product.id);
     close(tonsToMeters(tonOptions.minimum, product.weightPerMeterKg!), meterOptions.minimum);
     close(tonsToMeters(tonOptions.maximum, product.weightPerMeterKg!), meterOptions.maximum);
-    if (isVgpVariant(product)) {
+    if (isWholePipeVariant(product)) {
       close(meterOptions.maximum / product.lengthMeters!, Math.round(meterOptions.maximum / product.lengthMeters!));
       assert.ok((meterOptions.maximum + product.lengthMeters!) * product.weightPerMeterKg! / 1000 > 999, product.id);
     } else {
@@ -238,12 +238,12 @@ test("all purchasable measured variants share their physical caps across cart an
       assert.equal(trusted.items[0].unitPrice, product.pricePerTon, product.id);
       assert.equal(trusted.totalAmount, line.estimatedTotal, product.id);
     }
-    const extraMeters = isVgpVariant(product) ? product.lengthMeters! : 1;
+    const extraMeters = isWholePipeVariant(product) ? product.lengthMeters! : 1;
     const oversizedMeters = meterOptions.maximum + extraMeters;
     const oversizedTons = oversizedMeters * product.weightPerMeterKg! / 1000;
     assert.equal(updateCartItem(fromTons, product, oversizedMeters, "meter"), fromTons, product.id);
     assert.equal(updateCartItem(fromTons, product, oversizedTons, "ton"), fromTons, product.id);
-    if (!isVgpVariant(product)) {
+    if (!isWholePipeVariant(product)) {
       const justAbove = 999.000000001;
       assert.equal(updateCartItem(fromTons, product, justAbove, "ton"), fromTons, product.id);
       const parsed = parseCreateOrderInput(orderInput([{productId: product.id, quantity: justAbove,

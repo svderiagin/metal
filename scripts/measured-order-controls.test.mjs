@@ -48,6 +48,7 @@ function setup(id, kind = 'beam') {
     'react/jsx-runtime': {jsx, jsxs: jsx, Fragment: 'fragment'},
     '@/lib/beam': readProjectData('lib/beam.ts'),
     '@/lib/vgp': readProjectData('lib/vgp.ts'),
+    '@/lib/wholePipeOrder': readProjectData('lib/wholePipeOrder.ts'),
     '@/lib/quoteRequest': readProjectData('lib/quoteRequest.ts'),
     '@/lib/orderMeasurement': readProjectData('lib/orderMeasurement.ts'),
     '@/lib/catalogNumberInput': readProjectData('lib/catalogNumberInput.ts'),

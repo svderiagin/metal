@@ -21,7 +21,7 @@ test('round-pipe families keep their products under round-pipe identifiers', () 
     Array.from(subcategories.filter(subcategory => subcategory.categoryId === 'cat-trk'), subcategory => subcategory.id),
     ['cat-trk-sub-1', 'cat-trk-sub-3', 'cat-trk-sub-2', 'cat-trk-sub-4'],
   );
-  assert.equal(productVariants.filter(product => product.categoryId === 'cat-trk').length, 31);
+  assert.equal(productVariants.filter(product => product.categoryId === 'cat-trk').length, 29);
 });
 
 test('obsolete category source, image and route are removed', () => {

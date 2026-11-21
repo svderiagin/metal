@@ -89,24 +89,24 @@ test('all seven VGP rows convert whole pipes precisely and reject fractional len
   }
 });
 
-test('archived MS-0071/MS-0072 remain editable but cannot be found, counted or purchased', () => {
-  for (const id of ['prd-071', 'prd-072']) {
+test('archived round-pipe demos remain editable but cannot be found, counted or purchased', () => {
+  for (const id of ['prd-071', 'prd-072', 'prd-073', 'prd-074']) {
     assert.ok(existingVariants.some(p => p.id === id));
     assert.equal(catalog.getProductVariantById(id), undefined);
     const line = createCartLines([{productId:id, quantity:1}])[0];
     assert.ok(line.invalidReason); assert.equal(line.estimatedTotal, 0);
   }
   const search = createCatalogSearchIndex(products);
-  for (const query of ['MS-0071', 'MS-0072']) assert.equal(search.search(query).total, 0);
+  for (const query of ['MS-0071', 'MS-0072', 'MS-0073', 'MS-0074']) assert.equal(search.search(query).total, 0);
 });
 
 test('VGP search accepts Ду, synonyms, equivalent dimensions and exact ГОСТ years', () => {
-  for (const search of [createCatalogSearchIndex(products, catalog.getAllProductTypes(), catalog.getAllCategories()), createCatalogSearchIndex(vgp)]) {
+  for (const [search, expectedCount] of [[createCatalogSearchIndex(products, catalog.getAllProductTypes(), catalog.getAllCategories()), 8], [createCatalogSearchIndex(vgp), 7]]) {
     for (const query of ['Труба ВГП 15', 'Водогазопроводная труба Ду15', 'Труба водогазопроводная 15х2.8', 'ВГП 15×2,8']) {
       assert.deepEqual(Array.from(search.search(query).hits, h => h.product.sku), ['МП-258'], query);
     }
     assert.equal(search.search('ВГП Ду16').total, 0);
-    assert.equal(search.search('ВГП ГОСТ 3262-75').total, 7);
+    assert.equal(search.search('ВГП ГОСТ 3262-75').total, expectedCount);
     assert.equal(search.search('ВГП ГОСТ 3262-99').total, 0);
   }
 });

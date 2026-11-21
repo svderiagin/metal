@@ -11,8 +11,8 @@ const find = (id: string) => products.find(product => product.id === id)!;
 
 test("unconfirmed demo offers cannot contribute prices or accept a stale cart purchase", () => {
   const demos = products.filter(isDemonstrationProduct);
-  assert.equal(demos.length, 13);
-  assert.equal(demos.filter(product => !product.demo).length, 7);
+  assert.equal(demos.length, 11);
+  assert.equal(demos.filter(product => !product.demo).length, 5);
   for (const product of demos.filter(product => !product.priceConfirmed)) {
     const originalPrice = product.price;
     const displayed = storefrontVariant(product);

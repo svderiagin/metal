@@ -25,7 +25,7 @@ const cache = new Map();
 const {productVariants} = readProjectData('data/products/index.ts', cache);
 const {isVgpVariant} = readProjectData('lib/vgp.ts', cache);
 const {productIllustrationSignature} = readProjectData('lib/productPreviewImage.ts', cache);
-const products = productVariants.filter(p => isVgpVariant(p) && (write || p.id === args[1]));
+const products = productVariants.filter(p => isVgpVariant(p) && p.subcategoryId === 'cat-trk-sub-1' && (write || p.id === args[1]));
 assert.ok(products.length, 'No matching VGP product');
 const number = new Intl.NumberFormat('ru-RU');
 

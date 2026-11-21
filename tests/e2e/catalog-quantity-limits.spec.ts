@@ -3,6 +3,7 @@ import {beamReferenceMassKg} from "../../lib/beam";
 import {getAllProductVariants} from "../../lib/catalog";
 import {isDemonstrationProduct} from "../../lib/catalogOffer";
 import {isProfilePipeVariant} from "../../lib/profilePipe";
+import {isWholePipeVariant} from "../../lib/pipeFamily";
 import type {ProductVariant} from "../../types/product";
 import {expect, productPath, test, visibleProduct} from "../browser";
 
@@ -13,7 +14,7 @@ const formatTons = new Intl.NumberFormat("ru-RU", {useGrouping: false, maximumFr
 function maximumMeasurement(variant: ProductVariant) {
   const mass = isDemonstrationProduct(variant) ? undefined : variant.weightPerMeterKg ?? beamReferenceMassKg(variant);
   if (!mass) return {meters: null, tons: 999};
-  const pipe = variant.subcategoryId === "cat-trk-sub-1" ? variant.lengthMeters : undefined;
+  const pipe = isWholePipeVariant(variant) ? variant.lengthMeters : undefined;
   const meters = pipe ? Math.floor(999_000 / (mass * pipe)) * pipe : 999_000 / mass;
   return {meters, tons: pipe ? meters * mass / 1_000 : 999};
 }

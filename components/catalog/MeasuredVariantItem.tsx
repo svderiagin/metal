@@ -2,7 +2,8 @@
 
 import {useEffect, useState, type ReactNode} from "react";
 import {beamProfile, beamKind, beamReferenceMassKg, beamStandardLabel} from "@/lib/beam";
-import {vgpSize, vgpSeries, wholeVgpOrder} from "@/lib/vgp";
+import {vgpSize, vgpSeries} from "@/lib/vgp";
+import {wholePipeOrder} from "@/lib/wholePipeOrder";
 import {QuoteRequestButton} from "./QuoteRequestButton";
 import {formatQuoteProductName} from "@/lib/quoteRequest";
 import filterStyles from "./FilterPanel.module.css";
@@ -26,7 +27,7 @@ import {DetailsSummary} from "@/components/ui/DetailsSummary";
 
 export function MeasuredVariantItem({
   variant, view, kind, name,
-}: {variant: ProductVariant; view: "table" | "card"; kind: "rebar" | "beam" | "vgp" | "profile"; name?: string}) {
+}: {variant: ProductVariant; view: "table" | "card"; kind: "rebar" | "beam" | "vgp" | "pipe" | "profile"; name?: string}) {
   return kind === "profile" ? <ProfilePipeVariantItem variant={variant} view={view}/>
     : <TonnageMeasuredVariantItem variant={variant} view={view} kind={kind} name={name}/>;
 }
@@ -39,7 +40,7 @@ function TonnageMeasuredVariantItem({
 }: {
   variant: ProductVariant;
   name?: string;
-  kind: "rebar" | "beam" | "vgp";
+  kind: "rebar" | "beam" | "vgp" | "pipe";
   view: "table" | "card";
 }) {
   const {addItem, updateQuantity, removeItem, lines, hydrated} = useCart();
@@ -48,7 +49,8 @@ function TonnageMeasuredVariantItem({
   const referenceMass = beamReferenceMassKg(variant);
   const isRebar = kind === "rebar";
   const isVgp = kind === "vgp";
-  const roundToWholePipes = isVgp && hasMass && Number.isFinite(variant.lengthMeters) && (variant.lengthMeters ?? 0) > 0;
+  const isPipe = isVgp || kind === "pipe";
+  const roundToWholePipes = isPipe && hasMass && Number.isFinite(variant.lengthMeters) && (variant.lengthMeters ?? 0) > 0;
   const [detailsOpen, setDetailsOpen] = useState(false);
   const cartLine = lines.find((line) => line.productId === variant.id);
   const savedMeasurement = cartLine?.measurement;
@@ -72,7 +74,7 @@ function TonnageMeasuredVariantItem({
   const enteredMeters = draft === null ? savedMeters : readQuantity(meters, "meter");
   const enteredTons = draft === null ? savedTons : readQuantity(tons, "ton");
   const pipeQuantity = inputMode === "meter" ? enteredMeters : enteredTons;
-  const pipeOrder = roundToWholePipes && pipeQuantity !== null ? wholeVgpOrder(variant, pipeQuantity, inputMode) : null;
+  const pipeOrder = roundToWholePipes && pipeQuantity !== null ? wholePipeOrder(variant, pipeQuantity, inputMode) : null;
   const parsedMeters = roundToWholePipes ? pipeOrder?.meters ?? null : !hasMass ? enteredMeters : inputMode === "meter" ? enteredMeters : enteredTons === null ? null : tonsToMeters(enteredTons, mass);
   const parsedTons = roundToWholePipes ? pipeOrder?.weightTons ?? null : !hasMass ? enteredTons : inputMode === "ton" ? enteredTons : enteredMeters === null ? null : metersToTons(enteredMeters, mass);
   // A reference conversion is displayed in the opposite field. The cart and
@@ -81,7 +83,7 @@ function TonnageMeasuredVariantItem({
   const referenceMeters = referenceMass !== undefined && parsedTons !== null ? tonsToMeters(parsedTons, referenceMass) : null;
   const pricePerTon = variant.pricePerTon;
   const needsQuote = pricePerTon === undefined || variant.quoteOnly || variant.priceQualifier === "from"
-    || (isVgp && !roundToWholePipes) || (!hasMass && enteredMeters !== null && enteredMeters > 0);
+    || (isPipe && !roundToWholePipes) || (!hasMass && enteredMeters !== null && enteredMeters > 0);
   const canPurchase = !needsQuote && (variant.inStock || (variant.imported && variant.availability === "UNKNOWN"));
   const estimatedTotal = variant.quoteOnly ? null
     : referenceMass !== undefined && parsedMeters !== null && pricePerTon !== undefined ? calculateMeasuredLineTotal(parsedMeters, referenceMass, pricePerTon)
@@ -116,7 +118,7 @@ function TonnageMeasuredVariantItem({
         : hasChanges && canPurchase ? filterStyles.updateCartButton
           : filterStyles.cartButton;
   const status = message || (invalidDraft ? "Проверьте введённое значение."
-    : hasChanges ? "Не сохранено" : isVgp && pipeOrder && pipeOrder.pieces > 0 ? `${pipeOrder.pieces} шт. · ${formatNumber(pipeOrder.meters)} м`
+    : hasChanges ? "Не сохранено" : isPipe && pipeOrder && pipeOrder.pieces > 0 ? `${pipeOrder.pieces} шт. · ${formatNumber(pipeOrder.meters)} м`
       : "");
 
   function estimateTotal(orderMeters: number | null, orderTons: number | null) {
@@ -162,7 +164,7 @@ function TonnageMeasuredVariantItem({
     const exactQuantity = constrained.capped ? options.maximum
       : sameDisplayedQuantity ? previousExact ?? undefined : undefined;
     const parsed = exactQuantity ?? validQuantity(value, mode);
-    const whole = roundToWholePipes && parsed !== null ? wholeVgpOrder(variant, parsed, mode) : null;
+    const whole = roundToWholePipes && parsed !== null ? wholePipeOrder(variant, parsed, mode) : null;
     if (mode === "meter") {
       const converted = parsed === null ? null : roundToWholePipes ? whole?.weightTons ?? null : metersToTons(parsed, mass);
       setDraft({inputMode: mode, meters: value, tons: hasMass ? displayQuantity(converted, "ton") : "", exactQuantity});
@@ -187,7 +189,7 @@ function TonnageMeasuredVariantItem({
     });
     const quantity = parseOrderQuantity(corrected.value);
     if (quantity === null) return null;
-    const whole = roundToWholePipes ? wholeVgpOrder(variant, quantity, mode) : null;
+    const whole = roundToWholePipes ? wholePipeOrder(variant, quantity, mode) : null;
     const nextMeters = roundToWholePipes ? whole?.meters ?? null : mode === "meter" ? quantity : hasMass ? tonsToMeters(quantity, mass) : null;
     const nextTons = roundToWholePipes ? whole?.weightTons ?? null : mode === "ton" ? quantity : hasMass ? metersToTons(quantity, mass) : null;
     const exactQuantity = whole ? mode === "meter" ? whole.meters : whole.weightTons : quantity;
@@ -289,7 +291,12 @@ function TonnageMeasuredVariantItem({
     <p>{variant.description}</p>
   </div>;
 
-  const specifications = <CatalogVariantSpecifications items={[
+  const specifications = <CatalogVariantSpecifications items={kind === "pipe" ? [
+    {label: "Наружный Ø × стенка, мм", value: `${formatNumber(variant.diameterMm ?? 0)}×${formatNumber(variant.wallThicknessMm ?? 0)}`},
+    {label: "Стандарт", value: variant.standard},
+    {label: "Теоретическая масса без цинкового покрытия", value: hasMass ? `${formatNumber(mass)} кг/м` : "—"},
+    {label: "Длина по каталогу", value: variant.lengthMeters === undefined ? "—" : `${formatNumber(variant.lengthMeters)} м`},
+  ] : [
     {label: isVgp ? "Ду × стенка, мм" : "Профиль", value: isVgp ? vgpSize(variant) : beamProfile(variant)},
     {label: isVgp ? "Серия" : "Тип балки", value: isVgp ? vgpSeries(variant) : beamKind(variant)},
     {label: isVgp ? "Наружный Ø, мм" : "Сталь / класс",
@@ -297,7 +304,7 @@ function TonnageMeasuredVariantItem({
     ...(kind === "beam" && variant.standard ? [{label: "Стандарт", value: beamStandardLabel(variant)}] : []),
     referenceMass !== undefined
       ? {label: "Справочная масса по ГОСТ 35087-2024", value: `${formatNumber(referenceMass)} кг/м`}
-      : {label: "Теоретическая масса", value: hasMass ? `${formatNumber(mass)} кг/м` : "—"},
+      : {label: "Теоретическая масса", value: hasMass ? `${formatNumber(isVgp ? Math.round(mass * 100) / 100 : mass)} кг/м` : "—"},
     {label: "Длина", value: variant.lengthMeters === undefined ? "—" : `${formatNumber(variant.lengthMeters)} м`},
   ]}/>;
   const moreDetails = view === "card"
@@ -309,9 +316,9 @@ function TonnageMeasuredVariantItem({
   return <>
     <CatalogVariantLayout view={view} variant={variant} name={name} specifications={isDemonstrationProduct(variant)
       ? <p className="text-sm text-slate-600 dark:text-slate-400">Характеристики требуют подтверждения перед заказом.</p>
-      : <>{specifications}{isVgp && moreDetails}</>}
+      : <>{specifications}{isPipe && moreDetails}</>}
       price={price} order={order}/>
-    {isVgp && view === "table" && <tr id={`vgp-details-${variant.id}`} hidden={!detailsOpen}
+    {isPipe && view === "table" && <tr id={`vgp-details-${variant.id}`} hidden={!detailsOpen}
       className="border-t border-slate-200 bg-slate-50 dark:border-slate-700 dark:bg-slate-800/50"><td colSpan={8} className="p-4">{details}</td></tr>}
   </>;
 }

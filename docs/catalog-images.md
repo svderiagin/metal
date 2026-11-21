@@ -71,6 +71,79 @@ Preview a variant with `node scripts/render-vgp-images.mjs --preview local-54870
 Use `--write` to refresh the table images and their catalog signatures, then run
 `node scripts/catalog-image-versions.mjs` to refresh image versions.
 
+The galvanized DN25×2.8 offer (`local-984`) uses the owner's marked JPG in
+`public/images/catalog/truba-kruglaya/vgp_ocinkovannaya/` directly, with no pixel
+changes. Its 33.5 mm outside diameter and 2.18 kg/m label match the table.
+`data/vgp-galvanized-specifications.json` records GOST 3262-75 table 1 and the
+3% zinc allowance: 2.12 × 1.03 = 2.1836 kg/m. Conversion retains all four decimal
+places and follows the existing whole-pipe VGP order rule at the supplier's
+nominal 7.8 m length. The supplier's ±150 mm length tolerance remains in the
+description. Price is still on inquiry. The uncoated VGP renderer excludes this
+subcategory, and the generic illustration renderer protects the supplied image.
+
+## Electrowelded pipe source photographs
+
+The owner approved reusing the VGP photographs for electrowelded pipes on
+22.11.2026. The clean 2400 × 1800 JPGs are copied byte-for-byte:
+
+- `public/images/catalog/truba-kruglaya/elektrosvarnaya/truba_elektrosvarnaya_2400_1800_original.jpg`
+  comes from the uncoated `vgp/` original.
+- `public/images/catalog/truba-kruglaya/elektrosvarnaya_ocinkovannaya/truba_elektrosvarnaya_ocinkovannaya_2400_1800_original.jpg`
+  comes from the galvanized `vgp_ocinkovannaya/` original.
+
+These folders hold the sources for subsequent annotation. At the owner's request,
+save annotated outputs beside their originals as JPG, quality 100 and 4:4:4
+chroma sampling. Labels must
+use the electrowelded product's outside diameter, wall, length and verified mass;
+the VGP references' nominal-bore labels and values do not transfer to this family.
+
+Both electrowelded tables now use **21 annotated JPGs**: 20 ordinary pipes
+and one galvanized pipe. The production images are `<product-id>.jpg` beside
+their respective clean originals. `data/product-illustrations.json` connects
+each image to its SKU and retains the catalog signature. The generic renderer
+excludes these two families so it cannot replace the dedicated artwork.
+
+The two initial examples are also retained beside the originals:
+
+- `elektrosvarnaya/truba_elektrosvarnaya_57x3_marked_preview.jpg` — `local-302`,
+  outside diameter 57 mm, wall 3 mm, catalog length 12 m, steel mass 4.00 kg/m.
+- `elektrosvarnaya_ocinkovannaya/truba_elektrosvarnaya_ocinkovannaya_89x3_5_marked_preview.jpg`
+  — `local-443`, outside diameter 89 mm, wall 3.5 mm, catalog length 7.8 m,
+  steel mass 7.38 kg/m, explicitly excluding the zinc coating.
+
+Mass values were checked against
+[GOST 10704-91 table 1](https://internet-law.ru/documents/prod/gost_gosudarstvennyj-standart/2/gost_49231.html).
+All current files are **2400 × 1800 JPGs, quality 100, 4:4:4** rebuilt from the exact
+supplied clean originals at the owner's request. They replace the earlier
+generated previews. `node scripts/render-electrowelded-images.mjs --write` adds
+a transparent annotation layer using the same bundled Inter renderer as VGP;
+arrow and extension-line coordinates follow the respective marked references.
+Headings use spaces around `×`: `57 × 3` and `89 × 3,5`.
+The photograph is never resized, regenerated or retouched. Before final JPG
+encoding, the renderer checks every pixel outside the annotation alpha mask
+against the decoded source: **zero changed pixels**. JPEG encoding is lossy,
+so this invariant applies to the composition before encoding, not the final
+decoded JPG. Source hashes, labels and verification
+results are recorded in `imports/electrowelded-image-template/rendered.json`;
+native crops, the complete contact sheet and annotation masks are in
+`.tmp/electrowelded-original-qa/`. Use `--preview local-58634` for a non-reference
+325 × 10 mm variant without changing published mappings.
+
+Twenty-one illustrations have complete dimensions and the tabulated mass
+recorded in `imports/electrowelded-image-template/mass-reference.json`.
+The three supplier offers with a nominal length range retain **11–12 м**;
+this is not replaced with a fixed 12 m value. At the owner's request, the legacy
+demonstration records `prd-073` and `prd-074` were removed from the public catalog
+on 2026-11-22, including their illustration mappings. They remain archived in
+source data through `data/catalog-visibility.ts`, as do the earlier VGP demos.
+
+The actual versioned JPGs were checked from table/card thumbnails at desktop
+and mobile sizes, including fitted and native-zoom dialogs, for the smallest
+section, a decimal wall, the largest section/range length and galvanized pipe.
+Screenshots are in `.tmp/electrowelded-image-preview/`.
+Focused checks: `node --import tsx --test scripts/electrowelded-images.test.mjs
+scripts/images.test.mjs tests/unit/product-illustrations.test.ts`.
+
 ## Beam product illustrations
 
 The 38 beam rows use the four marked 2400 × 1800 JPGs supplied for Б, Ш, К and М.

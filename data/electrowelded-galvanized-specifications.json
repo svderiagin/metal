@@ -1,0 +1,14 @@
+{
+  "checkedOn": "2026-11-22",
+  "sourceUrl": "https://internet-law.ru/documents/prod/gost_gosudarstvennyj-standart/2/gost_49231.html",
+  "sourceLocation": "ГОСТ 10704-91, таблица 1: наружный диаметр 89 мм, стенка 3,5 мм, масса 7,38 кг/м; примечание 1 — масса стали при плотности 7,85 г/см³.",
+  "massBasis": "Теоретическая масса стальной трубы без цинкового покрытия. Масса покрытия в предложении поставщика не указана; коэффициент 1,03 из ГОСТ 3262-75 не применяется.",
+  "id": "local-443",
+  "sku": "МП-443",
+  "sourceProductName": "Труба электросварная прямошовная ОЦ 89х3.5х7800 ГОСТ 10704; 10705 ТАГМЕТ ТМ (+/-150мм)",
+  "diameterMm": 89,
+  "wallThicknessMm": 3.5,
+  "lengthMeters": 7.8,
+  "supplierLengthToleranceMm": 150,
+  "weightPerMeterKg": 7.38
+}

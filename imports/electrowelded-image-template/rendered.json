@@ -1,0 +1,1362 @@
+{
+  "sourceUrl": "https://internet-law.ru/documents/prod/gost_gosudarstvennyj-standart/2/gost_49231.html",
+  "results": [
+    {
+      "id": "local-302",
+      "source": "public/images/catalog/truba-kruglaya/elektrosvarnaya/truba_elektrosvarnaya_2400_1800_original.jpg",
+      "output": "public/images/catalog/truba-kruglaya/elektrosvarnaya/local-302.jpg",
+      "width": 2400,
+      "height": 1800,
+      "jpegQuality": 100,
+      "chromaSubsampling": "4:4:4",
+      "sourceSha256": "1e668af93311e2fc5812c7303cbf979b403db69e60e120661912fe94a8e3fcd0",
+      "title": [
+        "Труба электросварная 57 × 3"
+      ],
+      "diameterMm": 57,
+      "wallThicknessMm": 3,
+      "lengthLabel": "12 м",
+      "weightPerMeterKg": 4,
+      "massBasis": "Стальная труба; масса цинкового покрытия не включена.",
+      "annotationBounds": {
+        "title0": {
+          "left": 133,
+          "top": 126,
+          "width": 1212,
+          "height": 80
+        },
+        "wall": {
+          "left": 820,
+          "top": 689,
+          "width": 128,
+          "height": 42
+        },
+        "diameter": {
+          "left": 1230,
+          "top": 1453,
+          "width": 216,
+          "height": 44
+        },
+        "caption0": {
+          "left": 133,
+          "top": 1567,
+          "width": 379,
+          "height": 40
+        },
+        "caption1": {
+          "left": 611,
+          "top": 1567,
+          "width": 85,
+          "height": 31
+        },
+        "caption2": {
+          "left": 133,
+          "top": 1633,
+          "width": 439,
+          "height": 40
+        },
+        "caption3": {
+          "left": 611,
+          "top": 1633,
+          "width": 196,
+          "height": 41
+        }
+      },
+      "annotatedPixels": 63271,
+      "changedOutsideAnnotationsBeforeJpegEncoding": 0
+    },
+    {
+      "id": "local-305",
+      "source": "public/images/catalog/truba-kruglaya/elektrosvarnaya/truba_elektrosvarnaya_2400_1800_original.jpg",
+      "output": "public/images/catalog/truba-kruglaya/elektrosvarnaya/local-305.jpg",
+      "width": 2400,
+      "height": 1800,
+      "jpegQuality": 100,
+      "chromaSubsampling": "4:4:4",
+      "sourceSha256": "1e668af93311e2fc5812c7303cbf979b403db69e60e120661912fe94a8e3fcd0",
+      "title": [
+        "Труба электросварная 57 × 3,5"
+      ],
+      "diameterMm": 57,
+      "wallThicknessMm": 3.5,
+      "lengthLabel": "12 м",
+      "weightPerMeterKg": 4.62,
+      "massBasis": "Стальная труба; масса цинкового покрытия не включена.",
+      "annotationBounds": {
+        "title0": {
+          "left": 133,
+          "top": 126,
+          "width": 1284,
+          "height": 80
+        },
+        "wall": {
+          "left": 773,
+          "top": 689,
+          "width": 175,
+          "height": 51
+        },
+        "diameter": {
+          "left": 1230,
+          "top": 1453,
+          "width": 216,
+          "height": 44
+        },
+        "caption0": {
+          "left": 133,
+          "top": 1567,
+          "width": 379,
+          "height": 40
+        },
+        "caption1": {
+          "left": 611,
+          "top": 1567,
+          "width": 85,
+          "height": 31
+        },
+        "caption2": {
+          "left": 133,
+          "top": 1633,
+          "width": 439,
+          "height": 40
+        },
+        "caption3": {
+          "left": 611,
+          "top": 1633,
+          "width": 193,
+          "height": 41
+        }
+      },
+      "annotatedPixels": 66045,
+      "changedOutsideAnnotationsBeforeJpegEncoding": 0
+    },
+    {
+      "id": "local-309",
+      "source": "public/images/catalog/truba-kruglaya/elektrosvarnaya/truba_elektrosvarnaya_2400_1800_original.jpg",
+      "output": "public/images/catalog/truba-kruglaya/elektrosvarnaya/local-309.jpg",
+      "width": 2400,
+      "height": 1800,
+      "jpegQuality": 100,
+      "chromaSubsampling": "4:4:4",
+      "sourceSha256": "1e668af93311e2fc5812c7303cbf979b403db69e60e120661912fe94a8e3fcd0",
+      "title": [
+        "Труба электросварная 76 × 3"
+      ],
+      "diameterMm": 76,
+      "wallThicknessMm": 3,
+      "lengthLabel": "12 м",
+      "weightPerMeterKg": 5.4,
+      "massBasis": "Стальная труба; масса цинкового покрытия не включена.",
+      "annotationBounds": {
+        "title0": {
+          "left": 133,
+          "top": 126,
+          "width": 1213,
+          "height": 80
+        },
+        "wall": {
+          "left": 820,
+          "top": 689,
+          "width": 128,
+          "height": 42
+        },
+        "diameter": {
+          "left": 1230,
+          "top": 1453,
+          "width": 216,
+          "height": 44
+        },
+        "caption0": {
+          "left": 133,
+          "top": 1567,
+          "width": 379,
+          "height": 40
+        },
+        "caption1": {
+          "left": 611,
+          "top": 1567,
+          "width": 85,
+          "height": 31
+        },
+        "caption2": {
+          "left": 133,
+          "top": 1633,
+          "width": 439,
+          "height": 40
+        },
+        "caption3": {
+          "left": 611,
+          "top": 1633,
+          "width": 193,
+          "height": 41
+        }
+      },
+      "annotatedPixels": 63505,
+      "changedOutsideAnnotationsBeforeJpegEncoding": 0
+    },
+    {
+      "id": "local-311",
+      "source": "public/images/catalog/truba-kruglaya/elektrosvarnaya/truba_elektrosvarnaya_2400_1800_original.jpg",
+      "output": "public/images/catalog/truba-kruglaya/elektrosvarnaya/local-311.jpg",
+      "width": 2400,
+      "height": 1800,
+      "jpegQuality": 100,
+      "chromaSubsampling": "4:4:4",
+      "sourceSha256": "1e668af93311e2fc5812c7303cbf979b403db69e60e120661912fe94a8e3fcd0",
+      "title": [
+        "Труба электросварная 76 × 3,5"
+      ],
+      "diameterMm": 76,
+      "wallThicknessMm": 3.5,
+      "lengthLabel": "12 м",
+      "weightPerMeterKg": 6.26,
+      "massBasis": "Стальная труба; масса цинкового покрытия не включена.",
+      "annotationBounds": {
+        "title0": {
+          "left": 133,
+          "top": 126,
+          "width": 1285,
+          "height": 80
+        },
+        "wall": {
+          "left": 773,
+          "top": 689,
+          "width": 175,
+          "height": 51
+        },
+        "diameter": {
+          "left": 1230,
+          "top": 1453,
+          "width": 216,
+          "height": 44
+        },
+        "caption0": {
+          "left": 133,
+          "top": 1567,
+          "width": 379,
+          "height": 40
+        },
+        "caption1": {
+          "left": 611,
+          "top": 1567,
+          "width": 85,
+          "height": 31
+        },
+        "caption2": {
+          "left": 133,
+          "top": 1633,
+          "width": 439,
+          "height": 40
+        },
+        "caption3": {
+          "left": 611,
+          "top": 1633,
+          "width": 191,
+          "height": 41
+        }
+      },
+      "annotatedPixels": 66373,
+      "changedOutsideAnnotationsBeforeJpegEncoding": 0
+    },
+    {
+      "id": "local-313",
+      "source": "public/images/catalog/truba-kruglaya/elektrosvarnaya/truba_elektrosvarnaya_2400_1800_original.jpg",
+      "output": "public/images/catalog/truba-kruglaya/elektrosvarnaya/local-313.jpg",
+      "width": 2400,
+      "height": 1800,
+      "jpegQuality": 100,
+      "chromaSubsampling": "4:4:4",
+      "sourceSha256": "1e668af93311e2fc5812c7303cbf979b403db69e60e120661912fe94a8e3fcd0",
+      "title": [
+        "Труба электросварная 76 × 4"
+      ],
+      "diameterMm": 76,
+      "wallThicknessMm": 4,
+      "lengthLabel": "12 м",
+      "weightPerMeterKg": 7.1,
+      "massBasis": "Стальная труба; масса цинкового покрытия не включена.",
+      "annotationBounds": {
+        "title0": {
+          "left": 133,
+          "top": 126,
+          "width": 1215,
+          "height": 80
+        },
+        "wall": {
+          "left": 817,
+          "top": 689,
+          "width": 131,
+          "height": 41
+        },
+        "diameter": {
+          "left": 1230,
+          "top": 1453,
+          "width": 216,
+          "height": 44
+        },
+        "caption0": {
+          "left": 133,
+          "top": 1567,
+          "width": 379,
+          "height": 40
+        },
+        "caption1": {
+          "left": 611,
+          "top": 1567,
+          "width": 85,
+          "height": 31
+        },
+        "caption2": {
+          "left": 133,
+          "top": 1633,
+          "width": 439,
+          "height": 40
+        },
+        "caption3": {
+          "left": 611,
+          "top": 1633,
+          "width": 175,
+          "height": 41
+        }
+      },
+      "annotatedPixels": 63214,
+      "changedOutsideAnnotationsBeforeJpegEncoding": 0
+    },
+    {
+      "id": "local-316",
+      "source": "public/images/catalog/truba-kruglaya/elektrosvarnaya/truba_elektrosvarnaya_2400_1800_original.jpg",
+      "output": "public/images/catalog/truba-kruglaya/elektrosvarnaya/local-316.jpg",
+      "width": 2400,
+      "height": 1800,
+      "jpegQuality": 100,
+      "chromaSubsampling": "4:4:4",
+      "sourceSha256": "1e668af93311e2fc5812c7303cbf979b403db69e60e120661912fe94a8e3fcd0",
+      "title": [
+        "Труба электросварная 89 × 3,5"
+      ],
+      "diameterMm": 89,
+      "wallThicknessMm": 3.5,
+      "lengthLabel": "12 м",
+      "weightPerMeterKg": 7.38,
+      "massBasis": "Стальная труба; масса цинкового покрытия не включена.",
+      "annotationBounds": {
+        "title0": {
+          "left": 133,
+          "top": 126,
+          "width": 1292,
+          "height": 80
+        },
+        "wall": {
+          "left": 773,
+          "top": 689,
+          "width": 175,
+          "height": 51
+        },
+        "diameter": {
+          "left": 1228,
+          "top": 1453,
+          "width": 220,
+          "height": 44
+        },
+        "caption0": {
+          "left": 133,
+          "top": 1567,
+          "width": 379,
+          "height": 40
+        },
+        "caption1": {
+          "left": 611,
+          "top": 1567,
+          "width": 85,
+          "height": 31
+        },
+        "caption2": {
+          "left": 133,
+          "top": 1633,
+          "width": 439,
+          "height": 40
+        },
+        "caption3": {
+          "left": 611,
+          "top": 1633,
+          "width": 186,
+          "height": 41
+        }
+      },
+      "annotatedPixels": 67188,
+      "changedOutsideAnnotationsBeforeJpegEncoding": 0
+    },
+    {
+      "id": "local-318",
+      "source": "public/images/catalog/truba-kruglaya/elektrosvarnaya/truba_elektrosvarnaya_2400_1800_original.jpg",
+      "output": "public/images/catalog/truba-kruglaya/elektrosvarnaya/local-318.jpg",
+      "width": 2400,
+      "height": 1800,
+      "jpegQuality": 100,
+      "chromaSubsampling": "4:4:4",
+      "sourceSha256": "1e668af93311e2fc5812c7303cbf979b403db69e60e120661912fe94a8e3fcd0",
+      "title": [
+        "Труба электросварная 89 × 4"
+      ],
+      "diameterMm": 89,
+      "wallThicknessMm": 4,
+      "lengthLabel": "12 м",
+      "weightPerMeterKg": 8.38,
+      "massBasis": "Стальная труба; масса цинкового покрытия не включена.",
+      "annotationBounds": {
+        "title0": {
+          "left": 133,
+          "top": 126,
+          "width": 1223,
+          "height": 80
+        },
+        "wall": {
+          "left": 817,
+          "top": 689,
+          "width": 131,
+          "height": 41
+        },
+        "diameter": {
+          "left": 1228,
+          "top": 1453,
+          "width": 220,
+          "height": 44
+        },
+        "caption0": {
+          "left": 133,
+          "top": 1567,
+          "width": 379,
+          "height": 40
+        },
+        "caption1": {
+          "left": 611,
+          "top": 1567,
+          "width": 85,
+          "height": 31
+        },
+        "caption2": {
+          "left": 133,
+          "top": 1633,
+          "width": 439,
+          "height": 40
+        },
+        "caption3": {
+          "left": 611,
+          "top": 1633,
+          "width": 193,
+          "height": 41
+        }
+      },
+      "annotatedPixels": 64614,
+      "changedOutsideAnnotationsBeforeJpegEncoding": 0
+    },
+    {
+      "id": "local-333",
+      "source": "public/images/catalog/truba-kruglaya/elektrosvarnaya/truba_elektrosvarnaya_2400_1800_original.jpg",
+      "output": "public/images/catalog/truba-kruglaya/elektrosvarnaya/local-333.jpg",
+      "width": 2400,
+      "height": 1800,
+      "jpegQuality": 100,
+      "chromaSubsampling": "4:4:4",
+      "sourceSha256": "1e668af93311e2fc5812c7303cbf979b403db69e60e120661912fe94a8e3fcd0",
+      "title": [
+        "Труба электросварная 133 × 4,5"
+      ],
+      "diameterMm": 133,
+      "wallThicknessMm": 4.5,
+      "lengthLabel": "12 м",
+      "weightPerMeterKg": 14.26,
+      "massBasis": "Стальная труба; масса цинкового покрытия не включена.",
+      "annotationBounds": {
+        "title0": {
+          "left": 133,
+          "top": 126,
+          "width": 1328,
+          "height": 80
+        },
+        "wall": {
+          "left": 772,
+          "top": 689,
+          "width": 176,
+          "height": 51
+        },
+        "diameter": {
+          "left": 1216,
+          "top": 1453,
+          "width": 243,
+          "height": 44
+        },
+        "caption0": {
+          "left": 133,
+          "top": 1567,
+          "width": 379,
+          "height": 40
+        },
+        "caption1": {
+          "left": 611,
+          "top": 1567,
+          "width": 85,
+          "height": 31
+        },
+        "caption2": {
+          "left": 133,
+          "top": 1633,
+          "width": 439,
+          "height": 40
+        },
+        "caption3": {
+          "left": 611,
+          "top": 1633,
+          "width": 212,
+          "height": 41
+        }
+      },
+      "annotatedPixels": 68012,
+      "changedOutsideAnnotationsBeforeJpegEncoding": 0
+    },
+    {
+      "id": "local-337",
+      "source": "public/images/catalog/truba-kruglaya/elektrosvarnaya/truba_elektrosvarnaya_2400_1800_original.jpg",
+      "output": "public/images/catalog/truba-kruglaya/elektrosvarnaya/local-337.jpg",
+      "width": 2400,
+      "height": 1800,
+      "jpegQuality": 100,
+      "chromaSubsampling": "4:4:4",
+      "sourceSha256": "1e668af93311e2fc5812c7303cbf979b403db69e60e120661912fe94a8e3fcd0",
+      "title": [
+        "Труба электросварная 159 × 4"
+      ],
+      "diameterMm": 159,
+      "wallThicknessMm": 4,
+      "lengthLabel": "12 м",
+      "weightPerMeterKg": 15.29,
+      "massBasis": "Стальная труба; масса цинкового покрытия не включена.",
+      "annotationBounds": {
+        "title0": {
+          "left": 133,
+          "top": 126,
+          "width": 1256,
+          "height": 80
+        },
+        "wall": {
+          "left": 817,
+          "top": 689,
+          "width": 131,
+          "height": 41
+        },
+        "diameter": {
+          "left": 1217,
+          "top": 1453,
+          "width": 242,
+          "height": 44
+        },
+        "caption0": {
+          "left": 133,
+          "top": 1567,
+          "width": 379,
+          "height": 40
+        },
+        "caption1": {
+          "left": 611,
+          "top": 1567,
+          "width": 85,
+          "height": 31
+        },
+        "caption2": {
+          "left": 133,
+          "top": 1633,
+          "width": 439,
+          "height": 40
+        },
+        "caption3": {
+          "left": 611,
+          "top": 1633,
+          "width": 208,
+          "height": 41
+        }
+      },
+      "annotatedPixels": 65823,
+      "changedOutsideAnnotationsBeforeJpegEncoding": 0
+    },
+    {
+      "id": "local-443",
+      "source": "public/images/catalog/truba-kruglaya/elektrosvarnaya_ocinkovannaya/truba_elektrosvarnaya_ocinkovannaya_2400_1800_original.jpg",
+      "output": "public/images/catalog/truba-kruglaya/elektrosvarnaya_ocinkovannaya/local-443.jpg",
+      "width": 2400,
+      "height": 1800,
+      "jpegQuality": 100,
+      "chromaSubsampling": "4:4:4",
+      "sourceSha256": "02e9a943bd03c607f79e0ee83c85417f02b692adb7d77ea0686cfc62d3e7def8",
+      "title": [
+        "Труба электросварная",
+        "оцинкованная 89 × 3,5"
+      ],
+      "diameterMm": 89,
+      "wallThicknessMm": 3.5,
+      "lengthLabel": "7,8 м",
+      "weightPerMeterKg": 7.38,
+      "massBasis": "Стальная труба; масса цинкового покрытия не включена.",
+      "annotationBounds": {
+        "title0": {
+          "left": 133,
+          "top": 126,
+          "width": 945,
+          "height": 79
+        },
+        "title1": {
+          "left": 133,
+          "top": 233,
+          "width": 940,
+          "height": 78
+        },
+        "wall": {
+          "left": 773,
+          "top": 689,
+          "width": 175,
+          "height": 51
+        },
+        "diameter": {
+          "left": 1225,
+          "top": 1453,
+          "width": 220,
+          "height": 44
+        },
+        "caption0": {
+          "left": 133,
+          "top": 1567,
+          "width": 379,
+          "height": 40
+        },
+        "caption1": {
+          "left": 611,
+          "top": 1567,
+          "width": 100,
+          "height": 40
+        },
+        "caption2": {
+          "left": 133,
+          "top": 1633,
+          "width": 439,
+          "height": 40
+        },
+        "caption3": {
+          "left": 611,
+          "top": 1633,
+          "width": 186,
+          "height": 41
+        },
+        "caption4": {
+          "left": 133,
+          "top": 1702,
+          "width": 637,
+          "height": 40
+        }
+      },
+      "annotatedPixels": 91848,
+      "changedOutsideAnnotationsBeforeJpegEncoding": 0
+    },
+    {
+      "id": "local-3963",
+      "source": "public/images/catalog/truba-kruglaya/elektrosvarnaya/truba_elektrosvarnaya_2400_1800_original.jpg",
+      "output": "public/images/catalog/truba-kruglaya/elektrosvarnaya/local-3963.jpg",
+      "width": 2400,
+      "height": 1800,
+      "jpegQuality": 100,
+      "chromaSubsampling": "4:4:4",
+      "sourceSha256": "1e668af93311e2fc5812c7303cbf979b403db69e60e120661912fe94a8e3fcd0",
+      "title": [
+        "Труба электросварная 108 × 4,5"
+      ],
+      "diameterMm": 108,
+      "wallThicknessMm": 4.5,
+      "lengthLabel": "12 м",
+      "weightPerMeterKg": 11.49,
+      "massBasis": "Стальная труба; масса цинкового покрытия не включена.",
+      "annotationBounds": {
+        "title0": {
+          "left": 133,
+          "top": 126,
+          "width": 1331,
+          "height": 80
+        },
+        "wall": {
+          "left": 772,
+          "top": 689,
+          "width": 176,
+          "height": 51
+        },
+        "diameter": {
+          "left": 1216,
+          "top": 1453,
+          "width": 244,
+          "height": 44
+        },
+        "caption0": {
+          "left": 133,
+          "top": 1567,
+          "width": 379,
+          "height": 40
+        },
+        "caption1": {
+          "left": 611,
+          "top": 1567,
+          "width": 85,
+          "height": 31
+        },
+        "caption2": {
+          "left": 133,
+          "top": 1633,
+          "width": 439,
+          "height": 40
+        },
+        "caption3": {
+          "left": 611,
+          "top": 1633,
+          "width": 205,
+          "height": 41
+        }
+      },
+      "annotatedPixels": 68619,
+      "changedOutsideAnnotationsBeforeJpegEncoding": 0
+    },
+    {
+      "id": "local-9211",
+      "source": "public/images/catalog/truba-kruglaya/elektrosvarnaya/truba_elektrosvarnaya_2400_1800_original.jpg",
+      "output": "public/images/catalog/truba-kruglaya/elektrosvarnaya/local-9211.jpg",
+      "width": 2400,
+      "height": 1800,
+      "jpegQuality": 100,
+      "chromaSubsampling": "4:4:4",
+      "sourceSha256": "1e668af93311e2fc5812c7303cbf979b403db69e60e120661912fe94a8e3fcd0",
+      "title": [
+        "Труба электросварная 219 × 4"
+      ],
+      "diameterMm": 219,
+      "wallThicknessMm": 4,
+      "lengthLabel": "12 м",
+      "weightPerMeterKg": 21.21,
+      "massBasis": "Стальная труба; масса цинкового покрытия не включена.",
+      "annotationBounds": {
+        "title0": {
+          "left": 133,
+          "top": 126,
+          "width": 1256,
+          "height": 80
+        },
+        "wall": {
+          "left": 817,
+          "top": 689,
+          "width": 131,
+          "height": 41
+        },
+        "diameter": {
+          "left": 1217,
+          "top": 1453,
+          "width": 242,
+          "height": 44
+        },
+        "caption0": {
+          "left": 133,
+          "top": 1567,
+          "width": 379,
+          "height": 40
+        },
+        "caption1": {
+          "left": 611,
+          "top": 1567,
+          "width": 85,
+          "height": 31
+        },
+        "caption2": {
+          "left": 133,
+          "top": 1633,
+          "width": 439,
+          "height": 40
+        },
+        "caption3": {
+          "left": 611,
+          "top": 1633,
+          "width": 201,
+          "height": 41
+        }
+      },
+      "annotatedPixels": 65332,
+      "changedOutsideAnnotationsBeforeJpegEncoding": 0
+    },
+    {
+      "id": "local-40706",
+      "source": "public/images/catalog/truba-kruglaya/elektrosvarnaya/truba_elektrosvarnaya_2400_1800_original.jpg",
+      "output": "public/images/catalog/truba-kruglaya/elektrosvarnaya/local-40706.jpg",
+      "width": 2400,
+      "height": 1800,
+      "jpegQuality": 100,
+      "chromaSubsampling": "4:4:4",
+      "sourceSha256": "1e668af93311e2fc5812c7303cbf979b403db69e60e120661912fe94a8e3fcd0",
+      "title": [
+        "Труба электросварная 219 × 5"
+      ],
+      "diameterMm": 219,
+      "wallThicknessMm": 5,
+      "lengthLabel": "12 м",
+      "weightPerMeterKg": 26.39,
+      "massBasis": "Стальная труба; масса цинкового покрытия не включена.",
+      "annotationBounds": {
+        "title0": {
+          "left": 133,
+          "top": 126,
+          "width": 1251,
+          "height": 80
+        },
+        "wall": {
+          "left": 820,
+          "top": 689,
+          "width": 128,
+          "height": 42
+        },
+        "diameter": {
+          "left": 1217,
+          "top": 1453,
+          "width": 242,
+          "height": 44
+        },
+        "caption0": {
+          "left": 133,
+          "top": 1567,
+          "width": 379,
+          "height": 40
+        },
+        "caption1": {
+          "left": 611,
+          "top": 1567,
+          "width": 85,
+          "height": 31
+        },
+        "caption2": {
+          "left": 133,
+          "top": 1633,
+          "width": 439,
+          "height": 40
+        },
+        "caption3": {
+          "left": 611,
+          "top": 1633,
+          "width": 216,
+          "height": 41
+        }
+      },
+      "annotatedPixels": 65953,
+      "changedOutsideAnnotationsBeforeJpegEncoding": 0
+    },
+    {
+      "id": "local-40707",
+      "source": "public/images/catalog/truba-kruglaya/elektrosvarnaya/truba_elektrosvarnaya_2400_1800_original.jpg",
+      "output": "public/images/catalog/truba-kruglaya/elektrosvarnaya/local-40707.jpg",
+      "width": 2400,
+      "height": 1800,
+      "jpegQuality": 100,
+      "chromaSubsampling": "4:4:4",
+      "sourceSha256": "1e668af93311e2fc5812c7303cbf979b403db69e60e120661912fe94a8e3fcd0",
+      "title": [
+        "Труба электросварная 219 × 6"
+      ],
+      "diameterMm": 219,
+      "wallThicknessMm": 6,
+      "lengthLabel": "12 м",
+      "weightPerMeterKg": 31.52,
+      "massBasis": "Стальная труба; масса цинкового покрытия не включена.",
+      "annotationBounds": {
+        "title0": {
+          "left": 133,
+          "top": 126,
+          "width": 1254,
+          "height": 80
+        },
+        "wall": {
+          "left": 819,
+          "top": 689,
+          "width": 129,
+          "height": 42
+        },
+        "diameter": {
+          "left": 1217,
+          "top": 1453,
+          "width": 242,
+          "height": 44
+        },
+        "caption0": {
+          "left": 133,
+          "top": 1567,
+          "width": 379,
+          "height": 40
+        },
+        "caption1": {
+          "left": 611,
+          "top": 1567,
+          "width": 85,
+          "height": 31
+        },
+        "caption2": {
+          "left": 133,
+          "top": 1633,
+          "width": 439,
+          "height": 40
+        },
+        "caption3": {
+          "left": 611,
+          "top": 1633,
+          "width": 209,
+          "height": 41
+        }
+      },
+      "annotatedPixels": 65915,
+      "changedOutsideAnnotationsBeforeJpegEncoding": 0
+    },
+    {
+      "id": "local-52334",
+      "source": "public/images/catalog/truba-kruglaya/elektrosvarnaya/truba_elektrosvarnaya_2400_1800_original.jpg",
+      "output": "public/images/catalog/truba-kruglaya/elektrosvarnaya/local-52334.jpg",
+      "width": 2400,
+      "height": 1800,
+      "jpegQuality": 100,
+      "chromaSubsampling": "4:4:4",
+      "sourceSha256": "1e668af93311e2fc5812c7303cbf979b403db69e60e120661912fe94a8e3fcd0",
+      "title": [
+        "Труба электросварная 273 × 6"
+      ],
+      "diameterMm": 273,
+      "wallThicknessMm": 6,
+      "lengthLabel": "12 м",
+      "weightPerMeterKg": 39.51,
+      "massBasis": "Стальная труба; масса цинкового покрытия не включена.",
+      "annotationBounds": {
+        "title0": {
+          "left": 133,
+          "top": 126,
+          "width": 1264,
+          "height": 80
+        },
+        "wall": {
+          "left": 819,
+          "top": 689,
+          "width": 129,
+          "height": 42
+        },
+        "diameter": {
+          "left": 1213,
+          "top": 1453,
+          "width": 250,
+          "height": 44
+        },
+        "caption0": {
+          "left": 133,
+          "top": 1567,
+          "width": 379,
+          "height": 40
+        },
+        "caption1": {
+          "left": 611,
+          "top": 1567,
+          "width": 85,
+          "height": 31
+        },
+        "caption2": {
+          "left": 133,
+          "top": 1633,
+          "width": 439,
+          "height": 40
+        },
+        "caption3": {
+          "left": 611,
+          "top": 1633,
+          "width": 207,
+          "height": 41
+        }
+      },
+      "annotatedPixels": 65867,
+      "changedOutsideAnnotationsBeforeJpegEncoding": 0
+    },
+    {
+      "id": "local-53918",
+      "source": "public/images/catalog/truba-kruglaya/elektrosvarnaya/truba_elektrosvarnaya_2400_1800_original.jpg",
+      "output": "public/images/catalog/truba-kruglaya/elektrosvarnaya/local-53918.jpg",
+      "width": 2400,
+      "height": 1800,
+      "jpegQuality": 100,
+      "chromaSubsampling": "4:4:4",
+      "sourceSha256": "1e668af93311e2fc5812c7303cbf979b403db69e60e120661912fe94a8e3fcd0",
+      "title": [
+        "Труба электросварная 127 × 4"
+      ],
+      "diameterMm": 127,
+      "wallThicknessMm": 4,
+      "lengthLabel": "12 м",
+      "weightPerMeterKg": 12.13,
+      "massBasis": "Стальная труба; масса цинкового покрытия не включена.",
+      "annotationBounds": {
+        "title0": {
+          "left": 133,
+          "top": 126,
+          "width": 1250,
+          "height": 80
+        },
+        "wall": {
+          "left": 817,
+          "top": 689,
+          "width": 131,
+          "height": 41
+        },
+        "diameter": {
+          "left": 1218,
+          "top": 1453,
+          "width": 239,
+          "height": 44
+        },
+        "caption0": {
+          "left": 133,
+          "top": 1567,
+          "width": 379,
+          "height": 40
+        },
+        "caption1": {
+          "left": 611,
+          "top": 1567,
+          "width": 85,
+          "height": 31
+        },
+        "caption2": {
+          "left": 133,
+          "top": 1633,
+          "width": 439,
+          "height": 40
+        },
+        "caption3": {
+          "left": 611,
+          "top": 1633,
+          "width": 199,
+          "height": 41
+        }
+      },
+      "annotatedPixels": 64333,
+      "changedOutsideAnnotationsBeforeJpegEncoding": 0
+    },
+    {
+      "id": "local-58627",
+      "source": "public/images/catalog/truba-kruglaya/elektrosvarnaya/truba_elektrosvarnaya_2400_1800_original.jpg",
+      "output": "public/images/catalog/truba-kruglaya/elektrosvarnaya/local-58627.jpg",
+      "width": 2400,
+      "height": 1800,
+      "jpegQuality": 100,
+      "chromaSubsampling": "4:4:4",
+      "sourceSha256": "1e668af93311e2fc5812c7303cbf979b403db69e60e120661912fe94a8e3fcd0",
+      "title": [
+        "Труба электросварная 273 × 8"
+      ],
+      "diameterMm": 273,
+      "wallThicknessMm": 8,
+      "lengthLabel": "11–12 м",
+      "weightPerMeterKg": 52.28,
+      "massBasis": "Стальная труба; масса цинкового покрытия не включена.",
+      "annotationBounds": {
+        "title0": {
+          "left": 133,
+          "top": 126,
+          "width": 1265,
+          "height": 80
+        },
+        "wall": {
+          "left": 819,
+          "top": 689,
+          "width": 129,
+          "height": 42
+        },
+        "diameter": {
+          "left": 1213,
+          "top": 1453,
+          "width": 250,
+          "height": 44
+        },
+        "caption0": {
+          "left": 133,
+          "top": 1567,
+          "width": 379,
+          "height": 40
+        },
+        "caption1": {
+          "left": 611,
+          "top": 1567,
+          "width": 142,
+          "height": 31
+        },
+        "caption2": {
+          "left": 133,
+          "top": 1633,
+          "width": 439,
+          "height": 40
+        },
+        "caption3": {
+          "left": 611,
+          "top": 1633,
+          "width": 219,
+          "height": 41
+        }
+      },
+      "annotatedPixels": 66773,
+      "changedOutsideAnnotationsBeforeJpegEncoding": 0
+    },
+    {
+      "id": "local-58631",
+      "source": "public/images/catalog/truba-kruglaya/elektrosvarnaya/truba_elektrosvarnaya_2400_1800_original.jpg",
+      "output": "public/images/catalog/truba-kruglaya/elektrosvarnaya/local-58631.jpg",
+      "width": 2400,
+      "height": 1800,
+      "jpegQuality": 100,
+      "chromaSubsampling": "4:4:4",
+      "sourceSha256": "1e668af93311e2fc5812c7303cbf979b403db69e60e120661912fe94a8e3fcd0",
+      "title": [
+        "Труба электросварная 325 × 7"
+      ],
+      "diameterMm": 325,
+      "wallThicknessMm": 7,
+      "lengthLabel": "11–12 м",
+      "weightPerMeterKg": 54.9,
+      "massBasis": "Стальная труба; масса цинкового покрытия не включена.",
+      "annotationBounds": {
+        "title0": {
+          "left": 133,
+          "top": 126,
+          "width": 1264,
+          "height": 80
+        },
+        "wall": {
+          "left": 822,
+          "top": 689,
+          "width": 126,
+          "height": 41
+        },
+        "diameter": {
+          "left": 1211,
+          "top": 1453,
+          "width": 253,
+          "height": 44
+        },
+        "caption0": {
+          "left": 133,
+          "top": 1567,
+          "width": 379,
+          "height": 40
+        },
+        "caption1": {
+          "left": 611,
+          "top": 1567,
+          "width": 142,
+          "height": 31
+        },
+        "caption2": {
+          "left": 133,
+          "top": 1633,
+          "width": 439,
+          "height": 40
+        },
+        "caption3": {
+          "left": 611,
+          "top": 1633,
+          "width": 220,
+          "height": 41
+        }
+      },
+      "annotatedPixels": 66487,
+      "changedOutsideAnnotationsBeforeJpegEncoding": 0
+    },
+    {
+      "id": "local-58634",
+      "source": "public/images/catalog/truba-kruglaya/elektrosvarnaya/truba_elektrosvarnaya_2400_1800_original.jpg",
+      "output": "public/images/catalog/truba-kruglaya/elektrosvarnaya/local-58634.jpg",
+      "width": 2400,
+      "height": 1800,
+      "jpegQuality": 100,
+      "chromaSubsampling": "4:4:4",
+      "sourceSha256": "1e668af93311e2fc5812c7303cbf979b403db69e60e120661912fe94a8e3fcd0",
+      "title": [
+        "Труба электросварная 325 × 10"
+      ],
+      "diameterMm": 325,
+      "wallThicknessMm": 10,
+      "lengthLabel": "11–12 м",
+      "weightPerMeterKg": 77.68,
+      "massBasis": "Стальная труба; масса цинкового покрытия не включена.",
+      "annotationBounds": {
+        "title0": {
+          "left": 133,
+          "top": 126,
+          "width": 1307,
+          "height": 80
+        },
+        "wall": {
+          "left": 795,
+          "top": 689,
+          "width": 153,
+          "height": 42
+        },
+        "diameter": {
+          "left": 1211,
+          "top": 1453,
+          "width": 253,
+          "height": 44
+        },
+        "caption0": {
+          "left": 133,
+          "top": 1567,
+          "width": 379,
+          "height": 40
+        },
+        "caption1": {
+          "left": 611,
+          "top": 1567,
+          "width": 142,
+          "height": 31
+        },
+        "caption2": {
+          "left": 133,
+          "top": 1633,
+          "width": 439,
+          "height": 40
+        },
+        "caption3": {
+          "left": 611,
+          "top": 1633,
+          "width": 211,
+          "height": 41
+        }
+      },
+      "annotatedPixels": 68436,
+      "changedOutsideAnnotationsBeforeJpegEncoding": 0
+    },
+    {
+      "id": "local-62388",
+      "source": "public/images/catalog/truba-kruglaya/elektrosvarnaya/truba_elektrosvarnaya_2400_1800_original.jpg",
+      "output": "public/images/catalog/truba-kruglaya/elektrosvarnaya/local-62388.jpg",
+      "width": 2400,
+      "height": 1800,
+      "jpegQuality": 100,
+      "chromaSubsampling": "4:4:4",
+      "sourceSha256": "1e668af93311e2fc5812c7303cbf979b403db69e60e120661912fe94a8e3fcd0",
+      "title": [
+        "Труба электросварная 57 × 3"
+      ],
+      "diameterMm": 57,
+      "wallThicknessMm": 3,
+      "lengthLabel": "12 м",
+      "weightPerMeterKg": 4,
+      "massBasis": "Стальная труба; масса цинкового покрытия не включена.",
+      "annotationBounds": {
+        "title0": {
+          "left": 133,
+          "top": 126,
+          "width": 1212,
+          "height": 80
+        },
+        "wall": {
+          "left": 820,
+          "top": 689,
+          "width": 128,
+          "height": 42
+        },
+        "diameter": {
+          "left": 1230,
+          "top": 1453,
+          "width": 216,
+          "height": 44
+        },
+        "caption0": {
+          "left": 133,
+          "top": 1567,
+          "width": 379,
+          "height": 40
+        },
+        "caption1": {
+          "left": 611,
+          "top": 1567,
+          "width": 85,
+          "height": 31
+        },
+        "caption2": {
+          "left": 133,
+          "top": 1633,
+          "width": 439,
+          "height": 40
+        },
+        "caption3": {
+          "left": 611,
+          "top": 1633,
+          "width": 196,
+          "height": 41
+        }
+      },
+      "annotatedPixels": 63271,
+      "changedOutsideAnnotationsBeforeJpegEncoding": 0
+    },
+    {
+      "id": "local-125936",
+      "source": "public/images/catalog/truba-kruglaya/elektrosvarnaya/truba_elektrosvarnaya_2400_1800_original.jpg",
+      "output": "public/images/catalog/truba-kruglaya/elektrosvarnaya/local-125936.jpg",
+      "width": 2400,
+      "height": 1800,
+      "jpegQuality": 100,
+      "chromaSubsampling": "4:4:4",
+      "sourceSha256": "1e668af93311e2fc5812c7303cbf979b403db69e60e120661912fe94a8e3fcd0",
+      "title": [
+        "Труба электросварная 48 × 3"
+      ],
+      "diameterMm": 48,
+      "wallThicknessMm": 3,
+      "lengthLabel": "6 м",
+      "weightPerMeterKg": 3.33,
+      "massBasis": "Стальная труба; масса цинкового покрытия не включена.",
+      "annotationBounds": {
+        "title0": {
+          "left": 133,
+          "top": 126,
+          "width": 1222,
+          "height": 80
+        },
+        "wall": {
+          "left": 820,
+          "top": 689,
+          "width": 128,
+          "height": 42
+        },
+        "diameter": {
+          "left": 1227,
+          "top": 1453,
+          "width": 222,
+          "height": 44
+        },
+        "caption0": {
+          "left": 133,
+          "top": 1567,
+          "width": 379,
+          "height": 40
+        },
+        "caption1": {
+          "left": 611,
+          "top": 1567,
+          "width": 68,
+          "height": 32
+        },
+        "caption2": {
+          "left": 133,
+          "top": 1633,
+          "width": 439,
+          "height": 40
+        },
+        "caption3": {
+          "left": 611,
+          "top": 1633,
+          "width": 193,
+          "height": 41
+        }
+      },
+      "annotatedPixels": 63849,
+      "changedOutsideAnnotationsBeforeJpegEncoding": 0
+    }
+  ]
+}

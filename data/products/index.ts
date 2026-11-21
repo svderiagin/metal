@@ -11,6 +11,8 @@ import rozmetCatalog from "../rozmet-catalog.json";
 import catalogImages from "../catalog-images.json";
 import {normalizeRebarVariant} from "@/lib/rebar";
 import {normalizeBeamVariant} from "@/lib/beam";
+import {normalizeGalvanizedVgpVariant} from "@/lib/vgp";
+import {normalizeGalvanizedElectroweldedVariant} from "@/lib/electroweldedPipe";
 import {isPublicProduct} from "@/data/catalog-visibility";
 import {isPipeProduct, normalizePipeWeight} from "@/lib/pipeWeight";
 import {isRetainedCategory} from "@/data/catalog-scope";
@@ -42,7 +44,7 @@ export const existingVariants: ProductVariant[] = productSources.map((product) =
 const retainedProductVariants: ProductVariant[] = [
   ...existingVariants.filter(p => !(importedCatalog.matchedIds as string[]).includes(p.id)),
   ...(importedCatalog.products as ProductVariant[]).filter(product => isRetainedCategory(product.categoryId)),
-].filter(product => isRetainedCategory(product.categoryId)).filter(isPublicProduct).map(normalizeRebarVariant).map(normalizeBeamVariant).map(normalizePipeWeight).map(product => ({
+].filter(product => isRetainedCategory(product.categoryId)).filter(isPublicProduct).map(normalizeRebarVariant).map(normalizeBeamVariant).map(normalizeGalvanizedVgpVariant).map(normalizeGalvanizedElectroweldedVariant).map(normalizePipeWeight).map(product => ({
   ...product,
   imageUrls: (catalogImages.products as Record<string, string>)[product.id]
     ? [(catalogImages.products as Record<string, string>)[product.id]]

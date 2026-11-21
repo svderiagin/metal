@@ -1,7 +1,8 @@
 import {calculateLineTotal, calculateMeasuredLineTotal, getMeasurementQuantityOptions, metersToTons, tonsToMeters} from "./orderMeasurement";
 import type {ProductVariant} from "@/types/product";
 import type {CartMeasurement, CartPieceOrder} from "@/types/cart";
-import {isVgpVariant, wholeVgpOrder} from "./vgp";
+import {isWholePipeVariant} from "./pipeFamily";
+import {wholePipeOrder} from "./wholePipeOrder";
 import {hasConfirmedProfilePipePrice, isProfilePipeVariant, profilePipeOrder} from "./profilePipe";
 import {isProfileSheetVariant} from "./profileSheet";
 import {requiresWholeMetalMeshQuantity, requiresWholeRozmetQuantity} from "./variantPresentation";
@@ -57,7 +58,7 @@ export function revalidateCartPrice(product: ProductVariant, item: PriceInput) {
       const entered = input.inputMode === "meter" ? input.meters : input.weightTons;
       const {maximum} = getMeasurementQuantityOptions(product, input.inputMode);
       // Whole-pipe weight is itself converted and may carry floating-point noise.
-      const tolerance = isVgpVariant(product) && input.inputMode === "ton" ? conversionTolerance(maximum) : 0;
+      const tolerance = isWholePipeVariant(product) && input.inputMode === "ton" ? conversionTolerance(maximum) : 0;
       if (entered > maximum + tolerance) {
         invalidReason = "Объём превышает допустимое значение. Измените количество.";
       }
@@ -73,8 +74,8 @@ export function revalidateCartPrice(product: ProductVariant, item: PriceInput) {
     }
   }
   if (estimatedTotal === null) invalidReason = "Не удалось пересчитать стоимость.";
-  if (isVgpVariant(product)) {
-    const whole = measurement && wholeVgpOrder(product, measurement.meters, "meter");
+  if (isWholePipeVariant(product)) {
+    const whole = measurement && wholePipeOrder(product, measurement.meters, "meter");
     if (!measurement || !whole || Math.abs(whole.meters - measurement.meters) > 1e-7) {
       invalidReason = "Выберите объём целыми трубами в таблице товара.";
     } else {

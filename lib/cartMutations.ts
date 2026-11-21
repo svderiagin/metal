@@ -3,7 +3,8 @@ import type {ProductVariant} from "@/types/product";
 import {normalizeMeasurement} from "./cart";
 import {revalidateCartPrice} from "./cartPricing";
 import {isProfilePipeVariant, profilePipeOrder} from "./profilePipe";
-import {isVgpVariant, wholeVgpOrder} from "./vgp";
+import {isWholePipeVariant} from "./pipeFamily";
+import {wholePipeOrder} from "./wholePipeOrder";
 import {metersToTons, tonsToMeters} from "./orderMeasurement";
 import {isDemonstrationProduct} from "./catalogOffer";
 
@@ -45,8 +46,8 @@ export function updateCartItem(items: CartItem[], product: ProductVariant | unde
     const weightTons = inputMode === "ton" ? quantity : metersToTons(quantity, product.weightPerMeterKg);
     if (meters === null || weightTons === null) return items;
     measurement = {inputMode, meters, weightTons, pricePerTon: 0, estimatedTotal: 0};
-    if (isVgpVariant(product)) {
-      const order = wholeVgpOrder(product, quantity, inputMode);
+    if (isWholePipeVariant(product)) {
+      const order = wholePipeOrder(product, quantity, inputMode);
       if (!order) return items;
       measurement = {...measurement, meters: order.meters, weightTons: order.weightTons};
     }

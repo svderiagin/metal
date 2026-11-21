@@ -66,18 +66,23 @@ export function VgpVariantCatalog({variants}: {variants: ProductVariant[]}) {
   return <MeasuredVariantCatalog variants={variants} kind="vgp"/>;
 }
 
+export function ElectroweldedPipeVariantCatalog({variants}: {variants: ProductVariant[]}) {
+  return <MeasuredVariantCatalog variants={variants} kind="pipe"/>;
+}
+
 export function ProfilePipeVariantCatalog({variants}: {variants: ProductVariant[]}) {
   return <MeasuredVariantCatalog variants={variants} kind="profile"/>;
 }
 
 function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
   variants: ProductVariant[];
-  kind?: "rebar" | "beam" | "vgp" | "profile";
+  kind?: "rebar" | "beam" | "vgp" | "pipe" | "profile";
   names?: ReadonlyMap<string, string>;
 }) {
   const isBeam = kind === "beam";
   const isVgp = kind === "vgp";
   const isProfile = kind === "profile";
+  const isElectrowelded = kind === "pipe";
   const Table = kind === "rebar" ? RebarVariantTable : CatalogVariantTable;
   const [query, setQuery] = useState("");
   const deferredQuery = useDeferredValue(query);
@@ -105,15 +110,15 @@ function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
   );
   const forms = useMemo(
     () => {
-      const values = [...new Set(variants.map(variant => isProfile ? String(variant.wallThicknessMm).replace(".", ",") : isVgp ? vgpSeries(variant) : isBeam ? beamKind(variant) : variant.form ?? ""))];
-      return isProfile ? values.sort((a, b) => a.localeCompare(b, "ru", {numeric: true})) : values;
+      const values = [...new Set(variants.map(variant => (isProfile || isElectrowelded) ? String(variant.wallThicknessMm).replace(".", ",") : isVgp ? vgpSeries(variant) : isBeam ? beamKind(variant) : variant.form ?? ""))];
+      return isProfile || isElectrowelded ? values.sort((a, b) => a.localeCompare(b, "ru", {numeric: true})) : values;
     },
-    [variants, isBeam, isVgp, isProfile],
+    [variants, isBeam, isVgp, isProfile, isElectrowelded],
   );
 
   const results = useMemo(() => {
     const sizeValue = (variant: ProductVariant) => isProfile ? profilePipeSize(variant) : isVgp ? vgpSize(variant) : isBeam ? beamProfile(variant) : String(variant.diameterMm ?? "");
-    const formValue = (variant: ProductVariant) => isProfile ? String(variant.wallThicknessMm).replace(".", ",") : isVgp ? vgpSeries(variant) : isBeam ? beamKind(variant) : variant.form;
+    const formValue = (variant: ProductVariant) => (isProfile || isElectrowelded) ? String(variant.wallThicknessMm).replace(".", ",") : isVgp ? vgpSeries(variant) : isBeam ? beamKind(variant) : variant.form;
     const priceValue = (variant: ProductVariant) => isProfile ? hasConfirmedProfilePipePrice(variant) ? variant.price ?? undefined : undefined : variant.pricePerTon;
     const massValue = (variant: ProductVariant) => variant.weightPerMeterKg ?? beamReferenceMassKg(variant);
     const min = parseCatalogPrice(minimumPrice);
@@ -133,7 +138,7 @@ function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
       if (sort === "weight-desc") return (massValue(right) ?? -Infinity) - (massValue(left) ?? -Infinity);
       return sizeValue(left).localeCompare(sizeValue(right), "ru", {numeric: true});
     });
-  }, [hits, deferredQuery, availability, diameter, form, length, maximumPrice, minimumPrice, sort, variants, isBeam, isVgp, isProfile]);
+  }, [hits, deferredQuery, availability, diameter, form, length, maximumPrice, minimumPrice, sort, variants, isBeam, isVgp, isProfile, isElectrowelded]);
   function resetFilters() {
     setQuery("");
     setDiameter("");
@@ -169,9 +174,9 @@ function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
           <Filter label={isProfile ? "Размер, мм" : isVgp ? "Ду × стенка, мм" : isBeam ? "Профиль" : "Диаметр, мм"} value={diameter} onChange={setDiameter}>
             {diameters.map((value) => <option key={value} value={value}>{value}</option>)}
           </Filter>
-          <Filter label={isProfile ? "Стенка, мм" : isVgp ? "Серия" : isBeam ? "Тип балки" : "Форма продукции"} value={form} onChange={setForm}>
+          <Filter label={isProfile || isElectrowelded ? "Стенка, мм" : isVgp ? "Серия" : isBeam ? "Тип балки" : "Форма продукции"} value={form} onChange={setForm}>
             {forms.map((value) => (
-              <option key={value} value={value}>{isVgp || isBeam || isProfile ? value : formLabel(value as "coil" | "bar")}</option>
+              <option key={value} value={value}>{isVgp || isBeam || isProfile || isElectrowelded ? value : formLabel(value as "coil" | "bar")}</option>
             ))}
           </Filter>
           <Filter label="Длина, м" value={length} onChange={setLength}>
@@ -181,14 +186,14 @@ function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
           <Filter label="Наличие" value={availability} onChange={setAvailability}>
             <option value="IN_STOCK">В наличии</option>
             <option value="ON_ORDER">Под заказ</option>
-            {(isVgp || isProfile) && <option value="UNKNOWN">Наличие уточняется</option>}
+            {(isVgp || isProfile || isElectrowelded) && <option value="UNKNOWN">Наличие уточняется</option>}
           </Filter>
       </FilterPanel>
 
       <section className="min-w-0 lg:col-span-2" aria-label="Продукция">
       {results.length ? (
         <>
-        <Table measured={isBeam || isVgp}>
+        <Table measured={isBeam || isVgp || isElectrowelded}>
           {results.map(variant => <MeasuredVariantItem key={variant.id} variant={variant} name={names?.get(variant.id)} kind={kind} view="table"/>)}
         </Table>
         <div className="grid gap-4 sm:grid-cols-2 xl:hidden">

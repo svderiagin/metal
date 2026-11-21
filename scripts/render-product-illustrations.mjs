@@ -23,8 +23,8 @@ const protectedCategories = new Set([
   "cat-bal", flatSteelCategoryId,
   "rozmet-cat-shveller", "rozmet-cat-ugolok", "rozmet-cat-kvadrat", "rozmet-cat-listovoy-prokat",
 ]);
-// Owner-approved pipe templates have separate lossless label renderers.
-const protectedProductTypes = new Set(["type-cat-trp-sub-1", "type-cat-trp-sub-2", "type-cat-trk-sub-1"]);
+// Owner-approved pipe templates have separate family label renderers.
+const protectedProductTypes = new Set(["type-cat-trp-sub-1", "type-cat-trp-sub-2", "type-cat-trk-sub-1", "type-cat-trk-sub-2", "type-cat-trk-sub-3", "type-cat-trk-sub-4"]);
 const width = 2400;
 const height = 1800;
 const textColor = "#41464D";
