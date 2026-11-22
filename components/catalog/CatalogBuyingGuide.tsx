@@ -27,7 +27,8 @@ export function CatalogBuyingGuide({headingId, title, description}: {
               <span className="min-w-0">{heading}</span>
             </h3>
             <p className="mt-2 text-base text-slate-700 dark:text-slate-300">{text}</p>
-            {diagram && <CatalogGuideFigure diagram={diagram}/>}
+            {diagram && (Array.isArray(diagram) ? diagram : [diagram]).map(example =>
+              <CatalogGuideFigure key={example.shape} diagram={example}/>)}
           </div>)}
         </div>
       )}

@@ -2,7 +2,11 @@ import {Fragment, type ReactNode} from "react";
 import type {ProductVariant} from "@/types/product";
 import {getProductIllustration} from "@/lib/productPreviewImage";
 import {isDemonstrationProduct} from "@/lib/catalogOffer";
+import {formatMassPerMeter, formatNumber} from "@/lib/numberFormat";
+import {vgpSeries} from "@/lib/vgp";
+import {Icon} from "@/components/ui/Icon";
 import {ProductImageViewer} from "./ProductImageViewer";
+import {VgpPositionFigures} from "./VgpDetailsVisuals";
 import tableStyles from "./RebarTable.module.css";
 
 type View = "table" | "card";
@@ -43,13 +47,14 @@ export function CatalogVariantTable({children, quantityHeading = "Кол-во", 
   </div>;
 }
 
-export function CatalogVariantLayout({view, variant, name = variant.name, preview, specifications, tableSpecifications, price, priceNote, order}: {
+export function CatalogVariantLayout({view, variant, name = variant.name, preview, specifications, tableSpecifications, cardDetails, price, priceNote, order}: {
   view: View;
   variant: ProductVariant;
   name?: string;
   preview?: ReactNode;
   specifications: ReactNode;
   tableSpecifications?: {heading: ReactNode; cells: ReactNode};
+  cardDetails?: ReactNode;
   price: ReactNode;
   priceNote?: ReactNode;
   order: ReactNode;
@@ -67,6 +72,7 @@ export function CatalogVariantLayout({view, variant, name = variant.name, previe
       {image && <div className={tableStyles.cardImage}>{image}</div>}
       <div className="min-w-0">{specifications}</div>
     </div>
+    {cardDetails}
     <div className="mt-4 flex flex-wrap items-end justify-between gap-3 border-t border-slate-100 pt-3 dark:border-slate-800">
       <div>
         <strong className="text-xl tabular-nums">{price}</strong>
@@ -86,6 +92,43 @@ export function CatalogVariantLayout({view, variant, name = variant.name, previe
     </td>
     {order}
   </tr>;
+}
+
+export function VgpVariantDetails({variant, length, mass}: {variant: ProductVariant; length?: ReactNode; mass?: number}) {
+  const series = vgpSeries(variant);
+  const fields = [
+    {label: "Условный проход (Ду)", value: variant.nominalBoreMm === undefined ? null : formatNumber(variant.nominalBoreMm)},
+    {label: "Наружный диаметр", value: variant.diameterMm === undefined ? null : `${formatNumber(variant.diameterMm)} мм`},
+    {label: "Толщина стенки", value: variant.wallThicknessMm === undefined ? null : `${formatNumber(variant.wallThicknessMm)} мм`},
+    {label: "Длина по каталогу", value: length},
+    {label: "Серия", value: series === "—" ? null : series},
+    {label: "Теоретическая масса", value: mass === undefined ? null : `${formatMassPerMeter(mass)} кг/м`},
+    {label: "Стандарт", value: variant.standard || null},
+  ];
+
+  return <div className="@container space-y-3 text-left">
+    <div className="flex items-center gap-2 text-slate-950 dark:text-slate-100">
+      <Icon name="ruler" className="text-brand-700 dark:text-brand-300"/>
+      <p className="text-sm font-semibold">Характеристики трубы</p>
+    </div>
+    <div className="grid gap-4 @min-[42rem]:grid-cols-[minmax(13.75rem,16rem)_minmax(0,1fr)] @min-[42rem]:items-start @min-[42rem]:gap-6">
+      <VgpPositionFigures length={length}/>
+      <dl className="grid grid-cols-1 gap-x-4 gap-y-2 @min-[12rem]:grid-cols-2 @min-[51rem]:grid-cols-4">
+        {fields.filter(({value}) => value != null).map(({label, value}) => <div key={label} className="min-w-0 border-b border-slate-200 pb-2 dark:border-slate-700">
+          <dt className="text-xs text-slate-600 dark:text-slate-400">{label}</dt>
+          <dd className="mt-0.5 text-sm font-semibold tabular-nums text-slate-950 dark:text-slate-100">{value}</dd>
+        </div>)}
+      </dl>
+    </div>
+    <div className="max-w-[72ch] space-y-1.5 text-sm text-slate-700 dark:text-slate-300">
+      <p className="flex items-center gap-2 font-semibold text-slate-950 dark:text-slate-100">
+        <Icon name="clipboard" className="text-brand-700 dark:text-brand-300"/>Поставка
+      </p>
+      <p>{variant.description}</p>
+      <p>Марка стали, исполнение резьбы и наличие муфт уточняются по документам поставки.</p>
+      {variant.sourceProductName && <p>Обозначение поставщика — {variant.sourceProductName}</p>}
+    </div>
+  </div>;
 }
 
 export function CatalogVariantSpecifications({items}: {items: readonly {label: string; value: ReactNode}[]}) {

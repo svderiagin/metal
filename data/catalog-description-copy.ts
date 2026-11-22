@@ -2,6 +2,9 @@ import type {IconName} from "@/components/ui/Icon";
 
 export type CatalogGuideDiagram =
   | {shape: "sheet-width"}
+  | {shape: "vgp-series"}
+  | {shape: "vgp-length"}
+  | {shape: "vgp-thread"}
   | {
     shape: "round" | "square" | "rectangle" | "mesh" | "solid-square" | "angle" | "strip";
     dimensions: readonly (readonly [label: string, value: string])[];
@@ -11,7 +14,7 @@ export type CatalogGuideSection = {
   heading: string;
   text: string;
   icon: IconName;
-  diagram?: CatalogGuideDiagram;
+  diagram?: CatalogGuideDiagram | CatalogGuideDiagram[];
 };
 
 type DescriptionCopy = {
@@ -181,8 +184,16 @@ export const catalogDescriptionCopy: Partial<Record<string, DescriptionCopy>> = 
         text: "Условный проход (Ду) сверяйте с обозначением фитинга. Для отверстий и хомутов используйте наружный диаметр из таблицы.",
         diagram: {shape: "round", dimensions: [["Ду", "32"], ["Наружный Ø", "42,3 мм"], ["Стенка", "2,8 мм"]]},
       },
-      {heading: "Стенка и серия", icon: "layers", text: "Для Ду 32 в каталоге есть лёгкая труба со стенкой 2,8 мм и обыкновенная со стенкой 3,2 мм. Серию можно отобрать в фильтре или сверить в «Подробнее»."},
-      {heading: "Резьба и длина", icon: "wrench", text: "До заказа уточните тип соединения, наличие резьбы и муфт. Если нужны цельные участки, сверьте их длину с длиной одной трубы. Поле «Заказ, м» показывает суммарный метраж."},
+      {
+        heading: "Стенка и серия", icon: "layers",
+        text: "У труб одного Ду наружный диаметр может совпадать при разной толщине стенки. Серию можно отобрать в фильтре или сверить в «Подробнее».",
+        diagram: {shape: "vgp-series"},
+      },
+      {
+        heading: "Резьба и длина", icon: "wrench",
+        text: "Для резьбового соединения проверьте исполнение концов трубы. Длину цельного участка сверьте с длиной одной трубы, а общий метраж заказа смотрите в поле «Заказ, м».",
+        diagram: [{shape: "vgp-thread"}, {shape: "vgp-length"}],
+      },
     ],
   },
   "cat-trk-sub-3": {

@@ -9,7 +9,7 @@ import {QuoteRequestButton} from "./QuoteRequestButton";
 import {formatQuoteProductName} from "@/lib/quoteRequest";
 import filterStyles from "./FilterPanel.module.css";
 import tableStyles from "./RebarTable.module.css";
-import {CatalogVariantLayout, CatalogVariantOrder, CatalogVariantSpecifications} from "./CatalogVariantLayout";
+import {CatalogVariantLayout, CatalogVariantOrder, CatalogVariantSpecifications, VgpVariantDetails} from "./CatalogVariantLayout";
 import {Button} from "@/components/ui/Button";
 import {Input} from "@/components/ui/Input";
 import {Icon} from "@/components/ui/Icon";
@@ -53,6 +53,7 @@ function TonnageMeasuredVariantItem({
   const referenceMass = beamReferenceMassKg(variant);
   const isRebar = kind === "rebar";
   const isVgp = kind === "vgp";
+  const isOrdinaryVgp = isVgp && variant.subcategoryId === "cat-trk-sub-1";
   const isPipe = isVgp || kind === "pipe";
   const wholePipe = isWholePipeVariant(variant);
   const roundToWholePipes = wholePipe && hasMass && Number.isFinite(variant.lengthMeters) && (variant.lengthMeters ?? 0) > 0;
@@ -295,7 +296,7 @@ function TonnageMeasuredVariantItem({
 
   if (isRebar) return <RebarVariantLayout view={view} variant={variant} price={price} order={order}/>;
 
-  const details = <div className="space-y-2 text-left text-sm font-normal text-slate-600 dark:text-slate-300">
+  const legacyDetails = <div className="space-y-2 text-left text-sm font-normal text-slate-600 dark:text-slate-300">
     <p className="font-bold text-slate-900 dark:text-slate-100">{variant.name}</p>
     <p>{variant.availability === "UNKNOWN" ? "Наличие уточняется" : variant.availability === "IN_STOCK" ? "В наличии" : "Под заказ"}</p>
     <p>{variant.shortDescription}</p>
@@ -317,6 +318,8 @@ function TonnageMeasuredVariantItem({
     <span className="whitespace-nowrap">{pipeLength} м</span>
     {pipeTolerance && <> <span className="whitespace-nowrap">({pipeTolerance})</span></>}
   </> : "—";
+  const details = isOrdinaryVgp ? <VgpVariantDetails variant={variant}
+    length={pipeLength ? lengthWithUnit : undefined} mass={hasMass ? mass : undefined}/> : legacyDetails;
   const specifications = <CatalogVariantSpecifications items={isPipe ? [
     {label: isVgp ? "Ду × стенка, мм" : "Наружный Ø × стенка, мм", value: <span className="whitespace-nowrap">{pipeSize}</span>},
     isVgp ? {label: "Наружный Ø, мм", value: outsideDiameter}
@@ -335,11 +338,15 @@ function TonnageMeasuredVariantItem({
   ]}/>;
   const detailsLabel = isVgp ? "Подробнее" : "Подробнее о товаре";
   const moreDetails = view === "card"
-    ? <details className="mt-3 text-sm"><DetailsSummary className="font-semibold text-slate-600 focus-visible:outline-2 focus-visible:outline-brand-700 dark:text-slate-300 dark:focus-visible:outline-brand-300">{detailsLabel}</DetailsSummary>
-      <div className="mt-3">{details}</div></details>
+    ? <details className={isOrdinaryVgp ? `${tableStyles.vgpDetailsDisclosure} mt-3 border-t border-slate-200 text-sm dark:border-slate-700` : "mt-3 text-sm"}>
+      <DetailsSummary className="font-semibold text-slate-600 focus-visible:outline-2 focus-visible:outline-brand-700 dark:text-slate-300 dark:focus-visible:outline-brand-300">{detailsLabel}</DetailsSummary>
+      <div className={isOrdinaryVgp ? "pt-1" : "mt-3"}>{details}</div></details>
     : <button type="button" aria-expanded={detailsOpen} aria-controls={`pipe-details-${variant.id}`}
       aria-label={`Подробности: ${variant.name}`} onClick={() => setDetailsOpen(!detailsOpen)}
-      className={`mt-2 cursor-pointer rounded-sm font-semibold text-slate-600 underline decoration-slate-300 underline-offset-4 hover:text-brand-700 focus-visible:outline-2 focus-visible:outline-brand-700 dark:text-slate-300 dark:decoration-slate-500 dark:hover:text-brand-400 dark:focus-visible:outline-brand-300 ${isVgp ? "whitespace-nowrap text-xs" : "text-sm"}`}>{detailsLabel}</button>;
+      className={`mt-2 cursor-pointer rounded-sm font-semibold text-slate-600 underline decoration-slate-300 underline-offset-4 focus-visible:outline-2 focus-visible:outline-brand-700 dark:text-slate-300 dark:decoration-slate-500 dark:focus-visible:outline-brand-300 ${isVgp ? "whitespace-nowrap text-xs" : "text-sm"} ${isOrdinaryVgp ? "inline-flex min-h-8 items-center gap-0.5" : ""} ${isOrdinaryVgp && detailsOpen ? "" : "hover:text-brand-700 dark:hover:text-brand-400"}`}>
+      {detailsLabel}
+      {isOrdinaryVgp && <Icon name="chevron-down" className={detailsOpen ? "rotate-180" : ""}/>}
+    </button>;
   const tableSpecifications = isPipe ? {
     heading: <><span className="block">{pipeSize}</span>{moreDetails}</>,
     cells: <>
@@ -352,10 +359,13 @@ function TonnageMeasuredVariantItem({
   return <>
     <CatalogVariantLayout view={view} variant={variant} name={name} tableSpecifications={tableSpecifications} specifications={isDemonstrationProduct(variant)
       ? <p className="text-sm text-slate-600 dark:text-slate-400">Характеристики требуют подтверждения перед заказом.</p>
-      : <>{specifications}{isPipe && moreDetails}</>}
+      : <>{specifications}{isPipe && !isOrdinaryVgp && moreDetails}</>}
+      cardDetails={isOrdinaryVgp && view === "card" && !isDemonstrationProduct(variant) ? moreDetails : undefined}
       price={price} order={order}/>
     {isPipe && view === "table" && <tr id={`pipe-details-${variant.id}`} hidden={!detailsOpen}
-      className="border-t border-slate-200 bg-slate-50 dark:border-slate-700 dark:bg-slate-800/50"><td colSpan={isVgp ? 9 : 10} className="p-4">{details}</td></tr>}
+      className={isOrdinaryVgp ? tableStyles.vgpDetailsRow : "border-t border-slate-200 bg-slate-50 dark:border-slate-700 dark:bg-slate-800/50"}>
+      <td colSpan={isVgp ? 9 : 10} className="p-4">{details}</td>
+    </tr>}
   </>;
 }
 

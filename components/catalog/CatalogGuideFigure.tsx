@@ -1,8 +1,13 @@
 import type {CatalogGuideDiagram} from "@/data/catalog-description-copy";
 import styles from "./CatalogGuideFigure.module.css";
+import {VgpLengthFigure, VgpSeriesFigure, VgpThreadFigure} from "./VgpDetailsVisuals";
 
 export function CatalogGuideFigure({diagram}: {diagram: CatalogGuideDiagram}) {
   const frame = `${styles.figure} mt-3 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2.5 dark:border-slate-700 dark:bg-slate-950`;
+
+  if (diagram.shape === "vgp-series") return <VgpSeriesFigure className={`${frame} w-full max-w-80`}/>;
+  if (diagram.shape === "vgp-length") return <VgpLengthFigure className={`${frame} w-full max-w-80`}/>;
+  if (diagram.shape === "vgp-thread") return <VgpThreadFigure className={`${frame} w-full max-w-80`}/>;
 
   if (diagram.shape === "sheet-width") {
     return <figure aria-label="Полная и полезная ширина профнастила" className={`${frame} w-full max-w-80`}>

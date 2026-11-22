@@ -1,11 +1,13 @@
 .frame {
   --table-border: var(--color-slate-200);
+  --vgp-details-surface: var(--color-slate-50);
   position: relative;
   isolation: isolate;
 }
 
 :global(html[data-theme="dark"]) .frame {
   --table-border: var(--color-slate-700);
+  --vgp-details-surface: var(--color-slate-950);
 }
 
 .table {
@@ -65,8 +67,14 @@
 }
 
 .table > tbody > tr:nth-child(even) > :is(th, td) { background: var(--table-stripe); }
-.table > tbody > tr:hover > :is(th, td),
-.table > tbody > tr:focus-within > :is(th, td) { background: var(--table-hover); }
+.table > tbody > tr:not(:where(.vgpDetailsRow, :has(+ .vgpDetailsRow:not([hidden])))):is(:hover, :focus-within) > :is(th, td) {
+  background: var(--table-hover);
+}
+
+.table > tbody > tr.vgpDetailsRow > td { background: var(--vgp-details-surface); }
+
+.vgpDetailsDisclosure:not([open]) > summary:hover { color: var(--color-brand-700); }
+:global(html[data-theme="dark"]) .vgpDetailsDisclosure:not([open]) > summary:hover { color: var(--color-brand-300); }
 
 .table > tbody > tr:nth-last-child(1 of :not([hidden])) > :first-child {
   border-bottom-left-radius: calc(var(--radius-xl) - 1px);
