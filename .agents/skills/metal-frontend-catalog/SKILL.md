@@ -33,6 +33,8 @@ Follow `AGENTS.md`. When changing a Next.js API or convention, read the matching
 
 Read [references/project-map.md](references/project-map.md) when the task changes catalog structure, product ordering, search, tables, cart calculations, or imports.
 
+For the requested [VGP-style catalogue rollout](../../../docs/catalog-product-pages-prompt.md#таблица-и-карточки), use the nine logical desktop columns defined there. Choose the visible characteristics for how buyers compare each family, keep exact values searchable, and move secondary facts to «Подробнее». Check the longest real labels, values and totals at 1280 px.
+
 ## Verification
 
 Follow [the shared check matrix](../../../docs/development-workflow.md) (repository `docs/development-workflow.md`). Start with the area's test from the project map. Recheck counts/protected data when the edit can affect them. Price/product edits also need the generated cart projection refreshed before browser checks; do not regenerate supplier imports for that.

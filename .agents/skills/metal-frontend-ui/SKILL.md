@@ -5,7 +5,7 @@ description: Edit metal-frontend layout, responsive styling, theme, navigation, 
 
 # Metal Frontend UI
 
-Preserve the existing visual language unless the user requests a redesign: red actions, slate surfaces, locally hosted Inter, rounded panels, light/dark/system themes. Reuse the nearest existing component rather than adding a UI library.
+Use the current visual language from [docs/theme.md](../../../docs/theme.md): graphite surfaces, steel-blue primary actions, red for errors and removal, locally hosted Inter, and light, dark and system themes. Reuse the nearest existing component.
 
 ## Find the owner
 
@@ -21,6 +21,7 @@ Preserve the existing visual language unless the user requests a redesign: red a
 | Category/family title gallery | `CatalogCoverGallery.tsx`, `CatalogCoverViewer.tsx`, `data/catalog-cover-galleries.ts`; behavior and adding supplied photos: `docs/catalog-cover-gallery.md` |
 | Generic product rows/cards | `VariantCatalogResults.tsx`; filters: `GenericProductVariantCatalog.tsx` and `lib/variantCatalog.ts` |
 | Category layout | `app/catalog/[categorySlug]/page.tsx`; contains special layout branches. Table/card markup lives in `components/catalog/`. |
+| Product-listing layout | [Ordinary VGP reference](../../../docs/catalog-product-pages-prompt.md#2-общая-композиция-страницы); see the relevant section for spacing, navigation, tables, cards, or buying guidance. |
 | About/delivery/services/contacts/privacy | Corresponding `app/<route>/page.tsx`; form behavior is covered by the orders skill |
 
 ## Non-obvious constraints
@@ -28,7 +29,7 @@ Preserve the existing visual language unless the user requests a redesign: red a
 - Typography uses shared `text-page-title`, `text-section-title`, `text-card-title` and `text-eyebrow` roles. `text-sm` is 15 px and `text-xs` is 13 px; editable controls keep 16 px. Preserve local Cyrillic font loading and tabular figures for quantities/prices. Font changes need native-size text review, font-failure/200% text checks, and deliberate screenshot baseline review. Do not regenerate approved bitmap labels for an interface-font change.
 - Theme initialization runs before paint in `app/layout.tsx`; preserve the stable server snapshot and existing `suppressHydrationWarning` on `html`. Add dark surfaces, borders, text and state colors together. Do not recolor product photos with filters.
 - Use `variant="secondary"` for secondary `Button`/`ButtonLink` controls. Do not append conflicting `text-white` and dark-text utilities to the same element: Tailwind's generated order, not JSX class order, chooses the winner. Check readable labels on both themes.
-- Table and mobile-card markup often coexist in one component. Change both presentations when the request affects shared behavior; scope browser locators to the visible control. Check where the category/sidebar appears before assuming no horizontal overflow means good mobile usability.
+- Table and mobile-card markup often coexist in one component. Change both presentations when the request affects shared behavior; scope browser locators to the visible control. Verify that catalogue order-field widths stay stable at a fixed viewport with empty, short and maximum values. Measure the rendered width and text clearance separately. Check where the category/sidebar appears before assuming no horizontal overflow means good mobile usability.
 - Keep image geometry reserved, use the existing URL version helper, and size downloads to rendered width. For new/replaced files read the relevant part of `docs/catalog-images.md`; for loading regressions read `docs/image-performance.md`. Old image-coverage counts are historical.
 - Before changing `next/image`, read `node_modules/next/dist/docs/01-app/03-api-reference/02-components/image.md`. Measure the actual visible LCP candidate; avoid preloading every image or copying deprecated `priority` usage.
 - Product previews use a native dialog portaled to the body, Escape, scroll locking and focus return. Preserve the approved rounded window, native 1:1 zoom and panning. A gallery for product-row photos was explicitly cancelled; do not add one during unrelated changes. Category/family title photos have a separate approved gallery: click opens a rounded overlay, click on the photo closes it, additional supplied photos enable arrows. Keep these two viewers separate. Frames overlay the thumbnail, preserving its 4:3 content box; adding a layout border creates fractional white gaps.

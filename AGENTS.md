@@ -17,6 +17,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
   - [metal-frontend-orders](.agents/skills/metal-frontend-orders/SKILL.md): корзина, количества, пересчёт цен, формы, checkout и API.
   - [metal-frontend-quality](.agents/skills/metal-frontend-quality/SKILL.md): аудит, декомпозиция, тестовое покрытие и регрессия по скриншотам.
 - Для пересекающейся задачи подключайте второй навык только в затронутой области.
+- Для унификации товарных листингов используйте [промпт переноса эталона ВГП](docs/catalog-product-pages-prompt.md). Для локальной правки читайте нужный раздел.
 - Изображения — важная часть продукта. Для их замены, генерации и разметки применяйте `metal-frontend-ui` и [обязательную визуальную проверку](docs/catalog-images.md#image-quality-review-required). Проверяйте результат на сайте, а при генерации — и производные варианты относительно исходника; хеши, размеры файлов и зелёные тесты не заменяют оценку внешнего вида.
 - Проверки и генерация: [docs/development-workflow.md](docs/development-workflow.md). Объём проверки зависит от риска изменения.
 - `README.md` содержит большой исторический разбор. Текущие детали подтверждайте кодом; не читайте README целиком по умолчанию.
