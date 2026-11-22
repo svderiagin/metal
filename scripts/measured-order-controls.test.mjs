@@ -175,7 +175,7 @@ test('existing generic tonne carts hydrate into measured controls and rebar keep
 test('VGP orders round up to whole pipes, retain exact mass and update or remove one cart line', () => {
   const h = setup('local-258', 'vgp');
   h.change(0, '7');
-  assert.equal(h.render().inputs[1].value, '0,01536');
+  assert.equal(h.render().inputs[1].value, '0,015');
   h.render().inputs[0].onBlur();
   assert.equal(h.render().inputs[0].value, '12');
   h.render().action.onClick();
@@ -186,7 +186,7 @@ test('VGP orders round up to whole pipes, retain exact mass and update or remove
   h.change(1, '0.02');
   assert.equal(h.render().inputs[0].value, '18');
   h.render().inputs[1].onBlur();
-  assert.equal(h.render().inputs[1].value, '0,02304');
+  assert.equal(h.render().inputs[1].value, '0,023');
   h.render().action.onClick();
   assert.equal(h.cart.lines.length, 1);
   assert.equal(h.cart.lines[0].measurement.meters, 18);

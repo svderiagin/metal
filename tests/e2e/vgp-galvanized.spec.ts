@@ -31,13 +31,14 @@ test("galvanized VGP shows audited facts and converts length and mass while typi
   const tons = row.getByRole("textbox", {name: /^Вес заказа в тоннах для/});
   await meters.fill("7,8");
   await expect(meters).toBeFocused();
-  await expect(tons).toHaveValue("0,017032");
+  await expect(tons).toHaveValue("0,017");
   await meters.fill("15,6");
-  await expect(tons).toHaveValue("0,034064");
+  await expect(tons).toHaveValue("0,034");
   await tons.fill("0,03406416");
+  await expect(tons).toHaveValue("0,034");
   await expect(meters).toHaveValue("15,6");
   await tons.blur();
-  await expect(tons).toHaveValue("0,034064");
+  await expect(tons).toHaveValue("0,034");
   await meters.fill("7,81");
   await meters.blur();
   await expect(meters).toHaveValue("15,6");
@@ -83,7 +84,7 @@ test("ordinary VGP searches by size, filters by series and adds whole pipes to t
   await meters.fill("6,01");
   await meters.blur();
   await expect(meters).toHaveValue("12");
-  await expect(tons).toHaveValue("0,01536");
+  await expect(tons).toHaveValue("0,015");
   await expect(row.getByLabel(/^Сумма заказа для/)).toContainText(/823,91/);
   await row.getByRole("button", {name: "В корзину", exact: true}).click();
   await page.goto("/cart");
@@ -121,10 +122,10 @@ test("whole-pipe counts stay visible when adding and updating from either field"
 
   await meters.fill("2");
   await expect(update).toBeEnabled();
-  await expect(status).toHaveText("1 шт. · Не сохранено");
+  await expect(status).toHaveText("1 шт. Не сохранено", {useInnerText: true});
   await meters.press("Enter");
   await expect(meters).toHaveValue("6");
-  await expect(status).toHaveText("1 шт. · Не сохранено");
+  await expect(status).toHaveText("1 шт. Не сохранено", {useInnerText: true});
   expect(await storedItems()).toMatchObject([{productId: ordinary.id, measurement: {meters: 12}}]);
   await update.click();
   await expect(saved).toBeDisabled();
@@ -132,15 +133,15 @@ test("whole-pipe counts stay visible when adding and updating from either field"
   expect(await storedItems()).toMatchObject([{productId: ordinary.id, measurement: {meters: 6}}]);
 
   await tons.fill("0,01");
-  await expect(status).toHaveText("2 шт. · Не сохранено");
+  await expect(status).toHaveText("2 шт. Не сохранено", {useInnerText: true});
   await update.click();
   await expect(saved).toBeDisabled();
-  await expect(tons).toHaveValue("0,01536");
+  await expect(tons).toHaveValue("0,015");
   await expect(status).toHaveText("2 шт.");
   expect(await storedItems()).toMatchObject([{productId: ordinary.id, measurement: {inputMode: "ton", meters: 12}}]);
 
   await meters.fill("18");
-  await expect(status).toHaveText("3 шт. · Не сохранено");
+  await expect(status).toHaveText("3 шт. Не сохранено", {useInnerText: true});
   await expect(update).toBeEnabled();
   await meters.fill("11");
   await expect(saved).toBeDisabled();

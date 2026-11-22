@@ -50,14 +50,14 @@ const rebarColumns = [
 ] as const;
 
 const vgpColumns = [
-  {label: "Ду × стенка, мм", width: 11},
-  {label: "Фото", width: 10},
-  {label: "Наружный Ø, мм", width: 11},
+  {label: "Ду × стенка, мм", width: 13, className: tableStyles.vgpSizeColumn},
+  {label: "Фото", width: 13},
+  {label: "Наружный", unit: "Ø, мм", width: 8, className: tableStyles.vgpDiameterColumn},
   {label: "Длина, м", width: 8},
   {label: "Цена, ₽/т", width: 11},
-  {label: "Заказ, м", width: 12},
-  {label: "Заказ, т", width: 12},
-  {label: "Сумма", width: 11, className: tableStyles.sumColumn},
+  {label: "Заказ, м", width: 10},
+  {label: "Заказ, т", width: 9},
+  {label: "Сумма", width: 14, className: tableStyles.sumColumn},
   {label: "Действие", width: 14, visuallyHidden: true},
 ] as const;
 

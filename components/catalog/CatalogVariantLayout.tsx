@@ -53,7 +53,7 @@ export function CatalogVariantLayout({view, variant, name = variant.name, previe
   name?: string;
   preview?: ReactNode;
   specifications: ReactNode;
-  tableSpecifications?: {heading: ReactNode; cells: ReactNode};
+  tableSpecifications?: {heading: ReactNode; headingClassName?: string; cells: ReactNode};
   cardDetails?: ReactNode;
   price: ReactNode;
   priceNote?: ReactNode;
@@ -83,7 +83,7 @@ export function CatalogVariantLayout({view, variant, name = variant.name, previe
   </article>;
 
   return <tr id={`variant-${variant.id}`} title={variant.name} className="align-middle border-t border-slate-200 dark:border-slate-700">
-    <th scope="row" className="font-semibold">{tableSpecifications?.heading ?? name}</th>
+    <th scope="row" className={`font-semibold ${tableSpecifications?.headingClassName ?? ""}`}>{tableSpecifications?.heading ?? name}</th>
     <td>{image ? <div className={tableStyles.rowImage}>{image}</div> : <span className="text-slate-500 dark:text-slate-400">—</span>}</td>
     {tableSpecifications?.cells ?? <td className="break-words text-left">{specifications}</td>}
     <td className="break-words">
@@ -96,6 +96,8 @@ export function CatalogVariantLayout({view, variant, name = variant.name, previe
 
 export function VgpVariantDetails({variant, length, mass}: {variant: ProductVariant; length?: ReactNode; mass?: number}) {
   const series = vgpSeries(variant);
+  const tableReference = "таблице 1 ГОСТ 3262-75";
+  const referenceStart = variant.description.indexOf(tableReference);
   const fields = [
     {label: "Условный проход (Ду)", value: variant.nominalBoreMm === undefined ? null : formatNumber(variant.nominalBoreMm)},
     {label: "Наружный диаметр", value: variant.diameterMm === undefined ? null : `${formatNumber(variant.diameterMm)} мм`},
@@ -128,7 +130,15 @@ export function VgpVariantDetails({variant, length, mass}: {variant: ProductVari
         <span className={headingIcon}><Icon name="clipboard"/></span>
         Поставка
       </p>
-      <p>{variant.description}</p>
+      <p>{referenceStart === -1 ? variant.description : <>
+        {variant.description.slice(0, referenceStart)}
+        <a href="https://meganorm.ru/mega_doc/norm/gost_gosudarstvennyj-standart/5/gost_3262-75_gosudarstvennyy_standart_soyuza_ssr_truby.html#Par103"
+          target="_blank" rel="noopener noreferrer"
+          className="rounded-sm text-brand-700 underline underline-offset-2 hover:text-brand-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-700 dark:text-brand-300 dark:hover:text-brand-100 dark:focus-visible:outline-brand-300">
+          {tableReference}<span className="sr-only"> (откроется в новой вкладке)</span>
+        </a>
+        {variant.description.slice(referenceStart + tableReference.length)}
+      </>}</p>
       <p>Марка стали, исполнение резьбы и наличие муфт уточняются по документам поставки.</p>
       {variant.sourceProductName && <p>Обозначение поставщика — {variant.sourceProductName}</p>}
     </div>

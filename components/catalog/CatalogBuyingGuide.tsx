@@ -4,17 +4,18 @@ import {CatalogGuideFigure} from "./CatalogGuideFigure";
 import {CatalogDescription} from "./CatalogDescription";
 import styles from "./CatalogBuyingGuide.module.css";
 
-export function CatalogBuyingGuide({headingId, title, description}: {
+export function CatalogBuyingGuide({headingId, title, description, marginClassName = "mt-5"}: {
   headingId: string;
   title: string;
   description: string | readonly CatalogGuideSection[];
+  marginClassName?: string;
 }) {
   const fourTopics = typeof description !== "string" && description.length === 4;
 
   return (
     <section
       aria-labelledby={headingId}
-      className="@container mt-5 min-w-0 rounded-xl border border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-900"
+      className={`@container min-w-0 rounded-xl border border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-900 ${marginClassName}`}
     >
       <h2 id={headingId} tabIndex={-1} className="flex scroll-mt-6 items-start gap-2.5 rounded-t-xl border-b border-slate-200 bg-slate-50 px-4 py-3 text-card-title text-slate-900 sm:px-5 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100">
         <Icon name="info" className="mt-[3px] text-brand-700 dark:text-brand-300"/>

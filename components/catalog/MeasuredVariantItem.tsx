@@ -19,7 +19,7 @@ import {formatCurrency, formatUnitPrice} from "@/lib/currency";
 import {formatNumber} from "@/lib/numberFormat";
 import {calculateLineTotal, calculateMeasuredLineTotal, getMeasurementQuantityOptions, metersToTons, tonsToMeters} from "@/lib/orderMeasurement";
 import {constrainOrderQuantityInput, correctOrderQuantity, formatCatalogNumber, parseOrderQuantity} from "@/lib/catalogNumberInput";
-import {formatMeasuredQuantity, quantityTransferHandlers} from "@/lib/cartQuantityInput";
+import {formatMeasuredQuantity, formatQuantityForInput, quantityTransferHandlers} from "@/lib/cartQuantityInput";
 import type {OrderInputMode} from "@/types/cart";
 import type {ProductVariant} from "@/types/product";
 import {isDemonstrationProduct} from "@/lib/catalogOffer";
@@ -58,6 +58,7 @@ function TonnageMeasuredVariantItem({
   const wholePipe = isWholePipeVariant(variant);
   const roundToWholePipes = wholePipe && hasMass && Number.isFinite(variant.lengthMeters) && (variant.lengthMeters ?? 0) > 0;
   const [detailsOpen, setDetailsOpen] = useState(false);
+  const [editingTons, setEditingTons] = useState(false);
   const cartLine = lines.find((line) => line.productId === variant.id);
   const savedMeasurement = cartLine?.measurement;
   const {draft, setDraft, message, setMessage} = useOrderDraft<{
@@ -100,7 +101,7 @@ function TonnageMeasuredVariantItem({
     : variant.quoteOnly || pricePerTon === undefined ? "По запросу" : estimatedTotal === null ? "Укажите объём" : `${referenceTons !== null ? "≈ " : ""}${variant.priceQualifier === "from" ? "от " : ""}${formatCurrency(estimatedTotal)}`;
   const totalClassName = estimatedTotal === null
     ? "text-xs font-normal text-slate-500 dark:text-slate-400"
-    : "font-semibold tabular-nums text-slate-900 dark:text-slate-100";
+    : `font-semibold tabular-nums text-slate-900 dark:text-slate-100${isVgp && view === "table" ? " whitespace-nowrap" : ""}`;
   const enteredQuantity = draft === null && cartLine && !savedMeasurement ? enteredTons : inputMode === "meter" ? enteredMeters : enteredTons;
   const isSaved = !!cartLine && !cartLine.invalidReason && parsedTons !== null && parsedTons > 0 && savedTons !== null
     && enteredQuantity !== 0
@@ -116,6 +117,8 @@ function TonnageMeasuredVariantItem({
     ((hasMass && (!parsedMeters || !parsedTons)) || (pricePerTon !== undefined && !variant.quoteOnly && parsedTons !== null && estimatedTotal === null));
   const invalidDraft = draft !== null && activeValue.trim() !== ""
     && (enteredQuantity === null || (enteredQuantity === 0 && !shouldRemove) || cannotCalculate);
+  const displayedTons = isVgp && !editingTons && !invalidDraft && parsedTons !== null
+    ? formatQuantityForInput(parsedTons, false, 3) : tons;
   const buttonLabel = removed ? "Удалено" : !canPurchase ? "Под заказ" : shouldRemove ? "Удалить" : isSaved
     ? <><Icon name="check"/><span className="whitespace-nowrap">В корзине</span></> : hasChanges ? "Обновить" : "В корзину";
   const buttonClassName = removed ? filterStyles.removedCartButton
@@ -123,13 +126,19 @@ function TonnageMeasuredVariantItem({
       : isSaved ? filterStyles.savedCartButton
         : hasChanges && canPurchase ? filterStyles.updateCartButton
           : filterStyles.cartButton;
+  const unsavedMessage = "Не сохранено";
   let feedbackText = message?.text;
   if (!feedbackText) {
     if (invalidDraft) feedbackText = "Проверьте введённое значение.";
-    else if (hasChanges && !shouldRemove) feedbackText = activeValue.trim() ? "Не сохранено" : enterQuantityMessage;
+    else if (hasChanges && !shouldRemove) feedbackText = activeValue.trim() ? unsavedMessage : enterQuantityMessage;
   }
   const pieceCount = !invalidDraft && pipeOrder && pipeOrder.pieces > 0 ? `${pipeOrder.pieces} шт.` : "";
-  const status = [pieceCount, feedbackText].filter(Boolean).join(" · ");
+  const status = isVgp && feedbackText === unsavedMessage
+    ? <>
+      {pieceCount && <span className="block">{pieceCount}</span>}
+      <span className="block whitespace-nowrap">{feedbackText}</span>
+    </>
+    : [pieceCount, feedbackText].filter(Boolean).join(" · ");
 
   function showError(text: string) {
     setMessage({kind: "error", text});
@@ -160,11 +169,17 @@ function TonnageMeasuredVariantItem({
   }
 
   function updateQuantityField(mode: OrderInputMode, value: string) {
+    const isVgpTonInput = isVgp && mode === "ton";
+    if (isVgpTonInput) {
+      if (/[.,]\d{4}/u.test(value)) return;
+      setEditingTons(true);
+    }
     const options = quantityOptions(mode);
-    const constrained = constrainOrderQuantityInput(value, options.maximum, bound => formatMeasuredQuantity(bound, mode));
+    const constrained = constrainOrderQuantityInput(value, options.maximum, bound =>
+      isVgpTonInput ? formatQuantityForInput(bound, false, 3) : formatMeasuredQuantity(bound, mode));
     value = constrained.value;
     const entered = parseOrderQuantity(value);
-    const previousValue = mode === "meter" ? meters : tons;
+    const previousValue = mode === "meter" ? meters : displayedTons;
     const previousExact = mode === "meter" ? parsedMeters : parsedTons;
     const sameDisplayedQuantity = entered !== null && entered === parseOrderQuantity(previousValue);
     if (!sameDisplayedQuantity || constrained.capped || message?.kind === "error") setMessage(null);
@@ -277,15 +292,17 @@ function TonnageMeasuredVariantItem({
   );
 
   const showOrderLabels = view === "card";
+  const fitOrderFields = isVgp && view === "table";
   const statusId = `measured-order-status-${view}-${variant.id}`;
   const meterInput = <OrderInput label={`Длина заказа для ${variant.name}`}
     placeholder={missingBeamMass && parsedTons !== null && parsedTons > 0 ? "—" : "0"}
-    visibleLabel={showOrderLabels ? "Заказ, м" : undefined} value={meters || displayQuantity(referenceMeters, "meter")} invalid={invalidDraft && inputMode === "meter"} statusId={statusId}
+    visibleLabel={showOrderLabels ? "Заказ, м" : undefined} value={meters || displayQuantity(referenceMeters, "meter")} fitContent={fitOrderFields} invalid={invalidDraft && inputMode === "meter"} statusId={statusId}
     onChange={value => updateQuantityField("meter", value)} onBlur={() => settleQuantity("meter")} onRejectedTransfer={showError}/>;
   const tonInput = <OrderInput label={`Вес заказа в тоннах для ${variant.name}`}
     placeholder={needsMassForLength ? "—" : "0"}
-    visibleLabel={showOrderLabels ? "Заказ, т" : undefined} value={tons || displayQuantity(referenceTons, "ton")} invalid={invalidDraft && inputMode === "ton"} statusId={statusId}
-    onChange={value => updateQuantityField("ton", value)} onBlur={() => settleQuantity("ton")} onRejectedTransfer={showError}/>;
+    visibleLabel={showOrderLabels ? "Заказ, т" : undefined} value={displayedTons || displayQuantity(referenceTons, "ton")}
+    fitContent={fitOrderFields} invalid={invalidDraft && inputMode === "ton"} statusId={statusId} onChange={value => updateQuantityField("ton", value)}
+    onBlur={() => {setEditingTons(false); settleQuantity("ton");}} onRejectedTransfer={showError}/>;
   const price = `${variant.priceQualifier === "from" ? "от " : ""}${formatUnitPrice(pricePerTon ?? null, "за тонну")}`;
   const total = <output aria-label={`Сумма заказа для ${variant.name}`} aria-live="polite" className={totalClassName}>{totalLabel}</output>;
   const statusColor = invalidDraft || message?.kind === "error" ? "text-red-700 dark:text-red-400" : "text-slate-500 dark:text-slate-400";
@@ -343,12 +360,13 @@ function TonnageMeasuredVariantItem({
       <div className={isOrdinaryVgp ? "pt-2" : "mt-3"}>{details}</div></details>
     : <button type="button" aria-expanded={detailsOpen} aria-controls={`pipe-details-${variant.id}`}
       aria-label={`Подробности: ${variant.name}`} onClick={() => setDetailsOpen(!detailsOpen)}
-      className={`mt-2 cursor-pointer rounded-sm font-semibold text-slate-600 underline decoration-slate-300 underline-offset-4 focus-visible:outline-2 focus-visible:outline-brand-700 dark:text-slate-300 dark:decoration-slate-500 dark:focus-visible:outline-brand-300 ${isVgp ? "whitespace-nowrap text-xs" : "text-sm"} ${isOrdinaryVgp ? "inline-flex min-h-8 items-center gap-0.5" : ""} ${isOrdinaryVgp && detailsOpen ? "" : "hover:text-brand-700 dark:hover:text-brand-400"}`}>
-      {detailsLabel}
+      className={`mt-2 cursor-pointer rounded-sm font-semibold text-slate-600 underline decoration-slate-300 underline-offset-4 focus-visible:outline-2 focus-visible:outline-brand-700 dark:text-slate-300 dark:decoration-slate-500 dark:focus-visible:outline-brand-300 ${isVgp ? "whitespace-nowrap text-xs" : "text-sm"} ${isOrdinaryVgp ? tableStyles.vgpDetailsButton : ""} ${isOrdinaryVgp && detailsOpen ? "" : "hover:text-brand-700 dark:hover:text-brand-400"}`}>
+      <span>{detailsLabel}</span>
       {isOrdinaryVgp && <Icon name="chevron-down" className={detailsOpen ? "rotate-180" : ""}/>}
     </button>;
   const tableSpecifications = isPipe ? {
     heading: <><span className="block">{pipeSize}</span>{moreDetails}</>,
+    headingClassName: isVgp ? tableStyles.vgpSizeColumn : undefined,
     cells: <>
       {isVgp ? <td className="tabular-nums">{outsideDiameter}</td>
         : <td>{variant.steelGrade ?? <><span aria-hidden="true">—</span><span className="sr-only">Уточняется</span></>}</td>}
@@ -422,6 +440,7 @@ function OrderInput({
   placeholder,
   visibleLabel,
   value,
+  fitContent,
   onChange,
   onBlur,
   onRejectedTransfer,
@@ -432,6 +451,7 @@ function OrderInput({
   placeholder: string;
   visibleLabel?: string;
   value: string;
+  fitContent: boolean;
   onChange: (value: string) => void;
   onBlur: () => void;
   onRejectedTransfer: (message: string) => void;
@@ -447,7 +467,10 @@ function OrderInput({
   return (
     <label className="block text-sm font-semibold">
       {visibleLabel && <span className="mb-1 block">{visibleLabel}</span>}
-      {input}
+      {fitContent ? <span className={tableStyles.measurementSizer}>
+        <span aria-hidden="true">{value || placeholder}</span>
+        {input}
+      </span> : input}
     </label>
   );
 }
