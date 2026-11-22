@@ -1,10 +1,11 @@
 import {CatalogCoverGallery} from "./CatalogCoverGallery";
 import {CatalogDescription} from "./CatalogDescription";
+import {ButtonLink} from "@/components/ui/Button";
 import {Icon} from "@/components/ui/Icon";
 import {getPreparedPhoto} from "@/lib/server/preparedPhotos";
 import styles from "./ProductCatalogIntro.module.css";
 
-export function ProductCatalogIntro({title, label, images, description, coverName = title, detailsId, summary, resultsHref, resultsLabel = "Размеры и цены"}: {
+export function ProductCatalogIntro({title, label, images, description, coverName = title, detailsId, summary, showProductTypesLink}: {
   title: string;
   label: string;
   images: readonly string[];
@@ -12,8 +13,7 @@ export function ProductCatalogIntro({title, label, images, description, coverNam
   coverName?: string;
   detailsId?: string;
   summary?: string;
-  resultsHref?: string;
-  resultsLabel?: string;
+  showProductTypesLink?: boolean;
 }) {
   return <header className="min-w-0 rounded-xl border border-slate-200 bg-white p-4 dark:border-slate-700 dark:bg-slate-900 sm:p-5">
     <div className={`${styles.grid} ${images.length ? styles.withImage : ""}`}>
@@ -24,9 +24,11 @@ export function ProductCatalogIntro({title, label, images, description, coverNam
       <CatalogDescription description={description} className={`${styles.description} mt-0`}/>
       {images.length > 0 && <div className={styles.gallery}><CatalogCoverGallery images={images} name={coverName}
         layout="compact" coverPhoto={getPreparedPhoto(images[0])}/></div>}
-      {(resultsHref || detailsId) && <div className={`${styles.actions} flex flex-wrap items-center gap-x-5 gap-y-1`}>
-        {resultsHref && <a href={resultsHref} className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-brand-700 hover:underline hover:underline-offset-4 dark:text-brand-300">{resultsLabel}<Icon name="arrow-down"/></a>}
-        {detailsId && <a href={`#${detailsId}`} className="inline-flex min-h-11 items-center text-sm text-slate-600 hover:underline hover:underline-offset-4 dark:text-slate-300">Как выбрать</a>}
+      {(showProductTypesLink || detailsId) && <div className={`${styles.actions} flex flex-wrap items-center gap-x-4 gap-y-2`}>
+        {showProductTypesLink && <a href="#catalog-types" className="inline-flex min-h-11 items-center gap-2 rounded-lg text-sm font-semibold text-brand-700 underline-offset-4 hover:underline dark:text-brand-300">Выбрать продукцию<Icon name="arrow-down"/></a>}
+        {detailsId && <ButtonLink href={`#${detailsId}`} variant="secondary" className={`${styles.guideLink} max-w-full`}>
+          Как выбрать<Icon name="arrow-down"/>
+        </ButtonLink>}
       </div>}
     </div>
   </header>;

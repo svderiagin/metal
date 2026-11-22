@@ -50,22 +50,19 @@ export function useCatalogPriceRange(onChange?: () => void) {
 export function PriceRangeInputs({range, unit}: {range: ReturnType<typeof useCatalogPriceRange>; unit?: string}) {
   const suffix = unit ? ` за ${unit}` : "";
   const unitLabel = unit === "тонну" ? "₽/т" : unit === "метр" ? "₽/м" : "₽";
-  return <>
-    <label className="text-sm font-semibold">
-      Цена от, {unitLabel}
-      <PriceInput value={range.minimumPrice} placeholder="От"
+  return <fieldset>
+    <legend className="text-sm font-semibold">Цена, {unitLabel}</legend>
+    <div className="mt-1 grid grid-cols-2 gap-2">
+      <PriceInput value={range.minimumPrice} prefix="от"
         label={`Минимальная цена${suffix} в рублях`}
         onRejectedTransfer={range.onRejectedTransfer}
         onChange={value => range.edit("minimumPrice", value)} onCommit={() => range.commit("minimumPrice")}/>
-    </label>
-    <label className="text-sm font-semibold">
-      Цена до, {unitLabel}
-      <PriceInput value={range.maximumPrice} placeholder="До"
+      <PriceInput value={range.maximumPrice} prefix="до"
         label={`Максимальная цена${suffix} в рублях`}
         onRejectedTransfer={range.onRejectedTransfer}
         onChange={value => range.edit("maximumPrice", value)} onCommit={() => range.commit("maximumPrice")}/>
-    </label>
-  </>;
+    </div>
+  </fieldset>;
 }
 
 export function PriceRangeFeedback({message}: {message: string}) {
@@ -73,17 +70,18 @@ export function PriceRangeFeedback({message}: {message: string}) {
     className={message ? "w-full text-xs text-slate-600 dark:text-slate-300" : "sr-only"}>{message}</p>;
 }
 
-function PriceInput({value, placeholder, label, onChange, onCommit, onRejectedTransfer}: {
+function PriceInput({value, prefix, label, onChange, onCommit, onRejectedTransfer}: {
   value: string;
-  placeholder: string;
+  prefix: "от" | "до";
   label: string;
   onChange: (value: string) => void;
   onCommit: () => void;
   onRejectedTransfer: (message: string) => void;
 }) {
   return (
-    <span className="relative mt-1 block">
-      <Input type="text" inputMode="decimal" value={value} placeholder={placeholder} aria-label={label}
+    <span className="relative block min-w-0">
+      <span aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-3.5 flex items-center text-sm text-slate-500 dark:text-slate-400">{prefix}</span>
+      <Input type="text" inputMode="decimal" value={value} aria-label={label}
         aria-invalid={(!!value.trim() && parseCatalogPrice(value) === null) || undefined}
         {...quantityTransferHandlers(onRejectedTransfer)}
         onChange={event => onChange(event.currentTarget.value)} onBlur={onCommit}
@@ -93,10 +91,8 @@ function PriceInput({value, placeholder, label, onChange, onCommit, onRejectedTr
             event.currentTarget.blur();
           }
         }}
-        className="pr-10"
+        className="pl-10 tabular-nums"
       />
-      <span aria-hidden="true" className="pointer-events-none absolute inset-y-0 right-3.5 flex items-center font-normal text-slate-500 dark:text-slate-400">₽</span>
-      <span className="sr-only">в рублях</span>
     </span>
   );
 }

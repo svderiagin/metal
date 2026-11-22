@@ -1,12 +1,48 @@
+.panel {
+  container: catalog-filters / inline-size;
+}
+
+.toolbar {
+  display: grid;
+  align-items: end;
+  gap: 0.75rem;
+}
+
+@container catalog-filters (min-width: 32rem) {
+  .toolbar { grid-template-columns: minmax(0, 2fr) minmax(14rem, 1fr); }
+}
+
+.fields {
+  --field-width: 9.5rem;
+  --field-gap: 0.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--field-gap);
+}
+
 .fields > label {
+  flex: 1 1 min(100%, var(--field-width));
   min-width: 0;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
 }
 
-.fields > label > :is(input, select, span) {
+.fields > label > select {
   margin-top: auto;
+}
+
+.fields > fieldset {
+  flex: 2 1 min(100%, calc(var(--field-width) * 2 + var(--field-gap)));
+  align-self: end;
+  min-width: 0;
+}
+
+.reset { margin-inline-start: auto; }
+
+@container catalog-filters (max-width: 21rem) {
+  .reset,
+  .reset > button { width: 100%; }
 }
 
 .toggle:focus-visible {

@@ -61,6 +61,14 @@ const vgpColumns = [
   {label: "Действие", width: 14, visuallyHidden: true},
 ] as const;
 
+const electroweldedMassTable = (
+  <a href="https://meganorm.ru/mega_doc/norm/gost_gosudarstvennyj-standart/0/gost_10704-91_mezhgosudarstvennyy_standart_truby_stalnye.html#Par53"
+    target="_blank" rel="noopener noreferrer"
+    className="rounded-sm text-brand-700 underline underline-offset-2 hover:text-brand-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-700 dark:text-brand-300 dark:hover:text-brand-100 dark:focus-visible:outline-brand-300">
+    таблицы 1 ГОСТ 10704-91<span className="sr-only"> (откроется в новой вкладке)</span>
+  </a>
+);
+
 export function isMeasuredRebarVariant(variant: ProductVariant): variant is RebarVariant {
   return variant.diameterMm !== undefined
     && variant.form !== undefined
@@ -98,12 +106,14 @@ function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
   const isVgp = kind === "vgp";
   const isProfile = kind === "profile";
   const isElectrowelded = kind === "pipe";
+  const showSizeFilter = !isVgp && !isElectrowelded;
   const isGalvanized = isElectrowelded && variants.every(isGalvanizedElectroweldedVariant);
+  const wholePipeOrderNote = <><strong>Заказ округляется вверх до целых труб.</strong> Итоговый метраж — в поле «Заказ, м».</>;
   const electroweldedNote = isGalvanized
-    ? <>Для пересчёта используется масса стальной трубы <strong>без цинкового покрытия</strong> по таблице 1 ГОСТ 10704-91.</>
-    : <>Масса и стоимость заказа по длине рассчитываются по <strong>теоретической массе</strong> из таблицы 1 ГОСТ 10704-91.</>;
+    ? <>Для пересчёта используется масса стальной трубы <strong>без цинкового покрытия</strong> из {electroweldedMassTable}. {wholePipeOrderNote}</>
+    : <>Масса и стоимость заказа по длине рассчитываются по <strong>теоретической массе</strong> из {electroweldedMassTable}.</>;
   const orderNote = isVgp
-    ? <><strong>Заказ округляется вверх до целых труб.</strong> Итоговый метраж — в поле «Заказ, м».</>
+    ? wholePipeOrderNote
     : isElectrowelded ? electroweldedNote : null;
   const pipeColumns = isElectrowelded ? [
     {label: "Наружный Ø × стенка, мм", width: 10},
@@ -133,8 +143,10 @@ function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
   useLinkedVariant(variants, variant => {resetFilters(); setQuery(variant.name);}, resultsPending);
 
   const diameters = useMemo(
-    () => [...new Set(variants.map(variant => isProfile ? profilePipeSize(variant) : isVgp ? vgpSize(variant) : isBeam ? beamProfile(variant) : String(variant.diameterMm ?? "")))].sort((a, b) => a.localeCompare(b, "ru", {numeric: true})),
-    [variants, isBeam, isVgp, isProfile],
+    () => showSizeFilter
+      ? [...new Set(variants.map(variant => isProfile ? profilePipeSize(variant) : isBeam ? beamProfile(variant) : String(variant.diameterMm ?? "")))].sort((a, b) => a.localeCompare(b, "ru", {numeric: true}))
+      : [],
+    [variants, isBeam, isProfile, showSizeFilter],
   );
   const lengths = useMemo(
     () => uniqueNumbers(variants.flatMap((variant) =>
@@ -208,9 +220,9 @@ function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
             </Select>
           </label>
         }>
-          <Filter label={isProfile ? "Размер, мм" : isVgp ? "Ду × стенка, мм" : isBeam ? "Профиль" : isElectrowelded ? "Наружный Ø, мм" : "Диаметр, мм"} value={diameter} onChange={setDiameter}>
+          {showSizeFilter && <Filter label={isProfile ? "Размер, мм" : isBeam ? "Профиль" : "Диаметр, мм"} value={diameter} onChange={setDiameter}>
             {diameters.map((value) => <option key={value} value={value}>{value}</option>)}
-          </Filter>
+          </Filter>}
           <Filter label={isProfile || isElectrowelded ? "Стенка, мм" : isVgp ? "Серия" : isBeam ? "Тип балки" : "Форма продукции"} value={form} onChange={setForm}>
             {forms.map((value) => (
               <option key={value} value={value}>{isVgp || isBeam || isProfile || isElectrowelded ? value : formLabel(value as "coil" | "bar")}</option>
@@ -219,12 +231,12 @@ function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
           <Filter label="Длина, м" value={length} onChange={setLength}>
             {lengths.map((value) => <option key={value} value={value}>{formatNumber(value)}</option>)}
           </Filter>
-          <PriceRangeInputs range={priceRange} unit={isProfile ? "метр" : "тонну"}/>
           <Filter label="Наличие" value={availability} onChange={setAvailability}>
             <option value="IN_STOCK">В наличии</option>
             <option value="ON_ORDER">Под заказ</option>
             {(isVgp || isProfile || isElectrowelded) && <option value="UNKNOWN">Наличие уточняется</option>}
           </Filter>
+          <PriceRangeInputs range={priceRange} unit={isProfile ? "метр" : "тонну"}/>
       </FilterPanel>
 
       <section className="min-w-0 lg:col-span-2" aria-label="Продукция">

@@ -16,10 +16,15 @@ for (const family of ["shveller", "ugolok", "kvadrat", "armatura", "balka", "pro
           "Диаметр, мм", "Форма", "Марка стали", "Цена, ₽/т", "Масса, кг/м", "Длина, м", "Заказ, м", "Заказ, т", "Сумма", "Действие",
         ]);
         await expect(productItem.getByRole("rowheader")).toHaveText(String(product.diameterMm));
+      } else if (family === "vgp") {
+        await expect(headers).toHaveText([
+          "Ду × стенка, мм", "Фото", "Наружный Ø, мм", "Длина, м", "Цена, ₽/т", "Заказ, м", "Заказ, т", "Сумма", "Действие",
+        ]);
+        await expect(productItem.getByRole("rowheader")).toBeVisible();
       } else {
         await expect(headers).toHaveText([
           "Наименование", "Изображение", "Характеристики", "Цена",
-          ...(family === "balka" || family === "vgp" ? ["Заказ, м", "Заказ, т"] : [/^Кол-во(?:, м)?$/]),
+          ...(family === "balka" ? ["Заказ, м", "Заказ, т"] : [/^Кол-во(?:, м)?$/]),
           "Сумма", "Действие",
         ]);
         await expect(productItem.getByRole("rowheader")).toBeVisible();
@@ -241,9 +246,11 @@ test("profile-sheet guidance follows product families in the rendered page", asy
   await expect(families.getByRole("heading", {level: 2})).toHaveText(["Профнастил С8", "Профнастил С20", "Профнастил Н75"]);
   await expect(families.getByText("Уточняется", {exact: true})).toHaveCount(0);
   const details = page.getByRole("region", {name: "Как подобрать профнастил", exact: true});
+  await expect(details.getByRole("heading", {level: 3})).toHaveText(["Профиль и толщина", "Полезная ширина", "Покрытие и цвет"]);
   await expect(details.getByRole("paragraph")).toHaveText([
-    /Для расчёта площади учитывайте полезную ширину и нахлёсты/,
     /Для кровли и несущего настила дополнительно проверяют схему опирания, пролёты и расчётные нагрузки/,
+    /Для расчёта площади учитывайте полезную ширину и нахлёсты/,
+    /Для окрашенных листов сверьте код RAL и цвет видимой стороны/,
   ]);
   const familiesBox = await families.boundingBox();
   const detailsBox = await details.boundingBox();

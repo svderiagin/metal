@@ -1,14 +1,105 @@
-.select:not([multiple]):not([size]),
-.select[size="1"]:not([multiple]) {
-  appearance: none;
-  padding-right: 2.75rem;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%235e707c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 0.875rem center;
-  background-size: 20px;
+.select {
+  --select-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%235e707c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  --picker-scroll-thumb: var(--color-brand-500);
 }
 
-:global(html[data-theme="dark"]) .select:not([multiple]):not([size]),
-:global(html[data-theme="dark"]) .select[size="1"]:not([multiple]) {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%2392a1ac' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+:global(html[data-theme="dark"]) .select {
+  --select-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%2392a1ac' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  --picker-scroll-thumb: var(--color-brand-400);
+}
+
+.select:where(:not([multiple]):is(:not([size]), [size="1"])) {
+  appearance: none;
+  padding-inline-end: 1.875rem;
+  background-image: var(--select-chevron);
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+  background-size: 16px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+@media (forced-colors: active) {
+  .select:where(:not([multiple]):is(:not([size]), [size="1"])) {
+    appearance: auto;
+    padding-inline-end: 0.875rem;
+    background-image: none;
+  }
+}
+
+/* Keep system pickers for touch and browsers that cannot style the option list. */
+@supports (appearance: base-select) and selector(::picker(select)) {
+  @media (pointer: fine) and (forced-colors: none) {
+    .select:where(:not([multiple]):is(:not([size]), [size="1"])) {
+      appearance: base-select;
+      column-gap: 0.625rem;
+      padding-inline-end: 0.875rem;
+      background-image: none;
+    }
+
+    .select::picker-icon {
+      content: "";
+      flex-shrink: 0;
+      align-self: center;
+      inline-size: 0.55rem;
+      block-size: 0.55rem;
+      margin-inline-start: auto;
+      margin-inline-end: 0.15rem;
+      border: solid var(--counter-text);
+      border-width: 0 2px 2px 0;
+      transform: translateY(-0.125rem) rotate(45deg);
+    }
+
+    .select:open::picker-icon {
+      transform: translateY(0.125rem) rotate(225deg);
+    }
+
+    .select:where(:not([multiple]):is(:not([size]), [size="1"]))::picker(select) {
+      appearance: base-select;
+      margin-block: 0.25rem;
+      max-block-size: min(20rem, 60dvh);
+      max-inline-size: calc(100dvw - 2rem);
+      padding: 0.25rem;
+      overflow: auto;
+      overscroll-behavior: contain;
+      scrollbar-width: thin;
+      scrollbar-color: var(--picker-scroll-thumb) transparent;
+      border: 1px solid var(--control-border);
+      border-radius: var(--radius-2xl);
+      background: var(--control-surface);
+      color: var(--foreground);
+      box-shadow: var(--shadow-lg);
+      font-weight: 400;
+    }
+
+    .select:open option {
+      min-block-size: 2.75rem;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 0.625rem;
+      border-radius: var(--radius-lg);
+      white-space: normal;
+      overflow-wrap: anywhere;
+    }
+
+    .select:open option:enabled:hover {
+      background: var(--inactive-background);
+    }
+
+    .select:open option:checked {
+      background: var(--update-background);
+      color: var(--update-text);
+      font-weight: 600;
+    }
+
+    .select:open option:focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: -2px;
+    }
+
+    .select:open option::checkmark {
+      order: 1;
+      margin-inline-start: auto;
+    }
+  }
 }

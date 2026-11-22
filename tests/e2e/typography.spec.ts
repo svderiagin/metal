@@ -133,6 +133,7 @@ test("enlarged and spaced text preserves category content and actions", async ({
   await descriptionLink.press("Enter");
   const detailsHeading = page.getByRole("heading", {name: "Как выбрать арматуру", exact: true});
   await expect(detailsHeading).toBeInViewport();
+  await expect(detailsHeading).toBeFocused();
   await expect(page.getByRole("region").filter({has: detailsHeading}))
     .toContainText("Сопоставьте класс, профиль поверхности, диаметр и длину с проектом.");
 });

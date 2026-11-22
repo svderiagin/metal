@@ -3,7 +3,7 @@ import type {Metadata} from "next";
 import {Suspense} from "react";
 import {Breadcrumbs} from "@/components/catalog/Breadcrumbs";
 import {CatalogSidebar} from "@/components/catalog/CatalogSidebar";
-import {CatalogDescription} from "@/components/catalog/CatalogDescription";
+import {CatalogBuyingGuide} from "@/components/catalog/CatalogBuyingGuide";
 import {CatalogProductDetail} from "@/components/catalog/CatalogProductDetail";
 import {ProductCatalogIntro} from "@/components/catalog/ProductCatalogIntro";
 import {ProductTypeResults} from "@/components/catalog/ProductTypeResults";
@@ -96,13 +96,10 @@ export default async function SubcategoryPage({params}: Props) {
           </Suspense>
           <div className="min-w-0">
             <ProductCatalogIntro key={currentSubcategory.id} title={currentSubcategory.name} label="Подкатегория"
-              summary={`Типов: ${productTypes.length}`} resultsHref="#catalog-types" resultsLabel="Выбрать продукцию"
+              summary={`Типов: ${productTypes.length}`} showProductTypesLink
               detailsId={copy ? "subcategory-details-heading" : undefined} images={coverImages} description={intro}/>
             <ProductTypeResults productTypes={productTypes} variants={variants}/>
-            {copy && <section className="mt-12 max-w-[800px]" aria-labelledby="subcategory-details-heading">
-              <h2 id="subcategory-details-heading" className="text-section-title">{copy.title}</h2>
-              <CatalogDescription description={copy.details} variant="categoryDetails" className="mt-4"/>
-            </section>}
+            {copy && <CatalogBuyingGuide headingId="subcategory-details-heading" title={copy.title} description={copy.details}/>}
           </div>
         </div>
       </PageContainer>

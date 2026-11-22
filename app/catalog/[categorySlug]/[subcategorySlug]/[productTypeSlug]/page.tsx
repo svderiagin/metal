@@ -95,7 +95,7 @@ export default async function ProductTypePage({params}: Props) {
       <div className="flex flex-col gap-4">
         <CatalogListingNavigation category={category} currentTypeId={productType.id}/>
         <ProductCatalogIntro key={productType.id} title={rebarHeadings[productType.subcategoryId] ?? title}
-          summary={`Позиций: ${variants.length}`} resultsHref="#catalog-products"
+          summary={`Позиций: ${variants.length}`}
           detailsId={detailsTitle && details ? "product-type-details-heading" : undefined}
           label={sheet || copy ? "Подкатегория" : "Тип продукции"} images={images} description={intro} coverName={title}/>
         <section id="catalog-products" className="flex scroll-mt-6 flex-col gap-5" aria-label="Подбор и заказ продукции">

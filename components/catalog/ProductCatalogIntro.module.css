@@ -14,7 +14,10 @@
 }
 .gallery { align-self: center; }
 @media (max-width: 39.999rem) {
-  .actions > a { min-height: 2rem; }
+  .guideLink { padding-inline: 0.75rem; }
+}
+@media (max-width: 22rem) {
+  .heading h1 { font-size: calc(var(--text-page-title) * 0.9); }
 }
 @media (min-width: 40rem) {
   .withImage {

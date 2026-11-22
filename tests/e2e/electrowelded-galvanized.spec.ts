@@ -43,7 +43,7 @@ test("galvanized 89×3.5 pipe converts while typing and retains the same measure
   await meters.fill("7,81");
   await meters.blur();
   await expect(meters).toHaveValue("15,6");
-  await expect(row).toContainText("Объём округлён вверх до целых труб");
+  await expect(row.getByRole("status", {name: "", exact: true})).toHaveText("2 шт.");
   await meters.fill("");
   await expect(tons).toHaveValue("");
   await meters.fill("-1");
@@ -84,7 +84,8 @@ test("ordinary electrowelded pipes match both ends of the length range and conve
   const ranged = visibleProduct(page, rangedPipe.id);
   await expect(ranged).toBeVisible();
   await openFilters(page);
-  await page.getByRole("combobox", {name: "Наружный Ø, мм", exact: true}).selectOption("273");
+  await expect(page.getByRole("combobox", {name: "Наружный Ø, мм", exact: true})).toHaveCount(0);
+  await page.getByLabel("Поиск товаров", {exact: true}).fill("Ø273");
   await page.getByRole("combobox", {name: "Стенка, мм", exact: true}).selectOption("8");
   const length = page.getByRole("combobox", {name: "Длина, м", exact: true});
   await length.selectOption("11");

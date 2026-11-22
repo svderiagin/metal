@@ -26,13 +26,14 @@ export function ButtonLink({href, children, variant = "primary", className = "",
   className?: string;
   onClick?: MouseEventHandler<HTMLAnchorElement>;
 }) {
+  const Anchor = href.startsWith("#") ? "a" : Link;
   return (
-    <Link
+    <Anchor
       href={href}
       onClick={onClick}
       className={`${styles} ${variants[variant]} ${className}`}
     >
       {children}
-    </Link>
+    </Anchor>
   );
 }

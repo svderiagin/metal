@@ -1,0 +1,73 @@
+.figure {
+  --diagram-line: var(--color-brand-700);
+  --diagram-fill: var(--color-brand-200);
+  --diagram-overlap: var(--color-brand-50);
+}
+
+:global(html[data-theme="dark"]) .figure {
+  --diagram-line: var(--color-brand-300);
+  --diagram-fill: var(--color-brand-800);
+  --diagram-overlap: var(--color-slate-950);
+}
+
+.shape {
+  position: relative;
+  width: 3rem;
+  height: 3rem;
+  border: 5px solid var(--diagram-line);
+}
+
+.round { border-radius: 50%; }
+.round::after {
+  content: "";
+  position: absolute;
+  inset-inline: -5px;
+  top: 50%;
+  border-top: 1px dashed var(--diagram-line);
+}
+
+.square,
+.rectangle { border-radius: var(--radius-sm); }
+.rectangle { width: 3.5rem; height: 2.375rem; }
+.solid-square,
+.strip {
+  border-width: 1px;
+  background: var(--diagram-fill);
+}
+.strip { width: 3.625rem; height: 0.625rem; }
+.angle { border-width: 0 0 5px 5px; }
+
+.mesh {
+  width: 3.125rem;
+  height: 3.125rem;
+  border-width: 0 1px 1px 0;
+  background-image: linear-gradient(to right, var(--diagram-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--diagram-line) 1px, transparent 1px);
+  background-size: calc(100% / 3) calc(100% / 3);
+}
+.mesh::after {
+  content: "";
+  position: absolute;
+  inset: calc(100% / 3 + 1px) calc(100% / 3) calc(100% / 3) calc(100% / 3 + 1px);
+  background: var(--diagram-fill);
+}
+
+.fullWidth,
+.coverWidth {
+  height: 0.625rem;
+  margin-block: 0.375rem;
+  border: 1px solid var(--diagram-line);
+  border-radius: var(--radius-sm);
+}
+.fullWidth {
+  position: relative;
+  background: var(--diagram-fill);
+}
+.fullWidth::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 0 78%;
+  border-inline-start: 1px solid var(--diagram-line);
+  background: repeating-linear-gradient(135deg, var(--diagram-overlap) 0 3px, var(--diagram-fill) 3px 6px);
+}
+.coverWidth { width: 78%; background: var(--diagram-fill); }

@@ -6,7 +6,6 @@ import {notFound} from "next/navigation";
 import {Breadcrumbs} from "@/components/catalog/Breadcrumbs";
 import {CatalogSidebar} from "@/components/catalog/CatalogSidebar";
 import {CatalogBuyingGuide} from "@/components/catalog/CatalogBuyingGuide";
-import {CatalogDescription} from "@/components/catalog/CatalogDescription";
 import {CatalogListingNavigation} from "@/components/catalog/CatalogListingNavigation";
 import {ProductTypeResults} from "@/components/catalog/ProductTypeResults";
 import {ProductCatalogIntro} from "@/components/catalog/ProductCatalogIntro";
@@ -58,7 +57,7 @@ export default async function CategoryPage({params}: Props) {
         <div className="flex flex-col gap-4">
           <CatalogListingNavigation category={category}/>
           <ProductCatalogIntro key={category.id} title={category.name} label="Категория"
-            summary={`Позиций: ${variants.length}`} resultsHref="#catalog-products"
+            summary={`Позиций: ${variants.length}`}
             detailsId={detailedDescription ? `${category.id}-details-heading` : undefined}
             images={hasImage ? coverImages : []} description={introDescription}/>
           <section id="catalog-products" className="flex scroll-mt-6 flex-col gap-5" aria-label="Подбор и заказ продукции">
@@ -81,16 +80,12 @@ export default async function CategoryPage({params}: Props) {
         </Suspense>
         <div className="min-w-0">
           <ProductCatalogIntro key={category.id} title={category.name} label="Категория"
-            summary={`Типов: ${productTypes.length}`} resultsHref="#catalog-types" resultsLabel="Выбрать продукцию"
+            summary={`Типов: ${productTypes.length}`} showProductTypesLink
             detailsId={detailedDescription ? `${category.id}-details-heading` : undefined}
             images={hasImage ? coverImages : []} description={introDescription}/>
           <ProductTypeResults productTypes={productTypes} variants={variants}/>
-          {detailedDescription && <section className="mt-12 max-w-[800px]" aria-labelledby={`${category.id}-details-heading`}>
-            <h2 id={`${category.id}-details-heading`} className="text-section-title scroll-mt-8 leading-tight">
-              {description?.title ?? `Подробнее о категории «${category.name}»`}
-            </h2>
-            <CatalogDescription description={detailedDescription} variant="categoryDetails" className="mt-4"/>
-          </section>}
+          {detailedDescription && <CatalogBuyingGuide headingId={`${category.id}-details-heading`}
+            title={description?.title ?? `Подробнее о категории «${category.name}»`} description={detailedDescription}/>}
           <div className="mt-10 rounded-lg bg-slate-900 p-6 text-white">
             <h2 className="text-xl font-bold">Нужна комплектация по спецификации?</h2>
             <p className="mt-2 text-slate-300">Опишите позиции и необходимые услуги — подготовим единый
