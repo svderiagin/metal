@@ -12,6 +12,7 @@ export function productIllustrationSignature(product: ProductVariant): string {
     product.diameterMm, product.nominalBoreMm, product.profileWidthMm, product.profileHeightMm,
     product.wallThicknessMm, product.lengthMeters, product.lengthRangeMeters, product.sheetSizeMeters,
     product.weightPerMeterKg, product.weightConfirmed, product.form, product.demo, product.specifications,
+    ...(product.categoryId === "cat-arm" ? [product.subcategoryId, product.attributes.find(item => item.key === "class")?.value] : []),
     ...(product.categoryId === "cat-bal" ? [product.standard] : []),
     ...(referenceMass === undefined ? [] : [referenceMass]),
   ]);

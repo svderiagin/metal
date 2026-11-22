@@ -20,7 +20,7 @@ sharp.concurrency(2);
 
 const sources = JSON.parse(await fs.readFile("data/product-illustration-sources.json", "utf8"));
 const protectedCategories = new Set([
-  "cat-bal", flatSteelCategoryId,
+  "cat-arm", "cat-bal", flatSteelCategoryId,
   "rozmet-cat-shveller", "rozmet-cat-ugolok", "rozmet-cat-kvadrat", "rozmet-cat-listovoy-prokat",
 ]);
 // Owner-approved pipe templates have separate family label renderers.
@@ -82,10 +82,9 @@ function sectionDiagram(product) {
       + text(unit(product.profileWidthMm), x + w / 2, 292)
       + line(x + w, y, 494, y) + line(x + w, y + h, 494, y + h)
       + line(488, y + 5, 488, y + h - 5, true) + text(unit(product.profileHeightMm), 584, y + h / 2 + 12);
-  } else if (product.diameterMm && ["cat-arm", "cat-trk"].includes(product.categoryId)) {
-    const hollow = product.categoryId === "cat-trk";
+  } else if (product.diameterMm && product.categoryId === "cat-trk") {
     shape = '<circle cx="263" cy="114" r="94" fill="#e9ecef"/>'
-      + (hollow ? '<circle cx="263" cy="114" r="73" fill="white"/>' : "")
+      + '<circle cx="263" cy="114" r="73" fill="white"/>'
       + line(169, 114, 169, 251) + line(357, 114, 357, 251) + line(174, 244, 352, 244, true)
       + text(`Ø ${unit(product.diameterMm)}`, 263, 288);
   }

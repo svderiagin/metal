@@ -1,118 +1,124 @@
 {
   "prd-003": {
     "imageUrl": "/images/catalog/product-illustrations/prd-003.webp",
-    "photoUrl": "/images/catalog/armatura/armatura_a400_35g.jpg",
-    "signature": "566122ab"
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "8fbc5a11",
+    "showForDemo": true
   },
   "prd-004": {
     "imageUrl": "/images/catalog/product-illustrations/prd-004.webp",
-    "photoUrl": "/images/catalog/armatura/armatura_a400_35g.jpg",
-    "signature": "cda061f3"
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "0a0f31d9",
+    "showForDemo": true
   },
   "prd-005": {
     "imageUrl": "/images/catalog/product-illustrations/prd-005.webp",
-    "photoUrl": "/images/catalog/armatura/armatura_a400_25g2c.jpg",
-    "signature": "26fce856"
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "0e29f71f",
+    "showForDemo": true
   },
   "prd-006": {
     "imageUrl": "/images/catalog/product-illustrations/prd-006.webp",
-    "photoUrl": "/images/catalog/armatura/armatura_a400_25g2c.jpg",
-    "signature": "bcf100a9"
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "4ea8ee06",
+    "showForDemo": true
   },
   "prd-007": {
     "imageUrl": "/images/catalog/product-illustrations/prd-007.webp",
-    "photoUrl": "/images/catalog/armatura/armatura_a240_a1.jpg",
-    "signature": "a7d7ebff"
+    "photoUrl": "/images/catalog/armatura/gladkaya/armatura_gladkaya_2400_1800_original.webp",
+    "signature": "51a4881f",
+    "showForDemo": true
   },
   "prd-008": {
     "imageUrl": "/images/catalog/product-illustrations/prd-008.webp",
-    "photoUrl": "/images/catalog/armatura/armatura_a240_a1.jpg",
-    "signature": "1601187d"
+    "photoUrl": "/images/catalog/armatura/gladkaya/armatura_gladkaya_2400_1800_original.webp",
+    "signature": "5e63045d",
+    "showForDemo": true
   },
   "rebar-a500c-6-coil": {
     "imageUrl": "/images/catalog/product-illustrations/rebar-a500c-6-coil.webp",
-    "photoUrl": "/images/catalog/illustration-sources/a500c-coils.jpg",
-    "signature": "32c107fb"
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "5e633282"
   },
   "rebar-a500c-6-bar": {
     "imageUrl": "/images/catalog/product-illustrations/rebar-a500c-6-bar.webp",
-    "photoUrl": "/images/catalog/armatura/armatura_а500с.jpg",
-    "signature": "f888e64e"
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "5ce06bd9"
   },
   "rebar-a500c-8-coil": {
     "imageUrl": "/images/catalog/product-illustrations/rebar-a500c-8-coil.webp",
-    "photoUrl": "/images/catalog/illustration-sources/a500c-coils.jpg",
-    "signature": "db15b42b"
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "5340c012"
   },
   "rebar-a500c-8-bar": {
     "imageUrl": "/images/catalog/product-illustrations/rebar-a500c-8-bar.webp",
-    "photoUrl": "/images/catalog/armatura/armatura_а500с.jpg",
-    "signature": "cb340c10"
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "260fb4d3"
   },
   "rebar-a500c-10-coil": {
     "imageUrl": "/images/catalog/product-illustrations/rebar-a500c-10-coil.webp",
-    "photoUrl": "/images/catalog/illustration-sources/a500c-coils.jpg",
-    "signature": "93caf1e0"
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "b2aba003"
   },
   "rebar-a500c-10-bar": {
     "imageUrl": "/images/catalog/product-illustrations/rebar-a500c-10-bar.webp",
-    "photoUrl": "/images/catalog/armatura/armatura_а500с.jpg",
-    "signature": "b7658329"
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "b99b54f0"
   },
   "rebar-a500c-12-coil": {
     "imageUrl": "/images/catalog/product-illustrations/rebar-a500c-12-coil.webp",
-    "photoUrl": "/images/catalog/illustration-sources/a500c-coils.jpg",
-    "signature": "eda60a06"
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "c20f7fb1"
   },
   "rebar-a500c-12-bar": {
     "imageUrl": "/images/catalog/product-illustrations/rebar-a500c-12-bar.webp",
-    "photoUrl": "/images/catalog/armatura/armatura_а500с.jpg",
-    "signature": "dcf2e000"
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "7571a423"
   },
   "rebar-a500c-14-bar": {
     "imageUrl": "/images/catalog/product-illustrations/rebar-a500c-14-bar.webp",
-    "photoUrl": "/images/catalog/armatura/armatura_а500с.jpg",
-    "signature": "ac6626dc"
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "02142047"
   },
   "rebar-a500c-16-bar": {
     "imageUrl": "/images/catalog/product-illustrations/rebar-a500c-16-bar.webp",
-    "photoUrl": "/images/catalog/armatura/armatura_а500с.jpg",
-    "signature": "2b6170aa"
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "0b18761d"
   },
   "rebar-a500c-18-bar": {
     "imageUrl": "/images/catalog/product-illustrations/rebar-a500c-18-bar.webp",
-    "photoUrl": "/images/catalog/armatura/armatura_а500с.jpg",
-    "signature": "36f13c48"
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "c6dcf9ab"
   },
   "rebar-a500c-20-bar": {
     "imageUrl": "/images/catalog/product-illustrations/rebar-a500c-20-bar.webp",
-    "photoUrl": "/images/catalog/armatura/armatura_а500с.jpg",
-    "signature": "79efd021"
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "fea326e8"
   },
   "rebar-a500c-22-bar": {
     "imageUrl": "/images/catalog/product-illustrations/rebar-a500c-22-bar.webp",
-    "photoUrl": "/images/catalog/armatura/armatura_а500с.jpg",
-    "signature": "fc227279"
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "628d2d60"
   },
   "rebar-a500c-25-bar": {
     "imageUrl": "/images/catalog/product-illustrations/rebar-a500c-25-bar.webp",
-    "photoUrl": "/images/catalog/armatura/armatura_а500с.jpg",
-    "signature": "ba2c2c10"
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "e6c814d3"
   },
   "rebar-a500c-28-bar": {
     "imageUrl": "/images/catalog/product-illustrations/rebar-a500c-28-bar.webp",
-    "photoUrl": "/images/catalog/armatura/armatura_а500с.jpg",
-    "signature": "7769e7fb"
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "070dd282"
   },
   "rebar-a500c-32-bar": {
     "imageUrl": "/images/catalog/product-illustrations/rebar-a500c-32-bar.webp",
-    "photoUrl": "/images/catalog/armatura/armatura_а500с.jpg",
-    "signature": "d5a61bf8"
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "a894043b"
   },
   "rebar-a500c-36-bar": {
     "imageUrl": "/images/catalog/product-illustrations/rebar-a500c-36-bar.webp",
-    "photoUrl": "/images/catalog/armatura/armatura_а500с.jpg",
-    "signature": "037e182c"
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "577289b7"
   },
   "prd-012": {
     "imageUrl": "/images/catalog/product-illustrations/prd-012.webp",
@@ -672,43 +678,43 @@
   },
   "local--995": {
     "imageUrl": "/images/catalog/product-illustrations/local--995.webp",
-    "photoUrl": "/images/catalog/armatura/armatura_a400_25g2c.jpg",
-    "signature": "6d1e29a6"
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "f81675cf"
   },
   "local--927": {
     "imageUrl": "/images/catalog/product-illustrations/local--927.webp",
-    "photoUrl": "/images/catalog/armatura/armatura_a400_25g2c.jpg",
-    "signature": "0055607d"
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "5632de82"
   },
   "local--926": {
     "imageUrl": "/images/catalog/product-illustrations/local--926.webp",
-    "photoUrl": "/images/catalog/armatura/armatura_a400_25g2c.jpg",
-    "signature": "e1f2f5e1"
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "a7b5f5be"
   },
   "local--925": {
     "imageUrl": "/images/catalog/product-illustrations/local--925.webp",
-    "photoUrl": "/images/catalog/armatura/armatura_a400_25g2c.jpg",
-    "signature": "83680293"
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "188aa184"
   },
   "local--919": {
     "imageUrl": "/images/catalog/product-illustrations/local--919.webp",
-    "photoUrl": "/images/catalog/armatura/armatura_a400_25g2c.jpg",
-    "signature": "a9083e94"
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "413a8301"
   },
   "local--870": {
     "imageUrl": "/images/catalog/product-illustrations/local--870.webp",
-    "photoUrl": "/images/catalog/armatura/armatura_a400_25g2c.jpg",
-    "signature": "a88f6cef"
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "751941b8"
   },
   "local--705": {
     "imageUrl": "/images/catalog/product-illustrations/local--705.webp",
-    "photoUrl": "/images/catalog/armatura/armatura_a240_a1.jpg",
-    "signature": "ad86c387"
+    "photoUrl": "/images/catalog/armatura/gladkaya/armatura_gladkaya_2400_1800_original.webp",
+    "signature": "54002087"
   },
   "local--684": {
     "imageUrl": "/images/catalog/product-illustrations/local--684.webp",
-    "photoUrl": "/images/catalog/armatura/armatura_а500с.jpg",
-    "signature": "1d5f34d1"
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "b800e655"
   },
   "local-258": {
     "imageUrl": "/images/catalog/product-illustrations/local-258.webp",
@@ -782,23 +788,23 @@
   },
   "local-1421": {
     "imageUrl": "/images/catalog/product-illustrations/local-1421.webp",
-    "photoUrl": "/images/catalog/armatura/armatura_а500с.jpg",
-    "signature": "c573f89f"
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "32721d2b"
   },
   "local-1555": {
     "imageUrl": "/images/catalog/product-illustrations/local-1555.webp",
-    "photoUrl": "/images/catalog/illustration-sources/a500c-coils.jpg",
-    "signature": "a15c4e7e"
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "85d71406"
   },
   "local-1758": {
     "imageUrl": "/images/catalog/product-illustrations/local-1758.webp",
-    "photoUrl": "/images/catalog/armatura/armatura_а500с.jpg",
-    "signature": "9c42891d"
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "0ddbe059"
   },
   "local-2000": {
     "imageUrl": "/images/catalog/product-illustrations/local-2000.webp",
-    "photoUrl": "/images/catalog/armatura/armatura_а500с.jpg",
-    "signature": "4a698cd3"
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "23c439c7"
   },
   "local-3963": {
     "imageUrl": "/images/catalog/truba-kruglaya/elektrosvarnaya/local-3963.jpg",
@@ -807,8 +813,8 @@
   },
   "local-6123": {
     "imageUrl": "/images/catalog/product-illustrations/local-6123.webp",
-    "photoUrl": "/images/catalog/armatura/armatura_a240_a1.jpg",
-    "signature": "f05d638b"
+    "photoUrl": "/images/catalog/armatura/gladkaya/armatura_gladkaya_2400_1800_original.webp",
+    "signature": "279e780b"
   },
   "local-6204": {
     "imageUrl": "/images/catalog/product-illustrations/local-6204.webp",
@@ -822,33 +828,33 @@
   },
   "local-6330": {
     "imageUrl": "/images/catalog/product-illustrations/local-6330.webp",
-    "photoUrl": "/images/catalog/armatura/armatura_а500с.jpg",
-    "signature": "d8759f00"
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "d5e9b3e8"
   },
   "local-6340": {
     "imageUrl": "/images/catalog/product-illustrations/local-6340.webp",
-    "photoUrl": "/images/catalog/armatura/armatura_а500с.jpg",
-    "signature": "dcc678fb"
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "b729c7af"
   },
   "local-6346": {
     "imageUrl": "/images/catalog/product-illustrations/local-6346.webp",
-    "photoUrl": "/images/catalog/armatura/armatura_а500с.jpg",
-    "signature": "a7377c61"
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "ce561fc5"
   },
   "local-6352": {
     "imageUrl": "/images/catalog/product-illustrations/local-6352.webp",
-    "photoUrl": "/images/catalog/armatura/armatura_а500с.jpg",
-    "signature": "40447f17"
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "7ce57163"
   },
   "local-6359": {
     "imageUrl": "/images/catalog/product-illustrations/local-6359.webp",
-    "photoUrl": "/images/catalog/armatura/armatura_а500с.jpg",
-    "signature": "fa5574ed"
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "23cc2c49"
   },
   "local-7483": {
     "imageUrl": "/images/catalog/product-illustrations/local-7483.webp",
-    "photoUrl": "/images/catalog/armatura/armatura_а500с.jpg",
-    "signature": "ed56bf2d"
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "e5229309"
   },
   "local-9211": {
     "imageUrl": "/images/catalog/truba-kruglaya/elektrosvarnaya/local-9211.jpg",
@@ -857,18 +863,18 @@
   },
   "local-17091": {
     "imageUrl": "/images/catalog/product-illustrations/local-17091.webp",
-    "photoUrl": "/images/catalog/armatura/armatura_а500с.jpg",
-    "signature": "d5d78cca"
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "2b5ac67a"
   },
   "local-17412": {
     "imageUrl": "/images/catalog/product-illustrations/local-17412.webp",
-    "photoUrl": "/images/catalog/armatura/armatura_а500с.jpg",
-    "signature": "28add0f5"
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "fb128731"
   },
   "local-17482": {
     "imageUrl": "/images/catalog/product-illustrations/local-17482.webp",
-    "photoUrl": "/images/catalog/armatura/armatura_а500с.jpg",
-    "signature": "ac67bec8"
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "95b1c5d0"
   },
   "local-40706": {
     "imageUrl": "/images/catalog/truba-kruglaya/elektrosvarnaya/local-40706.jpg",
@@ -882,8 +888,8 @@
   },
   "local-44188": {
     "imageUrl": "/images/catalog/product-illustrations/local-44188.webp",
-    "photoUrl": "/images/catalog/armatura/armatura_а500с.jpg",
-    "signature": "fcc2add0"
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "347fe898"
   },
   "local-52334": {
     "imageUrl": "/images/catalog/truba-kruglaya/elektrosvarnaya/local-52334.jpg",
@@ -922,8 +928,8 @@
   },
   "local-61299": {
     "imageUrl": "/images/catalog/product-illustrations/local-61299.webp",
-    "photoUrl": "/images/catalog/armatura/armatura_а500с.jpg",
-    "signature": "c15ea635"
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "4a22c2f1"
   },
   "local-62388": {
     "imageUrl": "/images/catalog/truba-kruglaya/elektrosvarnaya/local-62388.jpg",
@@ -962,8 +968,8 @@
   },
   "local-73160": {
     "imageUrl": "/images/catalog/product-illustrations/local-73160.webp",
-    "photoUrl": "/images/catalog/armatura/armatura_а500с.jpg",
-    "signature": "5b988586"
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "72a0a40e"
   },
   "local-73573": {
     "imageUrl": "/images/catalog/product-illustrations/local-73573.webp",
@@ -972,8 +978,8 @@
   },
   "local-80044": {
     "imageUrl": "/images/catalog/product-illustrations/local-80044.webp",
-    "photoUrl": "/images/catalog/armatura/armatura_a400_25g2c.jpg",
-    "signature": "f8a94e0d"
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "9f8488f2"
   },
   "local-83922": {
     "imageUrl": "/images/catalog/product-illustrations/local-83922.webp",
@@ -1057,53 +1063,53 @@
   },
   "local-110937": {
     "imageUrl": "/images/catalog/product-illustrations/local-110937.webp",
-    "photoUrl": "/images/catalog/armatura/armatura_a240_a1.jpg",
-    "signature": "b24da51f"
+    "photoUrl": "/images/catalog/armatura/gladkaya/armatura_gladkaya_2400_1800_original.webp",
+    "signature": "12041fef"
   },
   "local-110938": {
     "imageUrl": "/images/catalog/product-illustrations/local-110938.webp",
-    "photoUrl": "/images/catalog/armatura/armatura_a240_a1.jpg",
-    "signature": "5dd0ed70"
+    "photoUrl": "/images/catalog/armatura/gladkaya/armatura_gladkaya_2400_1800_original.webp",
+    "signature": "a435bc04"
   },
   "local-110940": {
     "imageUrl": "/images/catalog/product-illustrations/local-110940.webp",
-    "photoUrl": "/images/catalog/armatura/armatura_a240_a1.jpg",
-    "signature": "40087719"
+    "photoUrl": "/images/catalog/armatura/gladkaya/armatura_gladkaya_2400_1800_original.webp",
+    "signature": "f8b5bad5"
   },
   "local-110941": {
     "imageUrl": "/images/catalog/product-illustrations/local-110941.webp",
-    "photoUrl": "/images/catalog/armatura/armatura_a240_a1.jpg",
-    "signature": "da8eee54"
+    "photoUrl": "/images/catalog/armatura/gladkaya/armatura_gladkaya_2400_1800_original.webp",
+    "signature": "0e0b01c8"
   },
   "local-110942": {
     "imageUrl": "/images/catalog/product-illustrations/local-110942.webp",
-    "photoUrl": "/images/catalog/armatura/armatura_a240_a1.jpg",
-    "signature": "887f11d3"
+    "photoUrl": "/images/catalog/armatura/gladkaya/armatura_gladkaya_2400_1800_original.webp",
+    "signature": "1dab04f3"
   },
   "local-110943": {
     "imageUrl": "/images/catalog/product-illustrations/local-110943.webp",
-    "photoUrl": "/images/catalog/armatura/armatura_a240_a1.jpg",
-    "signature": "2da5dcb3"
+    "photoUrl": "/images/catalog/armatura/gladkaya/armatura_gladkaya_2400_1800_original.webp",
+    "signature": "778c2193"
   },
   "local-111016": {
     "imageUrl": "/images/catalog/product-illustrations/local-111016.webp",
-    "photoUrl": "/images/catalog/armatura/armatura_a240_a1.jpg",
-    "signature": "8cbdb2bd"
+    "photoUrl": "/images/catalog/armatura/gladkaya/armatura_gladkaya_2400_1800_original.webp",
+    "signature": "84291b29"
   },
   "local-111017": {
     "imageUrl": "/images/catalog/product-illustrations/local-111017.webp",
-    "photoUrl": "/images/catalog/armatura/armatura_a240_a1.jpg",
-    "signature": "f573c106"
+    "photoUrl": "/images/catalog/armatura/gladkaya/armatura_gladkaya_2400_1800_original.webp",
+    "signature": "b1a9df46"
   },
   "local-111019": {
     "imageUrl": "/images/catalog/product-illustrations/local-111019.webp",
-    "photoUrl": "/images/catalog/armatura/armatura_a240_a1.jpg",
-    "signature": "d0c82edd"
+    "photoUrl": "/images/catalog/armatura/gladkaya/armatura_gladkaya_2400_1800_original.webp",
+    "signature": "38c26c89"
   },
   "local-111021": {
     "imageUrl": "/images/catalog/product-illustrations/local-111021.webp",
-    "photoUrl": "/images/catalog/illustration-sources/a240-coils.jpg",
-    "signature": "7858432c"
+    "photoUrl": "/images/catalog/armatura/gladkaya/armatura_gladkaya_2400_1800_original.webp",
+    "signature": "e8cfbaa0"
   },
   "local-113874": {
     "imageUrl": "/images/catalog/product-illustrations/local-113874.webp",
@@ -1157,8 +1163,8 @@
   },
   "local-118826": {
     "imageUrl": "/images/catalog/product-illustrations/local-118826.webp",
-    "photoUrl": "/images/catalog/armatura/armatura_a240_a1.jpg",
-    "signature": "44d03357"
+    "photoUrl": "/images/catalog/armatura/gladkaya/armatura_gladkaya_2400_1800_original.webp",
+    "signature": "5fb831a7"
   },
   "local-122247": {
     "imageUrl": "/images/catalog/product-illustrations/local-122247.webp",
@@ -1177,8 +1183,8 @@
   },
   "local-122766": {
     "imageUrl": "/images/catalog/product-illustrations/local-122766.webp",
-    "photoUrl": "/images/catalog/armatura/armatura_а500с.jpg",
-    "signature": "1b21a707"
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "85e5ed33"
   },
   "local-125936": {
     "imageUrl": "/images/catalog/truba-kruglaya/elektrosvarnaya/local-125936.jpg",
