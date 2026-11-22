@@ -106,23 +106,27 @@ export function VgpVariantDetails({variant, length, mass}: {variant: ProductVari
     {label: "Стандарт", value: variant.standard || null},
   ];
 
-  return <div className="@container space-y-3 text-left">
-    <div className="flex items-center gap-2 text-slate-950 dark:text-slate-100">
-      <Icon name="ruler" className="text-brand-700 dark:text-brand-300"/>
-      <p className="text-sm font-semibold">Характеристики трубы</p>
-    </div>
-    <div className="grid gap-4 @min-[42rem]:grid-cols-[minmax(13.75rem,16rem)_minmax(0,1fr)] @min-[42rem]:items-start @min-[42rem]:gap-6">
+  const heading = "flex items-center gap-2.5 text-base font-semibold text-slate-900 dark:text-slate-100";
+  const headingIcon = "grid size-8 shrink-0 place-items-center rounded-lg bg-slate-100 text-brand-700 dark:bg-slate-800 dark:text-brand-300";
+
+  return <div className="@container space-y-4 text-left">
+    <p className={heading}>
+      <span className={headingIcon}><Icon name="ruler"/></span>
+      Характеристики трубы
+    </p>
+    <div className="grid gap-4 @min-[32rem]:grid-cols-[minmax(12rem,1fr)_minmax(0,2fr)] @min-[32rem]:items-start @min-[32rem]:gap-6 @min-[51rem]:grid-cols-[16rem_minmax(0,1fr)]">
       <VgpPositionFigures length={length}/>
       <dl className="grid grid-cols-1 gap-x-4 gap-y-2 @min-[12rem]:grid-cols-2 @min-[51rem]:grid-cols-4">
-        {fields.filter(({value}) => value != null).map(({label, value}) => <div key={label} className="min-w-0 border-b border-slate-200 pb-2 dark:border-slate-700">
-          <dt className="text-xs text-slate-600 dark:text-slate-400">{label}</dt>
-          <dd className="mt-0.5 text-sm font-semibold tabular-nums text-slate-950 dark:text-slate-100">{value}</dd>
+        {fields.filter(({value}) => value != null).map(({label, value}) => <div key={label} className="flex min-w-0 flex-col gap-1 border-b border-slate-200 pb-2 dark:border-slate-700">
+          <dt className="text-xs text-slate-600 dark:text-slate-300">{label}</dt>
+          <dd className="mt-auto text-sm font-semibold tabular-nums text-slate-900 dark:text-slate-100">{value}</dd>
         </div>)}
       </dl>
     </div>
-    <div className="max-w-[72ch] space-y-1.5 text-sm text-slate-700 dark:text-slate-300">
-      <p className="flex items-center gap-2 font-semibold text-slate-950 dark:text-slate-100">
-        <Icon name="clipboard" className="text-brand-700 dark:text-brand-300"/>Поставка
+    <div className="max-w-[68ch] space-y-2 text-base text-slate-700 dark:text-slate-300">
+      <p className={heading}>
+        <span className={headingIcon}><Icon name="clipboard"/></span>
+        Поставка
       </p>
       <p>{variant.description}</p>
       <p>Марка стали, исполнение резьбы и наличие муфт уточняются по документам поставки.</p>

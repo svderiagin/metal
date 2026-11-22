@@ -6,7 +6,7 @@ export type CatalogGuideDiagram =
   | {shape: "vgp-length"}
   | {shape: "vgp-thread"}
   | {
-    shape: "round" | "square" | "rectangle" | "mesh" | "solid-square" | "angle" | "strip";
+    shape: "round" | "square" | "rectangle" | "mesh" | "solid-square" | "angle" | "strip" | "vgp-dimensions";
     dimensions: readonly (readonly [label: string, value: string])[];
   };
 
@@ -180,19 +180,24 @@ export const catalogDescriptionCopy: Partial<Record<string, DescriptionCopy>> = 
     title: "Как выбрать ВГП-трубу",
     details: [
       {
-        heading: "Ду для соединения, Ø для монтажа", icon: "ruler",
+        heading: "Ду и наружный диаметр", icon: "ruler",
         text: "Условный проход (Ду) сверяйте с обозначением фитинга. Для отверстий и хомутов используйте наружный диаметр из таблицы.",
-        diagram: {shape: "round", dimensions: [["Ду", "32"], ["Наружный Ø", "42,3 мм"], ["Стенка", "2,8 мм"]]},
+        diagram: {shape: "vgp-dimensions", dimensions: [["Ду", "32"], ["Наружный Ø", "42,3 мм"], ["Стенка", "2,8 мм"]]},
       },
       {
         heading: "Стенка и серия", icon: "layers",
-        text: "У труб одного Ду наружный диаметр может совпадать при разной толщине стенки. Серию можно отобрать в фильтре или сверить в «Подробнее».",
+        text: "У труб одного Ду с одинаковым наружным диаметром толщина стенки может различаться. Серию проверьте в фильтре или в «Подробнее».",
         diagram: {shape: "vgp-series"},
       },
       {
-        heading: "Резьба и длина", icon: "wrench",
-        text: "Для резьбового соединения проверьте исполнение концов трубы. Длину цельного участка сверьте с длиной одной трубы, а общий метраж заказа смотрите в поле «Заказ, м».",
-        diagram: [{shape: "vgp-thread"}, {shape: "vgp-length"}],
+        heading: "Резьба и муфта", icon: "wrench",
+        text: "Для резьбового соединения проверьте исполнение концов трубы и сверяйте размер резьбы с соединительной деталью.",
+        diagram: {shape: "vgp-thread"},
+      },
+      {
+        heading: "Длина трубы и заказа", icon: "clipboard",
+        text: "Длину цельного участка сверьте с длиной одной трубы. Общий метраж всех труб указан в поле «Заказ, м».",
+        diagram: {shape: "vgp-length"},
       },
     ],
   },

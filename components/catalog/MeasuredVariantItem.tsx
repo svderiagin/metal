@@ -340,7 +340,7 @@ function TonnageMeasuredVariantItem({
   const moreDetails = view === "card"
     ? <details className={isOrdinaryVgp ? `${tableStyles.vgpDetailsDisclosure} mt-3 border-t border-slate-200 text-sm dark:border-slate-700` : "mt-3 text-sm"}>
       <DetailsSummary className="font-semibold text-slate-600 focus-visible:outline-2 focus-visible:outline-brand-700 dark:text-slate-300 dark:focus-visible:outline-brand-300">{detailsLabel}</DetailsSummary>
-      <div className={isOrdinaryVgp ? "pt-1" : "mt-3"}>{details}</div></details>
+      <div className={isOrdinaryVgp ? "pt-2" : "mt-3"}>{details}</div></details>
     : <button type="button" aria-expanded={detailsOpen} aria-controls={`pipe-details-${variant.id}`}
       aria-label={`Подробности: ${variant.name}`} onClick={() => setDetailsOpen(!detailsOpen)}
       className={`mt-2 cursor-pointer rounded-sm font-semibold text-slate-600 underline decoration-slate-300 underline-offset-4 focus-visible:outline-2 focus-visible:outline-brand-700 dark:text-slate-300 dark:decoration-slate-500 dark:focus-visible:outline-brand-300 ${isVgp ? "whitespace-nowrap text-xs" : "text-sm"} ${isOrdinaryVgp ? "inline-flex min-h-8 items-center gap-0.5" : ""} ${isOrdinaryVgp && detailsOpen ? "" : "hover:text-brand-700 dark:hover:text-brand-400"}`}>
@@ -364,7 +364,7 @@ function TonnageMeasuredVariantItem({
       price={price} order={order}/>
     {isPipe && view === "table" && <tr id={`pipe-details-${variant.id}`} hidden={!detailsOpen}
       className={isOrdinaryVgp ? tableStyles.vgpDetailsRow : "border-t border-slate-200 bg-slate-50 dark:border-slate-700 dark:bg-slate-800/50"}>
-      <td colSpan={isVgp ? 9 : 10} className="p-4">{details}</td>
+      <td colSpan={isVgp ? 9 : 10} className={isOrdinaryVgp ? "p-5" : "p-4"}>{details}</td>
     </tr>}
   </>;
 }

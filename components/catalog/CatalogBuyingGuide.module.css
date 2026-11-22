@@ -1,0 +1,40 @@
+.fourTopics {
+  gap: 1.5rem;
+}
+
+.topic {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  row-gap: 0.75rem;
+}
+
+@container (min-width: 36rem) {
+  .fourTopics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @supports (grid-template-rows: subgrid) {
+    .fourTopics {
+      row-gap: 0.75rem;
+    }
+
+    .topic {
+      grid-row: span 3;
+      grid-template-rows: subgrid;
+    }
+  }
+}
+
+@container (36rem <= width < 66rem) {
+  @supports (grid-template-rows: subgrid) {
+    .topic:nth-child(-n + 2) {
+      margin-block-end: 0.75rem;
+    }
+  }
+}
+
+@container (min-width: 66rem) {
+  .fourTopics {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}

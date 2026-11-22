@@ -16,8 +16,8 @@
 .section {
   --wall: 0.625rem;
   position: relative;
-  width: 4.5rem;
-  height: 4.5rem;
+  width: 3.5rem;
+  height: 3.5rem;
   border: 1px solid var(--pipe-line);
   border-radius: 50%;
   background: var(--pipe-fill);

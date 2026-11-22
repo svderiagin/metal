@@ -108,7 +108,7 @@ function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
   const isElectrowelded = kind === "pipe";
   const showSizeFilter = !isVgp && !isElectrowelded;
   const isGalvanized = isElectrowelded && variants.every(isGalvanizedElectroweldedVariant);
-  const wholePipeOrderNote = <><strong>Заказ округляется вверх до целых труб.</strong> Итоговый метраж — в поле «Заказ, м».</>;
+  const wholePipeOrderNote = <strong>Заказ округляется вверх до целых труб.</strong>;
   const electroweldedNote = isGalvanized
     ? <>Для пересчёта используется масса стальной трубы <strong>без цинкового покрытия</strong> из {electroweldedMassTable}. {wholePipeOrderNote}</>
     : <>Масса и стоимость заказа по длине рассчитываются по <strong>теоретической массе</strong> из {electroweldedMassTable}.</>;

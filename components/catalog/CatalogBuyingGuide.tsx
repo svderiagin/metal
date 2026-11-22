@@ -2,12 +2,15 @@ import {Icon} from "@/components/ui/Icon";
 import type {CatalogGuideSection} from "@/data/catalog-description-copy";
 import {CatalogGuideFigure} from "./CatalogGuideFigure";
 import {CatalogDescription} from "./CatalogDescription";
+import styles from "./CatalogBuyingGuide.module.css";
 
 export function CatalogBuyingGuide({headingId, title, description}: {
   headingId: string;
   title: string;
   description: string | readonly CatalogGuideSection[];
 }) {
+  const fourTopics = typeof description !== "string" && description.length === 4;
+
   return (
     <section
       aria-labelledby={headingId}
@@ -20,15 +23,17 @@ export function CatalogBuyingGuide({headingId, title, description}: {
       {typeof description === "string" ? (
         <CatalogDescription description={description} variant="categoryDetails" className="min-w-0 p-4 sm:p-5"/>
       ) : (
-        <div className="grid gap-x-8 gap-y-5 p-4 sm:p-5 @min-[56rem]:grid-cols-3">
-          {description.map(({heading, text, icon, diagram}) => <div key={heading} className="min-w-0 max-w-[68ch]">
-            <h3 className="flex items-center gap-2.5 text-base font-semibold text-slate-900 dark:text-slate-100">
+        <div className={`grid p-4 sm:p-5 ${fourTopics ? styles.fourTopics : "gap-x-8 gap-y-5 @min-[56rem]:grid-cols-3"}`}>
+          {description.map(({heading, text, icon, diagram}) => <div key={heading} className={`min-w-0 max-w-[68ch]${fourTopics ? ` ${styles.topic}` : ""}`}>
+            <h3 className={`flex gap-2.5 text-base font-semibold text-slate-900 dark:text-slate-100 ${fourTopics ? "items-start" : "items-center"}`}>
               <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-slate-100 text-brand-700 dark:bg-slate-800 dark:text-brand-300"><Icon name={icon}/></span>
-              <span className="min-w-0">{heading}</span>
+              <span className={fourTopics ? "min-w-0 pt-[0.1875rem]" : "min-w-0"}>{heading}</span>
             </h3>
-            <p className="mt-2 text-base text-slate-700 dark:text-slate-300">{text}</p>
-            {diagram && (Array.isArray(diagram) ? diagram : [diagram]).map(example =>
-              <CatalogGuideFigure key={example.shape} diagram={example}/>)}
+            <p className={`${fourTopics ? "" : "mt-2 "}text-base text-slate-700 dark:text-slate-300`}>{text}</p>
+            {diagram && <div className={fourTopics ? "grid min-w-0" : undefined}>
+              {(Array.isArray(diagram) ? diagram : [diagram]).map(example =>
+                <CatalogGuideFigure key={example.shape} diagram={example}/>)}
+            </div>}
           </div>)}
         </div>
       )}

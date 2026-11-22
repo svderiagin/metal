@@ -73,6 +73,7 @@
 
 .table > tbody > tr.vgpDetailsRow > td { background: var(--vgp-details-surface); }
 
+.vgpDetailsDisclosure > summary { padding-inline-end: 0.25rem; }
 .vgpDetailsDisclosure:not([open]) > summary:hover { color: var(--color-brand-700); }
 :global(html[data-theme="dark"]) .vgpDetailsDisclosure:not([open]) > summary:hover { color: var(--color-brand-300); }
 
