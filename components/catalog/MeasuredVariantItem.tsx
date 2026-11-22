@@ -292,16 +292,18 @@ function TonnageMeasuredVariantItem({
   );
 
   const showOrderLabels = view === "card";
-  const fitOrderFields = isVgp && view === "table";
+  const isVgpTable = isVgp && view === "table";
   const statusId = `measured-order-status-${view}-${variant.id}`;
   const meterInput = <OrderInput label={`Длина заказа для ${variant.name}`}
     placeholder={missingBeamMass && parsedTons !== null && parsedTons > 0 ? "—" : "0"}
-    visibleLabel={showOrderLabels ? "Заказ, м" : undefined} value={meters || displayQuantity(referenceMeters, "meter")} fitContent={fitOrderFields} invalid={invalidDraft && inputMode === "meter"} statusId={statusId}
+    className={isVgpTable ? tableStyles.vgpMeterInput : undefined}
+    visibleLabel={showOrderLabels ? "Заказ, м" : undefined} value={meters || displayQuantity(referenceMeters, "meter")} invalid={invalidDraft && inputMode === "meter"} statusId={statusId}
     onChange={value => updateQuantityField("meter", value)} onBlur={() => settleQuantity("meter")} onRejectedTransfer={showError}/>;
   const tonInput = <OrderInput label={`Вес заказа в тоннах для ${variant.name}`}
     placeholder={needsMassForLength ? "—" : "0"}
+    className={isVgpTable ? tableStyles.vgpTonInput : undefined}
     visibleLabel={showOrderLabels ? "Заказ, т" : undefined} value={displayedTons || displayQuantity(referenceTons, "ton")}
-    fitContent={fitOrderFields} invalid={invalidDraft && inputMode === "ton"} statusId={statusId} onChange={value => updateQuantityField("ton", value)}
+    invalid={invalidDraft && inputMode === "ton"} statusId={statusId} onChange={value => updateQuantityField("ton", value)}
     onBlur={() => {setEditingTons(false); settleQuantity("ton");}} onRejectedTransfer={showError}/>;
   const price = `${variant.priceQualifier === "from" ? "от " : ""}${formatUnitPrice(pricePerTon ?? null, "за тонну")}`;
   const total = <output aria-label={`Сумма заказа для ${variant.name}`} aria-live="polite" className={totalClassName}>{totalLabel}</output>;
@@ -438,9 +440,9 @@ function RebarVariantLayout({view, variant, price, order}: {
 function OrderInput({
   label,
   placeholder,
+  className = "",
   visibleLabel,
   value,
-  fitContent,
   onChange,
   onBlur,
   onRejectedTransfer,
@@ -449,9 +451,9 @@ function OrderInput({
 }: {
   label: string;
   placeholder: string;
+  className?: string;
   visibleLabel?: string;
   value: string;
-  fitContent: boolean;
   onChange: (value: string) => void;
   onBlur: () => void;
   onRejectedTransfer: (message: string) => void;
@@ -463,14 +465,11 @@ function OrderInput({
     {...quantityTransferHandlers(onRejectedTransfer)}
     value={value} onChange={event => onChange(event.target.value)}
     onKeyDown={event => {if (event.key === "Enter" && !event.nativeEvent.isComposing) {event.preventDefault(); event.currentTarget.blur();}}}
-    className={`${filterStyles.field} ${tableStyles.measurementInput} w-full min-w-0 ${alignment} tabular-nums focus:placeholder:text-transparent`} placeholder={placeholder}/>;
+    className={`${filterStyles.field} ${tableStyles.measurementInput} w-full min-w-0 ${alignment} tabular-nums focus:placeholder:text-transparent ${className}`} placeholder={placeholder}/>;
   return (
     <label className="block text-sm font-semibold">
       {visibleLabel && <span className="mb-1 block">{visibleLabel}</span>}
-      {fitContent ? <span className={tableStyles.measurementSizer}>
-        <span aria-hidden="true">{value || placeholder}</span>
-        {input}
-      </span> : input}
+      {input}
     </label>
   );
 }

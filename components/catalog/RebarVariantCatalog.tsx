@@ -53,11 +53,11 @@ const vgpColumns = [
   {label: "Ду × стенка, мм", width: 13, className: tableStyles.vgpSizeColumn},
   {label: "Фото", width: 13},
   {label: "Наружный", unit: "Ø, мм", width: 8, className: tableStyles.vgpDiameterColumn},
-  {label: "Длина, м", width: 8},
+  {label: "Длина, м", width: 7.25},
   {label: "Цена, ₽/т", width: 11},
   {label: "Заказ, м", width: 10},
-  {label: "Заказ, т", width: 9},
-  {label: "Сумма", width: 14, className: tableStyles.sumColumn},
+  {label: "Заказ, т", width: 10.25},
+  {label: "Сумма", width: 13.5, className: tableStyles.sumColumn},
   {label: "Действие", width: 14, visuallyHidden: true},
 ] as const;
 

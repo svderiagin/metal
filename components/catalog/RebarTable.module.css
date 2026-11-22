@@ -125,34 +125,8 @@
   padding-inline: 0.25rem;
 }
 
-.measurementSizer {
-  --measurement-padding: 0.75rem;
-  position: relative;
-  display: block;
-  inline-size: fit-content;
-  max-inline-size: 100%;
-  margin-inline: auto;
-}
-
-.measurementSizer > span {
-  display: block;
-  min-block-size: var(--control-height);
-  overflow: hidden;
-  visibility: hidden;
-  padding-inline: var(--measurement-padding);
-  border-inline: 1px solid transparent;
-  font-size: 1rem;
-  font-weight: 400;
-  font-variant-numeric: tabular-nums;
-  white-space: pre;
-}
-
-.table td .measurementSizer > .measurementInput {
-  position: absolute;
-  inset: 0;
-  block-size: 100%;
-  padding-inline: var(--measurement-padding);
-}
+.table td .vgpMeterInput { inline-size: min(100%, 6.375rem); }
+.table td .vgpTonInput { inline-size: min(100%, 6.625rem); }
 
 .table > :is(thead, tbody) > tr > :is(th, td).sumColumn {
   text-align: center;
