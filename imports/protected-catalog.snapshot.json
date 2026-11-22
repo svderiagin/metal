@@ -2048,6 +2048,1083 @@
       }
     },
     {
+      "id": "rebar-a400-35gs-6-bar",
+      "slug": "rebar-a400-35gs-6-bar",
+      "categoryId": "cat-arm",
+      "subcategoryId": "cat-arm-sub-2",
+      "sku": "MS-A400-35GS-6-B",
+      "name": "Арматура рифлёная А400 (А3), 35ГС 6 мм, пруток 6 м",
+      "shortDescription": "Арматура рифлёная А400 (А3), 35ГС 6 мм, пруток 6 м.",
+      "description": "Рифлёная арматура класса А400 (А3) из стали 35ГС диаметром 6 мм. Поставляется прутками длиной 6 м.",
+      "diameterMm": 6,
+      "weightPerMeterKg": 0.222,
+      "lengthMeters": 6,
+      "form": "bar",
+      "steelGrade": "35ГС",
+      "price": 43000,
+      "pricePerTon": 43000,
+      "priceUnit": "за тонну",
+      "currency": "RUB",
+      "priceQualifier": "from",
+      "quoteOnly": true,
+      "availability": "UNKNOWN",
+      "inStock": false,
+      "sourceReference": "https://as-tim.ru/a3-35gs-6mm-6m/",
+      "featured": false,
+      "imageUrls": [],
+      "attributes": [
+        {
+          "key": "material",
+          "label": "Материал",
+          "value": "Низколегированная сталь 35ГС"
+        },
+        {
+          "key": "class",
+          "label": "Класс арматуры",
+          "value": "А400 (А3)"
+        },
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "35ГС"
+        },
+        {
+          "key": "size",
+          "label": "Диаметр",
+          "value": "6 мм"
+        },
+        {
+          "key": "length",
+          "label": "Длина прутка",
+          "value": "6 м"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Форма поставки",
+          "value": "Пруток"
+        },
+        {
+          "name": "Теоретическая масса по ГОСТ 5781-82",
+          "value": "0,222 кг/м"
+        }
+      ],
+      "productTypeId": "type-cat-arm-sub-2",
+      "unit": "ton",
+      "material": "Низколегированная сталь 35ГС",
+      "standard": "",
+      "weight": {
+        "value": 0.222,
+        "unit": "кг/м"
+      }
+    },
+    {
+      "id": "rebar-a400-35gs-8-bar",
+      "slug": "rebar-a400-35gs-8-bar",
+      "categoryId": "cat-arm",
+      "subcategoryId": "cat-arm-sub-2",
+      "sku": "MS-A400-35GS-8-B",
+      "name": "Арматура рифлёная А400 (А3), 35ГС 8 мм, пруток 6 м",
+      "shortDescription": "Арматура рифлёная А400 (А3), 35ГС 8 мм, пруток 6 м.",
+      "description": "Рифлёная арматура класса А400 (А3) из стали 35ГС диаметром 8 мм. Поставляется прутками длиной 6 м.",
+      "diameterMm": 8,
+      "weightPerMeterKg": 0.395,
+      "lengthMeters": 6,
+      "form": "bar",
+      "steelGrade": "35ГС",
+      "price": 42000,
+      "pricePerTon": 42000,
+      "priceUnit": "за тонну",
+      "currency": "RUB",
+      "priceQualifier": "from",
+      "quoteOnly": true,
+      "availability": "UNKNOWN",
+      "inStock": false,
+      "sourceReference": "https://as-tim.ru/a3-35gs-8mm-6m/",
+      "featured": false,
+      "imageUrls": [],
+      "attributes": [
+        {
+          "key": "material",
+          "label": "Материал",
+          "value": "Низколегированная сталь 35ГС"
+        },
+        {
+          "key": "class",
+          "label": "Класс арматуры",
+          "value": "А400 (А3)"
+        },
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "35ГС"
+        },
+        {
+          "key": "size",
+          "label": "Диаметр",
+          "value": "8 мм"
+        },
+        {
+          "key": "length",
+          "label": "Длина прутка",
+          "value": "6 м"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Форма поставки",
+          "value": "Пруток"
+        },
+        {
+          "name": "Теоретическая масса по ГОСТ 5781-82",
+          "value": "0,395 кг/м"
+        }
+      ],
+      "productTypeId": "type-cat-arm-sub-2",
+      "unit": "ton",
+      "material": "Низколегированная сталь 35ГС",
+      "standard": "",
+      "weight": {
+        "value": 0.395,
+        "unit": "кг/м"
+      }
+    },
+    {
+      "id": "rebar-a400-35gs-10-bar",
+      "slug": "rebar-a400-35gs-10-bar",
+      "categoryId": "cat-arm",
+      "subcategoryId": "cat-arm-sub-2",
+      "sku": "MS-A400-35GS-10-B",
+      "name": "Арматура рифлёная А400 (А3), 35ГС 10 мм, пруток 11,7 м",
+      "shortDescription": "Арматура рифлёная А400 (А3), 35ГС 10 мм, пруток 11,7 м.",
+      "description": "Рифлёная арматура класса А400 (А3) из стали 35ГС диаметром 10 мм. Поставляется прутками длиной 11,7 м.",
+      "diameterMm": 10,
+      "weightPerMeterKg": 0.617,
+      "lengthMeters": 11.7,
+      "form": "bar",
+      "steelGrade": "35ГС",
+      "price": 41000,
+      "pricePerTon": 41000,
+      "priceUnit": "за тонну",
+      "currency": "RUB",
+      "priceQualifier": "from",
+      "quoteOnly": true,
+      "availability": "UNKNOWN",
+      "inStock": false,
+      "sourceReference": "https://as-tim.ru/a3-35gs-10mm-11-7m/",
+      "featured": false,
+      "imageUrls": [],
+      "attributes": [
+        {
+          "key": "material",
+          "label": "Материал",
+          "value": "Низколегированная сталь 35ГС"
+        },
+        {
+          "key": "class",
+          "label": "Класс арматуры",
+          "value": "А400 (А3)"
+        },
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "35ГС"
+        },
+        {
+          "key": "size",
+          "label": "Диаметр",
+          "value": "10 мм"
+        },
+        {
+          "key": "length",
+          "label": "Длина прутка",
+          "value": "11,7 м"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Форма поставки",
+          "value": "Пруток"
+        },
+        {
+          "name": "Теоретическая масса по ГОСТ 5781-82",
+          "value": "0,617 кг/м"
+        }
+      ],
+      "productTypeId": "type-cat-arm-sub-2",
+      "unit": "ton",
+      "material": "Низколегированная сталь 35ГС",
+      "standard": "",
+      "weight": {
+        "value": 0.617,
+        "unit": "кг/м"
+      }
+    },
+    {
+      "id": "rebar-a400-35gs-14-bar",
+      "slug": "rebar-a400-35gs-14-bar",
+      "categoryId": "cat-arm",
+      "subcategoryId": "cat-arm-sub-2",
+      "sku": "MS-A400-35GS-14-B",
+      "name": "Арматура рифлёная А400 (А3), 35ГС 14 мм, пруток 11,7 м",
+      "shortDescription": "Арматура рифлёная А400 (А3), 35ГС 14 мм, пруток 11,7 м.",
+      "description": "Рифлёная арматура класса А400 (А3) из стали 35ГС диаметром 14 мм. Поставляется прутками длиной 11,7 м.",
+      "diameterMm": 14,
+      "weightPerMeterKg": 1.21,
+      "lengthMeters": 11.7,
+      "form": "bar",
+      "steelGrade": "35ГС",
+      "price": 40000,
+      "pricePerTon": 40000,
+      "priceUnit": "за тонну",
+      "currency": "RUB",
+      "priceQualifier": "from",
+      "quoteOnly": true,
+      "availability": "UNKNOWN",
+      "inStock": false,
+      "sourceReference": "https://as-tim.ru/a3-35gs-14mm-11-7m/",
+      "featured": false,
+      "imageUrls": [],
+      "attributes": [
+        {
+          "key": "material",
+          "label": "Материал",
+          "value": "Низколегированная сталь 35ГС"
+        },
+        {
+          "key": "class",
+          "label": "Класс арматуры",
+          "value": "А400 (А3)"
+        },
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "35ГС"
+        },
+        {
+          "key": "size",
+          "label": "Диаметр",
+          "value": "14 мм"
+        },
+        {
+          "key": "length",
+          "label": "Длина прутка",
+          "value": "11,7 м"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Форма поставки",
+          "value": "Пруток"
+        },
+        {
+          "name": "Теоретическая масса по ГОСТ 5781-82",
+          "value": "1,21 кг/м"
+        }
+      ],
+      "productTypeId": "type-cat-arm-sub-2",
+      "unit": "ton",
+      "material": "Низколегированная сталь 35ГС",
+      "standard": "",
+      "weight": {
+        "value": 1.21,
+        "unit": "кг/м"
+      }
+    },
+    {
+      "id": "rebar-a400-35gs-16-bar",
+      "slug": "rebar-a400-35gs-16-bar",
+      "categoryId": "cat-arm",
+      "subcategoryId": "cat-arm-sub-2",
+      "sku": "MS-A400-35GS-16-B",
+      "name": "Арматура рифлёная А400 (А3), 35ГС 16 мм, пруток 11,7 м",
+      "shortDescription": "Арматура рифлёная А400 (А3), 35ГС 16 мм, пруток 11,7 м.",
+      "description": "Рифлёная арматура класса А400 (А3) из стали 35ГС диаметром 16 мм. Поставляется прутками длиной 11,7 м.",
+      "diameterMm": 16,
+      "weightPerMeterKg": 1.58,
+      "lengthMeters": 11.7,
+      "form": "bar",
+      "steelGrade": "35ГС",
+      "price": 40000,
+      "pricePerTon": 40000,
+      "priceUnit": "за тонну",
+      "currency": "RUB",
+      "priceQualifier": "from",
+      "quoteOnly": true,
+      "availability": "UNKNOWN",
+      "inStock": false,
+      "sourceReference": "https://as-tim.ru/a3-35gs-16mm-11-7m/",
+      "featured": false,
+      "imageUrls": [],
+      "attributes": [
+        {
+          "key": "material",
+          "label": "Материал",
+          "value": "Низколегированная сталь 35ГС"
+        },
+        {
+          "key": "class",
+          "label": "Класс арматуры",
+          "value": "А400 (А3)"
+        },
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "35ГС"
+        },
+        {
+          "key": "size",
+          "label": "Диаметр",
+          "value": "16 мм"
+        },
+        {
+          "key": "length",
+          "label": "Длина прутка",
+          "value": "11,7 м"
+        },
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 5781-82"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Форма поставки",
+          "value": "Пруток"
+        },
+        {
+          "name": "Теоретическая масса по ГОСТ 5781-82",
+          "value": "1,58 кг/м"
+        }
+      ],
+      "productTypeId": "type-cat-arm-sub-2",
+      "unit": "ton",
+      "material": "Низколегированная сталь 35ГС",
+      "standard": "ГОСТ 5781-82",
+      "weight": {
+        "value": 1.58,
+        "unit": "кг/м"
+      }
+    },
+    {
+      "id": "rebar-a400-35gs-18-bar",
+      "slug": "rebar-a400-35gs-18-bar",
+      "categoryId": "cat-arm",
+      "subcategoryId": "cat-arm-sub-2",
+      "sku": "MS-A400-35GS-18-B",
+      "name": "Арматура рифлёная А400 (А3), 35ГС 18 мм, пруток 11,7 м",
+      "shortDescription": "Арматура рифлёная А400 (А3), 35ГС 18 мм, пруток 11,7 м.",
+      "description": "Рифлёная арматура класса А400 (А3) из стали 35ГС диаметром 18 мм. Поставляется прутками длиной 11,7 м.",
+      "diameterMm": 18,
+      "weightPerMeterKg": 2,
+      "lengthMeters": 11.7,
+      "form": "bar",
+      "steelGrade": "35ГС",
+      "price": 40000,
+      "pricePerTon": 40000,
+      "priceUnit": "за тонну",
+      "currency": "RUB",
+      "priceQualifier": "from",
+      "quoteOnly": true,
+      "availability": "UNKNOWN",
+      "inStock": false,
+      "sourceReference": "https://as-tim.ru/a3-35gs-18mm-11-7m/",
+      "featured": false,
+      "imageUrls": [],
+      "attributes": [
+        {
+          "key": "material",
+          "label": "Материал",
+          "value": "Низколегированная сталь 35ГС"
+        },
+        {
+          "key": "class",
+          "label": "Класс арматуры",
+          "value": "А400 (А3)"
+        },
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "35ГС"
+        },
+        {
+          "key": "size",
+          "label": "Диаметр",
+          "value": "18 мм"
+        },
+        {
+          "key": "length",
+          "label": "Длина прутка",
+          "value": "11,7 м"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Форма поставки",
+          "value": "Пруток"
+        },
+        {
+          "name": "Теоретическая масса по ГОСТ 5781-82",
+          "value": "2 кг/м"
+        }
+      ],
+      "productTypeId": "type-cat-arm-sub-2",
+      "unit": "ton",
+      "material": "Низколегированная сталь 35ГС",
+      "standard": "",
+      "weight": {
+        "value": 2,
+        "unit": "кг/м"
+      }
+    },
+    {
+      "id": "rebar-a400-35gs-22-bar",
+      "slug": "rebar-a400-35gs-22-bar",
+      "categoryId": "cat-arm",
+      "subcategoryId": "cat-arm-sub-2",
+      "sku": "MS-A400-35GS-22-B",
+      "name": "Арматура рифлёная А400 (А3), 35ГС 22 мм, пруток 11,7 м",
+      "shortDescription": "Арматура рифлёная А400 (А3), 35ГС 22 мм, пруток 11,7 м.",
+      "description": "Рифлёная арматура класса А400 (А3) из стали 35ГС диаметром 22 мм. Поставляется прутками длиной 11,7 м.",
+      "diameterMm": 22,
+      "weightPerMeterKg": 2.98,
+      "lengthMeters": 11.7,
+      "form": "bar",
+      "steelGrade": "35ГС",
+      "price": 40000,
+      "pricePerTon": 40000,
+      "priceUnit": "за тонну",
+      "currency": "RUB",
+      "priceQualifier": "from",
+      "quoteOnly": true,
+      "availability": "UNKNOWN",
+      "inStock": false,
+      "sourceReference": "https://as-tim.ru/a3-35gs-22mm-11-7m/",
+      "featured": false,
+      "imageUrls": [],
+      "attributes": [
+        {
+          "key": "material",
+          "label": "Материал",
+          "value": "Низколегированная сталь 35ГС"
+        },
+        {
+          "key": "class",
+          "label": "Класс арматуры",
+          "value": "А400 (А3)"
+        },
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "35ГС"
+        },
+        {
+          "key": "size",
+          "label": "Диаметр",
+          "value": "22 мм"
+        },
+        {
+          "key": "length",
+          "label": "Длина прутка",
+          "value": "11,7 м"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Форма поставки",
+          "value": "Пруток"
+        },
+        {
+          "name": "Теоретическая масса по ГОСТ 5781-82",
+          "value": "2,98 кг/м"
+        }
+      ],
+      "productTypeId": "type-cat-arm-sub-2",
+      "unit": "ton",
+      "material": "Низколегированная сталь 35ГС",
+      "standard": "",
+      "weight": {
+        "value": 2.98,
+        "unit": "кг/м"
+      }
+    },
+    {
+      "id": "rebar-a400-35gs-25-bar",
+      "slug": "rebar-a400-35gs-25-bar",
+      "categoryId": "cat-arm",
+      "subcategoryId": "cat-arm-sub-2",
+      "sku": "MS-A400-35GS-25-B",
+      "name": "Арматура рифлёная А400 (А3), 35ГС 25 мм, пруток 11,7 м",
+      "shortDescription": "Арматура рифлёная А400 (А3), 35ГС 25 мм, пруток 11,7 м.",
+      "description": "Рифлёная арматура класса А400 (А3) из стали 35ГС диаметром 25 мм. Поставляется прутками длиной 11,7 м.",
+      "diameterMm": 25,
+      "weightPerMeterKg": 3.85,
+      "lengthMeters": 11.7,
+      "form": "bar",
+      "steelGrade": "35ГС",
+      "price": 58086,
+      "pricePerTon": 58086,
+      "priceUnit": "за тонну",
+      "currency": "RUB",
+      "priceQualifier": "from",
+      "quoteOnly": true,
+      "availability": "UNKNOWN",
+      "inStock": false,
+      "sourceReference": "https://novametcom.ru/produkciya/prod/armatura-25-a3-35gs-15/",
+      "featured": false,
+      "imageUrls": [],
+      "attributes": [
+        {
+          "key": "material",
+          "label": "Материал",
+          "value": "Низколегированная сталь 35ГС"
+        },
+        {
+          "key": "class",
+          "label": "Класс арматуры",
+          "value": "А400 (А3)"
+        },
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "35ГС"
+        },
+        {
+          "key": "size",
+          "label": "Диаметр",
+          "value": "25 мм"
+        },
+        {
+          "key": "length",
+          "label": "Длина прутка",
+          "value": "11,7 м"
+        },
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 5781-82"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Форма поставки",
+          "value": "Пруток"
+        },
+        {
+          "name": "Теоретическая масса по ГОСТ 5781-82",
+          "value": "3,85 кг/м"
+        }
+      ],
+      "productTypeId": "type-cat-arm-sub-2",
+      "unit": "ton",
+      "material": "Низколегированная сталь 35ГС",
+      "standard": "ГОСТ 5781-82",
+      "weight": {
+        "value": 3.85,
+        "unit": "кг/м"
+      }
+    },
+    {
+      "id": "rebar-a400-35gs-28-bar",
+      "slug": "rebar-a400-35gs-28-bar",
+      "categoryId": "cat-arm",
+      "subcategoryId": "cat-arm-sub-2",
+      "sku": "MS-A400-35GS-28-B",
+      "name": "Арматура рифлёная А400 (А3), 35ГС 28 мм, пруток 11,7 м",
+      "shortDescription": "Арматура рифлёная А400 (А3), 35ГС 28 мм, пруток 11,7 м.",
+      "description": "Рифлёная арматура класса А400 (А3) из стали 35ГС диаметром 28 мм. Поставляется прутками длиной 11,7 м.",
+      "diameterMm": 28,
+      "weightPerMeterKg": 4.83,
+      "lengthMeters": 11.7,
+      "form": "bar",
+      "steelGrade": "35ГС",
+      "price": 42021,
+      "pricePerTon": 42021,
+      "priceUnit": "за тонну",
+      "currency": "RUB",
+      "priceQualifier": "exact",
+      "quoteOnly": true,
+      "availability": "UNKNOWN",
+      "inStock": false,
+      "sourceReference": "https://metallmk.ru/armatura/armatura-riflenaya/armatura-28-mm-a3-a400-riflenaya-35gs/",
+      "featured": false,
+      "imageUrls": [],
+      "attributes": [
+        {
+          "key": "material",
+          "label": "Материал",
+          "value": "Низколегированная сталь 35ГС"
+        },
+        {
+          "key": "class",
+          "label": "Класс арматуры",
+          "value": "А400 (А3)"
+        },
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "35ГС"
+        },
+        {
+          "key": "size",
+          "label": "Диаметр",
+          "value": "28 мм"
+        },
+        {
+          "key": "length",
+          "label": "Длина прутка",
+          "value": "11,7 м"
+        },
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 5781-82"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Форма поставки",
+          "value": "Пруток"
+        },
+        {
+          "name": "Теоретическая масса по ГОСТ 5781-82",
+          "value": "4,83 кг/м"
+        }
+      ],
+      "productTypeId": "type-cat-arm-sub-2",
+      "unit": "ton",
+      "material": "Низколегированная сталь 35ГС",
+      "standard": "ГОСТ 5781-82",
+      "weight": {
+        "value": 4.83,
+        "unit": "кг/м"
+      }
+    },
+    {
+      "id": "rebar-a400-35gs-32-bar",
+      "slug": "rebar-a400-35gs-32-bar",
+      "categoryId": "cat-arm",
+      "subcategoryId": "cat-arm-sub-2",
+      "sku": "MS-A400-35GS-32-B",
+      "name": "Арматура рифлёная А400 (А3), 35ГС 32 мм, пруток 11,7 м",
+      "shortDescription": "Арматура рифлёная А400 (А3), 35ГС 32 мм, пруток 11,7 м.",
+      "description": "Рифлёная арматура класса А400 (А3) из стали 35ГС диаметром 32 мм. Поставляется прутками длиной 11,7 м.",
+      "diameterMm": 32,
+      "weightPerMeterKg": 6.31,
+      "lengthMeters": 11.7,
+      "form": "bar",
+      "steelGrade": "35ГС",
+      "price": 40000,
+      "pricePerTon": 40000,
+      "priceUnit": "за тонну",
+      "currency": "RUB",
+      "priceQualifier": "from",
+      "quoteOnly": true,
+      "availability": "UNKNOWN",
+      "inStock": false,
+      "sourceReference": "https://as-tim.ru/a3-35gs-32mm-11-7m/",
+      "featured": false,
+      "imageUrls": [],
+      "attributes": [
+        {
+          "key": "material",
+          "label": "Материал",
+          "value": "Низколегированная сталь 35ГС"
+        },
+        {
+          "key": "class",
+          "label": "Класс арматуры",
+          "value": "А400 (А3)"
+        },
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "35ГС"
+        },
+        {
+          "key": "size",
+          "label": "Диаметр",
+          "value": "32 мм"
+        },
+        {
+          "key": "length",
+          "label": "Длина прутка",
+          "value": "11,7 м"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Форма поставки",
+          "value": "Пруток"
+        },
+        {
+          "name": "Теоретическая масса по ГОСТ 5781-82",
+          "value": "6,31 кг/м"
+        }
+      ],
+      "productTypeId": "type-cat-arm-sub-2",
+      "unit": "ton",
+      "material": "Низколегированная сталь 35ГС",
+      "standard": "",
+      "weight": {
+        "value": 6.31,
+        "unit": "кг/м"
+      }
+    },
+    {
+      "id": "rebar-a400-35gs-36-bar",
+      "slug": "rebar-a400-35gs-36-bar",
+      "categoryId": "cat-arm",
+      "subcategoryId": "cat-arm-sub-2",
+      "sku": "MS-A400-35GS-36-B",
+      "name": "Арматура рифлёная А400 (А3), 35ГС 36 мм, пруток 11,7 м",
+      "shortDescription": "Арматура рифлёная А400 (А3), 35ГС 36 мм, пруток 11,7 м.",
+      "description": "Рифлёная арматура класса А400 (А3) из стали 35ГС диаметром 36 мм. Поставляется прутками длиной 11,7 м.",
+      "diameterMm": 36,
+      "weightPerMeterKg": 7.99,
+      "lengthMeters": 11.7,
+      "form": "bar",
+      "steelGrade": "35ГС",
+      "price": 40000,
+      "pricePerTon": 40000,
+      "priceUnit": "за тонну",
+      "currency": "RUB",
+      "priceQualifier": "from",
+      "quoteOnly": true,
+      "availability": "UNKNOWN",
+      "inStock": false,
+      "sourceReference": "https://as-tim.ru/a3-35gs-36mm-11-7m/",
+      "featured": false,
+      "imageUrls": [],
+      "attributes": [
+        {
+          "key": "material",
+          "label": "Материал",
+          "value": "Низколегированная сталь 35ГС"
+        },
+        {
+          "key": "class",
+          "label": "Класс арматуры",
+          "value": "А400 (А3)"
+        },
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "35ГС"
+        },
+        {
+          "key": "size",
+          "label": "Диаметр",
+          "value": "36 мм"
+        },
+        {
+          "key": "length",
+          "label": "Длина прутка",
+          "value": "11,7 м"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Форма поставки",
+          "value": "Пруток"
+        },
+        {
+          "name": "Теоретическая масса по ГОСТ 5781-82",
+          "value": "7,99 кг/м"
+        }
+      ],
+      "productTypeId": "type-cat-arm-sub-2",
+      "unit": "ton",
+      "material": "Низколегированная сталь 35ГС",
+      "standard": "",
+      "weight": {
+        "value": 7.99,
+        "unit": "кг/м"
+      }
+    },
+    {
+      "id": "rebar-a400-35gs-40-bar",
+      "slug": "rebar-a400-35gs-40-bar",
+      "categoryId": "cat-arm",
+      "subcategoryId": "cat-arm-sub-2",
+      "sku": "MS-A400-35GS-40-B",
+      "name": "Арматура рифлёная А400 (А3), 35ГС 40 мм, пруток 11,7 м",
+      "shortDescription": "Арматура рифлёная А400 (А3), 35ГС 40 мм, пруток 11,7 м.",
+      "description": "Рифлёная арматура класса А400 (А3) из стали 35ГС диаметром 40 мм. Поставляется прутками длиной 11,7 м.",
+      "diameterMm": 40,
+      "weightPerMeterKg": 9.87,
+      "lengthMeters": 11.7,
+      "form": "bar",
+      "steelGrade": "35ГС",
+      "price": 43000,
+      "pricePerTon": 43000,
+      "priceUnit": "за тонну",
+      "currency": "RUB",
+      "priceQualifier": "from",
+      "quoteOnly": true,
+      "availability": "UNKNOWN",
+      "inStock": false,
+      "sourceReference": "https://as-tim.ru/a3-35gs-40mm-11-7m/",
+      "featured": false,
+      "imageUrls": [],
+      "attributes": [
+        {
+          "key": "material",
+          "label": "Материал",
+          "value": "Низколегированная сталь 35ГС"
+        },
+        {
+          "key": "class",
+          "label": "Класс арматуры",
+          "value": "А400 (А3)"
+        },
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "35ГС"
+        },
+        {
+          "key": "size",
+          "label": "Диаметр",
+          "value": "40 мм"
+        },
+        {
+          "key": "length",
+          "label": "Длина прутка",
+          "value": "11,7 м"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Форма поставки",
+          "value": "Пруток"
+        },
+        {
+          "name": "Теоретическая масса по ГОСТ 5781-82",
+          "value": "9,87 кг/м"
+        }
+      ],
+      "productTypeId": "type-cat-arm-sub-2",
+      "unit": "ton",
+      "material": "Низколегированная сталь 35ГС",
+      "standard": "",
+      "weight": {
+        "value": 9.87,
+        "unit": "кг/м"
+      }
+    },
+    {
+      "id": "rebar-a400-35gs-6-coil",
+      "slug": "rebar-a400-35gs-6-coil",
+      "categoryId": "cat-arm",
+      "subcategoryId": "cat-arm-sub-2",
+      "sku": "MS-A400-35GS-6-C",
+      "name": "Арматура рифлёная А400 (А3), 35ГС 6 мм, в бунтах",
+      "shortDescription": "Арматура рифлёная А400 (А3), 35ГС 6 мм, в бунтах.",
+      "description": "Рифлёная арматура класса А400 (А3) из стали 35ГС диаметром 6 мм. Поставляется в бунтах.",
+      "diameterMm": 6,
+      "weightPerMeterKg": 0.222,
+      "form": "coil",
+      "steelGrade": "35ГС",
+      "price": 57580,
+      "pricePerTon": 57580,
+      "priceUnit": "за тонну",
+      "currency": "RUB",
+      "priceQualifier": "exact",
+      "quoteOnly": true,
+      "availability": "UNKNOWN",
+      "inStock": false,
+      "sourceReference": "https://metallmk.ru/armatura/armatura-riflenaya/armatura-6-mm-a3-a400-riflenaya-35gs-buhta/",
+      "featured": false,
+      "imageUrls": [],
+      "attributes": [
+        {
+          "key": "material",
+          "label": "Материал",
+          "value": "Низколегированная сталь 35ГС"
+        },
+        {
+          "key": "class",
+          "label": "Класс арматуры",
+          "value": "А400 (А3)"
+        },
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "35ГС"
+        },
+        {
+          "key": "size",
+          "label": "Диаметр",
+          "value": "6 мм"
+        },
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 5781-82"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Форма поставки",
+          "value": "В бунтах"
+        },
+        {
+          "name": "Теоретическая масса по ГОСТ 5781-82",
+          "value": "0,222 кг/м"
+        }
+      ],
+      "productTypeId": "type-cat-arm-sub-2",
+      "unit": "ton",
+      "material": "Низколегированная сталь 35ГС",
+      "standard": "ГОСТ 5781-82",
+      "weight": {
+        "value": 0.222,
+        "unit": "кг/м"
+      }
+    },
+    {
+      "id": "rebar-a400-35gs-8-coil",
+      "slug": "rebar-a400-35gs-8-coil",
+      "categoryId": "cat-arm",
+      "subcategoryId": "cat-arm-sub-2",
+      "sku": "MS-A400-35GS-8-C",
+      "name": "Арматура рифлёная А400 (А3), 35ГС 8 мм, в бунтах",
+      "shortDescription": "Арматура рифлёная А400 (А3), 35ГС 8 мм, в бунтах.",
+      "description": "Рифлёная арматура класса А400 (А3) из стали 35ГС диаметром 8 мм. Поставляется в бунтах.",
+      "diameterMm": 8,
+      "weightPerMeterKg": 0.395,
+      "form": "coil",
+      "steelGrade": "35ГС",
+      "price": 56780,
+      "pricePerTon": 56780,
+      "priceUnit": "за тонну",
+      "currency": "RUB",
+      "priceQualifier": "exact",
+      "quoteOnly": true,
+      "availability": "UNKNOWN",
+      "inStock": false,
+      "sourceReference": "https://metallmk.ru/armatura/armatura-riflenaya/armatura-8-mm-a3-a400-riflenaya-35gs-buhta/",
+      "featured": false,
+      "imageUrls": [],
+      "attributes": [
+        {
+          "key": "material",
+          "label": "Материал",
+          "value": "Низколегированная сталь 35ГС"
+        },
+        {
+          "key": "class",
+          "label": "Класс арматуры",
+          "value": "А400 (А3)"
+        },
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "35ГС"
+        },
+        {
+          "key": "size",
+          "label": "Диаметр",
+          "value": "8 мм"
+        },
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 5781-82"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Форма поставки",
+          "value": "В бунтах"
+        },
+        {
+          "name": "Теоретическая масса по ГОСТ 5781-82",
+          "value": "0,395 кг/м"
+        }
+      ],
+      "productTypeId": "type-cat-arm-sub-2",
+      "unit": "ton",
+      "material": "Низколегированная сталь 35ГС",
+      "standard": "ГОСТ 5781-82",
+      "weight": {
+        "value": 0.395,
+        "unit": "кг/м"
+      }
+    },
+    {
+      "id": "rebar-a400-35gs-10-coil",
+      "slug": "rebar-a400-35gs-10-coil",
+      "categoryId": "cat-arm",
+      "subcategoryId": "cat-arm-sub-2",
+      "sku": "MS-A400-35GS-10-C",
+      "name": "Арматура рифлёная А400 (А3), 35ГС 10 мм, в бунтах",
+      "shortDescription": "Арматура рифлёная А400 (А3), 35ГС 10 мм, в бунтах.",
+      "description": "Рифлёная арматура класса А400 (А3) из стали 35ГС диаметром 10 мм. Поставляется в бунтах.",
+      "diameterMm": 10,
+      "weightPerMeterKg": 0.617,
+      "form": "coil",
+      "steelGrade": "35ГС",
+      "price": 51500,
+      "pricePerTon": 51500,
+      "priceUnit": "за тонну",
+      "currency": "RUB",
+      "priceQualifier": "exact",
+      "quoteOnly": true,
+      "availability": "UNKNOWN",
+      "inStock": false,
+      "sourceReference": "https://metallmk.ru/armatura/armatura-riflenaya/armatura-10-mm-a3-a400-riflenaya-35gs-buhta/",
+      "featured": false,
+      "imageUrls": [],
+      "attributes": [
+        {
+          "key": "material",
+          "label": "Материал",
+          "value": "Низколегированная сталь 35ГС"
+        },
+        {
+          "key": "class",
+          "label": "Класс арматуры",
+          "value": "А400 (А3)"
+        },
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "35ГС"
+        },
+        {
+          "key": "size",
+          "label": "Диаметр",
+          "value": "10 мм"
+        },
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 5781-82"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Форма поставки",
+          "value": "В бунтах"
+        },
+        {
+          "name": "Теоретическая масса по ГОСТ 5781-82",
+          "value": "0,617 кг/м"
+        }
+      ],
+      "productTypeId": "type-cat-arm-sub-2",
+      "unit": "ton",
+      "material": "Низколегированная сталь 35ГС",
+      "standard": "ГОСТ 5781-82",
+      "weight": {
+        "value": 0.617,
+        "unit": "кг/м"
+      }
+    },
+    {
       "id": "prd-012",
       "categoryId": "cat-bal",
       "subcategoryId": "cat-bal-sub-2",

@@ -11,6 +11,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 ## Работа с metal-frontend
 
 - Перед изменениями: `git status --short`. Сохраняйте чужие незакоммиченные правки.
+- При просьбе найти характеристики и цены покажите результаты в чате. Добавляйте найденные позиции в каталог только по прямому указанию пользователя.
 - Выбирайте навык по задаче; читайте только нужные разделы его ссылок:
   - [metal-frontend-catalog](.agents/skills/metal-frontend-catalog/SKILL.md): данные, маршруты, поиск, товарные таблицы, импорт.
   - [metal-frontend-ui](.agents/skills/metal-frontend-ui/SKILL.md): вёрстка, темы, навигация, изображения, информационные страницы.

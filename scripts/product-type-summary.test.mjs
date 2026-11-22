@@ -67,8 +67,10 @@ test('card prices reject demo, archived, foreign, quote-only, invalid and incomp
 test('owner-approved 35GS offers are in stock at 50000 per tonne without certifying their original demo facts', () => {
   const type = types.find(t => t.subcategoryId === 'cat-arm-sub-2');
   const rows = products.filter(p => p.productTypeId === type.id);
-  assert.equal(rows.length, 2);
-  for (const row of rows) {
+  const ownerIds = ['prd-003', 'prd-004'];
+  for (const id of ownerIds) {
+    const row = rows.find(p => p.id === id);
+    assert.ok(row, id);
     assert.equal(row.price, 50000);
     assert.equal(row.pricePerTon, 50000);
     assert.equal(row.unit, 'ton');
@@ -79,7 +81,7 @@ test('owner-approved 35GS offers are in stock at 50000 per tonne without certify
     assert.equal(row.priceConfirmed, true);
   }
   assert.equal(getProductTypeSummary(type, rows).minimumPrice, 50000);
-  const unconfirmed = rows.map(p => ({...p, priceConfirmed:false}));
+  const unconfirmed = rows.map(p => ownerIds.includes(p.id) ? {...p, priceConfirmed:false} : p);
   assert.equal(getProductTypeSummary(type, unconfirmed).minimumPrice, null);
 });
 

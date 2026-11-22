@@ -22,7 +22,7 @@ import type {OrderInputMode} from "@/types/cart";
 import type {ProductVariant} from "@/types/product";
 import {isDemonstrationProduct} from "@/lib/catalogOffer";
 import {useOrderDraft} from "./OrderDraftProvider";
-import {CatalogPositionDetails} from "./CatalogPositionDetails";
+import {CatalogPositionDetails, CatalogStandardLink} from "./CatalogPositionDetails";
 import {CatalogGuideFigure} from "./CatalogGuideFigure";
 import {PipePositionDetails} from "./PipePositionDetails";
 
@@ -384,6 +384,7 @@ function RebarVariantLayout({view, variant, price, order}: {
   const diameter = unverified || variant.diameterMm === undefined ? undefined : formatNumber(variant.diameterMm);
   const form = unverified || variant.form === undefined ? undefined : formLabel(variant.form);
   const mass = unverified || !variant.weightPerMeterKg ? undefined : formatNumber(variant.weightPerMeterKg);
+  const hasGost5781Mass = variant.specifications.some(spec => spec.name === "Теоретическая масса по ГОСТ 5781-82");
   const steelGrade = unverified ? undefined : variant.steelGrade;
   const length = unverified || variant.lengthMeters === undefined ? undefined : formatNumber(variant.lengthMeters);
   const fields = [
@@ -391,7 +392,7 @@ function RebarVariantLayout({view, variant, price, order}: {
     {label: "Форма поставки", value: form},
     {label: "Марка стали", value: steelGrade},
     {label: "Длина", value: length && `${length} м`},
-    {label: "Масса погонного метра", value: mass && `${mass} кг/м`},
+    {label: hasGost5781Mass ? "Теоретическая масса 1 м" : "Масса погонного метра", value: mass && `${mass} кг/м`},
     {label: "Стандарт", value: !unverified ? variant.standard : undefined},
   ];
 
@@ -403,8 +404,11 @@ function RebarVariantLayout({view, variant, price, order}: {
     specifications={<CatalogVariantSpecifications items={fields.slice(0, 4).filter(({value}) => value)}/>}
     details={<CatalogPositionDetails title="Характеристики арматуры" fields={fields}
       figures={diameter ? <CatalogGuideFigure diagram={{shape: "solid-round", dimensions: [["Номинальный Ø", `${diameter} мм`]]}}/> : undefined}
-      supply={<p>{unverified ? "Характеристики требуют подтверждения перед заказом."
-        : "При подборе по ведомости сверьте класс, диаметр и форму поставки с документом партии."}</p>}/>}
+      supply={<>
+        <p>{unverified ? "Характеристики требуют подтверждения перед заказом."
+          : "При подборе по ведомости сверьте класс, диаметр и форму поставки с документом партии."}</p>
+        {hasGost5781Mass && <p>Для пересчёта метров в тонны используется теоретическая масса из <CatalogStandardLink href="https://meganorm.ru/Data1/3/3937/index.htm#i25093">таблицы 1 ГОСТ 5781-82</CatalogStandardLink>.</p>}
+      </>}/>}
     price={price} order={order}/>;
 }
 

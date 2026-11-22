@@ -39,7 +39,7 @@ test('removed category routes cannot be resolved by the catalog', () => {
   }
   assert.equal(categories.filter(category=>allowedIds.has(category.id)).length, 6);
   assert.equal(subcategories.filter(subcategory=>allowedIds.has(subcategory.categoryId)).length, 20);
-  assert.equal(productVariants.filter(product=>allowedIds.has(product.categoryId)).length, 238);
+  assert.equal(productVariants.filter(product=>allowedIds.has(product.categoryId)).length, 253);
 });
 
 test('removed supplier families have no raw records, image mappings or source roots', () => {

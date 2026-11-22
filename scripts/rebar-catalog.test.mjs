@@ -8,7 +8,7 @@ const {revalidateCartPrice} = readProjectData('lib/cartPricing.ts');
 const {metersToTons, calculateMeasuredLineTotal} = readProjectData('lib/orderMeasurement.ts');
 
 test('every remaining rebar category retains all rows and supports the reference table', () => {
-  const counts = new Map([['cat-arm-sub-2', 2], ['cat-arm-sub-3', 9], ['cat-arm-sub-4', 15]]);
+  const counts = new Map([['cat-arm-sub-2', 17], ['cat-arm-sub-3', 9], ['cat-arm-sub-4', 15]]);
   for (const [id, count] of counts) {
     const rows = productVariants.filter(p => p.subcategoryId === id);
     assert.equal(rows.length, count);
@@ -36,6 +36,41 @@ test('every remaining rebar category retains all rows and supports the reference
       }
     }
   }
+});
+
+test('35GS supplier references distinguish bars from coils and require an individual quote', () => {
+  const diametersByForm = {
+    bar: [6, 8, 10, 14, 16, 18, 22, 25, 28, 32, 36, 40],
+    coil: [6, 8, 10],
+  };
+  for (const [form, diameters] of Object.entries(diametersByForm)) {
+    for (const diameter of diameters) {
+      const id = `rebar-a400-35gs-${diameter}-${form}`;
+      const row = productVariants.find(p => p.id === id);
+      assert.ok(row, id);
+      assert.equal(row.subcategoryId, 'cat-arm-sub-2', id);
+      assert.equal(row.form, form, id);
+      assert.equal(row.diameterMm, diameter, id);
+      assert.equal(row.steelGrade, '35ГС', id);
+      assert.equal(row.unit, 'ton', id);
+      assert.ok(row.pricePerTon > 0, id);
+      assert.equal(row.quoteOnly, true, id);
+      assert.equal(row.inStock, false, id);
+      assert.equal(row.availability, 'UNKNOWN', id);
+      if (form === 'coil') assert.equal(row.lengthMeters, undefined, id);
+      else assert.equal(row.lengthMeters, diameter <= 8 ? 6 : 11.7, id);
+      const exactPrice = form === 'coil' || diameter === 28;
+      assert.equal(row.priceQualifier, exactPrice ? 'exact' : 'from', id);
+      if (diameter === 25) {
+        assert.equal(row.sourceReference, 'https://novametcom.ru/produkciya/prod/armatura-25-a3-35gs-15/', id);
+        assert.equal(row.pricePerTon, 58086, id);
+        assert.equal(row.standard, 'ГОСТ 5781-82', id);
+      } else {
+        assert.equal(new URL(row.sourceReference).hostname, exactPrice ? 'metallmk.ru' : 'as-tim.ru', id);
+      }
+    }
+  }
+  assert.equal(productVariants.find(p => p.id === 'rebar-a400-35gs-14-bar').weightPerMeterKg, 1.21);
 });
 
 test('imported rebar preserves quote-only and unknown stock states and converts millimetres', () => {

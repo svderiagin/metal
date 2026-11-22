@@ -1,5 +1,6 @@
 import {armaturaProducts} from "./armatura";
 import {armaturaA500cVariants} from "./armaturaA500c";
+import {armaturaA40035gsVariants} from "./armaturaA40035gs";
 import {balkaProducts} from "./balka";
 import {profnastilProducts} from "./profnastil";
 import {metalMeshProducts} from "./metalMesh";
@@ -21,6 +22,7 @@ import {applyCatalogOverrides} from "@/lib/catalogOverrides";
 const productSources: ProductVariantSource[] = [
   ...armaturaProducts.filter((product) => product.subcategoryId !== "cat-arm-sub-1"),
   ...armaturaA500cVariants,
+  ...armaturaA40035gsVariants,
   ...balkaProducts,
   ...profnastilProducts,
   ...metalMeshProducts,

@@ -1530,5 +1530,80 @@
     "imageUrl": "/images/catalog/product-illustrations/rozmet-2178.webp",
     "photoUrl": "/images/catalog/polosa/polosa_stalnaya_1448_1086_original.png",
     "signature": "abbfc5e6"
+  },
+  "rebar-a400-35gs-6-bar": {
+    "imageUrl": "/images/catalog/product-illustrations/rebar-a400-35gs-6-bar.webp",
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "8f43b51a"
+  },
+  "rebar-a400-35gs-8-bar": {
+    "imageUrl": "/images/catalog/product-illustrations/rebar-a400-35gs-8-bar.webp",
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "52912268"
+  },
+  "rebar-a400-35gs-10-bar": {
+    "imageUrl": "/images/catalog/product-illustrations/rebar-a400-35gs-10-bar.webp",
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "dc27394a"
+  },
+  "rebar-a400-35gs-14-bar": {
+    "imageUrl": "/images/catalog/product-illustrations/rebar-a400-35gs-14-bar.webp",
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "e02ab446"
+  },
+  "rebar-a400-35gs-16-bar": {
+    "imageUrl": "/images/catalog/product-illustrations/rebar-a400-35gs-16-bar.webp",
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "64db7e8e"
+  },
+  "rebar-a400-35gs-18-bar": {
+    "imageUrl": "/images/catalog/product-illustrations/rebar-a400-35gs-18-bar.webp",
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "ce6cb4fc"
+  },
+  "rebar-a400-35gs-22-bar": {
+    "imageUrl": "/images/catalog/product-illustrations/rebar-a400-35gs-22-bar.webp",
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "b6440542"
+  },
+  "rebar-a400-35gs-25-bar": {
+    "imageUrl": "/images/catalog/product-illustrations/rebar-a400-35gs-25-bar.webp",
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "dbb294cd"
+  },
+  "rebar-a400-35gs-28-bar": {
+    "imageUrl": "/images/catalog/product-illustrations/rebar-a400-35gs-28-bar.webp",
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "1e44ca7f"
+  },
+  "rebar-a400-35gs-32-bar": {
+    "imageUrl": "/images/catalog/product-illustrations/rebar-a400-35gs-32-bar.webp",
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "1577768e"
+  },
+  "rebar-a400-35gs-36-bar": {
+    "imageUrl": "/images/catalog/product-illustrations/rebar-a400-35gs-36-bar.webp",
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "8bfd4176"
+  },
+  "rebar-a400-35gs-40-bar": {
+    "imageUrl": "/images/catalog/product-illustrations/rebar-a400-35gs-40-bar.webp",
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "cebf2d7a"
+  },
+  "rebar-a400-35gs-6-coil": {
+    "imageUrl": "/images/catalog/product-illustrations/rebar-a400-35gs-6-coil.webp",
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "3aaa34d4"
+  },
+  "rebar-a400-35gs-8-coil": {
+    "imageUrl": "/images/catalog/product-illustrations/rebar-a400-35gs-8-coil.webp",
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "a3b9dc54"
+  },
+  "rebar-a400-35gs-10-coil": {
+    "imageUrl": "/images/catalog/product-illustrations/rebar-a400-35gs-10-coil.webp",
+    "photoUrl": "/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "9bb1b068"
   }
 }
