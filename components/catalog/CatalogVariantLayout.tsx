@@ -1,64 +1,66 @@
-import {Fragment, type ReactNode} from "react";
+import {Fragment, useState, type ReactNode} from "react";
 import type {ProductVariant} from "@/types/product";
 import {getProductIllustration} from "@/lib/productPreviewImage";
 import {isDemonstrationProduct} from "@/lib/catalogOffer";
-import {formatMassPerMeter, formatNumber} from "@/lib/numberFormat";
-import {vgpSeries} from "@/lib/vgp";
 import {Icon} from "@/components/ui/Icon";
+import {DetailsSummary} from "@/components/ui/DetailsSummary";
 import {ProductImageViewer} from "./ProductImageViewer";
-import {VgpPositionFigures} from "./VgpDetailsVisuals";
 import tableStyles from "./RebarTable.module.css";
 
 type View = "table" | "card";
-type CatalogColumn = {label: string; width: number; unit?: string; className?: string; visuallyHidden?: boolean};
+export type CatalogColumn = {label: string; width: number | readonly [number, number]; unit?: string; className?: string; visuallyHidden?: boolean};
+const trackCount = 9;
 
-const quantityColumnWidths = [11, 20, 21, 11, 10, 12, 15];
-const measuredColumnWidths = [13, 12, 15, 11, 11, 11, 12, 15];
+export function singleQuantityColumns(
+  designation: string, firstSpecification: string, secondSpecification: string, quantityLabel = "Количество",
+): CatalogColumn[] {
+  return [
+    {label: designation, width: 14},
+    {label: "Фото", width: 13},
+    {label: firstSpecification, width: 10},
+    {label: secondSpecification, width: 12},
+    {label: "Цена", width: 11},
+    {label: quantityLabel, width: [5, 6]},
+    {label: "Сумма", width: 14, className: tableStyles.sumColumn},
+    {label: "Действие", width: 15, visuallyHidden: true},
+  ];
+}
 
-export function CatalogVariantTable({children, quantityHeading = "Кол-во", measured = false, columns}: {
+export function CatalogVariantTable({children, columns}: {
   children: ReactNode;
-  quantityHeading?: string;
-  measured?: boolean;
-  columns?: readonly CatalogColumn[];
+  columns: readonly CatalogColumn[];
 }) {
-  const columnWidths = columns?.map(({width}) => width) ?? (measured ? measuredColumnWidths : quantityColumnWidths);
+  const columnWidths = columns.flatMap(({width}) => width);
   return <div className={`${tableStyles.frame} hidden rounded-xl border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-900 xl:block`}>
     <table className={`${tableStyles.table} text-center text-sm`}>
       <colgroup>{columnWidths.map((width, index) => <col key={index} style={{width: `${width}%`}}/>)}</colgroup>
       <thead className="bg-slate-900 text-white">
-        <tr>{columns ? columns.map(({label, unit, className, visuallyHidden}) => <th key={label} scope="col" className={className}>
+        <tr>{columns.map(({label, width, unit, className, visuallyHidden}) => <th key={label} scope="col"
+          colSpan={typeof width === "number" ? undefined : width.length} className={className}>
           {visuallyHidden ? <span className="sr-only">{label}</span> : label}
           {unit && <> <span className="whitespace-nowrap">{unit}</span></>}
-        </th>) : <>
-          <th scope="col">Наименование</th>
-          <th scope="col">Изображение</th>
-          <th scope="col" className="text-left">Характеристики</th>
-          <th scope="col">Цена</th>
-          {measured ? <>
-            <th scope="col">Заказ, м</th>
-            <th scope="col">Заказ, т</th>
-          </> : <th scope="col">{quantityHeading}</th>}
-          <th scope="col" className={tableStyles.sumColumn}>Сумма</th>
-          <th scope="col"><span className="sr-only">Действие</span></th>
-        </>}</tr>
+        </th>)}</tr>
       </thead>
       <tbody>{children}</tbody>
     </table>
   </div>;
 }
 
-export function CatalogVariantLayout({view, variant, name = variant.name, preview, specifications, tableSpecifications, cardDetails, price, priceNote, order}: {
+export function CatalogVariantLayout({view, variant, name = variant.name, preview,
+  specifications, tableSpecifications, details, detailsId = `variant-details-${variant.id}`, price, priceNote, order}: {
   view: View;
   variant: ProductVariant;
   name?: string;
   preview?: ReactNode;
   specifications: ReactNode;
-  tableSpecifications?: {heading: ReactNode; headingClassName?: string; cells: ReactNode};
-  cardDetails?: ReactNode;
+  tableSpecifications: {headingClassName?: string; cells: ReactNode};
+  details?: ReactNode;
+  detailsId?: string;
   price: ReactNode;
   priceNote?: ReactNode;
   order: ReactNode;
 }) {
+  const [detailsOpen, setDetailsOpen] = useState(false);
   const illustration = getProductIllustration(variant);
   const src = illustration && (!isDemonstrationProduct(variant) || illustration.showForDemo)
     ? illustration.imageUrl : variant.imageUrls[0];
@@ -72,7 +74,12 @@ export function CatalogVariantLayout({view, variant, name = variant.name, previe
       {image && <div className={tableStyles.cardImage}>{image}</div>}
       <div className="min-w-0">{specifications}</div>
     </div>
-    {cardDetails}
+    {details && <details className={`${tableStyles.detailsDisclosure} mt-3 border-t border-slate-200 text-sm dark:border-slate-700`}>
+      <DetailsSummary className="font-semibold text-slate-600 focus-visible:outline-2 focus-visible:outline-brand-700 dark:text-slate-300 dark:focus-visible:outline-brand-300">
+        Подробнее
+      </DetailsSummary>
+      <div className="pt-2">{details}</div>
+    </details>}
     <div className="mt-4 flex flex-wrap items-end justify-between gap-3 border-t border-slate-100 pt-3 dark:border-slate-800">
       <div>
         <strong className="text-xl tabular-nums">{price}</strong>
@@ -82,72 +89,32 @@ export function CatalogVariantLayout({view, variant, name = variant.name, previe
     {order}
   </article>;
 
-  return <tr id={`variant-${variant.id}`} title={variant.name} className="align-middle border-t border-slate-200 dark:border-slate-700">
-    <th scope="row" className={`font-semibold ${tableSpecifications?.headingClassName ?? ""}`}>{tableSpecifications?.heading ?? name}</th>
-    <td>{image ? <div className={tableStyles.rowImage}>{image}</div> : <span className="text-slate-500 dark:text-slate-400">—</span>}</td>
-    {tableSpecifications?.cells ?? <td className="break-words text-left">{specifications}</td>}
+  const nameId = `variant-name-${variant.id}`;
+  return <><tr id={`variant-${variant.id}`} title={variant.name} className="align-middle">
+    <th scope="row" aria-labelledby={nameId} className={`font-semibold tabular-nums ${tableSpecifications.headingClassName ?? ""}`}>
+      <span id={nameId} className="block">{name}</span>
+      {details && <button type="button" aria-expanded={detailsOpen} aria-controls={detailsId}
+        aria-label={`Подробности: ${variant.name}`} onClick={() => setDetailsOpen(!detailsOpen)}
+        className={`${tableStyles.detailsButton} mt-2 cursor-pointer rounded-sm text-xs font-semibold whitespace-nowrap text-slate-600 underline decoration-slate-300 underline-offset-4 focus-visible:outline-2 focus-visible:outline-brand-700 dark:text-slate-300 dark:decoration-slate-500 dark:focus-visible:outline-brand-300`}>
+        <span>Подробнее</span><Icon name="chevron-down" className={detailsOpen ? "rotate-180" : ""}/>
+      </button>}
+    </th>
+    <td>{image ? <div className={tableStyles.rowImage}>{image}</div> : <span aria-hidden="true" className="text-slate-500 dark:text-slate-400">—</span>}</td>
+    {tableSpecifications.cells}
     <td className="break-words">
       <strong className="font-semibold tabular-nums">{price}</strong>
       {priceNote}
     </td>
     {order}
-  </tr>;
-}
-
-export function VgpVariantDetails({variant, length, mass}: {variant: ProductVariant; length?: ReactNode; mass?: number}) {
-  const series = vgpSeries(variant);
-  const tableReference = "таблице 1 ГОСТ 3262-75";
-  const referenceStart = variant.description.indexOf(tableReference);
-  const fields = [
-    {label: "Условный проход (Ду)", value: variant.nominalBoreMm === undefined ? null : formatNumber(variant.nominalBoreMm)},
-    {label: "Наружный диаметр", value: variant.diameterMm === undefined ? null : `${formatNumber(variant.diameterMm)} мм`},
-    {label: "Толщина стенки", value: variant.wallThicknessMm === undefined ? null : `${formatNumber(variant.wallThicknessMm)} мм`},
-    {label: "Длина по каталогу", value: length},
-    {label: "Серия", value: series === "—" ? null : series},
-    {label: "Теоретическая масса", value: mass === undefined ? null : `${formatMassPerMeter(mass)} кг/м`},
-    {label: "Стандарт", value: variant.standard || null},
-  ];
-
-  const heading = "flex items-center gap-2.5 text-base font-semibold text-slate-900 dark:text-slate-100";
-  const headingIcon = "grid size-8 shrink-0 place-items-center rounded-lg bg-slate-100 text-brand-700 dark:bg-slate-800 dark:text-brand-300";
-
-  return <div className="@container space-y-4 text-left">
-    <p className={heading}>
-      <span className={headingIcon}><Icon name="ruler"/></span>
-      Характеристики трубы
-    </p>
-    <div className="grid gap-4 @min-[32rem]:grid-cols-[minmax(12rem,1fr)_minmax(0,2fr)] @min-[32rem]:items-start @min-[32rem]:gap-6 @min-[51rem]:grid-cols-[16rem_minmax(0,1fr)]">
-      <VgpPositionFigures length={length}/>
-      <dl className="grid grid-cols-1 gap-x-4 gap-y-2 @min-[12rem]:grid-cols-2 @min-[51rem]:grid-cols-4">
-        {fields.filter(({value}) => value != null).map(({label, value}) => <div key={label} className="flex min-w-0 flex-col gap-1 border-b border-slate-200 pb-2 dark:border-slate-700">
-          <dt className="text-xs text-slate-600 dark:text-slate-300">{label}</dt>
-          <dd className="mt-auto text-sm font-semibold tabular-nums text-slate-900 dark:text-slate-100">{value}</dd>
-        </div>)}
-      </dl>
-    </div>
-    <div className="max-w-[68ch] space-y-2 text-base text-slate-700 dark:text-slate-300">
-      <p className={heading}>
-        <span className={headingIcon}><Icon name="clipboard"/></span>
-        Поставка
-      </p>
-      <p>{referenceStart === -1 ? variant.description : <>
-        {variant.description.slice(0, referenceStart)}
-        <a href="https://meganorm.ru/mega_doc/norm/gost_gosudarstvennyj-standart/5/gost_3262-75_gosudarstvennyy_standart_soyuza_ssr_truby.html#Par103"
-          target="_blank" rel="noopener noreferrer"
-          className="rounded-sm text-brand-700 underline underline-offset-2 hover:text-brand-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-700 dark:text-brand-300 dark:hover:text-brand-100 dark:focus-visible:outline-brand-300">
-          {tableReference}<span className="sr-only"> (откроется в новой вкладке)</span>
-        </a>
-        {variant.description.slice(referenceStart + tableReference.length)}
-      </>}</p>
-      <p>Марка стали, исполнение резьбы и наличие муфт уточняются по документам поставки.</p>
-      {variant.sourceProductName && <p>Обозначение поставщика — {variant.sourceProductName}</p>}
-    </div>
-  </div>;
+  </tr>
+  {details && <tr id={detailsId} hidden={!detailsOpen} className={tableStyles.detailsRow}>
+    <td colSpan={trackCount} className="p-5">{detailsOpen && details}</td>
+  </tr>}</>;
 }
 
 export function CatalogVariantSpecifications({items}: {items: readonly {label: string; value: ReactNode}[]}) {
   return <dl className="space-y-1.5 text-sm">
-    {items.map(({label, value}) => <div key={label}>
+    {items.filter(({value}) => value != null && value !== "").map(({label, value}) => <div key={label}>
       <dt className="inline text-slate-600 dark:text-slate-400">{label}: </dt>
       <dd className="inline font-medium tabular-nums">{value}</dd>
     </div>)}
@@ -173,8 +140,8 @@ export function CatalogVariantOrder({view, quantity, secondaryQuantity, action, 
 }) {
   return view === "table"
     ? <>
-      <td>{quantity}</td>
-      {secondaryQuantity && <td>{secondaryQuantity}</td>}
+      <td colSpan={secondaryQuantity ? undefined : 2} className={tableStyles.quantityCell}>{quantity}</td>
+      {secondaryQuantity && <td className={tableStyles.quantityCell}>{secondaryQuantity}</td>}
       <td className={tableStyles.sumColumn}>{total}</td>
       <td className="text-center">{action}{status}</td>
     </>

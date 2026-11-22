@@ -9,7 +9,7 @@ import {QuoteRequestButton} from "./QuoteRequestButton";
 import {formatQuoteProductName} from "@/lib/quoteRequest";
 import filterStyles from "./FilterPanel.module.css";
 import tableStyles from "./RebarTable.module.css";
-import {CatalogVariantLayout, CatalogVariantOrder, CatalogVariantSpecifications, VgpVariantDetails} from "./CatalogVariantLayout";
+import {CatalogVariantLayout, CatalogVariantOrder, CatalogVariantSpecifications} from "./CatalogVariantLayout";
 import {Button} from "@/components/ui/Button";
 import {Input} from "@/components/ui/Input";
 import {Icon} from "@/components/ui/Icon";
@@ -24,7 +24,9 @@ import type {OrderInputMode} from "@/types/cart";
 import type {ProductVariant} from "@/types/product";
 import {isDemonstrationProduct} from "@/lib/catalogOffer";
 import {useOrderDraft} from "./OrderDraftProvider";
-import {DetailsSummary} from "@/components/ui/DetailsSummary";
+import {CatalogPositionDetails} from "./CatalogPositionDetails";
+import {CatalogGuideFigure} from "./CatalogGuideFigure";
+import {PipePositionDetails} from "./PipePositionDetails";
 
 type OrderFeedback = {kind: "correction" | "error"; text: string};
 const enterQuantityMessage = "Укажите длину или вес больше нуля.";
@@ -53,11 +55,9 @@ function TonnageMeasuredVariantItem({
   const referenceMass = beamReferenceMassKg(variant);
   const isRebar = kind === "rebar";
   const isVgp = kind === "vgp";
-  const isOrdinaryVgp = isVgp && variant.subcategoryId === "cat-trk-sub-1";
   const isPipe = isVgp || kind === "pipe";
   const wholePipe = isWholePipeVariant(variant);
   const roundToWholePipes = wholePipe && hasMass && Number.isFinite(variant.lengthMeters) && (variant.lengthMeters ?? 0) > 0;
-  const [detailsOpen, setDetailsOpen] = useState(false);
   const [editingTons, setEditingTons] = useState(false);
   const cartLine = lines.find((line) => line.productId === variant.id);
   const savedMeasurement = cartLine?.measurement;
@@ -101,7 +101,7 @@ function TonnageMeasuredVariantItem({
     : variant.quoteOnly || pricePerTon === undefined ? "По запросу" : estimatedTotal === null ? "Укажите объём" : `${referenceTons !== null ? "≈ " : ""}${variant.priceQualifier === "from" ? "от " : ""}${formatCurrency(estimatedTotal)}`;
   const totalClassName = estimatedTotal === null
     ? "text-xs font-normal text-slate-500 dark:text-slate-400"
-    : `font-semibold tabular-nums text-slate-900 dark:text-slate-100${isVgp && view === "table" ? " whitespace-nowrap" : ""}`;
+    : `font-semibold tabular-nums text-slate-900 dark:text-slate-100`;
   const enteredQuantity = draft === null && cartLine && !savedMeasurement ? enteredTons : inputMode === "meter" ? enteredMeters : enteredTons;
   const isSaved = !!cartLine && !cartLine.invalidReason && parsedTons !== null && parsedTons > 0 && savedTons !== null
     && enteredQuantity !== 0
@@ -133,12 +133,10 @@ function TonnageMeasuredVariantItem({
     else if (hasChanges && !shouldRemove) feedbackText = activeValue.trim() ? unsavedMessage : enterQuantityMessage;
   }
   const pieceCount = !invalidDraft && pipeOrder && pipeOrder.pieces > 0 ? `${pipeOrder.pieces} шт.` : "";
-  const status = isVgp && feedbackText === unsavedMessage
-    ? <>
-      {pieceCount && <span className="block">{pieceCount}</span>}
-      <span className="block whitespace-nowrap">{feedbackText}</span>
-    </>
-    : [pieceCount, feedbackText].filter(Boolean).join(" · ");
+  const status = <>
+    {pieceCount && <span className="block">{pieceCount}</span>}
+    {feedbackText && <span className={feedbackText === unsavedMessage ? "block whitespace-nowrap" : "block"}>{feedbackText}</span>}
+  </>;
 
   function showError(text: string) {
     setMessage({kind: "error", text});
@@ -251,8 +249,6 @@ function TonnageMeasuredVariantItem({
       return;
     }
     setDraft(next.draft);
-    // Blur can have corrected the value before the click. Keep its feedback when saving.
-    setMessage(next.message ? {kind: "correction", text: next.message} : message?.kind === "correction" ? message : null);
     const nextTotal = estimateTotal(next.meters, next.tons);
     if (!next.tons || (hasMass && !next.meters)) {
       showError(enterQuantityMessage);
@@ -277,6 +273,7 @@ function TonnageMeasuredVariantItem({
       );
     }
     setDraft(null);
+    setMessage(null);
   }
 
   const actionSizeClassName = view === "card" ? "w-full" : tableStyles.tableAction;
@@ -306,7 +303,7 @@ function TonnageMeasuredVariantItem({
     invalid={invalidDraft && inputMode === "ton"} statusId={statusId} onChange={value => updateQuantityField("ton", value)}
     onBlur={() => {setEditingTons(false); settleQuantity("ton");}} onRejectedTransfer={showError}/>;
   const price = `${variant.priceQualifier === "from" ? "от " : ""}${formatUnitPrice(pricePerTon ?? null, "за тонну")}`;
-  const total = <output aria-label={`Сумма заказа для ${variant.name}`} aria-live="polite" className={totalClassName}>{totalLabel}</output>;
+  const total = <output data-price={estimatedTotal !== null && !needsMassForLength || undefined} aria-label={`Сумма заказа для ${variant.name}`} aria-live="polite" className={totalClassName}>{totalLabel}</output>;
   const statusColor = invalidDraft || message?.kind === "error" ? "text-red-700 dark:text-red-400" : "text-slate-500 dark:text-slate-400";
   const statusSpacing = view === "table" ? "mx-auto mt-1 max-w-32" : "mt-1";
   const orderStatus = <span id={statusId} role="status" className={`block text-xs ${statusSpacing} ${statusColor}`}>{status}</span>;
@@ -315,78 +312,65 @@ function TonnageMeasuredVariantItem({
 
   if (isRebar) return <RebarVariantLayout view={view} variant={variant} price={price} order={order}/>;
 
-  const legacyDetails = <div className="space-y-2 text-left text-sm font-normal text-slate-600 dark:text-slate-300">
-    <p className="font-bold text-slate-900 dark:text-slate-100">{variant.name}</p>
-    <p>{variant.availability === "UNKNOWN" ? "Наличие уточняется" : variant.availability === "IN_STOCK" ? "В наличии" : "Под заказ"}</p>
-    <p>{variant.shortDescription}</p>
-    <p>{variant.description}</p>
-    {isVgp && <p>Марка стали, исполнение резьбы и наличие муфт уточняются по документам поставки.</p>}
-    {isPipe && variant.sourceProductName && <p>Обозначение поставщика — {variant.sourceProductName}</p>}
-  </div>;
+  const unverified = isDemonstrationProduct(variant);
+  if (isPipe) {
+    const outsideDiameter = variant.diameterMm === undefined ? "—" : formatNumber(variant.diameterMm);
+    const pipeSize = isVgp ? vgpSize(variant) : `${outsideDiameter} × ${formatNumber(variant.wallThicknessMm ?? 0)}`;
+    const pipeLength = variant.lengthRangeMeters?.map(formatNumber).join("–")
+      ?? (variant.lengthMeters === undefined ? undefined : formatNumber(variant.lengthMeters));
+    const tolerance = variant.supplierLengthToleranceMm === undefined ? undefined
+      : `±${formatNumber(variant.supplierLengthToleranceMm)} мм`;
+    const length = pipeLength ? <>
+      <span className="whitespace-nowrap">{pipeLength} м</span>
+      {tolerance && <> <span className="whitespace-nowrap">({tolerance})</span></>}
+    </> : undefined;
 
-  const outsideDiameter = variant.diameterMm === undefined ? "—" : formatNumber(variant.diameterMm);
-  const pipeSize = isVgp ? vgpSize(variant) : `${outsideDiameter} × ${formatNumber(variant.wallThicknessMm ?? 0)}`;
-  const pipeLength = variant.lengthRangeMeters?.map(formatNumber).join("–")
-    ?? (variant.lengthMeters === undefined ? undefined : formatNumber(variant.lengthMeters));
-  const pipeTolerance = variant.supplierLengthToleranceMm === undefined ? undefined
-    : `±${formatNumber(variant.supplierLengthToleranceMm)} мм`;
-  const pipeMass = hasMass ? formatNumber(mass) : undefined;
-  const pipeMassLabel = kind === "pipe" && variant.coatingType === "galvanized"
-    ? "Теоретическая масса без цинкового покрытия" : "Теоретическая масса";
-  const lengthWithUnit = pipeLength ? <>
-    <span className="whitespace-nowrap">{pipeLength} м</span>
-    {pipeTolerance && <> <span className="whitespace-nowrap">({pipeTolerance})</span></>}
-  </> : "—";
-  const details = isOrdinaryVgp ? <VgpVariantDetails variant={variant}
-    length={pipeLength ? lengthWithUnit : undefined} mass={hasMass ? mass : undefined}/> : legacyDetails;
-  const specifications = <CatalogVariantSpecifications items={isPipe ? [
-    {label: isVgp ? "Ду × стенка, мм" : "Наружный Ø × стенка, мм", value: <span className="whitespace-nowrap">{pipeSize}</span>},
-    isVgp ? {label: "Наружный Ø, мм", value: outsideDiameter}
-      : {label: "Марка стали", value: variant.steelGrade ?? "Уточняется"},
-    {label: "Длина по каталогу", value: lengthWithUnit},
-    ...(!isVgp ? [{label: pipeMassLabel, value: pipeMass ? `${pipeMass} кг/м` : "—"}] : []),
-  ] : [
-    {label: "Профиль", value: beamProfile(variant)},
+    return <CatalogVariantLayout view={view} variant={variant} name={view === "table" ? pipeSize : name}
+      tableSpecifications={{headingClassName: isVgp ? tableStyles.vgpSizeColumn : undefined, cells: <>
+        <td>{isVgp ? outsideDiameter : variant.steelGrade || "Уточняется"}</td>
+        <td className="tabular-nums">{pipeLength ?? "—"}{tolerance && <small className="block whitespace-nowrap text-xs font-normal text-slate-600 dark:text-slate-400">{tolerance}</small>}</td>
+      </>}}
+      specifications={<CatalogVariantSpecifications items={[
+        {label: isVgp ? "Ду × стенка, мм" : "Наружный Ø × стенка, мм", value: pipeSize},
+        isVgp ? {label: "Наружный Ø, мм", value: outsideDiameter}
+          : {label: "Марка стали", value: variant.steelGrade || "Уточняется"},
+        {label: "Длина по каталогу", value: length ?? "—"},
+      ]}/>}
+      detailsId={`pipe-details-${variant.id}`}
+      details={<PipePositionDetails variant={variant} isVgp={isVgp} length={length} mass={hasMass ? mass : undefined}/>}
+      price={price} order={order}/>;
+  }
+
+  if (isRebar) return <RebarVariantLayout view={view} variant={variant} price={price} order={order}/>;
+
+  const profile = unverified ? "Уточняется" : beamProfile(variant);
+  const steelGrade = unverified ? undefined : variant.steelGrade;
+  const length = unverified || variant.lengthMeters === undefined ? undefined : formatNumber(variant.lengthMeters);
+  const massField = referenceMass !== undefined
+    ? {label: "Справочная масса по ГОСТ 35087-2024", value: `${formatNumber(referenceMass)} кг/м`}
+    : {label: "Теоретическая масса", value: hasMass ? `${formatNumber(mass)} кг/м` : undefined};
+  const fields = [
+    {label: "Профиль", value: profile},
     {label: "Тип балки", value: beamKind(variant)},
-    {label: "Сталь / класс", value: variant.steelGrade ?? "—"},
-    ...(variant.standard ? [{label: "Стандарт", value: beamStandardLabel(variant)}] : []),
-    referenceMass !== undefined
-      ? {label: "Справочная масса по ГОСТ 35087-2024", value: `${formatNumber(referenceMass)} кг/м`}
-      : {label: "Теоретическая масса", value: hasMass ? `${formatNumber(mass)} кг/м` : "—"},
-    {label: "Длина", value: variant.lengthMeters === undefined ? "—" : `${formatNumber(variant.lengthMeters)} м`},
-  ]}/>;
-  const detailsLabel = isVgp ? "Подробнее" : "Подробнее о товаре";
-  const moreDetails = view === "card"
-    ? <details className={isOrdinaryVgp ? `${tableStyles.vgpDetailsDisclosure} mt-3 border-t border-slate-200 text-sm dark:border-slate-700` : "mt-3 text-sm"}>
-      <DetailsSummary className="font-semibold text-slate-600 focus-visible:outline-2 focus-visible:outline-brand-700 dark:text-slate-300 dark:focus-visible:outline-brand-300">{detailsLabel}</DetailsSummary>
-      <div className={isOrdinaryVgp ? "pt-2" : "mt-3"}>{details}</div></details>
-    : <button type="button" aria-expanded={detailsOpen} aria-controls={`pipe-details-${variant.id}`}
-      aria-label={`Подробности: ${variant.name}`} onClick={() => setDetailsOpen(!detailsOpen)}
-      className={`mt-2 cursor-pointer rounded-sm font-semibold text-slate-600 underline decoration-slate-300 underline-offset-4 focus-visible:outline-2 focus-visible:outline-brand-700 dark:text-slate-300 dark:decoration-slate-500 dark:focus-visible:outline-brand-300 ${isVgp ? "whitespace-nowrap text-xs" : "text-sm"} ${isOrdinaryVgp ? tableStyles.vgpDetailsButton : ""} ${isOrdinaryVgp && detailsOpen ? "" : "hover:text-brand-700 dark:hover:text-brand-400"}`}>
-      <span>{detailsLabel}</span>
-      {isOrdinaryVgp && <Icon name="chevron-down" className={detailsOpen ? "rotate-180" : ""}/>}
-    </button>;
-  const tableSpecifications = isPipe ? {
-    heading: <><span className="block">{pipeSize}</span>{moreDetails}</>,
-    headingClassName: isVgp ? tableStyles.vgpSizeColumn : undefined,
-    cells: <>
-      {isVgp ? <td className="tabular-nums">{outsideDiameter}</td>
-        : <td>{variant.steelGrade ?? <><span aria-hidden="true">—</span><span className="sr-only">Уточняется</span></>}</td>}
-      <td className="tabular-nums">{pipeLength ?? "—"}{pipeTolerance && <small className="block whitespace-nowrap text-xs font-normal text-slate-600 dark:text-slate-400">{pipeTolerance}</small>}</td>
-      {!isVgp && <td className="tabular-nums">{pipeMass ?? "—"}</td>}
-    </>,
-  } : undefined;
-  return <>
-    <CatalogVariantLayout view={view} variant={variant} name={name} tableSpecifications={tableSpecifications} specifications={isDemonstrationProduct(variant)
-      ? <p className="text-sm text-slate-600 dark:text-slate-400">Характеристики требуют подтверждения перед заказом.</p>
-      : <>{specifications}{isPipe && !isOrdinaryVgp && moreDetails}</>}
-      cardDetails={isOrdinaryVgp && view === "card" && !isDemonstrationProduct(variant) ? moreDetails : undefined}
-      price={price} order={order}/>
-    {isPipe && view === "table" && <tr id={`pipe-details-${variant.id}`} hidden={!detailsOpen}
-      className={isOrdinaryVgp ? tableStyles.vgpDetailsRow : "border-t border-slate-200 bg-slate-50 dark:border-slate-700 dark:bg-slate-800/50"}>
-      <td colSpan={isVgp ? 9 : 10} className={isOrdinaryVgp ? "p-5" : "p-4"}>{details}</td>
-    </tr>}
-  </>;
+    {label: "Марка стали", value: steelGrade},
+    {label: "Длина", value: length && `${length} м`},
+    {label: "Стандарт", value: !unverified ? beamStandardLabel(variant) : undefined},
+    massField,
+  ];
+  const shortName = name?.match(/\(ГОСТ[^)]+\)$/u)?.[0];
+  return <CatalogVariantLayout view={view} variant={variant}
+    name={view === "card" ? name : shortName ? `${profile} ${shortName}` : profile}
+    tableSpecifications={{cells: <><td>{steelGrade ?? "—"}</td><td className="tabular-nums">{length ?? "—"}</td></>}}
+    specifications={<CatalogVariantSpecifications items={fields.slice(0, 4).filter(({value}) => value)}/>}
+    details={<CatalogPositionDetails title="Характеристики балки" fields={fields}
+      figures={profile !== "Уточняется" && profile !== "—" ? <CatalogGuideFigure diagram={{
+        shape: "beam", dimensions: [["Профиль", profile], ...(length ? [["Длина", `${length} м`] as const] : [])],
+      }}/> : undefined}
+      supply={unverified ? <p>{variant.description}</p> : <>
+        {referenceMass !== undefined && <p>Масса по сортаменту даёт ориентир для расчёта. Применимость к выбранной позиции подтверждает поставщик.</p>}
+        {variant.sourceProductName && <p>Обозначение поставщика — {variant.sourceProductName}</p>}
+      </>}/>}
+    price={price} order={order}/>;
 }
 
 function RebarVariantLayout({view, variant, price, order}: {
@@ -395,46 +379,32 @@ function RebarVariantLayout({view, variant, price, order}: {
   price: string;
   order: ReactNode;
 }) {
-  const diameter = formatNumber(variant.diameterMm ?? 0);
-  const form = formLabel(variant.form ?? "bar");
   const unverified = isDemonstrationProduct(variant);
-  const mass = unverified ? undefined : variant.weightPerMeterKg;
-  const steelGrade = unverified ? "Уточняется" : variant.steelGrade ?? "—";
-  const length = variant.lengthMeters;
+  const diameter = unverified || variant.diameterMm === undefined ? undefined : formatNumber(variant.diameterMm);
+  const form = unverified || variant.form === undefined ? undefined : formLabel(variant.form);
+  const mass = unverified || !variant.weightPerMeterKg ? undefined : formatNumber(variant.weightPerMeterKg);
+  const steelGrade = unverified ? undefined : variant.steelGrade;
+  const length = unverified || variant.lengthMeters === undefined ? undefined : formatNumber(variant.lengthMeters);
+  const fields = [
+    {label: "Диаметр", value: diameter && `${diameter} мм`},
+    {label: "Форма поставки", value: form},
+    {label: "Марка стали", value: steelGrade},
+    {label: "Длина", value: length && `${length} м`},
+    {label: "Масса погонного метра", value: mass && `${mass} кг/м`},
+    {label: "Стандарт", value: !unverified ? variant.standard : undefined},
+  ];
 
-  if (view === "card") return (
-    <article id={`variant-mobile-${variant.id}`} className={`${tableStyles.card} min-w-0 break-words rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-900`}>
-      <h3 className="text-card-title">{variant.name}</h3>
-      <dl className="mt-4 grid grid-cols-2 gap-3 text-sm">
-        {[
-          ["Диаметр", `${diameter} мм`],
-          ["Форма", form],
-          ["Марка стали", steelGrade],
-          ["Вес", mass !== undefined && mass > 0 ? `${formatNumber(mass)} кг/м` : "—"],
-          ["Длина", length === undefined ? "—" : `${formatNumber(length)} м`],
-          ["Цена", price],
-        ].map(([label, value]) => (
-          <div key={label}>
-            <dt className="text-slate-600 dark:text-slate-400">{label}</dt>
-            <dd className="mt-1 font-medium">{value}</dd>
-          </div>
-        ))}
-      </dl>
-      {order}
-    </article>
-  );
-
-  return (
-    <tr id={`variant-${variant.id}`} title={variant.name} className="align-middle border-t border-slate-200 dark:border-slate-700">
-      <th scope="row" className="font-semibold">{diameter}</th>
-      <td>{form}</td>
-      <td>{steelGrade}</td>
-      <td className="font-semibold tabular-nums">{price}</td>
-      <td>{mass !== undefined && mass > 0 ? formatNumber(mass) : "—"}</td>
-      <td>{length === undefined ? "—" : formatNumber(length)}</td>
-      {order}
-    </tr>
-  );
+  return <CatalogVariantLayout view={view} variant={variant} name={view === "table" ? diameter ?? "Уточняется" : variant.name}
+    tableSpecifications={{cells: <>
+      <td>{form ?? "—"}{steelGrade && <span className="block text-xs text-slate-600 dark:text-slate-400">{steelGrade}</span>}</td>
+      <td className="tabular-nums">{length ?? "—"}</td>
+    </>}}
+    specifications={<CatalogVariantSpecifications items={fields.slice(0, 4).filter(({value}) => value)}/>}
+    details={<CatalogPositionDetails title="Характеристики арматуры" fields={fields}
+      figures={diameter ? <CatalogGuideFigure diagram={{shape: "solid-round", dimensions: [["Номинальный Ø", `${diameter} мм`]]}}/> : undefined}
+      supply={<p>{unverified ? "Характеристики требуют подтверждения перед заказом."
+        : "При подборе по ведомости сверьте класс, диаметр и форму поставки с документом партии."}</p>}/>}
+    price={price} order={order}/>;
 }
 
 function OrderInput({

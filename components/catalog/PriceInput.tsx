@@ -49,7 +49,7 @@ export function useCatalogPriceRange(onChange?: () => void) {
 
 export function PriceRangeInputs({range, unit}: {range: ReturnType<typeof useCatalogPriceRange>; unit?: string}) {
   const suffix = unit ? ` за ${unit}` : "";
-  const unitLabel = unit === "тонну" ? "₽/т" : unit === "метр" ? "₽/м" : "₽";
+  const unitLabel = unit === "тонну" ? "₽/т" : unit === "метр" ? "₽/м" : unit === "штуку" ? "₽/шт." : "₽";
   return <fieldset>
     <legend className="text-sm font-semibold">Цена, {unitLabel}</legend>
     <div className="mt-1 grid grid-cols-2 gap-2">

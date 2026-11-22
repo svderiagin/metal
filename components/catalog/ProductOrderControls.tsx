@@ -85,6 +85,7 @@ export function ProductOrderControls({variant, view, showUnit = true, allowBacko
     if (line) updateQuantity(variant.id, nextQuantity);
     else addItem(variant.id, nextQuantity);
     setDraft(null);
+    setCorrection("");
   }
 
   function correctQuantity() {
@@ -137,17 +138,21 @@ export function ProductOrderControls({variant, view, showUnit = true, allowBacko
         }}
         className={`${styles.field} min-w-0 ${showUnit ? "pl-2 pr-10" : "px-2"} text-center tabular-nums focus:placeholder:text-transparent`}
         placeholder="0"/>;
-  const input = showUnit ? <CatalogVariantQuantity unit={quantityUnit}>{quantityInput}</CatalogVariantQuantity> : quantityInput;
-  const totalOutput = <output aria-label={`Сумма заказа для ${variant.name}`} aria-live="polite"
+  const input = view === "card" || showUnit ? <CatalogVariantQuantity unit={quantityUnit}>{quantityInput}</CatalogVariantQuantity> : quantityInput;
+  const quantityField = view === "card" ? <label className="block text-sm font-semibold">
+    <span className="mb-1 block">Количество</span>{input}
+  </label> : input;
+  const totalOutput = <output data-price={total !== null || undefined} aria-label={`Сумма заказа для ${variant.name}`} aria-live="polite"
     className={total === null ? "text-xs text-slate-500 dark:text-slate-400" : "font-semibold tabular-nums"}>
     {total === null ? variant.price === null || variant.quoteOnly ? "По запросу" : "Укажите количество"
       : `${variant.priceQualifier === "from" ? "от " : ""}${formatCurrency(total)}`}
   </output>;
   const status = <span id={statusId} aria-live="polite" className={`mt-1 block text-xs ${quantityError
     ? "text-red-700 dark:text-red-400" : "text-slate-500 dark:text-slate-400"}`}>
+    {wholeQuantity && valid && !removed && <span className="block">{quantity} {quantityUnit}</span>}
+    {line && !saved && !shouldRemove && <span className="block whitespace-nowrap">Не сохранено</span>}
     {amountTooSmall ? "Увеличьте количество. Сумма позиции должна быть больше 0 ₽."
-      : correction || (quantityError ? wholeQuantity ? "Введите целое количество от 1 до 999." : "Введите количество больше 0 и не больше 999."
-      : line && !saved ? "Не сохранено" : "")}
+      : correction || (quantityError ? wholeQuantity ? "Введите целое количество от 1 до 999." : "Введите количество больше 0 и не больше 999." : "")}
   </span>;
-  return <CatalogVariantOrder view={view} quantity={input} total={totalOutput} action={action} status={status}/>;
+  return <CatalogVariantOrder view={view} quantity={quantityField} total={totalOutput} action={action} status={status}/>;
 }

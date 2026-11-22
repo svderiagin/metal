@@ -12,7 +12,9 @@ import {formatNumber} from "@/lib/numberFormat";
 import {hasConfirmedProfilePipePrice, profilePipeOrder, profilePipeSize} from "@/lib/profilePipe";
 import type {ProductVariant} from "@/types/product";
 import {QuoteRequestButton} from "./QuoteRequestButton";
-import {CatalogVariantLayout, CatalogVariantOrder, CatalogVariantQuantity, CatalogVariantSpecifications} from "./CatalogVariantLayout";
+import {CatalogVariantLayout, CatalogVariantOrder, CatalogVariantSpecifications} from "./CatalogVariantLayout";
+import {CatalogPositionDetails} from "./CatalogPositionDetails";
+import {CatalogGuideFigure} from "./CatalogGuideFigure";
 import filterStyles from "./FilterPanel.module.css";
 import tableStyles from "./RebarTable.module.css";
 import {useOrderDraft} from "./OrderDraftProvider";
@@ -51,7 +53,7 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
   const lengthError = !!range && !!lengthText.trim() && validLength === undefined;
   const status = message ?? (piecesError ? "Введите целое количество труб от 1 до 999."
     : lengthError ? `Введите длину от ${formatNumber(range![0])} до ${formatNumber(range![1])} м.`
-      : line && !saved ? "Не сохранено" : "");
+      : "");
   const statusId = `profile-pipe-order-status-${view}-${variant.id}`;
   const correctedOrder = correctOrderValues().order;
 
@@ -114,6 +116,7 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
     if (line) updatePieceOrder(variant.id, nextOrder.pieces, nextOrder.lengthMeters);
     else addItem(variant.id, nextOrder.meters, undefined, {pieces: nextOrder.pieces, lengthMeters: nextOrder.lengthMeters});
     setDraft(null);
+    setMessage(undefined);
   }
 
   const action = !confirmedPrice && !shouldRemove && !removed ? <QuoteRequestButton label="Запросить цену"
@@ -125,9 +128,10 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
       className={`${buttonClass} ${actionSize} px-3`}>{label}</Button>;
 
   const quantityInput = <Input type="text" inputMode="numeric"
+    id={`profile-pieces-${view}-${variant.id}`}
     aria-label={`Количество целых труб для ${variant.name}`} value={piecesText}
     aria-invalid={piecesError || undefined}
-    aria-describedby={status ? statusId : undefined}
+    aria-describedby={statusId}
     {...quantityTransferHandlers(setMessage)}
     onChange={event => {
       const next = constrainOrderQuantityInput(event.target.value, 999);
@@ -140,11 +144,11 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
         event.preventDefault();
         event.currentTarget.blur();
       }
-    }} className={`${filterStyles.field} min-w-0 px-7 text-center tabular-nums`}/>;
+    }} className={`${filterStyles.field} min-w-0 px-2 text-center tabular-nums`}/>;
   const lengthField = range ? <Input type="text" inputMode="decimal"
     aria-label={`Длина одной трубы для ${variant.name}`} value={lengthText}
     aria-invalid={lengthError || undefined}
-    aria-describedby={status ? statusId : undefined}
+    aria-describedby={statusId}
     {...quantityTransferHandlers(setMessage)}
     placeholder={`${range[0]}–${range[1]}`}
     onChange={event => {setDraft({pieces: piecesText, length: event.target.value}); setMessage(undefined);}}
@@ -157,33 +161,52 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
     }}
     className={`${filterStyles.field} min-w-0 px-2 text-center tabular-nums`}/>
     : null;
-  const mass = variant.weightConfirmed && variant.weightPerMeterKg !== undefined ? formatNumber(variant.weightPerMeterKg) : "—";
-  const metersLabel = order ? formatNumber(order.meters) : "—";
-  const total = <output aria-label={`Сумма заказа для ${variant.name}`} aria-live="polite"
+  const mass = variant.weightConfirmed && variant.weightPerMeterKg !== undefined ? formatNumber(variant.weightPerMeterKg) : undefined;
+  const total = <output data-price={order?.estimatedTotal != null || undefined}
+    aria-label={`Сумма заказа для ${variant.name}`} aria-live="polite"
     className={order && order.estimatedTotal !== null
       ? "font-semibold tabular-nums text-slate-900 dark:text-slate-100" : "text-xs font-normal text-slate-500 dark:text-slate-400"}>{totalLabel}</output>;
 
   const lengths = variant.lengthRangeMeters?.map(value => formatNumber(value)).join("–")
     ?? (variant.lengthMeters === undefined ? undefined : formatNumber(variant.lengthMeters));
-  const specifications = <CatalogVariantSpecifications items={[
-    {label: "Размер, мм", value: profilePipeSize(variant)},
-    {label: "Стенка, мм", value: formatNumber(variant.wallThicknessMm!)},
-    {label: "Теоретическая масса", value: mass === "—" ? mass : `${mass} кг/м`},
-    {label: "Длина", value: lengths === undefined ? "Уточняется" : `${lengths} м`},
-  ]}/>;
-  const quantity = <div className="grid gap-2">
-    {lengthField && <label className="block text-xs font-semibold">
-      <span className="mb-1 block">Длина трубы, м</span>{lengthField}
-    </label>}
-    <CatalogVariantQuantity unit="шт.">{quantityInput}</CatalogVariantQuantity>
-    <p className="text-xs text-slate-600 dark:text-slate-400">
-      Заказ, м: <output aria-label={`Заказ в метрах для ${variant.name}`} aria-live="polite" className="tabular-nums">{metersLabel}</output>
-    </p>
+  const size = profilePipeSize(variant).replace("×", " × ");
+  const thickness = formatNumber(variant.wallThicknessMm!);
+  const dimensionFields = [
+    {label: "Сечение", value: `${size} мм`},
+    {label: "Толщина стенки", value: `${thickness} мм`},
+  ];
+  const fields = [
+    ...dimensionFields,
+    {label: "Длина по каталогу", value: lengths === undefined ? "Уточняется" : `${lengths} м`},
+    {label: "Теоретическая масса", value: mass ? `${mass} кг/м` : undefined},
+    {label: "Марка стали", value: variant.steelGrade},
+    {label: "Стандарт", value: variant.standard},
+  ];
+  const selectedLength = lengthField ?? <p className="py-2 text-sm tabular-nums">{lengths ?? "—"}</p>;
+  const quantity = view === "card" && lengthField ? <label className="block text-sm font-semibold">
+    <span className="mb-1 block">Одна труба, м</span>{selectedLength}
+  </label> : view === "card" ? <div><p className="text-sm font-semibold">Одна труба, м</p>{selectedLength}</div> : selectedLength;
+  const piecesField = <div>
+    {view === "card" && <label htmlFor={`profile-pieces-${view}-${variant.id}`} className="mb-1 block text-sm font-semibold">Заказ, шт.</label>}
+    {quantityInput}
+    <p className="mt-1 text-xs text-slate-600 dark:text-slate-400">Заказ, м: <output
+      aria-label={`Заказ в метрах для ${variant.name}`} aria-live="polite" className="tabular-nums">{order ? formatNumber(order.meters) : "—"}</output></p>
   </div>;
 
-  return <CatalogVariantLayout view={view} variant={variant} specifications={specifications} price={priceLabel}
-    order={<CatalogVariantOrder view={view} quantity={quantity} action={action} total={total}
-      status={<span id={statusId} className={status ? `mt-1 block text-xs ${piecesError || lengthError
-        ? "text-red-700 dark:text-red-400" : "text-slate-500 dark:text-slate-400"}` : "sr-only"}
-        aria-live="polite" aria-atomic="true">{status}</span>}/>}/>;
+  return <CatalogVariantLayout view={view} variant={variant} name={view === "table" ? `${size} × ${thickness}` : variant.name}
+    tableSpecifications={{cells: <><td className="tabular-nums">{lengths ?? "—"}</td><td className="tabular-nums">{mass ?? "—"}</td></>}}
+    specifications={<CatalogVariantSpecifications items={fields.slice(0, 3)}/>}
+    details={<CatalogPositionDetails title="Характеристики профильной трубы" fields={fields}
+      figures={<CatalogGuideFigure diagram={{shape: variant.profileWidthMm === variant.profileHeightMm ? "square" : "rectangle",
+        dimensions: dimensionFields.map(({label, value}) => [label, value] as const)}}/>}
+      supply={<p>Уточните фактическую длину и марку стали по документам поставки. При заказе по ведомости укажите количество труб каждой длины.</p>}/>}
+    price={priceLabel}
+    order={<CatalogVariantOrder view={view} quantity={quantity} secondaryQuantity={piecesField} action={action} total={total}
+      status={<span id={statusId} className={`mt-1 block text-xs ${piecesError || lengthError
+        ? "text-red-700 dark:text-red-400" : "text-slate-500 dark:text-slate-400"}`}
+        aria-live="polite" aria-atomic="true">
+        {!piecesError && validPieces && <span className="block">{validPieces} шт.</span>}
+        {line && !saved && !shouldRemove && <span className="block whitespace-nowrap">Не сохранено</span>}
+        {status && <span className="block">{status}</span>}
+      </span>}/>}/>;
 }

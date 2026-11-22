@@ -12,7 +12,9 @@ import {buildQuoteMessage} from "@/lib/quoteRequest";
 import {isApiSuccess, readApiError} from "@/lib/apiResponse";
 import {companyDetails} from "@/lib/companyDetails";
 
-export function QuoteRequestForm() {
+export function QuoteRequestForm({descriptionPlaceholder = "Арматура рифлёная А500С, 12 мм, 100 м. Доставка в Истринский округ, СНТ «Берёзка», участок 10."}: {
+  descriptionPlaceholder?: string;
+} = {}) {
   const formId = useId();
   const [fieldErrors, setFieldErrors] = useState<QuoteErrors>({});
   const [success, setSuccess] = useState(false);
@@ -142,7 +144,7 @@ export function QuoteRequestForm() {
     </div>
     <div className="min-w-0 sm:col-span-2"><label className="block text-sm font-semibold">Что требуется рассчитать? *
       <Textarea name="message" required maxLength={QUOTE_LIMITS.message} rows={4} value={message}
-        placeholder="Арматура рифлёная А500С, 12 мм, 100 м. Доставка в Истринский округ, СНТ «Берёзка», участок 10."
+        placeholder={descriptionPlaceholder}
         onChange={event => setMessage(event.target.value.slice(0, QUOTE_LIMITS.message))} className="mt-1 block" {...validationProps("message")}/>
       </label>
       <span className={styles.messageMeta}>

@@ -1,13 +1,13 @@
 .frame {
   --table-border: var(--color-slate-200);
-  --vgp-details-surface: var(--color-slate-50);
+  --details-surface: var(--color-slate-50);
   position: relative;
   isolation: isolate;
 }
 
 :global(html[data-theme="dark"]) .frame {
   --table-border: var(--color-slate-700);
-  --vgp-details-surface: var(--color-slate-950);
+  --details-surface: var(--color-slate-950);
 }
 
 .table {
@@ -66,17 +66,17 @@
   border-top: 1px solid var(--table-border);
 }
 
-.table > tbody > tr:nth-child(even) > :is(th, td) { background: var(--table-stripe); }
-.table > tbody > tr:not(:where(.vgpDetailsRow, :has(+ .vgpDetailsRow:not([hidden])))):is(:hover, :focus-within) > :is(th, td) {
+.table > tbody > tr:nth-child(even of :not(.detailsRow)) > :is(th, td) { background: var(--table-stripe); }
+.table > tbody > tr:not(:where(.detailsRow, :has(+ .detailsRow:not([hidden])))):is(:hover, :focus-within) > :is(th, td) {
   background: var(--table-hover);
 }
 
-.table > tbody > tr.vgpDetailsRow > td { background: var(--vgp-details-surface); }
+.table > tbody > tr.detailsRow > td { background: var(--details-surface); }
 
 .vgpSizeColumn { --edge-padding-x: var(--cell-padding-x); }
 .vgpDiameterColumn > span { display: block; }
 
-.vgpDetailsButton {
+.detailsButton {
   display: inline-grid;
   min-block-size: 2rem;
   grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
@@ -84,16 +84,19 @@
   column-gap: 0.125rem;
 }
 
-.vgpDetailsButton > span { grid-column: 2; }
+.detailsButton[aria-expanded="false"]:hover { color: var(--color-brand-700); }
+:global(html[data-theme="dark"]) .detailsButton[aria-expanded="false"]:hover { color: var(--color-brand-300); }
 
-.vgpDetailsButton > svg {
+.detailsButton > span { grid-column: 2; }
+
+.detailsButton > svg {
   inline-size: 1rem;
   block-size: 1rem;
 }
 
-.vgpDetailsDisclosure > summary { padding-inline-end: 0.25rem; }
-.vgpDetailsDisclosure:not([open]) > summary:hover { color: var(--color-brand-700); }
-:global(html[data-theme="dark"]) .vgpDetailsDisclosure:not([open]) > summary:hover { color: var(--color-brand-300); }
+.detailsDisclosure > summary { padding-inline-end: 0.25rem; }
+.detailsDisclosure:not([open]) > summary:hover { color: var(--color-brand-700); }
+:global(html[data-theme="dark"]) .detailsDisclosure:not([open]) > summary:hover { color: var(--color-brand-300); }
 
 .table > tbody > tr:nth-last-child(1 of :not([hidden])) > :first-child {
   border-bottom-left-radius: calc(var(--radius-xl) - 1px);
@@ -114,6 +117,10 @@
 .table > :is(thead, tbody) > tr > :is(th, td):last-child:not([colspan]) {
   padding-inline-end: var(--edge-padding-x);
 }
+
+.table .quantityCell { padding: var(--cell-padding-y) var(--cell-padding-x); }
+
+.quantityCell > span:has(input) { max-inline-size: 8rem; margin-inline: auto; }
 
 .table td :is(input, select) {
   min-height: var(--control-height);
@@ -137,6 +144,8 @@
   width: 100%;
   text-align: center;
 }
+
+.table .sumColumn output[data-price] { white-space: nowrap; }
 
 .table :is(button, a) {
   max-width: 100%;

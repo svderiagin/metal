@@ -3,22 +3,31 @@
 import {useMemo, useState} from "react";
 import {Select} from "@/components/ui/Select";
 import {useLinkedVariant} from "@/hooks/useLinkedVariant";
-import {comparePrices} from "@/lib/catalogFilters";
+import {comparePrices, parseCatalogPrice} from "@/lib/catalogFilters";
+import {normalizeText} from "@/lib/search/russian";
 import {formatUnitPrice} from "@/lib/currency";
 import {formatNumber} from "@/lib/numberFormat";
 import {profileSheetCoatingLabel, type ProfileSheetVariant} from "@/lib/profileSheet";
 import {ProductOrderControls} from "./ProductOrderControls";
 import {FilterPanel} from "./FilterPanel";
+import {PriceRangeFeedback, PriceRangeInputs, useCatalogPriceRange} from "./PriceInput";
 import {ResetFiltersButton} from "./ResetFiltersButton";
-import {CatalogVariantLayout, CatalogVariantSpecifications, CatalogVariantTable} from "./CatalogVariantLayout";
+import {CatalogVariantLayout, CatalogVariantSpecifications, CatalogVariantTable, singleQuantityColumns} from "./CatalogVariantLayout";
+import {CatalogPositionDetails} from "./CatalogPositionDetails";
+import {CatalogGuideFigure} from "./CatalogGuideFigure";
+import {formatSpecification} from "./StorefrontPositionSpecifications";
 
 type SortMode = "thickness-asc" | "thickness-desc" | "price-asc" | "price-desc";
+const columns = singleQuantityColumns("Профиль / толщина", "Покрытие", "Формат, м", "Заказ, шт.");
 
 export function ProfileSheetVariantCatalog({variants}: {variants: ProfileSheetVariant[]}) {
   const [query, setQuery] = useState("");
   const [thickness, setThickness] = useState("");
   const [coating, setCoating] = useState("");
   const [sort, setSort] = useState<SortMode>("thickness-asc");
+  const priceRange = useCatalogPriceRange();
+  const minimum = parseCatalogPrice(priceRange.minimumPrice);
+  const maximum = parseCatalogPrice(priceRange.maximumPrice);
   useLinkedVariant(variants, (variant) => { reset(); setQuery(variant.name); });
 
   const thicknesses = useMemo(() => [...new Set(variants.map((variant) => variant.wallThicknessMm))]
@@ -26,12 +35,14 @@ export function ProfileSheetVariantCatalog({variants}: {variants: ProfileSheetVa
   const coatings = useMemo(() => [...new Set(variants.map(profileSheetCoatingLabel))]
     .sort((left, right) => left.localeCompare(right, "ru", {numeric: true})), [variants]);
   const results = useMemo(() => {
-    const needle = query.trim().toLocaleLowerCase("ru");
+    const needle = normalizeText(query);
     return variants.filter((variant) => {
-      const searchable = `${variant.name} ${variant.sku} ${profileSheetCoatingLabel(variant)}`.toLocaleLowerCase("ru");
+      const searchable = normalizeText(`${variant.name} ${variant.sku} ${profileSheetCoatingLabel(variant)}`);
       return (!needle || searchable.includes(needle))
         && (!thickness || variant.wallThicknessMm === Number(thickness))
-        && (!coating || profileSheetCoatingLabel(variant) === coating);
+        && (!coating || profileSheetCoatingLabel(variant) === coating)
+        && (minimum === null || (variant.price !== null && variant.price >= minimum))
+        && (maximum === null || (variant.price !== null && variant.price <= maximum));
     }).sort((left, right) => {
       if (sort === "thickness-desc") return right.wallThicknessMm - left.wallThicknessMm
         || profileSheetCoatingLabel(left).localeCompare(profileSheetCoatingLabel(right), "ru", {numeric: true});
@@ -41,18 +52,20 @@ export function ProfileSheetVariantCatalog({variants}: {variants: ProfileSheetVa
       return left.wallThicknessMm - right.wallThicknessMm
         || profileSheetCoatingLabel(left).localeCompare(profileSheetCoatingLabel(right), "ru", {numeric: true});
     });
-  }, [coating, query, sort, thickness, variants]);
+  }, [coating, maximum, minimum, query, sort, thickness, variants]);
 
   function reset() {
     setQuery("");
     setThickness("");
     setCoating("");
     setSort("thickness-asc");
+    priceRange.reset();
   }
 
   return <>
     <FilterPanel className="lg:col-start-2" query={query}
-      activeFilters={[thickness, coating].filter(Boolean).length}
+      activeFilters={[thickness, coating, priceRange.minimumPrice, priceRange.maximumPrice].filter(Boolean).length}
+      extraControls={<PriceRangeFeedback message={priceRange.message}/>}
       onQueryChange={setQuery} onReset={reset} resultCount={{visible: results.length, total: variants.length}}
       sorting={<label className="text-sm font-semibold">
         Сортировка
@@ -77,11 +90,12 @@ export function ProfileSheetVariantCatalog({variants}: {variants: ProfileSheetVa
           {coatings.map((value) => <option key={value} value={value}>{value}</option>)}
         </Select>
       </label>
+      <PriceRangeInputs range={priceRange} unit="штуку"/>
     </FilterPanel>
 
     <section className="min-w-0 lg:col-span-2" aria-label="Профнастил">
       {results.length ? <>
-        <CatalogVariantTable>
+        <CatalogVariantTable columns={columns}>
           {results.map(variant => <ProfileSheetItem key={variant.id} variant={variant} view="table"/>)}
         </CatalogVariantTable>
         <div className="grid gap-4 sm:grid-cols-2 xl:hidden">
@@ -97,13 +111,23 @@ export function ProfileSheetVariantCatalog({variants}: {variants: ProfileSheetVa
 }
 
 function ProfileSheetItem({variant, view}: {variant: ProfileSheetVariant; view: "table" | "card"}) {
-  const specifications = <CatalogVariantSpecifications items={[
+  const coating = profileSheetCoatingLabel(variant);
+  const size = formatSpecification(variant.sheetSizeMeters);
+  const thickness = formatNumber(variant.wallThicknessMm);
+  const fields = [
+    {label: "Марка профиля", value: variant.profileMark},
     {label: "Толщина, мм", value: formatNumber(variant.wallThicknessMm)},
-    {label: "Цвет / покрытие", value: profileSheetCoatingLabel(variant)},
-    {label: "Размер листа, м", value: variant.sheetSizeMeters},
-  ]}/>;
+    {label: "Цвет / покрытие", value: coating},
+    {label: "Размер листа, м", value: size},
+  ];
 
-  return <CatalogVariantLayout view={view} variant={variant} specifications={specifications}
+  return <CatalogVariantLayout view={view} variant={variant}
+    name={view === "table" ? `${variant.profileMark} · ${thickness} мм` : variant.name}
+    tableSpecifications={{cells: <><td>{variant.coatingType === "galvanized" ? "Цинк" : coating}</td><td className="tabular-nums">{size}</td></>}}
+    specifications={<CatalogVariantSpecifications items={fields}/>}
+    details={<CatalogPositionDetails title="Характеристики профлиста" fields={fields}
+      figures={<CatalogGuideFigure diagram={{shape: "sheet-width"}}/>}
+      supply={<p>Для расчёта количества листов уточните полезную ширину с учётом нахлёста. Размер в каталоге относится к выбранной позиции.</p>}/>}
     price={formatUnitPrice(variant.price, variant.priceUnit)}
     order={<ProductOrderControls view={view} variant={variant} allowBackorder wholeQuantity={true}/>}/>;
 }

@@ -1,6 +1,19 @@
 import {test, expect, openProduct, samples, visibleProduct, productPath, openFilters} from "../browser";
 import {getAllProductVariants} from "../../lib/catalog";
 
+const familyColumns = {
+  shveller: ["Профиль", "Фото", "Высота × полка", "Длина", "Цена", "Заказ, м"],
+  ugolok: ["Полки × толщина, мм", "Фото", "Тип", "Длина", "Цена", "Заказ, м"],
+  kvadrat: ["Профиль", "Фото", "Сечение", "Длина", "Цена", "Заказ, м"],
+  armatura: ["Диаметр, мм", "Фото", "Форма / сталь", "Длина, м", "Цена, ₽/т", "Заказ, м", "Заказ, т"],
+  balka: ["Профиль", "Фото", "Сталь", "Длина, м", "Цена, ₽/т", "Заказ, м", "Заказ, т"],
+  profile: ["Сечение × стенка, мм", "Фото", "Длина, м", "Масса, кг/м", "Цена, ₽/м", "Одна труба, м", "Заказ, шт."],
+  vgp: ["Ду × стенка, мм", "Фото", "Наружный Ø, мм", "Длина, м", "Цена, ₽/т", "Заказ, м", "Заказ, т"],
+  profnastil: ["Профиль / толщина", "Фото", "Покрытие", "Формат, м", "Цена", "Заказ, шт."],
+  mesh: ["Ячейка", "Фото", "Проволока", "Формат", "Цена", "Количество"],
+  shtaketnik: ["Профиль / цвет", "Фото", "Ширина × толщина", "Длина", "Цена", "Количество"],
+};
+
 for (const family of ["shveller", "ugolok", "kvadrat", "armatura", "balka", "profile", "vgp", "profnastil", "mesh", "shtaketnik"] as const) {
   test(`${family}: linked product is visible and filters reset`, async ({page}) => {
     const product = samples[family];
@@ -9,39 +22,23 @@ for (const family of ["shveller", "ugolok", "kvadrat", "armatura", "balka", "pro
     await expect(query).toHaveValue(product.name);
     const productItem = visibleProduct(page, product.id);
     await expect(productItem).toBeInViewport();
-    if (await productItem.evaluate(element => element.tagName === "TR")) {
+    const isTable = await productItem.evaluate(element => element.tagName === "TR");
+    if (isTable) {
       const headers = productItem.locator("xpath=ancestor::table").getByRole("columnheader");
-      if (family === "armatura") {
-        await expect(headers).toHaveText([
-          "Диаметр, мм", "Форма", "Марка стали", "Цена, ₽/т", "Масса, кг/м", "Длина, м", "Заказ, м", "Заказ, т", "Сумма", "Действие",
-        ]);
-        await expect(productItem.getByRole("rowheader")).toHaveText(String(product.diameterMm));
-      } else if (family === "vgp") {
-        await expect(headers).toHaveText([
-          "Ду × стенка, мм", "Фото", "Наружный Ø, мм", "Длина, м", "Цена, ₽/т", "Заказ, м", "Заказ, т", "Сумма", "Действие",
-        ]);
-        await expect(productItem.getByRole("rowheader")).toBeVisible();
-      } else {
-        await expect(headers).toHaveText([
-          "Наименование", "Изображение", "Характеристики", "Цена",
-          ...(family === "balka" ? ["Заказ, м", "Заказ, т"] : [/^Кол-во(?:, м)?$/]),
-          "Сумма", "Действие",
-        ]);
-        await expect(productItem.getByRole("rowheader")).toBeVisible();
-      }
+      await expect(headers).toHaveText([...familyColumns[family], "Сумма", "Действие"]);
+      await expect(productItem.getByRole("rowheader")).toBeVisible();
     } else {
       await expect(productItem.getByRole("heading", {level: 3})).toBeVisible();
     }
     if (family === "armatura") {
-      await expect(page.getByRole("region", {name: "Продукция"}).locator("img")).toHaveCount(0);
       await expect(productItem.getByRole("textbox")).toHaveCount(2);
     }
-    if (family === "mesh") {
+    if (family === "mesh" && !isTable) {
       for (const label of ["Размер ячейки:", "Диаметр проволоки:", "Размер рулона / карты:"]) {
         await expect(productItem.getByText(label, {exact: true})).toBeVisible();
       }
     }
-    if (family === "profnastil") {
+    if (family === "profnastil" && !isTable) {
       for (const label of ["Толщина, мм:", "Цвет / покрытие:", "Размер листа, м:"]) {
         await expect(productItem.getByText(label, {exact: true})).toBeVisible();
       }

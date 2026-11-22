@@ -12,21 +12,20 @@ test("galvanized 89×3.5 pipe converts while typing and retains the same measure
   if (isMobile) {
     await expect(row.getByText("89 × 3,5", {exact: true})).toBeVisible();
     await expect(row.getByText("7,8 м (±150 мм)", {exact: true})).toBeVisible();
-    await expect(row.getByText("7,38 кг/м", {exact: true})).toBeVisible();
-    await expect(row.getByText("Теоретическая масса без цинкового покрытия:", {exact: true})).toBeVisible();
   } else {
     const table = row.locator("xpath=ancestor::table");
     await expect(row.getByRole("rowheader")).toContainText("89 × 3,5");
     await expect(row.getByRole("cell", {name: "7,8 ±150 мм", exact: true})).toBeVisible();
-    await expect(table.getByRole("columnheader", {name: "Масса стали, кг/м", exact: true})).toBeVisible();
-    await expect(row.getByRole("cell", {name: "7,38", exact: true})).toBeVisible();
+    await expect(table.getByRole("columnheader", {name: "Сталь", exact: true})).toBeVisible();
     await expect(page.getByText(/^Для пересчёта используется масса стальной трубы без цинкового покрытия/)).toBeVisible();
   }
-  const detailsButton = isMobile ? row.getByText("Подробнее о товаре", {exact: true})
+  const detailsButton = isMobile ? row.getByText("Подробнее", {exact: true})
     : row.getByRole("button", {name: /^Подробности:/});
   await detailsButton.click();
   const details = isMobile ? row.locator("details") : page.locator(`#${await detailsButton.getAttribute("aria-controls")}`);
-  await expect(details.getByText(/ГОСТ 10704-91.*ГОСТ 10705-80.*без массы цинкового покрытия/)).toBeVisible();
+  await expect(details.getByText("Теоретическая масса без покрытия", {exact: true})).toBeVisible();
+  await expect(details.getByText("7,38 кг/м", {exact: true})).toBeVisible();
+  await expect(details.getByText(/ГОСТ 10705-80/).first()).toBeVisible();
   await detailsButton.click();
 
   const meters = row.getByRole("textbox", {name: /^Длина заказа для/});

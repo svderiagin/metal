@@ -11,6 +11,7 @@ import {isIllustratedSheet, sheetFilterKeys} from "@/lib/sheetPresentation";
 import {selectVariants, uniqueAttributeValues, variantFilterLabel, type VariantSort} from "@/lib/variantCatalog";
 import type {ProductAttributeKey, ProductVariant} from "@/types/product";
 import {VariantCatalogResults} from "./VariantCatalogResults";
+import {isDemonstrationProduct} from "@/lib/catalogOffer";
 
 export function GenericProductVariantCatalog({
   variants,
@@ -34,15 +35,15 @@ export function GenericProductVariantCatalog({
   const search = useMemo(() => index.search(deferredQuery), [index, deferredQuery]);
   useLinkedVariant(variants, variant => {reset(); setQuery(variant.name);}, resultsPending);
 
-  const filterOptions = useMemo(
-    () => new Map(
+  const filterOptions = useMemo(() => {
+    const specifiedVariants = variants.filter(variant => !isDemonstrationProduct(variant));
+    return new Map(
       filterKeys.map((key) => [
         key,
-        uniqueAttributeValues(variants, key),
+        uniqueAttributeValues(specifiedVariants, key),
       ]),
-    ),
-    [filterKeys, variants],
-  );
+    );
+  }, [filterKeys, variants]);
 
   const results = useMemo(() => selectVariants(deferredQuery.trim() ? search.hits.map(hit => hit.product) : variants,
     {filters, filterKeys, stockOnly, minimumPrice, maximumPrice, sort}),
@@ -87,11 +88,11 @@ export function GenericProductVariantCatalog({
             </Select>
           </label>
         } extraControls={<>
-          <label className="flex min-h-11 cursor-pointer items-center gap-3 text-sm font-semibold">
+          {variants.some(variant => variant.inStock && !isDemonstrationProduct(variant)) && <label className="flex min-h-11 cursor-pointer items-center gap-3 text-sm font-semibold">
             <input type="checkbox" checked={stockOnly} onChange={event => {setStockOnly(event.target.checked); setPage(1);}}
               className="size-5 shrink-0 accent-brand-700"/>
             Только в наличии
-          </label>
+          </label>}
           <PriceRangeFeedback message={priceRange.message}/>
         </>}>
           {filterKeys.filter(key => (filterOptions.get(key)?.length ?? 0) > 0).map((key) => (

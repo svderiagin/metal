@@ -28,6 +28,6 @@ export function RequestQuoteSection({appearance = "default"}: {appearance?: "def
         id="catalog-request-heading" className="text-section-title mt-2">Запросите расчёт поставки</h2><p
         className="mt-3 leading-6 text-slate-600 dark:text-slate-300">Укажите тип продукции, размеры, количество и адрес доставки. Приложить ведомость или чертёж можно в письме в отдел продаж.</p>
         <a href={`mailto:${companyDetails.salesEmail}`} className="mt-4 inline-flex min-h-11 items-center break-all font-semibold underline underline-offset-4">{companyDetails.salesEmail}</a></div>
-      <QuoteRequestForm/></div>
+      <QuoteRequestForm descriptionPlaceholder="Наименование и размер позиции, количество с единицей измерения, адрес доставки"/></div>
   </section>
 }

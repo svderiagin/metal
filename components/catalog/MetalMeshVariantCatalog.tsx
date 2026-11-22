@@ -4,6 +4,7 @@ import {useMemo, useState} from "react";
 import {Select} from "@/components/ui/Select";
 import {useLinkedVariant} from "@/hooks/useLinkedVariant";
 import {comparePrices} from "@/lib/catalogFilters";
+import {normalizeText} from "@/lib/search/russian";
 import {formatUnitPrice} from "@/lib/currency";
 import {
   metalMeshFormat,
@@ -14,9 +15,13 @@ import {requiresWholeMetalMeshQuantity} from "@/lib/variantPresentation";
 import {ProductOrderControls} from "./ProductOrderControls";
 import {FilterPanel} from "./FilterPanel";
 import {ResetFiltersButton} from "./ResetFiltersButton";
-import {CatalogVariantLayout, CatalogVariantSpecifications, CatalogVariantTable} from "./CatalogVariantLayout";
+import {CatalogVariantLayout, CatalogVariantSpecifications, CatalogVariantTable, singleQuantityColumns} from "./CatalogVariantLayout";
+import {CatalogPositionDetails} from "./CatalogPositionDetails";
+import {CatalogGuideFigure} from "./CatalogGuideFigure";
+import {formatSpecification, storefrontPositionFields} from "./StorefrontPositionSpecifications";
 
 type SortMode = "name" | "cell-asc" | "price-asc" | "price-desc";
+const columns = singleQuantityColumns("Ячейка", "Проволока", "Формат");
 
 export function MetalMeshVariantCatalog({variants}: {variants: MetalMeshVariant[]}) {
   const [query, setQuery] = useState("");
@@ -32,12 +37,12 @@ export function MetalMeshVariantCatalog({variants}: {variants: MetalMeshVariant[
     .filter((value) => value !== "—")
     .sort(numericCompare), [variants]);
   const results = useMemo(() => {
-    const needle = query.trim().toLocaleLowerCase("ru");
+    const needle = normalizeText(query);
     return variants.filter((variant) => {
       const cell = metalMeshSpecification(variant, "Размер ячейки");
       const wire = metalMeshSpecification(variant, "Диаметр проволоки");
       const productFormat = metalMeshFormat(variant);
-      const searchable = `${variant.name} ${variant.sku} ${cell} ${wire} ${productFormat}`.toLocaleLowerCase("ru");
+      const searchable = normalizeText(`${variant.name} ${variant.sku} ${cell} ${wire} ${productFormat}`);
       return (!needle || searchable.includes(needle))
         && (!cellSize || cell === cellSize)
         && (!wireDiameter || wire === wireDiameter)
@@ -87,7 +92,7 @@ export function MetalMeshVariantCatalog({variants}: {variants: MetalMeshVariant[
 
     <section className="min-w-0 lg:col-span-2" aria-label="Сетка металлическая">
       {results.length ? <>
-        <CatalogVariantTable>
+        <CatalogVariantTable columns={columns}>
           {results.map(variant => <MetalMeshItem key={variant.id} variant={variant} view="table"/>)}
         </CatalogVariantTable>
         <div className="grid gap-4 sm:grid-cols-2 xl:hidden">
@@ -103,13 +108,31 @@ export function MetalMeshVariantCatalog({variants}: {variants: MetalMeshVariant[
 }
 
 function MetalMeshItem({variant, view}: {variant: MetalMeshVariant; view: "table" | "card"}) {
-  const specifications = <CatalogVariantSpecifications items={[
-    {label: "Размер ячейки", value: metalMeshSpecification(variant, "Размер ячейки")},
-    {label: "Диаметр проволоки", value: metalMeshSpecification(variant, "Диаметр проволоки")},
-    {label: "Размер рулона / карты", value: metalMeshFormat(variant)},
-  ]}/>;
+  const cell = formatSpecification(metalMeshSpecification(variant, "Размер ячейки"));
+  const wire = formatSpecification(metalMeshSpecification(variant, "Диаметр проволоки"));
+  const format = formatSpecification(metalMeshFormat(variant));
+  const coating = metalMeshSpecification(variant, "Покрытие");
+  const fields = [
+    {label: "Размер ячейки", value: cell},
+    {label: "Диаметр проволоки", value: wire},
+    {label: "Размер рулона / карты", value: format},
+    ...(coating !== "—" ? [{label: "Покрытие", value: coating}] : []),
+  ];
 
-  return <CatalogVariantLayout view={view} variant={variant} specifications={specifications}
+  return <CatalogVariantLayout view={view} variant={variant}
+    name={view === "table" && cell !== "—" ? cell : variant.name}
+    tableSpecifications={{cells: <>
+      <td className="tabular-nums">{wire}{coating !== "—" && <span className="block text-xs text-slate-600 dark:text-slate-400">
+        {coating === "Оцинкованная" ? "Цинк" : coating}
+      </span>}</td>
+      <td className="tabular-nums">{format}</td>
+    </>}}
+    specifications={<CatalogVariantSpecifications items={fields}/>}
+    details={<CatalogPositionDetails title="Характеристики сетки" fields={storefrontPositionFields(variant)}
+      figures={cell !== "—" ? <CatalogGuideFigure diagram={{
+        shape: "mesh", dimensions: [["Ячейка", cell], ...(wire !== "—" ? [["Проволока", wire] as const] : [])],
+      }}/> : undefined}
+      supply={<p>Сверьте единицу продажи с нужным объёмом. Для рулона учитывайте его длину, для карт — размер панели и стыки по схеме укладки.</p>}/>}
     price={formatUnitPrice(variant.price, variant.priceUnit)}
     order={<ProductOrderControls view={view} variant={variant} allowBackorder wholeQuantity={requiresWholeMetalMeshQuantity(variant)}/>}/>;
 }

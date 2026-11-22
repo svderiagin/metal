@@ -1,4 +1,4 @@
-.fourTopics {
+.topics {
   gap: 1.5rem;
 }
 
@@ -9,12 +9,12 @@
 }
 
 @container (min-width: 36rem) {
-  .fourTopics {
+  .topics {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   @supports (grid-template-rows: subgrid) {
-    .fourTopics {
+    .topics {
       row-gap: 0.75rem;
     }
 
@@ -25,11 +25,23 @@
   }
 }
 
-@container (36rem <= width < 66rem) {
+@container (36rem <= width < 56rem) {
   @supports (grid-template-rows: subgrid) {
-    .topic:nth-child(-n + 2) {
+    .topics > .topic:nth-child(-n + 2) {
       margin-block-end: 0.75rem;
     }
+  }
+}
+
+@container (min-width: 56rem) {
+  .threeTopics {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@container (56rem <= width < 66rem) {
+  .fourTopics > .topic:nth-child(-n + 2) {
+    margin-block-end: 0.75rem;
   }
 }
 

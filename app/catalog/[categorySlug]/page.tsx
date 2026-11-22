@@ -1,15 +1,13 @@
 import {getCatalogCoverImages} from "@/lib/catalogCoverImages";
 import {catalogDescriptionCopy} from "@/data/catalog-description-copy";
 import type {Metadata} from "next";
-import {Suspense} from "react";
 import {notFound} from "next/navigation";
 import {Breadcrumbs} from "@/components/catalog/Breadcrumbs";
-import {CatalogSidebar} from "@/components/catalog/CatalogSidebar";
 import {CatalogBuyingGuide} from "@/components/catalog/CatalogBuyingGuide";
 import {CatalogListingNavigation} from "@/components/catalog/CatalogListingNavigation";
+import {CatalogListingPage} from "@/components/catalog/CatalogListingPage";
 import {ProductTypeResults} from "@/components/catalog/ProductTypeResults";
 import {ProductCatalogIntro} from "@/components/catalog/ProductCatalogIntro";
-import {ProductVariantCatalog} from "@/components/catalog/ProductVariantCatalog";
 import {PageContainer} from "@/components/layout/PageContainer";
 import {ButtonLink} from "@/components/ui/Button";
 import {
@@ -51,47 +49,35 @@ export default async function CategoryPage({params}: Props) {
   const detailedDescription = description?.details;
 
   if (category.directProducts) {
-    return (
-      <PageContainer className="py-5 sm:py-6 lg:py-7">
-        <Breadcrumbs items={[{label: "Каталог", href: "/catalog"}, {label: category.name}]}/>
-        <div className="flex flex-col gap-4">
-          <CatalogListingNavigation category={category}/>
-          <ProductCatalogIntro key={category.id} title={category.name} label="Категория"
-            summary={`Позиций: ${variants.length}`}
-            detailsId={detailedDescription ? `${category.id}-details-heading` : undefined}
-            images={hasImage ? coverImages : []} description={introDescription}/>
-          <section id="catalog-products" className="flex scroll-mt-6 flex-col gap-5" aria-label="Подбор и заказ продукции">
-          <ProductVariantCatalog variants={variants} categorySlug={category.slug}>
-            {detailedDescription && <CatalogBuyingGuide headingId={`${category.id}-details-heading`}
-              title={description?.title ?? `Подробнее о категории «${category.name}»`} description={detailedDescription}/>}
-          </ProductVariantCatalog>
-          </section>
-        </div>
-      </PageContainer>
-    );
+    return <CatalogListingPage category={category} title={category.name} label="Категория"
+      intro={introDescription} images={coverImages} variants={variants}
+      guide={detailedDescription ? {
+        title: description?.title ?? `Как выбрать продукцию категории «${category.name}»`,
+        description: detailedDescription,
+      } : undefined}/>;
   }
 
   return (
-    <PageContainer className="py-5 sm:py-6 lg:py-7">
+    <PageContainer className="pt-5 pb-8 sm:pt-6 lg:pt-7 lg:pb-10">
       <Breadcrumbs items={[{label: "Каталог", href: "/catalog"}, {label: category.name}]}/>
-      <div className="grid gap-5 lg:grid-cols-[244px_minmax(0,1fr)] lg:gap-6">
-        <Suspense fallback={<div className="h-96 animate-pulse rounded-xl bg-slate-200 dark:bg-slate-700"/>}>
-          <CatalogSidebar activeSlug={category.slug}/>
-        </Suspense>
-        <div className="min-w-0">
-          <ProductCatalogIntro key={category.id} title={category.name} label="Категория"
-            summary={`Типов: ${productTypes.length}`} showProductTypesLink
-            detailsId={detailedDescription ? `${category.id}-details-heading` : undefined}
-            images={hasImage ? coverImages : []} description={introDescription}/>
-          <ProductTypeResults productTypes={productTypes} variants={variants}/>
-          {detailedDescription && <CatalogBuyingGuide headingId={`${category.id}-details-heading`}
-            title={description?.title ?? `Подробнее о категории «${category.name}»`} description={detailedDescription}/>}
-          <div className="mt-10 rounded-lg bg-slate-900 p-6 text-white">
-            <h2 className="text-xl font-bold">Нужна комплектация по спецификации?</h2>
-            <p className="mt-2 text-slate-300">Опишите позиции и необходимые услуги — подготовим единый
-              расчёт.</p>
-            <ButtonLink href="/#request" className="mt-5">Запросить расчёт</ButtonLink>
+      <div className="flex min-w-0 flex-col gap-10">
+        <div className="flex min-w-0 flex-col gap-6 lg:gap-8">
+          <div className="flex min-w-0 flex-col gap-4 lg:gap-5">
+            <CatalogListingNavigation category={category}/>
+            <ProductCatalogIntro key={category.id} title={category.name} label="Категория"
+              summary={`Типов: ${productTypes.length}`} showProductTypesLink
+              detailsId={detailedDescription ? `${category.id}-details-heading` : undefined}
+              images={hasImage ? coverImages : []} description={introDescription}/>
           </div>
+          <ProductTypeResults productTypes={productTypes} variants={variants}/>
+        </div>
+        {detailedDescription && <CatalogBuyingGuide headingId={`${category.id}-details-heading`}
+          title={description?.title ?? `Как выбрать продукцию категории «${category.name}»`}
+          description={detailedDescription} marginClassName=""/>}
+        <div className="rounded-xl bg-slate-900 p-5 text-white sm:p-6">
+          <h2 className="text-section-title">Нужна комплектация по спецификации?</h2>
+          <p className="mt-2 text-slate-300">Опишите позиции и необходимые услуги — подготовим единый расчёт.</p>
+          <ButtonLink href="/#request" className="mt-5">Запросить расчёт</ButtonLink>
         </div>
       </div>
     </PageContainer>

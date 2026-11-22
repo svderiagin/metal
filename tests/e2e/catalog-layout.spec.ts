@@ -2,12 +2,12 @@ import {test, expect, openProduct, openFilters, seedCart} from "../browser";
 import {getProductTypesByCategoryId} from "../../lib/catalog";
 
 for (const type of getProductTypesByCategoryId("cat-arm")) {
-  test(`${type.name}: rebar uses the text-only table and mobile cards`, async ({page, isMobile}) => {
+  test(`${type.name}: rebar uses the catalog table and mobile cards`, async ({page, isMobile}) => {
     await page.goto(`/catalog/${type.categorySlug}/${type.subcategorySlug}/${type.slug}`);
     const products = page.getByRole("region", {name: "Продукция", exact: true});
-    await expect(products.locator("img")).toHaveCount(0);
+    await expect(products.getByRole("img").first()).toBeVisible();
     if (isMobile) await expect(products.locator('article').first()).toBeVisible();
-    else await expect(products.getByRole("columnheader")).toHaveCount(10);
+    else await expect(products.getByRole("columnheader")).toHaveCount(9);
   });
 }
 

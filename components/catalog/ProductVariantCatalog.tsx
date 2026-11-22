@@ -19,9 +19,11 @@ import {DetailsSummary} from "@/components/ui/DetailsSummary";
 
 export function ProductVariantCatalog({children, ...props}: {variants: ProductVariant[]; categorySlug: string; children?: ReactNode}) {
   return <QuoteRequestProvider><OrderDraftProvider>
-    <VariantCatalogContent {...props} variants={props.variants.map(storefrontVariant)}/>
+    <div className="flex min-w-0 flex-col gap-4">
+      <VariantCatalogContent {...props} variants={props.variants.map(storefrontVariant)}/>
+    </div>
     {children}
-    <div className="min-w-0 lg:col-span-2"><RequestQuoteSection/></div>
+    <RequestQuoteSection/>
   </OrderDraftProvider></QuoteRequestProvider>;
 }
 
@@ -69,7 +71,9 @@ function LegacyProfilePipeCatalog({variants, categorySlug}: {variants: ProductVa
   return <div className="min-w-0 lg:col-span-2">
     <details open={open} onToggle={event => setOpen(event.currentTarget.open)} className="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-5">
       <DetailsSummary className="font-semibold">Другие позиции — параметры уточняются</DetailsSummary>
-      <GenericProductVariantCatalog variants={variants} categorySlug={categorySlug}/>
+      {open && <div className="mt-4 flex min-w-0 flex-col gap-4">
+        <GenericProductVariantCatalog variants={variants} categorySlug={categorySlug}/>
+      </div>}
     </details>
   </div>;
 }

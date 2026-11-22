@@ -1,51 +1,48 @@
-import {Suspense} from "react";
 import Link from "next/link";
 import type {Category} from "@/types/category";
 import type {ProductVariant} from "@/types/product";
 import {PageContainer} from "@/components/layout/PageContainer";
 import {Breadcrumbs} from "./Breadcrumbs";
-import {CatalogSidebar} from "./CatalogSidebar";
+import {CatalogListingNavigation} from "./CatalogListingNavigation";
+import {CatalogPositionFields} from "./CatalogPositionDetails";
 import {CatalogDescription} from "./CatalogDescription";
 import {ProductImageViewer} from "./ProductImageViewer";
 import {getChannelProductDescription} from "@/lib/channelDescription";
 import {ChannelSpecificationNote} from "./ChannelSpecificationNote";
+import {storefrontPositionFields} from "./StorefrontPositionSpecifications";
 
 export function CatalogProductDetail({category, variant}: {category: Category; variant: ProductVariant}) {
-  const description = getChannelProductDescription(variant);
-  const specifications = variant.specifications.filter(item => !["Полное обозначение", "Условия цены", "Условия оплаты"].includes(item.name));
+  const [introduction, , selection] = getChannelProductDescription(variant).split("\n\n");
+  const fields = storefrontPositionFields(variant);
 
-  return <PageContainer className="py-8 sm:py-10 lg:py-12">
+  return <PageContainer className="pt-5 pb-8 sm:pt-6 lg:pt-7 lg:pb-10">
     <Breadcrumbs items={[
       {label: "Каталог", href: "/catalog"},
       {label: category.name, href: `/catalog/${category.slug}`},
       {label: variant.name},
     ]}/>
-    <div className="grid gap-7 lg:grid-cols-[280px_minmax(0,1fr)]">
-      <Suspense fallback={<div className="h-96 animate-pulse rounded-xl bg-slate-200 dark:bg-slate-700"/>}>
-        <CatalogSidebar activeSlug={category.slug}/>
-      </Suspense>
-      <div className="min-w-0">
-        <div className="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-5 shadow-sm sm:p-6 lg:p-8">
-          <p className="text-eyebrow uppercase text-brand-700 dark:text-brand-400">Товар</p>
-          <h1 className="mt-2 break-words text-page-title">{variant.name}</h1>
-          {variant.imageUrls[0] && <ProductImageViewer src={variant.imageUrls[0]} name={variant.name}/>}
-          {description && <CatalogDescription description={description}/>}
-          {specifications.length > 0 && <section className="mt-8" aria-labelledby="product-specifications-heading">
-            <h2 id="product-specifications-heading" className="text-xl font-bold">Характеристики</h2>
-            <dl className="mt-4 space-y-2 text-sm">
-              {specifications.map((item, index) => <div key={`${item.name}-${index}`}>
-                <dt className="inline text-slate-500 dark:text-slate-400">{item.name}: </dt>
-                <dd className="inline">{item.value}</dd>
-              </div>)}
-            </dl>
-            {category.slug === "shveller" && <ChannelSpecificationNote/>}
-          </section>}
-          {variant.imageUrls.slice(1).map((src, index) => <ProductImageViewer key={src} src={src} name={`${variant.name} — фото ${index + 2}`}/>)}
+    <div className="flex min-w-0 flex-col gap-4 lg:gap-5">
+      <CatalogListingNavigation category={category}/>
+      <div className="min-w-0 space-y-6 rounded-xl border border-slate-200 bg-white p-4 dark:border-slate-700 dark:bg-slate-900 sm:p-5 lg:space-y-8">
+        <div className="grid items-start gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,26rem)] lg:gap-8">
+          <div>
+            <h1 className="text-page-title">{variant.name}</h1>
+            <CatalogDescription description={[introduction, selection].filter(Boolean).join("\n\n")}/>
+          </div>
+          {variant.imageUrls.length > 0 && <div className="grid max-w-md gap-3">
+            {variant.imageUrls.map((src, index) => <ProductImageViewer key={src} src={src}
+              name={index ? `${variant.name} — фото ${index + 1}` : variant.name} presentation="card" framed expanded/>)}
+          </div>}
         </div>
-        <Link href={`/catalog/${category.slug}`} className="mt-6 inline-flex min-h-11 items-center font-semibold text-brand-700 dark:text-brand-400 hover:underline">
-          Вернуться к категории «{category.name}»
-        </Link>
+        {fields.length > 0 && <section className="@container space-y-4" aria-labelledby="product-specifications-heading">
+          <h2 id="product-specifications-heading" className="text-card-title">Характеристики</h2>
+          <CatalogPositionFields fields={fields}/>
+          {category.slug === "shveller" && <ChannelSpecificationNote/>}
+        </section>}
       </div>
+      <Link href={`/catalog/${category.slug}#variant-${variant.id}`} className="inline-flex min-h-11 w-fit items-center rounded-sm font-semibold text-brand-700 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-700 dark:text-brand-300">
+        Вернуться к позиции в каталоге
+      </Link>
     </div>
   </PageContainer>;
 }

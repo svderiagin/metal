@@ -1,8 +1,7 @@
 import {notFound, redirect} from "next/navigation";
 import type {Metadata} from "next";
-import {Suspense} from "react";
 import {Breadcrumbs} from "@/components/catalog/Breadcrumbs";
-import {CatalogSidebar} from "@/components/catalog/CatalogSidebar";
+import {CatalogListingNavigation} from "@/components/catalog/CatalogListingNavigation";
 import {CatalogBuyingGuide} from "@/components/catalog/CatalogBuyingGuide";
 import {CatalogProductDetail} from "@/components/catalog/CatalogProductDetail";
 import {ProductCatalogIntro} from "@/components/catalog/ProductCatalogIntro";
@@ -84,23 +83,23 @@ export default async function SubcategoryPage({params}: Props) {
       .filter((variant) => variant.subcategoryId === currentSubcategory.id);
 
     return (
-      <PageContainer className="py-5 sm:py-6 lg:py-7">
+      <PageContainer className="pt-5 pb-8 sm:pt-6 lg:pt-7 lg:pb-10">
         <Breadcrumbs items={[
           {label: "Каталог", href: "/catalog"},
           {label: category.name, href: `/catalog/${category.slug}`},
           {label: currentSubcategory.name},
         ]}/>
-        <div className="grid gap-5 lg:grid-cols-[244px_minmax(0,1fr)] lg:gap-6">
-          <Suspense fallback={<div className="h-96 animate-pulse rounded-xl bg-slate-200 dark:bg-slate-700"/>}>
-            <CatalogSidebar activeSlug={category.slug}/>
-          </Suspense>
-          <div className="min-w-0">
-            <ProductCatalogIntro key={currentSubcategory.id} title={currentSubcategory.name} label="Подкатегория"
-              summary={`Типов: ${productTypes.length}`} showProductTypesLink
-              detailsId={copy ? "subcategory-details-heading" : undefined} images={coverImages} description={intro}/>
+        <div className="flex min-w-0 flex-col gap-10">
+          <div className="flex min-w-0 flex-col gap-6 lg:gap-8">
+            <div className="flex min-w-0 flex-col gap-4 lg:gap-5">
+              <CatalogListingNavigation category={category} currentTypeId={productTypes.length === 1 ? productType.id : undefined}/>
+              <ProductCatalogIntro key={currentSubcategory.id} title={currentSubcategory.name} label="Подкатегория"
+                summary={`Типов: ${productTypes.length}`} showProductTypesLink
+                detailsId={copy ? "subcategory-details-heading" : undefined} images={coverImages} description={intro}/>
+            </div>
             <ProductTypeResults productTypes={productTypes} variants={variants}/>
-            {copy && <CatalogBuyingGuide headingId="subcategory-details-heading" title={copy.title} description={copy.details}/>}
           </div>
+          {copy && <CatalogBuyingGuide headingId="subcategory-details-heading" title={copy.title} description={copy.details} marginClassName=""/>}
         </div>
       </PageContainer>
     );

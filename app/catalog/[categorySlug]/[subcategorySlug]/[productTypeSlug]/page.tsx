@@ -1,14 +1,9 @@
 import type {Metadata} from "next";
 import {notFound, redirect} from "next/navigation";
-import {Breadcrumbs} from "@/components/catalog/Breadcrumbs";
-import {CatalogListingNavigation} from "@/components/catalog/CatalogListingNavigation";
-import {CatalogBuyingGuide} from "@/components/catalog/CatalogBuyingGuide";
-import {ProductVariantCatalog} from "@/components/catalog/ProductVariantCatalog";
-import {ProductCatalogIntro} from "@/components/catalog/ProductCatalogIntro";
+import {CatalogListingPage} from "@/components/catalog/CatalogListingPage";
 import {getCatalogCoverImages} from "@/lib/catalogCoverImages";
 import {catalogDescriptionCopy} from "@/data/catalog-description-copy";
 import {getSheetPresentation} from "@/lib/sheetPresentation";
-import {PageContainer} from "@/components/layout/PageContainer";
 import {
   getAllProductTypes,
   getCategoryById,
@@ -69,7 +64,6 @@ export default async function ProductTypePage({params}: Props) {
 
   const {category, productType} = resolved;
   if (category.directProducts) redirect(`/catalog/${category.slug}`);
-  const isOrdinaryVgp = productType.subcategoryId === "cat-trk-sub-1";
   const variants = getProductVariantsByTypeId(productType.id);
   const sheet = getSheetPresentation(productType.subcategoryId);
   const copy = catalogDescriptionCopy[productType.subcategoryId];
@@ -83,33 +77,10 @@ export default async function ProductTypePage({params}: Props) {
   const images = getCatalogCoverImages(productType.id,
     productType.imageUrl && !productType.imageUrl.endsWith(".svg") ? productType.imageUrl : "");
 
-  return (
-    <PageContainer className={isOrdinaryVgp ? "pt-5 pb-8 sm:pt-6 lg:pt-7 lg:pb-10" : "py-5 sm:py-6 lg:py-7"}>
-      <Breadcrumbs
-        items={[
-          {label: "Каталог", href: "/catalog"},
-          {label: category.name, href: `/catalog/${category.slug}`},
-          {label: title},
-        ]}
-      />
-
-      <div className={`flex flex-col ${isOrdinaryVgp ? "gap-6 lg:gap-8" : "gap-4"}`}>
-        <div className={`flex flex-col gap-4${isOrdinaryVgp ? " lg:gap-5" : ""}`}>
-          <CatalogListingNavigation category={category} currentTypeId={productType.id}/>
-          <ProductCatalogIntro key={productType.id} title={rebarHeadings[productType.subcategoryId] ?? title}
-            summary={`Позиций: ${variants.length}`}
-            detailsId={detailsTitle && details ? "product-type-details-heading" : undefined}
-            label={sheet || copy ? "Подкатегория" : "Тип продукции"} images={images} description={intro} coverName={title}/>
-        </div>
-        <section id="catalog-products" className={`flex scroll-mt-6 flex-col ${isOrdinaryVgp ? "gap-4" : "gap-5"}`} aria-label="Подбор и заказ продукции">
-          <ProductVariantCatalog variants={variants} categorySlug={category.slug}>
-            {detailsTitle && details && <CatalogBuyingGuide headingId="product-type-details-heading"
-              title={detailsTitle} description={details} marginClassName={isOrdinaryVgp ? "my-6" : undefined}/>}
-          </ProductVariantCatalog>
-        </section>
-      </div>
-    </PageContainer>
-  );
+  return <CatalogListingPage category={category} typeId={productType.id}
+    title={rebarHeadings[productType.subcategoryId] ?? title} coverName={title}
+    intro={intro} images={images} label={sheet || copy ? "Подкатегория" : "Тип продукции"} variants={variants}
+    guide={detailsTitle && details ? {title: detailsTitle, description: details} : undefined}/>;
 }
 
 function resolveProductType({

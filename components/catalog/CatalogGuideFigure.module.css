@@ -18,6 +18,8 @@
 }
 
 .round { border-radius: 50%; }
+.solid-round { border-width: 1px; border-radius: 50%; background: var(--diagram-fill); }
+.solid-round::after,
 .round::after {
   content: "";
   position: absolute;
@@ -25,6 +27,8 @@
   top: 50%;
   border-top: 1px dashed var(--diagram-line);
 }
+
+.solid-round::after { inset-inline: -4px; }
 
 .square,
 .rectangle { border-radius: var(--radius-sm); }
@@ -35,7 +39,45 @@
   background: var(--diagram-fill);
 }
 .strip { width: 3.625rem; height: 0.625rem; }
+.length {
+  width: 3.625rem;
+  height: 0.5rem;
+  border-width: 1px;
+  border-radius: 2px;
+  background: var(--diagram-fill);
+}
+.length::after {
+  content: "";
+  position: absolute;
+  inset: auto -2px 0.875rem;
+  block-size: 0.5rem;
+  border: solid var(--diagram-line);
+  border-width: 0 1px 1px;
+}
 .angle { border-width: 0 0 5px 5px; }
+.channel { border-width: 5px 0 5px 5px; width: 2.5rem; }
+.beam { border-width: 5px 0; width: 2.5rem; }
+.beam::after {
+  content: "";
+  position: absolute;
+  inset: 0 calc(50% - 2px);
+  background: var(--diagram-line);
+}
+.plate {
+  width: 2.5rem;
+  height: 2.875rem;
+  border-width: 1px 3px 3px 1px;
+  border-radius: var(--radius-sm);
+  background: var(--diagram-fill);
+}
+.profile-sheet {
+  width: 3.75rem;
+  height: 1.25rem;
+  border: 0;
+  background: var(--diagram-line);
+  clip-path: polygon(0 94%, 12% 94%, 25% 8%, 39% 8%, 51% 94%, 63% 94%, 76% 8%, 89% 8%, 100% 94%,
+    100% 100%, 97% 100%, 87% 19%, 78% 19%, 65% 100%, 49% 100%, 37% 19%, 27% 19%, 14% 100%, 0 100%);
+}
 
 .mesh {
   width: 3.125rem;
