@@ -13,8 +13,8 @@ function product(id: string): ProductVariant {
 }
 
 const rebar6 = product("rebar-a500c-6-coil");
-const rebar10 = product("rebar-a500c-10-bar");
-const rebar12 = product("rebar-a500c-12-bar");
+const rebar10 = product("rebar-a500c-10-coil");
+const rebar12 = product("rebar-a500c-12-coil");
 const vgp = product("local-258");
 const heavyBeam = product("local-115970");
 const beamHalfKopeck = product("local-110542");

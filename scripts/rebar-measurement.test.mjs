@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readProjectData} from './project-data.mjs';
 
 const {armaturaA500cVariants} = readProjectData('data/products/armaturaA500c.ts');
-const {metersToTons, tonsToMeters, calculateLineTotal, formatDecimal} = readProjectData('lib/orderMeasurement.ts');
+const {metersToTons, tonsToMeters, wholeLengthOrder, formatDecimal} = readProjectData('lib/orderMeasurement.ts');
 const {revalidateCartPrice} = readProjectData('lib/cartPricing.ts');
 // GOST 34028-2016, table 1: nominal mass per metre in kilograms.
 const masses = new Map([[6, .222], [8, .395], [10, .617], [12, .888],
@@ -36,29 +36,34 @@ test('all A500C rows use GOST nominal masses and reversible metre/tonne conversi
   }
 });
 
-test('12 mm: 100 metres weigh 0.0888 tonnes; display rounding never changes the cart total', () => {
+test('12 mm bars: requesting 100 metres prices nine 11.7 metre bars using their exact mass', () => {
   const row = armaturaA500cVariants.find(r => r.diameterMm === 12 && r.form === 'bar');
-  assert.equal(metersToTons(100, row.weightPerMeterKg), .0888);
-  assert.equal(formatDecimal(.0888, 2), '0.09');
-  assert.equal(calculateLineTotal(.0888, row.pricePerTon), 6073.92);
-  const priced = revalidateCartPrice(row, {quantity: 100, measurement: {
-    inputMode: 'meter', meters: 100, weightTons: .09, pricePerTon: 0, estimatedTotal: 0,
+  const order = wholeLengthOrder(row, 100, 'meter');
+  assert.equal(order.pieces, 9);
+  assert.equal(order.meters, 105.3);
+  assert.ok(Math.abs(order.weightTons - 0.0935064) < 1e-12);
+  const priced = revalidateCartPrice(row, {quantity: order.meters, measurement: {
+    inputMode: 'meter', meters: order.meters, weightTons: 0.09,
   }});
-  assert.equal(priced.measurement.weightTons, .0888);
-  assert.equal(priced.estimatedTotal, 6073.92);
-  assert.equal(formatDecimal(tonsToMeters(1, row.weightPerMeterKg), 2), '1126.13');
+  assert.equal(priced.invalidReason, undefined);
+  assert.equal(priced.measurement.weightTons, order.weightTons);
+  assert.equal(priced.estimatedTotal, 6395.84);
 });
 
-test('16 mm uses 1.578 kg/m and reprices saved orders with corrected nominal mass', () => {
-  const row = armaturaA500cVariants.find(r => r.diameterMm === 16);
-  const priced = revalidateCartPrice(row, {quantity: 100, measurement: {
-    inputMode: 'meter', meters: 100, weightTons: .158, pricePerTon: row.pricePerTon, estimatedTotal: 10712.4,
+test('16 mm bars: saved whole lengths use the current linear mass for authoritative pricing', () => {
+  const row = armaturaA500cVariants.find(r => r.diameterMm === 16 && r.form === 'bar');
+  const meters = 11.7;
+  const tons = 0.0184626;
+  const priced = revalidateCartPrice(row, {quantity: meters, measurement: {
+    inputMode: 'meter', meters, weightTons: meters * 1.58 / 1000,
   }});
-  assert.ok(Math.abs(priced.measurement.weightTons - .1578) < 1e-12);
-  assert.equal(priced.estimatedTotal, 10698.84);
-  const byTons = revalidateCartPrice(row, {quantity: 1, measurement: {
-    inputMode: 'ton', meters: 1000 / 1.58, weightTons: 1, pricePerTon: row.pricePerTon, estimatedTotal: row.pricePerTon,
+  assert.equal(priced.invalidReason, undefined);
+  assert.ok(Math.abs(priced.measurement.weightTons - tons) < 1e-12);
+  assert.equal(priced.estimatedTotal, 1251.76);
+  const byTons = revalidateCartPrice(row, {quantity: tons, measurement: {
+    inputMode: 'ton', meters: tons * 1000 / 1.58, weightTons: tons,
   }});
-  assert.equal(byTons.measurement.meters, 1000 / 1.578);
-  assert.equal(byTons.estimatedTotal, row.pricePerTon);
+  assert.equal(byTons.invalidReason, undefined);
+  assert.equal(byTons.measurement.meters, meters);
+  assert.equal(byTons.estimatedTotal, priced.estimatedTotal);
 });

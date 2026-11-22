@@ -4,23 +4,48 @@ import {isDemonstrationProduct} from "./catalogOffer";
 import {MAX_ORDER_TONS} from "./constants";
 import {isWholePipeVariant} from "./pipeFamily";
 
+export function requiresWholeLengthOrder(product: ProductVariant): boolean {
+  return isWholePipeVariant(product) || (product.categoryId === "cat-arm" && product.form === "bar"
+    && !isDemonstrationProduct(product) && product.lengthRangeMeters === undefined
+    && product.lengthMeters !== undefined && isPositiveFinite(product.lengthMeters));
+}
+
+function stockLengthMeters(pieces: number, lengthMeters: number) {
+  // Whole-millimetre catalog lengths can be multiplied exactly before converting
+  // back to metres. This matters when a whole order costs exactly half a kopeck.
+  const millimeters = Math.round(lengthMeters * 1000);
+  const totalMillimeters = millimeters * pieces;
+  return lengthMeters === millimeters / 1000 && Number.isSafeInteger(totalMillimeters)
+    ? totalMillimeters / 1000 : lengthMeters * pieces;
+}
+
+export function sameMeasuredQuantity(value: number, reference: number) {
+  return Math.abs(value - reference) <= Math.abs(reference) * Number.EPSILON * 4;
+}
+
+function stockPieceRatio(meters: number, length: number) {
+  const ratio = meters / length;
+  const nearest = Math.round(ratio);
+  return sameMeasuredQuantity(ratio, nearest) ? nearest : ratio;
+}
+
 // Input limits are shared by the catalog, cart editor and authoritative repricing.
 export function getMeasurementQuantityOptions(product: ProductVariant, mode: OrderInputMode) {
   const length = product.lengthMeters;
   const mass = isDemonstrationProduct(product) ? undefined : product.weightPerMeterKg;
-  const wholePipes = isWholePipeVariant(product) && mass !== undefined && isPositiveFinite(mass) && length !== undefined && isPositiveFinite(length);
-  const minimumMeters = wholePipes ? length : 0.01;
+  const wholeLengths = requiresWholeLengthOrder(product) && mass !== undefined && isPositiveFinite(mass) && length !== undefined && isPositiveFinite(length);
+  const minimumMeters = wholeLengths ? length : 0.01;
   const maximumTons = MAX_ORDER_TONS;
   const convertedMaximum = mass !== undefined && isPositiveFinite(mass) ? tonsToMeters(maximumTons, mass) : null;
   const maximumMeters = convertedMaximum !== null
-    ? wholePipes ? Math.floor(convertedMaximum / length + 1e-9) * length : convertedMaximum
+    ? wholeLengths ? stockLengthMeters(Math.floor(stockPieceRatio(convertedMaximum, length)), length) : convertedMaximum
     : 9999;
   if (mode === "meter") {
-    return {minimum: minimumMeters, maximum: maximumMeters, decimalPlaces: wholePipes ? undefined : 2};
+    return {minimum: minimumMeters, maximum: maximumMeters, decimalPlaces: wholeLengths ? undefined : 2};
   }
   if (mass !== undefined && isPositiveFinite(mass)) {
     const minimumTons = metersToTons(minimumMeters, mass);
-    const wholeMaximumTons = wholePipes ? metersToTons(maximumMeters, mass) : maximumTons;
+    const wholeMaximumTons = wholeLengths ? metersToTons(maximumMeters, mass) : maximumTons;
     // Keep one physical range; remove binary noise without a three-decimal tonne step.
     if (minimumTons !== null && wholeMaximumTons !== null) {
       return {minimum: Number(minimumTons.toPrecision(15)), maximum: Number(wholeMaximumTons.toPrecision(15)), decimalPlaces: undefined};
@@ -47,6 +72,22 @@ export function tonsToMeters(tons: number, weightPerMeterKg: number) {
   // Mass (t) × 1000 kg per tonne / nominal linear mass (kg/m).
   const result = tons * 1000 / weightPerMeterKg;
   return Number.isFinite(result) ? result : null;
+}
+
+// Round up to whole stock lengths, preserving the exact mass used for pricing.
+export function wholeLengthOrder(product: ProductVariant, quantity: number, mode: OrderInputMode) {
+  const length = product.lengthMeters;
+  const mass = product.weightPerMeterKg;
+  if (!Number.isFinite(quantity) || quantity < 0 || !length || !Number.isFinite(length) || length <= 0
+    || !mass || !Number.isFinite(mass) || mass <= 0) return null;
+  const requestedMeters = mode === "meter" ? quantity : tonsToMeters(quantity, mass);
+  if (requestedMeters === null) return null;
+  const rounded = Math.ceil(stockPieceRatio(requestedMeters, length));
+  const pieces = quantity > 0 ? Math.max(1, rounded) : 0;
+  if (!Number.isSafeInteger(pieces)) return null;
+  const meters = stockLengthMeters(pieces, length);
+  const weightTons = metersToTons(meters, mass);
+  return weightTons === null ? null : {pieces, meters, weightTons};
 }
 
 export function calculateLineTotal(quantity: number, unitPrice: number) {

@@ -6,9 +6,8 @@ import {addCartItem, updateCartItem, updateCartPieceOrder} from "../../lib/cartM
 import {createCartLines, normalizeCartItems} from "../../lib/cart";
 import {revalidateCartPrice} from "../../lib/cartPricing";
 import {calculateLineTotal, calculateMeasuredLineTotal, calculatePieceLineTotal,
-  getCartMeasurementQuantityOptions, getMeasurementQuantityOptions, tonsToMeters} from "../../lib/orderMeasurement";
+  getCartMeasurementQuantityOptions, getMeasurementQuantityOptions, requiresWholeLengthOrder, tonsToMeters} from "../../lib/orderMeasurement";
 import {isDemonstrationProduct} from "../../lib/catalogOffer";
-import {isWholePipeVariant} from "../../lib/pipeFamily";
 import {parseCreateOrderInput} from "../../lib/server/validation";
 import {createTrustedOrder} from "../../lib/server/orders";
 import {createOrderInput} from "../../lib/checkout";
@@ -108,6 +107,36 @@ test("VGP rounds requests to whole pipes while both fields share the last legal 
   assert.equal(createCartLines(maximum)[0].invalidReason, undefined);
   assert.equal(updateCartItem(maximum, product, 780469, "meter"), maximum);
   assert.equal(updateCartItem(maximum, product, 999, "ton"), maximum);
+});
+
+test("a previously saved partial bar remains visible until the buyer accepts a whole bar", () => {
+  const product = fixture("rebar-a500c-18-bar");
+  const previous = normalizeCartItems([{productId: product.id, quantity: 1, measurement: {
+    inputMode: "meter", meters: 1, weightTons: 0.001998, pricePerTon: 68400, estimatedTotal: 136.66,
+  }}]);
+  const line = createCartLines(previous)[0];
+  assert.equal(line.measurement?.meters, 1);
+  assert.ok(line.invalidReason);
+  assert.equal(line.estimatedTotal, 0);
+  assert.equal(createTrustedOrder(orderInput(previous)), null);
+
+  const corrected = updateCartItem(previous, product, 1, "meter");
+  assert.equal(corrected[0].quantity, 11.7);
+  close(corrected[0].measurement?.weightTons, 0.0233766);
+  assert.equal(createCartLines(corrected)[0].estimatedTotal, 1598.96);
+  const exact = updateCartItem(corrected, product, 0.0233766, "ton");
+  assert.equal(exact[0].measurement?.meters, 11.7);
+  const next = updateCartItem(exact, product, 0.023377, "ton");
+  assert.equal(next[0].measurement?.meters, 23.4);
+  const trusted = createTrustedOrder(orderInput(next));
+  assert.ok(trusted);
+  assert.equal(trusted.totalAmount, 3197.92);
+  assert.equal(trusted.items[0].weightPerMeterKg, 1.998);
+
+  const legacyTons = (quantity: number) => [{productId: product.id, quantity}];
+  assert.ok(createCartLines(legacyTons(0.02))[0].invalidReason);
+  assert.equal(createTrustedOrder(orderInput(legacyTons(0.02))), null);
+  assert.equal(createTrustedOrder(orderInput(legacyTons(0.0233766)))?.totalAmount, 1598.96);
 });
 
 test("both rebar fields accept 999 tonnes and former metre-cap volumes but reject more than 999 tonnes", () => {
@@ -210,7 +239,7 @@ test("all purchasable measured variants share their physical caps across cart an
     assert.ok(tonOptions.maximum > 0 && tonOptions.maximum <= 999, product.id);
     close(tonsToMeters(tonOptions.minimum, product.weightPerMeterKg!), meterOptions.minimum);
     close(tonsToMeters(tonOptions.maximum, product.weightPerMeterKg!), meterOptions.maximum);
-    if (isWholePipeVariant(product)) {
+    if (requiresWholeLengthOrder(product)) {
       close(meterOptions.maximum / product.lengthMeters!, Math.round(meterOptions.maximum / product.lengthMeters!));
       assert.ok((meterOptions.maximum + product.lengthMeters!) * product.weightPerMeterKg! / 1000 > 999, product.id);
     } else {
@@ -238,12 +267,12 @@ test("all purchasable measured variants share their physical caps across cart an
       assert.equal(trusted.items[0].unitPrice, product.pricePerTon, product.id);
       assert.equal(trusted.totalAmount, line.estimatedTotal, product.id);
     }
-    const extraMeters = isWholePipeVariant(product) ? product.lengthMeters! : 1;
+    const extraMeters = requiresWholeLengthOrder(product) ? product.lengthMeters! : 1;
     const oversizedMeters = meterOptions.maximum + extraMeters;
     const oversizedTons = oversizedMeters * product.weightPerMeterKg! / 1000;
     assert.equal(updateCartItem(fromTons, product, oversizedMeters, "meter"), fromTons, product.id);
     assert.equal(updateCartItem(fromTons, product, oversizedTons, "ton"), fromTons, product.id);
-    if (!isWholePipeVariant(product)) {
+    if (!requiresWholeLengthOrder(product)) {
       const justAbove = 999.000000001;
       assert.equal(updateCartItem(fromTons, product, justAbove, "ton"), fromTons, product.id);
       const parsed = parseCreateOrderInput(orderInput([{productId: product.id, quantity: justAbove,

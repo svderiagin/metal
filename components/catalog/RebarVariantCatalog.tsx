@@ -8,6 +8,7 @@ import {hasConfirmedProfilePipePrice, profilePipeSize} from "@/lib/profilePipe";
 import {isGalvanizedElectroweldedVariant} from "@/lib/pipeFamily";
 import {formatNumber} from "@/lib/numberFormat";
 import {isDemonstrationProduct} from "@/lib/catalogOffer";
+import {requiresWholeLengthOrder} from "@/lib/orderMeasurement";
 
 import {FilterPanel} from "./FilterPanel";
 import {CatalogVariantTable, type CatalogColumn} from "./CatalogVariantLayout";
@@ -143,9 +144,6 @@ function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
   const electroweldedNote = isGalvanized
     ? <>Для пересчёта используется масса стальной трубы <strong>без цинкового покрытия</strong> из <ElectroweldedMassTable>таблицы 1 ГОСТ 10704-91</ElectroweldedMassTable>. {wholePipeOrderNote}</>
     : <>Масса и стоимость заказа по длине рассчитываются по <strong>теоретической массе</strong> из <ElectroweldedMassTable>таблицы 1 ГОСТ 10704-91</ElectroweldedMassTable>.</>;
-  const orderNote = isVgp
-    ? wholePipeOrderNote
-    : isElectrowelded ? electroweldedNote : null;
   const [query, setQuery] = useState("");
   const deferredQuery = useDeferredValue(query);
   const resultsPending = query !== deferredQuery;
@@ -211,6 +209,11 @@ function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
       return compareSizes(left, right);
     });
   }, [hits, deferredQuery, availability, diameter, form, length, maximumPrice, minimumPrice, sort, variants, isBeam, isVgp, isProfile, isElectrowelded]);
+  const orderNote = isVgp ? wholePipeOrderNote : isElectrowelded ? electroweldedNote
+    : kind === "rebar" && results.some(requiresWholeLengthOrder) ? <>
+      <strong>Прутки поставляются целиком.</strong> По введённой длине или массе количество прутков округляется вверх.
+    </> : null;
+
   function resetFilters() {
     setQuery("");
     setDiameter("");

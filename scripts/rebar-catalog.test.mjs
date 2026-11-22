@@ -5,7 +5,7 @@ import {readProjectData} from './project-data.mjs';
 const {productVariants} = readProjectData('data/products/index.ts');
 const {normalizeRebarVariant} = readProjectData('lib/rebar.ts');
 const {revalidateCartPrice} = readProjectData('lib/cartPricing.ts');
-const {metersToTons, calculateLineTotal} = readProjectData('lib/orderMeasurement.ts');
+const {metersToTons, calculateMeasuredLineTotal} = readProjectData('lib/orderMeasurement.ts');
 
 test('every remaining rebar category retains all rows and supports the reference table', () => {
   const counts = new Map([['cat-arm-sub-2', 2], ['cat-arm-sub-3', 9], ['cat-arm-sub-4', 15]]);
@@ -20,9 +20,11 @@ test('every remaining rebar category retains all rows and supports the reference
       assert.ok(row.steelGrade);
       assert.ok(row.lengthMeters === undefined || row.lengthMeters <= 18);
       if (row.price !== null) assert.equal(row.pricePerTon, row.price);
-      const tons = metersToTons(100, row.weightPerMeterKg);
-      const priced = revalidateCartPrice(row, {quantity: 100, measurement: {
-        inputMode: 'meter', meters: 100, weightTons: tons,
+      const meters = row.form === 'bar' ? row.lengthMeters : 100;
+      assert.ok(meters > 0, row.id);
+      const tons = metersToTons(meters, row.weightPerMeterKg);
+      const priced = revalidateCartPrice(row, {quantity: meters, measurement: {
+        inputMode: 'meter', meters, weightTons: tons,
         pricePerTon: row.pricePerTon ?? 0, estimatedTotal: 0,
       }});
       if (row.quoteOnly || row.demo) {
@@ -30,7 +32,7 @@ test('every remaining rebar category retains all rows and supports the reference
         assert.equal(priced.estimatedTotal, 0);
       } else {
         assert.equal(priced.invalidReason, undefined);
-        assert.equal(priced.estimatedTotal, calculateLineTotal(tons, row.pricePerTon));
+        assert.equal(priced.estimatedTotal, calculateMeasuredLineTotal(meters, row.weightPerMeterKg, row.pricePerTon));
       }
     }
   }

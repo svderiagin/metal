@@ -3,7 +3,7 @@ import {beamReferenceMassKg} from "../../lib/beam";
 import {getAllProductVariants} from "../../lib/catalog";
 import {isDemonstrationProduct} from "../../lib/catalogOffer";
 import {isProfilePipeVariant} from "../../lib/profilePipe";
-import {isWholePipeVariant} from "../../lib/pipeFamily";
+import {requiresWholeLengthOrder} from "../../lib/orderMeasurement";
 import type {ProductVariant} from "../../types/product";
 import {expect, productPath, test, visibleProduct} from "../browser";
 
@@ -14,9 +14,12 @@ const formatTons = new Intl.NumberFormat("ru-RU", {useGrouping: false, maximumFr
 function maximumMeasurement(variant: ProductVariant) {
   const mass = isDemonstrationProduct(variant) ? undefined : variant.weightPerMeterKg ?? beamReferenceMassKg(variant);
   if (!mass) return {meters: null, tons: 999};
-  const pipe = isWholePipeVariant(variant) ? variant.lengthMeters : undefined;
-  const meters = pipe ? Math.floor(999_000 / (mass * pipe)) * pipe : 999_000 / mass;
-  return {meters, tons: pipe ? meters * mass / 1_000 : 999};
+  const pieceLength = requiresWholeLengthOrder(variant) ? variant.lengthMeters : undefined;
+  if (!pieceLength) return {meters: 999_000 / mass, tons: 999};
+  const lengthMm = Math.round(pieceLength * 1_000);
+  const pieces = Math.floor(999_000_000 / (mass * lengthMm));
+  const meters = pieces * lengthMm / 1_000;
+  return {meters, tons: Number((meters * mass / 1_000).toPrecision(15))};
 }
 
 async function expectFits(input: Locator) {

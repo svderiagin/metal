@@ -3,8 +3,6 @@
 import {useEffect, useState, type ReactNode} from "react";
 import {beamProfile, beamKind, beamReferenceMassKg, beamStandardLabel} from "@/lib/beam";
 import {vgpSize} from "@/lib/vgp";
-import {wholePipeOrder} from "@/lib/wholePipeOrder";
-import {isWholePipeVariant} from "@/lib/pipeFamily";
 import {QuoteRequestButton} from "./QuoteRequestButton";
 import {formatQuoteProductName} from "@/lib/quoteRequest";
 import filterStyles from "./FilterPanel.module.css";
@@ -17,7 +15,7 @@ import {ProfilePipeVariantItem} from "./ProfilePipeVariantItem";
 import {useCart} from "@/hooks/useCart";
 import {formatCurrency, formatUnitPrice} from "@/lib/currency";
 import {formatNumber} from "@/lib/numberFormat";
-import {calculateLineTotal, calculateMeasuredLineTotal, getMeasurementQuantityOptions, metersToTons, tonsToMeters} from "@/lib/orderMeasurement";
+import {calculateLineTotal, calculateMeasuredLineTotal, getMeasurementQuantityOptions, metersToTons, requiresWholeLengthOrder, tonsToMeters, wholeLengthOrder} from "@/lib/orderMeasurement";
 import {constrainOrderQuantityInput, correctOrderQuantity, formatCatalogNumber, parseOrderQuantity} from "@/lib/catalogNumberInput";
 import {formatMeasuredQuantity, formatQuantityForInput, quantityTransferHandlers} from "@/lib/cartQuantityInput";
 import type {OrderInputMode} from "@/types/cart";
@@ -56,8 +54,8 @@ function TonnageMeasuredVariantItem({
   const isRebar = kind === "rebar";
   const isVgp = kind === "vgp";
   const isPipe = isVgp || kind === "pipe";
-  const wholePipe = isWholePipeVariant(variant);
-  const roundToWholePipes = wholePipe && hasMass && Number.isFinite(variant.lengthMeters) && (variant.lengthMeters ?? 0) > 0;
+  const wholeLengths = requiresWholeLengthOrder(variant);
+  const roundToWholeLengths = wholeLengths && hasMass && Number.isFinite(variant.lengthMeters) && (variant.lengthMeters ?? 0) > 0;
   const [editingTons, setEditingTons] = useState(false);
   const cartLine = lines.find((line) => line.productId === variant.id);
   const savedMeasurement = cartLine?.measurement;
@@ -80,24 +78,26 @@ function TonnageMeasuredVariantItem({
   // Calculate from the edited field, preserving precision before display rounding.
   const enteredMeters = draft === null ? savedMeters : readQuantity(meters, "meter");
   const enteredTons = draft === null ? savedTons : readQuantity(tons, "ton");
-  const pipeQuantity = inputMode === "meter" ? enteredMeters : enteredTons;
-  const pipeOrder = roundToWholePipes && pipeQuantity !== null ? wholePipeOrder(variant, pipeQuantity, inputMode) : null;
-  const parsedMeters = roundToWholePipes ? pipeOrder?.meters ?? null : !hasMass ? enteredMeters : inputMode === "meter" ? enteredMeters : enteredTons === null ? null : tonsToMeters(enteredTons, mass);
-  const parsedTons = roundToWholePipes ? pipeOrder?.weightTons ?? null : !hasMass ? enteredTons : inputMode === "ton" ? enteredTons : enteredMeters === null ? null : metersToTons(enteredMeters, mass);
+  const requestedQuantity = inputMode === "meter" ? enteredMeters : enteredTons;
+  const wholeOrder = roundToWholeLengths && requestedQuantity !== null ? wholeLengthOrder(variant, requestedQuantity, inputMode) : null;
+  const parsedMeters = roundToWholeLengths ? wholeOrder?.meters ?? null : !hasMass ? enteredMeters : inputMode === "meter" ? enteredMeters : enteredTons === null ? null : tonsToMeters(enteredTons, mass);
+  const parsedTons = roundToWholeLengths ? wholeOrder?.weightTons ?? null : !hasMass ? enteredTons : inputMode === "ton" ? enteredTons : enteredMeters === null ? null : metersToTons(enteredMeters, mass);
   // A reference conversion is displayed in the opposite field. The cart and
   // quote still receive only the quantity entered for this supplier's offer.
   const referenceTons = referenceMass !== undefined && parsedMeters !== null ? metersToTons(parsedMeters, referenceMass) : null;
   const referenceMeters = referenceMass !== undefined && parsedTons !== null ? tonsToMeters(parsedTons, referenceMass) : null;
   const pricePerTon = variant.pricePerTon;
   const needsQuote = pricePerTon === undefined || variant.quoteOnly || variant.priceQualifier === "from"
-    || (wholePipe && !roundToWholePipes) || (!hasMass && enteredMeters !== null && enteredMeters > 0);
+    || (wholeLengths && !roundToWholeLengths) || (!hasMass && enteredMeters !== null && enteredMeters > 0);
   const canPurchase = !needsQuote && (variant.inStock || (variant.imported && variant.availability === "UNKNOWN"));
   const estimatedTotal = variant.quoteOnly ? null
     : referenceMass !== undefined && parsedMeters !== null && pricePerTon !== undefined ? calculateMeasuredLineTotal(parsedMeters, referenceMass, pricePerTon)
     : estimateTotal(parsedMeters, parsedTons);
-  const missingBeamMass = kind === "beam" && !hasMass && referenceMass === undefined;
-  const needsMassForLength = missingBeamMass && parsedMeters !== null && parsedMeters > 0;
-  const totalLabel = needsMassForLength ? "Для расчёта нужна масса 1 м"
+  const missingMass = (kind === "beam" || isRebar) && !hasMass && referenceMass === undefined;
+  const needsMassForLength = missingMass && parsedMeters !== null && parsedMeters > 0;
+  const unconfirmedRebarLength = isRebar && isDemonstrationProduct(variant) && needsMassForLength;
+  const totalLabel = unconfirmedRebarLength ? "Длина поставки и масса 1 м уточняются"
+    : needsMassForLength ? "Для расчёта нужна масса 1 м"
     : variant.quoteOnly || pricePerTon === undefined ? "По запросу" : estimatedTotal === null ? "Укажите объём" : `${referenceTons !== null ? "≈ " : ""}${variant.priceQualifier === "from" ? "от " : ""}${formatCurrency(estimatedTotal)}`;
   const totalClassName = estimatedTotal === null
     ? "text-xs font-normal text-slate-500 dark:text-slate-400"
@@ -132,7 +132,7 @@ function TonnageMeasuredVariantItem({
     if (invalidDraft) feedbackText = "Проверьте введённое значение.";
     else if (hasChanges && !shouldRemove) feedbackText = activeValue.trim() ? unsavedMessage : enterQuantityMessage;
   }
-  const pieceCount = !invalidDraft && pipeOrder && pipeOrder.pieces > 0 ? `${pipeOrder.pieces} шт.` : "";
+  const pieceCount = !invalidDraft && wholeOrder && wholeOrder.pieces > 0 ? `${wholeOrder.pieces} шт.` : "";
   const status = <>
     {pieceCount && <span className="block">{pieceCount}</span>}
     {feedbackText && <span className={feedbackText === unsavedMessage ? "block whitespace-nowrap" : "block"}>{feedbackText}</span>}
@@ -144,7 +144,7 @@ function TonnageMeasuredVariantItem({
 
   function estimateTotal(orderMeters: number | null, orderTons: number | null) {
     if (orderTons === null || pricePerTon === undefined) return null;
-    return orderMeters !== null && hasMass && (inputMode === "meter" || roundToWholePipes)
+    return orderMeters !== null && hasMass && (inputMode === "meter" || roundToWholeLengths)
       ? calculateMeasuredLineTotal(orderMeters, mass, pricePerTon)
       : calculateLineTotal(orderTons, pricePerTon);
   }
@@ -191,12 +191,12 @@ function TonnageMeasuredVariantItem({
     const exactQuantity = constrained.capped ? options.maximum
       : sameDisplayedQuantity ? previousExact ?? undefined : undefined;
     const parsed = exactQuantity ?? validQuantity(value, mode);
-    const whole = roundToWholePipes && parsed !== null ? wholePipeOrder(variant, parsed, mode) : null;
+    const whole = roundToWholeLengths && parsed !== null ? wholeLengthOrder(variant, parsed, mode) : null;
     if (mode === "meter") {
-      const converted = parsed === null ? null : roundToWholePipes ? whole?.weightTons ?? null : metersToTons(parsed, mass);
+      const converted = parsed === null ? null : roundToWholeLengths ? whole?.weightTons ?? null : metersToTons(parsed, mass);
       setDraft({inputMode: mode, meters: value, tons: hasMass ? displayQuantity(converted, "ton") : "", exactQuantity});
     } else {
-      const converted = parsed === null ? null : roundToWholePipes ? whole?.meters ?? null : tonsToMeters(parsed, mass);
+      const converted = parsed === null ? null : roundToWholeLengths ? whole?.meters ?? null : tonsToMeters(parsed, mass);
       setDraft({inputMode: mode, tons: value, meters: hasMass ? displayQuantity(converted, "meter") : "", exactQuantity});
     }
   }
@@ -215,14 +215,14 @@ function TonnageMeasuredVariantItem({
     });
     const quantity = parseOrderQuantity(corrected.value);
     if (quantity === null) return null;
-    const whole = roundToWholePipes ? wholePipeOrder(variant, quantity, mode) : null;
-    const nextMeters = roundToWholePipes ? whole?.meters ?? null : mode === "meter" ? quantity : hasMass ? tonsToMeters(quantity, mass) : null;
-    const nextTons = roundToWholePipes ? whole?.weightTons ?? null : mode === "ton" ? quantity : hasMass ? metersToTons(quantity, mass) : null;
+    const whole = roundToWholeLengths ? wholeLengthOrder(variant, quantity, mode) : null;
+    const nextMeters = roundToWholeLengths ? whole?.meters ?? null : mode === "meter" ? quantity : hasMass ? tonsToMeters(quantity, mass) : null;
+    const nextTons = roundToWholeLengths ? whole?.weightTons ?? null : mode === "ton" ? quantity : hasMass ? metersToTons(quantity, mass) : null;
     const exactQuantity = whole ? mode === "meter" ? whole.meters : whole.weightTons : quantity;
     return {quantity: exactQuantity, meters: nextMeters, tons: nextTons,
       draft: {inputMode: mode, meters: displayQuantity(nextMeters, "meter"),
         tons: displayQuantity(nextTons, "ton"), exactQuantity},
-      message: roundToWholePipes ? undefined : corrected.message};
+      message: roundToWholeLengths ? undefined : corrected.message};
   }
 
   function settleQuantity(mode: OrderInputMode) {
@@ -278,8 +278,9 @@ function TonnageMeasuredVariantItem({
 
   const actionSizeClassName = view === "card" ? "w-full" : tableStyles.tableAction;
   const action = !canPurchase && !shouldRemove && !removed ? (
-    <QuoteRequestButton label={needsQuote ? "Запросить цену" : "Под заказ"}
-      order={{product: formatQuoteProductName(variant), meters: invalidDraft ? null : parsedMeters, tons: invalidDraft ? null : parsedTons}}
+    <QuoteRequestButton label={unconfirmedRebarLength ? "Запросить расчёт" : needsQuote ? "Запросить цену" : "Под заказ"}
+      order={{product: formatQuoteProductName(variant), meters: invalidDraft ? null : parsedMeters, tons: invalidDraft ? null : parsedTons,
+        ...(isRebar && wholeOrder && !invalidDraft ? {quantity: wholeOrder.pieces, unit: "шт."} : {})}}
       className={`${filterStyles.quoteButton} ${actionSizeClassName} px-3`}/>
   ) : (
     <Button type="button" disabled={!hydrated || isSaved || removed || !usableDraft || (!canPurchase && !shouldRemove)} onClick={addToCart}
@@ -292,7 +293,7 @@ function TonnageMeasuredVariantItem({
   const isVgpTable = isVgp && view === "table";
   const statusId = `measured-order-status-${view}-${variant.id}`;
   const meterInput = <OrderInput label={`Длина заказа для ${variant.name}`}
-    placeholder={missingBeamMass && parsedTons !== null && parsedTons > 0 ? "—" : "0"}
+    placeholder={missingMass && parsedTons !== null && parsedTons > 0 ? "—" : "0"}
     className={isVgpTable ? tableStyles.vgpMeterInput : undefined}
     visibleLabel={showOrderLabels ? "Заказ, м" : undefined} value={meters || displayQuantity(referenceMeters, "meter")} invalid={invalidDraft && inputMode === "meter"} statusId={statusId}
     onChange={value => updateQuantityField("meter", value)} onBlur={() => settleQuantity("meter")} onRejectedTransfer={showError}/>;

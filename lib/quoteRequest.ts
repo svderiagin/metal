@@ -29,7 +29,11 @@ export function buildQuoteMessage(order: QuoteOrder) {
   const positive = (value: number | null | undefined): value is number => typeof value === "number" && Number.isFinite(value) && value > 0;
   const format = (value: number, digits: number) => new Intl.NumberFormat("ru-RU", {maximumFractionDigits: digits}).format(value);
   if (positive(order.meters)) lines.push(`Общая длина: ${format(order.meters, 2)} м`);
-  if (positive(order.tons)) lines.push(`Вес: ${format(order.tons, order.tons < 0.001 ? 9 : 3)} т`);
+  if (positive(order.tons)) {
+    // Keep the calculated weight consistent with the stated number of stock lengths.
+    const wholeLengths = positive(order.meters) && positive(order.quantity) && order.unit === "шт.";
+    lines.push(`Вес: ${format(order.tons, wholeLengths || order.tons < 0.001 ? 9 : 3)} т`);
+  }
   if (positive(order.quantity) && order.unit) lines.push(`Количество: ${format(order.quantity, 3)} ${order.unit}`);
   return lines.join("\n");
 }

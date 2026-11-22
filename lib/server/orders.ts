@@ -1,7 +1,7 @@
 import {randomInt} from "node:crypto";
 import {getProductVariantById} from "@/lib/catalog";
 import {revalidateCartPrice} from "@/lib/cartPricing";
-import {isWholePipeVariant} from "@/lib/pipeFamily";
+import {requiresWholeLengthOrder} from "@/lib/orderMeasurement";
 import {FIRST_INVOICE_NUMBER} from "@/lib/invoiceNumber";
 import type {CreateOrderInput, Order, OrderItem, PaymentStatus} from "@/types/order";
 import type {InvoiceEmailStatus} from "@/types/invoice";
@@ -123,7 +123,7 @@ export function createTrustedOrder(input: CreateOrderInput, lookupProduct = getP
         productId: product.id,
         quantity: measurement.inputMode === "meter" ? meters : weightTons,
         measurement: {inputMode: measurement.inputMode, meters, weightTons},
-        ...(measurement.inputMode === "meter" || isWholePipeVariant(product) ? {weightPerMeterKg: product.weightPerMeterKg} : {}),
+        ...(measurement.inputMode === "meter" || requiresWholeLengthOrder(product) ? {weightPerMeterKg: product.weightPerMeterKg} : {}),
         name: product.name,
         sku: product.sku,
         unitPrice: measurement.pricePerTon,

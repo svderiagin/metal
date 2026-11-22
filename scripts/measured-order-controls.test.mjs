@@ -68,6 +68,9 @@ function setup(id, kind = 'beam') {
       CatalogVariantSpecifications: 'specifications',
       CatalogVariantOrder: ({quantity, secondaryQuantity, action, total}) => jsx('order', {children: [quantity, secondaryQuantity, total, action]}),
     },
+    './CatalogPositionDetails': {CatalogPositionDetails: 'details'},
+    './CatalogGuideFigure': {CatalogGuideFigure: 'figure'},
+    './PipePositionDetails': {PipePositionDetails: 'details'},
     './ProfilePipeVariantItem': {ProfilePipeVariantItem: () => null},
     './FilterPanel.module.css': {default: {}}, './RebarTable.module.css': {default: {}},
   };
@@ -165,8 +168,7 @@ test('existing generic tonne carts hydrate into measured controls and rebar keep
   h.change(0, '200'); h.render().action.onClick();
   assert.equal(h.cart.lines.length, 1);
   assert.equal(h.cart.lines[0].measurement.weightTons, 8.84);
-  const rebar = productVariants.find(p => p.categoryId === 'cat-arm' && p.diameterMm === 6 && p.pricePerTon && !p.quoteOnly);
-  const r = setup(rebar.id, 'rebar'); r.change(0, '100');
+  const r = setup('rebar-a500c-6-coil', 'rebar'); r.change(0, '100');
   assert.equal(r.render().inputs[1].value, '0,0222');
   r.render().action.onClick();
   assert.ok(Math.abs(r.cart.lines[0].measurement.weightTons - 0.0222) < 1e-12);

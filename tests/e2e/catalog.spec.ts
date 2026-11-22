@@ -56,6 +56,70 @@ for (const family of ["shveller", "ugolok", "kvadrat", "armatura", "balka", "pro
   });
 }
 
+test("one requested metre shows the whole rebar count for bars and keeps coils continuous", async ({page}) => {
+  const products = getAllProductVariants();
+  for (const [id, expectedMeters, expectedCount] of [
+    ["rebar-a500c-6-bar", "6", "1 шт."],
+    ["rebar-a500c-18-bar", "11,7", "1 шт."],
+    ["rebar-a500c-6-coil", "1", ""],
+    ["local--927", "11,7", "1 шт."],
+    ["local-111019", "6", "1 шт."],
+    ["local-111021", "1", ""],
+  ] as const) {
+    const product = products.find(item => item.id === id)!;
+    await openProduct(page, product);
+    const row = visibleProduct(page, id);
+    const meters = row.getByRole("textbox", {name: /^Длина заказа для/});
+    const status = row.getByRole("status", {name: "", exact: true});
+    await meters.fill("1");
+    await expect(status).toHaveText(expectedCount);
+    await meters.press("Enter");
+    await expect(meters).toHaveValue(expectedMeters);
+    await row.getByRole("button", {name: "В корзину", exact: true}).click();
+    await expect(row.getByRole("button", {name: "В корзине", exact: true})).toBeVisible();
+    await expect(status).toHaveText(expectedCount);
+  }
+});
+
+test("A400 35GS accepts tonnes at its confirmed price and requests a calculation for metres", async ({page}) => {
+  const product = getAllProductVariants().find(item => item.id === "prd-003")!;
+  await openProduct(page, product);
+  const row = visibleProduct(page, product.id);
+  const meters = row.getByRole("textbox", {name: /^Длина заказа для/});
+  const tons = row.getByRole("textbox", {name: /^Вес заказа/});
+  const total = row.getByLabel(/^Сумма заказа для/);
+  await meters.fill("1");
+  await meters.press("Enter");
+  await expect(meters).toHaveValue("1");
+  await expect(tons).toHaveValue("");
+  await expect(row.getByRole("status", {name: "", exact: true})).not.toContainText("шт.");
+  await expect(total).toHaveText("Длина поставки и масса 1 м уточняются");
+  await row.getByRole("link", {name: "Запросить расчёт", exact: true}).click();
+  const message = page.getByRole("textbox", {name: /^Что требуется рассчитать\?/});
+  await expect(message).toHaveValue(/Общая длина: 1 м(?:\n|$)/);
+  await expect(message).not.toHaveValue(/Вес:|Количество:/);
+  await tons.fill("1");
+  await expect(total).toHaveText(/50\s000,00\s₽/);
+  await row.getByRole("button", {name: "В корзину", exact: true}).click();
+  await expect(row.getByRole("button", {name: "В корзине", exact: true})).toBeVisible();
+});
+
+test("smooth A1 rebar carries the whole bar count and catalogue length into a price request", async ({page}) => {
+  const product = getAllProductVariants().find(item => item.id === "local--705")!;
+  await openProduct(page, product);
+  const row = visibleProduct(page, product.id);
+  const meters = row.getByRole("textbox", {name: /^Длина заказа для/});
+  await meters.fill("1");
+  await expect(row.getByRole("status", {name: "", exact: true})).toHaveText("1 шт.");
+  await meters.press("Enter");
+  await expect(meters).toHaveValue("11,7");
+  await row.getByRole("link", {name: "Запросить цену", exact: true}).click();
+  const message = page.getByRole("textbox", {name: /^Что требуется рассчитать\?/});
+  await expect(message).toHaveValue(/Общая длина: 11,7 м/);
+  await expect(message).toHaveValue(/Вес: 0,0233766 т/);
+  await expect(message).toHaveValue(/Количество: 1 шт\./);
+});
+
 test("channel section filter contains profile numbers and is independent of length", async ({page}) => {
   await openProduct(page);
   await page.getByRole("button", {name: "Сбросить фильтры", exact: true}).first().click();

@@ -1,8 +1,6 @@
-import {calculateLineTotal, calculateMeasuredLineTotal, getMeasurementQuantityOptions, metersToTons, tonsToMeters} from "./orderMeasurement";
+import {calculateLineTotal, calculateMeasuredLineTotal, getMeasurementQuantityOptions, metersToTons, requiresWholeLengthOrder, sameMeasuredQuantity, tonsToMeters, wholeLengthOrder} from "./orderMeasurement";
 import type {ProductVariant} from "@/types/product";
 import type {CartMeasurement, CartPieceOrder} from "@/types/cart";
-import {isWholePipeVariant} from "./pipeFamily";
-import {wholePipeOrder} from "./wholePipeOrder";
 import {hasConfirmedProfilePipePrice, isProfilePipeVariant, profilePipeOrder} from "./profilePipe";
 import {isProfileSheetVariant} from "./profileSheet";
 import {requiresWholeMetalMeshQuantity, requiresWholeRozmetQuantity} from "./variantPresentation";
@@ -44,40 +42,48 @@ export function revalidateCartPrice(product: ProductVariant, item: PriceInput) {
   }
   const legacyMeasuredTons = !item.measurement && product.unit === "ton" && !isDemonstrationProduct(product)
     && product.weightPerMeterKg !== undefined && Number.isFinite(product.weightPerMeterKg) && product.weightPerMeterKg > 0;
+  const wholeLength = requiresWholeLengthOrder(product);
   let estimatedTotal = calculateLineTotal(item.quantity, product.price ?? 0);
   if (!Number.isFinite(item.quantity) || item.quantity <= 0 || (!item.measurement && item.quantity > 999)) {
     invalidReason = "Не удалось пересчитать количество.";
   }
-  if (item.measurement) {
-    const input = item.measurement;
-    if (input.inputMode !== "meter" && input.inputMode !== "ton") {
+  // Older rebar clients sent only tonnes. Validate that original quantity
+  // against the stock length just as we do for an explicitly measured line.
+  const legacyBar = legacyMeasuredTons && wholeLength && product.categoryId === "cat-arm";
+  if (item.measurement || legacyBar) {
+    const inputMode = item.measurement ? item.measurement.inputMode : "ton";
+    if (inputMode !== "meter" && inputMode !== "ton") {
       invalidReason = "Не удалось определить единицу измерения.";
     } else if (isDemonstrationProduct(product) || !product.pricePerTon || !product.weightPerMeterKg) {
       invalidReason = "Недостаточно данных для пересчёта массы и стоимости. Уточните позицию.";
     } else {
-      const entered = input.inputMode === "meter" ? input.meters : input.weightTons;
-      const {maximum} = getMeasurementQuantityOptions(product, input.inputMode);
-      // Whole-pipe weight is itself converted and may carry floating-point noise.
-      const tolerance = isWholePipeVariant(product) && input.inputMode === "ton" ? conversionTolerance(maximum) : 0;
+      const entered = item.measurement
+        ? inputMode === "meter" ? item.measurement.meters : item.measurement.weightTons
+        : item.quantity;
+      const {maximum} = getMeasurementQuantityOptions(product, inputMode);
+      // Converted weight may carry floating-point noise at the last whole stock length.
+      const tolerance = wholeLength && inputMode === "ton" ? conversionTolerance(maximum) : 0;
       if (entered > maximum + tolerance) {
         invalidReason = "Объём превышает допустимое значение. Измените количество.";
       }
-      const meters = input.inputMode === "meter" ? input.meters : tonsToMeters(input.weightTons, product.weightPerMeterKg);
-      const weightTons = input.inputMode === "ton" ? input.weightTons : metersToTons(input.meters, product.weightPerMeterKg);
+      const meters = inputMode === "meter" ? entered : tonsToMeters(entered, product.weightPerMeterKg);
+      const weightTons = inputMode === "ton" ? entered : metersToTons(entered, product.weightPerMeterKg);
       if (meters === null || weightTons === null || meters <= 0 || weightTons <= 0) invalidReason = "Не удалось пересчитать количество.";
       else {
-        estimatedTotal = input.inputMode === "meter"
+        estimatedTotal = inputMode === "meter"
           ? calculateMeasuredLineTotal(meters, product.weightPerMeterKg, product.pricePerTon)
           : calculateLineTotal(weightTons, product.pricePerTon);
-        if (estimatedTotal !== null) measurement = {inputMode: input.inputMode, meters, weightTons, pricePerTon: product.pricePerTon, estimatedTotal};
+        if (estimatedTotal !== null) measurement = {inputMode, meters, weightTons, pricePerTon: product.pricePerTon, estimatedTotal};
       }
     }
   }
   if (estimatedTotal === null) invalidReason = "Не удалось пересчитать стоимость.";
-  if (isWholePipeVariant(product)) {
-    const whole = measurement && wholePipeOrder(product, measurement.meters, "meter");
-    if (!measurement || !whole || Math.abs(whole.meters - measurement.meters) > 1e-7) {
-      invalidReason = "Выберите объём целыми трубами в таблице товара.";
+  if (wholeLength) {
+    const whole = measurement && wholeLengthOrder(product, measurement.meters, "meter");
+    if (!measurement || !whole || !sameMeasuredQuantity(measurement.meters, whole.meters)) {
+      invalidReason ??= product.categoryId === "cat-arm"
+        ? "Измените объём заказа до целого числа прутков."
+        : "Выберите объём целыми трубами в таблице товара.";
     } else {
       // Recompute from the whole length to avoid drift after a tonne/metre round trip.
       estimatedTotal = calculateMeasuredLineTotal(whole.meters, product.weightPerMeterKg!, product.pricePerTon ?? 0);

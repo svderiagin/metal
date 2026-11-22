@@ -3,9 +3,7 @@ import type {ProductVariant} from "@/types/product";
 import {normalizeMeasurement} from "./cart";
 import {revalidateCartPrice} from "./cartPricing";
 import {isProfilePipeVariant, profilePipeOrder} from "./profilePipe";
-import {isWholePipeVariant} from "./pipeFamily";
-import {wholePipeOrder} from "./wholePipeOrder";
-import {metersToTons, tonsToMeters} from "./orderMeasurement";
+import {metersToTons, requiresWholeLengthOrder, tonsToMeters, wholeLengthOrder} from "./orderMeasurement";
 import {isDemonstrationProduct} from "./catalogOffer";
 
 export function addCartItem(items: CartItem[], product: ProductVariant | undefined, quantity = 1,
@@ -46,8 +44,8 @@ export function updateCartItem(items: CartItem[], product: ProductVariant | unde
     const weightTons = inputMode === "ton" ? quantity : metersToTons(quantity, product.weightPerMeterKg);
     if (meters === null || weightTons === null) return items;
     measurement = {inputMode, meters, weightTons, pricePerTon: 0, estimatedTotal: 0};
-    if (isWholePipeVariant(product)) {
-      const order = wholePipeOrder(product, quantity, inputMode);
+    if (requiresWholeLengthOrder(product)) {
+      const order = wholeLengthOrder(product, quantity, inputMode);
       if (!order) return items;
       measurement = {...measurement, meters: order.meters, weightTons: order.weightTons};
     }
