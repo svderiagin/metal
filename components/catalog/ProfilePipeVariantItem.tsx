@@ -19,7 +19,7 @@ import filterStyles from "./FilterPanel.module.css";
 import tableStyles from "./RebarTable.module.css";
 import {useOrderDraft} from "./OrderDraftProvider";
 
-export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant; view: "table" | "card"}) {
+export function ProfilePipeVariantItem({variant, view, squareProfile = false}: {variant: ProductVariant; view: "table" | "card"; squareProfile?: boolean}) {
   const {addItem, updatePieceOrder, removeItem, lines, hydrated} = useCart();
   const line = lines.find(item => item.productId === variant.id);
   const savedLength = line?.pieceOrder?.lengthMeters ?? variant.lengthMeters;
@@ -127,6 +127,7 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
       disabled={!hydrated || saved || removed || (!shouldRemove && (!correctedOrder || correctedOrder.estimatedTotal === null))}
       className={`${buttonClass} ${actionSize} px-3`}>{label}</Button>;
 
+  const inputClassName = `${filterStyles.field} min-w-0 px-2 text-center tabular-nums ${squareProfile && view === "table" ? "max-w-[6.375rem]" : ""}`;
   const quantityInput = <Input type="text" inputMode="numeric"
     id={`profile-pieces-${view}-${variant.id}`}
     aria-label={`Количество целых труб для ${variant.name}`} value={piecesText}
@@ -144,13 +145,13 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
         event.preventDefault();
         event.currentTarget.blur();
       }
-    }} className={`${filterStyles.field} min-w-0 px-2 text-center tabular-nums`}/>;
+    }} className={inputClassName}/>;
   const lengthField = range ? <Input type="text" inputMode="decimal"
     aria-label={`Длина одной трубы для ${variant.name}`} value={lengthText}
     aria-invalid={lengthError || undefined}
-    aria-describedby={statusId}
+    aria-describedby={squareProfile ? `${statusId}-range ${statusId}` : statusId}
     {...quantityTransferHandlers(setMessage)}
-    placeholder={`${range[0]}–${range[1]}`}
+    placeholder={squareProfile ? undefined : `${range[0]}–${range[1]}`}
     onChange={event => {setDraft({pieces: piecesText, length: event.target.value}); setMessage(undefined);}}
     onBlur={settleLength}
     onKeyDown={event => {
@@ -159,7 +160,7 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
         event.currentTarget.blur();
       }
     }}
-    className={`${filterStyles.field} min-w-0 px-2 text-center tabular-nums`}/>
+    className={inputClassName}/>
     : null;
   const mass = variant.weightConfirmed && variant.weightPerMeterKg !== undefined ? formatNumber(variant.weightPerMeterKg) : undefined;
   const total = <output data-price={order?.estimatedTotal != null || undefined}
@@ -182,10 +183,15 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
     {label: "Марка стали", value: variant.steelGrade},
     {label: "Стандарт", value: variant.standard},
   ];
-  const selectedLength = lengthField ?? <p className="py-2 text-sm tabular-nums">{lengths ?? "—"}</p>;
-  const quantity = view === "card" && lengthField ? <label className="block text-sm font-semibold">
-    <span className="mb-1 block">Одна труба, м</span>{selectedLength}
-  </label> : view === "card" ? <div><p className="text-sm font-semibold">Одна труба, м</p>{selectedLength}</div> : selectedLength;
+  const lengthControl = lengthField ? <label className="block text-sm">
+    {view === "card" && <span className="mb-1 block font-semibold">{squareProfile ? "Длина, м" : "Одна труба, м"}</span>}
+    {lengthField}
+    {squareProfile && <span id={`${statusId}-range`} className="mt-1 block text-xs tabular-nums text-slate-600 dark:text-slate-400">{lengths} м</span>}
+  </label> : <div>
+    {view === "card" && <p className="text-sm font-semibold">Одна труба, м</p>}
+    <p className="py-2 text-sm tabular-nums">{lengths ?? "—"}</p>
+  </div>;
+  const lengthInOrder = !squareProfile || (view === "card" && Boolean(range));
   const piecesField = <div>
     {view === "card" && <label htmlFor={`profile-pieces-${view}-${variant.id}`} className="mb-1 block text-sm font-semibold">Заказ, шт.</label>}
     {quantityInput}
@@ -194,14 +200,18 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
   </div>;
 
   return <CatalogVariantLayout view={view} variant={variant} name={view === "table" ? `${size} × ${thickness}` : variant.name}
-    tableSpecifications={{cells: <><td className="tabular-nums">{lengths ?? "—"}</td><td className="tabular-nums">{mass ?? "—"}</td></>}}
-    specifications={<CatalogVariantSpecifications items={fields.slice(0, 3)}/>}
+    tableSpecifications={{headingColSpan: squareProfile ? 2 : undefined, cells: <>
+      <td className="tabular-nums">{squareProfile && range ? lengthControl : lengths ?? "—"}</td>
+      {!squareProfile && <td className="tabular-nums">{mass ?? "—"}</td>}
+    </>}}
+    specifications={<CatalogVariantSpecifications items={squareProfile && range ? dimensionFields : fields.slice(0, 3)}/>}
     details={<CatalogPositionDetails title="Характеристики профильной трубы" fields={fields}
       figures={<CatalogGuideFigure diagram={{shape: variant.profileWidthMm === variant.profileHeightMm ? "square" : "rectangle",
         dimensions: dimensionFields.map(({label, value}) => [label, value] as const)}}/>}
       supply={<p>Уточните фактическую длину и марку стали по документам поставки. При заказе по ведомости укажите количество труб каждой длины.</p>}/>}
     price={priceLabel}
-    order={<CatalogVariantOrder view={view} quantity={quantity} secondaryQuantity={piecesField} action={action} total={total}
+    order={<CatalogVariantOrder view={view} quantity={lengthInOrder ? lengthControl : piecesField}
+      secondaryQuantity={lengthInOrder ? piecesField : undefined} action={action} total={total}
       status={<span id={statusId} className={`mt-1 block text-xs ${piecesError || lengthError
         ? "text-red-700 dark:text-red-400" : "text-slate-500 dark:text-slate-400"}`}
         aria-live="polite" aria-atomic="true">

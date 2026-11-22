@@ -53,7 +53,7 @@ export function CatalogVariantLayout({view, variant, name = variant.name, previe
   name?: string;
   preview?: ReactNode;
   specifications: ReactNode;
-  tableSpecifications: {headingClassName?: string; cells: ReactNode};
+  tableSpecifications: {headingClassName?: string; headingColSpan?: number; cells: ReactNode};
   details?: ReactNode;
   detailsId?: string;
   price: ReactNode;
@@ -91,7 +91,7 @@ export function CatalogVariantLayout({view, variant, name = variant.name, previe
 
   const nameId = `variant-name-${variant.id}`;
   return <><tr id={`variant-${variant.id}`} title={variant.name} className="align-middle">
-    <th scope="row" aria-labelledby={nameId} className={`font-semibold tabular-nums ${tableSpecifications.headingClassName ?? ""}`}>
+    <th scope="row" colSpan={tableSpecifications.headingColSpan} aria-labelledby={nameId} className={`font-semibold tabular-nums ${tableSpecifications.headingClassName ?? ""}`}>
       <span id={nameId} className="block">{name}</span>
       {details && <button type="button" aria-expanded={detailsOpen} aria-controls={detailsId}
         aria-label={`Подробности: ${variant.name}`} onClick={() => setDetailsOpen(!detailsOpen)}

@@ -85,6 +85,16 @@ const electroweldedColumns = [
   ...measuredOrderColumns,
 ] as const;
 
+const squareProfilePipeColumns = [
+  {label: "Сечение × стенка, мм", width: [10, 8]},
+  {label: "Фото", width: 17},
+  {label: "Длина, м", width: 11},
+  {label: "Цена, ₽/м", width: 12},
+  {label: "Заказ, шт.", width: [7, 6]},
+  {label: "Сумма", width: 14, className: tableStyles.sumColumn},
+  {label: "Действие", width: 15, visuallyHidden: true},
+] as const;
+
 const profilePipeColumns = [
   {label: "Сечение × стенка, мм", width: 14},
   {label: "Фото", width: 13},
@@ -137,6 +147,8 @@ function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
   const isBeam = kind === "beam";
   const isVgp = kind === "vgp";
   const isProfile = kind === "profile";
+  const squareProfile = isProfile && variants.every(variant => variant.subcategoryId === "cat-trp-sub-1");
+  const columns = squareProfile ? squareProfilePipeColumns : columnsByKind[kind];
   const isElectrowelded = kind === "pipe";
   const showSizeFilter = !isVgp && !isElectrowelded;
   const isGalvanized = isElectrowelded && variants.every(isGalvanizedElectroweldedVariant);
@@ -272,12 +284,12 @@ function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
           <Icon name="info" className="mt-0.5 text-brand-700 dark:text-brand-300"/>
           <span className="min-w-0">{orderNote}</span>
         </p>}
-        <CatalogVariantTable columns={columnsByKind[kind]}>
-          {results.map(variant => <MeasuredVariantItem key={variant.id} variant={variant} name={names?.get(variant.id)} kind={kind} view="table"/>)}
+        <CatalogVariantTable columns={columns}>
+          {results.map(variant => <MeasuredVariantItem key={variant.id} variant={variant} name={names?.get(variant.id)} kind={kind} view="table" squareProfile={squareProfile}/>)}
         </CatalogVariantTable>
         <div className="grid gap-4 sm:grid-cols-2 xl:hidden">
           {results.map((variant) => (
-            <MeasuredVariantItem key={variant.id} variant={variant} name={names?.get(variant.id)} kind={kind} view="card"/>
+            <MeasuredVariantItem key={variant.id} variant={variant} name={names?.get(variant.id)} kind={kind} view="card" squareProfile={squareProfile}/>
           ))}
         </div>
         </>

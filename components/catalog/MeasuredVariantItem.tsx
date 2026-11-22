@@ -30,9 +30,9 @@ type OrderFeedback = {kind: "correction" | "error"; text: string};
 const enterQuantityMessage = "Укажите длину или вес больше нуля.";
 
 export function MeasuredVariantItem({
-  variant, view, kind, name,
-}: {variant: ProductVariant; view: "table" | "card"; kind: "rebar" | "beam" | "vgp" | "pipe" | "profile"; name?: string}) {
-  return kind === "profile" ? <ProfilePipeVariantItem variant={variant} view={view}/>
+  variant, view, kind, name, squareProfile,
+}: {variant: ProductVariant; view: "table" | "card"; kind: "rebar" | "beam" | "vgp" | "pipe" | "profile"; name?: string; squareProfile?: boolean}) {
+  return kind === "profile" ? <ProfilePipeVariantItem variant={variant} view={view} squareProfile={squareProfile}/>
     : <TonnageMeasuredVariantItem variant={variant} view={view} kind={kind} name={name}/>;
 }
 

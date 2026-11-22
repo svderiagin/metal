@@ -106,11 +106,11 @@
   border-bottom-right-radius: calc(var(--radius-xl) - 1px);
 }
 
-.table > tbody > tr > :is(th, td):not([colspan]) {
+.table > tbody > tr > :is(th[scope="row"], td:not([colspan])) {
   padding: var(--cell-padding-y) var(--cell-padding-x);
 }
 
-.table > :is(thead, tbody) > tr > :is(th, td):first-child:not([colspan]) {
+.table > :is(thead, tbody) > tr > :is(th, td:not([colspan])):first-child {
   padding-inline-start: var(--edge-padding-x);
 }
 
