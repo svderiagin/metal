@@ -4,7 +4,12 @@ import {productVariants} from "@/data/products";
 import {subcategories} from "@/data/subcategories";
 import {resolveCatalogProductId, resolveCatalogProductSlug} from "./catalogIdentity";
 
-export const getAllCategories = () => categories;
+const lastCategorySlugs = ["profnastil", "setka-metallicheskaya", "shtaketnik"];
+const categoriesInCatalogOrder = categories.toSorted((left, right) =>
+  lastCategorySlugs.indexOf(left.slug) - lastCategorySlugs.indexOf(right.slug),
+);
+
+export const getAllCategories = () => categoriesInCatalogOrder;
 export const getCategoryBySlug = (slug: string) =>
   categories.find((item) => item.slug === slug);
 export const getCategoryById = (id: string) =>
