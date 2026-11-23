@@ -8,7 +8,7 @@ import {isProfilePipeVariant, profilePipePricePerTon, profilePipeSize} from "@/l
 import {isGalvanizedElectroweldedVariant} from "@/lib/pipeFamily";
 import {formatNumber} from "@/lib/numberFormat";
 import {isDemonstrationProduct, storefrontAvailability} from "@/lib/catalogOffer";
-import {a500cSubcategoryId} from "@/lib/rebar";
+import {a40035gsSubcategoryId, a500cSubcategoryId} from "@/lib/rebar";
 
 import {FilterPanel} from "./FilterPanel";
 import {CatalogVariantTable} from "./CatalogVariantLayout";
@@ -86,6 +86,7 @@ function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
   const isProfile = kind === "profile";
   const isElectrowelded = kind === "pipe";
   const isA500c = kind === "rebar" && variants.every(variant => variant.subcategoryId === a500cSubcategoryId);
+  const isA40035gs = kind === "rebar" && variants.every(variant => variant.subcategoryId === a40035gsSubcategoryId);
   const showSizeFilter = !isVgp && !isElectrowelded;
   const isGalvanized = isElectrowelded && variants.every(isGalvanizedElectroweldedVariant);
   const showSteelGrade = isElectrowelded;
@@ -184,11 +185,19 @@ function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
   const hasGostRebarMass = kind === "rebar" && results.some(variant => variant.specifications.some(
     spec => spec.name === "Теоретическая масса по ГОСТ 5781-82",
   ));
-  const orderNote = isA500c ? <>Стандарт для всех позиций — <CatalogStandardReference>ГОСТ 34028-2016</CatalogStandardReference>.</>
+  const orderNote = isA500c ? <>
+    Стандарт для всех позиций — <CatalogStandardReference>ГОСТ 34028-2016</CatalogStandardReference>.{" "}
+    Марка стали — Ст3сп или Ст3пс, в зависимости от партии. Химический состав указан в документе о качестве.
+  </>
     : isElectrowelded ? electroweldedNote
     : isBeam && results.some(variant => beamReferenceMassKg(variant) !== undefined)
       ? "Справочная масса по сортаменту используется для предварительного расчёта. Массу выбранной балки уточните у поставщика."
-    : hasGostRebarMass ? <>Теоретическая масса 1 м профиля приведена в <CatalogStandardReference>таблице 1 ГОСТ 5781-82</CatalogStandardReference>.</> : null;
+    : hasGostRebarMass ? <>
+      {isA40035gs ? "Номинальные диаметры и теоретическая масса 1 м арматуры А400 (35ГС) приведены в "
+        : "Теоретическая масса 1 м профиля приведена в "}
+      <CatalogStandardReference>таблице 1 ГОСТ 5781-82</CatalogStandardReference>.
+      {isA40035gs && " Стандарт поставки указан в документе о качестве партии."}
+    </> : null;
 
   function resetFilters() {
     setQuery("");

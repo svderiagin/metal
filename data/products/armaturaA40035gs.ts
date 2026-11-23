@@ -7,31 +7,31 @@ type RebarRow = {
   diameterMm: number;
   weightPerMeterKg: number;
   pricePerTon: number;
-  priceQualifier: NonNullable<ProductVariantSource["priceQualifier"]>;
+  inStock: boolean;
   lengthMeters?: number; // Coils have no catalogue length.
   standard?: string; // Only when explicitly identified for this item.
 };
 
 const rows: RebarRow[] = [
-  {diameterMm: 6, weightPerMeterKg: 0.222, pricePerTon: 43000, priceQualifier: "from", lengthMeters: 6},
-  {diameterMm: 8, weightPerMeterKg: 0.395, pricePerTon: 42000, priceQualifier: "from", lengthMeters: 6},
-  {diameterMm: 10, weightPerMeterKg: 0.617, pricePerTon: 41000, priceQualifier: "from", lengthMeters: 11.7},
-  {diameterMm: 14, weightPerMeterKg: 1.21, pricePerTon: 40000, priceQualifier: "from", lengthMeters: 11.7},
-  {diameterMm: 16, weightPerMeterKg: 1.58, pricePerTon: 40000, priceQualifier: "from", lengthMeters: 11.7, standard: "ГОСТ 5781-82"},
-  {diameterMm: 18, weightPerMeterKg: 2, pricePerTon: 40000, priceQualifier: "from", lengthMeters: 11.7},
-  {diameterMm: 22, weightPerMeterKg: 2.98, pricePerTon: 40000, priceQualifier: "from", lengthMeters: 11.7},
-  {diameterMm: 25, weightPerMeterKg: 3.85, pricePerTon: 58086, priceQualifier: "from", lengthMeters: 11.7, standard: "ГОСТ 5781-82"},
-  {diameterMm: 28, weightPerMeterKg: 4.83, pricePerTon: 42021, priceQualifier: "exact", lengthMeters: 11.7, standard: "ГОСТ 5781-82"},
-  {diameterMm: 32, weightPerMeterKg: 6.31, pricePerTon: 40000, priceQualifier: "from", lengthMeters: 11.7},
-  {diameterMm: 36, weightPerMeterKg: 7.99, pricePerTon: 40000, priceQualifier: "from", lengthMeters: 11.7},
-  {diameterMm: 40, weightPerMeterKg: 9.87, pricePerTon: 43000, priceQualifier: "from", lengthMeters: 11.7},
-  {diameterMm: 6, weightPerMeterKg: 0.222, pricePerTon: 57580, priceQualifier: "exact", standard: "ГОСТ 5781-82"},
-  {diameterMm: 8, weightPerMeterKg: 0.395, pricePerTon: 56780, priceQualifier: "exact", standard: "ГОСТ 5781-82"},
-  {diameterMm: 10, weightPerMeterKg: 0.617, pricePerTon: 51500, priceQualifier: "exact", standard: "ГОСТ 5781-82"},
+  {diameterMm: 6, weightPerMeterKg: 0.222, pricePerTon: 43000, inStock: false, lengthMeters: 6},
+  {diameterMm: 8, weightPerMeterKg: 0.395, pricePerTon: 42000, inStock: true, lengthMeters: 6},
+  {diameterMm: 10, weightPerMeterKg: 0.617, pricePerTon: 41000, inStock: true, lengthMeters: 11.7},
+  {diameterMm: 14, weightPerMeterKg: 1.21, pricePerTon: 40000, inStock: true, lengthMeters: 11.7},
+  {diameterMm: 16, weightPerMeterKg: 1.58, pricePerTon: 40000, inStock: true, lengthMeters: 11.7, standard: "ГОСТ 5781-82"},
+  {diameterMm: 18, weightPerMeterKg: 2, pricePerTon: 40000, inStock: true, lengthMeters: 11.7},
+  {diameterMm: 22, weightPerMeterKg: 2.98, pricePerTon: 40000, inStock: true, lengthMeters: 11.7},
+  {diameterMm: 25, weightPerMeterKg: 3.85, pricePerTon: 58086, inStock: true, lengthMeters: 11.7, standard: "ГОСТ 5781-82"},
+  {diameterMm: 28, weightPerMeterKg: 4.83, pricePerTon: 42021, inStock: true, lengthMeters: 11.7, standard: "ГОСТ 5781-82"},
+  {diameterMm: 32, weightPerMeterKg: 6.31, pricePerTon: 40000, inStock: true, lengthMeters: 11.7},
+  {diameterMm: 36, weightPerMeterKg: 7.99, pricePerTon: 40000, inStock: false, lengthMeters: 11.7},
+  {diameterMm: 40, weightPerMeterKg: 9.87, pricePerTon: 43000, inStock: false, lengthMeters: 11.7},
+  {diameterMm: 6, weightPerMeterKg: 0.222, pricePerTon: 57580, inStock: true, standard: "ГОСТ 5781-82"},
+  {diameterMm: 8, weightPerMeterKg: 0.395, pricePerTon: 56780, inStock: true, standard: "ГОСТ 5781-82"},
+  {diameterMm: 10, weightPerMeterKg: 0.617, pricePerTon: 51500, inStock: true, standard: "ГОСТ 5781-82"},
 ];
 
 export const armaturaA40035gsVariants: ProductVariantSource[] = rows.map(row => {
-  const {diameterMm, weightPerMeterKg, pricePerTon, lengthMeters, standard} = row;
+  const {diameterMm, weightPerMeterKg, pricePerTon, lengthMeters, standard, inStock} = row;
   const length = lengthMeters === undefined ? undefined : `${formatNumber(lengthMeters)} м`;
   const form = length === undefined ? "coil" : "bar";
   const formName = length ? `пруток ${length}` : "в бунтах";
@@ -45,8 +45,9 @@ export const armaturaA40035gsVariants: ProductVariantSource[] = rows.map(row => 
     description: `Рифлёная арматура класса А400 (А3) из стали 35ГС диаметром ${diameterMm} мм. ${length ? `Поставляется прутками длиной ${length}.` : "Поставляется в бунтах."}`,
     diameterMm, weightPerMeterKg, lengthMeters, form, steelGrade: "35ГС",
     price: pricePerTon, pricePerTon, priceUnit: "за тонну", currency: "RUB",
-    priceQualifier: row.priceQualifier,
-    quoteOnly: true, availability: "UNKNOWN", inStock: false,
+    priceQualifier: inStock ? "exact" : "from",
+    priceConfirmed: inStock,
+    quoteOnly: !inStock, availability: inStock ? "IN_STOCK" : "ON_ORDER", inStock,
     featured: false, imageUrls: [],
     attributes: [
       {key: "material", label: "Материал", value: "Низколегированная сталь 35ГС"},
