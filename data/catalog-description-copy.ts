@@ -95,7 +95,7 @@ export const catalogDescriptionCopy: Partial<Record<string, DescriptionCopy>> = 
       {heading: "Длина и количество", icon: "wrench", text: "Подготовьте длины и количество балок по каждому профилю. Если подходит только цельная заготовка, уточните длину поставки до заказа."},
     ],
   },
-  "rozmet-cat-shveller": {
+  "catalog-cat-shveller": {
     intro: "Стальные швеллеры П-образного сечения. Сравните номер профиля, размеры полок, стенки и длину.",
     title: "Как выбрать швеллер",
     details: [
@@ -107,7 +107,7 @@ export const catalogDescriptionCopy: Partial<Record<string, DescriptionCopy>> = 
       {heading: "Длина и монтаж", icon: "wrench", text: "Сопоставьте длину поставки с раскроем. Для несущего узла возьмите сечение, марку стали и способ крепления из проекта."},
     ],
   },
-  "rozmet-cat-shtaketnik": {
+  "catalog-cat-shtaketnik": {
     intro: "Металлические планки для ограждений. Сравните форму профиля, длину, ширину и исполнение покрытия.",
     title: "Как выбрать металлический штакетник",
     details: [
@@ -142,7 +142,7 @@ export const catalogDescriptionCopy: Partial<Record<string, DescriptionCopy>> = 
         heading: "Маркировка в ведомости", icon: "clipboard", text: "А400 обозначает класс, а 35ГС — марку стали. Сопоставьте оба обозначения и номинальный диаметр с ведомостью.",
         diagram: {shape: "solid-round", dimensions: [["Класс", "А400"], ["Марка стали", "35ГС"]]},
       },
-      {heading: "Пруток или бунт", icon: "ruler", text: "Для раскроя сравните длину заготовок с длиной прутка. Если в таблице указаны 6 или 11,7 м, заказ округляется до целых прутков. Для бунта укажите общий метраж или массу и уточните массу одного бунта при заказе."},
+      {heading: "Пруток или бунт", icon: "ruler", text: "Для раскроя сравните длину заготовок с длиной прутка. Для бунта укажите общий метраж или массу и уточните массу одного бунта при заказе."},
       {heading: "Соединения и приёмка", icon: "wrench", text: "Способ соединения и требования к сварке сверяйте с проектом. Перед приёмкой проверьте марку стали и стандарт по документу качества."},
     ],
   },
@@ -268,8 +268,8 @@ export const catalogDescriptionCopy: Partial<Record<string, DescriptionCopy>> = 
         diagram: {shape: "round", dimensions: [["Наружный Ø", "89 мм"], ["Стенка", "3,5 мм"]]},
       },
       {
-        heading: "Длина и защитное покрытие", icon: "shield", text: "Длина трубы по каталогу — 7,8 м с допуском ±150 мм. Если предстоит резка, проверьте запас длины и заранее согласуйте защиту обработанных кромок.",
-        diagram: {shape: "length", dimensions: [["Одна труба", "7,8 м"], ["Допуск", "±150 мм"]]},
+        heading: "Длина, сталь и покрытие", icon: "shield", text: "Сверьте длину и марку стали у выбранной позиции. Если нужен раскрой, укажите размеры отрезков в заявке и согласуйте защиту обработанных кромок.",
+        diagram: {shape: "length", dimensions: [["Пример длины", "7,8 м"]]},
       },
       {heading: "Масса партии", icon: "clipboard", text: "Для расчёта заказа в таблице используется масса стальной трубы без цинка. Если масса нужна для перевозки или подъёма, запросите у поставщика фактическую массу партии."},
     ],
@@ -409,7 +409,7 @@ export const catalogDescriptionCopy: Partial<Record<string, DescriptionCopy>> = 
       {heading: "Армирование или ограждение", icon: "wrench", text: "Для армирования бетона диаметр, шаг, нахлёсты и защитный слой берите из проекта. Для ограждения проверьте точки крепления карты к раме или стойкам."},
     ],
   },
-  "rozmet-cat-ugolok": {
+  "catalog-cat-ugolok": {
     intro: "Стальные уголки для рам, кронштейнов и соединений. Сравните ширину полок, толщину и длину.",
     title: "Как выбрать стальной уголок",
     details: [
@@ -422,7 +422,7 @@ export const catalogDescriptionCopy: Partial<Record<string, DescriptionCopy>> = 
       {heading: "Длина и материал", icon: "layers", text: "Сопоставьте длину уголка с картой раскроя. Марку стали, сечение и узлы крепления несущих деталей берите из проекта."},
     ],
   },
-  "rozmet-cat-kvadrat": {
+  "catalog-cat-kvadrat": {
     intro: "Сплошной стальной пруток квадратного сечения для деталей, ограждений и металлоконструкций.",
     title: "Как выбрать стальной квадрат",
     details: [
@@ -435,7 +435,7 @@ export const catalogDescriptionCopy: Partial<Record<string, DescriptionCopy>> = 
       {heading: "Длина и материал", icon: "clipboard", text: "Проверьте, сколько заготовок выйдет из одного прутка с учётом ширины реза. Уточните марку стали, если деталь будет свариваться или термообрабатываться."},
     ],
   },
-  "rozmet-cat-listovoy-prokat": {
+  "catalog-cat-listovoy-prokat": {
     intro: "Гладкие горячекатаные, холоднокатаные и оцинкованные листы, а также листы с рифлением.",
     title: "Как выбрать листовой прокат",
     details: [
@@ -444,7 +444,7 @@ export const catalogDescriptionCopy: Partial<Record<string, DescriptionCopy>> = 
       {heading: "Масса и количество", icon: "clipboard", text: "Сверьте единицу массы в подробностях позиции. Для закупки, перемещения и перевозки считайте количество и массу целых листов."},
     ],
   },
-  "rozmet-sub-listovoy-prokat-galvanized-steel-sheet": {
+  "catalog-sub-listovoy-prokat-galvanized-steel-sheet": {
     intro: "Гладкий стальной лист с цинковым покрытием для облицовки, доборных деталей и воздуховодов.",
     title: "Как выбрать оцинкованный лист",
     details: [
@@ -456,7 +456,7 @@ export const catalogDescriptionCopy: Partial<Record<string, DescriptionCopy>> = 
       {heading: "Кромки после обработки", icon: "wrench", text: "Проверьте способ защиты мест реза и участков, где покрытие повреждается при обработке. Учитывайте условия эксплуатации готовой детали."},
     ],
   },
-  "rozmet-sub-listovoy-prokat-list-ocynkovannyj": {
+  "catalog-sub-listovoy-prokat-list-ocynkovannyj": {
     intro: "Гладкий холоднокатаный стальной лист для гибки, облицовки и изготовления тонколистовых деталей.",
     title: "Как выбрать холоднокатаный лист",
     details: [
@@ -468,7 +468,7 @@ export const catalogDescriptionCopy: Partial<Record<string, DescriptionCopy>> = 
       {heading: "Марка стали для формовки", icon: "layers", text: "Если предстоят глубокая вытяжка или гибка с заданным радиусом, укажите требование к стали и допустимым отклонениям толщины в заявке."},
     ],
   },
-  "rozmet-sub-listovoy-prokat-list-riflennyj": {
+  "catalog-sub-listovoy-prokat-list-riflennyj": {
     intro: "Стальной лист с выступающим рельефом для ступеней, настилов и рабочих площадок.",
     title: "Как выбрать рифлёный лист",
     details: [
@@ -480,7 +480,7 @@ export const catalogDescriptionCopy: Partial<Record<string, DescriptionCopy>> = 
       {heading: "Раскрой и обработка", icon: "wrench", text: "Сделайте раскладку деталей на целом листе. Для точной стыковки учтите направление рисунка и ширину реза."},
     ],
   },
-  "rozmet-sub-listovoy-prokat-list-goryachekatanyj": {
+  "catalog-sub-listovoy-prokat-list-goryachekatanyj": {
     intro: "Гладкий горячекатаный стальной лист для сварных деталей и заготовок под раскрой.",
     title: "Как выбрать горячекатаный лист",
     details: [
@@ -492,7 +492,7 @@ export const catalogDescriptionCopy: Partial<Record<string, DescriptionCopy>> = 
       {heading: "Сталь и документы", icon: "clipboard", text: "Сравните марку стали, допуски и документ поставки по требованиям проекта. Если в каталоге есть варианты по ГОСТ и по ТУ, проверяйте условия конкретной позиции."},
     ],
   },
-  "rozmet-cat-polosa": {
+  "catalog-cat-polosa": {
     intro: "Стальная полоса прямоугольного сечения для накладок, крепёжных деталей и заготовок.",
     title: "Как подобрать стальную полосу",
     details: [

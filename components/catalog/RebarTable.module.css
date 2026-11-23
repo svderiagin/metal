@@ -105,7 +105,12 @@
   padding: var(--cell-padding-y) var(--cell-padding-x);
 }
 
-.table .quantityCell[colspan] > :is(input, span) {
+.table .quantityCell[colspan] > input {
+  max-inline-size: 6.375rem;
+  padding-inline: 0.25rem;
+}
+
+.table .quantityCell[colspan] > span {
   max-inline-size: 8.75rem;
   margin-inline: auto;
 }
@@ -116,12 +121,13 @@
   font-variant-numeric: tabular-nums;
 }
 
-.table td .measurementInput {
+.table td :is(.meterInput, .tonInput) {
   padding-inline: 0.25rem;
 }
 
-.table td .vgpMeterInput { inline-size: min(100%, 6.375rem); }
-.table td .vgpTonInput { inline-size: min(100%, 6.625rem); }
+.table td .meterInput { inline-size: min(100%, 6.375rem); }
+.table td .tonInput { inline-size: min(100%, 6.625rem); }
+.table td input[data-long-value] { font-size: 0.875rem; }
 
 .table > :is(thead, tbody) > tr > :is(th, td).sumColumn {
   text-align: center;

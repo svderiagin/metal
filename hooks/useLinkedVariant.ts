@@ -2,6 +2,13 @@
 
 import {useEffect, useEffectEvent, useState} from "react";
 import type {ProductVariant} from "@/types/product";
+import {resolveCatalogProductId} from "@/lib/catalogIdentity";
+
+const anchorPrefix = "#variant-";
+
+function linkedProductId(hash: string) {
+  return hash.startsWith(anchorPrefix) ? resolveCatalogProductId(hash.slice(anchorPrefix.length)) : null;
+}
 
 // Search and cart links use the same anchor on desktop and mobile tables.
 export function useLinkedVariant(variants: ProductVariant[], reveal: (variant: ProductVariant) => void, resultsPending = false) {
@@ -11,7 +18,8 @@ export function useLinkedVariant(variants: ProductVariant[], reveal: (variant: P
     let timer: number;
     function followHash() {
       window.clearTimeout(timer);
-      const variant = variants.find(item => `#variant-${item.id}` === window.location.hash);
+      const productId = linkedProductId(window.location.hash);
+      const variant = variants.find(item => item.id === productId);
       timer = window.setTimeout(() => {
         if (variant) onReveal(variant);
         setTargetId(variant?.id ?? null);
@@ -31,7 +39,7 @@ export function useLinkedVariant(variants: ProductVariant[], reveal: (variant: P
     let attempts = 0;
     let frame = window.requestAnimationFrame(scroll);
     function scroll() {
-      if (window.location.hash !== `#variant-${targetId}`) return;
+      if (linkedProductId(window.location.hash) !== targetId) return;
       const prefix = window.matchMedia("(min-width: 1280px)").matches ? "variant-" : "variant-mobile-";
       const element = document.getElementById(prefix + targetId);
       if (element?.getClientRects().length) {

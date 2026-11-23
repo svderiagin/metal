@@ -4,7 +4,7 @@ import sharp from 'sharp';
 import {renderBeamLabel} from '../beam-image-template/labels.mjs';
 
 const canvas = {width: 2400, height: 1800, channels: 3};
-const photos = new URL('../../public/images/catalog/armatura/', import.meta.url);
+const photos = new URL('../../public/images/catalog/armatura/originals/', import.meta.url);
 const profiles = {
   smooth: {
     marked: 'gladkaya/armatura_gladkaya_2400_1800_marked.jpg',

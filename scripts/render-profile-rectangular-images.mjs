@@ -1,4 +1,5 @@
 import fs from 'node:fs/promises';
+import {catalogMeasurementUrl} from './catalog-measurement-path.mjs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {createHash} from 'node:crypto';
@@ -21,7 +22,7 @@ const {default: sharp} = await import('sharp');
 sharp.concurrency(2);
 
 const WIDTH = 2400, HEIGHT = 1800;
-const sourceDirectory = 'public/images/catalog/truba-profilnia/truba_priamougolnaya';
+const sourceDirectory = 'public/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/originals';
 const referencePath = `${sourceDirectory}/truba_priamougolnaya_2400_1800_marked.jpg`;
 const photoPath = `${sourceDirectory}/truba_priamougolnaya_1148_1086_original.jpg`;
 const reference = await fs.readFile(referencePath);
@@ -82,7 +83,7 @@ const previewIndex = process.argv.indexOf('--preview');
 const previewId = previewIndex >= 0 ? process.argv[previewIndex + 1] : undefined;
 assert.ok(write !== (previewIndex >= 0), 'Use --write or --preview PRODUCT_ID');
 assert.ok(previewIndex < 0 || previewId, '--preview requires a product ID');
-const outputDirectory = write ? 'public/images/catalog/product-illustrations' : '.tmp/profile-rectangular-template-review/preview';
+const outputDirectory = write ? 'public/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement' : '.tmp/profile-rectangular-template-review/preview';
 await fs.mkdir(outputDirectory, {recursive: true});
 const records = [];
 for (const product of products) {
@@ -138,10 +139,11 @@ for (const product of products) {
   for (let p = 0; p < mask.length; p++) if (!mask[p] && (referencePixels[p * 3] !== renderedPixels[p * 3]
     || referencePixels[p * 3 + 1] !== renderedPixels[p * 3 + 1] || referencePixels[p * 3 + 2] !== renderedPixels[p * 3 + 2])) protectedPixelChanges++;
   assert.equal(protectedPixelChanges, 0, `${product.id}: pixels changed outside variable-label regions`);
-  const filename = `${product.id}.webp`;
+  const imageUrl = catalogMeasurementUrl(product);
+  const filename = write ? path.basename(imageUrl) : `${product.id}.webp`;
   const output = `${outputDirectory}/${filename}`;
   await fs.writeFile(output, image);
-  records.push({id: product.id, imageUrl: `/images/catalog/product-illustrations/${filename}`,
+  records.push({id: product.id, imageUrl,
     photoUrl: photoPath.replace(/^public/, ''), signature: productIllustrationSignature(product),
     labels: labels.map(({key, text}) => ({key, text: key==='title'?text.replace(/№\s*/gu,''):text})), changedLabels: changed.map(label => label.key),
     ...(correction?{headingCorrection:{removed:'№',box:correction.box,shiftLeft:correction.shiftLeft}}:{}),

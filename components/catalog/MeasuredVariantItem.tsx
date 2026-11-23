@@ -29,10 +29,13 @@ type OrderFeedback = {kind: "correction" | "error"; text: string};
 const enterQuantityMessage = "Укажите длину или вес больше нуля.";
 
 export function MeasuredVariantItem({
-  variant, view, kind, name,
-}: {variant: ProductVariant; view: "table" | "card"; kind: "rebar" | "beam" | "vgp" | "pipe" | "profile"; name?: string}) {
+  variant, view, kind, name, showSteelGrade,
+}: {
+  variant: ProductVariant; view: "table" | "card"; kind: "rebar" | "beam" | "vgp" | "pipe" | "profile";
+  name?: string; showSteelGrade?: boolean;
+}) {
   return kind === "profile" ? <ProfilePipeVariantItem variant={variant} view={view}/>
-    : <TonnageMeasuredVariantItem variant={variant} view={view} kind={kind} name={name}/>;
+    : <TonnageMeasuredVariantItem variant={variant} view={view} kind={kind} name={name} showSteelGrade={showSteelGrade}/>;
 }
 
 function TonnageMeasuredVariantItem({
@@ -40,9 +43,11 @@ function TonnageMeasuredVariantItem({
   view,
   kind,
   name,
+  showSteelGrade,
 }: {
   variant: ProductVariant;
   name?: string;
+  showSteelGrade?: boolean;
   kind: "rebar" | "beam" | "vgp" | "pipe";
   view: "table" | "card";
 }) {
@@ -331,18 +336,15 @@ function TonnageMeasuredVariantItem({
   );
 
   const showOrderLabels = view === "card";
-  const isVgpTable = isVgp && view === "table";
   const onRejectedTransfer = isRebar ? undefined : showError;
-  const meterInput = <CatalogOrderInput label={`Длина заказа для ${variant.name}`}
+  const meterInput = <CatalogOrderInput mode="meter" label={`Длина заказа для ${variant.name}`}
     placeholder={missingMass && parsedTons !== null && parsedTons > 0 ? "—" : tinyRebarMeters ? "< 0,01" : "0"}
     keepPlaceholderOnFocus={tinyRebarMeters}
-    className={isVgpTable ? tableStyles.vgpMeterInput : undefined}
     visibleLabel={showOrderLabels ? "Заказ, м" : undefined} value={displayedMeters || displayQuantity(referenceMeters, "meter")} invalid={invalidDraft && inputMode === "meter"} statusId={statusId}
     onChange={value => updateQuantityField("meter", value)} onBlur={() => settleQuantity("meter")} onRejectedTransfer={onRejectedTransfer}/>;
-  const tonInput = <CatalogOrderInput label={`Вес заказа в тоннах для ${variant.name}`}
+  const tonInput = <CatalogOrderInput mode="ton" label={`Вес заказа в тоннах для ${variant.name}`}
     placeholder={needsMassForLength ? "—" : tinyRebarTons ? `< ${formatRebarOrderTons(rebarMinimumTonEntry)}` : "0"}
     keepPlaceholderOnFocus={tinyRebarTons}
-    className={isVgpTable ? tableStyles.vgpTonInput : undefined}
     visibleLabel={showOrderLabels ? "Заказ, т" : undefined} value={displayedTons || displayQuantity(referenceTons, "ton")}
     invalid={invalidDraft && inputMode === "ton"} statusId={statusId} onChange={value => updateQuantityField("ton", value)}
     onBlur={() => {setEditingTons(false); settleQuantity("ton");}} onRejectedTransfer={onRejectedTransfer}/>;
@@ -360,10 +362,11 @@ function TonnageMeasuredVariantItem({
   if (isPipe) {
     const outsideDiameter = variant.diameterMm === undefined ? "—" : formatNumber(variant.diameterMm);
     const pipeSize = isVgp ? vgpSize(variant) : `${outsideDiameter} × ${formatNumber(variant.wallThicknessMm ?? 0)}`;
-    const grade = variant.steelGrade && variant.steelGrade !== "—" ? `, сталь ${variant.steelGrade}` : "";
-    const pipeDesignation = view === "card" ? `Труба Ø${pipeSize} мм${grade}` : pipeSize + grade;
+    const grade = variant.steelGrade || "Уточняется";
+    const pipeDesignation = view === "card" ? `Труба Ø${pipeSize} мм` : pipeSize;
     const pipeLength = variant.lengthRangeMeters?.map(formatNumber).join("–")
       ?? (variant.lengthMeters === undefined ? undefined : formatNumber(variant.lengthMeters));
+    const madeToOrder = !isVgp && variant.availability === "ON_ORDER";
     const tolerance = variant.supplierLengthToleranceMm === undefined ? undefined
       : `±${formatNumber(variant.supplierLengthToleranceMm)} мм`;
     const length = pipeLength ? <>
@@ -374,14 +377,16 @@ function TonnageMeasuredVariantItem({
     return <CatalogVariantLayout view={view} variant={variant} name={isVgp ? (view === "table" ? pipeSize : name) : pipeDesignation}
       tableSpecifications={[...(isVgp ? [outsideDiameter] : []),
         <Fragment key="length">{pipeLength ?? "—"}{tolerance && <small className="block whitespace-nowrap text-xs font-normal text-slate-600 dark:text-slate-400">{tolerance}</small>}</Fragment>,
+        ...(showSteelGrade ? [grade] : []),
       ]}
       specifications={<CatalogVariantSpecifications items={[
         ...(isVgp ? [{label: "Ду × стенка, мм", value: pipeSize}, {label: "Наружный Ø, мм", value: outsideDiameter}] : []),
         {label: "Длина по каталогу", value: length ?? "—"},
+        ...(showSteelGrade ? [{label: "Марка стали", value: grade}] : []),
       ]}/>}
       detailsId={`pipe-details-${variant.id}`}
       details={<PipePositionDetails variant={variant} isVgp={isVgp} length={pipeLength && `${pipeLength} м`} mass={hasMass ? mass : undefined}/>}
-      price={price} order={order}/>;
+      price={price} priceNote={madeToOrder && <span className="block text-xs text-slate-600 dark:text-slate-400">Под заказ</span>} order={order}/>;
   }
 
   const profile = unverified ? "Уточняется" : beamProfile(variant);
@@ -408,7 +413,7 @@ function TonnageMeasuredVariantItem({
     tableSpecifications={[standard || "—", length ?? "—"]}
     specifications={<CatalogVariantSpecifications items={[{label: "Длина", value: length && `${length} м`}]}/>}
     details={<CatalogPositionDetails productName={variant.name} fields={fields}
-      note={unverified ? variant.description : variant.sourceProductName && `Обозначение поставщика — ${variant.sourceProductName}`}/>}
+      note={unverified ? variant.description : undefined}/>}
     price={price} order={order}/>;
 }
 
@@ -428,7 +433,6 @@ function RebarVariantLayout({view, variant, price, order}: {
     {label: "Диаметр", value: diameter ? `${diameter} мм` : "—"},
     {label: "Форма", value: form},
     {label: "Длина", value: length ? `${length} м` : "—"},
-    {label: "Цена", value: price},
   ];
   const detailsFields = [
     {label: "Диаметр", value: diameter && `${diameter} мм`},
@@ -440,9 +444,9 @@ function RebarVariantLayout({view, variant, price, order}: {
     ...variant.specifications.filter(({name}) => ["Класс арматуры", "Поверхность"].includes(name))
       .map(({name, value}) => ({label: name, value})),
   ];
-  return <CatalogVariantLayout view={view} variant={variant} name={diameter ?? "—"} cardFields={fields}
+  return <CatalogVariantLayout view={view} variant={variant} name={view === "card" ? variant.name : diameter ?? "—"}
     tableSpecifications={[unverified ? <span key="form" className="text-xs text-slate-600 dark:text-slate-400">{form}</span> : form, length ?? "—"]}
-    specifications={null} details={!unverified && <CatalogPositionDetails productName={variant.name} fields={detailsFields}/>}
+    specifications={<CatalogVariantSpecifications items={fields}/>} details={!unverified && <CatalogPositionDetails productName={variant.name} fields={detailsFields}/>}
     price={price} order={order}/>;
 }
 

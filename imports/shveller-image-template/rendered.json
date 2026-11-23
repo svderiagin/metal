@@ -59,9 +59,9 @@
   "illustration": "Shared family photograph; nominal dimensions are labels, not a scaled manufacturing drawing.",
   "records": [
     {
-      "id": "rozmet-2235",
+      "id": "catalog-2235",
       "number": "5",
-      "imageUrl": "/images/catalog/shveller/shveller-5-clean.webp",
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-n5-11-7m.webp",
       "values": {
         "Высота": "50 мм",
         "Ширина полки": "32 мм",
@@ -105,7 +105,7 @@
       "changedLabels": [],
       "placements": [],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/shveller/shveller-5-clean.webp",
+      "output": "public/images/catalog/shveller/measurement/shveller-n5-11-7m.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
@@ -123,9 +123,9 @@
       }
     },
     {
-      "id": "rozmet-2236",
+      "id": "catalog-2236",
       "number": "6,5",
-      "imageUrl": "/images/catalog/shveller/shveller-6-5-clean.webp",
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-n6-5-l6-12m.webp",
       "values": {
         "Высота": "65 мм",
         "Ширина полки": "36 мм",
@@ -237,7 +237,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/shveller/shveller-6-5-clean.webp",
+      "output": "public/images/catalog/shveller/measurement/shveller-n6-5-l6-12m.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
@@ -255,9 +255,9 @@
       }
     },
     {
-      "id": "rozmet-2237",
+      "id": "catalog-2237",
       "number": "8",
-      "imageUrl": "/images/catalog/shveller/shveller-8-clean.webp",
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-n8-l6-12m.webp",
       "values": {
         "Высота": "80 мм",
         "Ширина полки": "40 мм",
@@ -379,7 +379,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/shveller/shveller-8-clean.webp",
+      "output": "public/images/catalog/shveller/measurement/shveller-n8-l6-12m.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
@@ -397,9 +397,9 @@
       }
     },
     {
-      "id": "rozmet-2238",
+      "id": "catalog-2238",
       "number": "10",
-      "imageUrl": "/images/catalog/shveller/shveller-10-clean.webp",
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-n10-12m.webp",
       "values": {
         "Высота": "100 мм",
         "Ширина полки": "46 мм",
@@ -521,7 +521,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/shveller/shveller-10-clean.webp",
+      "output": "public/images/catalog/shveller/measurement/shveller-n10-12m.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
@@ -539,9 +539,9 @@
       }
     },
     {
-      "id": "rozmet-2239",
+      "id": "catalog-2239",
       "number": "12",
-      "imageUrl": "/images/catalog/shveller/shveller-12-clean.webp",
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-n12-12m.webp",
       "values": {
         "Высота": "120 мм",
         "Ширина полки": "52 мм",
@@ -663,7 +663,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/shveller/shveller-12-clean.webp",
+      "output": "public/images/catalog/shveller/measurement/shveller-n12-12m.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
@@ -681,9 +681,9 @@
       }
     },
     {
-      "id": "rozmet-2240",
+      "id": "catalog-2240",
       "number": "14",
-      "imageUrl": "/images/catalog/shveller/shveller-14-clean.webp",
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-n14-12m.webp",
       "values": {
         "Высота": "140 мм",
         "Ширина полки": "58 мм",
@@ -805,7 +805,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/shveller/shveller-14-clean.webp",
+      "output": "public/images/catalog/shveller/measurement/shveller-n14-12m.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
@@ -823,9 +823,9 @@
       }
     },
     {
-      "id": "rozmet-2241",
+      "id": "catalog-2241",
       "number": "16",
-      "imageUrl": "/images/catalog/shveller/shveller-16-clean.webp",
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-n16-l11-7-12m.webp",
       "values": {
         "Высота": "160 мм",
         "Ширина полки": "64 мм",
@@ -947,7 +947,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/shveller/shveller-16-clean.webp",
+      "output": "public/images/catalog/shveller/measurement/shveller-n16-l11-7-12m.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
@@ -965,9 +965,9 @@
       }
     },
     {
-      "id": "rozmet-2242",
+      "id": "catalog-2242",
       "number": "18",
-      "imageUrl": "/images/catalog/shveller/shveller-18-clean.webp",
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-n18-12m.webp",
       "values": {
         "Высота": "180 мм",
         "Ширина полки": "70 мм",
@@ -1089,7 +1089,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/shveller/shveller-18-clean.webp",
+      "output": "public/images/catalog/shveller/measurement/shveller-n18-12m.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
@@ -1107,9 +1107,9 @@
       }
     },
     {
-      "id": "rozmet-2243",
+      "id": "catalog-2243",
       "number": "20",
-      "imageUrl": "/images/catalog/shveller/shveller-20-clean.webp",
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-n20-12m.webp",
       "values": {
         "Высота": "200 мм",
         "Ширина полки": "76 мм",
@@ -1231,7 +1231,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/shveller/shveller-20-clean.webp",
+      "output": "public/images/catalog/shveller/measurement/shveller-n20-12m.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
@@ -1249,9 +1249,9 @@
       }
     },
     {
-      "id": "rozmet-2244",
+      "id": "catalog-2244",
       "number": "22",
-      "imageUrl": "/images/catalog/shveller/shveller-22-clean.webp",
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-n22-12m.webp",
       "values": {
         "Высота": "220 мм",
         "Ширина полки": "82 мм",
@@ -1373,7 +1373,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/shveller/shveller-22-clean.webp",
+      "output": "public/images/catalog/shveller/measurement/shveller-n22-12m.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
@@ -1391,9 +1391,9 @@
       }
     },
     {
-      "id": "rozmet-2245",
+      "id": "catalog-2245",
       "number": "24",
-      "imageUrl": "/images/catalog/shveller/shveller-24-clean.webp",
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-n24-12m.webp",
       "values": {
         "Высота": "240 мм",
         "Ширина полки": "90 мм",
@@ -1515,7 +1515,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/shveller/shveller-24-clean.webp",
+      "output": "public/images/catalog/shveller/measurement/shveller-n24-12m.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
@@ -1533,9 +1533,9 @@
       }
     },
     {
-      "id": "rozmet-2246",
+      "id": "catalog-2246",
       "number": "27",
-      "imageUrl": "/images/catalog/shveller/shveller-27-clean.webp",
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-n27-12m.webp",
       "values": {
         "Высота": "270 мм",
         "Ширина полки": "95 мм",
@@ -1657,7 +1657,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/shveller/shveller-27-clean.webp",
+      "output": "public/images/catalog/shveller/measurement/shveller-n27-12m.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
@@ -1675,9 +1675,9 @@
       }
     },
     {
-      "id": "rozmet-2247",
+      "id": "catalog-2247",
       "number": "30",
-      "imageUrl": "/images/catalog/shveller/shveller-30-clean.webp",
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-n30-12m.webp",
       "values": {
         "Высота": "300 мм",
         "Ширина полки": "100 мм",
@@ -1799,7 +1799,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/shveller/shveller-30-clean.webp",
+      "output": "public/images/catalog/shveller/measurement/shveller-n30-12m.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
@@ -1817,9 +1817,9 @@
       }
     },
     {
-      "id": "rozmet-2248",
+      "id": "catalog-2248",
       "number": "40",
-      "imageUrl": "/images/catalog/shveller/shveller-40-clean.webp",
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-n40-12m.webp",
       "values": {
         "Высота": "400 мм",
         "Ширина полки": "115 мм",
@@ -1941,7 +1941,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/shveller/shveller-40-clean.webp",
+      "output": "public/images/catalog/shveller/measurement/shveller-n40-12m.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",

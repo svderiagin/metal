@@ -1,7 +1,7 @@
 import type {ProductVariant} from "@/types/product";
 
 export function getChannelProductDescription(variant: ProductVariant): string {
-  if (variant.categoryId !== "rozmet-cat-shveller") return variant.description || variant.shortDescription;
+  if (variant.categoryId !== "catalog-cat-shveller") return variant.description || variant.shortDescription;
 
   const formatValue = (value: string) => value.replace(/(\d)\.(?=\d)/g, "$1,")
     .replace(/(\d)\s*-\s*(?=\d)/g, "$1–").replace(/кг\/м\.п\.?/g, "кг/м");

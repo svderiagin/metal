@@ -53,10 +53,9 @@
   "illustration": "Shared family photograph; labels show nominal dimensions, not scaled manufacturing geometry.",
   "records": [
     {
-      "id": "rozmet-2209",
-      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_25x25x3/",
+      "id": "catalog-2209",
       "profile": "25x25x3",
-      "imageUrl": "/images/catalog/ugolok/ugolok-25x25x3-clean.webp",
+      "imageUrl": "/images/catalog/ugolok/measurement/ugolok-stalnoy-25x25x3mm-6m.webp",
       "labels": [
         {
           "key": "title",
@@ -109,16 +108,15 @@
         "shiftLeft": 109
       },
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/ugolok/ugolok-25x25x3-clean.webp",
+      "output": "public/images/catalog/ugolok/measurement/ugolok-stalnoy-25x25x3mm-6m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "9004df6b366470cb1bf1ede220ee0031de56577f4f3cd3206d1efb901b9e8acc"
     },
     {
-      "id": "rozmet-2210",
-      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_32x32x3/",
+      "id": "catalog-2210",
       "profile": "32x32x3",
-      "imageUrl": "/images/catalog/ugolok/ugolok-32x32x3-clean.webp",
+      "imageUrl": "/images/catalog/ugolok/measurement/ugolok-stalnoy-32x32x3mm-6m.webp",
       "labels": [
         {
           "key": "title",
@@ -204,16 +202,15 @@
         "shiftLeft": 106
       },
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/ugolok/ugolok-32x32x3-clean.webp",
+      "output": "public/images/catalog/ugolok/measurement/ugolok-stalnoy-32x32x3mm-6m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "6e686392c859fd292d2ee0580f33d705b6187d2ae90947c74d88dc11e8b85670"
     },
     {
-      "id": "rozmet-20157",
-      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_35x35x4/",
+      "id": "catalog-20157",
       "profile": "35x35x4",
-      "imageUrl": "/images/catalog/ugolok/ugolok-35x35x4-clean.webp",
+      "imageUrl": "/images/catalog/ugolok/measurement/ugolok-stalnoy-35x35x4mm-6m.webp",
       "labels": [
         {
           "key": "title",
@@ -309,16 +306,15 @@
         "shiftLeft": 106
       },
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/ugolok/ugolok-35x35x4-clean.webp",
+      "output": "public/images/catalog/ugolok/measurement/ugolok-stalnoy-35x35x4mm-6m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "a84b8d13d5e3c62ef93f374224d8950c7c5f91236afe7e64fa59e953a7a24090"
     },
     {
-      "id": "rozmet-2211",
-      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_40x40x3/",
+      "id": "catalog-2211",
       "profile": "40x40x3",
-      "imageUrl": "/images/catalog/ugolok/ugolok-40x40x3-clean.webp",
+      "imageUrl": "/images/catalog/ugolok/measurement/ugolok-stalnoy-40x40x3mm-6m.webp",
       "labels": [
         {
           "key": "title",
@@ -404,16 +400,15 @@
         "shiftLeft": 106
       },
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/ugolok/ugolok-40x40x3-clean.webp",
+      "output": "public/images/catalog/ugolok/measurement/ugolok-stalnoy-40x40x3mm-6m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "373d5e61ec79b2b106d53514dfbca9551d3123b1c7f400278f13fb388b153319"
     },
     {
-      "id": "rozmet-2212",
-      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_40x40x4/",
+      "id": "catalog-2212",
       "profile": "40x40x4",
-      "imageUrl": "/images/catalog/ugolok/ugolok-40x40x4-clean.webp",
+      "imageUrl": "/images/catalog/ugolok/measurement/ugolok-stalnoy-40x40x4mm-6m.webp",
       "labels": [
         {
           "key": "title",
@@ -509,16 +504,15 @@
         "shiftLeft": 106
       },
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/ugolok/ugolok-40x40x4-clean.webp",
+      "output": "public/images/catalog/ugolok/measurement/ugolok-stalnoy-40x40x4mm-6m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "21f33cb46b365aaa389eea431d9226d67ad46dfecc322bc400f845c9210ebb0f"
     },
     {
-      "id": "rozmet-2213",
-      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_45x45x4/",
+      "id": "catalog-2213",
       "profile": "45x45x4",
-      "imageUrl": "/images/catalog/ugolok/ugolok-45x45x4-clean.webp",
+      "imageUrl": "/images/catalog/ugolok/measurement/ugolok-stalnoy-45x45x4mm-12m.webp",
       "labels": [
         {
           "key": "title",
@@ -625,16 +619,15 @@
         "shiftLeft": 106
       },
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/ugolok/ugolok-45x45x4-clean.webp",
+      "output": "public/images/catalog/ugolok/measurement/ugolok-stalnoy-45x45x4mm-12m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "9b75383fa0c10c0554988ce3afd3147757e247c4b443833b4e30af4fcafbb5f6"
     },
     {
-      "id": "rozmet-2214",
-      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_50x50x4/",
+      "id": "catalog-2214",
       "profile": "50x50x4",
-      "imageUrl": "/images/catalog/ugolok/ugolok-50x50x4-clean.webp",
+      "imageUrl": "/images/catalog/ugolok/measurement/ugolok-stalnoy-50x50x4mm-6m.webp",
       "labels": [
         {
           "key": "title",
@@ -730,16 +723,15 @@
         "shiftLeft": 106
       },
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/ugolok/ugolok-50x50x4-clean.webp",
+      "output": "public/images/catalog/ugolok/measurement/ugolok-stalnoy-50x50x4mm-6m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "65cc97b6cdb45b807d92532fe57c2f6b3c0878d7dd7ae79b74768499c80bcbd9"
     },
     {
-      "id": "rozmet-2215",
-      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_50x50x5/",
+      "id": "catalog-2215",
       "profile": "50x50x5",
-      "imageUrl": "/images/catalog/ugolok/ugolok-50x50x5-clean.webp",
+      "imageUrl": "/images/catalog/ugolok/measurement/ugolok-stalnoy-50x50x5mm-12m.webp",
       "labels": [
         {
           "key": "title",
@@ -846,16 +838,15 @@
         "shiftLeft": 106
       },
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/ugolok/ugolok-50x50x5-clean.webp",
+      "output": "public/images/catalog/ugolok/measurement/ugolok-stalnoy-50x50x5mm-12m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "e006c2b43c3356c11a1f952d135bcf6a514c9ca83b5265b81cc155807dd09e6e"
     },
     {
-      "id": "rozmet-2216",
-      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_63x63x4/",
+      "id": "catalog-2216",
       "profile": "63x63x4",
-      "imageUrl": "/images/catalog/ugolok/ugolok-63x63x4-clean.webp",
+      "imageUrl": "/images/catalog/ugolok/measurement/ugolok-stalnoy-63x63x4mm-12m.webp",
       "labels": [
         {
           "key": "title",
@@ -962,16 +953,15 @@
         "shiftLeft": 106
       },
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/ugolok/ugolok-63x63x4-clean.webp",
+      "output": "public/images/catalog/ugolok/measurement/ugolok-stalnoy-63x63x4mm-12m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "aa0f9df489b50ca6490418e8ee60f0949bf80a555c6690700d2ac134997780f4"
     },
     {
-      "id": "rozmet-2217",
-      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_63x63x5/",
+      "id": "catalog-2217",
       "profile": "63x63x5",
-      "imageUrl": "/images/catalog/ugolok/ugolok-63x63x5-clean.webp",
+      "imageUrl": "/images/catalog/ugolok/measurement/ugolok-stalnoy-63x63x5mm-12m.webp",
       "labels": [
         {
           "key": "title",
@@ -1078,16 +1068,15 @@
         "shiftLeft": 106
       },
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/ugolok/ugolok-63x63x5-clean.webp",
+      "output": "public/images/catalog/ugolok/measurement/ugolok-stalnoy-63x63x5mm-12m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "7d0cb1e4f32c2ccbf2f6c63b4111bd945491bb7bff8fd2758a719f591ca232b2"
     },
     {
-      "id": "rozmet-2218",
-      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_75x75x5/",
+      "id": "catalog-2218",
       "profile": "75x75x5",
-      "imageUrl": "/images/catalog/ugolok/ugolok-75x75x5-clean.webp",
+      "imageUrl": "/images/catalog/ugolok/measurement/ugolok-stalnoy-75x75x5mm-12m.webp",
       "labels": [
         {
           "key": "title",
@@ -1194,16 +1183,15 @@
         "shiftLeft": 105
       },
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/ugolok/ugolok-75x75x5-clean.webp",
+      "output": "public/images/catalog/ugolok/measurement/ugolok-stalnoy-75x75x5mm-12m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "7c8522cc590397de40847eef46b0ef41a4bd70717ff6becbd68614f393405697"
     },
     {
-      "id": "rozmet-20160",
-      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_75x75x6/",
+      "id": "catalog-20160",
       "profile": "75x75x6",
-      "imageUrl": "/images/catalog/ugolok/ugolok-75x75x6-clean.webp",
+      "imageUrl": "/images/catalog/ugolok/measurement/ugolok-stalnoy-75x75x6mm-6m.webp",
       "labels": [
         {
           "key": "title",
@@ -1299,16 +1287,15 @@
         "shiftLeft": 105
       },
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/ugolok/ugolok-75x75x6-clean.webp",
+      "output": "public/images/catalog/ugolok/measurement/ugolok-stalnoy-75x75x6mm-6m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "af1d6094cc190d2ba9d19e0522f5619d22136c4883e91c7e420ada01aebfa172"
     },
     {
-      "id": "rozmet-2220",
-      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_90x90x6/",
+      "id": "catalog-2220",
       "profile": "90x90x6",
-      "imageUrl": "/images/catalog/ugolok/ugolok-90x90x6-clean.webp",
+      "imageUrl": "/images/catalog/ugolok/measurement/ugolok-stalnoy-90x90x6mm-12m.webp",
       "labels": [
         {
           "key": "title",
@@ -1415,16 +1402,15 @@
         "shiftLeft": 106
       },
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/ugolok/ugolok-90x90x6-clean.webp",
+      "output": "public/images/catalog/ugolok/measurement/ugolok-stalnoy-90x90x6mm-12m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "8421221f34e36b6861bf3303d594b157cddf0a1779b3b604f71d5df70e6dc77a"
     },
     {
-      "id": "rozmet-2219",
-      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok-75kh75kh6/",
+      "id": "catalog-2219",
       "profile": "100x63x6",
-      "imageUrl": "/images/catalog/ugolok/ugolok-100x63x6-clean.webp",
+      "imageUrl": "/images/catalog/ugolok/measurement/ugolok-stalnoy-100x63x6mm-12m.webp",
       "labels": [
         {
           "key": "title",
@@ -1531,16 +1517,15 @@
         "shiftLeft": 105
       },
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/ugolok/ugolok-100x63x6-clean.webp",
+      "output": "public/images/catalog/ugolok/measurement/ugolok-stalnoy-100x63x6mm-12m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "ed1463a780d984f6a00d0589af3f2df3ae0ce28820b817838b46444ec67e93e8"
     },
     {
-      "id": "rozmet-2221",
-      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_100x100x7/",
+      "id": "catalog-2221",
       "profile": "100x100x7",
-      "imageUrl": "/images/catalog/ugolok/ugolok-100x100x7-clean.webp",
+      "imageUrl": "/images/catalog/ugolok/measurement/ugolok-stalnoy-100x100x7mm-12m.webp",
       "labels": [
         {
           "key": "title",
@@ -1647,16 +1632,15 @@
         "shiftLeft": 105
       },
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/ugolok/ugolok-100x100x7-clean.webp",
+      "output": "public/images/catalog/ugolok/measurement/ugolok-stalnoy-100x100x7mm-12m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "00b296192677951e330ce54c0fe113e2a87817ecef6d2e2ed470fd0431c926f1"
     },
     {
-      "id": "rozmet-2222",
-      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_100x100x8/",
+      "id": "catalog-2222",
       "profile": "100x100x8",
-      "imageUrl": "/images/catalog/ugolok/ugolok-100x100x8-clean.webp",
+      "imageUrl": "/images/catalog/ugolok/measurement/ugolok-stalnoy-100x100x8mm-12m.webp",
       "labels": [
         {
           "key": "title",
@@ -1763,16 +1747,15 @@
         "shiftLeft": 105
       },
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/ugolok/ugolok-100x100x8-clean.webp",
+      "output": "public/images/catalog/ugolok/measurement/ugolok-stalnoy-100x100x8mm-12m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "74d8bfbaf3edb26d4b024b99a4d86cc057c675ab2f97651db8f7868153ea83e4"
     },
     {
-      "id": "rozmet-20368",
-      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_100x100x10/",
+      "id": "catalog-20368",
       "profile": "100x100x10",
-      "imageUrl": "/images/catalog/ugolok/ugolok-100x100x10-clean.webp",
+      "imageUrl": "/images/catalog/ugolok/measurement/ugolok-stalnoy-100x100x10mm-12m.webp",
       "labels": [
         {
           "key": "title",
@@ -1879,16 +1862,15 @@
         "shiftLeft": 105
       },
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/ugolok/ugolok-100x100x10-clean.webp",
+      "output": "public/images/catalog/ugolok/measurement/ugolok-stalnoy-100x100x10mm-12m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "f88bb4c9e75774f56a2f23423cb55211532b978b3f7cb508593181f59690ac3d"
     },
     {
-      "id": "rozmet-2223",
-      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_125x125x8/",
+      "id": "catalog-2223",
       "profile": "125x125x8",
-      "imageUrl": "/images/catalog/ugolok/ugolok-125x125x8-clean.webp",
+      "imageUrl": "/images/catalog/ugolok/measurement/ugolok-stalnoy-125x125x8mm-12m.webp",
       "labels": [
         {
           "key": "title",
@@ -1995,16 +1977,15 @@
         "shiftLeft": 105
       },
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/ugolok/ugolok-125x125x8-clean.webp",
+      "output": "public/images/catalog/ugolok/measurement/ugolok-stalnoy-125x125x8mm-12m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "b4feeb33dca625907885fd374f0e1594fb9e716d4eb5f913410fd0b95a36085b"
     },
     {
-      "id": "rozmet-29030",
-      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_125kh125kh10/",
+      "id": "catalog-29030",
       "profile": "125x125x10",
-      "imageUrl": "/images/catalog/ugolok/ugolok-125x125x10-clean.webp",
+      "imageUrl": "/images/catalog/ugolok/measurement/ugolok-stalnoy-125x125x10mm-12m.webp",
       "labels": [
         {
           "key": "title",
@@ -2111,16 +2092,15 @@
         "shiftLeft": 105
       },
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/ugolok/ugolok-125x125x10-clean.webp",
+      "output": "public/images/catalog/ugolok/measurement/ugolok-stalnoy-125x125x10mm-12m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "f37ffcc169089df719bcd56a0817dc9faca2ce84bb3d4f423c18250945263720"
     },
     {
-      "id": "rozmet-2224",
-      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_140x140x10/",
+      "id": "catalog-2224",
       "profile": "140x140x10",
-      "imageUrl": "/images/catalog/ugolok/ugolok-140x140x10-clean.webp",
+      "imageUrl": "/images/catalog/ugolok/measurement/ugolok-stalnoy-140x140x10mm-12m.webp",
       "labels": [
         {
           "key": "title",
@@ -2227,16 +2207,15 @@
         "shiftLeft": 105
       },
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/ugolok/ugolok-140x140x10-clean.webp",
+      "output": "public/images/catalog/ugolok/measurement/ugolok-stalnoy-140x140x10mm-12m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "afc532620cd858285e9f6789f184c67ba2e3be6debd85002a56aa79f32681464"
     },
     {
-      "id": "rozmet-2225",
-      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_160x160x10/",
+      "id": "catalog-2225",
       "profile": "160x160x10",
-      "imageUrl": "/images/catalog/ugolok/ugolok-160x160x10-clean.webp",
+      "imageUrl": "/images/catalog/ugolok/measurement/ugolok-stalnoy-160x160x10mm-12m.webp",
       "labels": [
         {
           "key": "title",
@@ -2343,16 +2322,15 @@
         "shiftLeft": 105
       },
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/ugolok/ugolok-160x160x10-clean.webp",
+      "output": "public/images/catalog/ugolok/measurement/ugolok-stalnoy-160x160x10mm-12m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "485f0f4d22abea1a886f24d2961dac9103c453b5aed30f470c428dd2d8b825b1"
     },
     {
-      "id": "rozmet-16726",
-      "sourceUrl": "https://rozmet.ru/production/ugolok/ugolok_100kh100kh10/",
+      "id": "catalog-16726",
       "profile": "160x100x10",
-      "imageUrl": "/images/catalog/ugolok/ugolok-160x100x10-clean.webp",
+      "imageUrl": "/images/catalog/ugolok/measurement/ugolok-stalnoy-160x100x10mm-12m.webp",
       "labels": [
         {
           "key": "title",
@@ -2459,7 +2437,7 @@
         "shiftLeft": 105
       },
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/ugolok/ugolok-160x100x10-clean.webp",
+      "output": "public/images/catalog/ugolok/measurement/ugolok-stalnoy-160x100x10mm-12m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "cc21083a0c680c00e0e83ce93f1bb20f982337f89db1274b8c7a698d49cd5d37"

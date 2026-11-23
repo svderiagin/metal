@@ -5,6 +5,7 @@ import {fileURLToPath} from 'node:url';
 import sharp from 'sharp';
 import {renderBeamLabel} from '../imports/beam-image-template/labels.mjs';
 import {readProjectData} from './project-data.mjs';
+import {catalogMeasurementUrl} from './catalog-measurement-path.mjs';
 
 process.chdir(fileURLToPath(new URL('..', import.meta.url)));
 const width = 2400, height = 1800;
@@ -25,12 +26,12 @@ const massReference = JSON.parse(await fs.readFile(`${recordDirectory}/mass-refe
 const number = new Intl.NumberFormat('ru-RU');
 const familyTemplates = {
   plain: {
-    family: 'elektrosvarnaya', reference: 'vgp',
+    family: 'elektrosvarnaya', reference: 'vgp', folder: 'truba-elektrosvarnaya', referenceFolder: 'truba-vodogazoprovodnaya',
     extension: {left: 1033, right: 1642, leftTop: 889, rightTop: 1180, y: 1475},
     outer: [[975, 718], [1043, 758]], inner: [[1146, 817], [1078, 778]],
   },
   galvanized: {
-    family: 'elektrosvarnaya_ocinkovannaya', reference: 'vgp_ocinkovannaya',
+    family: 'elektrosvarnaya_ocinkovannaya', reference: 'vgp_ocinkovannaya', folder: 'truba-elektrosvarnaya-otsinkovannaya', referenceFolder: 'truba-vodogazoprovodnaya-otsinkovannaya',
     extension: {left: 1037, right: 1633, leftTop: 877, rightTop: 1180, y: 1472},
     outer: [[978, 718], [1047, 758]], inner: [[1158, 823], [1090, 785]],
   },
@@ -98,11 +99,12 @@ function catalogNumber(product, name) {
 }
 
 const results = [];
+const published = new Map();
 for (const variant of variants) {
   const product = productVariants.find(item => item.id === variant.id);
   assert.ok(product, variant.id);
-  const source = root + `${variant.family}/truba_${variant.family}_2400_1800_original.jpg`;
-  const referenceSource = root + `${variant.reference}/truba_${variant.reference}_2400_1800_original.jpg`;
+  const source = root + `${variant.folder}/originals/truba_${variant.family}_2400_1800_original.jpg`;
+  const referenceSource = root + `${variant.referenceFolder}/originals/truba_${variant.reference}_2400_1800_original.jpg`;
   const originalFile = await fs.readFile(source);
   assert.ok(originalFile.equals(await fs.readFile(referenceSource)), 'Use the exact supplied original');
   const {data: original, info} = await sharp(originalFile).removeAlpha().raw().toBuffer({resolveWithObject: true});
@@ -146,8 +148,14 @@ for (const variant of variants) {
   }
   assert.equal(changedOutsideAnnotations, 0, 'Original photograph must be pixel-identical outside annotations');
   const output = await sharp(after, {raw: {width, height, channels: 3}}).jpeg({quality: 100, chromaSubsampling: '4:4:4'}).toBuffer();
-  const outputPath = write ? root + `${variant.family}/${variant.filename}` : `${qa}/${variant.filename}`;
-  await fs.writeFile(outputPath, output);
+  const key = `${variant.folder}/${createHash('sha256').update(output).digest('hex')}`;
+  const previous = write ? published.get(key) : undefined;
+  const outputPath = previous ?? (write ? `public${catalogMeasurementUrl(product, 'jpg')}` : `${qa}/${variant.filename}`);
+  if (!previous) {
+    if (write) await fs.mkdir(root + `${variant.folder}/measurement`, {recursive: true});
+    await fs.writeFile(outputPath, output);
+    if (write) published.set(key, outputPath);
+  }
   await fs.writeFile(`${qa}/${variant.id}-annotations.png`, overlay);
   for (const [name, box] of Object.entries({title: {left: 115, top: 110, width: 1300, height: variant.title.length * 107}, wall: {left: 750, top: 670, width: 450, height: 190}, footer: {left: 115, top: 1550, width: 1000, height: 210}})) {
     await sharp(output).extract(box).png().toFile(`${qa}/${variant.id}-${name}.png`);
@@ -161,6 +169,8 @@ if (write) {
   const manifest = JSON.parse(await fs.readFile(manifestPath, 'utf8'));
   for (const result of results) {
     const product = productVariants.find(item => item.id === result.id);
+    // This size has a separately selected WebP for the storefront.
+    if (result.id === 'local-443' && manifest[result.id]?.imageUrl === catalogMeasurementUrl(product)) continue;
     manifest[result.id] = {imageUrl: result.output.replace(/^public/u, ''), photoUrl: result.source.replace(/^public/u, ''), signature: productIllustrationSignature(product), ...(result.unverified ? {showForDemo: true} : {})};
   }
   await fs.writeFile(manifestPath, JSON.stringify(manifest, null, 2) + '\n');

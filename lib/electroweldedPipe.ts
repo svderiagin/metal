@@ -5,8 +5,21 @@ import {formatNumber} from "./numberFormat";
 
 const assortmentStandard = "ГОСТ 10704-91";
 const technicalStandard = "ГОСТ 10705-80";
-const standard = `${assortmentStandard}; ${technicalStandard}`;
+export const electroweldedPipeStandard = `${assortmentStandard}; ${technicalStandard}`;
 const pipeMasses: Partial<Record<string, number>> = massReference.massKgPerMeterBySection;
+const intermediatePipeMasses: Partial<Record<string, number>> = massReference.massKgPerMeterByFormula;
+
+export function electroweldedPipeMass(diameterMm: number, wallThicknessMm: number) {
+  return pipeMasses[`${diameterMm}x${wallThicknessMm}`];
+}
+
+export function electroweldedMarketPipeMass(diameterMm: number, wallThicknessMm: number, standard: string) {
+  const mass = electroweldedPipeMass(diameterMm, wallThicknessMm) ?? intermediatePipeMasses[`${diameterMm}x${wallThicknessMm}`];
+  // ГОСТ 10706-76 limits sizes below 820 mm to a single longitudinal seam.
+  // Table 1 of ГОСТ 10704-91 adds 1% to the theoretical mass of single-seam pipe.
+  return mass !== undefined && diameterMm < 820 && standard.includes("10706-76")
+    ? Math.round(mass * 101) / 100 : mass;
+}
 
 export function normalizeElectroweldedVariant(product: ProductVariant): ProductVariant {
   if (product.categoryId !== "cat-trk" || product.subcategoryId !== "cat-trk-sub-2"
@@ -16,9 +29,9 @@ export function normalizeElectroweldedVariant(product: ProductVariant): ProductV
   const sourceProductName = fact("Полное обозначение");
   const diameterMm = supplierNumber(fact("Диаметр, мм"));
   const wallThicknessMm = supplierNumber(fact("Толщина, мм"));
-  const weightPerMeterKg = pipeMasses[`${diameterMm}x${wallThicknessMm}`];
-  if (sourceProductName !== product.name || diameterMm === undefined || wallThicknessMm === undefined
-    || weightPerMeterKg === undefined) return product;
+  if (sourceProductName !== product.name || diameterMm === undefined || wallThicknessMm === undefined) return product;
+  const weightPerMeterKg = electroweldedPipeMass(diameterMm, wallThicknessMm);
+  if (weightPerMeterKg === undefined) return product;
 
   const lengthMm = supplierNumber(fact("Длина, мм"));
   const range = /\sн\/д\s*\((\d+)\s*[-–]\s*(\d+)\s*м\)/iu.exec(sourceProductName);
@@ -49,7 +62,7 @@ export function normalizeElectroweldedVariant(product: ProductVariant): ProductV
       steelGrade ? `Марка стали ${steelGrade} по данным поставщика.` : "Марка стали уточняется.",
       "Фактические параметры партии подтверждаются документом о качестве.",
     ].filter(Boolean).join(" "),
-    standard,
+    standard: electroweldedPipeStandard,
     diameterMm,
     wallThicknessMm,
     ...(lengthMeters === undefined ? {lengthRangeMeters} : {lengthMeters}),
@@ -58,7 +71,7 @@ export function normalizeElectroweldedVariant(product: ProductVariant): ProductV
     weightConfirmed: true,
     attributes: [
       ...product.attributes.filter(({key}) => !["standard", "size", "length", "grade"].includes(key)),
-      {key: "standard", label: "Стандарты по каталогу", value: standard},
+      {key: "standard", label: "Стандарты по каталогу", value: electroweldedPipeStandard},
       {key: "size", label: "Наружный Ø × стенка, мм", value: section},
       {key: "length", label: "Длина по каталогу, м", value: length},
       ...(steelGrade ? [{key: "grade" as const, label: "Марка стали по каталогу", value: steelGrade}] : []),

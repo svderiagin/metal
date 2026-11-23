@@ -2,8 +2,8 @@
 
 Эталон владельца от 08.11.2026 сохранён в новой папке:
 
-- чистая фотография: `public/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg` (фактический размер 1448 × 1086);
-- образец разметки: `public/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_2400_1800_marked.jpg` (2400 × 1800).
+- чистая фотография: `public/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/originals/truba_priamougolnaya_1148_1086_original.jpg` (фактический размер 1448 × 1086);
+- образец разметки: `public/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/originals/truba_priamougolnaya_2400_1800_marked.jpg` (2400 × 1800).
 
 Имена и содержимое обоих исходников сохраняются. На размеченном образце
 осталось слово «квадратная»; в производных изображениях заголовок исправлен

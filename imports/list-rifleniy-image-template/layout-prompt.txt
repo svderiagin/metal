@@ -1,6 +1,6 @@
 Use case: compositing.
 Asset type: clean steel-product catalog illustration, prepared for later manual dimension annotations.
-Edit target: input image 1, the selected Cronvall steel tread plate, currently 1536x1024.
+Edit target: input image 1, the selected steel tread plate, currently 1536x1024.
 Composition-only references: inputs 2, 3 and 4 show the site's channel, angle and square product illustrations. Use their white canvas, large product on the right, and negative space on the upper left and lower left as the layout reference. Do not copy their products or change the tread plate into a bar or profile.
 
 Primary request: Recompose the SAME single rectangular steel tread plate onto a LANDSCAPE 4:3 white canvas, ideally exactly 2400 x 1800 pixels. Only change overall positioning, in-plane rotation, scale and the surrounding white canvas. Preserve the original plate's proportions, flat rectangular geometry, thin straight cut edges, individual alternating oval/lentil raised tread pattern, metallic grey material, reflections and soft contact shadow. No new material design. Keep all four corners and the entire perimeter visible. Do not warp, bend, thicken or truncate the plate.

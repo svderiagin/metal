@@ -4,12 +4,11 @@ import {type FormEvent, useDeferredValue, useMemo, useRef, useState} from "react
 import {useRouter, useSearchParams} from "next/navigation";
 import {Button} from "@/components/ui/Button";
 import {Input} from "@/components/ui/Input";
-import {createCatalogSearchIndex} from "@/lib/search";
+import {createCatalogSearchIndex, type SearchCategory} from "@/lib/search";
 import Link from "next/link";
 import {catalogProductPath} from "@/lib/catalogLinks";
 import {ProductTypeGrid} from "./ProductTypeGrid";
 import type {ProductType, ProductVariant} from "@/types/product";
-import type {Category} from "@/types/category";
 import focusStyles from "./CatalogFocus.module.css";
 
 const queryLimit = 250;
@@ -21,7 +20,7 @@ export function CatalogSearch({
 }: {
   productTypes: ProductType[];
   variants: ProductVariant[];
-  categories: Category[];
+  categories: SearchCategory[];
 }) {
   const router = useRouter();
   const formRef = useRef<HTMLFormElement>(null);

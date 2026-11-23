@@ -1,7 +1,7 @@
 import type {ProductVariant} from "@/types/product";
 
 // GOST 34028-2016, table 1: nominal mass in kg/m.
-// https://files.stroyinf.ru/Data2/1/4293746/4293746568.htm
+// https://meganorm.ru/Data2/1/4293746/4293746568.htm
 const nominalMasses: Record<number, number> = {
   6: .222, 8: .395, 10: .617, 12: .888, 14: 1.208, 16: 1.578,
   18: 1.998, 20: 2.466, 22: 2.984, 25: 3.853, 28: 4.834, 32: 6.313, 36: 7.990, 40: 9.865,

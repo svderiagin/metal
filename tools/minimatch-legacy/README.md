@@ -15,14 +15,12 @@ callable matching, `Minimatch.match`, partial matching and convenience helpers.
 `eslint-plugin-import/no-internal-modules`; it returns a safe matcher, not a RegExp.
 Do not use it for code requiring RegExp identity/source or removed AST APIs.
 
-`scripts/minimatch-compat.test.mjs` exercises the actual React, accessibility and
-import rules with glob options, including both accepted and rejected input.
-Run `npm run test:unit`, `npm run lint`, `npm ls minimatch minimatch-modern --all`
-and `npm audit` after any dependency/override edit. A clean `npm ci` must work.
+Run `npm run lint`, `npm ls minimatch minimatch-modern --all` and `npm audit`
+after a dependency or override edit. Verify that a clean `npm ci` works.
 
 Remove this adapter and both root overrides when all installed consumers support
 the patched upstream API. Do not simply force v11 on plugins that expect a
 callable v3 export: ordinary lint runs may not reach their glob-dependent rules.
 
-Sources: [security advisory](https://github.com/advisories/GHSA-g3hv-75wg-m249),
-[upstream API changes](https://github.com/isaacs/minimatch/blob/main/changelog.md).
+Sources: security advisory,
+upstream API changes.

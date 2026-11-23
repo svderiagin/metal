@@ -1,7 +1,7 @@
 # Исправление dev-зависимостей — 04.11.2026
 
 После аудита `31cf129` оставались 16 moderate-предупреждений. Все они восходили
-к одному advisory minimatch: [GHSA-g3hv-75wg-m249](https://github.com/advisories/GHSA-g3hv-75wg-m249).
+к одному advisory minimatch: GHSA-g3hv-75wg-m249.
 В дереве были 3.1.5 (ESLint, React/import/a11y plugins) и 10.2.6 (TypeScript parser).
 Исправленный upstream — 11.0.1+, установлен и закреплён **11.0.4**.
 
@@ -38,16 +38,12 @@
 | `npm ls minimatch minimatch-modern --all` | Корректное дерево, без invalid/missing dependencies; старых движков нет |
 | Полный `npm audit --json` | **0** info/low/moderate/high/critical |
 | ESLint | 225 файлов, 0 ошибок, 0 предупреждений; исходные файлы остаются в области проверки |
-| `npm run test:unit` | **172 passed**, 0 failed, 3 ранее документированных skip; всего 175 |
 | TypeScript | Пройден |
-| `npm run test:build` | Production webpack-сборка Next.js 16.4.5, 687 страниц |
-| `npm run test:e2e` | **86 passed**, 0 failed, 2 mobile-only skip в desktop-проектах |
-| `npm run test:visual` | **48 passed**, 0 failed; все 60 PNG совпали без обновления эталонов |
 
 Новые 7 проверок выполняют реальные glob-ветки React, доступности и импортов
 с разрешёнными и запрещёнными примерами. Они также проверяют разрешение зависимости,
 dotfiles/negation/partial matching, callable helpers и сохранение ESLint ignores.
 Эталоны изображений и код магазина не обновлялись.
 
-Источники API: [upstream changelog](https://github.com/isaacs/minimatch/blob/main/changelog.md),
-[обсуждение обновления ESLint](https://github.com/eslint/eslint/issues/21463).
+Источники API: upstream changelog,
+обсуждение обновления ESLint.

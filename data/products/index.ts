@@ -7,8 +7,8 @@ import {metalMeshProducts} from "./metalMesh";
 import {roundPipeLegacyProducts} from "./trubaKruglayaLegacy";
 import {trubyProfilnyeProducts, profilePipeProducts} from "./trubyProfilnye";
 import type {ProductVariant, ProductVariantSource, ProductWeight} from "@/types/product";
-import importedCatalog from "../imported-catalog.json";
-import rozmetCatalog from "../rozmet-catalog.json";
+import catalogPositions from "../catalog-positions.json";
+import additionalCatalog from "../additional-catalog.json";
 import catalogImages from "../catalog-images.json";
 import {normalizeRebarVariant} from "@/lib/rebar";
 import {normalizeBeamVariant} from "@/lib/beam";
@@ -44,8 +44,8 @@ export const existingVariants: ProductVariant[] = productSources.map((product) =
 }));
 
 const retainedProductVariants: ProductVariant[] = [
-  ...existingVariants.filter(p => !(importedCatalog.matchedIds as string[]).includes(p.id)),
-  ...(importedCatalog.products as ProductVariant[]).filter(product => isRetainedCategory(product.categoryId)),
+  ...existingVariants.filter(p => !(catalogPositions.matchedIds as string[]).includes(p.id)),
+  ...(catalogPositions.products as ProductVariant[]).filter(product => isRetainedCategory(product.categoryId)),
 ].filter(product => isRetainedCategory(product.categoryId)).filter(isPublicProduct).map(normalizeRebarVariant).map(normalizeBeamVariant).map(normalizeGalvanizedVgpVariant).map(normalizeElectroweldedVariant).map(normalizeGalvanizedElectroweldedVariant).map(normalizePipeWeight).map(product => ({
   ...product,
   imageUrls: (catalogImages.products as Record<string, string>)[product.id]
@@ -55,7 +55,7 @@ const retainedProductVariants: ProductVariant[] = [
 
 export const productVariants: ProductVariant[] = [
   ...retainedProductVariants,
-  ...(rozmetCatalog.products as ProductVariant[]).filter(isPublicProduct).map(applyCatalogOverrides),
+  ...(additionalCatalog.products as ProductVariant[]).filter(isPublicProduct).map(applyCatalogOverrides),
 ];
 
 function estimateDemoWeight(product: ProductVariantSource): ProductWeight | undefined {

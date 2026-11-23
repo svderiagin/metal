@@ -1,7 +1,7 @@
 {
   "renderer": "scripts/render-profile-square-images.mjs",
-  "reference": "public/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_2400_1800_marked.jpg",
-  "cleanPhoto": "public/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+  "reference": "public/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/originals/truba_kvadratnaya_2400_1800_marked.jpg",
+  "cleanPhoto": "public/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/originals/truba_kvadratnaya_1448_1086_original.jpg",
   "typography": {
     "family": "Inter",
     "fontFile": "imports/shveller-image-template/fonts/Inter-variable.ttf",
@@ -52,8 +52,8 @@
   "records": [
     {
       "id": "profile-pipe-square-15x15x1-5",
-      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-15x15x1-5.webp",
-      "photoUrl": "/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-15x15x1-5mm-6m.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/originals/truba_kvadratnaya_1448_1086_original.jpg",
       "signature": "41a5e8e6",
       "labels": [
         {
@@ -84,7 +84,7 @@
       "changedLabels": [],
       "placements": [],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/product-illustrations/profile-pipe-square-15x15x1-5.webp",
+      "output": "public/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-15x15x1-5mm-6m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "0bc40cd2ea5de4f138e144f075e6c537d6a729bb2dcc2cb9c51b81e6b271cc03",
@@ -102,8 +102,8 @@
     },
     {
       "id": "profile-pipe-square-20x20x1-5",
-      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-20x20x1-5.webp",
-      "photoUrl": "/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-20x20x1-5mm-6m.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/originals/truba_kvadratnaya_1448_1086_original.jpg",
       "signature": "d7556fae",
       "labels": [
         {
@@ -180,7 +180,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/product-illustrations/profile-pipe-square-20x20x1-5.webp",
+      "output": "public/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-20x20x1-5mm-6m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "48077b186aedb070c1cd04a822b977b5a41ac06eba2dad1fe24c4d6a49bfc389",
@@ -198,8 +198,8 @@
     },
     {
       "id": "profile-pipe-square-20x20x2",
-      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-20x20x2.webp",
-      "photoUrl": "/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-20x20x2mm-6m.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/originals/truba_kvadratnaya_1448_1086_original.jpg",
       "signature": "1f53f64f",
       "labels": [
         {
@@ -286,7 +286,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/product-illustrations/profile-pipe-square-20x20x2.webp",
+      "output": "public/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-20x20x2mm-6m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "a95882d7eb965588b38b76351a670a2af2e614e2e1cd93f82fbd22417afd4dba",
@@ -304,8 +304,8 @@
     },
     {
       "id": "profile-pipe-square-25x25x1-5",
-      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-25x25x1-5.webp",
-      "photoUrl": "/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-25x25x1-5mm-6m.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/originals/truba_kvadratnaya_1448_1086_original.jpg",
       "signature": "27a314b4",
       "labels": [
         {
@@ -382,7 +382,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/product-illustrations/profile-pipe-square-25x25x1-5.webp",
+      "output": "public/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-25x25x1-5mm-6m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "6d76cdf7c2d74be3594841efc0c170ed011ce46748e27137d50c3147a5b8b066",
@@ -400,8 +400,8 @@
     },
     {
       "id": "profile-pipe-square-25x25x2",
-      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-25x25x2.webp",
-      "photoUrl": "/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-25x25x2mm-6m.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/originals/truba_kvadratnaya_1448_1086_original.jpg",
       "signature": "ecda5f51",
       "labels": [
         {
@@ -488,7 +488,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/product-illustrations/profile-pipe-square-25x25x2.webp",
+      "output": "public/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-25x25x2mm-6m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "d9d7ed4cdac744c1b8e8c88245007c4dc436ec784a1d642368a75921217c4fc1",
@@ -506,8 +506,8 @@
     },
     {
       "id": "profile-pipe-square-30x30x1-5",
-      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-30x30x1-5.webp",
-      "photoUrl": "/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-30x30x1-5mm-6m.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/originals/truba_kvadratnaya_1448_1086_original.jpg",
       "signature": "b3c695a8",
       "labels": [
         {
@@ -584,7 +584,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/product-illustrations/profile-pipe-square-30x30x1-5.webp",
+      "output": "public/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-30x30x1-5mm-6m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "dd10ceb3b880804ad59d76e489629588c826750ae42790b547dbdcd91ea27453",
@@ -602,8 +602,8 @@
     },
     {
       "id": "profile-pipe-square-30x30x2",
-      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-30x30x2.webp",
-      "photoUrl": "/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-30x30x2mm-6m.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/originals/truba_kvadratnaya_1448_1086_original.jpg",
       "signature": "35451d91",
       "labels": [
         {
@@ -690,7 +690,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/product-illustrations/profile-pipe-square-30x30x2.webp",
+      "output": "public/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-30x30x2mm-6m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "2d6dd5c3daa36c0697642ea76c63d4e62d003939c213f288d72e172c6278dc2f",
@@ -708,8 +708,8 @@
     },
     {
       "id": "profile-pipe-square-40x40x1-5",
-      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-40x40x1-5.webp",
-      "photoUrl": "/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-40x40x1-5mm-6m.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/originals/truba_kvadratnaya_1448_1086_original.jpg",
       "signature": "2a8df31c",
       "labels": [
         {
@@ -786,7 +786,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/product-illustrations/profile-pipe-square-40x40x1-5.webp",
+      "output": "public/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-40x40x1-5mm-6m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "91692280747a97f2a2641c9ecb6a10d240de9b4fa5d9c91ef41659d6e4ebc5b9",
@@ -804,8 +804,8 @@
     },
     {
       "id": "profile-pipe-square-40x40x2",
-      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-40x40x2.webp",
-      "photoUrl": "/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-40x40x2mm-6m.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/originals/truba_kvadratnaya_1448_1086_original.jpg",
       "signature": "f7f62845",
       "labels": [
         {
@@ -892,7 +892,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/product-illustrations/profile-pipe-square-40x40x2.webp",
+      "output": "public/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-40x40x2mm-6m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "0eb09cb00d88a00118462293142262ae25583a3602404f33bd0f8ee5896d6397",
@@ -910,8 +910,8 @@
     },
     {
       "id": "profile-pipe-square-40x40x3",
-      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-40x40x3.webp",
-      "photoUrl": "/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-40x40x3mm-6m.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/originals/truba_kvadratnaya_1448_1086_original.jpg",
       "signature": "f1143a05",
       "labels": [
         {
@@ -998,7 +998,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/product-illustrations/profile-pipe-square-40x40x3.webp",
+      "output": "public/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-40x40x3mm-6m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "96daff71520f28703c88e796f8a8e779962b5ed84d33f5f5180452903a3fe3d4",
@@ -1016,8 +1016,8 @@
     },
     {
       "id": "profile-pipe-square-50x50x1-5",
-      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-50x50x1-5.webp",
-      "photoUrl": "/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-50x50x1-5mm-6m.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/originals/truba_kvadratnaya_1448_1086_original.jpg",
       "signature": "ced60ef2",
       "labels": [
         {
@@ -1094,7 +1094,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/product-illustrations/profile-pipe-square-50x50x1-5.webp",
+      "output": "public/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-50x50x1-5mm-6m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "0b249b9cc0773ba935f9b75c263ed4d38c0ec3e15ca031a96357ef6368f1b1d4",
@@ -1112,8 +1112,8 @@
     },
     {
       "id": "profile-pipe-square-50x50x2",
-      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-50x50x2.webp",
-      "photoUrl": "/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-50x50x2mm-6m.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/originals/truba_kvadratnaya_1448_1086_original.jpg",
       "signature": "5cfb7515",
       "labels": [
         {
@@ -1200,7 +1200,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/product-illustrations/profile-pipe-square-50x50x2.webp",
+      "output": "public/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-50x50x2mm-6m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "96aec923f39c118a75973ed5b2cf679071d536c575503aaf12cb3848776fafc8",
@@ -1218,8 +1218,8 @@
     },
     {
       "id": "profile-pipe-square-50x50x3",
-      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-50x50x3.webp",
-      "photoUrl": "/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-50x50x3mm-6m.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/originals/truba_kvadratnaya_1448_1086_original.jpg",
       "signature": "cd92dd21",
       "labels": [
         {
@@ -1306,7 +1306,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/product-illustrations/profile-pipe-square-50x50x3.webp",
+      "output": "public/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-50x50x3mm-6m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "064e6c3317e68d5fa3d56334107a181836640498af6f691353234f0edfc6739b",
@@ -1324,8 +1324,8 @@
     },
     {
       "id": "profile-pipe-square-50x50x4",
-      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-50x50x4.webp",
-      "photoUrl": "/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-50x50x4mm-6m.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/originals/truba_kvadratnaya_1448_1086_original.jpg",
       "signature": "26e41d69",
       "labels": [
         {
@@ -1412,7 +1412,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/product-illustrations/profile-pipe-square-50x50x4.webp",
+      "output": "public/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-50x50x4mm-6m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "8d0f129aacdddbd1a940f11c832be3293a402b1a8440f9175e3788a677629d06",
@@ -1430,8 +1430,8 @@
     },
     {
       "id": "profile-pipe-square-60x60x1-5",
-      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-60x60x1-5.webp",
-      "photoUrl": "/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-60x60x1-5mm-6m.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/originals/truba_kvadratnaya_1448_1086_original.jpg",
       "signature": "69865d40",
       "labels": [
         {
@@ -1508,7 +1508,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/product-illustrations/profile-pipe-square-60x60x1-5.webp",
+      "output": "public/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-60x60x1-5mm-6m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "6f1c7e55d426c5c8e745cf2b06e0d003e8bc702f624315bf66024932188f8a44",
@@ -1526,8 +1526,8 @@
     },
     {
       "id": "profile-pipe-square-60x60x2",
-      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-60x60x2.webp",
-      "photoUrl": "/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-60x60x2mm-6m.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/originals/truba_kvadratnaya_1448_1086_original.jpg",
       "signature": "4cd8b4f9",
       "labels": [
         {
@@ -1614,7 +1614,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/product-illustrations/profile-pipe-square-60x60x2.webp",
+      "output": "public/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-60x60x2mm-6m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "f32e14afeab4e773b374d3a7acb269df9a91b5516cb42bf9a8231b551e3725d0",
@@ -1632,8 +1632,8 @@
     },
     {
       "id": "profile-pipe-square-60x60x3",
-      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-60x60x3.webp",
-      "photoUrl": "/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-60x60x3mm-6m.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/originals/truba_kvadratnaya_1448_1086_original.jpg",
       "signature": "f294cd69",
       "labels": [
         {
@@ -1720,7 +1720,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/product-illustrations/profile-pipe-square-60x60x3.webp",
+      "output": "public/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-60x60x3mm-6m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "3f30eeeabfb982dffb9ab9c6a3bbb634c6429ef539581fd6540f7107e78f5d48",
@@ -1738,8 +1738,8 @@
     },
     {
       "id": "profile-pipe-square-60x60x4",
-      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-60x60x4.webp",
-      "photoUrl": "/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-60x60x4mm-6m.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/originals/truba_kvadratnaya_1448_1086_original.jpg",
       "signature": "7f3139ad",
       "labels": [
         {
@@ -1826,7 +1826,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/product-illustrations/profile-pipe-square-60x60x4.webp",
+      "output": "public/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-60x60x4mm-6m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "ed064e3f106dff9be2c239d15bd4faf921e236f6bb531305234a389e467797fd",
@@ -1844,8 +1844,8 @@
     },
     {
       "id": "profile-pipe-square-80x80x2",
-      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-80x80x2.webp",
-      "photoUrl": "/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-80x80x2mm-l6-12m.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/originals/truba_kvadratnaya_1448_1086_original.jpg",
       "signature": "cb772bdc",
       "labels": [
         {
@@ -1943,7 +1943,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/product-illustrations/profile-pipe-square-80x80x2.webp",
+      "output": "public/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-80x80x2mm-l6-12m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "4d03b3bc9a4e436492a2a346746258b1bcf32415d9ee4785554d63339e5eacc4",
@@ -1961,8 +1961,8 @@
     },
     {
       "id": "profile-pipe-square-80x80x3",
-      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-80x80x3.webp",
-      "photoUrl": "/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-80x80x3mm-12m.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/originals/truba_kvadratnaya_1448_1086_original.jpg",
       "signature": "3e6935dd",
       "labels": [
         {
@@ -2060,7 +2060,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/product-illustrations/profile-pipe-square-80x80x3.webp",
+      "output": "public/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-80x80x3mm-12m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "f793ee9f3a466f3a4401cb043c76c4389fc019dc767d8b5fab805b3df5fe5b24",
@@ -2078,8 +2078,8 @@
     },
     {
       "id": "profile-pipe-square-80x80x4",
-      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-80x80x4.webp",
-      "photoUrl": "/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-80x80x4mm-12m.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/originals/truba_kvadratnaya_1448_1086_original.jpg",
       "signature": "2d6944db",
       "labels": [
         {
@@ -2177,7 +2177,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/product-illustrations/profile-pipe-square-80x80x4.webp",
+      "output": "public/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-80x80x4mm-12m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "9aae8a53b2649fa2631e5663d4ee0a0bfdb2b069505dc74db567f11823c9f313",
@@ -2195,8 +2195,8 @@
     },
     {
       "id": "profile-pipe-square-100x100x3",
-      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-100x100x3.webp",
-      "photoUrl": "/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-100x100x3mm-12m.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/originals/truba_kvadratnaya_1448_1086_original.jpg",
       "signature": "3c922d1d",
       "labels": [
         {
@@ -2294,7 +2294,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/product-illustrations/profile-pipe-square-100x100x3.webp",
+      "output": "public/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-100x100x3mm-12m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "59a4b69837ca3c8cb989daf13f415e302eeab9aff2c31296c388cb2171d929b9",
@@ -2312,8 +2312,8 @@
     },
     {
       "id": "profile-pipe-square-100x100x4",
-      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-100x100x4.webp",
-      "photoUrl": "/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-100x100x4mm-12m.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/originals/truba_kvadratnaya_1448_1086_original.jpg",
       "signature": "2acff91f",
       "labels": [
         {
@@ -2411,7 +2411,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/product-illustrations/profile-pipe-square-100x100x4.webp",
+      "output": "public/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-100x100x4mm-12m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "fae237257dfbe7848b8339b325993625768ae665ff1c58e2129941bcf73ec943",
@@ -2429,8 +2429,8 @@
     },
     {
       "id": "profile-pipe-square-100x100x5",
-      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-100x100x5.webp",
-      "photoUrl": "/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-100x100x5mm-12m.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/originals/truba_kvadratnaya_1448_1086_original.jpg",
       "signature": "75e70e1f",
       "labels": [
         {
@@ -2528,7 +2528,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/product-illustrations/profile-pipe-square-100x100x5.webp",
+      "output": "public/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-100x100x5mm-12m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "241599b8c3cda2be025057d8d6f12c1f4d57c8570b62017423db163df38b0790",
@@ -2546,8 +2546,8 @@
     },
     {
       "id": "profile-pipe-square-120x120x3",
-      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-120x120x3.webp",
-      "photoUrl": "/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-120x120x3mm-12m.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/originals/truba_kvadratnaya_1448_1086_original.jpg",
       "signature": "88c3b02b",
       "labels": [
         {
@@ -2645,7 +2645,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/product-illustrations/profile-pipe-square-120x120x3.webp",
+      "output": "public/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-120x120x3mm-12m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "a837efd29eb3d2668a0d41dd82d106d259cf9f4f4a8283dd6134c41c491bb61c",
@@ -2663,8 +2663,8 @@
     },
     {
       "id": "profile-pipe-square-120x120x4",
-      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-120x120x4.webp",
-      "photoUrl": "/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-120x120x4mm-12m.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/originals/truba_kvadratnaya_1448_1086_original.jpg",
       "signature": "f328e5ef",
       "labels": [
         {
@@ -2762,7 +2762,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/product-illustrations/profile-pipe-square-120x120x4.webp",
+      "output": "public/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-120x120x4mm-12m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "b9d5c4cfc51ba3300e5a2929c394e0f777356e960a736cccc41b3115b8f2510f",
@@ -2780,8 +2780,8 @@
     },
     {
       "id": "profile-pipe-square-140x140x4",
-      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-140x140x4.webp",
-      "photoUrl": "/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-140x140x4mm-12m.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/originals/truba_kvadratnaya_1448_1086_original.jpg",
       "signature": "36dd7317",
       "labels": [
         {
@@ -2879,7 +2879,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/product-illustrations/profile-pipe-square-140x140x4.webp",
+      "output": "public/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-140x140x4mm-12m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "e36999751292f637febb2e891d48e6e414fbd8116b7475c81c4d93993386ad5e",
@@ -2897,8 +2897,8 @@
     },
     {
       "id": "profile-pipe-square-160x160x4",
-      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-square-160x160x4.webp",
-      "photoUrl": "/images/catalog/truba-profilnia/truba_kvadratnaya/truba_kvadratnaya_1448_1086_original.jpg",
+      "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-160x160x4mm-12m.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/originals/truba_kvadratnaya_1448_1086_original.jpg",
       "signature": "14ca35e3",
       "labels": [
         {
@@ -2996,7 +2996,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/product-illustrations/profile-pipe-square-160x160x4.webp",
+      "output": "public/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-160x160x4mm-12m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "6b208aa431feb7a16be0ac28c0b438c8234d5e34ba498fb3f3a743e3ef843841",

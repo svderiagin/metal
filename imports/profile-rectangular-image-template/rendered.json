@@ -1,7 +1,7 @@
 {
   "renderer": "scripts/render-profile-rectangular-images.mjs",
-  "reference": "public/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_2400_1800_marked.jpg",
-  "cleanPhoto": "public/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+  "reference": "public/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/originals/truba_priamougolnaya_2400_1800_marked.jpg",
+  "cleanPhoto": "public/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/originals/truba_priamougolnaya_1148_1086_original.jpg",
   "typography": {
     "family": "Inter",
     "fontFile": "imports/shveller-image-template/fonts/Inter-variable.ttf",
@@ -52,8 +52,8 @@
   "records": [
     {
       "id": "profile-pipe-rectangular-30x20x2",
-      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-rectangular-30x20x2.webp",
-      "photoUrl": "/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-30x20x2mm-6m.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/originals/truba_priamougolnaya_1148_1086_original.jpg",
       "signature": "4df507f2",
       "labels": [
         {
@@ -97,7 +97,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-30x20x2.webp",
+      "output": "public/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-30x20x2mm-6m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "f33334d0e995fb62ad720f32cb69af7ba2d25380dc5e95986e3834d84a7875b8",
@@ -115,8 +115,8 @@
     },
     {
       "id": "profile-pipe-rectangular-40x20x1-5",
-      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-rectangular-40x20x1-5.webp",
-      "photoUrl": "/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-40x20x1-5mm-6m.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/originals/truba_priamougolnaya_1148_1086_original.jpg",
       "signature": "5acb2369",
       "labels": [
         {
@@ -192,7 +192,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-40x20x1-5.webp",
+      "output": "public/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-40x20x1-5mm-6m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "25dff9a733e27f4f4cf4f46467afff829699b691abd92ce0601ae00099d61bf8",
@@ -210,8 +210,8 @@
     },
     {
       "id": "profile-pipe-rectangular-40x20x2",
-      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-rectangular-40x20x2.webp",
-      "photoUrl": "/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-40x20x2mm-6m.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/originals/truba_priamougolnaya_1148_1086_original.jpg",
       "signature": "e8b7c242",
       "labels": [
         {
@@ -277,7 +277,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-40x20x2.webp",
+      "output": "public/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-40x20x2mm-6m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "6eb4d3f8959fd48cb0de7fa4293f2b9a3f9be6a3f7bbc24bdcf599ae47704a4c",
@@ -295,8 +295,8 @@
     },
     {
       "id": "profile-pipe-rectangular-40x20x3",
-      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-rectangular-40x20x3.webp",
-      "photoUrl": "/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-40x20x3mm-6m.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/originals/truba_priamougolnaya_1148_1086_original.jpg",
       "signature": "385dcd34",
       "labels": [
         {
@@ -372,7 +372,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-40x20x3.webp",
+      "output": "public/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-40x20x3mm-6m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "1b31320409dd5beb76a85d5da76af67006a367501f068f289a60d131ca9e22ae",
@@ -390,8 +390,8 @@
     },
     {
       "id": "profile-pipe-rectangular-40x25x1-5",
-      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-rectangular-40x25x1-5.webp",
-      "photoUrl": "/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-40x25x1-5mm-6m.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/originals/truba_priamougolnaya_1148_1086_original.jpg",
       "signature": "a73f9d35",
       "labels": [
         {
@@ -478,7 +478,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-40x25x1-5.webp",
+      "output": "public/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-40x25x1-5mm-6m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "b85aeb9fe7ce87030fcee3d6f2abfe41d8237c0046f514afcbd0ad1a76153750",
@@ -496,8 +496,8 @@
     },
     {
       "id": "profile-pipe-rectangular-40x25x2",
-      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-rectangular-40x25x2.webp",
-      "photoUrl": "/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-40x25x2mm-6m.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/originals/truba_priamougolnaya_1148_1086_original.jpg",
       "signature": "37bbd91e",
       "labels": [
         {
@@ -574,7 +574,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-40x25x2.webp",
+      "output": "public/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-40x25x2mm-6m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "63d377b8b01a095f766cb0d4e83aeccebae2e87e784690a1449b595ae548cf9d",
@@ -592,8 +592,8 @@
     },
     {
       "id": "profile-pipe-rectangular-50x25x1-5",
-      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-rectangular-50x25x1-5.webp",
-      "photoUrl": "/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-50x25x1-5mm-6m.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/originals/truba_priamougolnaya_1148_1086_original.jpg",
       "signature": "47766c1d",
       "labels": [
         {
@@ -680,7 +680,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-50x25x1-5.webp",
+      "output": "public/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-50x25x1-5mm-6m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "378a496cba1161768db11bb240695c9000c121885c428981a783cb4fbf319dd0",
@@ -698,8 +698,8 @@
     },
     {
       "id": "profile-pipe-rectangular-50x25x2",
-      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-rectangular-50x25x2.webp",
-      "photoUrl": "/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-50x25x2mm-6m.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/originals/truba_priamougolnaya_1148_1086_original.jpg",
       "signature": "cb70d482",
       "labels": [
         {
@@ -776,7 +776,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-50x25x2.webp",
+      "output": "public/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-50x25x2mm-6m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "081d531fc3cc4736b9a344587c123f1ba1284aad1e4c43f55f215db0b216d434",
@@ -794,8 +794,8 @@
     },
     {
       "id": "profile-pipe-rectangular-50x25x3",
-      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-rectangular-50x25x3.webp",
-      "photoUrl": "/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-50x25x3mm-6m.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/originals/truba_priamougolnaya_1148_1086_original.jpg",
       "signature": "4a5430e0",
       "labels": [
         {
@@ -882,7 +882,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-50x25x3.webp",
+      "output": "public/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-50x25x3mm-6m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "7da657cf330029f65bbf05697945dfeafa968c309b851ee90d9928072ef02e14",
@@ -900,8 +900,8 @@
     },
     {
       "id": "profile-pipe-rectangular-60x30x1-5",
-      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-rectangular-60x30x1-5.webp",
-      "photoUrl": "/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-60x30x1-5mm-6m.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/originals/truba_priamougolnaya_1148_1086_original.jpg",
       "signature": "9f7bdad1",
       "labels": [
         {
@@ -988,7 +988,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-60x30x1-5.webp",
+      "output": "public/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-60x30x1-5mm-6m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "4899edf653ec5ad02622d160aecfb560dd5c2cedbba4382815583632c2eb17ee",
@@ -1006,8 +1006,8 @@
     },
     {
       "id": "profile-pipe-rectangular-60x30x2",
-      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-rectangular-60x30x2.webp",
-      "photoUrl": "/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-60x30x2mm-6m.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/originals/truba_priamougolnaya_1148_1086_original.jpg",
       "signature": "fc70406e",
       "labels": [
         {
@@ -1084,7 +1084,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-60x30x2.webp",
+      "output": "public/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-60x30x2mm-6m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "b80fec361c974324b7a416427d6d33aeb7b1495c5ec902168b981cf9d1af91a7",
@@ -1102,8 +1102,8 @@
     },
     {
       "id": "profile-pipe-rectangular-60x30x3",
-      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-rectangular-60x30x3.webp",
-      "photoUrl": "/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-60x30x3mm-6m.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/originals/truba_priamougolnaya_1148_1086_original.jpg",
       "signature": "3894c0e8",
       "labels": [
         {
@@ -1190,7 +1190,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-60x30x3.webp",
+      "output": "public/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-60x30x3mm-6m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "f8501c758fd9e52f4f4a8286e7ed02fd206fc76e30d92bce9ad0da5b93264fb8",
@@ -1208,8 +1208,8 @@
     },
     {
       "id": "profile-pipe-rectangular-60x40x1-5",
-      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-rectangular-60x40x1-5.webp",
-      "photoUrl": "/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-60x40x1-5mm-6m.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/originals/truba_priamougolnaya_1148_1086_original.jpg",
       "signature": "da9c7621",
       "labels": [
         {
@@ -1296,7 +1296,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-60x40x1-5.webp",
+      "output": "public/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-60x40x1-5mm-6m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "bd0299fe92e8a0390c8f81f263582b4a8476debd2ae324567c76b5d1e5090b27",
@@ -1314,8 +1314,8 @@
     },
     {
       "id": "profile-pipe-rectangular-60x40x2",
-      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-rectangular-60x40x2.webp",
-      "photoUrl": "/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-60x40x2mm-6m.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/originals/truba_priamougolnaya_1148_1086_original.jpg",
       "signature": "6e4b9b6a",
       "labels": [
         {
@@ -1392,7 +1392,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-60x40x2.webp",
+      "output": "public/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-60x40x2mm-6m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "3cf446e2731dd786a71417ba7da76df96a4e58d8cccd1165e449328dcd6722bb",
@@ -1410,8 +1410,8 @@
     },
     {
       "id": "profile-pipe-rectangular-60x40x3",
-      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-rectangular-60x40x3.webp",
-      "photoUrl": "/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-60x40x3mm-6m.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/originals/truba_priamougolnaya_1148_1086_original.jpg",
       "signature": "c0adc998",
       "labels": [
         {
@@ -1498,7 +1498,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-60x40x3.webp",
+      "output": "public/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-60x40x3mm-6m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "2cadf89b82a8eb516f9f2400aaed2719eafd721358680c1f983337281571bae3",
@@ -1516,8 +1516,8 @@
     },
     {
       "id": "profile-pipe-rectangular-60x40x4",
-      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-rectangular-60x40x4.webp",
-      "photoUrl": "/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-60x40x4mm-6m.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/originals/truba_priamougolnaya_1148_1086_original.jpg",
       "signature": "cd0d2c8e",
       "labels": [
         {
@@ -1604,7 +1604,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-60x40x4.webp",
+      "output": "public/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-60x40x4mm-6m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "3843846c302b276bf8af65b6ceef662846a323ff9a0dafcd0a73a05099ea6f8a",
@@ -1622,8 +1622,8 @@
     },
     {
       "id": "profile-pipe-rectangular-80x40x2",
-      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-rectangular-80x40x2.webp",
-      "photoUrl": "/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-80x40x2mm-6m.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/originals/truba_priamougolnaya_1148_1086_original.jpg",
       "signature": "28f9541e",
       "labels": [
         {
@@ -1700,7 +1700,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-80x40x2.webp",
+      "output": "public/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-80x40x2mm-6m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "16f31eaee7989e8964fe3b96e1c06f872a93a53524d0a9b87a34c2c0c7c67559",
@@ -1718,8 +1718,8 @@
     },
     {
       "id": "profile-pipe-rectangular-80x40x3",
-      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-rectangular-80x40x3.webp",
-      "photoUrl": "/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-80x40x3mm-6m.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/originals/truba_priamougolnaya_1148_1086_original.jpg",
       "signature": "04e088e8",
       "labels": [
         {
@@ -1806,7 +1806,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-80x40x3.webp",
+      "output": "public/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-80x40x3mm-6m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "a0835850733593f21c3600751bd2e142b75eb4027130d8f1a6b7234f3ad6973c",
@@ -1824,8 +1824,8 @@
     },
     {
       "id": "profile-pipe-rectangular-80x60x2",
-      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-rectangular-80x60x2.webp",
-      "photoUrl": "/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-80x60x2mm-6m.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/originals/truba_priamougolnaya_1148_1086_original.jpg",
       "signature": "3cb8428c",
       "labels": [
         {
@@ -1902,7 +1902,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-80x60x2.webp",
+      "output": "public/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-80x60x2mm-6m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "24b5df123683f592344d1a41a2e7c5bb393a974bc7fb38f3232445d09df27fbe",
@@ -1920,8 +1920,8 @@
     },
     {
       "id": "profile-pipe-rectangular-80x60x3",
-      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-rectangular-80x60x3.webp",
-      "photoUrl": "/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-80x60x3mm-6m.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/originals/truba_priamougolnaya_1148_1086_original.jpg",
       "signature": "814714d8",
       "labels": [
         {
@@ -2008,7 +2008,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-80x60x3.webp",
+      "output": "public/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-80x60x3mm-6m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "e43e1e26cdd6a5350a9b2ed57526fce90e8644bd887bbf1192cb888108add0f6",
@@ -2026,8 +2026,8 @@
     },
     {
       "id": "profile-pipe-rectangular-100x50x2",
-      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-rectangular-100x50x2.webp",
-      "photoUrl": "/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-100x50x2mm-6m.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/originals/truba_priamougolnaya_1148_1086_original.jpg",
       "signature": "63b18198",
       "labels": [
         {
@@ -2104,7 +2104,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-100x50x2.webp",
+      "output": "public/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-100x50x2mm-6m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "ca1b06c5c3a04fb326b08dd03f0abf4694cc7c04faacd627e792c372b7d07796",
@@ -2122,8 +2122,8 @@
     },
     {
       "id": "profile-pipe-rectangular-100x50x3",
-      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-rectangular-100x50x3.webp",
-      "photoUrl": "/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-100x50x3mm-6m.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/originals/truba_priamougolnaya_1148_1086_original.jpg",
       "signature": "9e5a0430",
       "labels": [
         {
@@ -2210,7 +2210,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-100x50x3.webp",
+      "output": "public/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-100x50x3mm-6m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "f3b3fd811ac34e4c32c1edf7d105ceed55fdeca83152e05629eb6a221ab6e8f6",
@@ -2228,8 +2228,8 @@
     },
     {
       "id": "profile-pipe-rectangular-100x60x3",
-      "imageUrl": "/images/catalog/product-illustrations/profile-pipe-rectangular-100x60x3.webp",
-      "photoUrl": "/images/catalog/truba-profilnia/truba_priamougolnaya/truba_priamougolnaya_1148_1086_original.jpg",
+      "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-100x60x3mm-6m.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/originals/truba_priamougolnaya_1148_1086_original.jpg",
       "signature": "bfc1302c",
       "labels": [
         {
@@ -2316,7 +2316,7 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/product-illustrations/profile-pipe-rectangular-100x60x3.webp",
+      "output": "public/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-100x60x3mm-6m.webp",
       "width": 2400,
       "height": 1800,
       "sha256": "4073151f1c409f24b74af4b2ef2a96781c86deffdc7e9122db04359f9d643ae5",

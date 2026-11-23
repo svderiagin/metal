@@ -50,9 +50,10 @@ const tableSpecs = {
   },
 } satisfies Record<string, TableSpecifications>;
 
-export function VariantCatalogResults({visible, categorySlug, isSheetCatalog, hasVerifiedSpecifications, resultsCount, currentPage, pages, onPageChange, onReset}: {
-  visible: ProductVariant[]; categorySlug: string; isSheetCatalog: boolean; hasVerifiedSpecifications: boolean; resultsCount: number; currentPage: number; pages: number;
-  onPageChange: (page: number) => void; onReset: () => void;
+export function VariantCatalogResults({visible, categorySlug, unit, isSheetCatalog, hasVerifiedSpecifications, resultsCount, currentPage = 1, pages = 1, onPageChange, onReset}: {
+  unit?: string;
+  visible: ProductVariant[]; categorySlug: string; isSheetCatalog: boolean; hasVerifiedSpecifications: boolean; resultsCount: number; currentPage?: number; pages?: number;
+  onPageChange?: (page: number) => void; onReset: () => void;
 }) {
   const isChannel = categorySlug === "shveller";
   const hasUnverified = visible.some(isDemonstrationProduct);
@@ -105,12 +106,9 @@ export function VariantCatalogResults({visible, categorySlug, isSheetCatalog, ha
     return <CatalogVariantLayout key={variant.id} variant={variant} view={view}
       name={view === "table" ? tableName : cardName}
       preview={photo}
-      cardFields={isUnverifiedSquarePipe ? [
-        {label: "Характеристики", value: "Уточняются"}, {label: "Цена", value: price},
-      ] : undefined}
       tableSpecifications={specifications.length ? specifications.map(({value}) => value ?? "—")
         : [<Availability key="availability" availability={variant.availability}/>]}
-      specifications={unverified
+      specifications={isUnverifiedSquarePipe ? <CatalogVariantSpecifications items={[{label: "Характеристики", value: "Уточняются"}]}/> : unverified
         ? <p className="text-sm text-slate-600 dark:text-slate-400">Характеристики требуют подтверждения перед заказом.</p>
         : <CatalogVariantSpecifications items={specifications}/>}
       details={(fields.length > 0 || description) && <CatalogPositionDetails productName={variant.name} fields={fields}
@@ -118,8 +116,7 @@ export function VariantCatalogResults({visible, categorySlug, isSheetCatalog, ha
       price={price}
       priceNote={showAvailability && (view === "card" || specifications.length > 0)
         ? <div className="mt-2"><Availability availability={variant.availability}/></div> : undefined}
-      order={<ProductOrderControls variant={variant} view={view}
-        showUnit={!hasMetreQuantities && categorySlug !== "polosa"}/>}/>;
+      order={<ProductOrderControls variant={variant} view={view} showUnit={!unit}/>}/>;
   }
   return (
       <section className="min-w-0 lg:col-span-2" aria-label="Продукция">
@@ -127,8 +124,7 @@ export function VariantCatalogResults({visible, categorySlug, isSheetCatalog, ha
       {resultsCount ? (
         <>
           {hasUnverified && <CatalogTableNote>{unverifiedOrderNote}</CatalogTableNote>}
-          <CatalogVariantTable designation={presentation.heading} specifications={specificationLabels}
-            quantity={hasMetreQuantities || categorySlug === "polosa" ? "Заказ, м" : "Количество"}>
+          <CatalogVariantTable designation={presentation.heading} specifications={specificationLabels} unit={unit}>
             {visible.map(variant => renderVariant(variant, "table"))}
           </CatalogVariantTable>
           <div className="grid gap-4 sm:grid-cols-2 xl:hidden">
@@ -142,7 +138,7 @@ export function VariantCatalogResults({visible, categorySlug, isSheetCatalog, ha
           <ResetFiltersButton onClick={onReset}/>
         </div>
       )}
-      {pages > 1 && <nav aria-label="Страницы вариантов" className="mt-6 flex flex-wrap items-center justify-center gap-4"><Button variant="secondary" disabled={currentPage === 1} onClick={() => onPageChange(currentPage - 1)}>Назад</Button><span>Страница {currentPage} из {pages}</span><Button variant="secondary" disabled={currentPage === pages} onClick={() => onPageChange(currentPage + 1)}>Далее</Button></nav>}
+      {pages > 1 && onPageChange && <nav aria-label="Страницы вариантов" className="mt-6 flex flex-wrap items-center justify-center gap-4"><Button variant="secondary" disabled={currentPage === 1} onClick={() => onPageChange(currentPage - 1)}>Назад</Button><span>Страница {currentPage} из {pages}</span><Button variant="secondary" disabled={currentPage === pages} onClick={() => onPageChange(currentPage + 1)}>Далее</Button></nav>}
       </section>
   );
 }

@@ -1,15 +1,16 @@
 import {Input} from "@/components/ui/Input";
+import type {OrderInputMode} from "@/types/cart";
 import {quantityTransferHandlers} from "@/lib/cartQuantityInput";
 import filterStyles from "./FilterPanel.module.css";
 import tableStyles from "./RebarTable.module.css";
 
 export function CatalogOrderInput({
-  label, placeholder, className = "", visibleLabel, value, onChange, onBlur, onRejectedTransfer, invalid, statusId, disabled,
+  mode, label, placeholder, visibleLabel, value, onChange, onBlur, onRejectedTransfer, invalid, statusId, disabled,
   keepPlaceholderOnFocus,
 }: {
   label: string;
   placeholder: string;
-  className?: string;
+  mode: OrderInputMode;
   visibleLabel?: string;
   value: string;
   onChange: (value: string) => void | false;
@@ -26,7 +27,7 @@ export function CatalogOrderInput({
     <label className="block text-sm font-semibold">
       {visibleLabel && <span className="mb-1 block">{visibleLabel}</span>}
       <Input aria-label={label} aria-invalid={invalid || undefined} aria-describedby={statusId} type="text" inputMode="decimal"
-        disabled={disabled} value={value} onChange={event => {
+        disabled={disabled} value={value} data-long-value={value.length >= 10 || undefined} onChange={event => {
           const input = event.target;
           const attempted = input.value;
           if (onChange(attempted) !== false) return;
@@ -45,7 +46,7 @@ export function CatalogOrderInput({
             event.currentTarget.blur();
           }
         }}
-        className={`${filterStyles.field} ${tableStyles.measurementInput} w-full min-w-0 ${alignment} tabular-nums ${placeholderStyle} ${className}`}
+        className={`${filterStyles.field} ${mode === "ton" ? tableStyles.tonInput : tableStyles.meterInput} w-full min-w-0 ${alignment} tabular-nums ${placeholderStyle}`}
         placeholder={placeholder}/>
     </label>
   );

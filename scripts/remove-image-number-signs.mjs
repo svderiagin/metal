@@ -54,7 +54,7 @@ for (const target of numberSignRemovalTargets) {
 }
 if (write) {
   const mapping = JSON.parse(await fs.readFile('data/tread-plate-images.json', 'utf8'));
-  const target = numberSignRemovalTargets.find(({id}) => id === 'rozmet-28952');
+  const target = numberSignRemovalTargets.find(({id}) => id === 'catalog-28952');
   mapping.products[target.id].imageUrl = target.outputFile.slice('public'.length);
   await fs.writeFile('data/tread-plate-images.json', JSON.stringify(mapping, null, 2) + '\n');
   const metadataPaths=[...new Set(numberSignRemovalTargets.map(t=>t.metadata).filter(Boolean))];

@@ -1,10 +1,11 @@
 import assert from 'node:assert/strict';
+import {catalogMeasurementUrl} from './catalog-measurement-path.mjs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {readProjectData} from './project-data.mjs';
 import {removeImageNumberSign} from './image-number-sign.mjs';
 
-const directory = 'public/images/catalog/listovoy-prokat/list-refleniy';
+const directory = 'public/images/catalog/listovoy-prokat/list-riflennyj';
 const temporaryDirectory = path.resolve('.tmp/list-refleniy-qa');
 const fontPath = path.resolve('imports/shveller-image-template/fonts/Inter-variable.ttf');
 const fontConfiguration = path.join(temporaryDirectory, 'fonts.conf');
@@ -15,16 +16,16 @@ process.env.PANGOCAIRO_BACKEND = 'fontconfig';
 const {default: sharp} = await import('sharp');
 
 const {isTreadPlate, getSheetParameters} = readProjectData('lib/sheetPresentation.ts');
-const {products} = JSON.parse(await fs.readFile('data/rozmet-catalog.json', 'utf8'));
+const {products} = JSON.parse(await fs.readFile('data/additional-catalog.json', 'utf8'));
 const plates = products.filter(isTreadPlate);
 assert.equal(plates.length, 4, 'Review the current tread plate range before regenerating');
-const referenceProduct = plates.find(product => product.id === 'rozmet-28952');
+const referenceProduct = plates.find(product => product.id === 'catalog-28952');
 const referenceValues = getSheetParameters(referenceProduct);
 assert.deepEqual({...referenceValues}, {thickness: '3', width: '1250', length: '2500', mass: '73,59 кг/шт', format: '1250 × 2500 мм'}, 'Review the source artwork if the reference product changes');
 assert.equal(referenceProduct.name, 'Лист № 3 ТУ рифленый');
 
-const marked = `${directory}/list_refleniy_2400_1800_marked.jpg`;
-const clean = `${directory}/list_refleniy_2400_1800_original.jpg`;
+const marked = `${directory}/originals/list_refleniy_2400_1800_marked.jpg`;
+const clean = `${directory}/originals/list_refleniy_2400_1800_original.jpg`;
 const width = 2400, height = 1800;
 for (const file of [marked, clean]) {
   const metadata = await sharp(file).metadata();
@@ -49,7 +50,7 @@ for (const product of plates) {
   const values = getSheetParameters(product);
   assert.ok(values, `${product.id}: missing thickness, format or mass`);
   if (product === referenceProduct) {
-    const file = `${directory}/list-refleniy-${values.thickness.replace(',', '.')}-${values.width}x${values.length}-${product.id}.webp`;
+    const file = `public${catalogMeasurementUrl(product)}`;
     outputs.push({product, file, image: await removeImageNumberSign(sharp, marked, product.id)});
     continue;
   }
@@ -89,7 +90,7 @@ for (const product of plates) {
   }
   assert.ok(expectedPixels.equals(pixels), `${product.id}: pixels changed outside label patches`);
 
-  const file = `${directory}/list-refleniy-${values.thickness.replace(',', '.')}-${values.width}x${values.length}-${product.id}.webp`;
+  const file = `public${catalogMeasurementUrl(product)}`;
   outputs.push({product, file, image: await removeImageNumberSign(sharp, image, product.id)});
 }
 
@@ -99,7 +100,7 @@ for (const {file, image} of outputs) {
 }
 if (write) {
   const products = Object.fromEntries(outputs.map(({product, file}) => [product.id, {
-    sourceUrl: product.sourceReference, imageUrl: file.slice('public'.length),
+    imageUrl: file.slice('public'.length),
   }]));
   await fs.writeFile('data/tread-plate-images.json', JSON.stringify({products}, null, 2) + '\n');
 }

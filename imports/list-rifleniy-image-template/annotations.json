@@ -3,9 +3,8 @@
   "status": "owner-requested-example-only",
   "connectedToProductTables": false,
   "renderer": "imports/list-rifleniy-image-template/render-annotations.mjs",
-  "productId": "rozmet-2202",
+  "productId": "catalog-2202",
   "productName": "Лист № 4 рифленый",
-  "sourceReference": "https://rozmet.ru/production/listovoy_prokat/list-riflennyj/list-4-rifleniy/",
   "specifications": [
     {
       "name": "Толщина",
@@ -196,6 +195,5 @@
     "Иллюстрация семейства с номинальными размерами, не масштабный производственный чертёж.",
     "Масса не добавлена: каталог даёт 31.4 кг/м², что совпадает с массой гладкого основания 4 мм; подтверждения массы рифлёного исполнения нет. Каталожные данные не менялись.",
     "Владелец разрешил произвольную позицию для демонстрации; выбрана существующая позиция 4 мм, 1500×6000 мм."
-  ],
-  "methodReference": "https://www.tatasteeluk.com/products/hot-rolled/durbar-floor-plate"
+  ]
 }

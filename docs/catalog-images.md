@@ -12,10 +12,9 @@
 
 ## Image quality review (required)
 
-Image quality is a completion criterion for image tasks. Source hashes, image
-dimensions, valid mappings and passing tests verify technical properties;
-they do not establish that labels match the owner's reference. Apply this review
-to replacements and annotation fixes as well as new image sets.
+Image quality is a completion criterion for image tasks. Check the appearance
+and labels against the owner's reference. Apply this review to replacements,
+annotation fixes and new image sets.
 Typography and batch checks apply to annotated/generated variants. For a single
 unannotated photograph, review the source and delivered views; do not add labels
 or generate extra variants solely to satisfy this checklist.
@@ -46,12 +45,9 @@ or generate extra variants solely to satisfy this checklist.
    thumbnail. Check desktop and mobile, thumbnail sharpness/crop, fit view and 1:1
    details. Confirm the viewer loads the versioned original. Check both themes
    and responsive boundaries when changing frames, backgrounds or viewer layout.
-5. **Use tests for the right scope.** Run the family's image/specification checks
-   and verify that pixels outside the intended label patches are unchanged where
-   that invariant applies. This protects the photo but cannot approve typography
-   inside the patches. Renderer regression coverage must exercise a generated
-   variant: a screenshot of an unchanged 8×8 reference does not validate the new
-   12×12 mass text. Review the visual result before updating affected baselines.
+5. **Review the generated variants.** Compare labels with catalog specifications
+   and inspect the photo outside the annotation patches. Review any native-size
+   crops or pixel-preservation reports produced by the renderer.
 6. **Record evidence and finish honestly.** Save a readable crop/comparison or
    screenshot showing the corrected detail and show it in the result. Keep QA
    intermediates under `.tmp/`; retain the required source and production assets
@@ -59,10 +55,38 @@ or generate extra variants solely to satisfy this checklist.
    mismatch. Matching incoming files to stored files alone is insufficient to
    declare the existing image set visually correct.
 
+## Структура каталога изображений
+
+Категории и подкатегории используют те же имена папок, что и адреса страниц.
+
+```text
+public/images/catalog/armatura/
+├── main/                          # основной кадр категории
+├── cover/                         # дополнительные кадры категории
+├── originals/                     # общие исходники и авторские эталоны
+└── armatura-a500s/
+    ├── cover/                     # титульное фото и галерея подкатегории
+    └── measurement/               # фотографии товаров с разметкой
+```
+
+Подкатегория хранит свои исходники в `originals/`. Для категорий с товарами
+на основной странице `measurement/` находится сразу в папке категории.
+Если несколько страниц используют один кадр, все ссылки ведут к одному файлу.
+Общий заполнитель и исходники без единственного владельца лежат в `shared/`.
+Адаптивные копии под `public/images/prepared/` создаются при сборке.
+
+Имена в `measurement/` состоят из вида товара и подтверждённых параметров.
+Используйте латиницу, `x` для размеров и дефис для десятичного разделителя
+в значениях. Например, `truba-vgp-du15x2-8mm-6m.webp` и
+`armatura-gladkaya-a240-20mm-prutok-11-7m.webp`. Марка стали, покрытие и форма
+поставки входят в имя, когда они помогают определить позицию. Для отдельных
+файлов с одинаковым описанием правило добавляет ID к совпавшему имени.
+Имена для генераторов задаёт `scripts/catalog-measurement-path.mjs`.
+
 ## VGP pipe product illustrations
 
 The ВГП table uses the owner's marked and clean 2400 × 1800 photographs in
-`public/images/catalog/truba-kruglaya/vgp/`. The bottom dimension shows the
+`public/images/catalog/truba-kruglaya/truba-vodogazoprovodnaya/originals/`. The bottom dimension shows the
 outside diameter from `diameterMm`. The Ду15 master has «50 мм» at this location.
 The published Ду15 illustration uses its catalog value «Ø 21,3 мм».
 The upper-left arrows mark one wall. All variants retain the same photograph.
@@ -72,7 +96,7 @@ Use `--write` to refresh the table images and their catalog signatures, then run
 `node scripts/catalog-image-versions.mjs` to refresh image versions.
 
 The galvanized DN25×2.8 offer (`local-984`) uses the owner's marked JPG in
-`public/images/catalog/truba-kruglaya/vgp_ocinkovannaya/` directly, with no pixel
+`public/images/catalog/truba-kruglaya/truba-vodogazoprovodnaya-otsinkovannaya/originals/` directly, with no pixel
 changes. Its 33.5 mm outside diameter and 2.18 kg/m label match the table.
 `data/vgp-galvanized-specifications.json` records GOST 3262-75 table 1 and the
 3% zinc allowance: 2.12 × 1.03 = 2.1836 kg/m. Conversion retains all four decimal
@@ -86,38 +110,40 @@ subcategory, and the generic illustration renderer protects the supplied image.
 The owner approved reusing the VGP photographs for electrowelded pipes on
 22.11.2026. The clean 2400 × 1800 JPGs are copied byte-for-byte:
 
-- `public/images/catalog/truba-kruglaya/elektrosvarnaya/truba_elektrosvarnaya_2400_1800_original.jpg`
+- `public/images/catalog/truba-kruglaya/truba-elektrosvarnaya/originals/truba_elektrosvarnaya_2400_1800_original.jpg`
   comes from the uncoated `vgp/` original.
-- `public/images/catalog/truba-kruglaya/elektrosvarnaya_ocinkovannaya/truba_elektrosvarnaya_ocinkovannaya_2400_1800_original.jpg`
+- `public/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/originals/truba_elektrosvarnaya_ocinkovannaya_2400_1800_original.jpg`
   comes from the galvanized `vgp_ocinkovannaya/` original.
 
 These folders hold the sources for subsequent annotation. At the owner's request,
 save annotated outputs beside their originals as JPG, quality 100 and 4:4:4
 chroma sampling. Labels must
-use the electrowelded product's outside diameter, wall, length and verified mass;
+use the electrowelded product's outside diameter, wall, steel grade, length and verified mass;
 the VGP references' nominal-bore labels and values do not transfer to this family.
 
-Both electrowelded tables now use **21 annotated JPGs**: 20 ordinary pipes
-and one galvanized pipe. The production images are `<product-id>.jpg` beside
-their respective clean originals. `data/product-illustrations.json` connects
-each image to its SKU and retains the catalog signature. The generic renderer
-excludes these two families so it cannot replace the dedicated artwork.
+The electrowelded catalogue has **21 positions** across its two tables.
 
-The two initial examples are also retained beside the originals:
+- The **20 ordinary positions** use annotated JPG files in
+  `public/images/catalog/truba-kruglaya/truba-elektrosvarnaya/measurement/`.
+  Positions with the same rendered artwork share one file.
+- The **one galvanized position**, 89 × 3,5 × 7800 mm (`local-443`), currently
+  uses `public/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/measurement/truba-elektrosvarnaya-otsinkovannaya-89x3-5mm-7-8m.webp`, the earlier
+  illustration based on the cover photograph. The JPG made from the supplied galvanized
+  VGP original is stored separately at
+  `public/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/measurement/truba-elektrosvarnaya-otsinkovannaya-89x3-5mm-7-8m.jpg`.
+  That JPG includes the caption «Без массы цинкового покрытия».
 
-- `elektrosvarnaya/truba_elektrosvarnaya_57x3_marked_preview.jpg` — `local-302`,
-  outside diameter 57 mm, wall 3 mm, catalog length 12 m, steel mass 4.00 kg/m.
-- `elektrosvarnaya_ocinkovannaya/truba_elektrosvarnaya_ocinkovannaya_89x3_5_marked_preview.jpg`
-  — `local-443`, outside diameter 89 mm, wall 3.5 mm, catalog length 7.8 m,
-  steel mass 7.38 kg/m, explicitly excluding the zinc coating.
+`data/product-illustrations.json` connects each image to its SKU and retains the
+catalog signature. The dedicated renderer preserves the active WebP mapping for
+`local-443` when it regenerates the JPGs. The generic renderer excludes both
+electrowelded families.
 
 Mass values were checked against
-[GOST 10704-91 table 1](https://internet-law.ru/documents/prod/gost_gosudarstvennyj-standart/2/gost_49231.html).
-All current files are **2400 × 1800 JPGs, quality 100, 4:4:4** rebuilt from the exact
-supplied clean originals at the owner's request. They replace the earlier
-generated previews. `node scripts/render-electrowelded-images.mjs --write` adds
-a transparent annotation layer using the same bundled Inter renderer as VGP;
-arrow and extension-line coordinates follow the respective marked references.
+[GOST 10704-91, table 1](https://meganorm.ru/mega_doc/norm/gost_gosudarstvennyj-standart/0/gost_10704-91_mezhgosudarstvennyy_standart_truby_stalnye.html#Par53).
+The dedicated renderer produces **2400 × 1800 JPGs, quality 100, 4:4:4** from the
+exact supplied clean originals. `node scripts/render-electrowelded-images.mjs
+--write` adds a transparent annotation layer using the same bundled Inter renderer
+as VGP. Arrow and extension-line coordinates follow the respective marked references.
 Headings use spaces around `×`: `57 × 3` and `89 × 3,5`.
 The photograph is never resized, regenerated or retouched. Before final JPG
 encoding, the renderer checks every pixel outside the annotation alpha mask
@@ -129,8 +155,8 @@ native crops, the complete contact sheet and annotation masks are in
 `.tmp/electrowelded-original-qa/`. Use `--preview local-58634` for a non-reference
 325 × 10 mm variant without changing published mappings.
 
-Twenty-one illustrations have complete dimensions and the tabulated mass
-recorded in `imports/electrowelded-image-template/mass-reference.json`.
+The tabulated mass for each illustration is recorded in
+`imports/electrowelded-image-template/mass-reference.json`.
 The three supplier offers with a nominal length range retain **11–12 м**;
 this is not replaced with a fixed 12 m value. At the owner's request, the legacy
 demonstration records `prd-073` and `prd-074` were removed from the public catalog
@@ -141,12 +167,10 @@ The actual versioned JPGs were checked from table/card thumbnails at desktop
 and mobile sizes, including fitted and native-zoom dialogs, for the smallest
 section, a decimal wall, the largest section/range length and galvanized pipe.
 Screenshots are in `.tmp/electrowelded-image-preview/`.
-Focused checks: `node --import tsx --test scripts/electrowelded-images.test.mjs
-scripts/images.test.mjs tests/unit/product-illustrations.test.ts`.
 
 ## Разметка арматуры
 
-Эталоны для рифлёной А500С и А400 лежат в `public/images/catalog/armatura/riflenaya/`, для гладкой А240 — в соседней папке `gladkaya/`. Обе папки содержат чистую фотографию и авторский JPG с разметкой. Рендерер использует образец с разметкой для нужной подкатегории и меняет только подписи и просвет в размерной линии. Профиль А240 определяется по подкатегории, поскольку в старом импорте у разных классов указана одна и та же поверхность.
+Эталоны для рифлёной А500С и А400 лежат в `public/images/catalog/armatura/originals/riflenaya/`, для гладкой А240 — в соседней папке `gladkaya/`. Обе папки содержат чистую фотографию и авторский JPG с разметкой. Рендерер использует образец с разметкой для нужной подкатегории и меняет только подписи и просвет в размерной линии. Профиль А240 определяется по подкатегории, поскольку в старом импорте у разных классов указана одна и та же поверхность.
 
 У прутка подписаны номинальный диаметр, длина по каталогу и теоретическая масса метра. У бунта на месте длины стоит «Форма поставки — В бунтах». Для А400 заголовок различает 35ГС и 25Г2С. Суффикс «С» у А240С берётся из класса конкретного товара. У демонстрационных позиций для заголовка и размерной линии берётся номинальный диаметр из публичного названия товара. Поля длины и массы у этих позиций остаются пустыми.
 
@@ -165,7 +189,7 @@ source tables, preview and write commands, and treatment of incomplete records.
 ## Steel strip product illustrations
 
 The 19 «Полоса стальная» rows use the owner's 20×4 mm marked reference and
-clean photograph from `public/images/catalog/polosa/`. Each row shows its
+clean photograph from `public/images/catalog/polosa/originals/`. Each row shows its
 width below the cut face and its thickness on the left. The length comes
 from the product specifications, including the 5,85–6 м range for 100×4 mm.
 
@@ -180,7 +204,7 @@ three-decimal precision, matching the standard's tables.
 
 The nominal formula is `width × thickness × 0.00785` kg/m for dimensions in
 millimetres. The density convention (7 850 kg/m³) comes from
-[ГОСТ 103-2006, Table 1, Note 1](https://www.metall-energy.ru/data/file/gosty/polosa/gost_103-2006.pdf).
+ГОСТ 103-2006, Table 1, Note 1.
 40×3 lies outside this standard's thickness scope and uses a geometric mass
 calculation. Clause 2.3 covers 80×4 and 100×4 by agreed specification.
 The public descriptions use each product's confirmed dimensions and remove
@@ -188,7 +212,7 @@ copied sizes and obsolete ГОСТ 103-76 claims. Steel grade, manufacturing met
 accuracy class and the shipment's actual standard require supplier documentation.
 
 Preview the 100×4 mm image with
-`node scripts/render-flat-steel-images.mjs --preview rozmet-12050`.
+`node scripts/render-flat-steel-images.mjs --preview catalog-12050`.
 After visual review run `node scripts/render-flat-steel-images.mjs --write`,
 then `node scripts/catalog-image-versions.mjs`.
 
@@ -237,7 +261,7 @@ Profile-pipe reference masses and their exact source pages are documented in
 ### Square profile-pipe illustrations
 
 The 28 parameterized square pipes use the owner's clean and marked photographs
-under `public/images/catalog/truba-profilnia/truba_kvadratnaya/`. The source files
+under `public/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/originals/`. The source files
 are retained. `scripts/render-profile-square-images.mjs` replaces only variable
 numeric labels on the 2400 × 1800 marked reference, using clean-photo patches
 and the confirmed catalog dimensions, wall thickness, length and theoretical
@@ -256,7 +280,7 @@ pipe images unchanged.
 ### Rectangular profile-pipe illustrations
 
 The 23 parameterized rectangular pipes use the owner's clean original and marked
-reference under `public/images/catalog/truba-profilnia/truba_priamougolnaya/`.
+reference under `public/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/originals/`.
 `scripts/render-profile-rectangular-images.mjs` follows the square-pipe lossless
 patch workflow: confirmed catalog values replace only variable labels, and the
 supplied heading's leftover word “квадратная” is corrected to “прямоугольная”.
@@ -270,64 +294,16 @@ details, then run `--write` and refresh image versions. See the
 `imports/profile-rectangular-image-template/rendered.json` for the exact sources,
 labels, typography and pixel-preservation evidence.
 
-The owner-renamed image directory is `public/images/catalog/truba-profilnia/`:
-the category title photo is `truba-main.jpg`, family photos are
-`truba-kvadratnaya.jpg` and `truba-priamougolnaya.jpg`, square templates are in
-`truba_kvadratnaya/`, rectangular templates in `truba_priamougolnaya/`, and title
-gallery photos in `cover/`. Image references use these names; public catalog page
-slugs retain `truby-profilnye`.
-
-## Historical supplier mapping
-
-Regenerate with:
-
-1. `node scripts/scan-images.mjs`
-2. `node scripts/supplement-content-images.mjs`
-3. `node scripts/map-catalog-images.mjs`
-
-The downloaded mirror is read only. Runtime mappings are separate from the catalog import so re-importing prices and specifications preserves images. The scanner extracts product files, gallery URLs (including renamed download extensions), categories and source page evidence. Editorial image alt text and surrounding descriptions are inventoried separately and checked visually before use.
-
-- sourceDirectory: brokinvest.ru
-- sourceHtmlPages: 2005
-- discoveredImageFiles: 327
-- discoveredUniqueImageContents: 263
-- uniqueImagesIntegrated: 19
-- totalProducts: 688
-- productsUpdated: 505
-- categoriesUpdated: 13
-- productTypesUpdated: 23
-- productsWithImageBefore: 0
-- productsWithImageAfter: 505
-- coverageBeforePercent: 0
-- coverageAfterPercent: 73.4
-- originalProductsWithImageReferences: 122
-- originalProductsWithBrokenImageReferences: 122
-- productsWithNewSourcePhotos: 505
-- productsWithoutReliableNewMatch: 183
-
-Coverage counts resolvable real images only: 0% before, 73.4% after. All 122 original product image references pointed to missing SVG files; absent images are now represented by a shared neutral placeholder where a fallback previously existed. Placeholders are excluded from coverage. Images illustrate reviewed form and surface, not certified grade, standard or exact dimensions.
-
-Optional historical evidence (not present in every checkout): full per-target provenance, confidence and unassigned products: [mapping report](../imports/image-mapping-report.json). Recursive source inventory: [source inventory](../imports/image-source-inventory.json). Browser results: [browser verification](../imports/image-browser-verification.json).
-
-## Rejected or uncertain source associations
-
-- Полоса: Rejected for strip products: photograph shows broad stacked plates; source association alone does not establish narrow strip geometry.
-- Арматура А1 / А240: Rejected inherited ribbed bar image. Verified smooth-bar editorial photo used for straight A1/A240 bars; coils remain unmatched.
-- Лист с рифлением: Lentil pattern verified visually; rejected for rhombus pattern and unspecified pattern.
-- Электроды: Packaging photo not assigned to named brands/models. Generic coated-stick electrode illustration represents the shared visible product type without asserting brand, coating chemistry or standard.
-- Уголок: Original category file absent. Editorial equal-leg angle photograph used for equal-leg variants only; unequal-leg, galvanized and stainless variants remain unmatched.
-- Рулоны: Silver unpainted coil illustration excluded from RAL/polymer coated and hot rolled variants.
-- Editorial images: Some editorial alt labels contradict the visible product (angles labelled channels, ribbed bars labelled smooth). These contradictory images were rejected; only visually corroborated descriptions were used.
-
-No uncertain matches are automatically assigned. Medium confidence means a reviewed family illustration reused for visually equivalent variants, rather than a photograph of that exact size. Mixed families retain their existing card placeholder. There are seven rejected or restricted source association groups above, all documented for optional manual review.
+The profile tube directory is `public/images/catalog/truby-profilnye/`.
+The category title photo is in `main/`. Family directories contain their own
+`cover/`, `originals/` and `measurement/` folders.
 
 ## Validation
 
-- `node --test scripts/images.test.mjs`: image paths, decoding, source byte identity, incompatible subtype exclusions and preservation of every non-image product field.
-- `npm run catalog:check`: catalog and cart checks. Set `CATALOG_IMPORT_CHECK=1` to verify replay in a temporary copy.
-- `npm run lint -- --ignore-pattern 'brokinvest.ru/**'`: application lint. Unscoped lint also scans downloaded donor JavaScript, which contains unrelated lint errors.
+- Verify image paths, filename case, dimensions and associations with the corresponding products.
+- `npm run lint` checks the application code.
 - `npm run build`: production build and TypeScript validation.
-- After `npm run test:build`, run `npx playwright test tests/e2e/images.spec.ts tests/e2e/cover-gallery` to verify loaded images, galleries and viewer behavior.
+- Open the changed catalog pages and verify loaded images, galleries and viewer behavior in the browser.
 
 ## Image filenames
 
@@ -338,16 +314,6 @@ Catalog images in `public/images/catalog/` use descriptive Latin filenames (for 
 Replace the image at its existing path. `npm run dev` checks catalog image contents every second and updates `data/catalog-image-versions.json` when files change. Image components and original-image links append a content version to the URL, so a replacement gets a new browser and Next.js image cache entry. Restart the dev server once after installing this workflow; subsequent image replacements need no restart. Refresh an already open page if necessary.
 
 `npm run build` regenerates the versions automatically before building. For production, rebuild and deploy both the application and public images together; copying a file alone does not update pre-rendered pages. Changing a filename or extension still requires updating `data/catalog-images.json`.
-
-Public file existence, exact path case and image metadata are always checked by `npm test`. Supplier byte/provenance checks are explicitly skipped when the optional mirror or reports are absent.
-
-`node --test scripts/catalog-image-labels.test.mjs` compares native 1:1 length/mass
-crops of generated channel No. 6.5, angle 160×100×10 and square 12×12 against reviewed
-PNG baselines in `tests/visual/label-baselines/`. These asset checks are independent
-of browser screenshot scaling and protect typography on derived variants.
-On failure the current crop is saved under `.tmp/catalog-image-qa/`; compare it
-with the supplied source before accepting a new baseline. The same test verifies
-that all channel photos remain unchanged outside their permitted label patches.
 
 ## Channel illustrations: approved template
 
@@ -384,7 +350,7 @@ Previews are written to `.tmp/catalog-image-qa/shveller-preview/`.
 All 22 products on `/catalog/ugolok` use the owner's supplied 25×25×3 reference,
 saved unchanged in `imports/ugolok-image-template/reference-25x25x3.jpg`.
 The individual 2400 × 1800 lossless WebP files live in
-`public/images/catalog/ugolok/ugolok-*-clean.webp`. The table and mobile cards
+`public/images/catalog/ugolok/measurement/ugolok-stalnoy-*.webp`. The table and mobile cards
 open the same expanded image viewer as channel products, including zoom and pan.
 
 Regenerate with `node scripts/render-ugolok-images.mjs --write`, or preview with
@@ -415,25 +381,18 @@ and mobile specifications use the same presentation helper.
 `imports/ugolok-image-template/rendered.json` records labels, patches, hashes and
 pixel checks. These are shared family photographs with nominal dimension labels,
 including the two unequal-leg profiles; they are not scaled manufacturing drawings.
-Validate with `node --test scripts/ugolok-images.test.mjs scripts/images.test.mjs`.
 
 ## Sheet illustration candidates
 
-[Sheet source selection](../imports/listovoy-image-sources/README.md) contains five
-reviewed, unannotated product images for the four sheet subcategories, with a
-separate PVL image for the expanded-metal variants inside the hot-rolled group.
-These preparation assets are not connected to the storefront. The manifest
-records source URLs, native file dimensions, hashes, candidate product IDs and
-restrictions. Confirm the tread pattern, PVL 306/406 association and the conflicting
-cold-rolled group description before generating dimension labels; use project
-specifications rather than donor sizes or grades.
+The unannotated sheet references in `imports/listovoy-image-sources/` are preparation assets.
+Confirm the tread pattern and PVL 306/406 geometry against the intended variant
+before generating new labels. Use dimensions and grades from the local catalog.
 
-The owner-selected Cronvall tread plate also has a clean, unannotated layout for
-manual dimension work: `public/images/catalog/listovoy-prokat/list-rifleniy_2400_1800_original.png`.
+The owner-selected tread plate previously had a separate clean layout.
 Its source, exact imagegen prompt, generation dimensions and review notes are in
 [`imports/list-rifleniy-image-template/`](../imports/list-rifleniy-image-template/README.md).
 The owner approved the smaller placement and requested a 200 px shift to the left.
-The final composition was rebuilt with the original Cronvall PNG as its appearance
+The final composition was rebuilt with the original PNG as its appearance
 source and the approved placement as a composition reference. The final canvas is
 2400 × 1800; the built-in imagegen result was 1448 × 1086 and was exported uniformly,
 then translated exactly -200 px horizontally without resampling the retained pixels.
@@ -442,10 +401,8 @@ The next revision increases the plate footprint by about 20%, keeping its left
 boundary at x=854 and bottom boundary at y=1338. All four corners remain visible.
 The first oversized attempt is recorded as rejected.
 
-An owner-requested example annotation is saved separately as
-`listovoy-prokat/list-rifleniy-4-1500x6000-marked.png`. It uses the public
-rozmet-2202 parameters: 4 mm base thickness, 1500 mm width and 6000 mm length.
-`imports/list-rifleniy-image-template/render-annotations.mjs` draws the same bundled
+The historical annotation example used the `catalog-2202` dimensions of 4 mm
+base thickness, 1500 mm width and 6000 mm length. It used the same bundled
 Inter typography and slate lines as the square family. Dimension lines follow the
 projected length/width edges; external thickness arrows identify the base sheet
 at its nearest cut edge, excluding the raised tread. Footer labels show length
@@ -458,7 +415,7 @@ The clean source remains separate; no product-table mappings have been changed.
 ## Tread plate product illustrations
 
 The active 2400 × 1800 templates are the owner's marked and clean JPGs in
-`public/images/catalog/listovoy-prokat/list-refleniy/`. The marked JPG serves
+`public/images/catalog/listovoy-prokat/list-riflennyj/originals/`. The marked JPG serves
 «Лист № 3 ТУ» unchanged. `node scripts/render-tread-plate-images.mjs --write`
 renders the other three products as lossless WebP and records their associations
 in `data/tread-plate-images.json`. Run without `--write` for previews under
@@ -478,7 +435,7 @@ appears next to the corresponding price.
 ## Galvanized sheet product illustrations
 
 The supplied clean and marked 2400 × 1800 JPGs are in
-`public/images/catalog/listovoy-prokat/list_ocinkovanniy/`. The marked JPG
+`public/images/catalog/listovoy-prokat/galvanized-steel-sheet/originals/`. The marked JPG
 sets the layout and the title «Лист оцинкованный № 0,5». Its decoded pixels are
 used for the 0,5 mm illustration.
 
@@ -496,7 +453,7 @@ appear in the row and mobile card.
 ## Cold-rolled sheet product illustrations
 
 The marked and clean 2400 × 1800 JPGs are in
-`public/images/catalog/listovoy-prokat/list_holodnokataniy/`.
+`public/images/catalog/listovoy-prokat/list-ocynkovannyj/originals/`.
 Run `node scripts/render-cold-rolled-sheet-images.mjs --write` to generate the two
 lossless WebP illustrations and `data/cold-rolled-sheet-images.json`. Without
 `--write`, the generated images go to `.tmp/cold-rolled-sheet-catalog/`.
@@ -511,7 +468,7 @@ existing `list-ocynkovannyj` route.
 ## Hot-rolled sheet product illustrations
 
 The marked and clean 2400 × 1800 JPGs are in
-`public/images/catalog/listovoy-prokat/list_goriachekataniy/`.
+`public/images/catalog/listovoy-prokat/list-goryachekatanyj/originals/`.
 The marked № 2 source supplies the composition for the 13 smooth variants.
 The product images use saved thicknesses, nominal sheet formats and masses,
 including kg per piece for the smaller format and kg per square metre for the
@@ -526,9 +483,6 @@ checks that the photo pixels outside the changed labels match the marked source.
 `ProductImageViewer.tsx` opens a viewport-sized native dialog for page images.
 Table previews and mobile cards retain the centered rounded window with a
 soft frame, close control over the image and a maximum outer width of 1000 px.
-`CatalogImage.tsx` also uses it for product
-photographs that previously had no enlargement control. Category and type
-navigation cards retain their navigation links.
 
 Only the clicked image's original, versioned file is loaded in the dialog
 (`unoptimized`); thumbnails retain responsive Next.js optimization. The dialog
@@ -542,7 +496,6 @@ Panning is bounded by the image edges and adapts when the viewport changes.
 **Вписать**, another image click, or closing/reopening restores the fitted view.
 Escape/close restores page scrolling and focus to the originating thumbnail.
 
-Geometry and interaction checks: `node --test scripts/image-viewer-geometry.test.mjs scripts/product-image-preview.test.mjs`.
 
 ## Angle and steel square category covers
 
@@ -553,9 +506,7 @@ These unannotated covers are separate from individual product illustrations.
 
 The square category is displayed as **Квадрат стальной**, including its internal
 subcategory, navigation, metadata and product descriptions. Its URL remains
-`/catalog/kvadrat`. The cover overrides and square terminology are also applied
-by `scripts/import-rozmet.mjs`, preserving the owner's changes on future imports
-without modifying saved supplier evidence.
+`/catalog/kvadrat`. The catalog data and cover gallery provide the names and images.
 
 ## Steel square product illustrations
 
@@ -565,7 +516,7 @@ length, theoretical mass and its own 2400 × 1800 lossless WebP illustration.
 The section filter uses the profile number (8×8 through 20×20 mm), separately
 from the supplier's `Размер` field, which means length (6 m for all seven).
 
-The owner's marked `public/images/catalog/kvadrat/kvadrat_2400_1800_marked.jpg` and
+The owner's marked `public/images/catalog/kvadrat/originals/kvadrat_2400_1800_marked.jpg` and
 clean `kvadrat_2400_1800_original.jpg` are saved unchanged as `reference-8x8.jpg` and
 `photo.jpg` in `imports/kvadrat-image-template/`. The 8×8 illustration preserves
 every decoded reference pixel. Other images replace only differing labels,
@@ -585,4 +536,3 @@ records labels, patches, hashes and zero changes outside those patches.
 URL, independently of supplier imports. `lib/squarePresentation.ts` supplies
 consistent values to the table, filters and renderer, with decimal commas and
 `кг/м`. Supplier values stay intact, including the listed **1,54 кг/м** for №16.
-Validate with `node --test scripts/kvadrat-images.test.mjs scripts/images.test.mjs`.

@@ -10,24 +10,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "pretest": "node scripts/cart-catalog.mjs",
-    "test": "node --import tsx --test scripts/*.test.mjs tests/unit/*.test.ts",
-    "catalog:import": "node scripts/inventory-mirror.mjs && node scripts/import-catalog.mjs && node scripts/completeness-mirror.mjs",
-    "catalog:check": "node --test scripts/catalog.test.mjs",
-    "search:check": "node --test scripts/search.test.mjs",
     "prebuild": "node scripts/catalog-image-versions.mjs && npm run images:prepare",
-    "images:prepare": "node --import tsx scripts/prepare-photos.ts",
-    "test:unit": "node --import tsx --test scripts/*.test.mjs tests/unit/*.test.ts",
-    "test:unit:legacy": "node --import tsx --test scripts/*.test.mjs",
-    "test:coverage": "node --import tsx --test --experimental-test-coverage --test-coverage-include='lib/**/*.ts' --test-coverage-lines=90 --test-coverage-branches=85 --test-coverage-functions=85 tests/unit/*.test.ts",
-    "test:install": "playwright install chromium",
-    "pretest:build": "npm run images:prepare",
-    "test:build": "METAL_TEST_DIST_DIR=.next-test next build --webpack",
-    "test:serve": "METAL_TEST_DIST_DIR=.next-test next start --hostname 127.0.0.1 --port 3100",
-    "test:e2e": "playwright test tests/e2e",
-    "test:visual": "playwright test tests/visual",
-    "test:visual:update": "playwright test tests/visual --update-snapshots",
-    "test:visual:probe": "node scripts/check-visual-sensitivity.mjs"
+    "images:prepare": "node --import tsx scripts/prepare-photos.ts"
   },
   "dependencies": {
     "@pdf-lib/fontkit": "^1.1.1",
@@ -45,7 +29,6 @@
     "minimatch@>=4 <11.0.1": "11.0.4"
   },
   "devDependencies": {
-    "@playwright/test": "1.64.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",

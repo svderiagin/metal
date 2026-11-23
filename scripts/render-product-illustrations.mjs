@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import path from "node:path";
+import {catalogMeasurementUrl} from "./catalog-measurement-path.mjs";
 import {productVariants} from "../data/products/index.ts";
 import {flatSteelCategoryId} from "../lib/flatSteel.ts";
 import {productIllustrationFacts} from "../lib/productIllustrationFacts.ts";
@@ -21,7 +22,7 @@ sharp.concurrency(2);
 const sources = JSON.parse(await fs.readFile("data/product-illustration-sources.json", "utf8"));
 const protectedCategories = new Set([
   "cat-arm", "cat-bal", flatSteelCategoryId,
-  "rozmet-cat-shveller", "rozmet-cat-ugolok", "rozmet-cat-kvadrat", "rozmet-cat-listovoy-prokat",
+  "catalog-cat-shveller", "catalog-cat-ugolok", "catalog-cat-kvadrat", "catalog-cat-listovoy-prokat",
 ]);
 // Owner-approved pipe templates have separate family label renderers.
 const protectedProductTypes = new Set(["type-cat-trp-sub-1", "type-cat-trp-sub-2", "type-cat-trk-sub-1", "type-cat-trk-sub-2", "type-cat-trk-sub-3", "type-cat-trk-sub-4"]);
@@ -30,7 +31,7 @@ const height = 1800;
 const textColor = "#41464D";
 const lineColor = "#59636F";
 const white = "#ffffff";
-const production = "public/images/catalog/product-illustrations";
+const production = "public/images/catalog";
 const write = process.argv.includes("--write");
 const samples = process.argv.slice(2).filter(argument => !argument.startsWith("--"));
 
@@ -142,7 +143,7 @@ async function render(product) {
   assert(/^[a-z\d-]+\.webp$/u.test(file), product.id);
   await sharp({create: {width, height, channels: 3, background: white}})
     .composite(layers).webp({quality: 89, effort: 4}).toFile(path.join(output, file));
-  return [product.id, {imageUrl: `/images/catalog/product-illustrations/${file}`,
+  return [product.id, {imageUrl: catalogMeasurementUrl(product),
     photoUrl: source, signature: productIllustrationSignature(product)}];
 }
 
@@ -153,8 +154,11 @@ for (let start = 0; start < products.length; start += batch) {
   if (start % 80 === 0) console.log(`Rendered ${result.length}/${products.length}`);
 }
 if (write) {
-  await fs.mkdir(production, {recursive: true});
-  for (const [id] of result) await fs.rename(path.join(output, `${id}.webp`), path.join(production, `${id}.webp`));
+  for (const [id, illustration] of result) {
+    const target = `public${illustration.imageUrl}`;
+    await fs.mkdir(path.dirname(target), {recursive: true});
+    await fs.rename(path.join(output, `${id}.webp`), target);
+  }
   // Keep dedicated family illustrations, including square pipes, in both full
   // and targeted generic renders.
   const previous = JSON.parse(await fs.readFile("data/product-illustrations.json", "utf8"));

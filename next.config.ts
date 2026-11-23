@@ -1,11 +1,28 @@
 import type {NextConfig} from "next";
+import {catalogStandards} from "./lib/catalogStandards";
+
+const storefrontContentPolicy = [
+  "default-src 'self'",
+  `script-src 'self' 'unsafe-inline'${process.env.NODE_ENV === "development" ? " 'unsafe-eval'" : ""}`,
+  "style-src 'self' 'unsafe-inline'",
+  "img-src 'self' data: blob:",
+  "connect-src 'self'",
+  "object-src 'none'",
+  "base-uri 'self'",
+  "form-action 'self'",
+].join("; ");
 
 const nextConfig: NextConfig = {
-  distDir: process.env.METAL_TEST_DIST_DIR || ".next",
   allowedDevOrigins: ["127.0.0.1"],
   outputFileTracingIncludes: {"/api/orders": ["./lib/server/invoice-fonts/*.ttf"]},
   async headers() {
     return [{
+      source: "/:path*",
+      headers: [
+        {key: "Content-Security-Policy", value: storefrontContentPolicy},
+        {key: "X-DNS-Prefetch-Control", value: "off"},
+      ],
+    }, {
       source: "/images/prepared/:path*",
       headers: [{key: "Cache-Control", value: "public, max-age=31536000, immutable"}],
     }, {
@@ -16,6 +33,7 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      {source: "/documents/gost-8240-97.pdf", destination: catalogStandards["8240"].href, permanent: true},
       {"source":"/catalog/balka/balka-25s1x12000-gost-27772-s255-tm","destination":"/catalog/balka/balka-shirokopolochnaya/balka-shirokopolochnaya#variant-local-122247","permanent":true},
       {"source":"/catalog/balka/balka-30s1x12000-gost-27772-s255-tm","destination":"/catalog/balka/balka-shirokopolochnaya/balka-shirokopolochnaya#variant-local-115982","permanent":true},
       {"source":"/catalog/balka/balka-20k1x12000-gost-27772-s255-tm","destination":"/catalog/balka/balka-kolonnaya/balka-kolonnaya#variant-local-11123500","permanent":true},

@@ -2,6 +2,7 @@
 
 import {useId, useRef} from "react";
 import {Icon} from "@/components/ui/Icon";
+import {CatalogStandardReference} from "./CatalogStandardReference";
 
 const explanations = [
   {
@@ -44,7 +45,7 @@ export function RebarStandardHelp({standard}: {standard: string}) {
         </div>
         <dl className="mt-3 space-y-3 text-sm">
           {relevant.map(({code, description}) => <div key={code}>
-            <dt className="font-semibold">{code}</dt>
+            <dt className="font-semibold"><CatalogStandardReference>{code}</CatalogStandardReference></dt>
             <dd className="mt-1 text-slate-700 dark:text-slate-300">{description}</dd>
           </div>)}
         </dl>

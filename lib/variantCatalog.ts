@@ -25,8 +25,8 @@ export function uniqueAttributeValues(variants: ProductVariant[], key: ProductAt
 export function variantFilterLabel(variants: ProductVariant[], key: ProductAttributeKey) {
   if (key === "size" && variants.length > 0 && variants.every(isIllustratedSheet)) return sheetFormatLabel;
   const category = variants[0]?.categoryId;
-  if (category === "rozmet-cat-kvadrat" || category === "rozmet-cat-shveller" || category === "rozmet-cat-ugolok") {
-    if (key === "size") return category === "rozmet-cat-shveller" ? "Номер профиля" : "Сечение";
+  if (category === "catalog-cat-kvadrat" || category === "catalog-cat-shveller" || category === "catalog-cat-ugolok") {
+    if (key === "size") return category === "catalog-cat-shveller" ? "Номер профиля" : "Сечение";
     if (key === "length") return "Длина по каталогу";
   }
   return variants.flatMap(variant => variant.attributes).find(attribute => attribute.key === key)?.label ?? key;

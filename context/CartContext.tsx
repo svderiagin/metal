@@ -2,6 +2,7 @@
 import {createContext, type ReactNode, useCallback, useEffect, useMemo, useRef, useState} from "react";
 import {CART_STORAGE_KEY} from "@/lib/constants";
 import {getProductVariantById} from "@/lib/cartCatalog";
+import {resolveCatalogProductId} from "@/lib/catalogIdentity";
 import type {CartItem, CartLine, CartMeasurement, CartPieceOrder, OrderInputMode} from "@/types/cart";
 import {createCartLines, normalizeCartItems} from "@/lib/cart";
 import {addCartItem, updateCartItem, updateCartPieceOrder} from "@/lib/cartMutations";
@@ -109,15 +110,23 @@ export function CartProvider({children}: { children: ReactNode }) {
 }
 
 function readStoredCart(): CartItem[] {
-  const legacy = normalizeCartItems(parseStoredJson(localStorage.getItem(CART_STORAGE_KEY)));
+  const snapshot = normalizeCartItems(parseStoredJson(localStorage.getItem(CART_STORAGE_KEY)));
+  const legacyUpdates: unknown[] = [];
   const updates: unknown[] = [];
   for (let index = 0; index < localStorage.length; index++) {
     const key = localStorage.key(index);
-    if (key?.startsWith(itemKeyPrefix)) updates.push(parseStoredJson(localStorage.getItem(key)));
+    if (!key?.startsWith(itemKeyPrefix)) continue;
+    const id = key.slice(itemKeyPrefix.length);
+    const value = parseStoredJson(localStorage.getItem(key));
+    if (resolveCatalogProductId(id) === id) updates.push(value);
+    else legacyUpdates.push(value);
   }
   // A change in another tab can overwrite a legacy snapshot. Per-product updates take precedence,
   // and a removal stays effective even if a previously started update writes that product later.
-  return normalizeCartItems([...legacy, ...updates]).filter(item => localStorage.getItem(removedKeyPrefix + item.productId) === null);
+  const items = [...snapshot, ...normalizeCartItems(legacyUpdates), ...normalizeCartItems(updates)]
+    .filter(item => localStorage.getItem(removedKeyPrefix + item.productId) === null)
+    .map(item => ({...item, productId: resolveCatalogProductId(item.productId)}));
+  return normalizeCartItems(items).filter(item => localStorage.getItem(removedKeyPrefix + item.productId) === null);
 }
 
 function parseStoredJson(raw: string | null): unknown {

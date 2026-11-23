@@ -1,4 +1,5 @@
 import fs from 'node:fs/promises';
+import {catalogMeasurementUrl} from './catalog-measurement-path.mjs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {createHash} from 'node:crypto';
@@ -10,7 +11,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 process.chdir(root);
 const directory = 'imports/ugolok-image-template';
 const temporaryDirectory = path.join(root, '.tmp/ugolok-image-render');
-await fs.mkdir(temporaryDirectory, {recursive: true});
+await fs.mkdir(path.join(temporaryDirectory, 'font-cache'), {recursive: true});
 const fontConfiguration = path.join(temporaryDirectory, 'fonts.conf');
 await fs.writeFile(fontConfiguration, `<?xml version="1.0"?><!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd"><fontconfig><dir>${path.join(root, 'imports/shveller-image-template/fonts')}</dir><cachedir>${temporaryDirectory}/font-cache</cachedir></fontconfig>`);
 process.env.FONTCONFIG_FILE = fontConfiguration;
@@ -60,7 +61,7 @@ async function textImage(text, size, weight = 400) {
     font: `Inter ${size}`, fontfile: fontPath, dpi: 72, rgba: true}}).png().toBuffer({resolveWithObject: true});
 }
 
-const products = readProjectData('data/products/index.ts').productVariants.filter(p => p.categoryId === 'rozmet-cat-ugolok');
+const products = readProjectData('data/products/index.ts').productVariants.filter(p => p.categoryId === 'catalog-cat-ugolok');
 const {formatAngleSpecificationValue: normalize} = readProjectData('lib/anglePresentation.ts');
 assert.equal(products.length, 22, 'Review the collection before changing its image set');
 const write = process.argv.includes('--write');
@@ -68,7 +69,7 @@ const previewIndex = process.argv.indexOf('--preview');
 const previewProfile = previewIndex >= 0 ? process.argv[previewIndex + 1] : undefined;
 assert.ok(!(write && previewIndex >= 0), 'Use --write or --preview PROFILE');
 assert.ok(previewIndex < 0 || previewProfile, '--preview requires dimensions such as 160x100x10');
-const outputDirectory = write ? 'public/images/catalog/ugolok' : '.tmp/catalog-image-qa/ugolok-preview';
+const outputDirectory = write ? 'public/images/catalog/ugolok/measurement' : '.tmp/catalog-image-qa/ugolok-preview';
 await fs.mkdir(outputDirectory, {recursive: true});
 const records = [];
 for (const product of products) {
@@ -131,10 +132,11 @@ for (const product of products) {
   let protectedPixelChanges = 0;
   for (let p = 0; p < mask.length; p++) if (!mask[p] && (referencePixels[p * 3] !== renderedPixels[p * 3] || referencePixels[p * 3 + 1] !== renderedPixels[p * 3 + 1] || referencePixels[p * 3 + 2] !== renderedPixels[p * 3 + 2])) protectedPixelChanges++;
   assert.equal(protectedPixelChanges, 0, `${product.id}: pixels changed outside variable-label regions`);
-  const filename = `ugolok-${profile}-clean.webp`;
+  const imageUrl = catalogMeasurementUrl(product);
+  const filename = path.basename(imageUrl);
   const output = `${outputDirectory}/${filename}`;
   await fs.writeFile(output, image);
-  records.push({id: product.id, sourceUrl: product.sourceReference, profile, imageUrl: `/images/catalog/ugolok/${filename}`,
+  records.push({id: product.id, profile, imageUrl,
     labels: labels.map(({key, text}) => ({key, text: key==='title'?text.replace(/№\s*/gu,''):text})), changedLabels: changed.map(label => label.key), placements,
     ...(correction?{headingCorrection:{removed:'№',box:correction.box,shiftLeft:correction.shiftLeft}}:{}),
     protectedPixelChanges, output, width: WIDTH, height: HEIGHT, sha256: createHash('sha256').update(image).digest('hex')});
@@ -148,5 +150,5 @@ if (write) {
     backgroundPlate: `${directory}/clean-background-generated.png`, patches,
     method: 'Original reference pixels; ImageGen background patches restricted to variable text; deterministic Inter labels from public product specifications.',
     illustration: 'Shared family photograph; labels show nominal dimensions, not scaled manufacturing geometry.', records}, null, 2) + '\n');
-  await fs.writeFile('data/angle-images.json', JSON.stringify({products: Object.fromEntries(records.map(({id, sourceUrl, imageUrl}) => [id, {sourceUrl, imageUrl}]))}, null, 2) + '\n');
+  await fs.writeFile('data/angle-images.json', JSON.stringify({products: Object.fromEntries(records.map(({id, imageUrl}) => [id, {imageUrl}]))}, null, 2) + '\n');
 }

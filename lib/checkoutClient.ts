@@ -2,6 +2,7 @@ import type {CreateOrderInput, CreateOrderResponse, CreatePaymentResponse} from 
 import {isApiSuccess, readApiError} from "./apiResponse";
 import {parseInvoiceReceipt} from "./invoiceReceipt";
 import {isOrderReference} from "./orderReference";
+import {isPaymentRedirect} from "./paymentRedirect";
 
 export async function createOrder(input: CreateOrderInput): Promise<CreateOrderResponse> {
   const result = await post("/api/orders", input, "Не удалось создать заказ.");
@@ -9,10 +10,10 @@ export async function createOrder(input: CreateOrderInput): Promise<CreateOrderR
   return result as unknown as CreateOrderResponse;
 }
 
-export async function createPayment(orderReference: string): Promise<CreatePaymentResponse> {
+export async function createPayment(orderReference: string, storefrontOrigin: string): Promise<CreatePaymentResponse> {
   try {
     const result = await post("/api/payments/create", {orderReference}, "Онлайн-оплата пока не настроена.");
-    if (!("redirectUrl" in result) || typeof result.redirectUrl !== "string" || !isPaymentRedirect(result.redirectUrl)) {
+    if (!("redirectUrl" in result) || !isPaymentRedirect(result.redirectUrl, storefrontOrigin)) {
       throw new Error("Сервис оплаты вернул некорректный адрес.");
     }
     return {ok: true, redirectUrl: result.redirectUrl};
@@ -20,13 +21,6 @@ export async function createPayment(orderReference: string): Promise<CreatePayme
     const message = caught instanceof Error ? caught.message : "Не удалось перейти к оплате.";
     throw new Error(`${message} Заказ ${orderReference} сохранён; корзина не очищена.`);
   }
-}
-
-export function isPaymentRedirect(value: string): boolean {
-  try {
-    const url = new URL(value);
-    return url.protocol === "https:" && !url.username && !url.password;
-  } catch {return false;}
 }
 
 async function post(url: string, input: unknown, fallback: string) {

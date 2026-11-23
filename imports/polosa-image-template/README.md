@@ -1,13 +1,12 @@
 # Чистая полоса П02, 4:3
 
-Подготовлена 08.11.2026 по выбору владельца. Источник —
-[e-materials, полоса 40×4](https://e-materials.pl/products/plaskownik-stalowy-40x4-mm-goracowalcowany-s235jrh).
+Подготовлена 08.11.2026 по выбору владельца. Исходник показывает полосу 40×4.
 Скачанный исходник 2000 × 2000 сохранён без изменений в
-`p02-e-materials-original.jpg`; точный URL и SHA-256 записаны в `generation.json`.
+`p02-steel-strip-original.jpg`; SHA-256 записан в `generation.json`.
 
 - `polosa_2000_1500_original.png` — мастер 4:3.
-- [Чистая фотография](../../public/images/catalog/polosa/polosa_stalnaya_1448_1086_original.png) — заготовка 1448 × 1086.
-- [Эталон владельца](../../public/images/catalog/polosa/polosa_stalnaya_2400_1800_marked.jpg) — разметка полосы 20×4 мм на холсте 2400 × 1800.
+- [Чистая фотография](../../public/images/catalog/polosa/originals/polosa_stalnaya_1448_1086_original.png) — заготовка 1448 × 1086.
+- [Эталон владельца](../../public/images/catalog/polosa/originals/polosa_stalnaya_2400_1800_marked.jpg) — разметка полосы 20×4 мм на холсте 2400 × 1800.
 
 Композиция сопоставлена с чистым шаблоном квадратной трубы: торец справа от
 центра, уходящая длина направлена в правый верхний угол, слева и снизу есть

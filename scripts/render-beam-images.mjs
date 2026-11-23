@@ -2,6 +2,7 @@
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import path from "node:path";
+import {catalogMeasurementUrl} from "./catalog-measurement-path.mjs";
 import sharp from "sharp";
 import {getAllProductVariants} from "../lib/catalog.ts";
 import {beamProfile, beamReferenceMassKg, beamSeries} from "../lib/beam.ts";
@@ -32,10 +33,10 @@ async function pixels(source) {
 
 async function loadTemplate(layout) {
   const {folder, profile} = layout;
-  const root = "/images/catalog/balka";
-  const photoUrl = `${root}/${folder}/balka_${folder}_2400_1800_marked.jpg`;
+  const root = `/images/catalog/balka/balka-${folder}/originals`;
+  const photoUrl = `${root}/balka_${folder}_2400_1800_marked.jpg`;
   const [markedPixels, cleanPixels] = await Promise.all([
-    pixels(`public${photoUrl}`), pixels(`public${root}/${folder}/balka_${folder}_2400_1800_original.jpg`),
+    pixels(`public${photoUrl}`), pixels(`public${root}/balka_${folder}_2400_1800_original.jpg`),
   ]);
   const section = sections[profile];
   return {layout, photoUrl, markedPixels, cleanPixels, labels: {
@@ -117,7 +118,7 @@ function decoration(placement, left, top, width, height) {
 async function render(product, template, series) {
   assert.match(product.id, /^[a-z\d-]+$/u);
   const illustration = {
-    imageUrl: `/images/catalog/product-illustrations/${product.id}.webp`,
+    imageUrl: catalogMeasurementUrl(product),
     photoUrl: template.photoUrl, signature: productIllustrationSignature(product),
     ...(isDemonstrationProduct(product) ? {showForDemo: true} : {}),
   };
@@ -159,6 +160,7 @@ async function render(product, template, series) {
     }
   }
   const output = write ? `public${illustration.imageUrl}` : path.join(outputDirectory, `${product.id}.webp`);
+  await fs.mkdir(path.dirname(output), {recursive: true});
   const temporary = output + `.${process.pid}.tmp`;
   await fs.writeFile(temporary, result);
   await fs.rename(temporary, output);

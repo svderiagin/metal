@@ -1,6 +1,6 @@
 # Catalog search
 
-All 549 catalog variants share `lib/search/`: Russian Snowball stemming, scoped directional terminology aliases, structured technical parsing, bounded Damerau spelling correction and weighted relevance. No dependencies or search service were added. The algorithm specification is https://snowballstem.org/algorithms/russian/stemmer.html.
+Catalog variants share `lib/search/`: Russian Snowball stemming, scoped directional terminology aliases, structured technical parsing, bounded Damerau spelling correction and weighted relevance. No dependencies or search service were added.
 
 An index is built once per mounted catalog dataset. Normalized fields and vocabulary are precomputed; compiled queries are cached. React deferred values keep typing responsive. Names have the highest text weight, followed by attributes, category/family names, inferred product terminology and descriptions. Exact names/SKUs receive a large ranking bonus. All significant terms must match. Explicit user sorting still takes precedence over relevance.
 
@@ -10,11 +10,8 @@ The header submits to the existing `/catalog?q=` URL. The catalog searches while
 
 Examples: `профильных труб`, `строительную арматуру`, `металлические уголки`, `двутавр`, `проф труба`, `40 40 4`, `арматура Ø12`, `09Г2С`, `профилная труба`, `арматруа`, `швелер`.
 
-Validation:
-
-- `npm run search:check`: morphology, synonyms, technical constraints, corrections, partial input, every real product name, filters/pagination and full-catalog timing.
-- After `npm run test:build`, run `npx playwright test tests/e2e/catalog.spec.ts` for search, technical queries, linked products, filters and empty results on desktop and mobile.
-- `npm run catalog:check`, `node --test scripts/images.test.mjs`, application ESLint (downloaded `brokinvest.ru/**` is already ignored) and `npm run build`.
+When changing search, check technical queries, linked products, filters and empty
+results in the browser at desktop and mobile widths.
 
 Measured index construction: approximately 65 ms. Repeated full-catalog queries: approximately 4 ms each on the development machine; timings vary by device.
 

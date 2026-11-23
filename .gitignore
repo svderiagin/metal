@@ -3,15 +3,11 @@
 
 # Next.js
 /.next/
-/.next-test/
 /out/
 /build/
 /public/images/prepared/
 
-# Testing
-/coverage/
-/playwright-report/
-/test-results/
+# Generated invoice previews
 /output/invoice-review-*/
 /output/pdf/rwb-invoice-preview.pdf
 
@@ -41,7 +37,6 @@ next-env.d.ts
 *.swp
 /.tmp/
 /.local/
-/brokinvest.ru/
 *~
 
 # Local AI assistant

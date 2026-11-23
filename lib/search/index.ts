@@ -10,6 +10,7 @@ interface Field {words: Set<string>; stems: Set<string>; weight: number}
 interface Document {product: ProductVariant; name: string; fields: Field[]; technical: ReturnType<typeof buildTechnicalDocument>}
 interface Term {word: string; stem: string; prefix: boolean; corrected?: string}
 export interface SearchHit {product: ProductVariant; score: number}
+export type SearchCategory = Pick<Category, "id" | "name" | "description">;
 export interface SearchOptions {categoryId?: string; inStock?: boolean; material?: string; standard?: string; offset?: number; limit?: number}
 export interface SearchResult {hits: SearchHit[]; total: number; correctedQuery?: string}
 
@@ -51,7 +52,7 @@ function editDistance(a: string, b: string, maximum: number): number {
   return rows[a.length][b.length];
 }
 
-export function createCatalogSearchIndex(products: ProductVariant[], types: ProductType[] = [], categories: Category[] = []) {
+export function createCatalogSearchIndex(products: ProductVariant[], types: ProductType[] = [], categories: SearchCategory[] = []) {
   const typeById = new Map(types.map(t => [t.id, t]));
   const categoryById = new Map(categories.map(c => [c.id, c]));
   const vocabulary = new Map<string, number>();

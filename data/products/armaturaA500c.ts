@@ -12,7 +12,7 @@ type A500cRow = {
 };
 
 // Nominal kg/m: GOST 34028-2016, table 1. Preserve three decimal places.
-// https://files.stroyinf.ru/Data2/1/4293746/4293746568.htm
+// https://meganorm.ru/Data2/1/4293746/4293746568.htm
 const rows: A500cRow[] = [
   {diameterMm: 6, form: "coil", pricePerTon: 73300, weightPerMeterKg: 0.222},
   {diameterMm: 6, form: "bar", lengthMeters: 6, pricePerTon: 73300, weightPerMeterKg: 0.222},
@@ -63,7 +63,7 @@ export const armaturaA500cVariants: ProductVariantSource[] = rows.map((row, inde
     sourceProductName: row.form === "coil"
       ? "арматура, в бунтах"
       : `арматура, ${formatNumber(row.lengthMeters ?? 0)} м`,
-    sourceReference: `armatura__${row.diameterMm}_a500s${row.form === "coil" ? "_buhty" : ""}.htm`,
+
     attributes: [
       {key: "material", label: "Материал", value: `Сталь ${steelGrade}`},
       {key: "size", label: "Диаметр", value: `${row.diameterMm} мм`},

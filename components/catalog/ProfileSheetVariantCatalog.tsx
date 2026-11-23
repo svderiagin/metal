@@ -14,6 +14,7 @@ import {PriceRangeFeedback, PriceRangeInputs, useCatalogPriceRange} from "./Pric
 import {ResetFiltersButton} from "./ResetFiltersButton";
 import {CatalogVariantLayout, CatalogVariantSpecifications, CatalogVariantTable} from "./CatalogVariantLayout";
 import {CatalogPositionDetails} from "./CatalogPositionDetails";
+import {CatalogTableNote} from "./CatalogTableNote";
 import {formatSpecification} from "./StorefrontPositionSpecifications";
 
 type SortMode = "thickness-asc" | "thickness-desc" | "price-asc" | "price-desc";
@@ -105,13 +106,13 @@ export function ProfileSheetVariantCatalog({variants}: {variants: ProfileSheetVa
 
     <section className="min-w-0 lg:col-span-2" aria-label="Профнастил">
       {results.length ? <>
-        {(shared.size || shared.coating) && <p className="mb-3 hidden text-sm text-slate-600 xl:block dark:text-slate-300">
+        {(shared.size || shared.coating) && <CatalogTableNote>
           {shared.size && <>Размер листа — {formatSpecification(shared.size)} м. </>}
           {shared.coating && <>Покрытие — {shared.coating === "Оцинкованный" ? "цинк" : shared.coating}.</>}
-        </p>}
+        </CatalogTableNote>}
         <CatalogVariantTable designation={shared.profile ? "Толщина, мм" : "Профиль / толщина"}
           specifications={sheetSpecifications(shared, "Цвет / покрытие", "Размер листа, м")}
-          quantity="Заказ, шт.">
+          unit="шт.">
           {results.map(variant => <ProfileSheetItem key={variant.id} variant={variant} shared={shared} view="table"/>)}
         </CatalogVariantTable>
         <div className="grid gap-4 sm:grid-cols-2 xl:hidden">
@@ -143,5 +144,5 @@ function ProfileSheetItem({variant, shared, view}: {variant: ProfileSheetVariant
     specifications={<CatalogVariantSpecifications items={fields.slice(2)}/>}
     details={<CatalogPositionDetails productName={variant.name} fields={fields}/>}
     price={formatUnitPrice(variant.price, variant.priceUnit)}
-    order={<ProductOrderControls view={view} variant={variant} allowBackorder wholeQuantity={true} showUnit={view === "card"}/>}/>;
+    order={<ProductOrderControls view={view} variant={variant} allowBackorder wholeQuantity showUnit={false}/>}/>;
 }

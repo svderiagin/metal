@@ -1,56 +1,43 @@
 {
   "products": {
-    "rozmet-2186": {
-      "sourceUrl": "https://rozmet.ru/production/listovoy_prokat/list-goryachekatanyj/list-1-5/",
-      "imageUrl": "/images/catalog/listovoy-prokat/list_goriachekataniy/list-goriachekataniy-1.5-1250x2500-rozmet-2186.webp"
+    "catalog-2186": {
+      "imageUrl": "/images/catalog/listovoy-prokat/list-goryachekatanyj/measurement/list-goryachekatanyy-1-5x1250x2500mm.webp"
     },
-    "rozmet-2187": {
-      "sourceUrl": "https://rozmet.ru/production/listovoy_prokat/list-goryachekatanyj/list-2/",
-      "imageUrl": "/images/catalog/listovoy-prokat/list_goriachekataniy/list-goriachekataniy-2-1250x2500-rozmet-2187.webp"
+    "catalog-2187": {
+      "imageUrl": "/images/catalog/listovoy-prokat/list-goryachekatanyj/measurement/list-goryachekatanyy-2x1250x2500mm.webp"
     },
-    "rozmet-28951": {
-      "sourceUrl": "https://rozmet.ru/production/listovoy_prokat/list-goryachekatanyj/list_3_tu/",
-      "imageUrl": "/images/catalog/listovoy-prokat/list_goriachekataniy/list-goriachekataniy-3-1250x2500-rozmet-28951.webp"
+    "catalog-28951": {
+      "imageUrl": "/images/catalog/listovoy-prokat/list-goryachekatanyj/measurement/list-goryachekatanyy-3x1250x2500mm-tu.webp"
     },
-    "rozmet-2188": {
-      "sourceUrl": "https://rozmet.ru/production/listovoy_prokat/list-goryachekatanyj/list-3/",
-      "imageUrl": "/images/catalog/listovoy-prokat/list_goriachekataniy/list-goriachekataniy-3-1250x2500-rozmet-2188.webp"
+    "catalog-2188": {
+      "imageUrl": "/images/catalog/listovoy-prokat/list-goryachekatanyj/measurement/list-goryachekatanyy-3x1250x2500mm-gost.webp"
     },
-    "rozmet-2190": {
-      "sourceUrl": "https://rozmet.ru/production/listovoy_prokat/list-goryachekatanyj/list-4/",
-      "imageUrl": "/images/catalog/listovoy-prokat/list_goriachekataniy/list-goriachekataniy-4-1500x6000-rozmet-2190.webp"
+    "catalog-2190": {
+      "imageUrl": "/images/catalog/listovoy-prokat/list-goryachekatanyj/measurement/list-goryachekatanyy-4x1500x6000mm.webp"
     },
-    "rozmet-2191": {
-      "sourceUrl": "https://rozmet.ru/production/listovoy_prokat/list-goryachekatanyj/list-5/",
-      "imageUrl": "/images/catalog/listovoy-prokat/list_goriachekataniy/list-goriachekataniy-5-1500x6000-rozmet-2191.webp"
+    "catalog-2191": {
+      "imageUrl": "/images/catalog/listovoy-prokat/list-goryachekatanyj/measurement/list-goryachekatanyy-5x1500x6000mm.webp"
     },
-    "rozmet-2192": {
-      "sourceUrl": "https://rozmet.ru/production/listovoy_prokat/list-goryachekatanyj/list-6/",
-      "imageUrl": "/images/catalog/listovoy-prokat/list_goriachekataniy/list-goriachekataniy-6-1500x6000-rozmet-2192.webp"
+    "catalog-2192": {
+      "imageUrl": "/images/catalog/listovoy-prokat/list-goryachekatanyj/measurement/list-goryachekatanyy-6x1500x6000mm.webp"
     },
-    "rozmet-2194": {
-      "sourceUrl": "https://rozmet.ru/production/listovoy_prokat/list-goryachekatanyj/list-8/",
-      "imageUrl": "/images/catalog/listovoy-prokat/list_goriachekataniy/list-goriachekataniy-8-1500x6000-rozmet-2194.webp"
+    "catalog-2194": {
+      "imageUrl": "/images/catalog/listovoy-prokat/list-goryachekatanyj/measurement/list-goryachekatanyy-8x1500x6000mm.webp"
     },
-    "rozmet-2195": {
-      "sourceUrl": "https://rozmet.ru/production/listovoy_prokat/list-goryachekatanyj/list-10/",
-      "imageUrl": "/images/catalog/listovoy-prokat/list_goriachekataniy/list-goriachekataniy-10-1500x6000-rozmet-2195.webp"
+    "catalog-2195": {
+      "imageUrl": "/images/catalog/listovoy-prokat/list-goryachekatanyj/measurement/list-goryachekatanyy-10x1500x6000mm.webp"
     },
-    "rozmet-2196": {
-      "sourceUrl": "https://rozmet.ru/production/listovoy_prokat/list-goryachekatanyj/list-12/",
-      "imageUrl": "/images/catalog/listovoy-prokat/list_goriachekataniy/list-goriachekataniy-12-1500x6000-rozmet-2196.webp"
+    "catalog-2196": {
+      "imageUrl": "/images/catalog/listovoy-prokat/list-goryachekatanyj/measurement/list-goryachekatanyy-12x1500x6000mm.webp"
     },
-    "rozmet-2197": {
-      "sourceUrl": "https://rozmet.ru/production/listovoy_prokat/list-goryachekatanyj/list-14/",
-      "imageUrl": "/images/catalog/listovoy-prokat/list_goriachekataniy/list-goriachekataniy-14-1500x6000-rozmet-2197.webp"
+    "catalog-2197": {
+      "imageUrl": "/images/catalog/listovoy-prokat/list-goryachekatanyj/measurement/list-goryachekatanyy-14x1500x6000mm.webp"
     },
-    "rozmet-2198": {
-      "sourceUrl": "https://rozmet.ru/production/listovoy_prokat/list-goryachekatanyj/list-16/",
-      "imageUrl": "/images/catalog/listovoy-prokat/list_goriachekataniy/list-goriachekataniy-16-1500x6000-rozmet-2198.webp"
+    "catalog-2198": {
+      "imageUrl": "/images/catalog/listovoy-prokat/list-goryachekatanyj/measurement/list-goryachekatanyy-16x1500x6000mm.webp"
     },
-    "rozmet-2200": {
-      "sourceUrl": "https://rozmet.ru/production/listovoy_prokat/list-goryachekatanyj/list-20/",
-      "imageUrl": "/images/catalog/listovoy-prokat/list_goriachekataniy/list-goriachekataniy-20-1500x6000-rozmet-2200.webp"
+    "catalog-2200": {
+      "imageUrl": "/images/catalog/listovoy-prokat/list-goryachekatanyj/measurement/list-goryachekatanyy-20x1500x6000mm.webp"
     }
   }
 }

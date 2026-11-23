@@ -11,7 +11,7 @@ import {
   metalMeshSpecification,
   type MetalMeshVariant,
 } from "@/lib/metalMesh";
-import {requiresWholeMetalMeshQuantity} from "@/lib/variantPresentation";
+import {commonQuantityUnit, requiresWholeMetalMeshQuantity} from "@/lib/variantPresentation";
 import {ProductOrderControls} from "./ProductOrderControls";
 import {FilterPanel} from "./FilterPanel";
 import {ResetFiltersButton} from "./ResetFiltersButton";
@@ -37,6 +37,7 @@ export function MetalMeshVariantCatalog({variants}: {variants: MetalMeshVariant[
   const wireDiameters = useMemo(() => uniqueValues(variants, "Диаметр проволоки"), [variants]);
   const formatLabels = new Set(variants.map(formatLabel));
   const packageLabel = formatLabels.size === 1 ? formatLabel(variants[0]) : "Формат поставки";
+  const unit = commonQuantityUnit(variants);
   const formats = useMemo(() => [...new Set(variants.map(metalMeshFormat))]
     .filter((value) => value !== "—")
     .sort(numericCompare), [variants]);
@@ -96,8 +97,8 @@ export function MetalMeshVariantCatalog({variants}: {variants: MetalMeshVariant[
 
     <section className="min-w-0 lg:col-span-2" aria-label="Сетка металлическая">
       {results.length ? <>
-        <CatalogVariantTable designation="Ячейка" specifications={["Проволока", packageLabel]}>
-          {results.map(variant => <MetalMeshItem key={variant.id} variant={variant} view="table"/>)}
+        <CatalogVariantTable designation="Ячейка" specifications={["Проволока", packageLabel]} unit={unit}>
+          {results.map(variant => <MetalMeshItem key={variant.id} variant={variant} view="table" showUnit={!unit}/>)}
         </CatalogVariantTable>
         <div className="grid gap-4 sm:grid-cols-2 xl:hidden">
           {results.map((variant) => <MetalMeshItem key={variant.id} variant={variant} view="card"/>)}
@@ -111,7 +112,7 @@ export function MetalMeshVariantCatalog({variants}: {variants: MetalMeshVariant[
   </>;
 }
 
-function MetalMeshItem({variant, view}: {variant: MetalMeshVariant; view: "table" | "card"}) {
+function MetalMeshItem({variant, view, showUnit}: {variant: MetalMeshVariant; view: "table" | "card"; showUnit?: boolean}) {
   const cell = formatSpecification(metalMeshSpecification(variant, "Размер ячейки"));
   const wire = formatSpecification(metalMeshSpecification(variant, "Диаметр проволоки"));
   const format = formatSpecification(metalMeshFormat(variant));
@@ -135,7 +136,7 @@ function MetalMeshItem({variant, view}: {variant: MetalMeshVariant; view: "table
     specifications={<CatalogVariantSpecifications items={fields}/>}
     details={<CatalogPositionDetails productName={variant.name} fields={detailsFields}/>}
     price={formatUnitPrice(variant.price, variant.priceUnit)}
-    order={<ProductOrderControls view={view} variant={variant} allowBackorder wholeQuantity={requiresWholeMetalMeshQuantity(variant)}/>}/>;
+    order={<ProductOrderControls view={view} variant={variant} showUnit={showUnit} allowBackorder wholeQuantity={requiresWholeMetalMeshQuantity(variant)}/>}/>;
 }
 
 function MeshFilter({label, value, values, onChange}: {

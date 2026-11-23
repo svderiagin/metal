@@ -3,7 +3,7 @@ import type {ProductVariant} from "@/types/product";
 import type {CartMeasurement, CartPieceOrder} from "@/types/cart";
 import {hasConfirmedProfilePipePrice, isProfilePipeVariant, profilePipeOrder} from "./profilePipe";
 import {isProfileSheetVariant} from "./profileSheet";
-import {requiresWholeMetalMeshQuantity, requiresWholeRozmetQuantity} from "./variantPresentation";
+import {requiresWholeMetalMeshQuantity, requiresWholeCatalogQuantity} from "./variantPresentation";
 import {isDemonstrationProduct, requiresOfferConfirmation} from "./catalogOffer";
 
 type PriceInput = {quantity: number; measurement?: Pick<CartMeasurement, "inputMode" | "meters" | "weightTons">; pieceOrder?: CartPieceOrder};
@@ -29,7 +29,7 @@ export function revalidateCartPrice(product: ProductVariant, item: PriceInput) {
     ? "Цена требует уточнения. Отправьте запрос на расчёт." : undefined;
   let measurement: CartMeasurement | undefined;
   if (item.pieceOrder) invalidReason = "Количество целых труб не применимо к этой позиции.";
-  if (requiresWholeRozmetQuantity(product) && (!Number.isInteger(item.quantity) || item.measurement)) {
+  if (requiresWholeCatalogQuantity(product) && (!Number.isInteger(item.quantity) || item.measurement)) {
     invalidReason = "Укажите целое количество штук.";
   }
   if (isProfileSheetVariant(product) && (!Number.isInteger(item.quantity) || item.measurement)) {

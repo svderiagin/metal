@@ -28,8 +28,12 @@ export function buildTechnicalDocument(product: ProductVariant): TechnicalDocume
   const specs = product.specifications;
   const gradeText = [product.steelGrade ?? "", ...product.attributes.filter(a => a.key === "grade" || a.key === "class").map(a => a.value), ...specs.filter(s => /марка|класс/i.test(s.name)).map(s => s.value)].join(" ");
   const stdText = [product.standard, product.name, ...specs.filter(s => /стандарт|гост/i.test(s.name)).map(s => s.value)].join(" ");
-  const offerName = isMeasuredElectroweldedVariant(product) ? product.sourceProductName ?? "" : "";
+  const electrowelded = isMeasuredElectroweldedVariant(product);
+  const offerName = electrowelded ? product.sourceProductName ?? "" : "";
   const chains = dimensions(`${product.name} ${offerName}`);
+  if (electrowelded && product.lengthMeters !== undefined) {
+    chains.push([String(product.diameterMm), String(product.wallThicknessMm), String(Math.round(product.lengthMeters * 1000))]);
+  }
   for (const spec of specs.filter(s => /профил|размер|сечение/i.test(s.name))) chains.push(...dimensions(spec.value));
   const primary = new Set(chains.map(chain => chain[0]));
   if (product.diameterMm !== undefined) primary.add(String(product.diameterMm));
@@ -45,6 +49,7 @@ export function buildTechnicalDocument(product: ProductVariant): TechnicalDocume
     const match = normalizeText(attr.value).match(/^(\d+(?:\.\d+)?)\s*(?:мм)?$/);if (match) primary.add(canonicalNumber(match[1]));
   }
   const grades = new Set([...identifiers(gradeText), ...identifiers(`${product.name} ${offerName}`).filter(t => !/^[\d.]+х[\dх.]+$/.test(t))]);
+  if (electrowelded && /^\d{1,2}$/.test(product.steelGrade ?? "")) grades.add(`ст${product.steelGrade}`);
   if (product.categoryId === "cat-bal") {
     const profile = beamProfile(product);
     if (/^\d+(?:[.,]\d+)?[БШКМ]\d*$/.test(profile)) grades.add(canonicalIdentifier(profile));
@@ -79,6 +84,7 @@ export function parseTechnicalQuery(input: string): TechnicalQuery {
   text = text.replace(/(^|[^а-яa-z])ду\s*(\d+(?:\.\d+)?)/g, (_, prefix: string, value: string) => {query.nominalBore = canonicalNumber(value);return prefix + value;});
   text = text.replace(/(?:[øØ⌀ф]\s*|диаметр(?:ом)?\s*)(\d+(?:\.\d+)?)/g, (_, value: string) => {query.diameter = canonicalNumber(value);return " ";});
   text = text.replace(/толщин(?:а|ой|у)\s*(\d+(?:\.\d+)?)/g, (_, value: string) => {query.thickness = canonicalNumber(value);return " ";});
+  text = text.replace(/(^|[^а-яa-z\d])(?:сталь\s+|ст\.\s*|ст\s+)(\d{1,2}(?:сп|пс|кп)?)(?![а-яa-z\d.])/g, "$1ст$2");
   text = text.replace(dimensionPattern, chain => {query.dimensions.push(chain.split("x").map(canonicalNumber));return " ";});
   // A standalone spaced sequence is an ordered section, never a bag of fuzzy numbers.
   text = text.replace(/(?:^|\s)(\d+(?:\.\d+)?(?:\s+\d+(?:\.\d+)?){1,3})(?=\s|$)/g, (_, chain: string) => {query.dimensions.push(chain.trim().split(/\s+/).map(canonicalNumber));return " ";});

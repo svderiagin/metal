@@ -85,8 +85,10 @@ export function CartItemRow({line, onRemove}: {line: CartLine; onRemove: () => v
                 const order = wholeLengthOrder(product, quantity, mode);
                 if (!order) return null;
                 const exact = mode === "meter" ? order.meters : order.weightTons;
-                return {value: exact, ...(Math.abs(exact - quantity) > Math.max(1, quantity) * 1e-9
-                  ? {message: `Объём округлён вверх до целых ${isBar ? "прутков" : "труб"} · ${order.pieces} шт.`} : {})};
+                if (!isBar && Math.abs(exact - quantity) > Math.max(1, quantity) * 1e-9) {
+                  return {value: exact, message: `Объём округлён вверх до целых труб · ${order.pieces} шт.`};
+                }
+                return {value: exact};
               } : undefined}/>;
           })}
           {wholeLengths && product?.lengthMeters ? <p className="max-w-64 text-xs text-slate-600 dark:text-slate-400">

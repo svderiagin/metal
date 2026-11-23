@@ -1,32 +1,25 @@
 {
   "products": {
-    "rozmet-2204": {
-      "sourceUrl": "https://rozmet.ru/production/kvadrat/kvadrat_8/",
-      "imageUrl": "/images/catalog/kvadrat/kvadrat-8x8-clean.webp"
+    "catalog-2204": {
+      "imageUrl": "/images/catalog/kvadrat/measurement/kvadrat-stalnoy-8x8mm-6m.webp"
     },
-    "rozmet-2205": {
-      "sourceUrl": "https://rozmet.ru/production/kvadrat/kvadrat_10/",
-      "imageUrl": "/images/catalog/kvadrat/kvadrat-10x10-clean.webp"
+    "catalog-2205": {
+      "imageUrl": "/images/catalog/kvadrat/measurement/kvadrat-stalnoy-10x10mm-6m.webp"
     },
-    "rozmet-2206": {
-      "sourceUrl": "https://rozmet.ru/production/kvadrat/kvadrat_12/",
-      "imageUrl": "/images/catalog/kvadrat/kvadrat-12x12-clean.webp"
+    "catalog-2206": {
+      "imageUrl": "/images/catalog/kvadrat/measurement/kvadrat-stalnoy-12x12mm-6m.webp"
     },
-    "rozmet-2207": {
-      "sourceUrl": "https://rozmet.ru/production/kvadrat/kvadrat_14/",
-      "imageUrl": "/images/catalog/kvadrat/kvadrat-14x14-clean.webp"
+    "catalog-2207": {
+      "imageUrl": "/images/catalog/kvadrat/measurement/kvadrat-stalnoy-14x14mm-6m.webp"
     },
-    "rozmet-26579": {
-      "sourceUrl": "https://rozmet.ru/production/kvadrat/kvadrat_16/",
-      "imageUrl": "/images/catalog/kvadrat/kvadrat-16x16-clean.webp"
+    "catalog-26579": {
+      "imageUrl": "/images/catalog/kvadrat/measurement/kvadrat-stalnoy-16x16mm-6m.webp"
     },
-    "rozmet-28995": {
-      "sourceUrl": "https://rozmet.ru/production/kvadrat/kvadrat_18/",
-      "imageUrl": "/images/catalog/kvadrat/kvadrat-18x18-clean.webp"
+    "catalog-28995": {
+      "imageUrl": "/images/catalog/kvadrat/measurement/kvadrat-stalnoy-18x18mm-6m.webp"
     },
-    "rozmet-2208": {
-      "sourceUrl": "https://rozmet.ru/production/kvadrat/kvadrat_20/",
-      "imageUrl": "/images/catalog/kvadrat/kvadrat-20x20-clean.webp"
+    "catalog-2208": {
+      "imageUrl": "/images/catalog/kvadrat/measurement/kvadrat-stalnoy-20x20mm-6m.webp"
     }
   }
 }

@@ -3,18 +3,17 @@ import verified from "@/data/section-specifications.json";
 
 const format = (value: number) => value.toLocaleString("ru-RU", {maximumFractionDigits: 3});
 
-// Apply audited facts only to the saved supplier identity. Keep import evidence
-// and commercial terms intact; a reference assortment is not a batch certificate.
+// Apply verified facts only when both the catalog identity and designation match.
 export function applySectionSpecifications(product: ProductVariant): ProductVariant {
   const record = verified.products[product.id as keyof typeof verified.products];
-  if (!record || record.categoryId !== product.categoryId || record.sourceUrl !== product.sourceReference
+  if (!record || record.categoryId !== product.categoryId
     || record.sourceProductName !== product.name) return product;
   const [minimum, maximum] = record.lengthRangeMeters;
   const length = minimum === maximum ? `${format(minimum)} м` : `${format(minimum)}–${format(maximum)} м`;
   const mass = `${format(record.displayMassKgPerMeter)} кг/м`;
   const dimensions = record.section.split("x").map(Number);
-  const angle = product.categoryId === "rozmet-cat-ugolok";
-  const square = product.categoryId === "rozmet-cat-kvadrat";
+  const angle = product.categoryId === "catalog-cat-ugolok";
+  const square = product.categoryId === "catalog-cat-kvadrat";
   const section = square ? `${dimensions[0]}×${dimensions[0]} мм`
     : angle ? `${dimensions.join("×")} мм` : record.section.replace(".", ",");
   const type = dimensions[0] === dimensions[1] ? "Равнополочный" : "Неравнополочный";

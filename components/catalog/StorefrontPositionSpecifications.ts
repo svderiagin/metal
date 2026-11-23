@@ -7,8 +7,8 @@ import {getSheetSpecifications} from "@/lib/sheetPresentation";
 
 export function storefrontPositionFields(variant: ProductVariant) {
   if (isDemonstrationProduct(variant)) return [];
-  const specifications = variant.categoryId === "rozmet-cat-kvadrat" ? getSquareProductSpecifications(variant)
-    : variant.categoryId === "rozmet-cat-ugolok" ? getAngleProductSpecifications(variant) : getSheetSpecifications(variant);
+  const specifications = variant.categoryId === "catalog-cat-kvadrat" ? getSquareProductSpecifications(variant)
+    : variant.categoryId === "catalog-cat-ugolok" ? getAngleProductSpecifications(variant) : getSheetSpecifications(variant);
   const fields = specifications
     .filter(({name}) => !["Полное обозначение", "Условия цены", "Условия оплаты"].includes(name))
     .map(({name, value}) => ({label: name, value: formatSpecification(value)}));

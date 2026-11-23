@@ -1,4 +1,5 @@
 import fs from 'node:fs/promises';
+import {catalogMeasurementUrl} from './catalog-measurement-path.mjs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {createHash} from 'node:crypto';
@@ -10,7 +11,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 process.chdir(root);
 const directory = 'imports/kvadrat-image-template';
 const temporaryDirectory = path.join(root, '.tmp/kvadrat-image-render');
-await fs.mkdir(temporaryDirectory, {recursive: true});
+await fs.mkdir(path.join(temporaryDirectory, 'font-cache'), {recursive: true});
 const fontConfiguration = path.join(temporaryDirectory, 'fonts.conf');
 await fs.writeFile(fontConfiguration, `<?xml version="1.0"?><!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd"><fontconfig><dir>${path.join(root, 'imports/shveller-image-template/fonts')}</dir><cachedir>${temporaryDirectory}/font-cache</cachedir></fontconfig>`);
 process.env.FONTCONFIG_FILE = fontConfiguration;
@@ -55,7 +56,7 @@ async function textImage(text, size, weight = 400) {
     font: `Inter ${size}`, fontfile: fontPath, dpi: 72, rgba: true}}).png().toBuffer({resolveWithObject: true});
 }
 
-const products = readProjectData('data/products/index.ts').productVariants.filter(p => p.categoryId === 'rozmet-cat-kvadrat');
+const products = readProjectData('data/products/index.ts').productVariants.filter(p => p.categoryId === 'catalog-cat-kvadrat');
 const {getSquareProductParameters} = readProjectData('lib/squarePresentation.ts');
 assert.equal(products.length, 7, 'Review the collection before changing its image set');
 const write = process.argv.includes('--write');
@@ -63,7 +64,7 @@ const previewIndex = process.argv.indexOf('--preview');
 const previewSide = previewIndex >= 0 ? process.argv[previewIndex + 1] : undefined;
 assert.ok(!(write && previewIndex >= 0), 'Use --write or --preview SIDE');
 assert.ok(previewIndex < 0 || previewSide, '--preview requires a side such as 20');
-const outputDirectory = write ? 'public/images/catalog/kvadrat' : 'output/image-edits/kvadrat-catalog-preview';
+const outputDirectory = write ? 'public/images/catalog/kvadrat/measurement' : 'output/image-edits/kvadrat-catalog-preview';
 await fs.mkdir(outputDirectory, {recursive: true});
 const records = [];
 for (const product of products) {
@@ -114,11 +115,12 @@ for (const product of products) {
   let protectedPixelChanges = 0;
   for (let p = 0; p < mask.length; p++) if (!mask[p] && (referencePixels[p * 3] !== renderedPixels[p * 3] || referencePixels[p * 3 + 1] !== renderedPixels[p * 3 + 1] || referencePixels[p * 3 + 2] !== renderedPixels[p * 3 + 2])) protectedPixelChanges++;
   assert.equal(protectedPixelChanges, 0, `${product.id}: pixels changed outside variable-label regions`);
-  const filename = `kvadrat-${parameters.profile}-clean.webp`;
+  const imageUrl = catalogMeasurementUrl(product);
+  const filename = path.basename(imageUrl);
   const output = `${outputDirectory}/${filename}`;
   await fs.writeFile(output, image);
-  records.push({id: product.id, sourceUrl: product.sourceReference, profile: parameters.profile,
-    imageUrl: `/images/catalog/kvadrat/${filename}`, labels: labels.map(({key, text}) => ({key, text: key==='title'?text.replace(/№\s*/gu,''):text})),
+  records.push({id: product.id, profile: parameters.profile,
+    imageUrl, labels: labels.map(({key, text}) => ({key, text: key==='title'?text.replace(/№\s*/gu,''):text})),
     ...(correction?{headingCorrection:{removed:'№',box:correction.box,shiftLeft:correction.shiftLeft}}:{}),
     changedLabels: changed.map(label => label.key), referenceUnmodified: changed.length === 0 && !correction, placements,
     protectedPixelChanges, output, width: WIDTH, height: HEIGHT, sha256: createHash('sha256').update(image).digest('hex')});
@@ -130,8 +132,8 @@ if (write) {
   await fs.writeFile(`${directory}/rendered.json`, JSON.stringify({renderer: 'scripts/render-kvadrat-images.mjs',
     reference: referencePath, cleanPhoto: photoPath,
     typography: {family: 'Inter', fontFile: fontPath, backend: 'fontconfig', mass: {size: 44, weight: 750}},
-    suppliedSources: ['public/images/catalog/kvadrat/kvadrat_2400_1800_marked.jpg', 'public/images/catalog/kvadrat/kvadrat_2400_1800_original.jpg'],
+    suppliedSources: ['public/images/catalog/kvadrat/originals/kvadrat_2400_1800_marked.jpg', 'public/images/catalog/kvadrat/originals/kvadrat_2400_1800_original.jpg'],
     patches, method: 'Original reference pixels; clean owner-supplied photograph patches and deterministic Inter labels from public product parameters; no generative editing.',
     illustration: 'Shared family photograph; nominal labels are not scaled manufacturing geometry.', records}, null, 2) + '\n');
-  await fs.writeFile('data/square-images.json', JSON.stringify({products: Object.fromEntries(records.map(({id, sourceUrl, imageUrl}) => [id, {sourceUrl, imageUrl}]))}, null, 2) + '\n');
+  await fs.writeFile('data/square-images.json', JSON.stringify({products: Object.fromEntries(records.map(({id, imageUrl}) => [id, {imageUrl}]))}, null, 2) + '\n');
 }

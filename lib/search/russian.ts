@@ -1,5 +1,5 @@
 /** Russian Snowball algorithm, including RV/R2 restrictions and longest suffix rules.
- * Specification: https://snowballstem.org/algorithms/russian/stemmer.html
+ * Algorithm: Snowball Russian stemming.
  * Technical identifiers bypass this function entirely.
  */
 const vowel = /[аеиоуыэюя]/;

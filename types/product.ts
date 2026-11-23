@@ -82,7 +82,6 @@ export interface ProductVariant {
   weightPerMeterKg?: number;
   lengthMeters?: number;
   sourceProductName?: string;
-  sourceReference?: string;
   availability: "IN_STOCK" | "ON_ORDER" | "UNKNOWN";
   inStock: boolean;
   featured: boolean;

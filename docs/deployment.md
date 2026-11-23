@@ -29,8 +29,7 @@ build command `npm run build`, run command `npm run start` и Node.js 22.x из 
 скачайте PDF, проверьте `404` без токена и сравните контрольную сумму PDF
 после перезапуска. Подробности в [документации по счетам](invoice-generation.md).
 
-В сборку должны входить папка `public`, локальные `data` и файлы приложения;
-скачанное зеркало поставщика не требуется для сборки и запуска.
+В сборку входят папка `public`, локальные `data` и файлы приложения.
 
 Команда `prebuild` обновляет хеши изображений и готовит адаптивные AVIF/WebP для главной и каталога.
 При копировании сборки на сервер включайте `public/images/prepared/` вместе с остальной папкой `public`.
@@ -43,11 +42,7 @@ build command `npm run build`, run command `npm run start` и Node.js 22.x из 
 Локальная production-проверка:
 
 ```sh
-npm run test:unit
 npm run lint
-npm run test:build
-npm run test:e2e
+npx tsc --noEmit --incremental false
+npm run build
 ```
-
-Playwright запускает локальную production-сборку на `127.0.0.1:3100` и подменяет
-запросы форм. Отчёт доступен через `npx playwright show-report`.

@@ -1,28 +1,22 @@
 ---
 name: metal-frontend-quality
-description: Audit metal-frontend architecture and regressions, add unit/API/browser coverage, and maintain screenshot baselines. Use for audits and test infrastructure, alongside the affected domain skill; not for every small UI edit.
+description: Audit metal-frontend architecture, behavior, and storefront changes. Use alongside the affected domain skill for audits and cross-cutting changes.
 ---
 
 # Metal Frontend Quality
 
-Read `AGENTS.md` and [the testing guide](../../../docs/testing.md). Use domain skills for facts and calculations; this skill owns evidence and test selection.
+Read `AGENTS.md` and [the development workflow](../../../docs/development-workflow.md). Use domain skills for product facts and calculations.
 
 ## Audit boundaries
 
-- Separate application defects, stale tests and unconfigured integrations. A historical failing test is evidence to investigate, not permission to overwrite a snapshot. The 2026-11-04 audit is recorded in `docs/development-audit-2026-11-04.md`.
-- Trace an export through application imports, scripts, dynamic loaders and documents before removing it. `originalCategories`, `originalSubcategories` and `projectCartProduct` are used by import/test tooling even though runtime call counts look low.
-- Preserve supplier evidence and approved public assets. `output/` is an archive of preparation assets, including rejected drafts; it is excluded from lint, not a runtime image source. Keep commit scope consistent with the user's request, including requested image sources and version manifests.
+- Distinguish application defects from unconfigured integrations. The 2026-11-04 audit is recorded in `docs/development-audit-2026-11-04.md`.
+- Trace an export through application imports, generators, dynamic loaders and documents before removing it. Include image manifests and the generated cart projection when tracing consumers.
+- Preserve approved public assets and local image-generation inputs. See [catalog images](../../../docs/catalog-images.md#структура-каталога-изображений) for the active directories and path conventions.
 - Decompose around independently understandable behavior: family dispatch, pure filtering, row/card rendering, cart mutations and checkout transport. Avoid abstractions that merely move a few JSX lines or duplicate business rules.
 
-## Regression evidence
+## Verification
 
-For scoped UI/image work, follow [the focused UI workflow](../../../docs/development-workflow.md#локальные-задачи-по-интерфейсу-и-изображениям). Keep the required visual evidence, reuse existing fixtures and app runtime, and select reruns by what the latest change invalidates. A repeated fixture/environment failure calls for diagnosing or simplifying that setup while retaining the behavior check. Full-suite runs need broad impact, a concrete unresolved risk, or an explicit task/CI requirement.
-
-- Exercise behavior or invariants. Prefer observable DOM/API contracts over source-text order, literal JSX, or mocks that duplicate the implementation. Keep financial precision and authoritative server repricing covered independently of layout.
-- Browser tests use isolated browser contexts and local API mocks. Never submit real requests, create real orders or initiate payment as a side effect of testing.
-- Visual baselines need stable browser/version, viewport, theme, local assets, font/image readiness and reduced motion. Scope table snapshots to visible rows; cover the rounded viewer, 1:1 zoom, mobile sidebar and table/card breakpoints. Do not use arbitrary sleeps as readiness assertions.
-- Review baseline images visually before accepting them. Update only deliberately changed snapshots; repeat comparison of new/changed screenshots without updating them before claiming deterministic coverage. Reuse passing results for unaffected snapshots. A screenshot without a comparison is evidence, not a regression test.
-- Image work also requires the [reference-to-result quality review](../../../docs/catalog-images.md#image-quality-review-required). Include a changed, generated variant when reviewing/testing a renderer: an unchanged 8×8 reference cannot protect the regenerated 12×12 mass label. Zero changes outside permitted patches protect the photo, not the correctness of typography inside those patches. Fix a visual defect before accepting a new baseline.
-- Report commands actually run, failures and skips, plus the practical scope of coverage. Do not claim exhaustive UI coverage or treat unconfigured provider adapters as implemented.
-- Use `npm run test:unit` for a read-only test run without the generating `pretest` hook. New TypeScript behavior tests use `node --import tsx --test`; do not extend the historical VM transpilation harness for new modules. `test:coverage` measures loaded core modules, not whole-application JSX coverage.
-- Browser commands share port 3100 and `.next-test`; run them sequentially. Build once after application changes with `npm run test:build`, then compare snapshots without rebuilding for test-only edits. Keep the user's development server and browser storage independent.
+- The project uses lint, type checking, builds and manual browser checks. Automated test suites and screenshot baselines were removed. Check cart and server pricing separately from layout when the change affects both.
+- For interface changes, check the affected routes and states using [the UI workflow](../../../docs/development-workflow.md#локальные-задачи-по-интерфейсу-и-изображениям). Preserve the user's browser storage. Use local mocks when checking form submission without external delivery.
+- For images, follow the [reference-to-result quality review](../../../docs/catalog-images.md#image-quality-review-required). Include a generated variant when checking a renderer change.
+- Report the checks performed and any remaining limitations.

@@ -1,24 +1,22 @@
 import {Fragment, useState, type ReactNode} from "react";
 import type {ProductVariant} from "@/types/product";
-import {getProductIllustration} from "@/lib/productPreviewImage";
-import {isDemonstrationProduct} from "@/lib/catalogOffer";
 import {Icon} from "@/components/ui/Icon";
 import {DetailsSummary} from "@/components/ui/DetailsSummary";
 import {ProductImageViewer} from "./ProductImageViewer";
+import {CatalogStandardReference} from "./CatalogStandardReference";
 import tableStyles from "./RebarTable.module.css";
 
 type View = "table" | "card";
-type CatalogCardField = {label: string; value: ReactNode};
 
 // Designation, photo, two specifications, price, two order units, total, action.
 const columnWidths = [11, 13, 9, 10, 11.5, 10, 10, 12.5, 13] as const;
 
-export function CatalogVariantTable({children, designation, specifications, price = "Цена",
-  quantity = "Количество", secondaryQuantity}: {
+export function CatalogVariantTable({children, designation, specifications, unit,
+  quantity = unit ? `Заказ, ${unit}` : "Заказ", secondaryQuantity}: {
   children: ReactNode;
   designation: string;
   specifications: readonly ReactNode[];
-  price?: string;
+  unit?: string;
   quantity?: string;
   secondaryQuantity?: string;
 }) {
@@ -30,7 +28,7 @@ export function CatalogVariantTable({children, designation, specifications, pric
           <th scope="col">{designation}</th>
           <th scope="col">Фото</th>
           {specifications.map((label, index) => <th scope="col" key={index} colSpan={specifications.length === 1 ? 2 : undefined}>{label}</th>)}
-          <th scope="col">{price}</th>
+          <th scope="col">{unit ? `Цена, ₽/${unit}` : "Цена"}</th>
           <th scope="col" colSpan={secondaryQuantity ? undefined : 2}>{quantity}</th>
           {secondaryQuantity && <th scope="col">{secondaryQuantity}</th>}
           <th scope="col">Сумма</th>
@@ -42,39 +40,13 @@ export function CatalogVariantTable({children, designation, specifications, pric
   </div>;
 }
 
-export function renderVariantPhoto(variant: ProductVariant, view: View) {
-  const illustration = getProductIllustration(variant);
-  const src = illustration && (!isDemonstrationProduct(variant) || illustration.showForDemo)
-    ? illustration.imageUrl : variant.imageUrls[0];
+function renderVariantPhoto(variant: ProductVariant, view: View) {
+  const src = variant.imageUrls[0];
   return src ? <ProductImageViewer src={src} name={variant.name} presentation={view} framed expanded/> : null;
 }
 
-export function CatalogOrderCard({variant, photo, fields, details, order}: {
-  variant: ProductVariant;
-  photo: ReactNode;
-  fields: readonly CatalogCardField[];
-  details?: ReactNode;
-  order: ReactNode;
-}) {
-  return <article id={`variant-mobile-${variant.id}`}
-    className={`${tableStyles.card} min-w-0 break-words rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-900`}>
-    <div className={photo ? "grid items-center gap-3 @min-[17rem]:grid-cols-[minmax(0,1fr)_8rem]" : undefined}>
-      <h3 className="text-card-title">{variant.name}</h3>
-      {photo && <div className="w-32 max-w-full">{photo}</div>}
-    </div>
-    <dl className="mt-4 grid grid-cols-2 gap-3 text-sm">
-      {fields.map(({label, value}) => <div key={label} className="min-w-0 last:odd:col-span-2">
-        <dt className="text-slate-600 dark:text-slate-400">{label}</dt>
-        <dd className="mt-1 font-medium tabular-nums">{value}</dd>
-      </div>)}
-    </dl>
-    {details}
-    {order}
-  </article>;
-}
-
 export function CatalogVariantLayout({view, variant, name = variant.name, preview,
-  specifications, tableSpecifications, details, detailsId = `variant-details-${variant.id}`, price, priceNote, order, cardFields}: {
+  specifications, tableSpecifications, details, detailsId = `variant-details-${variant.id}`, price, priceNote, order}: {
   view: View;
   variant: ProductVariant;
   name?: string;
@@ -86,7 +58,6 @@ export function CatalogVariantLayout({view, variant, name = variant.name, previe
   price: ReactNode;
   priceNote?: ReactNode;
   order: ReactNode;
-  cardFields?: readonly CatalogCardField[];
 }) {
   const [detailsOpen, setDetailsOpen] = useState(false);
   const image = preview ?? renderVariantPhoto(variant, view);
@@ -97,20 +68,20 @@ export function CatalogVariantLayout({view, variant, name = variant.name, previe
     <div className="pt-2">{details}</div>
   </details>;
 
-  if (view === "card" && cardFields) return <CatalogOrderCard variant={variant} photo={image} fields={cardFields} details={cardDetails} order={order}/>;
   if (view === "card") return <article id={`variant-mobile-${variant.id}`}
     className={`${tableStyles.card} min-w-0 break-words rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-900`}>
-    <h3 className="text-card-title">{name.split(/(×)/u).map((part, index) => <Fragment key={index}>{part}{part === "×" && <wbr/>}</Fragment>)}</h3>
+    <h3 className="text-card-title">{name.split(/(×)/u).map((part, index) => <Fragment key={index}><CatalogStandardReference>{part}</CatalogStandardReference>{part === "×" && <wbr/>}</Fragment>)}</h3>
     <div className={`mt-3 ${image ? tableStyles.cardDetails : ""}`}>
       {image && <div className={tableStyles.cardImage}>{image}</div>}
       <div className="min-w-0">{specifications}</div>
     </div>
     {cardDetails}
-    <div className="mt-4 flex flex-wrap items-end justify-between gap-3 border-t border-slate-100 pt-3 dark:border-slate-800">
-      <div>
-        <strong className="text-xl tabular-nums">{price}</strong>
-        {priceNote}
-      </div>
+    <div className="mt-4 border-t border-slate-100 pt-3 dark:border-slate-800">
+      <dl>
+        <dt className="sr-only">Цена</dt>
+        <dd className="text-xl font-bold tabular-nums">{price}</dd>
+      </dl>
+      {priceNote}
     </div>
     {order}
   </article>;
@@ -127,7 +98,7 @@ export function CatalogVariantLayout({view, variant, name = variant.name, previe
     </th>
     <td>{image ? <div className={tableStyles.rowImage}>{image}</div> : <span aria-hidden="true" className="text-slate-500 dark:text-slate-400">—</span>}</td>
     {tableSpecifications.map((value, index) => <td key={index} colSpan={tableSpecifications.length === 1 ? 2 : undefined}
-      className="tabular-nums">{value}</td>)}
+      className="tabular-nums"><CatalogStandardReference>{value}</CatalogStandardReference></td>)}
     <td className="break-words">
       <strong className="font-semibold tabular-nums">{price}</strong>
       {priceNote}
@@ -142,8 +113,8 @@ export function CatalogVariantLayout({view, variant, name = variant.name, previe
 export function CatalogVariantSpecifications({items}: {items: readonly {label: string; value: ReactNode}[]}) {
   return <dl className="space-y-1.5 text-sm">
     {items.filter(({value}) => value != null && value !== "").map(({label, value}) => <div key={label}>
-      <dt className="inline text-slate-600 dark:text-slate-400">{label}: </dt>
-      <dd className="inline font-medium tabular-nums">{value}</dd>
+      <dt className="inline text-slate-600 dark:text-slate-400"><CatalogStandardReference>{label}</CatalogStandardReference>: </dt>
+      <dd className="inline font-medium tabular-nums"><CatalogStandardReference>{value}</CatalogStandardReference></dd>
     </div>)}
   </dl>;
 }

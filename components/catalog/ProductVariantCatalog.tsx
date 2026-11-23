@@ -6,7 +6,7 @@ import {RequestQuoteSection} from "@/components/home/RequestQuoteSection";
 import {useLinkedVariant} from "@/hooks/useLinkedVariant";
 import {BeamVariantCatalog, isMeasuredRebarVariant, RebarVariantCatalog, VgpVariantCatalog, ElectroweldedPipeVariantCatalog, ProfilePipeVariantCatalog} from "./RebarVariantCatalog";
 import {isVgpVariant, isMeasuredElectroweldedVariant} from "@/lib/pipeFamily";
-import {isProfilePipeVariant} from "@/lib/profilePipe";
+import {isProfilePipeVariant, isSquareProfilePipe} from "@/lib/profilePipe";
 import {isProfileSheetVariant} from "@/lib/profileSheet";
 import {isMetalMeshVariant} from "@/lib/metalMesh";
 import {ProfileSheetVariantCatalog} from "./ProfileSheetVariantCatalog";
@@ -41,6 +41,7 @@ function VariantCatalogContent({
     return <MetalMeshVariantCatalog variants={variants}/>;
   }
   if (categorySlug === "truby-profilnye") {
+    if (variants.every(isSquareProfilePipe)) return <ProfilePipeVariantCatalog variants={variants}/>;
     const structured = variants.filter(isProfilePipeVariant);
     const legacy = variants.filter(variant => !isProfilePipeVariant(variant));
     return <>

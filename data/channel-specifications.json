@@ -17,9 +17,8 @@
     "Длина по каталогу"
   ],
   "products": {
-    "rozmet-2235": {
-      "imageUrl": "/images/catalog/shveller/shveller-5-clean.webp",
-      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_5/",
+    "catalog-2235": {
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-n5-11-7m.webp",
       "profileNumber": "5",
       "specifications": [
         {
@@ -48,9 +47,8 @@
         }
       ]
     },
-    "rozmet-2236": {
-      "imageUrl": "/images/catalog/shveller/shveller-6-5-clean.webp",
-      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_6.5/",
+    "catalog-2236": {
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-n6-5-l6-12m.webp",
       "profileNumber": "6,5",
       "specifications": [
         {
@@ -79,8 +77,7 @@
         }
       ]
     },
-    "rozmet-2237": {
-      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_8/",
+    "catalog-2237": {
       "profileNumber": "8",
       "specifications": [
         {
@@ -108,10 +105,9 @@
           "value": "6–12 м"
         }
       ],
-      "imageUrl": "/images/catalog/shveller/shveller-8-clean.webp"
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-n8-l6-12m.webp"
     },
-    "rozmet-2238": {
-      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_10/",
+    "catalog-2238": {
       "profileNumber": "10",
       "specifications": [
         {
@@ -139,10 +135,9 @@
           "value": "12 м"
         }
       ],
-      "imageUrl": "/images/catalog/shveller/shveller-10-clean.webp"
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-n10-12m.webp"
     },
-    "rozmet-2239": {
-      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_12/",
+    "catalog-2239": {
       "profileNumber": "12",
       "specifications": [
         {
@@ -170,10 +165,9 @@
           "value": "12 м"
         }
       ],
-      "imageUrl": "/images/catalog/shveller/shveller-12-clean.webp"
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-n12-12m.webp"
     },
-    "rozmet-2240": {
-      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_14/",
+    "catalog-2240": {
       "profileNumber": "14",
       "specifications": [
         {
@@ -201,10 +195,9 @@
           "value": "12 м"
         }
       ],
-      "imageUrl": "/images/catalog/shveller/shveller-14-clean.webp"
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-n14-12m.webp"
     },
-    "rozmet-2241": {
-      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_16/",
+    "catalog-2241": {
       "profileNumber": "16",
       "specifications": [
         {
@@ -232,10 +225,9 @@
           "value": "11,7–12 м"
         }
       ],
-      "imageUrl": "/images/catalog/shveller/shveller-16-clean.webp"
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-n16-l11-7-12m.webp"
     },
-    "rozmet-2242": {
-      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_18/",
+    "catalog-2242": {
       "profileNumber": "18",
       "specifications": [
         {
@@ -263,10 +255,9 @@
           "value": "12 м"
         }
       ],
-      "imageUrl": "/images/catalog/shveller/shveller-18-clean.webp"
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-n18-12m.webp"
     },
-    "rozmet-2243": {
-      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_20/",
+    "catalog-2243": {
       "profileNumber": "20",
       "specifications": [
         {
@@ -294,10 +285,9 @@
           "value": "12 м"
         }
       ],
-      "imageUrl": "/images/catalog/shveller/shveller-20-clean.webp"
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-n20-12m.webp"
     },
-    "rozmet-2244": {
-      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_22/",
+    "catalog-2244": {
       "profileNumber": "22",
       "specifications": [
         {
@@ -325,10 +315,9 @@
           "value": "12 м"
         }
       ],
-      "imageUrl": "/images/catalog/shveller/shveller-22-clean.webp"
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-n22-12m.webp"
     },
-    "rozmet-2245": {
-      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_24/",
+    "catalog-2245": {
       "profileNumber": "24",
       "specifications": [
         {
@@ -356,10 +345,9 @@
           "value": "12 м"
         }
       ],
-      "imageUrl": "/images/catalog/shveller/shveller-24-clean.webp"
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-n24-12m.webp"
     },
-    "rozmet-2246": {
-      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_27/",
+    "catalog-2246": {
       "profileNumber": "27",
       "specifications": [
         {
@@ -387,10 +375,9 @@
           "value": "12 м"
         }
       ],
-      "imageUrl": "/images/catalog/shveller/shveller-27-clean.webp"
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-n27-12m.webp"
     },
-    "rozmet-2247": {
-      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_30/",
+    "catalog-2247": {
       "profileNumber": "30",
       "specifications": [
         {
@@ -418,10 +405,9 @@
           "value": "12 м"
         }
       ],
-      "imageUrl": "/images/catalog/shveller/shveller-30-clean.webp"
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-n30-12m.webp"
     },
-    "rozmet-2248": {
-      "sourceUrl": "https://rozmet.ru/production/shveller/shveller_40/",
+    "catalog-2248": {
       "profileNumber": "40",
       "specifications": [
         {
@@ -449,7 +435,7 @@
           "value": "12 м"
         }
       ],
-      "imageUrl": "/images/catalog/shveller/shveller-40-clean.webp"
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-n40-12m.webp"
     }
   }
 }

@@ -60,7 +60,7 @@
 Проверять масштабирование текста до 200% и пользовательские интервалы.
 Это целевые проверки, а не заявление о полной сертификации WCAG.
 
-Основания: [W3C — увеличение текста](https://www.w3.org/WAI/WCAG22/Understanding/resize-text.html),
-[интервалы](https://www.w3.org/WAI/WCAG22/Understanding/text-spacing.html),
-[контраст](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html).
+Основания: W3C — увеличение текста,
+интервалы,
+контраст.
 16/15/13 px — выбранная шкала проекта, а не требование WCAG к минимальному кеглю.

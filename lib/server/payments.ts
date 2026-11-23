@@ -48,6 +48,5 @@ class UnconfiguredPaymentProvider implements PaymentProvider {
   }
 }
 
-// Replace this adapter only after selecting a provider and following its official
-// hosted-checkout and webhook-signature documentation.
+// A configured adapter must keep browser navigation on the storefront origin.
 export const paymentProvider: PaymentProvider = new UnconfiguredPaymentProvider();

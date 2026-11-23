@@ -4,21 +4,22 @@ import {MeasuredVariantItem} from "./MeasuredVariantItem";
 
 import {beamProfile, beamKind, beamReferenceMassKg, beamTableNames} from "@/lib/beam";
 import {vgpSize, vgpSeries} from "@/lib/vgp";
-import {profilePipePricePerTon, profilePipeSize} from "@/lib/profilePipe";
+import {isProfilePipeVariant, profilePipePricePerTon, profilePipeSize} from "@/lib/profilePipe";
 import {isGalvanizedElectroweldedVariant} from "@/lib/pipeFamily";
 import {formatNumber} from "@/lib/numberFormat";
 import {isDemonstrationProduct} from "@/lib/catalogOffer";
-import {requiresWholeLengthOrder} from "@/lib/orderMeasurement";
 
 import {FilterPanel} from "./FilterPanel";
 import {CatalogVariantTable} from "./CatalogVariantLayout";
+import {VariantCatalogResults} from "./VariantCatalogResults";
+import {getQuantityUnit} from "@/lib/variantPresentation";
 import {PriceRangeFeedback, PriceRangeInputs, useCatalogPriceRange} from "./PriceInput";
 import {ResetFiltersButton} from "./ResetFiltersButton";
 
 import {createCatalogSearchIndex} from "@/lib/search";
 import {useDeferredValue, useMemo, useState} from "react";
-import {ElectroweldedMassTable} from "./PipePositionDetails";
-import {CatalogStandardLink} from "./CatalogPositionDetails";
+import {CatalogStandardLink} from "./CatalogStandardReference";
+import {catalogStandardTables} from "@/lib/catalogStandards";
 import {CatalogTableNote} from "./CatalogTableNote";
 import {Select} from "@/components/ui/Select";
 import {useLinkedVariant} from "@/hooks/useLinkedVariant";
@@ -86,10 +87,14 @@ function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
   const isElectrowelded = kind === "pipe";
   const showSizeFilter = !isVgp && !isElectrowelded;
   const isGalvanized = isElectrowelded && variants.every(isGalvanizedElectroweldedVariant);
-  const wholePipeOrderNote = <strong>Заказ округляется вверх до целых труб.</strong>;
-  const electroweldedMassSource = <ElectroweldedMassTable>таблицы 1 <span className="whitespace-nowrap">ГОСТ 10704-91</span></ElectroweldedMassTable>;
+  const showSteelGrade = isElectrowelded;
+  const headers = tableHeaders[kind];
+  const specifications = showSteelGrade ? [...headers.specifications, "Марка стали"] : headers.specifications;
+  const electroweldedMassSource = <CatalogStandardLink href={catalogStandardTables.electrowelded}>
+    <span className="whitespace-nowrap">ГОСТ 10704-91</span>{" "}<span className="whitespace-nowrap">(таблица 1)</span>
+  </CatalogStandardLink>;
   const electroweldedNote = isGalvanized
-    ? <>Для пересчёта используется масса стальной трубы <strong>без цинкового покрытия</strong> из {electroweldedMassSource}. <span className="block">{wholePipeOrderNote}</span></>
+    ? <>Для пересчёта используется масса стальной трубы <strong>без цинкового покрытия</strong> по {electroweldedMassSource}.</>
     : <>Масса и стоимость заказа по длине рассчитываются по <strong>теоретической массе</strong> из {electroweldedMassSource}.</>;
   const [query, setQuery] = useState("");
   const deferredQuery = useDeferredValue(query);
@@ -99,13 +104,28 @@ function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
   const [diameter, setDiameter] = useState("");
   const [form, setForm] = useState("");
   const [length, setLength] = useState("");
+  const [steelGrade, setSteelGrade] = useState("");
   const priceRange = useCatalogPriceRange();
   const {minimumPrice, maximumPrice} = priceRange;
   const [availability, setAvailability] = useState("");
   const [sort, setSort] = useState<SortMode>("diameter-asc");
-  useLinkedVariant(variants, variant => {resetFilters(); setQuery(variant.name);}, resultsPending);
+  useLinkedVariant(variants, variant => {
+    resetFilters();
+    setQuery(variant.name);
+    if (isElectrowelded) setSort("relevance");
+  }, resultsPending);
   const specifiedVariants = useMemo(() => variants.filter(variant => !isDemonstrationProduct(variant)), [variants]);
   const availabilityOptions = [...new Set(specifiedVariants.map(variant => variant.availability))];
+  const steelGrades = showSteelGrade
+    ? [...new Set(specifiedVariants.flatMap(variant => variant.steelGrade ? [variant.steelGrade] : []))]
+      .sort((a, b) => a.localeCompare(b, "ru", {numeric: true}))
+    : [];
+  // Keep old SKU links and exact-name lookups available without a second catalogue on the square-pipe page.
+  const lookup = deferredQuery.trim().toLocaleLowerCase("ru");
+  const legacyMatch = isProfile && lookup && !diameter && !form && !length && !availability && !minimumPrice && !maximumPrice
+    ? variants.find(variant => !isProfilePipeVariant(variant)
+      && [variant.name, variant.sku].some(value => value.toLocaleLowerCase("ru") === lookup))
+    : undefined;
 
   const diameters = useMemo(
     () => showSizeFilter
@@ -140,10 +160,12 @@ function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
     const min = parseCatalogPrice(minimumPrice);
     const max = parseCatalogPrice(maximumPrice);
     return (deferredQuery.trim() ? hits.map(hit => hit.product) : variants).filter((variant) =>
-      (!(diameter || form || length || availability) || !isDemonstrationProduct(variant))
+      (!isProfile || isProfilePipeVariant(variant))
+      && (!(diameter || form || length || availability || steelGrade) || !isDemonstrationProduct(variant))
       && (!diameter || sizeValue(variant) === diameter)
       && (!form || formValue(variant) === form)
       && (!length || variant.lengthMeters === Number(length) || (variant.lengthRangeMeters && Number(length) >= variant.lengthRangeMeters[0] && Number(length) <= variant.lengthRangeMeters[1]))
+      && (!steelGrade || variant.steelGrade === steelGrade)
       && (!availability || variant.availability === availability)
       && (min === null || (priceValue(variant) !== undefined && priceValue(variant)! >= min))
       && (max === null || (priceValue(variant) !== undefined && priceValue(variant)! <= max)),
@@ -155,25 +177,22 @@ function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
       if (sort === "weight-desc") return (massValue(right) ?? -Infinity) - (massValue(left) ?? -Infinity);
       return compareSizes(left, right);
     });
-  }, [hits, deferredQuery, availability, diameter, form, length, maximumPrice, minimumPrice, sort, variants, isBeam, isVgp, isProfile, isElectrowelded]);
-  const hasRebarBars = kind === "rebar" && results.some(requiresWholeLengthOrder);
+  }, [hits, deferredQuery, availability, diameter, form, length, steelGrade, maximumPrice, minimumPrice, sort, variants, isBeam, isVgp, isProfile, isElectrowelded]);
+  const activeFilters = [diameter, form, length, steelGrade, availability, minimumPrice, maximumPrice].filter(Boolean).length;
   const hasGostRebarMass = kind === "rebar" && results.some(variant => variant.specifications.some(
     spec => spec.name === "Теоретическая масса по ГОСТ 5781-82",
   ));
-  const orderNote = isVgp ? wholePipeOrderNote : isElectrowelded ? electroweldedNote
-    : isProfile ? wholePipeOrderNote
+  const orderNote = isElectrowelded ? electroweldedNote
     : isBeam && results.some(variant => beamReferenceMassKg(variant) !== undefined)
       ? "Справочная масса по сортаменту используется для предварительного расчёта. Массу выбранной балки уточните у поставщика."
-    : hasRebarBars || hasGostRebarMass ? <>
-      {hasRebarBars && <span className="block"><strong>Заказ округляется вверх до целых прутков.</strong></span>}
-      {hasGostRebarMass && <>Теоретическая масса метра приведена в <CatalogStandardLink href="https://meganorm.ru/Data1/3/3937/index.htm#i25093">таблице 1 <span className="whitespace-nowrap">ГОСТ 5781-82</span></CatalogStandardLink>.</>}
-    </> : null;
+    : hasGostRebarMass ? <>Теоретическая масса метра приведена в <CatalogStandardLink href={catalogStandardTables.rebar}>таблице 1 <span className="whitespace-nowrap">ГОСТ 5781-82</span></CatalogStandardLink>.</> : null;
 
   function resetFilters() {
     setQuery("");
     setDiameter("");
     setForm("");
     setLength("");
+    setSteelGrade("");
     priceRange.reset();
     setAvailability("");
     setSort("diameter-asc");
@@ -182,10 +201,10 @@ function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
   return (
     <>
       <FilterPanel className="lg:col-start-2" query={query}
-        activeFilters={[diameter, form, length, availability, minimumPrice, maximumPrice].filter(Boolean).length}
+        activeFilters={activeFilters}
         onQueryChange={value => {setQuery(value);setSort("relevance");}} onReset={resetFilters}
         extraControls={<PriceRangeFeedback message={priceRange.message}/>}
-        resultCount={{visible: results.length, total: variants.length, pending: resultsPending}}
+        resultCount={{visible: legacyMatch ? 1 : results.length, total: variants.length, pending: resultsPending}}
         sorting={
           <label className="text-sm font-semibold">
             Сортировка
@@ -212,6 +231,9 @@ function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
           {lengths.length > 0 && <Filter label="Длина, м" value={length} onChange={setLength}>
             {lengths.map((value) => <option key={value} value={value}>{formatNumber(value)}</option>)}
           </Filter>}
+          {steelGrades.length > 0 && <Filter label="Марка стали" value={steelGrade} onChange={setSteelGrade}>
+            {steelGrades.map(value => <option key={value} value={value}>{value}</option>)}
+          </Filter>}
           {availabilityOptions.length > 1 && <Filter label="Наличие" value={availability} onChange={setAvailability}>
             {availabilityOptions.includes("IN_STOCK") && <option value="IN_STOCK">В наличии</option>}
             {availabilityOptions.includes("ON_ORDER") && <option value="ON_ORDER">Под заказ</option>}
@@ -220,16 +242,18 @@ function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
           <PriceRangeInputs range={priceRange} unit="тонну"/>
       </FilterPanel>
 
-      <section className="min-w-0 lg:col-span-2" aria-label="Продукция">
+      {legacyMatch ? <VariantCatalogResults visible={[legacyMatch]} categorySlug="truby-profilnye" unit={getQuantityUnit(legacyMatch)}
+        isSheetCatalog={false} hasVerifiedSpecifications={false} resultsCount={1}
+        onReset={resetFilters}/> : <section className="min-w-0 lg:col-span-2" aria-label="Продукция">
       {results.length ? (
         <>
         {orderNote && <CatalogTableNote>{orderNote}</CatalogTableNote>}
-        <CatalogVariantTable {...tableHeaders[kind]} price="Цена, ₽/т" quantity="Заказ, м" secondaryQuantity="Заказ, т">
-          {results.map(variant => <MeasuredVariantItem key={variant.id} variant={variant} name={names?.get(variant.id)} kind={kind} view="table"/>)}
+        <CatalogVariantTable designation={headers.designation} specifications={specifications} unit="т" quantity="Заказ, м" secondaryQuantity="Заказ, т">
+          {results.map(variant => <MeasuredVariantItem key={variant.id} variant={variant} name={names?.get(variant.id)} kind={kind} view="table" showSteelGrade={showSteelGrade}/>)}
         </CatalogVariantTable>
         <div className="grid gap-4 sm:grid-cols-2 xl:hidden">
           {results.map((variant) => (
-            <MeasuredVariantItem key={variant.id} variant={variant} name={names?.get(variant.id)} kind={kind} view="card"/>
+            <MeasuredVariantItem key={variant.id} variant={variant} name={names?.get(variant.id)} kind={kind} view="card" showSteelGrade={showSteelGrade}/>
           ))}
         </div>
         </>
@@ -240,7 +264,7 @@ function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
           <div className="mt-4"><ResetFiltersButton onClick={resetFilters}/></div>
         </div>
       )}
-      </section>
+      </section>}
     </>
   );
 }

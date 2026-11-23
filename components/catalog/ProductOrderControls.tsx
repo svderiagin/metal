@@ -5,7 +5,7 @@ import {useCart} from "@/hooks/useCart";
 import {Button} from "@/components/ui/Button";
 import {Input} from "@/components/ui/Input";
 import {Icon} from "@/components/ui/Icon";
-import {getQuantityUnit, requiresWholeRozmetQuantity} from "@/lib/variantPresentation";
+import {getQuantityUnit, requiresWholeCatalogQuantity} from "@/lib/variantPresentation";
 import type {ProductVariant} from "@/types/product";
 import {QuoteRequestButton} from "./QuoteRequestButton";
 import {formatQuoteProductName} from "@/lib/quoteRequest";
@@ -19,7 +19,7 @@ import tableStyles from "./RebarTable.module.css";
 import {useOrderDraft} from "./OrderDraftProvider";
 
 export function ProductOrderControls({variant, view, showUnit = true, allowBackorder = false,
-  wholeQuantity = requiresWholeRozmetQuantity(variant)}: {
+  wholeQuantity = requiresWholeCatalogQuantity(variant)}: {
   variant: ProductVariant; view: "table" | "card"; showUnit?: boolean; allowBackorder?: boolean; wholeQuantity?: boolean;
 }) {
   const {lines, hydrated, addItem, updateQuantity, removeItem} = useCart();
@@ -119,6 +119,7 @@ export function ProductOrderControls({variant, view, showUnit = true, allowBacko
   const amountTooSmall = canPurchase && valid && total === null;
   const quantityError = draft !== null && value.trim() !== "" && (!valid || amountTooSmall) && !shouldRemove;
   const statusId = `quantity-status-${view}-${variant.id}`;
+  const unitInsideField = view === "table" && showUnit;
   const quantityInput = <Input type="text" inputMode={wholeQuantity ? "numeric" : "decimal"} value={value}
         aria-label={`Количество ${variant.name}, ${quantityUnit}`}
         aria-invalid={quantityError || undefined}
@@ -136,11 +137,11 @@ export function ProductOrderControls({variant, view, showUnit = true, allowBacko
             event.currentTarget.blur();
           }
         }}
-        className={`${styles.field} min-w-0 ${showUnit ? "pl-2 pr-10" : "px-2"} text-center tabular-nums focus:placeholder:text-transparent`}
+        className={`${styles.field} min-w-0 ${unitInsideField ? "pl-2 pr-10" : "px-2"} tabular-nums focus:placeholder:text-transparent`}
         placeholder="0"/>;
-  const input = view === "card" || showUnit ? <CatalogVariantQuantity unit={quantityUnit}>{quantityInput}</CatalogVariantQuantity> : quantityInput;
+  const input = unitInsideField ? <CatalogVariantQuantity unit={quantityUnit}>{quantityInput}</CatalogVariantQuantity> : quantityInput;
   const quantityField = view === "card" ? <label className="block text-sm font-semibold">
-    <span className="mb-1 block">Количество</span>{input}
+    <span className="mb-1 block">Заказ, {quantityUnit}</span>{input}
   </label> : input;
   const totalOutput = <output data-price={total !== null || undefined} aria-label={`Сумма заказа для ${variant.name}`} aria-live="polite"
     className={total === null ? "text-xs text-slate-500 dark:text-slate-400" : "font-semibold tabular-nums"}>

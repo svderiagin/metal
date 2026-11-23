@@ -1,20 +1,16 @@
 {
   "products": {
-    "rozmet-28952": {
-      "sourceUrl": "https://rozmet.ru/production/listovoy_prokat/list-riflennyj/list_3_tu_riflenyy/",
-      "imageUrl": "/images/catalog/listovoy-prokat/list-refleniy/list-refleniy-3-1250x2500-rozmet-28952.webp"
+    "catalog-28952": {
+      "imageUrl": "/images/catalog/listovoy-prokat/list-riflennyj/measurement/list-riflenyy-3x1250x2500mm-tu.webp"
     },
-    "rozmet-2201": {
-      "sourceUrl": "https://rozmet.ru/production/listovoy_prokat/list-riflennyj/list-3-rifleniy/",
-      "imageUrl": "/images/catalog/listovoy-prokat/list-refleniy/list-refleniy-3-1250x2500-rozmet-2201.webp"
+    "catalog-2201": {
+      "imageUrl": "/images/catalog/listovoy-prokat/list-riflennyj/measurement/list-riflenyy-3x1250x2500mm-f.webp"
     },
-    "rozmet-2202": {
-      "sourceUrl": "https://rozmet.ru/production/listovoy_prokat/list-riflennyj/list-4-rifleniy/",
-      "imageUrl": "/images/catalog/listovoy-prokat/list-refleniy/list-refleniy-4-1500x6000-rozmet-2202.webp"
+    "catalog-2202": {
+      "imageUrl": "/images/catalog/listovoy-prokat/list-riflennyj/measurement/list-riflenyy-4x1500x6000mm.webp"
     },
-    "rozmet-2203": {
-      "sourceUrl": "https://rozmet.ru/production/listovoy_prokat/list-riflennyj/list-5-rifleniy/",
-      "imageUrl": "/images/catalog/listovoy-prokat/list-refleniy/list-refleniy-5-1500x6000-rozmet-2203.webp"
+    "catalog-2203": {
+      "imageUrl": "/images/catalog/listovoy-prokat/list-riflennyj/measurement/list-riflenyy-5x1500x6000mm.webp"
     }
   }
 }

@@ -12,7 +12,7 @@ function hull(points) {
 export async function coldRolledPalette(sharp, input) {
   const width=2400,height=1800;
   const original=await sharp(input).removeAlpha().raw().toBuffer();
-  const clean=await sharp('public/images/catalog/listovoy-prokat/list_holodnokataniy/list_holodnokataniy_2400_1800_original.jpg').removeAlpha().raw().toBuffer();
+  const clean=await sharp('public/images/catalog/listovoy-prokat/list-ocynkovannyj/originals/list_holodnokataniy_2400_1800_original.jpg').removeAlpha().raw().toBuffer();
   const points=[];
   for(let y=100;y<1400;y++) {
     let first=-1,last=-1;

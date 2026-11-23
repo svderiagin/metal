@@ -1,6 +1,6 @@
 ---
 name: metal-frontend-catalog
-description: Maintain metal-frontend catalog data, hierarchy, category routes, product tables, search, and supplier imports. Use for catalog changes in this repository; pure styling and checkout/API work have separate skills.
+description: Maintain metal-frontend catalog data, category routes, product tables and search. Use for catalog changes in this repository. Interface styling and order behavior have separate skills.
 ---
 
 # Metal Frontend Catalog
@@ -16,7 +16,7 @@ node .agents/skills/metal-frontend-catalog/scripts/catalog_state.mjs --summary
 git status --short
 ```
 
-Use the summary for totals and protected-data checks; omit `--summary` only when category counts help. Search with `rg`, then read only the component, data module, and focused test for the requested area. Do not print full imported JSON, snapshots, or broad documentation. For a supplier record, select the ID and relevant fields programmatically.
+Use the summary for totals and protected-data checks. Omit `--summary` when category counts help. Search with `rg`, then read the relevant components and data modules. For a supplier record, select the ID and relevant fields programmatically.
 
 Follow `AGENTS.md`. When changing a Next.js API or convention, read the matching file in `node_modules/next/dist/docs/` first. Ordinary copy or catalog-data edits do not require broad Next.js documentation review.
 
@@ -24,25 +24,25 @@ Follow `AGENTS.md`. When changing a Next.js API or convention, read the matching
 
 - The hierarchy is `Category → Subcategory → ProductType → ProductVariant`.
 - `data/categories.ts` and `data/subcategories.ts` define navigation. `data/productTypes.ts` derives product types. `data/products/index.ts` is the public product boundary. `lib/catalog.ts` is the read API used by pages.
-- These six protected category IDs stay first in this order: `cat-arm`, `cat-trp`, `cat-trk`, `cat-pnf`, `cat-mesh`, `cat-bal`. Owner-approved rozmet.ru content follows them; see `docs/rozmet-import.md` for its separate data files and source evidence.
-- `lib/catalogOverrides.ts` applies approved channel/angle/square images and display labels, guarded by category, ID and source URL. Keep saved supplier specifications reproducible; a display label such as «Теоретическая масса» does not belong in the raw supplier import.
-- Treat `imports/protected-catalog.snapshot.json` and `scripts/catalog-pruning.test.mjs` as the regression guard. Update them only when the user explicitly requests a change to the retained catalog.
-- Keep identifiers, slugs, units, prices, and cart calculations stable unless the request changes them. Never infer missing commercial or technical facts.
+- These six protected category IDs stay first in this order: `cat-arm`, `cat-trp`, `cat-trk`, `cat-pnf`, `cat-mesh`, `cat-bal`. The additional categories and variants live in `data/additional-catalog.json`. Their direct category routes use `data/direct-catalog-routes.json`.
+- Edit the project's local data, as described in [catalog data](../../../docs/catalog-data.md). Keep supplier identities, sites and contact details out of the catalog. Route GOST links through `lib/catalogStandards.ts` to Meganorm.
+- `lib/catalogOverrides.ts` applies approved section specifications and image overrides by category and product ID. A change to a section designation must agree with the matching specification record.
+- `imports/protected-catalog.snapshot.json` records approved catalog data. Update it only when the user explicitly requests a change to the retained catalog.
+- Keep identifiers, slugs, units, prices, and cart calculations stable unless the request changes them. Preserve saved cart and product link resolution through `lib/catalogIdentity.ts` when migrating existing keys. Never infer missing commercial or technical facts.
 - `ProductVariantCatalog.tsx` dispatches product families; `GenericProductVariantCatalog.tsx` owns filter state, `lib/variantCatalog.ts` selection/sorting, and `VariantCatalogResults.tsx` rows/cards. Fix shared selection rules in the pure helper, not in both layouts. Direct-product categories use the table at category level; `internal: true` subcategories are adapters, not extra navigation levels.
-- Import tooling must not restore removed categories. Run `npm run catalog:import` only when the user requests import work; it rewrites generated data.
 
-Read [references/project-map.md](references/project-map.md) when the task changes catalog structure, product ordering, search, tables, cart calculations, or imports.
+Read the relevant section of [the project map](references/project-map.md) when tracing catalog routes, tables, search or cart calculations.
 
 For the requested [VGP-style catalogue rollout](../../../docs/catalog-product-pages-prompt.md#таблица-и-карточки), use the nine logical desktop columns defined there. Choose the visible characteristics for how buyers compare each family, keep exact values searchable, and move secondary facts to «Подробнее». Check the longest real labels, values and totals at 1280 px.
 
 ## Verification
 
-Follow [the shared check matrix](../../../docs/development-workflow.md) (repository `docs/development-workflow.md`). Start with the area's test from the project map. Recheck counts/protected data when the edit can affect them. Price/product edits also need the generated cart projection refreshed before browser checks; do not regenerate supplier imports for that.
+Follow [the shared check matrix](../../../docs/development-workflow.md). Recheck counts and protected data when the edit can affect them. After changes to prices or products, refresh the cart projection before checking the storefront.
 
-Rendered links, filters and all family layouts are covered by `tests/e2e/catalog.spec.ts` and `tests/visual/catalog.visual.spec.ts`; direct selection/overlay invariants by `tests/unit/catalog-and-cart.test.ts`. See [testing.md](../../../docs/testing.md) for commands. The four image-only corrections in `imports/protected-image-corrections.json` have explicit Git provenance; they do not authorize changes to protected catalog facts or arbitrary snapshot exceptions.
+Check affected links, filters and product views manually in the browser.
 
 Verify desktop tables and mobile cards when behavior or layout changes. Preserve search/cart links using `#variant-<id>` and their mobile targets; `hooks/useLinkedVariant.ts` reveals filtered or collapsed rows.
 
-For product-image tasks, also apply the UI skill's [image quality review](../../../docs/catalog-images.md#image-quality-review-required). Check each variant's rendered labels against public catalog facts; preserving supplier data or decoding every file does not verify the image's typography or appearance.
+For product-image tasks, also apply the UI skill's [image quality review](../../../docs/catalog-images.md#image-quality-review-required). Compare rendered labels with the variant's actual catalog values.
 
 Report changed behavior, relevant checks and limitations; include counts only when catalog membership changed or was at risk.

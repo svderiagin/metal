@@ -8,6 +8,8 @@ import {ProductTypeGrid} from "@/components/catalog/ProductTypeGrid";
 import {SectionHeading} from "@/components/ui/SectionHeading";
 import {CatalogSearch} from "@/components/catalog/CatalogSearch";
 import {getAllCategories, getAllProductTypes, getAllProductVariants} from "@/lib/catalog";
+import {storefrontProduct} from "@/lib/storefrontProduct";
+import {catalogDescriptionCopy} from "@/data/catalog-description-copy";
 
 export const metadata: Metadata = {
   title: "Каталог металлопроката",
@@ -21,9 +23,14 @@ export default function CatalogPage() {
       <div>
         <Suspense fallback={<div className="h-40 animate-pulse rounded-xl bg-slate-200 dark:bg-slate-700"/>}>
           <CatalogSearch
-            categories={getAllCategories()}
-            productTypes={getAllProductTypes()}
-            variants={getAllProductVariants()}
+            categories={getAllCategories().map(({id, name, shortDescription}) => ({
+              id, name, description: catalogDescriptionCopy[id]?.intro ?? shortDescription,
+            }))}
+            productTypes={getAllProductTypes().map(type => {
+              const copy = catalogDescriptionCopy[type.subcategoryId] ?? catalogDescriptionCopy[type.categoryId];
+              return {...type, description: copy?.intro ?? type.shortDescription};
+            })}
+            variants={getAllProductVariants().map(storefrontProduct)}
           />
         </Suspense>
         <div className="mt-8">

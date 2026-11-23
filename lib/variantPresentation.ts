@@ -19,15 +19,15 @@ export function getVariantAttribute(
   variant: ProductVariant,
   key: ProductAttributeKey,
 ) {
-  if (variant.categoryId === "rozmet-cat-shveller") {
+  if (variant.categoryId === "catalog-cat-shveller") {
     if (key === "size") return variant.name.match(/№\s*(\d+(?:[.,]\d+)?)/)?.[1].replace(".", ",") ?? "—";
     if (key === "length") return specification(variant, ["Длина по каталогу", "Длина", "Размер"]);
   }
-  if (variant.categoryId === "rozmet-cat-ugolok") {
+  if (variant.categoryId === "catalog-cat-ugolok") {
     if (key === "size") return specification(variant, ["Размеры уголка"]);
     if (key === "length") return specification(variant, ["Длина по каталогу", "Длина", "Размер"]);
   }
-  if (variant.categoryId === "rozmet-cat-kvadrat" && (key === "size" || key === "length")) {
+  if (variant.categoryId === "catalog-cat-kvadrat" && (key === "size" || key === "length")) {
     const square = getSquareProductParameters(variant);
     if (square) return key === "size" ? square.section : square.length;
   }
@@ -53,8 +53,15 @@ export function getQuantityUnit(variant: ProductVariant) {
   return "шт.";
 }
 
-export function requiresWholeRozmetQuantity(variant: ProductVariant) {
-  return variant.id?.startsWith("rozmet-") === true && variant.unit === "piece";
+export function requiresWholeCatalogQuantity(variant: ProductVariant) {
+  return variant.id?.startsWith("catalog-") === true && variant.unit === "piece";
+}
+
+export function commonQuantityUnit(variants: readonly ProductVariant[]) {
+  const first = variants[0];
+  if (!first) return undefined;
+  const unit = getQuantityUnit(first);
+  return variants.every(variant => getQuantityUnit(variant) === unit) ? unit : undefined;
 }
 
 export function requiresWholeMetalMeshQuantity(variant: ProductVariant) {

@@ -2,7 +2,7 @@ import type {ProductVariant} from "@/types/product";
 import {formatAngleSpecificationValue} from "./anglePresentation";
 
 export function getSquareProductParameters(variant: ProductVariant) {
-  if (variant.categoryId !== "rozmet-cat-kvadrat") return null;
+  if (variant.categoryId !== "catalog-cat-kvadrat") return null;
   const side = variant.name.match(/№\s*(\d+(?:[.,]\d+)?)/u)?.[1];
   const length = variant.specifications.find(s => s.name === "Длина по каталогу")?.value
     ?? variant.specifications.find(s => s.name === "Размер")?.value;

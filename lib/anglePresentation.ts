@@ -1,7 +1,7 @@
 import type {ProductVariant} from "@/types/product";
 
 export function getAngleProductSpecifications(variant: ProductVariant) {
-  if (variant.categoryId !== "rozmet-cat-ugolok") return variant.specifications;
+  if (variant.categoryId !== "catalog-cat-ugolok") return variant.specifications;
   const section = variant.specifications.find(item => item.name === "Размеры уголка")?.value.match(/^(\d+)[хx×](\d+)$/u);
   if (!section || Number(section[1]) <= 0 || Number(section[2]) <= 0) return variant.specifications;
   const type = Number(section[1]) === Number(section[2]) ? "Равнополочный" : "Неравнополочный";

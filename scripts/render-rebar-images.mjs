@@ -4,6 +4,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {renderRebarImage} from '../imports/rebar-image-template/labels.mjs';
 import {readProjectData} from './project-data.mjs';
+import {catalogMeasurementUrl} from './catalog-measurement-path.mjs';
 
 process.chdir(fileURLToPath(new URL('..', import.meta.url)));
 const args = process.argv.slice(2);
@@ -24,8 +25,8 @@ const families = {
   'cat-arm-sub-4': {profile: 'smooth', designation: 'А240'},
 };
 const photos = {
-  ribbed: '/images/catalog/armatura/riflenaya/armatura_reflenaya_1448_1086_original.jpg',
-  smooth: '/images/catalog/armatura/gladkaya/armatura_gladkaya_2400_1800_original.webp',
+  ribbed: '/images/catalog/armatura/originals/riflenaya/armatura_reflenaya_1448_1086_original.jpg',
+  smooth: '/images/catalog/armatura/originals/gladkaya/armatura_gladkaya_2400_1800_original.webp',
 };
 const number = new Intl.NumberFormat('ru-RU', {useGrouping: false, maximumFractionDigits: 12});
 
@@ -65,9 +66,10 @@ async function replaceFile(file, contents) {
 }
 
 const records = products.map(product => ({product, labels: labelsFor(product)}));
-const directory = write ? 'public/images/catalog/product-illustrations' : '.tmp/rebar-image-render';
-await fs.mkdir(directory, {recursive: true});
+const directory = '.tmp/rebar-image-render';
 const images = new Map();
+const published = new Map();
+const publishedById = new Map();
 const {default: sharp} = await import('sharp');
 for (const {product, labels} of records) {
   const key = JSON.stringify(labels);
@@ -79,14 +81,23 @@ for (const {product, labels} of records) {
 }
 // Finish rendering the entire selection before replacing any storefront files.
 for (const {product, labels} of records) {
-  await replaceFile(path.join(directory, product.id + '.webp'), images.get(JSON.stringify(labels)));
+  const key = JSON.stringify(labels);
+  const scopedKey = `${product.subcategoryId}/${key}`;
+  const previous = published.get(scopedKey);
+  const url = previous ?? catalogMeasurementUrl(product);
+  publishedById.set(product.id, url);
+  if (write && previous) continue;
+  if (write) published.set(scopedKey, url);
+  const output = write ? `public${url}` : path.join(directory, product.id + '.webp');
+  await fs.mkdir(path.dirname(output), {recursive: true});
+  await replaceFile(output, images.get(key));
 }
 if (write) {
   const manifestPath = 'data/product-illustrations.json';
   const manifest = JSON.parse(await fs.readFile(manifestPath, 'utf8'));
   for (const {product, labels} of records) {
     manifest[product.id] = {
-      imageUrl: '/images/catalog/product-illustrations/' + product.id + '.webp',
+      imageUrl: publishedById.get(product.id),
       photoUrl: photos[labels.profile], signature: productIllustrationSignature(product),
       ...(isDemonstrationProduct(product) ? {showForDemo: true} : {}),
     };

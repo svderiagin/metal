@@ -2,6 +2,7 @@ import {categories} from "@/data/categories";
 import {productTypes} from "@/data/productTypes";
 import {productVariants} from "@/data/products";
 import {subcategories} from "@/data/subcategories";
+import {resolveCatalogProductId, resolveCatalogProductSlug} from "./catalogIdentity";
 
 export const getAllCategories = () => categories;
 export const getCategoryBySlug = (slug: string) =>
@@ -29,10 +30,14 @@ export const getProductTypesBySubcategoryId = (subcategoryId: string) =>
   productTypes.filter((item) => item.subcategoryId === subcategoryId);
 
 export const getAllProductVariants = () => productVariants;
-export const getProductVariantBySlug = (slug: string) =>
-  productVariants.find((item) => item.slug === slug);
-export const getProductVariantById = (id: string) =>
-  productVariants.find((item) => item.id === id);
+export function getProductVariantBySlug(slug: string) {
+  const key = resolveCatalogProductSlug(slug);
+  return productVariants.find(item => item.slug === key);
+}
+export function getProductVariantById(id: string) {
+  const key = resolveCatalogProductId(id);
+  return productVariants.find(item => item.id === key);
+}
 export const getProductVariantsByTypeId = (productTypeId: string) =>
   productVariants.filter((item) => item.productTypeId === productTypeId);
 export const getProductVariantsByCategoryId = (categoryId: string) =>

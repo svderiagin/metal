@@ -2,7 +2,7 @@
 
 19 октября 2026. Встроенный инструмент `image_gen`.
 
-Референс владельца: `imports/shveller-6-5-reference.png`. Визуальный образец: финальное изображение № 5. Итог: `public/images/catalog/shveller/shveller-6-5-clean.webp`, WebP quality 92.
+Референс владельца: `imports/shveller-6-5-reference.png`. Визуальный образец: финальное изображение № 5. Итог: `public/images/catalog/shveller/measurement/shveller-n6-5-l6-12m.webp`, WebP quality 92.
 
 Размеры 65 × 36 мм, толщина стенки 4,4 мм и полки 7,2 мм. Подписи длины 6–12 м и теоретической массы 5,90 кг/м соответствуют `data/channel-specifications.json`. Исходная подпись 12000 мм не переносится, поскольку в каталоге указан диапазон. Изображение иллюстративное.
 

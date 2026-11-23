@@ -5,6 +5,7 @@ import {fileURLToPath} from 'node:url';
 import sharp from 'sharp';
 import {renderBeamLabel} from '../imports/beam-image-template/labels.mjs';
 import {readProjectData} from './project-data.mjs';
+import {catalogMeasurementUrl} from './catalog-measurement-path.mjs';
 
 process.chdir(fileURLToPath(new URL('..', import.meta.url)));
 const args = process.argv.slice(2);
@@ -20,8 +21,8 @@ const products = productVariants.filter(p => p.categoryId === flatSteelCategoryI
 assert.ok(products.length, 'No matching steel strip');
 
 const canvas = {width: 2400, height: 1800, channels: 3};
-const photoUrl = '/images/catalog/polosa/polosa_stalnaya_1448_1086_original.png';
-const markedFile = 'public/images/catalog/polosa/polosa_stalnaya_2400_1800_marked.jpg';
+const photoUrl = '/images/catalog/polosa/originals/polosa_stalnaya_1448_1086_original.png';
+const markedFile = 'public/images/catalog/polosa/originals/polosa_stalnaya_2400_1800_marked.jpg';
 const marked = await sharp(markedFile).removeAlpha().raw().toBuffer({resolveWithObject: true});
 for (const key of Object.keys(canvas)) assert.equal(marked.info[key], canvas[key], markedFile);
 const clean = await sharp('public' + photoUrl).resize(canvas.width, canvas.height).removeAlpha().raw().toBuffer();
@@ -111,12 +112,13 @@ async function replaceFile(file, data) {
   await fs.rename(temporary, file);
 }
 
-const directory = write ? 'public/images/catalog/product-illustrations' : '.tmp/flat-steel-image-render';
+const artworkDirectory = '/images/catalog/polosa/measurement';
+const directory = write ? `public${artworkDirectory}` : '.tmp/flat-steel-image-render';
 await fs.mkdir(directory, {recursive: true});
 const results = [];
 for (const product of products) results.push({product, image: await render(product)});
 for (const {product, image} of results) {
-  const file = path.join(directory, product.id + '.webp');
+  const file = write ? `public${catalogMeasurementUrl(product)}` : path.join(directory, product.id + '.webp');
   await replaceFile(file, image);
   console.log(product.name, file);
 }
@@ -125,7 +127,7 @@ if (write) {
   const manifest = JSON.parse(await fs.readFile(file, 'utf8'));
   for (const {product} of results) {
     manifest[product.id] = {
-      imageUrl: `/images/catalog/product-illustrations/${product.id}.webp`,
+      imageUrl: catalogMeasurementUrl(product),
       photoUrl, signature: productIllustrationSignature(product),
     };
   }

@@ -6,7 +6,7 @@ import {PriceRangeFeedback, PriceRangeInputs, useCatalogPriceRange} from "./Pric
 import {Select} from "@/components/ui/Select";
 import {createCatalogSearchIndex} from "@/lib/search";
 import {useLinkedVariant} from "@/hooks/useLinkedVariant";
-import {getVariantFilterKeys} from "@/lib/variantPresentation";
+import {commonQuantityUnit, getVariantFilterKeys} from "@/lib/variantPresentation";
 import {isIllustratedSheet, sheetFilterKeys} from "@/lib/sheetPresentation";
 import {selectVariants, uniqueAttributeValues, variantFilterLabel, type VariantSort} from "@/lib/variantCatalog";
 import type {ProductAttributeKey, ProductVariant} from "@/types/product";
@@ -114,6 +114,7 @@ export function GenericProductVariantCatalog({
       </FilterPanel>
 
       <VariantCatalogResults visible={visible} categorySlug={categorySlug} isSheetCatalog={isSheetCatalog} resultsCount={results.length}
+        unit={commonQuantityUnit(variants)}
         hasVerifiedSpecifications={variants.some(variant => !isDemonstrationProduct(variant))}
         currentPage={currentPage} pages={pages} onPageChange={setPage} onReset={reset}/>
     </>

@@ -7,6 +7,7 @@ import {getProductTypeSummary} from "@/lib/productTypeSummary";
 import type {ProductType, ProductVariant} from "@/types/product";
 import type {PreparedPhoto as Photo} from "@/lib/server/preparedPhotos";
 import {RebarStandardHelp} from "./RebarStandardHelp";
+import {CatalogStandardReference} from "./CatalogStandardReference";
 import {catalogDescriptionCopy} from "@/data/catalog-description-copy";
 import styles from "./CatalogCard.module.css";
 import homeStyles from "./ProductTypeCard.module.css";
@@ -51,7 +52,7 @@ export function ProductTypeCard({
             {catalogDescriptionCopy[productType.subcategoryId]?.intro ?? productType.shortDescription}
           </p>
           {standard !== "Уточняется" && <div className={`${isHome ? homeStyles.standard : ""} col-span-2 mt-3 flex items-center gap-1 text-xs leading-6 text-slate-600 dark:text-slate-300`}>
-            <span className="min-w-0">{standard}</span>
+            <span className="min-w-0 [&_a]:relative [&_a]:z-10"><CatalogStandardReference>{standard}</CatalogStandardReference></span>
             {categorySlug === "armatura" && <RebarStandardHelp standard={standard}/>}
           </div>}
       </div>

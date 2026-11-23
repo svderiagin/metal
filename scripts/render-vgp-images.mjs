@@ -5,6 +5,7 @@ import {fileURLToPath} from 'node:url';
 import sharp from 'sharp';
 import {renderBeamLabel} from '../imports/beam-image-template/labels.mjs';
 import {readProjectData} from './project-data.mjs';
+import {catalogMeasurementUrl} from './catalog-measurement-path.mjs';
 
 process.chdir(fileURLToPath(new URL('..', import.meta.url)));
 const args = process.argv.slice(2);
@@ -13,7 +14,8 @@ const preview = args.length === 2 && args[0] === '--preview';
 assert.ok(write || preview, 'Use --write or --preview PRODUCT_ID');
 
 const canvas = {width: 2400, height: 1800, channels: 3};
-const template = '/images/catalog/truba-kruglaya/vgp/truba_vgp_2400_1800_';
+const familyDirectory = '/images/catalog/truba-kruglaya/truba-vodogazoprovodnaya';
+const template = `${familyDirectory}/originals/truba_vgp_2400_1800_`;
 const photoUrl = template + 'original.jpg';
 async function readPixels(url) {
   const {data, info} = await sharp('public' + url).removeAlpha().raw().toBuffer({resolveWithObject: true});
@@ -81,7 +83,7 @@ async function render(p) {
   return sharp(base, {raw: canvas}).composite(layers).webp({lossless: true, effort: 4}).toBuffer();
 }
 
-const directory = write ? 'public/images/catalog/product-illustrations' : '.tmp/vgp-image-render';
+const directory = write ? `public${familyDirectory}/measurement` : '.tmp/vgp-image-render';
 await fs.mkdir(directory, {recursive: true});
 async function replaceFile(file, data) {
   const temporary = file + `.${process.pid}.tmp`;
@@ -92,7 +94,7 @@ async function replaceFile(file, data) {
 const results = [];
 for (const product of products) results.push({product, image: await render(product)});
 for (const {product, image} of results) {
-  const output = path.join(directory, product.id + '.webp');
+  const output = write ? `public${catalogMeasurementUrl(product)}` : path.join(directory, product.id + '.webp');
   await replaceFile(output, image);
   console.log(product.name, output);
 }
@@ -101,7 +103,7 @@ if (write) {
   const manifest = JSON.parse(await fs.readFile(manifestPath, 'utf8'));
   for (const {product} of results) {
     manifest[product.id] = {
-      imageUrl: `/images/catalog/product-illustrations/${product.id}.webp`,
+      imageUrl: catalogMeasurementUrl(product),
       photoUrl, signature: productIllustrationSignature(product),
     };
   }

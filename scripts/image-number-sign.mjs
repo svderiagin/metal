@@ -74,5 +74,5 @@ export async function removeImageNumberSign(sharp, input, productId) {
       assert.ok(original.subarray(rightStart, start + width * 3).equals(delivered.subarray(rightStart, start + width * 3)), `${productId}: protected pixels changed`);
     }
   }
-  return productId === 'rozmet-2182' ? (await coldRolledPalette(sharp, output)).image : output;
+  return productId === 'catalog-2182' ? (await coldRolledPalette(sharp, output)).image : output;
 }

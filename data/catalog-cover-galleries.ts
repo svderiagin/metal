@@ -1,270 +1,256 @@
 // Title galleries keyed by Category.id or ProductType.id.
-const sheetDirectory = "/images/catalog/listovoy-prokat";
-const galvanizedCoverDirectory = `${sheetDirectory}/list_ocinkovanniy/cover`;
-const coldRolledCoverDirectory = `${sheetDirectory}/list_holodnokataniy/cover`;
-const treadPlateCoverDirectory = `${sheetDirectory}/list-refleniy/cover`;
-const hotRolledCoverDirectory = `${sheetDirectory}/list_goriachekataniy/cover`;
-const channelCoverDirectory = "/images/catalog/shveller/cover";
-const angleCoverDirectory = "/images/catalog/ugolok/cover";
-const squareCoverDirectory = "/images/catalog/kvadrat/cover";
-const rebarCoverDirectory = "/images/catalog/armatura/cover";
-const profileTubeCoverDirectory = "/images/catalog/truba-profilnia/cover";
-const roundTubeCoverDirectory = "/images/catalog/truba-kruglaya/cover";
-const roofingCoverDirectory = "/images/catalog/profnastil/cover";
-const meshCoverDirectory = "/images/catalog/setka-metallicheskaya/cover";
-const beamCoverDirectory = "/images/catalog/balka/cover";
 
 export const catalogCoverGalleries: Partial<Record<string, {cover?: string; additional: readonly string[]}>> = {
   "cat-arm": {
-    cover: `${rebarCoverDirectory}/a400-warehouse-berlion.webp`,
+    cover: "/images/catalog/armatura/main/a400-rebar-warehouse.webp",
     additional: [
-      `${rebarCoverDirectory}/a400-production-veles.jpg`,
-      "/images/catalog/armatura.jpg",
-      `${rebarCoverDirectory}/a500c-warehouse-meg.webp`,
-      `${rebarCoverDirectory}/a240-stock-citymet.jpg`,
+      "/images/catalog/armatura/cover/a400-rebar-production.jpg",
+      "/images/catalog/armatura/main/armatura.jpg",
+      "/images/catalog/armatura/armatura-a500s/cover/a500c-rebar-warehouse.webp",
+      "/images/catalog/armatura/cover/a240-bar-stacks.jpg",
     ],
   },
   "type-cat-arm-sub-1": {
     additional: [
-      `${rebarCoverDirectory}/a500c-warehouse-meg.webp`,
-      `${rebarCoverDirectory}/a500c-bundle-tag.jpg`,
-      `${rebarCoverDirectory}/a500c-stock-van-metall.png`,
-      `${rebarCoverDirectory}/a500c-yard-metallobaza.jpg`,
+      "/images/catalog/armatura/armatura-a500s/cover/a500c-rebar-warehouse.webp",
+      "/images/catalog/armatura/armatura-a500s/cover/a500c-rebar-bundle.jpg",
+      "/images/catalog/armatura/armatura-a500s/cover/a500c-rebar-stock.png",
+      "/images/catalog/armatura/armatura-a500s/cover/a500c-rebar-yard.jpg",
     ],
   },
   "type-cat-arm-sub-2": {
     additional: [
-      `${rebarCoverDirectory}/a400-35gs-stock-moststal.jpg`,
-      `${rebarCoverDirectory}/rebar-warehouse-arcelormittal.jpg`,
+      "/images/catalog/armatura/armatura-a3-35gs-a400s/cover/a400-35gs-rebar-stock.jpg",
+      "/images/catalog/armatura/armatura-a3-35gs-a400s/cover/a400-35gs-rebar-warehouse.jpg",
     ],
   },
   "type-cat-arm-sub-3": {
     additional: [
-      `${rebarCoverDirectory}/a400-25g2s-stock-pkfsst.jpg`,
-      `${rebarCoverDirectory}/a400-25g2s-bundles-metallmk.jpg`,
-      `${rebarCoverDirectory}/rebar-warehouse-made-in-china.jpg`,
+      "/images/catalog/armatura/armatura-a3-25g2s/cover/a400-25g2s-rebar-stock.jpg",
+      "/images/catalog/armatura/armatura-a3-25g2s/cover/a400-25g2s-rebar-bundles.jpg",
+      "/images/catalog/armatura/armatura-a3-25g2s/cover/a400-25g2s-rebar-warehouse.jpg",
     ],
   },
   "type-cat-arm-sub-4": {
     additional: [
-      `${rebarCoverDirectory}/a240-bundle-citymet.jpg`,
-      `${rebarCoverDirectory}/a240-rods-metallrs.webp`,
-      `${rebarCoverDirectory}/a240-stock-metall-dk.jpg`,
+      "/images/catalog/armatura/armatura-a1-a240/cover/a240-bar-bundle.jpg",
+      "/images/catalog/armatura/armatura-a1-a240/cover/a240-bar-ends.webp",
+      "/images/catalog/armatura/armatura-a1-a240/cover/a240-bar-stock.jpg",
     ],
   },
   "cat-trp": {
-    cover: "/images/catalog/truba-profilnia/truba-main.jpg",
+    cover: "/images/catalog/truby-profilnye/main/truba-main.jpg",
     additional: [
-      `${profileTubeCoverDirectory}/robmetalstal-square-warehouse.webp`,
-      `${profileTubeCoverDirectory}/marketstal-rectangular-bundle.jpg`,
+      "/images/catalog/truby-profilnye/cover/square-tube-warehouse.webp",
+      "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/cover/rectangular-tube-bundle.jpg",
     ],
   },
   "type-cat-trp-sub-1": {
     additional: [
-      `${profileTubeCoverDirectory}/stroy-partner-square-ends.jpg`,
-      `${profileTubeCoverDirectory}/metamoll-square-detail.jpg`,
+      "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/cover/square-tube-ends.jpg",
+      "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/cover/square-tube-detail.jpg",
     ],
   },
   "type-cat-trp-sub-2": {
     additional: [
-      `${profileTubeCoverDirectory}/marketstal-rectangular-bundle.jpg`,
-      `${profileTubeCoverDirectory}/gradstal-rectangular-stack.jpg`,
+      "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/cover/rectangular-tube-bundle.jpg",
+      "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/cover/rectangular-tube-stack.jpg",
     ],
   },
   "cat-trk": {
     additional: [
-      `${roundTubeCoverDirectory}/metservis-welded-warehouse.jpg`,
-      `${roundTubeCoverDirectory}/prometey-black-vgp-bundle.webp`,
-      `${roundTubeCoverDirectory}/marketstal-galvanized-welded-stock.jpg`,
-      `${roundTubeCoverDirectory}/lorber-galvanized-vgp-threads.jpg`,
+      "/images/catalog/truba-kruglaya/truba-elektrosvarnaya/cover/welded-pipe-warehouse.jpg",
+      "/images/catalog/truba-kruglaya/truba-vodogazoprovodnaya/cover/black-vgp-bundle.webp",
+      "/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/cover/galvanized-welded-pipe-stock.jpg",
+      "/images/catalog/truba-kruglaya/truba-vodogazoprovodnaya-otsinkovannaya/cover/galvanized-vgp-threads.jpg",
     ],
   },
   "type-cat-trk-sub-1": {
     additional: [
-      `${roundTubeCoverDirectory}/prometey-black-vgp-bundle.webp`,
-      `${roundTubeCoverDirectory}/aksvil-black-vgp-ends.jpg`,
+      "/images/catalog/truba-kruglaya/truba-vodogazoprovodnaya/cover/black-vgp-bundle.webp",
+      "/images/catalog/truba-kruglaya/truba-vodogazoprovodnaya/cover/black-vgp-ends.jpg",
     ],
   },
   "type-cat-trk-sub-2": {
     additional: [
-      `${roundTubeCoverDirectory}/metservis-welded-warehouse.jpg`,
-      `${roundTubeCoverDirectory}/stalnoy-dom-welded-ends.jpg`,
-      `${roundTubeCoverDirectory}/ural-welded-stock.jpg`,
+      "/images/catalog/truba-kruglaya/truba-elektrosvarnaya/cover/welded-pipe-warehouse.jpg",
+      "/images/catalog/truba-kruglaya/truba-elektrosvarnaya/cover/welded-pipe-ends.jpg",
+      "/images/catalog/truba-kruglaya/truba-elektrosvarnaya/cover/welded-pipe-stock.jpg",
     ],
   },
   "type-cat-trk-sub-3": {
     additional: [
-      `${roundTubeCoverDirectory}/steel-expert-galvanized-vgp-ends.jpg`,
-      `${roundTubeCoverDirectory}/lorber-galvanized-vgp-threads.jpg`,
+      "/images/catalog/truba-kruglaya/truba-vodogazoprovodnaya-otsinkovannaya/cover/galvanized-vgp-ends.jpg",
+      "/images/catalog/truba-kruglaya/truba-vodogazoprovodnaya-otsinkovannaya/cover/galvanized-vgp-threads.jpg",
     ],
   },
   "type-cat-trk-sub-4": {
     additional: [
-      `${roundTubeCoverDirectory}/marketstal-galvanized-welded-stock.jpg`,
-      `${roundTubeCoverDirectory}/hotoks-galvanized-welded-seam.webp`,
+      "/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/cover/galvanized-welded-pipe-stock.jpg",
+      "/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/cover/galvanized-pipe-welded-seam.webp",
     ],
   },
   "cat-pnf": {
-    cover: `${roofingCoverDirectory}/profiled-steel-production.webp`,
+    cover: "/images/catalog/profnastil/main/profiled-steel-production.webp",
     additional: [
-      `${roofingCoverDirectory}/s8-coated-packs.webp`,
-      `${roofingCoverDirectory}/s20-galvanized-packs.webp`,
-      `${roofingCoverDirectory}/n75-galvanized-packs.jpg`,
+      "/images/catalog/profnastil/profnastil-s8/cover/s8-coated-packs.webp",
+      "/images/catalog/profnastil/profnastil-s20/cover/s20-galvanized-packs.webp",
+      "/images/catalog/profnastil/profnastil-n75/cover/n75-galvanized-packs.jpg",
     ],
   },
   "type-cat-pnf-sub-1": {
     additional: [
-      `${roofingCoverDirectory}/s8-coated-packs.webp`,
-      `${roofingCoverDirectory}/s8-coated-surface.jpg`,
+      "/images/catalog/profnastil/profnastil-s8/cover/s8-coated-packs.webp",
+      "/images/catalog/profnastil/profnastil-s8/cover/s8-coated-surface.jpg",
     ],
   },
   "type-cat-pnf-sub-2": {
     additional: [
-      `${roofingCoverDirectory}/s20-galvanized-packs.webp`,
-      `${roofingCoverDirectory}/s20-coated-sheets.jpg`,
+      "/images/catalog/profnastil/profnastil-s20/cover/s20-galvanized-packs.webp",
+      "/images/catalog/profnastil/profnastil-s20/cover/s20-coated-sheets.jpg",
     ],
   },
   "type-cat-pnf-sub-3": {
     additional: [
-      `${roofingCoverDirectory}/n75-galvanized-packs.jpg`,
-      `${roofingCoverDirectory}/n75-galvanized-profile.jpg`,
+      "/images/catalog/profnastil/profnastil-n75/cover/n75-galvanized-packs.jpg",
+      "/images/catalog/profnastil/profnastil-n75/cover/n75-galvanized-profile.jpg",
     ],
   },
   "cat-mesh": {
     additional: [
-      `${meshCoverDirectory}/rabitsa-warehouse-packs.jpg`,
-      `${meshCoverDirectory}/welded-rolls-warehouse.jpg`,
-      `${meshCoverDirectory}/welded-panels-stacks.webp`,
+      "/images/catalog/setka-metallicheskaya/setka-rabitsa/cover/rabitsa-warehouse-packs.jpg",
+      "/images/catalog/setka-metallicheskaya/setka-svarnaya-v-rulonah/cover/welded-rolls-warehouse.jpg",
+      "/images/catalog/setka-metallicheskaya/setka-svarnaya-v-kartah/cover/welded-panels-stacks.webp",
     ],
   },
   "type-cat-mesh-sub-1": {
     additional: [
-      `${meshCoverDirectory}/rabitsa-warehouse-packs.jpg`,
-      `${meshCoverDirectory}/rabitsa-production-rolls.webp`,
+      "/images/catalog/setka-metallicheskaya/setka-rabitsa/cover/rabitsa-warehouse-packs.jpg",
+      "/images/catalog/setka-metallicheskaya/setka-rabitsa/cover/rabitsa-production-rolls.webp",
     ],
   },
   "type-cat-mesh-sub-2": {
     additional: [
-      `${meshCoverDirectory}/welded-rolls-warehouse.jpg`,
-      `${meshCoverDirectory}/welded-rolls-packed.jpg`,
+      "/images/catalog/setka-metallicheskaya/setka-svarnaya-v-rulonah/cover/welded-rolls-warehouse.jpg",
+      "/images/catalog/setka-metallicheskaya/setka-svarnaya-v-rulonah/cover/welded-rolls-packed.jpg",
     ],
   },
   "type-cat-mesh-sub-3": {
     additional: [
-      `${meshCoverDirectory}/welded-panels-stacks.webp`,
-      `${meshCoverDirectory}/welded-panels-edges.jpg`,
+      "/images/catalog/setka-metallicheskaya/setka-svarnaya-v-kartah/cover/welded-panels-stacks.webp",
+      "/images/catalog/setka-metallicheskaya/setka-svarnaya-v-kartah/cover/welded-panels-edges.jpg",
     ],
   },
   "cat-bal": {
     additional: [
-      `${beamCoverDirectory}/normal-parallel-flanges-expo.jpg`,
-      `${beamCoverDirectory}/wide-flanges-betall.jpg`,
-      `${beamCoverDirectory}/column-stock-sda.jpg`,
-      `${beamCoverDirectory}/monorail-taper-expo.jpg`,
+      "/images/catalog/balka/balka-normalnaya/cover/normal-parallel-flanges.jpg",
+      "/images/catalog/balka/balka-shirokopolochnaya/cover/wide-flanges-profile.jpg",
+      "/images/catalog/balka/balka-kolonnaya/cover/column-beam-stock.jpg",
+      "/images/catalog/balka/balka-monorelsovaya/cover/monorail-beam-taper.jpg",
     ],
   },
   "type-cat-bal-sub-1": {
     additional: [
-      `${beamCoverDirectory}/normal-parallel-flanges-expo.jpg`,
+      "/images/catalog/balka/balka-normalnaya/cover/normal-parallel-flanges.jpg",
     ],
   },
   "type-cat-bal-sub-2": {
     additional: [
-      `${beamCoverDirectory}/wide-flanges-betall.jpg`,
-      `${beamCoverDirectory}/wide-stock-betall.jpg`,
+      "/images/catalog/balka/balka-shirokopolochnaya/cover/wide-flanges-profile.jpg",
+      "/images/catalog/balka/balka-shirokopolochnaya/cover/wide-beam-stock.jpg",
     ],
   },
   "type-cat-bal-sub-3": {
     additional: [
-      `${beamCoverDirectory}/column-stock-sda.jpg`,
+      "/images/catalog/balka/balka-kolonnaya/cover/column-beam-stock.jpg",
     ],
   },
   "type-cat-bal-sub-4": {
     additional: [
-      `${beamCoverDirectory}/monorail-taper-expo.jpg`,
+      "/images/catalog/balka/balka-monorelsovaya/cover/monorail-beam-taper.jpg",
     ],
   },
-  "rozmet-cat-shveller": {
+  "catalog-cat-shveller": {
     additional: [
-      `${channelCoverDirectory}/rigang-channel-bundle.avif`,
-      `${channelCoverDirectory}/gradstal-channel-stock.jpg`,
-      `${channelCoverDirectory}/artmetal-channel-ends.jpg`,
-      `${channelCoverDirectory}/eststeel-channel-profile.jpg`,
+      "/images/catalog/shveller/cover/channel-bundle.avif",
+      "/images/catalog/shveller/cover/channel-stock.jpg",
+      "/images/catalog/shveller/cover/channel-ends.jpg",
+      "/images/catalog/shveller/cover/channel-profile.jpg",
     ],
   },
-  "rozmet-cat-ugolok": {
+  "catalog-cat-ugolok": {
     additional: [
-      `${angleCoverDirectory}/ostermaier-angle-rack.jpg`,
-      `${angleCoverDirectory}/kzmc-angle-bundles.jpg`,
-      `${angleCoverDirectory}/marketstal-angle-profile.jpg`,
-      `${angleCoverDirectory}/stalmal-angle-ends.jpg`,
+      "/images/catalog/ugolok/cover/angle-rack.jpg",
+      "/images/catalog/ugolok/cover/angle-bundles.jpg",
+      "/images/catalog/ugolok/cover/angle-profile.jpg",
+      "/images/catalog/ugolok/cover/angle-ends.jpg",
     ],
   },
-  "rozmet-cat-kvadrat": {
+  "catalog-cat-kvadrat": {
     additional: [
-      `${squareCoverDirectory}/tianyuda-square-yard.jpg`,
-      `${squareCoverDirectory}/zhongji-square-bundles.jpg`,
-      `${squareCoverDirectory}/ozdemir-square-ends.jpg`,
-      `${squareCoverDirectory}/metalshoppen-square-profile.jpg`,
+      "/images/catalog/kvadrat/cover/square-bar-yard.jpg",
+      "/images/catalog/kvadrat/cover/square-bar-bundles.jpg",
+      "/images/catalog/kvadrat/cover/square-bar-ends.jpg",
+      "/images/catalog/kvadrat/cover/square-bar-profile.jpg",
     ],
   },
-  "type-rozmet-sub-listovoy-prokat-galvanized-steel-sheet": {
-    cover: `${galvanizedCoverDirectory}/harcelik.webp`,
+  "type-catalog-sub-listovoy-prokat-galvanized-steel-sheet": {
+    cover: "/images/catalog/listovoy-prokat/galvanized-steel-sheet/cover/galvanized-sheet-warehouse.webp",
     additional: [
-      `${galvanizedCoverDirectory}/marketstal-warehouse.webp`,
-      `${galvanizedCoverDirectory}/rolled-steel-sheet.jpg`,
-      `${galvanizedCoverDirectory}/cs-carbon-steel.jpg`,
-      `${galvanizedCoverDirectory}/expo-snab.jpg`,
-      `${galvanizedCoverDirectory}/wuxi-gms.jpg`,
-      `${galvanizedCoverDirectory}/marketstal-edges.webp`,
-      `${galvanizedCoverDirectory}/marketstal-surface.webp`,
+      "/images/catalog/listovoy-prokat/galvanized-steel-sheet/cover/galvanized-sheet-stock.webp",
+      "/images/catalog/listovoy-prokat/galvanized-steel-sheet/cover/rolled-steel-sheet.jpg",
+      "/images/catalog/listovoy-prokat/galvanized-steel-sheet/cover/galvanized-sheet-coils.jpg",
+      "/images/catalog/listovoy-prokat/galvanized-steel-sheet/cover/galvanized-sheet-packs.jpg",
+      "/images/catalog/listovoy-prokat/galvanized-steel-sheet/cover/galvanized-sheet-edges.jpg",
+      "/images/catalog/listovoy-prokat/galvanized-steel-sheet/cover/galvanized-sheet-stack-edges.webp",
+      "/images/catalog/listovoy-prokat/galvanized-steel-sheet/cover/galvanized-sheet-surface.webp",
     ],
   },
-  "type-rozmet-sub-listovoy-prokat-list-ocynkovannyj": {
-    cover: `${coldRolledCoverDirectory}/marketstal-sheet-rack.webp`,
+  "type-catalog-sub-listovoy-prokat-list-ocynkovannyj": {
+    cover: "/images/catalog/listovoy-prokat/list-ocynkovannyj/cover/steel-sheet-rack.webp",
     additional: [
-      `${coldRolledCoverDirectory}/maras-metal-banded-sheets.jpg`,
-      `${coldRolledCoverDirectory}/marketstal-sheet-surface.webp`,
-      `${coldRolledCoverDirectory}/marketstal-sheet-edges.webp`,
+      "/images/catalog/listovoy-prokat/list-ocynkovannyj/cover/cold-rolled-banded-sheets.jpg",
+      "/images/catalog/listovoy-prokat/list-ocynkovannyj/cover/cold-rolled-sheet-surface.webp",
+      "/images/catalog/listovoy-prokat/list-ocynkovannyj/cover/sheet-stack-edges.webp",
     ],
   },
-  "type-rozmet-sub-listovoy-prokat-list-riflennyj": {
-    cover: `${treadPlateCoverDirectory}/sugar-steel-warehouse.jpg`,
+  "type-catalog-sub-listovoy-prokat-list-riflennyj": {
+    cover: "/images/catalog/listovoy-prokat/list-riflennyj/cover/tread-plate-warehouse.jpg",
     additional: [
-      `${treadPlateCoverDirectory}/marketstal-sheet-rack.webp`,
-      `${treadPlateCoverDirectory}/total-steel-stacks.jpg`,
-      `${treadPlateCoverDirectory}/stalserwis-sheet-edges.jpg`,
-      `${treadPlateCoverDirectory}/sugar-steel-tread-detail.jpg`,
+      "/images/catalog/listovoy-prokat/list-riflennyj/cover/steel-sheet-rack.webp",
+      "/images/catalog/listovoy-prokat/list-riflennyj/cover/tread-plate-stacks.jpg",
+      "/images/catalog/listovoy-prokat/list-riflennyj/cover/tread-plate-edges.jpg",
+      "/images/catalog/listovoy-prokat/list-riflennyj/cover/tread-pattern-detail.jpg",
     ],
   },
-  "type-rozmet-sub-listovoy-prokat-list-goryachekatanyj": {
-    cover: `${hotRolledCoverDirectory}/morgan-warehouse.webp`,
+  "type-catalog-sub-listovoy-prokat-list-goryachekatanyj": {
+    cover: "/images/catalog/listovoy-prokat/list-goryachekatanyj/cover/hot-rolled-sheet-warehouse.webp",
     additional: [
-      `${hotRolledCoverDirectory}/huale-stacks.webp`,
-      `${hotRolledCoverDirectory}/beshert-warehouse.jpg`,
-      `${hotRolledCoverDirectory}/ural-sheet-surface.jpg`,
-      `${hotRolledCoverDirectory}/marketstal-sheet-edges.webp`,
+      "/images/catalog/listovoy-prokat/list-goryachekatanyj/cover/hot-rolled-sheet-stacks.webp",
+      "/images/catalog/listovoy-prokat/list-goryachekatanyj/cover/hot-rolled-sheet-rack.jpg",
+      "/images/catalog/listovoy-prokat/list-goryachekatanyj/cover/hot-rolled-sheet-surface.jpg",
+      "/images/catalog/listovoy-prokat/list-goryachekatanyj/cover/sheet-stack-edges.webp",
     ],
   },
-  "rozmet-cat-shtaketnik": {
-    cover: "/images/catalog/shtaketnik/cover/grand-line-brown-fence.jpg",
+  "catalog-cat-shtaketnik": {
+    cover: "/images/catalog/shtaketnik/main/brown-picket-fence.jpg",
     additional: [
-      "/images/catalog/shtaketnik/cover/center-mk-graphite-fence.jpg",
-      "/images/catalog/shtaketnik/cover/pmzabor-rounded-pickets.jpg",
+      "/images/catalog/shtaketnik/cover/graphite-picket-fence.jpg",
+      "/images/catalog/shtaketnik/cover/rounded-fence-pickets.jpg",
     ],
   },
-  "rozmet-cat-listovoy-prokat": {
-    cover: `${hotRolledCoverDirectory}/morgan-warehouse.webp`,
+  "catalog-cat-listovoy-prokat": {
+    cover: "/images/catalog/listovoy-prokat/list-goryachekatanyj/cover/hot-rolled-sheet-warehouse.webp",
     additional: [
-      `${coldRolledCoverDirectory}/marketstal-sheet-rack.webp`,
-      `${galvanizedCoverDirectory}/harcelik.webp`,
-      `${treadPlateCoverDirectory}/sugar-steel-warehouse.jpg`,
+      "/images/catalog/listovoy-prokat/list-ocynkovannyj/cover/steel-sheet-rack.webp",
+      "/images/catalog/listovoy-prokat/galvanized-steel-sheet/cover/galvanized-sheet-warehouse.webp",
+      "/images/catalog/listovoy-prokat/list-riflennyj/cover/tread-plate-warehouse.jpg",
     ],
   },
-  "rozmet-cat-polosa": {
-    cover: "/images/catalog/polosa/cover/changzeng-hot-rolled-flat-bundles.webp",
+  "catalog-cat-polosa": {
+    cover: "/images/catalog/polosa/main/hot-rolled-flat-bar-bundles.webp",
     additional: [
-      "/images/catalog/polosa/cover/metals4u-flat-bar-end.jpg",
+      "/images/catalog/polosa/cover/steel-flat-bar-end.jpg",
       "/images/catalog/polosa/cover/carbon-flat-bar-yard.webp",
     ],
   },

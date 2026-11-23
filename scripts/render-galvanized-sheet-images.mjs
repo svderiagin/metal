@@ -1,10 +1,11 @@
 import assert from 'node:assert/strict';
+import {catalogMeasurementUrl} from './catalog-measurement-path.mjs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {readProjectData} from './project-data.mjs';
 import {removeImageNumberSign} from './image-number-sign.mjs';
 
-const directory = 'public/images/catalog/listovoy-prokat/list_ocinkovanniy';
+const directory = 'public/images/catalog/listovoy-prokat/galvanized-steel-sheet';
 const temporaryDirectory = path.resolve('.tmp/galvanized-sheet-catalog');
 const fontPath = path.resolve('imports/shveller-image-template/fonts/Inter-variable.ttf');
 const fontConfiguration = path.join(temporaryDirectory, 'fonts.conf');
@@ -15,17 +16,17 @@ process.env.PANGOCAIRO_BACKEND = 'fontconfig';
 const {default: sharp} = await import('sharp');
 
 const {isGalvanizedSheet, getSheetParameters} = readProjectData('lib/sheetPresentation.ts');
-const {products} = JSON.parse(await fs.readFile('data/rozmet-catalog.json', 'utf8'));
+const {products} = JSON.parse(await fs.readFile('data/additional-catalog.json', 'utf8'));
 const sheets = products.filter(isGalvanizedSheet);
-assert.deepEqual(sheets.map(({id}) => id).sort(), ['rozmet-2181', 'rozmet-2184', 'rozmet-2199']);
-const referenceProduct = sheets.find(({id}) => id === 'rozmet-2181');
+assert.deepEqual(sheets.map(({id}) => id).sort(), ['catalog-2181', 'catalog-2184', 'catalog-2199']);
+const referenceProduct = sheets.find(({id}) => id === 'catalog-2181');
 assert.equal(referenceProduct.name, 'Лист № 0,5 оцинкованный');
 assert.deepEqual({...getSheetParameters(referenceProduct)}, {
   thickness: '0,5', width: '1250', length: '2500', mass: '12,26 кг/шт', format: '1250 × 2500 мм',
 }, 'Review the reference artwork if the supplier specifications change');
 
-const marked = `${directory}/list_ocinkovanniy_2400_1800_marked.jpg`;
-const clean = `${directory}/list_ocinkovanniy_2400_1800_original.jpg`;
+const marked = `${directory}/originals/list_ocinkovanniy_2400_1800_marked.jpg`;
+const clean = `${directory}/originals/list_ocinkovanniy_2400_1800_original.jpg`;
 const width = 2400, height = 1800;
 for (const file of [marked, clean]) {
   const metadata = await sharp(file).metadata();
@@ -84,7 +85,7 @@ for (const product of sheets) {
     const pixel = Math.floor(offset / 3);
     throw new Error(`${product.id}: pixels changed outside label patches at ${pixel % width}, ${Math.floor(pixel / width)} (${expectedPixels[offset]} → ${pixels[offset]})`);
   }
-  const file = `${directory}/list-ocinkovanniy-${values.thickness.replace(',', '.')}-${values.width}x${values.length}-${product.id}.webp`;
+  const file = `public${catalogMeasurementUrl(product)}`;
   outputs.push({product, file, image: await removeImageNumberSign(sharp, image, product.id)});
 }
 
@@ -94,7 +95,7 @@ for (const {file, image} of outputs) {
 }
 if (write) {
   const products = Object.fromEntries(outputs.map(({product, file}) => [product.id, {
-    sourceUrl: product.sourceReference, imageUrl: file.slice('public'.length),
+    imageUrl: file.slice('public'.length),
   }]));
   await fs.writeFile('data/galvanized-sheet-images.json', JSON.stringify({products}, null, 2) + '\n');
 }

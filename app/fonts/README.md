@@ -4,7 +4,6 @@
 `imports/shveller-image-template/fonts/Inter-variable.ttf`: Inter 4.001,
 SHA-256 `29160a80ff49ddcab2c97711247e08b1fab27a484a329ce8b813d820dc559031`.
 Лицензия SIL Open Font License 1.1 сохранена в `OFL.txt`.
-Проект шрифта: https://rsms.me/inter/.
 
 Сохранены оси `wght` 100–900 и `opsz` 14–32. В интерфейсе основные начертания:
 400 для чтения, 500 для значений и компактных действий, 600 для карточек и

@@ -1,4 +1,5 @@
 import fs from 'node:fs/promises';
+import {catalogMeasurementUrl} from './catalog-measurement-path.mjs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {createHash} from 'node:crypto';
@@ -10,7 +11,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 process.chdir(root);
 const templateDirectory = 'imports/shveller-image-template';
 const temporaryDirectory = path.join(root, '.tmp/shveller-image-render');
-await fs.mkdir(temporaryDirectory, {recursive: true});
+await fs.mkdir(path.join(temporaryDirectory, 'font-cache'), {recursive: true});
 const fontConfiguration = path.join(temporaryDirectory, 'fonts.conf');
 await fs.writeFile(fontConfiguration, `<?xml version="1.0"?><!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd"><fontconfig><dir>${path.join(root, templateDirectory, 'fonts')}</dir><cachedir>${temporaryDirectory}/font-cache</cachedir></fontconfig>`);
 process.env.FONTCONFIG_FILE = fontConfiguration;
@@ -25,7 +26,7 @@ const reference = await fs.readFile(referencePath);
 const photo = await fs.readFile(photoPath);
 const referencePixels = await sharp(reference).removeAlpha().raw().toBuffer();
 const products = readProjectData('data/products/index.ts').productVariants
-  .filter(product => product.categoryId === 'rozmet-cat-shveller');
+  .filter(product => product.categoryId === 'catalog-cat-shveller');
 assert.equal(products.length, 14, 'Review the channel collection before changing its image set');
 for (const input of [reference, photo]) {
   const metadata = await sharp(input).metadata();
@@ -74,7 +75,7 @@ const patchLayers = Object.fromEntries(await Promise.all(Object.entries(patches)
 async function render(product) {
   const number = product.name.match(/№\s*(\d+(?:[.,]\d+)?)/u)?.[1].replace('.', ',');
   assert.ok(number, product.name);
-  const expectedPath = `/images/catalog/shveller/shveller-${number.replace(',', '-')}-clean.webp`;
+  const expectedPath = catalogMeasurementUrl(product);
   assert.equal(product.imageUrls[0], expectedPath, 'Do not change product routing or image associations');
   const values = Object.fromEntries(['Высота', 'Ширина полки', 'Толщина стенки', 'Толщина полки', 'Длина по каталогу', 'Теоретическая масса'].map(name => {
     const entries = product.specifications.filter(item => item.name === name);

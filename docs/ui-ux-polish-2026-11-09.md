@@ -84,11 +84,3 @@ P3 — доступность и согласованность второсте
 Просмотр охватывает общие компоненты и перечисленные сценарии, а не все
 комбинации каждого товара и каждого размера экрана. Публикация реального телефона
 и подключение онлайн-оплаты остаются отдельными задачами: текущие заглушки сохранены.
-
-## Визуальные доказательства
-
-- Карточки категории: [до](../output/ui-ux-polish-2026-11-09/before-armatura-mobile.png), [после](../output/ui-ux-polish-2026-11-09/after-armatura-mobile.png), [тёмная тема](../output/ui-ux-polish-2026-11-09/after-armatura-mobile-dark.png).
-- Услуги: [до](../output/ui-ux-polish-2026-11-09/before-services-mobile.png), [после](../output/ui-ux-polish-2026-11-09/after-services-mobile.png).
-- Корзина: [до](../output/ui-ux-polish-2026-11-09/before-cart-desktop.png), [после](../output/ui-ux-polish-2026-11-09/after-cart-desktop.png).
-- [Ошибки оформления](../output/ui-ux-polish-2026-11-09/after-checkout-errors-mobile-dark.png), [ошибки заявки](../output/ui-ux-polish-2026-11-09/after-quote-errors-mobile-dark.png).
-- [Компактная шапка 320 px](../output/ui-ux-polish-2026-11-09/after-home-mobile-320.png), [карточки главной](../output/ui-ux-polish-2026-11-09/after-home-products-mobile.png).

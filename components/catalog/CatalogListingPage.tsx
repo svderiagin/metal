@@ -1,5 +1,6 @@
 import type {Category} from "@/types/category";
 import type {ProductVariant} from "@/types/product";
+import {storefrontProduct} from "@/lib/storefrontProduct";
 import type {CatalogGuideSection} from "@/data/catalog-description-copy";
 import {PageContainer} from "@/components/layout/PageContainer";
 import {Breadcrumbs} from "./Breadcrumbs";
@@ -34,7 +35,7 @@ export function CatalogListingPage({category, typeId, title, coverName, label, i
           images={images} description={intro} coverName={coverName}/>
       </div>
       <section id="catalog-products" className="flex scroll-mt-6 flex-col gap-10" aria-label="Подбор и заказ продукции">
-        <ProductVariantCatalog variants={variants} categorySlug={category.slug}>
+        <ProductVariantCatalog variants={variants.map(storefrontProduct)} categorySlug={category.slug}>
           {guide && <CatalogBuyingGuide headingId={guideId} title={guide.title}
             description={guide.description} marginClassName=""/>}
         </ProductVariantCatalog>

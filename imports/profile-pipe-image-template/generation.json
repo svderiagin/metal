@@ -6,7 +6,7 @@
   "records": [
     {
       "kind": "square",
-      "original": "public/images/catalog/illustration-sources/square-steel-tube.jpg",
+      "original": "public/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/originals/square-steel-tube.jpg",
       "compositionReference": "imports/kvadrat-image-template/photo.jpg",
       "generatedOriginal": "/Users/sergei/.codex/generated_images/01a1b06b-2e78-7042-bb0c-13a40f3ae00d/exec-cc428be7-5e78-445c-a3de-01249b4bca95.png",
       "output": "imports/profile-pipe-image-template/square-photo-4x3.png",
@@ -17,7 +17,7 @@
     },
     {
       "kind": "rectangular",
-      "original": "public/images/catalog/illustration-sources/rectangular-steel-tube.jpg",
+      "original": "public/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/originals/rectangular-steel-tube.jpg",
       "compositionReference": "imports/kvadrat-image-template/photo.jpg",
       "generatedOriginal": "/Users/sergei/.codex/generated_images/01a1b06b-2e78-7042-bb0c-13a40f3ae00d/exec-7e9aa44f-35a0-4e0c-beda-751434b37128.png",
       "output": "imports/profile-pipe-image-template/rectangular-photo-4x3-raised-white.png",
@@ -81,9 +81,7 @@
       "date": "2026-11-07",
       "kind": "rectangular-r06",
       "sourceId": "R06",
-      "sourcePage": "https://www.metallshopper.de/rohre/stahl/",
-      "sourceUrl": "https://www.metallshopper.de/-uploads/images/webcart/cache/rechthoek1-2_24.jpg_card-CEFE3790.jpg",
-      "original": "public/images/catalog/illustration-sources/rectangular-steel-tube-r06-metallshopper.jpg",
+      "original": "public/images/catalog/shared/originals/rectangular-steel-tube-r06.jpg",
       "sourceWidth": 660,
       "sourceHeight": 648,
       "backgroundPlate": "imports/profile-pipe-image-template/rectangular-r06-background-plate.png",
@@ -135,7 +133,7 @@
     {
       "date": "2026-11-07",
       "kind": "rectangular-r06-diagonal",
-      "original": "public/images/catalog/illustration-sources/rectangular-steel-tube-r06-metallshopper.jpg",
+      "original": "public/images/catalog/shared/originals/rectangular-steel-tube-r06.jpg",
       "backgroundPlate": "imports/profile-pipe-image-template/rectangular-r06-diagonal-background-plate.png",
       "nativeOutput": "imports/profile-pipe-image-template/rectangular-r06-photo-4x3-diagonal-native.png",
       "nativeWidth": 864,

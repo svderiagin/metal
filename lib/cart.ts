@@ -1,6 +1,6 @@
 import {getCategoryById, getProductTypeById, getProductVariantById, getSubcategoryById} from "./cartCatalog";
 import {revalidateCartPrice} from "./cartPricing";
-import {getQuantityUnit, requiresWholeMetalMeshQuantity, requiresWholeRozmetQuantity} from "./variantPresentation";
+import {getQuantityUnit, requiresWholeMetalMeshQuantity, requiresWholeCatalogQuantity} from "./variantPresentation";
 import type {CartItem, CartLine, CartMeasurement} from "@/types/cart";
 import {normalizePieceOrder} from "./profilePipe";
 import {isProfileSheetVariant} from "./profileSheet";
@@ -70,7 +70,7 @@ export function createCartLines(items: CartItem[]): CartLine[] {
       price: product.price ?? 0,
       priceUnit: product.priceUnit,
       quantityUnit: getQuantityUnit(product),
-      wholeQuantity: isProfileSheetVariant(product) || requiresWholeMetalMeshQuantity(product) || requiresWholeRozmetQuantity(product),
+      wholeQuantity: isProfileSheetVariant(product) || requiresWholeMetalMeshQuantity(product) || requiresWholeCatalogQuantity(product),
     };
   });
 }

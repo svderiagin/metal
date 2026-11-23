@@ -92,7 +92,7 @@ export function CheckoutForm() {
         router.push("/order/success");
         return
       }
-      const payment = await createPayment(result.order.reference);
+      const payment = await createPayment(result.order.reference, window.location.origin);
       clearCart();
       window.location.assign(payment.redirectUrl);
     } catch (caught) {

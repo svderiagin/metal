@@ -2,6 +2,7 @@ import {readJsonBody} from "@/lib/server/request";
 import {orderRepository} from "@/lib/server/orders";
 import {hasValidOrderAmount, paymentProvider} from "@/lib/server/payments";
 import {isOrderReference} from "@/lib/orderReference";
+import {isPaymentRedirect} from "@/lib/paymentRedirect";
 
 const error = (message: string, status: number) =>
   Response.json({ok: false, error: message}, {status});
@@ -18,6 +19,9 @@ export async function POST(request: Request) {
     if (!order || order.paymentMethod !== "CARD") return error("Заказ не найден.", 404);
     if (!hasValidOrderAmount(order)) return error("Не удалось проверить сумму заказа.", 409);
     const session = await paymentProvider.createPayment(order);
+    if (!isPaymentRedirect(session.redirectUrl, new URL(request.url).origin)) {
+      return error("Сервис оплаты вернул некорректный адрес.", 502);
+    }
     return Response.json({ok: true, redirectUrl: session.redirectUrl});
   } catch {
     return error("Онлайн-оплата пока не настроена.", 503);

@@ -15,7 +15,7 @@ import type {ProductVariant} from "@/types/product";
 import type {OrderInputMode} from "@/types/cart";
 import {QuoteRequestButton} from "./QuoteRequestButton";
 import {CatalogOrderInput} from "./CatalogOrderInput";
-import {CatalogVariantLayout, CatalogVariantOrder} from "./CatalogVariantLayout";
+import {CatalogVariantLayout, CatalogVariantOrder, CatalogVariantSpecifications} from "./CatalogVariantLayout";
 import {CatalogPositionDetails} from "./CatalogPositionDetails";
 import filterStyles from "./FilterPanel.module.css";
 import tableStyles from "./RebarTable.module.css";
@@ -212,7 +212,7 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
     const measuredInTons = mode === "ton";
     const label = measuredInTons ? "Вес заказа в тоннах" : "Длина заказа";
     const disabled = measuredInTons && mass === null;
-    return <CatalogOrderInput label={`${label} для ${variant.name}`} value={measuredValue(mode)}
+    return <CatalogOrderInput mode={mode} label={`${label} для ${variant.name}`} value={measuredValue(mode)}
       visibleLabel={view === "card" ? `Заказ, ${orderUnits[mode]}` : undefined}
       placeholder={disabled ? "—" : "0"} disabled={disabled}
       invalid={quantityError && mode === inputUnit} statusId={statusId}
@@ -223,13 +223,11 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
   const cardFields = [
     {label: "Стенка", value: `${thickness}\u00a0мм`},
     {label: "Длина", value: lengthControl ?? lengthLabel},
-    {label: "Цена", value: priceLabel},
   ];
 
   return <CatalogVariantLayout view={view} variant={variant} name={view === "table" ? size : variant.name}
     tableSpecifications={[thickness, lengthControl ?? lengths ?? "—"]}
-    cardFields={cardFields}
-    specifications={null}
+    specifications={<CatalogVariantSpecifications items={cardFields}/>}
     details={<CatalogPositionDetails productName={variant.name} fields={fields}/>}
     price={priceLabel}
     order={<CatalogVariantOrder view={view} quantity={measuredInput("meter")}

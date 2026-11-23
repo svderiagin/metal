@@ -1,9 +1,9 @@
 import type {ProductAttributeKey, ProductVariant} from "@/types/product";
 
-export const treadPlateSubcategoryId = "rozmet-sub-listovoy-prokat-list-riflennyj";
-export const galvanizedSheetSubcategoryId = "rozmet-sub-listovoy-prokat-galvanized-steel-sheet";
-export const coldRolledSheetSubcategoryId = "rozmet-sub-listovoy-prokat-list-ocynkovannyj";
-export const hotRolledSheetSubcategoryId = "rozmet-sub-listovoy-prokat-list-goryachekatanyj";
+export const treadPlateSubcategoryId = "catalog-sub-listovoy-prokat-list-riflennyj";
+export const galvanizedSheetSubcategoryId = "catalog-sub-listovoy-prokat-galvanized-steel-sheet";
+export const coldRolledSheetSubcategoryId = "catalog-sub-listovoy-prokat-list-ocynkovannyj";
+export const hotRolledSheetSubcategoryId = "catalog-sub-listovoy-prokat-list-goryachekatanyj";
 export const hotRolledSheetTitle = "Лист горячекатаный";
 export const sheetFilterKeys: ProductAttributeKey[] = ["wallThickness", "size"];
 export const sheetFormatLabel = "Размер листа";

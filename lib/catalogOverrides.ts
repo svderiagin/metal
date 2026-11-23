@@ -10,8 +10,8 @@ import {applyFlatSteelSpecifications, flatSteelCategoryId} from "./flatSteel";
 import {applySectionSpecifications} from "./sectionSpecifications";
 import {coldRolledSheetSubcategoryId, galvanizedSheetSubcategoryId, hotRolledSheetSubcategoryId, treadPlateSubcategoryId} from "./sheetPresentation";
 
-type ImageOverride = {sourceUrl: string; imageUrl: string};
-type ChannelOverride = {sourceUrl: string; imageUrl?: string; specifications: ProductSpecification[]};
+type ImageOverride = {imageUrl: string};
+type ChannelOverride = {imageUrl?: string; specifications: ProductSpecification[]};
 const sheetImageOverrides = new Map<string, Record<string, ImageOverride>>([
   [treadPlateSubcategoryId, treadPlateImages.products],
   [galvanizedSheetSubcategoryId, galvanizedSheetImages.products],
@@ -19,27 +19,26 @@ const sheetImageOverrides = new Map<string, Record<string, ImageOverride>>([
   [hotRolledSheetSubcategoryId, hotRolledSheetImages.products],
 ]);
 
-// The saved supplier catalog remains reproducible. Display corrections and
-// approved illustrations are applied only to the matching identity and source.
+// Apply approved display corrections and illustrations to the matching catalog position.
 export function applyCatalogOverrides(product: ProductVariant): ProductVariant {
   if (product.categoryId === flatSteelCategoryId) return applyFlatSteelSpecifications(product);
   const sheetImages = sheetImageOverrides.get(product.subcategoryId);
   if (sheetImages) {
     const image = sheetImages[product.id];
-    return image && image.sourceUrl === product.sourceReference ? {...product, imageUrls: [image.imageUrl]} : product;
+    return image ? {...product, imageUrls: [image.imageUrl]} : product;
   }
-  if (product.categoryId === "rozmet-cat-kvadrat") {
+  if (product.categoryId === "catalog-cat-kvadrat") {
     const image = (squareImages.products as Record<string, ImageOverride>)[product.id];
-    return image && image.sourceUrl === product.sourceReference ? applySectionSpecifications({...product, imageUrls: [image.imageUrl]}) : product;
+    return image ? applySectionSpecifications({...product, imageUrls: [image.imageUrl]}) : product;
   }
-  if (product.categoryId === "rozmet-cat-ugolok") {
+  if (product.categoryId === "catalog-cat-ugolok") {
     const image = (angleImages.products as Record<string, ImageOverride>)[product.id];
-    if (!image || image.sourceUrl !== product.sourceReference) return product;
+    if (!image) return product;
     return applySectionSpecifications({...product, imageUrls: [image.imageUrl], specifications: product.specifications.map(item =>
       item.name === "Вес" ? {...item, name: "Теоретическая масса"} : item)});
   }
   const details = (channelSpecifications.products as Record<string, ChannelOverride>)[product.id];
-  if (product.categoryId !== "rozmet-cat-shveller" || !details || details.sourceUrl !== product.sourceReference) return product;
+  if (product.categoryId !== "catalog-cat-shveller" || !details) return product;
   const other = product.specifications.filter(item => !channelSpecifications.replacedSpecificationNames.includes(item.name));
   return applySectionSpecifications({...product, imageUrls: details.imageUrl ? [details.imageUrl] : product.imageUrls,
     specifications: [...details.specifications, ...other]});

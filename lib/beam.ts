@@ -6,9 +6,7 @@ const subcategoryBySeries: Record<BeamSeries, string> = {
   Б: "cat-bal-sub-1", Ш: "cat-bal-sub-2", К: "cat-bal-sub-3", М: "cat-bal-sub-4",
 };
 
-// Nominal kg/m, GOST 35087-2024 table 1, also published in the EVRAZ product catalogue.
-// https://gostam.ru/pdfs/gost-35087.pdf
-// https://evraz.ru/upload/files/products/evraz-catalog-2025.pdf
+// Nominal kg/m, GOST 35087-2024 table 1.
 const masses35087: Record<string, number> = {
   "20Б1": 21.3, "20Б2": 25.3, "25Б1": 25.7, "25Б2": 29.6,
   "30Б1": 32, "30Б2": 36.7, "35Б1": 41.4, "35Б2": 49.6,
@@ -20,14 +18,12 @@ const masses35087: Record<string, number> = {
   "35К1": 109.1, "40К1": 146.7,
 };
 // GOST 19425-74 table 1: beams for suspended tracks.
-// https://files.stroyinf.ru/Data2/1/4294852/4294852659.htm
 const masses19425: Record<string, number> = {"24М": 38.3, "30М": 50.2, "36М": 57.9, "45М": 77.6};
 
 // These offers specify the steel standard only. Use the nominal profile in the
 // calculator without treating it as the supplier's linear mass for checkout.
 // The supplier's general reference lists 153 kg/m for 40К1 under СТО АСЧМ 20-93,
 // while table 1 of GOST 35087-2024 gives 146.7 kg/m for that designation.
-// https://www.brokinvest.ru/article/ves-dvutavra
 const referenceProfiles: Record<string, string> = {
   "local-67138": "20Б2", "local-65599": "40Б1", "local-83922": "50Б1", "local-69883": "55Б1",
   "local-73573": "20Ш2", "local-69066": "35К1", "local-67139": "40К1",

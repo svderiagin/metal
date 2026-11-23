@@ -1,9 +1,9 @@
 # ООО «РВБ»: локальная витрина металлопроката
 
-Актуальные инструкции: [архитектура](docs/architecture.md), [локальный аудит и проверки](docs/local-audit.md),
-[запуск на DigitalOcean App Platform](docs/deployment.md), [каталог и импорт](docs/catalog-import.md).
+Актуальные инструкции: [архитектура](docs/architecture.md), [рабочий процесс и проверки](docs/development-workflow.md),
+[запуск на DigitalOcean App Platform](docs/deployment.md), [структура каталога](docs/catalog-data.md).
 Сайт остаётся на Next.js 16 / React 19 с локальными данными. Для разработки: `npm run dev`;
-для проверки: `npm test`, `npm run lint`, `npm run build`.
+для проверки используйте `npm run lint` и `npm run build`.
 
 Ниже сохранён исторический разбор первоначальной версии. Числа товаров, имена компонентов и примеры корзины
 в нём не описывают текущую реализацию; при работе с проектом используйте документы выше.
@@ -265,10 +265,10 @@ TypeScript-типы:
 Статические файлы доступны от корня:
 
 ```text
-public/file.svg → /file.svg
+public/images/catalog/shared/image-unavailable.svg → /images/catalog/shared/image-unavailable.svg
 ```
 
-Сейчас здесь только стандартные SVG шаблона Next.js. Каталогов `public/images/categories` и `public/images/products` нет.
+Структура фотографий и авторских исходников описана в [справочнике изображений](docs/catalog-images.md#структура-каталога-изображений).
 
 Аналогия — `src/main/resources/static` в Spring Boot.
 

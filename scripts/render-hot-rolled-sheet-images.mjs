@@ -1,10 +1,11 @@
 import assert from 'node:assert/strict';
+import {catalogMeasurementUrl} from './catalog-measurement-path.mjs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {readProjectData} from './project-data.mjs';
 import {removeImageNumberSign} from './image-number-sign.mjs';
 
-const directory = 'public/images/catalog/listovoy-prokat/list_goriachekataniy';
+const directory = 'public/images/catalog/listovoy-prokat/list-goryachekatanyj';
 const temporaryDirectory = path.resolve('.tmp/hot-rolled-sheet-catalog');
 const fontPath = path.resolve('imports/shveller-image-template/fonts/Inter-variable.ttf');
 const fontConfiguration = path.join(temporaryDirectory, 'fonts.conf');
@@ -16,17 +17,17 @@ process.env.PANGOCAIRO_BACKEND = 'fontconfig';
 const {default: sharp} = await import('sharp');
 
 const {isPlainHotRolledSheet, getHotRolledSheetNumber, getSheetParameters} = readProjectData('lib/sheetPresentation.ts');
-const {products} = JSON.parse(await fs.readFile('data/rozmet-catalog.json', 'utf8'));
+const {products} = JSON.parse(await fs.readFile('data/additional-catalog.json', 'utf8'));
 const sheets = products.filter(isPlainHotRolledSheet);
 assert.equal(sheets.length, 13, 'Review the current smooth hot-rolled sheet range before regenerating');
-const referenceProduct = sheets.find(({id}) => id === 'rozmet-2187');
+const referenceProduct = sheets.find(({id}) => id === 'catalog-2187');
 const referenceValues = {...getSheetParameters(referenceProduct)};
 assert.deepEqual(referenceValues, {
   thickness: '2', width: '1250', length: '2500', mass: '49,06 кг/шт', format: '1250 × 2500 мм',
 }, 'Review the reference artwork if the supplier specifications change');
 
-const marked = `${directory}/list_goriachekataniy_2400_1800_marked.jpg`;
-const clean = `${directory}/list_goriachekataniy_2400_1800_original.jpg`;
+const marked = `${directory}/originals/list_goriachekataniy_2400_1800_marked.jpg`;
+const clean = `${directory}/originals/list_goriachekataniy_2400_1800_original.jpg`;
 const width = 2400, height = 1800;
 for (const file of [marked, clean]) {
   const metadata = await sharp(file).metadata();
@@ -82,8 +83,7 @@ for (const product of sheets) {
     }
   }
   assert.ok(expectedPixels.equals(pixels), `${product.id}: pixels changed outside label patches`);
-  const thickness = values.thickness.replace(',', '.');
-  const file = `${directory}/list-goriachekataniy-${thickness}-${values.width}x${values.length}-${product.id}.webp`;
+  const file = `public${catalogMeasurementUrl(product)}`;
   outputs.push({product, file, image: await removeImageNumberSign(sharp, image, product.id)});
 }
 
@@ -93,7 +93,7 @@ for (const {file, image} of outputs) {
 }
 if (write) {
   const products = Object.fromEntries(outputs.map(({product, file}) => [product.id, {
-    sourceUrl: product.sourceReference, imageUrl: file.slice('public'.length),
+    imageUrl: file.slice('public'.length),
   }]));
   await fs.writeFile('data/hot-rolled-sheet-images.json', JSON.stringify({products}, null, 2) + '\n');
 }
