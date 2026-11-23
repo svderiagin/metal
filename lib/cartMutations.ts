@@ -4,7 +4,7 @@ import {normalizeMeasurement} from "./cart";
 import {revalidateCartPrice} from "./cartPricing";
 import {isProfilePipeVariant, profilePipeOrder} from "./profilePipe";
 import {metersToTons, requiresWholeLengthOrder, tonsToMeters, wholeLengthOrder} from "./orderMeasurement";
-import {isDemonstrationProduct} from "./catalogOffer";
+import {isDemonstrationProduct, storefrontAvailability} from "./catalogOffer";
 
 export function addCartItem(items: CartItem[], product: ProductVariant | undefined, quantity = 1,
   measurement?: CartMeasurement, pieceOrder?: CartPieceOrder): CartItem[] {
@@ -38,8 +38,7 @@ export function updateCartItem(items: CartItem[], product: ProductVariant | unde
   if (inputMode !== undefined) {
     // A legacy tonne line can adopt measured input only when catalog data supports conversion.
     if ((!previous.measurement && product.unit !== "ton") || isDemonstrationProduct(product)
-      || !product.weightPerMeterKg || !Number.isFinite(product.weightPerMeterKg) || product.weightPerMeterKg <= 0
-      || !product.pricePerTon || !Number.isFinite(product.pricePerTon) || product.pricePerTon <= 0) return items;
+      || !product.weightPerMeterKg || !Number.isFinite(product.weightPerMeterKg) || product.weightPerMeterKg <= 0) return items;
     const meters = inputMode === "meter" ? quantity : tonsToMeters(quantity, product.weightPerMeterKg);
     const weightTons = inputMode === "ton" ? quantity : metersToTons(quantity, product.weightPerMeterKg);
     if (meters === null || weightTons === null) return items;
@@ -59,7 +58,7 @@ export function updateCartPieceOrder(items: CartItem[], product: ProductVariant 
   pieces: number, lengthMeters: number): CartItem[] {
   if (!product || !items.some(item => item.productId === product.id)) return items;
   const order = profilePipeOrder(product, pieces, lengthMeters);
-  if (!order || order.pieces <= 0 || order.estimatedTotal === null) return items;
+  if (!order || order.pieces <= 0) return items;
   const next = priceItem(product, {productId: product.id, quantity: order.meters,
     pieceOrder: {pieces: order.pieces, lengthMeters: order.lengthMeters}});
   return next ? replace(items, next) : items;
@@ -69,7 +68,7 @@ function priceItem(product: ProductVariant, item: CartItem): CartItem | null {
   const measurement = item.measurement ? normalizeMeasurement(item.measurement) : undefined;
   if (item.measurement && !measurement) return null;
   const priced = revalidateCartPrice(product, {...item, measurement});
-  if (priced.invalidReason) return null;
+  if (priced.invalidReason || (priced.priceRequiresQuote && storefrontAvailability(product.availability) !== "ON_ORDER")) return null;
   return {productId: product.id,
     quantity: priced.measurement ? priced.measurement.inputMode === "meter" ? priced.measurement.meters : priced.measurement.weightTons : item.quantity,
     ...(priced.measurement ? {measurement: priced.measurement} : {}),

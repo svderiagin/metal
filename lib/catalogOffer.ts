@@ -11,6 +11,13 @@ export function requiresOfferConfirmation(product: Pick<ProductVariant, "id" | "
   return isDemonstrationProduct(product) && product.priceConfirmed !== true;
 }
 
+export function requiresCatalogPriceQuote(product: ProductVariant) {
+  return requiresOfferConfirmation(product) || product.price === null || !Number.isFinite(product.price)
+    || product.price < 0 || product.quoteOnly === true || product.priceQualifier === "from";
+}
+
+export const BACKORDER_DELIVERY_ESTIMATE = "2–4 недели";
+
 // Use the same availability for the storefront, cart and checkout.
 export function storefrontAvailability(availability: ProductVariant["availability"]) {
   return availability === "IN_STOCK" ? "IN_STOCK" : "ON_ORDER";

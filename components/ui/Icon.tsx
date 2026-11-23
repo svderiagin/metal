@@ -17,6 +17,7 @@ const glyphs = {
   "zoom-out": <><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5M7.5 10.5h6"/></>,
   help: <><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 4.25 1.8C12.65 11.55 12 12 12 13.5M12 17h.01"/></>,
   info: <><circle cx="12" cy="12" r="9"/><path d="M12 11v5m0-8h.01"/></>,
+  clock: <><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></>,
   ruler: <><rect x="3" y="7" width="18" height="10" rx="2"/><path d="M7 7v4m5-4v3m5-3v4"/></>,
   diameter: <><circle cx="12" cy="12" r="7.5"/><path d="m4 20 16-16"/></>,
   mesh: <><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M9 3v18m6-18v18M3 9h18M3 15h18"/></>,

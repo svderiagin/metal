@@ -1,6 +1,7 @@
 import {Fragment, useState, type ReactNode} from "react";
 import type {ProductVariant} from "@/types/product";
 import {Icon} from "@/components/ui/Icon";
+import {BACKORDER_DELIVERY_ESTIMATE} from "@/lib/catalogOffer";
 import {DetailsSummary} from "@/components/ui/DetailsSummary";
 import {ProductImageViewer} from "./ProductImageViewer";
 import {CatalogStandardReference} from "./CatalogStandardReference";
@@ -128,20 +129,24 @@ export function CatalogVariantQuantity({unit, children}: {unit: string; children
   </span>;
 }
 
-export function CatalogVariantOrder({view, quantity, secondaryQuantity, action, total, status}: {
+export function CatalogVariantOrder({view, quantity, secondaryQuantity, action, total, status, deliveryId}: {
   view: View;
   quantity: ReactNode;
   secondaryQuantity?: ReactNode;
   action: ReactNode;
   total: ReactNode;
   status?: ReactNode;
+  deliveryId?: string;
 }) {
+  const delivery = deliveryId && <p id={deliveryId} className="mt-1.5 text-[0.875rem] leading-[1.35] text-slate-600 dark:text-slate-300">
+    Доставка <strong className="whitespace-nowrap font-semibold">{BACKORDER_DELIVERY_ESTIMATE}</strong>
+  </p>;
   return view === "table"
     ? <>
       <td colSpan={secondaryQuantity ? undefined : 2} className={tableStyles.quantityCell}>{quantity}</td>
       {secondaryQuantity && <td className={tableStyles.quantityCell}>{secondaryQuantity}</td>}
       <td className={tableStyles.sumColumn}>{total}</td>
-      <td className="text-center">{action}{status}</td>
+      <td className="text-center">{action}{status}{delivery}</td>
     </>
     : <>
       <div className={`mt-4 grid gap-3 border-t border-slate-100 pt-4 dark:border-slate-800 ${secondaryQuantity ? tableStyles.measurementFields : ""}`}>
@@ -154,5 +159,6 @@ export function CatalogVariantOrder({view, quantity, secondaryQuantity, action, 
       </p>
       <div className="mt-4">{action}</div>
       {status}
+      {delivery}
     </>;
 }

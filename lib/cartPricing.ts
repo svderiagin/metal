@@ -4,37 +4,29 @@ import type {CartMeasurement, CartPieceOrder} from "@/types/cart";
 import {hasConfirmedProfilePipePrice, isProfilePipeVariant, profilePipeOrder} from "./profilePipe";
 import {isProfileSheetVariant} from "./profileSheet";
 import {requiresWholeMetalMeshQuantity, requiresWholeCatalogQuantity} from "./variantPresentation";
-import {isDemonstrationProduct, requiresOfferConfirmation, storefrontAvailability} from "./catalogOffer";
+import {isDemonstrationProduct, requiresCatalogPriceQuote} from "./catalogOffer";
 
 type PriceInput = {quantity: number; measurement?: Pick<CartMeasurement, "inputMode" | "meters" | "weightTons">; pieceOrder?: CartPieceOrder};
 
 export function revalidateCartPrice(product: ProductVariant, item: PriceInput) {
-  if (storefrontAvailability(product.availability) === "ON_ORDER") {
-    return {
-      measurement: undefined,
-      pieceOrder: item.pieceOrder,
-      invalidReason: "Позиция доступна под заказ. Отправьте заявку.",
-      estimatedTotal: 0,
-    };
-  }
   if (isProfilePipeVariant(product)) {
+    const priceRequiresQuote = !hasConfirmedProfilePipePrice(product);
     const pieces = item.pieceOrder?.pieces ?? (product.lengthMeters ? item.quantity / product.lengthMeters : NaN);
     const order = profilePipeOrder(product, pieces, item.pieceOrder?.lengthMeters);
-    const invalidReason = !hasConfirmedProfilePipePrice(product)
-      ? "Цена уточняется. Отправьте запрос на расчёт."
-      : item.measurement || !order || order.pieces <= 0 || !Number.isFinite(item.quantity)
-        || Math.abs(order.meters - item.quantity) > 1e-7
-        ? "Выберите количество целых труб и конкретную длину в таблице товара."
-        : order.estimatedTotal === null ? "Не удалось пересчитать стоимость." : undefined;
+    const invalidReason = item.measurement || !order || order.pieces <= 0 || !Number.isFinite(item.quantity)
+      || Math.abs(order.meters - item.quantity) > 1e-7
+      ? "Выберите количество целых труб и конкретную длину в таблице товара."
+      : !priceRequiresQuote && order.estimatedTotal === null ? "Не удалось пересчитать стоимость." : undefined;
     return {
       measurement: undefined,
       pieceOrder: order && order.pieces > 0 ? {pieces: order.pieces, lengthMeters: order.lengthMeters} : undefined,
       invalidReason,
+      priceRequiresQuote,
       estimatedTotal: invalidReason ? 0 : order?.estimatedTotal ?? 0,
     };
   }
-  let invalidReason = requiresOfferConfirmation(product) || product.price === null || !Number.isFinite(product.price) || product.price < 0 || product.quoteOnly || product.priceQualifier === "from"
-    ? "Цена требует уточнения. Отправьте запрос на расчёт." : undefined;
+  const priceRequiresQuote = requiresCatalogPriceQuote(product);
+  let invalidReason: string | undefined;
   let measurement: CartMeasurement | undefined;
   if (item.pieceOrder) invalidReason = "Количество целых труб не применимо к этой позиции.";
   if (requiresWholeCatalogQuantity(product) && (!Number.isInteger(item.quantity) || item.measurement)) {
@@ -51,7 +43,7 @@ export function revalidateCartPrice(product: ProductVariant, item: PriceInput) {
   const legacyMeasuredTons = !item.measurement && product.unit === "ton" && !isDemonstrationProduct(product)
     && product.weightPerMeterKg !== undefined && Number.isFinite(product.weightPerMeterKg) && product.weightPerMeterKg > 0;
   const wholeLength = requiresWholeLengthOrder(product);
-  let estimatedTotal = calculateLineTotal(item.quantity, product.price ?? 0);
+  let estimatedTotal = priceRequiresQuote ? 0 : calculateLineTotal(item.quantity, product.price!);
   if (!Number.isFinite(item.quantity) || item.quantity <= 0 || (!item.measurement && item.quantity > 999)) {
     invalidReason = "Не удалось пересчитать количество.";
   }
@@ -62,7 +54,8 @@ export function revalidateCartPrice(product: ProductVariant, item: PriceInput) {
     const inputMode = item.measurement ? item.measurement.inputMode : "ton";
     if (inputMode !== "meter" && inputMode !== "ton") {
       invalidReason = "Не удалось определить единицу измерения.";
-    } else if (isDemonstrationProduct(product) || !product.pricePerTon || !product.weightPerMeterKg) {
+    } else if (isDemonstrationProduct(product) || !product.weightPerMeterKg
+      || (!priceRequiresQuote && !product.pricePerTon)) {
       invalidReason = "Недостаточно данных для пересчёта массы и стоимости. Уточните позицию.";
     } else {
       const entered = item.measurement
@@ -78,10 +71,11 @@ export function revalidateCartPrice(product: ProductVariant, item: PriceInput) {
       const weightTons = inputMode === "ton" ? entered : metersToTons(entered, product.weightPerMeterKg);
       if (meters === null || weightTons === null || meters <= 0 || weightTons <= 0) invalidReason = "Не удалось пересчитать количество.";
       else {
-        estimatedTotal = inputMode === "meter"
-          ? calculateMeasuredLineTotal(meters, product.weightPerMeterKg, product.pricePerTon)
-          : calculateLineTotal(weightTons, product.pricePerTon);
-        if (estimatedTotal !== null) measurement = {inputMode, meters, weightTons, pricePerTon: product.pricePerTon, estimatedTotal};
+        const pricePerTon = priceRequiresQuote ? 0 : product.pricePerTon!;
+        estimatedTotal = priceRequiresQuote ? 0 : inputMode === "meter"
+          ? calculateMeasuredLineTotal(meters, product.weightPerMeterKg, pricePerTon)
+          : calculateLineTotal(weightTons, pricePerTon);
+        if (estimatedTotal !== null) measurement = {inputMode, meters, weightTons, pricePerTon, estimatedTotal};
       }
     }
   }
@@ -94,7 +88,8 @@ export function revalidateCartPrice(product: ProductVariant, item: PriceInput) {
         : "Выберите объём целыми трубами в таблице товара.";
     } else {
       // Recompute from the whole length to avoid drift after a tonne/metre round trip.
-      estimatedTotal = calculateMeasuredLineTotal(whole.meters, product.weightPerMeterKg!, product.pricePerTon ?? 0);
+      estimatedTotal = priceRequiresQuote ? 0
+        : calculateMeasuredLineTotal(whole.meters, product.weightPerMeterKg!, measurement.pricePerTon);
       if (estimatedTotal === null) invalidReason = "Не удалось пересчитать стоимость.";
       else measurement = {...measurement, meters: whole.meters, weightTons: whole.weightTons, estimatedTotal};
     }
@@ -106,7 +101,7 @@ export function revalidateCartPrice(product: ProductVariant, item: PriceInput) {
     invalidReason = "Объём превышает допустимое значение. Измените количество.";
   }
   if (invalidReason || estimatedTotal === null) estimatedTotal = 0;
-  return {measurement, pieceOrder: undefined, invalidReason, estimatedTotal};
+  return {measurement, pieceOrder: undefined, invalidReason, priceRequiresQuote, estimatedTotal};
 }
 
 function conversionTolerance(maximum: number) {

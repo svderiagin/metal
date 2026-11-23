@@ -12986,8 +12986,8 @@
       "priceUnit": "за тонну",
       "material": "Сталь 3сп(пс)",
       "standard": "ГОСТ 34028",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/armatura/main/armatura.jpg"
@@ -13391,8 +13391,8 @@
       "priceUnit": "за тонну",
       "material": "Сталь 3сп(пс)",
       "standard": "ГОСТ 34028",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/armatura/main/armatura.jpg"
@@ -13480,8 +13480,8 @@
       "priceUnit": "за тонну",
       "material": "Сталь 3сп(пс)",
       "standard": "ГОСТ 34028",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/armatura/main/armatura.jpg"

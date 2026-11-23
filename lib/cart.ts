@@ -4,7 +4,7 @@ import {getQuantityUnit, requiresWholeMetalMeshQuantity, requiresWholeCatalogQua
 import type {CartItem, CartLine, CartMeasurement} from "@/types/cart";
 import {normalizePieceOrder} from "./profilePipe";
 import {isProfileSheetVariant} from "./profileSheet";
-import {isDemonstrationProduct} from "./catalogOffer";
+import {BACKORDER_DELIVERY_ESTIMATE, isDemonstrationProduct, storefrontAvailability} from "./catalogOffer";
 import {tonsToMeters} from "./orderMeasurement";
 
 export function normalizeCartItems(value: unknown): CartItem[] {
@@ -61,6 +61,7 @@ export function createCartLines(items: CartItem[]): CartLine[] {
       ...item,
       ...pricing,
       measurement,
+      deliveryEstimate: storefrontAvailability(product.availability) === "ON_ORDER" ? BACKORDER_DELIVERY_ESTIMATE : undefined,
       name: product.name,
       slug: product.slug,
       categorySlug: category?.slug ?? "catalog",

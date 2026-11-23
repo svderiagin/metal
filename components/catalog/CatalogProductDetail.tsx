@@ -2,10 +2,7 @@ import Link from "next/link";
 import type {Category} from "@/types/category";
 import type {ProductVariant} from "@/types/product";
 import {PageContainer} from "@/components/layout/PageContainer";
-import {QuoteRequestProvider} from "@/components/forms/QuoteRequestContext";
-import {RequestQuoteSection} from "@/components/home/RequestQuoteSection";
 import {storefrontAvailability} from "@/lib/catalogOffer";
-import {formatQuoteProductName} from "@/lib/quoteRequest";
 import {Breadcrumbs} from "./Breadcrumbs";
 import {CatalogListingNavigation} from "./CatalogListingNavigation";
 import {CatalogPositionFields} from "./CatalogPositionDetails";
@@ -14,14 +11,14 @@ import {ProductImageViewer} from "./ProductImageViewer";
 import {getChannelProductDescription} from "@/lib/channelDescription";
 import {ChannelSpecificationNote} from "./ChannelSpecificationNote";
 import {storefrontPositionFields} from "./StorefrontPositionSpecifications";
-import {QuoteRequestButton} from "./QuoteRequestButton";
+import {ProductOrderControls} from "./ProductOrderControls";
 
 export function CatalogProductDetail({category, variant}: {category: Category; variant: ProductVariant}) {
   const [introduction, , selection] = getChannelProductDescription(variant).split("\n\n");
   const fields = storefrontPositionFields(variant);
   const madeToOrder = storefrontAvailability(variant.availability) === "ON_ORDER";
 
-  return <QuoteRequestProvider><PageContainer className="pt-5 pb-8 sm:pt-6 lg:pt-7 lg:pb-10">
+  return <PageContainer className="pt-5 pb-8 sm:pt-6 lg:pt-7 lg:pb-10">
     <Breadcrumbs items={[
       {label: "Каталог", href: "/catalog"},
       {label: category.name, href: `/catalog/${category.slug}`},
@@ -34,7 +31,7 @@ export function CatalogProductDetail({category, variant}: {category: Category; v
           <div>
             <h1 className="text-page-title">{variant.name}</h1>
             <CatalogDescription description={[introduction, selection].filter(Boolean).join("\n\n")}/>
-            {madeToOrder && <QuoteRequestButton label="Под заказ" order={{product: formatQuoteProductName(variant)}} className="mt-4"/>}
+            {madeToOrder && <ProductOrderControls variant={variant} view="card"/>}
           </div>
           {variant.imageUrls.length > 0 && <div className="grid max-w-md gap-3">
             {variant.imageUrls.map((src, index) => <ProductImageViewer key={src} src={src}
@@ -50,7 +47,6 @@ export function CatalogProductDetail({category, variant}: {category: Category; v
       <Link href={`/catalog/${category.slug}#variant-${variant.id}`} className="inline-flex min-h-11 w-fit items-center rounded-sm font-semibold text-brand-700 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-700 dark:text-brand-300">
         Вернуться к позиции в каталоге
       </Link>
-      {madeToOrder && <RequestQuoteSection/>}
     </div>
-  </PageContainer></QuoteRequestProvider>;
+  </PageContainer>;
 }

@@ -56,7 +56,7 @@ export function CheckoutForm() {
     event.preventDefault();
     if (submitting) return;
     setSubmissionFailed(false);
-    if (!lines.length || totalAmount <= 0 || lines.some(line => line.invalidReason)) {
+    if (!lines.length || totalAmount <= 0 || lines.some(line => line.invalidReason || line.priceRequiresQuote)) {
       setError("Проверьте корзину: часть позиций требует уточнения цены или характеристик.");
       return;
     }

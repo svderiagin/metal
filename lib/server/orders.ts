@@ -115,8 +115,8 @@ export function createTrustedOrder(input: CreateOrderInput, lookupProduct = getP
   for (const item of input.items) {
     const product = lookupProduct(item.productId);
     if (!product) return null;
-    const {measurement, pieceOrder, estimatedTotal: subtotal, invalidReason} = revalidateCartPrice(product, item);
-    if (invalidReason) return null;
+    const {measurement, pieceOrder, estimatedTotal: subtotal, invalidReason, priceRequiresQuote} = revalidateCartPrice(product, item);
+    if (invalidReason || priceRequiresQuote) return null;
     if (measurement) {
       const {meters, weightTons} = measurement;
       items.push({

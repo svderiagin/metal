@@ -20,7 +20,7 @@ import {constrainOrderQuantityInput, correctOrderQuantity, formatCatalogNumber, 
 import {correctDraftPrecision, formatMeasuredQuantity, formatQuantityForInput, formatRebarOrderTons, normalizeCartQuantityDraft, rebarMinimumMeterEntry, rebarMinimumTonEntry, rebarTonFractionDigits} from "@/lib/cartQuantityInput";
 import type {OrderInputMode} from "@/types/cart";
 import type {ProductVariant} from "@/types/product";
-import {isDemonstrationProduct, storefrontAvailability} from "@/lib/catalogOffer";
+import {isDemonstrationProduct, requiresCatalogPriceQuote, storefrontAvailability} from "@/lib/catalogOffer";
 import {a500cSubcategoryId} from "@/lib/rebar";
 import {useOrderDraft} from "./OrderDraftProvider";
 import {CatalogPositionDetails} from "./CatalogPositionDetails";
@@ -92,10 +92,11 @@ function TonnageMeasuredVariantItem({
   const referenceTons = referenceMass !== undefined && parsedMeters !== null ? metersToTons(parsedMeters, referenceMass) : null;
   const referenceMeters = referenceMass !== undefined && parsedTons !== null ? tonsToMeters(parsedTons, referenceMass) : null;
   const pricePerTon = variant.pricePerTon;
-  const needsQuote = pricePerTon === undefined || variant.quoteOnly || variant.priceQualifier === "from"
+  const needsQuote = pricePerTon === undefined || requiresCatalogPriceQuote(variant)
     || (wholeLengths && !roundToWholeLengths) || (!hasMass && enteredMeters !== null && enteredMeters > 0);
   const madeToOrder = storefrontAvailability(variant.availability) === "ON_ORDER";
-  const canPurchase = !needsQuote && !madeToOrder;
+  const canAdd = madeToOrder || !needsQuote;
+  const requiresTonnage = madeToOrder && !hasMass;
   const estimatedTotal = variant.quoteOnly ? null
     : referenceMass !== undefined && parsedMeters !== null && pricePerTon !== undefined ? calculateMeasuredLineTotal(parsedMeters, referenceMass, pricePerTon)
     : estimateTotal(parsedMeters, parsedTons);
@@ -113,15 +114,15 @@ function TonnageMeasuredVariantItem({
     && enteredQuantity !== 0
     && (savedMeasurement?.inputMode === inputMode ? parsedTons === savedTons
       : Math.abs(parsedTons - savedTons) <= Math.max(1, savedTons) * Number.EPSILON * 32)
-    && estimatedTotal === cartLine.estimatedTotal
+    && (cartLine.priceRequiresQuote || estimatedTotal === cartLine.estimatedTotal)
     && (hasMass || !(enteredMeters && enteredMeters > 0));
-  const hasChanges = !madeToOrder && !!cartLine && !isSaved;
-  const shouldRemove = !madeToOrder && !!cartLine && enteredQuantity === 0;
+  const hasChanges = !!cartLine && !isSaved;
+  const shouldRemove = !!cartLine && enteredQuantity === 0;
   const activeValue = inputMode === "meter" ? meters : tons;
   const enteringFraction = isRebar && activeValue === "0,";
   const usableDraft = draft === null || shouldRemove || (draft.exactQuantity ?? parseDraftQuantity(activeValue) ?? 0) > 0;
   const cannotCalculate = enteredQuantity !== null && enteredQuantity > 0 &&
-    ((hasMass && (!parsedMeters || !parsedTons)) || (pricePerTon !== undefined && !variant.quoteOnly && parsedTons !== null && estimatedTotal === null));
+    ((hasMass && (!parsedMeters || !parsedTons)) || (!needsQuote && parsedTons !== null && estimatedTotal === null));
   const invalidDraft = draft !== null && !enteringFraction && activeValue.trim() !== ""
     && (enteredQuantity === null || (enteredQuantity === 0 && !shouldRemove) || cannotCalculate);
   const tinyRebarMeters = isRebar && parsedMeters !== null && parsedMeters > 0 && parsedMeters < rebarMinimumMeterEntry / 2;
@@ -130,12 +131,12 @@ function TonnageMeasuredVariantItem({
   const tinyRebarTons = showRoundedTons && isRebar && parsedTons > 0 && parsedTons < rebarMinimumTonEntry / 2;
   const displayedTons = !showRoundedTons ? tons : isRebar
     ? tinyRebarTons ? "" : formatRebarOrderTons(parsedTons, true) : formatQuantityForInput(parsedTons, false, 3);
-  const buttonLabel = removed ? "Удалено" : !canPurchase ? "Под заказ" : shouldRemove ? "Удалить" : isSaved
-    ? <><Icon name="check"/><span className="whitespace-nowrap">В корзине</span></> : hasChanges ? "Обновить" : "В корзину";
+  const buttonLabel = removed ? "Удалено" : shouldRemove ? "Удалить" : isSaved
+    ? <><Icon name="check"/><span className="whitespace-nowrap">В корзине</span></> : hasChanges ? "Обновить" : madeToOrder ? "Заказать" : "В корзину";
   const buttonClassName = removed ? filterStyles.removedCartButton
     : shouldRemove ? filterStyles.removeCartButton
       : isSaved ? filterStyles.savedCartButton
-        : hasChanges && canPurchase ? filterStyles.updateCartButton
+        : hasChanges && canAdd ? filterStyles.updateCartButton
           : filterStyles.cartButton;
   const unsavedMessage = "Не сохранено";
   const showRebarUnsaved = isRebar && hasChanges && !shouldRemove && !enteringFraction && !invalidDraft && !!activeValue.trim();
@@ -143,6 +144,7 @@ function TonnageMeasuredVariantItem({
   if (!feedbackText) {
     if (invalidDraft) feedbackText = "Проверьте введённое значение.";
     else if (hasChanges && !shouldRemove && !enteringFraction && !showRebarUnsaved) feedbackText = activeValue.trim() ? unsavedMessage : enterQuantityMessage;
+    else if (requiresTonnage && parsedTons === null) feedbackText = "Укажите массу заказа.";
   }
   const pieceCount = !invalidDraft && wholeOrder && wholeOrder.pieces > 0 ? `${wholeOrder.pieces} шт.` : "";
   const status = <>
@@ -291,7 +293,7 @@ function TonnageMeasuredVariantItem({
       showError(enterQuantityMessage);
       return;
     }
-    if (!canPurchase || nextTotal === null || pricePerTon === undefined || (!hasMass && inputMode === "meter")) return;
+    if (!canAdd || (!needsQuote && nextTotal === null) || (!hasMass && inputMode === "meter")) return;
     if (cartLine) {
       updateQuantity(variant.id, inputMode === "meter" ? next.meters! : next.tons, hasMass ? inputMode : undefined);
     } else if (!hasMass) {
@@ -304,8 +306,8 @@ function TonnageMeasuredVariantItem({
           inputMode,
           meters: next.meters!,
           weightTons: next.tons,
-          pricePerTon,
-          estimatedTotal: nextTotal,
+          pricePerTon: pricePerTon ?? 0,
+          estimatedTotal: nextTotal ?? 0,
         },
       );
     }
@@ -315,9 +317,10 @@ function TonnageMeasuredVariantItem({
 
   const actionSizeClassName = view === "card" ? "w-full" : tableStyles.tableAction;
   const statusId = `measured-order-status-${view}-${variant.id}`;
-  const needsInquiry = madeToOrder || (needsQuote && !shouldRemove && !removed);
+  const deliveryId = madeToOrder ? `${statusId}-delivery` : undefined;
+  const needsInquiry = !canAdd && !shouldRemove && !removed;
   const correctedInquiry = isRebar && needsInquiry && invalidDraft ? resolvedOrder(inputMode) : null;
-  const quoteLabel = madeToOrder ? "Под заказ" : unconfirmedRebarLength ? "Запросить расчёт" : "Запросить цену";
+  const quoteLabel = unconfirmedRebarLength ? "Запросить расчёт" : "Запросить цену";
   const quoteClass = `${filterStyles.quoteButton} ${actionSizeClassName} px-3`;
   const inquiryPieces = isRebar && !invalidDraft ? wholeOrder?.pieces
     : roundToWholeLengths && correctedInquiry ? wholeLengthOrder(variant, correctedInquiry.quantity, inputMode)?.pieces : undefined;
@@ -331,7 +334,7 @@ function TonnageMeasuredVariantItem({
           ...(inquiryPieces !== undefined ? {quantity: inquiryPieces, unit: "шт."} : {})}}
         className={quoteClass}/>
   ) : (
-    <Button type="button" disabled={!hydrated || isSaved || removed || !usableDraft || (!canPurchase && !shouldRemove)} onClick={addToCart}
+    <Button type="button" aria-describedby={deliveryId} disabled={!hydrated || isSaved || removed || !usableDraft || (!canAdd && !shouldRemove)} onClick={addToCart}
       className={`${buttonClassName} ${actionSizeClassName} whitespace-nowrap px-3`}>
       {shouldRemove ? "Удалить" : buttonLabel}
     </Button>
@@ -340,7 +343,8 @@ function TonnageMeasuredVariantItem({
   const showOrderLabels = view === "card";
   const onRejectedTransfer = isRebar ? undefined : showError;
   const meterInput = <CatalogOrderInput mode="meter" label={`Длина заказа для ${variant.name}`}
-    placeholder={missingMass && parsedTons !== null && parsedTons > 0 ? "—" : tinyRebarMeters ? "< 0,01" : "0"}
+    placeholder={requiresTonnage || (missingMass && parsedTons !== null && parsedTons > 0) ? "—" : tinyRebarMeters ? "< 0,01" : "0"}
+    disabled={requiresTonnage}
     keepPlaceholderOnFocus={tinyRebarMeters}
     visibleLabel={showOrderLabels ? "Заказ, м" : undefined} value={displayedMeters || displayQuantity(referenceMeters, "meter")} invalid={invalidDraft && inputMode === "meter"} statusId={statusId}
     onChange={value => updateQuantityField("meter", value)} onBlur={() => settleQuantity("meter")} onRejectedTransfer={onRejectedTransfer}/>;
@@ -355,7 +359,7 @@ function TonnageMeasuredVariantItem({
   const statusColor = invalidDraft || message?.kind === "error" ? "text-red-700 dark:text-red-400" : "text-slate-500 dark:text-slate-400";
   const statusSpacing = view === "table" ? "mx-auto mt-1 max-w-32" : "mt-1";
   const orderStatus = <span id={statusId} role="status" className={`block text-xs ${statusSpacing} ${statusColor}`}>{status}</span>;
-  const order = <CatalogVariantOrder view={view} quantity={meterInput} secondaryQuantity={tonInput}
+  const order = <CatalogVariantOrder view={view} quantity={meterInput} secondaryQuantity={tonInput} deliveryId={deliveryId}
     action={action} total={total} status={orderStatus}/>;
 
   if (isRebar) return <RebarVariantLayout view={view} variant={variant} price={price} order={order}/>;

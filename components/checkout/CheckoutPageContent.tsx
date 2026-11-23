@@ -8,6 +8,7 @@ import {formatNumber} from "@/lib/numberFormat";
 import {formatCartQuantity, formatMeasuredQuantity} from "@/lib/cartQuantityInput";
 import {ButtonLink} from "@/components/ui/Button";
 import {Icon} from "@/components/ui/Icon";
+import {BACKORDER_DELIVERY_ESTIMATE} from "@/lib/catalogOffer";
 
 export function CheckoutPageContent() {
   const {lines, totalAmount, hydrated} = useCart();
@@ -23,8 +24,8 @@ export function CheckoutPageContent() {
       />
     );
   }
-  if (lines.some(line => line.invalidReason)) {
-    return <div role="alert" className="rounded-xl border border-amber-300 dark:border-amber-700 bg-amber-50 dark:bg-amber-950/40 p-6"><h2 className="text-xl font-bold">Расчёт заказа требует уточнения</h2><p className="mt-3">В корзине есть позиции без подтверждённой цены или данных для пересчёта. Проверьте их перед оформлением.</p><div className="mt-5 flex flex-wrap gap-3"><ButtonLink href="/cart">Проверить корзину</ButtonLink><ButtonLink href="/#request" variant="secondary">Запросить расчёт</ButtonLink></div></div>;
+  if (lines.some(line => line.invalidReason || line.priceRequiresQuote)) {
+    return <div role="alert" className="rounded-xl border border-amber-300 dark:border-amber-700 bg-amber-50 dark:bg-amber-950/40 p-6"><h2 className="text-xl font-bold">Расчёт заказа требует уточнения</h2><p className="mt-3">Проверьте объём и уточните цены позиций в корзине перед оформлением.</p><div className="mt-5"><ButtonLink href="/cart">Перейти в корзину</ButtonLink></div></div>;
   }
 
   return (
@@ -35,6 +36,9 @@ export function CheckoutPageContent() {
           <h2 id={summaryHeadingId} className="text-xl font-bold">Ваш заказ</h2>
           <p className="text-lg font-bold tabular-nums lg:hidden"><span className="sr-only">Итого </span>{formatCurrency(totalAmount)}</p>
         </div>
+        {lines.some(line => line.deliveryEstimate) && <p className="mt-2 text-sm text-slate-700 dark:text-slate-300 lg:hidden">
+          Доставка товаров под заказ — {BACKORDER_DELIVERY_ESTIMATE}
+        </p>}
         <button type="button" aria-expanded={showBreakdown} aria-controls={breakdownId}
           onClick={() => setShowBreakdown(current => !current)}
           className="mt-2 flex min-h-11 w-full cursor-pointer items-center justify-between gap-3 rounded-sm text-left text-sm font-semibold text-brand-800 underline underline-offset-4 dark:text-brand-300 lg:hidden">
@@ -51,6 +55,7 @@ export function CheckoutPageContent() {
                     : line.measurement
                     ? ` — ${formatMeasuredQuantity(line.measurement.meters, "meter", true)} м / ${formatMeasuredQuantity(line.measurement.weightTons, "ton", true)} т`
                     : ` — ${formatCartQuantity(line.quantity)} ${line.quantityUnit}`}
+                  {line.deliveryEstimate && <span className="mt-1 block font-semibold">Доставка {line.deliveryEstimate}</span>}
                 </span>
                 <strong className="ml-auto shrink-0 whitespace-nowrap tabular-nums">{formatCurrency(line.estimatedTotal)}</strong>
               </li>

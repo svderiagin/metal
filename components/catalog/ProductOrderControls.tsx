@@ -13,7 +13,7 @@ import {constrainOrderQuantityInput, correctOrderQuantity, parseOrderQuantity} f
 import {formatQuantityForInput, productOrderFractionDigits, quantityTransferHandlers} from "@/lib/cartQuantityInput";
 import {calculateLineTotal} from "@/lib/orderMeasurement";
 import {formatCurrency} from "@/lib/currency";
-import {storefrontAvailability} from "@/lib/catalogOffer";
+import {requiresCatalogPriceQuote, storefrontAvailability} from "@/lib/catalogOffer";
 import {CatalogVariantOrder, CatalogVariantQuantity} from "./CatalogVariantLayout";
 import styles from "./FilterPanel.module.css";
 import tableStyles from "./RebarTable.module.css";
@@ -30,11 +30,10 @@ export function ProductOrderControls({variant, view, showUnit = true,
   const savedValue = formatQuantityForInput(line?.quantity ?? 1);
   const value = draft ?? savedValue;
   const quantity = chosenQuantity(value);
-  const needsQuote = variant.price === null || !Number.isFinite(variant.price) || variant.price < 0
-    || variant.quoteOnly || variant.priceQualifier === "from";
+  const needsQuote = requiresCatalogPriceQuote(variant);
   const madeToOrder = storefrontAvailability(variant.availability) === "ON_ORDER";
-  const canPurchase = !needsQuote && !madeToOrder;
-  const shouldRemove = !madeToOrder && !!line && quantity === 0;
+  const canAdd = madeToOrder || !needsQuote;
+  const shouldRemove = !!line && quantity === 0;
   const saved = !!line && !line.invalidReason && quantity === line.quantity;
   const valid = quantity !== null && quantity > 0 && quantity <= 999
     && (!wholeQuantity || Number.isInteger(quantity));
@@ -42,9 +41,11 @@ export function ProductOrderControls({variant, view, showUnit = true,
     ? calculateLineTotal(quantity, variant.price) : null;
   const quantityUnit = getQuantityUnit(variant);
   const correctedQuantity = parseOrderQuantity(correctQuantityValue(value).value);
-  const canSubmitQuantity = quantity !== null && correctedQuantity !== null && correctedQuantity > 0 && correctedQuantity <= 999
-    && (!wholeQuantity || Number.isInteger(correctedQuantity)) && variant.price !== null
-    && calculateLineTotal(correctedQuantity, variant.price) !== null;
+  function canSubmitQuantity(quantity: number | null): quantity is number {
+    return quantity !== null && quantity > 0 && quantity <= 999
+      && (!wholeQuantity || Number.isInteger(quantity))
+      && (needsQuote || calculateLineTotal(quantity, variant.price!) !== null);
+  }
 
   useEffect(() => {
     if (!removed) return;
@@ -68,7 +69,7 @@ export function ProductOrderControls({variant, view, showUnit = true,
 
   function submit(rawValue = value) {
     const rawQuantity = chosenQuantity(rawValue);
-    if (!hydrated || removed || madeToOrder || rawQuantity === null) return;
+    if (!hydrated || removed || rawQuantity === null) return;
     const corrected = correctQuantityValue(rawValue);
     const nextQuantity = chosenQuantity(corrected.value);
     setDraft(corrected.value);
@@ -80,9 +81,7 @@ export function ProductOrderControls({variant, view, showUnit = true,
       setRemoved(true);
       return;
     }
-    if (!canPurchase || nextQuantity === null || nextQuantity <= 0 || nextQuantity > 999
-      || (wholeQuantity && !Number.isInteger(nextQuantity)) || variant.price === null
-      || calculateLineTotal(nextQuantity, variant.price) === null) return;
+    if (!canAdd || !canSubmitQuantity(nextQuantity)) return;
     if (line && !line.invalidReason && nextQuantity === line.quantity) {setDraft(null); return;}
     if (line) updateQuantity(variant.id, nextQuantity);
     else addItem(variant.id, nextQuantity);
@@ -100,27 +99,28 @@ export function ProductOrderControls({variant, view, showUnit = true,
   const stateClass = removed ? styles.removedCartButton
     : shouldRemove ? styles.removeCartButton
       : saved ? styles.savedCartButton
-        : line && canPurchase ? styles.updateCartButton : styles.cartButton;
-  const label = removed ? "Удалено" : shouldRemove ? "Удалить" : !canPurchase ? "Под заказ"
-    : saved ? <><Icon name="check"/><span className="whitespace-nowrap">В корзине</span></> : line ? "Обновить" : "В корзину";
+        : line && canAdd ? styles.updateCartButton : styles.cartButton;
+  const label = removed ? "Удалено" : shouldRemove ? "Удалить"
+    : saved ? <><Icon name="check"/><span className="whitespace-nowrap">В корзине</span></> : line ? "Обновить" : madeToOrder ? "Заказать" : "В корзину";
   const actionClass = `${view === "card" ? "w-full" : tableStyles.tableAction} px-3`;
   const quoteQuantity = valid && (draft !== null || line || !needsQuote) ? quantity : null;
   const weightPerMeter = variant.weightPerMeterKg ?? (variant.weight?.unit === "кг/м" ? variant.weight.value : undefined);
   const quoteTons = quoteQuantity === null ? null : variant.unit === "ton" ? quoteQuantity
     : variant.unit === "kg" ? quoteQuantity / 1000
       : variant.unit === "meter" && weightPerMeter !== undefined ? quoteQuantity * weightPerMeter / 1000 : null;
-  const action = madeToOrder || (needsQuote && !shouldRemove && !removed) ? (
-    <QuoteRequestButton label={madeToOrder ? "Под заказ" : "Запросить цену"}
+  const statusId = `quantity-status-${view}-${variant.id}`;
+  const deliveryId = madeToOrder ? `${statusId}-delivery` : undefined;
+  const action = !canAdd && !shouldRemove && !removed ? (
+    <QuoteRequestButton label="Запросить цену"
       order={{product: formatQuoteProductName(variant), quantity: quoteQuantity, unit: getQuantityUnit(variant), tons: quoteTons}}
       className={`${styles.quoteButton} ${actionClass}`}/>
   ) : (
-    <Button type="button" onClick={() => submit()}
-      disabled={!hydrated || saved || removed || (!shouldRemove && (!canPurchase || !canSubmitQuantity))}
+    <Button type="button" aria-describedby={deliveryId} onClick={() => submit()}
+      disabled={!hydrated || saved || removed || (!shouldRemove && (!canAdd || !canSubmitQuantity(correctedQuantity)))}
       className={`${stateClass} ${actionClass}`}>{label}</Button>
   );
-  const amountTooSmall = canPurchase && valid && total === null;
+  const amountTooSmall = !needsQuote && valid && total === null;
   const quantityError = draft !== null && value.trim() !== "" && (!valid || amountTooSmall) && !shouldRemove;
-  const statusId = `quantity-status-${view}-${variant.id}`;
   const unitInsideField = view === "table" && showUnit;
   const quantityInput = <Input type="text" inputMode={wholeQuantity ? "numeric" : "decimal"} value={value}
         aria-label={`Количество ${variant.name}, ${quantityUnit}`}
@@ -153,9 +153,9 @@ export function ProductOrderControls({variant, view, showUnit = true,
   const status = <span id={statusId} aria-live="polite" className={`mt-1 block text-xs ${quantityError
     ? "text-red-700 dark:text-red-400" : "text-slate-500 dark:text-slate-400"}`}>
     {wholeQuantity && valid && !removed && <span className="block">{quantity} {quantityUnit}</span>}
-    {!madeToOrder && line && !saved && !shouldRemove && <span className="block whitespace-nowrap">Не сохранено</span>}
+    {line && !saved && !shouldRemove && <span className="block whitespace-nowrap">Не сохранено</span>}
     {amountTooSmall ? "Увеличьте количество. Сумма позиции должна быть больше 0 ₽."
       : correction || (quantityError ? wholeQuantity ? "Введите целое количество от 1 до 999." : "Введите количество больше 0 и не больше 999." : "")}
   </span>;
-  return <CatalogVariantOrder view={view} quantity={quantityField} total={totalOutput} action={action} status={status}/>;
+  return <CatalogVariantOrder view={view} quantity={quantityField} total={totalOutput} action={action} status={status} deliveryId={deliveryId}/>;
 }
