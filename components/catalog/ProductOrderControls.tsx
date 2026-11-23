@@ -13,14 +13,15 @@ import {constrainOrderQuantityInput, correctOrderQuantity, parseOrderQuantity} f
 import {formatQuantityForInput, productOrderFractionDigits, quantityTransferHandlers} from "@/lib/cartQuantityInput";
 import {calculateLineTotal} from "@/lib/orderMeasurement";
 import {formatCurrency} from "@/lib/currency";
+import {storefrontAvailability} from "@/lib/catalogOffer";
 import {CatalogVariantOrder, CatalogVariantQuantity} from "./CatalogVariantLayout";
 import styles from "./FilterPanel.module.css";
 import tableStyles from "./RebarTable.module.css";
 import {useOrderDraft} from "./OrderDraftProvider";
 
-export function ProductOrderControls({variant, view, showUnit = true, allowBackorder = false,
+export function ProductOrderControls({variant, view, showUnit = true,
   wholeQuantity = requiresWholeCatalogQuantity(variant)}: {
-  variant: ProductVariant; view: "table" | "card"; showUnit?: boolean; allowBackorder?: boolean; wholeQuantity?: boolean;
+  variant: ProductVariant; view: "table" | "card"; showUnit?: boolean; wholeQuantity?: boolean;
 }) {
   const {lines, hydrated, addItem, updateQuantity, removeItem} = useCart();
   const line = lines.find(item => item.productId === variant.id);
@@ -31,8 +32,9 @@ export function ProductOrderControls({variant, view, showUnit = true, allowBacko
   const quantity = chosenQuantity(value);
   const needsQuote = variant.price === null || !Number.isFinite(variant.price) || variant.price < 0
     || variant.quoteOnly || variant.priceQualifier === "from";
-  const canPurchase = !needsQuote && (allowBackorder || variant.inStock || (variant.imported && variant.availability !== "ON_ORDER"));
-  const shouldRemove = !!line && quantity === 0;
+  const madeToOrder = storefrontAvailability(variant.availability) === "ON_ORDER";
+  const canPurchase = !needsQuote && !madeToOrder;
+  const shouldRemove = !madeToOrder && !!line && quantity === 0;
   const saved = !!line && !line.invalidReason && quantity === line.quantity;
   const valid = quantity !== null && quantity > 0 && quantity <= 999
     && (!wholeQuantity || Number.isInteger(quantity));
@@ -66,7 +68,7 @@ export function ProductOrderControls({variant, view, showUnit = true, allowBacko
 
   function submit(rawValue = value) {
     const rawQuantity = chosenQuantity(rawValue);
-    if (!hydrated || removed || rawQuantity === null) return;
+    if (!hydrated || removed || madeToOrder || rawQuantity === null) return;
     const corrected = correctQuantityValue(rawValue);
     const nextQuantity = chosenQuantity(corrected.value);
     setDraft(corrected.value);
@@ -107,8 +109,8 @@ export function ProductOrderControls({variant, view, showUnit = true, allowBacko
   const quoteTons = quoteQuantity === null ? null : variant.unit === "ton" ? quoteQuantity
     : variant.unit === "kg" ? quoteQuantity / 1000
       : variant.unit === "meter" && weightPerMeter !== undefined ? quoteQuantity * weightPerMeter / 1000 : null;
-  const action = !canPurchase && !shouldRemove && !removed ? (
-    <QuoteRequestButton label={needsQuote ? "Запросить цену" : "Под заказ"}
+  const action = madeToOrder || (needsQuote && !shouldRemove && !removed) ? (
+    <QuoteRequestButton label={madeToOrder ? "Под заказ" : "Запросить цену"}
       order={{product: formatQuoteProductName(variant), quantity: quoteQuantity, unit: getQuantityUnit(variant), tons: quoteTons}}
       className={`${styles.quoteButton} ${actionClass}`}/>
   ) : (
@@ -151,7 +153,7 @@ export function ProductOrderControls({variant, view, showUnit = true, allowBacko
   const status = <span id={statusId} aria-live="polite" className={`mt-1 block text-xs ${quantityError
     ? "text-red-700 dark:text-red-400" : "text-slate-500 dark:text-slate-400"}`}>
     {wholeQuantity && valid && !removed && <span className="block">{quantity} {quantityUnit}</span>}
-    {line && !saved && !shouldRemove && <span className="block whitespace-nowrap">Не сохранено</span>}
+    {!madeToOrder && line && !saved && !shouldRemove && <span className="block whitespace-nowrap">Не сохранено</span>}
     {amountTooSmall ? "Увеличьте количество. Сумма позиции должна быть больше 0 ₽."
       : correction || (quantityError ? wholeQuantity ? "Введите целое количество от 1 до 999." : "Введите количество больше 0 и не больше 999." : "")}
   </span>;

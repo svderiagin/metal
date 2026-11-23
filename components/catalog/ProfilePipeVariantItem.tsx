@@ -9,6 +9,7 @@ import {correctOrderQuantity, formatCatalogNumber, parseOrderQuantity} from "@/l
 import {correctDraftPrecision, formatMeasuredQuantity, measuredTonFractionDigits, normalizeCartQuantityDraft, quantityTransferHandlers} from "@/lib/cartQuantityInput";
 import {formatCurrency, formatUnitPrice} from "@/lib/currency";
 import {formatNumber} from "@/lib/numberFormat";
+import {storefrontAvailability} from "@/lib/catalogOffer";
 import {hasConfirmedProfilePipePrice, MAX_PROFILE_PIPE_PIECES, profilePipeMassPerMeter,
   profilePipeOrder, profilePipeOrderByQuantity, profilePipePricePerTon, profilePipeSize, type ProfilePipeOrderUnit} from "@/lib/profilePipe";
 import type {ProductVariant} from "@/types/product";
@@ -47,10 +48,11 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
   const order = quantity !== null && quantity > 0 && validLength !== undefined
     ? profilePipeOrderByQuantity(variant, quantity, inputUnit, validLength) : null;
   const confirmedPrice = hasConfirmedProfilePipePrice(variant);
+  const madeToOrder = storefrontAvailability(variant.availability) === "ON_ORDER";
   const pricePerTon = profilePipePricePerTon(variant);
   const saved = !!line && !line.invalidReason && !!order
     && order.pieces === savedPieces && order.lengthMeters === savedLength;
-  const shouldRemove = !!line && quantity === 0;
+  const shouldRemove = !madeToOrder && !!line && quantity === 0;
   const label = removed ? "Удалено" : shouldRemove ? "Удалить" : saved
     ? <><Icon name="check"/><span className="whitespace-nowrap">В корзине</span></> : line ? "Обновить" : "В корзину";
   const buttonClass = removed ? filterStyles.removedCartButton : shouldRemove ? filterStyles.removeCartButton
@@ -74,7 +76,7 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
     ? `Введите целое количество труб от 1 до ${MAX_PROFILE_PIPE_PIECES}.` : "Введите объём больше нуля.";
   else if (range && quantity !== null && quantity > 0 && validLength === undefined) validationMessage = "Укажите длину одной трубы.";
   const status = validationMessage ?? message;
-  const showUnsaved = !!line && !saved && !shouldRemove && !!order;
+  const showUnsaved = !madeToOrder && !!line && !saved && !shouldRemove && !!order;
   const statusId = `profile-pipe-order-status-${view}-${variant.id}`;
   const statusSpacing = view === "table" ? "mx-auto mt-1 max-w-32" : "mt-1";
   const nextDraft = {quantity: quantityText, length: lengthText, inputUnit, settled: draft?.settled, exactQuantity: draft?.exactQuantity};
@@ -132,7 +134,7 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
   }
 
   function submit() {
-    if (!hydrated || removed) return;
+    if (!hydrated || removed || madeToOrder) return;
     const corrected = correctOrderValues();
     setDraft({...nextDraft, length: corrected.length});
     if (corrected.message) setMessage(corrected.message);
@@ -154,9 +156,10 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
   const quoteLength = quoteOrder?.lengthMeters ?? validLength;
   const quoteBlocked = !quoteOrder && (lengthError || !!quantityText.trim());
   const quoteClassName = `${filterStyles.quoteButton} ${actionSize} px-3`;
-  const action = !confirmedPrice && !shouldRemove && !removed ? quoteBlocked
-    ? <Button type="button" disabled aria-describedby={statusId} className={quoteClassName}>Запросить цену</Button>
-    : <QuoteRequestButton label="Запросить цену"
+  const quoteLabel = madeToOrder ? "Под заказ" : "Запросить цену";
+  const action = madeToOrder || (!confirmedPrice && !shouldRemove && !removed) ? quoteBlocked
+    ? <Button type="button" disabled aria-describedby={statusId} className={quoteClassName}>{quoteLabel}</Button>
+    : <QuoteRequestButton label={quoteLabel}
     order={{product: quoteLength ? `${variant.name}, длина ${formatNumber(quoteLength)} м` : variant.name,
       quantity: quoteOrder?.pieces ?? null,
       unit: "шт.", meters: quoteOrder?.meters ?? null, tons: quoteOrder?.weightTons,

@@ -12,7 +12,7 @@ import {getSheetDesignation, getSheetTableDesignation, isPlainHotRolledSheet, sh
 import {Button} from "@/components/ui/Button";
 import {ResetFiltersButton} from "./ResetFiltersButton";
 import {CatalogVariantLayout, CatalogVariantSpecifications, CatalogVariantTable} from "./CatalogVariantLayout";
-import {isDemonstrationProduct} from "@/lib/catalogOffer";
+import {isDemonstrationProduct, storefrontAvailability} from "@/lib/catalogOffer";
 import {isSquareProfilePipe} from "@/lib/profilePipe";
 import {CatalogPositionDetails} from "./CatalogPositionDetails";
 import {formatSpecification, storefrontPositionFields} from "./StorefrontPositionSpecifications";
@@ -144,12 +144,13 @@ export function VariantCatalogResults({visible, categorySlug, unit, isSheetCatal
 }
 
 function Availability({availability}: {availability: ProductVariant["availability"]}) {
+  const inStock = storefrontAvailability(availability) === "IN_STOCK";
   return (
     <span className={`inline-flex rounded-full px-2.5 py-1 text-xs font-bold ${
-      availability === "UNKNOWN" ? "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300"
-        : availability === "IN_STOCK" ? "bg-green-100 dark:bg-green-950/60 text-green-800 dark:text-green-300" : "bg-amber-100 dark:bg-amber-950/60 text-amber-900 dark:text-amber-200"
+      inStock ? "bg-green-100 dark:bg-green-950/60 text-green-800 dark:text-green-300"
+        : "bg-amber-100 dark:bg-amber-950/60 text-amber-900 dark:text-amber-200"
     }`}>
-      {availability === "UNKNOWN" ? "Наличие уточняется" : availability === "IN_STOCK" ? "В наличии" : "Под заказ"}
+      {inStock ? "В наличии" : "Под заказ"}
     </span>
   );
 }

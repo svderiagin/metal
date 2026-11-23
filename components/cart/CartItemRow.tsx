@@ -12,7 +12,7 @@ import {formatCartQuantity, formatMeasuredQuantity, formatQuantityForInput, form
   measuredTonFractionDigits, productOrderFractionDigits, rebarMinimumMeterEntry, rebarMinimumTonEntry, rebarTonFractionDigits} from "@/lib/cartQuantityInput";
 import {isVgpVariant} from "@/lib/pipeFamily";
 import {hasConfirmedProfilePipePrice, isProfilePipeVariant} from "@/lib/profilePipe";
-import {isDemonstrationProduct, requiresOfferConfirmation} from "@/lib/catalogOffer";
+import {isDemonstrationProduct, requiresOfferConfirmation, storefrontAvailability} from "@/lib/catalogOffer";
 import {CartAmount} from "./CartAmount";
 import styles from "./CartItemRow.module.css";
 
@@ -35,6 +35,7 @@ export function CartItemRow({line, onRemove}: {line: CartLine; onRemove: () => v
   const tonOptions = product && measurement ? getCartMeasurementQuantityOptions(product, "ton") : undefined;
   const priceRequiresQuote = !product || requiresOfferConfirmation(product) || product.price === null || product.quoteOnly
     || product.priceQualifier === "from" || (isProfilePipeVariant(product) && !hasConfirmedProfilePipePrice(product));
+  const quantityDisabled = priceRequiresQuote || (!!product && storefrontAvailability(product.availability) === "ON_ORDER");
   return (
     <article data-cart-row={line.productId} className={`${styles.row} rounded-xl border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-900`}>
       <div className="min-w-0 break-words">
@@ -51,10 +52,10 @@ export function CartItemRow({line, onRemove}: {line: CartLine; onRemove: () => v
       </div>
       <div className={styles.order}>{line.pieceOrder ? (
         <div className="space-y-2">
-          <QuantitySelector whole fieldLabel="Количество труб" productName={line.name} unit="шт." disabled={priceRequiresQuote} value={line.pieceOrder.pieces}
+          <QuantitySelector whole fieldLabel="Количество труб" productName={line.name} unit="шт." disabled={quantityDisabled} value={line.pieceOrder.pieces}
             onChange={pieces => updatePieceOrder(line.productId, pieces, line.pieceOrder!.lengthMeters)}/>
           {product?.lengthRangeMeters ? <QuantitySelector fieldLabel="Длина одной трубы" productName={line.name} unit="м"
-            disabled={priceRequiresQuote} minimum={product.lengthRangeMeters[0]} maximum={product.lengthRangeMeters[1]}
+            disabled={quantityDisabled} minimum={product.lengthRangeMeters[0]} maximum={product.lengthRangeMeters[1]}
             decimalPlaces={2} formatValue={(quantity, grouped) => formatQuantityForInput(quantity, grouped, 2)}
             value={line.pieceOrder.lengthMeters}
             onChange={length => updatePieceOrder(line.productId, line.pieceOrder!.pieces, length)}/>
@@ -71,14 +72,14 @@ export function CartItemRow({line, onRemove}: {line: CartLine; onRemove: () => v
               productName={line.name} unit={mode === "meter" ? "м" : "т"}
               wideInput
               value={mode === "meter" ? measurement.meters : measurement.weightTons}
-              onChange={quantity => updateQuantity(line.productId, quantity, mode)} disabled={priceRequiresQuote || !canConvert}
+              onChange={quantity => updateQuantity(line.productId, quantity, mode)} disabled={quantityDisabled || !canConvert}
               {...options}
               precision={mode === "meter" ? 2 : tonPrecision}
               displayThreshold={isRebar ? mode === "meter" ? rebarMinimumMeterEntry : rebarMinimumTonEntry : undefined}
               step={wholeLengths ? options?.minimum : mode === "meter" ? 1 : 0.001}
               formatValue={(quantity, grouped) => mode === "ton" && isRebar ? formatRebarOrderTons(quantity, true, grouped)
                 : mode === "ton" && isVgp ? formatQuantityForInput(quantity, grouped, 3) : formatMeasuredQuantity(quantity, mode, grouped)}
-              hasPositiveTotal={canConvert && !priceRequiresQuote ? quantity => (mode === "meter"
+              hasPositiveTotal={canConvert && !quantityDisabled ? quantity => (mode === "meter"
                 ? calculateMeasuredLineTotal(quantity, product.weightPerMeterKg!, product.pricePerTon!)
                 : calculateLineTotal(quantity, product.pricePerTon!)) !== null : undefined}
               normalizeQuantity={product && wholeLengths ? quantity => {
@@ -103,8 +104,8 @@ export function CartItemRow({line, onRemove}: {line: CartLine; onRemove: () => v
           displayThreshold={simpleRebarMass ? rebarMinimumTonEntry : undefined}
           formatValue={simpleRebarMass ? (quantity, grouped) => formatRebarOrderTons(quantity, true, grouped) : undefined}
           step={!line.wholeQuantity && product?.unit === "ton" ? 0.001 : 1}
-          hasPositiveTotal={priceRequiresQuote ? undefined : quantity => calculateLineTotal(quantity, product.price!) !== null}
-          disabled={priceRequiresQuote} value={line.quantity} onChange={(value) => updateQuantity(line.productId, value)}/>
+          hasPositiveTotal={quantityDisabled ? undefined : quantity => calculateLineTotal(quantity, product.price!) !== null}
+          disabled={quantityDisabled} value={line.quantity} onChange={(value) => updateQuantity(line.productId, value)}/>
       )}</div>
       <div className={styles.price}>
         <strong className={styles.total}>{line.invalidReason ? "Расчёт недоступен" : <CartAmount>{formatCurrency(line.estimatedTotal)}</CartAmount>}</strong>

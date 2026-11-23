@@ -4,11 +4,19 @@ import type {CartMeasurement, CartPieceOrder} from "@/types/cart";
 import {hasConfirmedProfilePipePrice, isProfilePipeVariant, profilePipeOrder} from "./profilePipe";
 import {isProfileSheetVariant} from "./profileSheet";
 import {requiresWholeMetalMeshQuantity, requiresWholeCatalogQuantity} from "./variantPresentation";
-import {isDemonstrationProduct, requiresOfferConfirmation} from "./catalogOffer";
+import {isDemonstrationProduct, requiresOfferConfirmation, storefrontAvailability} from "./catalogOffer";
 
 type PriceInput = {quantity: number; measurement?: Pick<CartMeasurement, "inputMode" | "meters" | "weightTons">; pieceOrder?: CartPieceOrder};
 
 export function revalidateCartPrice(product: ProductVariant, item: PriceInput) {
+  if (storefrontAvailability(product.availability) === "ON_ORDER") {
+    return {
+      measurement: undefined,
+      pieceOrder: item.pieceOrder,
+      invalidReason: "Позиция доступна под заказ. Отправьте заявку.",
+      estimatedTotal: 0,
+    };
+  }
   if (isProfilePipeVariant(product)) {
     const pieces = item.pieceOrder?.pieces ?? (product.lengthMeters ? item.quantity / product.lengthMeters : NaN);
     const order = profilePipeOrder(product, pieces, item.pieceOrder?.lengthMeters);

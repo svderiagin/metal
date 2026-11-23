@@ -20,7 +20,8 @@ import {constrainOrderQuantityInput, correctOrderQuantity, formatCatalogNumber, 
 import {correctDraftPrecision, formatMeasuredQuantity, formatQuantityForInput, formatRebarOrderTons, normalizeCartQuantityDraft, rebarMinimumMeterEntry, rebarMinimumTonEntry, rebarTonFractionDigits} from "@/lib/cartQuantityInput";
 import type {OrderInputMode} from "@/types/cart";
 import type {ProductVariant} from "@/types/product";
-import {isDemonstrationProduct} from "@/lib/catalogOffer";
+import {isDemonstrationProduct, storefrontAvailability} from "@/lib/catalogOffer";
+import {a500cSubcategoryId} from "@/lib/rebar";
 import {useOrderDraft} from "./OrderDraftProvider";
 import {CatalogPositionDetails} from "./CatalogPositionDetails";
 import {PipePositionDetails} from "./PipePositionDetails";
@@ -93,7 +94,8 @@ function TonnageMeasuredVariantItem({
   const pricePerTon = variant.pricePerTon;
   const needsQuote = pricePerTon === undefined || variant.quoteOnly || variant.priceQualifier === "from"
     || (wholeLengths && !roundToWholeLengths) || (!hasMass && enteredMeters !== null && enteredMeters > 0);
-  const canPurchase = !needsQuote && (variant.inStock || (variant.imported && variant.availability === "UNKNOWN"));
+  const madeToOrder = storefrontAvailability(variant.availability) === "ON_ORDER";
+  const canPurchase = !needsQuote && !madeToOrder;
   const estimatedTotal = variant.quoteOnly ? null
     : referenceMass !== undefined && parsedMeters !== null && pricePerTon !== undefined ? calculateMeasuredLineTotal(parsedMeters, referenceMass, pricePerTon)
     : estimateTotal(parsedMeters, parsedTons);
@@ -113,8 +115,8 @@ function TonnageMeasuredVariantItem({
       : Math.abs(parsedTons - savedTons) <= Math.max(1, savedTons) * Number.EPSILON * 32)
     && estimatedTotal === cartLine.estimatedTotal
     && (hasMass || !(enteredMeters && enteredMeters > 0));
-  const hasChanges = !!cartLine && !isSaved;
-  const shouldRemove = !!cartLine && enteredQuantity === 0;
+  const hasChanges = !madeToOrder && !!cartLine && !isSaved;
+  const shouldRemove = !madeToOrder && !!cartLine && enteredQuantity === 0;
   const activeValue = inputMode === "meter" ? meters : tons;
   const enteringFraction = isRebar && activeValue === "0,";
   const usableDraft = draft === null || shouldRemove || (draft.exactQuantity ?? parseDraftQuantity(activeValue) ?? 0) > 0;
@@ -313,9 +315,9 @@ function TonnageMeasuredVariantItem({
 
   const actionSizeClassName = view === "card" ? "w-full" : tableStyles.tableAction;
   const statusId = `measured-order-status-${view}-${variant.id}`;
-  const needsInquiry = !canPurchase && !shouldRemove && !removed;
+  const needsInquiry = madeToOrder || (needsQuote && !shouldRemove && !removed);
   const correctedInquiry = isRebar && needsInquiry && invalidDraft ? resolvedOrder(inputMode) : null;
-  const quoteLabel = unconfirmedRebarLength ? "Запросить расчёт" : needsQuote ? "Запросить цену" : "Под заказ";
+  const quoteLabel = madeToOrder ? "Под заказ" : unconfirmedRebarLength ? "Запросить расчёт" : "Запросить цену";
   const quoteClass = `${filterStyles.quoteButton} ${actionSizeClassName} px-3`;
   const inquiryPieces = isRebar && !invalidDraft ? wholeOrder?.pieces
     : roundToWholeLengths && correctedInquiry ? wholeLengthOrder(variant, correctedInquiry.quantity, inputMode)?.pieces : undefined;
@@ -366,7 +368,6 @@ function TonnageMeasuredVariantItem({
     const pipeDesignation = view === "card" ? `Труба Ø${pipeSize} мм` : pipeSize;
     const pipeLength = variant.lengthRangeMeters?.map(formatNumber).join("–")
       ?? (variant.lengthMeters === undefined ? undefined : formatNumber(variant.lengthMeters));
-    const madeToOrder = !isVgp && variant.availability === "ON_ORDER";
     const tolerance = variant.supplierLengthToleranceMm === undefined ? undefined
       : `±${formatNumber(variant.supplierLengthToleranceMm)} мм`;
     const length = pipeLength ? <>
@@ -386,7 +387,7 @@ function TonnageMeasuredVariantItem({
       ]}/>}
       detailsId={`pipe-details-${variant.id}`}
       details={<PipePositionDetails variant={variant} isVgp={isVgp} length={pipeLength && `${pipeLength} м`} mass={hasMass ? mass : undefined}/>}
-      price={price} priceNote={madeToOrder && <span className="block text-xs text-slate-600 dark:text-slate-400">Под заказ</span>} order={order}/>;
+      price={price} priceNote={!isVgp && madeToOrder && <span className="block text-xs text-slate-600 dark:text-slate-400">Под заказ</span>} order={order}/>;
   }
 
   const profile = unverified ? "Уточняется" : beamProfile(variant);
@@ -423,6 +424,7 @@ function RebarVariantLayout({view, variant, price, order}: {
   price: string;
   order: ReactNode;
 }) {
+  const isA500c = variant.subcategoryId === a500cSubcategoryId;
   const unverified = isDemonstrationProduct(variant);
   const diameter = unverified ? variant.name.match(/(\d+(?:[.,]\d+)?)\s*мм$/iu)?.[1]?.replace(".", ",")
     : variant.diameterMm === undefined ? undefined : formatNumber(variant.diameterMm);
@@ -440,11 +442,14 @@ function RebarVariantLayout({view, variant, price, order}: {
     {label: "Марка стали", value: variant.steelGrade},
     {label: "Длина прутка", value: length && variant.form === "bar" ? `${length} м` : undefined},
     {label: "Теоретическая масса", value: variant.weightPerMeterKg === undefined ? undefined : `${formatNumber(variant.weightPerMeterKg)} кг/м`},
-    {label: "Стандарт", value: variant.standard},
-    ...variant.specifications.filter(({name}) => ["Класс арматуры", "Поверхность"].includes(name))
-      .map(({name, value}) => ({label: name, value})),
+    ...(isA500c ? [] : [
+      {label: "Стандарт", value: variant.standard},
+      ...variant.specifications.filter(({name}) => ["Класс арматуры", "Поверхность"].includes(name))
+        .map(({name, value}) => ({label: name, value})),
+    ]),
   ];
-  return <CatalogVariantLayout view={view} variant={variant} name={view === "card" ? variant.name : diameter ?? "—"}
+  const cardName = isA500c ? variant.name.replace(/\s+ГОСТ\s+34028(?:-2016)?$/u, "") : variant.name;
+  return <CatalogVariantLayout view={view} variant={variant} name={view === "card" ? cardName : diameter ?? "—"}
     tableSpecifications={[unverified ? <span key="form" className="text-xs text-slate-600 dark:text-slate-400">{form}</span> : form, length ?? "—"]}
     specifications={<CatalogVariantSpecifications items={fields}/>} details={!unverified && <CatalogPositionDetails productName={variant.name} fields={detailsFields}/>}
     price={price} order={order}/>;

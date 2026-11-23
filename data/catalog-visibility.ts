@@ -1,8 +1,14 @@
-// Archived records remain in source data for reproducible imports.
+// Archived records remain in the local catalog data.
 const hiddenProductIds = new Set([
   "prd-071", "prd-072", "prd-073", "prd-074",
   "catalog-26569", "catalog-28931", "catalog-28971",
   "local-118826",
+  // A500C duplicates of original positions with the same diameter, form and length.
+  "local-44188", "local-17091", "local-1555", "local-73160", "local-1421",
+  "local-6340", "local--684", "local-6346", "local-6352", "local-17412",
+  "local-6359", "local-1758", "local-17482", "local-61299",
+  // Incorrect A500C Ø10 × 12 m position.
+  "local-122766",
 ]);
 const hiddenSkus = new Set(["MS-0071", "MS-0072", "MS-0073", "MS-0074"]);
 

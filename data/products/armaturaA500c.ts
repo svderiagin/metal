@@ -6,9 +6,11 @@ const steelGrade = "3сп(пс)";
 type A500cRow = {
   diameterMm: number;
   form: "coil" | "bar";
-  pricePerTon: number;
+  pricePerTon: number | null;
   weightPerMeterKg: number;
   lengthMeters?: number;
+  inStock?: boolean;
+  variantSuffix?: string;
 };
 
 // Nominal kg/m: GOST 34028-2016, table 1. Preserve three decimal places.
@@ -22,7 +24,9 @@ const rows: A500cRow[] = [
   {diameterMm: 10, form: "bar", lengthMeters: 6, pricePerTon: 71800, weightPerMeterKg: 0.617},
   {diameterMm: 12, form: "coil", pricePerTon: 70400, weightPerMeterKg: 0.888},
   {diameterMm: 12, form: "bar", lengthMeters: 11.7, pricePerTon: 68400, weightPerMeterKg: 0.888},
+  {diameterMm: 14, form: "bar", lengthMeters: 6, pricePerTon: 69000, weightPerMeterKg: 1.208, inStock: false, variantSuffix: "6m"},
   {diameterMm: 14, form: "bar", lengthMeters: 11.7, pricePerTon: 68400, weightPerMeterKg: 1.208},
+  {diameterMm: 16, form: "bar", lengthMeters: 6, pricePerTon: 68400, weightPerMeterKg: 1.578, inStock: false, variantSuffix: "6m"},
   {diameterMm: 16, form: "bar", lengthMeters: 11.7, pricePerTon: 67800, weightPerMeterKg: 1.578},
   {diameterMm: 18, form: "bar", lengthMeters: 11.7, pricePerTon: 68400, weightPerMeterKg: 1.998},
   {diameterMm: 20, form: "bar", lengthMeters: 11.7, pricePerTon: 68400, weightPerMeterKg: 2.466},
@@ -31,6 +35,7 @@ const rows: A500cRow[] = [
   {diameterMm: 28, form: "bar", lengthMeters: 11.7, pricePerTon: 68400, weightPerMeterKg: 4.834},
   {diameterMm: 32, form: "bar", lengthMeters: 11.7, pricePerTon: 68400, weightPerMeterKg: 6.313},
   {diameterMm: 36, form: "bar", lengthMeters: 11.7, pricePerTon: 68400, weightPerMeterKg: 7.99},
+  {diameterMm: 40, form: "bar", lengthMeters: 11.7, pricePerTon: 68400, weightPerMeterKg: 9.865, inStock: false},
 ];
 
 export const armaturaA500cVariants: ProductVariantSource[] = rows.map((row, index) => {
@@ -38,7 +43,8 @@ export const armaturaA500cVariants: ProductVariantSource[] = rows.map((row, inde
   const formName = row.form === "coil"
     ? "в бунтах"
     : `пруток${row.lengthMeters ? ` ${formatNumber(row.lengthMeters)} м` : ""}`;
-  const id = `rebar-a500c-${row.diameterMm}-${formSlug}`;
+  const suffix = row.variantSuffix ? `-${row.variantSuffix}` : "";
+  const id = `rebar-a500c-${row.diameterMm}-${formSlug}${suffix}`;
 
   return {
     id,
@@ -46,18 +52,18 @@ export const armaturaA500cVariants: ProductVariantSource[] = rows.map((row, inde
     subcategoryId: productTypeId,
     name: `Арматура рифлёная А500С ${row.diameterMm} мм, ${formName}`,
     slug: id,
-    sku: `MS-A500C-${String(row.diameterMm).padStart(2, "0")}-${row.form === "coil" ? "C" : "B"}`,
+    sku: `MS-A500C-${String(row.diameterMm).padStart(2, "0")}-${row.form === "coil" ? "C" : "B"}${suffix.toUpperCase()}`,
     shortDescription: `Арматура рифлёная А500С диаметром ${row.diameterMm} мм, ${formName}, сталь ${steelGrade}.`,
     description: `Вариант рифлёной арматуры А500С диаметром ${row.diameterMm} мм в форме «${formName}».`,
     price: row.pricePerTon,
     priceUnit: "за тонну",
-    inStock: true,
+    inStock: row.inStock ?? true,
     featured: index < 4,
     imageUrls: [],
     diameterMm: row.diameterMm,
     form: row.form,
     steelGrade,
-    pricePerTon: row.pricePerTon,
+    pricePerTon: row.pricePerTon ?? undefined,
     weightPerMeterKg: row.weightPerMeterKg,
     lengthMeters: row.lengthMeters,
     sourceProductName: row.form === "coil"

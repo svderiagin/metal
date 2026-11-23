@@ -88,7 +88,7 @@
       "slug": "armatura-a500s",
       "shortDescription": "Рифлёная свариваемая арматура класса А500 для армирования фундаментов, перекрытий, колонн и армопоясов. Отличается высокой прочностью и подходит для изготовления сварных арматурных каркасов с соблюдением технологии соединений.",
       "description": "Рифлёная свариваемая арматура повышенной прочности для армирования фундаментов, монолитных перекрытий, колонн и армопоясов.\n\nШироко применяется при строительстве частных домов, коттеджей и гаражей.\n\nСварные соединения выполняют с соблюдением предусмотренной проектом технологии. Основной стандарт — ГОСТ 34028-2016. Стандарт поставки и характеристики партии сверяют по документам о качестве.",
-      "materialDescription": "Сталь; марка уточняется",
+      "materialDescription": "Сталь 3сп(пс)",
       "referenceStandard": "ГОСТ 34028-2016"
     },
     {
@@ -1226,6 +1226,81 @@
       }
     },
     {
+      "id": "rebar-a500c-14-bar-6m",
+      "categoryId": "cat-arm",
+      "subcategoryId": "cat-arm-sub-1",
+      "name": "Арматура рифлёная А500С 14 мм, пруток 6 м",
+      "slug": "rebar-a500c-14-bar-6m",
+      "sku": "MS-A500C-14-B-6M",
+      "shortDescription": "Арматура рифлёная А500С диаметром 14 мм, пруток 6 м, сталь 3сп(пс).",
+      "description": "Вариант рифлёной арматуры А500С диаметром 14 мм в форме «пруток 6 м».",
+      "price": 69000,
+      "priceUnit": "за тонну",
+      "inStock": false,
+      "featured": false,
+      "imageUrls": [],
+      "diameterMm": 14,
+      "form": "bar",
+      "steelGrade": "3сп(пс)",
+      "pricePerTon": 69000,
+      "weightPerMeterKg": 1.208,
+      "lengthMeters": 6,
+      "sourceProductName": "арматура, 6 м",
+      "attributes": [
+        {
+          "key": "material",
+          "label": "Материал",
+          "value": "Сталь 3сп(пс)"
+        },
+        {
+          "key": "size",
+          "label": "Диаметр",
+          "value": "14 мм"
+        },
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "3сп(пс)"
+        },
+        {
+          "key": "length",
+          "label": "Длина",
+          "value": "6 м"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Диаметр",
+          "value": "14 мм"
+        },
+        {
+          "name": "Форма поставки",
+          "value": "Пруток"
+        },
+        {
+          "name": "Марка стали",
+          "value": "3сп(пс)"
+        },
+        {
+          "name": "Вес погонного метра",
+          "value": "1,208 кг/м"
+        },
+        {
+          "name": "Фиксированная длина",
+          "value": "6 м"
+        }
+      ],
+      "productTypeId": "type-cat-arm-sub-1",
+      "unit": "ton",
+      "material": "Сталь 3сп(пс)",
+      "standard": "",
+      "availability": "ON_ORDER",
+      "weight": {
+        "value": 1.208,
+        "unit": "кг/м"
+      }
+    },
+    {
       "id": "rebar-a500c-14-bar",
       "categoryId": "cat-arm",
       "subcategoryId": "cat-arm-sub-1",
@@ -1299,6 +1374,81 @@
       "availability": "IN_STOCK",
       "weight": {
         "value": 1.208,
+        "unit": "кг/м"
+      }
+    },
+    {
+      "id": "rebar-a500c-16-bar-6m",
+      "categoryId": "cat-arm",
+      "subcategoryId": "cat-arm-sub-1",
+      "name": "Арматура рифлёная А500С 16 мм, пруток 6 м",
+      "slug": "rebar-a500c-16-bar-6m",
+      "sku": "MS-A500C-16-B-6M",
+      "shortDescription": "Арматура рифлёная А500С диаметром 16 мм, пруток 6 м, сталь 3сп(пс).",
+      "description": "Вариант рифлёной арматуры А500С диаметром 16 мм в форме «пруток 6 м».",
+      "price": 68400,
+      "priceUnit": "за тонну",
+      "inStock": false,
+      "featured": false,
+      "imageUrls": [],
+      "diameterMm": 16,
+      "form": "bar",
+      "steelGrade": "3сп(пс)",
+      "pricePerTon": 68400,
+      "weightPerMeterKg": 1.578,
+      "lengthMeters": 6,
+      "sourceProductName": "арматура, 6 м",
+      "attributes": [
+        {
+          "key": "material",
+          "label": "Материал",
+          "value": "Сталь 3сп(пс)"
+        },
+        {
+          "key": "size",
+          "label": "Диаметр",
+          "value": "16 мм"
+        },
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "3сп(пс)"
+        },
+        {
+          "key": "length",
+          "label": "Длина",
+          "value": "6 м"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Диаметр",
+          "value": "16 мм"
+        },
+        {
+          "name": "Форма поставки",
+          "value": "Пруток"
+        },
+        {
+          "name": "Марка стали",
+          "value": "3сп(пс)"
+        },
+        {
+          "name": "Вес погонного метра",
+          "value": "1,578 кг/м"
+        },
+        {
+          "name": "Фиксированная длина",
+          "value": "6 м"
+        }
+      ],
+      "productTypeId": "type-cat-arm-sub-1",
+      "unit": "ton",
+      "material": "Сталь 3сп(пс)",
+      "standard": "",
+      "availability": "ON_ORDER",
+      "weight": {
+        "value": 1.578,
         "unit": "кг/м"
       }
     },
@@ -1915,6 +2065,81 @@
       "availability": "IN_STOCK",
       "weight": {
         "value": 7.99,
+        "unit": "кг/м"
+      }
+    },
+    {
+      "id": "rebar-a500c-40-bar",
+      "categoryId": "cat-arm",
+      "subcategoryId": "cat-arm-sub-1",
+      "name": "Арматура рифлёная А500С 40 мм, пруток 11,7 м",
+      "slug": "rebar-a500c-40-bar",
+      "sku": "MS-A500C-40-B",
+      "shortDescription": "Арматура рифлёная А500С диаметром 40 мм, пруток 11,7 м, сталь 3сп(пс).",
+      "description": "Вариант рифлёной арматуры А500С диаметром 40 мм в форме «пруток 11,7 м».",
+      "price": 68400,
+      "priceUnit": "за тонну",
+      "inStock": false,
+      "featured": false,
+      "imageUrls": [],
+      "diameterMm": 40,
+      "form": "bar",
+      "steelGrade": "3сп(пс)",
+      "pricePerTon": 68400,
+      "weightPerMeterKg": 9.865,
+      "lengthMeters": 11.7,
+      "sourceProductName": "арматура, 11,7 м",
+      "attributes": [
+        {
+          "key": "material",
+          "label": "Материал",
+          "value": "Сталь 3сп(пс)"
+        },
+        {
+          "key": "size",
+          "label": "Диаметр",
+          "value": "40 мм"
+        },
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "3сп(пс)"
+        },
+        {
+          "key": "length",
+          "label": "Длина",
+          "value": "11,7 м"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Диаметр",
+          "value": "40 мм"
+        },
+        {
+          "name": "Форма поставки",
+          "value": "Пруток"
+        },
+        {
+          "name": "Марка стали",
+          "value": "3сп(пс)"
+        },
+        {
+          "name": "Вес погонного метра",
+          "value": "9,865 кг/м"
+        },
+        {
+          "name": "Фиксированная длина",
+          "value": "11,7 м"
+        }
+      ],
+      "productTypeId": "type-cat-arm-sub-1",
+      "unit": "ton",
+      "material": "Сталь 3сп(пс)",
+      "standard": "",
+      "availability": "ON_ORDER",
+      "weight": {
+        "value": 9.865,
         "unit": "кг/м"
       }
     },
@@ -11535,90 +11760,6 @@
       "steelGrade": "—"
     },
     {
-      "id": "local--684",
-      "categoryId": "cat-arm",
-      "subcategoryId": "cat-arm-sub-1",
-      "productTypeId": "type-cat-arm-sub-1",
-      "name": "Арматура 16х11700 А500С ГОСТ 34028",
-      "slug": "armatura-16x11700-a500s-gost-34028",
-      "sku": "МП--684",
-      "shortDescription": "Длина, мм: 11 700; Номинальный диаметр, мм: 16; Поверхность: Рифленый; Стандарт: ГОСТ 34028; Класс арматуры: А500С",
-      "description": "Арматура 16х11700 А500С ГОСТ 34028. Длина, мм: 11 700; Номинальный диаметр, мм: 16; Поверхность: Рифленый; Стандарт: ГОСТ 34028; Класс арматуры: А500С. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 50400,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 34028",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [
-        "/images/catalog/armatura/main/armatura.jpg"
-      ],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 34028"
-        },
-        {
-          "key": "class",
-          "label": "Класс арматуры",
-          "value": "А500С"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Номинальный диаметр, мм: 16"
-        },
-        {
-          "key": "length",
-          "label": "Длина, мм",
-          "value": "11 700"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Длина, мм",
-          "value": "11 700"
-        },
-        {
-          "name": "Номинальный диаметр, мм",
-          "value": "16"
-        },
-        {
-          "name": "Поверхность",
-          "value": "Рифленый"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 34028"
-        },
-        {
-          "name": "Класс арматуры",
-          "value": "А500С"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Арматура 16х11700 А500С ГОСТ 34028"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 50400,
-      "diameterMm": 16,
-      "weightPerMeterKg": 1.578,
-      "weight": {
-        "value": 1.578,
-        "unit": "кг/м"
-      },
-      "lengthMeters": 11.7,
-      "form": "bar",
-      "steelGrade": "—"
-    },
-    {
       "id": "local-258",
       "categoryId": "cat-trk",
       "subcategoryId": "cat-trk-sub-1",
@@ -12828,250 +12969,6 @@
       }
     },
     {
-      "id": "local-1421",
-      "categoryId": "cat-arm",
-      "subcategoryId": "cat-arm-sub-1",
-      "productTypeId": "type-cat-arm-sub-1",
-      "name": "Арматура 12х11700 А500С ГОСТ 34028",
-      "slug": "armatura-12x11700-a500s-gost-34028",
-      "sku": "МП-1421",
-      "shortDescription": "Длина, мм: 11 700; Номинальный диаметр, мм: 12; Поверхность: Рифленый; Стандарт: ГОСТ 34028; Класс арматуры: А500С",
-      "description": "Арматура 12х11700 А500С ГОСТ 34028. Длина, мм: 11 700; Номинальный диаметр, мм: 12; Поверхность: Рифленый; Стандарт: ГОСТ 34028; Класс арматуры: А500С. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 50850,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 34028",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [
-        "/images/catalog/armatura/main/armatura.jpg"
-      ],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 34028"
-        },
-        {
-          "key": "class",
-          "label": "Класс арматуры",
-          "value": "А500С"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Номинальный диаметр, мм: 12"
-        },
-        {
-          "key": "length",
-          "label": "Длина, мм",
-          "value": "11 700"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Длина, мм",
-          "value": "11 700"
-        },
-        {
-          "name": "Номинальный диаметр, мм",
-          "value": "12"
-        },
-        {
-          "name": "Поверхность",
-          "value": "Рифленый"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 34028"
-        },
-        {
-          "name": "Класс арматуры",
-          "value": "А500С"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Арматура 12х11700 А500С ГОСТ 34028"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 50850,
-      "diameterMm": 12,
-      "weightPerMeterKg": 0.888,
-      "weight": {
-        "value": 0.888,
-        "unit": "кг/м"
-      },
-      "lengthMeters": 11.7,
-      "form": "bar",
-      "steelGrade": "—"
-    },
-    {
-      "id": "local-1555",
-      "categoryId": "cat-arm",
-      "subcategoryId": "cat-arm-sub-1",
-      "productTypeId": "type-cat-arm-sub-1",
-      "name": "Арматура 8 А500С ГОСТ 34028 (бухты)",
-      "slug": "armatura-8-a500s-gost-34028-buxty",
-      "sku": "МП-1555",
-      "shortDescription": "Номинальный диаметр, мм: 8; Поверхность: Рифленый; Стандарт: ГОСТ 34028; Форма поставки: Бухта; Класс арматуры: А500С",
-      "description": "Арматура 8 А500С ГОСТ 34028 (бухты). Номинальный диаметр, мм: 8; Поверхность: Рифленый; Стандарт: ГОСТ 34028; Форма поставки: Бухта; Класс арматуры: А500С. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 53550,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 34028",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 34028"
-        },
-        {
-          "key": "class",
-          "label": "Класс арматуры",
-          "value": "А500С"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Номинальный диаметр, мм: 8"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Номинальный диаметр, мм",
-          "value": "8"
-        },
-        {
-          "name": "Поверхность",
-          "value": "Рифленый"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 34028"
-        },
-        {
-          "name": "Форма поставки",
-          "value": "Бухта"
-        },
-        {
-          "name": "Класс арматуры",
-          "value": "А500С"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Арматура 8 А500С ГОСТ 34028 (бухты)"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 53550,
-      "diameterMm": 8,
-      "weightPerMeterKg": 0.395,
-      "weight": {
-        "value": 0.395,
-        "unit": "кг/м"
-      },
-      "form": "coil",
-      "steelGrade": "—"
-    },
-    {
-      "id": "local-1758",
-      "categoryId": "cat-arm",
-      "subcategoryId": "cat-arm-sub-1",
-      "productTypeId": "type-cat-arm-sub-1",
-      "name": "Арматура 28х11700 А500С ГОСТ 34028",
-      "slug": "armatura-28x11700-a500s-gost-34028",
-      "sku": "МП-1758",
-      "shortDescription": "Длина, мм: 11 700; Номинальный диаметр, мм: 28; Поверхность: Рифленый; Стандарт: ГОСТ 34028; Класс арматуры: А500С",
-      "description": "Арматура 28х11700 А500С ГОСТ 34028. Длина, мм: 11 700; Номинальный диаметр, мм: 28; Поверхность: Рифленый; Стандарт: ГОСТ 34028; Класс арматуры: А500С. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 50400,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 34028",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [
-        "/images/catalog/armatura/main/armatura.jpg"
-      ],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 34028"
-        },
-        {
-          "key": "class",
-          "label": "Класс арматуры",
-          "value": "А500С"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Номинальный диаметр, мм: 28"
-        },
-        {
-          "key": "length",
-          "label": "Длина, мм",
-          "value": "11 700"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Длина, мм",
-          "value": "11 700"
-        },
-        {
-          "name": "Номинальный диаметр, мм",
-          "value": "28"
-        },
-        {
-          "name": "Поверхность",
-          "value": "Рифленый"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 34028"
-        },
-        {
-          "name": "Класс арматуры",
-          "value": "А500С"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Арматура 28х11700 А500С ГОСТ 34028"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 50400,
-      "diameterMm": 28,
-      "weightPerMeterKg": 4.834,
-      "weight": {
-        "value": 4.834,
-        "unit": "кг/м"
-      },
-      "lengthMeters": 11.7,
-      "form": "bar",
-      "steelGrade": "—"
-    },
-    {
       "id": "local-2000",
       "categoryId": "cat-arm",
       "subcategoryId": "cat-arm-sub-1",
@@ -13087,7 +12984,7 @@
       "currency": "RUB",
       "unit": "ton",
       "priceUnit": "за тонну",
-      "material": "",
+      "material": "Сталь 3сп(пс)",
       "standard": "ГОСТ 34028",
       "availability": "UNKNOWN",
       "inStock": false,
@@ -13115,6 +13012,11 @@
           "key": "length",
           "label": "Длина, мм",
           "value": "11 700"
+        },
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "3сп(пс)"
         }
       ],
       "specifications": [
@@ -13153,7 +13055,7 @@
       },
       "lengthMeters": 11.7,
       "form": "bar",
-      "steelGrade": "—"
+      "steelGrade": "3сп(пс)"
     },
     {
       "id": "local-3963",
@@ -13487,7 +13389,7 @@
       "currency": "RUB",
       "unit": "ton",
       "priceUnit": "за тонну",
-      "material": "",
+      "material": "Сталь 3сп(пс)",
       "standard": "ГОСТ 34028",
       "availability": "UNKNOWN",
       "inStock": false,
@@ -13515,6 +13417,11 @@
           "key": "length",
           "label": "Длина, мм",
           "value": "11 700"
+        },
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "3сп(пс)"
         }
       ],
       "specifications": [
@@ -13553,343 +13460,7 @@
       },
       "lengthMeters": 11.7,
       "form": "bar",
-      "steelGrade": "—"
-    },
-    {
-      "id": "local-6340",
-      "categoryId": "cat-arm",
-      "subcategoryId": "cat-arm-sub-1",
-      "productTypeId": "type-cat-arm-sub-1",
-      "name": "Арматура 14х11700 А500С ГОСТ 34028",
-      "slug": "armatura-14x11700-a500s-gost-34028",
-      "sku": "МП-6340",
-      "shortDescription": "Длина, мм: 11 700; Номинальный диаметр, мм: 14; Поверхность: Рифленый; Стандарт: ГОСТ 34028; Класс арматуры: А500С",
-      "description": "Арматура 14х11700 А500С ГОСТ 34028. Длина, мм: 11 700; Номинальный диаметр, мм: 14; Поверхность: Рифленый; Стандарт: ГОСТ 34028; Класс арматуры: А500С. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 50400,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 34028",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [
-        "/images/catalog/armatura/main/armatura.jpg"
-      ],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 34028"
-        },
-        {
-          "key": "class",
-          "label": "Класс арматуры",
-          "value": "А500С"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Номинальный диаметр, мм: 14"
-        },
-        {
-          "key": "length",
-          "label": "Длина, мм",
-          "value": "11 700"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Длина, мм",
-          "value": "11 700"
-        },
-        {
-          "name": "Номинальный диаметр, мм",
-          "value": "14"
-        },
-        {
-          "name": "Поверхность",
-          "value": "Рифленый"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 34028"
-        },
-        {
-          "name": "Класс арматуры",
-          "value": "А500С"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Арматура 14х11700 А500С ГОСТ 34028"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 50400,
-      "diameterMm": 14,
-      "weightPerMeterKg": 1.208,
-      "weight": {
-        "value": 1.208,
-        "unit": "кг/м"
-      },
-      "lengthMeters": 11.7,
-      "form": "bar",
-      "steelGrade": "—"
-    },
-    {
-      "id": "local-6346",
-      "categoryId": "cat-arm",
-      "subcategoryId": "cat-arm-sub-1",
-      "productTypeId": "type-cat-arm-sub-1",
-      "name": "Арматура 18х11700 А500С ГОСТ 34028",
-      "slug": "armatura-18x11700-a500s-gost-34028",
-      "sku": "МП-6346",
-      "shortDescription": "Длина, мм: 11 700; Номинальный диаметр, мм: 18; Поверхность: Рифленый; Стандарт: ГОСТ 34028; Класс арматуры: А500С",
-      "description": "Арматура 18х11700 А500С ГОСТ 34028. Длина, мм: 11 700; Номинальный диаметр, мм: 18; Поверхность: Рифленый; Стандарт: ГОСТ 34028; Класс арматуры: А500С. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 50400,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 34028",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [
-        "/images/catalog/armatura/main/armatura.jpg"
-      ],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 34028"
-        },
-        {
-          "key": "class",
-          "label": "Класс арматуры",
-          "value": "А500С"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Номинальный диаметр, мм: 18"
-        },
-        {
-          "key": "length",
-          "label": "Длина, мм",
-          "value": "11 700"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Длина, мм",
-          "value": "11 700"
-        },
-        {
-          "name": "Номинальный диаметр, мм",
-          "value": "18"
-        },
-        {
-          "name": "Поверхность",
-          "value": "Рифленый"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 34028"
-        },
-        {
-          "name": "Класс арматуры",
-          "value": "А500С"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Арматура 18х11700 А500С ГОСТ 34028"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 50400,
-      "diameterMm": 18,
-      "weightPerMeterKg": 1.998,
-      "weight": {
-        "value": 1.998,
-        "unit": "кг/м"
-      },
-      "lengthMeters": 11.7,
-      "form": "bar",
-      "steelGrade": "—"
-    },
-    {
-      "id": "local-6352",
-      "categoryId": "cat-arm",
-      "subcategoryId": "cat-arm-sub-1",
-      "productTypeId": "type-cat-arm-sub-1",
-      "name": "Арматура 20х11700 А500С ГОСТ 34028",
-      "slug": "armatura-20x11700-a500s-gost-34028",
-      "sku": "МП-6352",
-      "shortDescription": "Длина, мм: 11 700; Номинальный диаметр, мм: 20; Поверхность: Рифленый; Стандарт: ГОСТ 34028; Класс арматуры: А500С",
-      "description": "Арматура 20х11700 А500С ГОСТ 34028. Длина, мм: 11 700; Номинальный диаметр, мм: 20; Поверхность: Рифленый; Стандарт: ГОСТ 34028; Класс арматуры: А500С. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 52200,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 34028",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [
-        "/images/catalog/armatura/main/armatura.jpg"
-      ],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 34028"
-        },
-        {
-          "key": "class",
-          "label": "Класс арматуры",
-          "value": "А500С"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Номинальный диаметр, мм: 20"
-        },
-        {
-          "key": "length",
-          "label": "Длина, мм",
-          "value": "11 700"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Длина, мм",
-          "value": "11 700"
-        },
-        {
-          "name": "Номинальный диаметр, мм",
-          "value": "20"
-        },
-        {
-          "name": "Поверхность",
-          "value": "Рифленый"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 34028"
-        },
-        {
-          "name": "Класс арматуры",
-          "value": "А500С"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Арматура 20х11700 А500С ГОСТ 34028"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 52200,
-      "diameterMm": 20,
-      "weightPerMeterKg": 2.466,
-      "weight": {
-        "value": 2.466,
-        "unit": "кг/м"
-      },
-      "lengthMeters": 11.7,
-      "form": "bar",
-      "steelGrade": "—"
-    },
-    {
-      "id": "local-6359",
-      "categoryId": "cat-arm",
-      "subcategoryId": "cat-arm-sub-1",
-      "productTypeId": "type-cat-arm-sub-1",
-      "name": "Арматура 25х11700 А500С ГОСТ 34028",
-      "slug": "armatura-25x11700-a500s-gost-34028",
-      "sku": "МП-6359",
-      "shortDescription": "Длина, мм: 11 700; Номинальный диаметр, мм: 25; Поверхность: Рифленый; Стандарт: ГОСТ 34028; Класс арматуры: А500С",
-      "description": "Арматура 25х11700 А500С ГОСТ 34028. Длина, мм: 11 700; Номинальный диаметр, мм: 25; Поверхность: Рифленый; Стандарт: ГОСТ 34028; Класс арматуры: А500С. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 50400,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 34028",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [
-        "/images/catalog/armatura/main/armatura.jpg"
-      ],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 34028"
-        },
-        {
-          "key": "class",
-          "label": "Класс арматуры",
-          "value": "А500С"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Номинальный диаметр, мм: 25"
-        },
-        {
-          "key": "length",
-          "label": "Длина, мм",
-          "value": "11 700"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Длина, мм",
-          "value": "11 700"
-        },
-        {
-          "name": "Номинальный диаметр, мм",
-          "value": "25"
-        },
-        {
-          "name": "Поверхность",
-          "value": "Рифленый"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 34028"
-        },
-        {
-          "name": "Класс арматуры",
-          "value": "А500С"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Арматура 25х11700 А500С ГОСТ 34028"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 50400,
-      "diameterMm": 25,
-      "weightPerMeterKg": 3.853,
-      "weight": {
-        "value": 3.853,
-        "unit": "кг/м"
-      },
-      "lengthMeters": 11.7,
-      "form": "bar",
-      "steelGrade": "—"
+      "steelGrade": "3сп(пс)"
     },
     {
       "id": "local-7483",
@@ -13907,7 +13478,7 @@
       "currency": "RUB",
       "unit": "ton",
       "priceUnit": "за тонну",
-      "material": "",
+      "material": "Сталь 3сп(пс)",
       "standard": "ГОСТ 34028",
       "availability": "UNKNOWN",
       "inStock": false,
@@ -13935,6 +13506,11 @@
           "key": "length",
           "label": "Длина, мм",
           "value": "6 000"
+        },
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "3сп(пс)"
         }
       ],
       "specifications": [
@@ -13973,7 +13549,7 @@
       },
       "lengthMeters": 6,
       "form": "bar",
-      "steelGrade": "—"
+      "steelGrade": "3сп(пс)"
     },
     {
       "id": "local-9211",
@@ -14062,258 +13638,6 @@
         "value": 21.21,
         "unit": "кг/м"
       }
-    },
-    {
-      "id": "local-17091",
-      "categoryId": "cat-arm",
-      "subcategoryId": "cat-arm-sub-1",
-      "productTypeId": "type-cat-arm-sub-1",
-      "name": "Арматура 8х6000 А500С ГОСТ 34028",
-      "slug": "armatura-8x6000-a500s-gost-34028",
-      "sku": "МП-17091",
-      "shortDescription": "Длина, мм: 6 000; Номинальный диаметр, мм: 8; Поверхность: Рифленый; Стандарт: ГОСТ 34028; Класс арматуры: А500С",
-      "description": "Арматура 8х6000 А500С ГОСТ 34028. Длина, мм: 6 000; Номинальный диаметр, мм: 8; Поверхность: Рифленый; Стандарт: ГОСТ 34028; Класс арматуры: А500С. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 57600,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 34028",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [
-        "/images/catalog/armatura/main/armatura.jpg"
-      ],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 34028"
-        },
-        {
-          "key": "class",
-          "label": "Класс арматуры",
-          "value": "А500С"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Номинальный диаметр, мм: 8"
-        },
-        {
-          "key": "length",
-          "label": "Длина, мм",
-          "value": "6 000"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Длина, мм",
-          "value": "6 000"
-        },
-        {
-          "name": "Номинальный диаметр, мм",
-          "value": "8"
-        },
-        {
-          "name": "Поверхность",
-          "value": "Рифленый"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 34028"
-        },
-        {
-          "name": "Класс арматуры",
-          "value": "А500С"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Арматура 8х6000 А500С ГОСТ 34028"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 57600,
-      "diameterMm": 8,
-      "weightPerMeterKg": 0.395,
-      "weight": {
-        "value": 0.395,
-        "unit": "кг/м"
-      },
-      "lengthMeters": 6,
-      "form": "bar",
-      "steelGrade": "—"
-    },
-    {
-      "id": "local-17412",
-      "categoryId": "cat-arm",
-      "subcategoryId": "cat-arm-sub-1",
-      "productTypeId": "type-cat-arm-sub-1",
-      "name": "Арматура 22х11700 А500С ГОСТ 34028",
-      "slug": "armatura-22x11700-a500s-gost-34028",
-      "sku": "МП-17412",
-      "shortDescription": "Длина, мм: 11 700; Номинальный диаметр, мм: 22; Поверхность: Рифленый; Стандарт: ГОСТ 34028; Класс арматуры: А500С",
-      "description": "Арматура 22х11700 А500С ГОСТ 34028. Длина, мм: 11 700; Номинальный диаметр, мм: 22; Поверхность: Рифленый; Стандарт: ГОСТ 34028; Класс арматуры: А500С. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 50400,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 34028",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [
-        "/images/catalog/armatura/main/armatura.jpg"
-      ],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 34028"
-        },
-        {
-          "key": "class",
-          "label": "Класс арматуры",
-          "value": "А500С"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Номинальный диаметр, мм: 22"
-        },
-        {
-          "key": "length",
-          "label": "Длина, мм",
-          "value": "11 700"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Длина, мм",
-          "value": "11 700"
-        },
-        {
-          "name": "Номинальный диаметр, мм",
-          "value": "22"
-        },
-        {
-          "name": "Поверхность",
-          "value": "Рифленый"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 34028"
-        },
-        {
-          "name": "Класс арматуры",
-          "value": "А500С"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Арматура 22х11700 А500С ГОСТ 34028"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 50400,
-      "diameterMm": 22,
-      "weightPerMeterKg": 2.984,
-      "weight": {
-        "value": 2.984,
-        "unit": "кг/м"
-      },
-      "lengthMeters": 11.7,
-      "form": "bar",
-      "steelGrade": "—"
-    },
-    {
-      "id": "local-17482",
-      "categoryId": "cat-arm",
-      "subcategoryId": "cat-arm-sub-1",
-      "productTypeId": "type-cat-arm-sub-1",
-      "name": "Арматура 32х11700 А500С ГОСТ 34028",
-      "slug": "armatura-32x11700-a500s-gost-34028",
-      "sku": "МП-17482",
-      "shortDescription": "Длина, мм: 11 700; Номинальный диаметр, мм: 32; Поверхность: Рифленый; Стандарт: ГОСТ 34028; Класс арматуры: А500С",
-      "description": "Арматура 32х11700 А500С ГОСТ 34028. Длина, мм: 11 700; Номинальный диаметр, мм: 32; Поверхность: Рифленый; Стандарт: ГОСТ 34028; Класс арматуры: А500С. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 49500,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 34028",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [
-        "/images/catalog/armatura/main/armatura.jpg"
-      ],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 34028"
-        },
-        {
-          "key": "class",
-          "label": "Класс арматуры",
-          "value": "А500С"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Номинальный диаметр, мм: 32"
-        },
-        {
-          "key": "length",
-          "label": "Длина, мм",
-          "value": "11 700"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Длина, мм",
-          "value": "11 700"
-        },
-        {
-          "name": "Номинальный диаметр, мм",
-          "value": "32"
-        },
-        {
-          "name": "Поверхность",
-          "value": "Рифленый"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 34028"
-        },
-        {
-          "name": "Класс арматуры",
-          "value": "А500С"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Арматура 32х11700 А500С ГОСТ 34028"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 49500,
-      "diameterMm": 32,
-      "weightPerMeterKg": 6.313,
-      "weight": {
-        "value": 6.313,
-        "unit": "кг/м"
-      },
-      "lengthMeters": 11.7,
-      "form": "bar",
-      "steelGrade": "—"
     },
     {
       "id": "local-40706",
@@ -14490,90 +13814,6 @@
         "value": 31.52,
         "unit": "кг/м"
       }
-    },
-    {
-      "id": "local-44188",
-      "categoryId": "cat-arm",
-      "subcategoryId": "cat-arm-sub-1",
-      "productTypeId": "type-cat-arm-sub-1",
-      "name": "Арматура 6х6000 А500С ГОСТ 34028",
-      "slug": "armatura-6x6000-a500s-gost-34028",
-      "sku": "МП-44188",
-      "shortDescription": "Длина, мм: 6 000; Номинальный диаметр, мм: 6; Поверхность: Рифленый; Стандарт: ГОСТ 34028; Класс арматуры: А500С",
-      "description": "Арматура 6х6000 А500С ГОСТ 34028. Длина, мм: 6 000; Номинальный диаметр, мм: 6; Поверхность: Рифленый; Стандарт: ГОСТ 34028; Класс арматуры: А500С. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 56700,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 34028",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [
-        "/images/catalog/armatura/main/armatura.jpg"
-      ],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 34028"
-        },
-        {
-          "key": "class",
-          "label": "Класс арматуры",
-          "value": "А500С"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Номинальный диаметр, мм: 6"
-        },
-        {
-          "key": "length",
-          "label": "Длина, мм",
-          "value": "6 000"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Длина, мм",
-          "value": "6 000"
-        },
-        {
-          "name": "Номинальный диаметр, мм",
-          "value": "6"
-        },
-        {
-          "name": "Поверхность",
-          "value": "Рифленый"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 34028"
-        },
-        {
-          "name": "Класс арматуры",
-          "value": "А500С"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Арматура 6х6000 А500С ГОСТ 34028"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 56700,
-      "diameterMm": 6,
-      "weightPerMeterKg": 0.222,
-      "weight": {
-        "value": 0.222,
-        "unit": "кг/м"
-      },
-      "lengthMeters": 6,
-      "form": "bar",
-      "steelGrade": "—"
     },
     {
       "id": "local-52334",
@@ -15205,90 +14445,6 @@
       }
     },
     {
-      "id": "local-61299",
-      "categoryId": "cat-arm",
-      "subcategoryId": "cat-arm-sub-1",
-      "productTypeId": "type-cat-arm-sub-1",
-      "name": "Арматура 36х11700 А500С ГОСТ 34028",
-      "slug": "armatura-36x11700-a500s-gost-34028",
-      "sku": "МП-61299",
-      "shortDescription": "Длина, мм: 11 700; Номинальный диаметр, мм: 36; Поверхность: Рифленый; Стандарт: ГОСТ 34028; Класс арматуры: А500С",
-      "description": "Арматура 36х11700 А500С ГОСТ 34028. Длина, мм: 11 700; Номинальный диаметр, мм: 36; Поверхность: Рифленый; Стандарт: ГОСТ 34028; Класс арматуры: А500С. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 49950,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 34028",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [
-        "/images/catalog/armatura/main/armatura.jpg"
-      ],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 34028"
-        },
-        {
-          "key": "class",
-          "label": "Класс арматуры",
-          "value": "А500С"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Номинальный диаметр, мм: 36"
-        },
-        {
-          "key": "length",
-          "label": "Длина, мм",
-          "value": "11 700"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Длина, мм",
-          "value": "11 700"
-        },
-        {
-          "name": "Номинальный диаметр, мм",
-          "value": "36"
-        },
-        {
-          "name": "Поверхность",
-          "value": "Рифленый"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 34028"
-        },
-        {
-          "name": "Класс арматуры",
-          "value": "А500С"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Арматура 36х11700 А500С ГОСТ 34028"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 49950,
-      "diameterMm": 36,
-      "weightPerMeterKg": 7.99,
-      "weight": {
-        "value": 7.99,
-        "unit": "кг/м"
-      },
-      "lengthMeters": 11.7,
-      "form": "bar",
-      "steelGrade": "—"
-    },
-    {
       "id": "local-62388",
       "categoryId": "cat-trk",
       "subcategoryId": "cat-trk-sub-2",
@@ -15768,90 +14924,6 @@
       "pricePerTon": 80010,
       "lengthMeters": 12,
       "steelGrade": "С255"
-    },
-    {
-      "id": "local-73160",
-      "categoryId": "cat-arm",
-      "subcategoryId": "cat-arm-sub-1",
-      "productTypeId": "type-cat-arm-sub-1",
-      "name": "Арматура 10х6000 А500С ГОСТ 34028",
-      "slug": "armatura-10x6000-a500s-gost-34028",
-      "sku": "МП-73160",
-      "shortDescription": "Длина, мм: 6 000; Номинальный диаметр, мм: 10; Поверхность: Рифленый; Стандарт: ГОСТ 34028; Класс арматуры: А500С",
-      "description": "Арматура 10х6000 А500С ГОСТ 34028. Длина, мм: 6 000; Номинальный диаметр, мм: 10; Поверхность: Рифленый; Стандарт: ГОСТ 34028; Класс арматуры: А500С. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 53100,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 34028",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [
-        "/images/catalog/armatura/main/armatura.jpg"
-      ],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 34028"
-        },
-        {
-          "key": "class",
-          "label": "Класс арматуры",
-          "value": "А500С"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Номинальный диаметр, мм: 10"
-        },
-        {
-          "key": "length",
-          "label": "Длина, мм",
-          "value": "6 000"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Длина, мм",
-          "value": "6 000"
-        },
-        {
-          "name": "Номинальный диаметр, мм",
-          "value": "10"
-        },
-        {
-          "name": "Поверхность",
-          "value": "Рифленый"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 34028"
-        },
-        {
-          "name": "Класс арматуры",
-          "value": "А500С"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Арматура 10х6000 А500С ГОСТ 34028"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 53100,
-      "diameterMm": 10,
-      "weightPerMeterKg": 0.617,
-      "weight": {
-        "value": 0.617,
-        "unit": "кг/м"
-      },
-      "lengthMeters": 6,
-      "form": "bar",
-      "steelGrade": "—"
     },
     {
       "id": "local-73573",
@@ -18787,90 +17859,6 @@
         "unit": "кг/м"
       },
       "steelGrade": "С255"
-    },
-    {
-      "id": "local-122766",
-      "categoryId": "cat-arm",
-      "subcategoryId": "cat-arm-sub-1",
-      "productTypeId": "type-cat-arm-sub-1",
-      "name": "Арматура 10х12000 А500С ГОСТ 34028",
-      "slug": "armatura-10x12000-a500s-gost-34028",
-      "sku": "МП-122766",
-      "shortDescription": "Длина, мм: 12 000; Номинальный диаметр, мм: 10; Поверхность: Рифленый; Стандарт: ГОСТ 34028; Класс арматуры: А500С",
-      "description": "Арматура 10х12000 А500С ГОСТ 34028. Длина, мм: 12 000; Номинальный диаметр, мм: 10; Поверхность: Рифленый; Стандарт: ГОСТ 34028; Класс арматуры: А500С. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 63000,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 34028",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [
-        "/images/catalog/armatura/main/armatura.jpg"
-      ],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 34028"
-        },
-        {
-          "key": "class",
-          "label": "Класс арматуры",
-          "value": "А500С"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Номинальный диаметр, мм: 10"
-        },
-        {
-          "key": "length",
-          "label": "Длина, мм",
-          "value": "12 000"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Длина, мм",
-          "value": "12 000"
-        },
-        {
-          "name": "Номинальный диаметр, мм",
-          "value": "10"
-        },
-        {
-          "name": "Поверхность",
-          "value": "Рифленый"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 34028"
-        },
-        {
-          "name": "Класс арматуры",
-          "value": "А500С"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Арматура 10х12000 А500С ГОСТ 34028"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 63000,
-      "diameterMm": 10,
-      "weightPerMeterKg": 0.617,
-      "weight": {
-        "value": 0.617,
-        "unit": "кг/м"
-      },
-      "lengthMeters": 12,
-      "form": "bar",
-      "steelGrade": "—"
     },
     {
       "id": "local-125936",

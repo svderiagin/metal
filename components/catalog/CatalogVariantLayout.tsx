@@ -9,7 +9,7 @@ import tableStyles from "./RebarTable.module.css";
 type View = "table" | "card";
 
 // Designation, photo, two specifications, price, two order units, total, action.
-const columnWidths = [11, 13, 9, 10, 11.5, 10, 10, 12.5, 13] as const;
+const columnWidths = [11, 13, 9, 9, 11.25, 11.25, 10, 12.5, 13] as const;
 
 export function CatalogVariantTable({children, designation, specifications, unit,
   quantity = unit ? `Заказ, ${unit}` : "Заказ", secondaryQuantity}: {

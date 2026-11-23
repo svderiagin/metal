@@ -1890,7 +1890,7 @@
       "currency": "RUB",
       "unit": "ton",
       "priceUnit": "за тонну",
-      "material": "",
+      "material": "Сталь 3сп(пс)",
       "standard": "ГОСТ 34028",
       "availability": "UNKNOWN",
       "inStock": false,
@@ -1916,6 +1916,11 @@
           "key": "length",
           "label": "Длина, мм",
           "value": "11 700"
+        },
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "3сп(пс)"
         }
       ],
       "specifications": [
@@ -2240,7 +2245,7 @@
       "currency": "RUB",
       "unit": "ton",
       "priceUnit": "за тонну",
-      "material": "",
+      "material": "Сталь 3сп(пс)",
       "standard": "ГОСТ 34028",
       "availability": "UNKNOWN",
       "inStock": false,
@@ -2266,6 +2271,11 @@
           "key": "length",
           "label": "Длина, мм",
           "value": "11 700"
+        },
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "3сп(пс)"
         }
       ],
       "specifications": [
@@ -2605,7 +2615,7 @@
       "currency": "RUB",
       "unit": "ton",
       "priceUnit": "за тонну",
-      "material": "",
+      "material": "Сталь 3сп(пс)",
       "standard": "ГОСТ 34028",
       "availability": "UNKNOWN",
       "inStock": false,
@@ -2631,6 +2641,11 @@
           "key": "length",
           "label": "Длина, мм",
           "value": "6 000"
+        },
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "3сп(пс)"
         }
       ],
       "specifications": [
@@ -6846,7 +6861,7 @@
       "currency": "RUB",
       "unit": "ton",
       "priceUnit": "за тонну",
-      "material": "",
+      "material": "Сталь 3сп(пс)",
       "standard": "ГОСТ 34028",
       "availability": "UNKNOWN",
       "inStock": false,
@@ -6872,6 +6887,11 @@
           "key": "length",
           "label": "Длина, мм",
           "value": "12 000"
+        },
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "3сп(пс)"
         }
       ],
       "specifications": [

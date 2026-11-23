@@ -27,7 +27,7 @@ export function CatalogOrderInput({
     <label className="block text-sm font-semibold">
       {visibleLabel && <span className="mb-1 block">{visibleLabel}</span>}
       <Input aria-label={label} aria-invalid={invalid || undefined} aria-describedby={statusId} type="text" inputMode="decimal"
-        disabled={disabled} value={value} data-long-value={value.length >= 10 || undefined} onChange={event => {
+        disabled={disabled} value={value} data-long-value={mode === "ton" && value.length >= 10 || undefined} onChange={event => {
           const input = event.target;
           const attempted = input.value;
           if (onChange(attempted) !== false) return;

@@ -11,6 +11,11 @@ export function requiresOfferConfirmation(product: Pick<ProductVariant, "id" | "
   return isDemonstrationProduct(product) && product.priceConfirmed !== true;
 }
 
+// Use the same availability for the storefront, cart and checkout.
+export function storefrontAvailability(availability: ProductVariant["availability"]) {
+  return availability === "IN_STOCK" ? "IN_STOCK" : "ON_ORDER";
+}
+
 export function storefrontVariant(product: ProductVariant): ProductVariant {
   if (!isDemonstrationProduct(product)) return product;
   const description = product.description.replace(" — оригинальная демонстрационная позиция каталога ООО «РВБ».", ".");

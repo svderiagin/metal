@@ -144,5 +144,5 @@ function ProfileSheetItem({variant, shared, view}: {variant: ProfileSheetVariant
     specifications={<CatalogVariantSpecifications items={fields.slice(2)}/>}
     details={<CatalogPositionDetails productName={variant.name} fields={fields}/>}
     price={formatUnitPrice(variant.price, variant.priceUnit)}
-    order={<ProductOrderControls view={view} variant={variant} allowBackorder wholeQuantity showUnit={false}/>}/>;
+    order={<ProductOrderControls view={view} variant={variant} wholeQuantity showUnit={false}/>}/>;
 }

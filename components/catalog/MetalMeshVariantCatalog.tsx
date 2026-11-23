@@ -136,7 +136,7 @@ function MetalMeshItem({variant, view, showUnit}: {variant: MetalMeshVariant; vi
     specifications={<CatalogVariantSpecifications items={fields}/>}
     details={<CatalogPositionDetails productName={variant.name} fields={detailsFields}/>}
     price={formatUnitPrice(variant.price, variant.priceUnit)}
-    order={<ProductOrderControls view={view} variant={variant} showUnit={showUnit} allowBackorder wholeQuantity={requiresWholeMetalMeshQuantity(variant)}/>}/>;
+    order={<ProductOrderControls view={view} variant={variant} showUnit={showUnit} wholeQuantity={requiresWholeMetalMeshQuantity(variant)}/>}/>;
 }
 
 function MeshFilter({label, value, values, onChange}: {
