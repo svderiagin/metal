@@ -1,13 +1,40 @@
 import {test, expect, openProduct, samples, visibleProduct, productPath, openFilters} from "../browser";
 import {getAllProductVariants} from "../../lib/catalog";
+import type {Locator} from "@playwright/test";
+
+test("product tables align their main columns with the rebar table, including secondary listings", async ({page, isMobile}) => {
+  test.skip(isMobile, "Desktop table geometry");
+  await page.setViewportSize({width: 1280, height: 900});
+  const product = getAllProductVariants().find(item => item.id === "profile-pipe-rectangular-40x20x2")!;
+  async function columns(table: Locator) {
+    return table.locator("thead tr").evaluate(row => [...(row as HTMLTableRowElement).cells]
+      .filter((cell, index) => index < 2 || /^(Цена|Сумма|Действие)/u.test(cell.textContent ?? ""))
+      .map(cell => {
+        const rect = cell.getBoundingClientRect();
+        return [Math.round(rect.left), Math.round(rect.width)];
+      }));
+  }
+  await page.goto(productPath(samples.armatura, false));
+  const reference = await columns(page.getByRole("table").first());
+  for (const sample of [product, samples.balka, samples.vgp, samples.profnastil, samples.shveller, samples.ugolok, samples.mesh]) {
+    await page.goto(productPath(sample, false));
+    const tables = page.getByRole("table");
+    expect(await columns(tables.first()), sample.name).toEqual(reference);
+    if (sample === product) {
+      await page.locator("summary").filter({hasText: "Другие позиции"}).click();
+      await expect(tables).toHaveCount(2);
+      expect(await columns(tables.nth(1))).toEqual(reference);
+    }
+  }
+});
 
 const familyColumns = {
   shveller: ["Профиль", "Фото", "Высота × полка", "Длина", "Цена", "Заказ, м"],
   ugolok: ["Полки × толщина, мм", "Фото", "Длина", "Цена", "Заказ, м"],
   kvadrat: ["Сечение, мм", "Фото", "Длина", "Цена", "Заказ, м"],
-  armatura: ["Диаметр, мм", "Фото", "Форма", "Марка стали", "Длина, м", "Цена, ₽/т", "Заказ, м", "Заказ, т"],
-  balka: ["Профиль", "Фото", "Длина, м", "Цена, ₽/т", "Заказ, м", "Заказ, т"],
-  profile: ["Сечение × стенка, мм", "Фото", "Длина, м", "Цена, ₽/м", "Заказ, шт."],
+  armatura: ["Диаметр, мм", "Фото", "Форма", "Длина, м", "Цена, ₽/т", "Заказ, м", "Заказ, т"],
+  balka: ["Профиль", "Фото", "Стандарт", "Длина, м", "Цена, ₽/т", "Заказ, м", "Заказ, т"],
+  profile: ["Размер, мм", "Фото", "Стенка, мм", "Длина, м", "Цена, ₽/т", "Заказ, м", "Заказ, т"],
   vgp: ["Ду × стенка, мм", "Фото", "Наружный Ø, мм", "Длина, м", "Цена, ₽/т", "Заказ, м", "Заказ, т"],
   profnastil: ["Толщина, мм", "Фото", "Цвет / покрытие", "Цена", "Заказ, шт."],
   mesh: ["Ячейка", "Фото", "Проволока", "Размер рулона", "Цена", "Количество"],
@@ -46,11 +73,12 @@ for (const family of ["shveller", "ugolok", "kvadrat", "armatura", "balka", "pro
       const photo = productItem.getByRole("img", {name: product.name, exact: true});
       await expect(photo).toBeVisible();
       if (isTable) {
-        await expect(productItem.getByRole("rowheader")).toHaveText(String(product.diameterMm));
+        await expect(productItem.getByRole("rowheader")).toHaveAccessibleName(String(product.diameterMm));
+        await expect(productItem.getByRole("button", {name: /^Подробности:/})).toBeVisible();
         await expect(productItem.getByRole("cell").first().getByRole("img")).toBeVisible();
       } else {
         await expect(productItem.getByRole("heading", {level: 3})).toHaveText(product.name);
-        await expect(productItem.getByRole("term")).toHaveText(["Диаметр", "Форма", "Марка стали", "Длина", "Цена"]);
+        await expect(productItem.getByRole("term")).toHaveText(["Диаметр", "Форма", "Длина", "Цена"]);
       }
     }
     if (family === "mesh" && !isTable) {
@@ -65,6 +93,15 @@ for (const family of ["shveller", "ugolok", "kvadrat", "armatura", "balka", "pro
     }
     await expect(productItem.getByRole("textbox").first()).toBeVisible();
     await expect(productItem.getByLabel(/^Сумма заказа для/)).toBeVisible();
+    const disclosure = isTable ? productItem.getByRole("button", {name: /^Подробности:/}) : productItem.locator("summary");
+    await disclosure.press("Enter");
+    const panel = isTable ? page.locator(`#${await disclosure.getAttribute("aria-controls")}`) : productItem.locator("details[open]");
+    const fields = panel.locator("dl");
+    await expect(fields).toHaveAccessibleName(`Характеристики товара «${product.name}»`);
+    await expect(fields.getByRole("definition").first()).toBeVisible();
+    if (family === "armatura") await expect(fields.getByText("Марка стали", {exact: true})).toBeVisible();
+    await disclosure.press("Enter");
+    await expect(panel).toBeHidden();
     await query.fill("нет-такого-товара-zzzzzz");
     await expect(page.getByText("Варианты не найдены", {exact: true})).toBeVisible();
     if (family !== "armatura" || product.subcategoryId === "cat-arm-sub-1") {
@@ -141,15 +178,113 @@ test("smooth A1 rebar carries the whole bar count and catalogue length into a pr
     await expect(row.getByRole("term")).toHaveText(["Диаметр", "Форма", "Длина", "Цена"]);
   }
   const meters = row.getByRole("textbox", {name: /^Длина заказа для/});
+  const request = row.getByRole("link", {name: "Запросить цену", exact: true});
+  await expect(request).toBeEnabled();
+  await meters.fill("-1");
+  await expect(meters).toHaveValue("");
+  await expect(row.getByRole("status", {name: "", exact: true})).toBeEmpty();
+  await expect(request).toBeEnabled();
+  await meters.fill("0");
+  await expect(meters).toHaveAttribute("aria-invalid", "true");
+  await expect(row.getByRole("button", {name: "Запросить цену", exact: true})).toBeDisabled();
   await meters.fill("1");
   await expect(row.getByRole("status", {name: "", exact: true})).toHaveText("1 шт.");
   await meters.press("Enter");
   await expect(meters).toHaveValue("11,7");
-  await row.getByRole("link", {name: "Запросить цену", exact: true}).click();
+  await request.click();
   const message = page.getByRole("textbox", {name: /^Что требуется рассчитать\?/});
   await expect(message).toHaveValue(/Общая длина: 11,7 м/);
   await expect(message).toHaveValue(/Вес: 0,0233766 т/);
   await expect(message).toHaveValue(/Количество: 1 шт\./);
+});
+
+test("rebar rejects invalid characters and transfers without changing the quantity or caret", async ({page}) => {
+  const product = getAllProductVariants().find(item => item.id === "rebar-a500c-6-coil")!;
+  await openProduct(page, product);
+  const row = visibleProduct(page, product.id);
+  const meters = row.getByRole("textbox", {name: /^Длина заказа для/});
+  const tons = row.getByRole("textbox", {name: /^Вес заказа в тоннах для/});
+  const add = row.getByRole("button", {name: "В корзину", exact: true});
+  await meters.fill("12345");
+  await meters.evaluate(input => (input as HTMLInputElement).setSelectionRange(1, 1));
+  await meters.press("x");
+  await meters.press("9");
+  await expect(meters).toHaveValue("192345");
+  await meters.evaluate(input => (input as HTMLInputElement).setSelectionRange(1, 3));
+  await meters.press("x");
+  expect(await meters.evaluate(input => {
+    const {selectionStart, selectionEnd} = input as HTMLInputElement;
+    return [selectionStart, selectionEnd];
+  })).toEqual([1, 3]);
+  await tons.fill("0,22");
+  const lengthBeforePaste = await meters.inputValue();
+  for (const text of ["   ", ",", ".", "\n12\n", "12\t"]) {
+    const accepted = await tons.evaluate((field, value) => {
+      const clipboardData = new DataTransfer();
+      clipboardData.setData("text/plain", value);
+      return field.dispatchEvent(new ClipboardEvent("paste", {bubbles: true, cancelable: true, clipboardData}));
+    }, text);
+    expect(accepted).toBe(false);
+  }
+  await expect(tons).toHaveValue("0,22");
+  await expect(meters).toHaveValue(lengthBeforePaste);
+  await expect(add).toBeEnabled();
+  await add.click();
+  await expect(row.getByRole("button", {name: "В корзине", exact: true})).toBeDisabled();
+  for (const [input, key] of [[meters, ","], [tons, "."]] as const) {
+    await input.clear();
+    await input.press(key);
+    await expect(input).toHaveValue("0,");
+    await expect(row.getByRole("button", {name: "Удалить", exact: true})).toHaveCount(0);
+    await expect(row.getByRole("button", {name: "Обновить", exact: true})).toBeDisabled();
+  }
+  await tons.fill("0");
+  await expect(row.getByRole("button", {name: "Удалить", exact: true})).toBeEnabled();
+});
+
+test("rebar uses the unrounded input to choose whole bars", async ({page}) => {
+  const product = getAllProductVariants().find(item => item.id === "rebar-a500c-6-bar")!;
+  await openProduct(page, product);
+  const row = visibleProduct(page, product.id);
+  const meters = row.getByRole("textbox", {name: /^Длина заказа для/});
+  const tons = row.getByRole("textbox", {name: /^Вес заказа в тоннах для/});
+  const status = row.getByRole("status", {name: "", exact: true});
+  await meters.pressSequentially("0,000000");
+  await meters.press("Enter");
+  await expect(meters).toHaveValue("6");
+  await expect(status).toHaveText("1 шт.");
+  await meters.fill("6,001");
+  await expect(status).toHaveText("2 шт.");
+  await meters.press("Enter");
+  await expect(meters).toHaveValue("12");
+  await tons.fill("0,001332");
+  await expect(status).toHaveText("1 шт.");
+  await tons.fill("0,001334");
+  await expect(status).toHaveText("2 шт.");
+  await expect(meters).toHaveValue("12");
+});
+
+test("rebar keeps small quantities visible on focus and distinguishes the exact order limit", async ({page}) => {
+  const product = getAllProductVariants().find(item => item.id === "rebar-a500c-6-coil")!;
+  await openProduct(page, product);
+  const row = visibleProduct(page, product.id);
+  const meters = row.getByRole("textbox", {name: /^Длина заказа для/});
+  const tons = row.getByRole("textbox", {name: /^Вес заказа в тоннах для/});
+  await meters.fill("0,01");
+  await expect(tons).toHaveAttribute("placeholder", "< 0,00001");
+  const placeholderColor = () => tons.evaluate(input => getComputedStyle(input, "::placeholder").color);
+  const unfocusedColor = await placeholderColor();
+  await tons.focus();
+  expect(await placeholderColor()).toBe(unfocusedColor);
+  await meters.fill("4499999,99");
+  await expect(tons).toHaveValue("998,999");
+  await row.getByRole("button", {name: "В корзину", exact: true}).click();
+  await tons.fill("999");
+  await expect(meters).toHaveValue("4500000");
+  await row.getByRole("button", {name: "Обновить", exact: true}).click();
+  await page.reload();
+  await expect(meters).toHaveValue("4500000");
+  await expect(tons).toHaveValue("999");
 });
 
 test("channel section filter contains profile numbers and is independent of length", async ({page}) => {

@@ -188,10 +188,10 @@ test("the rebar table can update from just below the 999 tonne limit to the full
   const tons = row.getByRole("textbox", {name: /^Вес заказа в тоннах/});
   const meters = row.getByRole("textbox", {name: /^Длина заказа/});
   const total = row.getByLabel(/^Сумма заказа/);
-  await tons.fill("998,9999992");
-  await expect(total).toHaveText("73 226 699,94 ₽");
+  await tons.fill("998,999");
+  await expect(total).toHaveText("73 226 626,70 ₽");
   await row.getByRole("button", {name: "В корзину", exact: true}).click();
-  await expect.poll(async () => (await storedItem(page, rebar6.id))?.quantity).toBe(998.9999992);
+  await expect.poll(async () => (await storedItem(page, rebar6.id))?.quantity).toBe(998.999);
   await expect(row.getByRole("button", {name: "В корзине", exact: true})).toBeDisabled();
   await tons.fill("999");
   await expectNumber(meters, 4_500_000);
@@ -201,11 +201,12 @@ test("the rebar table can update from just below the 999 tonne limit to the full
   await update.click();
   await expectMeasurement(page, rebar6.id, 4_500_000, 999, "ton");
 
-  await tons.fill("998,9999999");
+  await tons.fill("998,9984");
+  await expect(tons).toHaveValue("998,998");
   await update.click();
-  await expect.poll(async () => (await storedItem(page, rebar6.id))?.quantity).toBe(998.9999999);
-  await expectNumber(tons, 998.999999);
-  await expect(total).toHaveText("73 226 699,99 ₽");
+  await expect.poll(async () => (await storedItem(page, rebar6.id))?.quantity).toBe(998.998);
+  await expectNumber(tons, 998.998);
+  await expect(total).toHaveText("73 226 553,40 ₽");
   await tons.fill("999");
   await expect(update).toBeEnabled();
   await update.click();
@@ -216,6 +217,24 @@ test("the rebar table can update from just below the 999 tonne limit to the full
   await expect(row.getByRole("button", {name: "В корзине", exact: true})).toBeDisabled();
   await page.goto("/cart");
   await expect(cartRow(page, rebar6.id).getByText("73 226 700,00 ₽", {exact: true})).toBeVisible();
+});
+
+test("corrected rebar quantity stays marked as unsaved until the cart is updated", async ({page}) => {
+  await openProduct(page, rebar6);
+  const row = visibleProduct(page, rebar6.id);
+  const meters = row.getByRole("textbox", {name: /^Длина заказа/});
+  await meters.fill("1");
+  await row.getByRole("button", {name: "В корзину", exact: true}).click();
+  await meters.fill("0,001");
+  await meters.press("Tab");
+  await expect(meters).toHaveValue("0,01");
+  const status = row.getByRole("status", {name: "", exact: true});
+  await expect(status.getByText("Не сохранено", {exact: true})).toBeVisible();
+  await expect(status.getByText("Значение увеличено до минимума 0,01.", {exact: true})).toBeVisible();
+  await row.getByRole("button", {name: "Обновить", exact: true}).click();
+  await expect(row.getByRole("button", {name: "В корзине", exact: true})).toBeDisabled();
+  await expect(status.getByText("Не сохранено", {exact: true})).toHaveCount(0);
+  await expectMeasurement(page, rebar6.id, 0.01, 0.00000222, "meter");
 });
 
 test("an exact half-kopeck rounds up in the measured row, cart and checkout", async ({page, isMobile}) => {
@@ -269,11 +288,12 @@ test("paste accepts locale grouping and rejects ambiguous numbers without losing
   }
   await input.press("Enter");
   await expectMeasurement(page, rebar6.id, 1234.5, 0.274059, "meter");
-  for (const text of ["1,234.56", "1 23,4", "12\n34", "12\t34", "5 кг", "0ю123"]) {
+  for (const text of ["1,234.56", "1 23,4", "12\n34", "12\t34", "5 кг", "0ю123", "  ", ",", ".", "\n42", "42\t", "-3"]) {
     await input.focus();
     await input.press("ControlOrMeta+A");
     await pasteText(input, text);
     await expect(input).toHaveValue("1234,5");
+    await expect(cartRow(page, rebar6.id).locator("[aria-live]").filter({hasText: /\S/u})).toHaveCount(0);
     expect(await input.evaluate(element => {
       const input = element as HTMLInputElement;
       return [input.selectionStart, input.selectionEnd];
@@ -315,6 +335,7 @@ test("rejected replacements restore both selection endpoints and an invalid drop
     return element.dispatchEvent(new DragEvent("drop", {bubbles: true, cancelable: true, dataTransfer}));
   });
   expect(allowedDrop).toBe(false);
+  await expect(cartRow(page, samples.shveller.id).locator("[aria-live]").filter({hasText: /\S/u})).toHaveCount(0);
   await expect(input).toHaveValue("123,45");
   await input.press("Escape");
   await expect(input).toHaveValue("3");
@@ -377,7 +398,7 @@ test("metres and tonnes share exact state and focusing the other field cannot re
   await expect(row.getByText(/203,41\s*₽/)).toBeVisible();
   await fillQuantity(meters, "100,25");
   await tons.click();
-  await expectNumber(tons, 0.022256);
+  await expectNumber(tons, 0.02226);
   await tons.blur();
   await expectMeasurement(page, rebar6.id, 100.25, 0.0222555, "meter");
   await fillQuantity(tons, "0,01");
@@ -386,7 +407,11 @@ test("metres and tonnes share exact state and focusing the other field cannot re
   await fillQuantity(meters, "0,01");
   await meters.press("Enter");
   await expectMeasurement(page, rebar6.id, 0.01, 0.00000222, "meter");
-  await expectNumber(tons, 0.00000222);
+  await tons.focus();
+  await expect(tons).toHaveValue("");
+  await expect(tons).toHaveAttribute("placeholder", "< 0,00001");
+  await tons.blur();
+  await expectMeasurement(page, rebar6.id, 0.01, 0.00000222, "meter");
   await expect(row.getByText(/0,16\s*₽/)).toBeVisible();
 });
 
@@ -403,7 +428,7 @@ for (const [variant, maximumMeters, maximumTons, minimumMeters, minimumTons] of 
     expect((await storedItem(page, variant.id))!.measurement!.meters).toBe(12);
     await meters.press("Enter");
     await expectMeasurement(page, variant.id, maximumMeters, maximumTons, "meter");
-    await expectNumber(tons, maximumTons);
+    await expectNumber(tons, variant === vgp ? 998.999 : maximumTons);
     for (const name of [/^Длина /, /^Масса /]) {
       await expect(row.getByRole("group", {name}).getByRole("button", {name: "Увеличить количество", exact: true})).toBeDisabled();
     }
@@ -419,7 +444,7 @@ for (const [variant, maximumMeters, maximumTons, minimumMeters, minimumTons] of 
     for (const input of [meters, tons]) {await input.focus(); await input.blur();}
     expect(await storedItems(page)).toEqual(capped);
     await fillQuantity(tons, "1000");
-    await expectNumber(tons, maximumTons);
+    await expectNumber(tons, variant === vgp ? 998.999 : maximumTons);
     await expect(row).not.toContainText("Значение ограничено максимумом 999.");
     await tons.press("Enter");
     await expect(row).not.toContainText("Значение ограничено максимумом 999.");
@@ -428,7 +453,8 @@ for (const [variant, maximumMeters, maximumTons, minimumMeters, minimumTons] of 
     await tons.press("Enter");
     await expectMeasurement(page, variant.id, minimumMeters, minimumTons, "ton");
     await expectNumber(meters, minimumMeters);
-    await expectNumber(tons, minimumTons);
+    if (variant === rebar6) await expect(tons).toHaveAttribute("placeholder", "< 0,00001");
+    else await expectNumber(tons, variant === vgp ? 0.008 : 0.00001);
   });
 }
 
@@ -472,6 +498,48 @@ test("VGP rounds either input to whole pipes and steps by one pipe", async ({pag
   await expectMeasurement(page, vgp.id, 24, 0.03072, "ton");
 });
 
+test("cart fixes rebar precision during editing and retains the exact volume on incomplete edits", async ({page}) => {
+  await openCart(page, [measuredItem(rebar6, 12)]);
+  const row = cartRow(page, rebar6.id), meters = metersInput(row), tons = tonsInput(row);
+  await fillQuantity(meters, "");
+  await meters.pressSequentially("0.000000");
+  await expect(meters).toHaveValue("0,01");
+  await meters.press("Enter");
+  await expectMeasurement(page, rebar6.id, 0.01, 0.00000222, "meter");
+  await tons.focus();
+  await pasteText(tons, "0.000000");
+  await expect(tons).toHaveValue("0,00001");
+  await tons.press("Enter");
+  await expectMeasurement(page, rebar6.id, 0.00001 * 1000 / 0.222, 0.00001, "ton");
+  await fillQuantity(tons, "998.9994");
+  await expect(tons).toHaveValue("998,999");
+  await tons.press("Enter");
+  await expectMeasurement(page, rebar6.id, 998.999 * 1000 / 0.222, 998.999, "ton");
+  const saved = await storedItems(page);
+  await fillQuantity(meters, "0,");
+  await expect(meters).not.toHaveAttribute("aria-invalid", "true");
+  await meters.press("Tab");
+  expect(await storedItems(page)).toEqual(saved);
+});
+
+test("cart uses exact rebar stock boundaries before rounding the editable digits", async ({page}) => {
+  const bar = product("rebar-a500c-6-bar");
+  await openCart(page, [measuredItem(bar, 18)]);
+  const row = cartRow(page, bar.id), meters = metersInput(row), tons = tonsInput(row);
+  for (const [input, raw, count] of [
+    [meters, "0,000000", 1], [meters, "6.001", 2],
+    [tons, "0.001332", 1], [tons, "0.001334", 2],
+  ] as const) {
+    await fillQuantity(input, raw);
+    await input.press("Enter");
+    await expectNumber(meters, count * 6);
+    await expectMeasurement(page, bar.id, count * 6, count * 0.001332, input === meters ? "meter" : "ton");
+    await expect(row.getByText(`${count} шт. по 6 м`, {exact: true})).toBeVisible();
+  }
+  await page.reload();
+  await expectMeasurement(page, bar.id, 12, 0.002664, "ton");
+});
+
 for (const legacy of [true, false]) {
   test(`an oversized ${legacy ? "legacy tonne" : "measured"} line remains visible until a valid edit`, async ({page}) => {
     const item: CartItem = legacy ? {productId: rebar6.id, quantity: 1000} : measuredTonneItem(rebar6, 1000);
@@ -483,6 +551,7 @@ for (const legacy of [true, false]) {
     for (const input of [meters, tons]) {
       await input.focus(); await input.blur();
       await input.focus(); await input.pressSequentially("ю"); await input.blur();
+      await fillQuantity(input, "0,"); await input.press("Enter");
     }
     expect(await storedItems(page)).toEqual(before);
     await fillQuantity(meters, "1000");
@@ -639,12 +708,14 @@ test("reload retains both fields and saved pieces, while quote-only pipe data ne
   await page.reload();
   const measured = cartRow(page, rebar6.id), pipe = cartRow(page, rangePipe.id);
   await expectNumber(metersInput(measured), 12.5);
-  await expectNumber(tonsInput(measured), 0.002775);
+  await expectNumber(tonsInput(measured), 0.00278);
   await expect(pipe.getByRole("textbox", {name: /^Количество труб /})).toHaveValue("2");
   await expectNumber(pipe.getByRole("textbox", {name: /^Длина одной трубы /}), 7.5);
   await expect(pipe.getByRole("alert")).toContainText("Цена уточняется");
   await expect(pipe.getByText("Расчёт недоступен", {exact: true})).toBeVisible();
   expect((await storedItem(page, rangePipe.id))!.pieceOrder).toEqual({pieces: 2, lengthMeters: 7.5});
+  for (const field of await pipe.getByRole("textbox").all()) await expect(field).toBeDisabled();
+  await expect(pipe.getByRole("link", {name: "Запросить расчёт"})).toBeVisible();
 });
 
 test("cart removal keeps focus, and clearing all items requires confirmation", async ({page}) => {

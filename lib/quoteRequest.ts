@@ -22,17 +22,22 @@ export type QuoteOrder = {
   tons?: number | null;
   quantity?: number | null;
   unit?: string;
+  requested?: {quantity: number; unit: string};
 };
 
 export function buildQuoteMessage(order: QuoteOrder) {
   const lines = ["Прошу рассчитать поставку:", `Наименование: ${order.product}`];
   const positive = (value: number | null | undefined): value is number => typeof value === "number" && Number.isFinite(value) && value > 0;
   const format = (value: number, digits: number) => new Intl.NumberFormat("ru-RU", {maximumFractionDigits: digits}).format(value);
+  if (order.requested && positive(order.requested.quantity)) {
+    const requested = new Intl.NumberFormat("ru-RU", {maximumSignificantDigits: 21}).format(order.requested.quantity);
+    lines.push(`Запрошенный объём: ${requested} ${order.requested.unit}`);
+  }
   if (positive(order.meters)) lines.push(`Общая длина: ${format(order.meters, 2)} м`);
   if (positive(order.tons)) {
     // Keep the calculated weight consistent with the stated number of stock lengths.
     const wholeLengths = positive(order.meters) && positive(order.quantity) && order.unit === "шт.";
-    lines.push(`Вес: ${format(order.tons, wholeLengths || order.tons < 0.001 ? 9 : 3)} т`);
+    lines.push(`${order.requested ? "Расчётная масса" : "Вес"}: ${format(order.tons, wholeLengths || order.tons < 0.001 ? 9 : 3)} т`);
   }
   if (positive(order.quantity) && order.unit) lines.push(`Количество: ${format(order.quantity, 3)} ${order.unit}`);
   return lines.join("\n");

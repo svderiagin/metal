@@ -1,4 +1,4 @@
-import {createContext, Fragment, useContext, useState, type ReactNode} from "react";
+import {Fragment, useState, type ReactNode} from "react";
 import type {ProductVariant} from "@/types/product";
 import {getProductIllustration} from "@/lib/productPreviewImage";
 import {isDemonstrationProduct} from "@/lib/catalogOffer";
@@ -8,47 +8,36 @@ import {ProductImageViewer} from "./ProductImageViewer";
 import tableStyles from "./RebarTable.module.css";
 
 type View = "table" | "card";
-export type CatalogColumn = {label: string; width: number | readonly number[]; unit?: string; className?: string; visuallyHidden?: boolean};
-const trackCount = 9;
-const TableHeadingSpan = createContext<number | undefined>(undefined);
-const singleQuantitySizes = [
-  {designation: [10, 10, 8], photo: 21, specifications: []},
-  {designation: [10, 10], photo: 17, specifications: [12]},
-  {designation: 14, photo: 13, specifications: [10, 12]},
-] as const;
+type CatalogCardField = {label: string; value: ReactNode};
 
-export function singleQuantityColumns(
-  designation: string, specificationLabels: readonly string[], quantityLabel = "Количество",
-): CatalogColumn[] {
-  const sizes = singleQuantitySizes[specificationLabels.length];
-  return [
-    {label: designation, width: sizes.designation},
-    {label: "Фото", width: sizes.photo},
-    ...specificationLabels.map((label, i) => ({label, width: sizes.specifications[i]})),
-    {label: "Цена", width: 11},
-    {label: quantityLabel, width: [5, 6]},
-    {label: "Сумма", width: 14, className: tableStyles.sumColumn},
-    {label: "Действие", width: 15, visuallyHidden: true},
-  ];
-}
+// Designation, photo, two specifications, price, two order units, total, action.
+const columnWidths = [11, 13, 9, 10, 11.5, 10, 10, 12.5, 13] as const;
 
-export function CatalogVariantTable({children, columns}: {
+export function CatalogVariantTable({children, designation, specifications, price = "Цена",
+  quantity = "Количество", secondaryQuantity}: {
   children: ReactNode;
-  columns: readonly CatalogColumn[];
+  designation: string;
+  specifications: readonly ReactNode[];
+  price?: string;
+  quantity?: string;
+  secondaryQuantity?: string;
 }) {
-  const columnWidths = columns.flatMap(({width}) => width);
-  const designationWidth = columns[0].width;
   return <div className={`${tableStyles.frame} hidden rounded-xl border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-900 xl:block`}>
     <table className={`${tableStyles.table} text-center text-sm`}>
       <colgroup>{columnWidths.map((width, index) => <col key={index} style={{width: `${width}%`}}/>)}</colgroup>
       <thead className="bg-slate-900 text-white">
-        <tr>{columns.map(({label, width, unit, className, visuallyHidden}) => <th key={label} scope="col"
-          colSpan={typeof width === "number" ? undefined : width.length} className={className}>
-          {visuallyHidden ? <span className="sr-only">{label}</span> : label}
-          {unit && <> <span className="whitespace-nowrap">{unit}</span></>}
-        </th>)}</tr>
+        <tr>
+          <th scope="col">{designation}</th>
+          <th scope="col">Фото</th>
+          {specifications.map((label, index) => <th scope="col" key={index} colSpan={specifications.length === 1 ? 2 : undefined}>{label}</th>)}
+          <th scope="col">{price}</th>
+          <th scope="col" colSpan={secondaryQuantity ? undefined : 2}>{quantity}</th>
+          {secondaryQuantity && <th scope="col">{secondaryQuantity}</th>}
+          <th scope="col">Сумма</th>
+          <th scope="col"><span className="sr-only">Действие</span></th>
+        </tr>
       </thead>
-      <tbody><TableHeadingSpan.Provider value={typeof designationWidth === "number" ? undefined : designationWidth.length}>{children}</TableHeadingSpan.Provider></tbody>
+      <tbody>{children}</tbody>
     </table>
   </div>;
 }
@@ -60,24 +49,55 @@ export function renderVariantPhoto(variant: ProductVariant, view: View) {
   return src ? <ProductImageViewer src={src} name={variant.name} presentation={view} framed expanded/> : null;
 }
 
+export function CatalogOrderCard({variant, photo, fields, details, order}: {
+  variant: ProductVariant;
+  photo: ReactNode;
+  fields: readonly CatalogCardField[];
+  details?: ReactNode;
+  order: ReactNode;
+}) {
+  return <article id={`variant-mobile-${variant.id}`}
+    className={`${tableStyles.card} min-w-0 break-words rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-900`}>
+    <div className={photo ? "grid items-center gap-3 @min-[17rem]:grid-cols-[minmax(0,1fr)_8rem]" : undefined}>
+      <h3 className="text-card-title">{variant.name}</h3>
+      {photo && <div className="w-32 max-w-full">{photo}</div>}
+    </div>
+    <dl className="mt-4 grid grid-cols-2 gap-3 text-sm">
+      {fields.map(({label, value}) => <div key={label} className="min-w-0 last:odd:col-span-2">
+        <dt className="text-slate-600 dark:text-slate-400">{label}</dt>
+        <dd className="mt-1 font-medium tabular-nums">{value}</dd>
+      </div>)}
+    </dl>
+    {details}
+    {order}
+  </article>;
+}
+
 export function CatalogVariantLayout({view, variant, name = variant.name, preview,
-  specifications, tableSpecifications, details, detailsId = `variant-details-${variant.id}`, price, priceNote, order}: {
+  specifications, tableSpecifications, details, detailsId = `variant-details-${variant.id}`, price, priceNote, order, cardFields}: {
   view: View;
   variant: ProductVariant;
   name?: string;
   preview?: ReactNode;
   specifications: ReactNode;
-  tableSpecifications: {headingClassName?: string; cells: ReactNode};
+  tableSpecifications: readonly ReactNode[];
   details?: ReactNode;
   detailsId?: string;
   price: ReactNode;
   priceNote?: ReactNode;
   order: ReactNode;
+  cardFields?: readonly CatalogCardField[];
 }) {
   const [detailsOpen, setDetailsOpen] = useState(false);
-  const headingColSpan = useContext(TableHeadingSpan);
   const image = preview ?? renderVariantPhoto(variant, view);
+  const cardDetails = details && <details className={`${tableStyles.detailsDisclosure} mt-3 border-t border-slate-200 text-sm dark:border-slate-700`}>
+    <DetailsSummary className="font-semibold text-slate-600 focus-visible:outline-2 focus-visible:outline-brand-700 dark:text-slate-300 dark:focus-visible:outline-brand-300">
+      Подробнее
+    </DetailsSummary>
+    <div className="pt-2">{details}</div>
+  </details>;
 
+  if (view === "card" && cardFields) return <CatalogOrderCard variant={variant} photo={image} fields={cardFields} details={cardDetails} order={order}/>;
   if (view === "card") return <article id={`variant-mobile-${variant.id}`}
     className={`${tableStyles.card} min-w-0 break-words rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-900`}>
     <h3 className="text-card-title">{name.split(/(×)/u).map((part, index) => <Fragment key={index}>{part}{part === "×" && <wbr/>}</Fragment>)}</h3>
@@ -85,12 +105,7 @@ export function CatalogVariantLayout({view, variant, name = variant.name, previe
       {image && <div className={tableStyles.cardImage}>{image}</div>}
       <div className="min-w-0">{specifications}</div>
     </div>
-    {details && <details className={`${tableStyles.detailsDisclosure} mt-3 border-t border-slate-200 text-sm dark:border-slate-700`}>
-      <DetailsSummary className="font-semibold text-slate-600 focus-visible:outline-2 focus-visible:outline-brand-700 dark:text-slate-300 dark:focus-visible:outline-brand-300">
-        Подробнее
-      </DetailsSummary>
-      <div className="pt-2">{details}</div>
-    </details>}
+    {cardDetails}
     <div className="mt-4 flex flex-wrap items-end justify-between gap-3 border-t border-slate-100 pt-3 dark:border-slate-800">
       <div>
         <strong className="text-xl tabular-nums">{price}</strong>
@@ -102,7 +117,7 @@ export function CatalogVariantLayout({view, variant, name = variant.name, previe
 
   const nameId = `variant-name-${variant.id}`;
   return <><tr id={`variant-${variant.id}`} title={variant.name} className="align-middle">
-    <th scope="row" colSpan={headingColSpan} aria-labelledby={nameId} className={`font-semibold tabular-nums ${tableSpecifications.headingClassName ?? ""}`}>
+    <th scope="row" aria-labelledby={nameId} className="font-semibold tabular-nums">
       <span id={nameId} className="block">{name}</span>
       {details && <button type="button" aria-expanded={detailsOpen} aria-controls={detailsId}
         aria-label={`Подробности: ${variant.name}`} onClick={() => setDetailsOpen(!detailsOpen)}
@@ -111,7 +126,8 @@ export function CatalogVariantLayout({view, variant, name = variant.name, previe
       </button>}
     </th>
     <td>{image ? <div className={tableStyles.rowImage}>{image}</div> : <span aria-hidden="true" className="text-slate-500 dark:text-slate-400">—</span>}</td>
-    {tableSpecifications.cells}
+    {tableSpecifications.map((value, index) => <td key={index} colSpan={tableSpecifications.length === 1 ? 2 : undefined}
+      className="tabular-nums">{value}</td>)}
     <td className="break-words">
       <strong className="font-semibold tabular-nums">{price}</strong>
       {priceNote}
@@ -119,7 +135,7 @@ export function CatalogVariantLayout({view, variant, name = variant.name, previe
     {order}
   </tr>
   {details && <tr id={detailsId} hidden={!detailsOpen} className={tableStyles.detailsRow}>
-    <td colSpan={trackCount} className="p-5">{detailsOpen && details}</td>
+    <td colSpan={columnWidths.length} className="p-5">{detailsOpen && details}</td>
   </tr>}</>;
 }
 

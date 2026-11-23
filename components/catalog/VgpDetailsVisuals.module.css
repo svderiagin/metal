@@ -1,23 +1,22 @@
 .section,
 .pipe,
-.longitudinal,
 .connection {
   --pipe-line: var(--color-brand-700);
   --pipe-fill: var(--color-brand-200);
   --pipe-bore: var(--color-slate-50);
 }
 
-:global(html[data-theme="dark"]) :is(.section, .pipe, .longitudinal, .connection) {
+:global(html[data-theme="dark"]) :is(.section, .pipe, .connection) {
   --pipe-line: var(--color-brand-300);
   --pipe-fill: var(--color-brand-800);
   --pipe-bore: var(--color-slate-950);
 }
 
 .section {
-  --wall: 0.625rem;
+  --wall: 0.25rem;
   position: relative;
-  width: 3.5rem;
-  height: 3.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
   border: 1px solid var(--pipe-line);
   border-radius: 50%;
   background: var(--pipe-fill);
@@ -51,7 +50,6 @@
   font-weight: 600;
 }
 
-.compact { --wall: 0.25rem; width: 2.5rem; height: 2.5rem; }
 .thicker { --wall: 0.375rem; }
 
 .pipe {
@@ -61,24 +59,6 @@
   border-radius: var(--radius-sm);
   background: var(--pipe-fill);
 }
-
-.lengthMark {
-  position: relative;
-  height: 1px;
-  background: var(--pipe-line);
-}
-
-.lengthMark::before,
-.lengthMark::after {
-  content: "";
-  position: absolute;
-  top: -0.1875rem;
-  height: 0.4375rem;
-  border-inline-start: 1px solid var(--pipe-line);
-}
-
-.lengthMark::before { inset-inline-start: 0; }
-.lengthMark::after { inset-inline-end: 0; }
 
 .connection {
   display: flex;

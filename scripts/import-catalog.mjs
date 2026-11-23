@@ -122,7 +122,6 @@ for(const [sourceId,entries] of [...sourceGroups].sort((a,b)=>Number(a[0])-Numbe
  const rebarGrade=category.id==='cat-arm'?clean(name.match(/(?:25Г2С|35ГС|Ст\d[а-яА-Я0-9]*)/u)?.[0]):'';
  if(rebarGrade&&!chars.some(c=>c.slug==='steel_grade'))specificationMap.set('Марка стали',rebarGrade);
  specificationMap.set('Полное обозначение',name);
- const specs=[...specificationMap].map(([name,value])=>({name,value}));
  const get=slug=>clean(chars.find(c=>c.slug===slug)?.value);
  const rawCat=r.admin_sub_categories?.[0]||r.admin_category;
  let family=rawCat&&rawCat.parentId?byId.get(rawCat.id):null;
@@ -149,6 +148,8 @@ for(const [sourceId,entries] of [...sourceGroups].sort((a,b)=>Number(a[0])-Numbe
  if(existingFamily)familyId=existingFamily.id;
  let f=families.find(f=>f.id===familyId);
  if(!f){f={id:familyId,categoryId:category.id,name:familyName,slug:familySlug,shortDescription:'',description:''};families.push(f);}
+ if(f.id==='cat-arm-sub-4')specificationMap.delete('Поверхность');
+ const specs=[...specificationMap].map(([name,value])=>({name,value}));
  const attrs=[];
  const attr=(key,label,value)=>{if(value)attrs.push({key,label,value});};
  attr('material','Материал',clean(r.material)||get('material'));

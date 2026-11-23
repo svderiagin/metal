@@ -29,11 +29,60 @@ export function formatQuantityForInput(value: number, grouped = false, fractionD
   return value > 0 && formatted === "0" ? formatEditableCartQuantity(Number(value.toPrecision(3))) : formatted;
 }
 
+export function measuredTonFractionDigits(value: number) {
+  return value < 0.001 ? 8 : 6;
+}
+
 export function formatMeasuredQuantity(value: number, mode: OrderInputMode, grouped = false) {
   if (mode === "meter") return formatQuantityForInput(value, grouped, 2);
   // A rounded display of 999 would make it impossible to explicitly enter the limit.
   const display = value < MAX_ORDER_TONS ? Math.min(value, MAX_ORDER_TONS - 0.000001) : value;
-  return formatQuantityForInput(display, grouped, value < 0.001 ? 8 : 6);
+  return formatQuantityForInput(display, grouped, measuredTonFractionDigits(value));
+}
+
+export const rebarMinimumMeterEntry = 0.01;
+export const rebarMinimumTonEntry = 0.00001;
+export type DraftPrecision = number | ((amount: number) => number | undefined);
+
+export function productOrderFractionDigits(amount: number) {
+  return amount > 0 && amount < 0.000001 ? undefined : 6;
+}
+
+export function rebarTonFractionDigits(amount: number) {
+  return Math.max(0, 6 - String(Math.trunc(amount)).length);
+}
+
+export function formatRebarOrderTons(tons: number, preserveBelowMaximum = false, grouped = false) {
+  const digits = rebarTonFractionDigits(tons);
+  const formatted = formatQuantityForInput(tons, grouped, digits);
+  if (preserveBelowMaximum && tons < MAX_ORDER_TONS && formatted === String(MAX_ORDER_TONS)) {
+    return formatQuantityForInput(MAX_ORDER_TONS - 10 ** -digits, grouped, digits);
+  }
+  return formatted;
+}
+
+// The caller has already validated the syntax. Keep the exact request when rounding
+// the displayed digits could change the number of stock lengths on the order.
+export function correctDraftPrecision(text: string, precision: DraftPrecision,
+  {minimum = 0, maximum}: {minimum?: number; maximum: number},
+  stockQuantity?: (amount: number) => number | undefined) {
+  const fraction = text.split(",")[1];
+  if (!fraction?.length) return;
+  const amount = Number(text.replace(",", "."));
+  const digitsFor = (quantity: number) => typeof precision === "number" ? precision : precision(quantity);
+  const digits = digitsFor(amount);
+  if (digits === undefined || fraction.length <= digits || amount > maximum) return;
+  const smallestEntry = Number(`1e-${digitsFor(0) ?? digits}`);
+  const substitutedMinimum = amount < smallestEntry ? Math.max(minimum, smallestEntry) : undefined;
+  const adjusted = substitutedMinimum ?? amount;
+  let result = formatQuantityForInput(adjusted, false, digitsFor(adjusted));
+  const shipped = stockQuantity?.(adjusted);
+  if (shipped !== undefined && shipped !== stockQuantity?.(Number(result.replace(",", ".")))) {
+    result = formatQuantityForInput(shipped, false, digitsFor(shipped));
+  }
+  // A subsequent zero must continue the fraction instead of multiplying the replacement by ten.
+  if (digits > 0 && !result.includes(",")) result += "," + "0".repeat(Math.min(2, digits));
+  return {text: result, substitutedMinimum, exactQuantity: shipped !== undefined ? adjusted : substitutedMinimum};
 }
 
 export function normalizeCartQuantityText(value: string) {
@@ -51,7 +100,7 @@ export function normalizeCartQuantityDraft(value: string, selectionStart: number
   } {
   const normalized = normalizeCartQuantityText(value);
   const reject = (message: string) => ({accepted: false, value, selectionStart, selectionEnd, message});
-  if (/[\r\n\t]/u.test(normalized)) return reject("Вставьте одно число без переносов строк и табуляции.");
+  if (/[\r\n\t]/u.test(value)) return reject("Вставьте одно число без переносов строк и табуляции.");
   if (normalized.includes(" ") && !/^\d{1,3}(?: \d{3})+(?:[.,]\d*)?$/u.test(normalized)) {
     return reject("Проверьте число: пробелы допускаются только между группами из трёх цифр.");
   }
@@ -84,13 +133,14 @@ export function normalizeCartQuantityDraft(value: string, selectionStart: number
 
 type QuantityTransfer = {preventDefault(): void} & ({clipboardData: DataTransfer} | {dataTransfer: DataTransfer});
 
-export function quantityTransferHandlers(onReject: (message: string) => void) {
+export function quantityTransferHandlers(onReject?: (message: string) => void) {
   function check(event: QuantityTransfer) {
     const data = "clipboardData" in event ? event.clipboardData : event.dataTransfer;
-    const result = normalizeCartQuantityDraft(data.getData("text/plain"), null, null);
-    if (result.accepted) return;
+    const text = data.getData("text/plain");
+    const result = normalizeCartQuantityDraft(text, null, null);
+    if (result.accepted && /\d/u.test(text)) return;
     event.preventDefault();
-    onReject(result.message ?? "Вставьте одно число.");
+    onReject?.(result.message ?? "Вставьте одно число.");
   }
   return {onPaste: check, onDrop: check};
 }

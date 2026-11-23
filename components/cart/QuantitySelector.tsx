@@ -4,14 +4,15 @@ import {useId, useRef, useState, type MouseEvent} from "react";
 import {Input} from "@/components/ui/Input";
 import {Icon} from "@/components/ui/Icon";
 import {correctOrderQuantity, formatCatalogNumber, parseCatalogNumber, parseOrderQuantity} from "@/lib/catalogNumberInput";
-import {cartMaximumMessage, formatQuantityForInput, normalizeCartQuantityDraft, normalizeCartQuantityText, stepCartQuantity} from "@/lib/cartQuantityInput";
+import {cartMaximumMessage, correctDraftPrecision, formatQuantityForInput, normalizeCartQuantityDraft, normalizeCartQuantityText, quantityTransferHandlers, stepCartQuantity, type DraftPrecision} from "@/lib/cartQuantityInput";
 import styles from "./QuantitySelector.module.css";
 
-type QuantityDraft = {text: string; capped?: boolean};
+type QuantityDraft = {text: string; exact?: number; capped?: boolean};
 
 export function QuantitySelector({value, onChange, whole = false, productName, unit, fieldLabel,
   minimum = whole ? 1 : undefined, maximum = 999, decimalPlaces, step = 1, disabled = false,
-  normalizeQuantity, hasPositiveTotal, formatValue = formatQuantityForInput, wideInput = false}: {
+  normalizeQuantity, hasPositiveTotal, formatValue = formatQuantityForInput, wideInput = false,
+  precision = decimalPlaces, displayThreshold}: {
   value: number;
   onChange: (value: number) => void;
   whole?: boolean;
@@ -21,6 +22,8 @@ export function QuantitySelector({value, onChange, whole = false, productName, u
   minimum?: number;
   maximum?: number;
   decimalPlaces?: number;
+  precision?: DraftPrecision;
+  displayThreshold?: number;
   step?: number;
   disabled?: boolean;
   wideInput?: boolean;
@@ -39,13 +42,14 @@ export function QuantitySelector({value, onChange, whole = false, productName, u
   const composition = useRef<({value: string; draft: QuantityDraft | null} & typeof selection.current) | null>(null);
   const label = `${fieldLabel ? `${fieldLabel}${productName ? ` ${productName}` : ""}`
     : productName ? `Количество ${productName}` : "Количество товара"}${unit ? `, ${unit}` : ""}`;
-  const text = draft?.text ?? formatValue(value, !focused);
   const editableValue = formatValue(value, false);
-  const parsed = draft?.capped ? maximum : parseOrderQuantity(normalizeCartQuantityText(text));
+  const tiny = displayThreshold !== undefined && value > 0 && value < displayThreshold / 2;
+  const text = draft?.text ?? (tiny ? "" : formatValue(value, !focused));
+  const parsed = draft?.exact ?? parseOrderQuantity(normalizeCartQuantityText(text));
   const options = {whole, minimum, maximum, decimalPlaces, formatFeedback: (quantity: number) => formatValue(quantity, true)};
   const invalid = draft === null ? value > maximum + Math.max(1, maximum) * Number.EPSILON * 32
-    : text.trim() !== "" && !isSavedQuantity(parsed) && (parsed === null || parsed <= 0 || parsed > maximum
-      || !!correctOrderQuantity(normalizeCartQuantityText(text), options).message);
+    : text !== "" && text !== "0," && !isSavedQuantity(parsed) && (parsed === null || parsed <= 0 || parsed > maximum
+      || (draft.exact === undefined && !!correctOrderQuantity(text, options).message));
   const current = draft === null ? value : parsed !== null && parsed > 0 ? parsed : value;
   const lowerBound = minimum ?? step;
   const atMinimum = current <= lowerBound + Math.abs(lowerBound) * Number.EPSILON * 32;
@@ -62,26 +66,35 @@ export function QuantitySelector({value, onChange, whole = false, productName, u
   }
 
   function updateDraft(input: HTMLInputElement) {
-    const previous = composition.current ?? {value: text, ...selection.current};
-    // Rejection must not silently clamp a historical order that exceeds a newly applied limit.
-    const previousDraft = normalizeCartQuantityDraft(previous.value, previous.start, previous.end);
+    const previous = composition.current ?? {value: text, draft, ...selection.current};
     const next = normalizeCartQuantityDraft(input.value, input.selectionStart, input.selectionEnd, {
       maximum, formatMaximum: bound => formatValue(bound, false),
     });
-    const restored = previousDraft.accepted ? previousDraft : {
-      value: editableValue, selectionStart: null, selectionEnd: null,
-    };
-    const accepted = next.accepted ? next : restored;
-    const direction = next.accepted ? input.selectionDirection : previous.direction;
-    if (accepted.value !== input.value) {
-      // Synchronous restoration also handles repeated rejected keys without a React state change.
-      input.value = accepted.value;
-      if (document.activeElement === input) input.setSelectionRange(accepted.selectionStart, accepted.selectionEnd, direction ?? undefined);
+    if (!next.accepted || (input.value !== "" && input.value.trim() === "")) {
+      input.value = previous.value;
+      if (document.activeElement === input) input.setSelectionRange(previous.start, previous.end, previous.direction ?? undefined);
+      setDraft(previous.draft);
+      return previous.draft;
     }
-    selection.current = {start: accepted.selectionStart, end: accepted.selectionEnd, direction};
-    const previousState = composition.current ? composition.current.draft : draft;
-    const capped = next.capped || (previousState?.capped && parseOrderQuantity(next.value) === parseOrderQuantity(previousState.text));
-    const nextDraft = next.accepted ? {text: accepted.value, capped} : previousDraft.accepted ? previousState : null;
+    const amount = parseOrderQuantity(next.value);
+    const sameAmount = amount !== null && amount > 0 && amount === parseOrderQuantity(previous.value);
+    const previousExact = previous.draft ? previous.draft.exact : value;
+    const correction = !next.capped && precision !== undefined
+      ? correctDraftPrecision(next.value, precision, options, normalizeQuantity && (q => normalizeQuantity(q)?.value))
+      : undefined;
+    const capped = next.capped || (sameAmount && previous.draft?.capped);
+    const exact = capped || amount === maximum ? maximum
+      : sameAmount && previousExact !== undefined ? previousExact : correction?.exactQuantity;
+    const nextText = correction?.text ?? next.value;
+    const direction = input.selectionDirection;
+    const start = correction ? nextText.length : next.selectionStart;
+    const end = correction ? nextText.length : next.selectionEnd;
+    if (nextText !== input.value) {
+      input.value = nextText;
+      if (document.activeElement === input) input.setSelectionRange(start, end, direction ?? undefined);
+    }
+    selection.current = {start, end, direction};
+    const nextDraft = {text: nextText, capped, exact};
     setDraft(nextDraft);
     setMessage(next.message ?? "");
     return nextDraft;
@@ -89,17 +102,23 @@ export function QuantitySelector({value, onChange, whole = false, productName, u
 
   function commit(direction = 0, candidate = draft) {
     if (disabled || composition.current || (candidate === null && !direction)) return;
+    if (!direction && candidate && (candidate.text === "" || candidate.text === "0,")) {
+      setDraft(null);
+      setMessage("");
+      return;
+    }
     // An untouched displayed measurement may be rounded; the saved value remains authoritative.
-    const raw = candidate?.capped ? formatCatalogNumber(maximum) : normalizeCartQuantityText(candidate?.text ?? editableValue);
+    const raw = candidate?.exact !== undefined ? formatCatalogNumber(candidate.exact)
+      : candidate?.text === "0," ? "" : normalizeCartQuantityText(candidate?.text ?? editableValue);
     const rawQuantity = parseOrderQuantity(raw);
-    const unchanged = isSavedQuantity(rawQuantity);
+    const unchanged = candidate?.exact !== undefined ? candidate.exact === value : isSavedQuantity(rawQuantity);
     if (!direction && unchanged) {setDraft(null); setMessage(""); return;}
     const restoreSaved = isSavedQuantity(value) && (parseCatalogNumber(raw) === null
       || (minimum === undefined && (rawQuantity === null || rawQuantity === 0)));
     const fromSaved = candidate === null || unchanged || restoreSaved;
     const corrected = fromSaved ? {value: formatCatalogNumber(value),
       message: restoreSaved ? `Восстановлено количество ${formatValue(value, true)}.` : undefined} : correctOrderQuantity(raw, {
-      ...options, fallback: value,
+      ...options, decimalPlaces: candidate?.exact !== undefined ? undefined : decimalPlaces, fallback: value,
     });
     let next = parseOrderQuantity(corrected.value);
     const feedbackFor = (result: {message?: string; capped?: boolean}) =>
@@ -138,6 +157,7 @@ export function QuantitySelector({value, onChange, whole = false, productName, u
       ? `Введите количество от ${formatValue(minimum, true)} до ${formatValue(maximum, true)}.`
       : `Введите количество больше 0 и не больше ${formatValue(maximum, true)}.`;
 
+  const transfers = quantityTransferHandlers();
   return <div className={styles.editor}>
     {fieldLabel && <label htmlFor={inputId} className={styles.label}>{fieldLabel}</label>}
     <div className={styles.row}>
@@ -147,6 +167,7 @@ export function QuantitySelector({value, onChange, whole = false, productName, u
           className={`${buttonClass} rounded-l-lg border-r-0`}><Icon name="minus"/></button>
         <Input id={inputId} aria-label={label} aria-invalid={invalid || undefined} aria-describedby={statusId}
           data-cart-input type="text" inputMode={whole ? "numeric" : "decimal"} disabled={disabled} value={text}
+          placeholder={tiny && draft === null ? `< ${formatQuantityForInput(displayThreshold)}` : undefined}
           autoComplete="off" spellCheck={false}
           onFocus={() => setFocused(true)}
           onSelect={event => {
@@ -160,7 +181,7 @@ export function QuantitySelector({value, onChange, whole = false, productName, u
           onCompositionStart={event => {composition.current = {value: text, draft, start: event.currentTarget.selectionStart,
             end: event.currentTarget.selectionEnd, direction: event.currentTarget.selectionDirection};}}
           onChange={event => {
-            if ((event.nativeEvent as InputEvent).isComposing) {setDraft({text: event.currentTarget.value}); setMessage("");}
+            if ((event.nativeEvent as InputEvent).isComposing) setDraft({text: event.currentTarget.value});
             else updateDraft(event.currentTarget);
           }}
           onCompositionEnd={event => {
@@ -172,12 +193,10 @@ export function QuantitySelector({value, onChange, whole = false, productName, u
             }
           }}
           onPaste={event => {
-            const pasted = event.clipboardData.getData("text/plain").trim();
-            const checked = normalizeCartQuantityDraft(pasted, pasted.length, pasted.length, {maximum});
-            if (!checked.accepted) {
-              event.preventDefault();
-              setMessage(checked.message ?? "Проверьте вставляемое число.");
-            } else if (/\s/u.test(pasted)) {
+            transfers.onPaste(event);
+            if (event.defaultPrevented) return;
+            const pasted = event.clipboardData.getData("text/plain");
+            if (/\s/u.test(pasted)) {
               // Validate the clipboard first, then apply grouping removal to the full candidate.
               event.preventDefault();
               const input = event.currentTarget;
@@ -186,11 +205,7 @@ export function QuantitySelector({value, onChange, whole = false, productName, u
               updateDraft(input);
             }
           }}
-          onDrop={event => {
-            const dropped = event.dataTransfer.getData("text/plain").trim();
-            const checked = normalizeCartQuantityDraft(dropped, dropped.length, dropped.length, {maximum});
-            if (!checked.accepted) {event.preventDefault(); setMessage(checked.message ?? "Проверьте вставляемое число.");}
-          }}
+          onDrop={transfers.onDrop}
           onBlur={() => {commit(); setFocused(false);}}
           onKeyDown={event => {
             if (event.nativeEvent.isComposing) return;

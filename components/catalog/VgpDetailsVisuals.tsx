@@ -1,40 +1,15 @@
-import type {ReactNode} from "react";
 import styles from "./VgpDetailsVisuals.module.css";
 
 const guideDrawing = "grid h-12 place-items-center";
 const figureLabel = "text-xs text-slate-600 dark:text-slate-300";
 const figureValue = "text-sm font-semibold tabular-nums text-slate-900 dark:text-slate-100";
 
-function VgpPipeSection({compact = false, thicker = false, showDiameter = false}: {
-  compact?: boolean;
+function VgpPipeSection({thicker = false, showDiameter = false}: {
   thicker?: boolean;
   showDiameter?: boolean;
 }) {
-  return <div aria-hidden="true" className={`${styles.section} ${compact ? styles.compact : ""} ${thicker ? styles.thicker : ""}`}>
+  return <div aria-hidden="true" className={`${styles.section} ${thicker ? styles.thicker : ""}`}>
     {showDiameter && <span className={styles.diameter}><span>Ø</span></span>}
-  </div>;
-}
-
-export function VgpPositionFigures({length}: {length?: ReactNode}) {
-  return <div className={`grid max-w-xs items-start gap-3 text-center ${length ? "grid-cols-2" : "grid-cols-1"}`}>
-    <figure className="min-w-0">
-      <div className="grid h-16 place-items-center"><VgpPipeSection showDiameter/></div>
-      <figcaption className={`mt-2 ${figureLabel}`}>
-        <strong className={`mb-1 block ${figureValue}`}>Сечение</strong>
-        <span className="block">Наружный Ø</span>
-        <span className="block">Кольцо — стенка</span>
-      </figcaption>
-    </figure>
-    {length && <figure className="min-w-0">
-      <div aria-hidden="true" className={`${styles.longitudinal} mx-auto flex h-16 w-5/6 max-w-32 flex-col justify-center gap-2`}>
-        <span className={styles.lengthMark}/>
-        <span className={styles.pipe}/>
-      </div>
-      <figcaption className={`mt-2 ${figureLabel}`}>
-        <strong className={`mb-1 block ${figureValue}`}>Одна труба</strong>
-        <span className={figureValue}>{length}</span>
-      </figcaption>
-    </figure>}
   </div>;
 }
 
@@ -43,7 +18,7 @@ export function VgpDimensionsFigure({className, dimensions}: {
   dimensions: readonly (readonly [label: string, value: string])[];
 }) {
   return <figure aria-label="Размеры на примере из каталога" className={`${className} text-center`}>
-    <div className={guideDrawing}><VgpPipeSection compact showDiameter/></div>
+    <div className={guideDrawing}><VgpPipeSection showDiameter/></div>
     <dl className="mt-2 grid grid-cols-[minmax(0,3fr)_minmax(0,4fr)_minmax(0,3fr)] items-end gap-x-2">
       {dimensions.map(([label, value]) => <div key={label} className="min-w-0">
         <dt className={figureLabel}>{label}</dt>
@@ -57,12 +32,12 @@ export function VgpSeriesFigure({className}: {className: string}) {
   return <figure className={`${className} text-center`}>
     <div className="grid grid-cols-2 gap-2">
       <div className="min-w-0">
-        <div className={guideDrawing}><VgpPipeSection compact/></div>
+        <div className={guideDrawing}><VgpPipeSection/></div>
         <p className={`mt-2 ${figureLabel}`}>Лёгкая</p>
         <p className={figureValue}>2,8 мм</p>
       </div>
       <div className="min-w-0 wrap-anywhere">
-        <div className={guideDrawing}><VgpPipeSection compact thicker/></div>
+        <div className={guideDrawing}><VgpPipeSection thicker/></div>
         <p className={`mt-2 ${figureLabel}`}>Обыкновенная</p>
         <p className={figureValue}>3,2 мм</p>
       </div>

@@ -38,6 +38,15 @@ test('every remaining rebar category retains all rows and supports the reference
   }
 });
 
+test('A240 bars and coils omit the redundant surface field from specifications and descriptions', () => {
+  for (const product of productVariants.filter(p => p.subcategoryId === 'cat-arm-sub-4')) {
+    assert.ok(!product.specifications.some(spec => spec.name === 'Поверхность'), product.id);
+    for (const text of [product.shortDescription, product.description]) {
+      assert.doesNotMatch(text, /поверхность\s*:|рифл/iu, product.id);
+    }
+  }
+});
+
 test('35GS supplier references distinguish bars from coils and require an individual quote', () => {
   const diametersByForm = {
     bar: [6, 8, 10, 14, 16, 18, 22, 25, 28, 32, 36, 40],

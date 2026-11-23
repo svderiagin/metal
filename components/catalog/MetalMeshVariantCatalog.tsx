@@ -15,9 +15,8 @@ import {requiresWholeMetalMeshQuantity} from "@/lib/variantPresentation";
 import {ProductOrderControls} from "./ProductOrderControls";
 import {FilterPanel} from "./FilterPanel";
 import {ResetFiltersButton} from "./ResetFiltersButton";
-import {CatalogVariantLayout, CatalogVariantSpecifications, CatalogVariantTable, singleQuantityColumns} from "./CatalogVariantLayout";
+import {CatalogVariantLayout, CatalogVariantSpecifications, CatalogVariantTable} from "./CatalogVariantLayout";
 import {CatalogPositionDetails} from "./CatalogPositionDetails";
-import {CatalogGuideFigure} from "./CatalogGuideFigure";
 import {formatSpecification, storefrontPositionFields} from "./StorefrontPositionSpecifications";
 
 type SortMode = "name" | "cell-asc" | "price-asc" | "price-desc";
@@ -38,7 +37,6 @@ export function MetalMeshVariantCatalog({variants}: {variants: MetalMeshVariant[
   const wireDiameters = useMemo(() => uniqueValues(variants, "Диаметр проволоки"), [variants]);
   const formatLabels = new Set(variants.map(formatLabel));
   const packageLabel = formatLabels.size === 1 ? formatLabel(variants[0]) : "Формат поставки";
-  const columns = singleQuantityColumns("Ячейка", ["Проволока", packageLabel]);
   const formats = useMemo(() => [...new Set(variants.map(metalMeshFormat))]
     .filter((value) => value !== "—")
     .sort(numericCompare), [variants]);
@@ -98,7 +96,7 @@ export function MetalMeshVariantCatalog({variants}: {variants: MetalMeshVariant[
 
     <section className="min-w-0 lg:col-span-2" aria-label="Сетка металлическая">
       {results.length ? <>
-        <CatalogVariantTable columns={columns}>
+        <CatalogVariantTable designation="Ячейка" specifications={["Проволока", packageLabel]}>
           {results.map(variant => <MetalMeshItem key={variant.id} variant={variant} view="table"/>)}
         </CatalogVariantTable>
         <div className="grid gap-4 sm:grid-cols-2 xl:hidden">
@@ -131,18 +129,11 @@ function MetalMeshItem({variant, view}: {variant: MetalMeshVariant; view: "table
 
   return <CatalogVariantLayout view={view} variant={variant}
     name={cell === "—" ? variant.name : view === "table" ? cellLabel : `Ячейка ${cellLabel}`}
-    tableSpecifications={{cells: <>
-      <td className="tabular-nums">{wire}{coating !== "—" && <span className="block text-xs text-slate-600 dark:text-slate-400">
+    tableSpecifications={[<span key="wire">{wire}{coating !== "—" && <span className="block text-xs text-slate-600 dark:text-slate-400">
         {coating === "Оцинкованная" ? "Цинк" : coating}
-      </span>}</td>
-      <td className="tabular-nums">{format}</td>
-    </>}}
+      </span>}</span>, format]}
     specifications={<CatalogVariantSpecifications items={fields}/>}
-    details={<CatalogPositionDetails title={variant.name} fields={detailsFields}
-      figures={cell !== "—" ? <CatalogGuideFigure diagram={{
-        shape: "mesh", dimensions: [["Ячейка", cell], ...(wire !== "—" ? [["Проволока", wire] as const] : [])],
-      }}/> : undefined}
-      supply={<p>Сверьте единицу продажи с нужным объёмом. Для рулона учитывайте его длину, для карт — размер панели и стыки по схеме укладки.</p>}/>}
+    details={<CatalogPositionDetails productName={variant.name} fields={detailsFields}/>}
     price={formatUnitPrice(variant.price, variant.priceUnit)}
     order={<ProductOrderControls view={view} variant={variant} allowBackorder wholeQuantity={requiresWholeMetalMeshQuantity(variant)}/>}/>;
 }

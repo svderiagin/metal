@@ -69,8 +69,8 @@ function LegacyProfilePipeCatalog({variants, categorySlug}: {variants: ProductVa
   const [open, setOpen] = useState(false);
   useLinkedVariant(variants, () => setOpen(true));
   return <div className="min-w-0 lg:col-span-2">
-    <details open={open} onToggle={event => setOpen(event.currentTarget.open)} className="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-5">
-      <DetailsSummary className="font-semibold">Другие позиции — параметры уточняются</DetailsSummary>
+    <details open={open} onToggle={event => setOpen(event.currentTarget.open)}>
+      <DetailsSummary className="rounded-xl border border-slate-200 bg-white px-5 py-3 font-semibold dark:border-slate-700 dark:bg-slate-900">Другие позиции — параметры уточняются</DetailsSummary>
       {open && <div className="mt-4 flex min-w-0 flex-col gap-4">
         <GenericProductVariantCatalog variants={variants} categorySlug={categorySlug}/>
       </div>}

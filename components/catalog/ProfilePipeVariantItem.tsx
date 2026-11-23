@@ -5,19 +5,24 @@ import {useCart} from "@/hooks/useCart";
 import {Button} from "@/components/ui/Button";
 import {Input} from "@/components/ui/Input";
 import {Icon} from "@/components/ui/Icon";
-import {constrainOrderQuantityInput, correctOrderQuantity, formatCatalogNumber, parseOrderQuantity} from "@/lib/catalogNumberInput";
-import {quantityTransferHandlers} from "@/lib/cartQuantityInput";
+import {correctOrderQuantity, formatCatalogNumber, parseOrderQuantity} from "@/lib/catalogNumberInput";
+import {correctDraftPrecision, formatMeasuredQuantity, measuredTonFractionDigits, normalizeCartQuantityDraft, quantityTransferHandlers} from "@/lib/cartQuantityInput";
 import {formatCurrency, formatUnitPrice} from "@/lib/currency";
 import {formatNumber} from "@/lib/numberFormat";
-import {hasConfirmedProfilePipePrice, profilePipeOrder, profilePipeSize} from "@/lib/profilePipe";
+import {hasConfirmedProfilePipePrice, MAX_PROFILE_PIPE_PIECES, profilePipeMassPerMeter,
+  profilePipeOrder, profilePipeOrderByQuantity, profilePipePricePerTon, profilePipeSize, type ProfilePipeOrderUnit} from "@/lib/profilePipe";
 import type {ProductVariant} from "@/types/product";
+import type {OrderInputMode} from "@/types/cart";
 import {QuoteRequestButton} from "./QuoteRequestButton";
-import {CatalogVariantLayout, CatalogVariantOrder, CatalogVariantSpecifications} from "./CatalogVariantLayout";
+import {CatalogOrderInput} from "./CatalogOrderInput";
+import {CatalogVariantLayout, CatalogVariantOrder} from "./CatalogVariantLayout";
 import {CatalogPositionDetails} from "./CatalogPositionDetails";
-import {CatalogGuideFigure} from "./CatalogGuideFigure";
 import filterStyles from "./FilterPanel.module.css";
 import tableStyles from "./RebarTable.module.css";
 import {useOrderDraft} from "./OrderDraftProvider";
+
+const orderUnits = {piece: "шт.", meter: "м", ton: "т"} as const;
+const maximumPiecesMessage = `Не более ${MAX_PROFILE_PIPE_PIECES} труб за заказ.`;
 
 export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant; view: "table" | "card"}) {
   const {addItem, updatePieceOrder, removeItem, lines, hydrated} = useCart();
@@ -25,36 +30,54 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
   const savedLength = line?.pieceOrder?.lengthMeters ?? variant.lengthMeters;
   const savedPieces = line?.pieceOrder?.pieces ?? (line && savedLength ? line.quantity / savedLength : undefined);
   const {draft, setDraft, message, setMessage} = useOrderDraft<{
-    pieces: string; length: string;
+    quantity: string; length: string; inputUnit: ProfilePipeOrderUnit; settled?: boolean; exactQuantity?: number;
   }, string | undefined>(variant.id, "profile-pipe", undefined);
   const [removed, setRemoved] = useState(false);
-  const piecesText = draft?.pieces ?? (savedPieces === undefined ? "" : String(savedPieces));
+  const mass = profilePipeMassPerMeter(variant);
+  // Existing cart lines are stored as whole pipes with a specific length.
+  const inputUnit = draft?.inputUnit ?? (savedPieces === undefined ? "meter" : "piece");
+  const quantityText = draft?.quantity ?? (savedPieces === undefined ? "" : String(savedPieces));
   const lengthText = draft?.length ?? (savedLength === undefined ? "" : String(savedLength));
-  const pieces = parseOrderQuantity(piecesText);
+  const enteringFraction = quantityText === "0,";
+  const quantity = draft?.exactQuantity ?? (enteringFraction ? null : parseOrderQuantity(quantityText));
   const length = parseOrderQuantity(lengthText);
   const range = variant.lengthRangeMeters;
-  const validPieces = pieces !== null && Number.isSafeInteger(pieces) && pieces > 0 && pieces <= 999 ? pieces : null;
   const validLength = variant.lengthMeters ?? (range && length !== null
     && length >= range[0] && length <= range[1] ? length : undefined);
-  const order = validPieces !== null && validLength !== undefined ? profilePipeOrder(variant, validPieces, validLength) : null;
+  const order = quantity !== null && quantity > 0 && validLength !== undefined
+    ? profilePipeOrderByQuantity(variant, quantity, inputUnit, validLength) : null;
   const confirmedPrice = hasConfirmedProfilePipePrice(variant);
+  const pricePerTon = profilePipePricePerTon(variant);
   const saved = !!line && !line.invalidReason && !!order
     && order.pieces === savedPieces && order.lengthMeters === savedLength;
-  const shouldRemove = !!line && pieces === 0;
+  const shouldRemove = !!line && quantity === 0;
   const label = removed ? "Удалено" : shouldRemove ? "Удалить" : saved
     ? <><Icon name="check"/><span className="whitespace-nowrap">В корзине</span></> : line ? "Обновить" : "В корзину";
   const buttonClass = removed ? filterStyles.removedCartButton : shouldRemove ? filterStyles.removeCartButton
     : saved ? filterStyles.savedCartButton : line ? filterStyles.updateCartButton : filterStyles.cartButton;
   const actionSize = view === "card" ? "w-full" : tableStyles.tableAction;
-  const priceLabel = confirmedPrice ? formatUnitPrice(variant.price, variant.priceUnit) : "Цена уточняется";
-  const totalLabel = !confirmedPrice ? "Цена уточняется" : !order || order.estimatedTotal === null
-    ? range && validLength === undefined ? "Выберите длину" : "Укажите количество" : formatCurrency(order.estimatedTotal);
-  const piecesError = !!piecesText.trim() && !shouldRemove && validPieces === null;
+  const priceLabel = pricePerTon !== undefined ? formatUnitPrice(pricePerTon, "за тонну")
+    : "По запросу";
+  const totalLabel = !confirmedPrice ? priceLabel : !order || order.estimatedTotal === null
+    ? range && validLength === undefined ? "Выберите длину" : "Укажите объём"
+    : formatCurrency(order.estimatedTotal);
+  const piecesError = inputUnit === "piece" && (quantity === null || !Number.isSafeInteger(quantity) || quantity > MAX_PROFILE_PIPE_PIECES);
+  const missingMass = inputUnit === "ton" && mass === null;
+  const exceedsLimit = inputUnit !== "piece" && quantity !== null && quantity > 0 && validLength !== undefined && !order && !missingMass;
+  const quantityError = !!quantityText.trim() && !enteringFraction && !shouldRemove && (piecesError || quantity === null || quantity === 0 || exceedsLimit || missingMass);
   const lengthError = !!range && !!lengthText.trim() && validLength === undefined;
-  const status = message ?? (piecesError ? "Введите целое количество труб от 1 до 999."
-    : lengthError ? `Введите длину от ${formatNumber(range![0])} до ${formatNumber(range![1])} м.`
-      : "");
+  let validationMessage: string | undefined;
+  if (lengthError) validationMessage = `Введите длину от ${formatNumber(range[0])} до ${formatNumber(range[1])} м.`;
+  else if (exceedsLimit) validationMessage = maximumPiecesMessage;
+  else if (missingMass) validationMessage = "Для расчёта по весу нужна масса одного метра трубы.";
+  else if (quantityError) validationMessage = inputUnit === "piece"
+    ? `Введите целое количество труб от 1 до ${MAX_PROFILE_PIPE_PIECES}.` : "Введите объём больше нуля.";
+  else if (range && quantity !== null && quantity > 0 && validLength === undefined) validationMessage = "Укажите длину одной трубы.";
+  const status = validationMessage ?? message;
+  const showUnsaved = !!line && !saved && !shouldRemove && !!order;
   const statusId = `profile-pipe-order-status-${view}-${variant.id}`;
+  const statusSpacing = view === "table" ? "mx-auto mt-1 max-w-32" : "mt-1";
+  const nextDraft = {quantity: quantityText, length: lengthText, inputUnit, settled: draft?.settled, exactQuantity: draft?.exactQuantity};
   const correctedOrder = correctOrderValues().order;
 
   useEffect(() => {
@@ -62,11 +85,6 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
     const timer = window.setTimeout(() => setRemoved(false), 1000);
     return () => window.clearTimeout(timer);
   }, [removed]);
-
-  function correctPiecesValue(rawValue: string) {
-    if (!parseOrderQuantity(rawValue)) return {value: rawValue};
-    return correctOrderQuantity(rawValue, {whole: true, maximum: 999});
-  }
 
   function correctLengthValue(rawValue: string): {value: string; message?: string} {
     if (variant.lengthMeters !== undefined) return {value: formatCatalogNumber(variant.lengthMeters)};
@@ -76,36 +94,49 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
     return {value, message: corrected.capped || corrected.message ? `Длина трубы скорректирована до ${value} м.` : undefined};
   }
 
-  function correctOrderValues(rawPieces = piecesText, rawLength = lengthText) {
-    const nextPieces = correctPiecesValue(rawPieces);
-    const nextLength = correctLengthValue(rawLength);
-    const correctedPieces = parseOrderQuantity(nextPieces.value);
+  function correctOrderValues() {
+    const nextLength = correctLengthValue(lengthText);
     const correctedLength = parseOrderQuantity(nextLength.value);
-    const corrected = correctedPieces !== null && correctedPieces > 0 && correctedLength !== null
-      ? profilePipeOrder(variant, correctedPieces, correctedLength) : null;
-    return {pieces: nextPieces.value, length: nextLength.value, order: corrected,
-      message: [nextPieces.message, nextLength.message].filter(Boolean).join(" ")};
+    const corrected = quantity !== null && quantity > 0 && correctedLength !== null
+      ? profilePipeOrderByQuantity(variant, quantity, inputUnit, correctedLength) : null;
+    return {length: nextLength.value, order: corrected, message: nextLength.message};
   }
 
-  function settlePieces() {
-    const corrected = correctPiecesValue(piecesText);
-    if (corrected.value !== piecesText) setDraft({pieces: corrected.value, length: lengthText});
-    if (corrected.message) setMessage(corrected.message);
+  function measuredValue(mode: OrderInputMode) {
+    const actual = mode === "meter" ? order?.meters : order?.weightTons;
+    if (mode === inputUnit && (!draft?.settled || actual == null)) return quantityText;
+    return actual == null ? "" : formatMeasuredQuantity(actual, mode);
+  }
+
+  function updateMeasuredQuantity(mode: OrderInputMode, value: string) {
+    const unitKey = mode === "meter" ? "meters" : "weightTons";
+    const minimum = profilePipeOrder(variant, 1, validLength)?.[unitKey] ?? undefined;
+    const maximum = profilePipeOrder(variant, MAX_PROFILE_PIPE_PIECES, validLength ?? range?.[1])?.[unitKey] ?? Infinity;
+    const normalized = normalizeCartQuantityDraft(value, null, null, {maximum, formatMaximum: bound => formatMeasuredQuantity(bound, mode)});
+    if (!normalized.accepted || (value !== "" && !value.trim())) return false;
+    const entered = parseOrderQuantity(normalized.value);
+    const sameAmount = entered !== null && entered > 0 && entered === parseOrderQuantity(measuredValue(mode));
+    if (!normalized.capped && order && sameAmount && (mode !== inputUnit || draft?.settled)) return;
+    const correction = normalized.capped ? undefined : correctDraftPrecision(normalized.value, mode === "meter" ? 2 : measuredTonFractionDigits,
+      {minimum, maximum}, amount => profilePipeOrderByQuantity(variant, amount, mode, validLength)?.[unitKey] ?? undefined);
+    setDraft({quantity: correction?.text ?? normalized.value, length: lengthText, inputUnit: mode,
+      exactQuantity: normalized.capped ? maximum : sameAmount && draft?.exactQuantity !== undefined ? draft.exactQuantity : correction?.exactQuantity});
+    setMessage(undefined);
   }
 
   function settleLength() {
     if (!range) return;
     const corrected = correctLengthValue(lengthText);
-    if (corrected.value !== lengthText) setDraft({pieces: piecesText, length: corrected.value});
+    if (corrected.value !== lengthText) setDraft({...nextDraft, length: corrected.value});
     if (corrected.message) setMessage(corrected.message);
   }
 
-  function submit(rawPieces = piecesText, rawLength = lengthText) {
+  function submit() {
     if (!hydrated || removed) return;
-    const corrected = correctOrderValues(rawPieces, rawLength);
-    setDraft({pieces: corrected.pieces, length: corrected.length});
+    const corrected = correctOrderValues();
+    setDraft({...nextDraft, length: corrected.length});
     if (corrected.message) setMessage(corrected.message);
-    if (line && parseOrderQuantity(rawPieces) === 0) {
+    if (line && shouldRemove) {
       removeItem(variant.id); setDraft(null); setMessage(undefined); setRemoved(true); return;
     }
     const nextOrder = corrected.order;
@@ -119,39 +150,33 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
     setMessage(undefined);
   }
 
-  const action = !confirmedPrice && !shouldRemove && !removed ? <QuoteRequestButton label="Запросить цену"
-    order={{product: validLength ? `${variant.name}, длина ${formatNumber(validLength)} м` : variant.name,
-      quantity: validPieces, unit: "шт.", meters: order?.meters ?? null}}
-    className={`${filterStyles.quoteButton} ${actionSize} px-3`}/>
+  const quoteOrder = correctedOrder;
+  const quoteLength = quoteOrder?.lengthMeters ?? validLength;
+  const quoteBlocked = !quoteOrder && (lengthError || !!quantityText.trim());
+  const quoteClassName = `${filterStyles.quoteButton} ${actionSize} px-3`;
+  const action = !confirmedPrice && !shouldRemove && !removed ? quoteBlocked
+    ? <Button type="button" disabled aria-describedby={statusId} className={quoteClassName}>Запросить цену</Button>
+    : <QuoteRequestButton label="Запросить цену"
+    order={{product: quoteLength ? `${variant.name}, длина ${formatNumber(quoteLength)} м` : variant.name,
+      quantity: quoteOrder?.pieces ?? null,
+      unit: "шт.", meters: quoteOrder?.meters ?? null, tons: quoteOrder?.weightTons,
+      requested: quoteOrder && quantity !== null
+        ? {quantity, unit: orderUnits[inputUnit]} : undefined}}
+    className={quoteClassName}/>
     : <Button type="button" onClick={() => submit()}
       disabled={!hydrated || saved || removed || (!shouldRemove && (!correctedOrder || correctedOrder.estimatedTotal === null))}
       className={`${buttonClass} ${actionSize} px-3`}>{label}</Button>;
 
   const inputClassName = `${filterStyles.field} min-w-0 px-2 text-center tabular-nums ${view === "table" ? "max-w-[6.375rem]" : ""}`;
-  const quantityInput = <Input type="text" inputMode="numeric"
-    id={`profile-pieces-${view}-${variant.id}`}
-    aria-label={`Количество целых труб для ${variant.name}`} value={piecesText}
-    aria-invalid={piecesError || undefined}
-    aria-describedby={statusId}
-    {...quantityTransferHandlers(setMessage)}
-    onChange={event => {
-      const next = constrainOrderQuantityInput(event.target.value, 999);
-      setDraft({pieces: next.value, length: lengthText});
-      setMessage(undefined);
-    }}
-    onBlur={settlePieces}
-    onKeyDown={event => {
-      if (event.key === "Enter" && !event.nativeEvent.isComposing) {
-        event.preventDefault();
-        event.currentTarget.blur();
-      }
-    }} className={inputClassName}/>;
   const lengthField = range ? <Input type="text" inputMode="decimal"
     aria-label={`Длина одной трубы для ${variant.name}`} value={lengthText}
     aria-invalid={lengthError || undefined}
     aria-describedby={`${statusId}-range ${statusId}`}
     {...quantityTransferHandlers(setMessage)}
-    onChange={event => {setDraft({pieces: piecesText, length: event.target.value}); setMessage(undefined);}}
+    onChange={event => {
+      setDraft({...nextDraft, length: event.target.value});
+      setMessage(undefined);
+    }}
     onBlur={settleLength}
     onKeyDown={event => {
       if (event.key === "Enter" && !event.nativeEvent.isComposing) {
@@ -161,7 +186,6 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
     }}
     className={inputClassName}/>
     : null;
-  const mass = variant.weightConfirmed && variant.weightPerMeterKg !== undefined ? formatNumber(variant.weightPerMeterKg) : undefined;
   const total = <output data-price={order?.estimatedTotal != null || undefined}
     aria-label={`Сумма заказа для ${variant.name}`} aria-live="polite"
     className={order && order.estimatedTotal !== null
@@ -171,46 +195,50 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
     ?? (variant.lengthMeters === undefined ? undefined : formatNumber(variant.lengthMeters));
   const size = profilePipeSize(variant).replace("×", " × ");
   const thickness = formatNumber(variant.wallThicknessMm!);
-  const dimensionFields = [
-    {label: "Сечение", value: `${size} мм`},
-    {label: "Толщина стенки", value: `${thickness} мм`},
-  ];
   const lengthLabel = lengths === undefined ? "Уточняется" : `${lengths}\u00a0м`;
   const fields = [
-    ...dimensionFields,
+    {label: "Размер профиля", value: `${size} мм`},
+    {label: "Толщина стенки", value: `${thickness} мм`},
     {label: "Длина по каталогу", value: lengthLabel},
-    {label: "Теоретическая масса", value: mass ? `${mass} кг/м` : undefined},
+    {label: "Теоретическая масса", value: mass === null ? undefined : `${formatNumber(mass)} кг/м`},
     {label: "Марка стали", value: variant.steelGrade},
     {label: "Стандарт", value: variant.standard},
   ];
   const lengthControl = lengthField && <label className="block text-sm">
-    {view === "card" && <span className="mb-1 block font-semibold">Длина, м</span>}
     {lengthField}
-    {view === "table" && <span id={`${statusId}-range`} className="mt-1 block text-xs tabular-nums text-slate-600 dark:text-slate-400">{lengthLabel}</span>}
+    <span id={`${statusId}-range`} className="mt-1 block text-xs font-normal tabular-nums text-slate-600 dark:text-slate-400">{lengthLabel}</span>
   </label>;
-  const lengthInOrder = view === "card" && Boolean(range);
-  const piecesField = <div>
-    {view === "card" && <label htmlFor={`profile-pieces-${view}-${variant.id}`} className="mb-1 block text-sm font-semibold">Заказ, шт.</label>}
-    {quantityInput}
-    <p className="mt-1 text-xs text-slate-600 dark:text-slate-400">Заказ, м: <output
-      aria-label={`Заказ в метрах для ${variant.name}`} aria-live="polite" className="tabular-nums">{order ? formatNumber(order.meters) : "—"}</output></p>
-  </div>;
+  function measuredInput(mode: OrderInputMode) {
+    const measuredInTons = mode === "ton";
+    const label = measuredInTons ? "Вес заказа в тоннах" : "Длина заказа";
+    const disabled = measuredInTons && mass === null;
+    return <CatalogOrderInput label={`${label} для ${variant.name}`} value={measuredValue(mode)}
+      visibleLabel={view === "card" ? `Заказ, ${orderUnits[mode]}` : undefined}
+      placeholder={disabled ? "—" : "0"} disabled={disabled}
+      invalid={quantityError && mode === inputUnit} statusId={statusId}
+      onChange={value => updateMeasuredQuantity(mode, value)}
+      onBlur={() => {if (draft && inputUnit === mode && !draft.settled) setDraft({...nextDraft, settled: true});}}/>;
+  }
 
-  return <CatalogVariantLayout view={view} variant={variant} name={view === "table" ? `${size} × ${thickness}` : variant.name}
-    tableSpecifications={{cells: <td className="tabular-nums">{lengthControl ?? lengths ?? "—"}</td>}}
-    specifications={<div id={range ? `${statusId}-range` : undefined}><CatalogVariantSpecifications items={[{label: "Длина", value: lengthLabel}]}/></div>}
-    details={<CatalogPositionDetails title="Характеристики профильной трубы" fields={fields}
-      figures={<CatalogGuideFigure diagram={{shape: variant.profileWidthMm === variant.profileHeightMm ? "square" : "rectangle",
-        dimensions: dimensionFields.map(({label, value}) => [label, value] as const)}}/>}
-      supply={<p>Уточните фактическую длину и марку стали по документам поставки. При заказе по ведомости укажите количество труб каждой длины.</p>}/>}
+  const cardFields = [
+    {label: "Стенка", value: `${thickness}\u00a0мм`},
+    {label: "Длина", value: lengthControl ?? lengthLabel},
+    {label: "Цена", value: priceLabel},
+  ];
+
+  return <CatalogVariantLayout view={view} variant={variant} name={view === "table" ? size : variant.name}
+    tableSpecifications={[thickness, lengthControl ?? lengths ?? "—"]}
+    cardFields={cardFields}
+    specifications={null}
+    details={<CatalogPositionDetails productName={variant.name} fields={fields}/>}
     price={priceLabel}
-    order={<CatalogVariantOrder view={view} quantity={lengthInOrder ? lengthControl : piecesField}
-      secondaryQuantity={lengthInOrder ? piecesField : undefined} action={action} total={total}
-      status={<span id={statusId} className={`mt-1 block text-xs ${piecesError || lengthError
+    order={<CatalogVariantOrder view={view} quantity={measuredInput("meter")}
+      secondaryQuantity={measuredInput("ton")} action={action} total={total}
+      status={<span id={statusId} className={`block text-xs ${statusSpacing} ${quantityError || lengthError
         ? "text-red-700 dark:text-red-400" : "text-slate-500 dark:text-slate-400"}`}
-        aria-live="polite" aria-atomic="true">
-        {!piecesError && validPieces && <span className="block">{validPieces} шт.</span>}
-        {line && !saved && !shouldRemove && <span className="block whitespace-nowrap">Не сохранено</span>}
+        role="status" aria-atomic="true">
+        {order && <span className="block">{order.pieces} шт.</span>}
+        {showUnsaved && <span className="block whitespace-nowrap">Не сохранено</span>}
         {status && <span className="block">{status}</span>}
       </span>}/>}/>;
 }

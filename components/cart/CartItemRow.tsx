@@ -8,7 +8,10 @@ import {formatNumber} from "@/lib/numberFormat";
 import {QuantitySelector} from "./QuantitySelector";
 import {getProductVariantById} from "@/lib/cartCatalog";
 import {calculateLineTotal, calculateMeasuredLineTotal, getCartMeasurementQuantityOptions, requiresWholeLengthOrder, tonsToMeters, wholeLengthOrder} from "@/lib/orderMeasurement";
-import {formatCartQuantity, formatMeasuredQuantity, formatQuantityForInput} from "@/lib/cartQuantityInput";
+import {formatCartQuantity, formatMeasuredQuantity, formatQuantityForInput, formatRebarOrderTons,
+  measuredTonFractionDigits, productOrderFractionDigits, rebarMinimumMeterEntry, rebarMinimumTonEntry, rebarTonFractionDigits} from "@/lib/cartQuantityInput";
+import {isVgpVariant} from "@/lib/pipeFamily";
+import {hasConfirmedProfilePipePrice, isProfilePipeVariant} from "@/lib/profilePipe";
 import {isDemonstrationProduct, requiresOfferConfirmation} from "@/lib/catalogOffer";
 import {CartAmount} from "./CartAmount";
 import styles from "./CartItemRow.module.css";
@@ -22,11 +25,16 @@ export function CartItemRow({line, onRemove}: {line: CartLine; onRemove: () => v
     inputMode: "ton" as const, meters: tonsToMeters(line.quantity, product.weightPerMeterKg!)!, weightTons: line.quantity,
   } : undefined);
   const wholeLengths = !!product && requiresWholeLengthOrder(product);
-  const isBar = product?.categoryId === "cat-arm" && wholeLengths;
+  const isRebar = product?.categoryId === "cat-arm";
+  const isVgp = product && isVgpVariant(product);
+  const tonPrecision = isRebar ? rebarTonFractionDigits : isVgp ? 3 : measuredTonFractionDigits;
+  const simpleRebarMass = isRebar && product.unit === "ton";
+  const isBar = isRebar && wholeLengths;
   const bars = isBar && measurement && !line.invalidReason ? wholeLengthOrder(product, measurement.meters, "meter") : null;
   const meterOptions = product && measurement ? getCartMeasurementQuantityOptions(product, "meter") : undefined;
   const tonOptions = product && measurement ? getCartMeasurementQuantityOptions(product, "ton") : undefined;
-  const priceRequiresQuote = !product || requiresOfferConfirmation(product) || product.price === null || product.quoteOnly || product.priceQualifier === "from";
+  const priceRequiresQuote = !product || requiresOfferConfirmation(product) || product.price === null || product.quoteOnly
+    || product.priceQualifier === "from" || (isProfilePipeVariant(product) && !hasConfirmedProfilePipePrice(product));
   return (
     <article data-cart-row={line.productId} className={`${styles.row} rounded-xl border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-900`}>
       <div className="min-w-0 break-words">
@@ -43,10 +51,10 @@ export function CartItemRow({line, onRemove}: {line: CartLine; onRemove: () => v
       </div>
       <div className={styles.order}>{line.pieceOrder ? (
         <div className="space-y-2">
-          <QuantitySelector whole fieldLabel="Количество труб" productName={line.name} unit="шт." disabled={!product} value={line.pieceOrder.pieces}
+          <QuantitySelector whole fieldLabel="Количество труб" productName={line.name} unit="шт." disabled={priceRequiresQuote} value={line.pieceOrder.pieces}
             onChange={pieces => updatePieceOrder(line.productId, pieces, line.pieceOrder!.lengthMeters)}/>
           {product?.lengthRangeMeters ? <QuantitySelector fieldLabel="Длина одной трубы" productName={line.name} unit="м"
-            minimum={product.lengthRangeMeters[0]} maximum={product.lengthRangeMeters[1]}
+            disabled={priceRequiresQuote} minimum={product.lengthRangeMeters[0]} maximum={product.lengthRangeMeters[1]}
             decimalPlaces={2} formatValue={(quantity, grouped) => formatQuantityForInput(quantity, grouped, 2)}
             value={line.pieceOrder.lengthMeters}
             onChange={length => updatePieceOrder(line.productId, line.pieceOrder!.pieces, length)}/>
@@ -63,10 +71,13 @@ export function CartItemRow({line, onRemove}: {line: CartLine; onRemove: () => v
               productName={line.name} unit={mode === "meter" ? "м" : "т"}
               wideInput
               value={mode === "meter" ? measurement.meters : measurement.weightTons}
-              onChange={quantity => updateQuantity(line.productId, quantity, mode)} disabled={!product || !canConvert}
+              onChange={quantity => updateQuantity(line.productId, quantity, mode)} disabled={priceRequiresQuote || !canConvert}
               {...options}
+              precision={mode === "meter" ? 2 : tonPrecision}
+              displayThreshold={isRebar ? mode === "meter" ? rebarMinimumMeterEntry : rebarMinimumTonEntry : undefined}
               step={wholeLengths ? options?.minimum : mode === "meter" ? 1 : 0.001}
-              formatValue={(quantity, grouped) => formatMeasuredQuantity(quantity, mode, grouped)}
+              formatValue={(quantity, grouped) => mode === "ton" && isRebar ? formatRebarOrderTons(quantity, true, grouped)
+                : mode === "ton" && isVgp ? formatQuantityForInput(quantity, grouped, 3) : formatMeasuredQuantity(quantity, mode, grouped)}
               hasPositiveTotal={canConvert && !priceRequiresQuote ? quantity => (mode === "meter"
                 ? calculateMeasuredLineTotal(quantity, product.weightPerMeterKg!, product.pricePerTon!)
                 : calculateLineTotal(quantity, product.pricePerTon!)) !== null : undefined}
@@ -86,9 +97,12 @@ export function CartItemRow({line, onRemove}: {line: CartLine; onRemove: () => v
         <QuantitySelector fieldLabel={product?.unit === "ton" || product?.unit === "kg" ? "Масса"
           : product?.unit === "meter" ? "Длина" : "Количество"}
           productName={line.name} unit={line.quantityUnit} whole={line.wholeQuantity}
+          precision={line.wholeQuantity ? undefined : simpleRebarMass ? rebarTonFractionDigits : productOrderFractionDigits}
+          displayThreshold={simpleRebarMass ? rebarMinimumTonEntry : undefined}
+          formatValue={simpleRebarMass ? (quantity, grouped) => formatRebarOrderTons(quantity, true, grouped) : undefined}
           step={!line.wholeQuantity && product?.unit === "ton" ? 0.001 : 1}
           hasPositiveTotal={priceRequiresQuote ? undefined : quantity => calculateLineTotal(quantity, product.price!) !== null}
-          disabled={!product} value={line.quantity} onChange={(value) => updateQuantity(line.productId, value)}/>
+          disabled={priceRequiresQuote} value={line.quantity} onChange={(value) => updateQuantity(line.productId, value)}/>
       )}</div>
       <div className={styles.price}>
         <strong className={styles.total}>{line.invalidReason ? "Расчёт недоступен" : <CartAmount>{formatCurrency(line.estimatedTotal)}</CartAmount>}</strong>

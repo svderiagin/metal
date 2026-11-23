@@ -56,6 +56,7 @@ function setup(id, kind = 'beam') {
     '@/lib/cartQuantityInput': readProjectData('lib/cartQuantityInput.ts'),
     '@/lib/catalogOffer': readProjectData('lib/catalogOffer.ts'),
     '@/lib/currency': readProjectData('lib/currency.ts'),
+    '@/lib/constants': readProjectData('lib/constants.ts'),
     '@/lib/numberFormat': readProjectData('lib/numberFormat.ts'),
     '@/hooks/useCart': {useCart: () => cart},
     '@/components/ui/Button': {Button: 'button'},
@@ -64,18 +65,23 @@ function setup(id, kind = 'beam') {
     '@/components/ui/DetailsSummary': {DetailsSummary: 'summary'},
     './QuoteRequestButton': {QuoteRequestButton: 'quote'},
     './CatalogVariantLayout': {
-      renderVariantPhoto: () => null,
       CatalogVariantLayout: ({specifications, order}) => jsx('row', {children: [specifications, order]}),
       CatalogVariantSpecifications: 'specifications',
       CatalogVariantOrder: ({quantity, secondaryQuantity, action, total}) => jsx('order', {children: [quantity, secondaryQuantity, total, action]}),
     },
     './CatalogPositionDetails': {CatalogPositionDetails: 'details'},
-    './CatalogGuideFigure': {CatalogGuideFigure: 'figure'},
     './PipePositionDetails': {PipePositionDetails: 'details'},
     './ProfilePipeVariantItem': {ProfilePipeVariantItem: () => null},
     './FilterPanel.module.css': {default: {}}, './RebarTable.module.css': {default: {}},
   };
   const testModule = {exports: {}};
+  const inputModule = {exports: {}};
+  const inputSource = ts.transpileModule(fs.readFileSync('components/catalog/CatalogOrderInput.tsx', 'utf8'), {
+    compilerOptions: {module: ts.ModuleKind.CommonJS, jsx: ts.JsxEmit.ReactJSX},
+  }).outputText;
+  vm.runInNewContext(inputSource, {module: inputModule, exports: inputModule.exports,
+    require: name => {assert.ok(name in imports, name); return imports[name];}});
+  imports['./CatalogOrderInput'] = inputModule.exports;
   const source = ts.transpileModule(fs.readFileSync('components/catalog/MeasuredVariantItem.tsx', 'utf8'), {
     compilerOptions: {module: ts.ModuleKind.CommonJS, jsx: ts.JsxEmit.ReactJSX},
   }).outputText;
@@ -92,7 +98,9 @@ function setup(id, kind = 'beam') {
     const total = tree.find(n => n.type === 'output').props.children;
     return {inputs: tree.filter(n => n.type === 'input').map(n => n.props), action, actionText, total};
   }
-  return {cart, timers, render, change(index, value) {render().inputs[index].onChange({target: {value}});}};
+  return {cart, timers, render, change(index, value) {
+    render().inputs[index].onChange({target: {value, selectionEnd: value.length, setSelectionRange() {}}});
+  }};
 }
 
 test('beam reference table converts, adds, replaces and deletes a measured order', () => {
@@ -173,6 +181,31 @@ test('existing generic tonne carts hydrate into measured controls and rebar keep
   assert.equal(r.render().inputs[1].value, '0,0222');
   r.render().action.onClick();
   assert.ok(Math.abs(r.cart.lines[0].measurement.weightTons - 0.0222) < 1e-12);
+  r.change(1, '0,000000');
+  assert.equal(r.render().inputs[1].value, '0,00001');
+  r.change(1, '1,2,3');
+  assert.equal(r.render().inputs[1].value, '0,00001');
+  r.change(1, '0.012345');
+  assert.equal(r.render().inputs[1].value, '0,01235');
+  r.change(1, '12,34567');
+  assert.equal(r.render().inputs[1].value, '12,3457');
+  r.change(1, '999,001');
+  assert.equal(r.render().inputs[1].value, '999');
+  r.change(0, '16.235');
+  assert.equal(r.render().inputs[0].value, '16,24');
+  r.change(0, '0,000000');
+  assert.equal(r.render().inputs[0].value, '0,01');
+  r.change(0, '16,2,3');
+  assert.equal(r.render().inputs[0].value, '0,01');
+  const bar = setup('rebar-a500c-18-bar', 'rebar');
+  bar.change(0, '0,000000');
+  assert.equal(bar.render().inputs[0].value, '11,7');
+  bar.change(0, '0');
+  bar.change(1, '0,000000');
+  assert.equal(bar.render().inputs[0].value, '11,7');
+  assert.match(bar.render().inputs[1].value, /^0,\d{1,5}$/u);
+  bar.render().action.onClick();
+  assert.equal(bar.cart.lines[0].measurement.meters, 11.7);
 });
 
 test('VGP orders round up to whole pipes, retain exact mass and update or remove one cart line', () => {

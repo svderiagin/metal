@@ -11,9 +11,7 @@
 }
 
 .table {
-  /* Общие параметры всех товарных таблиц; состав и ширина колонок задаются по категории. */
   --cell-padding-x: 0.5rem;
-  --edge-padding-x: 1rem;
   --heading-padding-y: 0.75rem;
   --cell-padding-y: 0.75rem;
   --control-height: 2.875rem;
@@ -73,9 +71,6 @@
 
 .table > tbody > tr.detailsRow > td { background: var(--details-surface); }
 
-.sizeColumn { --edge-padding-x: var(--cell-padding-x); }
-.vgpDiameterColumn > span { display: block; }
-
 .detailsButton {
   display: inline-grid;
   min-block-size: 2rem;
@@ -106,21 +101,14 @@
   border-bottom-right-radius: calc(var(--radius-xl) - 1px);
 }
 
-.table > tbody > tr > :is(th[scope="row"], td:not([colspan])) {
+.table > tbody > tr:not(.detailsRow) > :is(th, td) {
   padding: var(--cell-padding-y) var(--cell-padding-x);
 }
 
-.table > :is(thead, tbody) > tr > :is(th, td:not([colspan])):first-child {
-  padding-inline-start: var(--edge-padding-x);
+.table .quantityCell[colspan] > :is(input, span) {
+  max-inline-size: 8.75rem;
+  margin-inline: auto;
 }
-
-.table > :is(thead, tbody) > tr > :is(th, td):last-child:not([colspan]) {
-  padding-inline-end: var(--edge-padding-x);
-}
-
-.table .quantityCell { padding: var(--cell-padding-y) var(--cell-padding-x); }
-
-.quantityCell > span:has(input) { max-inline-size: 8rem; margin-inline: auto; }
 
 .table td :is(input, select) {
   min-height: var(--control-height);

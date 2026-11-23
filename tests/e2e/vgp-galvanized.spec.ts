@@ -10,10 +10,10 @@ test("galvanized VGP shows audited facts and converts length and mass while typi
   const row = visibleProduct(page, product.id);
   await expect(row).toContainText("33,5");
   await expect(row).toContainText("25 × 2,8");
-  await expect(row).not.toContainText("Лёгкая");
+  await expect(row.getByText("Лёгкая", {exact: true})).toBeHidden();
   if (isMobile) {
     await expect(row.getByText("7,8 м (±150 мм)", {exact: true})).toBeVisible();
-    await expect(row.getByText("2,18 кг/м", {exact: true})).toHaveCount(0);
+    await expect(row.getByText("2,18 кг/м", {exact: true})).toBeHidden();
   } else {
     const table = row.locator("xpath=ancestor::table");
     await expect(table.getByRole("columnheader", {name: "Ду × стенка, мм", exact: true})).toBeVisible();
@@ -24,7 +24,7 @@ test("galvanized VGP shows audited facts and converts length and mass while typi
   const detailsButton = isMobile ? row.locator("summary") : row.getByRole("button", {name: /^Подробности:/});
   await detailsButton.click();
   const details = isMobile ? row.locator("details") : page.locator(`#${await detailsButton.getAttribute("aria-controls")}`);
-  await expect(details).toContainText("Допуск ±150 мм указан поставщиком");
+  await expect(details.getByText("Допуск длины по данным поставщика", {exact: true}).locator("..").locator("dd")).toHaveText("±150 мм");
   await expect(details).not.toContainText(/2,1836|2,184/);
   await detailsButton.click();
   const meters = row.getByRole("textbox", {name: /^Длина заказа для/});
@@ -90,7 +90,9 @@ test("ordinary VGP searches by size, filters by series and adds whole pipes to t
   await page.goto("/cart");
   const cart = page.locator(`[data-cart-row="${ordinary.id}"]`);
   await expect(cart.getByRole("textbox", {name: /^Длина /})).toHaveValue("12");
-  await expect(cart.getByRole("textbox", {name: /^Масса /})).toHaveValue("0,01536");
+  await expect(cart.getByRole("textbox", {name: /^Масса /})).toHaveValue("0,015");
+  const items = await page.evaluate(() => JSON.parse(localStorage.getItem("metal-store-cart-v1") ?? "[]"));
+  expect(items).toMatchObject([{productId: ordinary.id, measurement: {weightTons: expect.closeTo(0.01536, 12)}}]);
   await expect(cart).toContainText(/823,91/);
 });
 

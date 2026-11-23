@@ -10,7 +10,7 @@ import type {ProductVariant} from "@/types/product";
 import {QuoteRequestButton} from "./QuoteRequestButton";
 import {formatQuoteProductName} from "@/lib/quoteRequest";
 import {constrainOrderQuantityInput, correctOrderQuantity, parseOrderQuantity} from "@/lib/catalogNumberInput";
-import {formatQuantityForInput, quantityTransferHandlers} from "@/lib/cartQuantityInput";
+import {formatQuantityForInput, productOrderFractionDigits, quantityTransferHandlers} from "@/lib/cartQuantityInput";
 import {calculateLineTotal} from "@/lib/orderMeasurement";
 import {formatCurrency} from "@/lib/currency";
 import {CatalogVariantOrder, CatalogVariantQuantity} from "./CatalogVariantLayout";
@@ -60,7 +60,7 @@ export function ProductOrderControls({variant, view, showUnit = true, allowBacko
     const numeric = chosenQuantity(rawValue);
     if (numeric === null || numeric === 0) return {value: rawValue};
     if (numeric === line?.quantity && numeric <= 999 && (!wholeQuantity || Number.isInteger(numeric))) return {value: savedValue};
-    const corrected = correctOrderQuantity(rawValue, {whole: wholeQuantity, maximum: 999, decimalPlaces: numeric >= 0.000001 ? 6 : undefined});
+    const corrected = correctOrderQuantity(rawValue, {whole: wholeQuantity, maximum: 999, decimalPlaces: productOrderFractionDigits(numeric)});
     return {...corrected, value: corrected.value.replace(".", ",")};
   }
 

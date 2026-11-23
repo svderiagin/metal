@@ -4,17 +4,16 @@ import {MeasuredVariantItem} from "./MeasuredVariantItem";
 
 import {beamProfile, beamKind, beamReferenceMassKg, beamTableNames} from "@/lib/beam";
 import {vgpSize, vgpSeries} from "@/lib/vgp";
-import {hasConfirmedProfilePipePrice, profilePipeSize} from "@/lib/profilePipe";
+import {profilePipePricePerTon, profilePipeSize} from "@/lib/profilePipe";
 import {isGalvanizedElectroweldedVariant} from "@/lib/pipeFamily";
 import {formatNumber} from "@/lib/numberFormat";
 import {isDemonstrationProduct} from "@/lib/catalogOffer";
 import {requiresWholeLengthOrder} from "@/lib/orderMeasurement";
 
 import {FilterPanel} from "./FilterPanel";
-import {CatalogVariantTable, type CatalogColumn} from "./CatalogVariantLayout";
+import {CatalogVariantTable} from "./CatalogVariantLayout";
 import {PriceRangeFeedback, PriceRangeInputs, useCatalogPriceRange} from "./PriceInput";
 import {ResetFiltersButton} from "./ResetFiltersButton";
-import tableStyles from "./RebarTable.module.css";
 
 import {createCatalogSearchIndex} from "@/lib/search";
 import {useDeferredValue, useMemo, useState} from "react";
@@ -40,60 +39,13 @@ type SortMode =
   | "weight-asc"
   | "weight-desc";
 
-function tonneOrderColumns({price = 11, tons = 10, total = 14, action = 15} = {}): CatalogColumn[] {
-  return [
-    {label: "Цена, ₽/т", width: price},
-    {label: "Заказ, м", width: 10},
-    {label: "Заказ, т", width: tons},
-    {label: "Сумма", width: total, className: tableStyles.sumColumn},
-    {label: "Действие", width: action, visuallyHidden: true},
-  ];
-}
-
-const vgpColumns = [
-  {label: "Ду × стенка, мм", width: 13, className: tableStyles.sizeColumn},
-  {label: "Фото", width: 13},
-  {label: "Наружный", unit: "Ø, мм", width: 8, className: tableStyles.vgpDiameterColumn},
-  {label: "Длина, м", width: 7.25},
-  ...tonneOrderColumns({tons: 10.25, total: 13.5, action: 14}),
-] as const;
-
-function measuredColumns(designation: string, specification: string): CatalogColumn[] {
-  return [
-    {label: designation, width: [9, 7]},
-    {label: "Фото", width: 13},
-    {label: specification, width: 11},
-    ...tonneOrderColumns(),
-  ];
-}
-
-function rebarColumns(showSteelGrade: boolean): CatalogColumn[] {
-  return [
-    {label: "Диаметр, мм", width: 8, className: tableStyles.sizeColumn},
-    {label: "Фото", width: 13},
-    {label: "Форма", width: showSteelGrade ? 8 : 12},
-    ...(showSteelGrade ? [{label: "Марка стали", width: 8}] : []),
-    {label: "Длина, м", width: showSteelGrade ? 6 : 10},
-    ...tonneOrderColumns({price: 11.5, total: 12.5, action: 13}),
-  ];
-}
-const rebarSubcategoriesWithoutSteelGradeColumn = ["cat-arm-sub-2", "cat-arm-sub-3", "cat-arm-sub-4"];
-const beamColumns = measuredColumns("Профиль", "Длина, м");
-const electroweldedColumns = measuredColumns("Ø × стенка, мм", "Длина, м");
-
-const profilePipeColumns = [
-  {label: "Сечение × стенка, мм", width: [10, 8]},
-  {label: "Фото", width: 17},
-  {label: "Длина, м", width: 11},
-  {label: "Цена, ₽/м", width: 12},
-  {label: "Заказ, шт.", width: [7, 6]},
-  {label: "Сумма", width: 14, className: tableStyles.sumColumn},
-  {label: "Действие", width: 15, visuallyHidden: true},
-] as const;
-
-const columnsByKind = {
-  beam: beamColumns, vgp: vgpColumns, pipe: electroweldedColumns, profile: profilePipeColumns,
-} satisfies Record<string, readonly CatalogColumn[]>;
+const tableHeaders = {
+  rebar: {designation: "Диаметр, мм", specifications: ["Форма", "Длина, м"]},
+  profile: {designation: "Размер, мм", specifications: ["Стенка, мм", "Длина, м"]},
+  beam: {designation: "Профиль", specifications: ["Стандарт", "Длина, м"]},
+  pipe: {designation: "Ø × стенка, мм", specifications: ["Длина, м"]},
+  vgp: {designation: "Ду × стенка, мм", specifications: [<>Наружный <span className="block whitespace-nowrap">Ø, мм</span></>, "Длина, м"]},
+};
 
 export function isMeasuredRebarVariant(variant: ProductVariant): variant is RebarVariant {
   return variant.diameterMm !== undefined
@@ -131,10 +83,6 @@ function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
   const isBeam = kind === "beam";
   const isVgp = kind === "vgp";
   const isProfile = kind === "profile";
-  const showRebarSteelGrade = kind === "rebar" && !rebarSubcategoriesWithoutSteelGradeColumn.some(
-    subcategoryId => variants.every(variant => variant.subcategoryId === subcategoryId),
-  );
-  const columns = kind === "rebar" ? rebarColumns(showRebarSteelGrade) : columnsByKind[kind];
   const isElectrowelded = kind === "pipe";
   const showSizeFilter = !isVgp && !isElectrowelded;
   const isGalvanized = isElectrowelded && variants.every(isGalvanizedElectroweldedVariant);
@@ -184,7 +132,7 @@ function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
   const results = useMemo(() => {
     const sizeValue = (variant: ProductVariant) => isProfile ? profilePipeSize(variant) : isVgp ? vgpSize(variant) : isBeam ? beamProfile(variant) : String(variant.diameterMm ?? "");
     const formValue = (variant: ProductVariant) => (isProfile || isElectrowelded) ? formatNumber(variant.wallThicknessMm!) : isVgp ? vgpSeries(variant) : isBeam ? beamKind(variant) : variant.form;
-    const priceValue = (variant: ProductVariant) => isProfile ? hasConfirmedProfilePipePrice(variant) ? variant.price ?? undefined : undefined : variant.pricePerTon;
+    const priceValue = (variant: ProductVariant) => isProfile ? profilePipePricePerTon(variant) : variant.pricePerTon;
     const massValue = (variant: ProductVariant) => variant.weightPerMeterKg ?? beamReferenceMassKg(variant);
     const compareSizes = (left: ProductVariant, right: ProductVariant) =>
       sizeValue(left).localeCompare(sizeValue(right), "ru", {numeric: true})
@@ -213,6 +161,9 @@ function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
     spec => spec.name === "Теоретическая масса по ГОСТ 5781-82",
   ));
   const orderNote = isVgp ? wholePipeOrderNote : isElectrowelded ? electroweldedNote
+    : isProfile ? wholePipeOrderNote
+    : isBeam && results.some(variant => beamReferenceMassKg(variant) !== undefined)
+      ? "Справочная масса по сортаменту используется для предварительного расчёта. Массу выбранной балки уточните у поставщика."
     : hasRebarBars || hasGostRebarMass ? <>
       {hasRebarBars && <span className="block"><strong>Заказ округляется вверх до целых прутков.</strong></span>}
       {hasGostRebarMass && <>Теоретическая масса метра приведена в <CatalogStandardLink href="https://meganorm.ru/Data1/3/3937/index.htm#i25093">таблице 1 <span className="whitespace-nowrap">ГОСТ 5781-82</span></CatalogStandardLink>.</>}
@@ -266,19 +217,19 @@ function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
             {availabilityOptions.includes("ON_ORDER") && <option value="ON_ORDER">Под заказ</option>}
             {availabilityOptions.includes("UNKNOWN") && <option value="UNKNOWN">Наличие уточняется</option>}
           </Filter>}
-          <PriceRangeInputs range={priceRange} unit={isProfile ? "метр" : "тонну"}/>
+          <PriceRangeInputs range={priceRange} unit="тонну"/>
       </FilterPanel>
 
       <section className="min-w-0 lg:col-span-2" aria-label="Продукция">
       {results.length ? (
         <>
         {orderNote && <CatalogTableNote>{orderNote}</CatalogTableNote>}
-        <CatalogVariantTable columns={columns}>
-          {results.map(variant => <MeasuredVariantItem key={variant.id} variant={variant} name={names?.get(variant.id)} kind={kind} view="table" showRebarSteelGrade={showRebarSteelGrade}/>)}
+        <CatalogVariantTable {...tableHeaders[kind]} price="Цена, ₽/т" quantity="Заказ, м" secondaryQuantity="Заказ, т">
+          {results.map(variant => <MeasuredVariantItem key={variant.id} variant={variant} name={names?.get(variant.id)} kind={kind} view="table"/>)}
         </CatalogVariantTable>
         <div className="grid gap-4 sm:grid-cols-2 xl:hidden">
           {results.map((variant) => (
-            <MeasuredVariantItem key={variant.id} variant={variant} name={names?.get(variant.id)} kind={kind} view="card" showRebarSteelGrade={showRebarSteelGrade}/>
+            <MeasuredVariantItem key={variant.id} variant={variant} name={names?.get(variant.id)} kind={kind} view="card"/>
           ))}
         </div>
         </>

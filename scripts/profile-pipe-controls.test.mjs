@@ -14,6 +14,7 @@ const {revalidateCartPrice}=readProjectData('lib/cartPricing.ts');
 const catalog=readProjectData('lib/catalog.ts');
 const rows=catalog.getProductVariantsByCategoryId('cat-trp').filter(pipe.isProfilePipeVariant);
 const base=rows.find(p=>p.profileWidthMm===40&&p.profileHeightMm===40&&p.wallThicknessMm===2);
+const ranged=rows.find(p=>p.id==='profile-pipe-square-80x80x2');
 
 function evaluateModule(file,imports,globals={}) {
  const testModule={exports:{}};const source=ts.transpileModule(fs.readFileSync(file,'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX,target:ts.ScriptTarget.ES2020}}).outputText;
@@ -39,15 +40,15 @@ function setup(variant={...base,price:157,priceConfirmed:true,quoteOnly:false}) 
  };
  const jsx=(type,props)=>typeof type==='function'?type(props):{type,props};
  const layout = {
-   CatalogVariantLayout: ({view, specifications, tableSpecifications, order}) =>
-     jsx('row', {children: [view === 'table' ? tableSpecifications.cells : specifications, order]}),
+   CatalogVariantLayout: ({view, specifications, tableSpecifications, cardFields, order}) =>
+     jsx('row', {children: [view === 'table' ? tableSpecifications : cardFields?.map(field => field.value) ?? specifications, order]}),
    CatalogVariantSpecifications: 'specifications',
    CatalogVariantOrder: ({quantity, secondaryQuantity, action, total}) =>
      jsx('order', {children: [quantity, secondaryQuantity, total, action]}),
  };
  const imports={react:{useState(initial){const i=cursor++;if(!(i in state))state[i]=initial;return [state[i],value=>{state[i]=value;}];},useEffect(effect){effect();}},'react/jsx-runtime':{jsx,jsxs:jsx,Fragment:'fragment'},'@/hooks/useCart':{useCart:()=>cart},'@/components/ui/Button':{Button:'button'},'@/components/ui/Input':{Input:'input'},'@/components/ui/Icon':{Icon:()=>null},'@/lib/catalogNumberInput':readProjectData('lib/catalogNumberInput.ts'),'@/lib/cartQuantityInput':readProjectData('lib/cartQuantityInput.ts'),'@/lib/currency':readProjectData('lib/currency.ts'),'@/lib/numberFormat':readProjectData('lib/numberFormat.ts'),'@/lib/profilePipe':pipe,'./QuoteRequestButton':{QuoteRequestButton:'quote'},'./CatalogVariantLayout':layout,'./FilterPanel.module.css':{default:{}},'./RebarTable.module.css':{default:{}}};
  imports['./CatalogPositionDetails'] = {CatalogPositionDetails: 'details'};
- imports['./CatalogGuideFigure'] = {CatalogGuideFigure: 'figure'};
+ imports['./CatalogOrderInput'] = evaluateModule('components/catalog/CatalogOrderInput.tsx', imports);
  // Keep the legacy local state slots; shared drafts are exercised in browser tests.
  imports['./OrderDraftProvider'] = {
    useOrderDraft(...args) {
@@ -57,7 +58,7 @@ function setup(variant={...base,price:157,priceConfirmed:true,quoteOnly:false}) 
    },
  };
  const {ProfilePipeVariantItem}=evaluateModule('components/catalog/ProfilePipeVariantItem.tsx',imports,{window:{setTimeout(fn){timers.push(fn);},clearTimeout(){}}});
- const nodes=node=>!node||typeof node!=='object'?[]:[node,...[node.props?.children].flat().flatMap(nodes)];
+ const nodes=node=>Array.isArray(node)?node.flatMap(nodes):!node||typeof node!=='object'?[]:[node,...nodes(node.props?.children)];
  function render(view='table'){
    cursor=0;
    const tree=nodes(ProfilePipeVariantItem({variant,view}));
@@ -67,44 +68,42 @@ function setup(variant={...base,price:157,priceConfirmed:true,quoteOnly:false}) 
    const control = (type, label) => tree.find(node =>
      node.type === type && node.props['aria-label'] === label + variant.name)?.props;
    return {
-     pieces: control('input', 'Количество целых труб для '),
+     meters: control('input', 'Длина заказа для '),
+     tons: control('input', 'Вес заказа в тоннах для '),
      length: control('input', 'Длина одной трубы для '),
-     meters: control('output', 'Заказ в метрах для '),
      total: control('output', 'Сумма заказа для '),
      action, actionText,
    };
  }
- return {cart,timers,render,change(field,value,view){render(view)[field].onChange({target:{value}});},
+ return {cart,timers,render,change(field,value,view){render(view)[field].onChange({target:{value,setSelectionRange(){}}});},
    blur(field,view){render(view)[field].onBlur();}};
 }
 
-test('profile table recalculates 2 pipes into 12 metres and 1884 rubles, replaces the cart line and removes zero',()=>{
+test('profile table rounds metres to whole pipes, replaces the cart line and removes zero',()=>{
  const h=setup();
- assert.equal(h.render().pieces.value,'');
- h.blur('pieces');
- assert.equal(h.render().pieces.value,'');
+ assert.equal(h.render().meters.value,'');
+ h.blur('meters');
+ assert.equal(h.render().meters.value,'');
  assert.equal(h.render().action.disabled,true);
  assert.equal(h.cart.lines.length,0);
- h.change('pieces','2');assert.equal(h.render().pieces.inputMode,'numeric');assert.equal(h.render().meters.children,'12');assert.equal(h.render().total.children.replace(/\s/gu,''),'1884,00₽');
+ h.change('meters','10');assert.equal(h.render().meters.inputMode,'decimal');assert.equal(h.render().tons.value,'0,02796');assert.equal(h.render().total.children.replace(/\s/gu,''),'1884,00₽');
+ h.blur('meters');assert.equal(h.render().meters.value,'12');
  h.render().action.onClick();assert.equal(h.cart.lines[0].quantity,12);assert.equal(h.cart.lines[0].pieceOrder.pieces,2);assert.equal(h.cart.lines[0].estimatedTotal,1884);assert.equal(h.render().actionText,'В корзине');
- h.change('pieces','1,5');assert.equal(h.render().pieces.value,'1,5');
- h.blur('pieces');assert.equal(h.render().pieces.value,'2');
- h.change('pieces','-0');h.blur('pieces');assert.equal(h.render().pieces.value,'-0');assert.equal(h.render().action.disabled,true);
+ h.change('meters','-0');h.blur('meters');assert.equal(h.render().meters.value,'12');assert.equal(h.render().action.disabled,true);
  assert.equal(h.cart.lines[0].pieceOrder.pieces,2);
- h.change('pieces','3');assert.equal(h.render().actionText,'Обновить');h.render().action.onClick();assert.equal(h.cart.lines.length,1);assert.equal(h.cart.lines[0].quantity,18);assert.equal(h.cart.lines[0].estimatedTotal,2826);
- h.change('pieces','0');assert.equal(h.render().actionText,'Удалить');h.render().action.onClick();assert.equal(h.cart.lines.length,0);assert.equal(h.render().actionText,'Удалено');h.timers.at(-1)();assert.equal(h.render().actionText,'В корзину');
+ h.change('tons','0,028');assert.equal(h.render().actionText,'Обновить');h.render().action.onClick();assert.equal(h.cart.lines.length,1);assert.equal(h.cart.lines[0].quantity,18);assert.equal(h.cart.lines[0].estimatedTotal,2826);
+ h.change('meters','0');assert.equal(h.render().actionText,'Удалить');h.render().action.onClick();assert.equal(h.cart.lines.length,0);assert.equal(h.render().actionText,'Удалено');h.timers.at(-1)();assert.equal(h.render().actionText,'В корзину');
 });
 
 test('reference prices stay quote-only while requests carry whole pieces and correctly calculated metres',()=>{
- const h=setup(base);assert.equal(h.render().action.label,'Запросить цену');assert.equal(h.render().action.order.quantity,null);h.change('pieces','2');assert.equal(h.render().action.order.quantity,2);assert.equal(h.render().action.order.unit,'шт.');assert.equal(h.render().action.order.meters,12);assert.equal(h.render().total.children,'Цена уточняется');assert.equal(h.cart.lines.length,0);
- assert.equal(h.render('card').pieces.inputMode,'numeric');
+ const h=setup(base);assert.equal(h.render().action.label,'Запросить цену');assert.equal(h.render().action.order.quantity,null);h.change('meters','10');assert.equal(h.render().action.order.quantity,2);assert.equal(h.render().action.order.unit,'шт.');assert.equal(h.render().action.order.meters,12);assert.equal(h.render().total.children,'По запросу');assert.equal(h.cart.lines.length,0);
+ assert.equal(h.render('card').tons.inputMode,'decimal');
 });
 
 test('80 by 80 by 2 requires a selected length and clamps positive out-of-range lengths',()=>{
- const product=rows.find(p=>p.profileWidthMm===80&&p.profileHeightMm===80&&p.wallThicknessMm===2);
- const h=setup({...product,price:343,priceConfirmed:true,quoteOnly:false});
- h.change('pieces','2');
- assert.equal(h.render().meters.children,'—');
+ const h=setup({...ranged,price:343,priceConfirmed:true,quoteOnly:false});
+ h.change('meters','12');
+ assert.equal(h.render().tons.value,'');
  assert.equal(h.render().action.disabled,true);
  h.change('length','abc');h.blur('length');
  assert.equal(h.render().length.value,'abc');
@@ -115,17 +114,16 @@ test('80 by 80 by 2 requires a selected length and clamps positive out-of-range 
  assert.equal(h.cart.lines[0].pieceOrder.lengthMeters,6);
  assert.equal(h.cart.lines[0].quantity,12);
  h.change('length','7.5','card');
- assert.equal(h.render('card').pieces.value,'2');
+ assert.equal(h.render('card').meters.value,'15');
  assert.equal(h.render('card').length.value,'7.5');
- assert.equal(h.render('card').meters.children,'15');
- assert.equal(h.render().meters.children,'15');h.render().action.onClick();assert.equal(h.cart.lines[0].pieceOrder.lengthMeters,7.5);assert.equal(h.cart.lines[0].quantity,15);assert.equal(h.render().length.value,'7.5');
+ assert.equal(h.render().meters.value,'15');h.render().action.onClick();assert.equal(h.cart.lines[0].pieceOrder.lengthMeters,7.5);assert.equal(h.cart.lines[0].quantity,15);assert.equal(h.render().length.value,'7.5');
  h.change('length','5');assert.equal(h.render().length['aria-invalid'],true);h.blur('length');assert.equal(h.render().length.value,'6');
  h.change('length','20');h.blur('length');assert.equal(h.render().length.value,'12');
  h.render().action.onClick();assert.equal(h.cart.lines[0].quantity,24);assert.equal(h.cart.lines[0].pieceOrder.pieces,2);
 });
 
-test('the real cart provider replaces piece orders, preserves length and rejects fractional updates',()=>{
- const product={...base,price:157,priceConfirmed:true,quoteOnly:false};let cursor=0;const state=[];const timers=[];const storage=new Map();
+test('the real cart provider replaces and restores piece orders while preserving length',()=>{
+ const product={...ranged,price:157,priceConfirmed:true,quoteOnly:false};let cursor=0;const state=[];const timers=[];const storage=new Map();
  const react={createContext:()=>({}),useState(initial){const i=cursor++;if(!(i in state))state[i]=initial;return [state[i],value=>{state[i]=typeof value==='function'?value(state[i]):value;}];},useEffect(effect){effect();},useMemo:fn=>fn(),useCallback:fn=>fn,useRef(initial){const i=cursor++;return state[i]??={current:initial};}};
  const mockCatalog={...catalog,getProductVariantById:id=>id===product.id?product:catalog.getProductVariantById(id)};
  const cart=evaluateModule('lib/cart.ts',{'./cartCatalog':mockCatalog,'./cartPricing':{revalidateCartPrice},'./variantPresentation':readProjectData('lib/variantPresentation.ts'),'./profilePipe':pipe,'./profileSheet':profileSheet,'./catalogOffer':catalogOffer,'./orderMeasurement':orderMeasurement});
@@ -142,5 +140,9 @@ test('the real cart provider replaces piece orders, preserves length and rejects
  render().updateQuantity(product.id,15);assert.equal(render().lines[0].quantity,18);
  render().updateQuantity(product.id,24);assert.equal(render().lines[0].pieceOrder.pieces,4);assert.equal(render().totalAmount,3768);
  render().updatePieceOrder(product.id,2,12);assert.equal(render().lines[0].quantity,24);
+ state.length=0;timers.length=0;render();timers.shift()();
+ assert.equal(render().lines[0].pieceOrder.pieces,2);
+ assert.equal(render().lines[0].pieceOrder.lengthMeters,12);
+ assert.equal(render().lines[0].estimatedTotal,3768);
  render().removeItem(product.id);assert.equal(render().items.length,0);
 });

@@ -29,6 +29,10 @@ function stockPieceRatio(meters: number, length: number) {
   return sameMeasuredQuantity(ratio, nearest) ? nearest : ratio;
 }
 
+export function wholeLengthPieces(meters: number, length: number) {
+  return meters > 0 ? Math.max(1, Math.ceil(stockPieceRatio(meters, length))) : 0;
+}
+
 // Input limits are shared by the catalog, cart editor and authoritative repricing.
 export function getMeasurementQuantityOptions(product: ProductVariant, mode: OrderInputMode) {
   const length = product.lengthMeters;
@@ -82,8 +86,7 @@ export function wholeLengthOrder(product: ProductVariant, quantity: number, mode
     || !mass || !Number.isFinite(mass) || mass <= 0) return null;
   const requestedMeters = mode === "meter" ? quantity : tonsToMeters(quantity, mass);
   if (requestedMeters === null) return null;
-  const rounded = Math.ceil(stockPieceRatio(requestedMeters, length));
-  const pieces = quantity > 0 ? Math.max(1, rounded) : 0;
+  const pieces = quantity > 0 ? Math.max(1, wholeLengthPieces(requestedMeters, length)) : 0;
   if (!Number.isSafeInteger(pieces)) return null;
   const meters = stockLengthMeters(pieces, length);
   const weightTons = metersToTons(meters, mass);
