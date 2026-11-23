@@ -1619,5 +1619,15 @@
     "imageUrl": "/images/catalog/armatura/armatura-a3-25g2s/measurement/armatura-riflenaya-a400-25g2s-32mm-prutok-11-7m.webp",
     "photoUrl": "/images/catalog/armatura/originals/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
     "signature": "4df7fa82"
+  },
+  "rebar-a240-6-coil": {
+    "imageUrl": "/images/catalog/armatura/armatura-a1-a240/measurement/armatura-gladkaya-a240-6mm-bunt.webp",
+    "photoUrl": "/images/catalog/armatura/originals/gladkaya/armatura_gladkaya_2400_1800_original.webp",
+    "signature": "5d90d834"
+  },
+  "rebar-a240-8-bar-11-7m": {
+    "imageUrl": "/images/catalog/armatura/armatura-a1-a240/measurement/armatura-gladkaya-a240-8mm-prutok-11-7m.webp",
+    "photoUrl": "/images/catalog/armatura/originals/gladkaya/armatura_gladkaya_2400_1800_original.webp",
+    "signature": "2bb1ef42"
   }
 }

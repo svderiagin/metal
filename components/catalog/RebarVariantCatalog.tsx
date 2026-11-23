@@ -8,7 +8,7 @@ import {isProfilePipeVariant, profilePipePricePerTon, profilePipeSize} from "@/l
 import {isGalvanizedElectroweldedVariant} from "@/lib/pipeFamily";
 import {formatNumber} from "@/lib/numberFormat";
 import {isDemonstrationProduct, storefrontAvailability} from "@/lib/catalogOffer";
-import {a40025g2sSubcategoryId, a40035gsSubcategoryId, a500cSubcategoryId} from "@/lib/rebar";
+import {a240SubcategoryId, a40025g2sSubcategoryId, a40035gsSubcategoryId, a500cSubcategoryId} from "@/lib/rebar";
 
 import {FilterPanel} from "./FilterPanel";
 import {CatalogVariantTable} from "./CatalogVariantLayout";
@@ -86,6 +86,7 @@ function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
   const isProfile = kind === "profile";
   const isElectrowelded = kind === "pipe";
   const isA500c = kind === "rebar" && variants.every(variant => variant.subcategoryId === a500cSubcategoryId);
+  const sortRebarLengths = isA500c || (kind === "rebar" && variants.every(variant => variant.subcategoryId === a240SubcategoryId));
   const isA400 = kind === "rebar" && variants.every(variant =>
     variant.subcategoryId === a40035gsSubcategoryId || variant.subcategoryId === a40025g2sSubcategoryId,
   );
@@ -160,7 +161,7 @@ function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
       const direction = sort === "diameter-desc" ? -1 : 1;
       const size = sizeValue(left).localeCompare(sizeValue(right), "ru", {numeric: true});
       if (size) return size * direction;
-      if (isA500c) return (left.lengthMeters ?? Number.MAX_VALUE) - (right.lengthMeters ?? Number.MAX_VALUE);
+      if (sortRebarLengths) return (left.lengthMeters ?? Number.MAX_VALUE) - (right.lengthMeters ?? Number.MAX_VALUE);
       return isElectrowelded ? ((left.wallThicknessMm ?? 0) - (right.wallThicknessMm ?? 0)) * direction : 0;
     };
     const min = parseCatalogPrice(minimumPrice);
@@ -182,7 +183,7 @@ function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
       if (sort === "weight-desc") return (massValue(right) ?? -Infinity) - (massValue(left) ?? -Infinity);
       return compareSizes(left, right);
     });
-  }, [hits, deferredQuery, availability, diameter, form, length, steelGrade, maximumPrice, minimumPrice, sort, variants, isA500c, isBeam, isVgp, isProfile, isElectrowelded]);
+  }, [hits, deferredQuery, availability, diameter, form, length, steelGrade, maximumPrice, minimumPrice, sort, variants, sortRebarLengths, isBeam, isVgp, isProfile, isElectrowelded]);
   const activeFilters = [diameter, form, length, steelGrade, availability, minimumPrice, maximumPrice].filter(Boolean).length;
   const hasGostRebarMass = kind === "rebar" && results.some(variant => variant.specifications.some(
     spec => spec.name === "Теоретическая масса по ГОСТ 5781-82",

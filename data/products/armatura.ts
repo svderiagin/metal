@@ -458,9 +458,9 @@ export const armaturaProducts: ProductVariantSource[] = [
     "sku": "MS-0007",
     "shortDescription": "Арматура гладкая А240 (А1) 20 мм, пруток 11,7 м.",
     "description": "Гладкая арматура класса А240 (А1) диаметром 20 мм. Поставляется прутками длиной 11,7 м. Параметры партии, допуски и доступность обработки подтверждаются при согласовании заказа.",
-    "price": null,
+    "price": 54900,
     "priceUnit": "за тонну",
-    "inStock": false,
+    "inStock": true,
     "featured": false,
     "imageUrls": [
       "/images/products/armatura-a1-a240.svg"
@@ -497,8 +497,7 @@ export const armaturaProducts: ProductVariantSource[] = [
         "value": "2,47 кг/м"
       }
     ],
-    "quoteOnly": true,
-    "availability": "UNKNOWN",
+    "availability": "IN_STOCK",
     "diameterMm": 20,
     "form": "bar",
     "lengthMeters": 11.7,
@@ -513,7 +512,7 @@ export const armaturaProducts: ProductVariantSource[] = [
     "sku": "MS-0008",
     "shortDescription": "Арматура гладкая А240 (А1) 32 мм, пруток 11,7 м.",
     "description": "Гладкая арматура класса А240 (А1) диаметром 32 мм. Поставляется прутками длиной 11,7 м. Параметры партии, допуски и доступность обработки подтверждаются при согласовании заказа.",
-    "price": null,
+    "price": 62900,
     "priceUnit": "за тонну",
     "inStock": false,
     "featured": false,
@@ -552,11 +551,69 @@ export const armaturaProducts: ProductVariantSource[] = [
         "value": "6,31 кг/м"
       }
     ],
-    "quoteOnly": true,
-    "availability": "UNKNOWN",
+    "availability": "ON_ORDER",
     "diameterMm": 32,
     "form": "bar",
     "lengthMeters": 11.7,
     "weightPerMeterKg": 6.31
+  },
+  {
+    "id": "rebar-a240-6-coil",
+    "categoryId": "cat-arm",
+    "subcategoryId": "cat-arm-sub-4",
+    "name": "Арматура гладкая А240 (А1) 6 мм, в бухтах",
+    "slug": "armatura-a1-a240-6-buhta",
+    "sku": "MS-A240-6-C",
+    "shortDescription": "Гладкая арматура А240 (А1) диаметром 6 мм в бухтах.",
+    "description": "Гладкая арматура класса А240 (А1) диаметром 6 мм по ГОСТ 5781-82. Поставляется в бухтах.",
+    "price": 55900,
+    "priceUnit": "за тонну",
+    "priceQualifier": "exact",
+    "availability": "IN_STOCK",
+    "inStock": true,
+    "featured": false,
+    "imageUrls": [],
+    "attributes": [
+      {"key": "class", "label": "Класс арматуры", "value": "А240"},
+      {"key": "size", "label": "Диаметр", "value": "6 мм"},
+      {"key": "standard", "label": "Стандарт", "value": "ГОСТ 5781-82"}
+    ],
+    "specifications": [
+      {"name": "Форма поставки", "value": "Бухта"},
+      {"name": "Теоретическая масса по ГОСТ 5781-82", "value": "0,222 кг/м"}
+    ],
+    "diameterMm": 6,
+    "form": "coil",
+    "weightPerMeterKg": 0.222
+  },
+  {
+    "id": "rebar-a240-8-bar-11-7m",
+    "categoryId": "cat-arm",
+    "subcategoryId": "cat-arm-sub-4",
+    "name": "Арматура гладкая А240 (А1) 8 мм, пруток 11,7 м",
+    "slug": "armatura-a1-a240-8-11-7m",
+    "sku": "MS-A240-8-B117",
+    "shortDescription": "Гладкая арматура А240 (А1) диаметром 8 мм, пруток 11,7 м.",
+    "description": "Гладкая арматура класса А240 (А1) диаметром 8 мм по ГОСТ 34028-2016. Поставляется прутками длиной 11,7 м.",
+    "price": 51500,
+    "priceUnit": "за тонну",
+    "priceQualifier": "exact",
+    "availability": "IN_STOCK",
+    "inStock": true,
+    "featured": false,
+    "imageUrls": [],
+    "attributes": [
+      {"key": "class", "label": "Класс арматуры", "value": "А240"},
+      {"key": "size", "label": "Диаметр", "value": "8 мм"},
+      {"key": "length", "label": "Длина прутка", "value": "11,7 м"},
+      {"key": "standard", "label": "Стандарт", "value": "ГОСТ 34028-2016"}
+    ],
+    "specifications": [
+      {"name": "Форма поставки", "value": "Пруток"}
+    ],
+    "diameterMm": 8,
+    "form": "bar",
+    "lengthMeters": 11.7,
+    "weightPerMeterKg": 0.395
   }
 ];

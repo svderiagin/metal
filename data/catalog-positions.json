@@ -608,16 +608,16 @@
       "sku": "МП--705",
       "shortDescription": "Длина, мм: 11 700; Номинальный диаметр, мм: 18; Стандарт: ГОСТ 34028",
       "description": "Арматура 18х11700 А1 ГОСТ 34028. Длина, мм: 11 700; Номинальный диаметр, мм: 18; Стандарт: ГОСТ 34028. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": null,
-      "quoteOnly": true,
+      "price": 50400,
+      "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
       "unit": "ton",
       "priceUnit": "за тонну",
       "material": "",
       "standard": "ГОСТ 34028",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
@@ -655,7 +655,8 @@
           "value": "Арматура 18х11700 А1 ГОСТ 34028"
         }
       ],
-      "imported": true
+      "imported": true,
+      "pricePerTon": 50400
     },
     {
       "id": "local--684",
@@ -2030,16 +2031,16 @@
       "sku": "МП-6123",
       "shortDescription": "Длина, мм: 6 000; Номинальный диаметр, мм: 6; Стандарт: ГОСТ 34028",
       "description": "Арматура 6х6000 А1 ГОСТ 34028. Длина, мм: 6 000; Номинальный диаметр, мм: 6; Стандарт: ГОСТ 34028. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": null,
-      "quoteOnly": true,
+      "price": 53900,
+      "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
       "unit": "ton",
       "priceUnit": "за тонну",
       "material": "",
       "standard": "ГОСТ 34028",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
@@ -2077,7 +2078,8 @@
           "value": "Арматура 6х6000 А1 ГОСТ 34028"
         }
       ],
-      "imported": true
+      "imported": true,
+      "pricePerTon": 53900
     },
     {
       "id": "local-6204",
@@ -5334,7 +5336,7 @@
       "priceUnit": "за тонну",
       "material": "",
       "standard": "ГОСТ 34028",
-      "availability": "UNKNOWN",
+      "availability": "ON_ORDER",
       "inStock": false,
       "featured": false,
       "imageUrls": [],
@@ -5403,8 +5405,8 @@
       "priceUnit": "за тонну",
       "material": "",
       "standard": "ГОСТ 34028",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
@@ -5472,8 +5474,8 @@
       "priceUnit": "за тонну",
       "material": "",
       "standard": "ГОСТ 34028",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
@@ -5541,8 +5543,8 @@
       "priceUnit": "за тонну",
       "material": "",
       "standard": "ГОСТ 34028",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
@@ -5610,8 +5612,8 @@
       "priceUnit": "за тонну",
       "material": "",
       "standard": "ГОСТ 34028",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
@@ -5679,8 +5681,8 @@
       "priceUnit": "за тонну",
       "material": "",
       "standard": "ГОСТ 34028",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
@@ -5748,8 +5750,8 @@
       "priceUnit": "за тонну",
       "material": "",
       "standard": "ГОСТ 34028",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
@@ -5817,8 +5819,8 @@
       "priceUnit": "за тонну",
       "material": "",
       "standard": "ГОСТ 34028",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
@@ -5886,8 +5888,8 @@
       "priceUnit": "за тонну",
       "material": "",
       "standard": "ГОСТ 34028",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
@@ -5955,8 +5957,8 @@
       "priceUnit": "за тонну",
       "material": "",
       "standard": "ГОСТ 34028",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
