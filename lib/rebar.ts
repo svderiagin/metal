@@ -2,6 +2,7 @@ import type {ProductVariant} from "@/types/product";
 
 export const a500cSubcategoryId = "cat-arm-sub-1";
 export const a40035gsSubcategoryId = "cat-arm-sub-2";
+export const a40025g2sSubcategoryId = "cat-arm-sub-3";
 
 // GOST 34028-2016, table 1: nominal mass in kg/m.
 // https://meganorm.ru/Data2/1/4293746/4293746568.htm

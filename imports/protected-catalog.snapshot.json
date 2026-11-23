@@ -11358,10 +11358,10 @@
       ],
       "imported": true,
       "pricePerTon": 51300,
+      "weightPerMeterKg": 2,
       "diameterMm": 18,
-      "weightPerMeterKg": 1.998,
       "weight": {
-        "value": 1.998,
+        "value": 2,
         "unit": "кг/м"
       },
       "lengthMeters": 11.7,
@@ -11442,10 +11442,10 @@
       ],
       "imported": true,
       "pricePerTon": 52650,
+      "weightPerMeterKg": 2.47,
       "diameterMm": 20,
-      "weightPerMeterKg": 2.466,
       "weight": {
-        "value": 2.466,
+        "value": 2.47,
         "unit": "кг/м"
       },
       "lengthMeters": 11.7,
@@ -11526,10 +11526,10 @@
       ],
       "imported": true,
       "pricePerTon": 54000,
+      "weightPerMeterKg": 2.98,
       "diameterMm": 22,
-      "weightPerMeterKg": 2.984,
       "weight": {
-        "value": 2.984,
+        "value": 2.98,
         "unit": "кг/м"
       },
       "lengthMeters": 11.7,
@@ -11610,10 +11610,10 @@
       ],
       "imported": true,
       "pricePerTon": 53100,
+      "weightPerMeterKg": 1.21,
       "diameterMm": 14,
-      "weightPerMeterKg": 1.208,
       "weight": {
-        "value": 1.208,
+        "value": 1.21,
         "unit": "кг/м"
       },
       "lengthMeters": 11.7,

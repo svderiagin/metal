@@ -21,7 +21,7 @@ import {correctDraftPrecision, formatMeasuredQuantity, formatQuantityForInput, f
 import type {OrderInputMode} from "@/types/cart";
 import type {ProductVariant} from "@/types/product";
 import {isDemonstrationProduct, requiresCatalogPriceQuote, storefrontAvailability} from "@/lib/catalogOffer";
-import {a40035gsSubcategoryId, a500cSubcategoryId} from "@/lib/rebar";
+import {a40025g2sSubcategoryId, a40035gsSubcategoryId, a500cSubcategoryId} from "@/lib/rebar";
 import {useOrderDraft} from "./OrderDraftProvider";
 import {CatalogPositionDetails} from "./CatalogPositionDetails";
 import {PipePositionDetails} from "./PipePositionDetails";
@@ -430,6 +430,7 @@ function RebarVariantLayout({view, variant, price, order}: {
 }) {
   const isA500c = variant.subcategoryId === a500cSubcategoryId;
   const isA40035gs = variant.subcategoryId === a40035gsSubcategoryId;
+  const isA40025g2s = variant.subcategoryId === a40025g2sSubcategoryId;
   const unverified = isDemonstrationProduct(variant);
   const diameter = unverified ? variant.name.match(/(\d+(?:[.,]\d+)?)\s*мм$/iu)?.[1]?.replace(".", ",")
     : variant.diameterMm === undefined ? undefined : formatNumber(variant.diameterMm);
@@ -445,12 +446,12 @@ function RebarVariantLayout({view, variant, price, order}: {
   const detailsFields = [
     {label: "Диаметр", value: diameter && `${diameter} мм`},
     {label: "Форма поставки", value: form},
-    {label: "Марка стали", value: isA500c || isA40035gs ? undefined : variant.steelGrade},
+    {label: "Марка стали", value: isA500c || isA40035gs || isA40025g2s ? undefined : variant.steelGrade},
     {label: "Длина прутка", value: length && variant.form === "bar" ? `${length} м` : undefined},
     {label: "Теоретическая масса", value: variant.weightPerMeterKg === undefined ? undefined : `${formatNumber(variant.weightPerMeterKg)} кг/м`},
     ...(isA500c ? [] : [
       {label: "Стандарт", value: isA40035gs ? undefined : standard},
-      ...variant.specifications.filter(({name}) => ["Класс арматуры", "Поверхность"].includes(name))
+      ...variant.specifications.filter(({name}) => name === "Класс арматуры" || (!isA40025g2s && name === "Поверхность"))
         .map(({name, value}) => ({label: name, value})),
     ]),
   ];

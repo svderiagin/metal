@@ -300,7 +300,8 @@
         }
       ],
       "imported": true,
-      "pricePerTon": 51300
+      "pricePerTon": 51300,
+      "weightPerMeterKg": 2
     },
     {
       "id": "local--926",
@@ -373,7 +374,8 @@
         }
       ],
       "imported": true,
-      "pricePerTon": 52650
+      "pricePerTon": 52650,
+      "weightPerMeterKg": 2.47
     },
     {
       "id": "local--925",
@@ -446,7 +448,8 @@
         }
       ],
       "imported": true,
-      "pricePerTon": 54000
+      "pricePerTon": 54000,
+      "weightPerMeterKg": 2.98
     },
     {
       "id": "local--919",
@@ -519,7 +522,8 @@
         }
       ],
       "imported": true,
-      "pricePerTon": 53100
+      "pricePerTon": 53100,
+      "weightPerMeterKg": 1.21
     },
     {
       "id": "local--870",
