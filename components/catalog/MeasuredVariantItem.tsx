@@ -447,7 +447,7 @@ function RebarVariantLayout({view, variant, price, order}: {
   const detailsFields = [
     {label: "Диаметр", value: diameter && `${diameter} мм`},
     {label: "Форма поставки", value: form},
-    {label: "Марка стали", value: isA500c || isA40035gs || isA40025g2s ? undefined : variant.steelGrade},
+    {label: "Марка стали", value: isA500c || isA40035gs || isA40025g2s || variant.steelGrade === "—" ? undefined : variant.steelGrade},
     {label: "Длина прутка", value: length && variant.form === "bar" ? `${length} м` : undefined},
     {label: "Теоретическая масса", value: variant.weightPerMeterKg === undefined ? undefined : `${formatNumber(variant.weightPerMeterKg)} кг/м`},
     ...(isA500c ? [] : [

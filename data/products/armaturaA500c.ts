@@ -5,13 +5,11 @@ const steelGrade = "3сп(пс)";
 
 type A500cRow = {
   diameterMm: number;
-  form: "coil" | "bar";
   pricePerTon: number | null;
   weightPerMeterKg: number;
-  lengthMeters?: number;
   inStock?: boolean;
   variantSuffix?: string;
-};
+} & ({form: "coil"; lengthMeters?: never} | {form: "bar"; lengthMeters: number});
 
 // Nominal kg/m: GOST 34028-2016, table 1. Preserve three decimal places.
 // https://meganorm.ru/Data2/1/4293746/4293746568.htm
@@ -42,7 +40,7 @@ export const armaturaA500cVariants: ProductVariantSource[] = rows.map((row, inde
   const formSlug = row.form === "coil" ? "coil" : "bar";
   const formName = row.form === "coil"
     ? "в бунтах"
-    : `пруток${row.lengthMeters ? ` ${formatNumber(row.lengthMeters)} м` : ""}`;
+    : `пруток ${formatNumber(row.lengthMeters)} м`;
   const suffix = row.variantSuffix ? `-${row.variantSuffix}` : "";
   const id = `rebar-a500c-${row.diameterMm}-${formSlug}${suffix}`;
 
@@ -53,8 +51,8 @@ export const armaturaA500cVariants: ProductVariantSource[] = rows.map((row, inde
     name: `Арматура рифлёная А500С ${row.diameterMm} мм, ${formName}`,
     slug: id,
     sku: `MS-A500C-${String(row.diameterMm).padStart(2, "0")}-${row.form === "coil" ? "C" : "B"}${suffix.toUpperCase()}`,
-    shortDescription: `Арматура рифлёная А500С диаметром ${row.diameterMm} мм, ${formName}, сталь ${steelGrade}.`,
-    description: `Вариант рифлёной арматуры А500С диаметром ${row.diameterMm} мм в форме «${formName}».`,
+    shortDescription: `Рифлёная арматура А500С Ø${row.diameterMm} мм, ${formName}.`,
+    description: `Рифлёная арматура А500С диаметром ${row.diameterMm} мм по ГОСТ 34028-2016. ${row.form === "coil" ? "Поставляется в бунтах." : `Поставляется прутками длиной ${formatNumber(row.lengthMeters)} м.`}`,
     price: row.pricePerTon,
     priceUnit: "за тонну",
     inStock: row.inStock ?? true,
@@ -68,12 +66,14 @@ export const armaturaA500cVariants: ProductVariantSource[] = rows.map((row, inde
     lengthMeters: row.lengthMeters,
     sourceProductName: row.form === "coil"
       ? "арматура, в бунтах"
-      : `арматура, ${formatNumber(row.lengthMeters ?? 0)} м`,
+      : `арматура, ${formatNumber(row.lengthMeters)} м`,
 
     attributes: [
       {key: "material", label: "Материал", value: `Сталь ${steelGrade}`},
+      {key: "class", label: "Класс арматуры", value: "А500С"},
       {key: "size", label: "Диаметр", value: `${row.diameterMm} мм`},
       {key: "grade", label: "Марка стали", value: steelGrade},
+      {key: "standard", label: "Стандарт", value: "ГОСТ 34028-2016"},
       ...(row.lengthMeters
         ? [{key: "length" as const, label: "Длина", value: `${formatNumber(row.lengthMeters)} м`}]
         : []),
