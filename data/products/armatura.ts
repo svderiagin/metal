@@ -270,9 +270,9 @@ export const armaturaProducts: ProductVariantSource[] = [
     "sku": "MS-0005",
     "shortDescription": "Арматура рифлёная А400 (А3), 25Г2С 16 мм, пруток 11,7 м.",
     "description": "Рифлёная арматура класса А400 (А3) из стали 25Г2С диаметром 16 мм. Поставляется прутками длиной 11,7 м. Параметры партии, допуски и доступность обработки подтверждаются при согласовании заказа.",
-    "price": null,
+    "price": 58900,
     "priceUnit": "за тонну",
-    "inStock": false,
+    "inStock": true,
     "featured": true,
     "imageUrls": [
       "/images/products/armatura-a3-25g2s.svg"
@@ -314,8 +314,7 @@ export const armaturaProducts: ProductVariantSource[] = [
         "value": "1,58 кг/м"
       }
     ],
-    "quoteOnly": true,
-    "availability": "UNKNOWN",
+    "availability": "IN_STOCK",
     "diameterMm": 16,
     "form": "bar",
     "lengthMeters": 11.7,
@@ -331,9 +330,9 @@ export const armaturaProducts: ProductVariantSource[] = [
     "sku": "MS-0006",
     "shortDescription": "Арматура рифлёная А400 (А3), 25Г2С 25 мм, пруток 11,7 м.",
     "description": "Рифлёная арматура класса А400 (А3) из стали 25Г2С диаметром 25 мм. Поставляется прутками длиной 11,7 м. Параметры партии, допуски и доступность обработки подтверждаются при согласовании заказа.",
-    "price": null,
+    "price": 59500,
     "priceUnit": "за тонну",
-    "inStock": false,
+    "inStock": true,
     "featured": true,
     "imageUrls": [
       "/images/products/armatura-a3-25g2s.svg"
@@ -375,12 +374,79 @@ export const armaturaProducts: ProductVariantSource[] = [
         "value": "3,85 кг/м"
       }
     ],
-    "quoteOnly": true,
-    "availability": "UNKNOWN",
+    "availability": "IN_STOCK",
     "diameterMm": 25,
     "form": "bar",
     "lengthMeters": 11.7,
     "weightPerMeterKg": 3.85,
+    "steelGrade": "25Г2С"
+  },
+  {
+    "id": "rebar-a400-25g2s-28-bar",
+    "categoryId": "cat-arm",
+    "subcategoryId": "cat-arm-sub-3",
+    "name": "Арматура рифлёная А400 (А3), 25Г2С 28 мм, пруток 11,7 м",
+    "slug": "armatura-a3-25g2s-28",
+    "sku": "MS-A400-25G2S-28-B",
+    "shortDescription": "Рифлёная арматура А400 (А3) из стали 25Г2С диаметром 28 мм, пруток 11,7 м.",
+    "description": "Рифлёная арматура класса А400 (А3) из стали 25Г2С диаметром 28 мм по ГОСТ 5781-82. Поставляется прутками длиной 11,7 м.",
+    "price": 59900,
+    "priceUnit": "за тонну",
+    "priceQualifier": "exact",
+    "availability": "IN_STOCK",
+    "inStock": true,
+    "featured": false,
+    "imageUrls": [],
+    "attributes": [
+      {"key": "material", "label": "Материал", "value": "Низколегированная сталь 25Г2С"},
+      {"key": "class", "label": "Класс арматуры", "value": "А400 (А3)"},
+      {"key": "size", "label": "Диаметр", "value": "28 мм"},
+      {"key": "grade", "label": "Марка стали", "value": "25Г2С"},
+      {"key": "length", "label": "Длина прутка", "value": "11,7 м"},
+      {"key": "standard", "label": "Стандарт", "value": "ГОСТ 5781-82"}
+    ],
+    "specifications": [
+      {"name": "Форма поставки", "value": "Пруток"},
+      {"name": "Теоретическая масса по ГОСТ 5781-82", "value": "4,83 кг/м"}
+    ],
+    "diameterMm": 28,
+    "form": "bar",
+    "lengthMeters": 11.7,
+    "weightPerMeterKg": 4.83,
+    "steelGrade": "25Г2С"
+  },
+  {
+    "id": "rebar-a400-25g2s-32-bar",
+    "categoryId": "cat-arm",
+    "subcategoryId": "cat-arm-sub-3",
+    "name": "Арматура рифлёная А400 (А3), 25Г2С 32 мм, пруток 11,7 м",
+    "slug": "armatura-a3-25g2s-32",
+    "sku": "MS-A400-25G2S-32-B",
+    "shortDescription": "Рифлёная арматура А400 (А3) из стали 25Г2С диаметром 32 мм, пруток 11,7 м.",
+    "description": "Рифлёная арматура класса А400 (А3) из стали 25Г2С диаметром 32 мм по ГОСТ 5781-82. Поставляется прутками длиной 11,7 м.",
+    "price": 61900,
+    "priceUnit": "за тонну",
+    "priceQualifier": "exact",
+    "availability": "ON_ORDER",
+    "inStock": false,
+    "featured": false,
+    "imageUrls": [],
+    "attributes": [
+      {"key": "material", "label": "Материал", "value": "Низколегированная сталь 25Г2С"},
+      {"key": "class", "label": "Класс арматуры", "value": "А400 (А3)"},
+      {"key": "size", "label": "Диаметр", "value": "32 мм"},
+      {"key": "grade", "label": "Марка стали", "value": "25Г2С"},
+      {"key": "length", "label": "Длина прутка", "value": "11,7 м"},
+      {"key": "standard", "label": "Стандарт", "value": "ГОСТ 5781-82"}
+    ],
+    "specifications": [
+      {"name": "Форма поставки", "value": "Пруток"},
+      {"name": "Теоретическая масса по ГОСТ 5781-82", "value": "6,31 кг/м"}
+    ],
+    "diameterMm": 32,
+    "form": "bar",
+    "lengthMeters": 11.7,
+    "weightPerMeterKg": 6.31,
     "steelGrade": "25Г2С"
   },
   {

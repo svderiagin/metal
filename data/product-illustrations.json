@@ -1609,5 +1609,15 @@
     "imageUrl": "/images/catalog/armatura/armatura-a500s/measurement/armatura-riflenaya-a500s-16mm-prutok-6m.webp",
     "photoUrl": "/images/catalog/armatura/originals/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
     "signature": "30f63709"
+  },
+  "rebar-a400-25g2s-28-bar": {
+    "imageUrl": "/images/catalog/armatura/armatura-a3-25g2s/measurement/armatura-riflenaya-a400-25g2s-28mm-prutok-11-7m.webp",
+    "photoUrl": "/images/catalog/armatura/originals/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "5084dec3"
+  },
+  "rebar-a400-25g2s-32-bar": {
+    "imageUrl": "/images/catalog/armatura/armatura-a3-25g2s/measurement/armatura-riflenaya-a400-25g2s-32mm-prutok-11-7m.webp",
+    "photoUrl": "/images/catalog/armatura/originals/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
+    "signature": "4df7fa82"
   }
 }
