@@ -2,12 +2,14 @@ import {catalogImageUrl} from "@/lib/catalog-image";
 import Link from "next/link";
 import {PreparedPhoto} from "@/components/ui/PreparedPhoto";
 import {Icon} from "@/components/ui/Icon";
+import {catalogStandards} from "@/lib/catalogStandards";
 import {formatUnitPrice} from "@/lib/currency";
 import {getProductTypeSummary} from "@/lib/productTypeSummary";
+import {a40025g2sSubcategoryId} from "@/lib/rebar";
 import type {ProductType, ProductVariant} from "@/types/product";
 import type {PreparedPhoto as Photo} from "@/lib/server/preparedPhotos";
 import {RebarStandardHelp} from "./RebarStandardHelp";
-import {CatalogStandardReference} from "./CatalogStandardReference";
+import {CatalogStandardLink, CatalogStandardReference} from "./CatalogStandardReference";
 import {catalogDescriptionCopy} from "@/data/catalog-description-copy";
 import styles from "./CatalogCard.module.css";
 import homeStyles from "./ProductTypeCard.module.css";
@@ -30,6 +32,7 @@ export function ProductTypeCard({
   const isHome = appearance === "home";
   const Heading = isHome ? "h3" : "h2";
   const {standard, hasPrices, minimumPrice, priceUnit} = getProductTypeSummary(productType, variants);
+  const isA40025g2sReference = productType.subcategoryId === a40025g2sSubcategoryId && standard === "ГОСТ 5781-82";
   const [priceAmount, priceUnitLabel] = minimumPrice === null
     ? []
     : formatUnitPrice(minimumPrice, priceUnit).replace(/,00(?=\s*₽)/u, "").split(/\s+(?=₽)/u);
@@ -52,7 +55,11 @@ export function ProductTypeCard({
             {catalogDescriptionCopy[productType.subcategoryId]?.intro ?? productType.shortDescription}
           </p>
           {standard !== "Уточняется" && <div className={`${isHome ? homeStyles.standard : ""} col-span-2 mt-3 flex items-center gap-1 text-xs leading-6 text-slate-600 dark:text-slate-300`}>
-            <span className="min-w-0 [&_a]:relative [&_a]:z-10"><CatalogStandardReference>{standard}</CatalogStandardReference></span>
+            <span className="min-w-0 [&_a]:relative [&_a]:z-10">
+              {isA40025g2sReference
+                ? <CatalogStandardLink href={catalogStandards["5781"].href}>Справочный {standard}</CatalogStandardLink>
+                : <CatalogStandardReference>{standard}</CatalogStandardReference>}
+            </span>
             {categorySlug === "armatura" && <RebarStandardHelp standard={standard}/>}
           </div>}
       </div>
