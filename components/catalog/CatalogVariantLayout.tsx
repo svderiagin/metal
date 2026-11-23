@@ -46,12 +46,11 @@ function renderVariantPhoto(variant: ProductVariant, view: View) {
   return src ? <ProductImageViewer src={src} name={variant.name} presentation={view} framed expanded/> : null;
 }
 
-export function CatalogVariantLayout({view, variant, name = variant.name, tableSubtitle, preview,
+export function CatalogVariantLayout({view, variant, name = variant.name, preview,
   specifications, tableSpecifications, details, detailsId = `variant-details-${variant.id}`, price, priceNote, order}: {
   view: View;
   variant: ProductVariant;
   name?: string;
-  tableSubtitle?: string;
   preview?: ReactNode;
   specifications: ReactNode;
   tableSpecifications: readonly ReactNode[];
@@ -91,9 +90,7 @@ export function CatalogVariantLayout({view, variant, name = variant.name, tableS
   const nameId = `variant-name-${variant.id}`;
   return <><tr id={`variant-${variant.id}`} title={variant.name} className="align-middle">
     <th scope="row" aria-labelledby={nameId} className="font-semibold tabular-nums">
-      <span id={nameId} className="block">
-        {name}{tableSubtitle && <>{" "}<span className="mt-1 block text-xs font-medium text-slate-600 dark:text-slate-300">{tableSubtitle}</span></>}
-      </span>
+      <span id={nameId} className="block">{name}</span>
       {details && <button type="button" aria-expanded={detailsOpen} aria-controls={detailsId}
         aria-label={`Подробности: ${variant.name}`} onClick={() => setDetailsOpen(!detailsOpen)}
         className={`${tableStyles.detailsButton} mt-2 cursor-pointer rounded-sm text-xs font-semibold whitespace-nowrap text-slate-600 underline decoration-slate-300 underline-offset-4 focus-visible:outline-2 focus-visible:outline-brand-700 dark:text-slate-300 dark:decoration-slate-500 dark:focus-visible:outline-brand-300`}>

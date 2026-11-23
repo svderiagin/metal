@@ -114,12 +114,12 @@
     {
       "id": "cat-arm-sub-4",
       "categoryId": "cat-arm",
-      "name": "Арматура А240 (А1)",
+      "name": "Арматура А240С (А1)",
       "slug": "armatura-a1-a240",
-      "shortDescription": "Гладкая арматура класса А240 для изготовления хомутов, распределительных и монтажных элементов арматурных каркасов. Отличается пластичностью и удобством обработки.",
-      "description": "Гладкая арматура для изготовления хомутов, распределительных и монтажных элементов арматурных каркасов.\n\nПрименяется при устройстве фундаментов, балок и колонн. Отличается пластичностью и удобством обработки.\n\nГладкая арматура класса А240 предусмотрена ГОСТ 5781-82 и ГОСТ 34028-2016. Стандарт поставки и характеристики партии сверяют по документам о качестве.",
+      "shortDescription": "Гладкая арматура А240С для изготовления хомутов, распределительных и монтажных элементов арматурных каркасов.",
+      "description": "Гладкая арматура А240С по ГОСТ 34028-2016 для изготовления хомутов, распределительных и монтажных элементов арматурных каркасов. Поставляется в прутках и бухтах.",
       "materialDescription": "Сталь; марка уточняется",
-      "referenceStandard": "ГОСТ 5781-82 или ГОСТ 34028-2016"
+      "referenceStandard": "ГОСТ 34028-2016"
     },
     {
       "id": "cat-bal-sub-1",
@@ -676,31 +676,85 @@
       "pricePerTon": 61900
     },
     {
-      "id": "prd-007",
+      "id": "rebar-a240s-6-bar-6m",
       "categoryId": "cat-arm",
       "subcategoryId": "cat-arm-sub-4",
-      "name": "Арматура гладкая А240 (А1) 20 мм, пруток 11,7 м",
-      "slug": "armatura-a1-a240-20",
-      "sku": "MS-0007",
-      "shortDescription": "Арматура гладкая А240 (А1) 20 мм, пруток 11,7 м.",
-      "description": "Гладкая арматура класса А240 (А1) диаметром 20 мм. Поставляется прутками длиной 11,7 м. Параметры партии, допуски и доступность обработки подтверждаются при согласовании заказа.",
-      "price": 54900,
+      "name": "Арматура гладкая А240С 6 мм, пруток 6 м",
+      "slug": "armatura-a1-a240s-6-6m",
+      "sku": "MS-A240S-6-B6",
+      "shortDescription": "Гладкая арматура А240С диаметром 6 мм, пруток 6 м.",
+      "description": "Гладкая арматура класса А240С диаметром 6 мм по ГОСТ 34028-2016. Поставляется прутками длиной 6 м.",
+      "price": 53900,
       "priceUnit": "за тонну",
+      "priceQualifier": "exact",
+      "availability": "IN_STOCK",
       "inStock": true,
       "featured": false,
-      "imageUrls": [
-        "/images/catalog/armatura/armatura-a1-a240/originals/armatura-gladkaya.jpg"
-      ],
+      "imageUrls": [],
       "attributes": [
-        {
-          "key": "material",
-          "label": "Материал",
-          "value": "Сталь"
-        },
         {
           "key": "class",
           "label": "Класс арматуры",
-          "value": "А240 (А1)"
+          "value": "А240С"
+        },
+        {
+          "key": "size",
+          "label": "Диаметр",
+          "value": "6 мм"
+        },
+        {
+          "key": "length",
+          "label": "Длина прутка",
+          "value": "6 м"
+        },
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 34028-2016"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Форма поставки",
+          "value": "Пруток"
+        }
+      ],
+      "diameterMm": 6,
+      "form": "bar",
+      "lengthMeters": 6,
+      "weightPerMeterKg": 0.222,
+      "productTypeId": "type-cat-arm-sub-4",
+      "unit": "ton",
+      "material": "",
+      "standard": "ГОСТ 34028-2016",
+      "weight": {
+        "value": 0.222,
+        "unit": "кг/м"
+      },
+      "steelGrade": "—",
+      "pricePerTon": 53900
+    },
+    {
+      "id": "rebar-a240s-20-bar-11-7m",
+      "categoryId": "cat-arm",
+      "subcategoryId": "cat-arm-sub-4",
+      "name": "Арматура гладкая А240С 20 мм, пруток 11,7 м",
+      "slug": "armatura-a1-a240s-20-11-7m",
+      "sku": "MS-A240S-20-B117",
+      "shortDescription": "Гладкая арматура А240С диаметром 20 мм, пруток 11,7 м.",
+      "description": "Гладкая арматура А240С диаметром 20 мм по ГОСТ 34028-2016. Поставляется прутками длиной 11,7 м.",
+      "price": 54900,
+      "priceUnit": "за тонну",
+      "priceQualifier": "exact",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "imageUrls": [],
+      "attributes": [
+        {
+          "key": "class",
+          "label": "Класс арматуры",
+          "value": "А240С"
         },
         {
           "key": "size",
@@ -711,60 +765,55 @@
           "key": "length",
           "label": "Длина прутка",
           "value": "11,7 м"
+        },
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 34028-2016"
         }
       ],
       "specifications": [
         {
           "name": "Форма поставки",
           "value": "Пруток"
-        },
-        {
-          "name": "Теоретическая масса по ГОСТ 5781-82",
-          "value": "2,47 кг/м"
         }
       ],
-      "availability": "IN_STOCK",
       "diameterMm": 20,
       "form": "bar",
       "lengthMeters": 11.7,
-      "weightPerMeterKg": 2.47,
+      "weightPerMeterKg": 2.466,
       "productTypeId": "type-cat-arm-sub-4",
       "unit": "ton",
-      "material": "Сталь",
-      "standard": "",
+      "material": "",
+      "standard": "ГОСТ 34028-2016",
       "weight": {
-        "value": 2.47,
+        "value": 2.466,
         "unit": "кг/м"
       },
       "steelGrade": "—",
       "pricePerTon": 54900
     },
     {
-      "id": "prd-008",
+      "id": "rebar-a240s-32-bar-11-7m",
       "categoryId": "cat-arm",
       "subcategoryId": "cat-arm-sub-4",
-      "name": "Арматура гладкая А240 (А1) 32 мм, пруток 11,7 м",
-      "slug": "armatura-a1-a240-32",
-      "sku": "MS-0008",
-      "shortDescription": "Арматура гладкая А240 (А1) 32 мм, пруток 11,7 м.",
-      "description": "Гладкая арматура класса А240 (А1) диаметром 32 мм. Поставляется прутками длиной 11,7 м. Параметры партии, допуски и доступность обработки подтверждаются при согласовании заказа.",
+      "name": "Арматура гладкая А240С 32 мм, пруток 11,7 м",
+      "slug": "armatura-a1-a240s-32-11-7m",
+      "sku": "MS-A240S-32-B117",
+      "shortDescription": "Гладкая арматура А240С диаметром 32 мм, пруток 11,7 м.",
+      "description": "Гладкая арматура А240С диаметром 32 мм по ГОСТ 34028-2016. Поставляется прутками длиной 11,7 м.",
       "price": 62900,
       "priceUnit": "за тонну",
+      "priceQualifier": "exact",
+      "availability": "ON_ORDER",
       "inStock": false,
       "featured": false,
-      "imageUrls": [
-        "/images/catalog/armatura/armatura-a1-a240/originals/armatura-gladkaya.jpg"
-      ],
+      "imageUrls": [],
       "attributes": [
-        {
-          "key": "material",
-          "label": "Материал",
-          "value": "Сталь"
-        },
         {
           "key": "class",
           "label": "Класс арматуры",
-          "value": "А240 (А1)"
+          "value": "А240С"
         },
         {
           "key": "size",
@@ -775,29 +824,29 @@
           "key": "length",
           "label": "Длина прутка",
           "value": "11,7 м"
+        },
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 34028-2016"
         }
       ],
       "specifications": [
         {
           "name": "Форма поставки",
           "value": "Пруток"
-        },
-        {
-          "name": "Теоретическая масса по ГОСТ 5781-82",
-          "value": "6,31 кг/м"
         }
       ],
-      "availability": "ON_ORDER",
       "diameterMm": 32,
       "form": "bar",
       "lengthMeters": 11.7,
-      "weightPerMeterKg": 6.31,
+      "weightPerMeterKg": 6.313,
       "productTypeId": "type-cat-arm-sub-4",
       "unit": "ton",
-      "material": "Сталь",
-      "standard": "",
+      "material": "",
+      "standard": "ГОСТ 34028-2016",
       "weight": {
-        "value": 6.31,
+        "value": 6.313,
         "unit": "кг/м"
       },
       "steelGrade": "—",
@@ -807,11 +856,11 @@
       "id": "rebar-a240-6-coil",
       "categoryId": "cat-arm",
       "subcategoryId": "cat-arm-sub-4",
-      "name": "Арматура гладкая А240 (А1) 6 мм, в бухтах",
+      "name": "Арматура гладкая А240С 6 мм, в бухтах",
       "slug": "armatura-a1-a240-6-buhta",
       "sku": "MS-A240-6-C",
-      "shortDescription": "Гладкая арматура А240 (А1) диаметром 6 мм в бухтах.",
-      "description": "Гладкая арматура класса А240 (А1) диаметром 6 мм по ГОСТ 5781-82. Поставляется в бухтах.",
+      "shortDescription": "Гладкая арматура А240С диаметром 6 мм в бухтах.",
+      "description": "Гладкая арматура А240С диаметром 6 мм по ГОСТ 34028-2016. Поставляется в бухтах.",
       "price": 55900,
       "priceUnit": "за тонну",
       "priceQualifier": "exact",
@@ -823,7 +872,7 @@
         {
           "key": "class",
           "label": "Класс арматуры",
-          "value": "А240"
+          "value": "А240С"
         },
         {
           "key": "size",
@@ -833,17 +882,13 @@
         {
           "key": "standard",
           "label": "Стандарт",
-          "value": "ГОСТ 5781-82"
+          "value": "ГОСТ 34028-2016"
         }
       ],
       "specifications": [
         {
           "name": "Форма поставки",
           "value": "Бухта"
-        },
-        {
-          "name": "Теоретическая масса по ГОСТ 5781-82",
-          "value": "0,222 кг/м"
         }
       ],
       "diameterMm": 6,
@@ -852,7 +897,7 @@
       "productTypeId": "type-cat-arm-sub-4",
       "unit": "ton",
       "material": "",
-      "standard": "ГОСТ 5781-82",
+      "standard": "ГОСТ 34028-2016",
       "weight": {
         "value": 0.222,
         "unit": "кг/м"
@@ -864,11 +909,11 @@
       "id": "rebar-a240-8-bar-11-7m",
       "categoryId": "cat-arm",
       "subcategoryId": "cat-arm-sub-4",
-      "name": "Арматура гладкая А240 (А1) 8 мм, пруток 11,7 м",
+      "name": "Арматура гладкая А240С 8 мм, пруток 11,7 м",
       "slug": "armatura-a1-a240-8-11-7m",
       "sku": "MS-A240-8-B117",
-      "shortDescription": "Гладкая арматура А240 (А1) диаметром 8 мм, пруток 11,7 м.",
-      "description": "Гладкая арматура класса А240 (А1) диаметром 8 мм по ГОСТ 34028-2016. Поставляется прутками длиной 11,7 м.",
+      "shortDescription": "Гладкая арматура А240С диаметром 8 мм, пруток 11,7 м.",
+      "description": "Гладкая арматура А240С диаметром 8 мм по ГОСТ 34028-2016. Поставляется прутками длиной 11,7 м.",
       "price": 51500,
       "priceUnit": "за тонну",
       "priceQualifier": "exact",
@@ -880,7 +925,7 @@
         {
           "key": "class",
           "label": "Класс арматуры",
-          "value": "А240"
+          "value": "А240С"
         },
         {
           "key": "size",
@@ -11967,77 +12012,6 @@
       "steelGrade": "25Г2С"
     },
     {
-      "id": "local--705",
-      "categoryId": "cat-arm",
-      "subcategoryId": "cat-arm-sub-4",
-      "productTypeId": "type-cat-arm-sub-4",
-      "name": "Арматура 18х11700 А1 ГОСТ 34028",
-      "slug": "armatura-18x11700-a1-gost-34028",
-      "sku": "МП--705",
-      "shortDescription": "Длина, мм: 11 700; Номинальный диаметр, мм: 18; Стандарт: ГОСТ 34028",
-      "description": "Арматура 18х11700 А1 ГОСТ 34028. Длина, мм: 11 700; Номинальный диаметр, мм: 18; Стандарт: ГОСТ 34028. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 50400,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 34028",
-      "availability": "IN_STOCK",
-      "inStock": true,
-      "featured": false,
-      "imageUrls": [
-        "/images/catalog/armatura/armatura-a1-a240/originals/armatura-gladkaya.jpg"
-      ],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 34028"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Номинальный диаметр, мм: 18"
-        },
-        {
-          "key": "length",
-          "label": "Длина, мм",
-          "value": "11 700"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Длина, мм",
-          "value": "11 700"
-        },
-        {
-          "name": "Номинальный диаметр, мм",
-          "value": "18"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 34028"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Арматура 18х11700 А1 ГОСТ 34028"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 50400,
-      "diameterMm": 18,
-      "weightPerMeterKg": 1.998,
-      "weight": {
-        "value": 1.998,
-        "unit": "кг/м"
-      },
-      "lengthMeters": 11.7,
-      "form": "bar",
-      "steelGrade": "—"
-    },
-    {
       "id": "local-258",
       "categoryId": "cat-trk",
       "subcategoryId": "cat-trk-sub-1",
@@ -13422,77 +13396,6 @@
         "value": 11.49,
         "unit": "кг/м"
       }
-    },
-    {
-      "id": "local-6123",
-      "categoryId": "cat-arm",
-      "subcategoryId": "cat-arm-sub-4",
-      "productTypeId": "type-cat-arm-sub-4",
-      "name": "Арматура 6х6000 А1 ГОСТ 34028",
-      "slug": "armatura-6x6000-a1-gost-34028",
-      "sku": "МП-6123",
-      "shortDescription": "Длина, мм: 6 000; Номинальный диаметр, мм: 6; Стандарт: ГОСТ 34028",
-      "description": "Арматура 6х6000 А1 ГОСТ 34028. Длина, мм: 6 000; Номинальный диаметр, мм: 6; Стандарт: ГОСТ 34028. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 53900,
-      "quoteOnly": false,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 34028",
-      "availability": "IN_STOCK",
-      "inStock": true,
-      "featured": false,
-      "imageUrls": [
-        "/images/catalog/armatura/armatura-a1-a240/originals/armatura-gladkaya.jpg"
-      ],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 34028"
-        },
-        {
-          "key": "size",
-          "label": "Размеры",
-          "value": "Номинальный диаметр, мм: 6"
-        },
-        {
-          "key": "length",
-          "label": "Длина, мм",
-          "value": "6 000"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Длина, мм",
-          "value": "6 000"
-        },
-        {
-          "name": "Номинальный диаметр, мм",
-          "value": "6"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 34028"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Арматура 6х6000 А1 ГОСТ 34028"
-        }
-      ],
-      "imported": true,
-      "pricePerTon": 53900,
-      "diameterMm": 6,
-      "weightPerMeterKg": 0.222,
-      "weight": {
-        "value": 0.222,
-        "unit": "кг/м"
-      },
-      "lengthMeters": 6,
-      "form": "bar",
-      "steelGrade": "—"
     },
     {
       "id": "local-6204",

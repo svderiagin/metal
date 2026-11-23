@@ -19,16 +19,6 @@
     "photoUrl": "/images/catalog/armatura/originals/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
     "signature": "32f192c0"
   },
-  "prd-007": {
-    "imageUrl": "/images/catalog/armatura/armatura-a1-a240/measurement/armatura-gladkaya-a240-20mm-prutok-11-7m.webp",
-    "photoUrl": "/images/catalog/armatura/originals/gladkaya/armatura_gladkaya_2400_1800_original.webp",
-    "signature": "f5bb7f23"
-  },
-  "prd-008": {
-    "imageUrl": "/images/catalog/armatura/armatura-a1-a240/measurement/armatura-gladkaya-a240-32mm-prutok-11-7m.webp",
-    "photoUrl": "/images/catalog/armatura/originals/gladkaya/armatura_gladkaya_2400_1800_original.webp",
-    "signature": "9d049b6c"
-  },
   "rebar-a500c-6-coil": {
     "imageUrl": "/images/catalog/armatura/armatura-a500s/measurement/armatura-riflenaya-a500s-6mm-bunt.webp",
     "photoUrl": "/images/catalog/armatura/originals/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
@@ -700,11 +690,6 @@
     "photoUrl": "/images/catalog/armatura/originals/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
     "signature": "0b673483"
   },
-  "local--705": {
-    "imageUrl": "/images/catalog/armatura/armatura-a1-a240/measurement/armatura-gladkaya-a240-18mm-prutok-11-7m.webp",
-    "photoUrl": "/images/catalog/armatura/originals/gladkaya/armatura_gladkaya_2400_1800_original.webp",
-    "signature": "41b49b20"
-  },
   "local--684": {
     "imageUrl": "/images/catalog/armatura/armatura-a500s/measurement/armatura-riflenaya-a500s-16mm-prutok-11-7m.webp",
     "photoUrl": "/images/catalog/armatura/originals/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
@@ -804,11 +789,6 @@
     "imageUrl": "/images/catalog/truba-kruglaya/truba-elektrosvarnaya/measurement/truba-elektrosvarnaya-108x4-5mm-12m.jpg",
     "photoUrl": "/images/catalog/truba-kruglaya/truba-elektrosvarnaya/originals/truba_elektrosvarnaya_2400_1800_original.jpg",
     "signature": "43b71a80"
-  },
-  "local-6123": {
-    "imageUrl": "/images/catalog/armatura/armatura-a1-a240/measurement/armatura-gladkaya-a240-6mm-prutok-6m.webp",
-    "photoUrl": "/images/catalog/armatura/originals/gladkaya/armatura_gladkaya_2400_1800_original.webp",
-    "signature": "10acbafe"
   },
   "local-6204": {
     "imageUrl": "/images/catalog/truba-kruglaya/truba-vodogazoprovodnaya/measurement/truba-vgp-du20x2-8mm-6m.webp",
@@ -1620,14 +1600,29 @@
     "photoUrl": "/images/catalog/armatura/originals/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
     "signature": "4df7fa82"
   },
-  "rebar-a240-6-coil": {
-    "imageUrl": "/images/catalog/armatura/armatura-a1-a240/measurement/armatura-gladkaya-a240-6mm-bunt.webp",
+  "rebar-a240s-6-bar-6m": {
+    "imageUrl": "/images/catalog/armatura/armatura-a1-a240/measurement/armatura-gladkaya-a240s-6mm-prutok-6m.webp",
     "photoUrl": "/images/catalog/armatura/originals/gladkaya/armatura_gladkaya_2400_1800_original.webp",
-    "signature": "5d90d834"
+    "signature": "94bbc217"
+  },
+  "rebar-a240-6-coil": {
+    "imageUrl": "/images/catalog/armatura/armatura-a1-a240/measurement/armatura-gladkaya-a240s-6mm-bunt.webp",
+    "photoUrl": "/images/catalog/armatura/originals/gladkaya/armatura_gladkaya_2400_1800_original.webp",
+    "signature": "058b86a7"
   },
   "rebar-a240-8-bar-11-7m": {
-    "imageUrl": "/images/catalog/armatura/armatura-a1-a240/measurement/armatura-gladkaya-a240-8mm-prutok-11-7m.webp",
+    "imageUrl": "/images/catalog/armatura/armatura-a1-a240/measurement/armatura-gladkaya-a240s-8mm-prutok-11-7m.webp",
     "photoUrl": "/images/catalog/armatura/originals/gladkaya/armatura_gladkaya_2400_1800_original.webp",
-    "signature": "2bb1ef42"
+    "signature": "f7d4c1ce"
+  },
+  "rebar-a240s-20-bar-11-7m": {
+    "imageUrl": "/images/catalog/armatura/armatura-a1-a240/measurement/armatura-gladkaya-a240s-20mm-prutok-11-7m.webp",
+    "photoUrl": "/images/catalog/armatura/originals/gladkaya/armatura_gladkaya_2400_1800_original.webp",
+    "signature": "b64cce7a"
+  },
+  "rebar-a240s-32-bar-11-7m": {
+    "imageUrl": "/images/catalog/armatura/armatura-a1-a240/measurement/armatura-gladkaya-a240s-32mm-prutok-11-7m.webp",
+    "photoUrl": "/images/catalog/armatura/originals/gladkaya/armatura_gladkaya_2400_1800_original.webp",
+    "signature": "8086cd88"
   }
 }

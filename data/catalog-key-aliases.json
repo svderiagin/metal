@@ -131,7 +131,11 @@
     "d0296e1b": "catalog-12050",
     "4d0c41ea": "catalog-2177",
     "4e0c437d": "catalog-2176",
-    "400c2d73": "catalog-2178"
+    "400c2d73": "catalog-2178",
+    "70422125": "rebar-a240s-6-bar-6m",
+    "6ec137e4": "local-110940",
+    "f4c868d1": "rebar-a240s-20-bar-11-7m",
+    "edc85dcc": "rebar-a240s-32-bar-11-7m"
   },
   "slugs": {
     "32966259": "catalog-ugolok-25x25x3-eb24ddb5",
@@ -265,6 +269,10 @@
     "6e54297c": "catalog-band-no-100kh4-0598475f",
     "6485378b": "catalog-Polosa-100x8-5032ec54",
     "3bd97b84": "catalog-Polosa-100x6-b681c11b",
-    "b6457b46": "catalog-polosa-100kh10-7105a574"
+    "b6457b46": "catalog-polosa-100kh10-7105a574",
+    "3b011032": "armatura-a1-a240s-6-6m",
+    "2e6020e8": "armatura-18x11700-a240s-gost-34028",
+    "eb9eb7b6": "armatura-a1-a240s-20-11-7m",
+    "f3a102e5": "armatura-a1-a240s-32-11-7m"
   }
 }

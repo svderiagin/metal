@@ -432,7 +432,6 @@ function RebarVariantLayout({view, variant, price, order}: {
   const isA240 = variant.subcategoryId === a240SubcategoryId;
   const isA40035gs = variant.subcategoryId === a40035gsSubcategoryId;
   const isA40025g2s = variant.subcategoryId === a40025g2sSubcategoryId;
-  const a240Class = variant.attributes.some(({key, value}) => key === "class" && value === "А240С") ? "А240С" : "А240";
   const unverified = isDemonstrationProduct(variant);
   const diameter = unverified ? variant.name.match(/(\d+(?:[.,]\d+)?)\s*мм$/iu)?.[1]?.replace(".", ",")
     : variant.diameterMm === undefined ? undefined : formatNumber(variant.diameterMm);
@@ -452,7 +451,7 @@ function RebarVariantLayout({view, variant, price, order}: {
     {label: "Длина прутка", value: length && variant.form === "bar" ? `${length} м` : undefined},
     {label: "Теоретическая масса", value: variant.weightPerMeterKg === undefined ? undefined : `${formatNumber(variant.weightPerMeterKg)} кг/м`},
     ...(isA500c ? [] : [
-      {label: "Стандарт", value: isA40035gs ? undefined : standard},
+      {label: "Стандарт", value: isA40035gs || isA240 ? undefined : standard},
       ...variant.specifications.filter(({name}) =>
         (!isA240 && name === "Класс арматуры") || (!isA40025g2s && name === "Поверхность"))
         .map(({name, value}) => ({label: name, value})),
@@ -460,7 +459,6 @@ function RebarVariantLayout({view, variant, price, order}: {
   ];
   const cardName = isA500c ? variant.name.replace(/\s+ГОСТ\s+34028(?:-2016)?$/u, "") : variant.name;
   return <CatalogVariantLayout view={view} variant={variant} name={view === "card" ? cardName : diameter ?? "—"}
-    tableSubtitle={isA240 ? a240Class : undefined}
     tableSpecifications={[unverified ? <span key="form" className="text-xs text-slate-600 dark:text-slate-400">{form}</span> : form, length ?? "—"]}
     specifications={<CatalogVariantSpecifications items={fields}/>} details={!unverified && <CatalogPositionDetails productName={variant.name} fields={detailsFields}/>}
     price={price} order={order}/>;

@@ -5,7 +5,30 @@ import type {CartItem, CartLine, CartMeasurement} from "@/types/cart";
 import {normalizePieceOrder} from "./profilePipe";
 import {isProfileSheetVariant} from "./profileSheet";
 import {BACKORDER_DELIVERY_ESTIMATE, isDemonstrationProduct, storefrontAvailability} from "./catalogOffer";
-import {tonsToMeters} from "./orderMeasurement";
+import {metersToTons, tonsToMeters} from "./orderMeasurement";
+import {resolveCatalogProductId} from "./catalogIdentity";
+
+const retiredRebarWeights = new Map([["prd-007", 2.47], ["prd-008", 6.31]]);
+
+export function resolveStoredCartItem(item: CartItem): CartItem {
+  const productId = resolveCatalogProductId(item.productId);
+  if (productId === item.productId) return item;
+  const replacement = {...item, productId};
+  const previousWeight = retiredRebarWeights.get(item.productId);
+  // The old A240 bars used rounded kg/m. Preserve their length when repricing
+  // ton-based carts against the more precise mass of the A240C replacements.
+  if (!previousWeight || item.pieceOrder || item.measurement?.inputMode === "meter") return replacement;
+  const product = getProductVariantById(productId);
+  if (!product?.weightPerMeterKg) return replacement;
+  const meters = tonsToMeters(item.measurement?.weightTons ?? item.quantity, previousWeight);
+  const weightTons = meters === null ? null : metersToTons(meters, product.weightPerMeterKg);
+  if (meters === null || weightTons === null) return replacement;
+  return {
+    ...replacement,
+    quantity: weightTons,
+    ...(item.measurement && {measurement: {...item.measurement, meters, weightTons}}),
+  };
+}
 
 export function normalizeCartItems(value: unknown): CartItem[] {
   if (!Array.isArray(value)) return [];

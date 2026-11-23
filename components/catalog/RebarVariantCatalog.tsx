@@ -86,7 +86,8 @@ function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
   const isProfile = kind === "profile";
   const isElectrowelded = kind === "pipe";
   const isA500c = kind === "rebar" && variants.every(variant => variant.subcategoryId === a500cSubcategoryId);
-  const sortRebarLengths = isA500c || (kind === "rebar" && variants.every(variant => variant.subcategoryId === a240SubcategoryId));
+  const isA240 = kind === "rebar" && variants.every(variant => variant.subcategoryId === a240SubcategoryId);
+  const sortRebarLengths = isA500c || isA240;
   const isA400 = kind === "rebar" && variants.every(variant =>
     variant.subcategoryId === a40035gsSubcategoryId || variant.subcategoryId === a40025g2sSubcategoryId,
   );
@@ -192,6 +193,7 @@ function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
     Стандарт для всех позиций — <CatalogStandardReference>ГОСТ 34028-2016</CatalogStandardReference>.{" "}
     Марка стали — Ст3сп или Ст3пс, в зависимости от партии. Химический состав указан в документе о качестве.
   </>
+    : isA240 ? <>Стандарт для всех позиций — <CatalogStandardReference>ГОСТ 34028-2016</CatalogStandardReference>.</>
     : isElectrowelded ? electroweldedNote
     : isBeam && results.some(variant => beamReferenceMassKg(variant) !== undefined)
       ? "Справочная масса по сортаменту используется для предварительного расчёта. Массу выбранной балки уточните у поставщика."

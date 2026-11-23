@@ -18,7 +18,7 @@ const rebarHeadings: Record<string, string> = {
   "cat-arm-sub-1": "Арматура рифлёная А500С",
   "cat-arm-sub-2": "Арматура рифлёная А400 (А3), 35ГС",
   "cat-arm-sub-3": "Арматура рифлёная А400 (А3), 25Г2С",
-  "cat-arm-sub-4": "Арматура гладкая А240 (А1)",
+  "cat-arm-sub-4": "Арматура гладкая А240С (А1)",
 };
 
 type Props = {

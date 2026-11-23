@@ -9,6 +9,8 @@ const hiddenProductIds = new Set([
   "local-6359", "local-1758", "local-17482", "local-61299",
   // Incorrect A500C Ø10 × 12 m position.
   "local-122766",
+  // Smooth rebar is offered as A240C for these diameters, forms and lengths.
+  "local-6123", "local--705", "prd-007", "prd-008",
 ]);
 const hiddenSkus = new Set(["MS-0071", "MS-0072", "MS-0073", "MS-0074"]);
 

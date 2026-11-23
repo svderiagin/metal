@@ -3,6 +3,7 @@ import {normalizeText} from "./russian";
 import {beamProfile, beamSeries, type BeamSeries} from "@/lib/beam";
 import {getSheetParameters, isPlainHotRolledSheet} from "@/lib/sheetPresentation";
 import {isMeasuredElectroweldedVariant} from "@/lib/pipeFamily";
+import {a240SubcategoryId} from "@/lib/rebar";
 
 const number = "\\d+(?:\\.\\d+)?";
 const dimensionPattern = new RegExp(`(?<![а-яa-z\\d.])${number}(?:x${number})+(?![а-яa-z\\d.])`, "g");
@@ -57,6 +58,11 @@ export function buildTechnicalDocument(product: ProductVariant): TechnicalDocume
   // Ст3сп/пс explicitly lists two variants; the second suffix inherits the written grade root.
   for (const m of normalizeText(gradeText + " " + product.name).matchAll(/(ст\d+)(сп|пс|кп)\s*\/\s*(сп|пс|кп)/g)) grades.add(m[1] + m[3]);
   const standardSet = new Set(standards(stdText));
+  if (product.subcategoryId === a240SubcategoryId && grades.has("а240с")) {
+    grades.add("а240");
+    grades.add("а1");
+    if (standardSet.has("34028")) standardSet.add("34028-2016");
+  }
   if (product.categoryId === "cat-bal") {
     for (const match of normalizeText(product.standard).matchAll(/;\s*(\d+(?:\.\d+)*(?:-\d+)?)/g)) standardSet.add(match[1]);
   }

@@ -4,7 +4,7 @@ import {CART_STORAGE_KEY} from "@/lib/constants";
 import {getProductVariantById} from "@/lib/cartCatalog";
 import {resolveCatalogProductId} from "@/lib/catalogIdentity";
 import type {CartItem, CartLine, CartMeasurement, CartPieceOrder, OrderInputMode} from "@/types/cart";
-import {createCartLines, normalizeCartItems} from "@/lib/cart";
+import {createCartLines, normalizeCartItems, resolveStoredCartItem} from "@/lib/cart";
 import {addCartItem, updateCartItem, updateCartPieceOrder} from "@/lib/cartMutations";
 
 interface CartContextValue {
@@ -125,7 +125,7 @@ function readStoredCart(): CartItem[] {
   // and a removal stays effective even if a previously started update writes that product later.
   const items = [...snapshot, ...normalizeCartItems(legacyUpdates), ...normalizeCartItems(updates)]
     .filter(item => localStorage.getItem(removedKeyPrefix + item.productId) === null)
-    .map(item => ({...item, productId: resolveCatalogProductId(item.productId)}));
+    .map(resolveStoredCartItem);
   return normalizeCartItems(items).filter(item => localStorage.getItem(removedKeyPrefix + item.productId) === null);
 }
 

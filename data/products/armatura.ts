@@ -558,14 +558,104 @@ export const armaturaProducts: ProductVariantSource[] = [
     "weightPerMeterKg": 6.31
   },
   {
+    "id": "rebar-a240s-6-bar-6m",
+    "categoryId": "cat-arm",
+    "subcategoryId": "cat-arm-sub-4",
+    "name": "Арматура гладкая А240С 6 мм, пруток 6 м",
+    "slug": "armatura-a1-a240s-6-6m",
+    "sku": "MS-A240S-6-B6",
+    "shortDescription": "Гладкая арматура А240С диаметром 6 мм, пруток 6 м.",
+    "description": "Гладкая арматура класса А240С диаметром 6 мм по ГОСТ 34028-2016. Поставляется прутками длиной 6 м.",
+    "price": 53900,
+    "priceUnit": "за тонну",
+    "priceQualifier": "exact",
+    "availability": "IN_STOCK",
+    "inStock": true,
+    "featured": false,
+    "imageUrls": [],
+    "attributes": [
+      {"key": "class", "label": "Класс арматуры", "value": "А240С"},
+      {"key": "size", "label": "Диаметр", "value": "6 мм"},
+      {"key": "length", "label": "Длина прутка", "value": "6 м"},
+      {"key": "standard", "label": "Стандарт", "value": "ГОСТ 34028-2016"}
+    ],
+    "specifications": [
+      {"name": "Форма поставки", "value": "Пруток"}
+    ],
+    "diameterMm": 6,
+    "form": "bar",
+    "lengthMeters": 6,
+    "weightPerMeterKg": 0.222
+  },
+  {
+    "id": "rebar-a240s-20-bar-11-7m",
+    "categoryId": "cat-arm",
+    "subcategoryId": "cat-arm-sub-4",
+    "name": "Арматура гладкая А240С 20 мм, пруток 11,7 м",
+    "slug": "armatura-a1-a240s-20-11-7m",
+    "sku": "MS-A240S-20-B117",
+    "shortDescription": "Гладкая арматура А240С диаметром 20 мм, пруток 11,7 м.",
+    "description": "Гладкая арматура А240С диаметром 20 мм по ГОСТ 34028-2016. Поставляется прутками длиной 11,7 м.",
+    "price": 54900,
+    "priceUnit": "за тонну",
+    "priceQualifier": "exact",
+    "availability": "IN_STOCK",
+    "inStock": true,
+    "featured": false,
+    "imageUrls": [],
+    "attributes": [
+      {"key": "class", "label": "Класс арматуры", "value": "А240С"},
+      {"key": "size", "label": "Диаметр", "value": "20 мм"},
+      {"key": "length", "label": "Длина прутка", "value": "11,7 м"},
+      {"key": "standard", "label": "Стандарт", "value": "ГОСТ 34028-2016"}
+    ],
+    "specifications": [
+      {"name": "Форма поставки", "value": "Пруток"}
+    ],
+    "diameterMm": 20,
+    "form": "bar",
+    "lengthMeters": 11.7,
+    "weightPerMeterKg": 2.466
+  },
+  {
+    "id": "rebar-a240s-32-bar-11-7m",
+    "categoryId": "cat-arm",
+    "subcategoryId": "cat-arm-sub-4",
+    "name": "Арматура гладкая А240С 32 мм, пруток 11,7 м",
+    "slug": "armatura-a1-a240s-32-11-7m",
+    "sku": "MS-A240S-32-B117",
+    "shortDescription": "Гладкая арматура А240С диаметром 32 мм, пруток 11,7 м.",
+    "description": "Гладкая арматура А240С диаметром 32 мм по ГОСТ 34028-2016. Поставляется прутками длиной 11,7 м.",
+    "price": 62900,
+    "priceUnit": "за тонну",
+    "priceQualifier": "exact",
+    "availability": "ON_ORDER",
+    "inStock": false,
+    "featured": false,
+    "imageUrls": [],
+    "attributes": [
+      {"key": "class", "label": "Класс арматуры", "value": "А240С"},
+      {"key": "size", "label": "Диаметр", "value": "32 мм"},
+      {"key": "length", "label": "Длина прутка", "value": "11,7 м"},
+      {"key": "standard", "label": "Стандарт", "value": "ГОСТ 34028-2016"}
+    ],
+    "specifications": [
+      {"name": "Форма поставки", "value": "Пруток"}
+    ],
+    "diameterMm": 32,
+    "form": "bar",
+    "lengthMeters": 11.7,
+    "weightPerMeterKg": 6.313
+  },
+  {
     "id": "rebar-a240-6-coil",
     "categoryId": "cat-arm",
     "subcategoryId": "cat-arm-sub-4",
-    "name": "Арматура гладкая А240 (А1) 6 мм, в бухтах",
+    "name": "Арматура гладкая А240С 6 мм, в бухтах",
     "slug": "armatura-a1-a240-6-buhta",
     "sku": "MS-A240-6-C",
-    "shortDescription": "Гладкая арматура А240 (А1) диаметром 6 мм в бухтах.",
-    "description": "Гладкая арматура класса А240 (А1) диаметром 6 мм по ГОСТ 5781-82. Поставляется в бухтах.",
+    "shortDescription": "Гладкая арматура А240С диаметром 6 мм в бухтах.",
+    "description": "Гладкая арматура А240С диаметром 6 мм по ГОСТ 34028-2016. Поставляется в бухтах.",
     "price": 55900,
     "priceUnit": "за тонну",
     "priceQualifier": "exact",
@@ -574,13 +664,12 @@ export const armaturaProducts: ProductVariantSource[] = [
     "featured": false,
     "imageUrls": [],
     "attributes": [
-      {"key": "class", "label": "Класс арматуры", "value": "А240"},
+      {"key": "class", "label": "Класс арматуры", "value": "А240С"},
       {"key": "size", "label": "Диаметр", "value": "6 мм"},
-      {"key": "standard", "label": "Стандарт", "value": "ГОСТ 5781-82"}
+      {"key": "standard", "label": "Стандарт", "value": "ГОСТ 34028-2016"}
     ],
     "specifications": [
-      {"name": "Форма поставки", "value": "Бухта"},
-      {"name": "Теоретическая масса по ГОСТ 5781-82", "value": "0,222 кг/м"}
+      {"name": "Форма поставки", "value": "Бухта"}
     ],
     "diameterMm": 6,
     "form": "coil",
@@ -590,11 +679,11 @@ export const armaturaProducts: ProductVariantSource[] = [
     "id": "rebar-a240-8-bar-11-7m",
     "categoryId": "cat-arm",
     "subcategoryId": "cat-arm-sub-4",
-    "name": "Арматура гладкая А240 (А1) 8 мм, пруток 11,7 м",
+    "name": "Арматура гладкая А240С 8 мм, пруток 11,7 м",
     "slug": "armatura-a1-a240-8-11-7m",
     "sku": "MS-A240-8-B117",
-    "shortDescription": "Гладкая арматура А240 (А1) диаметром 8 мм, пруток 11,7 м.",
-    "description": "Гладкая арматура класса А240 (А1) диаметром 8 мм по ГОСТ 34028-2016. Поставляется прутками длиной 11,7 м.",
+    "shortDescription": "Гладкая арматура А240С диаметром 8 мм, пруток 11,7 м.",
+    "description": "Гладкая арматура А240С диаметром 8 мм по ГОСТ 34028-2016. Поставляется прутками длиной 11,7 м.",
     "price": 51500,
     "priceUnit": "за тонну",
     "priceQualifier": "exact",
@@ -603,7 +692,7 @@ export const armaturaProducts: ProductVariantSource[] = [
     "featured": false,
     "imageUrls": [],
     "attributes": [
-      {"key": "class", "label": "Класс арматуры", "value": "А240"},
+      {"key": "class", "label": "Класс арматуры", "value": "А240С"},
       {"key": "size", "label": "Диаметр", "value": "8 мм"},
       {"key": "length", "label": "Длина прутка", "value": "11,7 м"},
       {"key": "standard", "label": "Стандарт", "value": "ГОСТ 34028-2016"}
