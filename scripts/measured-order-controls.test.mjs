@@ -64,6 +64,7 @@ function setup(id, kind = 'beam') {
     '@/components/ui/DetailsSummary': {DetailsSummary: 'summary'},
     './QuoteRequestButton': {QuoteRequestButton: 'quote'},
     './CatalogVariantLayout': {
+      renderVariantPhoto: () => null,
       CatalogVariantLayout: ({specifications, order}) => jsx('row', {children: [specifications, order]}),
       CatalogVariantSpecifications: 'specifications',
       CatalogVariantOrder: ({quantity, secondaryQuantity, action, total}) => jsx('order', {children: [quantity, secondaryQuantity, total, action]}),

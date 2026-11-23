@@ -3,15 +3,15 @@ import {getAllProductVariants} from "../../lib/catalog";
 
 const familyColumns = {
   shveller: ["Профиль", "Фото", "Высота × полка", "Длина", "Цена", "Заказ, м"],
-  ugolok: ["Полки × толщина, мм", "Фото", "Тип", "Длина", "Цена", "Заказ, м"],
-  kvadrat: ["Профиль", "Фото", "Сечение", "Длина", "Цена", "Заказ, м"],
-  armatura: ["Диаметр, мм", "Фото", "Форма / сталь", "Длина, м", "Цена, ₽/т", "Заказ, м", "Заказ, т"],
-  balka: ["Профиль", "Фото", "Сталь", "Длина, м", "Цена, ₽/т", "Заказ, м", "Заказ, т"],
+  ugolok: ["Полки × толщина, мм", "Фото", "Длина", "Цена", "Заказ, м"],
+  kvadrat: ["Сечение, мм", "Фото", "Длина", "Цена", "Заказ, м"],
+  armatura: ["Диаметр, мм", "Фото", "Форма", "Марка стали", "Длина, м", "Цена, ₽/т", "Заказ, м", "Заказ, т"],
+  balka: ["Профиль", "Фото", "Длина, м", "Цена, ₽/т", "Заказ, м", "Заказ, т"],
   profile: ["Сечение × стенка, мм", "Фото", "Длина, м", "Цена, ₽/м", "Заказ, шт."],
   vgp: ["Ду × стенка, мм", "Фото", "Наружный Ø, мм", "Длина, м", "Цена, ₽/т", "Заказ, м", "Заказ, т"],
-  profnastil: ["Профиль / толщина", "Фото", "Покрытие", "Формат, м", "Цена", "Заказ, шт."],
-  mesh: ["Ячейка", "Фото", "Проволока", "Формат", "Цена", "Количество"],
-  shtaketnik: ["Профиль / цвет", "Фото", "Ширина × толщина", "Длина", "Цена", "Количество"],
+  profnastil: ["Толщина, мм", "Фото", "Цвет / покрытие", "Цена", "Заказ, шт."],
+  mesh: ["Ячейка", "Фото", "Проволока", "Размер рулона", "Цена", "Количество"],
+  shtaketnik: ["Цвет / окраска", "Фото", "Ширина × толщина", "Длина", "Цена", "Количество"],
 };
 
 for (const family of ["shveller", "ugolok", "kvadrat", "armatura", "balka", "profile", "vgp", "profnastil", "mesh", "shtaketnik"] as const) {
@@ -27,19 +27,39 @@ for (const family of ["shveller", "ugolok", "kvadrat", "armatura", "balka", "pro
       const headers = productItem.locator("xpath=ancestor::table").getByRole("columnheader");
       await expect(headers).toHaveText([...familyColumns[family], "Сумма", "Действие"]);
       await expect(productItem.getByRole("rowheader")).toBeVisible();
+      const cells = productItem.getByRole("cell");
+      const hasTonneInput = familyColumns[family].includes("Заказ, т");
+      await expect(cells.nth(hasTonneInput ? -5 : -4)).toContainText(/₽|по запросу|уточняется/iu);
+      if (hasTonneInput) {
+        await expect(cells.nth(-4).getByRole("textbox", {name: /^Длина заказа/})).toBeVisible();
+        await expect(cells.nth(-3).getByRole("textbox", {name: /^Вес заказа в тоннах/})).toBeVisible();
+      } else {
+        await expect(cells.nth(-3).getByRole("textbox")).toBeVisible();
+      }
+      await expect(cells.nth(-2).getByLabel(/^Сумма заказа для/)).toBeVisible();
+      await expect(cells.last().getByRole("button").or(cells.last().getByRole("link"))).toBeVisible();
     } else {
       await expect(productItem.getByRole("heading", {level: 3})).toBeVisible();
     }
     if (family === "armatura") {
       await expect(productItem.getByRole("textbox")).toHaveCount(2);
+      const photo = productItem.getByRole("img", {name: product.name, exact: true});
+      await expect(photo).toBeVisible();
+      if (isTable) {
+        await expect(productItem.getByRole("rowheader")).toHaveText(String(product.diameterMm));
+        await expect(productItem.getByRole("cell").first().getByRole("img")).toBeVisible();
+      } else {
+        await expect(productItem.getByRole("heading", {level: 3})).toHaveText(product.name);
+        await expect(productItem.getByRole("term")).toHaveText(["Диаметр", "Форма", "Марка стали", "Длина", "Цена"]);
+      }
     }
     if (family === "mesh" && !isTable) {
-      for (const label of ["Размер ячейки:", "Диаметр проволоки:", "Размер рулона / карты:"]) {
+      for (const label of ["Диаметр проволоки:", "Размер рулона:"]) {
         await expect(productItem.getByText(label, {exact: true})).toBeVisible();
       }
     }
     if (family === "profnastil" && !isTable) {
-      for (const label of ["Толщина, мм:", "Цвет / покрытие:", "Размер листа, м:"]) {
+      for (const label of ["Цвет / покрытие:", "Размер листа, м:"]) {
         await expect(productItem.getByText(label, {exact: true})).toBeVisible();
       }
     }
@@ -81,33 +101,45 @@ test("one requested metre shows the whole rebar count for bars and keeps coils c
   }
 });
 
-test("A400 35GS accepts tonnes at its confirmed price and requests a calculation for metres", async ({page}) => {
-  const product = getAllProductVariants().find(item => item.id === "prd-003")!;
-  await openProduct(page, product);
-  const row = visibleProduct(page, product.id);
-  const meters = row.getByRole("textbox", {name: /^Длина заказа для/});
-  const tons = row.getByRole("textbox", {name: /^Вес заказа/});
-  const total = row.getByLabel(/^Сумма заказа для/);
-  await meters.fill("1");
-  await meters.press("Enter");
-  await expect(meters).toHaveValue("1");
-  await expect(tons).toHaveValue("");
-  await expect(row.getByRole("status", {name: "", exact: true})).not.toContainText("шт.");
-  await expect(total).toHaveText("Длина поставки и масса 1 м уточняются");
-  await row.getByRole("link", {name: "Запросить расчёт", exact: true}).click();
-  const message = page.getByRole("textbox", {name: /^Что требуется рассчитать\?/});
-  await expect(message).toHaveValue(/Общая длина: 1 м(?:\n|$)/);
-  await expect(message).not.toHaveValue(/Вес:|Количество:/);
-  await tons.fill("1");
-  await expect(total).toHaveText(/50\s000,00\s₽/);
-  await row.getByRole("button", {name: "В корзину", exact: true}).click();
-  await expect(row.getByRole("button", {name: "В корзине", exact: true})).toBeVisible();
+test("A400 35GS 12 and 20 mm are sold as whole 11.7 m bars", async ({page}) => {
+  for (const [id, amount] of [["prd-003", /519,48\s₽/], ["prd-004", /1\s444,95\s₽/]] as const) {
+    const product = getAllProductVariants().find(item => item.id === id)!;
+    await openProduct(page, product);
+    const row = visibleProduct(page, id);
+    if (await row.evaluate(element => element.tagName === "TR")) {
+      const headers = row.locator("xpath=ancestor::table").getByRole("columnheader");
+      await expect(headers).toHaveText(["Диаметр, мм", "Фото", "Форма", "Длина, м", "Цена, ₽/т", "Заказ, м", "Заказ, т", "Сумма", "Действие"]);
+      const cells = row.getByRole("cell");
+      await expect(cells).toHaveCount(8);
+      await expect(cells.nth(1)).toHaveText("Пруток");
+      await expect(cells.nth(2)).toHaveText("11,7");
+    } else {
+      await expect(row.getByRole("term")).toHaveText(["Диаметр", "Форма", "Длина", "Цена"]);
+      await expect(row.getByRole("definition").nth(1)).toHaveText("Пруток");
+      await expect(row.getByRole("definition").nth(2)).toHaveText("11,7 м");
+    }
+    const meters = row.getByRole("textbox", {name: /^Длина заказа для/});
+    await meters.fill("1");
+    await meters.press("Enter");
+    await expect(meters).toHaveValue("11,7");
+    await expect(row.getByRole("status", {name: "", exact: true})).toHaveText("1 шт.");
+    await expect(row.getByLabel(/^Сумма заказа для/)).toHaveText(amount);
+    await row.getByRole("button", {name: "В корзину", exact: true}).click();
+    await expect(row.getByRole("button", {name: "В корзине", exact: true})).toBeVisible();
+  }
 });
 
 test("smooth A1 rebar carries the whole bar count and catalogue length into a price request", async ({page}) => {
   const product = getAllProductVariants().find(item => item.id === "local--705")!;
   await openProduct(page, product);
   const row = visibleProduct(page, product.id);
+  if (await row.evaluate(element => element.tagName === "TR")) {
+    const headers = row.locator("xpath=ancestor::table").getByRole("columnheader");
+    await expect(headers).toHaveText(["Диаметр, мм", "Фото", "Форма", "Длина, м", "Цена, ₽/т", "Заказ, м", "Заказ, т", "Сумма", "Действие"]);
+    await expect(row.getByRole("cell")).toHaveCount(8);
+  } else {
+    await expect(row.getByRole("term")).toHaveText(["Диаметр", "Форма", "Длина", "Цена"]);
+  }
   const meters = row.getByRole("textbox", {name: /^Длина заказа для/});
   await meters.fill("1");
   await expect(row.getByRole("status", {name: "", exact: true})).toHaveText("1 шт.");
@@ -188,12 +220,12 @@ test("tread plate filters use the table dimensions and keep the ordering units",
   const sheet = visibleProduct(page, "rozmet-28952");
   const area = visibleProduct(page, samples.treadPlate.id);
   await expect(sheet.getByRole(isMobile ? "heading" : "rowheader", {
-    name: isMobile ? "Лист № 3 ТУ рифленый" : "№ 3 ТУ", exact: true,
+    name: isMobile ? "Лист № 3 ТУ рифленый" : "3 мм · ТУ", exact: true,
   })).toBeVisible();
   await expect(sheet.getByRole("textbox", {name: /^Количество .+, шт\.$/})).toBeVisible();
   await format.selectOption("1500 × 6000 мм");
   await expect(sheet).toHaveCount(0);
-  await expect(area.getByText("1500 × 6000 мм", {exact: true})).toBeVisible();
+  await expect(area.getByText("1500 × 6000 мм", {exact: true}).filter({visible: true})).toBeVisible();
   await expect(area.getByRole("textbox", {name: /^Количество .+, м²$/})).toBeVisible();
   await thickness.selectOption("3 мм");
   await expect(page.getByText("Варианты не найдены", {exact: true})).toBeVisible();
@@ -216,9 +248,9 @@ test("galvanized sheets filter decimal thickness and keep per-sheet ordering", a
   await expect(thin).toHaveCount(0);
   await expect(thick).toHaveCount(0);
   await expect(selected.getByRole(isMobile ? "heading" : "rowheader", {
-    name: isMobile ? "Лист № 0,7 оцинкованный" : "№ 0,7", exact: true,
+    name: isMobile ? "Лист № 0,7 оцинкованный" : "0,7 мм", exact: true,
   })).toBeVisible();
-  await expect(selected.getByText("1250 × 2500 мм", {exact: true})).toBeVisible();
+  await expect(selected.getByText("1250 × 2500 мм", {exact: true}).filter({visible: true})).toBeVisible();
   await expect(selected.getByRole("textbox", {name: /^Количество .+, шт\.$/})).toHaveAttribute("inputmode", "numeric");
   await page.getByRole("button", {name: "Сбросить фильтры", exact: true}).first().click();
   await expect(thin).toBeVisible();

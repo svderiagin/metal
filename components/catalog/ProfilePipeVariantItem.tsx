@@ -19,7 +19,7 @@ import filterStyles from "./FilterPanel.module.css";
 import tableStyles from "./RebarTable.module.css";
 import {useOrderDraft} from "./OrderDraftProvider";
 
-export function ProfilePipeVariantItem({variant, view, squareProfile = false}: {variant: ProductVariant; view: "table" | "card"; squareProfile?: boolean}) {
+export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant; view: "table" | "card"}) {
   const {addItem, updatePieceOrder, removeItem, lines, hydrated} = useCart();
   const line = lines.find(item => item.productId === variant.id);
   const savedLength = line?.pieceOrder?.lengthMeters ?? variant.lengthMeters;
@@ -127,7 +127,7 @@ export function ProfilePipeVariantItem({variant, view, squareProfile = false}: {
       disabled={!hydrated || saved || removed || (!shouldRemove && (!correctedOrder || correctedOrder.estimatedTotal === null))}
       className={`${buttonClass} ${actionSize} px-3`}>{label}</Button>;
 
-  const inputClassName = `${filterStyles.field} min-w-0 px-2 text-center tabular-nums ${squareProfile && view === "table" ? "max-w-[6.375rem]" : ""}`;
+  const inputClassName = `${filterStyles.field} min-w-0 px-2 text-center tabular-nums ${view === "table" ? "max-w-[6.375rem]" : ""}`;
   const quantityInput = <Input type="text" inputMode="numeric"
     id={`profile-pieces-${view}-${variant.id}`}
     aria-label={`Количество целых труб для ${variant.name}`} value={piecesText}
@@ -149,9 +149,8 @@ export function ProfilePipeVariantItem({variant, view, squareProfile = false}: {
   const lengthField = range ? <Input type="text" inputMode="decimal"
     aria-label={`Длина одной трубы для ${variant.name}`} value={lengthText}
     aria-invalid={lengthError || undefined}
-    aria-describedby={squareProfile ? `${statusId}-range ${statusId}` : statusId}
+    aria-describedby={`${statusId}-range ${statusId}`}
     {...quantityTransferHandlers(setMessage)}
-    placeholder={squareProfile ? undefined : `${range[0]}–${range[1]}`}
     onChange={event => {setDraft({pieces: piecesText, length: event.target.value}); setMessage(undefined);}}
     onBlur={settleLength}
     onKeyDown={event => {
@@ -176,22 +175,20 @@ export function ProfilePipeVariantItem({variant, view, squareProfile = false}: {
     {label: "Сечение", value: `${size} мм`},
     {label: "Толщина стенки", value: `${thickness} мм`},
   ];
+  const lengthLabel = lengths === undefined ? "Уточняется" : `${lengths}\u00a0м`;
   const fields = [
     ...dimensionFields,
-    {label: "Длина по каталогу", value: lengths === undefined ? "Уточняется" : `${lengths} м`},
+    {label: "Длина по каталогу", value: lengthLabel},
     {label: "Теоретическая масса", value: mass ? `${mass} кг/м` : undefined},
     {label: "Марка стали", value: variant.steelGrade},
     {label: "Стандарт", value: variant.standard},
   ];
-  const lengthControl = lengthField ? <label className="block text-sm">
-    {view === "card" && <span className="mb-1 block font-semibold">{squareProfile ? "Длина, м" : "Одна труба, м"}</span>}
+  const lengthControl = lengthField && <label className="block text-sm">
+    {view === "card" && <span className="mb-1 block font-semibold">Длина, м</span>}
     {lengthField}
-    {squareProfile && <span id={`${statusId}-range`} className="mt-1 block text-xs tabular-nums text-slate-600 dark:text-slate-400">{lengths} м</span>}
-  </label> : <div>
-    {view === "card" && <p className="text-sm font-semibold">Одна труба, м</p>}
-    <p className="py-2 text-sm tabular-nums">{lengths ?? "—"}</p>
-  </div>;
-  const lengthInOrder = !squareProfile || (view === "card" && Boolean(range));
+    {view === "table" && <span id={`${statusId}-range`} className="mt-1 block text-xs tabular-nums text-slate-600 dark:text-slate-400">{lengthLabel}</span>}
+  </label>;
+  const lengthInOrder = view === "card" && Boolean(range);
   const piecesField = <div>
     {view === "card" && <label htmlFor={`profile-pieces-${view}-${variant.id}`} className="mb-1 block text-sm font-semibold">Заказ, шт.</label>}
     {quantityInput}
@@ -200,11 +197,8 @@ export function ProfilePipeVariantItem({variant, view, squareProfile = false}: {
   </div>;
 
   return <CatalogVariantLayout view={view} variant={variant} name={view === "table" ? `${size} × ${thickness}` : variant.name}
-    tableSpecifications={{headingColSpan: squareProfile ? 2 : undefined, cells: <>
-      <td className="tabular-nums">{squareProfile && range ? lengthControl : lengths ?? "—"}</td>
-      {!squareProfile && <td className="tabular-nums">{mass ?? "—"}</td>}
-    </>}}
-    specifications={<CatalogVariantSpecifications items={squareProfile && range ? dimensionFields : fields.slice(0, 3)}/>}
+    tableSpecifications={{cells: <td className="tabular-nums">{lengthControl ?? lengths ?? "—"}</td>}}
+    specifications={<div id={range ? `${statusId}-range` : undefined}><CatalogVariantSpecifications items={[{label: "Длина", value: lengthLabel}]}/></div>}
     details={<CatalogPositionDetails title="Характеристики профильной трубы" fields={fields}
       figures={<CatalogGuideFigure diagram={{shape: variant.profileWidthMm === variant.profileHeightMm ? "square" : "rectangle",
         dimensions: dimensionFields.map(({label, value}) => [label, value] as const)}}/>}

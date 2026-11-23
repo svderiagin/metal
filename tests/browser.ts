@@ -24,7 +24,7 @@ export const samples = {
   galvanizedSheet: products.find(p => p.id === "rozmet-2199")!,
   coldRolledSheet: products.find(p => p.id === "rozmet-2185")!,
   hotRolledSheet: products.find(p => p.id === "rozmet-2190")!,
-  armatura: products.find(p => p.categoryId === "cat-arm" && !p.demo && p.diameterMm === 12 && p.inStock)!,
+  armatura: products.find(p => p.id === "rebar-a500c-12-coil")!,
   balka: products.find(p => p.categoryId === "cat-bal" && p.imported)!,
   profile: products.find(p => p.categoryId === "cat-trp" && p.profileWidthMm === 40 && p.profileHeightMm === 40 && p.wallThicknessMm === 2)!,
   vgp: products.find(p => p.categoryId === "cat-trk" && p.weightPerMeterKg)!,

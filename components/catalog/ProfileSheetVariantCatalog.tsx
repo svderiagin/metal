@@ -18,7 +18,7 @@ import {CatalogGuideFigure} from "./CatalogGuideFigure";
 import {formatSpecification} from "./StorefrontPositionSpecifications";
 
 type SortMode = "thickness-asc" | "thickness-desc" | "price-asc" | "price-desc";
-const columns = singleQuantityColumns("Профиль / толщина", "Покрытие", "Формат, м", "Заказ, шт.");
+type SharedSheetProperties = {profile?: string; size?: string; coating?: string};
 
 export function ProfileSheetVariantCatalog({variants}: {variants: ProfileSheetVariant[]}) {
   const [query, setQuery] = useState("");
@@ -34,6 +34,14 @@ export function ProfileSheetVariantCatalog({variants}: {variants: ProfileSheetVa
     .sort((left, right) => left - right), [variants]);
   const coatings = useMemo(() => [...new Set(variants.map(profileSheetCoatingLabel))]
     .sort((left, right) => left.localeCompare(right, "ru", {numeric: true})), [variants]);
+  const first = variants[0];
+  const shared: SharedSheetProperties = {
+    profile: variants.every(p => p.profileMark === first.profileMark) ? first?.profileMark : undefined,
+    size: variants.every(p => p.sheetSizeMeters === first.sheetSizeMeters) ? first?.sheetSizeMeters : undefined,
+    coating: coatings.length === 1 ? coatings[0] : undefined,
+  };
+  const columns = singleQuantityColumns(shared.profile ? "Толщина, мм" : "Профиль / толщина",
+    [...(shared.coating ? [] : ["Цвет / покрытие"]), ...(shared.size ? [] : ["Размер листа, м"])], "Заказ, шт.");
   const results = useMemo(() => {
     const needle = normalizeText(query);
     return variants.filter((variant) => {
@@ -83,23 +91,27 @@ export function ProfileSheetVariantCatalog({variants}: {variants: ProfileSheetVa
           {thicknesses.map((value) => <option key={value} value={value}>{formatNumber(value)}</option>)}
         </Select>
       </label>
-      <label className="text-sm font-semibold">
+      {coatings.length > 1 && <label className="text-sm font-semibold">
         Цвет / покрытие
         <Select value={coating} onChange={(event) => setCoating(event.target.value)}>
           <option value="">Все значения</option>
           {coatings.map((value) => <option key={value} value={value}>{value}</option>)}
         </Select>
-      </label>
+      </label>}
       <PriceRangeInputs range={priceRange} unit="штуку"/>
     </FilterPanel>
 
     <section className="min-w-0 lg:col-span-2" aria-label="Профнастил">
       {results.length ? <>
+        {(shared.size || shared.coating) && <p className="mb-3 hidden text-sm text-slate-600 xl:block dark:text-slate-300">
+          {shared.size && <>Размер листа — {formatSpecification(shared.size)} м. </>}
+          {shared.coating && <>Покрытие — {shared.coating === "Оцинкованный" ? "цинк" : shared.coating}.</>}
+        </p>}
         <CatalogVariantTable columns={columns}>
-          {results.map(variant => <ProfileSheetItem key={variant.id} variant={variant} view="table"/>)}
+          {results.map(variant => <ProfileSheetItem key={variant.id} variant={variant} shared={shared} view="table"/>)}
         </CatalogVariantTable>
         <div className="grid gap-4 sm:grid-cols-2 xl:hidden">
-          {results.map((variant) => <ProfileSheetItem key={variant.id} variant={variant} view="card"/>)}
+          {results.map((variant) => <ProfileSheetItem key={variant.id} variant={variant} shared={shared} view="card"/>)}
         </div>
       </> : <div className="rounded-xl border border-dashed border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 p-8 text-center">
         <strong className="text-lg">Варианты не найдены</strong>
@@ -110,24 +122,27 @@ export function ProfileSheetVariantCatalog({variants}: {variants: ProfileSheetVa
   </>;
 }
 
-function ProfileSheetItem({variant, view}: {variant: ProfileSheetVariant; view: "table" | "card"}) {
+function ProfileSheetItem({variant, shared, view}: {variant: ProfileSheetVariant; shared: SharedSheetProperties; view: "table" | "card"}) {
   const coating = profileSheetCoatingLabel(variant);
   const size = formatSpecification(variant.sheetSizeMeters);
   const thickness = formatNumber(variant.wallThicknessMm);
   const fields = [
     {label: "Марка профиля", value: variant.profileMark},
-    {label: "Толщина, мм", value: formatNumber(variant.wallThicknessMm)},
+    {label: "Толщина, мм", value: thickness},
     {label: "Цвет / покрытие", value: coating},
     {label: "Размер листа, м", value: size},
   ];
 
   return <CatalogVariantLayout view={view} variant={variant}
-    name={view === "table" ? `${variant.profileMark} · ${thickness} мм` : variant.name}
-    tableSpecifications={{cells: <><td>{variant.coatingType === "galvanized" ? "Цинк" : coating}</td><td className="tabular-nums">{size}</td></>}}
-    specifications={<CatalogVariantSpecifications items={fields}/>}
-    details={<CatalogPositionDetails title="Характеристики профлиста" fields={fields}
+    name={view === "table" && shared.profile ? thickness : `${variant.profileMark} · ${thickness} мм`}
+    tableSpecifications={{cells: <>
+      {!shared.coating && <td>{coating}</td>}
+      {!shared.size && <td className="tabular-nums">{size}</td>}
+    </>}}
+    specifications={<CatalogVariantSpecifications items={fields.slice(2)}/>}
+    details={<CatalogPositionDetails title={variant.name} fields={fields}
       figures={<CatalogGuideFigure diagram={{shape: "sheet-width"}}/>}
       supply={<p>Для расчёта количества листов уточните полезную ширину с учётом нахлёста. Размер в каталоге относится к выбранной позиции.</p>}/>}
     price={formatUnitPrice(variant.price, variant.priceUnit)}
-    order={<ProductOrderControls view={view} variant={variant} allowBackorder wholeQuantity={true}/>}/>;
+    order={<ProductOrderControls view={view} variant={variant} allowBackorder wholeQuantity={true} showUnit={view === "card"}/>}/>;
 }

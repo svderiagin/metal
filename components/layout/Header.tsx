@@ -31,12 +31,13 @@ export function Header() {
         </Link>
         <div className={`${headerStyles.actions} ml-auto flex max-w-full flex-wrap items-center gap-2 sm:gap-3`}>
           <ThemeSwitch/>
-          <Link
+          {/* eslint-disable-next-line @next/next/no-html-link-for-pages -- Native navigation waits for the home page's fragment target. */}
+          <a
             href="/#request"
             className="hidden min-h-11 items-center rounded-lg border border-slate-600 px-5 text-sm font-semibold text-white transition-colors hover:border-slate-400 hover:bg-slate-800 sm:inline-flex"
           >
             Запросить расчёт
-          </Link>
+          </a>
           <CartButton/>
         </div>
       </PageContainer>

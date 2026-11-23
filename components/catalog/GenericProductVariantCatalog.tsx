@@ -114,6 +114,7 @@ export function GenericProductVariantCatalog({
       </FilterPanel>
 
       <VariantCatalogResults visible={visible} categorySlug={categorySlug} isSheetCatalog={isSheetCatalog} resultsCount={results.length}
+        hasVerifiedSpecifications={variants.some(variant => !isDemonstrationProduct(variant))}
         currentPage={currentPage} pages={pages} onPageChange={setPage} onReset={reset}/>
     </>
   );

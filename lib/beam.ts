@@ -69,14 +69,18 @@ export function beamStandardLabel(product: ProductVariant) {
     .replace(/ГОСТ\s+(?=\d)/gu, "ГОСТ\u00a0");
 }
 
-export function beamTableNames(products: ProductVariant[]) {
+export function beamTableNames(products: ProductVariant[], {compact = false} = {}) {
+  const grades = new Set(products.filter(product => !isDemonstrationProduct(product))
+    .map(product => product.steelGrade).filter(grade => grade && grade !== "—"));
   const groups = new Map<string, ProductVariant[]>();
   for (const product of products) {
     const kind = beamKind(product);
     const profile = beamProfile(product);
     const grade = product.steelGrade;
+    const prefix = compact ? "" : `Балка ${kind.toLowerCase()} `;
+    const showGrade = grade && grade !== "—" && (!compact || grades.size > 1);
     const name = isDemonstrationProduct(product) || kind === "—" || profile === "—" ? product.name
-      : `Балка ${kind.toLowerCase()} ${profile}${grade && grade !== "—" ? `, ${grade}` : ""}`;
+      : `${prefix}${profile}${showGrade ? `, ${grade}` : ""}`;
     const group = groups.get(name);
     if (group) group.push(product);
     else groups.set(name, [product]);

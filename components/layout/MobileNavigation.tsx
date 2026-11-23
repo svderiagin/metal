@@ -64,10 +64,11 @@ export function MobileNavigation() {
             </li>
           ))}
           <li>
-            <Link href="/#request" onClick={() => setOpenPath(null)}
+            {/* eslint-disable-next-line @next/next/no-html-link-for-pages -- Native navigation waits for the home page's fragment target. */}
+            <a href="/#request" onClick={() => setOpenPath(null)}
               className={`${styles.link} flex min-h-12 items-center px-4 py-3 font-medium text-slate-100 transition-colors hover:bg-slate-800 sm:px-6`}>
               Запросить расчёт
-            </Link>
+            </a>
           </li>
         </ul>
       </nav>

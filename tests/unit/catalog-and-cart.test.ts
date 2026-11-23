@@ -85,7 +85,7 @@ test("ordinary cart changes validate whole units, merge, and reject unknown or i
 });
 
 test("measured cart mutations ignore cached money and reprice the edited quantity", () => {
-  const rebar = products.find(p => p.categoryId === "cat-arm" && !p.demo && p.diameterMm === 12 && p.inStock)!;
+  const rebar = products.find(p => p.id === "rebar-a500c-12-coil")!;
   const measurement = {inputMode: "meter" as const, meters: 100, weightTons: 999, pricePerTon: 1, estimatedTotal: 1};
   let items = addCartItem([], rebar, 100, measurement);
   assert.equal(items[0].measurement?.weightTons, .0888);

@@ -7,7 +7,7 @@ import {CatalogDescription} from "./CatalogDescription";
 import {ChannelSpecificationNote} from "./ChannelSpecificationNote";
 import {ChannelProductPreview} from "./ChannelProductPreview";
 import {formatUnitPrice} from "@/lib/currency";
-import {getSheetDesignation, isPlainHotRolledSheet, sheetFormatLabel} from "@/lib/sheetPresentation";
+import {getSheetDesignation, getSheetTableDesignation, isPlainHotRolledSheet, sheetFormatLabel} from "@/lib/sheetPresentation";
 import {Button} from "@/components/ui/Button";
 import {ResetFiltersButton} from "./ResetFiltersButton";
 import {CatalogVariantLayout, CatalogVariantSpecifications, CatalogVariantTable, singleQuantityColumns} from "./CatalogVariantLayout";
@@ -19,45 +19,46 @@ import type {CatalogGuideDiagram} from "@/data/catalog-description-copy";
 
 type DimensionDiagram = Extract<CatalogGuideDiagram, {dimensions: unknown}>;
 type TableSpecifications = {
-  heading: string; labels: readonly [string, string]; keys: readonly [string, string];
+  heading: string;
+  parameters: readonly (readonly [label: string, key: string, secondDimension?: string])[];
   shape?: DimensionDiagram["shape"]; diagramKeys?: readonly string[];
 };
 
 const tableSpecs = {
   shveller: {
-    heading: "Профиль", labels: ["Высота × полка", "Длина"], keys: ["Высота", "Длина по каталогу"], shape: "channel",
+    heading: "Профиль", parameters: [["Высота × полка", "Высота", "Ширина полки"], ["Длина", "Длина по каталогу"]], shape: "channel",
     diagramKeys: ["Высота", "Ширина полки", "Толщина стенки"],
   },
   ugolok: {
-    heading: "Полки × толщина, мм", labels: ["Тип", "Длина"], keys: ["Тип уголка", "Длина по каталогу"], shape: "angle",
+    heading: "Полки × толщина, мм", parameters: [["Длина", "Длина по каталогу"]], shape: "angle",
     diagramKeys: ["Размеры уголка", "Толщина полок уголка"],
   },
   kvadrat: {
-    heading: "Профиль", labels: ["Сечение", "Длина"], keys: ["Сечение", "Длина по каталогу"], shape: "solid-square",
+    heading: "Сечение, мм", parameters: [["Длина", "Длина по каталогу"]], shape: "solid-square",
     diagramKeys: ["Сечение"],
   },
   polosa: {
-    heading: "Сечение, мм", labels: ["Длина", "Масса"], keys: ["Длина по каталогу", "Теоретическая масса"], shape: "strip",
+    heading: "Сечение, мм", parameters: [["Длина", "Длина по каталогу"]], shape: "strip",
     diagramKeys: ["Ширина", "Толщина"],
   },
   shtaketnik: {
-    heading: "Профиль / цвет", labels: ["Ширина × толщина", "Длина"], keys: ["Ширина", "Длина"], shape: "strip",
+    heading: "Цвет / окраска", parameters: [["Ширина × толщина", "Ширина", "Толщина"], ["Длина", "Длина"]], shape: "strip",
     diagramKeys: ["Ширина", "Толщина", "Длина"],
   },
   "listovoy-prokat": {
-    heading: "Обозначение", labels: ["Толщина", "Формат"], keys: ["Толщина", sheetFormatLabel], shape: "plate",
+    heading: "Толщина / исполнение", parameters: [["Формат", sheetFormatLabel]], shape: "plate",
     diagramKeys: [sheetFormatLabel, "Толщина"],
   },
   "truby-profilnye": {
-    heading: "Обозначение", labels: ["Сечение", "Длина"], keys: ["Размер", "Длина поставки"],
+    heading: "Обозначение", parameters: [["Сечение", "Размер"], ["Длина", "Длина поставки"]],
   },
   armatura: {
-    heading: "Обозначение", labels: ["Диаметр", "Длина"], keys: ["Номинальный диаметр, мм", "Длина, мм"],
+    heading: "Обозначение", parameters: [["Диаметр", "Номинальный диаметр, мм"], ["Длина", "Длина, мм"]],
   },
 } satisfies Record<string, TableSpecifications>;
 
-export function VariantCatalogResults({visible, categorySlug, isSheetCatalog, resultsCount, currentPage, pages, onPageChange, onReset}: {
-  visible: ProductVariant[]; categorySlug: string; isSheetCatalog: boolean; resultsCount: number; currentPage: number; pages: number;
+export function VariantCatalogResults({visible, categorySlug, isSheetCatalog, hasVerifiedSpecifications, resultsCount, currentPage, pages, onPageChange, onReset}: {
+  visible: ProductVariant[]; categorySlug: string; isSheetCatalog: boolean; hasVerifiedSpecifications: boolean; resultsCount: number; currentPage: number; pages: number;
   onPageChange: (page: number) => void; onReset: () => void;
 }) {
   const isChannel = categorySlug === "shveller";
@@ -65,7 +66,8 @@ export function VariantCatalogResults({visible, categorySlug, isSheetCatalog, re
   const showAvailability = !hasMetreQuantities && !isSheetCatalog;
   const presentation: TableSpecifications = isSheetCatalog ? tableSpecs["listovoy-prokat"]
     : tableSpecs[categorySlug as keyof typeof tableSpecs] ?? tableSpecs.armatura;
-  const columns = singleQuantityColumns(presentation.heading, ...presentation.labels,
+  const parameters = hasVerifiedSpecifications ? presentation.parameters : [];
+  const columns = singleQuantityColumns(presentation.heading, parameters.map(([label]) => label),
     hasMetreQuantities || categorySlug === "polosa" ? "Заказ, м" : "Количество");
   function renderVariant(variant: ProductVariant, view: "table" | "card") {
     const price = variant.quoteOnly ? "Цена по запросу" : `${variant.priceQualifier === "from" ? "от " : ""}${formatUnitPrice(variant.price, variant.priceUnit)}`;
@@ -77,32 +79,42 @@ export function VariantCatalogResults({visible, categorySlug, isSheetCatalog, re
       const b = value(second);
       return a && b ? `${a.replace(/\s*мм$/u, "")} × ${b}` : a;
     };
-    const angleType = value("Тип уголка");
-    const values = [
-      isChannel ? pairedSize("Высота", "Ширина полки")
-        : categorySlug === "shtaketnik" ? pairedSize("Ширина", "Толщина")
-          : categorySlug === "ugolok" && angleType ? angleType === "Равнополочный" ? "Равные полки" : "Неравные полки"
-            : value(presentation.keys[0]),
-      value(presentation.keys[1]),
-    ];
-    const tableName = isSheetCatalog ? getSheetDesignation(variant)
-      : categorySlug === "polosa" ? pairedSize("Ширина", "Толщина")?.replace(/\s*мм$/u, "")
-        : categorySlug === "shtaketnik" ? [value("Вид профиля штакетника"), variant.ralCode ? `RAL ${variant.ralCode}` : value("Код цвета")].filter(Boolean).join(" · ")
-          : formatSpecification(referenceProfileName(variant.name, categorySlug)).replace(/^№\s+(?=\d+ ×)/u, "");
+    const specifications = parameters.map(([label, key, secondDimension]) => ({
+      label, value: secondDimension ? pairedSize(key, secondDimension) : value(key),
+    }));
+    let tableName = formatSpecification(referenceProfileName(variant.name, categorySlug)).replace(/^№\s+(?=\d+ ×)/u, "");
+    let cardName = isPlainHotRolledSheet(variant) ? getSheetDesignation(variant) : variant.name;
+    if (isSheetCatalog) tableName = getSheetTableDesignation(variant);
+    const section = categorySlug === "kvadrat" ? value("Сечение") : undefined;
+    if (section) {
+      tableName = section.replace(/\s*мм$/u, "");
+      cardName = `Квадрат стальной ${section}`;
+    }
+    if (categorySlug === "polosa") tableName = pairedSize("Ширина", "Толщина")?.replace(/\s*мм$/u, "") ?? tableName;
+    if (categorySlug === "shtaketnik") {
+      const ral = variant.ralCode ?? variant.name.match(/\bRAL\s+(\d{4})\b/iu)?.[1];
+      const finish = value("Тип покраски");
+      const sides = finish === "Односторонний" ? "1 сторона" : finish === "Двухсторонний" ? "2 стороны" : finish;
+      const coating = [ral ? `RAL ${ral}` : value("Код цвета"), sides].filter(Boolean).join(" · ");
+      if (coating) {
+        tableName = coating;
+        cardName = `Штакетник ${coating}`;
+      }
+    }
     const diagram = presentation.shape ? {
       shape: presentation.shape,
       dimensions: fields.filter(field => presentation.diagramKeys?.includes(field.label)).map(({label, value}) => [label, value] as const),
     } : undefined;
     const photo = isChannel ? <ChannelProductPreview variant={variant} compact={view === "table"}/> : undefined;
     return <CatalogVariantLayout key={variant.id} variant={variant} view={view}
-      name={view === "table" ? tableName || variant.name : isPlainHotRolledSheet(variant) ? getSheetDesignation(variant) : variant.name}
+      name={view === "table" ? tableName : cardName}
       preview={photo}
-      tableSpecifications={{cells: values.map((specification, index) =>
-        <td key={presentation.keys[index]} className="tabular-nums">{specification ?? "—"}</td>)}}
+      tableSpecifications={{cells: specifications.map(({label, value}) =>
+        <td key={label} className="tabular-nums">{value ?? "—"}</td>)}}
       specifications={unverified
         ? <p className="text-sm text-slate-600 dark:text-slate-400">Характеристики требуют подтверждения перед заказом.</p>
-        : <CatalogVariantSpecifications items={values.map((value, index) => ({label: presentation.labels[index], value})).filter(({value}) => value)}/>}
-      details={<CatalogPositionDetails fields={fields}
+        : <CatalogVariantSpecifications items={specifications}/>}
+      details={<CatalogPositionDetails title={variant.name} fields={fields}
         figures={diagram?.dimensions.length ? <CatalogGuideFigure diagram={diagram}/> : undefined}
         supply={unverified ? <p>Укажите в заявке нужные размеры и документы на партию.</p>
           : isChannel || hasMetreQuantities || isSheetCatalog || categorySlug === "polosa" ? undefined

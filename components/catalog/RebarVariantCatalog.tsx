@@ -18,8 +18,9 @@ import tableStyles from "./RebarTable.module.css";
 
 import {createCatalogSearchIndex} from "@/lib/search";
 import {useDeferredValue, useMemo, useState} from "react";
-import {Icon} from "@/components/ui/Icon";
 import {ElectroweldedMassTable} from "./PipePositionDetails";
+import {CatalogStandardLink} from "./CatalogPositionDetails";
+import {CatalogTableNote} from "./CatalogTableNote";
 import {Select} from "@/components/ui/Select";
 import {useLinkedVariant} from "@/hooks/useLinkedVariant";
 import {comparePrices, parseCatalogPrice} from "@/lib/catalogFilters";
@@ -39,53 +40,48 @@ type SortMode =
   | "weight-asc"
   | "weight-desc";
 
+function tonneOrderColumns({price = 11, tons = 10, total = 14, action = 15} = {}): CatalogColumn[] {
+  return [
+    {label: "Цена, ₽/т", width: price},
+    {label: "Заказ, м", width: 10},
+    {label: "Заказ, т", width: tons},
+    {label: "Сумма", width: total, className: tableStyles.sumColumn},
+    {label: "Действие", width: action, visuallyHidden: true},
+  ];
+}
+
 const vgpColumns = [
-  {label: "Ду × стенка, мм", width: 13, className: tableStyles.vgpSizeColumn},
+  {label: "Ду × стенка, мм", width: 13, className: tableStyles.sizeColumn},
   {label: "Фото", width: 13},
   {label: "Наружный", unit: "Ø, мм", width: 8, className: tableStyles.vgpDiameterColumn},
   {label: "Длина, м", width: 7.25},
-  {label: "Цена, ₽/т", width: 11},
-  {label: "Заказ, м", width: 10},
-  {label: "Заказ, т", width: 10.25},
-  {label: "Сумма", width: 13.5, className: tableStyles.sumColumn},
-  {label: "Действие", width: 14, visuallyHidden: true},
+  ...tonneOrderColumns({tons: 10.25, total: 13.5, action: 14}),
 ] as const;
 
-const measuredOrderColumns = [
-  {label: "Заказ, м", width: 10},
-  {label: "Заказ, т", width: 10},
-  {label: "Сумма", width: 14, className: tableStyles.sumColumn},
-  {label: "Действие", width: 15, visuallyHidden: true},
-] as const;
+function measuredColumns(designation: string, specification: string): CatalogColumn[] {
+  return [
+    {label: designation, width: [9, 7]},
+    {label: "Фото", width: 13},
+    {label: specification, width: 11},
+    ...tonneOrderColumns(),
+  ];
+}
 
-const rebarColumns = [
-  {label: "Диаметр, мм", width: 11},
-  {label: "Фото", width: 13},
-  {label: "Форма / сталь", width: 9},
-  {label: "Длина, м", width: 6},
-  {label: "Цена, ₽/т", width: 12},
-  ...measuredOrderColumns,
-] as const;
+function rebarColumns(showSteelGrade: boolean): CatalogColumn[] {
+  return [
+    {label: "Диаметр, мм", width: 8, className: tableStyles.sizeColumn},
+    {label: "Фото", width: 13},
+    {label: "Форма", width: showSteelGrade ? 8 : 12},
+    ...(showSteelGrade ? [{label: "Марка стали", width: 8}] : []),
+    {label: "Длина, м", width: showSteelGrade ? 6 : 10},
+    ...tonneOrderColumns({price: 11.5, total: 12.5, action: 13}),
+  ];
+}
+const rebarSubcategoriesWithoutSteelGradeColumn = ["cat-arm-sub-2", "cat-arm-sub-3", "cat-arm-sub-4"];
+const beamColumns = measuredColumns("Профиль", "Длина, м");
+const electroweldedColumns = measuredColumns("Ø × стенка, мм", "Длина, м");
 
-const beamColumns = [
-  {label: "Профиль", width: 13},
-  {label: "Фото", width: 13},
-  {label: "Сталь", width: 7},
-  {label: "Длина, м", width: 6},
-  {label: "Цена, ₽/т", width: 12},
-  ...measuredOrderColumns,
-] as const;
-
-const electroweldedColumns = [
-  {label: "Ø × стенка, мм", width: 13},
-  {label: "Фото", width: 13},
-  {label: "Сталь", width: 7},
-  {label: "Длина, м", width: 7},
-  {label: "Цена, ₽/т", width: 11},
-  ...measuredOrderColumns,
-] as const;
-
-const squareProfilePipeColumns = [
+const profilePipeColumns = [
   {label: "Сечение × стенка, мм", width: [10, 8]},
   {label: "Фото", width: 17},
   {label: "Длина, м", width: 11},
@@ -95,20 +91,8 @@ const squareProfilePipeColumns = [
   {label: "Действие", width: 15, visuallyHidden: true},
 ] as const;
 
-const profilePipeColumns = [
-  {label: "Сечение × стенка, мм", width: 14},
-  {label: "Фото", width: 13},
-  {label: "Длина, м", width: 8},
-  {label: "Масса, кг/м", width: 8},
-  {label: "Цена, ₽/м", width: 10},
-  {label: "Одна труба, м", width: 9},
-  {label: "Заказ, шт.", width: 9},
-  {label: "Сумма", width: 14, className: tableStyles.sumColumn},
-  {label: "Действие", width: 15, visuallyHidden: true},
-] as const;
-
 const columnsByKind = {
-  rebar: rebarColumns, beam: beamColumns, vgp: vgpColumns, pipe: electroweldedColumns, profile: profilePipeColumns,
+  beam: beamColumns, vgp: vgpColumns, pipe: electroweldedColumns, profile: profilePipeColumns,
 } satisfies Record<string, readonly CatalogColumn[]>;
 
 export function isMeasuredRebarVariant(variant: ProductVariant): variant is RebarVariant {
@@ -123,7 +107,7 @@ export function RebarVariantCatalog({variants}: {variants: RebarVariant[]}) {
 }
 
 export function BeamVariantCatalog({variants}: {variants: ProductVariant[]}) {
-  const names = useMemo(() => beamTableNames(variants), [variants]);
+  const names = useMemo(() => beamTableNames(variants, {compact: true}), [variants]);
   return <MeasuredVariantCatalog variants={variants} kind="beam" names={names}/>;
 }
 
@@ -147,15 +131,18 @@ function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
   const isBeam = kind === "beam";
   const isVgp = kind === "vgp";
   const isProfile = kind === "profile";
-  const squareProfile = isProfile && variants.every(variant => variant.subcategoryId === "cat-trp-sub-1");
-  const columns = squareProfile ? squareProfilePipeColumns : columnsByKind[kind];
+  const showRebarSteelGrade = kind === "rebar" && !rebarSubcategoriesWithoutSteelGradeColumn.some(
+    subcategoryId => variants.every(variant => variant.subcategoryId === subcategoryId),
+  );
+  const columns = kind === "rebar" ? rebarColumns(showRebarSteelGrade) : columnsByKind[kind];
   const isElectrowelded = kind === "pipe";
   const showSizeFilter = !isVgp && !isElectrowelded;
   const isGalvanized = isElectrowelded && variants.every(isGalvanizedElectroweldedVariant);
   const wholePipeOrderNote = <strong>Заказ округляется вверх до целых труб.</strong>;
+  const electroweldedMassSource = <ElectroweldedMassTable>таблицы 1 <span className="whitespace-nowrap">ГОСТ 10704-91</span></ElectroweldedMassTable>;
   const electroweldedNote = isGalvanized
-    ? <>Для пересчёта используется масса стальной трубы <strong>без цинкового покрытия</strong> из <ElectroweldedMassTable>таблицы 1 ГОСТ 10704-91</ElectroweldedMassTable>. {wholePipeOrderNote}</>
-    : <>Масса и стоимость заказа по длине рассчитываются по <strong>теоретической массе</strong> из <ElectroweldedMassTable>таблицы 1 ГОСТ 10704-91</ElectroweldedMassTable>.</>;
+    ? <>Для пересчёта используется масса стальной трубы <strong>без цинкового покрытия</strong> из {electroweldedMassSource}. <span className="block">{wholePipeOrderNote}</span></>
+    : <>Масса и стоимость заказа по длине рассчитываются по <strong>теоретической массе</strong> из {electroweldedMassSource}.</>;
   const [query, setQuery] = useState("");
   const deferredQuery = useDeferredValue(query);
   const resultsPending = query !== deferredQuery;
@@ -221,9 +208,14 @@ function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
       return compareSizes(left, right);
     });
   }, [hits, deferredQuery, availability, diameter, form, length, maximumPrice, minimumPrice, sort, variants, isBeam, isVgp, isProfile, isElectrowelded]);
+  const hasRebarBars = kind === "rebar" && results.some(requiresWholeLengthOrder);
+  const hasGostRebarMass = kind === "rebar" && results.some(variant => variant.specifications.some(
+    spec => spec.name === "Теоретическая масса по ГОСТ 5781-82",
+  ));
   const orderNote = isVgp ? wholePipeOrderNote : isElectrowelded ? electroweldedNote
-    : kind === "rebar" && results.some(requiresWholeLengthOrder) ? <>
-      <strong>Прутки поставляются целиком.</strong> По введённой длине или массе количество прутков округляется вверх.
+    : hasRebarBars || hasGostRebarMass ? <>
+      {hasRebarBars && <span className="block"><strong>Заказ округляется вверх до целых прутков.</strong></span>}
+      {hasGostRebarMass && <>Теоретическая масса метра приведена в <CatalogStandardLink href="https://meganorm.ru/Data1/3/3937/index.htm#i25093">таблице 1 <span className="whitespace-nowrap">ГОСТ 5781-82</span></CatalogStandardLink>.</>}
     </> : null;
 
   function resetFilters() {
@@ -280,16 +272,13 @@ function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
       <section className="min-w-0 lg:col-span-2" aria-label="Продукция">
       {results.length ? (
         <>
-        {orderNote && <p className="mb-3 flex items-start gap-2.5 rounded-lg border border-brand-200 bg-brand-50 px-3 py-2.5 text-sm text-slate-700 sm:px-4 dark:border-brand-800 dark:bg-brand-950 dark:text-slate-200">
-          <Icon name="info" className="mt-0.5 text-brand-700 dark:text-brand-300"/>
-          <span className="min-w-0">{orderNote}</span>
-        </p>}
+        {orderNote && <CatalogTableNote>{orderNote}</CatalogTableNote>}
         <CatalogVariantTable columns={columns}>
-          {results.map(variant => <MeasuredVariantItem key={variant.id} variant={variant} name={names?.get(variant.id)} kind={kind} view="table" squareProfile={squareProfile}/>)}
+          {results.map(variant => <MeasuredVariantItem key={variant.id} variant={variant} name={names?.get(variant.id)} kind={kind} view="table" showRebarSteelGrade={showRebarSteelGrade}/>)}
         </CatalogVariantTable>
         <div className="grid gap-4 sm:grid-cols-2 xl:hidden">
           {results.map((variant) => (
-            <MeasuredVariantItem key={variant.id} variant={variant} name={names?.get(variant.id)} kind={kind} view="card" squareProfile={squareProfile}/>
+            <MeasuredVariantItem key={variant.id} variant={variant} name={names?.get(variant.id)} kind={kind} view="card" showRebarSteelGrade={showRebarSteelGrade}/>
           ))}
         </div>
         </>

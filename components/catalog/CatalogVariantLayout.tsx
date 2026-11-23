@@ -1,4 +1,4 @@
-import {Fragment, useState, type ReactNode} from "react";
+import {createContext, Fragment, useContext, useState, type ReactNode} from "react";
 import type {ProductVariant} from "@/types/product";
 import {getProductIllustration} from "@/lib/productPreviewImage";
 import {isDemonstrationProduct} from "@/lib/catalogOffer";
@@ -8,17 +8,23 @@ import {ProductImageViewer} from "./ProductImageViewer";
 import tableStyles from "./RebarTable.module.css";
 
 type View = "table" | "card";
-export type CatalogColumn = {label: string; width: number | readonly [number, number]; unit?: string; className?: string; visuallyHidden?: boolean};
+export type CatalogColumn = {label: string; width: number | readonly number[]; unit?: string; className?: string; visuallyHidden?: boolean};
 const trackCount = 9;
+const TableHeadingSpan = createContext<number | undefined>(undefined);
+const singleQuantitySizes = [
+  {designation: [10, 10, 8], photo: 21, specifications: []},
+  {designation: [10, 10], photo: 17, specifications: [12]},
+  {designation: 14, photo: 13, specifications: [10, 12]},
+] as const;
 
 export function singleQuantityColumns(
-  designation: string, firstSpecification: string, secondSpecification: string, quantityLabel = "Количество",
+  designation: string, specificationLabels: readonly string[], quantityLabel = "Количество",
 ): CatalogColumn[] {
+  const sizes = singleQuantitySizes[specificationLabels.length];
   return [
-    {label: designation, width: 14},
-    {label: "Фото", width: 13},
-    {label: firstSpecification, width: 10},
-    {label: secondSpecification, width: 12},
+    {label: designation, width: sizes.designation},
+    {label: "Фото", width: sizes.photo},
+    ...specificationLabels.map((label, i) => ({label, width: sizes.specifications[i]})),
     {label: "Цена", width: 11},
     {label: quantityLabel, width: [5, 6]},
     {label: "Сумма", width: 14, className: tableStyles.sumColumn},
@@ -31,6 +37,7 @@ export function CatalogVariantTable({children, columns}: {
   columns: readonly CatalogColumn[];
 }) {
   const columnWidths = columns.flatMap(({width}) => width);
+  const designationWidth = columns[0].width;
   return <div className={`${tableStyles.frame} hidden rounded-xl border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-900 xl:block`}>
     <table className={`${tableStyles.table} text-center text-sm`}>
       <colgroup>{columnWidths.map((width, index) => <col key={index} style={{width: `${width}%`}}/>)}</colgroup>
@@ -41,9 +48,16 @@ export function CatalogVariantTable({children, columns}: {
           {unit && <> <span className="whitespace-nowrap">{unit}</span></>}
         </th>)}</tr>
       </thead>
-      <tbody>{children}</tbody>
+      <tbody><TableHeadingSpan.Provider value={typeof designationWidth === "number" ? undefined : designationWidth.length}>{children}</TableHeadingSpan.Provider></tbody>
     </table>
   </div>;
+}
+
+export function renderVariantPhoto(variant: ProductVariant, view: View) {
+  const illustration = getProductIllustration(variant);
+  const src = illustration && (!isDemonstrationProduct(variant) || illustration.showForDemo)
+    ? illustration.imageUrl : variant.imageUrls[0];
+  return src ? <ProductImageViewer src={src} name={variant.name} presentation={view} framed expanded/> : null;
 }
 
 export function CatalogVariantLayout({view, variant, name = variant.name, preview,
@@ -53,7 +67,7 @@ export function CatalogVariantLayout({view, variant, name = variant.name, previe
   name?: string;
   preview?: ReactNode;
   specifications: ReactNode;
-  tableSpecifications: {headingClassName?: string; headingColSpan?: number; cells: ReactNode};
+  tableSpecifications: {headingClassName?: string; cells: ReactNode};
   details?: ReactNode;
   detailsId?: string;
   price: ReactNode;
@@ -61,11 +75,8 @@ export function CatalogVariantLayout({view, variant, name = variant.name, previe
   order: ReactNode;
 }) {
   const [detailsOpen, setDetailsOpen] = useState(false);
-  const illustration = getProductIllustration(variant);
-  const src = illustration && (!isDemonstrationProduct(variant) || illustration.showForDemo)
-    ? illustration.imageUrl : variant.imageUrls[0];
-  const image = preview ?? (src ? <ProductImageViewer src={src} name={variant.name}
-    presentation={view} framed expanded/> : null);
+  const headingColSpan = useContext(TableHeadingSpan);
+  const image = preview ?? renderVariantPhoto(variant, view);
 
   if (view === "card") return <article id={`variant-mobile-${variant.id}`}
     className={`${tableStyles.card} min-w-0 break-words rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-900`}>
@@ -91,7 +102,7 @@ export function CatalogVariantLayout({view, variant, name = variant.name, previe
 
   const nameId = `variant-name-${variant.id}`;
   return <><tr id={`variant-${variant.id}`} title={variant.name} className="align-middle">
-    <th scope="row" colSpan={tableSpecifications.headingColSpan} aria-labelledby={nameId} className={`font-semibold tabular-nums ${tableSpecifications.headingClassName ?? ""}`}>
+    <th scope="row" colSpan={headingColSpan} aria-labelledby={nameId} className={`font-semibold tabular-nums ${tableSpecifications.headingClassName ?? ""}`}>
       <span id={nameId} className="block">{name}</span>
       {details && <button type="button" aria-expanded={detailsOpen} aria-controls={detailsId}
         aria-label={`Подробности: ${variant.name}`} onClick={() => setDetailsOpen(!detailsOpen)}

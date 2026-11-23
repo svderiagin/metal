@@ -13,13 +13,13 @@ const sheetPresentations = new Map<string, {texture: string; detailsTitle: strin
   [galvanizedSheetSubcategoryId, {
     texture: "Гладкий",
     detailsTitle: "Подробнее об оцинкованном листе",
-    intro: "Гладкий стальной лист с цинковым покрытием. В таблице можно сравнить толщину, массу и цену за лист.",
+    intro: "Гладкий стальной лист с цинковым покрытием. Сравните толщину, размер и цену за лист.",
   }],
   [coldRolledSheetSubcategoryId, {texture: "Гладкий", detailsTitle: "Подробнее о холоднокатаном листе"}],
   [hotRolledSheetSubcategoryId, {
     texture: "Гладкий",
     detailsTitle: "Подробнее о горячекатаном листе",
-    intro: "Гладкие горячекатаные стальные листы. В таблице можно сравнить толщину, формат, массу и цену.",
+    intro: "Гладкие горячекатаные стальные листы. Сравните толщину, исполнение, формат и цену.",
   }],
 ]);
 
@@ -48,12 +48,12 @@ export function isPlainHotRolledSheet(variant: ProductVariant) {
     && variant.specifications.some(item => item.name === "Текстура листа" && item.value === "Гладкий");
 }
 
-function getHotRolledSheetQualifier(variant: ProductVariant) {
-  return variant.name.match(/\s(ТУ|ГОСТ)$/u)?.[1];
+function getSheetQualifier(variant: ProductVariant) {
+  return variant.name.match(/\s(ТУ|ГОСТ|Ф)(?:\s+рифл[её]ный)?$/u)?.[1];
 }
 
 export function getHotRolledSheetNumber(variant: ProductVariant, thickness: string) {
-  const qualifier = getHotRolledSheetQualifier(variant);
+  const qualifier = getSheetQualifier(variant);
   return qualifier ? `${thickness} ${qualifier}` : thickness;
 }
 
@@ -66,6 +66,12 @@ export function getSheetDesignation(variant: ProductVariant) {
   }
   if (variant.subcategoryId === hotRolledSheetSubcategoryId) return variant.name;
   return variant.name.replace(/^Лист\s+(?=№)/u, "").replace(/\s(?:рифл[её]ный|оцинкованный)$/u, "");
+}
+
+export function getSheetTableDesignation(variant: ProductVariant) {
+  const parameters = getSheetParameters(variant);
+  if (!parameters) return getSheetDesignation(variant);
+  return [`${parameters.thickness} мм`, getSheetQualifier(variant)].filter(Boolean).join(" · ");
 }
 
 export function getSheetParameters(variant: ProductVariant) {
@@ -90,7 +96,7 @@ export function getSheetSpecifications(variant: ProductVariant) {
   const presentation = getSheetPresentation(variant.subcategoryId);
   const parameters = getSheetParameters(variant);
   if (!parameters || !presentation) return variant.specifications;
-  const designation = isPlainHotRolledSheet(variant) ? getHotRolledSheetQualifier(variant) : undefined;
+  const designation = getSheetQualifier(variant);
   const additional = variant.specifications.filter(item => !["Толщина", "Размер", "Вес"].includes(item.name)
     && !(item.name === "Текстура листа" && item.value === presentation.texture));
   return [

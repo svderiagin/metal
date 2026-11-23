@@ -10,13 +10,13 @@ test("galvanized 89×3.5 pipe converts while typing and retains the same measure
   await openProduct(page, galvanizedPipe);
   const row = visibleProduct(page, galvanizedPipe.id);
   if (isMobile) {
-    await expect(row.getByText("89 × 3,5", {exact: true})).toBeVisible();
-    await expect(row.getByText("7,8 м (±150 мм)", {exact: true})).toBeVisible();
+    await expect(row.getByRole("heading", {name: "Труба Ø89 × 3,5 мм", exact: true})).toBeVisible();
+    await expect(row.getByText("7,8 м (±150 мм)", {exact: true}).filter({visible: true})).toBeVisible();
   } else {
     const table = row.locator("xpath=ancestor::table");
     await expect(row.getByRole("rowheader")).toContainText("89 × 3,5");
     await expect(row.getByRole("cell", {name: "7,8 ±150 мм", exact: true})).toBeVisible();
-    await expect(table.getByRole("columnheader", {name: "Сталь", exact: true})).toBeVisible();
+    await expect(table.getByRole("columnheader", {name: "Сталь", exact: true})).toHaveCount(0);
     await expect(page.getByText(/^Для пересчёта используется масса стальной трубы без цинкового покрытия/)).toBeVisible();
   }
   const detailsButton = isMobile ? row.getByText("Подробнее", {exact: true})

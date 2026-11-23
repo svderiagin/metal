@@ -11,7 +11,7 @@ const find = (id: string) => products.find(product => product.id === id)!;
 
 test("unconfirmed demo offers cannot contribute prices or accept a stale cart purchase", () => {
   const demos = products.filter(isDemonstrationProduct);
-  assert.equal(demos.length, 11);
+  assert.equal(demos.length, 5);
   assert.equal(demos.filter(product => !product.demo).length, 5);
   for (const product of demos.filter(product => !product.priceConfirmed)) {
     const originalPrice = product.price;
@@ -30,18 +30,19 @@ test("unconfirmed demo offers cannot contribute prices or accept a stale cart pu
   assert.equal(getProductTypeSummary(type, legacy).standard, "Уточняется");
 });
 
-test("confirmed demo tonne prices remain usable without certifying their mass conversions", () => {
-  for (const id of ["prd-003", "prd-004"]) {
+test("confirmed 35GS bars are priced using their catalogue lengths and nominal mass", () => {
+  for (const [id, mass, total] of [["prd-003", 0.888, 519.48], ["prd-004", 2.47, 1444.95]] as const) {
     const product = find(id);
-    const displayed = storefrontVariant(product);
-    assert.equal(displayed.price, product.price);
-    assert.doesNotMatch(displayed.description, /демонстрацион/u);
-    assert.match(displayed.description, /подтверждаются при согласовании заказа/u);
-    const tonneOrder = revalidateCartPrice(product, {quantity: 2});
-    assert.equal(tonneOrder.invalidReason, undefined);
-    assert.equal(tonneOrder.estimatedTotal, 100000);
-    const metreOrder = revalidateCartPrice(product, {quantity: 100, measurement: {inputMode: "meter", meters: 100, weightTons: 1}});
-    assert.ok(metreOrder.invalidReason);
-    assert.equal(metreOrder.estimatedTotal, 0);
+    assert.equal(isDemonstrationProduct(product), false);
+    assert.equal(product.form, "bar");
+    assert.equal(product.lengthMeters, 11.7);
+    assert.equal(product.weightPerMeterKg, mass);
+    assert.equal(storefrontVariant(product), product);
+    const weightTons = 11.7 * mass / 1000;
+    const metreOrder = revalidateCartPrice(product, {quantity: 11.7, measurement: {inputMode: "meter", meters: 11.7, weightTons}});
+    assert.equal(metreOrder.invalidReason, undefined);
+    assert.equal(metreOrder.estimatedTotal, total);
+    assert.equal(revalidateCartPrice(product, {quantity: weightTons}).estimatedTotal, total);
+    assert.ok(revalidateCartPrice(product, {quantity: 2}).invalidReason);
   }
 });

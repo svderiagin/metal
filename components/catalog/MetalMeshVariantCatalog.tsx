@@ -21,7 +21,10 @@ import {CatalogGuideFigure} from "./CatalogGuideFigure";
 import {formatSpecification, storefrontPositionFields} from "./StorefrontPositionSpecifications";
 
 type SortMode = "name" | "cell-asc" | "price-asc" | "price-desc";
-const columns = singleQuantityColumns("Ячейка", "Проволока", "Формат");
+
+function formatLabel(variant: MetalMeshVariant) {
+  return variant.specifications.some(spec => spec.name === "Размер карты") ? "Размер карты" : "Размер рулона";
+}
 
 export function MetalMeshVariantCatalog({variants}: {variants: MetalMeshVariant[]}) {
   const [query, setQuery] = useState("");
@@ -33,6 +36,9 @@ export function MetalMeshVariantCatalog({variants}: {variants: MetalMeshVariant[
 
   const cellSizes = useMemo(() => uniqueValues(variants, "Размер ячейки"), [variants]);
   const wireDiameters = useMemo(() => uniqueValues(variants, "Диаметр проволоки"), [variants]);
+  const formatLabels = new Set(variants.map(formatLabel));
+  const packageLabel = formatLabels.size === 1 ? formatLabel(variants[0]) : "Формат поставки";
+  const columns = singleQuantityColumns("Ячейка", ["Проволока", packageLabel]);
   const formats = useMemo(() => [...new Set(variants.map(metalMeshFormat))]
     .filter((value) => value !== "—")
     .sort(numericCompare), [variants]);
@@ -87,7 +93,7 @@ export function MetalMeshVariantCatalog({variants}: {variants: MetalMeshVariant[
       </label>}>
       <MeshFilter label="Размер ячейки" value={cellSize} values={cellSizes} onChange={setCellSize}/>
       <MeshFilter label="Диаметр проволоки" value={wireDiameter} values={wireDiameters} onChange={setWireDiameter}/>
-      <MeshFilter label="Размер рулона / карты" value={format} values={formats} onChange={setFormat}/>
+      <MeshFilter label={packageLabel} value={format} values={formats} onChange={setFormat}/>
     </FilterPanel>
 
     <section className="min-w-0 lg:col-span-2" aria-label="Сетка металлическая">
@@ -112,15 +118,19 @@ function MetalMeshItem({variant, view}: {variant: MetalMeshVariant; view: "table
   const wire = formatSpecification(metalMeshSpecification(variant, "Диаметр проволоки"));
   const format = formatSpecification(metalMeshFormat(variant));
   const coating = metalMeshSpecification(variant, "Покрытие");
+  const packageLabel = formatLabel(variant);
+  const meshKind = variant.name.match(/штукатурная|тканая/iu)?.[0];
+  const cellLabel = meshKind ? `${cell}, ${meshKind.toLocaleLowerCase("ru")}` : cell;
   const fields = [
-    {label: "Размер ячейки", value: cell},
-    {label: "Диаметр проволоки", value: wire},
-    {label: "Размер рулона / карты", value: format},
+    {label: "Диаметр проволоки", value: wire === "—" ? undefined : wire},
+    {label: packageLabel, value: format},
     ...(coating !== "—" ? [{label: "Покрытие", value: coating}] : []),
   ];
+  const detailsFields = storefrontPositionFields(variant).filter(field => field.label !== "Тип")
+    .map(field => field.label === packageLabel ? {...field, value: format} : field);
 
   return <CatalogVariantLayout view={view} variant={variant}
-    name={view === "table" && cell !== "—" ? cell : variant.name}
+    name={cell === "—" ? variant.name : view === "table" ? cellLabel : `Ячейка ${cellLabel}`}
     tableSpecifications={{cells: <>
       <td className="tabular-nums">{wire}{coating !== "—" && <span className="block text-xs text-slate-600 dark:text-slate-400">
         {coating === "Оцинкованная" ? "Цинк" : coating}
@@ -128,7 +138,7 @@ function MetalMeshItem({variant, view}: {variant: MetalMeshVariant; view: "table
       <td className="tabular-nums">{format}</td>
     </>}}
     specifications={<CatalogVariantSpecifications items={fields}/>}
-    details={<CatalogPositionDetails title="Характеристики сетки" fields={storefrontPositionFields(variant)}
+    details={<CatalogPositionDetails title={variant.name} fields={detailsFields}
       figures={cell !== "—" ? <CatalogGuideFigure diagram={{
         shape: "mesh", dimensions: [["Ячейка", cell], ...(wire !== "—" ? [["Проволока", wire] as const] : [])],
       }}/> : undefined}
@@ -147,7 +157,7 @@ function MeshFilter({label, value, values, onChange}: {
     {label}
     <Select value={value} onChange={(event) => onChange(event.target.value)}>
       <option value="">Все значения</option>
-      {values.map((option) => <option key={option} value={option}>{option}</option>)}
+      {values.map((option) => <option key={option} value={option}>{formatSpecification(option)}</option>)}
     </Select>
   </label>;
 }

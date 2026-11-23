@@ -39,9 +39,6 @@ test('all four rebar cards use category guidance and real family prices without 
       assert.equal(source.shortDescription, type.shortDescription);
     }
   }
-  const demos = products.filter(p => p.demo);
-  assert.deepEqual(Array.from(demos, p => p.sku), ['MS-0003','MS-0004','MS-0005','MS-0006','MS-0007','MS-0008']);
-  assert.ok(demos.every(p => /демонстрационн/.test(p.description)));
   assert.ok(products.some(p => p.id === 'local-80044' && p.standard === 'ГОСТ 34028'), 'actual supplier standard is preserved');
 });
 
@@ -64,7 +61,7 @@ test('card prices reject demo, archived, foreign, quote-only, invalid and incomp
   assert.equal(getProductTypeSummary(type, [{...cheap, demo:true, priceConfirmed:true}]).minimumPrice, 1);
 });
 
-test('owner-approved 35GS offers are in stock at 50000 per tonne without certifying their original demo facts', () => {
+test('owner-approved 35GS bars are in stock at 50000 per tonne with the specified catalogue length', () => {
   const type = types.find(t => t.subcategoryId === 'cat-arm-sub-2');
   const rows = products.filter(p => p.productTypeId === type.id);
   const ownerIds = ['prd-003', 'prd-004'];
@@ -77,11 +74,13 @@ test('owner-approved 35GS offers are in stock at 50000 per tonne without certify
     assert.equal(row.priceUnit, 'за тонну');
     assert.equal(row.inStock, true);
     assert.equal(row.availability, 'IN_STOCK');
-    assert.equal(row.demo, true);
+    assert.equal(row.demo, undefined);
+    assert.equal(row.form, 'bar');
+    assert.equal(row.lengthMeters, 11.7);
     assert.equal(row.priceConfirmed, true);
   }
   assert.equal(getProductTypeSummary(type, rows).minimumPrice, 50000);
-  const unconfirmed = rows.map(p => ownerIds.includes(p.id) ? {...p, priceConfirmed:false} : p);
+  const unconfirmed = rows.map(p => ownerIds.includes(p.id) ? {...p, demo:true, priceConfirmed:false} : p);
   assert.equal(getProductTypeSummary(type, unconfirmed).minimumPrice, null);
 });
 

@@ -8,6 +8,7 @@ const {categories} = readProjectData('data/categories.ts', cache);
 const {subcategories} = readProjectData('data/subcategories.ts', cache);
 const {productVariants} = readProjectData('data/products/index.ts', cache);
 const {createCartLines} = readProjectData('lib/cart.ts', cache);
+const {metalMeshFormat} = readProjectData('lib/metalMesh.ts', cache);
 const images = JSON.parse(fs.readFileSync('data/catalog-images.json', 'utf8'));
 const mesh = productVariants.filter(product => product.categoryId === 'cat-mesh');
 
@@ -74,6 +75,10 @@ test('source identity, images and technical fields remain traceable', () => {
 });
 
 test('mesh dimensions and exact totals use the transferred data', () => {
+  const narrowRolls = ['20182', '28918', '20209', '20210', '26578']
+    .map(id => mesh.find(product => product.id === 'mesh-' + id));
+  assert.deepEqual(narrowRolls.map(metalMeshFormat), ['0,2×50 м', '0,3×50 м', '0,35×50 м', '0,5×50 м', '1×50 м']);
+  assert.equal(metalMeshFormat({...narrowRolls[0], name: 'Сетка, рулон 1×25 м'}), '50 м');
   const chainLink = mesh.find(product => product.id === 'mesh-2249');
   assert.ok(chainLink.specifications.some(item => item.name === 'Размер ячейки' && item.value === '55×55 мм'));
   assert.ok(chainLink.specifications.some(item => item.name === 'Диаметр проволоки' && item.value === '1,6 мм'));

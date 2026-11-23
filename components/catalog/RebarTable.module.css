@@ -73,7 +73,7 @@
 
 .table > tbody > tr.detailsRow > td { background: var(--details-surface); }
 
-.vgpSizeColumn { --edge-padding-x: var(--cell-padding-x); }
+.sizeColumn { --edge-padding-x: var(--cell-padding-x); }
 .vgpDiameterColumn > span { display: block; }
 
 .detailsButton {
