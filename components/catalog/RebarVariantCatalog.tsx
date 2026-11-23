@@ -19,8 +19,7 @@ import {ResetFiltersButton} from "./ResetFiltersButton";
 
 import {createCatalogSearchIndex} from "@/lib/search";
 import {useDeferredValue, useMemo, useState} from "react";
-import {CatalogStandardLink, CatalogStandardReference} from "./CatalogStandardReference";
-import {catalogStandardTables} from "@/lib/catalogStandards";
+import {CatalogStandardReference} from "./CatalogStandardReference";
 import {CatalogTableNote} from "./CatalogTableNote";
 import {Select} from "@/components/ui/Select";
 import {useLinkedVariant} from "@/hooks/useLinkedVariant";
@@ -92,12 +91,10 @@ function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
   const showSteelGrade = isElectrowelded;
   const headers = tableHeaders[kind];
   const specifications = showSteelGrade ? [...headers.specifications, "Марка стали"] : headers.specifications;
-  const electroweldedMassSource = <CatalogStandardLink href={catalogStandardTables.electrowelded}>
-    <span className="whitespace-nowrap">ГОСТ 10704-91</span>{" "}<span className="whitespace-nowrap">(таблица 1)</span>
-  </CatalogStandardLink>;
+  const electroweldedMassSource = <CatalogStandardReference>таблице 1 ГОСТ 10704-91</CatalogStandardReference>;
   const electroweldedNote = isGalvanized
-    ? <>Для пересчёта используется масса стальной трубы <strong>без цинкового покрытия</strong> по {electroweldedMassSource}.</>
-    : <>Масса и стоимость заказа по длине рассчитываются по <strong>теоретической массе</strong> из {electroweldedMassSource}.</>;
+    ? <>Для пересчёта используется масса стальной трубы <strong>без цинкового покрытия</strong>, приведённая в {electroweldedMassSource}.</>
+    : <>Масса и стоимость заказа по длине рассчитываются по <strong>теоретической массе</strong>, приведённой в {electroweldedMassSource}.</>;
   const [query, setQuery] = useState("");
   const deferredQuery = useDeferredValue(query);
   const resultsPending = query !== deferredQuery;
@@ -191,7 +188,7 @@ function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
     : isElectrowelded ? electroweldedNote
     : isBeam && results.some(variant => beamReferenceMassKg(variant) !== undefined)
       ? "Справочная масса по сортаменту используется для предварительного расчёта. Массу выбранной балки уточните у поставщика."
-    : hasGostRebarMass ? <>Теоретическая масса метра приведена в <CatalogStandardLink href={catalogStandardTables.rebar}>таблице 1 <span className="whitespace-nowrap">ГОСТ 5781-82</span></CatalogStandardLink>.</> : null;
+    : hasGostRebarMass ? <>Теоретическая масса 1 м профиля приведена в <CatalogStandardReference>таблице 1 ГОСТ 5781-82</CatalogStandardReference>.</> : null;
 
   function resetFilters() {
     setQuery("");

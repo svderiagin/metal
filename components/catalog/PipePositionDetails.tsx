@@ -2,9 +2,7 @@ import type {ReactNode} from "react";
 import type {ProductVariant} from "@/types/product";
 import {formatMassPerMeter, formatNumber} from "@/lib/numberFormat";
 import {vgpSeries} from "@/lib/vgp";
-import {catalogStandardTables} from "@/lib/catalogStandards";
 import {CatalogPositionDetails} from "./CatalogPositionDetails";
-import {CatalogStandardLink} from "./CatalogStandardReference";
 
 export function PipePositionDetails({variant, isVgp, length, mass}: {
   variant: ProductVariant; isVgp: boolean; length?: ReactNode; mass?: number;
@@ -24,10 +22,10 @@ export function PipePositionDetails({variant, isVgp, length, mass}: {
     {label: "Покрытие", value: galvanized ? "Цинковое" : null},
     {label: massLabel, value: mass === undefined ? null : `${formatMassPerMeter(mass)} кг/м`},
     ...(isVgp ? [{label: "Стандарт", value: variant.standard === "ГОСТ 3262-75"
-      ? <CatalogStandardLink href={catalogStandardTables.vgp}>{variant.standard} (Таблица 1)</CatalogStandardLink> : variant.standard}] : variant.specifications
+      ? "ГОСТ 3262-75 (таблица 1)" : variant.standard}] : variant.specifications
       .filter(item => item.name === "Сортамент по каталогу" || item.name === "Технические условия по каталогу" ||
         (item.name === "Стандарт" && !variant.specifications.some(spec => spec.name === "Сортамент по каталогу")))
-      .map(({name, value}) => ({label: name, value}))),
+      .map(({name, value}) => ({label: name, value: value.replace(/^ГОСТ 10704-91(?=;|$)/u, "ГОСТ 10704-91 (таблица 1)")}))),
     {label: "Артикул", value: isVgp ? null : variant.sku},
   ];
   return <CatalogPositionDetails productName={variant.name} fields={fields}/>;

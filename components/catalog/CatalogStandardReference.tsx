@@ -1,5 +1,5 @@
 import type {ReactNode} from "react";
-import {catalogStandards} from "@/lib/catalogStandards";
+import {catalogStandards, catalogStandardTableReference, getCatalogStandardTableHref} from "@/lib/catalogStandards";
 
 export function CatalogStandardLink({href, children, title}: {href: string; children: ReactNode; title?: string}) {
   return <a href={href} target="_blank" rel="noopener noreferrer" title={title}
@@ -9,12 +9,17 @@ export function CatalogStandardLink({href, children, title}: {href: string; chil
 }
 
 // A semicolon can introduce another standard with the same ГОСТ prefix.
-const standardList = /(ГОСТ\s+\d+(?:\.\d+)*(?:[-‐‑–—−]\d+)?(?:\s*;\s*\d+(?:\.\d+)*(?:[-‐‑–—−]\d+)?)*)/u;
+const standardReferences = /ГОСТ\s+\d+(?:\.\d+)*(?:[-‐‑–—−]\d+)?(?:\s*;\s*\d+(?:\.\d+)*(?:[-‐‑–—−]\d+)?)*/u;
+const standardList = new RegExp(`(${catalogStandardTableReference.source}|${standardReferences.source})`, "u");
 
 export function CatalogStandardReference({children}: {children: ReactNode}) {
   if (typeof children !== "string" || !children.includes("ГОСТ")) return children;
   return children.split(standardList).map((part, index) => {
     if (index % 2 === 0) return part;
+    if (catalogStandardTableReference.test(part)) {
+      const href = getCatalogStandardTableHref(part);
+      return href ? <CatalogStandardLink key={index} href={href}>{part}</CatalogStandardLink> : part;
+    }
     return part.split(/(\s*;\s*)/u).map((reference, offset) => {
       if (offset % 2 === 1) return reference;
       const [number, year] = reference.replace(/^ГОСТ\s+/u, "").split(/[-‐‑–—−]/u);

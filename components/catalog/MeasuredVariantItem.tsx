@@ -430,6 +430,7 @@ function RebarVariantLayout({view, variant, price, order}: {
     : variant.diameterMm === undefined ? undefined : formatNumber(variant.diameterMm);
   const form = unverified || variant.form === undefined ? "Уточняется" : formLabel(variant.form);
   const length = unverified || variant.lengthMeters === undefined ? undefined : formatNumber(variant.lengthMeters);
+  const standard = variant.standard === "ГОСТ 5781-82" ? "ГОСТ 5781-82 (таблица 1)" : variant.standard;
 
   const fields = [
     {label: "Диаметр", value: diameter ? `${diameter} мм` : "—"},
@@ -443,7 +444,7 @@ function RebarVariantLayout({view, variant, price, order}: {
     {label: "Длина прутка", value: length && variant.form === "bar" ? `${length} м` : undefined},
     {label: "Теоретическая масса", value: variant.weightPerMeterKg === undefined ? undefined : `${formatNumber(variant.weightPerMeterKg)} кг/м`},
     ...(isA500c ? [] : [
-      {label: "Стандарт", value: variant.standard},
+      {label: "Стандарт", value: standard},
       ...variant.specifications.filter(({name}) => ["Класс арматуры", "Поверхность"].includes(name))
         .map(({name, value}) => ({label: name, value})),
     ]),

@@ -19,9 +19,27 @@ export const catalogStandards: Readonly<Record<string, {year: string; href: stri
   "35087": {year: "2024", href: meganorm + "mega_doc/norm_update_04112024/gost_gosudarstvennyj-standart/0/gost_35087-2024_mezhgosudarstvennyy_standart_dvutavry.html"},
 };
 
-export const catalogStandardTables = {
-  vgp: catalogStandards["3262"].href + "#Par103",
-  electrowelded: catalogStandards["10704"].href + "#Par53",
-  rebar: catalogStandards["5781"].href + "#i25093",
-  channel: catalogStandards["8240"].href + "#Par91",
+const channelStandardPdf = meganorm + "Data2/1/4294847/4294847929.pdf";
+const catalogStandardTables: Record<string, Partial<Record<number, string>>> = {
+  "2591-2006": {1: meganorm + "Data/476/47679.pdf#page=4"},
+  "3262-75": {1: meganorm + "Data2/1/4294852/4294852785.htm#i95506"},
+  "5781-82": {
+    1: catalogStandards["5781"].href + "#i25093",
+    5: catalogStandards["5781"].href + "#i138592",
+  },
+  "8240-97": {1: channelStandardPdf + "#page=5", 2: channelStandardPdf + "#page=6"},
+  "8509-93": {1: catalogStandards["8509"].href + "#i26415"},
+  "8510-86": {1: catalogStandards["8510"].href + "#i18743"},
+  "10704-91": {1: catalogStandards["10704"].href + "#Par53"},
+  "34028-2016": {4: catalogStandards["34028"].href + "#i325258"},
 };
+
+const datedStandard = /ГОСТ\s+(\d+(?:\.\d+)*)[-‐‑–—−](\d+)/u;
+const numberedTable = /[Тт]аблиц[аеуы]\s+(\d+)/u;
+export const catalogStandardTableReference = /(?:[Тт]аблиц[аеуы]\s+\d+\s+ГОСТ\s+\d+(?:\.\d+)*[-‐‑–—−]\d+|ГОСТ\s+\d+(?:\.\d+)*[-‐‑–—−]\d+\s+\([Тт]аблица\s+\d+\))/u;
+
+export function getCatalogStandardTableHref(reference: string) {
+  const standard = datedStandard.exec(reference);
+  const table = numberedTable.exec(reference);
+  return standard && table ? catalogStandardTables[`${standard[1]}-${standard[2]}`]?.[Number(table[1])] : undefined;
+}

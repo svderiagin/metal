@@ -1,9 +1,12 @@
+import {catalogStandardTableReference} from "@/lib/catalogStandards";
+import {CatalogStandardReference} from "./CatalogStandardReference";
 
 const sentenceSegmenter = new Intl.Segmenter("ru", {granularity: "sentence"});
 
 // Break at existing changes of subject; keep short descriptions together.
 const paragraphStart = /^(?:ГОСТ|Основной стандарт|Сортамент|Стандарты представленных|По толщине|При выборе|Основные параметры|Для выбора|Для подбора|Для применения в несущих|Неоцинкованные|После резки|Места повреждения|Применяется|Применяются|Используется|Используются)/u;
-const emphasis = /(ГОСТ(?:\s+Р)?\s+\d+(?:[.−–-]\d+)*|не менее \d+(?:[.,]\d+)? МПа|Основные параметры выбора|Для выбора|Для подбора|По толщине стенки|Условный проход(?:\s*\(Ду\))?|Применяются|Используются)/gu;
+const descriptiveEmphasis = /ГОСТ(?:\s+Р)?\s+\d+(?:[.−–-]\d+)*|не менее \d+(?:[.,]\d+)? МПа|Основные параметры выбора|Для выбора|Для подбора|По толщине стенки|Условный проход(?:\s*\(Ду\))?|Применяются|Используются/u;
+const emphasis = new RegExp(`(${catalogStandardTableReference.source}|${descriptiveEmphasis.source})`, "gu");
 
 function paragraphs(description: string): string[] {
   return description.split(/\n\s*\n/u).flatMap(block => {
@@ -24,9 +27,11 @@ function paragraphs(description: string): string[] {
 }
 
 function highlight(text: string) {
-  return text.split(emphasis).map((part, index) => index % 2
-    ? <strong key={index} className="font-semibold">{part}</strong>
-    : part);
+  return text.split(emphasis).map((part, index) => {
+    if (index % 2 === 0) return part;
+    if (catalogStandardTableReference.test(part)) return <CatalogStandardReference key={index}>{part}</CatalogStandardReference>;
+    return <strong key={index} className="font-semibold">{part}</strong>;
+  });
 }
 
 function richText(text: string) {

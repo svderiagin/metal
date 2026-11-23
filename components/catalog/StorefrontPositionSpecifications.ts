@@ -11,7 +11,11 @@ export function storefrontPositionFields(variant: ProductVariant) {
     : variant.categoryId === "catalog-cat-ugolok" ? getAngleProductSpecifications(variant) : getSheetSpecifications(variant);
   const fields = specifications
     .filter(({name}) => !["Полное обозначение", "Условия цены", "Условия оплаты"].includes(name))
-    .map(({name, value}) => ({label: name, value: formatSpecification(value)}));
+    .map(({name, value}) => ({
+      label: name,
+      value: name === "Справочный сортамент" && /^ГОСТ (?:2591-2006|8509-93|8510-86)$/u.test(value)
+        ? `${value} (таблица 1)` : formatSpecification(value),
+    }));
   if (variant.weightConfirmed && variant.weight && !fields.some(({label}) => /масса|вес/i.test(label))) {
     fields.push({label: "Теоретическая масса", value: `${formatNumber(variant.weight.value)} ${variant.weight.unit}`});
   }
