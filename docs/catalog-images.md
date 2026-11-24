@@ -431,14 +431,14 @@ appears next to the corresponding price.
 
 The supplied clean and marked 2400 × 1800 JPGs are in
 `public/images/catalog/listovoy-prokat/galvanized-steel-sheet/originals/`. The marked JPG
-sets the layout and the title «Лист оцинкованный № 0,5». Its decoded pixels are
-used for the 0,5 mm illustration.
+sets the layout. Run `node scripts/render-galvanized-sheet-images.mjs --write`
+to generate the lossless WebP illustrations and `data/galvanized-sheet-images.json`.
+Without `--write`, the script saves previews to `.tmp/galvanized-sheet-catalog/`.
 
-Run `node scripts/render-galvanized-sheet-images.mjs --write` to generate three
-lossless WebP illustrations and the source-matched `data/galvanized-sheet-images.json`.
-The renderer uses clean photo patches to replace the designation, thickness
-and mass for the 0,7 mm and 1 mm illustrations. It reads the values from the
-saved supplier data and checks that all pixels outside the edited labels
+The renderer reads the thickness, format and mass from the catalog, and uses
+clean photo patches to replace the corresponding labels. The 1000 × 2000 mm
+illustrations share the photo and dimension arrows of the 1250 × 2500 mm
+reference. The script verifies that all pixels outside the edited labels
 match the marked reference.
 
 The illustrated sheet families use the same table, filters, cards and image viewer.

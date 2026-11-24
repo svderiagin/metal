@@ -3,7 +3,7 @@ import {catalogMeasurementUrl} from './catalog-measurement-path.mjs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {readProjectData} from './project-data.mjs';
-import {removeImageNumberSign} from './image-number-sign.mjs';
+import {numberSignRemovalTargets, removeImageNumberSign} from './image-number-sign.mjs';
 
 const directory = 'public/images/catalog/listovoy-prokat/galvanized-steel-sheet';
 const temporaryDirectory = path.resolve('.tmp/galvanized-sheet-catalog');
@@ -18,8 +18,8 @@ const {default: sharp} = await import('sharp');
 const {isGalvanizedSheet, getSheetParameters} = readProjectData('lib/sheetPresentation.ts');
 const {products} = JSON.parse(await fs.readFile('data/additional-catalog.json', 'utf8'));
 const sheets = products.filter(isGalvanizedSheet);
-assert.deepEqual(sheets.map(({id}) => id).sort(), ['catalog-2181', 'catalog-2184', 'catalog-2199']);
 const referenceProduct = sheets.find(({id}) => id === 'catalog-2181');
+assert.ok(referenceProduct, 'Missing the galvanized sheet used as the artwork reference');
 assert.equal(referenceProduct.name, 'Лист № 0,5 оцинкованный');
 assert.deepEqual({...getSheetParameters(referenceProduct)}, {
   thickness: '0,5', width: '1250', length: '2500', mass: '12,26 кг/шт', format: '1250 × 2500 мм',
@@ -34,12 +34,19 @@ for (const file of [marked, clean]) {
 }
 const referencePixels = await sharp(marked).removeAlpha().raw().toBuffer();
 
-// Keep the marked «Лист оцинкованный №» and the dimension arrows and units.
-// For the derived variants replace the designation, thickness and mass values.
+// Preserve the dimension arrows and unit glyphs while replacing the values.
 const fields = {
-  designation: {box: {left: 1094, top: 114, width: 156, height: 103}, left: 1107, top: 127, size: 84, weight: 700},
-  thickness: {box: {left: 501, top: 1008, width: 102, height: 73}, right: 591, top: 1018, size: 56, weight: 500},
+  designation: {box: {left: 985, top: 114, width: 390, height: 103}, left: 998, top: 127, size: 84, weight: 700},
+  thickness: {box: {left: 463, top: 1008, width: 140, height: 73}, right: 591, top: 1018, size: 56, weight: 500},
+  width: {box: {left: 1047, top: 1278, width: 139, height: 62}, center: 1115, top: 1286, size: 56, weight: 500},
+  length: {box: {left: 1091, top: 464, width: 151, height: 62}, center: 1168, top: 474, size: 56, weight: 500},
   mass: {box: {left: 594, top: 1619, width: 330, height: 66}, left: 607, top: 1632, size: 44, weight: 750},
+};
+// These two patches must match the approved images before removing their № sign.
+const legacyFields = {
+  ...fields,
+  designation: {...fields.designation, box: {left: 1094, top: 114, width: 156, height: 103}, left: 1107},
+  thickness: {...fields.thickness, box: {left: 501, top: 1008, width: 102, height: 73}},
 };
 
 const write = process.argv.includes('--write');
@@ -47,20 +54,24 @@ const outputs = [];
 for (const product of sheets) {
   const values = getSheetParameters(product);
   assert.ok(values, `${product.id}: missing thickness, format or mass`);
-  assert.deepEqual([values.width, values.length], ['1250', '2500'], `${product.id}: update fixed dimensions in the artwork`);
   assert.match(values.mass, /^\d+(?:,\d+)? кг\/шт$/u, `${product.id}: unexpected mass unit`);
 
   const labels = product === referenceProduct ? {} : {
     designation: values.thickness, thickness: values.thickness, mass: values.mass.replace(' ', '\u00a0'),
   };
+  if (values.width !== '1250') labels.width = values.width;
+  if (values.length !== '2500') labels.length = values.length;
+  const layout = numberSignRemovalTargets.some(({id}) => id === product.id) ? legacyFields : fields;
   const background = [], text = [], changedBoxes = [];
   for (const [key, value] of Object.entries(labels)) {
-    const field = fields[key];
+    const field = layout[key];
     const {box, top, size, weight} = field;
     const escaped = value.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
     const rendered = await sharp({text: {text: `<span foreground="#41464D" weight="${weight}">${escaped}</span>`,
       font: `Inter ${size}`, fontfile: fontPath, dpi: 72, rgba: true}}).png().toBuffer({resolveWithObject: true});
-    const left = field.left ?? field.right - rendered.info.width;
+    const left = field.center === undefined
+      ? field.left ?? field.right - rendered.info.width
+      : Math.round(field.center - rendered.info.width / 2);
     assert.ok(left >= box.left && left + rendered.info.width <= box.left + box.width
       && top + rendered.info.height <= box.top + box.height, `${product.id}: ${key} does not fit its patch`);
     background.push({input: await sharp(clean).extract(box).png().toBuffer(), left: box.left, top: box.top});

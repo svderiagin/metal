@@ -7074,6 +7074,536 @@
       "sourceProductName": "Лист № 1 оцинкованный"
     },
     {
+      "id": "catalog-list-otsink-0-4x1250x2500",
+      "categoryId": "catalog-cat-listovoy-prokat",
+      "subcategoryId": "catalog-sub-listovoy-prokat-galvanized-steel-sheet",
+      "productTypeId": "type-catalog-sub-listovoy-prokat-galvanized-steel-sheet",
+      "name": "Лист оцинкованный 0,4 × 1250 × 2500 мм",
+      "slug": "list-otsinkovannyy-0-4x1250x2500mm",
+      "shortDescription": "Гладкий стальной лист с цинковым покрытием, толщина 0,4 мм, формат 1250 × 2500 мм.",
+      "description": "Гладкий стальной лист с цинковым покрытием, толщина 0,4 мм, формат 1250 × 2500 мм.",
+      "price": 1190,
+      "priceQualifier": "exact",
+      "currency": "RUB",
+      "unit": "piece",
+      "priceUnit": "за штуку",
+      "material": "Оцинкованная сталь",
+      "standard": "",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/listovoy-prokat/galvanized-steel-sheet/measurement/list-otsinkovannyy-0-4x1250x2500mm.webp"
+      ],
+      "attributes": [
+        {
+          "key": "size",
+          "label": "Размер",
+          "value": "1,25х2,5 м"
+        },
+        {
+          "key": "wallThickness",
+          "label": "Толщина",
+          "value": "0,4 мм"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Толщина",
+          "value": "0,4 мм"
+        },
+        {
+          "name": "Текстура листа",
+          "value": "Гладкий"
+        },
+        {
+          "name": "Вес",
+          "value": "9,81 кг/шт."
+        },
+        {
+          "name": "Размер",
+          "value": "1,25х2,5 м"
+        }
+      ]
+    },
+    {
+      "id": "catalog-list-otsink-0-45x1250x2500",
+      "categoryId": "catalog-cat-listovoy-prokat",
+      "subcategoryId": "catalog-sub-listovoy-prokat-galvanized-steel-sheet",
+      "productTypeId": "type-catalog-sub-listovoy-prokat-galvanized-steel-sheet",
+      "name": "Лист оцинкованный 0,45 × 1250 × 2500 мм",
+      "slug": "list-otsinkovannyy-0-45x1250x2500mm",
+      "shortDescription": "Гладкий стальной лист с цинковым покрытием, толщина 0,45 мм, формат 1250 × 2500 мм.",
+      "description": "Гладкий стальной лист с цинковым покрытием, толщина 0,45 мм, формат 1250 × 2500 мм.",
+      "price": 1250,
+      "priceQualifier": "exact",
+      "currency": "RUB",
+      "unit": "piece",
+      "priceUnit": "за штуку",
+      "material": "Оцинкованная сталь",
+      "standard": "",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/listovoy-prokat/galvanized-steel-sheet/measurement/list-otsinkovannyy-0-45x1250x2500mm.webp"
+      ],
+      "attributes": [
+        {
+          "key": "size",
+          "label": "Размер",
+          "value": "1,25х2,5 м"
+        },
+        {
+          "key": "wallThickness",
+          "label": "Толщина",
+          "value": "0,45 мм"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Толщина",
+          "value": "0,45 мм"
+        },
+        {
+          "name": "Текстура листа",
+          "value": "Гладкий"
+        },
+        {
+          "name": "Вес",
+          "value": "11,04 кг/шт."
+        },
+        {
+          "name": "Размер",
+          "value": "1,25х2,5 м"
+        }
+      ]
+    },
+    {
+      "id": "catalog-list-otsink-0-5x1000x2000",
+      "categoryId": "catalog-cat-listovoy-prokat",
+      "subcategoryId": "catalog-sub-listovoy-prokat-galvanized-steel-sheet",
+      "productTypeId": "type-catalog-sub-listovoy-prokat-galvanized-steel-sheet",
+      "name": "Лист оцинкованный 0,5 × 1000 × 2000 мм",
+      "slug": "list-otsinkovannyy-0-5x1000x2000mm",
+      "shortDescription": "Гладкий стальной лист с цинковым покрытием, толщина 0,5 мм, формат 1000 × 2000 мм.",
+      "description": "Гладкий стальной лист с цинковым покрытием, толщина 0,5 мм, формат 1000 × 2000 мм.",
+      "price": 850,
+      "priceQualifier": "exact",
+      "currency": "RUB",
+      "unit": "piece",
+      "priceUnit": "за штуку",
+      "material": "Оцинкованная сталь",
+      "standard": "",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/listovoy-prokat/galvanized-steel-sheet/measurement/list-otsinkovannyy-0-5x1000x2000mm.webp"
+      ],
+      "attributes": [
+        {
+          "key": "size",
+          "label": "Размер",
+          "value": "1х2 м"
+        },
+        {
+          "key": "wallThickness",
+          "label": "Толщина",
+          "value": "0,5 мм"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Толщина",
+          "value": "0,5 мм"
+        },
+        {
+          "name": "Текстура листа",
+          "value": "Гладкий"
+        },
+        {
+          "name": "Вес",
+          "value": "7,85 кг/шт."
+        },
+        {
+          "name": "Размер",
+          "value": "1х2 м"
+        }
+      ]
+    },
+    {
+      "id": "catalog-list-otsink-0-6x1250x2500",
+      "categoryId": "catalog-cat-listovoy-prokat",
+      "subcategoryId": "catalog-sub-listovoy-prokat-galvanized-steel-sheet",
+      "productTypeId": "type-catalog-sub-listovoy-prokat-galvanized-steel-sheet",
+      "name": "Лист оцинкованный 0,6 × 1250 × 2500 мм",
+      "slug": "list-otsinkovannyy-0-6x1250x2500mm",
+      "shortDescription": "Гладкий стальной лист с цинковым покрытием, толщина 0,6 мм, формат 1250 × 2500 мм.",
+      "description": "Гладкий стальной лист с цинковым покрытием, толщина 0,6 мм, формат 1250 × 2500 мм.",
+      "price": 1690,
+      "priceQualifier": "exact",
+      "currency": "RUB",
+      "unit": "piece",
+      "priceUnit": "за штуку",
+      "material": "Оцинкованная сталь",
+      "standard": "",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/listovoy-prokat/galvanized-steel-sheet/measurement/list-otsinkovannyy-0-6x1250x2500mm.webp"
+      ],
+      "attributes": [
+        {
+          "key": "size",
+          "label": "Размер",
+          "value": "1,25х2,5 м"
+        },
+        {
+          "key": "wallThickness",
+          "label": "Толщина",
+          "value": "0,6 мм"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Толщина",
+          "value": "0,6 мм"
+        },
+        {
+          "name": "Текстура листа",
+          "value": "Гладкий"
+        },
+        {
+          "name": "Вес",
+          "value": "14,72 кг/шт."
+        },
+        {
+          "name": "Размер",
+          "value": "1,25х2,5 м"
+        }
+      ]
+    },
+    {
+      "id": "catalog-list-otsink-0-7x1000x2000",
+      "categoryId": "catalog-cat-listovoy-prokat",
+      "subcategoryId": "catalog-sub-listovoy-prokat-galvanized-steel-sheet",
+      "productTypeId": "type-catalog-sub-listovoy-prokat-galvanized-steel-sheet",
+      "name": "Лист оцинкованный 0,7 × 1000 × 2000 мм",
+      "slug": "list-otsinkovannyy-0-7x1000x2000mm",
+      "shortDescription": "Гладкий стальной лист с цинковым покрытием, толщина 0,7 мм, формат 1000 × 2000 мм.",
+      "description": "Гладкий стальной лист с цинковым покрытием, толщина 0,7 мм, формат 1000 × 2000 мм.",
+      "price": 1150,
+      "priceQualifier": "exact",
+      "currency": "RUB",
+      "unit": "piece",
+      "priceUnit": "за штуку",
+      "material": "Оцинкованная сталь",
+      "standard": "",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/listovoy-prokat/galvanized-steel-sheet/measurement/list-otsinkovannyy-0-7x1000x2000mm.webp"
+      ],
+      "attributes": [
+        {
+          "key": "size",
+          "label": "Размер",
+          "value": "1х2 м"
+        },
+        {
+          "key": "wallThickness",
+          "label": "Толщина",
+          "value": "0,7 мм"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Толщина",
+          "value": "0,7 мм"
+        },
+        {
+          "name": "Текстура листа",
+          "value": "Гладкий"
+        },
+        {
+          "name": "Вес",
+          "value": "10,99 кг/шт."
+        },
+        {
+          "name": "Размер",
+          "value": "1х2 м"
+        }
+      ]
+    },
+    {
+      "id": "catalog-list-otsink-0-8x1250x2500",
+      "categoryId": "catalog-cat-listovoy-prokat",
+      "subcategoryId": "catalog-sub-listovoy-prokat-galvanized-steel-sheet",
+      "productTypeId": "type-catalog-sub-listovoy-prokat-galvanized-steel-sheet",
+      "name": "Лист оцинкованный 0,8 × 1250 × 2500 мм",
+      "slug": "list-otsinkovannyy-0-8x1250x2500mm",
+      "shortDescription": "Гладкий стальной лист с цинковым покрытием, толщина 0,8 мм, формат 1250 × 2500 мм.",
+      "description": "Гладкий стальной лист с цинковым покрытием, толщина 0,8 мм, формат 1250 × 2500 мм.",
+      "price": 2190,
+      "priceQualifier": "exact",
+      "currency": "RUB",
+      "unit": "piece",
+      "priceUnit": "за штуку",
+      "material": "Оцинкованная сталь",
+      "standard": "",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/listovoy-prokat/galvanized-steel-sheet/measurement/list-otsinkovannyy-0-8x1250x2500mm.webp"
+      ],
+      "attributes": [
+        {
+          "key": "size",
+          "label": "Размер",
+          "value": "1,25х2,5 м"
+        },
+        {
+          "key": "wallThickness",
+          "label": "Толщина",
+          "value": "0,8 мм"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Толщина",
+          "value": "0,8 мм"
+        },
+        {
+          "name": "Текстура листа",
+          "value": "Гладкий"
+        },
+        {
+          "name": "Вес",
+          "value": "19,63 кг/шт."
+        },
+        {
+          "name": "Размер",
+          "value": "1,25х2,5 м"
+        }
+      ]
+    },
+    {
+      "id": "catalog-list-otsink-1x1000x2000",
+      "categoryId": "catalog-cat-listovoy-prokat",
+      "subcategoryId": "catalog-sub-listovoy-prokat-galvanized-steel-sheet",
+      "productTypeId": "type-catalog-sub-listovoy-prokat-galvanized-steel-sheet",
+      "name": "Лист оцинкованный 1 × 1000 × 2000 мм",
+      "slug": "list-otsinkovannyy-1x1000x2000mm",
+      "shortDescription": "Гладкий стальной лист с цинковым покрытием, толщина 1 мм, формат 1000 × 2000 мм.",
+      "description": "Гладкий стальной лист с цинковым покрытием, толщина 1 мм, формат 1000 × 2000 мм.",
+      "price": 1550,
+      "priceQualifier": "exact",
+      "currency": "RUB",
+      "unit": "piece",
+      "priceUnit": "за штуку",
+      "material": "Оцинкованная сталь",
+      "standard": "",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/listovoy-prokat/galvanized-steel-sheet/measurement/list-otsinkovannyy-1x1000x2000mm.webp"
+      ],
+      "attributes": [
+        {
+          "key": "size",
+          "label": "Размер",
+          "value": "1х2 м"
+        },
+        {
+          "key": "wallThickness",
+          "label": "Толщина",
+          "value": "1 мм"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Толщина",
+          "value": "1 мм"
+        },
+        {
+          "name": "Текстура листа",
+          "value": "Гладкий"
+        },
+        {
+          "name": "Вес",
+          "value": "15,70 кг/шт."
+        },
+        {
+          "name": "Размер",
+          "value": "1х2 м"
+        }
+      ]
+    },
+    {
+      "id": "catalog-list-otsink-1-2x1250x2500",
+      "categoryId": "catalog-cat-listovoy-prokat",
+      "subcategoryId": "catalog-sub-listovoy-prokat-galvanized-steel-sheet",
+      "productTypeId": "type-catalog-sub-listovoy-prokat-galvanized-steel-sheet",
+      "name": "Лист оцинкованный 1,2 × 1250 × 2500 мм",
+      "slug": "list-otsinkovannyy-1-2x1250x2500mm",
+      "shortDescription": "Гладкий стальной лист с цинковым покрытием, толщина 1,2 мм, формат 1250 × 2500 мм.",
+      "description": "Гладкий стальной лист с цинковым покрытием, толщина 1,2 мм, формат 1250 × 2500 мм.",
+      "price": 3190,
+      "priceQualifier": "exact",
+      "currency": "RUB",
+      "unit": "piece",
+      "priceUnit": "за штуку",
+      "material": "Оцинкованная сталь",
+      "standard": "",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/listovoy-prokat/galvanized-steel-sheet/measurement/list-otsinkovannyy-1-2x1250x2500mm.webp"
+      ],
+      "attributes": [
+        {
+          "key": "size",
+          "label": "Размер",
+          "value": "1,25х2,5 м"
+        },
+        {
+          "key": "wallThickness",
+          "label": "Толщина",
+          "value": "1,2 мм"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Толщина",
+          "value": "1,2 мм"
+        },
+        {
+          "name": "Текстура листа",
+          "value": "Гладкий"
+        },
+        {
+          "name": "Вес",
+          "value": "29,44 кг/шт."
+        },
+        {
+          "name": "Размер",
+          "value": "1,25х2,5 м"
+        }
+      ]
+    },
+    {
+      "id": "catalog-list-otsink-1-5x1250x2500",
+      "categoryId": "catalog-cat-listovoy-prokat",
+      "subcategoryId": "catalog-sub-listovoy-prokat-galvanized-steel-sheet",
+      "productTypeId": "type-catalog-sub-listovoy-prokat-galvanized-steel-sheet",
+      "name": "Лист оцинкованный 1,5 × 1250 × 2500 мм",
+      "slug": "list-otsinkovannyy-1-5x1250x2500mm",
+      "shortDescription": "Гладкий стальной лист с цинковым покрытием, толщина 1,5 мм, формат 1250 × 2500 мм.",
+      "description": "Гладкий стальной лист с цинковым покрытием, толщина 1,5 мм, формат 1250 × 2500 мм.",
+      "price": 4190,
+      "priceQualifier": "exact",
+      "currency": "RUB",
+      "unit": "piece",
+      "priceUnit": "за штуку",
+      "material": "Оцинкованная сталь",
+      "standard": "",
+      "availability": "ON_ORDER",
+      "inStock": false,
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/listovoy-prokat/galvanized-steel-sheet/measurement/list-otsinkovannyy-1-5x1250x2500mm.webp"
+      ],
+      "attributes": [
+        {
+          "key": "size",
+          "label": "Размер",
+          "value": "1,25х2,5 м"
+        },
+        {
+          "key": "wallThickness",
+          "label": "Толщина",
+          "value": "1,5 мм"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Толщина",
+          "value": "1,5 мм"
+        },
+        {
+          "name": "Текстура листа",
+          "value": "Гладкий"
+        },
+        {
+          "name": "Вес",
+          "value": "36,80 кг/шт."
+        },
+        {
+          "name": "Размер",
+          "value": "1,25х2,5 м"
+        }
+      ]
+    },
+    {
+      "id": "catalog-list-otsink-2x1250x2500",
+      "categoryId": "catalog-cat-listovoy-prokat",
+      "subcategoryId": "catalog-sub-listovoy-prokat-galvanized-steel-sheet",
+      "productTypeId": "type-catalog-sub-listovoy-prokat-galvanized-steel-sheet",
+      "name": "Лист оцинкованный 2 × 1250 × 2500 мм",
+      "slug": "list-otsinkovannyy-2x1250x2500mm",
+      "shortDescription": "Гладкий стальной лист с цинковым покрытием, толщина 2 мм, формат 1250 × 2500 мм.",
+      "description": "Гладкий стальной лист с цинковым покрытием, толщина 2 мм, формат 1250 × 2500 мм.",
+      "price": 5490,
+      "priceQualifier": "exact",
+      "currency": "RUB",
+      "unit": "piece",
+      "priceUnit": "за штуку",
+      "material": "Оцинкованная сталь",
+      "standard": "",
+      "availability": "ON_ORDER",
+      "inStock": false,
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/listovoy-prokat/galvanized-steel-sheet/measurement/list-otsinkovannyy-2x1250x2500mm.webp"
+      ],
+      "attributes": [
+        {
+          "key": "size",
+          "label": "Размер",
+          "value": "1,25х2,5 м"
+        },
+        {
+          "key": "wallThickness",
+          "label": "Толщина",
+          "value": "2 мм"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Толщина",
+          "value": "2 мм"
+        },
+        {
+          "name": "Текстура листа",
+          "value": "Гладкий"
+        },
+        {
+          "name": "Вес",
+          "value": "49,06 кг/шт."
+        },
+        {
+          "name": "Размер",
+          "value": "1,25х2,5 м"
+        }
+      ]
+    },
+    {
       "id": "catalog-2182",
       "categoryId": "catalog-cat-listovoy-prokat",
       "subcategoryId": "catalog-sub-listovoy-prokat-list-ocynkovannyj",
