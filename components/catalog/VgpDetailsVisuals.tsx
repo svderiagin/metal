@@ -54,7 +54,7 @@ export function VgpLengthFigure({className}: {className: string}) {
         <p className={`mt-2 ${figureValue}`}>6 м</p>
       </div>)}
     </div>
-    <figcaption className={`mt-2 ${figureLabel}`}>2 трубы по 6 м · 12 м в поле «Заказ, м»</figcaption>
+    <figcaption className={`mt-2 ${figureLabel}`}>2 трубы по 6 м · всего 12 м</figcaption>
   </figure>;
 }
 
@@ -70,6 +70,6 @@ export function VgpThreadFigure({className}: {className: string}) {
         <p className={`mt-2 ${figureValue}`}>Муфта</p>
       </div>
     </div>
-    <figcaption className={`mt-2 ${figureLabel}`}>Уточните, входит ли муфта в поставку.</figcaption>
+    <figcaption className={`mt-2 ${figureLabel}`}>У трубы резьба снаружи, у муфты внутри.</figcaption>
   </figure>;
 }
