@@ -403,7 +403,7 @@ function TonnageMeasuredVariantItem({
   const series = beamSeries(variant);
   const section = beamSection(variant);
   const sectionSize = section ? `${formatNumber(section.height)} × ${formatNumber(section.width)}` : undefined;
-  const steelGrade = unverified ? undefined : variant.steelGrade;
+  const steelGrade = unverified || !showSteelGrade || variant.steelGrade === "—" ? undefined : variant.steelGrade;
   const length = unverified || variant.lengthMeters === undefined ? undefined : formatNumber(variant.lengthMeters);
   const standard = unverified ? undefined : beamStandardLabel(variant);
   const massField = referenceMass !== undefined
@@ -422,13 +422,14 @@ function TonnageMeasuredVariantItem({
       {label: "Толщина стенки", value: `${formatNumber(section.web)} мм`},
       {label: series === "М" ? "Средняя толщина полки" : "Толщина полки", value: `${formatNumber(section.flange)} мм`},
     ] : []),
-    {label: "Марка стали", value: showSteelGrade ? steelGrade : undefined},
+    {label: "Марка стали", value: steelGrade},
     {label: "Стандарт", value: showBeamStandard ? standard : undefined},
     massField,
   ];
   const designation = name ?? profile;
   return <CatalogVariantLayout view={view} variant={variant}
     name={view === "table" || designation.startsWith("Балка ") ? designation : `Балка ${designation}`}
+    nameNote={steelGrade}
     tableSpecifications={[<span key="size" className="whitespace-nowrap">{sectionSize ?? "—"}</span>, length ?? "—"]}
     specifications={<CatalogVariantSpecifications items={[
       {label: "Размер сечения", value: sectionSize && `${sectionSize} мм`},

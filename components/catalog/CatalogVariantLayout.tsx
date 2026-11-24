@@ -48,11 +48,12 @@ function renderVariantPhoto(variant: ProductVariant, view: View) {
   return src ? <ProductImageViewer src={src} name={variant.name} presentation={view} framed expanded/> : null;
 }
 
-export function CatalogVariantLayout({view, variant, name = variant.name, preview,
+export function CatalogVariantLayout({view, variant, name = variant.name, nameNote, preview,
   specifications, tableSpecifications, details, detailsId = `variant-details-${variant.id}`, price, order}: {
   view: View;
   variant: ProductVariant;
   name?: string;
+  nameNote?: string;
   preview?: ReactNode;
   specifications: ReactNode;
   tableSpecifications: readonly ReactNode[];
@@ -63,6 +64,7 @@ export function CatalogVariantLayout({view, variant, name = variant.name, previe
 }) {
   const [detailsOpen, setDetailsOpen] = useState(false);
   const image = preview ?? renderVariantPhoto(variant, view);
+  const caption = nameNote && <span className="mt-1 block text-xs font-medium text-slate-600 dark:text-slate-300">{nameNote}</span>;
   const cardDetails = details && <details className={`${tableStyles.detailsDisclosure} mt-3 border-t border-slate-200 text-sm dark:border-slate-700`}>
     <DetailsSummary className="font-semibold text-slate-600 focus-visible:outline-2 focus-visible:outline-brand-700 dark:text-slate-300 dark:focus-visible:outline-brand-300">
       Подробнее
@@ -72,7 +74,10 @@ export function CatalogVariantLayout({view, variant, name = variant.name, previe
 
   if (view === "card") return <article id={`variant-mobile-${variant.id}`}
     className={`${tableStyles.card} min-w-0 break-words rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-900`}>
-    <h3 className="text-card-title">{name.split(/(×)/u).map((part, index) => <Fragment key={index}><CatalogStandardReference>{part}</CatalogStandardReference>{part === "×" && <wbr/>}</Fragment>)}</h3>
+    <h3 className="text-card-title">
+      {name.split(/(×)/u).map((part, index) => <Fragment key={index}><CatalogStandardReference>{part}</CatalogStandardReference>{part === "×" && <wbr/>}</Fragment>)}
+      {caption}
+    </h3>
     <div className={`mt-3 ${image ? tableStyles.cardDetails : ""}`}>
       {image && <div className={tableStyles.cardImage}>{image}</div>}
       <div className="min-w-0">{specifications}</div>
@@ -90,7 +95,7 @@ export function CatalogVariantLayout({view, variant, name = variant.name, previe
   const nameId = `variant-name-${variant.id}`;
   return <><tr id={`variant-${variant.id}`} title={variant.name} className="align-middle">
     <th scope="row" aria-labelledby={nameId} className="font-semibold tabular-nums">
-      <span id={nameId} className="block">{name}</span>
+      <span id={nameId} className="block">{name}{caption}</span>
       {details && <button type="button" aria-expanded={detailsOpen} aria-controls={detailsId}
         aria-label={`Подробности: ${variant.name}`} onClick={() => setDetailsOpen(!detailsOpen)}
         className={`${tableStyles.detailsButton} mt-2 cursor-pointer rounded-sm text-xs font-semibold whitespace-nowrap text-slate-600 underline decoration-slate-300 underline-offset-4 focus-visible:outline-2 focus-visible:outline-brand-700 dark:text-slate-300 dark:decoration-slate-500 dark:focus-visible:outline-brand-300`}>
