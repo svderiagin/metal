@@ -58,7 +58,6 @@ export function VariantCatalogResults({visible, categorySlug, unit, isSheetCatal
   const isChannel = categorySlug === "shveller";
   const hasUnverified = visible.some(isDemonstrationProduct);
   const hasMetreQuantities = referenceCategorySlugs.some(slug => slug === categorySlug);
-  const showAvailability = !hasMetreQuantities && !isSheetCatalog;
   const presentation: TableSpecifications = isSheetCatalog ? tableSpecs["listovoy-prokat"]
     : tableSpecs[categorySlug as keyof typeof tableSpecs] ?? tableSpecs.armatura;
   const parameters = hasVerifiedSpecifications ? presentation.parameters : [];
@@ -80,6 +79,7 @@ export function VariantCatalogResults({visible, categorySlug, unit, isSheetCatal
     const specifications = parameters.map(([label, key, secondDimension]) => ({
       label, value: secondDimension ? pairedSize(key, secondDimension) : value(key),
     }));
+    const availability = specifications.length === 0 ? <Availability availability={variant.availability}/> : null;
     let tableName = formatSpecification(referenceProfileName(variant.name, categorySlug)).replace(/^№\s+(?=\d+ ×)/u, "");
     if (unverified && categorySlug === "truby-profilnye") {
       tableName = tableName.replace(/^Труба профильная (?:квадратная|прямоугольная)\s+(?=\d)/iu, "");
@@ -107,15 +107,13 @@ export function VariantCatalogResults({visible, categorySlug, unit, isSheetCatal
       name={view === "table" ? tableName : cardName}
       preview={photo}
       tableSpecifications={specifications.length ? specifications.map(({value}) => value ?? "—")
-        : [<Availability key="availability" availability={variant.availability}/>]}
+        : [availability]}
       specifications={isUnverifiedSquarePipe ? <CatalogVariantSpecifications items={[{label: "Характеристики", value: "Уточняются"}]}/> : unverified
         ? <p className="text-sm text-slate-600 dark:text-slate-400">Характеристики требуют подтверждения перед заказом.</p>
-        : <CatalogVariantSpecifications items={specifications}/>}
+        : availability ?? <CatalogVariantSpecifications items={specifications}/>}
       details={(fields.length > 0 || description) && <CatalogPositionDetails productName={variant.name} fields={fields}
         note={description && <CatalogDescription description={description}/>}/>}
       price={price}
-      priceNote={showAvailability && (view === "card" || specifications.length > 0)
-        ? <div className="mt-2"><Availability availability={variant.availability}/></div> : undefined}
       order={<ProductOrderControls variant={variant} view={view} showUnit={!unit}/>}/>;
   }
   return (

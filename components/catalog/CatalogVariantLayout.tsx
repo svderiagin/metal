@@ -47,7 +47,7 @@ function renderVariantPhoto(variant: ProductVariant, view: View) {
 }
 
 export function CatalogVariantLayout({view, variant, name = variant.name, preview,
-  specifications, tableSpecifications, details, detailsId = `variant-details-${variant.id}`, price, priceNote, order}: {
+  specifications, tableSpecifications, details, detailsId = `variant-details-${variant.id}`, price, order}: {
   view: View;
   variant: ProductVariant;
   name?: string;
@@ -56,8 +56,7 @@ export function CatalogVariantLayout({view, variant, name = variant.name, previe
   tableSpecifications: readonly ReactNode[];
   details?: ReactNode;
   detailsId?: string;
-  price: ReactNode;
-  priceNote?: ReactNode;
+  price: string;
   order: ReactNode;
 }) {
   const [detailsOpen, setDetailsOpen] = useState(false);
@@ -82,7 +81,6 @@ export function CatalogVariantLayout({view, variant, name = variant.name, previe
         <dt className="sr-only">Цена</dt>
         <dd className="text-xl font-bold tabular-nums">{price}</dd>
       </dl>
-      {priceNote}
     </div>
     {order}
   </article>;
@@ -102,7 +100,6 @@ export function CatalogVariantLayout({view, variant, name = variant.name, previe
       className="tabular-nums"><CatalogStandardReference>{value}</CatalogStandardReference></td>)}
     <td className="break-words">
       <strong className="font-semibold tabular-nums">{price}</strong>
-      {priceNote}
     </td>
     {order}
   </tr>

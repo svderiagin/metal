@@ -393,7 +393,7 @@ function TonnageMeasuredVariantItem({
       detailsId={`pipe-details-${variant.id}`}
       details={<PipePositionDetails variant={variant} isVgp={isVgp} length={pipeLength && `${pipeLength} м`}
         mass={hasMass ? mass : undefined} showVgpStandard={showVgpStandard}/>}
-      price={price} priceNote={!isVgp && madeToOrder && <span className="block text-xs text-slate-600 dark:text-slate-400">Под заказ</span>} order={order}/>;
+      price={price} order={order}/>;
   }
 
   const profile = unverified ? "Уточняется" : beamProfile(variant);
