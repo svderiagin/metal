@@ -127,9 +127,9 @@ chroma sampling. Labels must
 use the electrowelded product's outside diameter, wall, steel grade, length and verified mass;
 the VGP references' nominal-bore labels and values do not transfer to this family.
 
-The electrowelded catalogue has **27 positions** across its two tables.
+The electrowelded catalogue has **26 positions** across its two tables.
 
-- The **20 ordinary positions** use annotated JPG files in
+- The **19 ordinary positions** use annotated JPG files in
   `public/images/catalog/truba-kruglaya/truba-elektrosvarnaya/measurement/`.
   Positions with the same rendered artwork share one file.
 - The **seven galvanized positions** use individual annotated JPG files in
@@ -184,7 +184,7 @@ Screenshots are in `.tmp/electrowelded-image-preview/`.
 
 The 38 beam rows use the four marked 2400 × 1800 JPGs supplied for Б, Ш, К and М.
 The dedicated renderer preserves reference pixels outside changed labels and
-checks each SKU's assortment standard before printing numerical dimensions.
+checks each product's assortment standard before printing numerical dimensions.
 The seven supplier rows with a reference mass show the catalogue calculator's
 kg/m value under «Справочная масса» and keep symbolic dimension labels.
 The [beam template guide](../imports/beam-image-template/README.md) lists the
@@ -239,8 +239,8 @@ Family-specific descriptions below document the original numeric annotation
 pass. The final heading and palette corrections described above follow it.
 
 `data/product-illustration-sources.json` maps reviewed source photos to a product
-or a product type. Keep these images free of printed dimensions from the donor
-SKU. See [photo sources](product-illustration-sources.md). The table thumbnail
+or a product type. Use source photos with no dimensions printed on them.
+See [photo sources](product-illustration-sources.md). The table thumbnail
 and the product viewer both show the annotated 2400 × 1800 WebP,
 with native zoom and pan. The approved sheet, channel, angle and square sets
 retain their separate production images and renderers.
@@ -284,7 +284,7 @@ pipe images unchanged.
 
 ### Rectangular profile-pipe illustrations
 
-The 23 parameterized rectangular pipes use the owner's clean original and marked
+The rectangular pipes with complete catalog dimensions use the owner's clean original and marked
 reference under `public/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/originals/`.
 `scripts/render-profile-rectangular-images.mjs` follows the square-pipe lossless
 patch workflow: confirmed catalog values replace only variable labels, and the
@@ -294,7 +294,7 @@ those patches remain exact. Outputs are 2400 × 1800 lossless WebP at the existi
 product URLs, merged into `data/product-illustrations.json`.
 
 Preview `profile-pipe-rectangular-100x60x3` with `--preview`, review the native
-details, then run `--write` and refresh image versions. See the
+details, then run `--write` with the reviewed product IDs and refresh image versions. See the
 [template notes](../imports/profile-rectangular-image-template/README.md) and
 `imports/profile-rectangular-image-template/rendered.json` for the exact sources,
 labels, typography and pixel-preservation evidence.
@@ -431,7 +431,7 @@ It verifies that all pixels outside those patches match the marked reference.
 Arrows, unit glyphs, and the plate composition stay in place. Width, length,
 thickness, and mass come from the saved catalog. The № 4 and № 5 illustrations
 label the supplied kg/m² value as «Масса по каталогу». The four images share one
-illustrative plate shape and tread pattern, with nominal dimensions for each SKU.
+illustrative plate shape and tread pattern, with nominal dimensions for each product.
 
 The product table and mobile cards reuse the profile thumbnails and viewer.
 Quantity units remain specific to each row, and the cash-only price condition

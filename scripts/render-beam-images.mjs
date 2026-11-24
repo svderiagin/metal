@@ -1,4 +1,4 @@
-// Run with node --import tsx. Optional SKU arguments limit the preview or write.
+// Run with node --import tsx. Optional product IDs limit the preview or write.
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import path from "node:path";
@@ -17,7 +17,7 @@ const outputDirectory = ".tmp/beam-series/preview";
 const write = process.argv.includes("--write");
 const ids = new Set(process.argv.slice(2).filter(arg => arg !== "--write"));
 const products = getAllProductVariants().filter(p => p.categoryId === "cat-bal" && (!ids.size || ids.has(p.id)));
-assert.ok(products.length && (!ids.size || products.length === ids.size), "Unknown beam SKU");
+assert.ok(products.length && (!ids.size || products.length === ids.size), "Unknown beam product ID");
 await fs.mkdir(outputDirectory, {recursive: true});
 
 const canvas = {width: 2400, height: 1800, channels: 3};

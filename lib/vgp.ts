@@ -8,7 +8,7 @@ export {wholePipeOrder as wholeVgpOrder} from "./wholePipeOrder";
 // Preserve supplier evidence and commercial terms; apply verified dimensions to this offer only.
 export function normalizeGalvanizedVgpVariant(product: ProductVariant): ProductVariant {
   if (product.categoryId !== "cat-trk" || product.subcategoryId !== "cat-trk-sub-3"
-    || product.id !== galvanized.id || product.sku !== galvanized.sku
+    || product.id !== galvanized.id
     || (product.sourceProductName ?? product.name) !== galvanized.sourceProductName) return product;
   const specifications = [
     {name: "Условный проход (Ду)", value: "25"},

@@ -62,7 +62,7 @@ export function normalizeMeasurement(value: unknown): CartMeasurement | undefine
 export function createCartLines(items: CartItem[]): CartLine[] {
   return items.map(item => {
     const product = getProductVariantById(item.productId);
-    if (!product) return {...item, name: "Позиция больше не доступна в каталоге", slug: "", categorySlug: "", subcategorySlug: "", productTypeSlug: "", sku: item.productId, price: 0, priceUnit: "", quantityUnit: "", estimatedTotal: 0, invalidReason: "Удалите позицию или уточните замену."};
+    if (!product) return {...item, name: "Позиция больше не доступна в каталоге", slug: "", categorySlug: "", subcategorySlug: "", productTypeSlug: "", price: 0, priceUnit: "", quantityUnit: "", estimatedTotal: 0, invalidReason: "Удалите позицию или уточните замену."};
     const category = getCategoryById(product.categoryId);
     const subcategory = getSubcategoryById(product.subcategoryId);
     const productType = getProductTypeById(product.productTypeId);
@@ -90,7 +90,6 @@ export function createCartLines(items: CartItem[]): CartLine[] {
       categorySlug: category?.slug ?? "catalog",
       subcategorySlug: subcategory?.slug ?? "catalog",
       productTypeSlug: productType?.slug ?? "variants",
-      sku: product.sku,
       price: product.price ?? 0,
       priceUnit: product.priceUnit,
       quantityUnit: getQuantityUnit(product),

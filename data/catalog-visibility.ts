@@ -11,11 +11,11 @@ const hiddenProductIds = new Set([
   "local-122766",
   // Smooth rebar is offered as A240C for these diameters, forms and lengths.
   "local-6123", "local--705", "prd-007", "prd-008",
-  // Square pipe demos without a complete section, wall thickness or length.
-  "prd-087", "prd-088",
+  // Profile pipe demos without a complete section, wall thickness or length.
+  "prd-087", "prd-088", "prd-089", "prd-090",
+  // The 57 × 3 × 12 m electrowelded offer is now represented by local-62388.
+  "local-302",
 ]);
-const hiddenSkus = new Set(["MS-0071", "MS-0072", "MS-0073", "MS-0074"]);
-
-export function isPublicProduct(product: {id: string; sku: string}): boolean {
-  return !hiddenProductIds.has(product.id) && !hiddenSkus.has(product.sku);
+export function isPublicProduct(product: {id: string}): boolean {
+  return !hiddenProductIds.has(product.id);
 }

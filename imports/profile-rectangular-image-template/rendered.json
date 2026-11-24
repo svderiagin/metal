@@ -51,6 +51,101 @@
   "illustration": "Shared family photograph. Nominal dimensions are labels, not scaled manufacturing geometry.",
   "records": [
     {
+      "id": "profile-pipe-rectangular-20x10x1-5",
+      "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-20x10x1-5mm-6m.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/originals/truba_priamougolnaya_1148_1086_original.jpg",
+      "signature": "5bec8706",
+      "labels": [
+        {
+          "key": "title",
+          "text": "прямоугольная 20 x 10 x 1,5"
+        },
+        {
+          "key": "height",
+          "text": "10 мм"
+        },
+        {
+          "key": "width",
+          "text": "20 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "1,5 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "0,605 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "height",
+        "width",
+        "thickness",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "прямоугольная 20 x 10 x 1,5",
+          "size": 84,
+          "weight": 700,
+          "left": 132,
+          "top": 237,
+          "width": 1100,
+          "height": 79
+        },
+        {
+          "key": "height",
+          "text": "10 мм",
+          "size": 56,
+          "center": 891,
+          "top": 934,
+          "left": 819,
+          "width": 145,
+          "height": 43
+        },
+        {
+          "key": "width",
+          "text": "20 мм",
+          "size": 56,
+          "center": 1344,
+          "top": 1425,
+          "left": 1267,
+          "width": 155,
+          "height": 43
+        },
+        {
+          "key": "thickness",
+          "text": "1,5 мм",
+          "size": 56,
+          "left": 1794,
+          "top": 1082,
+          "width": 155,
+          "height": 49
+        },
+        {
+          "key": "mass",
+          "text": "0,605 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 608,
+          "top": 1634,
+          "width": 220,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-20x10x1-5mm-6m.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "dfb520845f31130ffba17d7edecb52ae2769fa0969a6d63684d9198551bc9187"
+    },
+    {
       "id": "profile-pipe-rectangular-30x20x2",
       "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-30x20x2mm-6m.webp",
       "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/originals/truba_priamougolnaya_1148_1086_original.jpg",
@@ -897,6 +992,91 @@
         "shiftLeft": 106
       },
       "referenceUnmodified": false
+    },
+    {
+      "id": "profile-pipe-rectangular-50x30x2",
+      "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-50x30x2mm-6m.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/originals/truba_priamougolnaya_1148_1086_original.jpg",
+      "signature": "6e9129e7",
+      "labels": [
+        {
+          "key": "title",
+          "text": "прямоугольная 50 x 30 x 2"
+        },
+        {
+          "key": "height",
+          "text": "30 мм"
+        },
+        {
+          "key": "width",
+          "text": "50 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "2 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "2,31 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "height",
+        "width",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "прямоугольная 50 x 30 x 2",
+          "size": 84,
+          "weight": 700,
+          "left": 132,
+          "top": 237,
+          "width": 1064,
+          "height": 79
+        },
+        {
+          "key": "height",
+          "text": "30 мм",
+          "size": 56,
+          "center": 891,
+          "top": 934,
+          "left": 813,
+          "width": 157,
+          "height": 44
+        },
+        {
+          "key": "width",
+          "text": "50 мм",
+          "size": 56,
+          "center": 1344,
+          "top": 1425,
+          "left": 1266,
+          "width": 156,
+          "height": 43
+        },
+        {
+          "key": "mass",
+          "text": "2,31 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 608,
+          "top": 1634,
+          "width": 179,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-50x30x2mm-6m.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "a7631e971988b81b87ccaa570ee8e532159c007cbb75c155ba64507e21a8edb2"
     },
     {
       "id": "profile-pipe-rectangular-60x30x1-5",
@@ -1823,6 +2003,101 @@
       "referenceUnmodified": false
     },
     {
+      "id": "profile-pipe-rectangular-80x40x4",
+      "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-80x40x4mm-6m.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/originals/truba_priamougolnaya_1148_1086_original.jpg",
+      "signature": "73943465",
+      "labels": [
+        {
+          "key": "title",
+          "text": "прямоугольная 80 x 40 x 4"
+        },
+        {
+          "key": "height",
+          "text": "40 мм"
+        },
+        {
+          "key": "width",
+          "text": "80 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "4 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "6,82 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "height",
+        "width",
+        "thickness",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "прямоугольная 80 x 40 x 4",
+          "size": 84,
+          "weight": 700,
+          "left": 132,
+          "top": 237,
+          "width": 1075,
+          "height": 79
+        },
+        {
+          "key": "height",
+          "text": "40 мм",
+          "size": 56,
+          "center": 891,
+          "top": 934,
+          "left": 811,
+          "width": 160,
+          "height": 43
+        },
+        {
+          "key": "width",
+          "text": "80 мм",
+          "size": 56,
+          "center": 1344,
+          "top": 1425,
+          "left": 1266,
+          "width": 157,
+          "height": 44
+        },
+        {
+          "key": "thickness",
+          "text": "4 мм",
+          "size": 56,
+          "left": 1794,
+          "top": 1082,
+          "width": 126,
+          "height": 41
+        },
+        {
+          "key": "mass",
+          "text": "6,82 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 608,
+          "top": 1634,
+          "width": 190,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-80x40x4mm-6m.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "3f5bc89b83bdcd4c13be1885fe3aeccfc4c5159159a64c4a51a38945a105d20d"
+    },
+    {
       "id": "profile-pipe-rectangular-80x60x2",
       "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-80x60x2mm-6m.webp",
       "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/originals/truba_priamougolnaya_1148_1086_original.jpg",
@@ -2331,6 +2606,112 @@
         "shiftLeft": 105
       },
       "referenceUnmodified": false
+    },
+    {
+      "id": "profile-pipe-rectangular-120x60x4",
+      "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-120x60x4mm-12m.webp",
+      "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/originals/truba_priamougolnaya_1148_1086_original.jpg",
+      "signature": "2954b69a",
+      "labels": [
+        {
+          "key": "title",
+          "text": "прямоугольная 120 x 60 x 4"
+        },
+        {
+          "key": "height",
+          "text": "60 мм"
+        },
+        {
+          "key": "width",
+          "text": "120 мм"
+        },
+        {
+          "key": "thickness",
+          "text": "4 мм"
+        },
+        {
+          "key": "length",
+          "text": "12 м"
+        },
+        {
+          "key": "mass",
+          "text": "10,48 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "height",
+        "width",
+        "thickness",
+        "length",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "прямоугольная 120 x 60 x 4",
+          "size": 84,
+          "weight": 700,
+          "left": 132,
+          "top": 237,
+          "width": 1103,
+          "height": 79
+        },
+        {
+          "key": "height",
+          "text": "60 мм",
+          "size": 56,
+          "center": 891,
+          "top": 934,
+          "left": 813,
+          "width": 157,
+          "height": 43
+        },
+        {
+          "key": "width",
+          "text": "120 мм",
+          "size": 56,
+          "center": 1344,
+          "top": 1425,
+          "left": 1256,
+          "width": 176,
+          "height": 43
+        },
+        {
+          "key": "thickness",
+          "text": "4 мм",
+          "size": 56,
+          "left": 1794,
+          "top": 1082,
+          "width": 126,
+          "height": 41
+        },
+        {
+          "key": "length",
+          "text": "12 м",
+          "size": 44,
+          "weight": 700,
+          "left": 608,
+          "top": 1568,
+          "width": 84,
+          "height": 32
+        },
+        {
+          "key": "mass",
+          "text": "10,48 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 608,
+          "top": 1634,
+          "width": 212,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-pryamougolnaya-120x60x4mm-12m.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "e003945f532a89179be5a8d4e0f7a75d11e36518c3851cbabe39473de049ca8f"
     }
   ]
 }

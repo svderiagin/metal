@@ -48,7 +48,7 @@ export function ProfileSheetVariantCatalog({variants}: {variants: ProfileSheetVa
   const results = useMemo(() => {
     const needle = normalizeText(query);
     return variants.filter((variant) => {
-      const searchable = normalizeText(`${variant.name} ${variant.sku} ${profileSheetCoatingLabel(variant)}`);
+      const searchable = normalizeText(`${variant.name} ${profileSheetCoatingLabel(variant)}`);
       return (!needle || searchable.includes(needle))
         && (!thickness || variant.wallThicknessMm === Number(thickness))
         && (!coating || profileSheetCoatingLabel(variant) === coating)

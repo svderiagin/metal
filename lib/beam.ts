@@ -105,7 +105,7 @@ export function normalizeBeamVariant(product: ProductVariant): ProductVariant {
   if (product.categoryId !== "cat-bal") return product;
   // This legacy placeholder has no actual profile. Its 10 mm dimension and
   // reinforcing-steel GOST 5781 must never be published as beam specifications.
-  if (product.id === "prd-012" && product.sku === "MS-0012") return {
+  if (product.id === "prd-012") return {
     ...product, name: "Балка широкополочная — профиль уточняется", standard: "",
     shortDescription: "Широкополочная балка. Профиль, размеры и марка стали уточняются при заказе.",
     description: "Профиль и технические характеристики этой позиции требуют подтверждения поставщика. Размеры, масса, длина и стандарт поставки указываются после выбора конкретного профиля.",

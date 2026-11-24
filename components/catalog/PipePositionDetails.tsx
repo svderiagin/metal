@@ -29,14 +29,13 @@ export function PipePositionDetails({variant, isVgp, length, mass, sharedPipeSta
     {label: massLabel, value: mass === undefined ? null : `${formatMassPerMeter(mass)} кг/м`},
     ...(isVgp ? [] : [lengthTolerance]),
     ...(isVgp ? [{label: "Стандарт", value: variant.standard === sharedPipeStandard ? null : vgpStandard}] : variant.specifications
-      .filter(item => (item.name === "Сортамент по каталогу" && (!galvanizedElectrowelded || item.value !== "ГОСТ 10704-91")) ||
+      .filter(item => (item.name === "Сортамент по каталогу" && item.value !== "ГОСТ 10704-91") ||
         (item.name === "Технические условия по каталогу" && item.value !== sharedPipeStandard) ||
         (item.name === "Стандарт" && !variant.specifications.some(spec => spec.name === "Сортамент по каталогу")))
       .map(({name, value}) => ({
         label: galvanizedElectrowelded && name === "Технические условия по каталогу" ? "Технические условия" : name,
         value: value.replace(/^ГОСТ 10704-91(?=;|$)/u, "ГОСТ 10704-91 (таблица 1)"),
       }))),
-    {label: "Артикул", value: isVgp ? null : variant.sku},
     ...(isVgp ? [lengthTolerance] : []),
   ];
   return <CatalogPositionDetails productName={variant.name} fields={fields}/>;

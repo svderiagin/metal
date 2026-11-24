@@ -22,8 +22,8 @@ function dimensions(text: string): string[][] {
 function standards(text: string): string[] {
   return [...normalizeText(text).matchAll(/гост\s*(?:р\s*)?(\d+(?:\.\d+)*(?:-\d+)?)/g)].map(m => m[1]);
 }
-export interface TechnicalDocument {dimensions: string[][]; primary: Set<string>; numbers: Set<string>; grades: Set<string>; standards: Set<string>; sku: string}
-export interface TechnicalQuery {dimensions: string[][]; numbers: string[]; grades: string[]; standards: string[]; nominalBore?: string; diameter?: string; thickness?: string; sku?: string; beamSeries?: BeamSeries; wordsText: string; invalid: boolean}
+export interface TechnicalDocument {dimensions: string[][]; primary: Set<string>; numbers: Set<string>; grades: Set<string>; standards: Set<string>}
+export interface TechnicalQuery {dimensions: string[][]; numbers: string[]; grades: string[]; standards: string[]; nominalBore?: string; diameter?: string; thickness?: string; beamSeries?: BeamSeries; wordsText: string; invalid: boolean}
 
 export function buildTechnicalDocument(product: ProductVariant): TechnicalDocument {
   const specs = product.specifications;
@@ -74,7 +74,7 @@ export function buildTechnicalDocument(product: ProductVariant): TechnicalDocume
     for (const match of normalizeText(product.standard).matchAll(/;\s*(\d+(?:\.\d+)*(?:-\d+)?)/g)) standardSet.add(match[1]);
   }
   const numbers = new Set([...primary, ...chains.flat(), ...[...standardSet].flatMap(s => [s, s.split("-")[0]])]);
-  return {dimensions: chains, primary, numbers, grades, standards: standardSet, sku: normalizeText(product.sku)};
+  return {dimensions: chains, primary, numbers, grades, standards: standardSet};
 }
 
 export function parseTechnicalQuery(input: string): TechnicalQuery {
@@ -92,7 +92,6 @@ export function parseTechnicalQuery(input: string): TechnicalQuery {
       query.beamSeries = namedSeries[family[1]];
     }
   }
-  text = text.replace(/(?:ms|мп)-\d+/g, sku => {query.sku = sku; return " ";});
   text = text.replace(/гост\s*(?:р\s*)?(\d+(?:\.\d+)*(?:-\d+)?)/g, (_, value: string) => {query.standards.push(value);return " ";});
   text = text.replace(/(^|[^а-яa-z])ду\s*(\d+(?:\.\d+)?)/g, (_, prefix: string, value: string) => {query.nominalBore = canonicalNumber(value);return prefix + value;});
   text = text.replace(/(?:[øØ⌀ф]\s*|диаметр(?:ом)?\s*)(\d+(?:\.\d+)?)/g, (_, value: string) => {query.diameter = canonicalNumber(value);return " ";});
@@ -113,7 +112,7 @@ export function parseTechnicalQuery(input: string): TechnicalQuery {
 
 export function technicalMatch(query: TechnicalQuery, doc: TechnicalDocument, product: ProductVariant): boolean {
   if (query.beamSeries && beamSeries(product) !== query.beamSeries) return false;
-  if (query.invalid || (query.sku && query.sku !== doc.sku)) return false;
+  if (query.invalid) return false;
   if (!query.dimensions.every(chain => doc.dimensions.some(candidate => chain.every((part, i) => part === candidate[i])))) return false;
   if (!query.numbers.every(n => Number(n) < 500 ? doc.primary.has(n) : doc.numbers.has(n))) return false;
   if (query.nominalBore && !(product.nominalBoreMm === Number(query.nominalBore)

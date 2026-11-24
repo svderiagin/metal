@@ -39,8 +39,8 @@ export function normalizeElectroweldedVariant(product: ProductVariant): ProductV
   const lengthMeters = lengthMm === undefined ? undefined : lengthMm / 1000;
   if (lengthMeters === undefined && lengthRangeMeters === undefined) return product;
 
-  const supplierGrade = fact("Марка стали");
-  const steelGrade = supplierGrade === "Ст20" ? "20" : supplierGrade;
+  const catalogGrade = product.steelGrade ?? fact("Марка стали");
+  const steelGrade = catalogGrade === "Ст20" ? "20" : catalogGrade;
   const section = `${formatNumber(diameterMm)} × ${formatNumber(wallThicknessMm)}`;
   const length = lengthRangeMeters?.map(formatNumber).join("–") ?? formatNumber(lengthMeters!);
   const lengthNote = lengthMeters === 12 && diameterMm <= 219
@@ -58,7 +58,7 @@ export function normalizeElectroweldedVariant(product: ProductVariant): ProductV
       `Сортамент по предложению поставщика — ${electroweldedPipeAssortmentStandard}, технические условия — ${electroweldedPipeTechnicalStandard}.`,
       `В таблице 1 ${electroweldedPipeAssortmentStandard} теоретическая масса 1 м трубы составляет ${formatNumber(weightPerMeterKg)} кг. Пересчёт заказа по длине является расчётным.`,
       lengthNote,
-      steelGrade ? `Марка стали ${steelGrade} по данным поставщика.` : "Марка стали уточняется.",
+      steelGrade ? `Марка стали ${steelGrade}.` : "Марка стали уточняется.",
       "Фактические параметры партии подтверждаются документом о качестве.",
     ].filter(Boolean).join(" "),
     standard: electroweldedPipeStandard,

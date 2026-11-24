@@ -4,6 +4,7 @@
     "7124789": "catalog-2204",
     "9148946": "catalog-2238",
     "13149904": "catalog-2236",
+    "70422125": "rebar-a240s-6-bar-6m",
     "5a3bb5d5": "catalog-29270",
     "593bb442": "catalog-29271",
     "583bb2af": "catalog-29272",
@@ -132,10 +133,10 @@
     "4d0c41ea": "catalog-2177",
     "4e0c437d": "catalog-2176",
     "400c2d73": "catalog-2178",
-    "70422125": "rebar-a240s-6-bar-6m",
     "6ec137e4": "local-110940",
     "f4c868d1": "rebar-a240s-20-bar-11-7m",
-    "edc85dcc": "rebar-a240s-32-bar-11-7m"
+    "edc85dcc": "rebar-a240s-32-bar-11-7m",
+    "2b1a4d8a": "local-62388"
   },
   "slugs": {
     "32966259": "catalog-ugolok-25x25x3-eb24ddb5",
@@ -273,6 +274,7 @@
     "3b011032": "armatura-a1-a240s-6-6m",
     "2e6020e8": "armatura-18x11700-a240s-gost-34028",
     "eb9eb7b6": "armatura-a1-a240s-20-11-7m",
-    "f3a102e5": "armatura-a1-a240s-32-11-7m"
+    "f3a102e5": "armatura-a1-a240s-32-11-7m",
+    "dfd474d3": "truba-elektrosvarnaya-pryamosovnaya-57x3x12000-gost-10704-10705-st20-vmz-tm"
   }
 }

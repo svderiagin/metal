@@ -31,6 +31,10 @@
     "extended2019": {
       "title": "Сводная таблица по ширине лент и массам труб от 01.01.2019",
       "column": "Масса трубы по ГОСТ и ТУ пм, кг"
+    },
+    "gost30245Table2": {
+      "title": "ГОСТ 30245-2003, таблица 2",
+      "column": "Масса 1 м, кг"
     }
   },
   "rows": [
@@ -307,6 +311,14 @@
       "pdfPage": 9
     },
     {
+      "widthMm": 20,
+      "heightMm": 10,
+      "wallThicknessMm": 1.5,
+      "massKgPerMeter": 0.605,
+      "sourceId": "gost8645",
+      "pdfPage": 2
+    },
+    {
       "widthMm": 30,
       "heightMm": 20,
       "wallThicknessMm": 2,
@@ -377,6 +389,14 @@
       "massKgPerMeter": 3.13,
       "sourceId": "gost8645",
       "pdfPage": 5
+    },
+    {
+      "widthMm": 50,
+      "heightMm": 30,
+      "wallThicknessMm": 2,
+      "massKgPerMeter": 2.31,
+      "sourceId": "gost30245Table2",
+      "pdfPage": 11
     },
     {
       "widthMm": 60,
@@ -452,6 +472,14 @@
     },
     {
       "widthMm": 80,
+      "heightMm": 40,
+      "wallThicknessMm": 4,
+      "massKgPerMeter": 6.82,
+      "sourceId": "gost8645",
+      "pdfPage": 6
+    },
+    {
+      "widthMm": 80,
       "heightMm": 60,
       "wallThicknessMm": 2,
       "massKgPerMeter": 4.216,
@@ -489,6 +517,14 @@
       "massKgPerMeter": 7.13,
       "sourceId": "gost8645am4",
       "pdfPage": 13
+    },
+    {
+      "widthMm": 120,
+      "heightMm": 60,
+      "wallThicknessMm": 4,
+      "massKgPerMeter": 10.48,
+      "sourceId": "gost30245Table2",
+      "pdfPage": 16
     }
   ]
 }

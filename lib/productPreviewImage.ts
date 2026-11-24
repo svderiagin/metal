@@ -8,7 +8,7 @@ const illustrationByProductId: Partial<Record<string, Illustration>> = illustrat
 export function productIllustrationSignature(product: ProductVariant): string {
   const referenceMass = beamReferenceMassKg(product);
   const input = JSON.stringify([
-    product.categoryId, product.productTypeId, product.sku, product.name,
+    product.categoryId, product.productTypeId, product.name,
     product.diameterMm, product.nominalBoreMm, product.profileWidthMm, product.profileHeightMm,
     product.wallThicknessMm, product.lengthMeters, product.lengthRangeMeters, product.sheetSizeMeters,
     product.weightPerMeterKg, product.weightConfirmed, product.form, product.demo, product.specifications,

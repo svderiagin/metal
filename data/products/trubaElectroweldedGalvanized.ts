@@ -27,7 +27,6 @@ export const galvanizedElectroweldedProducts: ProductVariantSource[] = offers.ma
     const mass = formatMassPerMeter(weightPerMeterKg);
 
     return {
-      sku: "",
       id: `electrowelded-galvanized-${key}`,
       categoryId: "cat-trk",
       subcategoryId: "cat-trk-sub-4",

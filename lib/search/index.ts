@@ -61,7 +61,7 @@ export function createCatalogSearchIndex(products: ProductVariant[], types: Prod
     const type = typeById.get(product.productTypeId), category = categoryById.get(product.categoryId);
     const technical = buildTechnicalDocument(product);
     const fields = [
-      field([product.name, product.sku, isPlainHotRolledSheet(product) ? hotRolledSheetTitle : ""].join(" "), 160),
+      field([product.name, isPlainHotRolledSheet(product) ? hotRolledSheetTitle : ""].join(" "), 160),
       field([product.material, ...product.attributes.map(a => a.value), ...product.specifications.map(s => s.value)].join(" "), 95),
       // Contextual description text belongs below exact product attributes, not technical constraints.
       field([category?.name ?? "", type?.name ?? ""].join(" "), 65),
@@ -121,7 +121,8 @@ export function createCatalogSearchIndex(products: ProductVariant[], types: Prod
   function search(input: string, options: SearchOptions = {}): SearchResult {
     const query = input.trim().slice(0, 250);
     const {terms, technical, correctedQuery} = compile(query);
-    const hasTechnical = technical.dimensions.length || technical.numbers.length || technical.grades.length || technical.standards.length || technical.nominalBore || technical.diameter || technical.thickness || technical.sku;
+    const normalizedQuery = normalizeText(query);
+    const hasTechnical = technical.dimensions.length || technical.numbers.length || technical.grades.length || technical.standards.length || technical.nominalBore || technical.diameter || technical.thickness;
     if (query && !terms.length && !hasTechnical) return {hits: [], total: 0};
     const hits: SearchHit[] = [];
     for (const doc of documents) {
@@ -130,13 +131,13 @@ export function createCatalogSearchIndex(products: ProductVariant[], types: Prod
       if (options.inStock && !p.inStock) continue;
       if (options.material && !p.attributes.some(a => a.key === "material" && a.value === options.material)) continue;
       if (options.standard && p.standard !== options.standard) continue;
-      const exactName = normalizeText(query) === doc.name || normalizeText(query) === doc.technical.sku;
+      const exactName = normalizedQuery === doc.name;
       if (!exactName && !technicalMatch(technical, doc.technical, p)) continue;
       const scores = terms.map(term => termScore(term, doc));
       if (!exactName && scores.some(score => !score)) continue;
       let score = scores.reduce((sum, s) => sum + s, 0) + (hasTechnical ? 250 : 0);
-      if (normalizeText(query) === doc.name || normalizeText(query) === doc.technical.sku) score += 10000;
-      else if (query && doc.name.includes(normalizeText(query))) score += 100;
+      if (exactName) score += 10000;
+      else if (query && doc.name.includes(normalizedQuery)) score += 100;
       hits.push({product: p, score});
     }
     hits.sort((a, b) => b.score - a.score || a.product.name.localeCompare(b.product.name, "ru", {numeric: true}) || a.product.id.localeCompare(b.product.id));

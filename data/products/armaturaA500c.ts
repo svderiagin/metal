@@ -50,7 +50,6 @@ export const armaturaA500cVariants: ProductVariantSource[] = rows.map((row, inde
     subcategoryId: productTypeId,
     name: `Арматура рифлёная А500С ${row.diameterMm} мм, ${formName}`,
     slug: id,
-    sku: `MS-A500C-${String(row.diameterMm).padStart(2, "0")}-${row.form === "coil" ? "C" : "B"}${suffix.toUpperCase()}`,
     shortDescription: `Рифлёная арматура А500С Ø${row.diameterMm} мм, ${formName}.`,
     description: `Рифлёная арматура А500С диаметром ${row.diameterMm} мм по ГОСТ 34028-2016. ${row.form === "coil" ? "Поставляется в бунтах." : `Поставляется прутками длиной ${formatNumber(row.lengthMeters)} м.`}`,
     price: row.pricePerTon,

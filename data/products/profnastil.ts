@@ -45,7 +45,6 @@ export const profnastilProducts: ProductVariantSource[] = rows.map((row) => {
     subcategoryId: row.subcategoryId,
     name,
     slug: row.id,
-    sku: `ПН-${row.id.replace("profnastil-", "").toUpperCase()}`,
     shortDescription: `${name}. Цена указана за один лист.`,
     description: `${name}. Цена указана за один лист.`,
     price: row.price,

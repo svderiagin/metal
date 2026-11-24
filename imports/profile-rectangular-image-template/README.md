@@ -23,7 +23,7 @@
 
 Размеры и длина берутся из текущего `productVariants`; теоретическая масса —
 из подтверждённых значений каталога. Источники масс описаны в
-`docs/profile-pipe-weights.md`. Генератор обслуживает 23 позиции с полной
+`docs/profile-pipe-weights.md`. Генератор обслуживает 27 позиций с полной
 спецификацией; старым позициям без полного сечения и толщины значения не
 присваиваются. Фотография общая для семейства, а подписи показывают номинальные
 параметры: геометрия фотографии под конкретное сечение не растягивается.
@@ -37,7 +37,7 @@
 
 ```sh
 node scripts/render-profile-rectangular-images.mjs --preview profile-pipe-rectangular-100x60x3
-node scripts/render-profile-rectangular-images.mjs --write
+node scripts/render-profile-rectangular-images.mjs --write profile-pipe-rectangular-100x60x3
 node scripts/catalog-image-versions.mjs
 ```
 

@@ -88,7 +88,6 @@ export const metalMeshProducts: ProductVariantSource[] = rows.map((row) => {
     subcategoryId: subcategoryByGroup[row.group],
     name: row.name,
     slug: `mesh-${row.sourceId}`,
-    sku: `СМ-${row.sourceId}`,
     shortDescription: `${row.name}. Цена указана ${priceUnitByBasis[row.priceBasis]}.`,
     description: `${row.name}. Цена указана ${priceUnitByBasis[row.priceBasis]}.`,
     price: row.price,

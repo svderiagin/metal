@@ -47,7 +47,7 @@ export function MetalMeshVariantCatalog({variants}: {variants: MetalMeshVariant[
       const cell = metalMeshSpecification(variant, "Размер ячейки");
       const wire = metalMeshSpecification(variant, "Диаметр проволоки");
       const productFormat = metalMeshFormat(variant);
-      const searchable = normalizeText(`${variant.name} ${variant.sku} ${cell} ${wire} ${productFormat}`);
+      const searchable = normalizeText(`${variant.name} ${cell} ${wire} ${productFormat}`);
       return (!needle || searchable.includes(needle))
         && (!cellSize || cell === cellSize)
         && (!wireDiameter || wire === wireDiameter)

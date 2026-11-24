@@ -29,7 +29,6 @@ export interface CartLine extends CartItem {
   categorySlug: string;
   subcategorySlug: string;
   productTypeSlug: string;
-  sku: string;
   price: number;
   priceUnit: string;
   quantityUnit: string;

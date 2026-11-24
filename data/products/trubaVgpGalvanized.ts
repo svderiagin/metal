@@ -28,7 +28,6 @@ export const galvanizedVgpProducts: ProductVariantSource[] = offers.map(
       subcategoryId: "cat-trk-sub-3",
       name: `Труба ВГП оцинкованная Ду${size}×${lengthMeters * 1000}`,
       slug: `truba-vgp-otsinkovannaya-du${key}`,
-      sku: `VGP-ZN-${key.toUpperCase()}`,
       shortDescription: `Оцинкованная ВГП-труба Ду${nominalBoreMm} со стенкой ${wall} мм, наружным диаметром ${outsideDiameter} мм и длиной ${lengthMeters} м.`,
       description: `Обыкновенная стальная труба с цинковым покрытием по ${standard}. Теоретическая масса учитывает цинковое покрытие.`,
       price: pricePerTon,

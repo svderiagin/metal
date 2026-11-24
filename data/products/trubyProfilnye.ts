@@ -8,7 +8,6 @@ export const trubyProfilnyeProducts: ProductVariantSource[] = [
     "subcategoryId": "cat-trp-sub-1",
     "name": "Труба профильная квадратная 12 мм",
     "slug": "truba-profilnaya-kvadratnaya-12",
-    "sku": "MS-0087",
     "shortDescription": "Труба профильная квадратная размера 12 мм для комплектования строительных и производственных заявок.",
     "description": "Труба профильная квадратная 12 мм — оригинальная демонстрационная позиция каталога ООО «РВБ». Параметры партии, допуски и доступность обработки подтверждаются при согласовании заказа.",
     "price": 96910,
@@ -78,7 +77,6 @@ export const trubyProfilnyeProducts: ProductVariantSource[] = [
     "subcategoryId": "cat-trp-sub-1",
     "name": "Труба профильная квадратная 20 мм",
     "slug": "truba-profilnaya-kvadratnaya-20",
-    "sku": "MS-0088",
     "shortDescription": "Труба профильная квадратная размера 20 мм для комплектования строительных и производственных заявок.",
     "description": "Труба профильная квадратная 20 мм — оригинальная демонстрационная позиция каталога ООО «РВБ». Параметры партии, допуски и доступность обработки подтверждаются при согласовании заказа.",
     "price": 105360,
@@ -148,7 +146,6 @@ export const trubyProfilnyeProducts: ProductVariantSource[] = [
     "subcategoryId": "cat-trp-sub-2",
     "name": "Труба профильная прямоугольная 16 мм",
     "slug": "truba-profilnaya-pryamougolnaya-16",
-    "sku": "MS-0089",
     "shortDescription": "Труба профильная прямоугольная размера 16 мм для комплектования строительных и производственных заявок.",
     "description": "Труба профильная прямоугольная 16 мм — оригинальная демонстрационная позиция каталога ООО «РВБ». Параметры партии, допуски и доступность обработки подтверждаются при согласовании заказа.",
     "price": 98280,
@@ -218,7 +215,6 @@ export const trubyProfilnyeProducts: ProductVariantSource[] = [
     "subcategoryId": "cat-trp-sub-2",
     "name": "Труба профильная прямоугольная 25 мм",
     "slug": "truba-profilnaya-pryamougolnaya-25",
-    "sku": "MS-0090",
     "shortDescription": "Труба профильная прямоугольная размера 25 мм для комплектования строительных и производственных заявок.",
     "description": "Труба профильная прямоугольная 25 мм — оригинальная демонстрационная позиция каталога ООО «РВБ». Параметры партии, допуски и доступность обработки подтверждаются при согласовании заказа.",
     "price": 106730,
@@ -288,9 +284,9 @@ export const trubyProfilnyeProducts: ProductVariantSource[] = [
 const profilePipeWeightBySize = new Map(profilePipeWeights.rows.map(row => [
   `${row.widthMm}x${row.heightMm}x${row.wallThicknessMm}`, row.massKgPerMeter,
 ]));
-// Square pipe retail prices are in RUB per metre. An explicit null marks an on-order
-// offer without a fixed price. An omitted price keeps the existing rectangular offers.
-const profilePipeRows: [width: number, height: number, wall: number, length: number | [number, number], pricePerMeter?: number | null][] = [
+// Prices are in RUB per metre. An on-order offer can have a fixed price.
+const profilePipeRows: [width: number, height: number, wall: number, length: number | [number, number],
+  pricePerMeter: number | null, availability?: "ON_ORDER"][] = [
   [15, 15, 1.2, 6, 55],
   [15, 15, 1.5, 6, 65],
   [20, 20, 1.2, 6, 80],
@@ -325,32 +321,36 @@ const profilePipeRows: [width: number, height: number, wall: number, length: num
   [120, 120, 4, 12, 960],
   [140, 140, 4, 12, null],
   [160, 160, 4, 12, null],
-  [30, 20, 2, 6],
-  [40, 20, 1.5, 6],
-  [40, 20, 2, 6],
-  [40, 20, 3, 6],
-  [40, 25, 1.5, 6],
-  [40, 25, 2, 6],
-  [50, 25, 1.5, 6],
-  [50, 25, 2, 6],
-  [50, 25, 3, 6],
-  [60, 30, 1.5, 6],
-  [60, 30, 2, 6],
-  [60, 30, 3, 6],
-  [60, 40, 1.5, 6],
-  [60, 40, 2, 6],
-  [60, 40, 3, 6],
-  [60, 40, 4, 6],
-  [80, 40, 2, 6],
-  [80, 40, 3, 6],
-  [80, 60, 2, 6],
-  [80, 60, 3, 6],
-  [100, 50, 2, 6],
-  [100, 50, 3, 6],
-  [100, 60, 3, 6],
+  [20, 10, 1.5, 6, 60],
+  [30, 20, 2, 6, 120],
+  [40, 20, 1.5, 6, 95],
+  [40, 20, 2, 6, 120],
+  [40, 20, 3, 6, 160],
+  [40, 25, 1.5, 6, 120],
+  [40, 25, 2, 6, 125],
+  [50, 25, 1.5, 6, 130],
+  [50, 25, 2, 6, 150],
+  [50, 25, 3, 6, 205, "ON_ORDER"],
+  [50, 30, 2, 6, 150],
+  [60, 30, 1.5, 6, 155],
+  [60, 30, 2, 6, 175],
+  [60, 30, 3, 6, 240],
+  [60, 40, 1.5, 6, 145, "ON_ORDER"],
+  [60, 40, 2, 6, 210],
+  [60, 40, 3, 6, 270],
+  [60, 40, 4, 6, 360],
+  [80, 40, 2, 6, 270],
+  [80, 40, 3, 6, 330],
+  [80, 40, 4, 6, 500],
+  [80, 60, 2, 6, 340, "ON_ORDER"],
+  [80, 60, 3, 6, 390],
+  [100, 50, 2, 6, 295],
+  [100, 50, 3, 6, 440],
+  [100, 60, 3, 6, 460, "ON_ORDER"],
+  [120, 60, 4, 12, 825],
 ];
 
-export const profilePipeProducts: ProductVariantSource[] = profilePipeRows.map(([width, height, wall, length, pricePerMeter]) => {
+export const profilePipeProducts: ProductVariantSource[] = profilePipeRows.map(([width, height, wall, length, pricePerMeter, listedAvailability]) => {
   const square = width === height;
   const family = square ? "квадратная" : "прямоугольная";
   const shape = square ? "square" : "rectangular";
@@ -359,20 +359,21 @@ export const profilePipeProducts: ProductVariantSource[] = profilePipeRows.map((
   const key = `${width}x${height}x${String(wall).replace(".", "-")}`;
   const theoreticalMass = profilePipeWeightBySize.get(`${width}x${height}x${wall}`);
   const lengthLabel = Array.isArray(length) ? `${length[0]}–${length[1]} м` : `${length} м`;
-  const priceConfirmed = typeof pricePerMeter === "number";
+  const priceConfirmed = pricePerMeter !== null;
+  const availability = listedAvailability ?? (priceConfirmed ? "IN_STOCK" : "ON_ORDER");
   const shortDescription = `Профиль ${size} мм, стенка ${thickness} мм, длина ${lengthLabel}.`;
   return {
     id: `profile-pipe-${shape}-${key}`,
     categoryId: "cat-trp", subcategoryId: square ? "cat-trp-sub-1" : "cat-trp-sub-2",
     name: `Труба профильная ${family} ${size}×${thickness} мм`,
-    slug: `truba-profilnaya-${shape}-${key}`, sku: `PP-${square ? "K" : "P"}-${key.toUpperCase()}`,
+    slug: `truba-profilnaya-${shape}-${key}`,
     shortDescription,
     description: priceConfirmed ? shortDescription : "Цена и характеристики поставки уточняются при согласовании заказа.",
-    price: pricePerMeter ?? null, quoteOnly: !priceConfirmed, priceConfirmed, priceUnit: "за метр",
+    price: pricePerMeter, quoteOnly: !priceConfirmed, priceConfirmed, priceUnit: "за метр",
     profileWidthMm: width, profileHeightMm: height, wallThicknessMm: wall,
     weightPerMeterKg: theoreticalMass, weightConfirmed: theoreticalMass !== undefined,
     ...(Array.isArray(length) ? {lengthRangeMeters: length} : {lengthMeters: length}),
-    inStock: priceConfirmed, availability: priceConfirmed ? "IN_STOCK" : square ? "ON_ORDER" : "UNKNOWN", featured: false, imageUrls: [],
+    inStock: availability === "IN_STOCK", availability, featured: false, imageUrls: [],
     attributes: [
       {key: "size", label: "Размер", value: `${size} мм`},
       {key: "wallThickness", label: "Стенка", value: `${thickness} мм`},

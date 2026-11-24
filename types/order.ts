@@ -38,7 +38,6 @@ export interface CreateOrderInput {
 
 export interface OrderItem extends OrderItemInput {
   name: string;
-  sku: string;
   unitPrice: number;
   priceUnit: string;
   subtotal: number;

@@ -1,7 +1,7 @@
 "use client";
 
 import {Fragment, useEffect, useState, type ReactNode} from "react";
-import {beamProfile, beamKind, beamReferenceMassKg, beamStandardLabel} from "@/lib/beam";
+import {beamProfile, beamKind, beamReferenceMassKg, beamSeries, beamStandardLabel} from "@/lib/beam";
 import {vgpSize} from "@/lib/vgp";
 import {QuoteRequestButton} from "./QuoteRequestButton";
 import {formatQuoteProductName} from "@/lib/quoteRequest";
@@ -412,12 +412,13 @@ function TonnageMeasuredVariantItem({
     massField,
   ];
   const designation = name ?? profile;
+  const tableStandard = standard || "—";
   const standardSuffix = ` (${standard})`;
   const tableDesignation = standard && designation.endsWith(standardSuffix)
     ? designation.slice(0, -standardSuffix.length) : designation;
   return <CatalogVariantLayout view={view} variant={variant}
     name={view === "table" ? tableDesignation : designation.startsWith("Балка ") ? designation : `Балка ${designation}`}
-    tableSpecifications={[standard || "—", length ?? "—"]}
+    tableSpecifications={[beamSeries(variant) === "Б" ? <span>{tableStandard}</span> : tableStandard, length ?? "—"]}
     specifications={<CatalogVariantSpecifications items={[{label: "Длина", value: length && `${length} м`}]}/>}
     details={<CatalogPositionDetails productName={variant.name} fields={fields}
       note={unverified ? variant.description : undefined}/>}

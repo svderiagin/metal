@@ -40,7 +40,6 @@ export const armaturaA40035gsVariants: ProductVariantSource[] = rows.map(row => 
 
   return {
     id, slug: id, categoryId: "cat-arm", subcategoryId: "cat-arm-sub-2",
-    sku: `MS-A400-35GS-${diameterMm}-${form === "bar" ? "B" : "C"}`,
     name, shortDescription: name + ".",
     description: `Рифлёная арматура класса А400 (А3) из стали 35ГС диаметром ${diameterMm} мм. ${length ? `Поставляется прутками длиной ${length}.` : "Поставляется в бунтах."}`,
     diameterMm, weightPerMeterKg, lengthMeters, form, steelGrade: "35ГС",

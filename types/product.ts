@@ -45,7 +45,6 @@ export interface ProductVariant {
   productTypeId: string;
   name: string;
   slug: string;
-  sku: string;
   shortDescription: string;
   description: string;
   price: number | null;
