@@ -8498,6 +8498,462 @@
       }
     },
     {
+      "sku": "",
+      "id": "electrowelded-galvanized-57x3-5-6m",
+      "categoryId": "cat-trk",
+      "subcategoryId": "cat-trk-sub-4",
+      "name": "Труба электросварная оцинкованная 57 × 3,5, 6 м",
+      "slug": "truba-elektrosvarnaya-otsinkovannaya-57x3-5-6m",
+      "shortDescription": "Наружный диаметр 57 мм, стенка 3,5 мм, длина 6 м.",
+      "description": "Оцинкованная стальная прямошовная труба 57 × 3,5 мм длиной 6 м. Сортамент по ГОСТ 10704-91. Теоретическая масса стальной трубы составляет 4,62 кг/м без учёта цинкового покрытия.",
+      "price": 89590,
+      "pricePerTon": 89590,
+      "priceUnit": "за тонну",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/originals/truba_elektrosvarnaya_ocinkovannaya_2400_1800_original.jpg"
+      ],
+      "coatingType": "galvanized",
+      "diameterMm": 57,
+      "wallThicknessMm": 3.5,
+      "lengthMeters": 6,
+      "weightPerMeterKg": 4.62,
+      "weightConfirmed": true,
+      "attributes": [
+        {
+          "key": "standard",
+          "label": "Сортамент по каталогу",
+          "value": "ГОСТ 10704-91"
+        },
+        {
+          "key": "size",
+          "label": "Наружный Ø × стенка, мм",
+          "value": "57 × 3,5"
+        },
+        {
+          "key": "length",
+          "label": "Длина по каталогу, м",
+          "value": "6"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Наружный диаметр, мм",
+          "value": "57"
+        },
+        {
+          "name": "Толщина стенки, мм",
+          "value": "3,5"
+        },
+        {
+          "name": "Длина по каталогу",
+          "value": "6 м"
+        },
+        {
+          "name": "Покрытие",
+          "value": "Цинковое"
+        },
+        {
+          "name": "Теоретическая масса без цинкового покрытия",
+          "value": "4,62 кг/м"
+        },
+        {
+          "name": "Сортамент по каталогу",
+          "value": "ГОСТ 10704-91"
+        }
+      ],
+      "productTypeId": "type-cat-trk-sub-4",
+      "unit": "ton",
+      "material": "",
+      "standard": "ГОСТ 10704-91",
+      "weight": {
+        "value": 4.62,
+        "unit": "кг/м"
+      }
+    },
+    {
+      "sku": "",
+      "id": "electrowelded-galvanized-76x3-5-6m",
+      "categoryId": "cat-trk",
+      "subcategoryId": "cat-trk-sub-4",
+      "name": "Труба электросварная оцинкованная 76 × 3,5, 6 м",
+      "slug": "truba-elektrosvarnaya-otsinkovannaya-76x3-5-6m",
+      "shortDescription": "Наружный диаметр 76 мм, стенка 3,5 мм, длина 6 м.",
+      "description": "Оцинкованная стальная прямошовная труба 76 × 3,5 мм длиной 6 м. Сортамент по ГОСТ 10704-91. Теоретическая масса стальной трубы составляет 6,26 кг/м без учёта цинкового покрытия.",
+      "price": 118860,
+      "pricePerTon": 118860,
+      "priceUnit": "за тонну",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/originals/truba_elektrosvarnaya_ocinkovannaya_2400_1800_original.jpg"
+      ],
+      "coatingType": "galvanized",
+      "diameterMm": 76,
+      "wallThicknessMm": 3.5,
+      "lengthMeters": 6,
+      "weightPerMeterKg": 6.26,
+      "weightConfirmed": true,
+      "attributes": [
+        {
+          "key": "standard",
+          "label": "Сортамент по каталогу",
+          "value": "ГОСТ 10704-91"
+        },
+        {
+          "key": "size",
+          "label": "Наружный Ø × стенка, мм",
+          "value": "76 × 3,5"
+        },
+        {
+          "key": "length",
+          "label": "Длина по каталогу, м",
+          "value": "6"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Наружный диаметр, мм",
+          "value": "76"
+        },
+        {
+          "name": "Толщина стенки, мм",
+          "value": "3,5"
+        },
+        {
+          "name": "Длина по каталогу",
+          "value": "6 м"
+        },
+        {
+          "name": "Покрытие",
+          "value": "Цинковое"
+        },
+        {
+          "name": "Теоретическая масса без цинкового покрытия",
+          "value": "6,26 кг/м"
+        },
+        {
+          "name": "Сортамент по каталогу",
+          "value": "ГОСТ 10704-91"
+        }
+      ],
+      "productTypeId": "type-cat-trk-sub-4",
+      "unit": "ton",
+      "material": "",
+      "standard": "ГОСТ 10704-91",
+      "weight": {
+        "value": 6.26,
+        "unit": "кг/м"
+      }
+    },
+    {
+      "sku": "",
+      "id": "electrowelded-galvanized-108x3-5-6m",
+      "categoryId": "cat-trk",
+      "subcategoryId": "cat-trk-sub-4",
+      "name": "Труба электросварная оцинкованная 108 × 3,5, 6 м",
+      "slug": "truba-elektrosvarnaya-otsinkovannaya-108x3-5-6m",
+      "shortDescription": "Наружный диаметр 108 мм, стенка 3,5 мм, длина 6 м.",
+      "description": "Оцинкованная стальная прямошовная труба 108 × 3,5 мм длиной 6 м. Сортамент по ГОСТ 10704-91. Теоретическая масса стальной трубы составляет 9,02 кг/м без учёта цинкового покрытия.",
+      "price": 117140,
+      "pricePerTon": 117140,
+      "priceUnit": "за тонну",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/originals/truba_elektrosvarnaya_ocinkovannaya_2400_1800_original.jpg"
+      ],
+      "coatingType": "galvanized",
+      "diameterMm": 108,
+      "wallThicknessMm": 3.5,
+      "lengthMeters": 6,
+      "weightPerMeterKg": 9.02,
+      "weightConfirmed": true,
+      "attributes": [
+        {
+          "key": "standard",
+          "label": "Сортамент по каталогу",
+          "value": "ГОСТ 10704-91"
+        },
+        {
+          "key": "size",
+          "label": "Наружный Ø × стенка, мм",
+          "value": "108 × 3,5"
+        },
+        {
+          "key": "length",
+          "label": "Длина по каталогу, м",
+          "value": "6"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Наружный диаметр, мм",
+          "value": "108"
+        },
+        {
+          "name": "Толщина стенки, мм",
+          "value": "3,5"
+        },
+        {
+          "name": "Длина по каталогу",
+          "value": "6 м"
+        },
+        {
+          "name": "Покрытие",
+          "value": "Цинковое"
+        },
+        {
+          "name": "Теоретическая масса без цинкового покрытия",
+          "value": "9,02 кг/м"
+        },
+        {
+          "name": "Сортамент по каталогу",
+          "value": "ГОСТ 10704-91"
+        }
+      ],
+      "productTypeId": "type-cat-trk-sub-4",
+      "unit": "ton",
+      "material": "",
+      "standard": "ГОСТ 10704-91",
+      "weight": {
+        "value": 9.02,
+        "unit": "кг/м"
+      }
+    },
+    {
+      "sku": "",
+      "id": "electrowelded-galvanized-133x4-5-6m",
+      "categoryId": "cat-trk",
+      "subcategoryId": "cat-trk-sub-4",
+      "name": "Труба электросварная оцинкованная 133 × 4,5, 6 м",
+      "slug": "truba-elektrosvarnaya-otsinkovannaya-133x4-5-6m",
+      "shortDescription": "Наружный диаметр 133 мм, стенка 4,5 мм, длина 6 м.",
+      "description": "Оцинкованная стальная прямошовная труба 133 × 4,5 мм длиной 6 м. Сортамент по ГОСТ 10704-91. Теоретическая масса стальной трубы составляет 14,26 кг/м без учёта цинкового покрытия.",
+      "price": 108203,
+      "pricePerTon": 108203,
+      "priceUnit": "за тонну",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/originals/truba_elektrosvarnaya_ocinkovannaya_2400_1800_original.jpg"
+      ],
+      "coatingType": "galvanized",
+      "diameterMm": 133,
+      "wallThicknessMm": 4.5,
+      "lengthMeters": 6,
+      "weightPerMeterKg": 14.26,
+      "weightConfirmed": true,
+      "attributes": [
+        {
+          "key": "standard",
+          "label": "Сортамент по каталогу",
+          "value": "ГОСТ 10704-91"
+        },
+        {
+          "key": "size",
+          "label": "Наружный Ø × стенка, мм",
+          "value": "133 × 4,5"
+        },
+        {
+          "key": "length",
+          "label": "Длина по каталогу, м",
+          "value": "6"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Наружный диаметр, мм",
+          "value": "133"
+        },
+        {
+          "name": "Толщина стенки, мм",
+          "value": "4,5"
+        },
+        {
+          "name": "Длина по каталогу",
+          "value": "6 м"
+        },
+        {
+          "name": "Покрытие",
+          "value": "Цинковое"
+        },
+        {
+          "name": "Теоретическая масса без цинкового покрытия",
+          "value": "14,26 кг/м"
+        },
+        {
+          "name": "Сортамент по каталогу",
+          "value": "ГОСТ 10704-91"
+        }
+      ],
+      "productTypeId": "type-cat-trk-sub-4",
+      "unit": "ton",
+      "material": "",
+      "standard": "ГОСТ 10704-91",
+      "weight": {
+        "value": 14.26,
+        "unit": "кг/м"
+      }
+    },
+    {
+      "sku": "",
+      "id": "electrowelded-galvanized-159x4-5-6m",
+      "categoryId": "cat-trk",
+      "subcategoryId": "cat-trk-sub-4",
+      "name": "Труба электросварная оцинкованная 159 × 4,5, 6 м",
+      "slug": "truba-elektrosvarnaya-otsinkovannaya-159x4-5-6m",
+      "shortDescription": "Наружный диаметр 159 мм, стенка 4,5 мм, длина 6 м.",
+      "description": "Оцинкованная стальная прямошовная труба 159 × 4,5 мм длиной 6 м. Сортамент по ГОСТ 10704-91. Теоретическая масса стальной трубы составляет 17,15 кг/м без учёта цинкового покрытия.",
+      "price": 93600,
+      "pricePerTon": 93600,
+      "priceUnit": "за тонну",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/originals/truba_elektrosvarnaya_ocinkovannaya_2400_1800_original.jpg"
+      ],
+      "coatingType": "galvanized",
+      "diameterMm": 159,
+      "wallThicknessMm": 4.5,
+      "lengthMeters": 6,
+      "weightPerMeterKg": 17.15,
+      "weightConfirmed": true,
+      "attributes": [
+        {
+          "key": "standard",
+          "label": "Сортамент по каталогу",
+          "value": "ГОСТ 10704-91"
+        },
+        {
+          "key": "size",
+          "label": "Наружный Ø × стенка, мм",
+          "value": "159 × 4,5"
+        },
+        {
+          "key": "length",
+          "label": "Длина по каталогу, м",
+          "value": "6"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Наружный диаметр, мм",
+          "value": "159"
+        },
+        {
+          "name": "Толщина стенки, мм",
+          "value": "4,5"
+        },
+        {
+          "name": "Длина по каталогу",
+          "value": "6 м"
+        },
+        {
+          "name": "Покрытие",
+          "value": "Цинковое"
+        },
+        {
+          "name": "Теоретическая масса без цинкового покрытия",
+          "value": "17,15 кг/м"
+        },
+        {
+          "name": "Сортамент по каталогу",
+          "value": "ГОСТ 10704-91"
+        }
+      ],
+      "productTypeId": "type-cat-trk-sub-4",
+      "unit": "ton",
+      "material": "",
+      "standard": "ГОСТ 10704-91",
+      "weight": {
+        "value": 17.15,
+        "unit": "кг/м"
+      }
+    },
+    {
+      "sku": "",
+      "id": "electrowelded-galvanized-219x6-12m",
+      "categoryId": "cat-trk",
+      "subcategoryId": "cat-trk-sub-4",
+      "name": "Труба электросварная оцинкованная 219 × 6, 12 м",
+      "slug": "truba-elektrosvarnaya-otsinkovannaya-219x6-12m",
+      "shortDescription": "Наружный диаметр 219 мм, стенка 6 мм, длина 12 м.",
+      "description": "Оцинкованная стальная прямошовная труба 219 × 6 мм длиной 12 м. Сортамент по ГОСТ 10704-91. Теоретическая масса стальной трубы составляет 31,52 кг/м без учёта цинкового покрытия.",
+      "price": 137529,
+      "pricePerTon": 137529,
+      "priceUnit": "за тонну",
+      "availability": "ON_ORDER",
+      "inStock": false,
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/originals/truba_elektrosvarnaya_ocinkovannaya_2400_1800_original.jpg"
+      ],
+      "coatingType": "galvanized",
+      "diameterMm": 219,
+      "wallThicknessMm": 6,
+      "lengthMeters": 12,
+      "weightPerMeterKg": 31.52,
+      "weightConfirmed": true,
+      "attributes": [
+        {
+          "key": "standard",
+          "label": "Сортамент по каталогу",
+          "value": "ГОСТ 10704-91"
+        },
+        {
+          "key": "size",
+          "label": "Наружный Ø × стенка, мм",
+          "value": "219 × 6"
+        },
+        {
+          "key": "length",
+          "label": "Длина по каталогу, м",
+          "value": "12"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Наружный диаметр, мм",
+          "value": "219"
+        },
+        {
+          "name": "Толщина стенки, мм",
+          "value": "6"
+        },
+        {
+          "name": "Длина по каталогу",
+          "value": "12 м"
+        },
+        {
+          "name": "Покрытие",
+          "value": "Цинковое"
+        },
+        {
+          "name": "Теоретическая масса без цинкового покрытия",
+          "value": "31,52 кг/м"
+        },
+        {
+          "name": "Сортамент по каталогу",
+          "value": "ГОСТ 10704-91"
+        }
+      ],
+      "productTypeId": "type-cat-trk-sub-4",
+      "unit": "ton",
+      "material": "",
+      "standard": "ГОСТ 10704-91",
+      "weight": {
+        "value": 31.52,
+        "unit": "кг/м"
+      }
+    },
+    {
       "id": "prd-089",
       "categoryId": "cat-trp",
       "subcategoryId": "cat-trp-sub-2",
@@ -14020,8 +14476,8 @@
       "priceUnit": "за тонну",
       "material": "",
       "standard": "ГОСТ 10704-91; ГОСТ 10705-80",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/cover/truba-elektrosvarnaya-cink.jpg"

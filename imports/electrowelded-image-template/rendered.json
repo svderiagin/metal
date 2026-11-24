@@ -1350,6 +1350,432 @@
       },
       "annotatedPixels": 63849,
       "changedOutsideAnnotationsBeforeJpegEncoding": 0
+    },
+    {
+      "id": "electrowelded-galvanized-57x3-5-6m",
+      "source": "public/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/originals/truba_elektrosvarnaya_ocinkovannaya_2400_1800_original.jpg",
+      "output": "public/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/measurement/truba-elektrosvarnaya-otsinkovannaya-57x3-5mm-6m.jpg",
+      "width": 2400,
+      "height": 1800,
+      "jpegQuality": 100,
+      "chromaSubsampling": "4:4:4",
+      "sourceSha256": "02e9a943bd03c607f79e0ee83c85417f02b692adb7d77ea0686cfc62d3e7def8",
+      "title": [
+        "Труба электросварная",
+        "оцинкованная 57 × 3,5"
+      ],
+      "diameterMm": 57,
+      "wallThicknessMm": 3.5,
+      "lengthLabel": "6 м",
+      "weightPerMeterKg": 4.62,
+      "massBasis": "Стальная труба; масса цинкового покрытия не включена.",
+      "annotationBounds": {
+        "title0": {
+          "left": 133,
+          "top": 126,
+          "width": 945,
+          "height": 79
+        },
+        "title1": {
+          "left": 133,
+          "top": 233,
+          "width": 932,
+          "height": 78
+        },
+        "wall": {
+          "left": 773,
+          "top": 689,
+          "width": 175,
+          "height": 51
+        },
+        "diameter": {
+          "left": 1227,
+          "top": 1453,
+          "width": 216,
+          "height": 44
+        },
+        "caption0": {
+          "left": 133,
+          "top": 1567,
+          "width": 379,
+          "height": 40
+        },
+        "caption1": {
+          "left": 611,
+          "top": 1567,
+          "width": 68,
+          "height": 32
+        },
+        "caption2": {
+          "left": 133,
+          "top": 1633,
+          "width": 439,
+          "height": 40
+        },
+        "caption3": {
+          "left": 611,
+          "top": 1633,
+          "width": 193,
+          "height": 41
+        }
+      },
+      "annotatedPixels": 83039,
+      "changedOutsideAnnotationsBeforeJpegEncoding": 0
+    },
+    {
+      "id": "electrowelded-galvanized-76x3-5-6m",
+      "source": "public/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/originals/truba_elektrosvarnaya_ocinkovannaya_2400_1800_original.jpg",
+      "output": "public/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/measurement/truba-elektrosvarnaya-otsinkovannaya-76x3-5mm-6m.jpg",
+      "width": 2400,
+      "height": 1800,
+      "jpegQuality": 100,
+      "chromaSubsampling": "4:4:4",
+      "sourceSha256": "02e9a943bd03c607f79e0ee83c85417f02b692adb7d77ea0686cfc62d3e7def8",
+      "title": [
+        "Труба электросварная",
+        "оцинкованная 76 × 3,5"
+      ],
+      "diameterMm": 76,
+      "wallThicknessMm": 3.5,
+      "lengthLabel": "6 м",
+      "weightPerMeterKg": 6.26,
+      "massBasis": "Стальная труба; масса цинкового покрытия не включена.",
+      "annotationBounds": {
+        "title0": {
+          "left": 133,
+          "top": 126,
+          "width": 945,
+          "height": 79
+        },
+        "title1": {
+          "left": 133,
+          "top": 233,
+          "width": 933,
+          "height": 78
+        },
+        "wall": {
+          "left": 773,
+          "top": 689,
+          "width": 175,
+          "height": 51
+        },
+        "diameter": {
+          "left": 1227,
+          "top": 1453,
+          "width": 216,
+          "height": 44
+        },
+        "caption0": {
+          "left": 133,
+          "top": 1567,
+          "width": 379,
+          "height": 40
+        },
+        "caption1": {
+          "left": 611,
+          "top": 1567,
+          "width": 68,
+          "height": 32
+        },
+        "caption2": {
+          "left": 133,
+          "top": 1633,
+          "width": 439,
+          "height": 40
+        },
+        "caption3": {
+          "left": 611,
+          "top": 1633,
+          "width": 191,
+          "height": 41
+        }
+      },
+      "annotatedPixels": 83374,
+      "changedOutsideAnnotationsBeforeJpegEncoding": 0
+    },
+    {
+      "id": "electrowelded-galvanized-108x3-5-6m",
+      "source": "public/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/originals/truba_elektrosvarnaya_ocinkovannaya_2400_1800_original.jpg",
+      "output": "public/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/measurement/truba-elektrosvarnaya-otsinkovannaya-108x3-5mm-6m.jpg",
+      "width": 2400,
+      "height": 1800,
+      "jpegQuality": 100,
+      "chromaSubsampling": "4:4:4",
+      "sourceSha256": "02e9a943bd03c607f79e0ee83c85417f02b692adb7d77ea0686cfc62d3e7def8",
+      "title": [
+        "Труба электросварная",
+        "оцинкованная 108 × 3,5"
+      ],
+      "diameterMm": 108,
+      "wallThicknessMm": 3.5,
+      "lengthLabel": "6 м",
+      "weightPerMeterKg": 9.02,
+      "massBasis": "Стальная труба; масса цинкового покрытия не включена.",
+      "annotationBounds": {
+        "title0": {
+          "left": 133,
+          "top": 126,
+          "width": 945,
+          "height": 79
+        },
+        "title1": {
+          "left": 133,
+          "top": 233,
+          "width": 977,
+          "height": 78
+        },
+        "wall": {
+          "left": 773,
+          "top": 689,
+          "width": 175,
+          "height": 51
+        },
+        "diameter": {
+          "left": 1213,
+          "top": 1453,
+          "width": 244,
+          "height": 44
+        },
+        "caption0": {
+          "left": 133,
+          "top": 1567,
+          "width": 379,
+          "height": 40
+        },
+        "caption1": {
+          "left": 611,
+          "top": 1567,
+          "width": 68,
+          "height": 32
+        },
+        "caption2": {
+          "left": 133,
+          "top": 1633,
+          "width": 439,
+          "height": 40
+        },
+        "caption3": {
+          "left": 611,
+          "top": 1633,
+          "width": 193,
+          "height": 41
+        }
+      },
+      "annotatedPixels": 85518,
+      "changedOutsideAnnotationsBeforeJpegEncoding": 0
+    },
+    {
+      "id": "electrowelded-galvanized-133x4-5-6m",
+      "source": "public/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/originals/truba_elektrosvarnaya_ocinkovannaya_2400_1800_original.jpg",
+      "output": "public/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/measurement/truba-elektrosvarnaya-otsinkovannaya-133x4-5mm-6m.jpg",
+      "width": 2400,
+      "height": 1800,
+      "jpegQuality": 100,
+      "chromaSubsampling": "4:4:4",
+      "sourceSha256": "02e9a943bd03c607f79e0ee83c85417f02b692adb7d77ea0686cfc62d3e7def8",
+      "title": [
+        "Труба электросварная",
+        "оцинкованная 133 × 4,5"
+      ],
+      "diameterMm": 133,
+      "wallThicknessMm": 4.5,
+      "lengthLabel": "6 м",
+      "weightPerMeterKg": 14.26,
+      "massBasis": "Стальная труба; масса цинкового покрытия не включена.",
+      "annotationBounds": {
+        "title0": {
+          "left": 133,
+          "top": 126,
+          "width": 945,
+          "height": 79
+        },
+        "title1": {
+          "left": 133,
+          "top": 233,
+          "width": 976,
+          "height": 78
+        },
+        "wall": {
+          "left": 772,
+          "top": 689,
+          "width": 176,
+          "height": 51
+        },
+        "diameter": {
+          "left": 1214,
+          "top": 1453,
+          "width": 243,
+          "height": 44
+        },
+        "caption0": {
+          "left": 133,
+          "top": 1567,
+          "width": 379,
+          "height": 40
+        },
+        "caption1": {
+          "left": 611,
+          "top": 1567,
+          "width": 68,
+          "height": 32
+        },
+        "caption2": {
+          "left": 133,
+          "top": 1633,
+          "width": 439,
+          "height": 40
+        },
+        "caption3": {
+          "left": 611,
+          "top": 1633,
+          "width": 212,
+          "height": 41
+        }
+      },
+      "annotatedPixels": 84989,
+      "changedOutsideAnnotationsBeforeJpegEncoding": 0
+    },
+    {
+      "id": "electrowelded-galvanized-159x4-5-6m",
+      "source": "public/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/originals/truba_elektrosvarnaya_ocinkovannaya_2400_1800_original.jpg",
+      "output": "public/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/measurement/truba-elektrosvarnaya-otsinkovannaya-159x4-5mm-6m.jpg",
+      "width": 2400,
+      "height": 1800,
+      "jpegQuality": 100,
+      "chromaSubsampling": "4:4:4",
+      "sourceSha256": "02e9a943bd03c607f79e0ee83c85417f02b692adb7d77ea0686cfc62d3e7def8",
+      "title": [
+        "Труба электросварная",
+        "оцинкованная 159 × 4,5"
+      ],
+      "diameterMm": 159,
+      "wallThicknessMm": 4.5,
+      "lengthLabel": "6 м",
+      "weightPerMeterKg": 17.15,
+      "massBasis": "Стальная труба; масса цинкового покрытия не включена.",
+      "annotationBounds": {
+        "title0": {
+          "left": 133,
+          "top": 126,
+          "width": 945,
+          "height": 79
+        },
+        "title1": {
+          "left": 133,
+          "top": 233,
+          "width": 974,
+          "height": 78
+        },
+        "wall": {
+          "left": 772,
+          "top": 689,
+          "width": 176,
+          "height": 51
+        },
+        "diameter": {
+          "left": 1214,
+          "top": 1453,
+          "width": 242,
+          "height": 44
+        },
+        "caption0": {
+          "left": 133,
+          "top": 1567,
+          "width": 379,
+          "height": 40
+        },
+        "caption1": {
+          "left": 611,
+          "top": 1567,
+          "width": 68,
+          "height": 32
+        },
+        "caption2": {
+          "left": 133,
+          "top": 1633,
+          "width": 439,
+          "height": 40
+        },
+        "caption3": {
+          "left": 611,
+          "top": 1633,
+          "width": 191,
+          "height": 41
+        }
+      },
+      "annotatedPixels": 85224,
+      "changedOutsideAnnotationsBeforeJpegEncoding": 0
+    },
+    {
+      "id": "electrowelded-galvanized-219x6-12m",
+      "source": "public/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/originals/truba_elektrosvarnaya_ocinkovannaya_2400_1800_original.jpg",
+      "output": "public/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/measurement/truba-elektrosvarnaya-otsinkovannaya-219x6mm-12m.jpg",
+      "width": 2400,
+      "height": 1800,
+      "jpegQuality": 100,
+      "chromaSubsampling": "4:4:4",
+      "sourceSha256": "02e9a943bd03c607f79e0ee83c85417f02b692adb7d77ea0686cfc62d3e7def8",
+      "title": [
+        "Труба электросварная",
+        "оцинкованная 219 × 6"
+      ],
+      "diameterMm": 219,
+      "wallThicknessMm": 6,
+      "lengthLabel": "12 м",
+      "weightPerMeterKg": 31.52,
+      "massBasis": "Стальная труба; масса цинкового покрытия не включена.",
+      "annotationBounds": {
+        "title0": {
+          "left": 133,
+          "top": 126,
+          "width": 945,
+          "height": 79
+        },
+        "title1": {
+          "left": 133,
+          "top": 233,
+          "width": 901,
+          "height": 75
+        },
+        "wall": {
+          "left": 819,
+          "top": 689,
+          "width": 129,
+          "height": 42
+        },
+        "diameter": {
+          "left": 1214,
+          "top": 1453,
+          "width": 242,
+          "height": 44
+        },
+        "caption0": {
+          "left": 133,
+          "top": 1567,
+          "width": 379,
+          "height": 40
+        },
+        "caption1": {
+          "left": 611,
+          "top": 1567,
+          "width": 85,
+          "height": 31
+        },
+        "caption2": {
+          "left": 133,
+          "top": 1633,
+          "width": 439,
+          "height": 40
+        },
+        "caption3": {
+          "left": 611,
+          "top": 1633,
+          "width": 209,
+          "height": 41
+        }
+      },
+      "annotatedPixels": 83121,
+      "changedOutsideAnnotationsBeforeJpegEncoding": 0
     }
   ]
 }

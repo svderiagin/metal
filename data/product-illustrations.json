@@ -1684,5 +1684,35 @@
     "imageUrl": "/images/catalog/truba-kruglaya/truba-vodogazoprovodnaya-otsinkovannaya/measurement/truba-vgp-otsinkovannaya-du50x3-5mm-6m.webp",
     "photoUrl": "/images/catalog/truba-kruglaya/truba-vodogazoprovodnaya-otsinkovannaya/originals/truba_vgp_ocinkovannaya_2400_1800_original.jpg",
     "signature": "a3af1aee"
+  },
+  "electrowelded-galvanized-57x3-5-6m": {
+    "imageUrl": "/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/measurement/truba-elektrosvarnaya-otsinkovannaya-57x3-5mm-6m.jpg",
+    "photoUrl": "/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/originals/truba_elektrosvarnaya_ocinkovannaya_2400_1800_original.jpg",
+    "signature": "15e9deb7"
+  },
+  "electrowelded-galvanized-76x3-5-6m": {
+    "imageUrl": "/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/measurement/truba-elektrosvarnaya-otsinkovannaya-76x3-5mm-6m.jpg",
+    "photoUrl": "/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/originals/truba_elektrosvarnaya_ocinkovannaya_2400_1800_original.jpg",
+    "signature": "49de2486"
+  },
+  "electrowelded-galvanized-108x3-5-6m": {
+    "imageUrl": "/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/measurement/truba-elektrosvarnaya-otsinkovannaya-108x3-5mm-6m.jpg",
+    "photoUrl": "/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/originals/truba_elektrosvarnaya_ocinkovannaya_2400_1800_original.jpg",
+    "signature": "722c74ac"
+  },
+  "electrowelded-galvanized-133x4-5-6m": {
+    "imageUrl": "/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/measurement/truba-elektrosvarnaya-otsinkovannaya-133x4-5mm-6m.jpg",
+    "photoUrl": "/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/originals/truba_elektrosvarnaya_ocinkovannaya_2400_1800_original.jpg",
+    "signature": "ab8fb62b"
+  },
+  "electrowelded-galvanized-159x4-5-6m": {
+    "imageUrl": "/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/measurement/truba-elektrosvarnaya-otsinkovannaya-159x4-5mm-6m.jpg",
+    "photoUrl": "/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/originals/truba_elektrosvarnaya_ocinkovannaya_2400_1800_original.jpg",
+    "signature": "3fe0315b"
+  },
+  "electrowelded-galvanized-219x6-12m": {
+    "imageUrl": "/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/measurement/truba-elektrosvarnaya-otsinkovannaya-219x6mm-12m.jpg",
+    "photoUrl": "/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/originals/truba_elektrosvarnaya_ocinkovannaya_2400_1800_original.jpg",
+    "signature": "9c64feac"
   }
 }

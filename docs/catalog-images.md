@@ -127,14 +127,14 @@ chroma sampling. Labels must
 use the electrowelded product's outside diameter, wall, steel grade, length and verified mass;
 the VGP references' nominal-bore labels and values do not transfer to this family.
 
-The electrowelded catalogue has **21 positions** across its two tables.
+The electrowelded catalogue has **27 positions** across its two tables.
 
 - The **20 ordinary positions** use annotated JPG files in
   `public/images/catalog/truba-kruglaya/truba-elektrosvarnaya/measurement/`.
   Positions with the same rendered artwork share one file.
-- The **one galvanized position**, 89 × 3,5 × 7800 mm (`local-443`), uses the
-  [annotated JPG](../public/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/measurement/truba-elektrosvarnaya-otsinkovannaya-89x3-5mm-7-8m.jpg)
-  made from the supplied galvanized VGP original. The image follows the owner's
+- The **seven galvanized positions** use individual annotated JPG files in
+  `public/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/measurement/`.
+  All seven are based on the supplied galvanized VGP original and follow the owner's
   reference with labels for diameter, wall thickness, length and theoretical mass.
   The table note explains the basis used to calculate that mass.
 

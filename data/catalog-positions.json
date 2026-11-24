@@ -1556,8 +1556,8 @@
       "priceUnit": "за тонну",
       "material": "",
       "standard": "ГОСТ 10704; 10705",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
