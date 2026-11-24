@@ -13220,7 +13220,7 @@
       "sku": "МП-302",
       "shortDescription": "Наружный диаметр 57 мм, стенка 3 мм, длина по каталогу 12 м.",
       "description": "Сортамент по предложению поставщика — ГОСТ 10704-91, технические условия — ГОСТ 10705-80. В таблице 1 ГОСТ 10704-91 теоретическая масса 1 м трубы составляет 4 кг. Пересчёт заказа по длине является расчётным. 12 м указаны поставщиком. Вид длины требует подтверждения: для мерной трубы этого диаметра ГОСТ 10704-91 (п. 3) указывает 5–9 м. Марка стали уточняется. Фактические параметры партии подтверждаются документом о качестве.",
-      "price": 50940,
+      "price": 60590,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
@@ -13228,8 +13228,8 @@
       "priceUnit": "за тонну",
       "material": "",
       "standard": "ГОСТ 10704-91; ГОСТ 10705-80",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/truba-kruglaya/truba-elektrosvarnaya/cover/truba-elektrosvarnaya.jpg"
@@ -13286,7 +13286,7 @@
         }
       ],
       "imported": true,
-      "pricePerTon": 50940,
+      "pricePerTon": 60590,
       "sourceProductName": "Труба электросварная прямошовная 57х3х12000 ГОСТ 10704; 10705 ТМ",
       "diameterMm": 57,
       "wallThicknessMm": 3,
@@ -13308,7 +13308,7 @@
       "sku": "МП-305",
       "shortDescription": "Наружный диаметр 57 мм, стенка 3,5 мм, длина по каталогу 12 м.",
       "description": "Сортамент по предложению поставщика — ГОСТ 10704-91, технические условия — ГОСТ 10705-80. В таблице 1 ГОСТ 10704-91 теоретическая масса 1 м трубы составляет 4,62 кг. Пересчёт заказа по длине является расчётным. 12 м указаны поставщиком. Вид длины требует подтверждения: для мерной трубы этого диаметра ГОСТ 10704-91 (п. 3) указывает 5–9 м. Марка стали уточняется. Фактические параметры партии подтверждаются документом о качестве.",
-      "price": 50940,
+      "price": 60590,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
@@ -13316,8 +13316,8 @@
       "priceUnit": "за тонну",
       "material": "",
       "standard": "ГОСТ 10704-91; ГОСТ 10705-80",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/truba-kruglaya/truba-elektrosvarnaya/cover/truba-elektrosvarnaya.jpg"
@@ -13374,7 +13374,7 @@
         }
       ],
       "imported": true,
-      "pricePerTon": 50940,
+      "pricePerTon": 60590,
       "sourceProductName": "Труба электросварная прямошовная 57х3.5х12000 ГОСТ 10704; 10705 ТМ",
       "diameterMm": 57,
       "wallThicknessMm": 3.5,
@@ -13396,7 +13396,7 @@
       "sku": "МП-309",
       "shortDescription": "Наружный диаметр 76 мм, стенка 3 мм, длина по каталогу 12 м.",
       "description": "Сортамент по предложению поставщика — ГОСТ 10704-91, технические условия — ГОСТ 10705-80. В таблице 1 ГОСТ 10704-91 теоретическая масса 1 м трубы составляет 5,4 кг. Пересчёт заказа по длине является расчётным. 12 м указаны поставщиком. Для мерной трубы этот размер длины допускается по согласованию (ГОСТ 10704-91, п. 3). Марка стали уточняется. Фактические параметры партии подтверждаются документом о качестве.",
-      "price": 50940,
+      "price": 60590,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
@@ -13404,8 +13404,8 @@
       "priceUnit": "за тонну",
       "material": "",
       "standard": "ГОСТ 10704-91; ГОСТ 10705-80",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/truba-kruglaya/truba-elektrosvarnaya/cover/truba-elektrosvarnaya.jpg"
@@ -13462,7 +13462,7 @@
         }
       ],
       "imported": true,
-      "pricePerTon": 50940,
+      "pricePerTon": 60590,
       "sourceProductName": "Труба электросварная прямошовная 76х3х12000 ГОСТ 10704; 10705 ТМ",
       "diameterMm": 76,
       "wallThicknessMm": 3,
@@ -13484,7 +13484,7 @@
       "sku": "МП-311",
       "shortDescription": "Наружный диаметр 76 мм, стенка 3,5 мм, длина по каталогу 12 м.",
       "description": "Сортамент по предложению поставщика — ГОСТ 10704-91, технические условия — ГОСТ 10705-80. В таблице 1 ГОСТ 10704-91 теоретическая масса 1 м трубы составляет 6,26 кг. Пересчёт заказа по длине является расчётным. 12 м указаны поставщиком. Для мерной трубы этот размер длины допускается по согласованию (ГОСТ 10704-91, п. 3). Марка стали уточняется. Фактические параметры партии подтверждаются документом о качестве.",
-      "price": 51840,
+      "price": 60590,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
@@ -13492,8 +13492,8 @@
       "priceUnit": "за тонну",
       "material": "",
       "standard": "ГОСТ 10704-91; ГОСТ 10705-80",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/truba-kruglaya/truba-elektrosvarnaya/cover/truba-elektrosvarnaya.jpg"
@@ -13550,7 +13550,7 @@
         }
       ],
       "imported": true,
-      "pricePerTon": 51840,
+      "pricePerTon": 60590,
       "sourceProductName": "Труба электросварная прямошовная 76х3.5х12000 ГОСТ 10704; 10705 ТМ",
       "diameterMm": 76,
       "wallThicknessMm": 3.5,
@@ -13572,7 +13572,7 @@
       "sku": "МП-313",
       "shortDescription": "Наружный диаметр 76 мм, стенка 4 мм, длина по каталогу 12 м.",
       "description": "Сортамент по предложению поставщика — ГОСТ 10704-91, технические условия — ГОСТ 10705-80. В таблице 1 ГОСТ 10704-91 теоретическая масса 1 м трубы составляет 7,1 кг. Пересчёт заказа по длине является расчётным. 12 м указаны поставщиком. Для мерной трубы этот размер длины допускается по согласованию (ГОСТ 10704-91, п. 3). Марка стали уточняется. Фактические параметры партии подтверждаются документом о качестве.",
-      "price": 50940,
+      "price": 64503,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
@@ -13580,8 +13580,8 @@
       "priceUnit": "за тонну",
       "material": "",
       "standard": "ГОСТ 10704-91; ГОСТ 10705-80",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/truba-kruglaya/truba-elektrosvarnaya/cover/truba-elektrosvarnaya.jpg"
@@ -13638,7 +13638,7 @@
         }
       ],
       "imported": true,
-      "pricePerTon": 50940,
+      "pricePerTon": 64503,
       "sourceProductName": "Труба электросварная прямошовная 76х4х12000 ГОСТ 10704; 10705 ТМ",
       "diameterMm": 76,
       "wallThicknessMm": 4,
@@ -13660,7 +13660,7 @@
       "sku": "МП-316",
       "shortDescription": "Наружный диаметр 89 мм, стенка 3,5 мм, длина по каталогу 12 м.",
       "description": "Сортамент по предложению поставщика — ГОСТ 10704-91, технические условия — ГОСТ 10705-80. В таблице 1 ГОСТ 10704-91 теоретическая масса 1 м трубы составляет 7,38 кг. Пересчёт заказа по длине является расчётным. 12 м указаны поставщиком. Для мерной трубы этот размер длины допускается по согласованию (ГОСТ 10704-91, п. 3). Марка стали уточняется. Фактические параметры партии подтверждаются документом о качестве.",
-      "price": 50940,
+      "price": 60090,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
@@ -13668,8 +13668,8 @@
       "priceUnit": "за тонну",
       "material": "",
       "standard": "ГОСТ 10704-91; ГОСТ 10705-80",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/truba-kruglaya/truba-elektrosvarnaya/cover/truba-elektrosvarnaya.jpg"
@@ -13726,7 +13726,7 @@
         }
       ],
       "imported": true,
-      "pricePerTon": 50940,
+      "pricePerTon": 60090,
       "sourceProductName": "Труба электросварная прямошовная 89х3.5х12000 ГОСТ 10704; 10705 ТМ",
       "diameterMm": 89,
       "wallThicknessMm": 3.5,
@@ -13748,7 +13748,7 @@
       "sku": "МП-318",
       "shortDescription": "Наружный диаметр 89 мм, стенка 4 мм, длина по каталогу 12 м.",
       "description": "Сортамент по предложению поставщика — ГОСТ 10704-91, технические условия — ГОСТ 10705-80. В таблице 1 ГОСТ 10704-91 теоретическая масса 1 м трубы составляет 8,38 кг. Пересчёт заказа по длине является расчётным. 12 м указаны поставщиком. Для мерной трубы этот размер длины допускается по согласованию (ГОСТ 10704-91, п. 3). Марка стали уточняется. Фактические параметры партии подтверждаются документом о качестве.",
-      "price": 50940,
+      "price": 64503,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
@@ -13756,8 +13756,8 @@
       "priceUnit": "за тонну",
       "material": "",
       "standard": "ГОСТ 10704-91; ГОСТ 10705-80",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/truba-kruglaya/truba-elektrosvarnaya/cover/truba-elektrosvarnaya.jpg"
@@ -13814,7 +13814,7 @@
         }
       ],
       "imported": true,
-      "pricePerTon": 50940,
+      "pricePerTon": 64503,
       "sourceProductName": "Труба электросварная прямошовная 89х4х12000 ГОСТ 10704; 10705 ТМ",
       "diameterMm": 89,
       "wallThicknessMm": 4,
@@ -13836,7 +13836,7 @@
       "sku": "МП-333",
       "shortDescription": "Наружный диаметр 133 мм, стенка 4,5 мм, длина по каталогу 12 м.",
       "description": "Сортамент по предложению поставщика — ГОСТ 10704-91, технические условия — ГОСТ 10705-80. В таблице 1 ГОСТ 10704-91 теоретическая масса 1 м трубы составляет 14,26 кг. Пересчёт заказа по длине является расчётным. 12 м указаны поставщиком. Для мерной трубы этот размер длины допускается по согласованию (ГОСТ 10704-91, п. 3). Марка стали уточняется. Фактические параметры партии подтверждаются документом о качестве.",
-      "price": 50940,
+      "price": 51800,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
@@ -13844,8 +13844,8 @@
       "priceUnit": "за тонну",
       "material": "",
       "standard": "ГОСТ 10704-91; ГОСТ 10705-80",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/truba-kruglaya/truba-elektrosvarnaya/cover/truba-elektrosvarnaya.jpg"
@@ -13902,7 +13902,7 @@
         }
       ],
       "imported": true,
-      "pricePerTon": 50940,
+      "pricePerTon": 51800,
       "sourceProductName": "Труба электросварная прямошовная 133х4.5х12000 ГОСТ 10704; 10705 ТМ",
       "diameterMm": 133,
       "wallThicknessMm": 4.5,
@@ -13924,7 +13924,7 @@
       "sku": "МП-337",
       "shortDescription": "Наружный диаметр 159 мм, стенка 4 мм, длина по каталогу 12 м.",
       "description": "Сортамент по предложению поставщика — ГОСТ 10704-91, технические условия — ГОСТ 10705-80. В таблице 1 ГОСТ 10704-91 теоретическая масса 1 м трубы составляет 15,29 кг. Пересчёт заказа по длине является расчётным. 12 м указаны поставщиком. Для мерной трубы этот размер длины допускается по согласованию (ГОСТ 10704-91, п. 3). Марка стали уточняется. Фактические параметры партии подтверждаются документом о качестве.",
-      "price": 51840,
+      "price": 60590,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
@@ -13932,8 +13932,8 @@
       "priceUnit": "за тонну",
       "material": "",
       "standard": "ГОСТ 10704-91; ГОСТ 10705-80",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/truba-kruglaya/truba-elektrosvarnaya/cover/truba-elektrosvarnaya.jpg"
@@ -13990,7 +13990,7 @@
         }
       ],
       "imported": true,
-      "pricePerTon": 51840,
+      "pricePerTon": 60590,
       "sourceProductName": "Труба электросварная прямошовная 159х4х12000 ГОСТ 10704; 10705 ТМ",
       "diameterMm": 159,
       "wallThicknessMm": 4,
@@ -14282,7 +14282,7 @@
       "sku": "МП-3963",
       "shortDescription": "Наружный диаметр 108 мм, стенка 4,5 мм, длина по каталогу 12 м.",
       "description": "Сортамент по предложению поставщика — ГОСТ 10704-91, технические условия — ГОСТ 10705-80. В таблице 1 ГОСТ 10704-91 теоретическая масса 1 м трубы составляет 11,49 кг. Пересчёт заказа по длине является расчётным. 12 м указаны поставщиком. Для мерной трубы этот размер длины допускается по согласованию (ГОСТ 10704-91, п. 3). Марка стали уточняется. Фактические параметры партии подтверждаются документом о качестве.",
-      "price": 52740,
+      "price": 63349,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
@@ -14290,8 +14290,8 @@
       "priceUnit": "за тонну",
       "material": "",
       "standard": "ГОСТ 10704-91; ГОСТ 10705-80",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/truba-kruglaya/truba-elektrosvarnaya/cover/truba-elektrosvarnaya.jpg"
@@ -14348,7 +14348,7 @@
         }
       ],
       "imported": true,
-      "pricePerTon": 52740,
+      "pricePerTon": 63349,
       "sourceProductName": "Труба электросварная прямошовная 108х4.5х12000 ГОСТ 10704; 10705 ТМ",
       "diameterMm": 108,
       "wallThicknessMm": 4.5,
@@ -14706,7 +14706,7 @@
       "sku": "МП-9211",
       "shortDescription": "Наружный диаметр 219 мм, стенка 4 мм, длина по каталогу 12 м.",
       "description": "Сортамент по предложению поставщика — ГОСТ 10704-91, технические условия — ГОСТ 10705-80. В таблице 1 ГОСТ 10704-91 теоретическая масса 1 м трубы составляет 21,21 кг. Пересчёт заказа по длине является расчётным. 12 м указаны поставщиком. Для мерной трубы этот размер длины допускается по согласованию (ГОСТ 10704-91, п. 3). Марка стали уточняется. Фактические параметры партии подтверждаются документом о качестве.",
-      "price": 53640,
+      "price": 49460,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
@@ -14714,8 +14714,8 @@
       "priceUnit": "за тонну",
       "material": "",
       "standard": "ГОСТ 10704-91; ГОСТ 10705-80",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/truba-kruglaya/truba-elektrosvarnaya/cover/truba-elektrosvarnaya.jpg"
@@ -14772,7 +14772,7 @@
         }
       ],
       "imported": true,
-      "pricePerTon": 53640,
+      "pricePerTon": 49460,
       "sourceProductName": "Труба электросварная прямошовная 219х4х12000 ГОСТ 10704; 10705 ТМ",
       "diameterMm": 219,
       "wallThicknessMm": 4,
@@ -14794,7 +14794,7 @@
       "sku": "МП-40706",
       "shortDescription": "Наружный диаметр 219 мм, стенка 5 мм, длина по каталогу 12 м.",
       "description": "Сортамент по предложению поставщика — ГОСТ 10704-91, технические условия — ГОСТ 10705-80. В таблице 1 ГОСТ 10704-91 теоретическая масса 1 м трубы составляет 26,39 кг. Пересчёт заказа по длине является расчётным. 12 м указаны поставщиком. Для мерной трубы этот размер длины допускается по согласованию (ГОСТ 10704-91, п. 3). Марка стали уточняется. Фактические параметры партии подтверждаются документом о качестве.",
-      "price": 53640,
+      "price": 61690,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
@@ -14802,8 +14802,8 @@
       "priceUnit": "за тонну",
       "material": "",
       "standard": "ГОСТ 10704-91; ГОСТ 10705-80",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/truba-kruglaya/truba-elektrosvarnaya/cover/truba-elektrosvarnaya.jpg"
@@ -14860,7 +14860,7 @@
         }
       ],
       "imported": true,
-      "pricePerTon": 53640,
+      "pricePerTon": 61690,
       "sourceProductName": "Труба электросварная прямошовная 219х5х12000 ГОСТ 10704; 10705 ТМ",
       "diameterMm": 219,
       "wallThicknessMm": 5,
@@ -14882,7 +14882,7 @@
       "sku": "МП-40707",
       "shortDescription": "Наружный диаметр 219 мм, стенка 6 мм, длина по каталогу 12 м.",
       "description": "Сортамент по предложению поставщика — ГОСТ 10704-91, технические условия — ГОСТ 10705-80. В таблице 1 ГОСТ 10704-91 теоретическая масса 1 м трубы составляет 31,52 кг. Пересчёт заказа по длине является расчётным. 12 м указаны поставщиком. Для мерной трубы этот размер длины допускается по согласованию (ГОСТ 10704-91, п. 3). Марка стали уточняется. Фактические параметры партии подтверждаются документом о качестве.",
-      "price": 53640,
+      "price": 61690,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
@@ -14890,8 +14890,8 @@
       "priceUnit": "за тонну",
       "material": "",
       "standard": "ГОСТ 10704-91; ГОСТ 10705-80",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/truba-kruglaya/truba-elektrosvarnaya/cover/truba-elektrosvarnaya.jpg"
@@ -14948,7 +14948,7 @@
         }
       ],
       "imported": true,
-      "pricePerTon": 53640,
+      "pricePerTon": 61690,
       "sourceProductName": "Труба электросварная прямошовная 219х6х12000 ГОСТ 10704; 10705 ТМ",
       "diameterMm": 219,
       "wallThicknessMm": 6,
@@ -14970,7 +14970,7 @@
       "sku": "МП-52334",
       "shortDescription": "Наружный диаметр 273 мм, стенка 6 мм, длина по каталогу 12 м.",
       "description": "Сортамент по предложению поставщика — ГОСТ 10704-91, технические условия — ГОСТ 10705-80. В таблице 1 ГОСТ 10704-91 теоретическая масса 1 м трубы составляет 39,51 кг. Пересчёт заказа по длине является расчётным. Марка стали уточняется. Фактические параметры партии подтверждаются документом о качестве.",
-      "price": 57600,
+      "price": 69390,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
@@ -14978,8 +14978,8 @@
       "priceUnit": "за тонну",
       "material": "",
       "standard": "ГОСТ 10704-91; ГОСТ 10705-80",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/truba-kruglaya/truba-elektrosvarnaya/cover/truba-elektrosvarnaya.jpg"
@@ -15036,7 +15036,7 @@
         }
       ],
       "imported": true,
-      "pricePerTon": 57600,
+      "pricePerTon": 69390,
       "sourceProductName": "Труба электросварная прямошовная 273х6х12000 ГОСТ 10704; 10705 ТМ",
       "diameterMm": 273,
       "wallThicknessMm": 6,
@@ -15058,15 +15058,15 @@
       "sku": "МП-53918",
       "shortDescription": "Наружный диаметр 127 мм, стенка 4 мм, длина по каталогу 12 м.",
       "description": "Сортамент по предложению поставщика — ГОСТ 10704-91, технические условия — ГОСТ 10705-80. В таблице 1 ГОСТ 10704-91 теоретическая масса 1 м трубы составляет 12,13 кг. Пересчёт заказа по длине является расчётным. 12 м указаны поставщиком. Для мерной трубы этот размер длины допускается по согласованию (ГОСТ 10704-91, п. 3). Марка стали 20 по данным поставщика. Фактические параметры партии подтверждаются документом о качестве.",
-      "price": null,
-      "quoteOnly": true,
+      "price": 62000,
+      "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
       "unit": "ton",
       "priceUnit": "за тонну",
       "material": "",
       "standard": "ГОСТ 10704-91; ГОСТ 10705-80",
-      "availability": "UNKNOWN",
+      "availability": "ON_ORDER",
       "inStock": false,
       "featured": false,
       "imageUrls": [
@@ -15129,6 +15129,7 @@
         }
       ],
       "imported": true,
+      "pricePerTon": 62000,
       "sourceProductName": "Труба электросварная прямошовная 127х4х12000 ГОСТ 10704; 10705 Ст20 ВМЗ ТМ",
       "diameterMm": 127,
       "wallThicknessMm": 4,
@@ -15309,7 +15310,7 @@
       "sku": "МП-58627",
       "shortDescription": "Наружный диаметр 273 мм, стенка 8 мм, длина по каталогу 11–12 м.",
       "description": "Сортамент по предложению поставщика — ГОСТ 10704-91, технические условия — ГОСТ 10705-80. В таблице 1 ГОСТ 10704-91 теоретическая масса 1 м трубы составляет 52,28 кг. Пересчёт заказа по длине является расчётным. Марка стали 20 по данным поставщика. Фактические параметры партии подтверждаются документом о качестве.",
-      "price": 55440,
+      "price": 59000,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
@@ -15317,8 +15318,8 @@
       "priceUnit": "за тонну",
       "material": "",
       "standard": "ГОСТ 10704-91; ГОСТ 10705-80",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/truba-kruglaya/truba-elektrosvarnaya/cover/truba-elektrosvarnaya.jpg"
@@ -15380,7 +15381,7 @@
         }
       ],
       "imported": true,
-      "pricePerTon": 55440,
+      "pricePerTon": 59000,
       "sourceProductName": "Труба электросварная прямошовная 273х8 ГОСТ 10704; 10705 Ст20 ВМЗ ТМ н/д (11-12м)",
       "diameterMm": 273,
       "wallThicknessMm": 8,
@@ -15406,16 +15407,16 @@
       "sku": "МП-58631",
       "shortDescription": "Наружный диаметр 325 мм, стенка 7 мм, длина по каталогу 11–12 м.",
       "description": "Сортамент по предложению поставщика — ГОСТ 10704-91, технические условия — ГОСТ 10705-80. В таблице 1 ГОСТ 10704-91 теоретическая масса 1 м трубы составляет 54,9 кг. Пересчёт заказа по длине является расчётным. Марка стали 20 по данным поставщика. Фактические параметры партии подтверждаются документом о качестве.",
-      "price": null,
-      "quoteOnly": true,
+      "price": 69258,
+      "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
       "unit": "ton",
       "priceUnit": "за тонну",
       "material": "",
       "standard": "ГОСТ 10704-91; ГОСТ 10705-80",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/truba-kruglaya/truba-elektrosvarnaya/cover/truba-elektrosvarnaya.jpg"
@@ -15477,6 +15478,7 @@
         }
       ],
       "imported": true,
+      "pricePerTon": 69258,
       "sourceProductName": "Труба электросварная прямошовная 325х7 ГОСТ 10704; 10705 Ст20 ВМЗ ТМ н/д (11-12м)",
       "diameterMm": 325,
       "wallThicknessMm": 7,
@@ -15502,7 +15504,7 @@
       "sku": "МП-58634",
       "shortDescription": "Наружный диаметр 325 мм, стенка 10 мм, длина по каталогу 11–12 м.",
       "description": "Сортамент по предложению поставщика — ГОСТ 10704-91, технические условия — ГОСТ 10705-80. В таблице 1 ГОСТ 10704-91 теоретическая масса 1 м трубы составляет 77,68 кг. Пересчёт заказа по длине является расчётным. Марка стали 20 по данным поставщика. Фактические параметры партии подтверждаются документом о качестве.",
-      "price": 57600,
+      "price": 63550,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
@@ -15510,7 +15512,7 @@
       "priceUnit": "за тонну",
       "material": "",
       "standard": "ГОСТ 10704-91; ГОСТ 10705-80",
-      "availability": "UNKNOWN",
+      "availability": "ON_ORDER",
       "inStock": false,
       "featured": false,
       "imageUrls": [
@@ -15573,7 +15575,7 @@
         }
       ],
       "imported": true,
-      "pricePerTon": 57600,
+      "pricePerTon": 63550,
       "sourceProductName": "Труба электросварная прямошовная 325х10 ГОСТ 10704; 10705 Ст20 ВМЗ ТМ н/д (11-12м)",
       "diameterMm": 325,
       "wallThicknessMm": 10,
@@ -15599,16 +15601,16 @@
       "sku": "МП-62388",
       "shortDescription": "Наружный диаметр 57 мм, стенка 3 мм, длина по каталогу 12 м.",
       "description": "Сортамент по предложению поставщика — ГОСТ 10704-91, технические условия — ГОСТ 10705-80. В таблице 1 ГОСТ 10704-91 теоретическая масса 1 м трубы составляет 4 кг. Пересчёт заказа по длине является расчётным. 12 м указаны поставщиком. Вид длины требует подтверждения: для мерной трубы этого диаметра ГОСТ 10704-91 (п. 3) указывает 5–9 м. Марка стали 20 по данным поставщика. Фактические параметры партии подтверждаются документом о качестве.",
-      "price": null,
-      "quoteOnly": true,
+      "price": 61050,
+      "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
       "unit": "ton",
       "priceUnit": "за тонну",
       "material": "",
       "standard": "ГОСТ 10704-91; ГОСТ 10705-80",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/truba-kruglaya/truba-elektrosvarnaya/cover/truba-elektrosvarnaya.jpg"
@@ -15670,6 +15672,7 @@
         }
       ],
       "imported": true,
+      "pricePerTon": 61050,
       "sourceProductName": "Труба электросварная прямошовная 57х3х12000 ГОСТ 10704; 10705 Ст20 ВМЗ ТМ",
       "diameterMm": 57,
       "wallThicknessMm": 3,
@@ -19015,7 +19018,7 @@
       "sku": "МП-125936",
       "shortDescription": "Наружный диаметр 48 мм, стенка 3 мм, длина по каталогу 6 м.",
       "description": "Сортамент по предложению поставщика — ГОСТ 10704-91, технические условия — ГОСТ 10705-80. В таблице 1 ГОСТ 10704-91 теоретическая масса 1 м трубы составляет 3,33 кг. Пересчёт заказа по длине является расчётным. Марка стали уточняется. Фактические параметры партии подтверждаются документом о качестве.",
-      "price": 61650,
+      "price": 63300,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
@@ -19023,8 +19026,8 @@
       "priceUnit": "за тонну",
       "material": "",
       "standard": "ГОСТ 10704-91; ГОСТ 10705-80",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/truba-kruglaya/truba-elektrosvarnaya/cover/truba-elektrosvarnaya.jpg"
@@ -19081,7 +19084,7 @@
         }
       ],
       "imported": true,
-      "pricePerTon": 61650,
+      "pricePerTon": 63300,
       "sourceProductName": "Труба электросварная прямошовная 48х3х6000 ГОСТ 10704; 10705 ТМ",
       "diameterMm": 48,
       "wallThicknessMm": 3,

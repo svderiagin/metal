@@ -972,7 +972,7 @@
       "sku": "МП-302",
       "shortDescription": "Диаметр, мм: 57; Длина, мм: 12 000; Толщина, мм: 3; Стандарт: ГОСТ 10704; 10705",
       "description": "Труба электросварная прямошовная 57х3х12000 ГОСТ 10704; 10705 ТМ. Диаметр, мм: 57; Длина, мм: 12 000; Толщина, мм: 3; Стандарт: ГОСТ 10704; 10705. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 50940,
+      "price": 60590,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
@@ -980,8 +980,8 @@
       "priceUnit": "за тонну",
       "material": "",
       "standard": "ГОСТ 10704; 10705",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
@@ -1024,7 +1024,7 @@
         }
       ],
       "imported": true,
-      "pricePerTon": 50940
+      "pricePerTon": 60590
     },
     {
       "id": "local-305",
@@ -1036,7 +1036,7 @@
       "sku": "МП-305",
       "shortDescription": "Диаметр, мм: 57; Длина, мм: 12 000; Толщина, мм: 3,5; Стандарт: ГОСТ 10704; 10705",
       "description": "Труба электросварная прямошовная 57х3.5х12000 ГОСТ 10704; 10705 ТМ. Диаметр, мм: 57; Длина, мм: 12 000; Толщина, мм: 3,5; Стандарт: ГОСТ 10704; 10705. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 50940,
+      "price": 60590,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
@@ -1044,8 +1044,8 @@
       "priceUnit": "за тонну",
       "material": "",
       "standard": "ГОСТ 10704; 10705",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
@@ -1088,7 +1088,7 @@
         }
       ],
       "imported": true,
-      "pricePerTon": 50940
+      "pricePerTon": 60590
     },
     {
       "id": "local-309",
@@ -1100,7 +1100,7 @@
       "sku": "МП-309",
       "shortDescription": "Диаметр, мм: 76; Длина, мм: 12 000; Толщина, мм: 3; Стандарт: ГОСТ 10704; 10705",
       "description": "Труба электросварная прямошовная 76х3х12000 ГОСТ 10704; 10705 ТМ. Диаметр, мм: 76; Длина, мм: 12 000; Толщина, мм: 3; Стандарт: ГОСТ 10704; 10705. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 50940,
+      "price": 60590,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
@@ -1108,8 +1108,8 @@
       "priceUnit": "за тонну",
       "material": "",
       "standard": "ГОСТ 10704; 10705",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
@@ -1152,7 +1152,7 @@
         }
       ],
       "imported": true,
-      "pricePerTon": 50940
+      "pricePerTon": 60590
     },
     {
       "id": "local-311",
@@ -1164,7 +1164,7 @@
       "sku": "МП-311",
       "shortDescription": "Диаметр, мм: 76; Длина, мм: 12 000; Толщина, мм: 3,5; Стандарт: ГОСТ 10704; 10705",
       "description": "Труба электросварная прямошовная 76х3.5х12000 ГОСТ 10704; 10705 ТМ. Диаметр, мм: 76; Длина, мм: 12 000; Толщина, мм: 3,5; Стандарт: ГОСТ 10704; 10705. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 51840,
+      "price": 60590,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
@@ -1172,8 +1172,8 @@
       "priceUnit": "за тонну",
       "material": "",
       "standard": "ГОСТ 10704; 10705",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
@@ -1216,7 +1216,7 @@
         }
       ],
       "imported": true,
-      "pricePerTon": 51840
+      "pricePerTon": 60590
     },
     {
       "id": "local-313",
@@ -1228,7 +1228,7 @@
       "sku": "МП-313",
       "shortDescription": "Диаметр, мм: 76; Длина, мм: 12 000; Толщина, мм: 4; Стандарт: ГОСТ 10704; 10705",
       "description": "Труба электросварная прямошовная 76х4х12000 ГОСТ 10704; 10705 ТМ. Диаметр, мм: 76; Длина, мм: 12 000; Толщина, мм: 4; Стандарт: ГОСТ 10704; 10705. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 50940,
+      "price": 64503,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
@@ -1236,8 +1236,8 @@
       "priceUnit": "за тонну",
       "material": "",
       "standard": "ГОСТ 10704; 10705",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
@@ -1280,7 +1280,7 @@
         }
       ],
       "imported": true,
-      "pricePerTon": 50940
+      "pricePerTon": 64503
     },
     {
       "id": "local-316",
@@ -1292,7 +1292,7 @@
       "sku": "МП-316",
       "shortDescription": "Диаметр, мм: 89; Длина, мм: 12 000; Толщина, мм: 3,5; Стандарт: ГОСТ 10704; 10705",
       "description": "Труба электросварная прямошовная 89х3.5х12000 ГОСТ 10704; 10705 ТМ. Диаметр, мм: 89; Длина, мм: 12 000; Толщина, мм: 3,5; Стандарт: ГОСТ 10704; 10705. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 50940,
+      "price": 60090,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
@@ -1300,8 +1300,8 @@
       "priceUnit": "за тонну",
       "material": "",
       "standard": "ГОСТ 10704; 10705",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
@@ -1344,7 +1344,7 @@
         }
       ],
       "imported": true,
-      "pricePerTon": 50940
+      "pricePerTon": 60090
     },
     {
       "id": "local-318",
@@ -1356,7 +1356,7 @@
       "sku": "МП-318",
       "shortDescription": "Диаметр, мм: 89; Длина, мм: 12 000; Толщина, мм: 4; Стандарт: ГОСТ 10704; 10705",
       "description": "Труба электросварная прямошовная 89х4х12000 ГОСТ 10704; 10705 ТМ. Диаметр, мм: 89; Длина, мм: 12 000; Толщина, мм: 4; Стандарт: ГОСТ 10704; 10705. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 50940,
+      "price": 64503,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
@@ -1364,8 +1364,8 @@
       "priceUnit": "за тонну",
       "material": "",
       "standard": "ГОСТ 10704; 10705",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
@@ -1408,7 +1408,7 @@
         }
       ],
       "imported": true,
-      "pricePerTon": 50940
+      "pricePerTon": 64503
     },
     {
       "id": "local-333",
@@ -1420,7 +1420,7 @@
       "sku": "МП-333",
       "shortDescription": "Диаметр, мм: 133; Длина, мм: 12 000; Толщина, мм: 4,5; Стандарт: ГОСТ 10704; 10705",
       "description": "Труба электросварная прямошовная 133х4.5х12000 ГОСТ 10704; 10705 ТМ. Диаметр, мм: 133; Длина, мм: 12 000; Толщина, мм: 4,5; Стандарт: ГОСТ 10704; 10705. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 50940,
+      "price": 51800,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
@@ -1428,8 +1428,8 @@
       "priceUnit": "за тонну",
       "material": "",
       "standard": "ГОСТ 10704; 10705",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
@@ -1472,7 +1472,7 @@
         }
       ],
       "imported": true,
-      "pricePerTon": 50940
+      "pricePerTon": 51800
     },
     {
       "id": "local-337",
@@ -1484,7 +1484,7 @@
       "sku": "МП-337",
       "shortDescription": "Диаметр, мм: 159; Длина, мм: 12 000; Толщина, мм: 4; Стандарт: ГОСТ 10704; 10705",
       "description": "Труба электросварная прямошовная 159х4х12000 ГОСТ 10704; 10705 ТМ. Диаметр, мм: 159; Длина, мм: 12 000; Толщина, мм: 4; Стандарт: ГОСТ 10704; 10705. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 51840,
+      "price": 60590,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
@@ -1492,8 +1492,8 @@
       "priceUnit": "за тонну",
       "material": "",
       "standard": "ГОСТ 10704; 10705",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
@@ -1536,7 +1536,7 @@
         }
       ],
       "imported": true,
-      "pricePerTon": 51840
+      "pricePerTon": 60590
     },
     {
       "id": "local-443",
@@ -1968,7 +1968,7 @@
       "sku": "МП-3963",
       "shortDescription": "Диаметр, мм: 108; Длина, мм: 12 000; Толщина, мм: 4,5; Стандарт: ГОСТ 10704; 10705",
       "description": "Труба электросварная прямошовная 108х4.5х12000 ГОСТ 10704; 10705 ТМ. Диаметр, мм: 108; Длина, мм: 12 000; Толщина, мм: 4,5; Стандарт: ГОСТ 10704; 10705. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 52740,
+      "price": 63349,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
@@ -1976,8 +1976,8 @@
       "priceUnit": "за тонну",
       "material": "",
       "standard": "ГОСТ 10704; 10705",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
@@ -2020,7 +2020,7 @@
         }
       ],
       "imported": true,
-      "pricePerTon": 52740
+      "pricePerTon": 63349
     },
     {
       "id": "local-6123",
@@ -2694,7 +2694,7 @@
       "sku": "МП-9211",
       "shortDescription": "Диаметр, мм: 219; Длина, мм: 12 000; Толщина, мм: 4; Стандарт: ГОСТ 10704; 10705",
       "description": "Труба электросварная прямошовная 219х4х12000 ГОСТ 10704; 10705 ТМ. Диаметр, мм: 219; Длина, мм: 12 000; Толщина, мм: 4; Стандарт: ГОСТ 10704; 10705. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 53640,
+      "price": 49460,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
@@ -2702,8 +2702,8 @@
       "priceUnit": "за тонну",
       "material": "",
       "standard": "ГОСТ 10704; 10705",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
@@ -2746,7 +2746,7 @@
         }
       ],
       "imported": true,
-      "pricePerTon": 53640
+      "pricePerTon": 49460
     },
     {
       "id": "local-17091",
@@ -2977,7 +2977,7 @@
       "sku": "МП-40706",
       "shortDescription": "Диаметр, мм: 219; Длина, мм: 12 000; Толщина, мм: 5; Стандарт: ГОСТ 10704; 10705",
       "description": "Труба электросварная прямошовная 219х5х12000 ГОСТ 10704; 10705 ТМ. Диаметр, мм: 219; Длина, мм: 12 000; Толщина, мм: 5; Стандарт: ГОСТ 10704; 10705. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 53640,
+      "price": 61690,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
@@ -2985,8 +2985,8 @@
       "priceUnit": "за тонну",
       "material": "",
       "standard": "ГОСТ 10704; 10705",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
@@ -3029,7 +3029,7 @@
         }
       ],
       "imported": true,
-      "pricePerTon": 53640
+      "pricePerTon": 61690
     },
     {
       "id": "local-40707",
@@ -3041,7 +3041,7 @@
       "sku": "МП-40707",
       "shortDescription": "Диаметр, мм: 219; Длина, мм: 12 000; Толщина, мм: 6; Стандарт: ГОСТ 10704; 10705",
       "description": "Труба электросварная прямошовная 219х6х12000 ГОСТ 10704; 10705 ТМ. Диаметр, мм: 219; Длина, мм: 12 000; Толщина, мм: 6; Стандарт: ГОСТ 10704; 10705. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 53640,
+      "price": 61690,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
@@ -3049,8 +3049,8 @@
       "priceUnit": "за тонну",
       "material": "",
       "standard": "ГОСТ 10704; 10705",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
@@ -3093,7 +3093,7 @@
         }
       ],
       "imported": true,
-      "pricePerTon": 53640
+      "pricePerTon": 61690
     },
     {
       "id": "local-44188",
@@ -3178,7 +3178,7 @@
       "sku": "МП-52334",
       "shortDescription": "Диаметр, мм: 273; Длина, мм: 12 000; Толщина, мм: 6; Стандарт: ГОСТ 10704; 10705",
       "description": "Труба электросварная прямошовная 273х6х12000 ГОСТ 10704; 10705 ТМ. Диаметр, мм: 273; Длина, мм: 12 000; Толщина, мм: 6; Стандарт: ГОСТ 10704; 10705. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 57600,
+      "price": 69390,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
@@ -3186,8 +3186,8 @@
       "priceUnit": "за тонну",
       "material": "",
       "standard": "ГОСТ 10704; 10705",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
@@ -3230,7 +3230,7 @@
         }
       ],
       "imported": true,
-      "pricePerTon": 57600
+      "pricePerTon": 69390
     },
     {
       "id": "local-53918",
@@ -3242,15 +3242,15 @@
       "sku": "МП-53918",
       "shortDescription": "Диаметр, мм: 127; Длина, мм: 12 000; Толщина, мм: 4; Стандарт: ГОСТ 10704; 10705; Марка стали: Ст20",
       "description": "Труба электросварная прямошовная 127х4х12000 ГОСТ 10704; 10705 Ст20 ВМЗ ТМ. Диаметр, мм: 127; Длина, мм: 12 000; Толщина, мм: 4; Стандарт: ГОСТ 10704; 10705; Марка стали: Ст20. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": null,
-      "quoteOnly": true,
+      "price": 62000,
+      "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
       "unit": "ton",
       "priceUnit": "за тонну",
       "material": "",
       "standard": "ГОСТ 10704; 10705",
-      "availability": "UNKNOWN",
+      "availability": "ON_ORDER",
       "inStock": false,
       "featured": false,
       "imageUrls": [],
@@ -3302,7 +3302,8 @@
           "value": "Труба электросварная прямошовная 127х4х12000 ГОСТ 10704; 10705 Ст20 ВМЗ ТМ"
         }
       ],
-      "imported": true
+      "imported": true,
+      "pricePerTon": 62000
     },
     {
       "id": "local-54870",
@@ -3468,7 +3469,7 @@
       "sku": "МП-58627",
       "shortDescription": "Диаметр, мм: 273; Толщина, мм: 8; Стандарт: ГОСТ 10704; 10705; Марка стали: Ст20",
       "description": "Труба электросварная прямошовная 273х8 ГОСТ 10704; 10705 Ст20 ВМЗ ТМ н/д (11-12м). Диаметр, мм: 273; Толщина, мм: 8; Стандарт: ГОСТ 10704; 10705; Марка стали: Ст20. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 55440,
+      "price": 59000,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
@@ -3476,8 +3477,8 @@
       "priceUnit": "за тонну",
       "material": "",
       "standard": "ГОСТ 10704; 10705",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
@@ -3520,7 +3521,7 @@
         }
       ],
       "imported": true,
-      "pricePerTon": 55440
+      "pricePerTon": 59000
     },
     {
       "id": "local-58631",
@@ -3532,16 +3533,16 @@
       "sku": "МП-58631",
       "shortDescription": "Диаметр, мм: 325; Толщина, мм: 7; Стандарт: ГОСТ 10704; 10705; Марка стали: Ст20",
       "description": "Труба электросварная прямошовная 325х7 ГОСТ 10704; 10705 Ст20 ВМЗ ТМ н/д (11-12м). Диаметр, мм: 325; Толщина, мм: 7; Стандарт: ГОСТ 10704; 10705; Марка стали: Ст20. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": null,
-      "quoteOnly": true,
+      "price": 69258,
+      "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
       "unit": "ton",
       "priceUnit": "за тонну",
       "material": "",
       "standard": "ГОСТ 10704; 10705",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
@@ -3583,7 +3584,8 @@
           "value": "Труба электросварная прямошовная 325х7 ГОСТ 10704; 10705 Ст20 ВМЗ ТМ н/д (11-12м)"
         }
       ],
-      "imported": true
+      "imported": true,
+      "pricePerTon": 69258
     },
     {
       "id": "local-58634",
@@ -3595,7 +3597,7 @@
       "sku": "МП-58634",
       "shortDescription": "Диаметр, мм: 325; Толщина, мм: 10; Стандарт: ГОСТ 10704; 10705; Марка стали: Ст20",
       "description": "Труба электросварная прямошовная 325х10 ГОСТ 10704; 10705 Ст20 ВМЗ ТМ н/д (11-12м). Диаметр, мм: 325; Толщина, мм: 10; Стандарт: ГОСТ 10704; 10705; Марка стали: Ст20. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 57600,
+      "price": 63550,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
@@ -3603,7 +3605,7 @@
       "priceUnit": "за тонну",
       "material": "",
       "standard": "ГОСТ 10704; 10705",
-      "availability": "UNKNOWN",
+      "availability": "ON_ORDER",
       "inStock": false,
       "featured": false,
       "imageUrls": [],
@@ -3647,7 +3649,7 @@
         }
       ],
       "imported": true,
-      "pricePerTon": 57600
+      "pricePerTon": 63550
     },
     {
       "id": "local-61299",
@@ -3732,16 +3734,16 @@
       "sku": "МП-62388",
       "shortDescription": "Диаметр, мм: 57; Длина, мм: 12 000; Толщина, мм: 3; Стандарт: ГОСТ 10704; 10705; Марка стали: Ст20",
       "description": "Труба электросварная прямошовная 57х3х12000 ГОСТ 10704; 10705 Ст20 ВМЗ ТМ. Диаметр, мм: 57; Длина, мм: 12 000; Толщина, мм: 3; Стандарт: ГОСТ 10704; 10705; Марка стали: Ст20. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": null,
-      "quoteOnly": true,
+      "price": 61050,
+      "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
       "unit": "ton",
       "priceUnit": "за тонну",
       "material": "",
       "standard": "ГОСТ 10704; 10705",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
@@ -3792,7 +3794,8 @@
           "value": "Труба электросварная прямошовная 57х3х12000 ГОСТ 10704; 10705 Ст20 ВМЗ ТМ"
         }
       ],
-      "imported": true
+      "imported": true,
+      "pricePerTon": 61050
     },
     {
       "id": "local-65599",
@@ -6940,7 +6943,7 @@
       "sku": "МП-125936",
       "shortDescription": "Диаметр, мм: 48; Длина, мм: 6 000; Толщина, мм: 3; Стандарт: ГОСТ 10704; 10705",
       "description": "Труба электросварная прямошовная 48х3х6000 ГОСТ 10704; 10705 ТМ. Диаметр, мм: 48; Длина, мм: 6 000; Толщина, мм: 3; Стандарт: ГОСТ 10704; 10705. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 61650,
+      "price": 63300,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
@@ -6948,8 +6951,8 @@
       "priceUnit": "за тонну",
       "material": "",
       "standard": "ГОСТ 10704; 10705",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
@@ -6992,7 +6995,7 @@
         }
       ],
       "imported": true,
-      "pricePerTon": 61650
+      "pricePerTon": 63300
     },
     {
       "id": "local-11123500",
