@@ -6606,8 +6606,8 @@
       "priceUnit": "за метр",
       "material": "",
       "standard": "",
-      "availability": "IN_STOCK",
-      "inStock": true,
+      "availability": "ON_ORDER",
+      "inStock": false,
       "featured": false,
       "imageUrls": [
         "/images/catalog/kvadrat/measurement/kvadrat-stalnoy-18x18mm-6m.webp"
@@ -6676,6 +6676,221 @@
         }
       ],
       "sourceProductName": "Квадрат стальной №20"
+    },
+    {
+      "id": "catalog-kvadrat-22x22-6m",
+      "categoryId": "catalog-cat-kvadrat",
+      "subcategoryId": "catalog-sub-kvadrat-kvadrat",
+      "productTypeId": "type-catalog-sub-kvadrat-kvadrat",
+      "name": "Квадрат стальной №22",
+      "slug": "kvadrat-stalnoy-22x22-6m",
+      "shortDescription": "Горячекатаный квадратный пруток из стали Ст3 сечением 22 × 22 мм, длиной 6 м.",
+      "description": "Горячекатаный квадратный пруток из стали Ст3 сечением 22 × 22 мм, длиной 6 м.",
+      "price": 285,
+      "priceQualifier": "exact",
+      "currency": "RUB",
+      "priceConfirmed": true,
+      "unit": "meter",
+      "priceUnit": "за метр",
+      "material": "Сталь",
+      "standard": "ГОСТ 2591-2006",
+      "form": "bar",
+      "steelGrade": "Ст3",
+      "availability": "ON_ORDER",
+      "inStock": false,
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/kvadrat/measurement/kvadrat-stalnoy-22x22mm-6m.webp"
+      ],
+      "attributes": [
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "Ст3"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Марка стали",
+          "value": "Ст3"
+        },
+        {
+          "name": "Форма поставки",
+          "value": "Пруток"
+        }
+      ]
+    },
+    {
+      "id": "catalog-kvadrat-25x25-6m",
+      "categoryId": "catalog-cat-kvadrat",
+      "subcategoryId": "catalog-sub-kvadrat-kvadrat",
+      "productTypeId": "type-catalog-sub-kvadrat-kvadrat",
+      "name": "Квадрат стальной №25",
+      "slug": "kvadrat-stalnoy-25x25-6m",
+      "shortDescription": "Горячекатаный квадратный пруток из стали Ст3 сечением 25 × 25 мм, длиной 6 м.",
+      "description": "Горячекатаный квадратный пруток из стали Ст3 сечением 25 × 25 мм, длиной 6 м.",
+      "price": 380,
+      "priceQualifier": "exact",
+      "currency": "RUB",
+      "priceConfirmed": true,
+      "unit": "meter",
+      "priceUnit": "за метр",
+      "material": "Сталь",
+      "standard": "ГОСТ 2591-2006",
+      "form": "bar",
+      "steelGrade": "Ст3",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/kvadrat/measurement/kvadrat-stalnoy-25x25mm-6m.webp"
+      ],
+      "attributes": [
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "Ст3"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Марка стали",
+          "value": "Ст3"
+        },
+        {
+          "name": "Форма поставки",
+          "value": "Пруток"
+        }
+      ]
+    },
+    {
+      "id": "catalog-kvadrat-30x30-6m",
+      "categoryId": "catalog-cat-kvadrat",
+      "subcategoryId": "catalog-sub-kvadrat-kvadrat",
+      "productTypeId": "type-catalog-sub-kvadrat-kvadrat",
+      "name": "Квадрат стальной №30",
+      "slug": "kvadrat-stalnoy-30x30-6m",
+      "shortDescription": "Горячекатаный квадратный пруток из стали Ст3 сечением 30 × 30 мм, длиной 6 м.",
+      "description": "Горячекатаный квадратный пруток из стали Ст3 сечением 30 × 30 мм, длиной 6 м.",
+      "price": 600,
+      "priceQualifier": "exact",
+      "currency": "RUB",
+      "priceConfirmed": true,
+      "unit": "meter",
+      "priceUnit": "за метр",
+      "material": "Сталь",
+      "standard": "ГОСТ 2591-2006",
+      "form": "bar",
+      "steelGrade": "Ст3",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/kvadrat/measurement/kvadrat-stalnoy-30x30mm-6m.webp"
+      ],
+      "attributes": [
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "Ст3"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Марка стали",
+          "value": "Ст3"
+        },
+        {
+          "name": "Форма поставки",
+          "value": "Пруток"
+        }
+      ]
+    },
+    {
+      "id": "catalog-kvadrat-40x40-6m",
+      "categoryId": "catalog-cat-kvadrat",
+      "subcategoryId": "catalog-sub-kvadrat-kvadrat",
+      "productTypeId": "type-catalog-sub-kvadrat-kvadrat",
+      "name": "Квадрат стальной №40",
+      "slug": "kvadrat-stalnoy-40x40-6m",
+      "shortDescription": "Горячекатаный квадратный пруток из стали Ст3 сечением 40 × 40 мм, длиной 6 м.",
+      "description": "Горячекатаный квадратный пруток из стали Ст3 сечением 40 × 40 мм, длиной 6 м.",
+      "price": 1005,
+      "priceQualifier": "exact",
+      "currency": "RUB",
+      "priceConfirmed": true,
+      "unit": "meter",
+      "priceUnit": "за метр",
+      "material": "Сталь",
+      "standard": "ГОСТ 2591-2006",
+      "form": "bar",
+      "steelGrade": "Ст3",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/kvadrat/measurement/kvadrat-stalnoy-40x40mm-6m.webp"
+      ],
+      "attributes": [
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "Ст3"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Марка стали",
+          "value": "Ст3"
+        },
+        {
+          "name": "Форма поставки",
+          "value": "Пруток"
+        }
+      ]
+    },
+    {
+      "id": "catalog-kvadrat-50x50-6m",
+      "categoryId": "catalog-cat-kvadrat",
+      "subcategoryId": "catalog-sub-kvadrat-kvadrat",
+      "productTypeId": "type-catalog-sub-kvadrat-kvadrat",
+      "name": "Квадрат стальной №50",
+      "slug": "kvadrat-stalnoy-50x50-6m",
+      "shortDescription": "Горячекатаный квадратный пруток из стали Ст3 сечением 50 × 50 мм, длиной 6 м.",
+      "description": "Горячекатаный квадратный пруток из стали Ст3 сечением 50 × 50 мм, длиной 6 м.",
+      "price": 1810,
+      "priceQualifier": "exact",
+      "currency": "RUB",
+      "priceConfirmed": true,
+      "unit": "meter",
+      "priceUnit": "за метр",
+      "material": "Сталь",
+      "standard": "ГОСТ 2591-2006",
+      "form": "bar",
+      "steelGrade": "Ст3",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/kvadrat/measurement/kvadrat-stalnoy-50x50mm-6m.webp"
+      ],
+      "attributes": [
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "Ст3"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Марка стали",
+          "value": "Ст3"
+        },
+        {
+          "name": "Форма поставки",
+          "value": "Пруток"
+        }
+      ]
     },
     {
       "id": "catalog-2181",

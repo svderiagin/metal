@@ -640,6 +640,411 @@
       "width": 2400,
       "height": 1800,
       "sha256": "00d5ede5ade1cbdb6c908328eae394c6a6070a5d1fd494c6835430eb0bbcf030"
+    },
+    {
+      "id": "catalog-kvadrat-22x22-6m",
+      "profile": "22x22",
+      "imageUrl": "/images/catalog/kvadrat/measurement/kvadrat-stalnoy-22x22mm-6m.webp",
+      "labels": [
+        {
+          "key": "title",
+          "text": "Квадрат стальной 22x22"
+        },
+        {
+          "key": "height",
+          "text": "22 мм"
+        },
+        {
+          "key": "width",
+          "text": "22 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "3,8 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "height",
+        "width",
+        "mass"
+      ],
+      "referenceUnmodified": false,
+      "placements": [
+        {
+          "key": "title",
+          "text": "Квадрат стальной 22x22",
+          "size": 84,
+          "weight": 700,
+          "left": 132,
+          "top": 127,
+          "width": 994,
+          "height": 79
+        },
+        {
+          "key": "height",
+          "text": "22 мм",
+          "size": 56,
+          "center": 1037,
+          "top": 942,
+          "left": 961,
+          "width": 152,
+          "height": 42
+        },
+        {
+          "key": "width",
+          "text": "22 мм",
+          "size": 56,
+          "center": 1390,
+          "top": 1374,
+          "left": 1314,
+          "width": 152,
+          "height": 42
+        },
+        {
+          "key": "mass",
+          "text": "3,8 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1634,
+          "width": 164,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/kvadrat/measurement/kvadrat-stalnoy-22x22mm-6m.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "2bc5c05c2d0c55d63c8979a51a5545c63d8e08c335451c7cc13859ac555d519e"
+    },
+    {
+      "id": "catalog-kvadrat-25x25-6m",
+      "profile": "25x25",
+      "imageUrl": "/images/catalog/kvadrat/measurement/kvadrat-stalnoy-25x25mm-6m.webp",
+      "labels": [
+        {
+          "key": "title",
+          "text": "Квадрат стальной 25x25"
+        },
+        {
+          "key": "height",
+          "text": "25 мм"
+        },
+        {
+          "key": "width",
+          "text": "25 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "4,91 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "height",
+        "width",
+        "mass"
+      ],
+      "referenceUnmodified": false,
+      "placements": [
+        {
+          "key": "title",
+          "text": "Квадрат стальной 25x25",
+          "size": 84,
+          "weight": 700,
+          "left": 132,
+          "top": 127,
+          "width": 996,
+          "height": 79
+        },
+        {
+          "key": "height",
+          "text": "25 мм",
+          "size": 56,
+          "center": 1037,
+          "top": 942,
+          "left": 961,
+          "width": 153,
+          "height": 43
+        },
+        {
+          "key": "width",
+          "text": "25 мм",
+          "size": 56,
+          "center": 1390,
+          "top": 1374,
+          "left": 1314,
+          "width": 153,
+          "height": 43
+        },
+        {
+          "key": "mass",
+          "text": "4,91 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1634,
+          "width": 181,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/kvadrat/measurement/kvadrat-stalnoy-25x25mm-6m.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "8945bc2e7957d6d45b387de14fef801c36413cec9df1cf63841ba7257fb7092f"
+    },
+    {
+      "id": "catalog-kvadrat-30x30-6m",
+      "profile": "30x30",
+      "imageUrl": "/images/catalog/kvadrat/measurement/kvadrat-stalnoy-30x30mm-6m.webp",
+      "labels": [
+        {
+          "key": "title",
+          "text": "Квадрат стальной 30x30"
+        },
+        {
+          "key": "height",
+          "text": "30 мм"
+        },
+        {
+          "key": "width",
+          "text": "30 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "7,07 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "height",
+        "width",
+        "mass"
+      ],
+      "referenceUnmodified": false,
+      "placements": [
+        {
+          "key": "title",
+          "text": "Квадрат стальной 30x30",
+          "size": 84,
+          "weight": 700,
+          "left": 132,
+          "top": 127,
+          "width": 1010,
+          "height": 79
+        },
+        {
+          "key": "height",
+          "text": "30 мм",
+          "size": 56,
+          "center": 1037,
+          "top": 942,
+          "left": 959,
+          "width": 157,
+          "height": 44
+        },
+        {
+          "key": "width",
+          "text": "30 мм",
+          "size": 56,
+          "center": 1390,
+          "top": 1374,
+          "left": 1312,
+          "width": 157,
+          "height": 44
+        },
+        {
+          "key": "mass",
+          "text": "7,07 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1634,
+          "width": 180,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/kvadrat/measurement/kvadrat-stalnoy-30x30mm-6m.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "f09a3b572766983aab5adcac371a55ab92bbe025172def40fb1d47707cac77c8"
+    },
+    {
+      "id": "catalog-kvadrat-40x40-6m",
+      "profile": "40x40",
+      "imageUrl": "/images/catalog/kvadrat/measurement/kvadrat-stalnoy-40x40mm-6m.webp",
+      "labels": [
+        {
+          "key": "title",
+          "text": "Квадрат стальной 40x40"
+        },
+        {
+          "key": "height",
+          "text": "40 мм"
+        },
+        {
+          "key": "width",
+          "text": "40 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "12,56 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "height",
+        "width",
+        "mass"
+      ],
+      "referenceUnmodified": false,
+      "placements": [
+        {
+          "key": "title",
+          "text": "Квадрат стальной 40x40",
+          "size": 84,
+          "weight": 700,
+          "left": 132,
+          "top": 127,
+          "width": 1016,
+          "height": 79
+        },
+        {
+          "key": "height",
+          "text": "40 мм",
+          "size": 56,
+          "center": 1037,
+          "top": 942,
+          "left": 957,
+          "width": 160,
+          "height": 43
+        },
+        {
+          "key": "width",
+          "text": "40 мм",
+          "size": 56,
+          "center": 1390,
+          "top": 1374,
+          "left": 1310,
+          "width": 160,
+          "height": 43
+        },
+        {
+          "key": "mass",
+          "text": "12,56 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1634,
+          "width": 209,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/kvadrat/measurement/kvadrat-stalnoy-40x40mm-6m.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "ca617dda012e589f8d9f02d28572bd21c1bcd050b3ba239172c974e709e13cb5"
+    },
+    {
+      "id": "catalog-kvadrat-50x50-6m",
+      "profile": "50x50",
+      "imageUrl": "/images/catalog/kvadrat/measurement/kvadrat-stalnoy-50x50mm-6m.webp",
+      "labels": [
+        {
+          "key": "title",
+          "text": "Квадрат стальной 50x50"
+        },
+        {
+          "key": "height",
+          "text": "50 мм"
+        },
+        {
+          "key": "width",
+          "text": "50 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "19,63 кг/м"
+        }
+      ],
+      "changedLabels": [
+        "title",
+        "height",
+        "width",
+        "mass"
+      ],
+      "referenceUnmodified": false,
+      "placements": [
+        {
+          "key": "title",
+          "text": "Квадрат стальной 50x50",
+          "size": 84,
+          "weight": 700,
+          "left": 132,
+          "top": 127,
+          "width": 1006,
+          "height": 79
+        },
+        {
+          "key": "height",
+          "text": "50 мм",
+          "size": 56,
+          "center": 1037,
+          "top": 942,
+          "left": 959,
+          "width": 156,
+          "height": 43
+        },
+        {
+          "key": "width",
+          "text": "50 мм",
+          "size": 56,
+          "center": 1390,
+          "top": 1374,
+          "left": 1312,
+          "width": 156,
+          "height": 43
+        },
+        {
+          "key": "mass",
+          "text": "19,63 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1634,
+          "width": 207,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/kvadrat/measurement/kvadrat-stalnoy-50x50mm-6m.webp",
+      "width": 2400,
+      "height": 1800,
+      "sha256": "fb3a8ea1fa7f6d8564ddb62876857fcf254d802c5a0cbc79f04b28ef760394e4"
     }
   ]
 }

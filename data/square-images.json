@@ -20,6 +20,21 @@
     },
     "catalog-2208": {
       "imageUrl": "/images/catalog/kvadrat/measurement/kvadrat-stalnoy-20x20mm-6m.webp"
+    },
+    "catalog-kvadrat-22x22-6m": {
+      "imageUrl": "/images/catalog/kvadrat/measurement/kvadrat-stalnoy-22x22mm-6m.webp"
+    },
+    "catalog-kvadrat-25x25-6m": {
+      "imageUrl": "/images/catalog/kvadrat/measurement/kvadrat-stalnoy-25x25mm-6m.webp"
+    },
+    "catalog-kvadrat-30x30-6m": {
+      "imageUrl": "/images/catalog/kvadrat/measurement/kvadrat-stalnoy-30x30mm-6m.webp"
+    },
+    "catalog-kvadrat-40x40-6m": {
+      "imageUrl": "/images/catalog/kvadrat/measurement/kvadrat-stalnoy-40x40mm-6m.webp"
+    },
+    "catalog-kvadrat-50x50-6m": {
+      "imageUrl": "/images/catalog/kvadrat/measurement/kvadrat-stalnoy-50x50mm-6m.webp"
     }
   }
 }

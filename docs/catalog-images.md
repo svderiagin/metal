@@ -505,11 +505,11 @@ subcategory, navigation, metadata and product descriptions. Its URL remains
 
 ## Steel square product illustrations
 
-The seven products on `/catalog/kvadrat` use the same six-column profile table
-and mobile previews as channels and angles. Each row shows its section, supplier
-length, theoretical mass and its own 2400 × 1800 lossless WebP illustration.
-The section filter uses the profile number (8×8 through 20×20 mm), separately
-from the supplier's `Размер` field, which means length (6 m for all seven).
+Products on `/catalog/kvadrat` use the shared profile table and mobile previews.
+Each product has a 2400 × 1800 lossless WebP illustration with its section,
+catalog length and displayed theoretical mass. The section and length filters
+use the verified dimensions, including for older records whose `Размер` field
+stores the length.
 
 The owner's marked `public/images/catalog/kvadrat/originals/kvadrat_2400_1800_marked.jpg` and
 clean `kvadrat_2400_1800_original.jpg` are saved unchanged as `reference-8x8.jpg` and
@@ -527,7 +527,7 @@ matched visually to the supplied reference; the original 8×8 pixels remain inta
 Regenerate with `node scripts/render-kvadrat-images.mjs --write`; preview with
 `node scripts/render-kvadrat-images.mjs --preview 20`. The manifest `rendered.json`
 records labels, patches, hashes and zero changes outside those patches.
-`data/square-images.json` associates images by product ID and matching supplier
-URL, independently of supplier imports. `lib/squarePresentation.ts` supplies
-consistent values to the table, filters and renderer, with decimal commas and
-`кг/м`. Supplier values stay intact, including the listed **1,54 кг/м** for №16.
+`data/square-images.json` associates images by product ID. Matching records in
+`data/section-specifications.json` provide catalog dimensions and theoretical
+mass. `lib/squarePresentation.ts` supplies the formatted values to the table,
+filters and renderer. The №16 illustration uses the verified **2,01 кг/м**.

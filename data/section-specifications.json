@@ -693,6 +693,66 @@
         12,
         12
       ]
+    },
+    "catalog-kvadrat-22x22-6m": {
+      "categoryId": "catalog-cat-kvadrat",
+      "sourceProductName": "Квадрат стальной №22",
+      "section": "22",
+      "referenceStandard": "ГОСТ 2591-2006",
+      "theoreticalMassKgPerMeter": 3.799,
+      "displayMassKgPerMeter": 3.8,
+      "lengthRangeMeters": [
+        6,
+        6
+      ]
+    },
+    "catalog-kvadrat-25x25-6m": {
+      "categoryId": "catalog-cat-kvadrat",
+      "sourceProductName": "Квадрат стальной №25",
+      "section": "25",
+      "referenceStandard": "ГОСТ 2591-2006",
+      "theoreticalMassKgPerMeter": 4.906,
+      "displayMassKgPerMeter": 4.91,
+      "lengthRangeMeters": [
+        6,
+        6
+      ]
+    },
+    "catalog-kvadrat-30x30-6m": {
+      "categoryId": "catalog-cat-kvadrat",
+      "sourceProductName": "Квадрат стальной №30",
+      "section": "30",
+      "referenceStandard": "ГОСТ 2591-2006",
+      "theoreticalMassKgPerMeter": 7.065,
+      "displayMassKgPerMeter": 7.07,
+      "lengthRangeMeters": [
+        6,
+        6
+      ]
+    },
+    "catalog-kvadrat-40x40-6m": {
+      "categoryId": "catalog-cat-kvadrat",
+      "sourceProductName": "Квадрат стальной №40",
+      "section": "40",
+      "referenceStandard": "ГОСТ 2591-2006",
+      "theoreticalMassKgPerMeter": 12.56,
+      "displayMassKgPerMeter": 12.56,
+      "lengthRangeMeters": [
+        6,
+        6
+      ]
+    },
+    "catalog-kvadrat-50x50-6m": {
+      "categoryId": "catalog-cat-kvadrat",
+      "sourceProductName": "Квадрат стальной №50",
+      "section": "50",
+      "referenceStandard": "ГОСТ 2591-2006",
+      "theoreticalMassKgPerMeter": 19.625,
+      "displayMassKgPerMeter": 19.63,
+      "lengthRangeMeters": [
+        6,
+        6
+      ]
     }
   }
 }

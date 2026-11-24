@@ -58,21 +58,22 @@ async function textImage(text, size, weight = 400) {
 
 const products = readProjectData('data/products/index.ts').productVariants.filter(p => p.categoryId === 'catalog-cat-kvadrat');
 const {getSquareProductParameters} = readProjectData('lib/squarePresentation.ts');
-assert.equal(products.length, 7, 'Review the collection before changing its image set');
+assert.ok(products.length, 'No catalog squares to render');
 const write = process.argv.includes('--write');
 const previewIndex = process.argv.indexOf('--preview');
 const previewSide = previewIndex >= 0 ? process.argv[previewIndex + 1] : undefined;
 assert.ok(!(write && previewIndex >= 0), 'Use --write or --preview SIDE');
 assert.ok(previewIndex < 0 || previewSide, '--preview requires a side such as 20');
-const outputDirectory = write ? 'public/images/catalog/kvadrat/measurement' : 'output/image-edits/kvadrat-catalog-preview';
+const outputDirectory = write ? 'public/images/catalog/kvadrat/measurement' : path.join(temporaryDirectory, 'preview');
 await fs.mkdir(outputDirectory, {recursive: true});
 const records = [];
 for (const product of products) {
   const parameters = getSquareProductParameters(product);
   assert.ok(parameters, `${product.id}: missing square section, length or mass`);
   if (previewSide && parameters.side !== previewSide) continue;
+  const correction = numberSignRemovalTargets.find(({id}) => id === product.id);
   const labels = [
-    {key: 'title', text: `Квадрат стальной № ${parameters.profile}`, size: 84, weight: 700, left: 132, top: 127},
+    {key: 'title', text: `Квадрат стальной ${correction ? '№ ' : ''}${parameters.profile}`, size: 84, weight: 700, left: 132, top: 127},
     {key: 'height', text: parameters.dimension, size: 56, center: 1037, top: 942},
     {key: 'width', text: parameters.dimension, size: 56, center: 1390, top: 1374},
     {key: 'length', text: parameters.length, size: 40, weight: 700, left: 610, top: 1568},
@@ -107,7 +108,6 @@ for (const product of products) {
     for (let y = box.top; y < box.top + box.height; y++) mask.fill(1, y * WIDTH + box.left, y * WIDTH + box.left + box.width);
   }
   const renderedPixels = await sharp(image).removeAlpha().raw().toBuffer();
-  const correction = numberSignRemovalTargets.find(({id}) => id === product.id);
   if (correction) {
     const box = correction.box;
     for (let y=box.top;y<box.top+box.height;y++) mask.fill(1,y*WIDTH+box.left,y*WIDTH+box.left+box.width);
@@ -128,7 +128,7 @@ for (const product of products) {
 }
 assert.ok(records.length, 'Unknown preview side');
 if (write) {
-  assert.equal(records.length, 7);
+  assert.equal(records.length, products.length);
   await fs.writeFile(`${directory}/rendered.json`, JSON.stringify({renderer: 'scripts/render-kvadrat-images.mjs',
     reference: referencePath, cleanPhoto: photoPath,
     typography: {family: 'Inter', fontFile: fontPath, backend: 'fontconfig', mass: {size: 44, weight: 750}},
