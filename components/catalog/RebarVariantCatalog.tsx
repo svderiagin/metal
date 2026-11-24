@@ -41,7 +41,7 @@ type SortMode =
 const tableHeaders = {
   rebar: {designation: "Диаметр, мм", specifications: ["Форма", "Длина, м"]},
   profile: {designation: "Размер, мм", specifications: ["Стенка, мм", "Длина, м"]},
-  beam: {designation: "Профиль", specifications: ["Длина, м"]},
+  beam: {designation: "Профиль", specifications: [<>Высота × <span className="block whitespace-nowrap">ширина полки, мм</span></>, "Длина, м"]},
   pipe: {designation: "Ø × стенка, мм", specifications: ["Длина, м"]},
   vgp: {designation: "Ду × стенка, мм", specifications: [<>Наружный <span className="block whitespace-nowrap">Ø, мм</span></>, "Длина, м"]},
 };
@@ -85,7 +85,7 @@ function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
   const isElectrowelded = kind === "pipe";
   const isA500c = kind === "rebar" && variants.every(variant => variant.subcategoryId === a500cSubcategoryId);
   const isA240 = kind === "rebar" && variants.every(variant => variant.subcategoryId === a240SubcategoryId);
-  const sortRebarLengths = isA500c || isA240;
+  const sortLengthsWithinSize = isBeam || isA500c || isA240;
   const isA400 = kind === "rebar" && variants.every(variant =>
     variant.subcategoryId === a40035gsSubcategoryId || variant.subcategoryId === a40025g2sSubcategoryId,
   );
@@ -178,7 +178,7 @@ function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
       const direction = sort === "diameter-desc" ? -1 : 1;
       const size = sizeValue(left).localeCompare(sizeValue(right), "ru", {numeric: true});
       if (size) return size * direction;
-      if (sortRebarLengths) return (left.lengthMeters ?? Number.MAX_VALUE) - (right.lengthMeters ?? Number.MAX_VALUE);
+      if (sortLengthsWithinSize) return (left.lengthMeters ?? Number.MAX_VALUE) - (right.lengthMeters ?? Number.MAX_VALUE);
       return isElectrowelded ? ((left.wallThicknessMm ?? 0) - (right.wallThicknessMm ?? 0)) * direction : 0;
     };
     const min = parseCatalogPrice(minimumPrice);
@@ -199,7 +199,7 @@ function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
       if (sort === "weight-desc") return (massValue(right) ?? -Infinity) - (massValue(left) ?? -Infinity);
       return compareSizes(left, right);
     });
-  }, [hits, deferredQuery, availability, diameter, form, length, steelGrade, maximumPrice, minimumPrice, sort, variants, sortRebarLengths, isBeam, isVgp, isProfile, isElectrowelded]);
+  }, [hits, deferredQuery, availability, diameter, form, length, steelGrade, maximumPrice, minimumPrice, sort, variants, sortLengthsWithinSize, isBeam, isVgp, isProfile, isElectrowelded]);
   const activeFilters = [diameter, form, length, steelGrade, availability, minimumPrice, maximumPrice].filter(Boolean).length;
   const hasGostRebarMass = kind === "rebar" && results.some(variant => variant.specifications.some(
     spec => spec.name === "Теоретическая масса по ГОСТ 5781-82",
@@ -290,7 +290,8 @@ function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
       {results.length ? (
         <>
         {orderNote && <CatalogTableNote>{orderNote}</CatalogTableNote>}
-        <CatalogVariantTable designation={headers.designation} specifications={specifications} unit="т" quantity="Заказ, м" secondaryQuantity="Заказ, т">
+        <CatalogVariantTable designation={headers.designation} specifications={specifications} specificationWidths={isBeam ? [12.5, 5.5] : undefined}
+          unit="т" quantity="Заказ, м" secondaryQuantity="Заказ, т">
           {results.map(variant => <MeasuredVariantItem key={variant.id} variant={variant} name={names?.get(variant.id)}
             kind={kind} view="table" showSteelGrade={showSteelGrade} showBeamStandard={showBeamStandard} sharedPipeStandard={sharedPipeStandard}/>)}
         </CatalogVariantTable>

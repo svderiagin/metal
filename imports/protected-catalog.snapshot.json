@@ -3824,6 +3824,77 @@
       }
     },
     {
+      "id": "balka-14b1-s255-6m",
+      "slug": "balka-14b1-s255-6m",
+      "name": "Балка нормальная 14Б1, С255, 6 м",
+      "categoryId": "cat-bal",
+      "subcategoryId": "cat-bal-sub-1",
+      "shortDescription": "Двутавр 14Б1 из стали С255, 6 м.",
+      "description": "Балка нормальная 14Б1, С255, 6 м. Сортамент по ГОСТ 35087-2024, требования к стали по ГОСТ 27772-2021.",
+      "price": 118400,
+      "pricePerTon": 118400,
+      "priceQualifier": "exact",
+      "currency": "RUB",
+      "priceUnit": "за тонну",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "steelGrade": "С255",
+      "lengthMeters": 6,
+      "weightPerMeterKg": 10.5,
+      "imageUrls": [
+        "/images/catalog/balka/balka-normalnaya/cover/balka-regular.jpg"
+      ],
+      "attributes": [
+        {
+          "key": "size",
+          "label": "Профиль",
+          "value": "14Б1"
+        },
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "С255"
+        },
+        {
+          "key": "length",
+          "label": "Длина",
+          "value": "6 м"
+        },
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Профиль",
+          "value": "14Б1"
+        },
+        {
+          "name": "Марка стали",
+          "value": "С255"
+        },
+        {
+          "name": "Длина",
+          "value": "6 м"
+        },
+        {
+          "name": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
+        }
+      ],
+      "productTypeId": "type-cat-bal-sub-1",
+      "unit": "ton",
+      "material": "",
+      "standard": "ГОСТ 35087-2024; 27772-2021",
+      "weight": {
+        "value": 10.5,
+        "unit": "кг/м"
+      }
+    },
+    {
       "id": "balka-14b1-s255-12m",
       "slug": "balka-14b1-s255-12m",
       "name": "Балка нормальная 14Б1, С255, 12 м",
@@ -3891,6 +3962,77 @@
       "standard": "ГОСТ 35087-2024; 27772-2021",
       "weight": {
         "value": 10.5,
+        "unit": "кг/м"
+      }
+    },
+    {
+      "id": "balka-16b1-s255-6m",
+      "slug": "balka-16b1-s255-6m",
+      "name": "Балка нормальная 16Б1, С255, 6 м",
+      "categoryId": "cat-bal",
+      "subcategoryId": "cat-bal-sub-1",
+      "shortDescription": "Двутавр 16Б1 из стали С255, 6 м.",
+      "description": "Балка нормальная 16Б1, С255, 6 м. Сортамент по ГОСТ 35087-2024, требования к стали по ГОСТ 27772-2021.",
+      "price": 91700,
+      "pricePerTon": 91700,
+      "priceQualifier": "exact",
+      "currency": "RUB",
+      "priceUnit": "за тонну",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "steelGrade": "С255",
+      "lengthMeters": 6,
+      "weightPerMeterKg": 12.7,
+      "imageUrls": [
+        "/images/catalog/balka/balka-normalnaya/cover/balka-regular.jpg"
+      ],
+      "attributes": [
+        {
+          "key": "size",
+          "label": "Профиль",
+          "value": "16Б1"
+        },
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "С255"
+        },
+        {
+          "key": "length",
+          "label": "Длина",
+          "value": "6 м"
+        },
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Профиль",
+          "value": "16Б1"
+        },
+        {
+          "name": "Марка стали",
+          "value": "С255"
+        },
+        {
+          "name": "Длина",
+          "value": "6 м"
+        },
+        {
+          "name": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
+        }
+      ],
+      "productTypeId": "type-cat-bal-sub-1",
+      "unit": "ton",
+      "material": "",
+      "standard": "ГОСТ 35087-2024; 27772-2021",
+      "weight": {
+        "value": 12.7,
         "unit": "кг/м"
       }
     },

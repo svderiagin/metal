@@ -12,18 +12,20 @@ type View = "table" | "card";
 // Designation, photo, two specifications, price, two order units, total, action.
 const columnWidths = [11, 13, 9, 9, 11.25, 11.25, 10, 12.5, 13] as const;
 
-export function CatalogVariantTable({children, designation, specifications, unit,
+export function CatalogVariantTable({children, designation, specifications, specificationWidths, unit,
   quantity = unit ? `Заказ, ${unit}` : "Заказ", secondaryQuantity}: {
   children: ReactNode;
   designation: string;
   specifications: readonly ReactNode[];
+  specificationWidths?: readonly [number, number];
   unit?: string;
   quantity?: string;
   secondaryQuantity?: string;
 }) {
+  const widths = specificationWidths ? [...columnWidths.slice(0, 2), ...specificationWidths, ...columnWidths.slice(4)] : columnWidths;
   return <div className={`${tableStyles.frame} hidden rounded-xl border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-900 xl:block`}>
     <table className={`${tableStyles.table} text-center text-sm`}>
-      <colgroup>{columnWidths.map((width, index) => <col key={index} style={{width: `${width}%`}}/>)}</colgroup>
+      <colgroup>{widths.map((width, index) => <col key={index} style={{width: `${width}%`}}/>)}</colgroup>
       <thead className="bg-slate-900 text-white">
         <tr>
           <th scope="col">{designation}</th>

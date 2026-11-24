@@ -1779,5 +1779,15 @@
     "imageUrl": "/images/catalog/balka/balka-kolonnaya/measurement/balka-40k2-s255-12m.webp",
     "photoUrl": "/images/catalog/balka/balka-kolonnaya/originals/balka_kolonnaya_2400_1800_marked.jpg",
     "signature": "10cdcb86"
+  },
+  "balka-14b1-s255-6m": {
+    "imageUrl": "/images/catalog/balka/balka-normalnaya/measurement/balka-14b1-s255-6m.webp",
+    "photoUrl": "/images/catalog/balka/balka-normalnaya/originals/balka_normalnaya_2400_1800_marked.jpg",
+    "signature": "ee29f173"
+  },
+  "balka-16b1-s255-6m": {
+    "imageUrl": "/images/catalog/balka/balka-normalnaya/measurement/balka-16b1-s255-6m.webp",
+    "photoUrl": "/images/catalog/balka/balka-normalnaya/originals/balka_normalnaya_2400_1800_marked.jpg",
+    "signature": "b8361d6b"
   }
 }

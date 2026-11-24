@@ -402,6 +402,7 @@ function TonnageMeasuredVariantItem({
   const profile = unverified ? "Уточняется" : beamProfile(variant);
   const series = beamSeries(variant);
   const section = beamSection(variant);
+  const sectionSize = section ? `${formatNumber(section.height)} × ${formatNumber(section.width)}` : undefined;
   const steelGrade = unverified ? undefined : variant.steelGrade;
   const length = unverified || variant.lengthMeters === undefined ? undefined : formatNumber(variant.lengthMeters);
   const standard = unverified ? undefined : beamStandardLabel(variant);
@@ -428,8 +429,11 @@ function TonnageMeasuredVariantItem({
   const designation = name ?? profile;
   return <CatalogVariantLayout view={view} variant={variant}
     name={view === "table" || designation.startsWith("Балка ") ? designation : `Балка ${designation}`}
-    tableSpecifications={[length ?? "—"]}
-    specifications={<CatalogVariantSpecifications items={[{label: "Длина", value: length && `${length} м`}]}/>}
+    tableSpecifications={[<span key="size" className="whitespace-nowrap">{sectionSize ?? "—"}</span>, length ?? "—"]}
+    specifications={<CatalogVariantSpecifications items={[
+      {label: "Размер сечения", value: sectionSize && `${sectionSize} мм`},
+      {label: "Длина", value: length && `${length} м`},
+    ]}/>}
     details={<CatalogPositionDetails productName={variant.name} fields={fields}
       note={unverified ? variant.description : undefined}/>}
     price={price} order={order}/>;
