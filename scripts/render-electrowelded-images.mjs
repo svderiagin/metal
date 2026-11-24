@@ -67,7 +67,6 @@ const variants = products.map(product => {
     captions: [
       ['caption', 'Длина по каталогу', 133, 1567], ['length', lengthLabel, 611, 1567],
       ['caption', 'Теоретическая масса', 133, 1633], ['mass', `${weightPerMeterKg.toFixed(2).replace('.', ',')} кг/м`, 611, 1633],
-      ...(galvanized ? [['caption', 'Без массы цинкового покрытия', 133, 1702]] : []),
     ]};
 });
 
@@ -169,8 +168,6 @@ if (write) {
   const manifest = JSON.parse(await fs.readFile(manifestPath, 'utf8'));
   for (const result of results) {
     const product = productVariants.find(item => item.id === result.id);
-    // This size has a separately selected WebP for the storefront.
-    if (result.id === 'local-443' && manifest[result.id]?.imageUrl === catalogMeasurementUrl(product)) continue;
     manifest[result.id] = {imageUrl: result.output.replace(/^public/u, ''), photoUrl: result.source.replace(/^public/u, ''), signature: productIllustrationSignature(product), ...(result.unverified ? {showForDemo: true} : {})};
   }
   await fs.writeFile(manifestPath, JSON.stringify(manifest, null, 2) + '\n');

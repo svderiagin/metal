@@ -132,16 +132,14 @@ The electrowelded catalogue has **21 positions** across its two tables.
 - The **20 ordinary positions** use annotated JPG files in
   `public/images/catalog/truba-kruglaya/truba-elektrosvarnaya/measurement/`.
   Positions with the same rendered artwork share one file.
-- The **one galvanized position**, 89 × 3,5 × 7800 mm (`local-443`), currently
-  uses `public/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/measurement/truba-elektrosvarnaya-otsinkovannaya-89x3-5mm-7-8m.webp`, the earlier
-  illustration based on the cover photograph. The JPG made from the supplied galvanized
-  VGP original is stored separately at
-  `public/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/measurement/truba-elektrosvarnaya-otsinkovannaya-89x3-5mm-7-8m.jpg`.
-  That JPG includes the caption «Без массы цинкового покрытия».
+- The **one galvanized position**, 89 × 3,5 × 7800 mm (`local-443`), uses the
+  [annotated JPG](../public/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/measurement/truba-elektrosvarnaya-otsinkovannaya-89x3-5mm-7-8m.jpg)
+  made from the supplied galvanized VGP original. The image follows the owner's
+  reference with labels for diameter, wall thickness, length and theoretical mass.
+  The table note explains the basis used to calculate that mass.
 
-`data/product-illustrations.json` connects each image to its SKU and retains the
-catalog signature. The dedicated renderer preserves the active WebP mapping for
-`local-443` when it regenerates the JPGs. The generic renderer excludes both
+`data/product-illustrations.json` connects each image to a product ID and records
+the signature of the relevant catalog data. The generic renderer excludes both
 electrowelded families.
 
 Mass values were checked against
