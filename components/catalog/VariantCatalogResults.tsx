@@ -4,9 +4,7 @@ import type {ProductVariant} from "@/types/product";
 import {referenceCategorySlugs, referenceProfileName} from "@/lib/variantCatalog";
 import {ProductOrderControls} from "./ProductOrderControls";
 import {CatalogDescription} from "./CatalogDescription";
-import {ChannelSpecificationNote} from "./ChannelSpecificationNote";
 import {CatalogTableNote} from "./CatalogTableNote";
-import {ChannelProductPreview} from "./ChannelProductPreview";
 import {formatUnitPrice} from "@/lib/currency";
 import {getSheetDesignation, getSheetTableDesignation, isPlainHotRolledSheet, sheetFormatLabel} from "@/lib/sheetPresentation";
 import {Button} from "@/components/ui/Button";
@@ -24,9 +22,6 @@ type TableSpecifications = {
 };
 
 const tableSpecs = {
-  shveller: {
-    heading: "Профиль", parameters: [["Высота × полка", "Высота", "Ширина полки"], ["Длина", "Длина по каталогу"]],
-  },
   ugolok: {
     heading: "Полки × толщина, мм", parameters: [["Длина", "Длина по каталогу"]],
   },
@@ -55,7 +50,6 @@ export function VariantCatalogResults({visible, categorySlug, unit, isSheetCatal
   visible: ProductVariant[]; categorySlug: string; isSheetCatalog: boolean; hasVerifiedSpecifications: boolean; resultsCount: number; currentPage?: number; pages?: number;
   onPageChange?: (page: number) => void; onReset: () => void;
 }) {
-  const isChannel = categorySlug === "shveller";
   const hasUnverified = visible.some(isDemonstrationProduct);
   const hasMetreQuantities = referenceCategorySlugs.some(slug => slug === categorySlug);
   const presentation: TableSpecifications = isSheetCatalog ? tableSpecs["listovoy-prokat"]
@@ -68,7 +62,7 @@ export function VariantCatalogResults({visible, categorySlug, unit, isSheetCatal
     const price = variant.quoteOnly ? (isUnverifiedSquarePipe ? "По запросу" : "Цена по запросу")
       : `${variant.priceQualifier === "from" ? "от " : ""}${formatUnitPrice(variant.price, variant.priceUnit)}`;
     const fields = storefrontPositionFields(variant);
-    const description = !unverified && !isChannel && !hasMetreQuantities && !isSheetCatalog && categorySlug !== "polosa"
+    const description = !unverified && !hasMetreQuantities && !isSheetCatalog && categorySlug !== "polosa"
       ? variant.description : undefined;
     const value = (label: string) => fields.find(field => field.label === label)?.value;
     const pairedSize = (first: string, second: string) => {
@@ -102,10 +96,8 @@ export function VariantCatalogResults({visible, categorySlug, unit, isSheetCatal
         cardName = `Штакетник ${coating}`;
       }
     }
-    const photo = isChannel ? <ChannelProductPreview variant={variant} compact={view === "table"}/> : undefined;
     return <CatalogVariantLayout key={variant.id} variant={variant} view={view}
       name={view === "table" ? tableName : cardName}
-      preview={photo}
       tableSpecifications={specifications.length ? specifications.map(({value}) => value ?? "—")
         : [availability]}
       specifications={isUnverifiedSquarePipe ? <CatalogVariantSpecifications items={[{label: "Характеристики", value: "Уточняются"}]}/> : unverified
@@ -118,7 +110,6 @@ export function VariantCatalogResults({visible, categorySlug, unit, isSheetCatal
   }
   return (
       <section className="min-w-0 lg:col-span-2" aria-label="Продукция">
-      {isChannel && <ChannelSpecificationNote/>}
       {resultsCount ? (
         <>
           {hasUnverified && <CatalogTableNote>{unverifiedOrderNote}</CatalogTableNote>}

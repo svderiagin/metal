@@ -2,6 +2,7 @@
 
 import {Fragment, useEffect, useState, type ReactNode} from "react";
 import {beamProfile, beamReferenceMassKg, beamSection, beamSeries, beamStandardLabel} from "@/lib/beam";
+import {channelProfile, channelSection} from "@/lib/channel";
 import {vgpSize} from "@/lib/vgp";
 import {QuoteRequestButton} from "./QuoteRequestButton";
 import {formatQuoteProductName} from "@/lib/quoteRequest";
@@ -32,12 +33,16 @@ type OrderFeedback = {kind: "correction" | "error"; text: string};
 export function MeasuredVariantItem({
   variant, view, kind, name, showSteelGrade, sharedPipeStandard, showBeamStandard,
 }: {
-  variant: ProductVariant; view: "table" | "card"; kind: "rebar" | "beam" | "vgp" | "pipe" | "profile";
+  variant: ProductVariant; view: "table" | "card"; kind: "rebar" | "beam" | "channel" | "vgp" | "pipe" | "profile";
   name?: string; showSteelGrade?: boolean; sharedPipeStandard?: string; showBeamStandard?: boolean;
 }) {
   return kind === "profile" ? <ProfilePipeVariantItem variant={variant} view={view}/>
     : <TonnageMeasuredVariantItem variant={variant} view={view} kind={kind} name={name}
       showSteelGrade={showSteelGrade} sharedPipeStandard={sharedPipeStandard} showBeamStandard={showBeamStandard}/>;
+}
+
+export function ChannelOrderControls({variant}: {variant: ProductVariant}) {
+  return <TonnageMeasuredVariantItem variant={variant} view="card" kind="channel" orderOnly/>;
 }
 
 function TonnageMeasuredVariantItem({
@@ -48,13 +53,15 @@ function TonnageMeasuredVariantItem({
   showSteelGrade,
   sharedPipeStandard,
   showBeamStandard = true,
+  orderOnly = false,
 }: {
   variant: ProductVariant;
   name?: string;
   showSteelGrade?: boolean;
   sharedPipeStandard?: string;
   showBeamStandard?: boolean;
-  kind: "rebar" | "beam" | "vgp" | "pipe";
+  orderOnly?: boolean;
+  kind: "rebar" | "beam" | "channel" | "vgp" | "pipe";
   view: "table" | "card";
 }) {
   const {addItem, updateQuantity, removeItem, lines, hydrated} = useCart();
@@ -366,6 +373,7 @@ function TonnageMeasuredVariantItem({
   const order = <CatalogVariantOrder view={view} quantity={meterInput} secondaryQuantity={tonInput} deliveryId={deliveryId}
     action={action} total={total} status={orderStatus}/>;
 
+  if (orderOnly) return <><p className="mt-3 text-xl font-bold tabular-nums">{price}</p>{order}</>;
   if (isRebar) return <RebarVariantLayout view={view} variant={variant} price={price} order={order}/>;
 
   const unverified = isDemonstrationProduct(variant);
@@ -399,13 +407,14 @@ function TonnageMeasuredVariantItem({
       price={price} order={order}/>;
   }
 
-  const profile = unverified ? "Уточняется" : beamProfile(variant);
+  const isChannel = kind === "channel";
+  const profile = unverified ? "Уточняется" : isChannel ? channelProfile(variant) ?? "—" : beamProfile(variant);
   const series = beamSeries(variant);
-  const section = beamSection(variant);
+  const section = isChannel ? channelSection(variant) : beamSection(variant);
   const sectionSize = section ? `${formatNumber(section.height)} × ${formatNumber(section.width)}` : undefined;
   const steelGrade = unverified || !showSteelGrade || variant.steelGrade === "—" ? undefined : variant.steelGrade;
   const length = unverified || variant.lengthMeters === undefined ? undefined : formatNumber(variant.lengthMeters);
-  const standard = unverified ? undefined : beamStandardLabel(variant);
+  const standard = unverified || isChannel ? undefined : beamStandardLabel(variant);
   const massField = referenceMass !== undefined
     ? {label: "Справочная масса", value: <>
       {formatNumber(referenceMass)} кг/м
@@ -427,8 +436,9 @@ function TonnageMeasuredVariantItem({
     massField,
   ];
   const designation = name ?? profile;
+  const prefix = isChannel ? "Швеллер" : "Балка";
   return <CatalogVariantLayout view={view} variant={variant}
-    name={view === "table" || designation.startsWith("Балка ") ? designation : `Балка ${designation}`}
+    name={view === "table" || designation.startsWith(`${prefix} `) ? designation : `${prefix} ${designation}`}
     nameNote={steelGrade}
     tableSpecifications={[<span key="size" className="whitespace-nowrap">{sectionSize ?? "—"}</span>, length ?? "—"]}
     specifications={<CatalogVariantSpecifications items={[

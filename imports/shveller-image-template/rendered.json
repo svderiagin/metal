@@ -56,24 +56,24 @@
     }
   },
   "method": "Original reference pixels with deterministic Inter labels from public product specifications; no generative editing.",
-  "illustration": "Shared family photograph; nominal dimensions are labels, not a scaled manufacturing drawing.",
+  "illustration": "Shared family photograph with ГОСТ 8240-97 dimensions. У includes a schematic of the sloping inner flange faces.",
   "records": [
     {
       "id": "catalog-2235",
-      "number": "5",
-      "imageUrl": "/images/catalog/shveller/measurement/shveller-n5-11-7m.webp",
+      "profile": "5П",
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-5p-st3-12m.webp",
       "values": {
         "Высота": "50 мм",
         "Ширина полки": "32 мм",
         "Толщина стенки": "4,4 мм",
         "Толщина полки": "7 мм",
-        "Длина по каталогу": "11,7 м",
+        "Длина по каталогу": "12 м",
         "Теоретическая масса": "4,84 кг/м"
       },
       "labels": [
         {
           "key": "title",
-          "text": "Швеллер 5"
+          "text": "Швеллер 5П"
         },
         {
           "key": "flangeWidth",
@@ -93,7 +93,7 @@
         },
         {
           "key": "length",
-          "text": "11,7 м"
+          "text": "12 м"
         },
         {
           "key": "mass",
@@ -101,43 +101,56 @@
         }
       ],
       "sourceReference": "imports/shveller-image-template/reference-5.jpg",
-      "referenceUnmodified": false,
-      "changedLabels": [],
-      "placements": [],
+      "changedLabels": [
+        "title",
+        "length"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "Швеллер 5П",
+          "size": 84,
+          "weight": 700,
+          "left": 136,
+          "top": 127,
+          "width": 489,
+          "height": 78
+        },
+        {
+          "key": "length",
+          "text": "12 м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1568,
+          "width": 85,
+          "height": 32
+        }
+      ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/shveller/measurement/shveller-n5-11-7m.webp",
+      "output": "public/images/catalog/shveller/measurement/shveller-5p-st3-12m.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
-      "bytes": 1090612,
-      "sha256": "425677f8984157a7f81583c18567c9a634525adb2d712b9696ae5e154d0dde1b",
-      "headingCorrection": {
-        "removed": "№",
-        "box": {
-          "left": 524,
-          "top": 110,
-          "width": 177,
-          "height": 108
-        },
-        "shiftLeft": 109
-      }
+      "bytes": 1090454,
+      "sha256": "9c1477f243ba31a467ac8d9215f6db19d005d83c86097b6251593e6907cfec47"
     },
     {
       "id": "catalog-2236",
-      "number": "6,5",
-      "imageUrl": "/images/catalog/shveller/measurement/shveller-n6-5-l6-12m.webp",
+      "profile": "6,5П",
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-6-5p-st3-12m.webp",
       "values": {
         "Высота": "65 мм",
         "Ширина полки": "36 мм",
         "Толщина стенки": "4,4 мм",
         "Толщина полки": "7,2 мм",
-        "Длина по каталогу": "6–12 м",
-        "Теоретическая масса": "5,90 кг/м"
+        "Длина по каталогу": "12 м",
+        "Теоретическая масса": "5,9 кг/м"
       },
       "labels": [
         {
           "key": "title",
-          "text": "Швеллер 6,5"
+          "text": "Швеллер 6,5П"
         },
         {
           "key": "flangeWidth",
@@ -157,15 +170,14 @@
         },
         {
           "key": "length",
-          "text": "6–12 м"
+          "text": "12 м"
         },
         {
           "key": "mass",
-          "text": "5,90 кг/м"
+          "text": "5,9 кг/м"
         }
       ],
       "sourceReference": "imports/shveller-image-template/reference-5.jpg",
-      "referenceUnmodified": false,
       "changedLabels": [
         "title",
         "flangeWidth",
@@ -177,12 +189,12 @@
       "placements": [
         {
           "key": "title",
-          "text": "Швеллер № 6,5",
+          "text": "Швеллер 6,5П",
           "size": 84,
           "weight": 700,
           "left": 136,
           "top": 127,
-          "width": 610,
+          "width": 559,
           "height": 79
         },
         {
@@ -217,59 +229,49 @@
         },
         {
           "key": "length",
-          "text": "6–12 м",
+          "text": "12 м",
           "size": 44,
           "weight": 750,
           "left": 610,
           "top": 1568,
-          "width": 133,
-          "height": 33
+          "width": 85,
+          "height": 32
         },
         {
           "key": "mass",
-          "text": "5,90 кг/м",
+          "text": "5,9 кг/м",
           "size": 44,
           "weight": 750,
           "left": 610,
           "top": 1634,
-          "width": 191,
+          "width": 162,
           "height": 40
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/shveller/measurement/shveller-n6-5-l6-12m.webp",
+      "output": "public/images/catalog/shveller/measurement/shveller-6-5p-st3-12m.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
-      "bytes": 1104022,
-      "sha256": "cddb2ee606616af170437ae2360bace5f8c83cc37f8c513148359333beaffa4f",
-      "headingCorrection": {
-        "removed": "№",
-        "box": {
-          "left": 514,
-          "top": 110,
-          "width": 245,
-          "height": 108
-        },
-        "shiftLeft": 106
-      }
+      "bytes": 1101834,
+      "sha256": "4aee76cb247e89b06ccef7e6f3aefe4666293db2a395ddff6cf6cfdf51aec24c"
     },
     {
       "id": "catalog-2237",
-      "number": "8",
-      "imageUrl": "/images/catalog/shveller/measurement/shveller-n8-l6-12m.webp",
+      "profile": "8П",
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-8p-s255-12m.webp",
       "values": {
         "Высота": "80 мм",
         "Ширина полки": "40 мм",
         "Толщина стенки": "4,5 мм",
         "Толщина полки": "7,4 мм",
-        "Длина по каталогу": "6–12 м",
+        "Длина по каталогу": "12 м",
         "Теоретическая масса": "7,05 кг/м"
       },
       "labels": [
         {
           "key": "title",
-          "text": "Швеллер 8"
+          "text": "Швеллер 8П"
         },
         {
           "key": "flangeWidth",
@@ -289,7 +291,7 @@
         },
         {
           "key": "length",
-          "text": "6–12 м"
+          "text": "12 м"
         },
         {
           "key": "mass",
@@ -297,7 +299,6 @@
         }
       ],
       "sourceReference": "imports/shveller-image-template/reference-5.jpg",
-      "referenceUnmodified": false,
       "changedLabels": [
         "title",
         "flangeWidth",
@@ -310,12 +311,12 @@
       "placements": [
         {
           "key": "title",
-          "text": "Швеллер № 8",
+          "text": "Швеллер 8П",
           "size": 84,
           "weight": 700,
           "left": 136,
           "top": 127,
-          "width": 541,
+          "width": 491,
           "height": 79
         },
         {
@@ -359,13 +360,13 @@
         },
         {
           "key": "length",
-          "text": "6–12 м",
+          "text": "12 м",
           "size": 44,
           "weight": 750,
           "left": 610,
           "top": 1568,
-          "width": 133,
-          "height": 33
+          "width": 85,
+          "height": 32
         },
         {
           "key": "mass",
@@ -379,27 +380,17 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/shveller/measurement/shveller-n8-l6-12m.webp",
+      "output": "public/images/catalog/shveller/measurement/shveller-8p-s255-12m.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
-      "bytes": 1102852,
-      "sha256": "8a1b540797154b885f6f30b45d7dcc06563634d14aba80349e5a4fc13db56959",
-      "headingCorrection": {
-        "removed": "№",
-        "box": {
-          "left": 514,
-          "top": 110,
-          "width": 176,
-          "height": 108
-        },
-        "shiftLeft": 106
-      }
+      "bytes": 1101274,
+      "sha256": "9c00ea24e9d2c5f3907cbf416af6fb4868181fcf687cc4949ba55ef8ca21f939"
     },
     {
       "id": "catalog-2238",
-      "number": "10",
-      "imageUrl": "/images/catalog/shveller/measurement/shveller-n10-12m.webp",
+      "profile": "10П",
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-10p-s255-12m.webp",
       "values": {
         "Высота": "100 мм",
         "Ширина полки": "46 мм",
@@ -411,7 +402,7 @@
       "labels": [
         {
           "key": "title",
-          "text": "Швеллер 10"
+          "text": "Швеллер 10П"
         },
         {
           "key": "flangeWidth",
@@ -439,7 +430,6 @@
         }
       ],
       "sourceReference": "imports/shveller-image-template/reference-5.jpg",
-      "referenceUnmodified": false,
       "changedLabels": [
         "title",
         "flangeWidth",
@@ -452,12 +442,12 @@
       "placements": [
         {
           "key": "title",
-          "text": "Швеллер № 10",
+          "text": "Швеллер 10П",
           "size": 84,
           "weight": 700,
           "left": 136,
           "top": 127,
-          "width": 578,
+          "width": 527,
           "height": 79
         },
         {
@@ -521,39 +511,29 @@
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/shveller/measurement/shveller-n10-12m.webp",
+      "output": "public/images/catalog/shveller/measurement/shveller-10p-s255-12m.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
-      "bytes": 1104828,
-      "sha256": "c8d8b682f4baae1f0d68f7d9499f00b71432017b8dfeacf9f6dd4ba90a9be1fa",
-      "headingCorrection": {
-        "removed": "№",
-        "box": {
-          "left": 514,
-          "top": 110,
-          "width": 213,
-          "height": 108
-        },
-        "shiftLeft": 105
-      }
+      "bytes": 1102496,
+      "sha256": "b867afa0727738340869e560050d223a90f97ea4bf9cee9c8f716d677179de88"
     },
     {
       "id": "catalog-2239",
-      "number": "12",
-      "imageUrl": "/images/catalog/shveller/measurement/shveller-n12-12m.webp",
+      "profile": "12П",
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-12p-s255-12m.webp",
       "values": {
         "Высота": "120 мм",
         "Ширина полки": "52 мм",
         "Толщина стенки": "4,8 мм",
         "Толщина полки": "7,8 мм",
         "Длина по каталогу": "12 м",
-        "Теоретическая масса": "10,40 кг/м"
+        "Теоретическая масса": "10,4 кг/м"
       },
       "labels": [
         {
           "key": "title",
-          "text": "Швеллер 12"
+          "text": "Швеллер 12П"
         },
         {
           "key": "flangeWidth",
@@ -577,11 +557,10 @@
         },
         {
           "key": "mass",
-          "text": "10,40 кг/м"
+          "text": "10,4 кг/м"
         }
       ],
       "sourceReference": "imports/shveller-image-template/reference-5.jpg",
-      "referenceUnmodified": false,
       "changedLabels": [
         "title",
         "flangeWidth",
@@ -594,12 +573,12 @@
       "placements": [
         {
           "key": "title",
-          "text": "Швеллер № 12",
+          "text": "Швеллер 12П",
           "size": 84,
           "weight": 700,
           "left": 136,
           "top": 127,
-          "width": 571,
+          "width": 522,
           "height": 79
         },
         {
@@ -653,49 +632,39 @@
         },
         {
           "key": "mass",
-          "text": "10,40 кг/м",
+          "text": "10,4 кг/м",
           "size": 44,
           "weight": 750,
           "left": 610,
           "top": 1634,
-          "width": 214,
+          "width": 185,
           "height": 40
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/shveller/measurement/shveller-n12-12m.webp",
+      "output": "public/images/catalog/shveller/measurement/shveller-12p-s255-12m.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
-      "bytes": 1103190,
-      "sha256": "4d55b0590f91eb8e6135b35187523dd240f6b9516aa34f5cf860ee27797ac82b",
-      "headingCorrection": {
-        "removed": "№",
-        "box": {
-          "left": 514,
-          "top": 110,
-          "width": 207,
-          "height": 108
-        },
-        "shiftLeft": 105
-      }
+      "bytes": 1102126,
+      "sha256": "c4a7533143e82ac15278c42a8edcc3628145ff06b1bca041c54410ff17872980"
     },
     {
       "id": "catalog-2240",
-      "number": "14",
-      "imageUrl": "/images/catalog/shveller/measurement/shveller-n14-12m.webp",
+      "profile": "14П",
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-14p-s255-12m.webp",
       "values": {
         "Высота": "140 мм",
         "Ширина полки": "58 мм",
         "Толщина стенки": "4,9 мм",
         "Толщина полки": "8,1 мм",
         "Длина по каталогу": "12 м",
-        "Теоретическая масса": "12,30 кг/м"
+        "Теоретическая масса": "12,3 кг/м"
       },
       "labels": [
         {
           "key": "title",
-          "text": "Швеллер 14"
+          "text": "Швеллер 14П"
         },
         {
           "key": "flangeWidth",
@@ -719,11 +688,10 @@
         },
         {
           "key": "mass",
-          "text": "12,30 кг/м"
+          "text": "12,3 кг/м"
         }
       ],
       "sourceReference": "imports/shveller-image-template/reference-5.jpg",
-      "referenceUnmodified": false,
       "changedLabels": [
         "title",
         "flangeWidth",
@@ -736,13 +704,13 @@
       "placements": [
         {
           "key": "title",
-          "text": "Швеллер № 14",
+          "text": "Швеллер 14П",
           "size": 84,
           "weight": 700,
           "left": 136,
           "top": 127,
-          "width": 577,
-          "height": 79
+          "width": 527,
+          "height": 78
         },
         {
           "key": "flangeWidth",
@@ -795,49 +763,39 @@
         },
         {
           "key": "mass",
-          "text": "12,30 кг/м",
+          "text": "12,3 кг/м",
           "size": 44,
           "weight": 750,
           "left": 610,
           "top": 1634,
-          "width": 210,
+          "width": 181,
           "height": 40
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/shveller/measurement/shveller-n14-12m.webp",
+      "output": "public/images/catalog/shveller/measurement/shveller-14p-s255-12m.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
-      "bytes": 1104000,
-      "sha256": "25edff3e8cadbff1a7d4811e5e264914128cde1c6340bd68d4592aa6c3a44a44",
-      "headingCorrection": {
-        "removed": "№",
-        "box": {
-          "left": 514,
-          "top": 110,
-          "width": 213,
-          "height": 108
-        },
-        "shiftLeft": 105
-      }
+      "bytes": 1102526,
+      "sha256": "aab49655bc7b077c15c693c91d365b4c3866cf8bc521075a62424bea84fc2c1e"
     },
     {
       "id": "catalog-2241",
-      "number": "16",
-      "imageUrl": "/images/catalog/shveller/measurement/shveller-n16-l11-7-12m.webp",
+      "profile": "16П",
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-16p-s255-12m.webp",
       "values": {
         "Высота": "160 мм",
         "Ширина полки": "64 мм",
         "Толщина стенки": "5 мм",
         "Толщина полки": "8,4 мм",
-        "Длина по каталогу": "11,7–12 м",
-        "Теоретическая масса": "14,20 кг/м"
+        "Длина по каталогу": "12 м",
+        "Теоретическая масса": "14,2 кг/м"
       },
       "labels": [
         {
           "key": "title",
-          "text": "Швеллер 16"
+          "text": "Швеллер 16П"
         },
         {
           "key": "flangeWidth",
@@ -857,15 +815,14 @@
         },
         {
           "key": "length",
-          "text": "11,7–12 м"
+          "text": "12 м"
         },
         {
           "key": "mass",
-          "text": "14,20 кг/м"
+          "text": "14,2 кг/м"
         }
       ],
       "sourceReference": "imports/shveller-image-template/reference-5.jpg",
-      "referenceUnmodified": false,
       "changedLabels": [
         "title",
         "flangeWidth",
@@ -878,12 +835,12 @@
       "placements": [
         {
           "key": "title",
-          "text": "Швеллер № 16",
+          "text": "Швеллер 16П",
           "size": 84,
           "weight": 700,
           "left": 136,
           "top": 127,
-          "width": 574,
+          "width": 524,
           "height": 79
         },
         {
@@ -927,59 +884,49 @@
         },
         {
           "key": "length",
-          "text": "11,7–12 м",
+          "text": "12 м",
           "size": 44,
           "weight": 750,
           "left": 610,
           "top": 1568,
-          "width": 174,
-          "height": 39
+          "width": 85,
+          "height": 32
         },
         {
           "key": "mass",
-          "text": "14,20 кг/м",
+          "text": "14,2 кг/м",
           "size": 44,
           "weight": 750,
           "left": 610,
           "top": 1634,
-          "width": 212,
+          "width": 183,
           "height": 40
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/shveller/measurement/shveller-n16-l11-7-12m.webp",
+      "output": "public/images/catalog/shveller/measurement/shveller-16p-s255-12m.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
-      "bytes": 1104354,
-      "sha256": "5f58193134d670aaa0fab48840168b9c9a603d6db9fe72b612a1aaddea6cdca0",
-      "headingCorrection": {
-        "removed": "№",
-        "box": {
-          "left": 514,
-          "top": 110,
-          "width": 210,
-          "height": 108
-        },
-        "shiftLeft": 105
-      }
+      "bytes": 1101474,
+      "sha256": "02b8edf6c0170489b0e94261c1d634b75c98159f6dd24833d6894aee6e71db1d"
     },
     {
       "id": "catalog-2242",
-      "number": "18",
-      "imageUrl": "/images/catalog/shveller/measurement/shveller-n18-12m.webp",
+      "profile": "18П",
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-18p-s255-12m.webp",
       "values": {
         "Высота": "180 мм",
         "Ширина полки": "70 мм",
         "Толщина стенки": "5,1 мм",
         "Толщина полки": "8,7 мм",
         "Длина по каталогу": "12 м",
-        "Теоретическая масса": "16,30 кг/м"
+        "Теоретическая масса": "16,3 кг/м"
       },
       "labels": [
         {
           "key": "title",
-          "text": "Швеллер 18"
+          "text": "Швеллер 18П"
         },
         {
           "key": "flangeWidth",
@@ -1003,11 +950,10 @@
         },
         {
           "key": "mass",
-          "text": "16,30 кг/м"
+          "text": "16,3 кг/м"
         }
       ],
       "sourceReference": "imports/shveller-image-template/reference-5.jpg",
-      "referenceUnmodified": false,
       "changedLabels": [
         "title",
         "flangeWidth",
@@ -1020,12 +966,12 @@
       "placements": [
         {
           "key": "title",
-          "text": "Швеллер № 18",
+          "text": "Швеллер 18П",
           "size": 84,
           "weight": 700,
           "left": 136,
           "top": 127,
-          "width": 574,
+          "width": 524,
           "height": 79
         },
         {
@@ -1079,49 +1025,39 @@
         },
         {
           "key": "mass",
-          "text": "16,30 кг/м",
+          "text": "16,3 кг/м",
           "size": 44,
           "weight": 750,
           "left": 610,
           "top": 1634,
-          "width": 209,
+          "width": 180,
           "height": 40
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/shveller/measurement/shveller-n18-12m.webp",
+      "output": "public/images/catalog/shveller/measurement/shveller-18p-s255-12m.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
-      "bytes": 1104556,
-      "sha256": "ad1ab80ee1513bf79b27ed85c079bc82ea678b82d420142fde9f00d879ef7a84",
-      "headingCorrection": {
-        "removed": "№",
-        "box": {
-          "left": 514,
-          "top": 110,
-          "width": 209,
-          "height": 108
-        },
-        "shiftLeft": 105
-      }
+      "bytes": 1103210,
+      "sha256": "94a7d60b6fba3f0671ed65f943d9abf7469019ba81a422c4efd9c698e7a3e967"
     },
     {
       "id": "catalog-2243",
-      "number": "20",
-      "imageUrl": "/images/catalog/shveller/measurement/shveller-n20-12m.webp",
+      "profile": "20П",
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-20p-s255-12m.webp",
       "values": {
         "Высота": "200 мм",
         "Ширина полки": "76 мм",
         "Толщина стенки": "5,2 мм",
         "Толщина полки": "9 мм",
         "Длина по каталогу": "12 м",
-        "Теоретическая масса": "18,40 кг/м"
+        "Теоретическая масса": "18,4 кг/м"
       },
       "labels": [
         {
           "key": "title",
-          "text": "Швеллер 20"
+          "text": "Швеллер 20П"
         },
         {
           "key": "flangeWidth",
@@ -1145,11 +1081,10 @@
         },
         {
           "key": "mass",
-          "text": "18,40 кг/м"
+          "text": "18,4 кг/м"
         }
       ],
       "sourceReference": "imports/shveller-image-template/reference-5.jpg",
-      "referenceUnmodified": false,
       "changedLabels": [
         "title",
         "flangeWidth",
@@ -1162,12 +1097,12 @@
       "placements": [
         {
           "key": "title",
-          "text": "Швеллер № 20",
+          "text": "Швеллер 20П",
           "size": 84,
           "weight": 700,
           "left": 136,
           "top": 127,
-          "width": 595,
+          "width": 544,
           "height": 79
         },
         {
@@ -1221,49 +1156,39 @@
         },
         {
           "key": "mass",
-          "text": "18,40 кг/м",
+          "text": "18,4 кг/м",
           "size": 44,
           "weight": 750,
           "left": 610,
           "top": 1634,
-          "width": 213,
+          "width": 184,
           "height": 40
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/shveller/measurement/shveller-n20-12m.webp",
+      "output": "public/images/catalog/shveller/measurement/shveller-20p-s255-12m.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
-      "bytes": 1106958,
-      "sha256": "ab0dbddffdf1f6f21b47c570cf168d5dddaf970939db64c05fad69e66bc77292",
-      "headingCorrection": {
-        "removed": "№",
-        "box": {
-          "left": 514,
-          "top": 110,
-          "width": 230,
-          "height": 108
-        },
-        "shiftLeft": 106
-      }
+      "bytes": 1105664,
+      "sha256": "c2a860fddaa490778e382d618090270b4e23be06a6c8e13216480a7bfed85b7f"
     },
     {
       "id": "catalog-2244",
-      "number": "22",
-      "imageUrl": "/images/catalog/shveller/measurement/shveller-n22-12m.webp",
+      "profile": "22П",
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-22p-s255-12m.webp",
       "values": {
         "Высота": "220 мм",
         "Ширина полки": "82 мм",
         "Толщина стенки": "5,4 мм",
         "Толщина полки": "9,5 мм",
         "Длина по каталогу": "12 м",
-        "Теоретическая масса": "21,00 кг/м"
+        "Теоретическая масса": "21 кг/м"
       },
       "labels": [
         {
           "key": "title",
-          "text": "Швеллер 22"
+          "text": "Швеллер 22П"
         },
         {
           "key": "flangeWidth",
@@ -1287,11 +1212,10 @@
         },
         {
           "key": "mass",
-          "text": "21,00 кг/м"
+          "text": "21 кг/м"
         }
       ],
       "sourceReference": "imports/shveller-image-template/reference-5.jpg",
-      "referenceUnmodified": false,
       "changedLabels": [
         "title",
         "flangeWidth",
@@ -1304,12 +1228,12 @@
       "placements": [
         {
           "key": "title",
-          "text": "Швеллер № 22",
+          "text": "Швеллер 22П",
           "size": 84,
           "weight": 700,
           "left": 136,
           "top": 127,
-          "width": 588,
+          "width": 539,
           "height": 79
         },
         {
@@ -1363,49 +1287,39 @@
         },
         {
           "key": "mass",
-          "text": "21,00 кг/м",
+          "text": "21 кг/м",
           "size": 44,
           "weight": 750,
           "left": 610,
           "top": 1634,
-          "width": 210,
-          "height": 40
+          "width": 142,
+          "height": 38
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/shveller/measurement/shveller-n22-12m.webp",
+      "output": "public/images/catalog/shveller/measurement/shveller-22p-s255-12m.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
-      "bytes": 1104682,
-      "sha256": "0650dace6f36bf19da41ea789beb93dc7ca70bd4fa402624f0882a06b7b011c4",
-      "headingCorrection": {
-        "removed": "№",
-        "box": {
-          "left": 514,
-          "top": 110,
-          "width": 224,
-          "height": 108
-        },
-        "shiftLeft": 106
-      }
+      "bytes": 1103092,
+      "sha256": "50c76edad1b8a13a5313e1fc7e6306b8268c6042fefe3d89749dd31ebdc1b278"
     },
     {
       "id": "catalog-2245",
-      "number": "24",
-      "imageUrl": "/images/catalog/shveller/measurement/shveller-n24-12m.webp",
+      "profile": "24П",
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-24p-s255-12m.webp",
       "values": {
         "Высота": "240 мм",
         "Ширина полки": "90 мм",
         "Толщина стенки": "5,6 мм",
         "Толщина полки": "10 мм",
         "Длина по каталогу": "12 м",
-        "Теоретическая масса": "24,00 кг/м"
+        "Теоретическая масса": "24 кг/м"
       },
       "labels": [
         {
           "key": "title",
-          "text": "Швеллер 24"
+          "text": "Швеллер 24П"
         },
         {
           "key": "flangeWidth",
@@ -1429,11 +1343,10 @@
         },
         {
           "key": "mass",
-          "text": "24,00 кг/м"
+          "text": "24 кг/м"
         }
       ],
       "sourceReference": "imports/shveller-image-template/reference-5.jpg",
-      "referenceUnmodified": false,
       "changedLabels": [
         "title",
         "flangeWidth",
@@ -1446,12 +1359,12 @@
       "placements": [
         {
           "key": "title",
-          "text": "Швеллер № 24",
+          "text": "Швеллер 24П",
           "size": 84,
           "weight": 700,
           "left": 136,
           "top": 127,
-          "width": 593,
+          "width": 543,
           "height": 79
         },
         {
@@ -1505,49 +1418,39 @@
         },
         {
           "key": "mass",
-          "text": "24,00 кг/м",
+          "text": "24 кг/м",
           "size": 44,
           "weight": 750,
           "left": 610,
           "top": 1634,
-          "width": 220,
-          "height": 40
+          "width": 153,
+          "height": 38
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/shveller/measurement/shveller-n24-12m.webp",
+      "output": "public/images/catalog/shveller/measurement/shveller-24p-s255-12m.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
-      "bytes": 1106174,
-      "sha256": "226d8d5231bfdf8c8800acdedea93901415734530e0faa20cad4330f8c51c180",
-      "headingCorrection": {
-        "removed": "№",
-        "box": {
-          "left": 514,
-          "top": 110,
-          "width": 229,
-          "height": 108
-        },
-        "shiftLeft": 106
-      }
+      "bytes": 1103234,
+      "sha256": "3301f561efa2639803ccdeb24cd2a4f84026c314eb0d9c6116e6e175962f6efe"
     },
     {
       "id": "catalog-2246",
-      "number": "27",
-      "imageUrl": "/images/catalog/shveller/measurement/shveller-n27-12m.webp",
+      "profile": "27П",
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-27p-s255-12m.webp",
       "values": {
         "Высота": "270 мм",
         "Ширина полки": "95 мм",
         "Толщина стенки": "6 мм",
         "Толщина полки": "10,5 мм",
         "Длина по каталогу": "12 м",
-        "Теоретическая масса": "27,70 кг/м"
+        "Теоретическая масса": "27,7 кг/м"
       },
       "labels": [
         {
           "key": "title",
-          "text": "Швеллер 27"
+          "text": "Швеллер 27П"
         },
         {
           "key": "flangeWidth",
@@ -1571,11 +1474,10 @@
         },
         {
           "key": "mass",
-          "text": "27,70 кг/м"
+          "text": "27,7 кг/м"
         }
       ],
       "sourceReference": "imports/shveller-image-template/reference-5.jpg",
-      "referenceUnmodified": false,
       "changedLabels": [
         "title",
         "flangeWidth",
@@ -1588,12 +1490,12 @@
       "placements": [
         {
           "key": "title",
-          "text": "Швеллер № 27",
+          "text": "Швеллер 27П",
           "size": 84,
           "weight": 700,
           "left": 136,
           "top": 127,
-          "width": 586,
+          "width": 535,
           "height": 79
         },
         {
@@ -1647,49 +1549,39 @@
         },
         {
           "key": "mass",
-          "text": "27,70 кг/м",
+          "text": "27,7 кг/м",
           "size": 44,
           "weight": 750,
           "left": 610,
           "top": 1634,
-          "width": 206,
+          "width": 177,
           "height": 40
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/shveller/measurement/shveller-n27-12m.webp",
+      "output": "public/images/catalog/shveller/measurement/shveller-27p-s255-12m.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
-      "bytes": 1104610,
-      "sha256": "bf82778f8f79056fa8c54b213d655f4a34da94d75407b12fe8c11cde2e633ad9",
-      "headingCorrection": {
-        "removed": "№",
-        "box": {
-          "left": 514,
-          "top": 110,
-          "width": 222,
-          "height": 108
-        },
-        "shiftLeft": 106
-      }
+      "bytes": 1102162,
+      "sha256": "f2a9bb8cdb423275aeb8492b6ebebaa4f1fce9c2d83485cbd522769880a27c98"
     },
     {
       "id": "catalog-2247",
-      "number": "30",
-      "imageUrl": "/images/catalog/shveller/measurement/shveller-n30-12m.webp",
+      "profile": "30П",
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-30p-s255-12m.webp",
       "values": {
         "Высота": "300 мм",
         "Ширина полки": "100 мм",
         "Толщина стенки": "6,5 мм",
         "Толщина полки": "11 мм",
         "Длина по каталогу": "12 м",
-        "Теоретическая масса": "31,80 кг/м"
+        "Теоретическая масса": "31,8 кг/м"
       },
       "labels": [
         {
           "key": "title",
-          "text": "Швеллер 30"
+          "text": "Швеллер 30П"
         },
         {
           "key": "flangeWidth",
@@ -1713,11 +1605,10 @@
         },
         {
           "key": "mass",
-          "text": "31,80 кг/м"
+          "text": "31,8 кг/м"
         }
       ],
       "sourceReference": "imports/shveller-image-template/reference-5.jpg",
-      "referenceUnmodified": false,
       "changedLabels": [
         "title",
         "flangeWidth",
@@ -1730,12 +1621,12 @@
       "placements": [
         {
           "key": "title",
-          "text": "Швеллер № 30",
+          "text": "Швеллер 30П",
           "size": 84,
           "weight": 700,
           "left": 136,
           "top": 127,
-          "width": 597,
+          "width": 546,
           "height": 79
         },
         {
@@ -1789,49 +1680,39 @@
         },
         {
           "key": "mass",
-          "text": "31,80 кг/м",
+          "text": "31,8 кг/м",
           "size": 44,
           "weight": 750,
           "left": 610,
           "top": 1634,
-          "width": 210,
+          "width": 181,
           "height": 40
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/shveller/measurement/shveller-n30-12m.webp",
+      "output": "public/images/catalog/shveller/measurement/shveller-30p-s255-12m.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
-      "bytes": 1107690,
-      "sha256": "c5064643516669b5ff4dbe4c4c66a188aa52250d4643e90b54b04e0c146b2a0a",
-      "headingCorrection": {
-        "removed": "№",
-        "box": {
-          "left": 514,
-          "top": 110,
-          "width": 232,
-          "height": 108
-        },
-        "shiftLeft": 106
-      }
+      "bytes": 1106814,
+      "sha256": "acf1d7086fcd7d9aa4ae7df471e7b6440b0f74dd2e463f6455987bb07488af48"
     },
     {
       "id": "catalog-2248",
-      "number": "40",
-      "imageUrl": "/images/catalog/shveller/measurement/shveller-n40-12m.webp",
+      "profile": "40П",
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-40p-s255-12m.webp",
       "values": {
         "Высота": "400 мм",
         "Ширина полки": "115 мм",
         "Толщина стенки": "8 мм",
         "Толщина полки": "13,5 мм",
         "Длина по каталогу": "12 м",
-        "Теоретическая масса": "48,30 кг/м"
+        "Теоретическая масса": "48,3 кг/м"
       },
       "labels": [
         {
           "key": "title",
-          "text": "Швеллер 40"
+          "text": "Швеллер 40П"
         },
         {
           "key": "flangeWidth",
@@ -1855,11 +1736,10 @@
         },
         {
           "key": "mass",
-          "text": "48,30 кг/м"
+          "text": "48,3 кг/м"
         }
       ],
       "sourceReference": "imports/shveller-image-template/reference-5.jpg",
-      "referenceUnmodified": false,
       "changedLabels": [
         "title",
         "flangeWidth",
@@ -1872,12 +1752,12 @@
       "placements": [
         {
           "key": "title",
-          "text": "Швеллер № 40",
+          "text": "Швеллер 40П",
           "size": 84,
           "weight": 700,
           "left": 136,
           "top": 127,
-          "width": 600,
+          "width": 549,
           "height": 79
         },
         {
@@ -1931,32 +1811,1792 @@
         },
         {
           "key": "mass",
-          "text": "48,30 кг/м",
+          "text": "48,3 кг/м",
           "size": 44,
           "weight": 750,
           "left": 610,
           "top": 1634,
-          "width": 221,
+          "width": 192,
           "height": 40
         }
       ],
       "protectedPixelChanges": 0,
-      "output": "public/images/catalog/shveller/measurement/shveller-n40-12m.webp",
+      "output": "public/images/catalog/shveller/measurement/shveller-40p-s255-12m.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
-      "bytes": 1103520,
-      "sha256": "9a14eb4ee2be8897fd622463da3827961debd53412a09f5a0b749db82905e4dc",
-      "headingCorrection": {
-        "removed": "№",
-        "box": {
-          "left": 514,
-          "top": 110,
-          "width": 235,
-          "height": 108
+      "bytes": 1103152,
+      "sha256": "9ce06a49eed77a37ec92cc55c340c0b6725722a78308d1299216d6e23cd5551f"
+    },
+    {
+      "id": "shveller-5p-st3-6m",
+      "profile": "5П",
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-5p-st3-6m.webp",
+      "values": {
+        "Высота": "50 мм",
+        "Ширина полки": "32 мм",
+        "Толщина стенки": "4,4 мм",
+        "Толщина полки": "7 мм",
+        "Длина по каталогу": "6 м",
+        "Теоретическая масса": "4,84 кг/м"
+      },
+      "labels": [
+        {
+          "key": "title",
+          "text": "Швеллер 5П"
         },
-        "shiftLeft": 106
-      }
+        {
+          "key": "flangeWidth",
+          "text": "32 мм"
+        },
+        {
+          "key": "webThickness",
+          "text": "4,4 мм"
+        },
+        {
+          "key": "flangeThickness",
+          "text": "7 мм"
+        },
+        {
+          "key": "height",
+          "text": "50 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "4,84 кг/м"
+        }
+      ],
+      "sourceReference": "imports/shveller-image-template/reference-5.jpg",
+      "changedLabels": [
+        "title",
+        "length"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "Швеллер 5П",
+          "size": 84,
+          "weight": 700,
+          "left": 136,
+          "top": 127,
+          "width": 489,
+          "height": 78
+        },
+        {
+          "key": "length",
+          "text": "6 м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1568,
+          "width": 67,
+          "height": 33
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/shveller/measurement/shveller-5p-st3-6m.webp",
+      "width": 2400,
+      "height": 1800,
+      "format": "lossless WebP",
+      "bytes": 1090182,
+      "sha256": "7373ad0005ff14a018f94e5d2e3be7f910a32735608f36aec238be771ea26873"
+    },
+    {
+      "id": "shveller-6-5p-st3-6m",
+      "profile": "6,5П",
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-6-5p-st3-6m.webp",
+      "values": {
+        "Высота": "65 мм",
+        "Ширина полки": "36 мм",
+        "Толщина стенки": "4,4 мм",
+        "Толщина полки": "7,2 мм",
+        "Длина по каталогу": "6 м",
+        "Теоретическая масса": "5,9 кг/м"
+      },
+      "labels": [
+        {
+          "key": "title",
+          "text": "Швеллер 6,5П"
+        },
+        {
+          "key": "flangeWidth",
+          "text": "36 мм"
+        },
+        {
+          "key": "webThickness",
+          "text": "4,4 мм"
+        },
+        {
+          "key": "flangeThickness",
+          "text": "7,2 мм"
+        },
+        {
+          "key": "height",
+          "text": "65 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "5,9 кг/м"
+        }
+      ],
+      "sourceReference": "imports/shveller-image-template/reference-5.jpg",
+      "changedLabels": [
+        "title",
+        "flangeWidth",
+        "flangeThickness",
+        "height",
+        "length",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "Швеллер 6,5П",
+          "size": 84,
+          "weight": 700,
+          "left": 136,
+          "top": 127,
+          "width": 559,
+          "height": 79
+        },
+        {
+          "key": "flangeWidth",
+          "text": "36 мм",
+          "size": 56,
+          "center": 814,
+          "top": 884,
+          "left": 736,
+          "width": 156,
+          "height": 44
+        },
+        {
+          "key": "flangeThickness",
+          "text": "7,2 мм",
+          "size": 56,
+          "left": 1980,
+          "top": 1010,
+          "halo": true,
+          "width": 157,
+          "height": 50
+        },
+        {
+          "key": "height",
+          "text": "65 мм",
+          "size": 56,
+          "center": 1390,
+          "top": 1431,
+          "left": 1313,
+          "width": 155,
+          "height": 43
+        },
+        {
+          "key": "length",
+          "text": "6 м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1568,
+          "width": 67,
+          "height": 33
+        },
+        {
+          "key": "mass",
+          "text": "5,9 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1634,
+          "width": 162,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/shveller/measurement/shveller-6-5p-st3-6m.webp",
+      "width": 2400,
+      "height": 1800,
+      "format": "lossless WebP",
+      "bytes": 1101898,
+      "sha256": "2b21b49bf545c44101aa44047fb977fb2e6524f955ef4a73625d924e35d80080"
+    },
+    {
+      "id": "shveller-8p-st3-6m",
+      "profile": "8П",
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-8p-st3-6m.webp",
+      "values": {
+        "Высота": "80 мм",
+        "Ширина полки": "40 мм",
+        "Толщина стенки": "4,5 мм",
+        "Толщина полки": "7,4 мм",
+        "Длина по каталогу": "6 м",
+        "Теоретическая масса": "7,05 кг/м"
+      },
+      "labels": [
+        {
+          "key": "title",
+          "text": "Швеллер 8П"
+        },
+        {
+          "key": "flangeWidth",
+          "text": "40 мм"
+        },
+        {
+          "key": "webThickness",
+          "text": "4,5 мм"
+        },
+        {
+          "key": "flangeThickness",
+          "text": "7,4 мм"
+        },
+        {
+          "key": "height",
+          "text": "80 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "7,05 кг/м"
+        }
+      ],
+      "sourceReference": "imports/shveller-image-template/reference-5.jpg",
+      "changedLabels": [
+        "title",
+        "flangeWidth",
+        "webThickness",
+        "flangeThickness",
+        "height",
+        "length",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "Швеллер 8П",
+          "size": 84,
+          "weight": 700,
+          "left": 136,
+          "top": 127,
+          "width": 491,
+          "height": 79
+        },
+        {
+          "key": "flangeWidth",
+          "text": "40 мм",
+          "size": 56,
+          "center": 814,
+          "top": 884,
+          "left": 734,
+          "width": 160,
+          "height": 43
+        },
+        {
+          "key": "webThickness",
+          "text": "4,5 мм",
+          "size": 56,
+          "left": 1172,
+          "top": 1245,
+          "width": 168,
+          "height": 49
+        },
+        {
+          "key": "flangeThickness",
+          "text": "7,4 мм",
+          "size": 56,
+          "left": 1980,
+          "top": 1010,
+          "halo": true,
+          "width": 160,
+          "height": 49
+        },
+        {
+          "key": "height",
+          "text": "80 мм",
+          "size": 56,
+          "center": 1390,
+          "top": 1431,
+          "left": 1312,
+          "width": 157,
+          "height": 44
+        },
+        {
+          "key": "length",
+          "text": "6 м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1568,
+          "width": 67,
+          "height": 33
+        },
+        {
+          "key": "mass",
+          "text": "7,05 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1634,
+          "width": 184,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/shveller/measurement/shveller-8p-st3-6m.webp",
+      "width": 2400,
+      "height": 1800,
+      "format": "lossless WebP",
+      "bytes": 1102698,
+      "sha256": "94fb951c6cc7b65b5ef5f918ad543800e03e51beb8092b886d6cc2757f498c16"
+    },
+    {
+      "id": "shveller-10p-s255-6m",
+      "profile": "10П",
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-10p-s255-6m.webp",
+      "values": {
+        "Высота": "100 мм",
+        "Ширина полки": "46 мм",
+        "Толщина стенки": "4,5 мм",
+        "Толщина полки": "7,6 мм",
+        "Длина по каталогу": "6 м",
+        "Теоретическая масса": "8,59 кг/м"
+      },
+      "labels": [
+        {
+          "key": "title",
+          "text": "Швеллер 10П"
+        },
+        {
+          "key": "flangeWidth",
+          "text": "46 мм"
+        },
+        {
+          "key": "webThickness",
+          "text": "4,5 мм"
+        },
+        {
+          "key": "flangeThickness",
+          "text": "7,6 мм"
+        },
+        {
+          "key": "height",
+          "text": "100 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "8,59 кг/м"
+        }
+      ],
+      "sourceReference": "imports/shveller-image-template/reference-5.jpg",
+      "changedLabels": [
+        "title",
+        "flangeWidth",
+        "webThickness",
+        "flangeThickness",
+        "height",
+        "length",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "Швеллер 10П",
+          "size": 84,
+          "weight": 700,
+          "left": 136,
+          "top": 127,
+          "width": 527,
+          "height": 79
+        },
+        {
+          "key": "flangeWidth",
+          "text": "46 мм",
+          "size": 56,
+          "center": 814,
+          "top": 884,
+          "left": 735,
+          "width": 159,
+          "height": 43
+        },
+        {
+          "key": "webThickness",
+          "text": "4,5 мм",
+          "size": 56,
+          "left": 1172,
+          "top": 1245,
+          "width": 168,
+          "height": 49
+        },
+        {
+          "key": "flangeThickness",
+          "text": "7,6 мм",
+          "size": 56,
+          "left": 1980,
+          "top": 1010,
+          "halo": true,
+          "width": 157,
+          "height": 50
+        },
+        {
+          "key": "height",
+          "text": "100 мм",
+          "size": 56,
+          "center": 1390,
+          "top": 1431,
+          "left": 1301,
+          "width": 179,
+          "height": 43
+        },
+        {
+          "key": "length",
+          "text": "6 м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1568,
+          "width": 67,
+          "height": 33
+        },
+        {
+          "key": "mass",
+          "text": "8,59 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1634,
+          "width": 191,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/shveller/measurement/shveller-10p-s255-6m.webp",
+      "width": 2400,
+      "height": 1800,
+      "format": "lossless WebP",
+      "bytes": 1103402,
+      "sha256": "4ff39568a15151b7b3cb93e996a5cd5362f554607e5ecec20ba61873476ffe38"
+    },
+    {
+      "id": "shveller-12p-s255-6m",
+      "profile": "12П",
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-12p-s255-6m.webp",
+      "values": {
+        "Высота": "120 мм",
+        "Ширина полки": "52 мм",
+        "Толщина стенки": "4,8 мм",
+        "Толщина полки": "7,8 мм",
+        "Длина по каталогу": "6 м",
+        "Теоретическая масса": "10,4 кг/м"
+      },
+      "labels": [
+        {
+          "key": "title",
+          "text": "Швеллер 12П"
+        },
+        {
+          "key": "flangeWidth",
+          "text": "52 мм"
+        },
+        {
+          "key": "webThickness",
+          "text": "4,8 мм"
+        },
+        {
+          "key": "flangeThickness",
+          "text": "7,8 мм"
+        },
+        {
+          "key": "height",
+          "text": "120 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "10,4 кг/м"
+        }
+      ],
+      "sourceReference": "imports/shveller-image-template/reference-5.jpg",
+      "changedLabels": [
+        "title",
+        "flangeWidth",
+        "webThickness",
+        "flangeThickness",
+        "height",
+        "length",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "Швеллер 12П",
+          "size": 84,
+          "weight": 700,
+          "left": 136,
+          "top": 127,
+          "width": 522,
+          "height": 79
+        },
+        {
+          "key": "flangeWidth",
+          "text": "52 мм",
+          "size": 56,
+          "center": 814,
+          "top": 884,
+          "left": 738,
+          "width": 153,
+          "height": 43
+        },
+        {
+          "key": "webThickness",
+          "text": "4,8 мм",
+          "size": 56,
+          "left": 1172,
+          "top": 1245,
+          "width": 169,
+          "height": 51
+        },
+        {
+          "key": "flangeThickness",
+          "text": "7,8 мм",
+          "size": 56,
+          "left": 1980,
+          "top": 1010,
+          "halo": true,
+          "width": 158,
+          "height": 51
+        },
+        {
+          "key": "height",
+          "text": "120 мм",
+          "size": 56,
+          "center": 1390,
+          "top": 1431,
+          "left": 1302,
+          "width": 176,
+          "height": 43
+        },
+        {
+          "key": "length",
+          "text": "6 м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1568,
+          "width": 67,
+          "height": 33
+        },
+        {
+          "key": "mass",
+          "text": "10,4 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1634,
+          "width": 185,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/shveller/measurement/shveller-12p-s255-6m.webp",
+      "width": 2400,
+      "height": 1800,
+      "format": "lossless WebP",
+      "bytes": 1102840,
+      "sha256": "64d072e88380fd20861cce070c97e6a739c185351b3a1c4fb16bbdd429eecd8c"
+    },
+    {
+      "id": "shveller-14p-s255-6m",
+      "profile": "14П",
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-14p-s255-6m.webp",
+      "values": {
+        "Высота": "140 мм",
+        "Ширина полки": "58 мм",
+        "Толщина стенки": "4,9 мм",
+        "Толщина полки": "8,1 мм",
+        "Длина по каталогу": "6 м",
+        "Теоретическая масса": "12,3 кг/м"
+      },
+      "labels": [
+        {
+          "key": "title",
+          "text": "Швеллер 14П"
+        },
+        {
+          "key": "flangeWidth",
+          "text": "58 мм"
+        },
+        {
+          "key": "webThickness",
+          "text": "4,9 мм"
+        },
+        {
+          "key": "flangeThickness",
+          "text": "8,1 мм"
+        },
+        {
+          "key": "height",
+          "text": "140 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "12,3 кг/м"
+        }
+      ],
+      "sourceReference": "imports/shveller-image-template/reference-5.jpg",
+      "changedLabels": [
+        "title",
+        "flangeWidth",
+        "webThickness",
+        "flangeThickness",
+        "height",
+        "length",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "Швеллер 14П",
+          "size": 84,
+          "weight": 700,
+          "left": 136,
+          "top": 127,
+          "width": 527,
+          "height": 78
+        },
+        {
+          "key": "flangeWidth",
+          "text": "58 мм",
+          "size": 56,
+          "center": 814,
+          "top": 884,
+          "left": 737,
+          "width": 155,
+          "height": 44
+        },
+        {
+          "key": "webThickness",
+          "text": "4,9 мм",
+          "size": 56,
+          "left": 1172,
+          "top": 1245,
+          "width": 169,
+          "height": 50
+        },
+        {
+          "key": "flangeThickness",
+          "text": "8,1 мм",
+          "size": 56,
+          "left": 1980,
+          "top": 1010,
+          "halo": true,
+          "width": 148,
+          "height": 51
+        },
+        {
+          "key": "height",
+          "text": "140 мм",
+          "size": 56,
+          "center": 1390,
+          "top": 1431,
+          "left": 1300,
+          "width": 180,
+          "height": 43
+        },
+        {
+          "key": "length",
+          "text": "6 м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1568,
+          "width": 67,
+          "height": 33
+        },
+        {
+          "key": "mass",
+          "text": "12,3 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1634,
+          "width": 181,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/shveller/measurement/shveller-14p-s255-6m.webp",
+      "width": 2400,
+      "height": 1800,
+      "format": "lossless WebP",
+      "bytes": 1102008,
+      "sha256": "2fb091e178b9337dc24b639f4f5f91d344d103448c46cbd5dee910b3a94a57d4"
+    },
+    {
+      "id": "shveller-16p-s255-6m",
+      "profile": "16П",
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-16p-s255-6m.webp",
+      "values": {
+        "Высота": "160 мм",
+        "Ширина полки": "64 мм",
+        "Толщина стенки": "5 мм",
+        "Толщина полки": "8,4 мм",
+        "Длина по каталогу": "6 м",
+        "Теоретическая масса": "14,2 кг/м"
+      },
+      "labels": [
+        {
+          "key": "title",
+          "text": "Швеллер 16П"
+        },
+        {
+          "key": "flangeWidth",
+          "text": "64 мм"
+        },
+        {
+          "key": "webThickness",
+          "text": "5 мм"
+        },
+        {
+          "key": "flangeThickness",
+          "text": "8,4 мм"
+        },
+        {
+          "key": "height",
+          "text": "160 мм"
+        },
+        {
+          "key": "length",
+          "text": "6 м"
+        },
+        {
+          "key": "mass",
+          "text": "14,2 кг/м"
+        }
+      ],
+      "sourceReference": "imports/shveller-image-template/reference-5.jpg",
+      "changedLabels": [
+        "title",
+        "flangeWidth",
+        "webThickness",
+        "flangeThickness",
+        "height",
+        "length",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "Швеллер 16П",
+          "size": 84,
+          "weight": 700,
+          "left": 136,
+          "top": 127,
+          "width": 524,
+          "height": 79
+        },
+        {
+          "key": "flangeWidth",
+          "text": "64 мм",
+          "size": 56,
+          "center": 814,
+          "top": 884,
+          "left": 735,
+          "width": 158,
+          "height": 43
+        },
+        {
+          "key": "webThickness",
+          "text": "5 мм",
+          "size": 56,
+          "left": 1172,
+          "top": 1245,
+          "width": 122,
+          "height": 42
+        },
+        {
+          "key": "flangeThickness",
+          "text": "8,4 мм",
+          "size": 56,
+          "left": 1980,
+          "top": 1010,
+          "halo": true,
+          "width": 168,
+          "height": 51
+        },
+        {
+          "key": "height",
+          "text": "160 мм",
+          "size": 56,
+          "center": 1390,
+          "top": 1431,
+          "left": 1301,
+          "width": 178,
+          "height": 43
+        },
+        {
+          "key": "length",
+          "text": "6 м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1568,
+          "width": 67,
+          "height": 33
+        },
+        {
+          "key": "mass",
+          "text": "14,2 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1634,
+          "width": 183,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/shveller/measurement/shveller-16p-s255-6m.webp",
+      "width": 2400,
+      "height": 1800,
+      "format": "lossless WebP",
+      "bytes": 1101666,
+      "sha256": "777d630d9b2efd5eb75a79edcf5e5537a276025909d3135ad775e42442a9fe48"
+    },
+    {
+      "id": "shveller-8u-s255-12m",
+      "profile": "8У",
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-8u-s255-12m.webp",
+      "values": {
+        "Высота": "80 мм",
+        "Ширина полки": "40 мм",
+        "Толщина стенки": "4,5 мм",
+        "Толщина полки": "7,4 мм",
+        "Длина по каталогу": "12 м",
+        "Теоретическая масса": "7,05 кг/м"
+      },
+      "labels": [
+        {
+          "key": "title",
+          "text": "Швеллер 8У"
+        },
+        {
+          "key": "flangeWidth",
+          "text": "40 мм"
+        },
+        {
+          "key": "webThickness",
+          "text": "4,5 мм"
+        },
+        {
+          "key": "flangeThickness",
+          "text": "7,4 мм"
+        },
+        {
+          "key": "height",
+          "text": "80 мм"
+        },
+        {
+          "key": "length",
+          "text": "12 м"
+        },
+        {
+          "key": "mass",
+          "text": "7,05 кг/м"
+        }
+      ],
+      "sourceReference": "imports/shveller-image-template/reference-5.jpg",
+      "changedLabels": [
+        "title",
+        "flangeWidth",
+        "webThickness",
+        "flangeThickness",
+        "height",
+        "length",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "Швеллер 8У",
+          "size": 84,
+          "weight": 700,
+          "left": 136,
+          "top": 127,
+          "width": 490,
+          "height": 79
+        },
+        {
+          "key": "flangeWidth",
+          "text": "40 мм",
+          "size": 56,
+          "center": 814,
+          "top": 884,
+          "left": 734,
+          "width": 160,
+          "height": 43
+        },
+        {
+          "key": "webThickness",
+          "text": "4,5 мм",
+          "size": 56,
+          "left": 1172,
+          "top": 1245,
+          "width": 168,
+          "height": 49
+        },
+        {
+          "key": "flangeThickness",
+          "text": "7,4 мм",
+          "size": 56,
+          "left": 1980,
+          "top": 1010,
+          "halo": true,
+          "width": 160,
+          "height": 49
+        },
+        {
+          "key": "height",
+          "text": "80 мм",
+          "size": 56,
+          "center": 1390,
+          "top": 1431,
+          "left": 1312,
+          "width": 157,
+          "height": 44
+        },
+        {
+          "key": "length",
+          "text": "12 м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1568,
+          "width": 85,
+          "height": 32
+        },
+        {
+          "key": "mass",
+          "text": "7,05 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1634,
+          "width": 184,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/shveller/measurement/shveller-8u-s255-12m.webp",
+      "width": 2400,
+      "height": 1800,
+      "format": "lossless WebP",
+      "bytes": 1101588,
+      "sha256": "c46ee7775830139f7062635d664977d1c06799773c08b97651c3e4b961295914"
+    },
+    {
+      "id": "shveller-10u-st3-12m",
+      "profile": "10У",
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-10u-st3-12m.webp",
+      "values": {
+        "Высота": "100 мм",
+        "Ширина полки": "46 мм",
+        "Толщина стенки": "4,5 мм",
+        "Толщина полки": "7,6 мм",
+        "Длина по каталогу": "12 м",
+        "Теоретическая масса": "8,59 кг/м"
+      },
+      "labels": [
+        {
+          "key": "title",
+          "text": "Швеллер 10У"
+        },
+        {
+          "key": "flangeWidth",
+          "text": "46 мм"
+        },
+        {
+          "key": "webThickness",
+          "text": "4,5 мм"
+        },
+        {
+          "key": "flangeThickness",
+          "text": "7,6 мм"
+        },
+        {
+          "key": "height",
+          "text": "100 мм"
+        },
+        {
+          "key": "length",
+          "text": "12 м"
+        },
+        {
+          "key": "mass",
+          "text": "8,59 кг/м"
+        }
+      ],
+      "sourceReference": "imports/shveller-image-template/reference-5.jpg",
+      "changedLabels": [
+        "title",
+        "flangeWidth",
+        "webThickness",
+        "flangeThickness",
+        "height",
+        "length",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "Швеллер 10У",
+          "size": 84,
+          "weight": 700,
+          "left": 136,
+          "top": 127,
+          "width": 522,
+          "height": 79
+        },
+        {
+          "key": "flangeWidth",
+          "text": "46 мм",
+          "size": 56,
+          "center": 814,
+          "top": 884,
+          "left": 735,
+          "width": 159,
+          "height": 43
+        },
+        {
+          "key": "webThickness",
+          "text": "4,5 мм",
+          "size": 56,
+          "left": 1172,
+          "top": 1245,
+          "width": 168,
+          "height": 49
+        },
+        {
+          "key": "flangeThickness",
+          "text": "7,6 мм",
+          "size": 56,
+          "left": 1980,
+          "top": 1010,
+          "halo": true,
+          "width": 157,
+          "height": 50
+        },
+        {
+          "key": "height",
+          "text": "100 мм",
+          "size": 56,
+          "center": 1390,
+          "top": 1431,
+          "left": 1301,
+          "width": 179,
+          "height": 43
+        },
+        {
+          "key": "length",
+          "text": "12 м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1568,
+          "width": 85,
+          "height": 32
+        },
+        {
+          "key": "mass",
+          "text": "8,59 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1634,
+          "width": 191,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/shveller/measurement/shveller-10u-st3-12m.webp",
+      "width": 2400,
+      "height": 1800,
+      "format": "lossless WebP",
+      "bytes": 1102812,
+      "sha256": "e574366599e75b24e6e7f7d975cb4d58e48a6432c955ddf526468710eb2f048a"
+    },
+    {
+      "id": "shveller-12u-st3-12m",
+      "profile": "12У",
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-12u-st3-12m.webp",
+      "values": {
+        "Высота": "120 мм",
+        "Ширина полки": "52 мм",
+        "Толщина стенки": "4,8 мм",
+        "Толщина полки": "7,8 мм",
+        "Длина по каталогу": "12 м",
+        "Теоретическая масса": "10,4 кг/м"
+      },
+      "labels": [
+        {
+          "key": "title",
+          "text": "Швеллер 12У"
+        },
+        {
+          "key": "flangeWidth",
+          "text": "52 мм"
+        },
+        {
+          "key": "webThickness",
+          "text": "4,8 мм"
+        },
+        {
+          "key": "flangeThickness",
+          "text": "7,8 мм"
+        },
+        {
+          "key": "height",
+          "text": "120 мм"
+        },
+        {
+          "key": "length",
+          "text": "12 м"
+        },
+        {
+          "key": "mass",
+          "text": "10,4 кг/м"
+        }
+      ],
+      "sourceReference": "imports/shveller-image-template/reference-5.jpg",
+      "changedLabels": [
+        "title",
+        "flangeWidth",
+        "webThickness",
+        "flangeThickness",
+        "height",
+        "length",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "Швеллер 12У",
+          "size": 84,
+          "weight": 700,
+          "left": 136,
+          "top": 127,
+          "width": 521,
+          "height": 79
+        },
+        {
+          "key": "flangeWidth",
+          "text": "52 мм",
+          "size": 56,
+          "center": 814,
+          "top": 884,
+          "left": 738,
+          "width": 153,
+          "height": 43
+        },
+        {
+          "key": "webThickness",
+          "text": "4,8 мм",
+          "size": 56,
+          "left": 1172,
+          "top": 1245,
+          "width": 169,
+          "height": 51
+        },
+        {
+          "key": "flangeThickness",
+          "text": "7,8 мм",
+          "size": 56,
+          "left": 1980,
+          "top": 1010,
+          "halo": true,
+          "width": 158,
+          "height": 51
+        },
+        {
+          "key": "height",
+          "text": "120 мм",
+          "size": 56,
+          "center": 1390,
+          "top": 1431,
+          "left": 1302,
+          "width": 176,
+          "height": 43
+        },
+        {
+          "key": "length",
+          "text": "12 м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1568,
+          "width": 85,
+          "height": 32
+        },
+        {
+          "key": "mass",
+          "text": "10,4 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1634,
+          "width": 185,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/shveller/measurement/shveller-12u-st3-12m.webp",
+      "width": 2400,
+      "height": 1800,
+      "format": "lossless WebP",
+      "bytes": 1102950,
+      "sha256": "557b05ebcd61fd7b1b5006def64209e432d607390fecbe141042ca2e1a1821c2"
+    },
+    {
+      "id": "shveller-14u-st3-12m",
+      "profile": "14У",
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-14u-st3-12m.webp",
+      "values": {
+        "Высота": "140 мм",
+        "Ширина полки": "58 мм",
+        "Толщина стенки": "4,9 мм",
+        "Толщина полки": "8,1 мм",
+        "Длина по каталогу": "12 м",
+        "Теоретическая масса": "12,3 кг/м"
+      },
+      "labels": [
+        {
+          "key": "title",
+          "text": "Швеллер 14У"
+        },
+        {
+          "key": "flangeWidth",
+          "text": "58 мм"
+        },
+        {
+          "key": "webThickness",
+          "text": "4,9 мм"
+        },
+        {
+          "key": "flangeThickness",
+          "text": "8,1 мм"
+        },
+        {
+          "key": "height",
+          "text": "140 мм"
+        },
+        {
+          "key": "length",
+          "text": "12 м"
+        },
+        {
+          "key": "mass",
+          "text": "12,3 кг/м"
+        }
+      ],
+      "sourceReference": "imports/shveller-image-template/reference-5.jpg",
+      "changedLabels": [
+        "title",
+        "flangeWidth",
+        "webThickness",
+        "flangeThickness",
+        "height",
+        "length",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "Швеллер 14У",
+          "size": 84,
+          "weight": 700,
+          "left": 136,
+          "top": 127,
+          "width": 526,
+          "height": 78
+        },
+        {
+          "key": "flangeWidth",
+          "text": "58 мм",
+          "size": 56,
+          "center": 814,
+          "top": 884,
+          "left": 737,
+          "width": 155,
+          "height": 44
+        },
+        {
+          "key": "webThickness",
+          "text": "4,9 мм",
+          "size": 56,
+          "left": 1172,
+          "top": 1245,
+          "width": 169,
+          "height": 50
+        },
+        {
+          "key": "flangeThickness",
+          "text": "8,1 мм",
+          "size": 56,
+          "left": 1980,
+          "top": 1010,
+          "halo": true,
+          "width": 148,
+          "height": 51
+        },
+        {
+          "key": "height",
+          "text": "140 мм",
+          "size": 56,
+          "center": 1390,
+          "top": 1431,
+          "left": 1300,
+          "width": 180,
+          "height": 43
+        },
+        {
+          "key": "length",
+          "text": "12 м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1568,
+          "width": 85,
+          "height": 32
+        },
+        {
+          "key": "mass",
+          "text": "12,3 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1634,
+          "width": 181,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/shveller/measurement/shveller-14u-st3-12m.webp",
+      "width": 2400,
+      "height": 1800,
+      "format": "lossless WebP",
+      "bytes": 1101870,
+      "sha256": "7fa3a7228d9dfa32c6bdb80a32d54895d852bc7434ecfe400f385c13b569ebf5"
+    },
+    {
+      "id": "shveller-16u-st3-12m",
+      "profile": "16У",
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-16u-st3-12m.webp",
+      "values": {
+        "Высота": "160 мм",
+        "Ширина полки": "64 мм",
+        "Толщина стенки": "5 мм",
+        "Толщина полки": "8,4 мм",
+        "Длина по каталогу": "12 м",
+        "Теоретическая масса": "14,2 кг/м"
+      },
+      "labels": [
+        {
+          "key": "title",
+          "text": "Швеллер 16У"
+        },
+        {
+          "key": "flangeWidth",
+          "text": "64 мм"
+        },
+        {
+          "key": "webThickness",
+          "text": "5 мм"
+        },
+        {
+          "key": "flangeThickness",
+          "text": "8,4 мм"
+        },
+        {
+          "key": "height",
+          "text": "160 мм"
+        },
+        {
+          "key": "length",
+          "text": "12 м"
+        },
+        {
+          "key": "mass",
+          "text": "14,2 кг/м"
+        }
+      ],
+      "sourceReference": "imports/shveller-image-template/reference-5.jpg",
+      "changedLabels": [
+        "title",
+        "flangeWidth",
+        "webThickness",
+        "flangeThickness",
+        "height",
+        "length",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "Швеллер 16У",
+          "size": 84,
+          "weight": 700,
+          "left": 136,
+          "top": 127,
+          "width": 523,
+          "height": 79
+        },
+        {
+          "key": "flangeWidth",
+          "text": "64 мм",
+          "size": 56,
+          "center": 814,
+          "top": 884,
+          "left": 735,
+          "width": 158,
+          "height": 43
+        },
+        {
+          "key": "webThickness",
+          "text": "5 мм",
+          "size": 56,
+          "left": 1172,
+          "top": 1245,
+          "width": 122,
+          "height": 42
+        },
+        {
+          "key": "flangeThickness",
+          "text": "8,4 мм",
+          "size": 56,
+          "left": 1980,
+          "top": 1010,
+          "halo": true,
+          "width": 168,
+          "height": 51
+        },
+        {
+          "key": "height",
+          "text": "160 мм",
+          "size": 56,
+          "center": 1390,
+          "top": 1431,
+          "left": 1301,
+          "width": 178,
+          "height": 43
+        },
+        {
+          "key": "length",
+          "text": "12 м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1568,
+          "width": 85,
+          "height": 32
+        },
+        {
+          "key": "mass",
+          "text": "14,2 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1634,
+          "width": 183,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/shveller/measurement/shveller-16u-st3-12m.webp",
+      "width": 2400,
+      "height": 1800,
+      "format": "lossless WebP",
+      "bytes": 1102060,
+      "sha256": "c70531ec30472b8a02cdb168614c090a75e920b40785d64c29279c3bb5583c69"
+    },
+    {
+      "id": "shveller-20u-s255-12m",
+      "profile": "20У",
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-20u-s255-12m.webp",
+      "values": {
+        "Высота": "200 мм",
+        "Ширина полки": "76 мм",
+        "Толщина стенки": "5,2 мм",
+        "Толщина полки": "9 мм",
+        "Длина по каталогу": "12 м",
+        "Теоретическая масса": "18,4 кг/м"
+      },
+      "labels": [
+        {
+          "key": "title",
+          "text": "Швеллер 20У"
+        },
+        {
+          "key": "flangeWidth",
+          "text": "76 мм"
+        },
+        {
+          "key": "webThickness",
+          "text": "5,2 мм"
+        },
+        {
+          "key": "flangeThickness",
+          "text": "9 мм"
+        },
+        {
+          "key": "height",
+          "text": "200 мм"
+        },
+        {
+          "key": "length",
+          "text": "12 м"
+        },
+        {
+          "key": "mass",
+          "text": "18,4 кг/м"
+        }
+      ],
+      "sourceReference": "imports/shveller-image-template/reference-5.jpg",
+      "changedLabels": [
+        "title",
+        "flangeWidth",
+        "webThickness",
+        "flangeThickness",
+        "height",
+        "length",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "Швеллер 20У",
+          "size": 84,
+          "weight": 700,
+          "left": 136,
+          "top": 127,
+          "width": 539,
+          "height": 79
+        },
+        {
+          "key": "flangeWidth",
+          "text": "76 мм",
+          "size": 56,
+          "center": 814,
+          "top": 884,
+          "left": 738,
+          "width": 152,
+          "height": 43
+        },
+        {
+          "key": "webThickness",
+          "text": "5,2 мм",
+          "size": 56,
+          "left": 1172,
+          "top": 1245,
+          "width": 165,
+          "height": 50
+        },
+        {
+          "key": "flangeThickness",
+          "text": "9 мм",
+          "size": 56,
+          "left": 1980,
+          "top": 1010,
+          "halo": true,
+          "width": 123,
+          "height": 43
+        },
+        {
+          "key": "height",
+          "text": "200 мм",
+          "size": 56,
+          "center": 1390,
+          "top": 1431,
+          "left": 1296,
+          "width": 189,
+          "height": 43
+        },
+        {
+          "key": "length",
+          "text": "12 м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1568,
+          "width": 85,
+          "height": 32
+        },
+        {
+          "key": "mass",
+          "text": "18,4 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1634,
+          "width": 184,
+          "height": 40
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/shveller/measurement/shveller-20u-s255-12m.webp",
+      "width": 2400,
+      "height": 1800,
+      "format": "lossless WebP",
+      "bytes": 1105532,
+      "sha256": "173a47eb08fbc72b27400f0a4ee2f22ee20812caba8bb95de6089e85120201f5"
+    },
+    {
+      "id": "shveller-24u-s255-12m",
+      "profile": "24У",
+      "imageUrl": "/images/catalog/shveller/measurement/shveller-24u-s255-12m.webp",
+      "values": {
+        "Высота": "240 мм",
+        "Ширина полки": "90 мм",
+        "Толщина стенки": "5,6 мм",
+        "Толщина полки": "10 мм",
+        "Длина по каталогу": "12 м",
+        "Теоретическая масса": "24 кг/м"
+      },
+      "labels": [
+        {
+          "key": "title",
+          "text": "Швеллер 24У"
+        },
+        {
+          "key": "flangeWidth",
+          "text": "90 мм"
+        },
+        {
+          "key": "webThickness",
+          "text": "5,6 мм"
+        },
+        {
+          "key": "flangeThickness",
+          "text": "10 мм"
+        },
+        {
+          "key": "height",
+          "text": "240 мм"
+        },
+        {
+          "key": "length",
+          "text": "12 м"
+        },
+        {
+          "key": "mass",
+          "text": "24 кг/м"
+        }
+      ],
+      "sourceReference": "imports/shveller-image-template/reference-5.jpg",
+      "changedLabels": [
+        "title",
+        "flangeWidth",
+        "webThickness",
+        "flangeThickness",
+        "height",
+        "length",
+        "mass"
+      ],
+      "placements": [
+        {
+          "key": "title",
+          "text": "Швеллер 24У",
+          "size": 84,
+          "weight": 700,
+          "left": 136,
+          "top": 127,
+          "width": 542,
+          "height": 79
+        },
+        {
+          "key": "flangeWidth",
+          "text": "90 мм",
+          "size": 56,
+          "center": 814,
+          "top": 884,
+          "left": 736,
+          "width": 157,
+          "height": 43
+        },
+        {
+          "key": "webThickness",
+          "text": "5,6 мм",
+          "size": 56,
+          "left": 1172,
+          "top": 1245,
+          "width": 165,
+          "height": 50
+        },
+        {
+          "key": "flangeThickness",
+          "text": "10 мм",
+          "size": 56,
+          "left": 1980,
+          "top": 1010,
+          "halo": true,
+          "width": 145,
+          "height": 43
+        },
+        {
+          "key": "height",
+          "text": "240 мм",
+          "size": 56,
+          "center": 1390,
+          "top": 1431,
+          "left": 1295,
+          "width": 190,
+          "height": 43
+        },
+        {
+          "key": "length",
+          "text": "12 м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1568,
+          "width": 85,
+          "height": 32
+        },
+        {
+          "key": "mass",
+          "text": "24 кг/м",
+          "size": 44,
+          "weight": 750,
+          "left": 610,
+          "top": 1634,
+          "width": 153,
+          "height": 38
+        }
+      ],
+      "protectedPixelChanges": 0,
+      "output": "public/images/catalog/shveller/measurement/shveller-24u-s255-12m.webp",
+      "width": 2400,
+      "height": 1800,
+      "format": "lossless WebP",
+      "bytes": 1103566,
+      "sha256": "aa738fea4fd2677b40fab92ccff782aa5e0a07ee49e4b198dd2085e1125267e2"
     }
   ]
 }

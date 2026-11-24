@@ -75,7 +75,9 @@ function measurementName(product, subcategory) {
         unit(digits(fact(product, 'Диаметр проволоки'))[0], 'mm'), section(digits(packageSize), 'm'), filenameToken(fact(product, 'Покрытие')));
     }
     case 'catalog-cat-shveller':
-      return parts('shveller', `n${number(digits(product.name)[0])}`, filenameToken(product.channelSeries), length(product));
+      return product.channelSeries
+        ? parts('shveller', `${number(product.channelNumber)}${filenameToken(product.channelSeries)}`, grade(product), length(product))
+        : parts('shveller', `n${number(digits(product.name)[0])}`, length(product));
     case 'catalog-cat-ugolok':
       return parts('ugolok-stalnoy', section(digits(product.name), 'mm'), length(product));
     case 'catalog-cat-kvadrat':

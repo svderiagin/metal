@@ -5,7 +5,6 @@ import {fileURLToPath} from 'node:url';
 import {createHash} from 'node:crypto';
 import assert from 'node:assert/strict';
 import {readProjectData} from './project-data.mjs';
-import {numberSignRemovalTargets, removeImageNumberSign} from './image-number-sign.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 process.chdir(root);
@@ -27,7 +26,7 @@ const photo = await fs.readFile(photoPath);
 const referencePixels = await sharp(reference).removeAlpha().raw().toBuffer();
 const products = readProjectData('data/products/index.ts').productVariants
   .filter(product => product.categoryId === 'catalog-cat-shveller');
-assert.equal(products.length, 14, 'Review the channel collection before changing its image set');
+assert.ok(products.length, 'No channel offers to illustrate');
 for (const input of [reference, photo]) {
   const metadata = await sharp(input).metadata();
   assert.equal(metadata.width, WIDTH);
@@ -36,9 +35,9 @@ for (const input of [reference, photo]) {
 
 const write = process.argv.includes('--write');
 const previewIndex = process.argv.indexOf('--preview');
-const previewNumber = previewIndex >= 0 ? process.argv[previewIndex + 1]?.replace('.', ',') : undefined;
+const previewProfile = previewIndex >= 0 ? process.argv[previewIndex + 1]?.replace('.', ',') : undefined;
 assert.ok(!(write && previewIndex >= 0), 'Use --write for the whole family or --preview for one profile');
-assert.ok(previewIndex < 0 || previewNumber, '--preview requires a profile number');
+assert.ok(previewIndex < 0 || previewProfile, '--preview requires a profile or product ID');
 const previewDirectory = '.tmp/catalog-image-qa/shveller-preview';
 await fs.mkdir(previewDirectory, {recursive: true});
 
@@ -67,14 +66,18 @@ const referenceLabels = {
   title: 'Швеллер № 5', flangeWidth: '32 мм', webThickness: '4,4 мм',
   flangeThickness: '7 мм', height: '50 мм', length: '11,7 м', mass: '4,84 кг/м',
 };
+const slopeDiagram = {
+  bounds: {left: 120, top: 320, width: 313, height: 300},
+  image: svg('<path d="M142 344H408V370L179 388V540L408 558V584H142Z" fill="#d1d7db" stroke="#59636f" stroke-width="5" stroke-linejoin="round"/>'),
+};
 const patchLayers = Object.fromEntries(await Promise.all(Object.entries(patches).map(async ([key, rectangle]) => [key, {
   input: await sharp(photo).extract(rectangle).png().toBuffer(),
   left: rectangle.left, top: rectangle.top,
 }])));
 
 async function render(product) {
-  const number = product.name.match(/№\s*(\d+(?:[.,]\d+)?)/u)?.[1].replace('.', ',');
-  assert.ok(number, product.name);
+  const profile = product.specifications.find(item => item.name === 'Профиль')?.value;
+  assert.ok(profile, product.name);
   const expectedPath = catalogMeasurementUrl(product);
   assert.equal(product.imageUrls[0], expectedPath, 'Do not change product routing or image associations');
   const values = Object.fromEntries(['Высота', 'Ширина полки', 'Толщина стенки', 'Толщина полки', 'Длина по каталогу', 'Теоретическая масса'].map(name => {
@@ -84,7 +87,7 @@ async function render(product) {
   }));
   let image = reference;
   const labels = [
-    {key: 'title', text: `Швеллер № ${number}`, size: 84, weight: 700, left: 136, top: 127},
+    {key: 'title', text: `Швеллер ${profile}`, size: 84, weight: 700, left: 136, top: 127},
     {key: 'flangeWidth', text: values['Ширина полки'], size: 56, center: 814, top: 884},
     {key: 'webThickness', text: values['Толщина стенки'], size: 56, left: 1172, top: 1245},
     {key: 'flangeThickness', text: values['Толщина полки'], size: 56, left: 1980, top: 1010, halo: true},
@@ -120,47 +123,45 @@ async function render(product) {
     const lines = overall ? [{input: svg(`<g stroke="#59636F" stroke-width="4" fill="none">
       <path d="M920 1408V1467 M1860 1408V1467 M920 1451H${gapLeft} M${gapRight} 1451H1860"/>
       </g><g fill="#59636F"><path d="M920 1451l24 -4v8z M1860 1451l-24 -4v8z"/></g>`), left: 0, top: 0}] : [];
+    if (product.channelSeries === 'У') layers.push({input: slopeDiagram.image, left: 0, top: 0});
     image = await sharp(cleanReference).composite([...lines, ...layers]).png().toBuffer();
   }
-  const output = write ? `public${expectedPath}` : `${previewDirectory}/shveller-${number.replace(',', '-')}.webp`;
+  const output = write ? `public${expectedPath}` : `${previewDirectory}/${path.basename(expectedPath)}`;
   // Lossless source assets preserve the photograph; next/image delivers smaller variants.
-  const result = await removeImageNumberSign(sharp, await sharp(image).webp({lossless: true, effort: 6}).toBuffer(), product.id);
+  const result = await sharp(image).webp({lossless: true, effort: 5}).toBuffer();
   const mask = Buffer.alloc(WIDTH * HEIGHT);
-  for (const {key} of changedLabels) {
-    const box = patches[key];
+  const changedAreas = changedLabels.map(({key}) => patches[key]);
+  if (product.channelSeries === 'У') changedAreas.push(slopeDiagram.bounds);
+  for (const box of changedAreas) {
     for (let y = box.top; y < box.top + box.height; y++) mask.fill(1, y * WIDTH + box.left, y * WIDTH + box.left + box.width);
   }
   const renderedPixels = await sharp(result).removeAlpha().raw().toBuffer();
-  const correction = numberSignRemovalTargets.find(({id}) => id === product.id);
-  if (correction) {
-    const box = correction.box;
-    for (let y=box.top;y<box.top+box.height;y++) mask.fill(1,y*WIDTH+box.left,y*WIDTH+box.left+box.width);
-  }
   let protectedPixelChanges = 0;
   for (let p = 0; p < mask.length; p++) if (!mask[p] && (referencePixels[p * 3] !== renderedPixels[p * 3] || referencePixels[p * 3 + 1] !== renderedPixels[p * 3 + 1] || referencePixels[p * 3 + 2] !== renderedPixels[p * 3 + 2])) protectedPixelChanges++;
   assert.equal(protectedPixelChanges, 0, `${product.id}: pixels changed outside variable-label regions`);
   await fs.writeFile(output, result);
-  return {id: product.id, number, imageUrl: expectedPath, values, labels: labels.map(({key, text}) => ({key, text: key==='title'?text.replace(/№\s*/gu,''):text})),
-    sourceReference: referencePath, referenceUnmodified: changedLabels.length === 0 && !correction,
-    ...(correction?{headingCorrection:{removed:'№',box:correction.box,shiftLeft:correction.shiftLeft}}:{}),
+  return {id: product.id, profile, imageUrl: expectedPath, values, labels: labels.map(({key, text}) => ({key, text})),
+    sourceReference: referencePath,
     changedLabels: changedLabels.map(label => label.key), placements, protectedPixelChanges, output, width: WIDTH, height: HEIGHT,
     format: 'lossless WebP', bytes: result.length, sha256: createHash('sha256').update(result).digest('hex')};
 }
 
-const selected = previewNumber ? products.filter(product => product.name.match(/№\s*(\d+(?:[.,]\d+)?)/u)?.[1].replace('.', ',') === previewNumber) : products;
+const selected = previewProfile ? products.filter(product =>
+  product.id === previewProfile || String(product.channelNumber).replace('.', ',') === previewProfile
+    || product.specifications.some(item => item.name === 'Профиль' && item.value === previewProfile)) : products;
 assert.ok(selected.length, 'Unknown preview profile');
 const records = [];
 for (const product of selected) {
   const record = await render(product);
   records.push(record);
-  console.log(`${record.number}: ${record.width}x${record.height}; ${Math.round(record.bytes / 1024)} KiB; ${record.output}`);
+  console.log(`${record.profile}: ${record.width}x${record.height}; ${Math.round(record.bytes / 1024)} KiB; ${record.output}`);
 }
 if (write) {
-  assert.equal(records.length, 14, '--write must update the whole reviewed family');
+  assert.equal(records.length, products.length, '--write must update the whole family');
   await fs.writeFile('imports/shveller-image-template/rendered.json', JSON.stringify({
     renderer: 'scripts/render-shveller-images.mjs', reference: referencePath, cleanPhoto: photoPath,
     typography: {family: 'Inter', fontFile: fontPath, backend: 'fontconfig', values: {size: 44, weight: 750}}, patches,
     method: 'Original reference pixels with deterministic Inter labels from public product specifications; no generative editing.',
-    illustration: 'Shared family photograph; nominal dimensions are labels, not a scaled manufacturing drawing.', records,
+    illustration: 'Shared family photograph with ГОСТ 8240-97 dimensions. У includes a schematic of the sloping inner flange faces.', records,
   }, null, 2) + '\n');
 }

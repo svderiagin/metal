@@ -3,7 +3,7 @@
 import type {ReactNode} from "react";
 import {QuoteRequestProvider} from "@/components/forms/QuoteRequestContext";
 import {RequestQuoteSection} from "@/components/home/RequestQuoteSection";
-import {BeamVariantCatalog, isMeasuredRebarVariant, RebarVariantCatalog, VgpVariantCatalog, ElectroweldedPipeVariantCatalog, ProfilePipeVariantCatalog} from "./RebarVariantCatalog";
+import {BeamVariantCatalog, ChannelVariantCatalog, isMeasuredRebarVariant, RebarVariantCatalog, VgpVariantCatalog, ElectroweldedPipeVariantCatalog, ProfilePipeVariantCatalog} from "./RebarVariantCatalog";
 import {isVgpVariant, isMeasuredElectroweldedVariant} from "@/lib/pipeFamily";
 import {isProfilePipeVariant} from "@/lib/profilePipe";
 import {isProfileSheetVariant} from "@/lib/profileSheet";
@@ -42,6 +42,7 @@ function VariantCatalogContent({
     return <ProfilePipeVariantCatalog variants={variants.filter(isProfilePipeVariant)}/>;
   }
   if (categorySlug === "balka") return <BeamVariantCatalog variants={variants}/>;
+  if (categorySlug === "shveller") return <ChannelVariantCatalog variants={variants}/>;
   if (variants.length > 0 && variants.every(isVgpVariant)) return <VgpVariantCatalog variants={variants}/>;
   if (variants.length > 0 && variants.every(isMeasuredElectroweldedVariant)) return <ElectroweldedPipeVariantCatalog variants={variants}/>;
   const isA500c = categorySlug === "armatura" && variants.every(v => v.subcategoryId === "cat-arm-sub-1");

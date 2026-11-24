@@ -5,6 +5,7 @@ import {hasConfirmedProfilePipePrice, isProfilePipeVariant, isSquareProfilePipe,
 import {isProfileSheetVariant} from "./profileSheet";
 import {requiresWholeMetalMeshQuantity, requiresWholeCatalogQuantity} from "./variantPresentation";
 import {isDemonstrationProduct, requiresCatalogPriceQuote} from "./catalogOffer";
+import {hasLegacyChannelMeterQuantity} from "./channel";
 
 type PriceInput = {quantity: number; measurement?: Pick<CartMeasurement, "inputMode" | "meters" | "weightTons">; pieceOrder?: CartPieceOrder};
 
@@ -42,7 +43,8 @@ export function revalidateCartPrice(product: ProductVariant, item: PriceInput) {
       ? "Укажите целое количество рулонов."
       : "Укажите целое количество штук.";
   }
-  const legacyMeasuredTons = !item.measurement && product.unit === "ton" && !isDemonstrationProduct(product)
+  const legacyChannelMeters = !item.measurement && !item.pieceOrder && hasLegacyChannelMeterQuantity(product);
+  const legacyMeasuredTons = !item.measurement && !legacyChannelMeters && product.unit === "ton" && !isDemonstrationProduct(product)
     && product.weightPerMeterKg !== undefined && Number.isFinite(product.weightPerMeterKg) && product.weightPerMeterKg > 0;
   const wholeLength = requiresWholeLengthOrder(product);
   let estimatedTotal = priceRequiresQuote ? 0 : calculateLineTotal(item.quantity, product.price!);
@@ -52,8 +54,8 @@ export function revalidateCartPrice(product: ProductVariant, item: PriceInput) {
   // Older rebar clients sent only tonnes. Validate that original quantity
   // against the stock length just as we do for an explicitly measured line.
   const legacyBar = legacyMeasuredTons && wholeLength && product.categoryId === "cat-arm";
-  if (item.measurement || legacyBar) {
-    const inputMode = item.measurement ? item.measurement.inputMode : "ton";
+  if (item.measurement || legacyBar || legacyChannelMeters) {
+    const inputMode = item.measurement?.inputMode ?? (legacyChannelMeters ? "meter" : "ton");
     if (inputMode !== "meter" && inputMode !== "ton") {
       invalidReason = "Не удалось определить единицу измерения.";
     } else if (isDemonstrationProduct(product) || !product.weightPerMeterKg

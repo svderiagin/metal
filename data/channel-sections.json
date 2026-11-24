@@ -1,0 +1,23 @@
+{
+  "5П": {"height": 50, "width": 32, "web": 4.4, "flange": 7, "mass": 4.84},
+  "6,5П": {"height": 65, "width": 36, "web": 4.4, "flange": 7.2, "mass": 5.9},
+  "8П": {"height": 80, "width": 40, "web": 4.5, "flange": 7.4, "mass": 7.05},
+  "10П": {"height": 100, "width": 46, "web": 4.5, "flange": 7.6, "mass": 8.59},
+  "12П": {"height": 120, "width": 52, "web": 4.8, "flange": 7.8, "mass": 10.4},
+  "14П": {"height": 140, "width": 58, "web": 4.9, "flange": 8.1, "mass": 12.3},
+  "16П": {"height": 160, "width": 64, "web": 5, "flange": 8.4, "mass": 14.2},
+  "18П": {"height": 180, "width": 70, "web": 5.1, "flange": 8.7, "mass": 16.3},
+  "20П": {"height": 200, "width": 76, "web": 5.2, "flange": 9, "mass": 18.4},
+  "22П": {"height": 220, "width": 82, "web": 5.4, "flange": 9.5, "mass": 21},
+  "24П": {"height": 240, "width": 90, "web": 5.6, "flange": 10, "mass": 24},
+  "27П": {"height": 270, "width": 95, "web": 6, "flange": 10.5, "mass": 27.7},
+  "30П": {"height": 300, "width": 100, "web": 6.5, "flange": 11, "mass": 31.8},
+  "40П": {"height": 400, "width": 115, "web": 8, "flange": 13.5, "mass": 48.3},
+  "8У": {"height": 80, "width": 40, "web": 4.5, "flange": 7.4, "mass": 7.05},
+  "10У": {"height": 100, "width": 46, "web": 4.5, "flange": 7.6, "mass": 8.59},
+  "12У": {"height": 120, "width": 52, "web": 4.8, "flange": 7.8, "mass": 10.4},
+  "14У": {"height": 140, "width": 58, "web": 4.9, "flange": 8.1, "mass": 12.3},
+  "16У": {"height": 160, "width": 64, "web": 5, "flange": 8.4, "mass": 14.2},
+  "20У": {"height": 200, "width": 76, "web": 5.2, "flange": 9, "mass": 18.4},
+  "24У": {"height": 240, "width": 90, "web": 5.6, "flange": 10, "mass": 24}
+}

@@ -2,7 +2,6 @@ import Link from "next/link";
 import type {Category} from "@/types/category";
 import type {ProductVariant} from "@/types/product";
 import {PageContainer} from "@/components/layout/PageContainer";
-import {storefrontAvailability} from "@/lib/catalogOffer";
 import {Breadcrumbs} from "./Breadcrumbs";
 import {CatalogListingNavigation} from "./CatalogListingNavigation";
 import {CatalogPositionFields} from "./CatalogPositionDetails";
@@ -11,12 +10,11 @@ import {ProductImageViewer} from "./ProductImageViewer";
 import {getChannelProductDescription} from "@/lib/channelDescription";
 import {ChannelSpecificationNote} from "./ChannelSpecificationNote";
 import {storefrontPositionFields} from "./StorefrontPositionSpecifications";
-import {ProductOrderControls} from "./ProductOrderControls";
+import {ChannelOrderControls} from "./MeasuredVariantItem";
 
 export function CatalogProductDetail({category, variant}: {category: Category; variant: ProductVariant}) {
   const [introduction, , selection] = getChannelProductDescription(variant).split("\n\n");
   const fields = storefrontPositionFields(variant);
-  const madeToOrder = storefrontAvailability(variant.availability) === "ON_ORDER";
 
   return <PageContainer className="pt-5 pb-8 sm:pt-6 lg:pt-7 lg:pb-10">
     <Breadcrumbs items={[
@@ -31,7 +29,7 @@ export function CatalogProductDetail({category, variant}: {category: Category; v
           <div>
             <h1 className="text-page-title">{variant.name}</h1>
             <CatalogDescription description={[introduction, selection].filter(Boolean).join("\n\n")}/>
-            {madeToOrder && <ProductOrderControls variant={variant} view="card"/>}
+            <ChannelOrderControls variant={variant}/>
           </div>
           {variant.imageUrls.length > 0 && <div className="grid max-w-md gap-3">
             {variant.imageUrls.map((src, index) => <ProductImageViewer key={src} src={src}

@@ -7,6 +7,7 @@ import {isProfileSheetVariant} from "./profileSheet";
 import {BACKORDER_DELIVERY_ESTIMATE, isDemonstrationProduct, storefrontAvailability} from "./catalogOffer";
 import {metersToTons, tonsToMeters} from "./orderMeasurement";
 import {resolveCatalogProductId} from "./catalogIdentity";
+import {hasLegacyChannelMeterQuantity} from "./channel";
 
 const retiredRebarWeights = new Map([["prd-007", 2.47], ["prd-008", 6.31]]);
 
@@ -67,7 +68,7 @@ export function createCartLines(items: CartItem[]): CartLine[] {
     const subcategory = getSubcategoryById(product.subcategoryId);
     const productType = getProductTypeById(product.productTypeId);
     let pricingInput = item;
-    if (!item.measurement && !item.pieceOrder && product.unit === "ton" && !isDemonstrationProduct(product)
+    if (!item.measurement && !item.pieceOrder && product.unit === "ton" && !hasLegacyChannelMeterQuantity(product) && !isDemonstrationProduct(product)
       && product.weightPerMeterKg !== undefined && Number.isFinite(product.weightPerMeterKg) && product.weightPerMeterKg > 0
       && product.pricePerTon !== undefined && Number.isFinite(product.pricePerTon) && product.pricePerTon > 0) {
       const meters = tonsToMeters(item.quantity, product.weightPerMeterKg);

@@ -324,19 +324,17 @@ Replace the image at its existing path. `npm run dev` checks catalog image conte
 
 The channel product images use the owner's approved No. 5 reference in
 `imports/shveller-image-template/reference-5.jpg`. Each 2400 × 1800 lossless WebP
-keeps the shared photograph, reflection, dimension arrows and layout; only the
-profile title and numeric labels change. No. 5 preserves the approved image's
-decoded pixels. The current reference is the owner's update without white
-backplates on the labels over the light background. Values that match No. 5
-are retained directly from that reference; only differing labels are replaced.
+keeps the shared photograph, reflection, dimension arrows and layout. The
+variable labels show the exact profile, length and nominal ГОСТ values. Series У
+also has a section sketch showing the sloping inner flange faces.
 The soft contrast backing for the flange-thickness label over the dark metal
 is retained as in the supplied reference. These are family illustrations with nominal dimensions, not
 manufacturing drawings or photographs proving the exact profile geometry.
 
 Regenerate with `node scripts/render-shveller-images.mjs --write`. The renderer
-reads the same public specifications as the site from `data/products/index.ts`,
-including supplier lengths and theoretical masses. Preview one profile with
-`node scripts/render-shveller-images.mjs --preview 40`. Inter is bundled with its
+reads the same public specifications as the site, including dimensions and
+masses from `data/channel-sections.json`. Preview one profile with
+`node scripts/render-shveller-images.mjs --preview 24У`. Inter is bundled with its
 OFL license in the template folder; font caches are written only under `.tmp/`.
 The generated `imports/shveller-image-template/rendered.json` records every
 label, product association, output size and image hash. The older ImageGen

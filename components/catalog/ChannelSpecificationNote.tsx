@@ -1,9 +1,10 @@
 import {CatalogStandardReference} from "./CatalogStandardReference";
 import {CatalogTableNote} from "./CatalogTableNote";
 
-export function ChannelSpecificationNote() {
+export function ChannelSpecificationNote({steelGrade}: {steelGrade?: string}) {
   return <CatalogTableNote>
-    <CatalogStandardReference>Номинальные размеры и масса приведены в таблице 1 ГОСТ 8240-97 для серии У и в таблице 2 ГОСТ 8240-97 для серии П.</CatalogStandardReference>
-    Серию У/П и фактические размеры уточняйте при заказе. Длина — по каталогу поставщика.
+    Серия П имеет параллельные грани полок, серия У — уклон внутренних граней.
+    {" "}<CatalogStandardReference>Размеры и теоретическая масса 1 м приведены в таблице 2 ГОСТ 8240-97 для серии П и в таблице 1 ГОСТ 8240-97 для серии У.</CatalogStandardReference>
+    {steelGrade && <> Сталь {steelGrade}.</>}
   </CatalogTableNote>;
 }
