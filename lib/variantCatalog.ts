@@ -1,7 +1,7 @@
 import type {ProductVariant} from "@/types/product";
 import {comparePrices, parseCatalogPrice} from "./catalogFilters";
 import {getVariantAttribute, type VariantFilterKey} from "./variantPresentation";
-import {getSheetDesignation, isGalvanizedSheet, isIllustratedSheet, isPlainHotRolledSheet, sheetFormatLabel} from "./sheetPresentation";
+import {getSheetDesignation, isColdRolledSheet, isGalvanizedSheet, isIllustratedSheet, isPlainHotRolledSheet, sheetFormatLabel} from "./sheetPresentation";
 import {requiresOfferConfirmation} from "./catalogOffer";
 
 export type VariantSort = "relevance" | "availability" | "price-asc" | "price-desc" | "size" | "name";
@@ -18,13 +18,17 @@ export function referenceProfileName(name: string, categorySlug: string) {
 }
 
 export function uniqueAttributeValues(variants: ProductVariant[], key: VariantFilterKey) {
-  const byThickness = key === "wallThickness" && variants.every(isGalvanizedSheet);
+  const byThickness = key === "wallThickness" && variants.every(usesSheetDimensionOrder);
   return [...new Set(variants.map(variant => getVariantAttribute(variant, key)).filter(value => value !== "—"))]
     .sort((left, right) => byThickness ? compareThickness(left, right) : left.localeCompare(right, "ru", {numeric: true}));
 }
 
 function compareThickness(left: string, right: string) {
   return Number.parseFloat(left.replace(",", ".")) - Number.parseFloat(right.replace(",", "."));
+}
+
+function usesSheetDimensionOrder(variant: ProductVariant) {
+  return isGalvanizedSheet(variant) || isColdRolledSheet(variant);
 }
 
 export function variantFilterLabel(variants: ProductVariant[], key: VariantFilterKey) {
@@ -53,14 +57,14 @@ export function selectVariants(variants: ProductVariant[], options: {
 }) {
   const minimum = parseCatalogPrice(options.minimumPrice);
   const maximum = parseCatalogPrice(options.maximumPrice);
-  const galvanizedSheets = variants.every(isGalvanizedSheet);
+  const orderBySheetDimensions = variants.every(usesSheetDimensionOrder);
   return variants.filter(variant => options.filterKeys.every(key => !options.filters[key] || getVariantAttribute(variant, key) === options.filters[key])
     && (!options.stockOnly || variant.inStock)
     && (minimum === null || (!requiresOfferConfirmation(variant) && !variant.quoteOnly && variant.price !== null && variant.price >= minimum))
     && (maximum === null || (!requiresOfferConfirmation(variant) && !variant.quoteOnly && variant.price !== null && variant.price <= maximum)))
     .sort((left, right) => {
       if (options.sort === "relevance") return 0;
-      if (galvanizedSheets && (options.sort === "name" || options.sort === "size")) {
+      if (orderBySheetDimensions && (options.sort === "name" || options.sort === "size")) {
         const thickness = compareThickness(getVariantAttribute(left, "wallThickness"), getVariantAttribute(right, "wallThickness"));
         const format = sortSize(left).localeCompare(sortSize(right), "ru", {numeric: true});
         return options.sort === "name" ? thickness || format : format || thickness;

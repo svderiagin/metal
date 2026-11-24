@@ -7722,6 +7722,589 @@
       "sourceProductName": "Лист № 1"
     },
     {
+      "id": "catalog-list-hk-0-5x1000x2000",
+      "categoryId": "catalog-cat-listovoy-prokat",
+      "subcategoryId": "catalog-sub-listovoy-prokat-list-ocynkovannyj",
+      "productTypeId": "type-catalog-sub-listovoy-prokat-list-ocynkovannyj",
+      "name": "Лист холоднокатаный 0,5 × 1000 × 2000 мм",
+      "slug": "list-kholodnokatanyy-0-5x1000x2000mm",
+      "shortDescription": "Гладкий холоднокатаный стальной лист без покрытия, толщина 0,5 мм, формат 1000 × 2000 мм.",
+      "description": "Гладкий холоднокатаный стальной лист без покрытия, толщина 0,5 мм, формат 1000 × 2000 мм.",
+      "price": 790,
+      "priceQualifier": "exact",
+      "currency": "RUB",
+      "unit": "piece",
+      "priceUnit": "за штуку",
+      "material": "Сталь",
+      "standard": "",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/listovoy-prokat/list-ocynkovannyj/measurement/list-kholodnokatanyy-0-5x1000x2000mm.webp"
+      ],
+      "attributes": [
+        {
+          "key": "size",
+          "label": "Размер",
+          "value": "1х2 м"
+        },
+        {
+          "key": "wallThickness",
+          "label": "Толщина",
+          "value": "0,5 мм"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Толщина",
+          "value": "0,5 мм"
+        },
+        {
+          "name": "Текстура листа",
+          "value": "Гладкий"
+        },
+        {
+          "name": "Вес",
+          "value": "7,85 кг/шт."
+        },
+        {
+          "name": "Размер",
+          "value": "1х2 м"
+        }
+      ]
+    },
+    {
+      "id": "catalog-list-hk-0-6x1250x2500",
+      "categoryId": "catalog-cat-listovoy-prokat",
+      "subcategoryId": "catalog-sub-listovoy-prokat-list-ocynkovannyj",
+      "productTypeId": "type-catalog-sub-listovoy-prokat-list-ocynkovannyj",
+      "name": "Лист холоднокатаный 0,6 × 1250 × 2500 мм",
+      "slug": "list-kholodnokatanyy-0-6x1250x2500mm",
+      "shortDescription": "Гладкий холоднокатаный стальной лист без покрытия, толщина 0,6 мм, формат 1250 × 2500 мм.",
+      "description": "Гладкий холоднокатаный стальной лист без покрытия, толщина 0,6 мм, формат 1250 × 2500 мм.",
+      "price": 1390,
+      "priceQualifier": "exact",
+      "currency": "RUB",
+      "unit": "piece",
+      "priceUnit": "за штуку",
+      "material": "Сталь",
+      "standard": "",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/listovoy-prokat/list-ocynkovannyj/measurement/list-kholodnokatanyy-0-6x1250x2500mm.webp"
+      ],
+      "attributes": [
+        {
+          "key": "size",
+          "label": "Размер",
+          "value": "1,25х2,5 м"
+        },
+        {
+          "key": "wallThickness",
+          "label": "Толщина",
+          "value": "0,6 мм"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Толщина",
+          "value": "0,6 мм"
+        },
+        {
+          "name": "Текстура листа",
+          "value": "Гладкий"
+        },
+        {
+          "name": "Вес",
+          "value": "14,72 кг/шт."
+        },
+        {
+          "name": "Размер",
+          "value": "1,25х2,5 м"
+        }
+      ]
+    },
+    {
+      "id": "catalog-list-hk-0-7x1000x2000",
+      "categoryId": "catalog-cat-listovoy-prokat",
+      "subcategoryId": "catalog-sub-listovoy-prokat-list-ocynkovannyj",
+      "productTypeId": "type-catalog-sub-listovoy-prokat-list-ocynkovannyj",
+      "name": "Лист холоднокатаный 0,7 × 1000 × 2000 мм",
+      "slug": "list-kholodnokatanyy-0-7x1000x2000mm",
+      "shortDescription": "Гладкий холоднокатаный стальной лист без покрытия, толщина 0,7 мм, формат 1000 × 2000 мм.",
+      "description": "Гладкий холоднокатаный стальной лист без покрытия, толщина 0,7 мм, формат 1000 × 2000 мм.",
+      "price": 990,
+      "priceQualifier": "exact",
+      "currency": "RUB",
+      "unit": "piece",
+      "priceUnit": "за штуку",
+      "material": "Сталь",
+      "standard": "",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/listovoy-prokat/list-ocynkovannyj/measurement/list-kholodnokatanyy-0-7x1000x2000mm.webp"
+      ],
+      "attributes": [
+        {
+          "key": "size",
+          "label": "Размер",
+          "value": "1х2 м"
+        },
+        {
+          "key": "wallThickness",
+          "label": "Толщина",
+          "value": "0,7 мм"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Толщина",
+          "value": "0,7 мм"
+        },
+        {
+          "name": "Текстура листа",
+          "value": "Гладкий"
+        },
+        {
+          "name": "Вес",
+          "value": "10,99 кг/шт."
+        },
+        {
+          "name": "Размер",
+          "value": "1х2 м"
+        }
+      ]
+    },
+    {
+      "id": "catalog-list-hk-0-7x1250x2500",
+      "categoryId": "catalog-cat-listovoy-prokat",
+      "subcategoryId": "catalog-sub-listovoy-prokat-list-ocynkovannyj",
+      "productTypeId": "type-catalog-sub-listovoy-prokat-list-ocynkovannyj",
+      "name": "Лист холоднокатаный 0,7 × 1250 × 2500 мм",
+      "slug": "list-kholodnokatanyy-0-7x1250x2500mm",
+      "shortDescription": "Гладкий холоднокатаный стальной лист без покрытия, толщина 0,7 мм, формат 1250 × 2500 мм.",
+      "description": "Гладкий холоднокатаный стальной лист без покрытия, толщина 0,7 мм, формат 1250 × 2500 мм.",
+      "price": 1490,
+      "priceQualifier": "exact",
+      "currency": "RUB",
+      "unit": "piece",
+      "priceUnit": "за штуку",
+      "material": "Сталь",
+      "standard": "",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/listovoy-prokat/list-ocynkovannyj/measurement/list-kholodnokatanyy-0-7x1250x2500mm.webp"
+      ],
+      "attributes": [
+        {
+          "key": "size",
+          "label": "Размер",
+          "value": "1,25х2,5 м"
+        },
+        {
+          "key": "wallThickness",
+          "label": "Толщина",
+          "value": "0,7 мм"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Толщина",
+          "value": "0,7 мм"
+        },
+        {
+          "name": "Текстура листа",
+          "value": "Гладкий"
+        },
+        {
+          "name": "Вес",
+          "value": "17,17 кг/шт."
+        },
+        {
+          "name": "Размер",
+          "value": "1,25х2,5 м"
+        }
+      ]
+    },
+    {
+      "id": "catalog-list-hk-0-8x1250x2500",
+      "categoryId": "catalog-cat-listovoy-prokat",
+      "subcategoryId": "catalog-sub-listovoy-prokat-list-ocynkovannyj",
+      "productTypeId": "type-catalog-sub-listovoy-prokat-list-ocynkovannyj",
+      "name": "Лист холоднокатаный 0,8 × 1250 × 2500 мм",
+      "slug": "list-kholodnokatanyy-0-8x1250x2500mm",
+      "shortDescription": "Гладкий холоднокатаный стальной лист без покрытия, толщина 0,8 мм, формат 1250 × 2500 мм.",
+      "description": "Гладкий холоднокатаный стальной лист без покрытия, толщина 0,8 мм, формат 1250 × 2500 мм.",
+      "price": 1790,
+      "priceQualifier": "exact",
+      "currency": "RUB",
+      "unit": "piece",
+      "priceUnit": "за штуку",
+      "material": "Сталь",
+      "standard": "",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/listovoy-prokat/list-ocynkovannyj/measurement/list-kholodnokatanyy-0-8x1250x2500mm.webp"
+      ],
+      "attributes": [
+        {
+          "key": "size",
+          "label": "Размер",
+          "value": "1,25х2,5 м"
+        },
+        {
+          "key": "wallThickness",
+          "label": "Толщина",
+          "value": "0,8 мм"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Толщина",
+          "value": "0,8 мм"
+        },
+        {
+          "name": "Текстура листа",
+          "value": "Гладкий"
+        },
+        {
+          "name": "Вес",
+          "value": "19,63 кг/шт."
+        },
+        {
+          "name": "Размер",
+          "value": "1,25х2,5 м"
+        }
+      ]
+    },
+    {
+      "id": "catalog-list-hk-1x1000x2000",
+      "categoryId": "catalog-cat-listovoy-prokat",
+      "subcategoryId": "catalog-sub-listovoy-prokat-list-ocynkovannyj",
+      "productTypeId": "type-catalog-sub-listovoy-prokat-list-ocynkovannyj",
+      "name": "Лист холоднокатаный 1 × 1000 × 2000 мм",
+      "slug": "list-kholodnokatanyy-1x1000x2000mm",
+      "shortDescription": "Гладкий холоднокатаный стальной лист без покрытия, толщина 1 мм, формат 1000 × 2000 мм.",
+      "description": "Гладкий холоднокатаный стальной лист без покрытия, толщина 1 мм, формат 1000 × 2000 мм.",
+      "price": 1390,
+      "priceQualifier": "exact",
+      "currency": "RUB",
+      "unit": "piece",
+      "priceUnit": "за штуку",
+      "material": "Сталь",
+      "standard": "",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/listovoy-prokat/list-ocynkovannyj/measurement/list-kholodnokatanyy-1x1000x2000mm.webp"
+      ],
+      "attributes": [
+        {
+          "key": "size",
+          "label": "Размер",
+          "value": "1х2 м"
+        },
+        {
+          "key": "wallThickness",
+          "label": "Толщина",
+          "value": "1 мм"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Толщина",
+          "value": "1 мм"
+        },
+        {
+          "name": "Текстура листа",
+          "value": "Гладкий"
+        },
+        {
+          "name": "Вес",
+          "value": "15,70 кг/шт."
+        },
+        {
+          "name": "Размер",
+          "value": "1х2 м"
+        }
+      ]
+    },
+    {
+      "id": "catalog-list-hk-1-2x1250x2500",
+      "categoryId": "catalog-cat-listovoy-prokat",
+      "subcategoryId": "catalog-sub-listovoy-prokat-list-ocynkovannyj",
+      "productTypeId": "type-catalog-sub-listovoy-prokat-list-ocynkovannyj",
+      "name": "Лист холоднокатаный 1,2 × 1250 × 2500 мм",
+      "slug": "list-kholodnokatanyy-1-2x1250x2500mm",
+      "shortDescription": "Гладкий холоднокатаный стальной лист без покрытия, толщина 1,2 мм, формат 1250 × 2500 мм.",
+      "description": "Гладкий холоднокатаный стальной лист без покрытия, толщина 1,2 мм, формат 1250 × 2500 мм.",
+      "price": 2390,
+      "priceQualifier": "exact",
+      "currency": "RUB",
+      "unit": "piece",
+      "priceUnit": "за штуку",
+      "material": "Сталь",
+      "standard": "",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/listovoy-prokat/list-ocynkovannyj/measurement/list-kholodnokatanyy-1-2x1250x2500mm.webp"
+      ],
+      "attributes": [
+        {
+          "key": "size",
+          "label": "Размер",
+          "value": "1,25х2,5 м"
+        },
+        {
+          "key": "wallThickness",
+          "label": "Толщина",
+          "value": "1,2 мм"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Толщина",
+          "value": "1,2 мм"
+        },
+        {
+          "name": "Текстура листа",
+          "value": "Гладкий"
+        },
+        {
+          "name": "Вес",
+          "value": "29,44 кг/шт."
+        },
+        {
+          "name": "Размер",
+          "value": "1,25х2,5 м"
+        }
+      ]
+    },
+    {
+      "id": "catalog-list-hk-1-5x1250x2500",
+      "categoryId": "catalog-cat-listovoy-prokat",
+      "subcategoryId": "catalog-sub-listovoy-prokat-list-ocynkovannyj",
+      "productTypeId": "type-catalog-sub-listovoy-prokat-list-ocynkovannyj",
+      "name": "Лист холоднокатаный 1,5 × 1250 × 2500 мм",
+      "slug": "list-kholodnokatanyy-1-5x1250x2500mm",
+      "shortDescription": "Гладкий холоднокатаный стальной лист без покрытия, толщина 1,5 мм, формат 1250 × 2500 мм.",
+      "description": "Гладкий холоднокатаный стальной лист без покрытия, толщина 1,5 мм, формат 1250 × 2500 мм.",
+      "price": 2990,
+      "priceQualifier": "exact",
+      "currency": "RUB",
+      "unit": "piece",
+      "priceUnit": "за штуку",
+      "material": "Сталь",
+      "standard": "",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/listovoy-prokat/list-ocynkovannyj/measurement/list-kholodnokatanyy-1-5x1250x2500mm.webp"
+      ],
+      "attributes": [
+        {
+          "key": "size",
+          "label": "Размер",
+          "value": "1,25х2,5 м"
+        },
+        {
+          "key": "wallThickness",
+          "label": "Толщина",
+          "value": "1,5 мм"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Толщина",
+          "value": "1,5 мм"
+        },
+        {
+          "name": "Текстура листа",
+          "value": "Гладкий"
+        },
+        {
+          "name": "Вес",
+          "value": "36,80 кг/шт."
+        },
+        {
+          "name": "Размер",
+          "value": "1,25х2,5 м"
+        }
+      ]
+    },
+    {
+      "id": "catalog-list-hk-2x1250x2500",
+      "categoryId": "catalog-cat-listovoy-prokat",
+      "subcategoryId": "catalog-sub-listovoy-prokat-list-ocynkovannyj",
+      "productTypeId": "type-catalog-sub-listovoy-prokat-list-ocynkovannyj",
+      "name": "Лист холоднокатаный 2 × 1250 × 2500 мм",
+      "slug": "list-kholodnokatanyy-2x1250x2500mm",
+      "shortDescription": "Гладкий холоднокатаный стальной лист без покрытия, толщина 2 мм, формат 1250 × 2500 мм.",
+      "description": "Гладкий холоднокатаный стальной лист без покрытия, толщина 2 мм, формат 1250 × 2500 мм.",
+      "price": 3790,
+      "priceQualifier": "exact",
+      "currency": "RUB",
+      "unit": "piece",
+      "priceUnit": "за штуку",
+      "material": "Сталь",
+      "standard": "",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/listovoy-prokat/list-ocynkovannyj/measurement/list-kholodnokatanyy-2x1250x2500mm.webp"
+      ],
+      "attributes": [
+        {
+          "key": "size",
+          "label": "Размер",
+          "value": "1,25х2,5 м"
+        },
+        {
+          "key": "wallThickness",
+          "label": "Толщина",
+          "value": "2 мм"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Толщина",
+          "value": "2 мм"
+        },
+        {
+          "name": "Текстура листа",
+          "value": "Гладкий"
+        },
+        {
+          "name": "Вес",
+          "value": "49,06 кг/шт."
+        },
+        {
+          "name": "Размер",
+          "value": "1,25х2,5 м"
+        }
+      ]
+    },
+    {
+      "id": "catalog-list-hk-2-5x1250x2500",
+      "categoryId": "catalog-cat-listovoy-prokat",
+      "subcategoryId": "catalog-sub-listovoy-prokat-list-ocynkovannyj",
+      "productTypeId": "type-catalog-sub-listovoy-prokat-list-ocynkovannyj",
+      "name": "Лист холоднокатаный 2,5 × 1250 × 2500 мм",
+      "slug": "list-kholodnokatanyy-2-5x1250x2500mm",
+      "shortDescription": "Гладкий холоднокатаный стальной лист без покрытия, толщина 2,5 мм, формат 1250 × 2500 мм.",
+      "description": "Гладкий холоднокатаный стальной лист без покрытия, толщина 2,5 мм, формат 1250 × 2500 мм.",
+      "price": 4990,
+      "priceQualifier": "exact",
+      "currency": "RUB",
+      "unit": "piece",
+      "priceUnit": "за штуку",
+      "material": "Сталь",
+      "standard": "",
+      "availability": "ON_ORDER",
+      "inStock": false,
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/listovoy-prokat/list-ocynkovannyj/measurement/list-kholodnokatanyy-2-5x1250x2500mm.webp"
+      ],
+      "attributes": [
+        {
+          "key": "size",
+          "label": "Размер",
+          "value": "1,25х2,5 м"
+        },
+        {
+          "key": "wallThickness",
+          "label": "Толщина",
+          "value": "2,5 мм"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Толщина",
+          "value": "2,5 мм"
+        },
+        {
+          "name": "Текстура листа",
+          "value": "Гладкий"
+        },
+        {
+          "name": "Вес",
+          "value": "61,33 кг/шт."
+        },
+        {
+          "name": "Размер",
+          "value": "1,25х2,5 м"
+        }
+      ]
+    },
+    {
+      "id": "catalog-list-hk-3x1250x2500",
+      "categoryId": "catalog-cat-listovoy-prokat",
+      "subcategoryId": "catalog-sub-listovoy-prokat-list-ocynkovannyj",
+      "productTypeId": "type-catalog-sub-listovoy-prokat-list-ocynkovannyj",
+      "name": "Лист холоднокатаный 3 × 1250 × 2500 мм",
+      "slug": "list-kholodnokatanyy-3x1250x2500mm",
+      "shortDescription": "Гладкий холоднокатаный стальной лист без покрытия, толщина 3 мм, формат 1250 × 2500 мм.",
+      "description": "Гладкий холоднокатаный стальной лист без покрытия, толщина 3 мм, формат 1250 × 2500 мм.",
+      "price": 5990,
+      "priceQualifier": "exact",
+      "currency": "RUB",
+      "unit": "piece",
+      "priceUnit": "за штуку",
+      "material": "Сталь",
+      "standard": "",
+      "availability": "ON_ORDER",
+      "inStock": false,
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/listovoy-prokat/list-ocynkovannyj/measurement/list-kholodnokatanyy-3x1250x2500mm.webp"
+      ],
+      "attributes": [
+        {
+          "key": "size",
+          "label": "Размер",
+          "value": "1,25х2,5 м"
+        },
+        {
+          "key": "wallThickness",
+          "label": "Толщина",
+          "value": "3 мм"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Толщина",
+          "value": "3 мм"
+        },
+        {
+          "name": "Текстура листа",
+          "value": "Гладкий"
+        },
+        {
+          "name": "Вес",
+          "value": "73,59 кг/шт."
+        },
+        {
+          "name": "Размер",
+          "value": "1,25х2,5 м"
+        }
+      ]
+    },
+    {
       "id": "catalog-28952",
       "categoryId": "catalog-cat-listovoy-prokat",
       "subcategoryId": "catalog-sub-listovoy-prokat-list-riflennyj",

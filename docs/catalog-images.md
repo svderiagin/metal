@@ -449,16 +449,16 @@ appear in the row and mobile card.
 
 The marked and clean 2400 × 1800 JPGs are in
 `public/images/catalog/listovoy-prokat/list-ocynkovannyj/originals/`.
-Run `node scripts/render-cold-rolled-sheet-images.mjs --write` to generate the two
-lossless WebP illustrations and `data/cold-rolled-sheet-images.json`. Without
-`--write`, the generated images go to `.tmp/cold-rolled-sheet-catalog/`.
+Run `node scripts/render-cold-rolled-sheet-images.mjs --write` to generate the
+lossless WebP illustrations and `data/cold-rolled-sheet-images.json`. Use
+`--preview PRODUCT_ID` for a single preview under `.tmp/cold-rolled-sheet-catalog/`.
 
-The № 0,5 illustration preserves every decoded pixel of the marked JPG. The
-№ 1 illustration uses the clean JPG and bundled Inter to replace its designation,
-thickness and mass. The renderer verifies that pixels outside these label patches
-match the reference. The shared plate illustration uses each product's saved nominal
-dimensions and mass. The storefront uses the title «Лист холоднокатаный» at the
-existing `list-ocynkovannyj` route.
+The renderer preserves the two approved illustrations and derives new ones from
+the finished 0,5 mm reference with graphite labels and dimension lines. It uses
+the clean JPG and bundled Inter to replace the designation, thickness, dimensions
+and mass from the catalog. Both formats share the plate composition and arrows.
+Pixels outside the edited labels match the reference. The storefront uses the title
+«Лист холоднокатаный» at the existing `list-ocynkovannyj` route.
 
 ## Hot-rolled sheet product illustrations
 
