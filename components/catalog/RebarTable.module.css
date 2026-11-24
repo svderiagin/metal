@@ -66,7 +66,7 @@
   border-top: 1px solid var(--table-border);
 }
 
-.table > tbody > tr:nth-child(even of :not(.detailsRow)) > :is(th, td) { background: var(--table-stripe); }
+.table > tbody > tr:where(:nth-child(even of :not(.detailsRow))) > :is(th, td) { background: var(--table-stripe); }
 .table > tbody > tr:not(:where(.detailsRow, :has(+ .detailsRow:not([hidden])))):is(:hover, :focus-within) > :is(th, td) {
   background: var(--table-hover);
 }

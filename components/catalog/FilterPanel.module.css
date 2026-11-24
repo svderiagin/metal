@@ -136,13 +136,14 @@
   margin: 0;
 }
 
-.cartButton:hover {
-  background-color: var(--action-hover);
+:global(html[data-theme="dark"]) .cartButton {
+  --action-background: #346e83;
+  --action-hover: #427e94;
+  border-color: transparent;
 }
 
-:global(html[data-theme="dark"]) .cartButton:hover {
-  background-color: var(--color-brand-500);
-  border-color: var(--color-brand-300);
+.cartButton:hover {
+  background-color: var(--action-hover);
 }
 
 .cartButton:focus-visible {
@@ -184,6 +185,14 @@
 
 .removeCartButton:hover {
   background-color: var(--danger-hover);
+}
+
+:global(html[data-theme="dark"]) .updateCartButton {
+  --update-hover: #204b60;
+}
+
+:global(html[data-theme="dark"]) .removeCartButton {
+  --danger-hover: #691b1e;
 }
 
 :global(html:not([data-theme="dark"])) .cartButton {
