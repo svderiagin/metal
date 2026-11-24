@@ -7,14 +7,14 @@ export type CatalogPositionField = {label: string; value: ReactNode; roundWall?:
 export function CatalogPositionFields({fields, label}: {fields: readonly CatalogPositionField[]; label?: string}) {
   const visibleFields = fields.filter(({value}) => value != null && value !== "");
   if (!visibleFields.length) return null;
-  return <dl aria-label={label} className="grid grid-cols-1 gap-4 @min-[12rem]:grid-cols-2 @min-[51rem]:grid-cols-4">
+  return <dl aria-label={label} className="grid grid-cols-1 gap-4 @min-[17.5rem]:grid-cols-2 @min-[51rem]:grid-cols-4">
     {visibleFields.map(({label, value, roundWall}) =>
-      <div key={label} className="relative row-span-2 grid min-w-0 grid-rows-subgrid gap-y-1 break-words @min-[32rem]:min-h-12 @min-[32rem]:ps-15">
+      <div key={label} className="relative min-w-0 wrap-anywhere @max-[17.5rem]:min-h-12 @max-[17.5rem]:ps-15 @min-[32rem]:min-h-12 @min-[32rem]:ps-15">
         <dt className="text-xs text-slate-600 dark:text-slate-300">
           <CatalogFieldIllustration label={label} roundWall={roundWall}/>
           <CatalogStandardReference>{label}</CatalogStandardReference>
         </dt>
-        <dd className="text-sm font-semibold tabular-nums text-slate-900 dark:text-slate-100"><CatalogStandardReference>{value}</CatalogStandardReference></dd>
+        <dd className="mt-1 text-sm font-semibold tabular-nums text-slate-900 dark:text-slate-100"><CatalogStandardReference>{value}</CatalogStandardReference></dd>
       </div>)}
   </dl>;
 }

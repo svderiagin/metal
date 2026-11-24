@@ -3759,27 +3759,27 @@
       "categoryId": "cat-bal",
       "subcategoryId": "cat-bal-sub-1",
       "productTypeId": "type-cat-bal-sub-1",
-      "name": "Балка 20Б2х12000 ГОСТ 27772 С255 ТМ",
+      "name": "Балка нормальная 20Б2, С255, 12 м",
       "slug": "balka-20b2x12000-gost-27772-s255-tm",
-      "shortDescription": "Длина, мм: 12 000; Стандарт: ГОСТ 27772; Марка стали: С255",
-      "description": "Балка 20Б2х12000 ГОСТ 27772 С255 ТМ. Длина, мм: 12 000; Стандарт: ГОСТ 27772; Марка стали: С255. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 84960,
+      "shortDescription": "Двутавр 20Б2 из стали С255, 12 м.",
+      "description": "Балка нормальная 20Б2, С255, 12 м. Сортамент по ГОСТ 35087-2024, требования к стали по ГОСТ 27772-2021.",
+      "price": 108600,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
       "unit": "ton",
       "priceUnit": "за тонну",
       "material": "",
-      "standard": "ГОСТ 27772",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "standard": "ГОСТ 35087-2024; 27772-2021",
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
         {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 27772"
+          "key": "size",
+          "label": "Профиль",
+          "value": "20Б2"
         },
         {
           "key": "grade",
@@ -3788,57 +3788,65 @@
         },
         {
           "key": "length",
-          "label": "Длина, мм",
-          "value": "12 000"
+          "label": "Длина",
+          "value": "12 м"
+        },
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "specifications": [
         {
-          "name": "Длина, мм",
-          "value": "12 000"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 27772"
+          "name": "Профиль",
+          "value": "20Б2"
         },
         {
           "name": "Марка стали",
           "value": "С255"
         },
         {
-          "name": "Полное обозначение",
-          "value": "Балка 20Б2х12000 ГОСТ 27772 С255 ТМ"
+          "name": "Длина",
+          "value": "12 м"
+        },
+        {
+          "name": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "imported": true,
-      "pricePerTon": 84960
+      "pricePerTon": 108600,
+      "weightPerMeterKg": 25.3,
+      "lengthMeters": 12,
+      "steelGrade": "С255"
     },
     {
       "id": "local-67139",
       "categoryId": "cat-bal",
       "subcategoryId": "cat-bal-sub-3",
       "productTypeId": "type-cat-bal-sub-3",
-      "name": "Балка 40К1х12000 ГОСТ 27772 С255 ТМ",
+      "name": "Балка колонная 40К1, С255, 12 м",
       "slug": "balka-40k1x12000-gost-27772-s255-tm",
-      "shortDescription": "Длина, мм: 12 000; Стандарт: ГОСТ 27772; Марка стали: С255",
-      "description": "Балка 40К1х12000 ГОСТ 27772 С255 ТМ. Длина, мм: 12 000; Стандарт: ГОСТ 27772; Марка стали: С255. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 89460,
+      "shortDescription": "Двутавр 40К1 из стали С255, 12 м.",
+      "description": "Балка колонная 40К1, С255, 12 м. Сортамент по ГОСТ 35087-2024, требования к стали по ГОСТ 27772-2021.",
+      "price": 96400,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
       "unit": "ton",
       "priceUnit": "за тонну",
       "material": "",
-      "standard": "ГОСТ 27772",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "standard": "ГОСТ 35087-2024; 27772-2021",
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
         {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 27772"
+          "key": "size",
+          "label": "Профиль",
+          "value": "40К1"
         },
         {
           "key": "grade",
@@ -3847,57 +3855,65 @@
         },
         {
           "key": "length",
-          "label": "Длина, мм",
-          "value": "12 000"
+          "label": "Длина",
+          "value": "12 м"
+        },
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "specifications": [
         {
-          "name": "Длина, мм",
-          "value": "12 000"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 27772"
+          "name": "Профиль",
+          "value": "40К1"
         },
         {
           "name": "Марка стали",
           "value": "С255"
         },
         {
-          "name": "Полное обозначение",
-          "value": "Балка 40К1х12000 ГОСТ 27772 С255 ТМ"
+          "name": "Длина",
+          "value": "12 м"
+        },
+        {
+          "name": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "imported": true,
-      "pricePerTon": 89460
+      "pricePerTon": 96400,
+      "weightPerMeterKg": 146.7,
+      "lengthMeters": 12,
+      "steelGrade": "С255"
     },
     {
       "id": "local-69066",
       "categoryId": "cat-bal",
       "subcategoryId": "cat-bal-sub-3",
       "productTypeId": "type-cat-bal-sub-3",
-      "name": "Балка 35К1х12000 ГОСТ 27772 С255 ТМ",
+      "name": "Балка колонная 35К1, С255, 12 м",
       "slug": "balka-35k1x12000-gost-27772-s255-tm",
-      "shortDescription": "Длина, мм: 12 000; Стандарт: ГОСТ 27772; Марка стали: С255",
-      "description": "Балка 35К1х12000 ГОСТ 27772 С255 ТМ. Длина, мм: 12 000; Стандарт: ГОСТ 27772; Марка стали: С255. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": null,
-      "quoteOnly": true,
+      "shortDescription": "Двутавр 35К1 из стали С255, 12 м.",
+      "description": "Балка колонная 35К1, С255, 12 м. Сортамент по ГОСТ 35087-2024, требования к стали по ГОСТ 27772-2021.",
+      "price": 89400,
+      "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
       "unit": "ton",
       "priceUnit": "за тонну",
       "material": "",
-      "standard": "ГОСТ 27772",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "standard": "ГОСТ 35087-2024; 27772-2021",
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
         {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 27772"
+          "key": "size",
+          "label": "Профиль",
+          "value": "35К1"
         },
         {
           "key": "grade",
@@ -3906,56 +3922,65 @@
         },
         {
           "key": "length",
-          "label": "Длина, мм",
-          "value": "12 000"
+          "label": "Длина",
+          "value": "12 м"
+        },
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "specifications": [
         {
-          "name": "Длина, мм",
-          "value": "12 000"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 27772"
+          "name": "Профиль",
+          "value": "35К1"
         },
         {
           "name": "Марка стали",
           "value": "С255"
         },
         {
-          "name": "Полное обозначение",
-          "value": "Балка 35К1х12000 ГОСТ 27772 С255 ТМ"
+          "name": "Длина",
+          "value": "12 м"
+        },
+        {
+          "name": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
-      "imported": true
+      "imported": true,
+      "pricePerTon": 89400,
+      "weightPerMeterKg": 109.1,
+      "lengthMeters": 12,
+      "steelGrade": "С255"
     },
     {
       "id": "local-69356",
       "categoryId": "cat-bal",
       "subcategoryId": "cat-bal-sub-4",
       "productTypeId": "type-cat-bal-sub-4",
-      "name": "Балка 24Мх12000 ГОСТ 19425 С255 ТМ",
+      "name": "Балка монорельсовая 24М, С255, 12 м",
       "slug": "balka-24mx12000-gost-19425-s255-tm",
-      "shortDescription": "Длина, мм: 12 000; Стандарт: ГОСТ 19425; Марка стали: С255",
-      "description": "Балка 24Мх12000 ГОСТ 19425 С255 ТМ. Длина, мм: 12 000; Стандарт: ГОСТ 19425; Марка стали: С255. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 124200,
+      "shortDescription": "Двутавр 24М из стали С255, 12 м.",
+      "description": "Балка монорельсовая 24М, С255, 12 м. Сортамент по ГОСТ 19425-74, требования к стали по ГОСТ 27772-2021.",
+      "price": 138000,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
       "unit": "ton",
       "priceUnit": "за тонну",
       "material": "",
-      "standard": "ГОСТ 19425",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "standard": "ГОСТ 19425-74; 27772-2021",
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
         {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 19425"
+          "key": "size",
+          "label": "Профиль",
+          "value": "24М"
         },
         {
           "key": "grade",
@@ -3964,57 +3989,65 @@
         },
         {
           "key": "length",
-          "label": "Длина, мм",
-          "value": "12 000"
+          "label": "Длина",
+          "value": "12 м"
+        },
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 19425-74; 27772-2021"
         }
       ],
       "specifications": [
         {
-          "name": "Длина, мм",
-          "value": "12 000"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 19425"
+          "name": "Профиль",
+          "value": "24М"
         },
         {
           "name": "Марка стали",
           "value": "С255"
         },
         {
-          "name": "Полное обозначение",
-          "value": "Балка 24Мх12000 ГОСТ 19425 С255 ТМ"
+          "name": "Длина",
+          "value": "12 м"
+        },
+        {
+          "name": "Стандарт",
+          "value": "ГОСТ 19425-74; 27772-2021"
         }
       ],
       "imported": true,
-      "pricePerTon": 124200
+      "pricePerTon": 138000,
+      "weightPerMeterKg": 38.3,
+      "lengthMeters": 12,
+      "steelGrade": "С255"
     },
     {
       "id": "local-69883",
       "categoryId": "cat-bal",
       "subcategoryId": "cat-bal-sub-1",
       "productTypeId": "type-cat-bal-sub-1",
-      "name": "Балка 55Б1х12000 ГОСТ 27772 С255 ТМ",
+      "name": "Балка нормальная 55Б1, С255, 12 м",
       "slug": "balka-55b1x12000-gost-27772-s255-tm",
-      "shortDescription": "Длина, мм: 12 000; Стандарт: ГОСТ 27772; Марка стали: С255",
-      "description": "Балка 55Б1х12000 ГОСТ 27772 С255 ТМ. Длина, мм: 12 000; Стандарт: ГОСТ 27772; Марка стали: С255. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 80010,
+      "shortDescription": "Двутавр 55Б1 из стали С255, 12 м.",
+      "description": "Балка нормальная 55Б1, С255, 12 м. Сортамент по ГОСТ 35087-2024, требования к стали по ГОСТ 27772-2021.",
+      "price": 88900,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
       "unit": "ton",
       "priceUnit": "за тонну",
       "material": "",
-      "standard": "ГОСТ 27772",
-      "availability": "UNKNOWN",
+      "standard": "ГОСТ 35087-2024; 27772-2021",
+      "availability": "ON_ORDER",
       "inStock": false,
       "featured": false,
       "imageUrls": [],
       "attributes": [
         {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 27772"
+          "key": "size",
+          "label": "Профиль",
+          "value": "55Б1"
         },
         {
           "key": "grade",
@@ -4023,30 +4056,38 @@
         },
         {
           "key": "length",
-          "label": "Длина, мм",
-          "value": "12 000"
+          "label": "Длина",
+          "value": "12 м"
+        },
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "specifications": [
         {
-          "name": "Длина, мм",
-          "value": "12 000"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 27772"
+          "name": "Профиль",
+          "value": "55Б1"
         },
         {
           "name": "Марка стали",
           "value": "С255"
         },
         {
-          "name": "Полное обозначение",
-          "value": "Балка 55Б1х12000 ГОСТ 27772 С255 ТМ"
+          "name": "Длина",
+          "value": "12 м"
+        },
+        {
+          "name": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "imported": true,
-      "pricePerTon": 80010
+      "pricePerTon": 88900,
+      "weightPerMeterKg": 89,
+      "lengthMeters": 12,
+      "steelGrade": "С255"
     },
     {
       "id": "local-73160",
@@ -4125,27 +4166,27 @@
       "categoryId": "cat-bal",
       "subcategoryId": "cat-bal-sub-2",
       "productTypeId": "type-cat-bal-sub-2",
-      "name": "Балка 20Ш2х12000 ГОСТ 27772 С255 ТМ",
+      "name": "Балка широкополочная 20Ш2, С255, 12 м",
       "slug": "balka-20s2x12000-gost-27772-s255-tm",
-      "shortDescription": "Длина, мм: 12 000; Стандарт: ГОСТ 27772; Марка стали: С255",
-      "description": "Балка 20Ш2х12000 ГОСТ 27772 С255 ТМ. Длина, мм: 12 000; Стандарт: ГОСТ 27772; Марка стали: С255. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 79290,
+      "shortDescription": "Двутавр 20Ш2 из стали С255, 12 м.",
+      "description": "Балка широкополочная 20Ш2, С255, 12 м. Сортамент по ГОСТ 35087-2024, требования к стали по ГОСТ 27772-2021.",
+      "price": 90700,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
       "unit": "ton",
       "priceUnit": "за тонну",
       "material": "",
-      "standard": "ГОСТ 27772",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "standard": "ГОСТ 35087-2024; 27772-2021",
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
         {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 27772"
+          "key": "size",
+          "label": "Профиль",
+          "value": "20Ш2"
         },
         {
           "key": "grade",
@@ -4154,30 +4195,38 @@
         },
         {
           "key": "length",
-          "label": "Длина, мм",
-          "value": "12 000"
+          "label": "Длина",
+          "value": "12 м"
+        },
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "specifications": [
         {
-          "name": "Длина, мм",
-          "value": "12 000"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 27772"
+          "name": "Профиль",
+          "value": "20Ш2"
         },
         {
           "name": "Марка стали",
           "value": "С255"
         },
         {
-          "name": "Полное обозначение",
-          "value": "Балка 20Ш2х12000 ГОСТ 27772 С255 ТМ"
+          "name": "Длина",
+          "value": "12 м"
+        },
+        {
+          "name": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "imported": true,
-      "pricePerTon": 79290
+      "pricePerTon": 90700,
+      "weightPerMeterKg": 38.8,
+      "lengthMeters": 12,
+      "steelGrade": "С255"
     },
     {
       "id": "local-80044",
@@ -4256,27 +4305,27 @@
       "categoryId": "cat-bal",
       "subcategoryId": "cat-bal-sub-1",
       "productTypeId": "type-cat-bal-sub-1",
-      "name": "Балка 50Б1х12000 ГОСТ 27772 С255 ТМ",
+      "name": "Балка нормальная 50Б1, С255, 12 м",
       "slug": "balka-50b1x12000-gost-27772-s255-tm",
-      "shortDescription": "Длина, мм: 12 000; Стандарт: ГОСТ 27772; Марка стали: С255",
-      "description": "Балка 50Б1х12000 ГОСТ 27772 С255 ТМ. Длина, мм: 12 000; Стандарт: ГОСТ 27772; Марка стали: С255. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 79470,
+      "shortDescription": "Двутавр 50Б1 из стали С255, 12 м.",
+      "description": "Балка нормальная 50Б1, С255, 12 м. Сортамент по ГОСТ 35087-2024, требования к стали по ГОСТ 27772-2021.",
+      "price": 88300,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
       "unit": "ton",
       "priceUnit": "за тонну",
       "material": "",
-      "standard": "ГОСТ 27772",
-      "availability": "UNKNOWN",
+      "standard": "ГОСТ 35087-2024; 27772-2021",
+      "availability": "ON_ORDER",
       "inStock": false,
       "featured": false,
       "imageUrls": [],
       "attributes": [
         {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 27772"
+          "key": "size",
+          "label": "Профиль",
+          "value": "50Б1"
         },
         {
           "key": "grade",
@@ -4285,57 +4334,65 @@
         },
         {
           "key": "length",
-          "label": "Длина, мм",
-          "value": "12 000"
+          "label": "Длина",
+          "value": "12 м"
+        },
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "specifications": [
         {
-          "name": "Длина, мм",
-          "value": "12 000"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 27772"
+          "name": "Профиль",
+          "value": "50Б1"
         },
         {
           "name": "Марка стали",
           "value": "С255"
         },
         {
-          "name": "Полное обозначение",
-          "value": "Балка 50Б1х12000 ГОСТ 27772 С255 ТМ"
+          "name": "Длина",
+          "value": "12 м"
+        },
+        {
+          "name": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "imported": true,
-      "pricePerTon": 79470
+      "pricePerTon": 88300,
+      "weightPerMeterKg": 72.5,
+      "lengthMeters": 12,
+      "steelGrade": "С255"
     },
     {
       "id": "local-86552",
       "categoryId": "cat-bal",
       "subcategoryId": "cat-bal-sub-4",
       "productTypeId": "type-cat-bal-sub-4",
-      "name": "Балка 30Мх12000 ГОСТ 19425 С255 ТМ",
+      "name": "Балка монорельсовая 30М, С255, 12 м",
       "slug": "balka-30mx12000-gost-19425-s255-tm",
-      "shortDescription": "Длина, мм: 12 000; Стандарт: ГОСТ 19425; Марка стали: С255",
-      "description": "Балка 30Мх12000 ГОСТ 19425 С255 ТМ. Длина, мм: 12 000; Стандарт: ГОСТ 19425; Марка стали: С255. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 124200,
+      "shortDescription": "Двутавр 30М из стали С255, 12 м.",
+      "description": "Балка монорельсовая 30М, С255, 12 м. Сортамент по ГОСТ 19425-74, требования к стали по ГОСТ 27772-2021.",
+      "price": 138000,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
       "unit": "ton",
       "priceUnit": "за тонну",
       "material": "",
-      "standard": "ГОСТ 19425",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "standard": "ГОСТ 19425-74; 27772-2021",
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
         {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 19425"
+          "key": "size",
+          "label": "Профиль",
+          "value": "30М"
         },
         {
           "key": "grade",
@@ -4344,57 +4401,65 @@
         },
         {
           "key": "length",
-          "label": "Длина, мм",
-          "value": "12 000"
+          "label": "Длина",
+          "value": "12 м"
+        },
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 19425-74; 27772-2021"
         }
       ],
       "specifications": [
         {
-          "name": "Длина, мм",
-          "value": "12 000"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 19425"
+          "name": "Профиль",
+          "value": "30М"
         },
         {
           "name": "Марка стали",
           "value": "С255"
         },
         {
-          "name": "Полное обозначение",
-          "value": "Балка 30Мх12000 ГОСТ 19425 С255 ТМ"
+          "name": "Длина",
+          "value": "12 м"
+        },
+        {
+          "name": "Стандарт",
+          "value": "ГОСТ 19425-74; 27772-2021"
         }
       ],
       "imported": true,
-      "pricePerTon": 124200
+      "pricePerTon": 138000,
+      "weightPerMeterKg": 50.2,
+      "lengthMeters": 12,
+      "steelGrade": "С255"
     },
     {
       "id": "local-87267",
       "categoryId": "cat-bal",
       "subcategoryId": "cat-bal-sub-4",
       "productTypeId": "type-cat-bal-sub-4",
-      "name": "Балка 45Мх12000 ГОСТ 19425 С255 ТМ",
+      "name": "Балка монорельсовая 45М, С255, 12 м",
       "slug": "balka-45mx12000-gost-19425-s255-tm",
-      "shortDescription": "Длина, мм: 12 000; Стандарт: ГОСТ 19425; Марка стали: С255",
-      "description": "Балка 45Мх12000 ГОСТ 19425 С255 ТМ. Длина, мм: 12 000; Стандарт: ГОСТ 19425; Марка стали: С255. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 124200,
+      "shortDescription": "Двутавр 45М из стали С255, 12 м.",
+      "description": "Балка монорельсовая 45М, С255, 12 м. Сортамент по ГОСТ 19425-74, требования к стали по ГОСТ 27772-2021.",
+      "price": 139000,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
       "unit": "ton",
       "priceUnit": "за тонну",
       "material": "",
-      "standard": "ГОСТ 19425",
-      "availability": "UNKNOWN",
+      "standard": "ГОСТ 19425-74; 27772-2021",
+      "availability": "ON_ORDER",
       "inStock": false,
       "featured": false,
       "imageUrls": [],
       "attributes": [
         {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 19425"
+          "key": "size",
+          "label": "Профиль",
+          "value": "45М"
         },
         {
           "key": "grade",
@@ -4403,57 +4468,65 @@
         },
         {
           "key": "length",
-          "label": "Длина, мм",
-          "value": "12 000"
+          "label": "Длина",
+          "value": "12 м"
+        },
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 19425-74; 27772-2021"
         }
       ],
       "specifications": [
         {
-          "name": "Длина, мм",
-          "value": "12 000"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 19425"
+          "name": "Профиль",
+          "value": "45М"
         },
         {
           "name": "Марка стали",
           "value": "С255"
         },
         {
-          "name": "Полное обозначение",
-          "value": "Балка 45Мх12000 ГОСТ 19425 С255 ТМ"
+          "name": "Длина",
+          "value": "12 м"
+        },
+        {
+          "name": "Стандарт",
+          "value": "ГОСТ 19425-74; 27772-2021"
         }
       ],
       "imported": true,
-      "pricePerTon": 124200
+      "pricePerTon": 139000,
+      "weightPerMeterKg": 77.6,
+      "lengthMeters": 12,
+      "steelGrade": "С255"
     },
     {
       "id": "local-92441",
       "categoryId": "cat-bal",
       "subcategoryId": "cat-bal-sub-4",
       "productTypeId": "type-cat-bal-sub-4",
-      "name": "Балка 36Мх12000 ГОСТ 19425 С255 ТМ",
+      "name": "Балка монорельсовая 36М, С255, 12 м",
       "slug": "balka-36mx12000-gost-19425-s255-tm",
-      "shortDescription": "Длина, мм: 12 000; Стандарт: ГОСТ 19425; Марка стали: С255",
-      "description": "Балка 36Мх12000 ГОСТ 19425 С255 ТМ. Длина, мм: 12 000; Стандарт: ГОСТ 19425; Марка стали: С255. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 121590,
+      "shortDescription": "Двутавр 36М из стали С255, 12 м.",
+      "description": "Балка монорельсовая 36М, С255, 12 м. Сортамент по ГОСТ 19425-74, требования к стали по ГОСТ 27772-2021.",
+      "price": 140100,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
       "unit": "ton",
       "priceUnit": "за тонну",
       "material": "",
-      "standard": "ГОСТ 19425",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "standard": "ГОСТ 19425-74; 27772-2021",
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
         {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 19425"
+          "key": "size",
+          "label": "Профиль",
+          "value": "36М"
         },
         {
           "key": "grade",
@@ -4462,57 +4535,65 @@
         },
         {
           "key": "length",
-          "label": "Длина, мм",
-          "value": "12 000"
+          "label": "Длина",
+          "value": "12 м"
+        },
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 19425-74; 27772-2021"
         }
       ],
       "specifications": [
         {
-          "name": "Длина, мм",
-          "value": "12 000"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 19425"
+          "name": "Профиль",
+          "value": "36М"
         },
         {
           "name": "Марка стали",
           "value": "С255"
         },
         {
-          "name": "Полное обозначение",
-          "value": "Балка 36Мх12000 ГОСТ 19425 С255 ТМ"
+          "name": "Длина",
+          "value": "12 м"
+        },
+        {
+          "name": "Стандарт",
+          "value": "ГОСТ 19425-74; 27772-2021"
         }
       ],
       "imported": true,
-      "pricePerTon": 121590
+      "pricePerTon": 140100,
+      "weightPerMeterKg": 57.9,
+      "lengthMeters": 12,
+      "steelGrade": "С255"
     },
     {
       "id": "local-106617",
       "categoryId": "cat-bal",
       "subcategoryId": "cat-bal-sub-3",
       "productTypeId": "type-cat-bal-sub-3",
-      "name": "Балка 20К1х12000 ГОСТ 35087; 27772 С355 ТМ",
+      "name": "Балка колонная 20К1, С355, 12 м",
       "slug": "balka-20k1x12000-gost-35087-27772-s355-tm",
-      "shortDescription": "Длина, мм: 12 000; Стандарт: ГОСТ 35087; 27772; Марка стали: С355",
-      "description": "Балка 20К1х12000 ГОСТ 35087; 27772 С355 ТМ. Длина, мм: 12 000; Стандарт: ГОСТ 35087; 27772; Марка стали: С355. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 85050,
+      "shortDescription": "Двутавр 20К1 из стали С355, 12 м.",
+      "description": "Балка колонная 20К1, С355, 12 м. Сортамент по ГОСТ 35087-2024, требования к стали по ГОСТ 27772-2021.",
+      "price": 94500,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
       "unit": "ton",
       "priceUnit": "за тонну",
       "material": "",
-      "standard": "ГОСТ 35087; 27772",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "standard": "ГОСТ 35087-2024; 27772-2021",
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
         {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 35087; 27772"
+          "key": "size",
+          "label": "Профиль",
+          "value": "20К1"
         },
         {
           "key": "grade",
@@ -4521,57 +4602,65 @@
         },
         {
           "key": "length",
-          "label": "Длина, мм",
-          "value": "12 000"
+          "label": "Длина",
+          "value": "12 м"
+        },
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "specifications": [
         {
-          "name": "Длина, мм",
-          "value": "12 000"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 35087; 27772"
+          "name": "Профиль",
+          "value": "20К1"
         },
         {
           "name": "Марка стали",
           "value": "С355"
         },
         {
-          "name": "Полное обозначение",
-          "value": "Балка 20К1х12000 ГОСТ 35087; 27772 С355 ТМ"
+          "name": "Длина",
+          "value": "12 м"
+        },
+        {
+          "name": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "imported": true,
-      "pricePerTon": 85050
+      "pricePerTon": 94500,
+      "weightPerMeterKg": 41.4,
+      "lengthMeters": 12,
+      "steelGrade": "С355"
     },
     {
       "id": "local-108395",
       "categoryId": "cat-bal",
       "subcategoryId": "cat-bal-sub-2",
       "productTypeId": "type-cat-bal-sub-2",
-      "name": "Балка 35Ш2х12000 ГОСТ 35087; 27772 С255 ТМ",
+      "name": "Балка широкополочная 35Ш2, С255, 12 м",
       "slug": "balka-35s2x12000-gost-35087-27772-s255-tm",
-      "shortDescription": "Длина, мм: 12 000; Стандарт: ГОСТ 35087; 27772; Марка стали: С255",
-      "description": "Балка 35Ш2х12000 ГОСТ 35087; 27772 С255 ТМ. Длина, мм: 12 000; Стандарт: ГОСТ 35087; 27772; Марка стали: С255. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 79470,
+      "shortDescription": "Двутавр 35Ш2 из стали С255, 12 м.",
+      "description": "Балка широкополочная 35Ш2, С255, 12 м. Сортамент по ГОСТ 35087-2024, требования к стали по ГОСТ 27772-2021.",
+      "price": 83000,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
       "unit": "ton",
       "priceUnit": "за тонну",
       "material": "",
-      "standard": "ГОСТ 35087; 27772",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "standard": "ГОСТ 35087-2024; 27772-2021",
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
         {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 35087; 27772"
+          "key": "size",
+          "label": "Профиль",
+          "value": "35Ш2"
         },
         {
           "key": "grade",
@@ -4580,57 +4669,65 @@
         },
         {
           "key": "length",
-          "label": "Длина, мм",
-          "value": "12 000"
+          "label": "Длина",
+          "value": "12 м"
+        },
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "specifications": [
         {
-          "name": "Длина, мм",
-          "value": "12 000"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 35087; 27772"
+          "name": "Профиль",
+          "value": "35Ш2"
         },
         {
           "name": "Марка стали",
           "value": "С255"
         },
         {
-          "name": "Полное обозначение",
-          "value": "Балка 35Ш2х12000 ГОСТ 35087; 27772 С255 ТМ"
+          "name": "Длина",
+          "value": "12 м"
+        },
+        {
+          "name": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "imported": true,
-      "pricePerTon": 79470
+      "pricePerTon": 83000,
+      "weightPerMeterKg": 79.7,
+      "lengthMeters": 12,
+      "steelGrade": "С255"
     },
     {
       "id": "local-110259",
       "categoryId": "cat-bal",
       "subcategoryId": "cat-bal-sub-2",
       "productTypeId": "type-cat-bal-sub-2",
-      "name": "Балка 35Ш1х12000 ГОСТ 35087; 27772 С255 ТМ",
+      "name": "Балка широкополочная 35Ш1, С255, 12 м",
       "slug": "balka-35s1x12000-gost-35087-27772-s255-tm",
-      "shortDescription": "Длина, мм: 12 000; Стандарт: ГОСТ 35087; 27772; Марка стали: С255",
-      "description": "Балка 35Ш1х12000 ГОСТ 35087; 27772 С255 ТМ. Длина, мм: 12 000; Стандарт: ГОСТ 35087; 27772; Марка стали: С255. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 79470,
+      "shortDescription": "Двутавр 35Ш1 из стали С255, 12 м.",
+      "description": "Балка широкополочная 35Ш1, С255, 12 м. Сортамент по ГОСТ 35087-2024, требования к стали по ГОСТ 27772-2021.",
+      "price": 83000,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
       "unit": "ton",
       "priceUnit": "за тонну",
       "material": "",
-      "standard": "ГОСТ 35087; 27772",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "standard": "ГОСТ 35087-2024; 27772-2021",
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
         {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 35087; 27772"
+          "key": "size",
+          "label": "Профиль",
+          "value": "35Ш1"
         },
         {
           "key": "grade",
@@ -4639,57 +4736,65 @@
         },
         {
           "key": "length",
-          "label": "Длина, мм",
-          "value": "12 000"
+          "label": "Длина",
+          "value": "12 м"
+        },
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "specifications": [
         {
-          "name": "Длина, мм",
-          "value": "12 000"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 35087; 27772"
+          "name": "Профиль",
+          "value": "35Ш1"
         },
         {
           "name": "Марка стали",
           "value": "С255"
         },
         {
-          "name": "Полное обозначение",
-          "value": "Балка 35Ш1х12000 ГОСТ 35087; 27772 С255 ТМ"
+          "name": "Длина",
+          "value": "12 м"
+        },
+        {
+          "name": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "imported": true,
-      "pricePerTon": 79470
+      "pricePerTon": 83000,
+      "weightPerMeterKg": 65.3,
+      "lengthMeters": 12,
+      "steelGrade": "С255"
     },
     {
       "id": "local-110534",
       "categoryId": "cat-bal",
       "subcategoryId": "cat-bal-sub-3",
       "productTypeId": "type-cat-bal-sub-3",
-      "name": "Балка 20К2х12000 ГОСТ 35087; 27772 С255 ТМ",
+      "name": "Балка колонная 20К2, С255, 12 м",
       "slug": "balka-20k2x12000-gost-35087-27772-s255-tm",
-      "shortDescription": "Длина, мм: 12 000; Стандарт: ГОСТ 35087; 27772; Марка стали: С255",
-      "description": "Балка 20К2х12000 ГОСТ 35087; 27772 С255 ТМ. Длина, мм: 12 000; Стандарт: ГОСТ 35087; 27772; Марка стали: С255. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 79740,
+      "shortDescription": "Двутавр 20К2 из стали С255, 12 м.",
+      "description": "Балка колонная 20К2, С255, 12 м. Сортамент по ГОСТ 35087-2024, требования к стали по ГОСТ 27772-2021.",
+      "price": 88700,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
       "unit": "ton",
       "priceUnit": "за тонну",
       "material": "",
-      "standard": "ГОСТ 35087; 27772",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "standard": "ГОСТ 35087-2024; 27772-2021",
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
         {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 35087; 27772"
+          "key": "size",
+          "label": "Профиль",
+          "value": "20К2"
         },
         {
           "key": "grade",
@@ -4698,57 +4803,65 @@
         },
         {
           "key": "length",
-          "label": "Длина, мм",
-          "value": "12 000"
+          "label": "Длина",
+          "value": "12 м"
+        },
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "specifications": [
         {
-          "name": "Длина, мм",
-          "value": "12 000"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 35087; 27772"
+          "name": "Профиль",
+          "value": "20К2"
         },
         {
           "name": "Марка стали",
           "value": "С255"
         },
         {
-          "name": "Полное обозначение",
-          "value": "Балка 20К2х12000 ГОСТ 35087; 27772 С255 ТМ"
+          "name": "Длина",
+          "value": "12 м"
+        },
+        {
+          "name": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "imported": true,
-      "pricePerTon": 79740
+      "pricePerTon": 88700,
+      "weightPerMeterKg": 49.9,
+      "lengthMeters": 12,
+      "steelGrade": "С255"
     },
     {
       "id": "local-110539",
       "categoryId": "cat-bal",
       "subcategoryId": "cat-bal-sub-2",
       "productTypeId": "type-cat-bal-sub-2",
-      "name": "Балка 25Ш2х12000 ГОСТ 35087; 27772 С255 ТМ",
+      "name": "Балка широкополочная 25Ш2, С255, 12 м",
       "slug": "balka-25s2x12000-gost-35087-27772-s255-tm",
-      "shortDescription": "Длина, мм: 12 000; Стандарт: ГОСТ 35087; 27772; Марка стали: С255",
-      "description": "Балка 25Ш2х12000 ГОСТ 35087; 27772 С255 ТМ. Длина, мм: 12 000; Стандарт: ГОСТ 35087; 27772; Марка стали: С255. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 79380,
+      "shortDescription": "Двутавр 25Ш2 из стали С255, 12 м.",
+      "description": "Балка широкополочная 25Ш2, С255, 12 м. Сортамент по ГОСТ 35087-2024, требования к стали по ГОСТ 27772-2021.",
+      "price": 88200,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
       "unit": "ton",
       "priceUnit": "за тонну",
       "material": "",
-      "standard": "ГОСТ 35087; 27772",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "standard": "ГОСТ 35087-2024; 27772-2021",
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
         {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 35087; 27772"
+          "key": "size",
+          "label": "Профиль",
+          "value": "25Ш2"
         },
         {
           "key": "grade",
@@ -4757,57 +4870,65 @@
         },
         {
           "key": "length",
-          "label": "Длина, мм",
-          "value": "12 000"
+          "label": "Длина",
+          "value": "12 м"
+        },
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "specifications": [
         {
-          "name": "Длина, мм",
-          "value": "12 000"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 35087; 27772"
+          "name": "Профиль",
+          "value": "25Ш2"
         },
         {
           "name": "Марка стали",
           "value": "С255"
         },
         {
-          "name": "Полное обозначение",
-          "value": "Балка 25Ш2х12000 ГОСТ 35087; 27772 С255 ТМ"
+          "name": "Длина",
+          "value": "12 м"
+        },
+        {
+          "name": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "imported": true,
-      "pricePerTon": 79380
+      "pricePerTon": 88200,
+      "weightPerMeterKg": 53.8,
+      "lengthMeters": 12,
+      "steelGrade": "С255"
     },
     {
       "id": "local-110542",
       "categoryId": "cat-bal",
       "subcategoryId": "cat-bal-sub-2",
       "productTypeId": "type-cat-bal-sub-2",
-      "name": "Балка 30Ш2х12000 ГОСТ 35087; 27772 С255 ТМ",
+      "name": "Балка широкополочная 30Ш2, С255, 12 м",
       "slug": "balka-30s2x12000-gost-35087-27772-s255-tm",
-      "shortDescription": "Длина, мм: 12 000; Стандарт: ГОСТ 35087; 27772; Марка стали: С255",
-      "description": "Балка 30Ш2х12000 ГОСТ 35087; 27772 С255 ТМ. Длина, мм: 12 000; Стандарт: ГОСТ 35087; 27772; Марка стали: С255. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 79470,
+      "shortDescription": "Двутавр 30Ш2 из стали С255, 12 м.",
+      "description": "Балка широкополочная 30Ш2, С255, 12 м. Сортамент по ГОСТ 35087-2024, требования к стали по ГОСТ 27772-2021.",
+      "price": 88300,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
       "unit": "ton",
       "priceUnit": "за тонну",
       "material": "",
-      "standard": "ГОСТ 35087; 27772",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "standard": "ГОСТ 35087-2024; 27772-2021",
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
         {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 35087; 27772"
+          "key": "size",
+          "label": "Профиль",
+          "value": "30Ш2"
         },
         {
           "key": "grade",
@@ -4816,57 +4937,65 @@
         },
         {
           "key": "length",
-          "label": "Длина, мм",
-          "value": "12 000"
+          "label": "Длина",
+          "value": "12 м"
+        },
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "specifications": [
         {
-          "name": "Длина, мм",
-          "value": "12 000"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 35087; 27772"
+          "name": "Профиль",
+          "value": "30Ш2"
         },
         {
           "name": "Марка стали",
           "value": "С255"
         },
         {
-          "name": "Полное обозначение",
-          "value": "Балка 30Ш2х12000 ГОСТ 35087; 27772 С255 ТМ"
+          "name": "Длина",
+          "value": "12 м"
+        },
+        {
+          "name": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "imported": true,
-      "pricePerTon": 79470
+      "pricePerTon": 88300,
+      "weightPerMeterKg": 68.6,
+      "lengthMeters": 12,
+      "steelGrade": "С255"
     },
     {
       "id": "local-110545",
       "categoryId": "cat-bal",
       "subcategoryId": "cat-bal-sub-1",
       "productTypeId": "type-cat-bal-sub-1",
-      "name": "Балка 40Б2х12000 ГОСТ 35087; 27772 С255 ТМ",
+      "name": "Балка нормальная 40Б2, С255, 12 м",
       "slug": "balka-40b2x12000-gost-35087-27772-s255-tm",
-      "shortDescription": "Длина, мм: 12 000; Стандарт: ГОСТ 35087; 27772; Марка стали: С255",
-      "description": "Балка 40Б2х12000 ГОСТ 35087; 27772 С255 ТМ. Длина, мм: 12 000; Стандарт: ГОСТ 35087; 27772; Марка стали: С255. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 79470,
+      "shortDescription": "Двутавр 40Б2 из стали С255, 12 м.",
+      "description": "Балка нормальная 40Б2, С255, 12 м. Сортамент по ГОСТ 35087-2024, требования к стали по ГОСТ 27772-2021.",
+      "price": 83000,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
       "unit": "ton",
       "priceUnit": "за тонну",
       "material": "",
-      "standard": "ГОСТ 35087; 27772",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "standard": "ГОСТ 35087-2024; 27772-2021",
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
         {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 35087; 27772"
+          "key": "size",
+          "label": "Профиль",
+          "value": "40Б2"
         },
         {
           "key": "grade",
@@ -4875,57 +5004,65 @@
         },
         {
           "key": "length",
-          "label": "Длина, мм",
-          "value": "12 000"
+          "label": "Длина",
+          "value": "12 м"
+        },
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "specifications": [
         {
-          "name": "Длина, мм",
-          "value": "12 000"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 35087; 27772"
+          "name": "Профиль",
+          "value": "40Б2"
         },
         {
           "name": "Марка стали",
           "value": "С255"
         },
         {
-          "name": "Полное обозначение",
-          "value": "Балка 40Б2х12000 ГОСТ 35087; 27772 С255 ТМ"
+          "name": "Длина",
+          "value": "12 м"
+        },
+        {
+          "name": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "imported": true,
-      "pricePerTon": 79470
+      "pricePerTon": 83000,
+      "weightPerMeterKg": 66,
+      "lengthMeters": 12,
+      "steelGrade": "С255"
     },
     {
       "id": "local-110546",
       "categoryId": "cat-bal",
       "subcategoryId": "cat-bal-sub-1",
       "productTypeId": "type-cat-bal-sub-1",
-      "name": "Балка 45Б1х12000 ГОСТ 35087; 27772 С255 ТМ",
+      "name": "Балка нормальная 45Б1, С255, 12 м",
       "slug": "balka-45b1x12000-gost-35087-27772-s255-tm",
-      "shortDescription": "Длина, мм: 12 000; Стандарт: ГОСТ 35087; 27772; Марка стали: С255",
-      "description": "Балка 45Б1х12000 ГОСТ 35087; 27772 С255 ТМ. Длина, мм: 12 000; Стандарт: ГОСТ 35087; 27772; Марка стали: С255. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 78570,
+      "shortDescription": "Двутавр 45Б1 из стали С255, 12 м.",
+      "description": "Балка нормальная 45Б1, С255, 12 м. Сортамент по ГОСТ 35087-2024, требования к стали по ГОСТ 27772-2021.",
+      "price": 84700,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
       "unit": "ton",
       "priceUnit": "за тонну",
       "material": "",
-      "standard": "ГОСТ 35087; 27772",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "standard": "ГОСТ 35087-2024; 27772-2021",
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
         {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 35087; 27772"
+          "key": "size",
+          "label": "Профиль",
+          "value": "45Б1"
         },
         {
           "key": "grade",
@@ -4934,57 +5071,65 @@
         },
         {
           "key": "length",
-          "label": "Длина, мм",
-          "value": "12 000"
+          "label": "Длина",
+          "value": "12 м"
+        },
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "specifications": [
         {
-          "name": "Длина, мм",
-          "value": "12 000"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 35087; 27772"
+          "name": "Профиль",
+          "value": "45Б1"
         },
         {
           "name": "Марка стали",
           "value": "С255"
         },
         {
-          "name": "Полное обозначение",
-          "value": "Балка 45Б1х12000 ГОСТ 35087; 27772 С255 ТМ"
+          "name": "Длина",
+          "value": "12 м"
+        },
+        {
+          "name": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "imported": true,
-      "pricePerTon": 78570
+      "pricePerTon": 84700,
+      "weightPerMeterKg": 66.2,
+      "lengthMeters": 12,
+      "steelGrade": "С255"
     },
     {
       "id": "local-110554",
       "categoryId": "cat-bal",
       "subcategoryId": "cat-bal-sub-3",
       "productTypeId": "type-cat-bal-sub-3",
-      "name": "Балка 30К1х12000 ГОСТ 35087; 27772 С255 ТМ",
+      "name": "Балка колонная 30К1, С255, 12 м",
       "slug": "balka-30k1x12000-gost-35087-27772-s255-tm",
-      "shortDescription": "Длина, мм: 12 000; Стандарт: ГОСТ 35087; 27772; Марка стали: С255",
-      "description": "Балка 30К1х12000 ГОСТ 35087; 27772 С255 ТМ. Длина, мм: 12 000; Стандарт: ГОСТ 35087; 27772; Марка стали: С255. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 79470,
+      "shortDescription": "Двутавр 30К1 из стали С255, 12 м.",
+      "description": "Балка колонная 30К1, С255, 12 м. Сортамент по ГОСТ 35087-2024, требования к стали по ГОСТ 27772-2021.",
+      "price": 88300,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
       "unit": "ton",
       "priceUnit": "за тонну",
       "material": "",
-      "standard": "ГОСТ 35087; 27772",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "standard": "ГОСТ 35087-2024; 27772-2021",
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
         {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 35087; 27772"
+          "key": "size",
+          "label": "Профиль",
+          "value": "30К1"
         },
         {
           "key": "grade",
@@ -4993,57 +5138,65 @@
         },
         {
           "key": "length",
-          "label": "Длина, мм",
-          "value": "12 000"
+          "label": "Длина",
+          "value": "12 м"
+        },
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "specifications": [
         {
-          "name": "Длина, мм",
-          "value": "12 000"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 35087; 27772"
+          "name": "Профиль",
+          "value": "30К1"
         },
         {
           "name": "Марка стали",
           "value": "С255"
         },
         {
-          "name": "Полное обозначение",
-          "value": "Балка 30К1х12000 ГОСТ 35087; 27772 С255 ТМ"
+          "name": "Длина",
+          "value": "12 м"
+        },
+        {
+          "name": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "imported": true,
-      "pricePerTon": 79470
+      "pricePerTon": 88300,
+      "weightPerMeterKg": 87,
+      "lengthMeters": 12,
+      "steelGrade": "С255"
     },
     {
       "id": "local-110555",
       "categoryId": "cat-bal",
       "subcategoryId": "cat-bal-sub-1",
       "productTypeId": "type-cat-bal-sub-1",
-      "name": "Балка 35Б2х12000 ГОСТ 35087; 27772 С255 ТМ",
+      "name": "Балка нормальная 35Б2, С255, 12 м",
       "slug": "balka-35b2x12000-gost-35087-27772-s255-tm",
-      "shortDescription": "Длина, мм: 12 000; Стандарт: ГОСТ 35087; 27772; Марка стали: С255",
-      "description": "Балка 35Б2х12000 ГОСТ 35087; 27772 С255 ТМ. Длина, мм: 12 000; Стандарт: ГОСТ 35087; 27772; Марка стали: С255. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 79380,
+      "shortDescription": "Двутавр 35Б2 из стали С255, 12 м.",
+      "description": "Балка нормальная 35Б2, С255, 12 м. Сортамент по ГОСТ 35087-2024, требования к стали по ГОСТ 27772-2021.",
+      "price": 82900,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
       "unit": "ton",
       "priceUnit": "за тонну",
       "material": "",
-      "standard": "ГОСТ 35087; 27772",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "standard": "ГОСТ 35087-2024; 27772-2021",
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
         {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 35087; 27772"
+          "key": "size",
+          "label": "Профиль",
+          "value": "35Б2"
         },
         {
           "key": "grade",
@@ -5052,57 +5205,65 @@
         },
         {
           "key": "length",
-          "label": "Длина, мм",
-          "value": "12 000"
+          "label": "Длина",
+          "value": "12 м"
+        },
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "specifications": [
         {
-          "name": "Длина, мм",
-          "value": "12 000"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 35087; 27772"
+          "name": "Профиль",
+          "value": "35Б2"
         },
         {
           "name": "Марка стали",
           "value": "С255"
         },
         {
-          "name": "Полное обозначение",
-          "value": "Балка 35Б2х12000 ГОСТ 35087; 27772 С255 ТМ"
+          "name": "Длина",
+          "value": "12 м"
+        },
+        {
+          "name": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "imported": true,
-      "pricePerTon": 79380
+      "pricePerTon": 82900,
+      "weightPerMeterKg": 49.6,
+      "lengthMeters": 12,
+      "steelGrade": "С255"
     },
     {
       "id": "local-110556",
       "categoryId": "cat-bal",
       "subcategoryId": "cat-bal-sub-1",
       "productTypeId": "type-cat-bal-sub-1",
-      "name": "Балка 35Б1х12000 ГОСТ 35087; 27772 С255 ТМ",
+      "name": "Балка нормальная 35Б1, С255, 12 м",
       "slug": "balka-35b1x12000-gost-35087-27772-s255-tm",
-      "shortDescription": "Длина, мм: 12 000; Стандарт: ГОСТ 35087; 27772; Марка стали: С255",
-      "description": "Балка 35Б1х12000 ГОСТ 35087; 27772 С255 ТМ. Длина, мм: 12 000; Стандарт: ГОСТ 35087; 27772; Марка стали: С255. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 79380,
+      "shortDescription": "Двутавр 35Б1 из стали С255, 12 м.",
+      "description": "Балка нормальная 35Б1, С255, 12 м. Сортамент по ГОСТ 35087-2024, требования к стали по ГОСТ 27772-2021.",
+      "price": 82900,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
       "unit": "ton",
       "priceUnit": "за тонну",
       "material": "",
-      "standard": "ГОСТ 35087; 27772",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "standard": "ГОСТ 35087-2024; 27772-2021",
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
         {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 35087; 27772"
+          "key": "size",
+          "label": "Профиль",
+          "value": "35Б1"
         },
         {
           "key": "grade",
@@ -5111,57 +5272,65 @@
         },
         {
           "key": "length",
-          "label": "Длина, мм",
-          "value": "12 000"
+          "label": "Длина",
+          "value": "12 м"
+        },
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "specifications": [
         {
-          "name": "Длина, мм",
-          "value": "12 000"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 35087; 27772"
+          "name": "Профиль",
+          "value": "35Б1"
         },
         {
           "name": "Марка стали",
           "value": "С255"
         },
         {
-          "name": "Полное обозначение",
-          "value": "Балка 35Б1х12000 ГОСТ 35087; 27772 С255 ТМ"
+          "name": "Длина",
+          "value": "12 м"
+        },
+        {
+          "name": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "imported": true,
-      "pricePerTon": 79380
+      "pricePerTon": 82900,
+      "weightPerMeterKg": 41.4,
+      "lengthMeters": 12,
+      "steelGrade": "С255"
     },
     {
       "id": "local-110557",
       "categoryId": "cat-bal",
       "subcategoryId": "cat-bal-sub-2",
       "productTypeId": "type-cat-bal-sub-2",
-      "name": "Балка 40Ш1х12000 ГОСТ 35087; 27772 С255 ТМ",
+      "name": "Балка широкополочная 40Ш1, С255, 12 м",
       "slug": "balka-40s1x12000-gost-35087-27772-s255-tm",
-      "shortDescription": "Длина, мм: 12 000; Стандарт: ГОСТ 35087; 27772; Марка стали: С255",
-      "description": "Балка 40Ш1х12000 ГОСТ 35087; 27772 С255 ТМ. Длина, мм: 12 000; Стандарт: ГОСТ 35087; 27772; Марка стали: С255. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 79560,
+      "shortDescription": "Двутавр 40Ш1 из стали С255, 12 м.",
+      "description": "Балка широкополочная 40Ш1, С255, 12 м. Сортамент по ГОСТ 35087-2024, требования к стали по ГОСТ 27772-2021.",
+      "price": 83100,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
       "unit": "ton",
       "priceUnit": "за тонну",
       "material": "",
-      "standard": "ГОСТ 35087; 27772",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "standard": "ГОСТ 35087-2024; 27772-2021",
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
         {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 35087; 27772"
+          "key": "size",
+          "label": "Профиль",
+          "value": "40Ш1"
         },
         {
           "key": "grade",
@@ -5170,30 +5339,38 @@
         },
         {
           "key": "length",
-          "label": "Длина, мм",
-          "value": "12 000"
+          "label": "Длина",
+          "value": "12 м"
+        },
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "specifications": [
         {
-          "name": "Длина, мм",
-          "value": "12 000"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 35087; 27772"
+          "name": "Профиль",
+          "value": "40Ш1"
         },
         {
           "name": "Марка стали",
           "value": "С255"
         },
         {
-          "name": "Полное обозначение",
-          "value": "Балка 40Ш1х12000 ГОСТ 35087; 27772 С255 ТМ"
+          "name": "Длина",
+          "value": "12 м"
+        },
+        {
+          "name": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "imported": true,
-      "pricePerTon": 79560
+      "pricePerTon": 83100,
+      "weightPerMeterKg": 88.6,
+      "lengthMeters": 12,
+      "steelGrade": "С255"
     },
     {
       "id": "local-110937",
@@ -5875,27 +6052,27 @@
       "categoryId": "cat-bal",
       "subcategoryId": "cat-bal-sub-1",
       "productTypeId": "type-cat-bal-sub-1",
-      "name": "Балка 25Б2х12000 ГОСТ 35087; 27772 С255 ТМ",
+      "name": "Балка нормальная 25Б2, С255, 12 м",
       "slug": "balka-25b2x12000-gost-35087-27772-s255-tm",
-      "shortDescription": "Длина, мм: 12 000; Стандарт: ГОСТ 35087; 27772; Марка стали: С255",
-      "description": "Балка 25Б2х12000 ГОСТ 35087; 27772 С255 ТМ. Длина, мм: 12 000; Стандарт: ГОСТ 35087; 27772; Марка стали: С255. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 80190,
+      "shortDescription": "Двутавр 25Б2 из стали С255, 12 м.",
+      "description": "Балка нормальная 25Б2, С255, 12 м. Сортамент по ГОСТ 35087-2024, требования к стали по ГОСТ 27772-2021.",
+      "price": 89200,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
       "unit": "ton",
       "priceUnit": "за тонну",
       "material": "",
-      "standard": "ГОСТ 35087; 27772",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "standard": "ГОСТ 35087-2024; 27772-2021",
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
         {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 35087; 27772"
+          "key": "size",
+          "label": "Профиль",
+          "value": "25Б2"
         },
         {
           "key": "grade",
@@ -5904,57 +6081,65 @@
         },
         {
           "key": "length",
-          "label": "Длина, мм",
-          "value": "12 000"
+          "label": "Длина",
+          "value": "12 м"
+        },
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "specifications": [
         {
-          "name": "Длина, мм",
-          "value": "12 000"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 35087; 27772"
+          "name": "Профиль",
+          "value": "25Б2"
         },
         {
           "name": "Марка стали",
           "value": "С255"
         },
         {
-          "name": "Полное обозначение",
-          "value": "Балка 25Б2х12000 ГОСТ 35087; 27772 С255 ТМ"
+          "name": "Длина",
+          "value": "12 м"
+        },
+        {
+          "name": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "imported": true,
-      "pricePerTon": 80190
+      "pricePerTon": 89200,
+      "weightPerMeterKg": 29.6,
+      "lengthMeters": 12,
+      "steelGrade": "С255"
     },
     {
       "id": "local-115970",
       "categoryId": "cat-bal",
       "subcategoryId": "cat-bal-sub-2",
       "productTypeId": "type-cat-bal-sub-2",
-      "name": "Балка 45Ш1х12000 ГОСТ 35087; 27772 С255 ТМ",
+      "name": "Балка широкополочная 45Ш1, С255, 12 м",
       "slug": "balka-45s1x12000-gost-35087-27772-s255-tm",
-      "shortDescription": "Длина, мм: 12 000; Стандарт: ГОСТ 35087; 27772; Марка стали: С255",
-      "description": "Балка 45Ш1х12000 ГОСТ 35087; 27772 С255 ТМ. Длина, мм: 12 000; Стандарт: ГОСТ 35087; 27772; Марка стали: С255. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 81270,
+      "shortDescription": "Двутавр 45Ш1 из стали С255, 12 м.",
+      "description": "Балка широкополочная 45Ш1, С255, 12 м. Сортамент по ГОСТ 35087-2024, требования к стали по ГОСТ 27772-2021.",
+      "price": 90300,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
       "unit": "ton",
       "priceUnit": "за тонну",
       "material": "",
-      "standard": "ГОСТ 35087; 27772",
-      "availability": "UNKNOWN",
+      "standard": "ГОСТ 35087-2024; 27772-2021",
+      "availability": "ON_ORDER",
       "inStock": false,
       "featured": false,
       "imageUrls": [],
       "attributes": [
         {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 35087; 27772"
+          "key": "size",
+          "label": "Профиль",
+          "value": "45Ш1"
         },
         {
           "key": "grade",
@@ -5963,57 +6148,65 @@
         },
         {
           "key": "length",
-          "label": "Длина, мм",
-          "value": "12 000"
+          "label": "Длина",
+          "value": "12 м"
+        },
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "specifications": [
         {
-          "name": "Длина, мм",
-          "value": "12 000"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 35087; 27772"
+          "name": "Профиль",
+          "value": "45Ш1"
         },
         {
           "name": "Марка стали",
           "value": "С255"
         },
         {
-          "name": "Полное обозначение",
-          "value": "Балка 45Ш1х12000 ГОСТ 35087; 27772 С255 ТМ"
+          "name": "Длина",
+          "value": "12 м"
+        },
+        {
+          "name": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "imported": true,
-      "pricePerTon": 81270
+      "pricePerTon": 90300,
+      "weightPerMeterKg": 123.6,
+      "lengthMeters": 12,
+      "steelGrade": "С255"
     },
     {
       "id": "local-115971",
       "categoryId": "cat-bal",
       "subcategoryId": "cat-bal-sub-3",
       "productTypeId": "type-cat-bal-sub-3",
-      "name": "Балка 25К2х12000 ГОСТ 35087; 27772 С255 ТМ",
+      "name": "Балка колонная 25К2, С255, 12 м",
       "slug": "balka-25k2x12000-gost-35087-27772-s255-tm",
-      "shortDescription": "Длина, мм: 12 000; Стандарт: ГОСТ 35087; 27772; Марка стали: С255",
-      "description": "Балка 25К2х12000 ГОСТ 35087; 27772 С255 ТМ. Длина, мм: 12 000; Стандарт: ГОСТ 35087; 27772; Марка стали: С255. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 79470,
+      "shortDescription": "Двутавр 25К2 из стали С255, 12 м.",
+      "description": "Балка колонная 25К2, С255, 12 м. Сортамент по ГОСТ 35087-2024, требования к стали по ГОСТ 27772-2021.",
+      "price": 88300,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
       "unit": "ton",
       "priceUnit": "за тонну",
       "material": "",
-      "standard": "ГОСТ 35087; 27772",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "standard": "ГОСТ 35087-2024; 27772-2021",
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
         {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 35087; 27772"
+          "key": "size",
+          "label": "Профиль",
+          "value": "25К2"
         },
         {
           "key": "grade",
@@ -6022,57 +6215,65 @@
         },
         {
           "key": "length",
-          "label": "Длина, мм",
-          "value": "12 000"
+          "label": "Длина",
+          "value": "12 м"
+        },
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "specifications": [
         {
-          "name": "Длина, мм",
-          "value": "12 000"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 35087; 27772"
+          "name": "Профиль",
+          "value": "25К2"
         },
         {
           "name": "Марка стали",
           "value": "С255"
         },
         {
-          "name": "Полное обозначение",
-          "value": "Балка 25К2х12000 ГОСТ 35087; 27772 С255 ТМ"
+          "name": "Длина",
+          "value": "12 м"
+        },
+        {
+          "name": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "imported": true,
-      "pricePerTon": 79470
+      "pricePerTon": 88300,
+      "weightPerMeterKg": 72.4,
+      "lengthMeters": 12,
+      "steelGrade": "С255"
     },
     {
       "id": "local-115972",
       "categoryId": "cat-bal",
       "subcategoryId": "cat-bal-sub-1",
       "productTypeId": "type-cat-bal-sub-1",
-      "name": "Балка 30Б2х12000 ГОСТ 35087; 27772 С255 ТМ",
+      "name": "Балка нормальная 30Б2, С255, 12 м",
       "slug": "balka-30b2x12000-gost-35087-27772-s255-tm",
-      "shortDescription": "Длина, мм: 12 000; Стандарт: ГОСТ 35087; 27772; Марка стали: С255",
-      "description": "Балка 30Б2х12000 ГОСТ 35087; 27772 С255 ТМ. Длина, мм: 12 000; Стандарт: ГОСТ 35087; 27772; Марка стали: С255. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 79740,
+      "shortDescription": "Двутавр 30Б2 из стали С255, 12 м.",
+      "description": "Балка нормальная 30Б2, С255, 12 м. Сортамент по ГОСТ 35087-2024, требования к стали по ГОСТ 27772-2021.",
+      "price": 83300,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
       "unit": "ton",
       "priceUnit": "за тонну",
       "material": "",
-      "standard": "ГОСТ 35087; 27772",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "standard": "ГОСТ 35087-2024; 27772-2021",
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
         {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 35087; 27772"
+          "key": "size",
+          "label": "Профиль",
+          "value": "30Б2"
         },
         {
           "key": "grade",
@@ -6081,57 +6282,65 @@
         },
         {
           "key": "length",
-          "label": "Длина, мм",
-          "value": "12 000"
+          "label": "Длина",
+          "value": "12 м"
+        },
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "specifications": [
         {
-          "name": "Длина, мм",
-          "value": "12 000"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 35087; 27772"
+          "name": "Профиль",
+          "value": "30Б2"
         },
         {
           "name": "Марка стали",
           "value": "С255"
         },
         {
-          "name": "Полное обозначение",
-          "value": "Балка 30Б2х12000 ГОСТ 35087; 27772 С255 ТМ"
+          "name": "Длина",
+          "value": "12 м"
+        },
+        {
+          "name": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "imported": true,
-      "pricePerTon": 79740
+      "pricePerTon": 83300,
+      "weightPerMeterKg": 36.7,
+      "lengthMeters": 12,
+      "steelGrade": "С255"
     },
     {
       "id": "local-115976",
       "categoryId": "cat-bal",
       "subcategoryId": "cat-bal-sub-2",
       "productTypeId": "type-cat-bal-sub-2",
-      "name": "Балка 20Ш1х12000 ГОСТ 35087; 27772 С255 ТМ",
+      "name": "Балка широкополочная 20Ш1, С255, 12 м",
       "slug": "balka-20s1x12000-gost-35087-27772-s255-tm",
-      "shortDescription": "Длина, мм: 12 000; Стандарт: ГОСТ 35087; 27772; Марка стали: С255",
-      "description": "Балка 20Ш1х12000 ГОСТ 35087; 27772 С255 ТМ. Длина, мм: 12 000; Стандарт: ГОСТ 35087; 27772; Марка стали: С255. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 79290,
+      "shortDescription": "Двутавр 20Ш1 из стали С255, 12 м.",
+      "description": "Балка широкополочная 20Ш1, С255, 12 м. Сортамент по ГОСТ 35087-2024, требования к стали по ГОСТ 27772-2021.",
+      "price": 88100,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
       "unit": "ton",
       "priceUnit": "за тонну",
       "material": "",
-      "standard": "ГОСТ 35087; 27772",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "standard": "ГОСТ 35087-2024; 27772-2021",
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
         {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 35087; 27772"
+          "key": "size",
+          "label": "Профиль",
+          "value": "20Ш1"
         },
         {
           "key": "grade",
@@ -6140,57 +6349,65 @@
         },
         {
           "key": "length",
-          "label": "Длина, мм",
-          "value": "12 000"
+          "label": "Длина",
+          "value": "12 м"
+        },
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "specifications": [
         {
-          "name": "Длина, мм",
-          "value": "12 000"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 35087; 27772"
+          "name": "Профиль",
+          "value": "20Ш1"
         },
         {
           "name": "Марка стали",
           "value": "С255"
         },
         {
-          "name": "Полное обозначение",
-          "value": "Балка 20Ш1х12000 ГОСТ 35087; 27772 С255 ТМ"
+          "name": "Длина",
+          "value": "12 м"
+        },
+        {
+          "name": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "imported": true,
-      "pricePerTon": 79290
+      "pricePerTon": 88100,
+      "weightPerMeterKg": 30.6,
+      "lengthMeters": 12,
+      "steelGrade": "С255"
     },
     {
       "id": "local-115977",
       "categoryId": "cat-bal",
       "subcategoryId": "cat-bal-sub-1",
       "productTypeId": "type-cat-bal-sub-1",
-      "name": "Балка 30Б1х12000 ГОСТ 35087; 27772 С255 ТМ",
+      "name": "Балка нормальная 30Б1, С255, 12 м",
       "slug": "balka-30b1x12000-gost-35087-27772-s255-tm",
-      "shortDescription": "Длина, мм: 12 000; Стандарт: ГОСТ 35087; 27772; Марка стали: С255",
-      "description": "Балка 30Б1х12000 ГОСТ 35087; 27772 С255 ТМ. Длина, мм: 12 000; Стандарт: ГОСТ 35087; 27772; Марка стали: С255. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 79740,
+      "shortDescription": "Двутавр 30Б1 из стали С255, 12 м.",
+      "description": "Балка нормальная 30Б1, С255, 12 м. Сортамент по ГОСТ 35087-2024, требования к стали по ГОСТ 27772-2021.",
+      "price": 83300,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
       "unit": "ton",
       "priceUnit": "за тонну",
       "material": "",
-      "standard": "ГОСТ 35087; 27772",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "standard": "ГОСТ 35087-2024; 27772-2021",
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
         {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 35087; 27772"
+          "key": "size",
+          "label": "Профиль",
+          "value": "30Б1"
         },
         {
           "key": "grade",
@@ -6199,57 +6416,65 @@
         },
         {
           "key": "length",
-          "label": "Длина, мм",
-          "value": "12 000"
+          "label": "Длина",
+          "value": "12 м"
+        },
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "specifications": [
         {
-          "name": "Длина, мм",
-          "value": "12 000"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 35087; 27772"
+          "name": "Профиль",
+          "value": "30Б1"
         },
         {
           "name": "Марка стали",
           "value": "С255"
         },
         {
-          "name": "Полное обозначение",
-          "value": "Балка 30Б1х12000 ГОСТ 35087; 27772 С255 ТМ"
+          "name": "Длина",
+          "value": "12 м"
+        },
+        {
+          "name": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "imported": true,
-      "pricePerTon": 79740
+      "pricePerTon": 83300,
+      "weightPerMeterKg": 32,
+      "lengthMeters": 12,
+      "steelGrade": "С255"
     },
     {
       "id": "local-115982",
       "categoryId": "cat-bal",
       "subcategoryId": "cat-bal-sub-2",
       "productTypeId": "type-cat-bal-sub-2",
-      "name": "Балка 30Ш1х12000 ГОСТ 35087; 27772 С255 ТМ",
+      "name": "Балка широкополочная 30Ш1, С255, 12 м",
       "slug": "balka-30s1x12000-gost-35087-27772-s255-tm",
-      "shortDescription": "Длина, мм: 12 000; Стандарт: ГОСТ 35087; 27772; Марка стали: С255",
-      "description": "Балка 30Ш1х12000 ГОСТ 35087; 27772 С255 ТМ. Длина, мм: 12 000; Стандарт: ГОСТ 35087; 27772; Марка стали: С255. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 79470,
+      "shortDescription": "Двутавр 30Ш1 из стали С255, 12 м.",
+      "description": "Балка широкополочная 30Ш1, С255, 12 м. Сортамент по ГОСТ 35087-2024, требования к стали по ГОСТ 27772-2021.",
+      "price": 83000,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
       "unit": "ton",
       "priceUnit": "за тонну",
       "material": "",
-      "standard": "ГОСТ 35087; 27772",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "standard": "ГОСТ 35087-2024; 27772-2021",
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
         {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 35087; 27772"
+          "key": "size",
+          "label": "Профиль",
+          "value": "30Ш1"
         },
         {
           "key": "grade",
@@ -6258,57 +6483,65 @@
         },
         {
           "key": "length",
-          "label": "Длина, мм",
-          "value": "12 000"
+          "label": "Длина",
+          "value": "12 м"
+        },
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "specifications": [
         {
-          "name": "Длина, мм",
-          "value": "12 000"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 35087; 27772"
+          "name": "Профиль",
+          "value": "30Ш1"
         },
         {
           "name": "Марка стали",
           "value": "С255"
         },
         {
-          "name": "Полное обозначение",
-          "value": "Балка 30Ш1х12000 ГОСТ 35087; 27772 С255 ТМ"
+          "name": "Длина",
+          "value": "12 м"
+        },
+        {
+          "name": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "imported": true,
-      "pricePerTon": 79470
+      "pricePerTon": 83000,
+      "weightPerMeterKg": 56.8,
+      "lengthMeters": 12,
+      "steelGrade": "С255"
     },
     {
       "id": "local-116009",
       "categoryId": "cat-bal",
       "subcategoryId": "cat-bal-sub-1",
       "productTypeId": "type-cat-bal-sub-1",
-      "name": "Балка 40Б1х12000 ГОСТ 35087; 27772 С255 ТМ",
+      "name": "Балка нормальная 40Б1, С255, 12 м",
       "slug": "balka-40b1x12000-gost-35087-27772-s255-tm",
-      "shortDescription": "Длина, мм: 12 000; Стандарт: ГОСТ 35087; 27772; Марка стали: С255",
-      "description": "Балка 40Б1х12000 ГОСТ 35087; 27772 С255 ТМ. Длина, мм: 12 000; Стандарт: ГОСТ 35087; 27772; Марка стали: С255. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 79470,
+      "shortDescription": "Двутавр 40Б1 из стали С255, 12 м.",
+      "description": "Балка нормальная 40Б1, С255, 12 м. Сортамент по ГОСТ 35087-2024, требования к стали по ГОСТ 27772-2021.",
+      "price": 83000,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
       "unit": "ton",
       "priceUnit": "за тонну",
       "material": "",
-      "standard": "ГОСТ 35087; 27772",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "standard": "ГОСТ 35087-2024; 27772-2021",
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
         {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 35087; 27772"
+          "key": "size",
+          "label": "Профиль",
+          "value": "40Б1"
         },
         {
           "key": "grade",
@@ -6317,57 +6550,65 @@
         },
         {
           "key": "length",
-          "label": "Длина, мм",
-          "value": "12 000"
+          "label": "Длина",
+          "value": "12 м"
+        },
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "specifications": [
         {
-          "name": "Длина, мм",
-          "value": "12 000"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 35087; 27772"
+          "name": "Профиль",
+          "value": "40Б1"
         },
         {
           "name": "Марка стали",
           "value": "С255"
         },
         {
-          "name": "Полное обозначение",
-          "value": "Балка 40Б1х12000 ГОСТ 35087; 27772 С255 ТМ"
+          "name": "Длина",
+          "value": "12 м"
+        },
+        {
+          "name": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "imported": true,
-      "pricePerTon": 79470
+      "pricePerTon": 83000,
+      "weightPerMeterKg": 56.6,
+      "lengthMeters": 12,
+      "steelGrade": "С255"
     },
     {
       "id": "local-117670",
       "categoryId": "cat-bal",
       "subcategoryId": "cat-bal-sub-1",
       "productTypeId": "type-cat-bal-sub-1",
-      "name": "Балка 25Б1х12000 ГОСТ 35087; 27772 С255 ТМ",
+      "name": "Балка нормальная 25Б1, С255, 12 м",
       "slug": "balka-25b1x12000-gost-35087-27772-s255-tm",
-      "shortDescription": "Длина, мм: 12 000; Стандарт: ГОСТ 35087; 27772; Марка стали: С255",
-      "description": "Балка 25Б1х12000 ГОСТ 35087; 27772 С255 ТМ. Длина, мм: 12 000; Стандарт: ГОСТ 35087; 27772; Марка стали: С255. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 80190,
+      "shortDescription": "Двутавр 25Б1 из стали С255, 12 м.",
+      "description": "Балка нормальная 25Б1, С255, 12 м. Сортамент по ГОСТ 35087-2024, требования к стали по ГОСТ 27772-2021.",
+      "price": 89200,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
       "unit": "ton",
       "priceUnit": "за тонну",
       "material": "",
-      "standard": "ГОСТ 35087; 27772",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "standard": "ГОСТ 35087-2024; 27772-2021",
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
         {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 35087; 27772"
+          "key": "size",
+          "label": "Профиль",
+          "value": "25Б1"
         },
         {
           "key": "grade",
@@ -6376,57 +6617,65 @@
         },
         {
           "key": "length",
-          "label": "Длина, мм",
-          "value": "12 000"
+          "label": "Длина",
+          "value": "12 м"
+        },
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "specifications": [
         {
-          "name": "Длина, мм",
-          "value": "12 000"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 35087; 27772"
+          "name": "Профиль",
+          "value": "25Б1"
         },
         {
           "name": "Марка стали",
           "value": "С255"
         },
         {
-          "name": "Полное обозначение",
-          "value": "Балка 25Б1х12000 ГОСТ 35087; 27772 С255 ТМ"
+          "name": "Длина",
+          "value": "12 м"
+        },
+        {
+          "name": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "imported": true,
-      "pricePerTon": 80190
+      "pricePerTon": 89200,
+      "weightPerMeterKg": 25.7,
+      "lengthMeters": 12,
+      "steelGrade": "С255"
     },
     {
       "id": "local-118168",
       "categoryId": "cat-bal",
       "subcategoryId": "cat-bal-sub-2",
       "productTypeId": "type-cat-bal-sub-2",
-      "name": "Балка 40Ш2х12000 ГОСТ 35087; 27772 С255 ТМ",
+      "name": "Балка широкополочная 40Ш2, С255, 12 м",
       "slug": "balka-40s2x12000-gost-35087-27772-s255-tm",
-      "shortDescription": "Длина, мм: 12 000; Стандарт: ГОСТ 35087; 27772; Марка стали: С255",
-      "description": "Балка 40Ш2х12000 ГОСТ 35087; 27772 С255 ТМ. Длина, мм: 12 000; Стандарт: ГОСТ 35087; 27772; Марка стали: С255. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 79560,
+      "shortDescription": "Двутавр 40Ш2 из стали С255, 12 м.",
+      "description": "Балка широкополочная 40Ш2, С255, 12 м. Сортамент по ГОСТ 35087-2024, требования к стали по ГОСТ 27772-2021.",
+      "price": 83100,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
       "unit": "ton",
       "priceUnit": "за тонну",
       "material": "",
-      "standard": "ГОСТ 35087; 27772",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "standard": "ГОСТ 35087-2024; 27772-2021",
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
         {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 35087; 27772"
+          "key": "size",
+          "label": "Профиль",
+          "value": "40Ш2"
         },
         {
           "key": "grade",
@@ -6435,30 +6684,38 @@
         },
         {
           "key": "length",
-          "label": "Длина, мм",
-          "value": "12 000"
+          "label": "Длина",
+          "value": "12 м"
+        },
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "specifications": [
         {
-          "name": "Длина, мм",
-          "value": "12 000"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 35087; 27772"
+          "name": "Профиль",
+          "value": "40Ш2"
         },
         {
           "name": "Марка стали",
           "value": "С255"
         },
         {
-          "name": "Полное обозначение",
-          "value": "Балка 40Ш2х12000 ГОСТ 35087; 27772 С255 ТМ"
+          "name": "Длина",
+          "value": "12 м"
+        },
+        {
+          "name": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "imported": true,
-      "pricePerTon": 79560
+      "pricePerTon": 83100,
+      "weightPerMeterKg": 106.7,
+      "lengthMeters": 12,
+      "steelGrade": "С255"
     },
     {
       "id": "local-118826",
@@ -6533,27 +6790,27 @@
       "categoryId": "cat-bal",
       "subcategoryId": "cat-bal-sub-2",
       "productTypeId": "type-cat-bal-sub-2",
-      "name": "Балка 25Ш1х12000 ГОСТ 35087; 27772 С255 ТМ",
+      "name": "Балка широкополочная 25Ш1, С255, 12 м",
       "slug": "balka-25s1x12000-gost-35087-27772-s255-tm",
-      "shortDescription": "Длина, мм: 12 000; Стандарт: ГОСТ 35087; 27772; Марка стали: С255",
-      "description": "Балка 25Ш1х12000 ГОСТ 35087; 27772 С255 ТМ. Длина, мм: 12 000; Стандарт: ГОСТ 35087; 27772; Марка стали: С255. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 79380,
+      "shortDescription": "Двутавр 25Ш1 из стали С255, 12 м.",
+      "description": "Балка широкополочная 25Ш1, С255, 12 м. Сортамент по ГОСТ 35087-2024, требования к стали по ГОСТ 27772-2021.",
+      "price": 88200,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
       "unit": "ton",
       "priceUnit": "за тонну",
       "material": "",
-      "standard": "ГОСТ 35087; 27772",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "standard": "ГОСТ 35087-2024; 27772-2021",
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
         {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 35087; 27772"
+          "key": "size",
+          "label": "Профиль",
+          "value": "25Ш1"
         },
         {
           "key": "grade",
@@ -6562,115 +6819,65 @@
         },
         {
           "key": "length",
-          "label": "Длина, мм",
-          "value": "12 000"
+          "label": "Длина",
+          "value": "12 м"
+        },
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "specifications": [
         {
-          "name": "Длина, мм",
-          "value": "12 000"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 35087; 27772"
+          "name": "Профиль",
+          "value": "25Ш1"
         },
         {
           "name": "Марка стали",
           "value": "С255"
         },
         {
-          "name": "Полное обозначение",
-          "value": "Балка 25Ш1х12000 ГОСТ 35087; 27772 С255 ТМ"
+          "name": "Длина",
+          "value": "12 м"
+        },
+        {
+          "name": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "imported": true,
-      "pricePerTon": 79380
+      "pricePerTon": 88200,
+      "weightPerMeterKg": 44.2,
+      "lengthMeters": 12,
+      "steelGrade": "С255"
     },
     {
       "id": "local-122248",
       "categoryId": "cat-bal",
       "subcategoryId": "cat-bal-sub-1",
       "productTypeId": "type-cat-bal-sub-1",
-      "name": "Балка 20Б1х12000 ГОСТ 35087; 27772 С255 ТМ",
+      "name": "Балка нормальная 20Б1, С255, 12 м",
       "slug": "balka-20b1x12000-gost-35087-27772-s255-tm",
-      "shortDescription": "Длина, мм: 12 000; Стандарт: ГОСТ 35087; 27772; Марка стали: С255",
-      "description": "Балка 20Б1х12000 ГОСТ 35087; 27772 С255 ТМ. Длина, мм: 12 000; Стандарт: ГОСТ 35087; 27772; Марка стали: С255. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": null,
-      "quoteOnly": true,
-      "priceQualifier": "exact",
-      "currency": "RUB",
-      "unit": "ton",
-      "priceUnit": "за тонну",
-      "material": "",
-      "standard": "ГОСТ 35087; 27772",
-      "availability": "UNKNOWN",
-      "inStock": false,
-      "featured": false,
-      "imageUrls": [],
-      "attributes": [
-        {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 35087; 27772"
-        },
-        {
-          "key": "grade",
-          "label": "Марка стали",
-          "value": "С255"
-        },
-        {
-          "key": "length",
-          "label": "Длина, мм",
-          "value": "12 000"
-        }
-      ],
-      "specifications": [
-        {
-          "name": "Длина, мм",
-          "value": "12 000"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 35087; 27772"
-        },
-        {
-          "name": "Марка стали",
-          "value": "С255"
-        },
-        {
-          "name": "Полное обозначение",
-          "value": "Балка 20Б1х12000 ГОСТ 35087; 27772 С255 ТМ"
-        }
-      ],
-      "imported": true
-    },
-    {
-      "id": "local-122249",
-      "categoryId": "cat-bal",
-      "subcategoryId": "cat-bal-sub-3",
-      "productTypeId": "type-cat-bal-sub-3",
-      "name": "Балка 30К2х12000 ГОСТ 35087; 27772 С255 ТМ",
-      "slug": "balka-30k2x12000-gost-35087-27772-s255-tm",
-      "shortDescription": "Длина, мм: 12 000; Стандарт: ГОСТ 35087; 27772; Марка стали: С255",
-      "description": "Балка 30К2х12000 ГОСТ 35087; 27772 С255 ТМ. Длина, мм: 12 000; Стандарт: ГОСТ 35087; 27772; Марка стали: С255. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 79470,
+      "shortDescription": "Двутавр 20Б1 из стали С255, 12 м.",
+      "description": "Балка нормальная 20Б1, С255, 12 м. Сортамент по ГОСТ 35087-2024, требования к стали по ГОСТ 27772-2021.",
+      "price": 94500,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
       "unit": "ton",
       "priceUnit": "за тонну",
       "material": "",
-      "standard": "ГОСТ 35087; 27772",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "standard": "ГОСТ 35087-2024; 27772-2021",
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
         {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 35087; 27772"
+          "key": "size",
+          "label": "Профиль",
+          "value": "20Б1"
         },
         {
           "key": "grade",
@@ -6679,30 +6886,105 @@
         },
         {
           "key": "length",
-          "label": "Длина, мм",
-          "value": "12 000"
+          "label": "Длина",
+          "value": "12 м"
+        },
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "specifications": [
         {
-          "name": "Длина, мм",
-          "value": "12 000"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 35087; 27772"
+          "name": "Профиль",
+          "value": "20Б1"
         },
         {
           "name": "Марка стали",
           "value": "С255"
         },
         {
-          "name": "Полное обозначение",
-          "value": "Балка 30К2х12000 ГОСТ 35087; 27772 С255 ТМ"
+          "name": "Длина",
+          "value": "12 м"
+        },
+        {
+          "name": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "imported": true,
-      "pricePerTon": 79470
+      "pricePerTon": 94500,
+      "weightPerMeterKg": 21.3,
+      "lengthMeters": 12,
+      "steelGrade": "С255"
+    },
+    {
+      "id": "local-122249",
+      "categoryId": "cat-bal",
+      "subcategoryId": "cat-bal-sub-3",
+      "productTypeId": "type-cat-bal-sub-3",
+      "name": "Балка колонная 30К2, С255, 12 м",
+      "slug": "balka-30k2x12000-gost-35087-27772-s255-tm",
+      "shortDescription": "Двутавр 30К2 из стали С255, 12 м.",
+      "description": "Балка колонная 30К2, С255, 12 м. Сортамент по ГОСТ 35087-2024, требования к стали по ГОСТ 27772-2021.",
+      "price": 88300,
+      "quoteOnly": false,
+      "priceQualifier": "exact",
+      "currency": "RUB",
+      "unit": "ton",
+      "priceUnit": "за тонну",
+      "material": "",
+      "standard": "ГОСТ 35087-2024; 27772-2021",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "imageUrls": [],
+      "attributes": [
+        {
+          "key": "size",
+          "label": "Профиль",
+          "value": "30К2"
+        },
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "С255"
+        },
+        {
+          "key": "length",
+          "label": "Длина",
+          "value": "12 м"
+        },
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Профиль",
+          "value": "30К2"
+        },
+        {
+          "name": "Марка стали",
+          "value": "С255"
+        },
+        {
+          "name": "Длина",
+          "value": "12 м"
+        },
+        {
+          "name": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
+        }
+      ],
+      "imported": true,
+      "pricePerTon": 88300,
+      "weightPerMeterKg": 94,
+      "lengthMeters": 12,
+      "steelGrade": "С255"
     },
     {
       "id": "local-122766",
@@ -6850,27 +7132,27 @@
       "categoryId": "cat-bal",
       "subcategoryId": "cat-bal-sub-3",
       "productTypeId": "type-cat-bal-sub-3",
-      "name": "Балка 20К1х12000 ГОСТ 35087; 27772 С255 ТМ",
+      "name": "Балка колонная 20К1, С255, 12 м",
       "slug": "balka-20k1x12000-gost-35087-27772-s255-tm",
-      "shortDescription": "Длина, мм: 12 000; Стандарт: ГОСТ 35087; 27772; Марка стали: С255",
-      "description": "Балка 20К1х12000 ГОСТ 35087; 27772 С255 ТМ. Длина, мм: 12 000; Стандарт: ГОСТ 35087; 27772; Марка стали: С255. При заказе сверяйте полное обозначение и характеристики исполнения.",
-      "price": 79740,
+      "shortDescription": "Двутавр 20К1 из стали С255, 12 м.",
+      "description": "Балка колонная 20К1, С255, 12 м. Сортамент по ГОСТ 35087-2024, требования к стали по ГОСТ 27772-2021.",
+      "price": 88700,
       "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
       "unit": "ton",
       "priceUnit": "за тонну",
       "material": "",
-      "standard": "ГОСТ 35087; 27772",
-      "availability": "UNKNOWN",
-      "inStock": false,
+      "standard": "ГОСТ 35087-2024; 27772-2021",
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [],
       "attributes": [
         {
-          "key": "standard",
-          "label": "Стандарт",
-          "value": "ГОСТ 35087; 27772"
+          "key": "size",
+          "label": "Профиль",
+          "value": "20К1"
         },
         {
           "key": "grade",
@@ -6879,30 +7161,38 @@
         },
         {
           "key": "length",
-          "label": "Длина, мм",
-          "value": "12 000"
+          "label": "Длина",
+          "value": "12 м"
+        },
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "specifications": [
         {
-          "name": "Длина, мм",
-          "value": "12 000"
-        },
-        {
-          "name": "Стандарт",
-          "value": "ГОСТ 35087; 27772"
+          "name": "Профиль",
+          "value": "20К1"
         },
         {
           "name": "Марка стали",
           "value": "С255"
         },
         {
-          "name": "Полное обозначение",
-          "value": "Балка 20К1х12000 ГОСТ 35087; 27772 С255 ТМ"
+          "name": "Длина",
+          "value": "12 м"
+        },
+        {
+          "name": "Стандарт",
+          "value": "ГОСТ 35087-2024; 27772-2021"
         }
       ],
       "imported": true,
-      "pricePerTon": 79740
+      "pricePerTon": 88700,
+      "weightPerMeterKg": 41.4,
+      "lengthMeters": 12,
+      "steelGrade": "С255"
     }
   ],
   "matchedIds": []

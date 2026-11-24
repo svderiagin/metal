@@ -1,3 +1,4 @@
+import sections from "@/data/beam-sections.json";
 import type {ProductVariant} from "@/types/product";
 import {isDemonstrationProduct} from "./catalogOffer";
 
@@ -6,19 +7,8 @@ const subcategoryBySeries: Record<BeamSeries, string> = {
   Б: "cat-bal-sub-1", Ш: "cat-bal-sub-2", К: "cat-bal-sub-3", М: "cat-bal-sub-4",
 };
 
-// Nominal kg/m, GOST 35087-2024 table 1.
-const masses35087: Record<string, number> = {
-  "20Б1": 21.3, "20Б2": 25.3, "25Б1": 25.7, "25Б2": 29.6,
-  "30Б1": 32, "30Б2": 36.7, "35Б1": 41.4, "35Б2": 49.6,
-  "40Б1": 56.6, "40Б2": 66, "45Б1": 66.2, "50Б1": 72.5, "55Б1": 89,
-  "20Ш1": 30.6, "20Ш2": 38.8, "25Ш1": 44.2, "25Ш2": 53.8,
-  "30Ш1": 56.8, "30Ш2": 68.6, "35Ш1": 65.3, "35Ш2": 79.7,
-  "40Ш1": 88.6, "40Ш2": 106.7, "45Ш1": 123.6,
-  "20К1": 41.4, "20К2": 49.9, "25К2": 72.4, "30К1": 87, "30К2": 94,
-  "35К1": 109.1, "40К1": 146.7,
-};
-// GOST 19425-74 table 1: beams for suspended tracks.
-const masses19425: Record<string, number> = {"24М": 38.3, "30М": 50.2, "36М": 57.9, "45М": 77.6};
+type BeamSection = {height: number; width: number; web: number; flange: number; mass: number};
+const beamSections: Readonly<Partial<Record<string, BeamSection>>> = sections;
 
 // These offers specify the steel standard only. Use the nominal profile in the
 // calculator without treating it as the supplier's linear mass for checkout.
@@ -32,18 +22,18 @@ const referenceProfiles: Record<string, string> = {
 export function beamReferenceMassKg(product: ProductVariant): number | undefined {
   if (product.categoryId !== "cat-bal" || product.weightPerMeterKg !== undefined || product.standard !== "ГОСТ 27772") return undefined;
   const profile = referenceProfiles[product.id];
-  return profile && beamProfile(product) === profile ? masses35087[profile] : undefined;
+  return profile && beamProfile(product) === profile ? beamSections[profile]?.mass : undefined;
 }
 
 export function beamProfile(product: ProductVariant) {
   const size = product.attributes.find(item => item.key === "size")?.value;
   const extract = (value: string | undefined) => {
-    const match = value?.normalize("NFKC").match(/(?:^|\s)(\d+(?:[.,]\d+)?)\s*(Б|B|Ш|SH|К|K|М|M)\s*(\d*)(?=[хx×\s]|$)/iu);
+    const match = value?.normalize("NFKC").match(/(?:^|\s)(\d+(?:[.,]\d+)?)\s*(Б|B|Ш|SH|К|K|М|M)\s*(\d*)(?=[хx×\s,;()]|$)/iu);
     if (!match) return undefined;
     const series = match[2].toUpperCase().replace(/SH|B|K|M/g, token => ({SH: "Ш", B: "Б", K: "К", M: "М"})[token]!);
     return `${match[1].replace(",", ".")}${series}${match[3]}`;
   };
-  return extract(product.name) ?? extract(size) ?? size ?? "—";
+  return extract(size) ?? extract(product.name) ?? size ?? "—";
 }
 
 export function beamSeries(product: ProductVariant): BeamSeries | undefined {
@@ -57,6 +47,14 @@ export function beamSeries(product: ProductVariant): BeamSeries | undefined {
 export function beamKind(product: ProductVariant) {
   const series = beamSeries(product);
   return series ? ({Б: "Нормальная", Ш: "Широкополочная", К: "Колонная", М: "Монорельсовая"})[series] : "—";
+}
+
+export function beamSection(product: ProductVariant) {
+  const series = beamSeries(product);
+  if (!series || isDemonstrationProduct(product)) return undefined;
+  // ГОСТ 27772 specifies steel properties. Section dimensions depend on the assortment standard.
+  const assortment = series === "М" ? /\b19425\b/u : /\b35087\b/u;
+  return assortment.test(product.standard) ? beamSections[beamProfile(product)] : undefined;
 }
 
 export function beamStandardLabel(product: ProductVariant) {
@@ -114,11 +112,7 @@ export function normalizeBeamVariant(product: ProductVariant): ProductVariant {
     weightPerMeterKg: undefined, weight: undefined, lengthMeters: undefined, steelGrade: undefined,
     pricePerTon: product.pricePerTon ?? (product.unit === "ton" && product.price !== null ? product.price : undefined),
   };
-  const profile = beamProfile(product);
-  // GOST 27772 specifies steel properties, not the beam assortment. Do not guess its mass.
-  const nominalMass = /35087/.test(product.standard) ? masses35087[profile]
-    : /19425/.test(product.standard) ? masses19425[profile] : undefined;
-  const weightPerMeterKg = product.weightPerMeterKg ?? nominalMass;
+  const weightPerMeterKg = product.weightPerMeterKg ?? beamSection(product)?.mass;
   const length = product.attributes.find(item => item.key === "length");
   const parsedLength = Number(length?.value.replace(/\s/g, "").replace(",", ".").replace(/(?:мм|м|mm|m)$/i, ""));
   const lengthMeters = product.lengthMeters ?? (Number.isFinite(parsedLength) && parsedLength > 0

@@ -31,7 +31,9 @@ const catalogStandardTables: Record<string, Partial<Record<number, string>>> = {
   "8509-93": {1: catalogStandards["8509"].href + "#i26415"},
   "8510-86": {1: catalogStandards["8510"].href + "#i18743"},
   "10704-91": {1: catalogStandards["10704"].href + "#Par53"},
+  "19425-74": {1: catalogStandards["19425"].href + "#i34075"},
   "34028-2016": {4: catalogStandards["34028"].href + "#i325258"},
+  "35087-2024": {1: meganorm + "Data/831/83185.pdf#page=11"},
 };
 
 const datedStandard = /ГОСТ\s+(\d+(?:\.\d+)*)[-‐‑–—−](\d+)/u;

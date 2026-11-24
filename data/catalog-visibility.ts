@@ -15,6 +15,8 @@ const hiddenProductIds = new Set([
   "prd-087", "prd-088", "prd-089", "prd-090",
   // The 57 × 3 × 12 m electrowelded offer is now represented by local-62388.
   "local-302",
+  // The 40Б1 С255 offer with documented section dimensions is local-116009.
+  "local-65599",
 ]);
 export function isPublicProduct(product: {id: string}): boolean {
   return !hiddenProductIds.has(product.id);

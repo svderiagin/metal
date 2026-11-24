@@ -5,14 +5,14 @@ import path from "node:path";
 import {catalogMeasurementUrl} from "./catalog-measurement-path.mjs";
 import sharp from "sharp";
 import {getAllProductVariants} from "../lib/catalog.ts";
-import {beamProfile, beamReferenceMassKg, beamSeries} from "../lib/beam.ts";
+import {beamProfile, beamReferenceMassKg, beamSection, beamSeries} from "../lib/beam.ts";
 import {isDemonstrationProduct} from "../lib/catalogOffer.ts";
 import {productIllustrationSignature} from "../lib/productPreviewImage.ts";
 import {renderBeamLabel} from "../imports/beam-image-template/labels.mjs";
 
 const directory = "imports/beam-image-template";
 const templates = JSON.parse(await fs.readFile(path.join(directory, "templates.json"), "utf8"));
-const sections = JSON.parse(await fs.readFile(path.join(directory, "sections.json"), "utf8"));
+const sections = JSON.parse(await fs.readFile(new URL("../data/beam-sections.json", import.meta.url), "utf8"));
 const outputDirectory = ".tmp/beam-series/preview";
 const write = process.argv.includes("--write");
 const ids = new Set(process.argv.slice(2).filter(arg => arg !== "--write"));
@@ -52,7 +52,7 @@ function productLabels(product, series) {
   const profile = beamProfile(product);
   // ГОСТ 27772 identifies the steel; it cannot settle the dimensions of the section.
   const confirmed = !demo && (series === "М" ? /\b19425\b/ : /\b35087\b/).test(product.standard);
-  const section = confirmed ? sections[profile] : undefined;
+  const section = beamSection(product);
   const referenceMass = beamReferenceMassKg(product);
   const displayedMass = section?.mass ?? referenceMass;
   if (confirmed) {

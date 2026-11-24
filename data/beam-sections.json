@@ -27,5 +27,21 @@
   "24М": {"height": 240, "width": 110, "web": 8.2, "flange": 14, "mass": 38.3},
   "30М": {"height": 300, "width": 130, "web": 9, "flange": 15, "mass": 50.2},
   "36М": {"height": 360, "width": 130, "web": 9.5, "flange": 16, "mass": 57.9},
-  "45М": {"height": 450, "width": 150, "web": 10.5, "flange": 18, "mass": 77.6}
+  "45М": {"height": 450, "width": 150, "web": 10.5, "flange": 18, "mass": 77.6},
+  "10Б1": {"height": 100, "width": 55, "web": 4.1, "flange": 5.7, "mass": 8.1},
+  "12Б1": {"height": 117.6, "width": 64, "web": 3.8, "flange": 5.1, "mass": 8.7},
+  "14Б1": {"height": 137.4, "width": 73, "web": 3.8, "flange": 5.6, "mass": 10.5},
+  "16Б1": {"height": 157, "width": 82, "web": 4, "flange": 5.9, "mass": 12.7},
+  "18Б1": {"height": 177, "width": 91, "web": 4.3, "flange": 6.5, "mass": 15.4},
+  "20Б2": {"height": 203, "width": 101, "web": 6.5, "flange": 9.5, "mass": 25.3},
+  "50Б1": {"height": 492, "width": 199, "web": 8.8, "flange": 12, "mass": 72.5},
+  "55Б1": {"height": 543, "width": 220, "web": 9.5, "flange": 13.5, "mass": 89},
+  "20Ш2": {"height": 199, "width": 151, "web": 7.5, "flange": 11.5, "mass": 38.8},
+  "50Ш1": {"height": 482, "width": 300, "web": 11, "flange": 15, "mass": 114.2},
+  "50Ш2": {"height": 487, "width": 300, "web": 14.5, "flange": 17.5, "mass": 138.4},
+  "25К1": {"height": 246, "width": 249, "web": 8, "flange": 12, "mass": 62.6},
+  "35К1": {"height": 342, "width": 348, "web": 10, "flange": 15, "mass": 109.1},
+  "35К2": {"height": 350, "width": 350, "web": 12, "flange": 19, "mass": 136.5},
+  "40К1": {"height": 394, "width": 398, "web": 11, "flange": 18, "mass": 146.7},
+  "40К2": {"height": 400, "width": 400, "web": 13, "flange": 21, "mass": 171.7}
 }

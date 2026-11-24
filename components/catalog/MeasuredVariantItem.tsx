@@ -1,7 +1,7 @@
 "use client";
 
 import {Fragment, useEffect, useState, type ReactNode} from "react";
-import {beamProfile, beamKind, beamReferenceMassKg, beamSeries, beamStandardLabel} from "@/lib/beam";
+import {beamProfile, beamReferenceMassKg, beamSection, beamSeries, beamStandardLabel} from "@/lib/beam";
 import {vgpSize} from "@/lib/vgp";
 import {QuoteRequestButton} from "./QuoteRequestButton";
 import {formatQuoteProductName} from "@/lib/quoteRequest";
@@ -24,19 +24,20 @@ import {isDemonstrationProduct, requiresCatalogPriceQuote, storefrontAvailabilit
 import {a240SubcategoryId, a40025g2sSubcategoryId, a40035gsSubcategoryId, a500cSubcategoryId} from "@/lib/rebar";
 import {orderQuantityHintDuration, useOrderDraft} from "./OrderDraftProvider";
 import {CatalogPositionDetails} from "./CatalogPositionDetails";
+import {CatalogStandardReference} from "./CatalogStandardReference";
 import {PipePositionDetails} from "./PipePositionDetails";
 
 type OrderFeedback = {kind: "correction" | "error"; text: string};
 
 export function MeasuredVariantItem({
-  variant, view, kind, name, showSteelGrade, sharedPipeStandard,
+  variant, view, kind, name, showSteelGrade, sharedPipeStandard, showBeamStandard,
 }: {
   variant: ProductVariant; view: "table" | "card"; kind: "rebar" | "beam" | "vgp" | "pipe" | "profile";
-  name?: string; showSteelGrade?: boolean; sharedPipeStandard?: string;
+  name?: string; showSteelGrade?: boolean; sharedPipeStandard?: string; showBeamStandard?: boolean;
 }) {
   return kind === "profile" ? <ProfilePipeVariantItem variant={variant} view={view}/>
     : <TonnageMeasuredVariantItem variant={variant} view={view} kind={kind} name={name}
-      showSteelGrade={showSteelGrade} sharedPipeStandard={sharedPipeStandard}/>;
+      showSteelGrade={showSteelGrade} sharedPipeStandard={sharedPipeStandard} showBeamStandard={showBeamStandard}/>;
 }
 
 function TonnageMeasuredVariantItem({
@@ -46,11 +47,13 @@ function TonnageMeasuredVariantItem({
   name,
   showSteelGrade,
   sharedPipeStandard,
+  showBeamStandard = true,
 }: {
   variant: ProductVariant;
   name?: string;
   showSteelGrade?: boolean;
   sharedPipeStandard?: string;
+  showBeamStandard?: boolean;
   kind: "rebar" | "beam" | "vgp" | "pipe";
   view: "table" | "card";
 }) {
@@ -397,28 +400,35 @@ function TonnageMeasuredVariantItem({
   }
 
   const profile = unverified ? "Уточняется" : beamProfile(variant);
+  const series = beamSeries(variant);
+  const section = beamSection(variant);
   const steelGrade = unverified ? undefined : variant.steelGrade;
   const length = unverified || variant.lengthMeters === undefined ? undefined : formatNumber(variant.lengthMeters);
   const standard = unverified ? undefined : beamStandardLabel(variant);
   const massField = referenceMass !== undefined
-    ? {label: "Справочная масса по ГОСТ 35087-2024", value: `${formatNumber(referenceMass)} кг/м`}
+    ? {label: "Справочная масса", value: <>
+      {formatNumber(referenceMass)} кг/м
+      <small className="mt-0.5 block text-xs font-normal">
+        <CatalogStandardReference>ГОСТ 35087‑2024</CatalogStandardReference>
+      </small>
+    </>}
     : {label: "Теоретическая масса", value: hasMass ? `${formatNumber(mass)} кг/м` : undefined};
   const fields = [
     {label: "Профиль", value: profile},
-    {label: "Тип балки", value: beamKind(variant)},
-    {label: "Марка стали", value: steelGrade},
-    {label: "Длина", value: length && `${length} м`},
-    {label: "Стандарт", value: standard},
+    ...(section ? [
+      {label: "Высота сечения", value: `${formatNumber(section.height)} мм`},
+      {label: "Ширина полки", value: `${formatNumber(section.width)} мм`},
+      {label: "Толщина стенки", value: `${formatNumber(section.web)} мм`},
+      {label: series === "М" ? "Средняя толщина полки" : "Толщина полки", value: `${formatNumber(section.flange)} мм`},
+    ] : []),
+    {label: "Марка стали", value: showSteelGrade ? steelGrade : undefined},
+    {label: "Стандарт", value: showBeamStandard ? standard : undefined},
     massField,
   ];
   const designation = name ?? profile;
-  const tableStandard = standard || "—";
-  const standardSuffix = ` (${standard})`;
-  const tableDesignation = standard && designation.endsWith(standardSuffix)
-    ? designation.slice(0, -standardSuffix.length) : designation;
   return <CatalogVariantLayout view={view} variant={variant}
-    name={view === "table" ? tableDesignation : designation.startsWith("Балка ") ? designation : `Балка ${designation}`}
-    tableSpecifications={[beamSeries(variant) === "Б" ? <span>{tableStandard}</span> : tableStandard, length ?? "—"]}
+    name={view === "table" || designation.startsWith("Балка ") ? designation : `Балка ${designation}`}
+    tableSpecifications={[length ?? "—"]}
     specifications={<CatalogVariantSpecifications items={[{label: "Длина", value: length && `${length} м`}]}/>}
     details={<CatalogPositionDetails productName={variant.name} fields={fields}
       note={unverified ? variant.description : undefined}/>}

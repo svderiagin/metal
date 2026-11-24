@@ -2,7 +2,7 @@
 
 import {MeasuredVariantItem} from "./MeasuredVariantItem";
 
-import {beamProfile, beamKind, beamReferenceMassKg, beamTableNames} from "@/lib/beam";
+import {beamProfile, beamKind, beamReferenceMassKg, beamStandardLabel, beamTableNames} from "@/lib/beam";
 import {vgpSize, vgpSeries} from "@/lib/vgp";
 import {profilePipePricePerTon, profilePipeSize} from "@/lib/profilePipe";
 import {isGalvanizedElectroweldedVariant} from "@/lib/pipeFamily";
@@ -41,7 +41,7 @@ type SortMode =
 const tableHeaders = {
   rebar: {designation: "Диаметр, мм", specifications: ["Форма", "Длина, м"]},
   profile: {designation: "Размер, мм", specifications: ["Стенка, мм", "Длина, м"]},
-  beam: {designation: "Профиль", specifications: ["Стандарт", "Длина, м"]},
+  beam: {designation: "Профиль", specifications: ["Длина, м"]},
   pipe: {designation: "Ø × стенка, мм", specifications: ["Длина, м"]},
   vgp: {designation: "Ду × стенка, мм", specifications: [<>Наружный <span className="block whitespace-nowrap">Ø, мм</span></>, "Длина, м"]},
 };
@@ -101,12 +101,19 @@ function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
   const sharedTechnicalStandard = technicalStandard && technicalStandards.every(value => value === technicalStandard)
     ? technicalStandard : undefined;
   const sharedPipeStandard = sharedVgpStandard ? "ГОСТ 3262-75" : sharedTechnicalStandard;
+  const firstVariant = variants[0];
+  const sharedBeamStandard = isBeam && firstVariant?.standard
+    && variants.every(variant => variant.standard === firstVariant.standard) ? beamStandardLabel(firstVariant) : undefined;
+  const beamStandards = sharedBeamStandard?.split(", ") ?? [];
+  const beamAssortment = beamStandards.find(value => /^ГОСТ\s+(35087-2024|19425-74)$/u.test(value));
+  const beamSteelStandard = beamStandards.find(value => /^ГОСТ\s+27772-2021$/u.test(value));
+  const showBeamStandard = !beamAssortment || beamStandards.some(value => value !== beamAssortment && value !== beamSteelStandard);
   const firstSteelGrade = variants[0]?.steelGrade;
-  const sharedSteelGrade = isElectrowelded && firstSteelGrade
+  const sharedSteelGrade = (isElectrowelded || isBeam) && firstSteelGrade && firstSteelGrade !== "—"
     && variants.every(variant => variant.steelGrade === firstSteelGrade) ? firstSteelGrade : undefined;
-  const showSteelGrade = isElectrowelded && !sharedSteelGrade;
+  const showSteelGrade = (isElectrowelded || isBeam) && !sharedSteelGrade;
   const headers = tableHeaders[kind];
-  const specifications = showSteelGrade ? [...headers.specifications, "Марка стали"] : headers.specifications;
+  const specifications = isElectrowelded && showSteelGrade ? [...headers.specifications, "Марка стали"] : headers.specifications;
   const electroweldedMassSource = <CatalogStandardReference>таблице 1 ГОСТ 10704-91</CatalogStandardReference>;
   const electroweldedNote = <>
     {sharedTechnicalStandard && <>Технические условия для всех позиций — <CatalogStandardReference>{sharedTechnicalStandard}</CatalogStandardReference>.{" "}</>}
@@ -207,6 +214,12 @@ function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
       {" "}Теоретическая масса указана с учётом цинкового покрытия.
     </>
     : isElectrowelded ? electroweldedNote
+    : beamAssortment ? <>
+      Размеры сечения и теоретическая масса 1 м приведены в{" "}
+      <CatalogStandardReference>{`таблице 1 ${beamAssortment}`}</CatalogStandardReference>.
+      {beamSteelStandard && <> Требования к стали — <CatalogStandardReference>{beamSteelStandard}</CatalogStandardReference>.</>}
+      {sharedSteelGrade && <> Сталь {sharedSteelGrade}.</>}
+    </>
     : isBeam && results.some(variant => beamReferenceMassKg(variant) !== undefined)
       ? "Справочная масса по сортаменту используется для предварительного расчёта. Массу выбранной балки уточните у поставщика."
     : isA400 ? <>
@@ -279,12 +292,12 @@ function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
         {orderNote && <CatalogTableNote>{orderNote}</CatalogTableNote>}
         <CatalogVariantTable designation={headers.designation} specifications={specifications} unit="т" quantity="Заказ, м" secondaryQuantity="Заказ, т">
           {results.map(variant => <MeasuredVariantItem key={variant.id} variant={variant} name={names?.get(variant.id)}
-            kind={kind} view="table" showSteelGrade={showSteelGrade} sharedPipeStandard={sharedPipeStandard}/>)}
+            kind={kind} view="table" showSteelGrade={showSteelGrade} showBeamStandard={showBeamStandard} sharedPipeStandard={sharedPipeStandard}/>)}
         </CatalogVariantTable>
         <div className="grid gap-4 sm:grid-cols-2 xl:hidden">
           {results.map((variant) => (
             <MeasuredVariantItem key={variant.id} variant={variant} name={names?.get(variant.id)}
-              kind={kind} view="card" showSteelGrade={showSteelGrade} sharedPipeStandard={sharedPipeStandard}/>
+              kind={kind} view="card" showSteelGrade={showSteelGrade} showBeamStandard={showBeamStandard} sharedPipeStandard={sharedPipeStandard}/>
           ))}
         </div>
         </>

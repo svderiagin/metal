@@ -327,7 +327,17 @@
     "electrowelded-galvanized-133x4-5-6m": "/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/originals/truba_elektrosvarnaya_ocinkovannaya_2400_1800_original.jpg",
     "electrowelded-galvanized-159x4-5-6m": "/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/originals/truba_elektrosvarnaya_ocinkovannaya_2400_1800_original.jpg",
     "electrowelded-galvanized-219x6-12m": "/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/originals/truba_elektrosvarnaya_ocinkovannaya_2400_1800_original.jpg",
-    "electrowelded-galvanized-89x3-5-6m": "/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/originals/truba_elektrosvarnaya_ocinkovannaya_2400_1800_original.jpg"
+    "electrowelded-galvanized-89x3-5-6m": "/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/originals/truba_elektrosvarnaya_ocinkovannaya_2400_1800_original.jpg",
+    "balka-10b1-s255-12m": "/images/catalog/balka/balka-normalnaya/cover/balka-regular.jpg",
+    "balka-12b1-s255-12m": "/images/catalog/balka/balka-normalnaya/cover/balka-regular.jpg",
+    "balka-14b1-s255-12m": "/images/catalog/balka/balka-normalnaya/cover/balka-regular.jpg",
+    "balka-16b1-s255-12m": "/images/catalog/balka/balka-normalnaya/cover/balka-regular.jpg",
+    "balka-18b1-s255-12m": "/images/catalog/balka/balka-normalnaya/cover/balka-regular.jpg",
+    "balka-50sh1-s255-12m": "/images/catalog/balka/balka-shirokopolochnaya/cover/balka-shirokopolochnaya.jpg",
+    "balka-50sh2-s255-12m": "/images/catalog/balka/balka-shirokopolochnaya/cover/balka-shirokopolochnaya.jpg",
+    "balka-25k1-s255-12m": "/images/catalog/balka/balka-kolonnaya/cover/balka-kolonnaya.jpg",
+    "balka-35k2-s255-12m": "/images/catalog/balka/balka-kolonnaya/cover/balka-kolonnaya.jpg",
+    "balka-40k2-s255-12m": "/images/catalog/balka/balka-kolonnaya/cover/balka-kolonnaya.jpg"
   },
   "categories": {
     "cat-arm": "/images/catalog/armatura/main/armatura.jpg",
