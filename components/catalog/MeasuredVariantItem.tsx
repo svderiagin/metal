@@ -29,7 +29,6 @@ import {CatalogStandardReference} from "./CatalogStandardReference";
 import {PipePositionDetails} from "./PipePositionDetails";
 
 type OrderFeedback = {kind: "correction" | "error"; text: string};
-const meterOrderLimit = 999;
 
 export function MeasuredVariantItem({
   variant, view, kind, name, showSteelGrade, sharedPipeStandard, showBeamStandard,
@@ -155,7 +154,7 @@ function MeasuredOrderItem({
   const showRoundedTons = (isVgp || compactTonInput) && !editingTons && !invalidDraft && parsedTons !== null;
   const tinyTons = showRoundedTons && compactTonInput && parsedTons > 0 && parsedTons < rebarMinimumTonEntry / 2;
   const displayedTons = !showRoundedTons ? tons : compactTonInput
-    ? tinyTons ? "" : displayCompactTons(parsedTons) : formatQuantityForInput(parsedTons, false, 3);
+    ? tinyTons ? "" : formatRebarOrderTons(parsedTons, true) : formatQuantityForInput(parsedTons, false, 3);
   const buttonLabel = removed ? "Удалено" : shouldRemove ? "Удалить" : isSaved
     ? <><Icon name="check"/><span className="whitespace-nowrap">В корзине</span></> : hasChanges ? "Обновить" : madeToOrder ? "Заказать" : "В корзину";
   const buttonClassName = removed ? filterStyles.removedCartButton
@@ -194,22 +193,7 @@ function MeasuredOrderItem({
     if (referenceMass !== undefined && mode === "meter") {
       return getMeasurementQuantityOptions({...variant, weightPerMeterKg: referenceMass}, mode);
     }
-    const options = getMeasurementQuantityOptions(variant, mode);
-    if (!pricedByMeter) return options;
-    const maximum = mode === "meter" ? meterOrderLimit : metersToTons(meterOrderLimit, mass) ?? options.maximum;
-    return {...options, maximum};
-  }
-
-  function displayCompactTons(weightTons: number) {
-    const formatted = formatRebarOrderTons(weightTons, true);
-    if (!pricedByMeter) return formatted;
-    const {maximum} = quantityOptions("ton");
-    const displayed = parseOrderQuantity(formatted);
-    if (displayed === null || displayed <= maximum || sameMeasuredQuantity(displayed, maximum)) return formatted;
-    // The editable display must fit the metre limit, even when the exact mass rounds upward.
-    const digits = rebarTonFractionDigits(maximum);
-    const scale = 10 ** digits;
-    return formatQuantityForInput(Math.floor(maximum * scale) / scale, false, digits);
+    return getMeasurementQuantityOptions(variant, mode);
   }
 
   function orderMetersFromTons(weightTons: number) {
@@ -217,7 +201,7 @@ function MeasuredOrderItem({
     if (!pricedByMeter || meters === null) return meters;
     // Discard binary conversion noise at explicit hundredths of a metre.
     const hundredths = Math.round(meters * 100) / 100;
-    return Math.min(sameMeasuredQuantity(meters, hundredths) ? hundredths : meters, meterOrderLimit);
+    return Math.min(sameMeasuredQuantity(meters, hundredths) ? hundredths : meters, quantityOptions("meter").maximum);
   }
 
   function readQuantity(value: string, mode: OrderInputMode) {
@@ -260,7 +244,7 @@ function MeasuredOrderItem({
     }
     if (isVgpTonInput || isCompactTonInput) setEditingTons(true);
     const constrained = constrainOrderQuantityInput(value, options.maximum, bound =>
-      isCompactTonInput ? displayCompactTons(bound)
+      isCompactTonInput ? formatRebarOrderTons(bound, true)
         : isVgpTonInput ? formatQuantityForInput(bound, false, 3) : formatMeasuredQuantity(bound, mode));
     value = constrained.value;
     const entered = parseDraftQuantity(value);

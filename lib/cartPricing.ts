@@ -1,4 +1,4 @@
-import {calculateLineTotal, calculateMeasuredLineTotal, getMeasurementQuantityOptions, metersToTons, requiresWholeLengthOrder, sameMeasuredQuantity, tonsToMeters, wholeLengthOrder} from "./orderMeasurement";
+import {calculateLineTotal, calculateMeasuredLineTotal, getMeasurementQuantityOptions, getSimpleOrderQuantityOptions, metersToTons, requiresWholeLengthOrder, sameMeasuredQuantity, tonsToMeters, wholeLengthOrder} from "./orderMeasurement";
 import type {ProductVariant} from "@/types/product";
 import type {CartMeasurement, CartPieceOrder} from "@/types/cart";
 import {hasConfirmedProfilePipePrice, isProfilePipeVariant, isSquareProfilePipe, profilePipeMaximumPieces, profilePipeOrder} from "./profilePipe";
@@ -48,8 +48,10 @@ export function revalidateCartPrice(product: ProductVariant, item: PriceInput) {
     && product.weightPerMeterKg !== undefined && Number.isFinite(product.weightPerMeterKg) && product.weightPerMeterKg > 0;
   const wholeLength = requiresWholeLengthOrder(product);
   let estimatedTotal = priceRequiresQuote ? 0 : calculateLineTotal(item.quantity, product.price!);
-  if (!Number.isFinite(item.quantity) || item.quantity <= 0 || (!item.measurement && item.quantity > 999)) {
+  if (!Number.isFinite(item.quantity) || item.quantity <= 0) {
     invalidReason = "Не удалось пересчитать количество.";
+  } else if (!item.measurement && item.quantity > getSimpleOrderQuantityOptions(product).maximum) {
+    invalidReason = "Объём превышает допустимое значение. Измените количество.";
   }
   // Older rebar clients sent only tonnes. Validate that original quantity
   // against the stock length just as we do for an explicitly measured line.

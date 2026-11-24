@@ -66,6 +66,16 @@ export function getCartMeasurementQuantityOptions(product: ProductVariant, mode:
   return getMeasurementQuantityOptions(product, mode);
 }
 
+export function getSimpleOrderQuantityOptions(product?: ProductVariant): {
+  maximum: number;
+  minimum?: number;
+  decimalPlaces?: number;
+} {
+  return product?.categoryId === "catalog-cat-ugolok" && product.unit === "meter"
+    ? getMeasurementQuantityOptions(product, "meter")
+    : {maximum: 999};
+}
+
 export function metersToTons(meters: number, weightPerMeterKg: number) {
   if (!isNonNegativeFinite(meters) || !isPositiveFinite(weightPerMeterKg)) return null;
   // The exact metre limit converts back to 999 t even with a fractional linear weight.

@@ -30,8 +30,8 @@ export function parseCreateOrderInput(value: unknown): CreateOrderInput | null {
     const pieceOrder = normalizePieceOrder(item.pieceOrder);
     if (item.measurement !== undefined && !measurement) return null;
     if (item.pieceOrder !== undefined && !pieceOrder || pieceOrder && measurement) return null;
+    // Authoritative pricing checks the quantity limit against the chosen product and unit.
     if (typeof item.quantity !== "number" || !Number.isFinite(item.quantity) || item.quantity <= 0) return null;
-    if (!measurement && !pieceOrder && item.quantity > 999) return null;
     items.push({
       productId: item.productId,
       quantity: item.quantity,

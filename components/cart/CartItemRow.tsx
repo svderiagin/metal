@@ -8,7 +8,7 @@ import {formatNumber} from "@/lib/numberFormat";
 import {Icon} from "@/components/ui/Icon";
 import {QuantitySelector} from "./QuantitySelector";
 import {getProductVariantById} from "@/lib/cartCatalog";
-import {calculateLineTotal, calculateMeasuredLineTotal, getCartMeasurementQuantityOptions, requiresWholeLengthOrder, tonsToMeters, wholeLengthOrder} from "@/lib/orderMeasurement";
+import {calculateLineTotal, calculateMeasuredLineTotal, getCartMeasurementQuantityOptions, getSimpleOrderQuantityOptions, requiresWholeLengthOrder, tonsToMeters, wholeLengthOrder} from "@/lib/orderMeasurement";
 import {formatCartQuantity, formatMeasuredQuantity, formatQuantityForInput, formatRebarOrderTons,
   measuredTonFractionDigits, productOrderFractionDigits, rebarMinimumMeterEntry, rebarMinimumTonEntry, rebarTonFractionDigits} from "@/lib/cartQuantityInput";
 import {isVgpVariant} from "@/lib/pipeFamily";
@@ -34,6 +34,8 @@ export function CartItemRow({line, onRemove}: {line: CartLine; onRemove: () => v
   const bars = isBar && measurement && !line.invalidReason ? wholeLengthOrder(product, measurement.meters, "meter") : null;
   const meterOptions = product && measurement ? getCartMeasurementQuantityOptions(product, "meter") : undefined;
   const tonOptions = product && measurement ? getCartMeasurementQuantityOptions(product, "ton") : undefined;
+  const simpleOptions = getSimpleOrderQuantityOptions(product);
+  const simplePrecision = simpleOptions.decimalPlaces;
   const priceRequiresQuote = !product || line.priceRequiresQuote;
   const quantityDisabled = !product || (priceRequiresQuote && !line.deliveryEstimate);
   const pieceOrder = line.pieceOrder;
@@ -117,9 +119,12 @@ export function CartItemRow({line, onRemove}: {line: CartLine; onRemove: () => v
         <QuantitySelector fieldLabel={product?.unit === "ton" || product?.unit === "kg" ? "Масса"
           : product?.unit === "meter" ? "Длина" : "Количество"}
           productName={line.name} unit={line.quantityUnit} whole={line.wholeQuantity}
-          precision={line.wholeQuantity ? undefined : simpleRebarMass ? rebarTonFractionDigits : productOrderFractionDigits}
+          {...simpleOptions}
+          wideInput={simplePrecision !== undefined}
+          precision={line.wholeQuantity ? undefined : simpleRebarMass ? rebarTonFractionDigits : simplePrecision ?? productOrderFractionDigits}
           displayThreshold={simpleRebarMass ? rebarMinimumTonEntry : undefined}
-          formatValue={simpleRebarMass ? (quantity, grouped) => formatRebarOrderTons(quantity, true, grouped) : undefined}
+          formatValue={simpleRebarMass ? (quantity, grouped) => formatRebarOrderTons(quantity, true, grouped)
+            : simplePrecision !== undefined ? (quantity, grouped) => formatQuantityForInput(quantity, grouped, simplePrecision) : undefined}
           step={!line.wholeQuantity && product?.unit === "ton" ? 0.001 : 1}
           hasPositiveTotal={priceRequiresQuote ? undefined : quantity => calculateLineTotal(quantity, product!.price!) !== null}
           disabled={quantityDisabled} value={line.quantity} onChange={(value) => updateQuantity(line.productId, value)}/>

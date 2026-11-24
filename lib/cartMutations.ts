@@ -3,7 +3,7 @@ import type {ProductVariant} from "@/types/product";
 import {normalizeMeasurement} from "./cart";
 import {revalidateCartPrice} from "./cartPricing";
 import {isProfilePipeVariant, profilePipeOrder} from "./profilePipe";
-import {metersToTons, requiresWholeLengthOrder, tonsToMeters, wholeLengthOrder} from "./orderMeasurement";
+import {getSimpleOrderQuantityOptions, metersToTons, requiresWholeLengthOrder, tonsToMeters, wholeLengthOrder} from "./orderMeasurement";
 import {isDemonstrationProduct, storefrontAvailability} from "./catalogOffer";
 
 export function addCartItem(items: CartItem[], product: ProductVariant | undefined, quantity = 1,
@@ -15,7 +15,8 @@ export function addCartItem(items: CartItem[], product: ProductVariant | undefin
   const previous = items.find(item => item.productId === product.id);
   const previousQuantity = previous?.measurement && product.unit === "ton"
     ? previous.measurement.weightTons : previous?.quantity ?? 0;
-  const next = priceItem(product, {productId: product.id, quantity: Math.min(999, previousQuantity + quantity)});
+  const {maximum} = getSimpleOrderQuantityOptions(product);
+  const next = priceItem(product, {productId: product.id, quantity: Math.min(maximum, previousQuantity + quantity)});
   return next ? replace(items, next) : items;
 }
 

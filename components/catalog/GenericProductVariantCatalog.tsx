@@ -107,7 +107,7 @@ export function GenericProductVariantCatalog({
               >
                 <option value="">Все значения</option>
                 {(filterOptions.get(key) ?? []).map((value) => (
-                  <option key={value} value={value}>{isAngle ? formatSpecification(value) : value}</option>
+                  <option key={value} value={value}>{isAngle ? formatSpecification(value).replace(/\s+(?:мм|м)$/u, "") : value}</option>
                 ))}
               </Select>
             </label>
