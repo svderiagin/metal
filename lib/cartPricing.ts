@@ -1,7 +1,7 @@
 import {calculateLineTotal, calculateMeasuredLineTotal, getMeasurementQuantityOptions, metersToTons, requiresWholeLengthOrder, sameMeasuredQuantity, tonsToMeters, wholeLengthOrder} from "./orderMeasurement";
 import type {ProductVariant} from "@/types/product";
 import type {CartMeasurement, CartPieceOrder} from "@/types/cart";
-import {hasConfirmedProfilePipePrice, isProfilePipeVariant, profilePipeOrder} from "./profilePipe";
+import {hasConfirmedProfilePipePrice, isProfilePipeVariant, isSquareProfilePipe, profilePipeMaximumPieces, profilePipeOrder} from "./profilePipe";
 import {isProfileSheetVariant} from "./profileSheet";
 import {requiresWholeMetalMeshQuantity, requiresWholeCatalogQuantity} from "./variantPresentation";
 import {isDemonstrationProduct, requiresCatalogPriceQuote} from "./catalogOffer";
@@ -13,7 +13,9 @@ export function revalidateCartPrice(product: ProductVariant, item: PriceInput) {
     const priceRequiresQuote = !hasConfirmedProfilePipePrice(product);
     const pieces = item.pieceOrder?.pieces ?? (product.lengthMeters ? item.quantity / product.lengthMeters : NaN);
     const order = profilePipeOrder(product, pieces, item.pieceOrder?.lengthMeters);
-    const invalidReason = item.measurement || !order || order.pieces <= 0 || !Number.isFinite(item.quantity)
+    const maximum = !order && isSquareProfilePipe(product) ? profilePipeMaximumPieces(product, item.pieceOrder?.lengthMeters) : null;
+    const invalidReason = maximum !== null && pieces > maximum ? "Объём превышает допустимое значение. Измените количество."
+      : item.measurement || !order || order.pieces <= 0 || !Number.isFinite(item.quantity)
       || Math.abs(order.meters - item.quantity) > 1e-7
       ? "Выберите количество целых труб и конкретную длину в таблице товара."
       : !priceRequiresQuote && order.estimatedTotal === null ? "Не удалось пересчитать стоимость." : undefined;

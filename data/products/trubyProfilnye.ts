@@ -284,42 +284,47 @@ export const trubyProfilnyeProducts: ProductVariantSource[] = [
   }
 ];
 
-// Reference prices are kept separately in imports/profile-pipe-reference-prices.json.
-// Masses are published table values for the exact section and wall; see source/page evidence in profile-pipe-weights.json.
-// These offers require commercial price confirmation; steel grade, manufacturing standard and stock are not inferred.
-// The optional fifth value may be filled only with an owner-confirmed commercial price per metre.
+// Masses are published table values for the exact section and wall. See profile-pipe-weights.json.
 const profilePipeWeightBySize = new Map(profilePipeWeights.rows.map(row => [
   `${row.widthMm}x${row.heightMm}x${row.wallThicknessMm}`, row.massKgPerMeter,
 ]));
-const profilePipeRows: [width: number, height: number, wall: number, length: number | [number, number], confirmedPrice?: number][] = [
-  [15, 15, 1.5, 6],
-  [20, 20, 1.5, 6],
-  [20, 20, 2, 6],
-  [25, 25, 1.5, 6],
-  [25, 25, 2, 6],
-  [30, 30, 1.5, 6],
-  [30, 30, 2, 6],
-  [40, 40, 1.5, 6],
-  [40, 40, 2, 6],
-  [40, 40, 3, 6],
-  [50, 50, 1.5, 6],
-  [50, 50, 2, 6],
-  [50, 50, 3, 6],
-  [50, 50, 4, 6],
-  [60, 60, 1.5, 6],
-  [60, 60, 2, 6],
-  [60, 60, 3, 6],
-  [60, 60, 4, 6],
-  [80, 80, 2, [6, 12]],
-  [80, 80, 3, 12],
-  [80, 80, 4, 12],
-  [100, 100, 3, 12],
-  [100, 100, 4, 12],
-  [100, 100, 5, 12],
-  [120, 120, 3, 12],
-  [120, 120, 4, 12],
-  [140, 140, 4, 12],
-  [160, 160, 4, 12],
+// Square pipe retail prices are in RUB per metre. An explicit null marks an on-order
+// offer without a fixed price. An omitted price keeps the existing rectangular offers.
+const profilePipeRows: [width: number, height: number, wall: number, length: number | [number, number], pricePerMeter?: number | null][] = [
+  [15, 15, 1.2, 6, 55],
+  [15, 15, 1.5, 6, 65],
+  [20, 20, 1.2, 6, 80],
+  [20, 20, 1.5, 6, 90],
+  [20, 20, 2, 6, 105],
+  [25, 25, 1.5, 6, 105],
+  [25, 25, 2, 6, 130],
+  [30, 30, 1.5, 6, 130],
+  [30, 30, 2, 6, 165],
+  [40, 40, 1.5, 6, 185],
+  [40, 40, 2, 6, 205],
+  [40, 40, 3, 6, 290],
+  [40, 40, 4, 6, 375],
+  [50, 50, 1.5, 6, 240],
+  [50, 50, 2, 6, 275],
+  [50, 50, 3, 6, 355],
+  [50, 50, 4, 6, 490],
+  [60, 60, 1.5, 6, null],
+  [60, 60, 2, 6, 290],
+  [60, 60, 3, 6, 390],
+  [60, 60, 4, 6, 480],
+  [80, 80, 2, [6, 12], null],
+  [80, 80, 3, 12, 490],
+  [80, 80, 4, 12, 645],
+  [80, 80, 5, 12, 800],
+  [80, 80, 6, 12, 880],
+  [100, 100, 3, 12, 650],
+  [100, 100, 4, 12, 770],
+  [100, 100, 5, 12, 940],
+  [100, 100, 6, 12, 1080],
+  [120, 120, 3, 12, null],
+  [120, 120, 4, 12, 960],
+  [140, 140, 4, 12, null],
+  [160, 160, 4, 12, null],
   [30, 20, 2, 6],
   [40, 20, 1.5, 6],
   [40, 20, 2, 6],
@@ -345,7 +350,7 @@ const profilePipeRows: [width: number, height: number, wall: number, length: num
   [100, 60, 3, 6],
 ];
 
-export const profilePipeProducts: ProductVariantSource[] = profilePipeRows.map(([width, height, wall, length, confirmedPrice]) => {
+export const profilePipeProducts: ProductVariantSource[] = profilePipeRows.map(([width, height, wall, length, pricePerMeter]) => {
   const square = width === height;
   const family = square ? "квадратная" : "прямоугольная";
   const shape = square ? "square" : "rectangular";
@@ -354,18 +359,20 @@ export const profilePipeProducts: ProductVariantSource[] = profilePipeRows.map((
   const key = `${width}x${height}x${String(wall).replace(".", "-")}`;
   const theoreticalMass = profilePipeWeightBySize.get(`${width}x${height}x${wall}`);
   const lengthLabel = Array.isArray(length) ? `${length[0]}–${length[1]} м` : `${length} м`;
+  const priceConfirmed = typeof pricePerMeter === "number";
+  const shortDescription = `Профиль ${size} мм, стенка ${thickness} мм, длина ${lengthLabel}.`;
   return {
     id: `profile-pipe-${shape}-${key}`,
     categoryId: "cat-trp", subcategoryId: square ? "cat-trp-sub-1" : "cat-trp-sub-2",
     name: `Труба профильная ${family} ${size}×${thickness} мм`,
     slug: `truba-profilnaya-${shape}-${key}`, sku: `PP-${square ? "K" : "P"}-${key.toUpperCase()}`,
-    shortDescription: `Профиль ${size} мм, стенка ${thickness} мм, длина ${lengthLabel}.`,
-    description: "Цена и характеристики поставки уточняются при согласовании заказа.",
-    price: confirmedPrice ?? null, quoteOnly: confirmedPrice === undefined, priceConfirmed: confirmedPrice !== undefined, priceUnit: "за метр",
+    shortDescription,
+    description: priceConfirmed ? shortDescription : "Цена и характеристики поставки уточняются при согласовании заказа.",
+    price: pricePerMeter ?? null, quoteOnly: !priceConfirmed, priceConfirmed, priceUnit: "за метр",
     profileWidthMm: width, profileHeightMm: height, wallThicknessMm: wall,
     weightPerMeterKg: theoreticalMass, weightConfirmed: theoreticalMass !== undefined,
     ...(Array.isArray(length) ? {lengthRangeMeters: length} : {lengthMeters: length}),
-    inStock: false, availability: "UNKNOWN", featured: false, imageUrls: [],
+    inStock: priceConfirmed, availability: priceConfirmed ? "IN_STOCK" : square ? "ON_ORDER" : "UNKNOWN", featured: false, imageUrls: [],
     attributes: [
       {key: "size", label: "Размер", value: `${size} мм`},
       {key: "wallThickness", label: "Стенка", value: `${thickness} мм`},

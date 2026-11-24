@@ -13,6 +13,7 @@ import {formatCartQuantity, formatMeasuredQuantity, formatQuantityForInput, form
   measuredTonFractionDigits, productOrderFractionDigits, rebarMinimumMeterEntry, rebarMinimumTonEntry, rebarTonFractionDigits} from "@/lib/cartQuantityInput";
 import {isVgpVariant} from "@/lib/pipeFamily";
 import {isDemonstrationProduct} from "@/lib/catalogOffer";
+import {isSquareProfilePipe, profilePipeMaximumPieces} from "@/lib/profilePipe";
 import {CartAmount} from "./CartAmount";
 import styles from "./CartItemRow.module.css";
 
@@ -35,6 +36,18 @@ export function CartItemRow({line, onRemove}: {line: CartLine; onRemove: () => v
   const tonOptions = product && measurement ? getCartMeasurementQuantityOptions(product, "ton") : undefined;
   const priceRequiresQuote = !product || line.priceRequiresQuote;
   const quantityDisabled = !product || (priceRequiresQuote && !line.deliveryEstimate);
+  const pieceOrder = line.pieceOrder;
+  const squarePipe = product && isSquareProfilePipe(product) ? product : undefined;
+  const maximumPieces = squarePipe && pieceOrder
+    ? profilePipeMaximumPieces(squarePipe, pieceOrder.lengthMeters) ?? undefined : undefined;
+
+  function updatePipeLength(length: number) {
+    if (!pieceOrder) return;
+    const maximum = squarePipe ? profilePipeMaximumPieces(squarePipe, length) : null;
+    const pieces = maximum === null ? pieceOrder.pieces : Math.min(pieceOrder.pieces, maximum);
+    updatePieceOrder(line.productId, pieces, length);
+  }
+
   return (
     <article data-cart-row={line.productId} className={`${styles.row} rounded-xl border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-900`}>
       <div className="min-w-0 break-words">
@@ -53,16 +66,17 @@ export function CartItemRow({line, onRemove}: {line: CartLine; onRemove: () => v
         </p>
         {line.invalidReason && <p role="alert" className="mt-2 text-sm text-amber-900 dark:text-amber-200">{line.invalidReason} <Link href="/#request" className="underline">Запросить расчёт</Link></p>}
       </div>
-      <div className={styles.order}>{line.pieceOrder ? (
+      <div className={styles.order}>{pieceOrder ? (
         <div className="space-y-2">
-          <QuantitySelector whole fieldLabel="Количество труб" productName={line.name} unit="шт." disabled={quantityDisabled} value={line.pieceOrder.pieces}
-            onChange={pieces => updatePieceOrder(line.productId, pieces, line.pieceOrder!.lengthMeters)}/>
+          <QuantitySelector whole fieldLabel="Количество труб" productName={line.name} unit="шт." disabled={quantityDisabled}
+            value={pieceOrder.pieces} maximum={maximumPieces}
+            onChange={pieces => updatePieceOrder(line.productId, pieces, pieceOrder.lengthMeters)}/>
           {product?.lengthRangeMeters ? <QuantitySelector fieldLabel="Длина одной трубы" productName={line.name} unit="м"
             disabled={quantityDisabled} minimum={product.lengthRangeMeters[0]} maximum={product.lengthRangeMeters[1]}
             decimalPlaces={2} formatValue={(quantity, grouped) => formatQuantityForInput(quantity, grouped, 2)}
-            value={line.pieceOrder.lengthMeters}
-            onChange={length => updatePieceOrder(line.productId, line.pieceOrder!.pieces, length)}/>
-            : <p className="text-sm text-slate-600 dark:text-slate-300">Длина трубы: {formatNumber(line.pieceOrder.lengthMeters)} м</p>}
+            value={pieceOrder.lengthMeters}
+            onChange={updatePipeLength}/>
+            : <p className="text-sm text-slate-600 dark:text-slate-300">Длина трубы: {formatNumber(pieceOrder.lengthMeters)} м</p>}
           <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
             Общая длина: {formatNumber(line.quantity)} м
           </p>

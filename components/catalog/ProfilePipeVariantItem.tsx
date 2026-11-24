@@ -6,12 +6,13 @@ import {Button} from "@/components/ui/Button";
 import {Input} from "@/components/ui/Input";
 import {Icon} from "@/components/ui/Icon";
 import {correctOrderQuantity, formatCatalogNumber, parseOrderQuantity} from "@/lib/catalogNumberInput";
-import {correctDraftPrecision, formatMeasuredQuantity, measuredTonFractionDigits, normalizeCartQuantityDraft, quantityTransferHandlers} from "@/lib/cartQuantityInput";
+import {correctDraftPrecision, formatMeasuredQuantity, formatRebarOrderTons, measuredTonFractionDigits, normalizeCartQuantityDraft, quantityTransferHandlers, rebarTonFractionDigits} from "@/lib/cartQuantityInput";
+import {MAX_ORDER_TONS} from "@/lib/constants";
 import {formatCurrency, formatUnitPrice} from "@/lib/currency";
 import {formatNumber} from "@/lib/numberFormat";
 import {storefrontAvailability} from "@/lib/catalogOffer";
-import {hasConfirmedProfilePipePrice, MAX_PROFILE_PIPE_PIECES, profilePipeMassPerMeter,
-  profilePipeOrder, profilePipeOrderByQuantity, profilePipePricePerTon, profilePipeSize, type ProfilePipeOrderUnit} from "@/lib/profilePipe";
+import {hasConfirmedProfilePipePrice, isSquareProfilePipe, MAX_RECTANGULAR_PIPE_PIECES, profilePipeMassPerMeter,
+  profilePipeMaximumPieces, profilePipeOrder, profilePipeOrderByQuantity, profilePipePricePerTon, profilePipeSize, type ProfilePipeOrderUnit} from "@/lib/profilePipe";
 import type {ProductVariant} from "@/types/product";
 import type {OrderInputMode} from "@/types/cart";
 import {QuoteRequestButton} from "./QuoteRequestButton";
@@ -23,8 +24,6 @@ import tableStyles from "./RebarTable.module.css";
 import {useOrderDraft} from "./OrderDraftProvider";
 
 const orderUnits = {piece: "шт.", meter: "м", ton: "т"} as const;
-const maximumPiecesMessage = `Не более ${MAX_PROFILE_PIPE_PIECES} труб за заказ.`;
-
 export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant; view: "table" | "card"}) {
   const {addItem, updatePieceOrder, removeItem, lines, hydrated} = useCart();
   const line = lines.find(item => item.productId === variant.id);
@@ -34,6 +33,7 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
     quantity: string; length: string; inputUnit: ProfilePipeOrderUnit; settled?: boolean; exactQuantity?: number;
   }, string | undefined>(variant.id, "profile-pipe", undefined);
   const [removed, setRemoved] = useState(false);
+  const square = isSquareProfilePipe(variant);
   const mass = profilePipeMassPerMeter(variant);
   // Existing cart lines are stored as whole pipes with a specific length.
   const inputUnit = draft?.inputUnit ?? (savedPieces === undefined ? "meter" : "piece");
@@ -45,8 +45,7 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
   const range = variant.lengthRangeMeters;
   const validLength = variant.lengthMeters ?? (range && length !== null
     && length >= range[0] && length <= range[1] ? length : undefined);
-  const order = quantity !== null && quantity > 0 && validLength !== undefined
-    ? profilePipeOrderByQuantity(variant, quantity, inputUnit, validLength) : null;
+  const order = resolveOrder(validLength);
   const confirmedPrice = hasConfirmedProfilePipePrice(variant);
   const madeToOrder = storefrontAvailability(variant.availability) === "ON_ORDER";
   const pricePerTon = profilePipePricePerTon(variant);
@@ -63,17 +62,21 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
   const totalLabel = !confirmedPrice ? priceLabel : !order || order.estimatedTotal === null
     ? range && validLength === undefined ? "Выберите длину" : "Укажите объём"
     : formatCurrency(order.estimatedTotal);
-  const piecesError = inputUnit === "piece" && (quantity === null || !Number.isSafeInteger(quantity) || quantity > MAX_PROFILE_PIPE_PIECES);
+  const piecesError = inputUnit === "piece" && (quantity === null || !Number.isSafeInteger(quantity)
+    || (!square && quantity > MAX_RECTANGULAR_PIPE_PIECES));
   const missingMass = inputUnit === "ton" && mass === null;
   const exceedsLimit = inputUnit !== "piece" && quantity !== null && quantity > 0 && validLength !== undefined && !order && !missingMass;
   const quantityError = !!quantityText.trim() && !enteringFraction && !shouldRemove && (piecesError || quantity === null || quantity === 0 || exceedsLimit || missingMass);
   const lengthError = !!range && !!lengthText.trim() && validLength === undefined;
   let validationMessage: string | undefined;
   if (lengthError) validationMessage = `Введите длину от ${formatNumber(range[0])} до ${formatNumber(range[1])} м.`;
-  else if (exceedsLimit) validationMessage = maximumPiecesMessage;
+  else if (exceedsLimit) validationMessage = square
+    ? `Не удалось рассчитать объём в пределах ${MAX_ORDER_TONS} т.`
+    : `Не более ${MAX_RECTANGULAR_PIPE_PIECES} труб за заказ.`;
   else if (missingMass) validationMessage = "Для расчёта по весу нужна масса одного метра трубы.";
   else if (quantityError) validationMessage = inputUnit === "piece"
-    ? `Введите целое количество труб от 1 до ${MAX_PROFILE_PIPE_PIECES}.` : "Введите объём больше нуля.";
+    ? square ? "Введите целое количество труб." : `Введите целое количество труб от 1 до ${MAX_RECTANGULAR_PIPE_PIECES}.`
+    : "Введите объём больше нуля.";
   else if (range && quantity !== null && quantity > 0 && validLength === undefined) validationMessage = "Укажите длину одной трубы.";
   const status = validationMessage ?? message;
   const showUnsaved = !!line && !saved && !shouldRemove && !!order;
@@ -83,6 +86,7 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
   const nextDraft = {quantity: quantityText, length: lengthText, inputUnit, settled: draft?.settled, exactQuantity: draft?.exactQuantity};
   const correctedOrder = correctOrderValues().order;
   const canAddOrder = correctedOrder && (confirmedPrice ? correctedOrder.estimatedTotal !== null : madeToOrder);
+  const canPromptForQuantity = square && quantityText === "";
 
   useEffect(() => {
     if (!removed) return;
@@ -100,31 +104,49 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
 
   function correctOrderValues() {
     const nextLength = correctLengthValue(lengthText);
-    const correctedLength = parseOrderQuantity(nextLength.value);
-    const corrected = quantity !== null && quantity > 0 && correctedLength !== null
-      ? profilePipeOrderByQuantity(variant, quantity, inputUnit, correctedLength) : null;
-    return {length: nextLength.value, order: corrected, message: nextLength.message};
+    return {length: nextLength.value, order: resolveOrder(parseOrderQuantity(nextLength.value) ?? undefined), message: nextLength.message};
+  }
+
+  function quantityLimit(mode: ProfilePipeOrderUnit, length: number) {
+    const pieces = profilePipeMaximumPieces(variant, length);
+    if (pieces === null || mode === "piece") return pieces;
+    const maximum = profilePipeOrder(variant, pieces, length);
+    return (mode === "meter" ? maximum?.meters : maximum?.weightTons) ?? null;
+  }
+
+  function resolveOrder(length: number | undefined) {
+    if (quantity === null || quantity <= 0 || length === undefined) return null;
+    // A different pipe length can change the maximum after an amount was entered.
+    const limit = square ? quantityLimit(inputUnit, length) : null;
+    return profilePipeOrderByQuantity(variant, limit === null ? quantity : Math.min(quantity, limit), inputUnit, length);
+  }
+
+  function displayQuantity(value: number, mode: OrderInputMode) {
+    return square && mode === "ton" ? formatRebarOrderTons(value, true) : formatMeasuredQuantity(value, mode);
   }
 
   function measuredValue(mode: OrderInputMode) {
     const actual = mode === "meter" ? order?.meters : order?.weightTons;
     if (mode === inputUnit && (!draft?.settled || actual == null)) return quantityText;
-    return actual == null ? "" : formatMeasuredQuantity(actual, mode);
+    return actual == null ? "" : displayQuantity(actual, mode);
   }
 
   function updateMeasuredQuantity(mode: OrderInputMode, value: string) {
     const unitKey = mode === "meter" ? "meters" : "weightTons";
     const minimum = profilePipeOrder(variant, 1, validLength)?.[unitKey] ?? undefined;
-    const maximum = profilePipeOrder(variant, MAX_PROFILE_PIPE_PIECES, validLength ?? range?.[1])?.[unitKey] ?? Infinity;
-    const normalized = normalizeCartQuantityDraft(value, null, null, {maximum, formatMaximum: bound => formatMeasuredQuantity(bound, mode)});
+    const limitLength = validLength ?? (square ? undefined : range?.[1]);
+    const maximum = limitLength === undefined ? Infinity : quantityLimit(mode, limitLength) ?? Infinity;
+    const normalized = normalizeCartQuantityDraft(value, null, null, {maximum, formatMaximum: bound => displayQuantity(bound, mode)});
     if (!normalized.accepted || (value !== "" && !value.trim())) return false;
     const entered = parseOrderQuantity(normalized.value);
     const sameAmount = entered !== null && entered > 0 && entered === parseOrderQuantity(measuredValue(mode));
     if (!normalized.capped && order && sameAmount && (mode !== inputUnit || draft?.settled)) return;
-    const correction = normalized.capped ? undefined : correctDraftPrecision(normalized.value, mode === "meter" ? 2 : measuredTonFractionDigits,
+    const precision = mode === "meter" ? 2 : square ? rebarTonFractionDigits : measuredTonFractionDigits;
+    const correction = normalized.capped ? undefined : correctDraftPrecision(normalized.value, precision,
       {minimum, maximum}, amount => profilePipeOrderByQuantity(variant, amount, mode, validLength)?.[unitKey] ?? undefined);
+    const exact = sameAmount && draft?.exactQuantity !== undefined ? draft.exactQuantity : correction?.exactQuantity;
     setDraft({quantity: correction?.text ?? normalized.value, length: lengthText, inputUnit: mode,
-      exactQuantity: normalized.capped ? maximum : sameAmount && draft?.exactQuantity !== undefined ? draft.exactQuantity : correction?.exactQuantity});
+      exactQuantity: normalized.capped ? maximum : exact ?? (square && correction ? entered ?? undefined : undefined)});
     setMessage(undefined);
   }
 
@@ -137,6 +159,10 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
 
   function submit() {
     if (!hydrated || removed) return;
+    if (canPromptForQuantity) {
+      setMessage("Укажите объём");
+      return;
+    }
     const corrected = correctOrderValues();
     setDraft({...nextDraft, length: corrected.length});
     if (corrected.message) setMessage(corrected.message);
@@ -167,8 +193,8 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
       requested: quoteOrder && quantity !== null
         ? {quantity, unit: orderUnits[inputUnit]} : undefined}}
     className={quoteClassName}/>
-    : <Button type="button" aria-describedby={deliveryId} onClick={() => submit()}
-      disabled={!hydrated || saved || removed || (!shouldRemove && !canAddOrder)}
+    : <Button type="button" aria-describedby={square ? [statusId, deliveryId].filter(Boolean).join(" ") : deliveryId} onClick={submit}
+      disabled={!hydrated || saved || removed || (!shouldRemove && !canAddOrder && !canPromptForQuantity)}
       className={`${buttonClass} ${actionSize} px-3`}>{label}</Button>;
 
   const inputClassName = `${filterStyles.field} min-w-0 px-2 text-center tabular-nums ${view === "table" ? "max-w-[6.375rem]" : ""}`;
@@ -176,9 +202,15 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
     aria-label={`Длина одной трубы для ${variant.name}`} value={lengthText}
     aria-invalid={lengthError || undefined}
     aria-describedby={`${statusId}-range ${statusId}`}
-    {...quantityTransferHandlers(setMessage)}
+    {...quantityTransferHandlers(square ? undefined : setMessage)}
     onChange={event => {
-      setDraft({...nextDraft, length: event.target.value});
+      const input = event.currentTarget;
+      const nextLength = square ? normalizeCartQuantityDraft(input.value, input.selectionStart, input.selectionEnd) : null;
+      if (nextLength && !nextLength.accepted) {
+        input.value = lengthText;
+        return;
+      }
+      setDraft({...nextDraft, length: nextLength?.value ?? input.value});
       setMessage(undefined);
     }}
     onBlur={settleLength}

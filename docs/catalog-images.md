@@ -260,7 +260,7 @@ Profile-pipe reference masses and their exact source pages are documented in
 
 ### Square profile-pipe illustrations
 
-The 28 parameterized square pipes use the owner's clean and marked photographs
+The parameterized square pipes use the owner's clean and marked photographs
 under `public/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/originals/`. The source files
 are retained. `scripts/render-profile-square-images.mjs` replaces only variable
 numeric labels on the 2400 × 1800 marked reference, using clean-photo patches
@@ -271,7 +271,8 @@ The output is lossless WebP at the existing product URLs and is connected throug
 
 Preview a non-reference item with
 `node scripts/render-profile-square-images.mjs --preview profile-pipe-square-100x100x5`.
-After visual review, generate with `--write` and refresh image versions. See the
+After visual review, generate with `--write` and optional product IDs, then
+refresh image versions. See the
 [template notes](../imports/profile-square-image-template/README.md) and
 `imports/profile-square-image-template/rendered.json` for patch geometry, exact
 labels, typography and protected-pixel checks. This renderer leaves rectangular

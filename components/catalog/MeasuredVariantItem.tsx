@@ -27,7 +27,7 @@ import {CatalogPositionDetails} from "./CatalogPositionDetails";
 import {PipePositionDetails} from "./PipePositionDetails";
 
 type OrderFeedback = {kind: "correction" | "error"; text: string};
-const enterQuantityMessage = "Укажите длину или вес больше нуля.";
+const enterQuantityHintDuration = 5000;
 
 export function MeasuredVariantItem({
   variant, view, kind, name, showSteelGrade,
@@ -143,7 +143,7 @@ function TonnageMeasuredVariantItem({
   let feedbackText = message?.text;
   if (!feedbackText) {
     if (invalidDraft) feedbackText = "Проверьте введённое значение.";
-    else if (hasChanges && !shouldRemove && !enteringFraction && !showRebarUnsaved) feedbackText = activeValue.trim() ? unsavedMessage : enterQuantityMessage;
+    else if (hasChanges && !shouldRemove && !enteringFraction && !showRebarUnsaved && activeValue.trim()) feedbackText = unsavedMessage;
     else if (requiresTonnage && parsedTons === null) feedbackText = "Укажите массу заказа.";
   }
   const pieceCount = !invalidDraft && wholeOrder && wholeOrder.pieces > 0 ? `${wholeOrder.pieces} шт.` : "";
@@ -155,6 +155,12 @@ function TonnageMeasuredVariantItem({
 
   function showError(text: string) {
     setMessage({kind: "error", text});
+  }
+
+  function showEnterQuantityHint() {
+    const hint: OrderFeedback = {kind: "error", text: "Укажите длину или вес больше нуля."};
+    setMessage(hint);
+    window.setTimeout(() => setMessage(null, {message: hint}), enterQuantityHintDuration);
   }
 
   function estimateTotal(orderMeters: number | null, orderTons: number | null) {
@@ -217,7 +223,9 @@ function TonnageMeasuredVariantItem({
     const previousExact = mode === "meter" ? parsedMeters : parsedTons;
     const sameDisplayedQuantity = substitutedMinimum === undefined && unroundedQuantity === undefined
       && entered !== null && entered === parseDraftQuantity(previousValue);
-    if (substitutedMinimum !== undefined && mode === "meter" && !roundToWholeLengths) {
+    if (cartLine && !value.trim()) {
+      showEnterQuantityHint();
+    } else if (substitutedMinimum !== undefined && mode === "meter" && !roundToWholeLengths) {
       setMessage({kind: "correction", text: `Значение увеличено до минимума ${formatMeasuredQuantity(substitutedMinimum, mode, true)}.`});
     } else if (!sameDisplayedQuantity || constrained.capped || message?.kind === "error") setMessage(null);
     if (!constrained.capped && sameDisplayedQuantity && mode !== inputMode && previousExact !== null) {
@@ -275,7 +283,7 @@ function TonnageMeasuredVariantItem({
   function addToCart() {
     if (!hydrated || isSaved || removed) return;
     if (draft === null && enteredQuantity === null) {
-      showError(enterQuantityMessage);
+      showEnterQuantityHint();
       return;
     }
     const next = resolvedOrder(inputMode);
@@ -290,7 +298,7 @@ function TonnageMeasuredVariantItem({
     setDraft(next.draft);
     const nextTotal = estimateTotal(next.meters, next.tons);
     if (!next.tons || (hasMass && !next.meters)) {
-      showError(enterQuantityMessage);
+      showEnterQuantityHint();
       return;
     }
     if (!canAdd || (!needsQuote && nextTotal === null) || (!hasMass && inputMode === "meter")) return;

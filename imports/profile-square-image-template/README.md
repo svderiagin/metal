@@ -5,7 +5,7 @@
 - чистая фотография: `public/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/originals/truba_kvadratnaya_1448_1086_original.jpg` (1448 × 1086);
 - образец разметки: `public/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/originals/truba_kvadratnaya_2400_1800_marked.jpg` (2400 × 1800).
 
-Оба исходника сохраняются. `scripts/render-profile-square-images.mjs` готовит 28 изображений 4:3 в lossless WebP. Основа — размеченный эталон; только изменяемые числовые подписи заменяются фрагментами чистой фотографии и текстом. Фотография за пределами этих областей, постоянные части заголовка, подписи строк, стрелки и отражение остаются попиксельно неизменными. Толщина 1,5 мм в эталоне указана корректно.
+Оба исходника сохраняются. `scripts/render-profile-square-images.mjs` готовит изображения 4:3 в lossless WebP для действующих квадратных труб. Основа — размеченный эталон. Изменяемые числовые подписи заменяются фрагментами чистой фотографии и текстом. Фотография за пределами этих областей, постоянные части заголовка, подписи строк, стрелки и отражение остаются попиксельно неизменными. Для новых позиций числовая часть заголовка сразу набирается без знака №.
 
 Правка 08.11.2026: после просмотра первой позиции удаление № распространено
 на все 28 изображений. Следующие цифры перенесены влево вместе с исходными
@@ -18,7 +18,7 @@
 
 ```sh
 node scripts/render-profile-square-images.mjs --preview profile-pipe-square-100x100x5
-node scripts/render-profile-square-images.mjs --write
+node scripts/render-profile-square-images.mjs --write profile-pipe-square-100x100x5
 node scripts/catalog-image-versions.mjs
 ```
 

@@ -44,6 +44,7 @@ const unit = (value, suffix) => `${number(value)}\u00a0${suffix}`;
 // Fixed heading, footer captions, arrows, cut face and reflection are untouched.
 const patches = {
   title: {left: 735, top: 222, width: 765, height: 108},
+  titleWithoutNumber: {left: 632, top: 222, width: 868, height: 108},
   height: {left: 835, top: 1000, width: 240, height: 90},
   width: {left: 1210, top: 1456, width: 260, height: 80},
   thickness: {left: 1676, top: 1056, width: 300, height: 124},
@@ -76,38 +77,39 @@ async function thicknessHalo(text, box, left, top) {
 const products = readProjectData('data/products/index.ts').productVariants.filter(p =>
   p.productTypeId === 'type-cat-trp-sub-1' && p.id.startsWith('profile-pipe-square-'));
 const {productIllustrationSignature} = readProjectData('lib/productPreviewImage.ts');
-assert.equal(products.length, 28, 'Review the collection before changing its image set');
-const write = process.argv.includes('--write');
-const previewIndex = process.argv.indexOf('--preview');
-const previewId = previewIndex >= 0 ? process.argv[previewIndex + 1] : undefined;
-assert.ok(write !== (previewIndex >= 0), 'Use --write or --preview PRODUCT_ID');
-assert.ok(previewIndex < 0 || previewId, '--preview requires a product ID');
+const [mode, ...ids] = process.argv.slice(2);
+const write = mode === '--write';
+assert.ok(write || (mode === '--preview' && ids.length === 1), 'Use --write [PRODUCT_ID ...] or --preview PRODUCT_ID');
+const selectedProducts = ids.length ? products.filter(product => ids.includes(product.id)) : products;
+assert.ok(selectedProducts.length && (!ids.length || selectedProducts.length === ids.length), 'Unknown or repeated product ID');
 const outputDirectory = write ? 'public/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement' : 'output/image-edits/profile-square-catalog-preview';
 await fs.mkdir(outputDirectory, {recursive: true});
 const records = [];
-for (const product of products) {
-  if (previewId && product.id !== previewId) continue;
+for (const product of selectedProducts) {
+  const headingCorrection = numberSignRemovalTargets.find(({id}) => id === product.id);
+  const patchKey = key => key === 'title' && !headingCorrection ? 'titleWithoutNumber' : key;
   const {profileWidthMm: width, profileHeightMm: height, wallThicknessMm: wall, weightPerMeterKg: mass} = product;
   assert.ok(width > 0 && width === height && wall > 0 && mass > 0 && product.weightConfirmed, `${product.id}: missing confirmed parameters`);
   const length = product.lengthMeters ? unit(product.lengthMeters, 'м')
     : product.lengthRangeMeters?.length === 2 ? `${product.lengthRangeMeters.map(number).join('–')}\u00a0м` : undefined;
   assert.ok(length, `${product.id}: missing catalog length`);
   const labels = [
-    {key: 'title', text: `${number(width)} x ${number(height)} x ${number(wall)}`, size: 84, weight: 700, left: 749, top: 237},
+    {key: 'title', text: `${number(width)} x ${number(height)} x ${number(wall)}`, size: 84, weight: 700,
+      left: headingCorrection ? 749 : 641, top: 237},
     {key: 'height', text: unit(height, 'мм'), size: 56, center: 954, top: 1022},
     {key: 'width', text: unit(width, 'мм'), size: 56, center: 1338, top: 1478},
     {key: 'thickness', text: unit(wall, 'мм'), size: 56, left: 1692, top: 1084},
     {key: 'length', text: length, size: 44, weight: 700, left: 608, top: 1568},
     {key: 'mass', text: unit(mass, 'кг/м'), size: 44, weight: 750, left: 608, top: 1634},
   ];
-  const changed = labels.filter(label => label.text !== referenceLabels[label.key]);
+  const changed = labels.filter(label => label.text !== referenceLabels[label.key] || patchKey(label.key) === 'titleWithoutNumber');
   const placements = [];
   let renderedReference = reference;
   if (changed.length) {
-    const clean = await sharp(reference).composite(changed.map(label => patchLayers[label.key])).png().toBuffer();
+    const clean = await sharp(reference).composite(changed.map(label => patchLayers[patchKey(label.key)])).png().toBuffer();
     const layers = [], lines = [];
     for (const label of changed) {
-      const box = patches[label.key];
+      const box = patches[patchKey(label.key)];
       const rendered = await textImage(label.text, label.size, label.weight);
       const left = label.center === undefined ? label.left : Math.round(label.center - rendered.info.width / 2);
       assert.ok(left >= box.left && left + rendered.info.width <= box.left + box.width, `${product.id}: clipped ${label.key}`);
@@ -124,10 +126,9 @@ for (const product of products) {
   }
   const image = await removeImageNumberSign(sharp,
     await sharp(renderedReference).webp({lossless: true, effort: 6}).toBuffer(), product.id);
-  const headingCorrection = numberSignRemovalTargets.find(({id}) => id === product.id);
   const mask = Buffer.alloc(WIDTH * HEIGHT);
   for (const {key} of changed) {
-    const box = patches[key];
+    const box = patches[patchKey(key)];
     for (let y = box.top; y < box.top + box.height; y++) mask.fill(1, y * WIDTH + box.left, y * WIDTH + box.left + box.width);
   }
   if (headingCorrection) {
@@ -151,15 +152,18 @@ for (const product of products) {
     sha256: createHash('sha256').update(image).digest('hex')});
   console.log(`${product.id}: ${output}; protectedPixelChanges=${protectedPixelChanges}`);
 }
-assert.ok(records.length, 'Unknown preview product');
 if (write) {
-  assert.equal(records.length, 28);
   await fs.mkdir(directory, {recursive: true});
-  await fs.writeFile(`${directory}/rendered.json`, JSON.stringify({renderer: 'scripts/render-profile-square-images.mjs',
+  const recordPath = `${directory}/rendered.json`;
+  const previousRecords = ids.length ? JSON.parse(await fs.readFile(recordPath, 'utf8')).records : [];
+  const recordById = new Map([...previousRecords, ...records].map(record => [record.id, record]));
+  const catalogRecords = products.map(({id}) => recordById.get(id));
+  assert.ok(catalogRecords.every(Boolean), 'Generate all missing catalog illustrations');
+  await fs.writeFile(recordPath, JSON.stringify({renderer: 'scripts/render-profile-square-images.mjs',
     reference: referencePath, cleanPhoto: photoPath,
     typography: {family: 'Inter', fontFile: fontPath, backend: 'fontconfig', text: '#41464D', lines: '#59636F'},
     patches, method: 'Owner marked reference; clean photograph patches and deterministic labels from confirmed public catalog parameters. Lossless WebP; no generative editing.',
-    illustration: 'Shared family photograph. Nominal dimensions are labels, not scaled manufacturing geometry.', records}, null, 2) + '\n');
+    illustration: 'Shared family photograph. Nominal dimensions are labels, not scaled manufacturing geometry.', records: catalogRecords}, null, 2) + '\n');
   const manifestPath = 'data/product-illustrations.json';
   const manifest = JSON.parse(await fs.readFile(manifestPath, 'utf8'));
   for (const {id, imageUrl, photoUrl, signature} of records) manifest[id] = {imageUrl, photoUrl, signature};

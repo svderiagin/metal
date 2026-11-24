@@ -140,6 +140,11 @@
   background-color: var(--action-hover);
 }
 
+:global(html[data-theme="dark"]) .cartButton:hover {
+  background-color: var(--color-brand-500);
+  border-color: var(--color-brand-300);
+}
+
 .cartButton:focus-visible {
   outline-color: var(--focus);
 }
@@ -181,8 +186,37 @@
   background-color: var(--danger-hover);
 }
 
+:global(html:not([data-theme="dark"])) .cartButton {
+  border-color: transparent;
+}
+
+:global(html:not([data-theme="dark"])) [data-order-delivery] .cartButton {
+  border-color: var(--color-brand-900);
+}
+
+:global(html:not([data-theme="dark"])) .savedCartButton {
+  border-color: #9cc6ad;
+}
+
+:global(html:not([data-theme="dark"])) .updateCartButton {
+  --update-background: var(--color-brand-100);
+  --update-hover: var(--color-brand-200);
+  border-color: #678b9a;
+}
+
+:global(html:not([data-theme="dark"])) .removeCartButton {
+  --danger-background: #fee2e2;
+  --danger-hover: #fecaca;
+  --danger-text: #991b1b;
+  border-color: #bc6f73;
+}
+
 .removedCartButton:disabled {
   background-color: var(--inactive-background);
   color: var(--inactive-text);
   opacity: 1;
+}
+
+:global(html:not([data-theme="dark"])) .removedCartButton {
+  border-color: var(--color-slate-400);
 }

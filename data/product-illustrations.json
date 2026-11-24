@@ -1624,5 +1624,35 @@
     "imageUrl": "/images/catalog/armatura/armatura-a1-a240/measurement/armatura-gladkaya-a240s-32mm-prutok-11-7m.webp",
     "photoUrl": "/images/catalog/armatura/originals/gladkaya/armatura_gladkaya_2400_1800_original.webp",
     "signature": "8086cd88"
+  },
+  "profile-pipe-square-15x15x1-2": {
+    "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-15x15x1-2mm-6m.webp",
+    "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/originals/truba_kvadratnaya_1448_1086_original.jpg",
+    "signature": "a9f5d1ab"
+  },
+  "profile-pipe-square-20x20x1-2": {
+    "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-20x20x1-2mm-6m.webp",
+    "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/originals/truba_kvadratnaya_1448_1086_original.jpg",
+    "signature": "6a0805fd"
+  },
+  "profile-pipe-square-40x40x4": {
+    "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-40x40x4mm-6m.webp",
+    "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/originals/truba_kvadratnaya_1448_1086_original.jpg",
+    "signature": "89b218c0"
+  },
+  "profile-pipe-square-80x80x5": {
+    "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-80x80x5mm-12m.webp",
+    "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/originals/truba_kvadratnaya_1448_1086_original.jpg",
+    "signature": "07902fac"
+  },
+  "profile-pipe-square-100x100x6": {
+    "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-100x100x6mm-12m.webp",
+    "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/originals/truba_kvadratnaya_1448_1086_original.jpg",
+    "signature": "7af9e170"
+  },
+  "profile-pipe-square-80x80x6": {
+    "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-80x80x6mm-12m.webp",
+    "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/originals/truba_kvadratnaya_1448_1086_original.jpg",
+    "signature": "37ceb5e0"
   }
 }

@@ -1,5 +1,5 @@
 {
-  "reviewedAt": "2026-11-07",
+  "reviewedAt": "2026-11-24",
   "unit": "кг/м",
   "basis": "Published reference theoretical mass for the exact outer section and nominal wall; not the measured mass or manufacturing-standard certification of a supplied batch.",
   "sources": {
@@ -27,9 +27,21 @@
       "title": "Сводная таблица по ширине лент и массе труб от 25.02.2025",
       "column": "Масса трубы по ГОСТ и ТУ пм, кг",
       "note": "Значения взяты из колонки ГОСТ и ТУ, а не из соседних расчётных колонок; строки без оцинковки и без пометки DIN."
+    },
+    "extended2019": {
+      "title": "Сводная таблица по ширине лент и массам труб от 01.01.2019",
+      "column": "Масса трубы по ГОСТ и ТУ пм, кг"
     }
   },
   "rows": [
+    {
+      "widthMm": 15,
+      "heightMm": 15,
+      "wallThicknessMm": 1.2,
+      "massKgPerMeter": 0.501,
+      "sourceId": "extended2019",
+      "pdfPage": 8
+    },
     {
       "widthMm": 15,
       "heightMm": 15,
@@ -37,6 +49,14 @@
       "massKgPerMeter": 0.605,
       "sourceId": "gost8639",
       "pdfPage": 3
+    },
+    {
+      "widthMm": 20,
+      "heightMm": 20,
+      "wallThicknessMm": 1.2,
+      "massKgPerMeter": 0.689,
+      "sourceId": "extended2019",
+      "pdfPage": 8
     },
     {
       "widthMm": 20,
@@ -107,6 +127,14 @@
       "heightMm": 40,
       "wallThicknessMm": 3,
       "massKgPerMeter": 3.36,
+      "sourceId": "gost8639",
+      "pdfPage": 3
+    },
+    {
+      "widthMm": 40,
+      "heightMm": 40,
+      "wallThicknessMm": 4,
+      "massKgPerMeter": 4.3,
       "sourceId": "gost8639",
       "pdfPage": 3
     },
@@ -199,6 +227,22 @@
       "pdfPage": 3
     },
     {
+      "widthMm": 80,
+      "heightMm": 80,
+      "wallThicknessMm": 5,
+      "massKgPerMeter": 11.44,
+      "sourceId": "gost8639",
+      "pdfPage": 3
+    },
+    {
+      "widthMm": 80,
+      "heightMm": 80,
+      "wallThicknessMm": 6,
+      "massKgPerMeter": 13.46,
+      "sourceId": "gost8639",
+      "pdfPage": 3
+    },
+    {
       "widthMm": 100,
       "heightMm": 100,
       "wallThicknessMm": 3,
@@ -221,6 +265,14 @@
       "massKgPerMeter": 14.58,
       "sourceId": "gost8639am4",
       "pdfPage": 9
+    },
+    {
+      "widthMm": 100,
+      "heightMm": 100,
+      "wallThicknessMm": 6,
+      "massKgPerMeter": 17.22,
+      "sourceId": "gost8639",
+      "pdfPage": 3
     },
     {
       "widthMm": 120,

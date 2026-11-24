@@ -56,8 +56,11 @@ export function useOrderDraft<Draft, Message = string>(variantId: string, contro
   const setDraft = useCallback((draft: Draft | null) => {
     store.update(key, initialState, current => Object.is(current.draft, draft) ? current : {...current, draft});
   }, [store, key, initialState]);
-  const setMessage = useCallback((message: Message) => {
-    store.update(key, initialState, current => Object.is(current.message, message) ? current : {...current, message});
+  const setMessage = useCallback((message: Message, expected?: {message: Message}) => {
+    store.update(key, initialState, current => {
+      if (expected && !Object.is(current.message, expected.message)) return current;
+      return Object.is(current.message, message) ? current : {...current, message};
+    });
   }, [store, key, initialState]);
 
   return {...state, setDraft, setMessage};

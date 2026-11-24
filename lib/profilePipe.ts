@@ -1,9 +1,10 @@
 import type {ProductVariant} from "@/types/product";
 import type {CartPieceOrder} from "@/types/cart";
-import {calculatePieceLineTotal, metersToTons, tonsToMeters, wholeLengthPieces} from "./orderMeasurement";
+import {MAX_ORDER_TONS} from "./constants";
+import {calculatePieceLineTotal, metersToTons, tonsToMeters, wholeLengthMeters, wholeLengthPieces, wholeLengthPiecesAtMost} from "./orderMeasurement";
 
 export type ProfilePipeOrderUnit = "piece" | "meter" | "ton";
-export const MAX_PROFILE_PIPE_PIECES = 999;
+export const MAX_RECTANGULAR_PIPE_PIECES = 999;
 
 export function isSquareProfilePipe(product: Pick<ProductVariant, "categoryId" | "subcategoryId">) {
   return product.categoryId === "cat-trp" && product.subcategoryId === "cat-trp-sub-1";
@@ -41,23 +42,32 @@ export function profilePipePricePerTon(product: ProductVariant) {
 export function normalizePieceOrder(value: unknown): CartPieceOrder | undefined {
   if (!value || typeof value !== "object") return undefined;
   const order = value as Partial<CartPieceOrder>;
-  if (typeof order.pieces !== "number" || !Number.isSafeInteger(order.pieces) || order.pieces <= 0 || order.pieces > MAX_PROFILE_PIPE_PIECES
+  if (typeof order.pieces !== "number" || !Number.isSafeInteger(order.pieces) || order.pieces <= 0
     || typeof order.lengthMeters !== "number" || !Number.isFinite(order.lengthMeters) || order.lengthMeters <= 0
     || !Number.isFinite(order.pieces * order.lengthMeters)) return undefined;
   return {pieces: order.pieces, lengthMeters: order.lengthMeters};
 }
 
-export function profilePipeOrder(product: ProductVariant, pieces: number, selectedLength?: number) {
-  if (!isProfilePipeVariant(product) || !Number.isSafeInteger(pieces) || pieces < 0 || pieces > MAX_PROFILE_PIPE_PIECES) return null;
-  const length = selectedLength ?? product.lengthMeters;
-  if (length === undefined || !Number.isFinite(length) || length <= 0) return null;
+export function profilePipeMaximumPieces(product: ProductVariant, length = product.lengthMeters): number | null {
+  if (!isProfilePipeVariant(product) || length === undefined || !Number.isFinite(length) || length <= 0) return null;
   if (product.lengthMeters !== undefined) {
     if (length !== product.lengthMeters) return null;
   } else {
     const range = product.lengthRangeMeters;
     if (!range || length < range[0] || length > range[1]) return null;
   }
-  const meters = pieces * length;
+  if (!isSquareProfilePipe(product)) return MAX_RECTANGULAR_PIPE_PIECES;
+  const mass = profilePipeMassPerMeter(product);
+  const maximumMeters = mass === null ? null : tonsToMeters(MAX_ORDER_TONS, mass);
+  if (maximumMeters === null) return null;
+  return Math.min(Number.MAX_SAFE_INTEGER, wholeLengthPiecesAtMost(maximumMeters, length));
+}
+
+export function profilePipeOrder(product: ProductVariant, pieces: number, length = product.lengthMeters) {
+  if (length === undefined || !Number.isSafeInteger(pieces) || pieces < 0) return null;
+  const maximum = profilePipeMaximumPieces(product, length);
+  if (maximum === null || pieces > maximum) return null;
+  const meters = isSquareProfilePipe(product) ? wholeLengthMeters(pieces, length) : pieces * length;
   if (!Number.isFinite(meters)) return null;
   const estimatedTotal = hasConfirmedProfilePipePrice(product)
     ? calculatePieceLineTotal(pieces, length, product.price!) : null;

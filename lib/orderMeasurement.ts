@@ -10,7 +10,7 @@ export function requiresWholeLengthOrder(product: ProductVariant): boolean {
     && product.lengthMeters !== undefined && isPositiveFinite(product.lengthMeters));
 }
 
-function stockLengthMeters(pieces: number, lengthMeters: number) {
+export function wholeLengthMeters(pieces: number, lengthMeters: number) {
   // Whole-millimetre catalog lengths can be multiplied exactly before converting
   // back to metres. This matters when a whole order costs exactly half a kopeck.
   const millimeters = Math.round(lengthMeters * 1000);
@@ -33,6 +33,10 @@ export function wholeLengthPieces(meters: number, length: number) {
   return meters > 0 ? Math.max(1, Math.ceil(stockPieceRatio(meters, length))) : 0;
 }
 
+export function wholeLengthPiecesAtMost(meters: number, length: number) {
+  return Math.floor(stockPieceRatio(meters, length));
+}
+
 // Input limits are shared by the catalog, cart editor and authoritative repricing.
 export function getMeasurementQuantityOptions(product: ProductVariant, mode: OrderInputMode) {
   const length = product.lengthMeters;
@@ -42,7 +46,7 @@ export function getMeasurementQuantityOptions(product: ProductVariant, mode: Ord
   const maximumTons = MAX_ORDER_TONS;
   const convertedMaximum = mass !== undefined && isPositiveFinite(mass) ? tonsToMeters(maximumTons, mass) : null;
   const maximumMeters = convertedMaximum !== null
-    ? wholeLengths ? stockLengthMeters(Math.floor(stockPieceRatio(convertedMaximum, length)), length) : convertedMaximum
+    ? wholeLengths ? wholeLengthMeters(wholeLengthPiecesAtMost(convertedMaximum, length), length) : convertedMaximum
     : 9999;
   if (mode === "meter") {
     return {minimum: minimumMeters, maximum: maximumMeters, decimalPlaces: wholeLengths ? undefined : 2};
@@ -88,7 +92,7 @@ export function wholeLengthOrder(product: ProductVariant, quantity: number, mode
   if (requestedMeters === null) return null;
   const pieces = quantity > 0 ? Math.max(1, wholeLengthPieces(requestedMeters, length)) : 0;
   if (!Number.isSafeInteger(pieces)) return null;
-  const meters = stockLengthMeters(pieces, length);
+  const meters = wholeLengthMeters(pieces, length);
   const weightTons = metersToTons(meters, mass);
   return weightTons === null ? null : {pieces, meters, weightTons};
 }
