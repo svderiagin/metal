@@ -138,8 +138,8 @@ export function CatalogVariantOrder({view, quantity, secondaryQuantity, action, 
   status?: ReactNode;
   deliveryId?: string;
 }) {
-  const delivery = deliveryId && <p id={deliveryId} className="mt-1.5 text-[0.875rem] leading-[1.35] text-slate-600 dark:text-slate-300">
-    Доставка <strong className="whitespace-nowrap font-semibold">{BACKORDER_DELIVERY_ESTIMATE}</strong>
+  const delivery = deliveryId && <p id={deliveryId} className="mt-1.5 text-[0.875rem] leading-[1.35] font-normal text-slate-600 dark:text-slate-300">
+    Доставка <span className="whitespace-nowrap">{BACKORDER_DELIVERY_ESTIMATE}</span>
   </p>;
   return view === "table"
     ? <>
