@@ -1,7 +1,103 @@
 {
   "renderer": "scripts/render-shveller-images.mjs",
-  "reference": "imports/shveller-image-template/reference-5.jpg",
-  "cleanPhoto": "imports/shveller-image-template/photo.png",
+  "templates": {
+    "П": {
+      "reference": "imports/shveller-image-template/reference-5.jpg",
+      "cleanPhoto": "imports/shveller-image-template/photo.png",
+      "patches": {
+        "title": {
+          "left": 110,
+          "top": 105,
+          "width": 960,
+          "height": 120
+        },
+        "flangeWidth": {
+          "left": 680,
+          "top": 876,
+          "width": 224,
+          "height": 58
+        },
+        "webThickness": {
+          "left": 1160,
+          "top": 1227,
+          "width": 320,
+          "height": 83
+        },
+        "flangeThickness": {
+          "left": 1964,
+          "top": 986,
+          "width": 370,
+          "height": 94
+        },
+        "height": {
+          "left": 900,
+          "top": 1408,
+          "width": 980,
+          "height": 90
+        },
+        "length": {
+          "left": 600,
+          "top": 1552,
+          "width": 470,
+          "height": 64
+        },
+        "mass": {
+          "left": 600,
+          "top": 1621,
+          "width": 470,
+          "height": 65
+        }
+      }
+    },
+    "У": {
+      "reference": "public/images/catalog/shveller/originals/shveller_Y_2400_1800_marked.jpg",
+      "cleanPhoto": "public/images/catalog/shveller/originals/shveller_Y_1448_1086_original.jpg",
+      "patches": {
+        "title": {
+          "left": 110,
+          "top": 105,
+          "width": 860,
+          "height": 120
+        },
+        "flangeWidth": {
+          "left": 684,
+          "top": 878,
+          "width": 216,
+          "height": 58
+        },
+        "webThickness": {
+          "left": 1208,
+          "top": 1223,
+          "width": 370,
+          "height": 80
+        },
+        "flangeThickness": {
+          "left": 2025,
+          "top": 876,
+          "width": 295,
+          "height": 103
+        },
+        "height": {
+          "left": 1269,
+          "top": 1389,
+          "width": 311,
+          "height": 72
+        },
+        "length": {
+          "left": 600,
+          "top": 1552,
+          "width": 470,
+          "height": 64
+        },
+        "mass": {
+          "left": 600,
+          "top": 1621,
+          "width": 470,
+          "height": 65
+        }
+      }
+    }
+  },
   "typography": {
     "family": "Inter",
     "fontFile": "imports/shveller-image-template/fonts/Inter-variable.ttf",
@@ -11,52 +107,8 @@
       "weight": 750
     }
   },
-  "patches": {
-    "title": {
-      "left": 110,
-      "top": 105,
-      "width": 960,
-      "height": 120
-    },
-    "flangeWidth": {
-      "left": 680,
-      "top": 876,
-      "width": 224,
-      "height": 58
-    },
-    "webThickness": {
-      "left": 1160,
-      "top": 1227,
-      "width": 320,
-      "height": 83
-    },
-    "flangeThickness": {
-      "left": 1964,
-      "top": 986,
-      "width": 370,
-      "height": 94
-    },
-    "height": {
-      "left": 900,
-      "top": 1408,
-      "width": 980,
-      "height": 90
-    },
-    "length": {
-      "left": 600,
-      "top": 1552,
-      "width": 470,
-      "height": 64
-    },
-    "mass": {
-      "left": 600,
-      "top": 1621,
-      "width": 470,
-      "height": 65
-    }
-  },
   "method": "Original reference pixels with deterministic Inter labels from public product specifications; no generative editing.",
-  "illustration": "Shared family photograph with ГОСТ 8240-97 dimensions. У includes a schematic of the sloping inner flange faces.",
+  "illustration": "Separate approved reference photographs for parallel and sloping flange faces, with ГОСТ 8240-97 dimensions.",
   "records": [
     {
       "id": "catalog-2235",
@@ -203,6 +255,7 @@
           "size": 56,
           "center": 814,
           "top": 884,
+          "rightLimit": 896,
           "left": 736,
           "width": 156,
           "height": 44
@@ -213,7 +266,10 @@
           "size": 56,
           "left": 1980,
           "top": 1010,
-          "halo": true,
+          "halo": {
+            "padding": 7,
+            "blur": 5
+          },
           "width": 157,
           "height": 50
         },
@@ -325,6 +381,7 @@
           "size": 56,
           "center": 814,
           "top": 884,
+          "rightLimit": 896,
           "left": 734,
           "width": 160,
           "height": 43
@@ -344,7 +401,10 @@
           "size": 56,
           "left": 1980,
           "top": 1010,
-          "halo": true,
+          "halo": {
+            "padding": 7,
+            "blur": 5
+          },
           "width": 160,
           "height": 49
         },
@@ -456,6 +516,7 @@
           "size": 56,
           "center": 814,
           "top": 884,
+          "rightLimit": 896,
           "left": 735,
           "width": 159,
           "height": 43
@@ -475,7 +536,10 @@
           "size": 56,
           "left": 1980,
           "top": 1010,
-          "halo": true,
+          "halo": {
+            "padding": 7,
+            "blur": 5
+          },
           "width": 157,
           "height": 50
         },
@@ -587,6 +651,7 @@
           "size": 56,
           "center": 814,
           "top": 884,
+          "rightLimit": 896,
           "left": 738,
           "width": 153,
           "height": 43
@@ -606,7 +671,10 @@
           "size": 56,
           "left": 1980,
           "top": 1010,
-          "halo": true,
+          "halo": {
+            "padding": 7,
+            "blur": 5
+          },
           "width": 158,
           "height": 51
         },
@@ -718,6 +786,7 @@
           "size": 56,
           "center": 814,
           "top": 884,
+          "rightLimit": 896,
           "left": 737,
           "width": 155,
           "height": 44
@@ -737,7 +806,10 @@
           "size": 56,
           "left": 1980,
           "top": 1010,
-          "halo": true,
+          "halo": {
+            "padding": 7,
+            "blur": 5
+          },
           "width": 148,
           "height": 51
         },
@@ -849,6 +921,7 @@
           "size": 56,
           "center": 814,
           "top": 884,
+          "rightLimit": 896,
           "left": 735,
           "width": 158,
           "height": 43
@@ -868,7 +941,10 @@
           "size": 56,
           "left": 1980,
           "top": 1010,
-          "halo": true,
+          "halo": {
+            "padding": 7,
+            "blur": 5
+          },
           "width": 168,
           "height": 51
         },
@@ -980,6 +1056,7 @@
           "size": 56,
           "center": 814,
           "top": 884,
+          "rightLimit": 896,
           "left": 738,
           "width": 153,
           "height": 43
@@ -999,7 +1076,10 @@
           "size": 56,
           "left": 1980,
           "top": 1010,
-          "halo": true,
+          "halo": {
+            "padding": 7,
+            "blur": 5
+          },
           "width": 162,
           "height": 51
         },
@@ -1111,6 +1191,7 @@
           "size": 56,
           "center": 814,
           "top": 884,
+          "rightLimit": 896,
           "left": 738,
           "width": 152,
           "height": 43
@@ -1130,7 +1211,10 @@
           "size": 56,
           "left": 1980,
           "top": 1010,
-          "halo": true,
+          "halo": {
+            "padding": 7,
+            "blur": 5
+          },
           "width": 123,
           "height": 43
         },
@@ -1242,6 +1326,7 @@
           "size": 56,
           "center": 814,
           "top": 884,
+          "rightLimit": 896,
           "left": 737,
           "width": 154,
           "height": 44
@@ -1261,7 +1346,10 @@
           "size": 56,
           "left": 1980,
           "top": 1010,
-          "halo": true,
+          "halo": {
+            "padding": 7,
+            "blur": 5
+          },
           "width": 165,
           "height": 50
         },
@@ -1373,6 +1461,7 @@
           "size": 56,
           "center": 814,
           "top": 884,
+          "rightLimit": 896,
           "left": 736,
           "width": 157,
           "height": 43
@@ -1392,7 +1481,10 @@
           "size": 56,
           "left": 1980,
           "top": 1010,
-          "halo": true,
+          "halo": {
+            "padding": 7,
+            "blur": 5
+          },
           "width": 145,
           "height": 43
         },
@@ -1504,6 +1596,7 @@
           "size": 56,
           "center": 814,
           "top": 884,
+          "rightLimit": 896,
           "left": 737,
           "width": 155,
           "height": 43
@@ -1523,7 +1616,10 @@
           "size": 56,
           "left": 1980,
           "top": 1010,
-          "halo": true,
+          "halo": {
+            "padding": 7,
+            "blur": 5
+          },
           "width": 188,
           "height": 50
         },
@@ -1635,6 +1731,7 @@
           "size": 56,
           "center": 814,
           "top": 884,
+          "rightLimit": 896,
           "left": 717,
           "width": 179,
           "height": 43
@@ -1654,7 +1751,10 @@
           "size": 56,
           "left": 1980,
           "top": 1010,
-          "halo": true,
+          "halo": {
+            "padding": 7,
+            "blur": 5
+          },
           "width": 131,
           "height": 41
         },
@@ -1766,6 +1866,7 @@
           "size": 56,
           "center": 814,
           "top": 884,
+          "rightLimit": 896,
           "left": 733,
           "width": 163,
           "height": 42
@@ -1785,7 +1886,10 @@
           "size": 56,
           "left": 1980,
           "top": 1010,
-          "halo": true,
+          "halo": {
+            "padding": 7,
+            "blur": 5
+          },
           "width": 187,
           "height": 51
         },
@@ -1973,6 +2077,7 @@
           "size": 56,
           "center": 814,
           "top": 884,
+          "rightLimit": 896,
           "left": 736,
           "width": 156,
           "height": 44
@@ -1983,7 +2088,10 @@
           "size": 56,
           "left": 1980,
           "top": 1010,
-          "halo": true,
+          "halo": {
+            "padding": 7,
+            "blur": 5
+          },
           "width": 157,
           "height": 50
         },
@@ -2095,6 +2203,7 @@
           "size": 56,
           "center": 814,
           "top": 884,
+          "rightLimit": 896,
           "left": 734,
           "width": 160,
           "height": 43
@@ -2114,7 +2223,10 @@
           "size": 56,
           "left": 1980,
           "top": 1010,
-          "halo": true,
+          "halo": {
+            "padding": 7,
+            "blur": 5
+          },
           "width": 160,
           "height": 49
         },
@@ -2226,6 +2338,7 @@
           "size": 56,
           "center": 814,
           "top": 884,
+          "rightLimit": 896,
           "left": 735,
           "width": 159,
           "height": 43
@@ -2245,7 +2358,10 @@
           "size": 56,
           "left": 1980,
           "top": 1010,
-          "halo": true,
+          "halo": {
+            "padding": 7,
+            "blur": 5
+          },
           "width": 157,
           "height": 50
         },
@@ -2357,6 +2473,7 @@
           "size": 56,
           "center": 814,
           "top": 884,
+          "rightLimit": 896,
           "left": 738,
           "width": 153,
           "height": 43
@@ -2376,7 +2493,10 @@
           "size": 56,
           "left": 1980,
           "top": 1010,
-          "halo": true,
+          "halo": {
+            "padding": 7,
+            "blur": 5
+          },
           "width": 158,
           "height": 51
         },
@@ -2488,6 +2608,7 @@
           "size": 56,
           "center": 814,
           "top": 884,
+          "rightLimit": 896,
           "left": 737,
           "width": 155,
           "height": 44
@@ -2507,7 +2628,10 @@
           "size": 56,
           "left": 1980,
           "top": 1010,
-          "halo": true,
+          "halo": {
+            "padding": 7,
+            "blur": 5
+          },
           "width": 148,
           "height": 51
         },
@@ -2619,6 +2743,7 @@
           "size": 56,
           "center": 814,
           "top": 884,
+          "rightLimit": 896,
           "left": 735,
           "width": 158,
           "height": 43
@@ -2638,7 +2763,10 @@
           "size": 56,
           "left": 1980,
           "top": 1010,
-          "halo": true,
+          "halo": {
+            "padding": 7,
+            "blur": 5
+          },
           "width": 168,
           "height": 51
         },
@@ -2723,94 +2851,16 @@
           "text": "7,05 кг/м"
         }
       ],
-      "sourceReference": "imports/shveller-image-template/reference-5.jpg",
-      "changedLabels": [
-        "title",
-        "flangeWidth",
-        "webThickness",
-        "flangeThickness",
-        "height",
-        "length",
-        "mass"
-      ],
-      "placements": [
-        {
-          "key": "title",
-          "text": "Швеллер 8У",
-          "size": 84,
-          "weight": 700,
-          "left": 136,
-          "top": 127,
-          "width": 490,
-          "height": 79
-        },
-        {
-          "key": "flangeWidth",
-          "text": "40 мм",
-          "size": 56,
-          "center": 814,
-          "top": 884,
-          "left": 734,
-          "width": 160,
-          "height": 43
-        },
-        {
-          "key": "webThickness",
-          "text": "4,5 мм",
-          "size": 56,
-          "left": 1172,
-          "top": 1245,
-          "width": 168,
-          "height": 49
-        },
-        {
-          "key": "flangeThickness",
-          "text": "7,4 мм",
-          "size": 56,
-          "left": 1980,
-          "top": 1010,
-          "halo": true,
-          "width": 160,
-          "height": 49
-        },
-        {
-          "key": "height",
-          "text": "80 мм",
-          "size": 56,
-          "center": 1390,
-          "top": 1431,
-          "left": 1312,
-          "width": 157,
-          "height": 44
-        },
-        {
-          "key": "length",
-          "text": "12 м",
-          "size": 44,
-          "weight": 750,
-          "left": 610,
-          "top": 1568,
-          "width": 85,
-          "height": 32
-        },
-        {
-          "key": "mass",
-          "text": "7,05 кг/м",
-          "size": 44,
-          "weight": 750,
-          "left": 610,
-          "top": 1634,
-          "width": 184,
-          "height": 40
-        }
-      ],
+      "sourceReference": "public/images/catalog/shveller/originals/shveller_Y_2400_1800_marked.jpg",
+      "changedLabels": [],
+      "placements": [],
       "protectedPixelChanges": 0,
       "output": "public/images/catalog/shveller/measurement/shveller-8u-s255-12m.webp",
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
-      "bytes": 1101588,
-      "sha256": "c46ee7775830139f7062635d664977d1c06799773c08b97651c3e4b961295914"
+      "bytes": 1291104,
+      "sha256": "064e6ebb072735aa123bf52e59c3dccc6439e52b01b71e0efb38ff70722c582e"
     },
     {
       "id": "shveller-10u-st3-12m",
@@ -2854,14 +2904,12 @@
           "text": "8,59 кг/м"
         }
       ],
-      "sourceReference": "imports/shveller-image-template/reference-5.jpg",
+      "sourceReference": "public/images/catalog/shveller/originals/shveller_Y_2400_1800_marked.jpg",
       "changedLabels": [
         "title",
         "flangeWidth",
-        "webThickness",
         "flangeThickness",
         "height",
-        "length",
         "mass"
       ],
       "placements": [
@@ -2870,8 +2918,8 @@
           "text": "Швеллер 10У",
           "size": 84,
           "weight": 700,
-          "left": 136,
-          "top": 127,
+          "left": 135,
+          "top": 126,
           "width": 522,
           "height": 79
         },
@@ -2879,50 +2927,37 @@
           "key": "flangeWidth",
           "text": "46 мм",
           "size": 56,
-          "center": 814,
-          "top": 884,
-          "left": 735,
-          "width": 159,
+          "weight": 480,
+          "center": 796,
+          "top": 885,
+          "left": 716,
+          "width": 160,
           "height": 43
-        },
-        {
-          "key": "webThickness",
-          "text": "4,5 мм",
-          "size": 56,
-          "left": 1172,
-          "top": 1245,
-          "width": 168,
-          "height": 49
         },
         {
           "key": "flangeThickness",
           "text": "7,6 мм",
           "size": 56,
-          "left": 1980,
-          "top": 1010,
-          "halo": true,
-          "width": 157,
+          "weight": 480,
+          "left": 2055,
+          "top": 900,
+          "halo": {
+            "padding": 11,
+            "blur": 8
+          },
+          "width": 158,
           "height": 50
         },
         {
           "key": "height",
           "text": "100 мм",
           "size": 56,
-          "center": 1390,
-          "top": 1431,
-          "left": 1301,
-          "width": 179,
+          "weight": 480,
+          "center": 1422,
+          "top": 1401,
+          "left": 1331,
+          "width": 183,
           "height": 43
-        },
-        {
-          "key": "length",
-          "text": "12 м",
-          "size": 44,
-          "weight": 750,
-          "left": 610,
-          "top": 1568,
-          "width": 85,
-          "height": 32
         },
         {
           "key": "mass",
@@ -2940,8 +2975,8 @@
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
-      "bytes": 1102812,
-      "sha256": "e574366599e75b24e6e7f7d975cb4d58e48a6432c955ddf526468710eb2f048a"
+      "bytes": 1257404,
+      "sha256": "dd2185e91831e327151a55f094e70d26f26c02d7e75d5a055702e5a38d8e5c35"
     },
     {
       "id": "shveller-12u-st3-12m",
@@ -2985,14 +3020,13 @@
           "text": "10,4 кг/м"
         }
       ],
-      "sourceReference": "imports/shveller-image-template/reference-5.jpg",
+      "sourceReference": "public/images/catalog/shveller/originals/shveller_Y_2400_1800_marked.jpg",
       "changedLabels": [
         "title",
         "flangeWidth",
         "webThickness",
         "flangeThickness",
         "height",
-        "length",
         "mass"
       ],
       "placements": [
@@ -3001,8 +3035,8 @@
           "text": "Швеллер 12У",
           "size": 84,
           "weight": 700,
-          "left": 136,
-          "top": 127,
+          "left": 135,
+          "top": 126,
           "width": 521,
           "height": 79
         },
@@ -3010,50 +3044,47 @@
           "key": "flangeWidth",
           "text": "52 мм",
           "size": 56,
-          "center": 814,
-          "top": 884,
-          "left": 738,
-          "width": 153,
+          "weight": 480,
+          "center": 796,
+          "top": 885,
+          "left": 718,
+          "width": 156,
           "height": 43
         },
         {
           "key": "webThickness",
           "text": "4,8 мм",
           "size": 56,
-          "left": 1172,
-          "top": 1245,
-          "width": 169,
-          "height": 51
+          "weight": 480,
+          "left": 1220,
+          "top": 1236,
+          "width": 170,
+          "height": 50
         },
         {
           "key": "flangeThickness",
           "text": "7,8 мм",
           "size": 56,
-          "left": 1980,
-          "top": 1010,
-          "halo": true,
-          "width": 158,
-          "height": 51
+          "weight": 480,
+          "left": 2055,
+          "top": 900,
+          "halo": {
+            "padding": 11,
+            "blur": 8
+          },
+          "width": 159,
+          "height": 50
         },
         {
           "key": "height",
           "text": "120 мм",
           "size": 56,
-          "center": 1390,
-          "top": 1431,
-          "left": 1302,
-          "width": 176,
+          "weight": 480,
+          "center": 1422,
+          "top": 1401,
+          "left": 1332,
+          "width": 180,
           "height": 43
-        },
-        {
-          "key": "length",
-          "text": "12 м",
-          "size": 44,
-          "weight": 750,
-          "left": 610,
-          "top": 1568,
-          "width": 85,
-          "height": 32
         },
         {
           "key": "mass",
@@ -3071,8 +3102,8 @@
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
-      "bytes": 1102950,
-      "sha256": "557b05ebcd61fd7b1b5006def64209e432d607390fecbe141042ca2e1a1821c2"
+      "bytes": 1253748,
+      "sha256": "bfb909a3dc2b0362881ed0eef52d623dae36664a765b339618b057c3a280fddc"
     },
     {
       "id": "shveller-14u-st3-12m",
@@ -3116,14 +3147,13 @@
           "text": "12,3 кг/м"
         }
       ],
-      "sourceReference": "imports/shveller-image-template/reference-5.jpg",
+      "sourceReference": "public/images/catalog/shveller/originals/shveller_Y_2400_1800_marked.jpg",
       "changedLabels": [
         "title",
         "flangeWidth",
         "webThickness",
         "flangeThickness",
         "height",
-        "length",
         "mass"
       ],
       "placements": [
@@ -3132,8 +3162,8 @@
           "text": "Швеллер 14У",
           "size": 84,
           "weight": 700,
-          "left": 136,
-          "top": 127,
+          "left": 135,
+          "top": 126,
           "width": 526,
           "height": 78
         },
@@ -3141,50 +3171,47 @@
           "key": "flangeWidth",
           "text": "58 мм",
           "size": 56,
-          "center": 814,
-          "top": 884,
-          "left": 737,
-          "width": 155,
-          "height": 44
+          "weight": 480,
+          "center": 796,
+          "top": 885,
+          "left": 718,
+          "width": 157,
+          "height": 43
         },
         {
           "key": "webThickness",
           "text": "4,9 мм",
           "size": 56,
-          "left": 1172,
-          "top": 1245,
-          "width": 169,
+          "weight": 480,
+          "left": 1220,
+          "top": 1236,
+          "width": 170,
           "height": 50
         },
         {
           "key": "flangeThickness",
           "text": "8,1 мм",
           "size": 56,
-          "left": 1980,
-          "top": 1010,
-          "halo": true,
-          "width": 148,
-          "height": 51
+          "weight": 480,
+          "left": 2055,
+          "top": 900,
+          "halo": {
+            "padding": 11,
+            "blur": 8
+          },
+          "width": 151,
+          "height": 50
         },
         {
           "key": "height",
           "text": "140 мм",
           "size": 56,
-          "center": 1390,
-          "top": 1431,
-          "left": 1300,
-          "width": 180,
+          "weight": 480,
+          "center": 1422,
+          "top": 1401,
+          "left": 1331,
+          "width": 183,
           "height": 43
-        },
-        {
-          "key": "length",
-          "text": "12 м",
-          "size": 44,
-          "weight": 750,
-          "left": 610,
-          "top": 1568,
-          "width": 85,
-          "height": 32
         },
         {
           "key": "mass",
@@ -3202,8 +3229,8 @@
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
-      "bytes": 1101870,
-      "sha256": "7fa3a7228d9dfa32c6bdb80a32d54895d852bc7434ecfe400f385c13b569ebf5"
+      "bytes": 1253900,
+      "sha256": "447512ba66de29271e6371efef9fd35927052e1b7b35d7d9a4869a708af23e49"
     },
     {
       "id": "shveller-16u-st3-12m",
@@ -3247,14 +3274,13 @@
           "text": "14,2 кг/м"
         }
       ],
-      "sourceReference": "imports/shveller-image-template/reference-5.jpg",
+      "sourceReference": "public/images/catalog/shveller/originals/shveller_Y_2400_1800_marked.jpg",
       "changedLabels": [
         "title",
         "flangeWidth",
         "webThickness",
         "flangeThickness",
         "height",
-        "length",
         "mass"
       ],
       "placements": [
@@ -3263,8 +3289,8 @@
           "text": "Швеллер 16У",
           "size": 84,
           "weight": 700,
-          "left": 136,
-          "top": 127,
+          "left": 135,
+          "top": 126,
           "width": 523,
           "height": 79
         },
@@ -3272,50 +3298,47 @@
           "key": "flangeWidth",
           "text": "64 мм",
           "size": 56,
-          "center": 814,
-          "top": 884,
-          "left": 735,
-          "width": 158,
+          "weight": 480,
+          "center": 796,
+          "top": 885,
+          "left": 717,
+          "width": 159,
           "height": 43
         },
         {
           "key": "webThickness",
           "text": "5 мм",
           "size": 56,
-          "left": 1172,
-          "top": 1245,
-          "width": 122,
+          "weight": 480,
+          "left": 1220,
+          "top": 1236,
+          "width": 124,
           "height": 42
         },
         {
           "key": "flangeThickness",
           "text": "8,4 мм",
           "size": 56,
-          "left": 1980,
-          "top": 1010,
-          "halo": true,
-          "width": 168,
-          "height": 51
+          "weight": 480,
+          "left": 2055,
+          "top": 900,
+          "halo": {
+            "padding": 11,
+            "blur": 8
+          },
+          "width": 171,
+          "height": 50
         },
         {
           "key": "height",
           "text": "160 мм",
           "size": 56,
-          "center": 1390,
-          "top": 1431,
-          "left": 1301,
-          "width": 178,
+          "weight": 480,
+          "center": 1422,
+          "top": 1401,
+          "left": 1332,
+          "width": 181,
           "height": 43
-        },
-        {
-          "key": "length",
-          "text": "12 м",
-          "size": 44,
-          "weight": 750,
-          "left": 610,
-          "top": 1568,
-          "width": 85,
-          "height": 32
         },
         {
           "key": "mass",
@@ -3333,8 +3356,8 @@
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
-      "bytes": 1102060,
-      "sha256": "c70531ec30472b8a02cdb168614c090a75e920b40785d64c29279c3bb5583c69"
+      "bytes": 1253084,
+      "sha256": "414b29c4a4c66856d64a9c343204647b3aef3c80ddea694a87cec5238e0483ad"
     },
     {
       "id": "shveller-20u-s255-12m",
@@ -3378,14 +3401,13 @@
           "text": "18,4 кг/м"
         }
       ],
-      "sourceReference": "imports/shveller-image-template/reference-5.jpg",
+      "sourceReference": "public/images/catalog/shveller/originals/shveller_Y_2400_1800_marked.jpg",
       "changedLabels": [
         "title",
         "flangeWidth",
         "webThickness",
         "flangeThickness",
         "height",
-        "length",
         "mass"
       ],
       "placements": [
@@ -3394,8 +3416,8 @@
           "text": "Швеллер 20У",
           "size": 84,
           "weight": 700,
-          "left": 136,
-          "top": 127,
+          "left": 135,
+          "top": 126,
           "width": 539,
           "height": 79
         },
@@ -3403,50 +3425,47 @@
           "key": "flangeWidth",
           "text": "76 мм",
           "size": 56,
-          "center": 814,
-          "top": 884,
-          "left": 738,
-          "width": 152,
+          "weight": 480,
+          "center": 796,
+          "top": 885,
+          "left": 719,
+          "width": 154,
           "height": 43
         },
         {
           "key": "webThickness",
           "text": "5,2 мм",
           "size": 56,
-          "left": 1172,
-          "top": 1245,
-          "width": 165,
+          "weight": 480,
+          "left": 1220,
+          "top": 1236,
+          "width": 167,
           "height": 50
         },
         {
           "key": "flangeThickness",
           "text": "9 мм",
           "size": 56,
-          "left": 1980,
-          "top": 1010,
-          "halo": true,
-          "width": 123,
+          "weight": 480,
+          "left": 2055,
+          "top": 900,
+          "halo": {
+            "padding": 11,
+            "blur": 8
+          },
+          "width": 124,
           "height": 43
         },
         {
           "key": "height",
           "text": "200 мм",
           "size": 56,
-          "center": 1390,
-          "top": 1431,
-          "left": 1296,
-          "width": 189,
+          "weight": 480,
+          "center": 1422,
+          "top": 1401,
+          "left": 1326,
+          "width": 193,
           "height": 43
-        },
-        {
-          "key": "length",
-          "text": "12 м",
-          "size": 44,
-          "weight": 750,
-          "left": 610,
-          "top": 1568,
-          "width": 85,
-          "height": 32
         },
         {
           "key": "mass",
@@ -3464,8 +3483,8 @@
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
-      "bytes": 1105532,
-      "sha256": "173a47eb08fbc72b27400f0a4ee2f22ee20812caba8bb95de6089e85120201f5"
+      "bytes": 1256194,
+      "sha256": "9393ee084b8051a80e11b971fbaf7eecdfd37ce301f5de3f142ba2cec9fa2501"
     },
     {
       "id": "shveller-24u-s255-12m",
@@ -3509,14 +3528,13 @@
           "text": "24 кг/м"
         }
       ],
-      "sourceReference": "imports/shveller-image-template/reference-5.jpg",
+      "sourceReference": "public/images/catalog/shveller/originals/shveller_Y_2400_1800_marked.jpg",
       "changedLabels": [
         "title",
         "flangeWidth",
         "webThickness",
         "flangeThickness",
         "height",
-        "length",
         "mass"
       ],
       "placements": [
@@ -3525,8 +3543,8 @@
           "text": "Швеллер 24У",
           "size": 84,
           "weight": 700,
-          "left": 136,
-          "top": 127,
+          "left": 135,
+          "top": 126,
           "width": 542,
           "height": 79
         },
@@ -3534,50 +3552,47 @@
           "key": "flangeWidth",
           "text": "90 мм",
           "size": 56,
-          "center": 814,
-          "top": 884,
-          "left": 736,
-          "width": 157,
+          "weight": 480,
+          "center": 796,
+          "top": 885,
+          "left": 717,
+          "width": 159,
           "height": 43
         },
         {
           "key": "webThickness",
           "text": "5,6 мм",
           "size": 56,
-          "left": 1172,
-          "top": 1245,
-          "width": 165,
+          "weight": 480,
+          "left": 1220,
+          "top": 1236,
+          "width": 166,
           "height": 50
         },
         {
           "key": "flangeThickness",
           "text": "10 мм",
           "size": 56,
-          "left": 1980,
-          "top": 1010,
-          "halo": true,
-          "width": 145,
+          "weight": 480,
+          "left": 2055,
+          "top": 900,
+          "halo": {
+            "padding": 11,
+            "blur": 8
+          },
+          "width": 148,
           "height": 43
         },
         {
           "key": "height",
           "text": "240 мм",
           "size": 56,
-          "center": 1390,
-          "top": 1431,
-          "left": 1295,
-          "width": 190,
+          "weight": 480,
+          "center": 1422,
+          "top": 1401,
+          "left": 1326,
+          "width": 192,
           "height": 43
-        },
-        {
-          "key": "length",
-          "text": "12 м",
-          "size": 44,
-          "weight": 750,
-          "left": 610,
-          "top": 1568,
-          "width": 85,
-          "height": 32
         },
         {
           "key": "mass",
@@ -3595,8 +3610,8 @@
       "width": 2400,
       "height": 1800,
       "format": "lossless WebP",
-      "bytes": 1103566,
-      "sha256": "aa738fea4fd2677b40fab92ccff782aa5e0a07ee49e4b198dd2085e1125267e2"
+      "bytes": 1254870,
+      "sha256": "eea237810a3907938e4efed9c020a9b5a950527335de267189cd0b0dcf1a2a1f"
     }
   ]
 }

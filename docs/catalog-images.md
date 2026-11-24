@@ -312,7 +312,11 @@ The category title photo is in `main/`. Family directories contain their own
 
 ## Image filenames
 
-Catalog images in `public/images/catalog/` use descriptive Latin filenames (for example, `armatura.png`, `balka.jpeg`, and `truby-profilnye.jpeg`). Shared product and category references are maintained in `data/catalog-images.json`. The mapping script preserves these names during regeneration. Homepage banner files in `public/images/hero/` are separate.
+Catalog images in `public/images/catalog/` use descriptive Latin filenames such as
+`channel-profile.jpg` and `square-tube-detail.jpg`. Shared product and category
+references are maintained in `data/catalog-images.json`. The mapping script
+preserves these names during regeneration. Homepage banner files live in
+`public/images/hero/`.
 
 ## Replacing images and cache updates
 
@@ -322,14 +326,15 @@ Replace the image at its existing path. `npm run dev` checks catalog image conte
 
 ## Channel illustrations: approved template
 
-The channel product images use the owner's approved No. 5 reference in
-`imports/shveller-image-template/reference-5.jpg`. Each 2400 × 1800 lossless WebP
-keeps the shared photograph, reflection, dimension arrows and layout. The
-variable labels show the exact profile, length and nominal ГОСТ values. Series У
-also has a section sketch showing the sloping inner flange faces.
-The soft contrast backing for the flange-thickness label over the dark metal
-is retained as in the supplied reference. These are family illustrations with nominal dimensions, not
-manufacturing drawings or photographs proving the exact profile geometry.
+The channel renderer selects one owner-approved reference per series. Series П
+uses `imports/shveller-image-template/reference-5.jpg` and its clean photograph.
+Series У uses the marked 8У reference `shveller_Y_2400_1800_marked.jpg` and the
+matching `shveller_Y_1448_1086_original.jpg` from
+`public/images/catalog/shveller/originals/`. Each 2400 × 1800 lossless WebP
+preserves the reference photograph, reflection and arrows. The photo of series У
+shows the sloping inner flange faces directly. Labels show the exact profile,
+length and nominal ГОСТ dimensions at the reference positions. The marked 8У
+is used directly when its values match the catalog.
 
 Regenerate with `node scripts/render-shveller-images.mjs --write`. The renderer
 reads the same public specifications as the site, including dimensions and
@@ -342,10 +347,12 @@ prompts in `imports/shveller-template-images.json` describe historical assets.
 Existing catalog URLs are retained; the normal image-version watcher refreshes
 their cache keys. Next.js creates the smaller delivery variants as before.
 
-Generated length/mass values use bundled Inter at 44 px / weight 750, matched
-to the reference. Fontconfig is selected before Sharp loads, including on macOS.
-The renderer also checks label bounds and exact photo preservation outside patches;
-the existing soft thickness-label backing is clipped to its permitted region.
+Generated length/mass values use bundled Inter at 44 px / weight 750. Series У
+uses a matching medium weight for the dimensions. Fontconfig is selected before
+Sharp loads, including on macOS. For changed labels, the renderer takes the
+background from the clean photo and preserves the marked reference outside those
+areas pixel for pixel. It restores the line around the overall height and clips
+the contrast backing under the flange-thickness label to its permitted region.
 Previews are written to `.tmp/catalog-image-qa/shveller-preview/`.
 
 ## Angle illustrations: approved template
@@ -385,36 +392,6 @@ and mobile specifications use the same presentation helper.
 pixel checks. These are shared family photographs with nominal dimension labels,
 including the two unequal-leg profiles; they are not scaled manufacturing drawings.
 
-## Sheet illustration candidates
-
-The unannotated sheet references in `imports/listovoy-image-sources/` are preparation assets.
-Confirm the tread pattern and PVL 306/406 geometry against the intended variant
-before generating new labels. Use dimensions and grades from the local catalog.
-
-The owner-selected tread plate previously had a separate clean layout.
-Its source, exact imagegen prompt, generation dimensions and review notes are in
-[`imports/list-rifleniy-image-template/`](../imports/list-rifleniy-image-template/README.md).
-The owner approved the smaller placement and requested a 200 px shift to the left.
-The final composition was rebuilt with the original PNG as its appearance
-source and the approved placement as a composition reference. The final canvas is
-2400 × 1800; the built-in imagegen result was 1448 × 1086 and was exported uniformly,
-then translated exactly -200 px horizontally without resampling the retained pixels.
-This is an AI-recomposed illustration, not a pixel-identical source transform.
-The next revision increases the plate footprint by about 20%, keeping its left
-boundary at x=854 and bottom boundary at y=1338. All four corners remain visible.
-The first oversized attempt is recorded as rejected.
-
-The historical annotation example used the `catalog-2202` dimensions of 4 mm
-base thickness, 1500 mm width and 6000 mm length. It used the same bundled
-Inter typography and slate lines as the square family. Dimension lines follow the
-projected length/width edges; external thickness arrows identify the base sheet
-at its nearest cut edge, excluding the raised tread. Footer labels show length
-and width. The inherited mass value is omitted pending confirmation for the
-actual treaded product. `annotations.json` records all placements and verifies
-unchanged photo pixels outside the transparent annotation layer. These are
-nominal catalog dimensions on a family illustration, not a manufacturing drawing.
-The clean source remains separate; no product-table mappings have been changed.
-
 ## Tread plate product illustrations
 
 The active 2400 × 1800 templates are the owner's marked and clean JPGs in
@@ -423,6 +400,9 @@ The active 2400 × 1800 templates are the owner's marked and clean JPGs in
 renders the other three products as lossless WebP and records their associations
 in `data/tread-plate-images.json`. Run without `--write` for previews under
 `.tmp/list-refleniy-qa/`.
+
+The [original user-supplied source and notes](../imports/list-rifleniy-image-template/README.md)
+document the earlier composition. The current dimensions come from the product specifications.
 
 The renderer uses clean photo patches and bundled Inter only for changed labels.
 It verifies that all pixels outside those patches match the marked reference.

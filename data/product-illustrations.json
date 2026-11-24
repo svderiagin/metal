@@ -104,12 +104,6 @@
     "photoUrl": "/images/catalog/armatura/originals/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
     "signature": "14fd9644"
   },
-  "prd-012": {
-    "imageUrl": "/images/catalog/balka/balka-shirokopolochnaya/measurement/balka.webp",
-    "photoUrl": "/images/catalog/balka/balka-shirokopolochnaya/originals/balka_shirokopolochnaya_2400_1800_marked.jpg",
-    "signature": "4e0d645d",
-    "showForDemo": true
-  },
   "profnastil-c8-03-ral-3005": {
     "imageUrl": "/images/catalog/profnastil/profnastil-s8/measurement/profnastil-c8-0-3mm-1200x2000mm-ral3005.webp",
     "photoUrl": "/images/catalog/profnastil/profnastil-s8/originals/c8-zinc.jpg",
@@ -384,26 +378,6 @@
     "imageUrl": "/images/catalog/setka-metallicheskaya/setka-svarnaya-v-kartah/measurement/setka-svarnaya-karta-150x150mm-4-5mm-2x3m.webp",
     "photoUrl": "/images/catalog/setka-metallicheskaya/setka-svarnaya-v-kartah/cover/setka-svarnaya-karty.jpg",
     "signature": "99bd5e34"
-  },
-  "prd-087": {
-    "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-profilnaya-kvadratnaya-12-mm.webp",
-    "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/originals/square-steel-tube.jpg",
-    "signature": "65e82a52"
-  },
-  "prd-088": {
-    "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-profilnaya-kvadratnaya-20-mm.webp",
-    "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/originals/square-steel-tube.jpg",
-    "signature": "88d51dfe"
-  },
-  "prd-089": {
-    "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-profilnaya-pryamougolnaya-16-mm.webp",
-    "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/originals/rectangular-steel-tube.jpg",
-    "signature": "25dab173"
-  },
-  "prd-090": {
-    "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/measurement/truba-profilnaya-pryamougolnaya-25-mm.webp",
-    "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/originals/rectangular-steel-tube.jpg",
-    "signature": "3ab99358"
   },
   "profile-pipe-square-15x15x1-5": {
     "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-15x15x1-5mm-6m.webp",
@@ -1139,11 +1113,6 @@
     "imageUrl": "/images/catalog/balka/balka-kolonnaya/measurement/balka-30k2-s255-12m.webp",
     "photoUrl": "/images/catalog/balka/balka-kolonnaya/originals/balka_kolonnaya_2400_1800_marked.jpg",
     "signature": "25c2647f"
-  },
-  "local-122766": {
-    "imageUrl": "/images/catalog/armatura/armatura-a500s/measurement/armatura-riflenaya-a500s-10mm-prutok-12m.webp",
-    "photoUrl": "/images/catalog/armatura/originals/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
-    "signature": "92e5fcc6"
   },
   "local-125936": {
     "imageUrl": "/images/catalog/truba-kruglaya/truba-elektrosvarnaya/measurement/truba-elektrosvarnaya-48x3mm-6m.jpg",

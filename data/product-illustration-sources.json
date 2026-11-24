@@ -1,24 +1,14 @@
 {
   "byProduct": {
-    "local-111021": "/images/catalog/armatura/armatura-a1-a240/originals/a240-coils.jpg",
-    "local-1555": "/images/catalog/armatura/armatura-a500s/originals/a500c-coils.jpg",
     "mesh-21517": "/images/catalog/setka-metallicheskaya/setka-svarnaya-v-rulonah/originals/fine-woven-mesh-2x2.webp",
     "mesh-2260": "/images/catalog/setka-metallicheskaya/setka-svarnaya-v-rulonah/originals/plaster-galvanized-mesh-14x14.png",
     "mesh-2263": "/images/catalog/setka-metallicheskaya/setka-svarnaya-v-rulonah/originals/plaster-black-mesh-14x14.png",
-    "mesh-2264": "/images/catalog/setka-metallicheskaya/setka-svarnaya-v-rulonah/originals/woven-black-mesh-5x5.jpg",
-    "rebar-a500c-10-coil": "/images/catalog/armatura/armatura-a500s/originals/a500c-coils.jpg",
-    "rebar-a500c-12-coil": "/images/catalog/armatura/armatura-a500s/originals/a500c-coils.jpg",
-    "rebar-a500c-6-coil": "/images/catalog/armatura/armatura-a500s/originals/a500c-coils.jpg",
-    "rebar-a500c-8-coil": "/images/catalog/armatura/armatura-a500s/originals/a500c-coils.jpg"
+    "mesh-2264": "/images/catalog/setka-metallicheskaya/setka-svarnaya-v-rulonah/originals/woven-black-mesh-5x5.jpg"
   },
   "byType": {
-    "type-cat-arm-sub-1": "/images/catalog/armatura/armatura-a500s/originals/armatura-a500s.jpg",
-    "type-cat-arm-sub-2": "/images/catalog/armatura/armatura-a3-35gs-a400s/originals/armatura_a400_35g.jpg",
-    "type-cat-arm-sub-3": "/images/catalog/armatura/armatura-a3-25g2s/originals/armatura_a400_25g2c.jpg",
     "type-cat-arm-sub-4": "/images/catalog/armatura/armatura-a1-a240/cover/armatura_a240_a1.jpg",
     "type-cat-bal-sub-1": "/images/catalog/balka/balka-normalnaya/cover/normal-parallel-flanges.jpg",
     "type-cat-bal-sub-2": "/images/catalog/balka/balka-shirokopolochnaya/cover/wide-flanges-profile.jpg",
-    "type-cat-bal-sub-3": "/images/catalog/balka/balka-kolonnaya/originals/beam-column-end.png",
     "type-cat-bal-sub-4": "/images/catalog/balka/balka-monorelsovaya/cover/monorail-beam-taper.jpg",
     "type-cat-mesh-sub-1": "/images/catalog/setka-metallicheskaya/setka-rabitsa/cover/setka-rabitsa.jpg",
     "type-cat-mesh-sub-2": "/images/catalog/setka-metallicheskaya/setka-svarnaya-v-rulonah/cover/setka-svarnaya-rulony.jpg",
@@ -26,12 +16,8 @@
     "type-cat-pnf-sub-1": "/images/catalog/profnastil/profnastil-s8/originals/c8-zinc.jpg",
     "type-cat-pnf-sub-2": "/images/catalog/profnastil/profnastil-s20/originals/c20-zinc.jpg",
     "type-cat-pnf-sub-3": "/images/catalog/profnastil/profnastil-n75/cover/n75-galvanized-profile.jpg",
-    "type-cat-trk-sub-1": "/images/catalog/truba-kruglaya/originals/round-steel-tube.jpg",
-    "type-cat-trk-sub-2": "/images/catalog/truba-kruglaya/originals/round-steel-tube.jpg",
     "type-cat-trk-sub-3": "/images/catalog/truba-kruglaya/truba-vodogazoprovodnaya-otsinkovannaya/cover/galvanized-vgp-ends.jpg",
     "type-cat-trk-sub-4": "/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/cover/galvanized-pipe-welded-seam.webp",
-    "type-cat-trp-sub-1": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/originals/square-steel-tube.jpg",
-    "type-cat-trp-sub-2": "/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/originals/rectangular-steel-tube.jpg",
     "type-catalog-sub-polosa-polosa": "/images/catalog/polosa/cover/steel-flat-bar-end.jpg"
   }
 }
