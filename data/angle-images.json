@@ -65,6 +65,24 @@
     },
     "catalog-16726": {
       "imageUrl": "/images/catalog/ugolok/measurement/ugolok-stalnoy-160x100x10mm-12m.webp"
+    },
+    "catalog-ugolok-25x25x4-6m": {
+      "imageUrl": "/images/catalog/ugolok/measurement/ugolok-stalnoy-25x25x4mm-6m.webp"
+    },
+    "catalog-ugolok-32x32x4-6m": {
+      "imageUrl": "/images/catalog/ugolok/measurement/ugolok-stalnoy-32x32x4mm-6m.webp"
+    },
+    "catalog-ugolok-50x50x5-6m": {
+      "imageUrl": "/images/catalog/ugolok/measurement/ugolok-stalnoy-50x50x5mm-6m.webp"
+    },
+    "catalog-ugolok-63x63x6-12m": {
+      "imageUrl": "/images/catalog/ugolok/measurement/ugolok-stalnoy-63x63x6mm-12m.webp"
+    },
+    "catalog-ugolok-75x75x6-12m": {
+      "imageUrl": "/images/catalog/ugolok/measurement/ugolok-stalnoy-75x75x6mm-12m.webp"
+    },
+    "catalog-ugolok-90x90x7-12m": {
+      "imageUrl": "/images/catalog/ugolok/measurement/ugolok-stalnoy-90x90x7mm-12m.webp"
     }
   }
 }

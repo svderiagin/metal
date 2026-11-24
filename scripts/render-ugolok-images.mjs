@@ -63,7 +63,7 @@ async function textImage(text, size, weight = 400) {
 
 const products = readProjectData('data/products/index.ts').productVariants.filter(p => p.categoryId === 'catalog-cat-ugolok');
 const {formatAngleSpecificationValue: normalize} = readProjectData('lib/anglePresentation.ts');
-assert.equal(products.length, 22, 'Review the collection before changing its image set');
+assert.ok(products.length, 'No catalog angles to render');
 const write = process.argv.includes('--write');
 const previewIndex = process.argv.indexOf('--preview');
 const previewProfile = previewIndex >= 0 ? process.argv[previewIndex + 1] : undefined;
@@ -84,8 +84,9 @@ for (const product of products) {
   const profile = `${legs[1]}x${legs[2]}x${thickness}`;
   assert.ok(product.name.replaceAll('х', 'x').includes(profile), `${product.id}: dimensions disagree with title`);
   if (previewProfile && profile !== previewProfile) continue;
+  const correction = numberSignRemovalTargets.find(({id}) => id === product.id);
   const labels = [
-    {key: 'title', text: `Угол стальной № ${profile}`, size: 84, weight: 700, left: 132, top: 125},
+    {key: 'title', text: `Угол стальной ${correction ? '№ ' : ''}${profile}`, size: 84, weight: 700, left: 132, top: 125},
     {key: 'firstLeg', text: `${legs[1]}\u00a0мм`, size: 56, center: 837, top: 862},
     {key: 'secondLeg', text: `${legs[2]}\u00a0мм`, size: 56, center: 1348, top: 1454},
     {key: 'thickness', text: `${thickness}\u00a0мм`, size: 56, left: 1940, top: 1342},
@@ -124,7 +125,6 @@ for (const product of products) {
     for (let y = box.top; y < box.top + box.height; y++) mask.fill(1, y * WIDTH + box.left, y * WIDTH + box.left + box.width);
   }
   const renderedPixels = await sharp(image).removeAlpha().raw().toBuffer();
-  const correction = numberSignRemovalTargets.find(({id}) => id === product.id);
   if (correction) {
     const box = correction.box;
     for (let y=box.top;y<box.top+box.height;y++) mask.fill(1,y*WIDTH+box.left,y*WIDTH+box.left+box.width);
@@ -144,7 +144,7 @@ for (const product of products) {
 }
 assert.ok(records.length, 'Unknown preview profile');
 if (write) {
-  assert.equal(records.length, 22);
+  assert.equal(records.length, products.length);
   await fs.writeFile(`${directory}/rendered.json`, JSON.stringify({renderer: 'scripts/render-ugolok-images.mjs', reference: referencePath,
     typography: {family: 'Inter', fontFile: fontPath, backend: 'fontconfig', values: {size: 44, weight: 750}},
     backgroundPlate: `${directory}/clean-background-generated.png`, patches,

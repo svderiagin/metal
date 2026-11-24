@@ -78,8 +78,10 @@ function measurementName(product, subcategory) {
       return product.channelSeries
         ? parts('shveller', `${number(product.channelNumber)}${filenameToken(product.channelSeries)}`, grade(product), length(product))
         : parts('shveller', `n${number(digits(product.name)[0])}`, length(product));
-    case 'catalog-cat-ugolok':
-      return parts('ugolok-stalnoy', section(digits(product.name), 'mm'), length(product));
+    case 'catalog-cat-ugolok': {
+      const dimensions = [...digits(fact(product, 'Размеры уголка')), ...digits(fact(product, 'Толщина полок уголка'))];
+      return parts('ugolok-stalnoy', section(dimensions.length === 3 ? dimensions : digits(product.name).slice(0, 3), 'mm'), length(product));
+    }
     case 'catalog-cat-kvadrat':
       return parts('kvadrat-stalnoy', section(digits(fact(product, 'Сечение')), 'mm'), length(product));
     case 'catalog-cat-polosa': {

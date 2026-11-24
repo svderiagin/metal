@@ -369,7 +369,7 @@ Previews are written to `.tmp/catalog-image-qa/shveller-preview/`.
 
 ## Angle illustrations: approved template
 
-All 22 products on `/catalog/ugolok` use the owner's supplied 25×25×3 reference,
+Product illustrations on `/catalog/ugolok` use the owner's supplied 25×25×3 reference,
 saved unchanged in `imports/ugolok-image-template/reference-25x25x3.jpg`.
 The individual 2400 × 1800 lossless WebP files live in
 `public/images/catalog/ugolok/measurement/ugolok-stalnoy-*.webp`. The table and mobile cards

@@ -6,11 +6,12 @@ import {PriceRangeFeedback, PriceRangeInputs, useCatalogPriceRange} from "./Pric
 import {Select} from "@/components/ui/Select";
 import {createCatalogSearchIndex} from "@/lib/search";
 import {useLinkedVariant} from "@/hooks/useLinkedVariant";
-import {commonQuantityUnit, getVariantFilterKeys} from "@/lib/variantPresentation";
+import {commonQuantityUnit, getVariantFilterKeys, type VariantFilterKey} from "@/lib/variantPresentation";
 import {isIllustratedSheet, sheetFilterKeys} from "@/lib/sheetPresentation";
 import {selectVariants, uniqueAttributeValues, variantFilterLabel, type VariantSort} from "@/lib/variantCatalog";
-import type {ProductAttributeKey, ProductVariant} from "@/types/product";
+import type {ProductVariant} from "@/types/product";
 import {VariantCatalogResults} from "./VariantCatalogResults";
+import {formatSpecification} from "./StorefrontPositionSpecifications";
 import {isDemonstrationProduct} from "@/lib/catalogOffer";
 
 export function GenericProductVariantCatalog({
@@ -21,8 +22,9 @@ export function GenericProductVariantCatalog({
   categorySlug: string;
 }) {
   const isSheetCatalog = variants.length > 0 && variants.every(isIllustratedSheet);
+  const isAngle = categorySlug === "ugolok";
   const filterKeys = isSheetCatalog ? sheetFilterKeys : getVariantFilterKeys(categorySlug);
-  const [filters, setFilters] = useState<Partial<Record<ProductAttributeKey, string>>>({});
+  const [filters, setFilters] = useState<Partial<Record<VariantFilterKey, string>>>({});
   const [stockOnly, setStockOnly] = useState(false);
   const [sort, setSort] = useState<VariantSort>("name");
   const [page, setPage] = useState(1);
@@ -51,7 +53,7 @@ export function GenericProductVariantCatalog({
   const pages = Math.max(1, Math.ceil(results.length / 40));
   const currentPage = Math.min(page, pages);
   const visible = results.slice((currentPage - 1) * 40, currentPage * 40);
-  function setFilter(key: ProductAttributeKey, value: string) {
+  function setFilter(key: VariantFilterKey, value: string) {
     setFilters((current) => ({...current, [key]: value}));
     setPage(1);
   }
@@ -105,12 +107,12 @@ export function GenericProductVariantCatalog({
               >
                 <option value="">Все значения</option>
                 {(filterOptions.get(key) ?? []).map((value) => (
-                  <option key={value} value={value}>{value}</option>
+                  <option key={value} value={value}>{isAngle ? formatSpecification(value) : value}</option>
                 ))}
               </Select>
             </label>
           ))}
-          <PriceRangeInputs range={priceRange}/>
+          <PriceRangeInputs range={priceRange} unit={isAngle ? "метр" : undefined}/>
       </FilterPanel>
 
       <VariantCatalogResults visible={visible} categorySlug={categorySlug} isSheetCatalog={isSheetCatalog} resultsCount={results.length}

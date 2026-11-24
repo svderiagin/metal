@@ -1,14 +1,17 @@
 import type {ProductAttributeKey, ProductVariant} from "@/types/product";
+import {getAngleProductSpecifications} from "./anglePresentation";
 import {getSquareProductParameters} from "./squarePresentation";
 import {getSheetParameters} from "./sheetPresentation";
 
-const defaultFilterKeys: ProductAttributeKey[] = ["material", "standard", "size", "grade", "length"];
-const filterKeysByCategory: Record<string, ProductAttributeKey[]> = {
+export type VariantFilterKey = ProductAttributeKey | "angleType";
+
+const defaultFilterKeys: VariantFilterKey[] = ["material", "standard", "size", "grade", "length"];
+const filterKeysByCategory: Record<string, VariantFilterKey[]> = {
   armatura: ["material", "standard", "size", "class", "grade", "length"],
   "setka-metallicheskaya": ["material", "size", "wallThickness", "length"],
   kvadrat: ["size", "length"],
   shveller: ["size", "length"],
-  ugolok: ["size", "wallThickness", "length"],
+  ugolok: ["angleType", "size", "wallThickness", "length"],
 };
 
 export function getVariantFilterKeys(categorySlug: string) {
@@ -17,13 +20,14 @@ export function getVariantFilterKeys(categorySlug: string) {
 
 export function getVariantAttribute(
   variant: ProductVariant,
-  key: ProductAttributeKey,
+  key: VariantFilterKey,
 ) {
   if (variant.categoryId === "catalog-cat-shveller") {
     if (key === "size") return variant.name.match(/№\s*(\d+(?:[.,]\d+)?)/)?.[1].replace(".", ",") ?? "—";
     if (key === "length") return specification(variant, ["Длина по каталогу", "Длина", "Размер"]);
   }
   if (variant.categoryId === "catalog-cat-ugolok") {
+    if (key === "angleType") return getAngleProductSpecifications(variant).find(({name}) => name === "Тип уголка")?.value ?? "—";
     if (key === "size") return specification(variant, ["Размеры уголка"]);
     if (key === "length") return specification(variant, ["Длина по каталогу", "Длина", "Размер"]);
   }

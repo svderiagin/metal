@@ -1,6 +1,6 @@
-import type {ProductAttributeKey, ProductVariant} from "@/types/product";
+import type {ProductVariant} from "@/types/product";
 import {comparePrices, parseCatalogPrice} from "./catalogFilters";
-import {getVariantAttribute} from "./variantPresentation";
+import {getVariantAttribute, type VariantFilterKey} from "./variantPresentation";
 import {getSheetDesignation, isIllustratedSheet, isPlainHotRolledSheet, sheetFormatLabel} from "./sheetPresentation";
 import {requiresOfferConfirmation} from "./catalogOffer";
 
@@ -17,14 +17,16 @@ export function referenceProfileName(name: string, categorySlug: string) {
   return name;
 }
 
-export function uniqueAttributeValues(variants: ProductVariant[], key: ProductAttributeKey) {
+export function uniqueAttributeValues(variants: ProductVariant[], key: VariantFilterKey) {
   return [...new Set(variants.map(variant => getVariantAttribute(variant, key)).filter(value => value !== "—"))]
     .sort((left, right) => left.localeCompare(right, "ru", {numeric: true}));
 }
 
-export function variantFilterLabel(variants: ProductVariant[], key: ProductAttributeKey) {
+export function variantFilterLabel(variants: ProductVariant[], key: VariantFilterKey) {
+  if (key === "angleType") return "Тип уголка";
   if (key === "size" && variants.length > 0 && variants.every(isIllustratedSheet)) return sheetFormatLabel;
   const category = variants[0]?.categoryId;
+  if (category === "catalog-cat-ugolok" && key === "size") return "Ширина полок";
   if (category === "catalog-cat-kvadrat" || category === "catalog-cat-shveller" || category === "catalog-cat-ugolok") {
     if (key === "size") return category === "catalog-cat-shveller" ? "Номер профиля" : "Сечение";
     if (key === "length") return "Длина по каталогу";
@@ -33,8 +35,8 @@ export function variantFilterLabel(variants: ProductVariant[], key: ProductAttri
 }
 
 export function selectVariants(variants: ProductVariant[], options: {
-  filters: Partial<Record<ProductAttributeKey, string>>;
-  filterKeys: ProductAttributeKey[];
+  filters: Partial<Record<VariantFilterKey, string>>;
+  filterKeys: readonly VariantFilterKey[];
   stockOnly: boolean;
   minimumPrice: string;
   maximumPrice: string;
@@ -50,11 +52,20 @@ export function selectVariants(variants: ProductVariant[], options: {
       if (options.sort === "relevance") return 0;
       if (options.sort === "name") return sortDesignation(left).localeCompare(sortDesignation(right), "ru", {numeric: true});
       if (options.sort === "price-asc" || options.sort === "price-desc") return comparePrices(left.quoteOnly || requiresOfferConfirmation(left) ? null : left.price, right.quoteOnly || requiresOfferConfirmation(right) ? null : right.price, options.sort === "price-desc");
-      if (options.sort === "size") return getVariantAttribute(left, "size").localeCompare(getVariantAttribute(right, "size"), "ru", {numeric: true});
+      if (options.sort === "size") return sortSize(left).localeCompare(sortSize(right), "ru", {numeric: true});
       return Number(right.inStock) - Number(left.inStock);
     });
 }
 
 function sortDesignation(variant: ProductVariant) {
+  if (variant.categoryId === "catalog-cat-ugolok") return sortSize(variant);
   return isPlainHotRolledSheet(variant) ? getSheetDesignation(variant) : variant.name;
+}
+
+function sortSize(variant: ProductVariant) {
+  if (variant.categoryId === "catalog-cat-ugolok") {
+    const section = variant.attributes.find(({key}) => key === "size")?.value;
+    if (section) return `${section} ${variant.lengthMeters ?? ""}`;
+  }
+  return getVariantAttribute(variant, "size");
 }

@@ -621,6 +621,78 @@
       ],
       "supplierMassKgPerMeter": 3.14,
       "supplierPageSha256": "365e686a340694545a8c275074493ef557ff7eeefa5f912934298b12b2e1be42"
+    },
+    "catalog-ugolok-25x25x4-6m": {
+      "categoryId": "catalog-cat-ugolok",
+      "sourceProductName": "Уголок стальной 25х25х4, 6 м",
+      "section": "25x25x4",
+      "referenceStandard": "ГОСТ 8509-93",
+      "theoreticalMassKgPerMeter": 1.46,
+      "displayMassKgPerMeter": 1.46,
+      "lengthRangeMeters": [
+        6,
+        6
+      ]
+    },
+    "catalog-ugolok-32x32x4-6m": {
+      "categoryId": "catalog-cat-ugolok",
+      "sourceProductName": "Уголок стальной 32х32х4, 6 м",
+      "section": "32x32x4",
+      "referenceStandard": "ГОСТ 8509-93",
+      "theoreticalMassKgPerMeter": 1.91,
+      "displayMassKgPerMeter": 1.91,
+      "lengthRangeMeters": [
+        6,
+        6
+      ]
+    },
+    "catalog-ugolok-50x50x5-6m": {
+      "categoryId": "catalog-cat-ugolok",
+      "sourceProductName": "Уголок стальной 50х50х5, 6 м",
+      "section": "50x50x5",
+      "referenceStandard": "ГОСТ 8509-93",
+      "theoreticalMassKgPerMeter": 3.77,
+      "displayMassKgPerMeter": 3.77,
+      "lengthRangeMeters": [
+        6,
+        6
+      ]
+    },
+    "catalog-ugolok-63x63x6-12m": {
+      "categoryId": "catalog-cat-ugolok",
+      "sourceProductName": "Уголок стальной 63х63х6, 12 м",
+      "section": "63x63x6",
+      "referenceStandard": "ГОСТ 8509-93",
+      "theoreticalMassKgPerMeter": 5.72,
+      "displayMassKgPerMeter": 5.72,
+      "lengthRangeMeters": [
+        12,
+        12
+      ]
+    },
+    "catalog-ugolok-75x75x6-12m": {
+      "categoryId": "catalog-cat-ugolok",
+      "sourceProductName": "Уголок стальной 75х75х6, 12 м",
+      "section": "75x75x6",
+      "referenceStandard": "ГОСТ 8509-93",
+      "theoreticalMassKgPerMeter": 6.89,
+      "displayMassKgPerMeter": 6.89,
+      "lengthRangeMeters": [
+        12,
+        12
+      ]
+    },
+    "catalog-ugolok-90x90x7-12m": {
+      "categoryId": "catalog-cat-ugolok",
+      "sourceProductName": "Уголок стальной 90х90х7, 12 м",
+      "section": "90x90x7",
+      "referenceStandard": "ГОСТ 8509-93",
+      "theoreticalMassKgPerMeter": 9.64,
+      "displayMassKgPerMeter": 9.64,
+      "lengthRangeMeters": [
+        12,
+        12
+      ]
     }
   }
 }

@@ -3,6 +3,7 @@
 import type {ProductVariant} from "@/types/product";
 import {referenceCategorySlugs, referenceProfileName} from "@/lib/variantCatalog";
 import {ProductOrderControls} from "./ProductOrderControls";
+import {AngleOrderControls} from "./MeasuredVariantItem";
 import {CatalogDescription} from "./CatalogDescription";
 import {CatalogTableNote} from "./CatalogTableNote";
 import {formatUnitPrice} from "@/lib/currency";
@@ -13,6 +14,7 @@ import {CatalogVariantLayout, CatalogVariantSpecifications, CatalogVariantTable}
 import {isDemonstrationProduct, storefrontAvailability} from "@/lib/catalogOffer";
 import {isSquareProfilePipe} from "@/lib/profilePipe";
 import {CatalogPositionDetails} from "./CatalogPositionDetails";
+import {CatalogStandardReference} from "./CatalogStandardReference";
 import {formatSpecification, storefrontPositionFields} from "./StorefrontPositionSpecifications";
 
 const unverifiedOrderNote = "Укажите в заявке нужные размеры и документы на партию.";
@@ -23,7 +25,7 @@ type TableSpecifications = {
 
 const tableSpecs = {
   ugolok: {
-    heading: "Полки × толщина, мм", parameters: [["Длина", "Длина по каталогу"]],
+    heading: "Полки × толщина, мм", parameters: [["Тип", "Тип уголка"], ["Длина", "Длина по каталогу"]],
   },
   kvadrat: {
     heading: "Сечение, мм", parameters: [["Длина", "Длина по каталогу"]],
@@ -52,10 +54,13 @@ export function VariantCatalogResults({visible, categorySlug, unit, isSheetCatal
 }) {
   const hasUnverified = visible.some(isDemonstrationProduct);
   const hasMetreQuantities = referenceCategorySlugs.some(slug => slug === categorySlug);
+  const isAngle = categorySlug === "ugolok";
   const presentation: TableSpecifications = isSheetCatalog ? tableSpecs["listovoy-prokat"]
     : tableSpecs[categorySlug as keyof typeof tableSpecs] ?? tableSpecs.armatura;
   const parameters = hasVerifiedSpecifications ? presentation.parameters : [];
-  const specificationLabels = parameters.length ? parameters.map(([label]) => label) : ["Наличие"];
+  const specificationLabels = parameters.length
+    ? parameters.map(([label]) => isAngle && label === "Длина" ? "Длина, м" : label)
+    : ["Наличие"];
   function renderVariant(variant: ProductVariant, view: "table" | "card") {
     const unverified = isDemonstrationProduct(variant);
     const isUnverifiedSquarePipe = unverified && isSquareProfilePipe(variant);
@@ -80,6 +85,12 @@ export function VariantCatalogResults({visible, categorySlug, unit, isSheetCatal
     }
     let cardName = isPlainHotRolledSheet(variant) ? getSheetDesignation(variant) : variant.name;
     if (isSheetCatalog) tableName = getSheetTableDesignation(variant);
+    const angleSize = isAngle && !unverified ? variant.attributes.find(({key}) => key === "size")?.value : undefined;
+    if (angleSize) {
+      const size = formatSpecification(angleSize);
+      tableName = size.replace(/\s+мм$/u, "");
+      cardName = `Уголок стальной ${size}`;
+    }
     const section = categorySlug === "kvadrat" ? value("Сечение") : undefined;
     if (section) {
       tableName = section.replace(/\s*мм$/u, "");
@@ -98,7 +109,8 @@ export function VariantCatalogResults({visible, categorySlug, unit, isSheetCatal
     }
     return <CatalogVariantLayout key={variant.id} variant={variant} view={view}
       name={view === "table" ? tableName : cardName}
-      tableSpecifications={specifications.length ? specifications.map(({value}) => value ?? "—")
+      tableSpecifications={specifications.length ? specifications.map(({label, value}) =>
+        (isAngle && label === "Длина" ? value?.replace(/\s*м$/u, "") : value) ?? "—")
         : [availability]}
       specifications={isUnverifiedSquarePipe ? <CatalogVariantSpecifications items={[{label: "Характеристики", value: "Уточняются"}]}/> : unverified
         ? <p className="text-sm text-slate-600 dark:text-slate-400">Характеристики требуют подтверждения перед заказом.</p>
@@ -106,14 +118,22 @@ export function VariantCatalogResults({visible, categorySlug, unit, isSheetCatal
       details={(fields.length > 0 || description) && <CatalogPositionDetails productName={variant.name} fields={fields}
         note={description && <CatalogDescription description={description}/>}/>}
       price={price}
-      order={<ProductOrderControls variant={variant} view={view} showUnit={!unit}/>}/>;
+      order={isAngle ? <AngleOrderControls variant={variant} view={view}/>
+        : <ProductOrderControls variant={variant} view={view} showUnit={!unit}/>}/>;
   }
   return (
       <section className="min-w-0 lg:col-span-2" aria-label="Продукция">
       {resultsCount ? (
         <>
           {hasUnverified && <CatalogTableNote>{unverifiedOrderNote}</CatalogTableNote>}
-          <CatalogVariantTable designation={presentation.heading} specifications={specificationLabels} unit={unit}>
+          {isAngle && hasVerifiedSpecifications && <CatalogTableNote>
+            Размеры и теоретическая масса 1 м равнополочных уголков приведены в{" "}
+            <CatalogStandardReference>таблице 1 ГОСТ 8509-93</CatalogStandardReference>, неравнополочных — в{" "}
+            <CatalogStandardReference>таблице 1 ГОСТ 8510-86</CatalogStandardReference>.
+          </CatalogTableNote>}
+          <CatalogVariantTable designation={presentation.heading} specifications={specificationLabels}
+            specificationWidths={isAngle && parameters.length === 2 ? [12, 6] : undefined}
+            unit={unit} quantity={isAngle ? "Заказ, м" : undefined} secondaryQuantity={isAngle ? "Заказ, т" : undefined}>
             {visible.map(variant => renderVariant(variant, "table"))}
           </CatalogVariantTable>
           <div className="grid gap-4 sm:grid-cols-2 xl:hidden">

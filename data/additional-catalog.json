@@ -5834,8 +5834,8 @@
       "priceUnit": "за метр",
       "material": "",
       "standard": "",
-      "availability": "IN_STOCK",
-      "inStock": true,
+      "availability": "ON_ORDER",
+      "inStock": false,
       "featured": false,
       "imageUrls": [
         "/images/catalog/ugolok/measurement/ugolok-stalnoy-125x125x10mm-12m.webp"
@@ -5901,8 +5901,8 @@
       "priceUnit": "за метр",
       "material": "",
       "standard": "",
-      "availability": "IN_STOCK",
-      "inStock": true,
+      "availability": "ON_ORDER",
+      "inStock": false,
       "featured": false,
       "imageUrls": [
         "/images/catalog/ugolok/measurement/ugolok-stalnoy-140x140x10mm-12m.webp"
@@ -5968,8 +5968,8 @@
       "priceUnit": "за метр",
       "material": "",
       "standard": "",
-      "availability": "IN_STOCK",
-      "inStock": true,
+      "availability": "ON_ORDER",
+      "inStock": false,
       "featured": false,
       "imageUrls": [
         "/images/catalog/ugolok/measurement/ugolok-stalnoy-160x160x10mm-12m.webp"
@@ -6035,8 +6035,8 @@
       "priceUnit": "за метр",
       "material": "",
       "standard": "",
-      "availability": "IN_STOCK",
-      "inStock": true,
+      "availability": "ON_ORDER",
+      "inStock": false,
       "featured": false,
       "imageUrls": [
         "/images/catalog/ugolok/measurement/ugolok-stalnoy-160x100x10mm-12m.webp"
@@ -6084,6 +6084,300 @@
         }
       ],
       "sourceProductName": "Уголок металлический № 160х100х10"
+    },
+    {
+      "id": "catalog-ugolok-25x25x4-6m",
+      "categoryId": "catalog-cat-ugolok",
+      "subcategoryId": "catalog-sub-ugolok-ugolok",
+      "productTypeId": "type-catalog-sub-ugolok-ugolok",
+      "name": "Уголок стальной 25х25х4, 6 м",
+      "slug": "ugolok-stalnoy-25x25x4-6m",
+      "shortDescription": "Равнополочный стальной уголок 25 × 25 × 4 мм длиной 6 м.",
+      "description": "Равнополочный стальной уголок 25 × 25 × 4 мм длиной 6 м.",
+      "price": 153,
+      "priceQualifier": "exact",
+      "currency": "RUB",
+      "priceConfirmed": true,
+      "unit": "meter",
+      "priceUnit": "за метр",
+      "material": "Сталь",
+      "standard": "",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/ugolok/measurement/ugolok-stalnoy-25x25x4mm-6m.webp"
+      ],
+      "attributes": [
+        {
+          "key": "wallThickness",
+          "label": "Толщина полок уголка",
+          "value": "4 мм"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Тип уголка",
+          "value": "Равнополочный"
+        },
+        {
+          "name": "Размеры уголка",
+          "value": "25х25"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "1,46 кг/м"
+        },
+        {
+          "name": "Толщина полок уголка",
+          "value": "4 мм"
+        }
+      ]
+    },
+    {
+      "id": "catalog-ugolok-32x32x4-6m",
+      "categoryId": "catalog-cat-ugolok",
+      "subcategoryId": "catalog-sub-ugolok-ugolok",
+      "productTypeId": "type-catalog-sub-ugolok-ugolok",
+      "name": "Уголок стальной 32х32х4, 6 м",
+      "slug": "ugolok-stalnoy-32x32x4-6m",
+      "shortDescription": "Равнополочный стальной уголок 32 × 32 × 4 мм длиной 6 м.",
+      "description": "Равнополочный стальной уголок 32 × 32 × 4 мм длиной 6 м.",
+      "price": 192,
+      "priceQualifier": "exact",
+      "currency": "RUB",
+      "priceConfirmed": true,
+      "unit": "meter",
+      "priceUnit": "за метр",
+      "material": "Сталь",
+      "standard": "",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/ugolok/measurement/ugolok-stalnoy-32x32x4mm-6m.webp"
+      ],
+      "attributes": [
+        {
+          "key": "wallThickness",
+          "label": "Толщина полок уголка",
+          "value": "4 мм"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Тип уголка",
+          "value": "Равнополочный"
+        },
+        {
+          "name": "Размеры уголка",
+          "value": "32х32"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "1,91 кг/м"
+        },
+        {
+          "name": "Толщина полок уголка",
+          "value": "4 мм"
+        }
+      ]
+    },
+    {
+      "id": "catalog-ugolok-50x50x5-6m",
+      "categoryId": "catalog-cat-ugolok",
+      "subcategoryId": "catalog-sub-ugolok-ugolok",
+      "productTypeId": "type-catalog-sub-ugolok-ugolok",
+      "name": "Уголок стальной 50х50х5, 6 м",
+      "slug": "ugolok-stalnoy-50x50x5-6m",
+      "shortDescription": "Равнополочный стальной уголок 50 × 50 × 5 мм длиной 6 м.",
+      "description": "Равнополочный стальной уголок 50 × 50 × 5 мм длиной 6 м.",
+      "price": 366,
+      "priceQualifier": "exact",
+      "currency": "RUB",
+      "priceConfirmed": true,
+      "unit": "meter",
+      "priceUnit": "за метр",
+      "material": "Сталь",
+      "standard": "",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/ugolok/measurement/ugolok-stalnoy-50x50x5mm-6m.webp"
+      ],
+      "attributes": [
+        {
+          "key": "wallThickness",
+          "label": "Толщина полок уголка",
+          "value": "5 мм"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Тип уголка",
+          "value": "Равнополочный"
+        },
+        {
+          "name": "Размеры уголка",
+          "value": "50х50"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "3,77 кг/м"
+        },
+        {
+          "name": "Толщина полок уголка",
+          "value": "5 мм"
+        }
+      ]
+    },
+    {
+      "id": "catalog-ugolok-63x63x6-12m",
+      "categoryId": "catalog-cat-ugolok",
+      "subcategoryId": "catalog-sub-ugolok-ugolok",
+      "productTypeId": "type-catalog-sub-ugolok-ugolok",
+      "name": "Уголок стальной 63х63х6, 12 м",
+      "slug": "ugolok-stalnoy-63x63x6-12m",
+      "shortDescription": "Равнополочный стальной уголок 63 × 63 × 6 мм длиной 12 м.",
+      "description": "Равнополочный стальной уголок 63 × 63 × 6 мм длиной 12 м.",
+      "price": 405,
+      "priceQualifier": "exact",
+      "currency": "RUB",
+      "priceConfirmed": true,
+      "unit": "meter",
+      "priceUnit": "за метр",
+      "material": "Сталь",
+      "standard": "",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/ugolok/measurement/ugolok-stalnoy-63x63x6mm-12m.webp"
+      ],
+      "attributes": [
+        {
+          "key": "wallThickness",
+          "label": "Толщина полок уголка",
+          "value": "6 мм"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Тип уголка",
+          "value": "Равнополочный"
+        },
+        {
+          "name": "Размеры уголка",
+          "value": "63х63"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "5,72 кг/м"
+        },
+        {
+          "name": "Толщина полок уголка",
+          "value": "6 мм"
+        }
+      ]
+    },
+    {
+      "id": "catalog-ugolok-75x75x6-12m",
+      "categoryId": "catalog-cat-ugolok",
+      "subcategoryId": "catalog-sub-ugolok-ugolok",
+      "productTypeId": "type-catalog-sub-ugolok-ugolok",
+      "name": "Уголок стальной 75х75х6, 12 м",
+      "slug": "ugolok-stalnoy-75x75x6-12m",
+      "shortDescription": "Равнополочный стальной уголок 75 × 75 × 6 мм длиной 12 м.",
+      "description": "Равнополочный стальной уголок 75 × 75 × 6 мм длиной 12 м.",
+      "price": 705,
+      "priceQualifier": "exact",
+      "currency": "RUB",
+      "priceConfirmed": true,
+      "unit": "meter",
+      "priceUnit": "за метр",
+      "material": "Сталь",
+      "standard": "",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/ugolok/measurement/ugolok-stalnoy-75x75x6mm-12m.webp"
+      ],
+      "attributes": [
+        {
+          "key": "wallThickness",
+          "label": "Толщина полок уголка",
+          "value": "6 мм"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Тип уголка",
+          "value": "Равнополочный"
+        },
+        {
+          "name": "Размеры уголка",
+          "value": "75х75"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "6,89 кг/м"
+        },
+        {
+          "name": "Толщина полок уголка",
+          "value": "6 мм"
+        }
+      ]
+    },
+    {
+      "id": "catalog-ugolok-90x90x7-12m",
+      "categoryId": "catalog-cat-ugolok",
+      "subcategoryId": "catalog-sub-ugolok-ugolok",
+      "productTypeId": "type-catalog-sub-ugolok-ugolok",
+      "name": "Уголок стальной 90х90х7, 12 м",
+      "slug": "ugolok-stalnoy-90x90x7-12m",
+      "shortDescription": "Равнополочный стальной уголок 90 × 90 × 7 мм длиной 12 м.",
+      "description": "Равнополочный стальной уголок 90 × 90 × 7 мм длиной 12 м.",
+      "price": 801,
+      "priceQualifier": "exact",
+      "currency": "RUB",
+      "priceConfirmed": true,
+      "unit": "meter",
+      "priceUnit": "за метр",
+      "material": "Сталь",
+      "standard": "",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/ugolok/measurement/ugolok-stalnoy-90x90x7mm-12m.webp"
+      ],
+      "attributes": [
+        {
+          "key": "wallThickness",
+          "label": "Толщина полок уголка",
+          "value": "7 мм"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Тип уголка",
+          "value": "Равнополочный"
+        },
+        {
+          "name": "Размеры уголка",
+          "value": "90х90"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "9,64 кг/м"
+        },
+        {
+          "name": "Толщина полок уголка",
+          "value": "7 мм"
+        }
+      ]
     },
     {
       "id": "catalog-2204",
