@@ -1654,5 +1654,35 @@
     "imageUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/measurement/truba-kvadratnaya-80x80x6mm-12m.webp",
     "photoUrl": "/images/catalog/truby-profilnye/truba-profilnaya-kvadratnaya/originals/truba_kvadratnaya_1448_1086_original.jpg",
     "signature": "37ceb5e0"
+  },
+  "vgp-galvanized-15x2-8-6m": {
+    "imageUrl": "/images/catalog/truba-kruglaya/truba-vodogazoprovodnaya-otsinkovannaya/measurement/truba-vgp-otsinkovannaya-du15x2-8mm-6m.webp",
+    "photoUrl": "/images/catalog/truba-kruglaya/truba-vodogazoprovodnaya-otsinkovannaya/originals/truba_vgp_ocinkovannaya_2400_1800_original.jpg",
+    "signature": "25a85f42"
+  },
+  "vgp-galvanized-20x2-8-6m": {
+    "imageUrl": "/images/catalog/truba-kruglaya/truba-vodogazoprovodnaya-otsinkovannaya/measurement/truba-vgp-otsinkovannaya-du20x2-8mm-6m.webp",
+    "photoUrl": "/images/catalog/truba-kruglaya/truba-vodogazoprovodnaya-otsinkovannaya/originals/truba_vgp_ocinkovannaya_2400_1800_original.jpg",
+    "signature": "bd7b2db7"
+  },
+  "vgp-galvanized-25x3-2-6m": {
+    "imageUrl": "/images/catalog/truba-kruglaya/truba-vodogazoprovodnaya-otsinkovannaya/measurement/truba-vgp-otsinkovannaya-du25x3-2mm-6m.webp",
+    "photoUrl": "/images/catalog/truba-kruglaya/truba-vodogazoprovodnaya-otsinkovannaya/originals/truba_vgp_ocinkovannaya_2400_1800_original.jpg",
+    "signature": "ad9b4fc5"
+  },
+  "vgp-galvanized-32x3-2-6m": {
+    "imageUrl": "/images/catalog/truba-kruglaya/truba-vodogazoprovodnaya-otsinkovannaya/measurement/truba-vgp-otsinkovannaya-du32x3-2mm-6m.webp",
+    "photoUrl": "/images/catalog/truba-kruglaya/truba-vodogazoprovodnaya-otsinkovannaya/originals/truba_vgp_ocinkovannaya_2400_1800_original.jpg",
+    "signature": "f728673e"
+  },
+  "vgp-galvanized-40x3-5-6m": {
+    "imageUrl": "/images/catalog/truba-kruglaya/truba-vodogazoprovodnaya-otsinkovannaya/measurement/truba-vgp-otsinkovannaya-du40x3-5mm-6m.webp",
+    "photoUrl": "/images/catalog/truba-kruglaya/truba-vodogazoprovodnaya-otsinkovannaya/originals/truba_vgp_ocinkovannaya_2400_1800_original.jpg",
+    "signature": "73517657"
+  },
+  "vgp-galvanized-50x3-5-6m": {
+    "imageUrl": "/images/catalog/truba-kruglaya/truba-vodogazoprovodnaya-otsinkovannaya/measurement/truba-vgp-otsinkovannaya-du50x3-5mm-6m.webp",
+    "photoUrl": "/images/catalog/truba-kruglaya/truba-vodogazoprovodnaya-otsinkovannaya/originals/truba_vgp_ocinkovannaya_2400_1800_original.jpg",
+    "signature": "a3af1aee"
   }
 }

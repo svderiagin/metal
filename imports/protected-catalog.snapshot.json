@@ -7988,6 +7988,516 @@
       }
     },
     {
+      "id": "vgp-galvanized-15x2-8-6m",
+      "categoryId": "cat-trk",
+      "subcategoryId": "cat-trk-sub-3",
+      "name": "Труба ВГП оцинкованная Ду15×2,8×6000",
+      "slug": "truba-vgp-otsinkovannaya-du15x2-8-6m",
+      "sku": "VGP-ZN-15X2-8-6M",
+      "shortDescription": "Оцинкованная ВГП-труба Ду15 со стенкой 2,8 мм, наружным диаметром 21,3 мм и длиной 6 м.",
+      "description": "Обыкновенная стальная труба с цинковым покрытием по ГОСТ 3262-75. Теоретическая масса учитывает цинковое покрытие.",
+      "price": 121100,
+      "pricePerTon": 121100,
+      "priceUnit": "за тонну",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/truba-kruglaya/truba-vodogazoprovodnaya-otsinkovannaya/originals/truba_vgp_ocinkovannaya_2400_1800_original.jpg"
+      ],
+      "coatingType": "galvanized",
+      "nominalBoreMm": 15,
+      "diameterMm": 21.3,
+      "wallThicknessMm": 2.8,
+      "lengthMeters": 6,
+      "weightPerMeterKg": 1.3184,
+      "weightConfirmed": true,
+      "attributes": [
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 3262-75"
+        },
+        {
+          "key": "size",
+          "label": "Ду × стенка, мм",
+          "value": "15×2,8"
+        },
+        {
+          "key": "length",
+          "label": "Длина по каталогу, м",
+          "value": "6"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Условный проход (Ду)",
+          "value": "15"
+        },
+        {
+          "name": "Наружный диаметр, мм",
+          "value": "21,3"
+        },
+        {
+          "name": "Толщина стенки, мм",
+          "value": "2,8"
+        },
+        {
+          "name": "Серия по толщине стенки",
+          "value": "Обыкновенная"
+        },
+        {
+          "name": "Покрытие",
+          "value": "Цинковое"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "1,32 кг/м"
+        },
+        {
+          "name": "Длина по каталогу",
+          "value": "6 м"
+        },
+        {
+          "name": "Стандарт",
+          "value": "ГОСТ 3262-75"
+        }
+      ],
+      "productTypeId": "type-cat-trk-sub-3",
+      "unit": "ton",
+      "material": "",
+      "standard": "ГОСТ 3262-75",
+      "weight": {
+        "value": 1.3184,
+        "unit": "кг/м"
+      }
+    },
+    {
+      "id": "vgp-galvanized-20x2-8-6m",
+      "categoryId": "cat-trk",
+      "subcategoryId": "cat-trk-sub-3",
+      "name": "Труба ВГП оцинкованная Ду20×2,8×6000",
+      "slug": "truba-vgp-otsinkovannaya-du20x2-8-6m",
+      "sku": "VGP-ZN-20X2-8-6M",
+      "shortDescription": "Оцинкованная ВГП-труба Ду20 со стенкой 2,8 мм, наружным диаметром 26,8 мм и длиной 6 м.",
+      "description": "Обыкновенная стальная труба с цинковым покрытием по ГОСТ 3262-75. Теоретическая масса учитывает цинковое покрытие.",
+      "price": 101700,
+      "pricePerTon": 101700,
+      "priceUnit": "за тонну",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/truba-kruglaya/truba-vodogazoprovodnaya-otsinkovannaya/originals/truba_vgp_ocinkovannaya_2400_1800_original.jpg"
+      ],
+      "coatingType": "galvanized",
+      "nominalBoreMm": 20,
+      "diameterMm": 26.8,
+      "wallThicknessMm": 2.8,
+      "lengthMeters": 6,
+      "weightPerMeterKg": 1.7098,
+      "weightConfirmed": true,
+      "attributes": [
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 3262-75"
+        },
+        {
+          "key": "size",
+          "label": "Ду × стенка, мм",
+          "value": "20×2,8"
+        },
+        {
+          "key": "length",
+          "label": "Длина по каталогу, м",
+          "value": "6"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Условный проход (Ду)",
+          "value": "20"
+        },
+        {
+          "name": "Наружный диаметр, мм",
+          "value": "26,8"
+        },
+        {
+          "name": "Толщина стенки, мм",
+          "value": "2,8"
+        },
+        {
+          "name": "Серия по толщине стенки",
+          "value": "Обыкновенная"
+        },
+        {
+          "name": "Покрытие",
+          "value": "Цинковое"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "1,71 кг/м"
+        },
+        {
+          "name": "Длина по каталогу",
+          "value": "6 м"
+        },
+        {
+          "name": "Стандарт",
+          "value": "ГОСТ 3262-75"
+        }
+      ],
+      "productTypeId": "type-cat-trk-sub-3",
+      "unit": "ton",
+      "material": "",
+      "standard": "ГОСТ 3262-75",
+      "weight": {
+        "value": 1.7098,
+        "unit": "кг/м"
+      }
+    },
+    {
+      "id": "vgp-galvanized-25x3-2-6m",
+      "categoryId": "cat-trk",
+      "subcategoryId": "cat-trk-sub-3",
+      "name": "Труба ВГП оцинкованная Ду25×3,2×6000",
+      "slug": "truba-vgp-otsinkovannaya-du25x3-2-6m",
+      "sku": "VGP-ZN-25X3-2-6M",
+      "shortDescription": "Оцинкованная ВГП-труба Ду25 со стенкой 3,2 мм, наружным диаметром 33,5 мм и длиной 6 м.",
+      "description": "Обыкновенная стальная труба с цинковым покрытием по ГОСТ 3262-75. Теоретическая масса учитывает цинковое покрытие.",
+      "price": 99700,
+      "pricePerTon": 99700,
+      "priceUnit": "за тонну",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/truba-kruglaya/truba-vodogazoprovodnaya-otsinkovannaya/originals/truba_vgp_ocinkovannaya_2400_1800_original.jpg"
+      ],
+      "coatingType": "galvanized",
+      "nominalBoreMm": 25,
+      "diameterMm": 33.5,
+      "wallThicknessMm": 3.2,
+      "lengthMeters": 6,
+      "weightPerMeterKg": 2.4617,
+      "weightConfirmed": true,
+      "attributes": [
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 3262-75"
+        },
+        {
+          "key": "size",
+          "label": "Ду × стенка, мм",
+          "value": "25×3,2"
+        },
+        {
+          "key": "length",
+          "label": "Длина по каталогу, м",
+          "value": "6"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Условный проход (Ду)",
+          "value": "25"
+        },
+        {
+          "name": "Наружный диаметр, мм",
+          "value": "33,5"
+        },
+        {
+          "name": "Толщина стенки, мм",
+          "value": "3,2"
+        },
+        {
+          "name": "Серия по толщине стенки",
+          "value": "Обыкновенная"
+        },
+        {
+          "name": "Покрытие",
+          "value": "Цинковое"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "2,46 кг/м"
+        },
+        {
+          "name": "Длина по каталогу",
+          "value": "6 м"
+        },
+        {
+          "name": "Стандарт",
+          "value": "ГОСТ 3262-75"
+        }
+      ],
+      "productTypeId": "type-cat-trk-sub-3",
+      "unit": "ton",
+      "material": "",
+      "standard": "ГОСТ 3262-75",
+      "weight": {
+        "value": 2.4617,
+        "unit": "кг/м"
+      }
+    },
+    {
+      "id": "vgp-galvanized-32x3-2-6m",
+      "categoryId": "cat-trk",
+      "subcategoryId": "cat-trk-sub-3",
+      "name": "Труба ВГП оцинкованная Ду32×3,2×6000",
+      "slug": "truba-vgp-otsinkovannaya-du32x3-2-6m",
+      "sku": "VGP-ZN-32X3-2-6M",
+      "shortDescription": "Оцинкованная ВГП-труба Ду32 со стенкой 3,2 мм, наружным диаметром 42,3 мм и длиной 6 м.",
+      "description": "Обыкновенная стальная труба с цинковым покрытием по ГОСТ 3262-75. Теоретическая масса учитывает цинковое покрытие.",
+      "price": 99100,
+      "pricePerTon": 99100,
+      "priceUnit": "за тонну",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/truba-kruglaya/truba-vodogazoprovodnaya-otsinkovannaya/originals/truba_vgp_ocinkovannaya_2400_1800_original.jpg"
+      ],
+      "coatingType": "galvanized",
+      "nominalBoreMm": 32,
+      "diameterMm": 42.3,
+      "wallThicknessMm": 3.2,
+      "lengthMeters": 6,
+      "weightPerMeterKg": 3.1827,
+      "weightConfirmed": true,
+      "attributes": [
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 3262-75"
+        },
+        {
+          "key": "size",
+          "label": "Ду × стенка, мм",
+          "value": "32×3,2"
+        },
+        {
+          "key": "length",
+          "label": "Длина по каталогу, м",
+          "value": "6"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Условный проход (Ду)",
+          "value": "32"
+        },
+        {
+          "name": "Наружный диаметр, мм",
+          "value": "42,3"
+        },
+        {
+          "name": "Толщина стенки, мм",
+          "value": "3,2"
+        },
+        {
+          "name": "Серия по толщине стенки",
+          "value": "Обыкновенная"
+        },
+        {
+          "name": "Покрытие",
+          "value": "Цинковое"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "3,18 кг/м"
+        },
+        {
+          "name": "Длина по каталогу",
+          "value": "6 м"
+        },
+        {
+          "name": "Стандарт",
+          "value": "ГОСТ 3262-75"
+        }
+      ],
+      "productTypeId": "type-cat-trk-sub-3",
+      "unit": "ton",
+      "material": "",
+      "standard": "ГОСТ 3262-75",
+      "weight": {
+        "value": 3.1827,
+        "unit": "кг/м"
+      }
+    },
+    {
+      "id": "vgp-galvanized-40x3-5-6m",
+      "categoryId": "cat-trk",
+      "subcategoryId": "cat-trk-sub-3",
+      "name": "Труба ВГП оцинкованная Ду40×3,5×6000",
+      "slug": "truba-vgp-otsinkovannaya-du40x3-5-6m",
+      "sku": "VGP-ZN-40X3-5-6M",
+      "shortDescription": "Оцинкованная ВГП-труба Ду40 со стенкой 3,5 мм, наружным диаметром 48 мм и длиной 6 м.",
+      "description": "Обыкновенная стальная труба с цинковым покрытием по ГОСТ 3262-75. Теоретическая масса учитывает цинковое покрытие.",
+      "price": 97500,
+      "pricePerTon": 97500,
+      "priceUnit": "за тонну",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/truba-kruglaya/truba-vodogazoprovodnaya-otsinkovannaya/originals/truba_vgp_ocinkovannaya_2400_1800_original.jpg"
+      ],
+      "coatingType": "galvanized",
+      "nominalBoreMm": 40,
+      "diameterMm": 48,
+      "wallThicknessMm": 3.5,
+      "lengthMeters": 6,
+      "weightPerMeterKg": 3.9552,
+      "weightConfirmed": true,
+      "attributes": [
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 3262-75"
+        },
+        {
+          "key": "size",
+          "label": "Ду × стенка, мм",
+          "value": "40×3,5"
+        },
+        {
+          "key": "length",
+          "label": "Длина по каталогу, м",
+          "value": "6"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Условный проход (Ду)",
+          "value": "40"
+        },
+        {
+          "name": "Наружный диаметр, мм",
+          "value": "48"
+        },
+        {
+          "name": "Толщина стенки, мм",
+          "value": "3,5"
+        },
+        {
+          "name": "Серия по толщине стенки",
+          "value": "Обыкновенная"
+        },
+        {
+          "name": "Покрытие",
+          "value": "Цинковое"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "3,96 кг/м"
+        },
+        {
+          "name": "Длина по каталогу",
+          "value": "6 м"
+        },
+        {
+          "name": "Стандарт",
+          "value": "ГОСТ 3262-75"
+        }
+      ],
+      "productTypeId": "type-cat-trk-sub-3",
+      "unit": "ton",
+      "material": "",
+      "standard": "ГОСТ 3262-75",
+      "weight": {
+        "value": 3.9552,
+        "unit": "кг/м"
+      }
+    },
+    {
+      "id": "vgp-galvanized-50x3-5-6m",
+      "categoryId": "cat-trk",
+      "subcategoryId": "cat-trk-sub-3",
+      "name": "Труба ВГП оцинкованная Ду50×3,5×6000",
+      "slug": "truba-vgp-otsinkovannaya-du50x3-5-6m",
+      "sku": "VGP-ZN-50X3-5-6M",
+      "shortDescription": "Оцинкованная ВГП-труба Ду50 со стенкой 3,5 мм, наружным диаметром 60 мм и длиной 6 м.",
+      "description": "Обыкновенная стальная труба с цинковым покрытием по ГОСТ 3262-75. Теоретическая масса учитывает цинковое покрытие.",
+      "price": 114150,
+      "pricePerTon": 114150,
+      "priceUnit": "за тонну",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/truba-kruglaya/truba-vodogazoprovodnaya-otsinkovannaya/originals/truba_vgp_ocinkovannaya_2400_1800_original.jpg"
+      ],
+      "coatingType": "galvanized",
+      "nominalBoreMm": 50,
+      "diameterMm": 60,
+      "wallThicknessMm": 3.5,
+      "lengthMeters": 6,
+      "weightPerMeterKg": 5.0264,
+      "weightConfirmed": true,
+      "attributes": [
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 3262-75"
+        },
+        {
+          "key": "size",
+          "label": "Ду × стенка, мм",
+          "value": "50×3,5"
+        },
+        {
+          "key": "length",
+          "label": "Длина по каталогу, м",
+          "value": "6"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Условный проход (Ду)",
+          "value": "50"
+        },
+        {
+          "name": "Наружный диаметр, мм",
+          "value": "60"
+        },
+        {
+          "name": "Толщина стенки, мм",
+          "value": "3,5"
+        },
+        {
+          "name": "Серия по толщине стенки",
+          "value": "Обыкновенная"
+        },
+        {
+          "name": "Покрытие",
+          "value": "Цинковое"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "5,03 кг/м"
+        },
+        {
+          "name": "Длина по каталогу",
+          "value": "6 м"
+        },
+        {
+          "name": "Стандарт",
+          "value": "ГОСТ 3262-75"
+        }
+      ],
+      "productTypeId": "type-cat-trk-sub-3",
+      "unit": "ton",
+      "material": "",
+      "standard": "ГОСТ 3262-75",
+      "weight": {
+        "value": 5.0264,
+        "unit": "кг/м"
+      }
+    },
+    {
       "id": "prd-089",
       "categoryId": "cat-trp",
       "subcategoryId": "cat-trp-sub-2",
@@ -13588,15 +14098,16 @@
       "sku": "МП-984",
       "shortDescription": "Оцинкованная ВГП-труба Ду25, наружный диаметр 33,5 мм, стенка 2,8 мм. Длина по каталогу 7,8 м.",
       "description": "Теоретическая масса с учётом цинкового покрытия рассчитана по ГОСТ 3262-75. Допуск ±150 мм указан поставщиком для каталожной длины 7,8 м. Вид длины, фактическую длину и параметры покрытия подтверждают документы поставки.",
-      "price": null,
-      "quoteOnly": true,
+      "price": 120030,
+      "pricePerTon": 120030,
+      "quoteOnly": false,
       "priceQualifier": "exact",
       "currency": "RUB",
       "unit": "ton",
       "priceUnit": "за тонну",
       "material": "",
       "standard": "ГОСТ 3262-75",
-      "availability": "UNKNOWN",
+      "availability": "ON_ORDER",
       "inStock": false,
       "featured": false,
       "imageUrls": [

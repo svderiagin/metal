@@ -102,8 +102,14 @@ changes. Its 33.5 mm outside diameter and 2.18 kg/m label match the table.
 3% zinc allowance: 2.12 × 1.03 = 2.1836 kg/m. Conversion retains all four decimal
 places and follows the existing whole-pipe VGP order rule at the supplier's
 nominal 7.8 m length. The supplier's ±150 mm length tolerance remains in the
-description. Price is still on inquiry. The uncoated VGP renderer excludes this
-subcategory, and the generic illustration renderer protects the supplied image.
+description. Price is still on inquiry. The generic illustration renderer
+preserves this family.
+
+Preview an annotated 6 m galvanized pipe with
+`node scripts/render-vgp-images.mjs --galvanized --preview vgp-galvanized-50x3-5-6m`.
+Use `--galvanized --write` to refresh the generated variants, then run
+`node scripts/catalog-image-versions.mjs`. The original DN25×2.8 illustration
+stays in the catalog alongside the generated images.
 
 ## Electrowelded pipe source photographs
 

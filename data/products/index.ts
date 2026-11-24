@@ -5,6 +5,7 @@ import {balkaProducts} from "./balka";
 import {profnastilProducts} from "./profnastil";
 import {metalMeshProducts} from "./metalMesh";
 import {roundPipeLegacyProducts} from "./trubaKruglayaLegacy";
+import {galvanizedVgpProducts} from "./trubaVgpGalvanized";
 import {trubyProfilnyeProducts, profilePipeProducts} from "./trubyProfilnye";
 import type {ProductVariant, ProductVariantSource, ProductWeight} from "@/types/product";
 import catalogPositions from "../catalog-positions.json";
@@ -27,6 +28,7 @@ const productSources: ProductVariantSource[] = [
   ...profnastilProducts,
   ...metalMeshProducts,
   ...roundPipeLegacyProducts,
+  ...galvanizedVgpProducts,
   ...trubyProfilnyeProducts,
   ...profilePipeProducts,
 ];

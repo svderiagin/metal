@@ -29,13 +29,14 @@ import {PipePositionDetails} from "./PipePositionDetails";
 type OrderFeedback = {kind: "correction" | "error"; text: string};
 
 export function MeasuredVariantItem({
-  variant, view, kind, name, showSteelGrade,
+  variant, view, kind, name, showSteelGrade, showVgpStandard,
 }: {
   variant: ProductVariant; view: "table" | "card"; kind: "rebar" | "beam" | "vgp" | "pipe" | "profile";
-  name?: string; showSteelGrade?: boolean;
+  name?: string; showSteelGrade?: boolean; showVgpStandard?: boolean;
 }) {
   return kind === "profile" ? <ProfilePipeVariantItem variant={variant} view={view}/>
-    : <TonnageMeasuredVariantItem variant={variant} view={view} kind={kind} name={name} showSteelGrade={showSteelGrade}/>;
+    : <TonnageMeasuredVariantItem variant={variant} view={view} kind={kind} name={name}
+      showSteelGrade={showSteelGrade} showVgpStandard={showVgpStandard}/>;
 }
 
 function TonnageMeasuredVariantItem({
@@ -44,10 +45,12 @@ function TonnageMeasuredVariantItem({
   kind,
   name,
   showSteelGrade,
+  showVgpStandard,
 }: {
   variant: ProductVariant;
   name?: string;
   showSteelGrade?: boolean;
+  showVgpStandard?: boolean;
   kind: "rebar" | "beam" | "vgp" | "pipe";
   view: "table" | "card";
 }) {
@@ -388,7 +391,8 @@ function TonnageMeasuredVariantItem({
         ...(showSteelGrade ? [{label: "Марка стали", value: grade}] : []),
       ]}/>}
       detailsId={`pipe-details-${variant.id}`}
-      details={<PipePositionDetails variant={variant} isVgp={isVgp} length={pipeLength && `${pipeLength} м`} mass={hasMass ? mass : undefined}/>}
+      details={<PipePositionDetails variant={variant} isVgp={isVgp} length={pipeLength && `${pipeLength} м`}
+        mass={hasMass ? mass : undefined} showVgpStandard={showVgpStandard}/>}
       price={price} priceNote={!isVgp && madeToOrder && <span className="block text-xs text-slate-600 dark:text-slate-400">Под заказ</span>} order={order}/>;
   }
 

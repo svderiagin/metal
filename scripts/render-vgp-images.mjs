@@ -8,14 +8,15 @@ import {readProjectData} from './project-data.mjs';
 import {catalogMeasurementUrl} from './catalog-measurement-path.mjs';
 
 process.chdir(fileURLToPath(new URL('..', import.meta.url)));
-const args = process.argv.slice(2);
+const galvanized = process.argv.includes('--galvanized');
+const args = process.argv.slice(2).filter(arg => arg !== '--galvanized');
 const write = args.length === 1 && args[0] === '--write';
 const preview = args.length === 2 && args[0] === '--preview';
-assert.ok(write || preview, 'Use --write or --preview PRODUCT_ID');
+assert.ok(write || preview, 'Use [--galvanized] --write or [--galvanized] --preview PRODUCT_ID');
 
 const canvas = {width: 2400, height: 1800, channels: 3};
-const familyDirectory = '/images/catalog/truba-kruglaya/truba-vodogazoprovodnaya';
-const template = `${familyDirectory}/originals/truba_vgp_2400_1800_`;
+const familyDirectory = '/images/catalog/truba-kruglaya/truba-vodogazoprovodnaya' + (galvanized ? '-otsinkovannaya' : '');
+const template = `${familyDirectory}/originals/truba_vgp${galvanized ? '_ocinkovannaya' : ''}_2400_1800_`;
 const photoUrl = template + 'original.jpg';
 async function readPixels(url) {
   const {data, info} = await sharp('public' + url).removeAlpha().raw().toBuffer({resolveWithObject: true});
@@ -26,18 +27,24 @@ const [marked, clean] = await Promise.all([readPixels(template + 'marked.jpg'), 
 const cache = new Map();
 const {productVariants} = readProjectData('data/products/index.ts', cache);
 const {isVgpVariant} = readProjectData('lib/vgp.ts', cache);
+const {formatMassPerMeter} = readProjectData('lib/numberFormat.ts', cache);
 const {productIllustrationSignature} = readProjectData('lib/productPreviewImage.ts', cache);
-const products = productVariants.filter(p => isVgpVariant(p) && p.subcategoryId === 'cat-trk-sub-1' && (write || p.id === args[1]));
+const galvanizedReference = JSON.parse(await fs.readFile('data/vgp-galvanized-specifications.json', 'utf8'));
+const subcategoryId = galvanized ? 'cat-trk-sub-3' : 'cat-trk-sub-1';
+const products = productVariants.filter(p => isVgpVariant(p) && p.subcategoryId === subcategoryId
+  && p.id !== galvanizedReference.id && (write || p.id === args[1]));
 assert.ok(products.length, 'No matching VGP product');
 const number = new Intl.NumberFormat('ru-RU');
 
 // Coordinates enclose only variable text. The title prefix, wall unit, arrows,
 // captions and the photograph remain the actual pixels from the marked template.
 const fields = {
-  title: {style: 'title', original: '15 x 2,8', box: [704,112,440,105], left: 707, top: 126},
+  title: galvanized
+    ? {style: 'title', original: 'Ду25 x 2,8', box: [120,218,580,105], left: 133, top: 234}
+    : {style: 'title', original: '15 x 2,8', box: [704,112,440,105], left: 707, top: 126},
   wall: {style: 'dimension', original: '2,8', box: [755,680,102,68], right: 846, top: 689},
-  length: {style: 'length', original: '6 м', box: [602,1558,170,51], left: 611, top: 1567},
-  mass: {style: 'mass', original: '1,28 кг/м', box: [602,1623,345,62], left: 611, top: 1633},
+  length: {style: 'length', original: galvanized ? '7,8 м' : '6 м', box: [602,1558,170,51], left: 611, top: 1567},
+  mass: {style: 'mass', original: galvanized ? '2,18 кг/м' : '1,28 кг/м', box: [602,1623,345,62], left: 611, top: 1633},
 };
 
 function restore(base, [left, top, width, height]) {
@@ -47,15 +54,22 @@ function restore(base, [left, top, width, height]) {
   }
 }
 
+function extendDiameterLine(base, start, end, sampleX) {
+  for (let y = 1470; y <= 1474; y++) {
+    const source = (y * canvas.width + sampleX) * 3;
+    for (let x = start; x < end; x++) marked.copy(base, (y * canvas.width + x) * 3, source, source + 3);
+  }
+}
+
 async function render(p) {
   const {nominalBoreMm: dn, diameterMm: od, wallThicknessMm: wall, lengthMeters: length, weightPerMeterKg: mass} = p;
   assert.ok([dn, od, wall, length, mass].every(n => Number.isFinite(n) && n > 0) && od > 2 * wall,
     `Missing or invalid dimensions, length or mass for ${p.id}`);
   const labels = {
-    title: `${number.format(dn)} x ${number.format(wall)}`,
+    title: `${galvanized ? 'Ду' : ''}${number.format(dn)} x ${number.format(wall)}`,
     wall: number.format(wall),
     length: number.format(length) + ' м',
-    mass: number.format(mass) + ' кг/м',
+    mass: (galvanized ? formatMassPerMeter(mass) : number.format(mass)) + ' кг/м',
   };
   const base = Buffer.from(marked);
   const layers = [];
@@ -70,16 +84,24 @@ async function render(p) {
     layers.push({input: data, left, top: field.top});
   }
 
-  // The owner's Ду15 master says «50 мм» here. Use each SKU's outside
-  // diameter, including Ду15. Open a gap in the existing line for the Ø label.
-  const diameter = await renderBeamLabel('dimension', 'Ø ' + number.format(od) + ' мм');
-  const center = 1337, padding = 10;
-  const left = Math.round(center - diameter.info.width / 2);
-  const gapLeft = left - padding, gapRight = left + diameter.info.width + padding;
-  assert.ok(gapLeft < 1250 && gapRight > 1422 && gapLeft > 1060 && gapRight < 1610,
-    `${p.id}: diameter label must cover the old inscription and clear both arrowheads`);
-  restore(base, [gapLeft, 1435, gapRight - gapLeft, 80]);
-  layers.push({input: diameter.data, left, top: 1453});
+  // Replace the outside diameter within the original arrow line.
+  if (!galvanized || od !== galvanizedReference.diameterMm) {
+    const diameter = await renderBeamLabel('dimension', 'Ø ' + number.format(od) + ' мм');
+    const center = galvanized ? 1335 : 1337;
+    const padding = galvanized ? 8 : 10;
+    const left = Math.round(center - diameter.info.width / 2);
+    const gapLeft = left - padding, gapRight = left + diameter.info.width + padding;
+    assert.ok(gapLeft < 1250 && gapRight > 1422 && gapLeft > 1060 && gapRight < 1610,
+      `${p.id}: diameter label must cover the old inscription and clear both arrowheads`);
+    const clearLeft = galvanized ? Math.min(gapLeft, 1192) : gapLeft;
+    const clearRight = galvanized ? Math.max(gapRight, 1477) : gapRight;
+    restore(base, [clearLeft, 1435, clearRight - clearLeft, 80]);
+    if (galvanized) {
+      extendDiameterLine(base, clearLeft, gapLeft, 1175);
+      extendDiameterLine(base, gapRight, clearRight, 1495);
+    }
+    layers.push({input: diameter.data, left, top: galvanized ? 1447 : 1453});
+  }
   return sharp(base, {raw: canvas}).composite(layers).webp({lossless: true, effort: 4}).toBuffer();
 }
 
