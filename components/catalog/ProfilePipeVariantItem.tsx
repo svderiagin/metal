@@ -3,10 +3,9 @@
 import {useEffect, useState} from "react";
 import {useCart} from "@/hooks/useCart";
 import {Button} from "@/components/ui/Button";
-import {Input} from "@/components/ui/Input";
 import {Icon} from "@/components/ui/Icon";
 import {correctOrderQuantity, formatCatalogNumber, parseOrderQuantity} from "@/lib/catalogNumberInput";
-import {correctDraftPrecision, formatMeasuredQuantity, formatRebarOrderTons, measuredTonFractionDigits, normalizeCartQuantityDraft, quantityTransferHandlers, rebarTonFractionDigits} from "@/lib/cartQuantityInput";
+import {correctDraftPrecision, formatMeasuredQuantity, formatRebarOrderTons, measuredTonFractionDigits, normalizeCartQuantityDraft, rebarTonFractionDigits} from "@/lib/cartQuantityInput";
 import {MAX_ORDER_TONS} from "@/lib/constants";
 import {formatCurrency, formatUnitPrice} from "@/lib/currency";
 import {formatNumber} from "@/lib/numberFormat";
@@ -21,7 +20,7 @@ import {CatalogVariantLayout, CatalogVariantOrder, CatalogVariantSpecifications}
 import {CatalogPositionDetails} from "./CatalogPositionDetails";
 import filterStyles from "./FilterPanel.module.css";
 import tableStyles from "./RebarTable.module.css";
-import {useOrderDraft} from "./OrderDraftProvider";
+import {orderQuantityHintDuration, useOrderDraft} from "./OrderDraftProvider";
 
 const orderUnits = {piece: "шт.", meter: "м", ton: "т"} as const;
 export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant; view: "table" | "card"}) {
@@ -86,7 +85,7 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
   const nextDraft = {quantity: quantityText, length: lengthText, inputUnit, settled: draft?.settled, exactQuantity: draft?.exactQuantity};
   const correctedOrder = correctOrderValues().order;
   const canAddOrder = correctedOrder && (confirmedPrice ? correctedOrder.estimatedTotal !== null : madeToOrder);
-  const canPromptForQuantity = square && quantityText === "";
+  const canPromptForQuantity = quantityText === "";
 
   useEffect(() => {
     if (!removed) return;
@@ -137,7 +136,6 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
     const limitLength = validLength ?? (square ? undefined : range?.[1]);
     const maximum = limitLength === undefined ? Infinity : quantityLimit(mode, limitLength) ?? Infinity;
     const normalized = normalizeCartQuantityDraft(value, null, null, {maximum, formatMaximum: bound => displayQuantity(bound, mode)});
-    if (!normalized.accepted || (value !== "" && !value.trim())) return false;
     const entered = parseOrderQuantity(normalized.value);
     const sameAmount = entered !== null && entered > 0 && entered === parseOrderQuantity(measuredValue(mode));
     if (!normalized.capped && order && sameAmount && (mode !== inputUnit || draft?.settled)) return;
@@ -160,7 +158,7 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
   function submit() {
     if (!hydrated || removed) return;
     if (canPromptForQuantity) {
-      setMessage("Укажите объём");
+      setMessage("Укажите длину или вес больше нуля.", orderQuantityHintDuration);
       return;
     }
     const corrected = correctOrderValues();
@@ -197,30 +195,14 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
       disabled={!hydrated || saved || removed || (!shouldRemove && !canAddOrder && !canPromptForQuantity)}
       className={`${buttonClass} ${actionSize} px-3`}>{label}</Button>;
 
-  const inputClassName = `${filterStyles.field} min-w-0 px-2 text-center tabular-nums ${view === "table" ? "max-w-[6.375rem]" : ""}`;
-  const lengthField = range ? <Input type="text" inputMode="decimal"
-    aria-label={`Длина одной трубы для ${variant.name}`} value={lengthText}
-    aria-invalid={lengthError || undefined}
-    aria-describedby={`${statusId}-range ${statusId}`}
-    {...quantityTransferHandlers(square ? undefined : setMessage)}
-    onChange={event => {
-      const input = event.currentTarget;
-      const nextLength = square ? normalizeCartQuantityDraft(input.value, input.selectionStart, input.selectionEnd) : null;
-      if (nextLength && !nextLength.accepted) {
-        input.value = lengthText;
-        return;
-      }
-      setDraft({...nextDraft, length: nextLength?.value ?? input.value});
+  const lengthField = range ? <CatalogOrderInput label={`Длина одной трубы для ${variant.name}`} value={lengthText}
+    invalid={lengthError} statusId={`${statusId}-range ${statusId}`} placeholder=""
+    onChange={value => {
+      setDraft({...nextDraft, length: value});
       setMessage(undefined);
     }}
     onBlur={settleLength}
-    onKeyDown={event => {
-      if (event.key === "Enter" && !event.nativeEvent.isComposing) {
-        event.preventDefault();
-        event.currentTarget.blur();
-      }
-    }}
-    className={inputClassName}/>
+    className={`px-2 text-center ${view === "table" ? "max-w-[6.375rem]" : ""}`}/>
     : null;
   const total = <output data-price={order?.estimatedTotal != null || undefined}
     aria-label={`Сумма заказа для ${variant.name}`} aria-live="polite"

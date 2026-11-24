@@ -138,7 +138,7 @@ export function CatalogVariantOrder({view, quantity, secondaryQuantity, action, 
   status?: ReactNode;
   deliveryId?: string;
 }) {
-  const orderAction = <div className={view === "card" ? "mt-4" : undefined} data-order-delivery={deliveryId ? "" : undefined}>
+  const orderAction = <div className={view === "card" ? "mt-4" : tableStyles.orderLayout} data-order-delivery={deliveryId ? "" : undefined}>
     <div className={tableStyles.orderAction}>
       {deliveryId && <p id={deliveryId} className={`${tableStyles.orderDelivery} text-xs font-normal text-slate-600 dark:text-slate-300`}>
         <Icon name="truck" className="shrink-0"/>

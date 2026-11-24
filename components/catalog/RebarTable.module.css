@@ -12,7 +12,7 @@
 
 .table {
   --cell-padding-x: 0.5rem;
-  --heading-padding-y: 0.75rem;
+  --heading-padding-y: 0.5rem;
   --cell-padding-y: 0.75rem;
   --control-height: 2.875rem;
   --action-width: 8.75rem;
@@ -32,11 +32,14 @@
   overflow-wrap: anywhere;
 }
 
+.table > thead > tr {
+  height: 4rem;
+}
+
 .table > thead > tr > th {
   padding: var(--heading-padding-y) var(--cell-padding-x);
   font-weight: 600;
   white-space: normal;
-  overflow-wrap: normal;
 }
 
 .table > thead {
@@ -144,16 +147,19 @@
 .table .sumColumn output[data-price] { white-space: nowrap; }
 
 .table > tbody > tr:not(.detailsRow) > .actionCell {
-  vertical-align: top;
   padding-block: 0.375rem;
   text-align: center;
 }
 
-.table .orderAction {
+.orderLayout {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  grid-template-rows: minmax(var(--action-feedback-size), auto) auto;
+  grid-template-rows: minmax(var(--action-feedback-size), 1fr) auto minmax(var(--action-feedback-size), 1fr);
   justify-items: center;
+}
+
+.table .orderAction {
+  display: contents;
 }
 
 .table .orderAction > :is(button, a) {
@@ -169,6 +175,7 @@
 }
 
 .table .orderDelivery {
+  grid-row: 1;
   align-self: end;
   justify-self: stretch;
   margin-inline: -0.25rem;
@@ -179,7 +186,8 @@
 }
 
 .table .orderFeedback {
-  min-block-size: var(--action-feedback-size);
+  grid-row: 3;
+  justify-self: stretch;
   margin-inline: -0.25rem;
 }
 

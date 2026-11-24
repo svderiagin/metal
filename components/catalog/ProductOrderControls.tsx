@@ -3,21 +3,21 @@
 import {useEffect, useState} from "react";
 import {useCart} from "@/hooks/useCart";
 import {Button} from "@/components/ui/Button";
-import {Input} from "@/components/ui/Input";
 import {Icon} from "@/components/ui/Icon";
 import {getQuantityUnit, requiresWholeCatalogQuantity} from "@/lib/variantPresentation";
 import type {ProductVariant} from "@/types/product";
 import {QuoteRequestButton} from "./QuoteRequestButton";
 import {formatQuoteProductName} from "@/lib/quoteRequest";
 import {constrainOrderQuantityInput, correctOrderQuantity, parseOrderQuantity} from "@/lib/catalogNumberInput";
-import {formatQuantityForInput, productOrderFractionDigits, quantityTransferHandlers} from "@/lib/cartQuantityInput";
+import {formatQuantityForInput, productOrderFractionDigits} from "@/lib/cartQuantityInput";
 import {calculateLineTotal} from "@/lib/orderMeasurement";
 import {formatCurrency} from "@/lib/currency";
 import {requiresCatalogPriceQuote, storefrontAvailability} from "@/lib/catalogOffer";
+import {CatalogOrderInput} from "./CatalogOrderInput";
 import {CatalogVariantOrder, CatalogVariantQuantity} from "./CatalogVariantLayout";
 import styles from "./FilterPanel.module.css";
 import tableStyles from "./RebarTable.module.css";
-import {useOrderDraft} from "./OrderDraftProvider";
+import {orderQuantityHintDuration, useOrderDraft} from "./OrderDraftProvider";
 
 export function ProductOrderControls({variant, view, showUnit = true,
   wholeQuantity = requiresWholeCatalogQuantity(variant)}: {
@@ -33,6 +33,8 @@ export function ProductOrderControls({variant, view, showUnit = true,
   const needsQuote = requiresCatalogPriceQuote(variant);
   const madeToOrder = storefrontAvailability(variant.availability) === "ON_ORDER";
   const canAdd = madeToOrder || !needsQuote;
+  const canPromptForQuantity = !line && value === "";
+  const enteringFraction = value === "0,";
   const shouldRemove = !!line && quantity === 0;
   const saved = !!line && !line.invalidReason && quantity === line.quantity;
   const valid = quantity !== null && quantity > 0 && quantity <= 999
@@ -54,6 +56,7 @@ export function ProductOrderControls({variant, view, showUnit = true,
   }, [removed]);
 
   function chosenQuantity(rawValue: string) {
+    if (rawValue === "0,") return null;
     const parsed = parseOrderQuantity(rawValue);
     return line && parsed === parseOrderQuantity(savedValue) ? line.quantity : parsed;
   }
@@ -64,12 +67,17 @@ export function ProductOrderControls({variant, view, showUnit = true,
     if (numeric === null || numeric === 0) return {value: rawValue};
     if (numeric === line?.quantity && numeric <= 999 && (!wholeQuantity || Number.isInteger(numeric))) return {value: savedValue};
     const corrected = correctOrderQuantity(rawValue, {whole: wholeQuantity, maximum: 999, decimalPlaces: productOrderFractionDigits(numeric)});
-    return {...corrected, value: corrected.value.replace(".", ",")};
+    return {value: corrected.value.replace(".", ","), message: corrected.value === "" ? corrected.message : undefined};
   }
 
   function submit(rawValue = value) {
+    if (!hydrated || removed) return;
+    if (canPromptForQuantity) {
+      setCorrection("Укажите количество больше нуля.", orderQuantityHintDuration);
+      return;
+    }
     const rawQuantity = chosenQuantity(rawValue);
-    if (!hydrated || removed || rawQuantity === null) return;
+    if (rawQuantity === null) return;
     const corrected = correctQuantityValue(rawValue);
     const nextQuantity = chosenQuantity(corrected.value);
     setDraft(corrected.value);
@@ -110,41 +118,32 @@ export function ProductOrderControls({variant, view, showUnit = true,
       : variant.unit === "meter" && weightPerMeter !== undefined ? quoteQuantity * weightPerMeter / 1000 : null;
   const statusId = `quantity-status-${view}-${variant.id}`;
   const deliveryId = madeToOrder ? `${statusId}-delivery` : undefined;
+  const amountTooSmall = !needsQuote && valid && total === null;
+  const quantityError = draft !== null && value !== "" && !enteringFraction && (!valid || amountTooSmall) && !shouldRemove;
+  const quoteClassName = `${styles.quoteButton} ${actionClass}`;
   const action = !canAdd && !shouldRemove && !removed ? (
-    <QuoteRequestButton label="Запросить цену"
-      order={{product: formatQuoteProductName(variant), quantity: quoteQuantity, unit: getQuantityUnit(variant), tons: quoteTons}}
-      className={`${styles.quoteButton} ${actionClass}`}/>
+    enteringFraction || (quantityError && !canSubmitQuantity(correctedQuantity))
+      ? <Button type="button" className={quoteClassName} disabled>Запросить цену</Button>
+      : <QuoteRequestButton label="Запросить цену"
+        order={{product: formatQuoteProductName(variant), quantity: quoteQuantity, unit: quantityUnit, tons: quoteTons}}
+        className={quoteClassName}/>
   ) : (
     <Button type="button" aria-describedby={deliveryId} onClick={() => submit()}
-      disabled={!hydrated || saved || removed || (!shouldRemove && (!canAdd || !canSubmitQuantity(correctedQuantity)))}
+      disabled={!hydrated || saved || removed || (!shouldRemove && (!canAdd || (!canSubmitQuantity(correctedQuantity) && !canPromptForQuantity)))}
       className={`${stateClass} ${actionClass}`}>{label}</Button>
   );
-  const amountTooSmall = !needsQuote && valid && total === null;
-  const quantityError = draft !== null && value.trim() !== "" && (!valid || amountTooSmall) && !shouldRemove;
   const unitInsideField = view === "table" && showUnit;
-  const quantityInput = <Input type="text" inputMode={wholeQuantity ? "numeric" : "decimal"} value={value}
-        aria-label={`Количество ${variant.name}, ${quantityUnit}`}
-        aria-invalid={quantityError || undefined}
-        aria-describedby={statusId}
-        {...quantityTransferHandlers(setCorrection)}
-        onChange={event => {
-          const next = constrainOrderQuantityInput(event.target.value, 999);
-          setDraft(next.value);
-          setCorrection("");
-        }}
-        onBlur={correctQuantity}
-        onKeyDown={event => {
-          if (event.key === "Enter" && !event.nativeEvent.isComposing) {
-            event.preventDefault();
-            event.currentTarget.blur();
-          }
-        }}
-        className={`${styles.field} min-w-0 ${unitInsideField ? "pl-2 pr-10" : "px-2"} tabular-nums focus:placeholder:text-transparent`}
-        placeholder="0"/>;
-  const input = unitInsideField ? <CatalogVariantQuantity unit={quantityUnit}>{quantityInput}</CatalogVariantQuantity> : quantityInput;
-  const quantityField = view === "card" ? <label className="block text-sm font-semibold">
-    <span className="mb-1 block">Заказ, {quantityUnit}</span>{input}
-  </label> : input;
+  const quantityInput = <CatalogOrderInput inputMode={wholeQuantity ? "numeric" : "decimal"} value={value}
+    label={`Количество ${variant.name}, ${quantityUnit}`}
+    visibleLabel={view === "card" ? `Заказ, ${quantityUnit}` : undefined}
+    invalid={quantityError} statusId={statusId}
+    onChange={value => {
+      setDraft(constrainOrderQuantityInput(value, 999).value);
+      setCorrection("");
+    }}
+    onBlur={correctQuantity}
+    className={unitInsideField ? "pl-2 pr-10" : undefined}/>;
+  const quantityField = unitInsideField ? <CatalogVariantQuantity unit={quantityUnit}>{quantityInput}</CatalogVariantQuantity> : quantityInput;
   const totalOutput = <output data-price={total !== null || undefined} aria-label={`Сумма заказа для ${variant.name}`} aria-live="polite"
     className={total === null ? "text-xs text-slate-500 dark:text-slate-400" : "font-semibold tabular-nums"}>
     {total === null ? variant.price === null || variant.quoteOnly ? "По запросу" : "Укажите количество"
@@ -153,7 +152,7 @@ export function ProductOrderControls({variant, view, showUnit = true,
   const status = <span id={statusId} aria-live="polite" className={`mt-1 block text-xs ${quantityError
     ? "text-red-700 dark:text-red-400" : "text-slate-500 dark:text-slate-400"}`}>
     {wholeQuantity && valid && !removed && <span className="block">{quantity} {quantityUnit}</span>}
-    {line && !saved && !shouldRemove && <span className="block whitespace-nowrap">Не сохранено</span>}
+    {line && valid && !saved && <span className="block whitespace-nowrap">Не сохранено</span>}
     {amountTooSmall ? "Увеличьте количество. Сумма позиции должна быть больше 0 ₽."
       : correction || (quantityError ? wholeQuantity ? "Введите целое количество от 1 до 999." : "Введите количество больше 0 и не больше 999." : "")}
   </span>;

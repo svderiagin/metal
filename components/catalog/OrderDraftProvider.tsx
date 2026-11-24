@@ -2,7 +2,7 @@
 
 import {createContext, useCallback, useContext, useMemo, useState, useSyncExternalStore, type ReactNode} from "react";
 
-type OrderDraftState<Draft, Message> = {draft: Draft | null; message: Message};
+type OrderDraftState<Draft, Message> = {draft: Draft | null; feedback: {message: Message} | null};
 type Listener = () => void;
 
 function createOrderDraftStore() {
@@ -44,7 +44,7 @@ export function useOrderDraft<Draft, Message = string>(variantId: string, contro
   const sharedStore = useContext(OrderDraftContext);
   const [fallbackStore] = useState(() => sharedStore ?? createOrderDraftStore());
   const store = sharedStore ?? fallbackStore;
-  const [initialState] = useState<OrderDraftState<Draft, Message>>(() => ({draft: null, message: initialMessage}));
+  const [initialState] = useState<OrderDraftState<Draft, Message>>(() => ({draft: null, feedback: null}));
   const key = JSON.stringify([controller, variantId]);
   const binding = useMemo(() => ({
     subscribe: (listener: Listener) => store.subscribe(key, listener),
@@ -56,12 +56,17 @@ export function useOrderDraft<Draft, Message = string>(variantId: string, contro
   const setDraft = useCallback((draft: Draft | null) => {
     store.update(key, initialState, current => Object.is(current.draft, draft) ? current : {...current, draft});
   }, [store, key, initialState]);
-  const setMessage = useCallback((message: Message, expected?: {message: Message}) => {
-    store.update(key, initialState, current => {
-      if (expected && !Object.is(current.message, expected.message)) return current;
-      return Object.is(current.message, message) ? current : {...current, message};
-    });
-  }, [store, key, initialState]);
+  const setMessage = useCallback((message: Message, duration?: number) => {
+    const feedback = Object.is(message, initialMessage) ? null : {message};
+    store.update(key, initialState, current => current.feedback === feedback ? current : {...current, feedback});
+    if (duration !== undefined && feedback) {
+      window.setTimeout(() => {
+        store.update(key, initialState, current => current.feedback === feedback ? {...current, feedback: null} : current);
+      }, duration);
+    }
+  }, [store, key, initialState, initialMessage]);
 
-  return {...state, setDraft, setMessage};
+  return {draft: state.draft, message: state.feedback ? state.feedback.message : initialMessage, setDraft, setMessage};
 }
+
+export const orderQuantityHintDuration = 5000;
