@@ -22,7 +22,7 @@ export function GenericProductVariantCatalog({
   categorySlug: string;
 }) {
   const isSheetCatalog = variants.length > 0 && variants.every(isIllustratedSheet);
-  const isAngle = categorySlug === "ugolok";
+  const isMeterPricedSection = categorySlug === "ugolok" || categorySlug === "kvadrat";
   const filterKeys = isSheetCatalog ? sheetFilterKeys : getVariantFilterKeys(categorySlug);
   const [filters, setFilters] = useState<Partial<Record<VariantFilterKey, string>>>({});
   const [stockOnly, setStockOnly] = useState(false);
@@ -107,12 +107,12 @@ export function GenericProductVariantCatalog({
               >
                 <option value="">Все значения</option>
                 {(filterOptions.get(key) ?? []).map((value) => (
-                  <option key={value} value={value}>{isAngle ? formatSpecification(value).replace(/\s+(?:мм|м)$/u, "") : value}</option>
+                  <option key={value} value={value}>{isMeterPricedSection ? formatSpecification(value).replace(/\s+(?:мм|м)$/u, "") : value}</option>
                 ))}
               </Select>
             </label>
           ))}
-          <PriceRangeInputs range={priceRange} unit={isAngle ? "метр" : undefined}/>
+          <PriceRangeInputs range={priceRange} unit={isMeterPricedSection ? "метр" : undefined}/>
       </FilterPanel>
 
       <VariantCatalogResults visible={visible} categorySlug={categorySlug} isSheetCatalog={isSheetCatalog} resultsCount={results.length}

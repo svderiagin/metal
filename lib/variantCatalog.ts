@@ -26,13 +26,13 @@ export function variantFilterLabel(variants: ProductVariant[], key: VariantFilte
   if (key === "angleType") return "Тип уголка";
   if (key === "size" && variants.length > 0 && variants.every(isIllustratedSheet)) return sheetFormatLabel;
   const category = variants[0]?.categoryId;
-  if (category === "catalog-cat-ugolok") {
-    if (key === "size") return "Ширина полок, мм";
+  if (category === "catalog-cat-ugolok" || category === "catalog-cat-kvadrat") {
+    if (key === "size") return category === "catalog-cat-ugolok" ? "Ширина полок, мм" : "Сечение, мм";
     if (key === "wallThickness") return "Толщина полок, мм";
     if (key === "length") return "Длина, м";
   }
-  if (category === "catalog-cat-kvadrat" || category === "catalog-cat-shveller") {
-    if (key === "size") return category === "catalog-cat-shveller" ? "Номер профиля" : "Сечение";
+  if (category === "catalog-cat-shveller") {
+    if (key === "size") return "Номер профиля";
     if (key === "length") return "Длина по каталогу";
   }
   return variants.flatMap(variant => variant.attributes).find(attribute => attribute.key === key)?.label ?? key;

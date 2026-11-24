@@ -71,7 +71,7 @@ export function getSimpleOrderQuantityOptions(product?: ProductVariant): {
   minimum?: number;
   decimalPlaces?: number;
 } {
-  return product?.categoryId === "catalog-cat-ugolok" && product.unit === "meter"
+  return product?.unit === "meter" && (product.categoryId === "catalog-cat-ugolok" || product.categoryId === "catalog-cat-kvadrat")
     ? getMeasurementQuantityOptions(product, "meter")
     : {maximum: 999};
 }

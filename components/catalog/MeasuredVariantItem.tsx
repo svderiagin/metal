@@ -45,8 +45,8 @@ export function ChannelOrderControls({variant}: {variant: ProductVariant}) {
   return <MeasuredOrderItem variant={variant} view="card" kind="channel" orderOnly="with-price"/>;
 }
 
-export function AngleOrderControls({variant, view}: {variant: ProductVariant; view: "table" | "card"}) {
-  return <MeasuredOrderItem variant={variant} view={view} kind="angle" orderOnly="controls"/>;
+export function MeterPricedOrderControls({variant, view}: {variant: ProductVariant; view: "table" | "card"}) {
+  return <MeasuredOrderItem variant={variant} view={view} kind="meter-priced" orderOnly="controls"/>;
 }
 
 function MeasuredOrderItem({
@@ -65,7 +65,7 @@ function MeasuredOrderItem({
   sharedPipeStandard?: string;
   showBeamStandard?: boolean;
   orderOnly?: "with-price" | "controls";
-  kind: "rebar" | "beam" | "channel" | "vgp" | "pipe" | "angle";
+  kind: "rebar" | "beam" | "channel" | "vgp" | "pipe" | "meter-priced";
   view: "table" | "card";
 }) {
   const {addItem, updateQuantity, removeItem, lines, hydrated} = useCart();
@@ -73,7 +73,7 @@ function MeasuredOrderItem({
   const mass = variant.weightPerMeterKg ?? 0;
   const referenceMass = beamReferenceMassKg(variant);
   const isRebar = kind === "rebar";
-  const pricedByMeter = kind === "angle" && variant.unit === "meter";
+  const pricedByMeter = kind === "meter-priced" && variant.unit === "meter";
   const compactTonInput = isRebar || pricedByMeter;
   const isVgp = kind === "vgp";
   const isPipe = isVgp || kind === "pipe";

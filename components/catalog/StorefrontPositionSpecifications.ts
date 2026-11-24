@@ -8,11 +8,12 @@ import {getSheetSpecifications} from "@/lib/sheetPresentation";
 export function storefrontPositionFields(variant: ProductVariant) {
   if (isDemonstrationProduct(variant)) return [];
   const isAngle = variant.categoryId === "catalog-cat-ugolok";
-  const specifications = variant.categoryId === "catalog-cat-kvadrat" ? getSquareProductSpecifications(variant)
+  const isSquare = variant.categoryId === "catalog-cat-kvadrat";
+  const specifications = isSquare ? getSquareProductSpecifications(variant)
     : isAngle ? getAngleProductSpecifications(variant) : getSheetSpecifications(variant);
   const fields = specifications
-    .filter(({name}) => !["Полное обозначение", "Условия цены", "Условия оплаты"].includes(name)
-      && (!isAngle || name !== "Справочный сортамент"))
+    .filter(({name, value}) => !["Полное обозначение", "Условия цены", "Условия оплаты"].includes(name)
+      && !(name === "Справочный сортамент" && (isAngle || (isSquare && value === "ГОСТ 2591-2006"))))
     .map(({name, value}) => ({
       label: name,
       value: name === "Справочный сортамент" && /^ГОСТ (?:2591-2006|8509-93|8510-86)$/u.test(value)
