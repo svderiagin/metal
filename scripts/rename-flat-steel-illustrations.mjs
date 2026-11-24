@@ -23,7 +23,7 @@ const products = productVariants.filter(product => product.categoryId === flatSt
 assert.ok(products.length, 'No matching steel strip products');
 const manifest = JSON.parse(await fs.readFile('data/product-illustrations.json', 'utf8'));
 for (const product of products) {
-  assert.equal(manifest[product.id]?.photoUrl, '/images/catalog/polosa/cover/steel-flat-bar-end.jpg',
+  assert.equal(manifest[product.id]?.photoUrl, '/images/catalog/polosa/gallery/steel-flat-bar-end.jpg',
     `${product.id}: the heading migration requires the old generic artwork. Use render-flat-steel-images.mjs for the owner's template.`);
 }
 await fs.mkdir(`${directory}/before`, {recursive: true});

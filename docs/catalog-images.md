@@ -60,20 +60,32 @@ or generate extra variants solely to satisfy this checklist.
 Категории и подкатегории используют те же имена папок, что и адреса страниц.
 
 ```text
-public/images/catalog/armatura/
-├── main/                          # основной кадр категории
-├── cover/                         # дополнительные кадры категории
-├── originals/                     # общие исходники и авторские эталоны
-└── armatura-a500s/
-    ├── cover/                     # титульное фото и галерея подкатегории
-    └── measurement/               # фотографии товаров с разметкой
+public/images/catalog/
+├── armatura-card.webp             # карточка категории в каталоге
+├── armatura/
+│   ├── armatura-a500s-card.jpg    # карточка подкатегории
+│   ├── armatura-a400-card.webp     # общий кадр для А400 (35ГС) и А400 (25Г2С)
+│   ├── gallery/                   # собственные кадры страницы категории
+│   ├── originals/                 # исходники и эталоны для нескольких подкатегорий
+│   └── armatura-a500s/
+│       ├── gallery/               # собственные кадры страницы А500С
+│       └── measurement/           # готовые фотографии товаров с разметкой
+└── shared/                        # файлы для нескольких категорий
 ```
 
-Подкатегория хранит свои исходники в `originals/`. Для категорий с товарами
-на основной странице `measurement/` находится сразу в папке категории.
-Если несколько страниц используют один кадр, все ссылки ведут к одному файлу.
-Общий заполнитель и исходники без единственного владельца лежат в `shared/`.
-Адаптивные копии под `public/images/prepared/` создаются при сборке.
+Карточка категории использует файл `<category>-card.<ext>` в корне `catalog/`.
+Карточка подкатегории использует `*-card.<ext>` в папке родительской категории.
+Если один кадр используется на нескольких карточках или в галереях, храните
+его в одном экземпляре. Обложки карточек лежат на уровне самой общей карточки,
+которая использует кадр. Порядок карусели задаётся в
+`data/catalog-cover-galleries.ts`.
+
+Подкатегория хранит свои источники в `originals/`. Храните чистый оригинал
+рядом с авторским эталоном `*_marked`, сохраняя исходные имена. Если исходник
+используют несколько подкатегорий, храните его в `originals/` категории.
+Для категорий с товарами на основной странице `measurement/` находится сразу
+в папке категории. Общий заполнитель лежит в `shared/`. Адаптивные копии под
+`public/images/prepared/` создаются при сборке.
 
 Имена в `measurement/` состоят из вида товара и подтверждённых параметров.
 Используйте латиницу, `x` для размеров и дефис для десятичного разделителя
@@ -299,9 +311,9 @@ details, then run `--write` with the reviewed product IDs and refresh image vers
 `imports/profile-rectangular-image-template/rendered.json` for the exact sources,
 labels, typography and pixel-preservation evidence.
 
-The profile tube directory is `public/images/catalog/truby-profilnye/`.
-The category title photo is in `main/`. Family directories contain their own
-`cover/`, `originals/` and `measurement/` folders.
+The profile tube category card is `public/images/catalog/truby-profilnye-card.jpg`.
+The category title photo is in `public/images/catalog/truby-profilnye/gallery/`.
+Family directories contain their own `gallery/`, `originals/` and `measurement/` folders.
 
 ## Validation
 

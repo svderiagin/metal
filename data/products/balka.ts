@@ -1,9 +1,10 @@
 import type {ProductVariantSource} from "@/types/product";
+import catalogImages from "../catalog-images.json";
 
 const families = {
-  Б: {subcategoryId: "cat-bal-sub-1", name: "нормальная", folder: "normalnaya", cover: "balka-regular.jpg"},
-  Ш: {subcategoryId: "cat-bal-sub-2", name: "широкополочная", folder: "shirokopolochnaya", cover: "balka-shirokopolochnaya.jpg"},
-  К: {subcategoryId: "cat-bal-sub-3", name: "колонная", folder: "kolonnaya", cover: "balka-kolonnaya.jpg"},
+  Б: {subcategoryId: "cat-bal-sub-1", name: "нормальная"},
+  Ш: {subcategoryId: "cat-bal-sub-2", name: "широкополочная"},
+  К: {subcategoryId: "cat-bal-sub-3", name: "колонная"},
 } as const;
 
 const rows: readonly {
@@ -41,7 +42,7 @@ export const balkaProducts = rows.flatMap(({key, profile, series, mass, price, l
       price, pricePerTon: price, priceQualifier: "exact", currency: "RUB", priceUnit: "за тонну",
       availability: onOrder ? "ON_ORDER" : "IN_STOCK", inStock: !onOrder, featured: false,
       steelGrade: "С255", lengthMeters, weightPerMeterKg: mass,
-      imageUrls: [`/images/catalog/balka/balka-${family.folder}/cover/${family.cover}`],
+      imageUrls: [catalogImages.types[`type-${family.subcategoryId}`]],
       attributes: [
         {key: "size", label: "Профиль", value: profile},
         {key: "grade", label: "Марка стали", value: "С255"},

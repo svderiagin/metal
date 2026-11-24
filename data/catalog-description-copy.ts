@@ -109,7 +109,7 @@ export const catalogDescriptionCopy: Partial<Record<string, DescriptionCopy>> = 
       {
         heading: "Покрытие и цвет",
         text: "Сверьте толщину стальной основы, вид покрытия, код RAL и сторону окраски. Для добора к существующей облицовке сравните образцы при дневном свете: оттенок зависит и от фактуры, и от партии.",
-        diagram: {shape: "photo", src: "/images/catalog/profnastil/profnastil-s20/cover/s20-coated-sheets.jpg",
+        diagram: {shape: "photo", src: "/images/catalog/profnastil/profnastil-s20/gallery/s20-coated-sheets.jpg",
           alt: "Окрашенные профилированные листы", caption: "Для добора сверяют цвет и гофр установленного листа."},
       },
     ],
@@ -189,7 +189,7 @@ export const catalogDescriptionCopy: Partial<Record<string, DescriptionCopy>> = 
       {
         heading: "Высота и форма планки",
         text: "Сверьте длину планки с высотой ограждения и просветом снизу. Для волнообразной линии верха разложите планки по длинам. Ширину и форму профиля проверяйте до закупки крепежа.",
-        diagram: {shape: "photo", src: "/images/catalog/shtaketnik/cover/rounded-fence-pickets.jpg",
+        diagram: {shape: "photo", src: "/images/catalog/shtaketnik/gallery/rounded-fence-pickets.jpg",
           alt: "Полукруглые планки металлического штакетника", caption: "Форма верха и ширина профиля задают рисунок секции.", position: "center 12%"},
       },
       {
@@ -237,7 +237,7 @@ export const catalogDescriptionCopy: Partial<Record<string, DescriptionCopy>> = 
       {
         heading: "Стыки и документ о качестве",
         text: "Для соединений сверяйте узлы и допустимый способ сварки по проекту. При приёмке проверьте класс, 35ГС и стандарт заказа по документу о качестве партии.",
-        diagram: {shape: "photo", src: "/images/catalog/armatura/armatura-a3-35gs-a400s/cover/a400-35gs-rebar-warehouse.jpg",
+        diagram: {shape: "photo", src: "/images/catalog/armatura/armatura-a3-35gs-a400s/gallery/a400-35gs-rebar-warehouse.jpg",
           alt: "Пачки мерных стержней на складе", caption: "Маркировка связывает пачку с документом о качестве."},
       },
     ],
@@ -364,7 +364,7 @@ export const catalogDescriptionCopy: Partial<Record<string, DescriptionCopy>> = 
       {
         heading: "Резьба и защитный слой",
         text: "Проверьте, нужны ли резьба и муфты. ГОСТ 3262-75 допускает отсутствие цинка на торцах и резьбе. Требования к защите этих участков, в том числе после резки, сверяйте с проектом.",
-        diagram: {shape: "photo", src: "/images/catalog/truba-kruglaya/truba-vodogazoprovodnaya-otsinkovannaya/cover/galvanized-vgp-threads.jpg",
+        diagram: {shape: "photo", src: "/images/catalog/truba-kruglaya/truba-vodogazoprovodnaya-otsinkovannaya/gallery/galvanized-vgp-threads.jpg",
           alt: "Крупный план трубы с наружной резьбой", caption: "Наружная резьба на торцах труб."},
       },
       {
@@ -386,7 +386,7 @@ export const catalogDescriptionCopy: Partial<Record<string, DescriptionCopy>> = 
       {
         heading: "Сортамент и технические требования",
         text: "Размеры и теоретическую массу сравнивайте по таблице 1 ГОСТ 10704-91. Требования к стали, шву и испытаниям сверяйте с проектом и стандартом поставки. Для трубопровода учитывайте также рабочую среду и давление.",
-        diagram: {shape: "photo", src: "/images/catalog/truba-kruglaya/truba-elektrosvarnaya/cover/welded-pipe-ends.jpg",
+        diagram: {shape: "photo", src: "/images/catalog/truba-kruglaya/truba-elektrosvarnaya/gallery/welded-pipe-ends.jpg",
           alt: "Торцы круглых электросварных труб", caption: "На торце различимы наружный контур и стенка."},
       },
       {
@@ -408,7 +408,7 @@ export const catalogDescriptionCopy: Partial<Record<string, DescriptionCopy>> = 
       {
         heading: "Покрытие и длина",
         text: "Уточните требования к цинковому слою и согласуйте обработку кромок после резки. Для цельной детали проверьте длину конкретной позиции. Например, 89 × 3,5 мм в каталоге имеет длину 6 м.",
-        diagram: {shape: "photo", src: "/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/cover/galvanized-pipe-welded-seam.webp",
+        diagram: {shape: "photo", src: "/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/gallery/galvanized-pipe-welded-seam.webp",
           alt: "Поверхность оцинкованной трубы", caption: "Для обработки кромок согласуйте восстановление защиты."},
       },
       {
@@ -430,7 +430,7 @@ export const catalogDescriptionCopy: Partial<Record<string, DescriptionCopy>> = 
       {
         heading: "Полки и стенка в узле",
         text: "Сверьте высоту и ширину полок, толщины полок и стенки и внутренние скругления, если деталь должна примыкать вплотную. Используйте размеры именно этого сечения по ГОСТ 35087-2024, если на него ссылается проект.",
-        diagram: {shape: "photo", src: "/images/catalog/balka/balka-normalnaya/cover/normal-parallel-flanges.jpg",
+        diagram: {shape: "photo", src: "/images/catalog/balka/balka-normalnaya/gallery/normal-parallel-flanges.jpg",
           alt: "Сечение нормального двутавра", caption: "Проверяйте габариты элементов примыкания."},
       },
       {
@@ -452,7 +452,7 @@ export const catalogDescriptionCopy: Partial<Record<string, DescriptionCopy>> = 
       {
         heading: "Что проверить в стыке",
         text: "Сопоставьте ширину и толщину полок, размеры стенки, внутренние радиусы и места под крепёж с чертежом. Параметры опирания и зазоры задаёт проект.",
-        diagram: {shape: "photo", src: "/images/catalog/balka/balka-shirokopolochnaya/cover/wide-flanges-profile.jpg",
+        diagram: {shape: "photo", src: "/images/catalog/balka/balka-shirokopolochnaya/gallery/wide-flanges-profile.jpg",
           alt: "Торцы широкополочных двутавров", caption: "Ширина полки влияет на размещение присоединительных деталей.", position: "center 68%"},
       },
       {
@@ -474,7 +474,7 @@ export const catalogDescriptionCopy: Partial<Record<string, DescriptionCopy>> = 
       {
         heading: "Габариты базы и стыков",
         text: "Проверьте ширину полок, высоту сечения и толщины относительно решённого узла. Присоединительные детали, отверстия и подготовку торца задаёт чертёж колонны.",
-        diagram: {shape: "photo", src: "/images/catalog/balka/balka-kolonnaya/cover/column-beam-stock.jpg",
+        diagram: {shape: "photo", src: "/images/catalog/balka/balka-kolonnaya/gallery/column-beam-stock.jpg",
           alt: "Стальные колонные двутавры", caption: "Для базы и стыков сверяют размеры конкретного профиля."},
       },
       {
@@ -491,7 +491,7 @@ export const catalogDescriptionCopy: Partial<Record<string, DescriptionCopy>> = 
       {
         heading: "Профиль подвесного пути",
         text: "Возьмите из проекта полное обозначение, например 24М. Для существующего участка проверьте геометрию стыков и рабочей поверхности. Сортамент монорельсовой серии приведён в таблице 1 ГОСТ 19425-74.",
-        diagram: {shape: "photo", src: "/images/catalog/balka/balka-monorelsovaya/cover/monorail-beam-taper.jpg",
+        diagram: {shape: "photo", src: "/images/catalog/balka/balka-monorelsovaya/gallery/monorail-beam-taper.jpg",
           alt: "Торец монорельсовой балки", caption: "У серии М внутренние грани полок имеют уклон.", position: "center 63%"},
       },
       {
@@ -523,7 +523,7 @@ export const catalogDescriptionCopy: Partial<Record<string, DescriptionCopy>> = 
       {
         heading: "Цвет, лицевая сторона и добор",
         text: "Проверьте код RAL, покрытие и видимую сторону. Для добора к существующему ограждению приложите образец цвета и проверьте совпадение высоты и шага гофров.",
-        diagram: {shape: "photo", src: "/images/catalog/profnastil/profnastil-s8/cover/s8-coated-surface.jpg",
+        diagram: {shape: "photo", src: "/images/catalog/profnastil/profnastil-s8/gallery/s8-coated-surface.jpg",
           alt: "Лицевая поверхность окрашенного листа С8", caption: "Для добора сравнивают оттенок и форму гофра."},
       },
     ],
@@ -545,7 +545,7 @@ export const catalogDescriptionCopy: Partial<Record<string, DescriptionCopy>> = 
       {
         heading: "Сторона окраски и совместимость",
         text: "Уточните, каким ребром лист должен перекрывать соседний и какая поверхность окажется снаружи. Для добора сравните шаг гофров, форму края, код RAL и сторону окраски.",
-        diagram: {shape: "photo", src: "/images/catalog/profnastil/profnastil-s20/cover/s20-coated-sheets.jpg",
+        diagram: {shape: "photo", src: "/images/catalog/profnastil/profnastil-s20/gallery/s20-coated-sheets.jpg",
           alt: "Окрашенный профлист С20", caption: "При доборе проверяют совпадение гофров и стороны окраски."},
       },
     ],
@@ -567,7 +567,7 @@ export const catalogDescriptionCopy: Partial<Record<string, DescriptionCopy>> = 
       {
         heading: "Кромки и крепления",
         text: "Сопоставьте гофр, толщину основы и покрытие с ведомостью. Способ крепления к опорам и соединения соседних листов задавайте по рабочим чертежам.",
-        diagram: {shape: "photo", src: "/images/catalog/profnastil/profnastil-n75/cover/n75-galvanized-profile.jpg",
+        diagram: {shape: "photo", src: "/images/catalog/profnastil/profnastil-n75/gallery/n75-galvanized-profile.jpg",
           alt: "Трапециевидные гофры оцинкованного Н75", caption: "Форму и ориентацию гофров сверяют с раскладкой.", position: "center 69%"},
       },
     ],
@@ -589,7 +589,7 @@ export const catalogDescriptionCopy: Partial<Record<string, DescriptionCopy>> = 
       {
         heading: "Крепление к стойкам",
         text: "Проверьте покрытие проволоки и способ натяжения. Особое внимание уделите углам, концам ряда и проёмам: от их крепления зависит, будет ли полотно провисать.",
-        diagram: {shape: "photo", src: "/images/catalog/setka-metallicheskaya/setka-rabitsa/cover/rabitsa-production-rolls.webp",
+        diagram: {shape: "photo", src: "/images/catalog/setka-metallicheskaya/setka-rabitsa/gallery/rabitsa-production-rolls.webp",
           alt: "Рулоны сетки из переплетённых спиралей", caption: "Проверьте, как полотно крепится на концах каждого пролёта."},
       },
     ],
@@ -632,7 +632,7 @@ export const catalogDescriptionCopy: Partial<Record<string, DescriptionCopy>> = 
       {
         heading: "Крепление или армирование",
         text: "Для ограждения сверьте крепление к раме, покрытие и обработку краёв. Для армирования проверьте, что сетка предназначена для железобетона. Класс арматуры, диаметр, шаг и защитный слой возьмите из проекта.",
-        diagram: {shape: "photo", src: "/images/catalog/setka-metallicheskaya/setka-svarnaya-v-kartah/cover/welded-panels-edges.jpg",
+        diagram: {shape: "photo", src: "/images/catalog/setka-metallicheskaya/setka-svarnaya-v-kartah/gallery/welded-panels-edges.jpg",
           alt: "Кромки сварных сеток в картах", caption: "У карты проверяют крайние проволоки и точки крепления."},
       },
     ],
@@ -649,7 +649,7 @@ export const catalogDescriptionCopy: Partial<Record<string, DescriptionCopy>> = 
       {
         heading: "Проверка сопряжения",
         text: "Внутреннее скругление может мешать детали лечь в угол. Сверьте размеры площадки контакта, положение крепежа и допуски с чертежом. Марку стали для несущего элемента берите из спецификации.",
-        diagram: {shape: "photo", src: "/images/catalog/ugolok/cover/angle-profile.jpg",
+        diagram: {shape: "photo", src: "/images/catalog/ugolok/gallery/angle-profile.jpg",
           alt: "Торцы стальных уголков", caption: "Внутреннее скругление видно на торце.", position: "center 73%"},
       },
       {
@@ -671,7 +671,7 @@ export const catalogDescriptionCopy: Partial<Record<string, DescriptionCopy>> = 
       {
         heading: "Припуск на обработку",
         text: "Для точёных, фрезерованных или гнутых деталей выбирайте заготовку по чертежу с учётом припуска. Если важны прямолинейность и поверхность, зафиксируйте требования при заказе.",
-        diagram: {shape: "photo", src: "/images/catalog/kvadrat/cover/square-bar-ends.jpg",
+        diagram: {shape: "photo", src: "/images/catalog/kvadrat/gallery/square-bar-ends.jpg",
           alt: "Торцы стальных квадратных прутков", caption: "Состояние углов видно на торце прутка."},
       },
       {
@@ -698,7 +698,7 @@ export const catalogDescriptionCopy: Partial<Record<string, DescriptionCopy>> = 
       {
         heading: "Плоскостность, кромки и масса",
         text: "Укажите требования к поверхности, кромке и плоскостности, если их контролируют по чертежу. Для перевозки или подъёма уточните массу пачки. В заявке отметьте стандарт или ТУ, если они заданы проектом.",
-        diagram: {shape: "photo", src: "/images/catalog/listovoy-prokat/galvanized-steel-sheet/cover/galvanized-sheet-stack-edges.webp",
+        diagram: {shape: "photo", src: "/images/catalog/listovoy-prokat/galvanized-steel-sheet/gallery/galvanized-sheet-stack-edges.webp",
           alt: "Торцы листов в пачке", caption: "Кромки и плоскостность проверяют по требованиям заказа."},
       },
     ],
@@ -720,7 +720,7 @@ export const catalogDescriptionCopy: Partial<Record<string, DescriptionCopy>> = 
       {
         heading: "Кромки и обработка",
         text: "До резки и гибки согласуйте способ обработки и защиту оголённого металла на кромках. Если важна декоративная поверхность, сверьте образец и согласуйте требования к следам обработки.",
-        diagram: {shape: "photo", src: "/images/catalog/listovoy-prokat/galvanized-steel-sheet/cover/galvanized-sheet-surface.webp",
+        diagram: {shape: "photo", src: "/images/catalog/listovoy-prokat/galvanized-steel-sheet/gallery/galvanized-sheet-surface.webp",
           alt: "Поверхность оцинкованного стального листа", caption: "Внешний вид цинка сверяют по образцу исполнения."},
       },
     ],
@@ -732,7 +732,7 @@ export const catalogDescriptionCopy: Partial<Record<string, DescriptionCopy>> = 
       {
         heading: "Поверхность и толщина",
         text: "Для холоднокатаного листа под окраску, гибку или видимую облицовку заранее задайте допустимые дефекты и состояние поверхности. Толщину, плоскостность и кромку задавайте по чертежу.",
-        diagram: {shape: "photo", src: "/images/catalog/listovoy-prokat/list-ocynkovannyj/cover/cold-rolled-sheet-surface.webp",
+        diagram: {shape: "photo", src: "/images/catalog/listovoy-prokat/list-ocynkovannyj/gallery/cold-rolled-sheet-surface.webp",
           alt: "Гладкая поверхность холоднокатаного листа", caption: "Допуски и состояние поверхности сверяют до заказа."},
       },
       {
@@ -754,7 +754,7 @@ export const catalogDescriptionCopy: Partial<Record<string, DescriptionCopy>> = 
       {
         heading: "Основа и рисунок",
         text: "Для листов по ГОСТ 8568-77 номинальная толщина относится к основанию, а высота рифлей нормируется отдельно. Для исполнения по ТУ сверяйте правила обозначения толщины. Если важны посадка и зазор, проверьте общую толщину листа с рифлями.",
-        diagram: {shape: "photo", src: "/images/catalog/listovoy-prokat/list-riflennyj/cover/tread-pattern-detail.jpg",
+        diagram: {shape: "photo", src: "/images/catalog/listovoy-prokat/list-riflennyj/gallery/tread-pattern-detail.jpg",
           alt: "Рельеф стального листа крупным планом", caption: "Уточняйте рисунок и высоту выступов для конкретной позиции."},
       },
       {
@@ -781,7 +781,7 @@ export const catalogDescriptionCopy: Partial<Record<string, DescriptionCopy>> = 
       {
         heading: "Окалина и состояние поверхности",
         text: "Для сварки и окраски согласуйте подготовку поверхности и кромок по технологии детали. Если лист должен лежать на опорах без подгонки, отдельно задайте плоскостность и допуски на кромки.",
-        diagram: {shape: "photo", src: "/images/catalog/listovoy-prokat/list-goryachekatanyj/cover/hot-rolled-sheet-surface.jpg",
+        diagram: {shape: "photo", src: "/images/catalog/listovoy-prokat/list-goryachekatanyj/gallery/hot-rolled-sheet-surface.jpg",
           alt: "Поверхность горячекатаной стали", caption: "Перед сваркой и окраской проверяют состояние поверхности."},
       },
       {
@@ -803,7 +803,7 @@ export const catalogDescriptionCopy: Partial<Record<string, DescriptionCopy>> = 
       {
         heading: "Кромки, отверстия и гибка",
         text: "Для паза проверьте фактический размер и зазор. Для гнутой детали закажите заготовку по развёртке, а для сварной накладки сверьте марку стали и размеры по чертежу.",
-        diagram: {shape: "photo", src: "/images/catalog/polosa/cover/steel-flat-bar-end.jpg",
+        diagram: {shape: "photo", src: "/images/catalog/polosa/gallery/steel-flat-bar-end.jpg",
           alt: "Торец стальной полосы", caption: "При посадке в паз проверяют ширину, толщину и кромки."},
       },
       {

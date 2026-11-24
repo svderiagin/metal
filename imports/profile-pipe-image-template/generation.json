@@ -81,7 +81,7 @@
       "date": "2026-11-07",
       "kind": "rectangular-r06",
       "sourceId": "R06",
-      "original": "public/images/catalog/shared/originals/rectangular-steel-tube-r06.jpg",
+      "original": "public/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/originals/rectangular-steel-tube-r06.jpg",
       "sourceWidth": 660,
       "sourceHeight": 648,
       "backgroundPlate": "imports/profile-pipe-image-template/rectangular-r06-background-plate.png",
@@ -133,7 +133,7 @@
     {
       "date": "2026-11-07",
       "kind": "rectangular-r06-diagonal",
-      "original": "public/images/catalog/shared/originals/rectangular-steel-tube-r06.jpg",
+      "original": "public/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/originals/rectangular-steel-tube-r06.jpg",
       "backgroundPlate": "imports/profile-pipe-image-template/rectangular-r06-diagonal-background-plate.png",
       "nativeOutput": "imports/profile-pipe-image-template/rectangular-r06-photo-4x3-diagonal-native.png",
       "nativeWidth": 864,

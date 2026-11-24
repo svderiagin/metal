@@ -77,7 +77,8 @@ Product Type создаётся из соответствующей подкат
 
 Публичные изображения и явные соответствия описаны в `docs/catalog-images.md`:
 `public/images/catalog/`, `data/catalog-images.json`, `data/catalog-image-versions.json`.
-Готовая разметка лежит в `measurement/`, фотографии для галереи в `cover/`, исходники в `originals/`.
+Обложки `*-card` лежат на уровне списка карточек. Готовая разметка лежит в
+`measurement/`, кадры галерей в `gallery/`, исходники и авторские эталоны в `originals/`.
 
 `ProductVariantCatalog.tsx` выбирает таблицу для семейства. Арматура, балки, ВГП, электросварные
 и профильные трубы используют конфигурации из `RebarVariantCatalog.tsx`. Для других семейств

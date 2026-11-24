@@ -42,7 +42,7 @@
 
 Владелец выбрал R06: видны внутренняя нижняя и боковая стенки, естественный
 переход в тень. Исходный JPEG 660 × 648 сохранён без изменений в
-`public/images/catalog/shared/originals/rectangular-steel-tube-r06.jpg`.
+`public/images/catalog/truby-profilnye/truba-profilnaya-pryamougolnaya/originals/rectangular-steel-tube-r06.jpg`.
 
 В диагональном варианте R06 наклон приведён к квадратной трубе:
 исходный JPEG пропорционально уменьшен до 561 × 551, зеркально развёрнут и
