@@ -96,12 +96,26 @@ function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
   );
   const showSizeFilter = !isVgp && !isElectrowelded;
   const isGalvanized = isElectrowelded && variants.every(isGalvanizedElectroweldedVariant);
-  const showSteelGrade = isElectrowelded;
+  const technicalStandards = isGalvanized
+    ? variants.map(variant => variant.specifications.find(item => item.name === "Технические условия по каталогу")?.value)
+    : [];
+  const technicalStandard = technicalStandards[0];
+  const sharedTechnicalStandard = technicalStandard && technicalStandards.every(value => value === technicalStandard)
+    ? technicalStandard : undefined;
+  const sharedPipeStandard = sharedVgpStandard ? "ГОСТ 3262-75" : sharedTechnicalStandard;
+  const firstSteelGrade = variants[0]?.steelGrade;
+  const sharedSteelGrade = isGalvanized && firstSteelGrade
+    && variants.every(variant => variant.steelGrade === firstSteelGrade) ? firstSteelGrade : undefined;
+  const showSteelGrade = isElectrowelded && !sharedSteelGrade;
   const headers = tableHeaders[kind];
   const specifications = showSteelGrade ? [...headers.specifications, "Марка стали"] : headers.specifications;
   const electroweldedMassSource = <CatalogStandardReference>таблице 1 ГОСТ 10704-91</CatalogStandardReference>;
   const electroweldedNote = isGalvanized
-    ? <>Для пересчёта используется масса стальной трубы <strong>без цинкового покрытия</strong>, приведённая в {electroweldedMassSource}.</>
+    ? <>
+      {sharedTechnicalStandard && <>Технические условия для всех позиций — <CatalogStandardReference>{sharedTechnicalStandard}</CatalogStandardReference>.{" "}</>}
+      {sharedSteelGrade && <>Марка стали — {sharedSteelGrade}.{" "}</>}
+      Размеры труб приведены в {electroweldedMassSource}. Для пересчёта метров в тонны используем указанную там <strong>теоретическую массу стальной основы</strong>.
+    </>
     : <>Масса и стоимость заказа по длине рассчитываются по <strong>теоретической массе</strong>, приведённой в {electroweldedMassSource}.</>;
   const [query, setQuery] = useState("");
   const deferredQuery = useDeferredValue(query);
@@ -111,7 +125,8 @@ function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
   const [diameter, setDiameter] = useState("");
   const [form, setForm] = useState("");
   const [length, setLength] = useState("");
-  const [steelGrade, setSteelGrade] = useState("");
+  const [selectedSteelGrade, setSteelGrade] = useState("");
+  const steelGrade = showSteelGrade ? selectedSteelGrade : "";
   const priceRange = useCatalogPriceRange();
   const {minimumPrice, maximumPrice} = priceRange;
   const [availability, setAvailability] = useState("");
@@ -276,12 +291,12 @@ function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
         {orderNote && <CatalogTableNote>{orderNote}</CatalogTableNote>}
         <CatalogVariantTable designation={headers.designation} specifications={specifications} unit="т" quantity="Заказ, м" secondaryQuantity="Заказ, т">
           {results.map(variant => <MeasuredVariantItem key={variant.id} variant={variant} name={names?.get(variant.id)}
-            kind={kind} view="table" showSteelGrade={showSteelGrade} showVgpStandard={!sharedVgpStandard}/>)}
+            kind={kind} view="table" showSteelGrade={showSteelGrade} sharedPipeStandard={sharedPipeStandard}/>)}
         </CatalogVariantTable>
         <div className="grid gap-4 sm:grid-cols-2 xl:hidden">
           {results.map((variant) => (
             <MeasuredVariantItem key={variant.id} variant={variant} name={names?.get(variant.id)}
-              kind={kind} view="card" showSteelGrade={showSteelGrade} showVgpStandard={!sharedVgpStandard}/>
+              kind={kind} view="card" showSteelGrade={showSteelGrade} sharedPipeStandard={sharedPipeStandard}/>
           ))}
         </div>
         </>

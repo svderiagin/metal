@@ -45,7 +45,6 @@
     "local-318": "/images/catalog/truba-kruglaya/truba-elektrosvarnaya/cover/truba-elektrosvarnaya.jpg",
     "local-333": "/images/catalog/truba-kruglaya/truba-elektrosvarnaya/cover/truba-elektrosvarnaya.jpg",
     "local-337": "/images/catalog/truba-kruglaya/truba-elektrosvarnaya/cover/truba-elektrosvarnaya.jpg",
-    "local-443": "/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/cover/truba-elektrosvarnaya-cink.jpg",
     "local-984": "/images/catalog/truba-kruglaya/truba-vodogazoprovodnaya-otsinkovannaya/cover/truba-vodogazoprovodnaya-cink.jpg",
     "vgp-galvanized-15x2-8-6m": "/images/catalog/truba-kruglaya/truba-vodogazoprovodnaya-otsinkovannaya/originals/truba_vgp_ocinkovannaya_2400_1800_original.jpg",
     "vgp-galvanized-20x2-8-6m": "/images/catalog/truba-kruglaya/truba-vodogazoprovodnaya-otsinkovannaya/originals/truba_vgp_ocinkovannaya_2400_1800_original.jpg",
@@ -327,7 +326,8 @@
     "electrowelded-galvanized-108x3-5-6m": "/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/originals/truba_elektrosvarnaya_ocinkovannaya_2400_1800_original.jpg",
     "electrowelded-galvanized-133x4-5-6m": "/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/originals/truba_elektrosvarnaya_ocinkovannaya_2400_1800_original.jpg",
     "electrowelded-galvanized-159x4-5-6m": "/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/originals/truba_elektrosvarnaya_ocinkovannaya_2400_1800_original.jpg",
-    "electrowelded-galvanized-219x6-12m": "/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/originals/truba_elektrosvarnaya_ocinkovannaya_2400_1800_original.jpg"
+    "electrowelded-galvanized-219x6-12m": "/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/originals/truba_elektrosvarnaya_ocinkovannaya_2400_1800_original.jpg",
+    "electrowelded-galvanized-89x3-5-6m": "/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/originals/truba_elektrosvarnaya_ocinkovannaya_2400_1800_original.jpg"
   },
   "categories": {
     "cat-arm": "/images/catalog/armatura/main/armatura.jpg",

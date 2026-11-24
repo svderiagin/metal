@@ -1,12 +1,13 @@
 import type {ProductVariantSource} from "@/types/product";
-import {electroweldedPipeMass} from "@/lib/electroweldedPipe";
+import {electroweldedPipeAssortmentStandard, electroweldedPipeMass, electroweldedPipeStandard,
+  electroweldedPipeTechnicalStandard} from "@/lib/electroweldedPipe";
 import {formatMassPerMeter, formatNumber} from "@/lib/numberFormat";
 
-const standard = "ГОСТ 10704-91";
 // Наружный диаметр, стенка, длина в метрах, цена за тонну и наличие.
 const offers = [
   [57, 3.5, 6, 89590, true],
   [76, 3.5, 6, 118860, true],
+  [89, 3.5, 6, 96000, true],
   [108, 3.5, 6, 117140, true],
   [133, 4.5, 6, 108203, true],
   [159, 4.5, 6, 93600, true],
@@ -21,7 +22,7 @@ export const galvanizedElectroweldedProducts: ProductVariantSource[] = offers.ma
     const key = `${diameterMm}x${wall.replace(",", "-")}-${lengthMeters}m`;
     const weightPerMeterKg = electroweldedPipeMass(diameterMm, wallThicknessMm);
     if (weightPerMeterKg === undefined) {
-      throw new Error(`Нет теоретической массы по ${standard} для трубы ${size} мм.`);
+      throw new Error(`Нет теоретической массы по ${electroweldedPipeAssortmentStandard} для трубы ${size} мм.`);
     }
     const mass = formatMassPerMeter(weightPerMeterKg);
 
@@ -33,7 +34,7 @@ export const galvanizedElectroweldedProducts: ProductVariantSource[] = offers.ma
       name: `Труба электросварная оцинкованная ${size}, ${lengthMeters} м`,
       slug: `truba-elektrosvarnaya-otsinkovannaya-${key}`,
       shortDescription: `Наружный диаметр ${diameter} мм, стенка ${wall} мм, длина ${lengthMeters} м.`,
-      description: `Оцинкованная стальная прямошовная труба ${size} мм длиной ${lengthMeters} м. Сортамент по ${standard}. Теоретическая масса стальной трубы составляет ${mass} кг/м без учёта цинкового покрытия.`,
+      description: `Оцинкованная стальная прямошовная труба ${size} мм длиной ${lengthMeters} м. Сортамент по ${electroweldedPipeAssortmentStandard}. Теоретическая масса стальной трубы составляет ${mass} кг/м без учёта цинкового покрытия.`,
       price: pricePerTon,
       pricePerTon,
       priceUnit: "за тонну",
@@ -42,13 +43,14 @@ export const galvanizedElectroweldedProducts: ProductVariantSource[] = offers.ma
       featured: false,
       imageUrls: [],
       coatingType: "galvanized",
+      steelGrade: "Ст3",
       diameterMm,
       wallThicknessMm,
       lengthMeters,
       weightPerMeterKg,
       weightConfirmed: true,
       attributes: [
-        {key: "standard", label: "Сортамент по каталогу", value: standard},
+        {key: "standard", label: "Стандарт", value: electroweldedPipeStandard},
         {key: "size", label: "Наружный Ø × стенка, мм", value: size},
         {key: "length", label: "Длина по каталогу, м", value: String(lengthMeters)},
       ],
@@ -58,7 +60,8 @@ export const galvanizedElectroweldedProducts: ProductVariantSource[] = offers.ma
         {name: "Длина по каталогу", value: `${lengthMeters} м`},
         {name: "Покрытие", value: "Цинковое"},
         {name: "Теоретическая масса без цинкового покрытия", value: `${mass} кг/м`},
-        {name: "Сортамент по каталогу", value: standard},
+        {name: "Сортамент по каталогу", value: electroweldedPipeAssortmentStandard},
+        {name: "Технические условия по каталогу", value: electroweldedPipeTechnicalStandard},
       ],
     };
   },

@@ -29,14 +29,14 @@ import {PipePositionDetails} from "./PipePositionDetails";
 type OrderFeedback = {kind: "correction" | "error"; text: string};
 
 export function MeasuredVariantItem({
-  variant, view, kind, name, showSteelGrade, showVgpStandard,
+  variant, view, kind, name, showSteelGrade, sharedPipeStandard,
 }: {
   variant: ProductVariant; view: "table" | "card"; kind: "rebar" | "beam" | "vgp" | "pipe" | "profile";
-  name?: string; showSteelGrade?: boolean; showVgpStandard?: boolean;
+  name?: string; showSteelGrade?: boolean; sharedPipeStandard?: string;
 }) {
   return kind === "profile" ? <ProfilePipeVariantItem variant={variant} view={view}/>
     : <TonnageMeasuredVariantItem variant={variant} view={view} kind={kind} name={name}
-      showSteelGrade={showSteelGrade} showVgpStandard={showVgpStandard}/>;
+      showSteelGrade={showSteelGrade} sharedPipeStandard={sharedPipeStandard}/>;
 }
 
 function TonnageMeasuredVariantItem({
@@ -45,12 +45,12 @@ function TonnageMeasuredVariantItem({
   kind,
   name,
   showSteelGrade,
-  showVgpStandard,
+  sharedPipeStandard,
 }: {
   variant: ProductVariant;
   name?: string;
   showSteelGrade?: boolean;
-  showVgpStandard?: boolean;
+  sharedPipeStandard?: string;
   kind: "rebar" | "beam" | "vgp" | "pipe";
   view: "table" | "card";
 }) {
@@ -392,7 +392,7 @@ function TonnageMeasuredVariantItem({
       ]}/>}
       detailsId={`pipe-details-${variant.id}`}
       details={<PipePositionDetails variant={variant} isVgp={isVgp} length={pipeLength && `${pipeLength} м`}
-        mass={hasMass ? mass : undefined} showVgpStandard={showVgpStandard}/>}
+        mass={hasMass ? mass : undefined} sharedPipeStandard={sharedPipeStandard} showSteelGrade={showSteelGrade}/>}
       price={price} order={order}/>;
   }
 

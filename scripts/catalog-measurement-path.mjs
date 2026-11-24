@@ -53,7 +53,7 @@ function measurementName(product, subcategory) {
         const size = section([bore, product.wallThicknessMm ?? digits(fact(product, 'Толщина стенки, мм'))[0]], 'mm');
         return size ? parts('truba-vgp', galvanized && 'otsinkovannaya', `du${size}`, length(product)) : filenameToken(product.name);
       }
-      return parts('truba-elektrosvarnaya', galvanized && 'otsinkovannaya', section([product.diameterMm, product.wallThicknessMm], 'mm'), length(product), grade(product));
+      return parts('truba-elektrosvarnaya', galvanized && 'otsinkovannaya', section([product.diameterMm, product.wallThicknessMm], 'mm'), length(product), galvanized ? '' : grade(product));
     }
     case 'cat-trp': {
       const size = section([product.profileWidthMm, product.profileHeightMm, product.wallThicknessMm ?? digits(fact(product, 'Стенка'))[0]], 'mm');
