@@ -7,7 +7,7 @@ import {MeterPricedOrderControls} from "./MeasuredVariantItem";
 import {CatalogDescription} from "./CatalogDescription";
 import {CatalogTableNote} from "./CatalogTableNote";
 import {formatUnitPrice} from "@/lib/currency";
-import {getSheetDesignation, getSheetTableDesignation, isPlainHotRolledSheet, sheetFormatLabel} from "@/lib/sheetPresentation";
+import {getSheetDesignation, getSheetParameters, getSheetTableDesignation, isGalvanizedSheet, isPlainHotRolledSheet, sheetFormatLabel} from "@/lib/sheetPresentation";
 import {Button} from "@/components/ui/Button";
 import {ResetFiltersButton} from "./ResetFiltersButton";
 import {CatalogVariantLayout, CatalogVariantSpecifications, CatalogVariantTable} from "./CatalogVariantLayout";
@@ -39,6 +39,9 @@ const tableSpecs = {
   "listovoy-prokat": {
     heading: "Толщина / исполнение", parameters: [["Формат", sheetFormatLabel]],
   },
+  "galvanized-steel-sheet": {
+    heading: "Толщина, мм", parameters: [["Формат", sheetFormatLabel]],
+  },
   "truby-profilnye": {
     heading: "Обозначение", parameters: [["Сечение", "Размер"], ["Длина", "Длина поставки"]],
   },
@@ -56,8 +59,10 @@ export function VariantCatalogResults({visible, categorySlug, unit, isSheetCatal
   const hasMetreQuantities = referenceCategorySlugs.some(slug => slug === categorySlug);
   const isAngle = categorySlug === "ugolok";
   const isSquare = categorySlug === "kvadrat";
+  const isGalvanizedSheetCatalog = visible.length > 0 && visible.every(isGalvanizedSheet);
   const hasMeasuredOrder = isAngle || isSquare;
-  const presentation: TableSpecifications = isSheetCatalog ? tableSpecs["listovoy-prokat"]
+  const presentation: TableSpecifications = isGalvanizedSheetCatalog ? tableSpecs["galvanized-steel-sheet"]
+    : isSheetCatalog ? tableSpecs["listovoy-prokat"]
     : tableSpecs[categorySlug as keyof typeof tableSpecs] ?? tableSpecs.armatura;
   const parameters = hasVerifiedSpecifications ? presentation.parameters : [];
   const specificationLabels = parameters.length
@@ -87,6 +92,13 @@ export function VariantCatalogResults({visible, categorySlug, unit, isSheetCatal
     }
     let cardName = isPlainHotRolledSheet(variant) ? getSheetDesignation(variant) : variant.name;
     if (isSheetCatalog) tableName = getSheetTableDesignation(variant);
+    if (isGalvanizedSheetCatalog) {
+      const sheet = getSheetParameters(variant);
+      if (sheet) {
+        tableName = sheet.thickness;
+        cardName = `Лист оцинкованный ${sheet.thickness} мм`;
+      }
+    }
     const angleSize = isAngle && !unverified ? variant.attributes.find(({key}) => key === "size")?.value : undefined;
     if (angleSize) {
       const size = formatSpecification(angleSize);
@@ -116,12 +128,12 @@ export function VariantCatalogResults({visible, categorySlug, unit, isSheetCatal
         : [availability]}
       specifications={isUnverifiedSquarePipe ? <CatalogVariantSpecifications items={[{label: "Характеристики", value: "Уточняются"}]}/> : unverified
         ? <p className="text-sm text-slate-600 dark:text-slate-400">Характеристики требуют подтверждения перед заказом.</p>
-        : availability ?? <CatalogVariantSpecifications items={specifications}/>}
+        : availability ?? <CatalogVariantSpecifications items={specifications} stacked={isGalvanizedSheetCatalog}/>}
       details={(fields.length > 0 || description) && <CatalogPositionDetails productName={variant.name} fields={fields}
         note={description && <CatalogDescription description={description}/>}/>}
       price={price}
       order={hasMeasuredOrder ? <MeterPricedOrderControls variant={variant} view={view}/>
-        : <ProductOrderControls variant={variant} view={view} showUnit={!unit}/>}/>;
+        : <ProductOrderControls variant={variant} view={view} showUnit={!unit} startEmpty={isGalvanizedSheetCatalog}/>}/>;
   }
   return (
       <section className="min-w-0 lg:col-span-2" aria-label="Продукция">

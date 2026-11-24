@@ -10,7 +10,7 @@ import {QuoteRequestButton} from "./QuoteRequestButton";
 import {formatQuoteProductName} from "@/lib/quoteRequest";
 import {constrainOrderQuantityInput, correctOrderQuantity, parseOrderQuantity} from "@/lib/catalogNumberInput";
 import {formatQuantityForInput, productOrderFractionDigits} from "@/lib/cartQuantityInput";
-import {calculateLineTotal} from "@/lib/orderMeasurement";
+import {calculateLineTotal, getSimpleOrderQuantityOptions} from "@/lib/orderMeasurement";
 import {formatCurrency} from "@/lib/currency";
 import {requiresCatalogPriceQuote, storefrontAvailability} from "@/lib/catalogOffer";
 import {CatalogOrderInput} from "./CatalogOrderInput";
@@ -19,32 +19,35 @@ import styles from "./FilterPanel.module.css";
 import tableStyles from "./RebarTable.module.css";
 import {orderQuantityHintDuration, useOrderDraft} from "./OrderDraftProvider";
 
-export function ProductOrderControls({variant, view, showUnit = true,
+export function ProductOrderControls({variant, view, showUnit = true, startEmpty = false,
   wholeQuantity = requiresWholeCatalogQuantity(variant)}: {
-  variant: ProductVariant; view: "table" | "card"; showUnit?: boolean; wholeQuantity?: boolean;
+  variant: ProductVariant; view: "table" | "card"; showUnit?: boolean; wholeQuantity?: boolean; startEmpty?: boolean;
 }) {
   const {lines, hydrated, addItem, updateQuantity, removeItem} = useCart();
   const line = lines.find(item => item.productId === variant.id);
   const {draft, setDraft, message: correction, setMessage: setCorrection} = useOrderDraft<string>(variant.id, "quantity", "");
   const [removed, setRemoved] = useState(false);
-  const savedValue = formatQuantityForInput(line?.quantity ?? 1);
+  const {maximum} = getSimpleOrderQuantityOptions(variant);
+  const savedValue = line ? formatQuantityForInput(line.quantity) : startEmpty ? "" : "1";
   const value = draft ?? savedValue;
-  const quantity = chosenQuantity(value);
+  const enteredQuantity = chosenQuantity(value);
+  const corrected = correctQuantityValue(value);
+  const correctedQuantity = chosenQuantity(corrected.value);
+  const quantity = wholeQuantity && enteredQuantity !== null ? correctedQuantity : enteredQuantity;
   const needsQuote = requiresCatalogPriceQuote(variant);
   const madeToOrder = storefrontAvailability(variant.availability) === "ON_ORDER";
   const canAdd = madeToOrder || !needsQuote;
-  const canPromptForQuantity = !line && value === "";
+  const canPromptForQuantity = !line && (value === "" || (startEmpty && quantity === 0));
   const enteringFraction = value === "0,";
   const shouldRemove = !!line && quantity === 0;
   const saved = !!line && !line.invalidReason && quantity === line.quantity;
-  const valid = quantity !== null && quantity > 0 && quantity <= 999
+  const valid = quantity !== null && quantity > 0 && quantity <= maximum
     && (!wholeQuantity || Number.isInteger(quantity));
   const total = !variant.quoteOnly && variant.price !== null && (valid || shouldRemove)
     ? calculateLineTotal(quantity, variant.price) : null;
   const quantityUnit = getQuantityUnit(variant);
-  const correctedQuantity = parseOrderQuantity(correctQuantityValue(value).value);
   function canSubmitQuantity(quantity: number | null): quantity is number {
-    return quantity !== null && quantity > 0 && quantity <= 999
+    return quantity !== null && quantity > 0 && quantity <= maximum
       && (!wholeQuantity || Number.isInteger(quantity))
       && (needsQuote || calculateLineTotal(quantity, variant.price!) !== null);
   }
@@ -62,37 +65,36 @@ export function ProductOrderControls({variant, view, showUnit = true,
   }
 
   function correctQuantityValue(rawValue: string) {
-    if (!rawValue.trim() && line) return {value: savedValue};
+    if (line && (rawValue === "" || rawValue === "0,")) return {value: savedValue};
     const numeric = chosenQuantity(rawValue);
-    if (numeric === null || numeric === 0) return {value: rawValue};
-    if (numeric === line?.quantity && numeric <= 999 && (!wholeQuantity || Number.isInteger(numeric))) return {value: savedValue};
-    const corrected = correctOrderQuantity(rawValue, {whole: wholeQuantity, maximum: 999, decimalPlaces: productOrderFractionDigits(numeric)});
+    if (numeric === null || (numeric === 0 && (!wholeQuantity || !rawValue.includes(",")))) return {value: rawValue};
+    if (numeric === line?.quantity && numeric <= maximum && (!wholeQuantity || Number.isInteger(numeric))) return {value: savedValue};
+    const corrected = correctOrderQuantity(rawValue, {
+      whole: wholeQuantity, minimum: wholeQuantity ? 1 : undefined, maximum, decimalPlaces: productOrderFractionDigits(numeric),
+    });
     return {value: corrected.value.replace(".", ","), message: corrected.value === "" ? corrected.message : undefined};
   }
 
-  function submit(rawValue = value) {
+  function submit() {
     if (!hydrated || removed) return;
     if (canPromptForQuantity) {
       setCorrection("Укажите количество больше нуля.", orderQuantityHintDuration);
       return;
     }
-    const rawQuantity = chosenQuantity(rawValue);
-    if (rawQuantity === null) return;
-    const corrected = correctQuantityValue(rawValue);
-    const nextQuantity = chosenQuantity(corrected.value);
+    if (enteredQuantity === null) return;
     setDraft(corrected.value);
     if (corrected.message) setCorrection(corrected.message);
-    if (line && rawQuantity === 0) {
+    if (shouldRemove) {
       removeItem(variant.id);
       setDraft(null);
       setCorrection("");
       setRemoved(true);
       return;
     }
-    if (!canAdd || !canSubmitQuantity(nextQuantity)) return;
-    if (line && !line.invalidReason && nextQuantity === line.quantity) {setDraft(null); return;}
-    if (line) updateQuantity(variant.id, nextQuantity);
-    else addItem(variant.id, nextQuantity);
+    if (!canAdd || !canSubmitQuantity(correctedQuantity)) return;
+    if (line && !line.invalidReason && correctedQuantity === line.quantity) {setDraft(null); return;}
+    if (line) updateQuantity(variant.id, correctedQuantity);
+    else addItem(variant.id, correctedQuantity);
     setDraft(null);
     setCorrection("");
   }
@@ -119,7 +121,8 @@ export function ProductOrderControls({variant, view, showUnit = true,
   const statusId = `quantity-status-${view}-${variant.id}`;
   const deliveryId = madeToOrder ? `${statusId}-delivery` : undefined;
   const amountTooSmall = !needsQuote && valid && total === null;
-  const quantityError = draft !== null && value !== "" && !enteringFraction && (!valid || amountTooSmall) && !shouldRemove;
+  const quantityError = draft !== null && !canPromptForQuantity && value !== "" && !enteringFraction
+    && (!valid || amountTooSmall) && !shouldRemove;
   const quoteClassName = `${styles.quoteButton} ${actionClass}`;
   const action = !canAdd && !shouldRemove && !removed ? (
     enteringFraction || (quantityError && !canSubmitQuantity(correctedQuantity))
@@ -128,8 +131,9 @@ export function ProductOrderControls({variant, view, showUnit = true,
         order={{product: formatQuoteProductName(variant), quantity: quoteQuantity, unit: quantityUnit, tons: quoteTons}}
         className={quoteClassName}/>
   ) : (
-    <Button type="button" aria-describedby={deliveryId} onClick={() => submit()}
-      disabled={!hydrated || saved || removed || (!shouldRemove && (!canAdd || (!canSubmitQuantity(correctedQuantity) && !canPromptForQuantity)))}
+    <Button type="button" aria-describedby={deliveryId} onClick={submit}
+      disabled={!hydrated || saved || removed
+        || (!shouldRemove && (!canAdd || (!canPromptForQuantity && (enteringFraction || !canSubmitQuantity(correctedQuantity)))))}
       className={`${stateClass} ${actionClass}`}>{label}</Button>
   );
   const unitInsideField = view === "table" && showUnit;
@@ -138,7 +142,7 @@ export function ProductOrderControls({variant, view, showUnit = true,
     visibleLabel={view === "card" ? `Заказ, ${quantityUnit}` : undefined}
     invalid={quantityError} statusId={statusId}
     onChange={value => {
-      setDraft(constrainOrderQuantityInput(value, 999).value);
+      setDraft(constrainOrderQuantityInput(value, maximum).value);
       setCorrection("");
     }}
     onBlur={correctQuantity}
@@ -154,7 +158,7 @@ export function ProductOrderControls({variant, view, showUnit = true,
     {wholeQuantity && valid && !removed && <span className="block">{quantity} {quantityUnit}</span>}
     {line && valid && !saved && <span className="block whitespace-nowrap">Не сохранено</span>}
     {amountTooSmall ? "Увеличьте количество. Сумма позиции должна быть больше 0 ₽."
-      : correction || (quantityError ? wholeQuantity ? "Введите целое количество от 1 до 999." : "Введите количество больше 0 и не больше 999." : "")}
+      : correction || (quantityError ? wholeQuantity ? `Введите целое количество от 1 до ${maximum}.` : `Введите количество больше 0 и не больше ${maximum}.` : "")}
   </span>;
   return <CatalogVariantOrder view={view} quantity={quantityField} total={totalOutput} action={action} status={status} deliveryId={deliveryId}/>;
 }

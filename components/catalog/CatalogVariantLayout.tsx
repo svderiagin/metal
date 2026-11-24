@@ -115,11 +115,15 @@ export function CatalogVariantLayout({view, variant, name = variant.name, nameNo
   </tr>}</>;
 }
 
-export function CatalogVariantSpecifications({items}: {items: readonly {label: string; value: ReactNode}[]}) {
+export function CatalogVariantSpecifications({items, stacked = false}: {
+  items: readonly {label: string; value: ReactNode}[];
+  stacked?: boolean;
+}) {
+  const display = stacked ? "block" : "inline";
   return <dl className="space-y-1.5 text-sm">
     {items.filter(({value}) => value != null && value !== "").map(({label, value}) => <div key={label}>
-      <dt className="inline text-slate-600 dark:text-slate-400"><CatalogStandardReference>{label}</CatalogStandardReference>: </dt>
-      <dd className="inline font-medium tabular-nums"><CatalogStandardReference>{value}</CatalogStandardReference></dd>
+      <dt className={`${display} text-slate-600 dark:text-slate-400`}><CatalogStandardReference>{label}</CatalogStandardReference>{!stacked && ": "}</dt>
+      <dd className={`${display} font-medium tabular-nums`}><CatalogStandardReference>{value}</CatalogStandardReference></dd>
     </div>)}
   </dl>;
 }
