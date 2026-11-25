@@ -1,72 +1,104 @@
 .row {
+  --cart-divider: var(--color-slate-200);
   display: grid;
   min-width: 0;
   gap: 16px;
-  padding: 20px;
+  padding: 16px;
+}
+
+:global(html[data-theme="dark"]) .row {
+  --cart-divider: var(--color-slate-700);
+}
+
+.product {
+  display: grid;
+  align-content: start;
+  gap: 6px;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .order {
+  display: grid;
+  align-content: start;
+  gap: 8px;
   min-width: 0;
+}
+
+.orderDetail {
+  color: var(--counter-text);
+  font-size: var(--text-xs);
+  line-height: 1.25rem;
 }
 
 .price {
   display: flex;
+  flex-wrap: wrap;
   min-width: 0;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 4px 12px;
+  border-top: 1px solid var(--cart-divider);
+  padding-block-start: 8px;
+}
+
+.subtotal {
+  display: grid;
+  gap: 2px;
 }
 
 .total {
   min-width: 0;
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 1.5;
+  font-size: 1.125rem;
+  font-weight: 650;
+  line-height: 1.35;
 }
 
 .remove {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   flex-shrink: 0;
+  margin-inline-start: auto;
+  border-radius: var(--radius-lg);
+  padding-inline: 0.5rem;
+  color: var(--danger-text);
+  font-size: var(--text-sm);
+  font-weight: 500;
   white-space: nowrap;
+  cursor: pointer;
 }
 
-@container cart-items (min-width: 32rem) {
+.remove:hover {
+  background: var(--danger-background);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+@container cart-items (min-width: 40rem) {
   .row {
-    grid-template-columns: minmax(0, 1fr) 15rem;
+    grid-template-columns: minmax(0, 1fr) 19rem;
     column-gap: 24px;
     padding: 24px;
   }
 
-  .order {
-    grid-column: 2;
-    grid-row: 1 / span 2;
-  }
-
-  .price {
-    grid-column: 1;
-    grid-row: 2;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-end;
-    gap: 4px;
-  }
-
-  .total { font-size: 18px; }
+  .price { grid-column: 1 / -1; }
 }
 
-@container cart-items (min-width: 44rem) {
+@container cart-items (min-width: 50rem) {
   .row {
-    grid-template-columns: minmax(0, 1fr) 15rem 11.5rem;
-    align-items: center;
-  }
-
-  .order {
-    grid-row: auto;
+    grid-template-columns: minmax(0, 1fr) 19rem 11.5rem;
+    align-items: start;
   }
 
   .price {
-    grid-column: 3;
-    grid-row: auto;
+    grid-column: auto;
+    flex-direction: column;
+    flex-wrap: nowrap;
     align-items: flex-end;
+    gap: 2px;
+    border: 0;
+    padding: 0;
     text-align: right;
   }
 }

@@ -6,20 +6,21 @@ import {Icon} from "@/components/ui/Icon";
 import {MAX_ORDER_PIECES} from "@/lib/constants";
 import {correctOrderQuantity, formatCatalogNumber, parseCatalogNumber, parseOrderQuantity} from "@/lib/catalogNumberInput";
 import {cartMaximumMessage, correctDraftPrecision, formatQuantityForInput, normalizeCartQuantityDraft, normalizeCartQuantityText, quantityTransferHandlers, stepCartQuantity, type DraftPrecision} from "@/lib/cartQuantityInput";
+import {sameMeasuredQuantity} from "@/lib/orderMeasurement";
 import styles from "./QuantitySelector.module.css";
 
 type QuantityDraft = {text: string; exact?: number; capped?: boolean};
 
 export function QuantitySelector({value, onChange, whole = false, productName, unit, fieldLabel,
   minimum = whole ? 1 : undefined, maximum = whole ? MAX_ORDER_PIECES : 999, decimalPlaces, step = 1, disabled = false,
-  normalizeQuantity, hasPositiveTotal, formatValue = formatQuantityForInput, wideInput = false,
+  normalizeQuantity, hasPositiveTotal, formatValue = formatQuantityForInput,
   precision = decimalPlaces, displayThreshold}: {
   value: number;
   onChange: (value: number) => void;
   whole?: boolean;
   productName?: string;
   unit?: string;
-  fieldLabel?: string;
+  fieldLabel: string;
   minimum?: number;
   maximum?: number;
   decimalPlaces?: number;
@@ -27,7 +28,6 @@ export function QuantitySelector({value, onChange, whole = false, productName, u
   displayThreshold?: number;
   step?: number;
   disabled?: boolean;
-  wideInput?: boolean;
   normalizeQuantity?: (quantity: number) => {value: number; message?: string} | null;
   hasPositiveTotal?: (quantity: number) => boolean;
   formatValue?: (quantity: number, grouped?: boolean) => string;
@@ -37,15 +37,17 @@ export function QuantitySelector({value, onChange, whole = false, productName, u
   const controls = useRef<HTMLDivElement>(null);
   const [draft, setDraft] = useState<QuantityDraft | null>(null);
   const [focused, setFocused] = useState(false);
-  const [message, setMessage] = useState("");
+  const [notice, setNotice] = useState<{text: string; quantity: number} | null>(null);
   const selection = useRef<{start: number | null; end: number | null; direction: "forward" | "backward" | "none" | null}>
     ({start: null, end: null, direction: null});
   const composition = useRef<({value: string; draft: QuantityDraft | null} & typeof selection.current) | null>(null);
-  const label = `${fieldLabel ? `${fieldLabel}${productName ? ` ${productName}` : ""}`
-    : productName ? `Количество ${productName}` : "Количество товара"}${unit ? `, ${unit}` : ""}`;
+  const label = `${fieldLabel}${productName ? ` ${productName}` : ""}${unit ? `, ${unit}` : ""}`;
   const editableValue = formatValue(value, false);
   const tiny = displayThreshold !== undefined && value > 0 && value < displayThreshold / 2;
   const text = draft?.text ?? (tiny ? "" : formatValue(value, !focused));
+  // The paired field can change the saved quantity without editing this input.
+  if (notice && !sameMeasuredQuantity(notice.quantity, value)) setNotice(null);
+  const message = notice?.text ?? "";
   const parsed = draft?.exact ?? parseOrderQuantity(normalizeCartQuantityText(text));
   const options = {whole, minimum, maximum, decimalPlaces, formatFeedback: (quantity: number) => formatValue(quantity, true)};
   const invalid = draft === null ? value > maximum + Math.max(1, maximum) * Number.EPSILON * 32
@@ -55,11 +57,14 @@ export function QuantitySelector({value, onChange, whole = false, productName, u
   const lowerBound = minimum ?? step;
   const atMinimum = current <= lowerBound + Math.abs(lowerBound) * Number.EPSILON * 32;
   const atMaximum = current >= maximum - Math.abs(maximum) * Number.EPSILON * 32;
-  const buttonClass = "inline-flex min-h-11 w-11 shrink-0 cursor-pointer items-center justify-center border border-slate-300 bg-slate-100 font-semibold transition-colors hover:bg-slate-200 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-slate-100 dark:border-slate-600 dark:bg-slate-800 dark:hover:bg-slate-700 dark:disabled:hover:bg-slate-800";
 
   function isSavedQuantity(quantity: number | null) {
     return value > 0 && value <= maximum && (!whole || Number.isInteger(value))
       && (quantity === value || quantity === parseOrderQuantity(editableValue));
+  }
+
+  function setMessage(text: string, quantity = value) {
+    setNotice(text ? {text, quantity} : null);
   }
 
   function preserveOwnInputFocus(event: MouseEvent<HTMLButtonElement>) {
@@ -148,7 +153,7 @@ export function QuantitySelector({value, onChange, whole = false, productName, u
       setMessage("Увеличьте количество. Сумма позиции должна быть больше 0 ₽. Прежнее количество сохранено.");
       return;
     }
-    setMessage(normalized?.message ?? (feedback || (candidate?.capped ? message : "")));
+    setMessage(normalized?.message ?? (feedback || (candidate?.capped ? message : "")), quantity);
     if (quantity !== value) onChange(quantity);
   }
 
@@ -160,12 +165,13 @@ export function QuantitySelector({value, onChange, whole = false, productName, u
 
   const transfers = quantityTransferHandlers();
   return <div className={styles.editor}>
-    {fieldLabel && <label htmlFor={inputId} className={styles.label}>{fieldLabel}</label>}
-    <div className={styles.row}>
-      <div ref={controls} className={styles.controls} role="group" aria-label={label}>
+    <label htmlFor={inputId} className={styles.label}>
+      <span>{fieldLabel}</span>{unit && <span className={styles.unit}>{unit}</span>}
+    </label>
+    <div ref={controls} className={styles.controls} role="group" aria-label={label}>
         <button type="button" aria-label="Уменьшить количество" onClick={() => commit(-1)}
           onMouseDown={preserveOwnInputFocus} disabled={disabled || atMinimum}
-          className={`${buttonClass} rounded-l-lg border-r-0`}><Icon name="minus"/></button>
+          className={styles.step}><Icon name="minus"/></button>
         <Input id={inputId} aria-label={label} aria-invalid={invalid || undefined} aria-describedby={statusId}
           data-cart-input type="text" inputMode={whole ? "numeric" : "decimal"} disabled={disabled} value={text}
           placeholder={tiny && draft === null ? `< ${formatQuantityForInput(displayThreshold)}` : undefined}
@@ -213,12 +219,10 @@ export function QuantitySelector({value, onChange, whole = false, productName, u
             if (event.key === "Enter") {event.preventDefault(); event.currentTarget.blur();}
             if (event.key === "Escape") {event.preventDefault(); setDraft(null); setMessage("");}
           }}
-          className={`${styles.input} ${wideInput ? styles.wideInput : ""} tabular-nums`}/>
+          className={`${styles.input} tabular-nums`}/>
         <button type="button" aria-label="Увеличить количество" onClick={() => commit(1)}
           onMouseDown={preserveOwnInputFocus} disabled={disabled || atMaximum}
-          className={`${buttonClass} rounded-r-lg border-l-0`}><Icon name="plus"/></button>
-      </div>
-      {unit && <span className="text-sm text-slate-500 dark:text-slate-400">{unit}</span>}
+          className={styles.step}><Icon name="plus"/></button>
     </div>
     <span id={statusId} aria-live="polite" className={`${styles.status} ${invalid ? styles.error : ""}`}>
       {message || (invalid ? validationMessage : "")}

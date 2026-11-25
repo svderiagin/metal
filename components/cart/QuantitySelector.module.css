@@ -1,47 +1,85 @@
 .editor {
-  max-width: 16rem;
+  display: grid;
+  grid-template-columns: minmax(4.625rem, 1fr) minmax(0, 13rem);
+  align-items: center;
+  column-gap: 0.5rem;
 }
 
 .label {
-  display: block;
-  margin-bottom: 0.25rem;
-  font-size: 0.8125rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 0.375rem;
+  font-size: var(--text-xs);
   font-weight: 600;
   line-height: 1.25rem;
 }
 
-.row {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+.unit {
+  color: var(--counter-text);
+  font-weight: 500;
+  white-space: nowrap;
 }
 
 .controls {
-  display: inline-flex;
-  min-width: 0;
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) 44px;
   align-items: stretch;
+  min-width: 0;
+}
+
+.step {
+  display: grid;
+  min-height: 44px;
+  place-items: center;
+  border: 1px solid var(--control-border);
+  border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+  border-inline-end: 0;
+  background: var(--update-background);
+  color: var(--update-text);
+  cursor: pointer;
+}
+
+.step:last-child {
+  border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+  border-inline-end: 1px solid var(--control-border);
+  border-inline-start: 0;
+}
+
+.step:enabled:hover {
+  background: var(--update-hover);
+}
+
+.step:disabled {
+  background: var(--inactive-background);
+  color: var(--counter-text);
+  cursor: default;
+}
+
+.step:focus-visible {
+  position: relative;
+  z-index: 1;
+  outline: 2px solid var(--focus);
+  outline-offset: -3px;
 }
 
 .input {
-  width: 7rem;
   min-width: 0;
   border-radius: 0;
-  padding-inline: 0.5rem;
+  padding: 0.5rem 0.125rem;
   text-align: center;
 }
 
-.wideInput {
-  width: 8rem;
-  padding-inline: 0.25rem;
+.status {
+  grid-column: 1 / -1;
+  color: var(--counter-text);
+  font-size: var(--text-xs);
+  line-height: 1.25rem;
+  overflow-wrap: anywhere;
 }
 
-.status {
-  display: block;
-  min-height: 1.25rem;
-  margin-top: 0.25rem;
-  color: var(--counter-text);
-  font-size: 0.8125rem;
-  line-height: 1.25rem;
+.status:not(:empty) {
+  margin-block-start: 0.25rem;
 }
 
 .error {

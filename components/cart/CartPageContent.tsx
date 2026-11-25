@@ -4,14 +4,13 @@ import {useCart} from "@/hooks/useCart";
 import {CartItemRow} from "./CartItemRow";
 import {CartSummary} from "./CartSummary";
 import {EmptyState} from "@/components/ui/EmptyState";
-import {ButtonLink} from "@/components/ui/Button";
 import {QuoteRequestProvider} from "@/components/forms/QuoteRequestContext";
 import {RequestQuoteSection} from "@/components/home/RequestQuoteSection";
 import styles from "./CartPageContent.module.css";
 
 export function CartPageContent() {
   const {lines, hydrated, removeItem, clearCart} = useCart();
-  const needsPriceQuote = lines.some(line => line.priceRequiresQuote);
+  const canRequestPrice = lines.some(line => line.priceRequiresQuote && !line.invalidReason);
   const emptyHeading = useRef<HTMLHeadingElement>(null);
   const focusAfterRemoval = useRef<string | null | undefined>(undefined);
 
@@ -56,12 +55,9 @@ export function CartPageContent() {
         ))}
       </section>
       <div className="xl:sticky xl:top-6">
-        <CartSummary onClear={removeAll}/>
-        <ButtonLink href="/catalog" variant="secondary" className="mt-3 w-full">
-          Продолжить покупки
-        </ButtonLink>
+        <CartSummary canRequestPrice={canRequestPrice} onClear={removeAll}/>
       </div>
-      {needsPriceQuote && <div className="xl:col-span-2"><RequestQuoteSection/></div>}
+      {canRequestPrice && <div className="xl:col-span-2"><RequestQuoteSection/></div>}
     </div></QuoteRequestProvider>
   );
 }

@@ -33,7 +33,8 @@ export function CartItemRow({line, onRemove}: {line: CartLine; onRemove: () => v
   const tonPrecision = isRebar ? rebarTonFractionDigits : isVgp ? 3 : measuredTonFractionDigits;
   const simpleRebarMass = isRebar && product.unit === "ton";
   const isBar = isRebar && wholeLengths;
-  const bars = isBar && measurement && !line.invalidReason ? wholeLengthOrder(product, measurement.meters, "meter") : null;
+  const wholeOrder = product && wholeLengths && measurement && !line.invalidReason
+    ? wholeLengthOrder(product, measurement.meters, "meter") : null;
   const meterOptions = product && measurement ? getCartMeasurementQuantityOptions(product, "meter") : undefined;
   const tonOptions = product && measurement ? getCartMeasurementQuantityOptions(product, "ton") : undefined;
   const simpleOptions = getSimpleOrderQuantityOptions(product);
@@ -55,44 +56,44 @@ export function CartItemRow({line, onRemove}: {line: CartLine; onRemove: () => v
 
   return (
     <article data-cart-row={line.productId} className={`${styles.row} rounded-xl border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-900`}>
-      <div className="min-w-0 break-words">
-        {line.slug ? <Link
-          href={catalogProductPath(line.categorySlug, line.subcategorySlug, line.productTypeSlug, line.productId)}
-          className="inline-block font-bold transition-colors hover:text-brand-700 dark:hover:text-brand-300"
-        >
-          {line.name}
-        </Link> : <p className="font-bold">{line.name}</p>}
-        {line.deliveryEstimate && <p className="mt-2 flex items-start gap-2 text-sm leading-5 text-slate-700 dark:text-slate-300">
-          <Icon name="clock" className="shrink-0"/>
+      <div className={styles.product}>
+        <h2 className="text-base font-semibold leading-snug">
+          {line.slug ? <Link
+            href={catalogProductPath(line.categorySlug, line.subcategorySlug, line.productTypeSlug, line.productId)}
+            className="rounded-sm transition-colors hover:text-brand-700 hover:underline dark:hover:text-brand-300"
+          >{line.name}</Link> : line.name}
+        </h2>
+        {product && <p className="text-sm text-slate-600 dark:text-slate-400">
+          {priceRequiresQuote ? "Цена по запросу" : <CartAmount>{formatUnitPrice(line.price, line.priceUnit)}</CartAmount>}
+        </p>}
+        {line.deliveryEstimate && <p className="flex items-start gap-2 text-sm leading-5 text-slate-700 dark:text-slate-300">
+          <Icon name="truck" className="shrink-0"/>
           <span>Под заказ · Доставка <strong className="whitespace-nowrap font-semibold">{line.deliveryEstimate}</strong></span>
         </p>}
-        <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
-          {priceRequiresQuote ? "Цена требует уточнения" : <CartAmount>{formatUnitPrice(line.price, line.priceUnit)}</CartAmount>}
-        </p>
-        {line.invalidReason && <p role="alert" className="mt-2 text-sm text-amber-900 dark:text-amber-200">{line.invalidReason} <Link href="/#request" className="underline">Запросить расчёт</Link></p>}
+        {line.invalidReason && <p role="alert" className="rounded-md bg-[var(--danger-background)] px-3 py-2 text-sm text-[var(--danger-text)]">
+          {line.invalidReason}
+        </p>}
       </div>
       <div className={styles.order}>{pieceOrder ? (
-        <div className="space-y-2">
-          <QuantitySelector whole fieldLabel="Количество труб" productName={line.name} unit="шт." disabled={quantityDisabled}
+        <>
+          <QuantitySelector whole fieldLabel="Количество" productName={line.name} unit="шт." disabled={quantityDisabled}
             value={pieceOrder.pieces} maximum={maximumPieces}
             onChange={pieces => updatePieceOrder(line.productId, pieces, pieceOrder.lengthMeters)}/>
-          {product?.lengthRangeMeters ? <QuantitySelector fieldLabel="Длина одной трубы" productName={line.name} unit="м"
+          {product?.lengthRangeMeters && <QuantitySelector fieldLabel="Длина трубы" productName={line.name} unit="м"
             disabled={quantityDisabled} minimum={product.lengthRangeMeters[0]} maximum={product.lengthRangeMeters[1]}
             decimalPlaces={2} formatValue={(quantity, grouped) => formatQuantityForInput(quantity, grouped, 2)}
             value={pieceOrder.lengthMeters}
-            onChange={updatePipeLength}/>
-            : <p className="text-sm text-slate-600 dark:text-slate-300">Длина трубы: {formatNumber(pieceOrder.lengthMeters)} м</p>}
-          <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
-            Общая длина: {formatNumber(line.quantity)} м
+            onChange={updatePipeLength}/>}
+          <p className={styles.orderDetail}>
+            {formatCartQuantity(pieceOrder.pieces)} шт. × {formatNumber(pieceOrder.lengthMeters)} м = {formatCartQuantity(line.quantity)} м
           </p>
-        </div>
+        </>
       ) : measurement ? (
-        <div className="space-y-2">
+        <>
           {(["meter", "ton"] as const).map((mode: OrderInputMode) => {
             const options = mode === "meter" ? meterOptions : tonOptions;
             return <QuantitySelector key={mode} fieldLabel={mode === "meter" ? "Длина" : "Масса"}
               productName={line.name} unit={mode === "meter" ? "м" : "т"}
-              wideInput
               value={mode === "meter" ? measurement.meters : measurement.weightTons}
               onChange={quantity => updateQuantity(line.productId, quantity, mode)} disabled={quantityDisabled || !canConvert}
               {...options}
@@ -114,29 +115,28 @@ export function CartItemRow({line, onRemove}: {line: CartLine; onRemove: () => v
                 return {value: exact};
               } : undefined}/>;
           })}
-          {wholeLengths && product?.lengthMeters ? <p className="max-w-64 text-xs text-slate-600 dark:text-slate-400">
-            {bars ? `${bars.pieces} шт.` : isBar ? "Целыми прутками" : "Целыми трубами"} по {formatCartQuantity(product.lengthMeters)} м
-          </p> : null}
-        </div>
+          {wholeOrder && product?.lengthMeters && <p className={styles.orderDetail}>
+            {formatCartQuantity(wholeOrder.pieces)} шт. по {formatCartQuantity(product.lengthMeters)} м
+          </p>}
+        </>
       ) : sheetOrder && Number.isInteger(sheetCount) ? (
-        <div className="space-y-3">
+        <>
           <QuantitySelector whole fieldLabel="Количество" productName={line.name} unit="шт." disabled={quantityDisabled}
             value={sheetCount} maximum={MAX_ORDER_PIECES}
             onChange={pieces => updateQuantity(line.productId, pieces * sheetOrder.quantityPerSheet)}/>
           <QuantitySelector fieldLabel="Масса" productName={line.name} unit="т" disabled={quantityDisabled}
             value={sheetOrderTons(sheetOrder, sheetCount)} minimum={sheetOrderTons(sheetOrder, 1)}
             maximum={sheetOrderTons(sheetOrder, MAX_ORDER_PIECES)} step={sheetOrderTons(sheetOrder, 1)}
-            precision={sheetTonDecimals} wideInput
+            precision={sheetTonDecimals}
             formatValue={(tons, grouped) => formatQuantityForInput(tons, grouped, sheetTonDecimals)}
             normalizeQuantity={tons => ({value: sheetOrderTons(sheetOrder, sheetsForOrderTons(sheetOrder, tons))})}
             onChange={tons => updateQuantity(line.productId, sheetsForOrderTons(sheetOrder, tons) * sheetOrder.quantityPerSheet)}/>
-        </div>
+        </>
       ) : (
         <QuantitySelector fieldLabel={product?.unit === "ton" || product?.unit === "kg" ? "Масса"
           : product?.unit === "meter" ? "Длина" : "Количество"}
           productName={line.name} unit={line.quantityUnit} whole={line.wholeQuantity}
           {...simpleOptions}
-          wideInput={simplePrecision !== undefined}
           precision={line.wholeQuantity ? undefined : simpleRebarMass ? rebarTonFractionDigits : simplePrecision ?? productOrderFractionDigits}
           displayThreshold={simpleRebarMass ? rebarMinimumTonEntry : undefined}
           formatValue={simpleRebarMass ? (quantity, grouped) => formatRebarOrderTons(quantity, true, grouped)
@@ -146,14 +146,17 @@ export function CartItemRow({line, onRemove}: {line: CartLine; onRemove: () => v
           disabled={quantityDisabled} value={line.quantity} onChange={(value) => updateQuantity(line.productId, value)}/>
       )}</div>
       <div className={styles.price}>
-        <strong className={styles.total}>{line.invalidReason ? "Расчёт недоступен" : priceRequiresQuote ? "По запросу"
-          : <CartAmount>{formatCurrency(line.estimatedTotal)}</CartAmount>}</strong>
+        <div className={styles.subtotal}>
+          <span className={styles.orderDetail}>Сумма позиции</span>
+          <strong className={styles.total}>{line.invalidReason ? "Требует проверки" : priceRequiresQuote ? "По запросу"
+            : <CartAmount>{formatCurrency(line.estimatedTotal)}</CartAmount>}</strong>
+        </div>
         <button
           type="button"
           id={`cart-remove-${line.productId}`}
           aria-label={`Удалить ${line.name} из корзины`}
           onClick={onRemove}
-          className={`${styles.remove} block min-h-11 text-sm font-medium text-red-700 dark:text-red-400 underline underline-offset-2`}
+          className={styles.remove}
         >
           Удалить
         </button>
