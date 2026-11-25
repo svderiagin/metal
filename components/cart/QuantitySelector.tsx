@@ -3,6 +3,7 @@
 import {useId, useRef, useState, type MouseEvent} from "react";
 import {Input} from "@/components/ui/Input";
 import {Icon} from "@/components/ui/Icon";
+import {MAX_ORDER_PIECES} from "@/lib/constants";
 import {correctOrderQuantity, formatCatalogNumber, parseCatalogNumber, parseOrderQuantity} from "@/lib/catalogNumberInput";
 import {cartMaximumMessage, correctDraftPrecision, formatQuantityForInput, normalizeCartQuantityDraft, normalizeCartQuantityText, quantityTransferHandlers, stepCartQuantity, type DraftPrecision} from "@/lib/cartQuantityInput";
 import styles from "./QuantitySelector.module.css";
@@ -10,7 +11,7 @@ import styles from "./QuantitySelector.module.css";
 type QuantityDraft = {text: string; exact?: number; capped?: boolean};
 
 export function QuantitySelector({value, onChange, whole = false, productName, unit, fieldLabel,
-  minimum = whole ? 1 : undefined, maximum = 999, decimalPlaces, step = 1, disabled = false,
+  minimum = whole ? 1 : undefined, maximum = whole ? MAX_ORDER_PIECES : 999, decimalPlaces, step = 1, disabled = false,
   normalizeQuantity, hasPositiveTotal, formatValue = formatQuantityForInput, wideInput = false,
   precision = decimalPlaces, displayThreshold}: {
   value: number;

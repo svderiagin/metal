@@ -6,11 +6,11 @@ import {Button} from "@/components/ui/Button";
 import {Icon} from "@/components/ui/Icon";
 import {correctOrderQuantity, formatCatalogNumber, parseOrderQuantity} from "@/lib/catalogNumberInput";
 import {correctDraftPrecision, formatMeasuredQuantity, formatRebarOrderTons, measuredTonFractionDigits, normalizeCartQuantityDraft, rebarTonFractionDigits} from "@/lib/cartQuantityInput";
-import {MAX_ORDER_TONS} from "@/lib/constants";
+import {MAX_ORDER_PIECES} from "@/lib/constants";
 import {formatCurrency, formatUnitPrice} from "@/lib/currency";
 import {formatNumber} from "@/lib/numberFormat";
 import {storefrontAvailability} from "@/lib/catalogOffer";
-import {hasConfirmedProfilePipePrice, isSquareProfilePipe, MAX_RECTANGULAR_PIPE_PIECES, profilePipeMassPerMeter,
+import {hasConfirmedProfilePipePrice, isSquareProfilePipe, profilePipeMassPerMeter,
   profilePipeMaximumPieces, profilePipeOrder, profilePipeOrderByQuantity, profilePipePricePerTon, profilePipeSize, type ProfilePipeOrderUnit} from "@/lib/profilePipe";
 import type {ProductVariant} from "@/types/product";
 import type {OrderInputMode} from "@/types/cart";
@@ -62,19 +62,17 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
     ? range && validLength === undefined ? "Выберите длину" : "Укажите объём"
     : formatCurrency(order.estimatedTotal);
   const piecesError = inputUnit === "piece" && (quantity === null || !Number.isSafeInteger(quantity)
-    || (!square && quantity > MAX_RECTANGULAR_PIPE_PIECES));
+    || quantity > MAX_ORDER_PIECES);
   const missingMass = inputUnit === "ton" && mass === null;
   const exceedsLimit = inputUnit !== "piece" && quantity !== null && quantity > 0 && validLength !== undefined && !order && !missingMass;
   const quantityError = !!quantityText.trim() && !enteringFraction && !shouldRemove && (piecesError || quantity === null || quantity === 0 || exceedsLimit || missingMass);
   const lengthError = !!range && !!lengthText.trim() && validLength === undefined;
   let validationMessage: string | undefined;
   if (lengthError) validationMessage = `Введите длину от ${formatNumber(range[0])} до ${formatNumber(range[1])} м.`;
-  else if (exceedsLimit) validationMessage = square
-    ? `Не удалось рассчитать объём в пределах ${MAX_ORDER_TONS} т.`
-    : `Не более ${MAX_RECTANGULAR_PIPE_PIECES} труб за заказ.`;
+  else if (exceedsLimit) validationMessage = "Проверьте допустимый объём заказа.";
   else if (missingMass) validationMessage = "Для расчёта по весу нужна масса одного метра трубы.";
   else if (quantityError) validationMessage = inputUnit === "piece"
-    ? square ? "Введите целое количество труб." : `Введите целое количество труб от 1 до ${MAX_RECTANGULAR_PIPE_PIECES}.`
+    ? `Введите целое количество труб от 1 до ${formatNumber(MAX_ORDER_PIECES)}.`
     : "Введите объём больше нуля.";
   else if (range && quantity !== null && quantity > 0 && validLength === undefined) validationMessage = "Укажите длину одной трубы.";
   const status = validationMessage ?? message;
@@ -116,7 +114,7 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
   function resolveOrder(length: number | undefined) {
     if (quantity === null || quantity <= 0 || length === undefined) return null;
     // A different pipe length can change the maximum after an amount was entered.
-    const limit = square ? quantityLimit(inputUnit, length) : null;
+    const limit = quantityLimit(inputUnit, length);
     return profilePipeOrderByQuantity(variant, limit === null ? quantity : Math.min(quantity, limit), inputUnit, length);
   }
 

@@ -1,7 +1,7 @@
 import type {ProductVariant} from "@/types/product";
 import type {OrderInputMode} from "@/types/cart";
 import {isDemonstrationProduct} from "./catalogOffer";
-import {MAX_ORDER_TONS} from "./constants";
+import {MAX_ORDER_PIECES, MAX_ORDER_TONS} from "./constants";
 import {isWholePipeVariant} from "./pipeFamily";
 
 export function requiresWholeLengthOrder(product: ProductVariant): boolean {
@@ -71,14 +71,13 @@ export function getCartMeasurementQuantityOptions(product: ProductVariant, mode:
   return getMeasurementQuantityOptions(product, mode);
 }
 
-export const maxOrderSheets = 9999;
-
 export function getSimpleOrderQuantityOptions(product?: ProductVariant): {
   maximum: number;
   minimum?: number;
   decimalPlaces?: number;
 } {
-  if (product?.sheetOrder) return {maximum: maxOrderSheets * product.sheetOrder.quantityPerSheet};
+  if (product?.sheetOrder) return {maximum: MAX_ORDER_PIECES * product.sheetOrder.quantityPerSheet};
+  if (product?.unit === "piece" || product?.unit === "sheet") return {maximum: MAX_ORDER_PIECES};
   return product && isMeterPricedSection(product)
     ? getMeasurementQuantityOptions(product, "meter")
     : {maximum: 999};

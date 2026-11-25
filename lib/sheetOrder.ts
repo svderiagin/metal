@@ -1,5 +1,6 @@
 import type {ProductVariant} from "@/types/product";
-import {maxOrderSheets, wholeLengthPieces} from "./orderMeasurement";
+import {MAX_ORDER_PIECES} from "./constants";
+import {wholeLengthPieces} from "./orderMeasurement";
 import {getSheetParameters, getTreadPlatePattern, isPlainHotRolledSheet, isTreadPlate} from "./sheetPresentation";
 
 type SheetOrder = NonNullable<ProductVariant["sheetOrder"]>;
@@ -37,7 +38,7 @@ export function sheetOrderTons(order: SheetOrder, sheets: number) {
 }
 
 export function sheetsForOrderTons(order: SheetOrder, tons: number) {
-  return Math.min(maxOrderSheets, wholeLengthPieces(tons, sheetOrderTons(order, 1)));
+  return Math.min(MAX_ORDER_PIECES, wholeLengthPieces(tons, sheetOrderTons(order, 1)));
 }
 
 export const sheetTonDecimals = 3;

@@ -8,13 +8,14 @@ import {formatNumber} from "@/lib/numberFormat";
 import {Icon} from "@/components/ui/Icon";
 import {QuantitySelector} from "./QuantitySelector";
 import {getProductVariantById} from "@/lib/cartCatalog";
-import {calculateLineTotal, calculateMeasuredLineTotal, getCartMeasurementQuantityOptions, getSimpleOrderQuantityOptions, maxOrderSheets, requiresWholeLengthOrder, tonsToMeters, wholeLengthOrder} from "@/lib/orderMeasurement";
+import {calculateLineTotal, calculateMeasuredLineTotal, getCartMeasurementQuantityOptions, getSimpleOrderQuantityOptions, requiresWholeLengthOrder, tonsToMeters, wholeLengthOrder} from "@/lib/orderMeasurement";
+import {MAX_ORDER_PIECES} from "@/lib/constants";
 import {sheetsForOrderTons, sheetTonDecimals, sheetOrderTons} from "@/lib/sheetOrder";
 import {formatCartQuantity, formatMeasuredQuantity, formatQuantityForInput, formatRebarOrderTons,
   measuredTonFractionDigits, productOrderFractionDigits, rebarMinimumMeterEntry, rebarMinimumTonEntry, rebarTonFractionDigits} from "@/lib/cartQuantityInput";
 import {isVgpVariant} from "@/lib/pipeFamily";
 import {isDemonstrationProduct} from "@/lib/catalogOffer";
-import {isSquareProfilePipe, profilePipeMaximumPieces} from "@/lib/profilePipe";
+import {profilePipeMaximumPieces} from "@/lib/profilePipe";
 import {CartAmount} from "./CartAmount";
 import styles from "./CartItemRow.module.css";
 
@@ -40,15 +41,14 @@ export function CartItemRow({line, onRemove}: {line: CartLine; onRemove: () => v
   const priceRequiresQuote = !product || line.priceRequiresQuote;
   const quantityDisabled = !product || (priceRequiresQuote && !line.deliveryEstimate);
   const pieceOrder = line.pieceOrder;
-  const squarePipe = product && isSquareProfilePipe(product) ? product : undefined;
-  const maximumPieces = squarePipe && pieceOrder
-    ? profilePipeMaximumPieces(squarePipe, pieceOrder.lengthMeters) ?? undefined : undefined;
+  const maximumPieces = product && pieceOrder
+    ? profilePipeMaximumPieces(product, pieceOrder.lengthMeters) ?? undefined : undefined;
   const sheetOrder = product?.sheetOrder;
   const sheetCount = sheetOrder ? line.quantity / sheetOrder.quantityPerSheet : 0;
 
   function updatePipeLength(length: number) {
     if (!pieceOrder) return;
-    const maximum = squarePipe ? profilePipeMaximumPieces(squarePipe, length) : null;
+    const maximum = product ? profilePipeMaximumPieces(product, length) : null;
     const pieces = maximum === null ? pieceOrder.pieces : Math.min(pieceOrder.pieces, maximum);
     updatePieceOrder(line.productId, pieces, length);
   }
@@ -121,11 +121,11 @@ export function CartItemRow({line, onRemove}: {line: CartLine; onRemove: () => v
       ) : sheetOrder && Number.isInteger(sheetCount) ? (
         <div className="space-y-3">
           <QuantitySelector whole fieldLabel="Количество" productName={line.name} unit="шт." disabled={quantityDisabled}
-            value={sheetCount} maximum={maxOrderSheets}
+            value={sheetCount} maximum={MAX_ORDER_PIECES}
             onChange={pieces => updateQuantity(line.productId, pieces * sheetOrder.quantityPerSheet)}/>
           <QuantitySelector fieldLabel="Масса" productName={line.name} unit="т" disabled={quantityDisabled}
             value={sheetOrderTons(sheetOrder, sheetCount)} minimum={sheetOrderTons(sheetOrder, 1)}
-            maximum={sheetOrderTons(sheetOrder, maxOrderSheets)} step={sheetOrderTons(sheetOrder, 1)}
+            maximum={sheetOrderTons(sheetOrder, MAX_ORDER_PIECES)} step={sheetOrderTons(sheetOrder, 1)}
             precision={sheetTonDecimals} wideInput
             formatValue={(tons, grouped) => formatQuantityForInput(tons, grouped, sheetTonDecimals)}
             normalizeQuantity={tons => ({value: sheetOrderTons(sheetOrder, sheetsForOrderTons(sheetOrder, tons))})}

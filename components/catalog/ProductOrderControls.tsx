@@ -10,7 +10,8 @@ import {QuoteRequestButton} from "./QuoteRequestButton";
 import {formatQuoteProductName} from "@/lib/quoteRequest";
 import {constrainOrderQuantityInput, correctOrderQuantity, parseOrderQuantity} from "@/lib/catalogNumberInput";
 import {correctDraftPrecision, formatQuantityForInput, productOrderFractionDigits} from "@/lib/cartQuantityInput";
-import {calculateLineTotal, getSimpleOrderQuantityOptions, maxOrderSheets} from "@/lib/orderMeasurement";
+import {calculateLineTotal, getSimpleOrderQuantityOptions} from "@/lib/orderMeasurement";
+import {MAX_ORDER_PIECES} from "@/lib/constants";
 import {sheetsForOrderTons, sheetTonDecimals, sheetOrderTons} from "@/lib/sheetOrder";
 import {formatCurrency} from "@/lib/currency";
 import {requiresCatalogPriceQuote, storefrontAvailability} from "@/lib/catalogOffer";
@@ -34,7 +35,7 @@ export function ProductOrderControls({variant, view, showUnit = true, startEmpty
   const [removed, setRemoved] = useState(false);
   const sheetOrder = orderBySheet ? variant.sheetOrder : undefined;
   const quantityPerSheet = sheetOrder?.quantityPerSheet ?? 1;
-  const maximum = sheetOrder ? maxOrderSheets : getSimpleOrderQuantityOptions(variant).maximum;
+  const maximum = sheetOrder ? MAX_ORDER_PIECES : getSimpleOrderQuantityOptions(variant).maximum;
   const savedQuantity = line ? line.quantity / quantityPerSheet : undefined;
   const savedValue = savedQuantity !== undefined ? formatQuantityForInput(savedQuantity) : startEmpty ? "" : "1";
   const massDraft = typeof draft === "string" ? null : draft;
@@ -131,7 +132,7 @@ export function ProductOrderControls({variant, view, showUnit = true, startEmpty
   function changeTons(text: string) {
     if (!sheetOrder) return;
     const minimum = sheetOrderTons(sheetOrder, 1);
-    const maximum = sheetOrderTons(sheetOrder, maxOrderSheets);
+    const maximum = sheetOrderTons(sheetOrder, MAX_ORDER_PIECES);
     const constrained = constrainOrderQuantityInput(text, maximum, formatSheetTons);
     const shown = massDraft?.text ?? (orderTons === null ? "" : formatSheetTons(orderTons));
     const parsed = parseCompleteQuantity(constrained.value);

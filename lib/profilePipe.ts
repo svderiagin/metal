@@ -1,10 +1,9 @@
 import type {ProductVariant} from "@/types/product";
 import type {CartPieceOrder} from "@/types/cart";
-import {MAX_ORDER_TONS} from "./constants";
+import {MAX_ORDER_PIECES, MAX_ORDER_TONS} from "./constants";
 import {calculatePieceLineTotal, metersToTons, tonsToMeters, wholeLengthMeters, wholeLengthPieces, wholeLengthPiecesAtMost} from "./orderMeasurement";
 
 export type ProfilePipeOrderUnit = "piece" | "meter" | "ton";
-export const MAX_RECTANGULAR_PIPE_PIECES = 999;
 
 export function isSquareProfilePipe(product: Pick<ProductVariant, "categoryId" | "subcategoryId">) {
   return product.categoryId === "cat-trp" && product.subcategoryId === "cat-trp-sub-1";
@@ -56,11 +55,11 @@ export function profilePipeMaximumPieces(product: ProductVariant, length = produ
     const range = product.lengthRangeMeters;
     if (!range || length < range[0] || length > range[1]) return null;
   }
-  if (!isSquareProfilePipe(product)) return MAX_RECTANGULAR_PIPE_PIECES;
+  if (!isSquareProfilePipe(product)) return MAX_ORDER_PIECES;
   const mass = profilePipeMassPerMeter(product);
   const maximumMeters = mass === null ? null : tonsToMeters(MAX_ORDER_TONS, mass);
   if (maximumMeters === null) return null;
-  return Math.min(Number.MAX_SAFE_INTEGER, wholeLengthPiecesAtMost(maximumMeters, length));
+  return Math.min(MAX_ORDER_PIECES, wholeLengthPiecesAtMost(maximumMeters, length));
 }
 
 export function profilePipeOrder(product: ProductVariant, pieces: number, length = product.lengthMeters) {

@@ -1,6 +1,7 @@
 export const CART_STORAGE_KEY = "metal-store-cart-v1";
 export const ORDER_STORAGE_KEY = "metal-store-order-v1";
 export const MAX_ORDER_TONS = 999;
+export const MAX_ORDER_PIECES = 9_999;
 export const mainNavigation = [
   {label: "Каталог", href: "/catalog"},
   {label: "Услуги", href: "/services"},
