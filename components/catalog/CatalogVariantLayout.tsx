@@ -93,7 +93,7 @@ export function CatalogVariantLayout({view, variant, name = variant.name, nameNo
   </article>;
 
   const nameId = `variant-name-${variant.id}`;
-  return <><tr id={`variant-${variant.id}`} title={variant.name} className="align-middle">
+  return <><tr id={`variant-${variant.id}`} className="align-middle">
     <th scope="row" aria-labelledby={nameId} className="font-semibold tabular-nums">
       <span id={nameId} className="block">{name}{caption}</span>
       {details && <button type="button" aria-expanded={detailsOpen} aria-controls={detailsId}

@@ -169,7 +169,7 @@ export function ProductImageViewer({src, previewSrc = src, name, presentation = 
           : "fixed inset-0 m-0 h-dvh max-h-none w-screen max-w-none overflow-hidden border-0 bg-slate-100 p-0 text-slate-900 dark:bg-slate-950 dark:text-white backdrop:bg-black/80"}>
         {open && <div className={isPreview ? "relative flex aspect-[4/3] w-full min-h-0 flex-col" : "flex h-full min-h-0 flex-col pt-[env(safe-area-inset-top)] pr-[env(safe-area-inset-right)] pb-[env(safe-area-inset-bottom)] pl-[env(safe-area-inset-left)]"}>
           {!isPreview && <div className="flex shrink-0 items-center gap-2 border-b border-slate-200 px-3 py-2 dark:border-slate-700 sm:px-5">
-            <h2 className="min-w-0 flex-1 truncate text-left text-sm font-semibold sm:text-base" title={name}>{name}</h2>
+            <h2 className="min-w-0 flex-1 truncate text-left text-sm font-semibold sm:text-base">{name}</h2>
             <button type="button" onClick={event => toggleImageZoom(event)} disabled={(!geometry.canZoom && !zoomed) || failed}
               aria-label={zoomed ? "Вписать изображение в экран" : "Показать оригинал в масштабе 1:1"} aria-pressed={zoomed}
               className="min-h-11 shrink-0 cursor-pointer rounded-lg border border-slate-300 px-3 text-sm font-semibold hover:bg-slate-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-600 disabled:cursor-default disabled:opacity-50 dark:border-slate-600 dark:hover:bg-slate-800 dark:focus-visible:outline-brand-300">
@@ -182,7 +182,6 @@ export function ProductImageViewer({src, previewSrc = src, name, presentation = 
           </div>}
           <div ref={imageViewportRef} className={`relative min-h-0 flex-1 overflow-hidden ${isPreview ? "rounded-xl" : ""}`}>
             <button type="button" autoFocus onClick={event => toggleImageZoom(event, true)} aria-label="Увеличение изображения" aria-pressed={zoomed}
-              title={zoomed ? "Нажмите, чтобы вписать изображение. Перетаскивайте для просмотра деталей" : "Нажмите для просмотра в масштабе 1:1"}
               disabled={(!geometry.canZoom && !zoomed) || failed}
               onPointerDown={beginImageGesture} onPointerMove={moveImageGesture} onPointerUp={endImageGesture}
               onPointerCancel={() => {imageGesture.current.moved = true; imageGesture.current.pointerId = null;}}
@@ -202,7 +201,7 @@ export function ProductImageViewer({src, previewSrc = src, name, presentation = 
                   <span className="hidden [@media(pointer:coarse)]:inline">Перетаскивайте изображение пальцем</span>
                 </p>}
           </div>
-          {isPreview && <button type="button" onClick={close} aria-label="Закрыть просмотр" title="Закрыть (Esc)"
+          {isPreview && <button type="button" onClick={close} aria-label="Закрыть просмотр"
             className="absolute right-2 top-2 z-10 flex h-11 w-11 cursor-pointer items-center justify-center rounded-lg border border-white/15 bg-slate-900/45 text-white/90 shadow-sm backdrop-blur-sm transition-colors hover:bg-slate-900/75 hover:text-white focus-visible:bg-slate-900/75 focus-visible:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white active:bg-slate-950/90">
             <Icon name="close"/>
           </button>}
