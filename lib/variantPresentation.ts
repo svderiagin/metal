@@ -3,7 +3,7 @@ import {getAngleProductSpecifications} from "./anglePresentation";
 import {getSquareProductParameters} from "./squarePresentation";
 import {getSheetParameters} from "./sheetPresentation";
 
-export type VariantFilterKey = ProductAttributeKey | "angleType" | "width";
+export type VariantFilterKey = ProductAttributeKey | "angleType" | "width" | "picketProfile" | "picketColor" | "picketPaint";
 
 const defaultFilterKeys: VariantFilterKey[] = ["material", "standard", "size", "grade", "length"];
 const filterKeysByCategory: Record<string, VariantFilterKey[]> = {
@@ -12,7 +12,17 @@ const filterKeysByCategory: Record<string, VariantFilterKey[]> = {
   kvadrat: ["size", "length"],
   polosa: ["width", "wallThickness", "length"],
   shveller: ["size", "length"],
+  shtaketnik: ["picketProfile", "width", "wallThickness", "length", "picketColor", "picketPaint"],
   ugolok: ["angleType", "size", "wallThickness", "length"],
+};
+
+const picketFilterSpecifications: Partial<Record<VariantFilterKey, string>> = {
+  picketProfile: "Вид профиля штакетника",
+  width: "Ширина",
+  wallThickness: "Толщина",
+  length: "Длина",
+  picketColor: "Код цвета",
+  picketPaint: "Тип покраски",
 };
 
 export function getVariantFilterKeys(categorySlug: string) {
@@ -23,6 +33,18 @@ export function getVariantAttribute(
   variant: ProductVariant,
   key: VariantFilterKey,
 ) {
+  if (variant.categoryId === "catalog-cat-shtaketnik") {
+    const name = picketFilterSpecifications[key];
+    if (name) {
+      const value = specification(variant, [name]);
+      if (key === "picketColor") return value.match(/\b\d{4}\b/u)?.[0] ?? value;
+      if (key === "picketPaint") {
+        if (value === "Односторонний") return "1 сторона";
+        if (value === "Двусторонний" || value === "Двухсторонний") return "2 стороны";
+      }
+      return value.replace(/\s*(?:мм|м)$/u, "");
+    }
+  }
   if (variant.categoryId === "catalog-cat-shveller") {
     if (key === "size") return variant.name.match(/№\s*(\d+(?:[.,]\d+)?)/)?.[1].replace(".", ",") ?? "—";
     if (key === "length") return specification(variant, ["Длина по каталогу", "Длина", "Размер"]);

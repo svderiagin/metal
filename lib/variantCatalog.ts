@@ -18,7 +18,8 @@ export function referenceProfileName(name: string, categorySlug: string) {
 }
 
 export function uniqueAttributeValues(variants: ProductVariant[], key: VariantFilterKey) {
-  const byThickness = key === "wallThickness" && variants.every(isIllustratedSheet);
+  const byThickness = key === "wallThickness"
+    && (variants.every(isIllustratedSheet) || variants[0]?.categoryId === "catalog-cat-shtaketnik");
   return [...new Set(variants.map(variant => getVariantAttribute(variant, key)).filter(value => value !== "—"))]
     .sort((left, right) => byThickness ? compareThickness(left, right) : left.localeCompare(right, "ru", {numeric: true}));
 }
@@ -31,6 +32,14 @@ export function variantFilterLabel(variants: ProductVariant[], key: VariantFilte
   if (key === "angleType") return "Тип уголка";
   if (key === "size" && variants.length > 0 && variants.every(isIllustratedSheet)) return sheetFormatLabel;
   const category = variants[0]?.categoryId;
+  if (category === "catalog-cat-shtaketnik") {
+    if (key === "picketProfile") return "Профиль";
+    if (key === "picketColor") return "Цвет RAL";
+    if (key === "picketPaint") return "Окраска";
+    if (key === "width") return "Ширина, мм";
+    if (key === "wallThickness") return "Толщина, мм";
+    if (key === "length") return "Длина, м";
+  }
   if (category === "catalog-cat-ugolok" || category === "catalog-cat-kvadrat") {
     if (key === "size") return category === "catalog-cat-ugolok" ? "Ширина полок, мм" : "Сечение, мм";
     if (key === "wallThickness") return "Толщина полок, мм";
@@ -72,7 +81,14 @@ export function selectVariants(variants: ProductVariant[], options: {
       }
       if (options.sort === "name") return sortDesignation(left).localeCompare(sortDesignation(right), "ru", {numeric: true});
       if (options.sort === "price-asc" || options.sort === "price-desc") return comparePrices(left.quoteOnly || requiresOfferConfirmation(left) ? null : left.price, right.quoteOnly || requiresOfferConfirmation(right) ? null : right.price, options.sort === "price-desc");
-      if (options.sort === "size") return sortSize(left).localeCompare(sortSize(right), "ru", {numeric: true});
+      if (options.sort === "size") {
+        if (left.categoryId === "catalog-cat-shtaketnik" && right.categoryId === left.categoryId) {
+          return compareThickness(getVariantAttribute(left, "width"), getVariantAttribute(right, "width"))
+            || compareThickness(getVariantAttribute(left, "wallThickness"), getVariantAttribute(right, "wallThickness"))
+            || compareThickness(getVariantAttribute(left, "length"), getVariantAttribute(right, "length"));
+        }
+        return sortSize(left).localeCompare(sortSize(right), "ru", {numeric: true});
+      }
       return Number(right.inStock) - Number(left.inStock);
     });
 }

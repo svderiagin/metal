@@ -1863,5 +1863,45 @@
     "imageUrl": "/images/catalog/profnastil/profnastil-n75/measurement/profnastil-n75-0-9mm-750x6000mm-otsinkovannyy.webp",
     "photoUrl": "/images/catalog/profnastil/profnastil-n75/gallery/n75-galvanized-profile.jpg",
     "signature": "0fe91232"
+  },
+  "catalog-shtaketnik-polukruglyy-105x0-45mm-1-5m-ral6005-odnostoronniy": {
+    "imageUrl": "/images/catalog/shtaketnik/measurement/shtaketnik-polukruglyy-105x0-45mm-1-5m-ral6005-odnostoronniy.webp",
+    "photoUrl": "/images/catalog/shtaketnik/originals/picket-round-ral6005.jpg",
+    "signature": "ff632745"
+  },
+  "catalog-shtaketnik-polukruglyy-105x0-45mm-1-8m-ral6005-odnostoronniy": {
+    "imageUrl": "/images/catalog/shtaketnik/measurement/shtaketnik-polukruglyy-105x0-45mm-1-8m-ral6005-odnostoronniy.webp",
+    "photoUrl": "/images/catalog/shtaketnik/originals/picket-round-ral6005.jpg",
+    "signature": "32d350e5"
+  },
+  "catalog-shtaketnik-polukruglyy-105x0-45mm-1-5m-ral3005-odnostoronniy": {
+    "imageUrl": "/images/catalog/shtaketnik/measurement/shtaketnik-polukruglyy-105x0-45mm-1-5m-ral3005-odnostoronniy.webp",
+    "photoUrl": "/images/catalog/shtaketnik/originals/picket-round-ral3005.png",
+    "signature": "332ee1ea"
+  },
+  "catalog-shtaketnik-polukruglyy-105x0-45mm-1-8m-ral3005-odnostoronniy": {
+    "imageUrl": "/images/catalog/shtaketnik/measurement/shtaketnik-polukruglyy-105x0-45mm-1-8m-ral3005-odnostoronniy.webp",
+    "photoUrl": "/images/catalog/shtaketnik/originals/picket-round-ral3005.png",
+    "signature": "70d9ac9e"
+  },
+  "catalog-shtaketnik-m-obraznyy-100x0-45mm-1-8m-ral8017-dvustoronniy": {
+    "imageUrl": "/images/catalog/shtaketnik/measurement/shtaketnik-m-obraznyy-100x0-45mm-1-8m-ral8017-dvustoronniy.webp",
+    "photoUrl": "/images/catalog/shtaketnik/originals/picket-m-ral8017.jpg",
+    "signature": "90b0d59d"
+  },
+  "catalog-shtaketnik-m-obraznyy-100x0-45mm-2m-ral8017-dvustoronniy": {
+    "imageUrl": "/images/catalog/shtaketnik/measurement/shtaketnik-m-obraznyy-100x0-45mm-2m-ral8017-dvustoronniy.webp",
+    "photoUrl": "/images/catalog/shtaketnik/originals/picket-m-ral8017.jpg",
+    "signature": "9b412359"
+  },
+  "catalog-shtaketnik-m-obraznyy-100x0-45mm-1-8m-ral7024-dvustoronniy": {
+    "imageUrl": "/images/catalog/shtaketnik/measurement/shtaketnik-m-obraznyy-100x0-45mm-1-8m-ral7024-dvustoronniy.webp",
+    "photoUrl": "/images/catalog/shtaketnik/originals/picket-m-ral7024.jpg",
+    "signature": "1ff984fe"
+  },
+  "catalog-shtaketnik-m-obraznyy-100x0-45mm-2m-ral7024-dvustoronniy": {
+    "imageUrl": "/images/catalog/shtaketnik/measurement/shtaketnik-m-obraznyy-100x0-45mm-2m-ral7024-dvustoronniy.webp",
+    "photoUrl": "/images/catalog/shtaketnik/originals/picket-m-ral7024.jpg",
+    "signature": "46d77eda"
   }
 }

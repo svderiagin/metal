@@ -22,9 +22,10 @@ import {orderQuantityHintDuration, useOrderDraft} from "./OrderDraftProvider";
 
 type QuantityDraft = string | {text: string; exactTons?: number};
 
-export function ProductOrderControls({variant, view, showUnit = true, startEmpty = false, orderBySheet = false,
+export function ProductOrderControls({variant, view, showUnit = true, startEmpty = false, orderBySheet = false, quantityColSpan,
   wholeQuantity = orderBySheet || requiresWholeCatalogQuantity(variant)}: {
   orderBySheet?: boolean;
+  quantityColSpan?: 1 | 2;
   variant: ProductVariant; view: "table" | "card"; showUnit?: boolean; wholeQuantity?: boolean; startEmpty?: boolean;
 }) {
   const {lines, hydrated, addItem, updateQuantity, removeItem} = useCart();
@@ -205,7 +206,7 @@ export function ProductOrderControls({variant, view, showUnit = true, startEmpty
     {amountTooSmall ? "Увеличьте количество. Сумма позиции должна быть больше 0 ₽."
       : correction || (quantityError ? wholeQuantity ? `Введите целое количество от 1 до ${maximum}.` : `Введите количество больше 0 и не больше ${maximum}.` : "")}
   </span>;
-  return <CatalogVariantOrder view={view} quantity={quantityField} secondaryQuantity={massField}
+  return <CatalogVariantOrder view={view} quantity={quantityField} secondaryQuantity={massField} quantityColSpan={quantityColSpan}
     total={totalOutput} action={action} status={status} deliveryId={deliveryId}/>;
 }
 

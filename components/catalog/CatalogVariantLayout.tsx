@@ -10,19 +10,23 @@ import tableStyles from "./RebarTable.module.css";
 type View = "table" | "card";
 
 // Designation, photo, two specifications, price, two order units, total, action.
-const columnWidths = [11, 13, 9, 9, 11.25, 11.25, 10, 12.5, 13] as const;
+const defaultColumnWidths = [11, 13, 9, 9, 11.25, 11.25, 10, 12.5, 13] as const;
 
-export function CatalogVariantTable({children, designation, specifications, specificationWidths, unit,
-  quantity = unit ? `Заказ, ${unit}` : "Заказ", secondaryQuantity}: {
+export function CatalogVariantTable({children, designation, specifications, specificationWidths, columnWidths, unit,
+  quantity = unit ? `Заказ, ${unit}` : "Заказ", secondaryQuantity, quantityColSpan = 2}: {
   children: ReactNode;
   designation: string;
   specifications: readonly ReactNode[];
   specificationWidths?: readonly [number, number];
+  columnWidths?: readonly number[];
   unit?: string;
   quantity?: string;
   secondaryQuantity?: string;
+  quantityColSpan?: 1 | 2;
 }) {
-  const widths = specificationWidths ? [...columnWidths.slice(0, 2), ...specificationWidths, ...columnWidths.slice(4)] : columnWidths;
+  const widths = columnWidths ?? (specificationWidths
+    ? [...defaultColumnWidths.slice(0, 2), ...specificationWidths, ...defaultColumnWidths.slice(4)]
+    : defaultColumnWidths);
   return <div className={`${tableStyles.frame} hidden rounded-xl border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-900 xl:block`}>
     <table className={`${tableStyles.table} text-center text-sm`}>
       <colgroup>{widths.map((width, index) => <col key={index} style={{width: `${width}%`}}/>)}</colgroup>
@@ -32,7 +36,7 @@ export function CatalogVariantTable({children, designation, specifications, spec
           <th scope="col">Фото</th>
           {specifications.map((label, index) => <th scope="col" key={index} colSpan={specifications.length === 1 ? 2 : undefined}>{label}</th>)}
           <th scope="col">{unit ? `Цена, ₽/${unit}` : "Цена"}</th>
-          <th scope="col" colSpan={secondaryQuantity ? undefined : 2}>{quantity}</th>
+          <th scope="col" colSpan={secondaryQuantity ? undefined : quantityColSpan}>{quantity}</th>
           {secondaryQuantity && <th scope="col">{secondaryQuantity}</th>}
           <th scope="col">Сумма</th>
           <th scope="col"><span className="sr-only">Действие</span></th>
@@ -111,7 +115,7 @@ export function CatalogVariantLayout({view, variant, name = variant.name, nameNo
     {order}
   </tr>
   {details && <tr id={detailsId} hidden={!detailsOpen} className={tableStyles.detailsRow}>
-    <td colSpan={columnWidths.length} className="p-5">{detailsOpen && details}</td>
+    <td colSpan={defaultColumnWidths.length} className="p-5">{detailsOpen && details}</td>
   </tr>}</>;
 }
 
@@ -137,10 +141,11 @@ export function CatalogVariantQuantity({unit, children}: {unit: string; children
   </span>;
 }
 
-export function CatalogVariantOrder({view, quantity, secondaryQuantity, action, total, status, deliveryId}: {
+export function CatalogVariantOrder({view, quantity, secondaryQuantity, quantityColSpan = 2, action, total, status, deliveryId}: {
   view: View;
   quantity: ReactNode;
   secondaryQuantity?: ReactNode;
+  quantityColSpan?: 1 | 2;
   action: ReactNode;
   total: ReactNode;
   status?: ReactNode;
@@ -158,7 +163,7 @@ export function CatalogVariantOrder({view, quantity, secondaryQuantity, action, 
   </div>;
   return view === "table"
     ? <>
-      <td colSpan={secondaryQuantity ? undefined : 2} className={tableStyles.quantityCell}>{quantity}</td>
+      <td colSpan={secondaryQuantity ? undefined : quantityColSpan} className={tableStyles.quantityCell}>{quantity}</td>
       {secondaryQuantity && <td className={tableStyles.quantityCell}>{secondaryQuantity}</td>}
       <td className={tableStyles.sumColumn}>{total}</td>
       <td className={tableStyles.actionCell}>{orderAction}</td>

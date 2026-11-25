@@ -176,8 +176,8 @@
       "priceUnit": "за штуку",
       "material": "",
       "standard": "",
-      "availability": "ON_ORDER",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/shtaketnik/originals/18b59d607fc01992e4fe.webp"
@@ -239,8 +239,8 @@
       "priceUnit": "за штуку",
       "material": "",
       "standard": "",
-      "availability": "ON_ORDER",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/shtaketnik/originals/18b59d607fc01992e4fe.webp"
@@ -302,8 +302,8 @@
       "priceUnit": "за штуку",
       "material": "",
       "standard": "",
-      "availability": "ON_ORDER",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/shtaketnik/originals/03e2cba085d558ae6bad.webp"
@@ -365,8 +365,8 @@
       "priceUnit": "за штуку",
       "material": "",
       "standard": "",
-      "availability": "ON_ORDER",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/shtaketnik/originals/03e2cba085d558ae6bad.webp"
@@ -428,8 +428,8 @@
       "priceUnit": "за штуку",
       "material": "",
       "standard": "",
-      "availability": "ON_ORDER",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/shtaketnik/originals/18b59d607fc01992e4fe.webp"
@@ -491,8 +491,8 @@
       "priceUnit": "за штуку",
       "material": "",
       "standard": "",
-      "availability": "ON_ORDER",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/shtaketnik/originals/18b59d607fc01992e4fe.webp"
@@ -554,8 +554,8 @@
       "priceUnit": "за штуку",
       "material": "",
       "standard": "",
-      "availability": "ON_ORDER",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/shtaketnik/originals/03e2cba085d558ae6bad.webp"
@@ -617,8 +617,8 @@
       "priceUnit": "за штуку",
       "material": "",
       "standard": "",
-      "availability": "ON_ORDER",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/shtaketnik/originals/03e2cba085d558ae6bad.webp"
@@ -680,8 +680,8 @@
       "priceUnit": "за штуку",
       "material": "",
       "standard": "",
-      "availability": "ON_ORDER",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/shtaketnik/originals/18b59d607fc01992e4fe.webp"
@@ -743,8 +743,8 @@
       "priceUnit": "за штуку",
       "material": "",
       "standard": "",
-      "availability": "ON_ORDER",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/shtaketnik/originals/18b59d607fc01992e4fe.webp"
@@ -806,8 +806,8 @@
       "priceUnit": "за штуку",
       "material": "",
       "standard": "",
-      "availability": "ON_ORDER",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/shtaketnik/originals/03e2cba085d558ae6bad.webp"
@@ -869,8 +869,8 @@
       "priceUnit": "за штуку",
       "material": "",
       "standard": "",
-      "availability": "ON_ORDER",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/shtaketnik/originals/03e2cba085d558ae6bad.webp"
@@ -932,8 +932,8 @@
       "priceUnit": "за штуку",
       "material": "",
       "standard": "",
-      "availability": "ON_ORDER",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/shtaketnik/originals/18b59d607fc01992e4fe.webp"
@@ -1058,8 +1058,8 @@
       "priceUnit": "за штуку",
       "material": "",
       "standard": "",
-      "availability": "ON_ORDER",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/shtaketnik/originals/03e2cba085d558ae6bad.webp"
@@ -1184,8 +1184,8 @@
       "priceUnit": "за штуку",
       "material": "",
       "standard": "",
-      "availability": "ON_ORDER",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/shtaketnik/originals/18b59d607fc01992e4fe.webp"
@@ -1247,8 +1247,8 @@
       "priceUnit": "за штуку",
       "material": "",
       "standard": "",
-      "availability": "ON_ORDER",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/shtaketnik/originals/18b59d607fc01992e4fe.webp"
@@ -1310,8 +1310,8 @@
       "priceUnit": "за штуку",
       "material": "",
       "standard": "",
-      "availability": "ON_ORDER",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/shtaketnik/originals/03e2cba085d558ae6bad.webp"
@@ -1373,8 +1373,8 @@
       "priceUnit": "за штуку",
       "material": "",
       "standard": "",
-      "availability": "ON_ORDER",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/shtaketnik/originals/03e2cba085d558ae6bad.webp"
@@ -1436,8 +1436,8 @@
       "priceUnit": "за штуку",
       "material": "",
       "standard": "",
-      "availability": "ON_ORDER",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/shtaketnik/originals/18b59d607fc01992e4fe.webp"
@@ -1499,8 +1499,8 @@
       "priceUnit": "за штуку",
       "material": "",
       "standard": "",
-      "availability": "ON_ORDER",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/shtaketnik/originals/18b59d607fc01992e4fe.webp"
@@ -1562,8 +1562,8 @@
       "priceUnit": "за штуку",
       "material": "",
       "standard": "",
-      "availability": "ON_ORDER",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/shtaketnik/originals/03e2cba085d558ae6bad.webp"
@@ -1625,8 +1625,8 @@
       "priceUnit": "за штуку",
       "material": "",
       "standard": "",
-      "availability": "ON_ORDER",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/shtaketnik/originals/03e2cba085d558ae6bad.webp"
@@ -1688,8 +1688,8 @@
       "priceUnit": "за штуку",
       "material": "",
       "standard": "",
-      "availability": "ON_ORDER",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/shtaketnik/originals/18b59d607fc01992e4fe.webp"
@@ -1751,8 +1751,8 @@
       "priceUnit": "за штуку",
       "material": "",
       "standard": "",
-      "availability": "ON_ORDER",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/shtaketnik/originals/18b59d607fc01992e4fe.webp"
@@ -1814,8 +1814,8 @@
       "priceUnit": "за штуку",
       "material": "",
       "standard": "",
-      "availability": "ON_ORDER",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/shtaketnik/originals/03e2cba085d558ae6bad.webp"
@@ -1877,8 +1877,8 @@
       "priceUnit": "за штуку",
       "material": "",
       "standard": "",
-      "availability": "ON_ORDER",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/shtaketnik/originals/03e2cba085d558ae6bad.webp"
@@ -1940,8 +1940,8 @@
       "priceUnit": "за штуку",
       "material": "",
       "standard": "",
-      "availability": "ON_ORDER",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/shtaketnik/originals/18b59d607fc01992e4fe.webp"
@@ -2066,8 +2066,8 @@
       "priceUnit": "за штуку",
       "material": "",
       "standard": "",
-      "availability": "ON_ORDER",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/shtaketnik/originals/03e2cba085d558ae6bad.webp"
@@ -2192,8 +2192,8 @@
       "priceUnit": "за штуку",
       "material": "",
       "standard": "",
-      "availability": "ON_ORDER",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/shtaketnik/originals/18b59d607fc01992e4fe.webp"
@@ -2255,8 +2255,8 @@
       "priceUnit": "за штуку",
       "material": "",
       "standard": "",
-      "availability": "ON_ORDER",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/shtaketnik/originals/03e2cba085d558ae6bad.webp"
@@ -2318,8 +2318,8 @@
       "priceUnit": "за штуку",
       "material": "",
       "standard": "",
-      "availability": "ON_ORDER",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/shtaketnik/originals/03e2cba085d558ae6bad.webp"
@@ -2381,8 +2381,8 @@
       "priceUnit": "за штуку",
       "material": "",
       "standard": "",
-      "availability": "ON_ORDER",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/shtaketnik/originals/03e2cba085d558ae6bad.webp"
@@ -2444,8 +2444,8 @@
       "priceUnit": "за штуку",
       "material": "",
       "standard": "",
-      "availability": "ON_ORDER",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/shtaketnik/originals/18b59d607fc01992e4fe.webp"
@@ -2507,8 +2507,8 @@
       "priceUnit": "за штуку",
       "material": "",
       "standard": "",
-      "availability": "ON_ORDER",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/shtaketnik/originals/18b59d607fc01992e4fe.webp"
@@ -2570,8 +2570,8 @@
       "priceUnit": "за штуку",
       "material": "",
       "standard": "",
-      "availability": "ON_ORDER",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/shtaketnik/originals/03e2cba085d558ae6bad.webp"
@@ -2633,8 +2633,8 @@
       "priceUnit": "за штуку",
       "material": "",
       "standard": "",
-      "availability": "ON_ORDER",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/shtaketnik/originals/03e2cba085d558ae6bad.webp"
@@ -2696,8 +2696,8 @@
       "priceUnit": "за штуку",
       "material": "",
       "standard": "",
-      "availability": "ON_ORDER",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/shtaketnik/originals/18b59d607fc01992e4fe.webp"
@@ -2822,8 +2822,8 @@
       "priceUnit": "за штуку",
       "material": "",
       "standard": "",
-      "availability": "ON_ORDER",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/shtaketnik/originals/03e2cba085d558ae6bad.webp"
@@ -2948,8 +2948,8 @@
       "priceUnit": "за штуку",
       "material": "",
       "standard": "",
-      "availability": "ON_ORDER",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/shtaketnik/originals/18b59d607fc01992e4fe.webp"
@@ -3074,8 +3074,8 @@
       "priceUnit": "за штуку",
       "material": "",
       "standard": "",
-      "availability": "ON_ORDER",
-      "inStock": false,
+      "availability": "IN_STOCK",
+      "inStock": true,
       "featured": false,
       "imageUrls": [
         "/images/catalog/shtaketnik/originals/03e2cba085d558ae6bad.webp"
@@ -3182,6 +3182,574 @@
         }
       ],
       "sourceProductName": "Штакетник Полукруглый RAL 7024 (Графитовый серый) 118х0,5 двухсторонний 2 м."
+    },
+    {
+      "id": "catalog-shtaketnik-polukruglyy-105x0-45mm-1-5m-ral6005-odnostoronniy",
+      "categoryId": "catalog-cat-shtaketnik",
+      "subcategoryId": "catalog-sub-shtaketnik-shtaketnik",
+      "productTypeId": "type-catalog-sub-shtaketnik-shtaketnik",
+      "name": "Штакетник полукруглый 105 × 0,45 мм, 1,5 м, RAL 6005, односторонний",
+      "slug": "catalog-shtaketnik-polukruglyy-105x0-45mm-1-5m-ral6005-odnostoronniy",
+      "shortDescription": "",
+      "description": "",
+      "price": 199,
+      "priceQualifier": "exact",
+      "priceConfirmed": true,
+      "currency": "RUB",
+      "unit": "piece",
+      "priceUnit": "за штуку",
+      "material": "Оцинкованная сталь",
+      "standard": "",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "ralCode": "6005",
+      "imageUrls": [
+        "/images/catalog/shtaketnik/originals/picket-round-ral6005.jpg"
+      ],
+      "attributes": [
+        {
+          "key": "wallThickness",
+          "label": "Толщина",
+          "value": "0,45 мм"
+        },
+        {
+          "key": "length",
+          "label": "Длина",
+          "value": "1,5 м"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Толщина",
+          "value": "0,45 мм"
+        },
+        {
+          "name": "Ширина",
+          "value": "105 мм"
+        },
+        {
+          "name": "Код цвета",
+          "value": "6005 (зелёный мох)"
+        },
+        {
+          "name": "Вид профиля штакетника",
+          "value": "Полукруглый"
+        },
+        {
+          "name": "Тип покраски",
+          "value": "Односторонний"
+        },
+        {
+          "name": "Длина",
+          "value": "1,5 м"
+        },
+        {
+          "name": "Срез",
+          "value": "Фигурный"
+        },
+        {
+          "name": "Покрытие",
+          "value": "Полимерное"
+        }
+      ]
+    },
+    {
+      "id": "catalog-shtaketnik-polukruglyy-105x0-45mm-1-8m-ral6005-odnostoronniy",
+      "categoryId": "catalog-cat-shtaketnik",
+      "subcategoryId": "catalog-sub-shtaketnik-shtaketnik",
+      "productTypeId": "type-catalog-sub-shtaketnik-shtaketnik",
+      "name": "Штакетник полукруглый 105 × 0,45 мм, 1,8 м, RAL 6005, односторонний",
+      "slug": "catalog-shtaketnik-polukruglyy-105x0-45mm-1-8m-ral6005-odnostoronniy",
+      "shortDescription": "",
+      "description": "",
+      "price": 229,
+      "priceQualifier": "exact",
+      "priceConfirmed": true,
+      "currency": "RUB",
+      "unit": "piece",
+      "priceUnit": "за штуку",
+      "material": "Оцинкованная сталь",
+      "standard": "",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "ralCode": "6005",
+      "imageUrls": [
+        "/images/catalog/shtaketnik/originals/picket-round-ral6005.jpg"
+      ],
+      "attributes": [
+        {
+          "key": "wallThickness",
+          "label": "Толщина",
+          "value": "0,45 мм"
+        },
+        {
+          "key": "length",
+          "label": "Длина",
+          "value": "1,8 м"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Толщина",
+          "value": "0,45 мм"
+        },
+        {
+          "name": "Ширина",
+          "value": "105 мм"
+        },
+        {
+          "name": "Код цвета",
+          "value": "6005 (зелёный мох)"
+        },
+        {
+          "name": "Вид профиля штакетника",
+          "value": "Полукруглый"
+        },
+        {
+          "name": "Тип покраски",
+          "value": "Односторонний"
+        },
+        {
+          "name": "Длина",
+          "value": "1,8 м"
+        },
+        {
+          "name": "Срез",
+          "value": "Фигурный"
+        },
+        {
+          "name": "Покрытие",
+          "value": "Полимерное"
+        }
+      ]
+    },
+    {
+      "id": "catalog-shtaketnik-polukruglyy-105x0-45mm-1-5m-ral3005-odnostoronniy",
+      "categoryId": "catalog-cat-shtaketnik",
+      "subcategoryId": "catalog-sub-shtaketnik-shtaketnik",
+      "productTypeId": "type-catalog-sub-shtaketnik-shtaketnik",
+      "name": "Штакетник полукруглый 105 × 0,45 мм, 1,5 м, RAL 3005, односторонний",
+      "slug": "catalog-shtaketnik-polukruglyy-105x0-45mm-1-5m-ral3005-odnostoronniy",
+      "shortDescription": "",
+      "description": "",
+      "price": 199,
+      "priceQualifier": "exact",
+      "priceConfirmed": true,
+      "currency": "RUB",
+      "unit": "piece",
+      "priceUnit": "за штуку",
+      "material": "Оцинкованная сталь",
+      "standard": "",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "ralCode": "3005",
+      "imageUrls": [
+        "/images/catalog/shtaketnik/originals/picket-round-ral3005.png"
+      ],
+      "attributes": [
+        {
+          "key": "wallThickness",
+          "label": "Толщина",
+          "value": "0,45 мм"
+        },
+        {
+          "key": "length",
+          "label": "Длина",
+          "value": "1,5 м"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Толщина",
+          "value": "0,45 мм"
+        },
+        {
+          "name": "Ширина",
+          "value": "105 мм"
+        },
+        {
+          "name": "Код цвета",
+          "value": "3005 (винно-красный)"
+        },
+        {
+          "name": "Вид профиля штакетника",
+          "value": "Полукруглый"
+        },
+        {
+          "name": "Тип покраски",
+          "value": "Односторонний"
+        },
+        {
+          "name": "Длина",
+          "value": "1,5 м"
+        },
+        {
+          "name": "Срез",
+          "value": "Фигурный"
+        },
+        {
+          "name": "Покрытие",
+          "value": "Полимерное"
+        }
+      ]
+    },
+    {
+      "id": "catalog-shtaketnik-polukruglyy-105x0-45mm-1-8m-ral3005-odnostoronniy",
+      "categoryId": "catalog-cat-shtaketnik",
+      "subcategoryId": "catalog-sub-shtaketnik-shtaketnik",
+      "productTypeId": "type-catalog-sub-shtaketnik-shtaketnik",
+      "name": "Штакетник полукруглый 105 × 0,45 мм, 1,8 м, RAL 3005, односторонний",
+      "slug": "catalog-shtaketnik-polukruglyy-105x0-45mm-1-8m-ral3005-odnostoronniy",
+      "shortDescription": "",
+      "description": "",
+      "price": 249,
+      "priceQualifier": "exact",
+      "priceConfirmed": true,
+      "currency": "RUB",
+      "unit": "piece",
+      "priceUnit": "за штуку",
+      "material": "Оцинкованная сталь",
+      "standard": "",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "ralCode": "3005",
+      "imageUrls": [
+        "/images/catalog/shtaketnik/originals/picket-round-ral3005.png"
+      ],
+      "attributes": [
+        {
+          "key": "wallThickness",
+          "label": "Толщина",
+          "value": "0,45 мм"
+        },
+        {
+          "key": "length",
+          "label": "Длина",
+          "value": "1,8 м"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Толщина",
+          "value": "0,45 мм"
+        },
+        {
+          "name": "Ширина",
+          "value": "105 мм"
+        },
+        {
+          "name": "Код цвета",
+          "value": "3005 (винно-красный)"
+        },
+        {
+          "name": "Вид профиля штакетника",
+          "value": "Полукруглый"
+        },
+        {
+          "name": "Тип покраски",
+          "value": "Односторонний"
+        },
+        {
+          "name": "Длина",
+          "value": "1,8 м"
+        },
+        {
+          "name": "Срез",
+          "value": "Фигурный"
+        },
+        {
+          "name": "Покрытие",
+          "value": "Полимерное"
+        }
+      ]
+    },
+    {
+      "id": "catalog-shtaketnik-m-obraznyy-100x0-45mm-1-8m-ral8017-dvustoronniy",
+      "categoryId": "catalog-cat-shtaketnik",
+      "subcategoryId": "catalog-sub-shtaketnik-shtaketnik",
+      "productTypeId": "type-catalog-sub-shtaketnik-shtaketnik",
+      "name": "Штакетник М-образный 100 × 0,45 мм, 1,8 м, RAL 8017, двусторонний",
+      "slug": "catalog-shtaketnik-m-obraznyy-100x0-45mm-1-8m-ral8017-dvustoronniy",
+      "shortDescription": "",
+      "description": "",
+      "price": 209,
+      "priceQualifier": "exact",
+      "priceConfirmed": true,
+      "currency": "RUB",
+      "unit": "piece",
+      "priceUnit": "за штуку",
+      "material": "Оцинкованная сталь",
+      "standard": "",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "ralCode": "8017",
+      "imageUrls": [
+        "/images/catalog/shtaketnik/originals/picket-m-ral8017.jpg"
+      ],
+      "attributes": [
+        {
+          "key": "wallThickness",
+          "label": "Толщина",
+          "value": "0,45 мм"
+        },
+        {
+          "key": "length",
+          "label": "Длина",
+          "value": "1,8 м"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Толщина",
+          "value": "0,45 мм"
+        },
+        {
+          "name": "Ширина",
+          "value": "100 мм"
+        },
+        {
+          "name": "Код цвета",
+          "value": "8017 (шоколадно-коричневый)"
+        },
+        {
+          "name": "Вид профиля штакетника",
+          "value": "М-образный"
+        },
+        {
+          "name": "Тип покраски",
+          "value": "Двусторонний"
+        },
+        {
+          "name": "Длина",
+          "value": "1,8 м"
+        },
+        {
+          "name": "Срез",
+          "value": "Прямой"
+        },
+        {
+          "name": "Покрытие",
+          "value": "Полимерное"
+        }
+      ]
+    },
+    {
+      "id": "catalog-shtaketnik-m-obraznyy-100x0-45mm-2m-ral8017-dvustoronniy",
+      "categoryId": "catalog-cat-shtaketnik",
+      "subcategoryId": "catalog-sub-shtaketnik-shtaketnik",
+      "productTypeId": "type-catalog-sub-shtaketnik-shtaketnik",
+      "name": "Штакетник М-образный 100 × 0,45 мм, 2 м, RAL 8017, двусторонний",
+      "slug": "catalog-shtaketnik-m-obraznyy-100x0-45mm-2m-ral8017-dvustoronniy",
+      "shortDescription": "",
+      "description": "",
+      "price": 229,
+      "priceQualifier": "exact",
+      "priceConfirmed": true,
+      "currency": "RUB",
+      "unit": "piece",
+      "priceUnit": "за штуку",
+      "material": "Оцинкованная сталь",
+      "standard": "",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "ralCode": "8017",
+      "imageUrls": [
+        "/images/catalog/shtaketnik/originals/picket-m-ral8017.jpg"
+      ],
+      "attributes": [
+        {
+          "key": "wallThickness",
+          "label": "Толщина",
+          "value": "0,45 мм"
+        },
+        {
+          "key": "length",
+          "label": "Длина",
+          "value": "2 м"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Толщина",
+          "value": "0,45 мм"
+        },
+        {
+          "name": "Ширина",
+          "value": "100 мм"
+        },
+        {
+          "name": "Код цвета",
+          "value": "8017 (шоколадно-коричневый)"
+        },
+        {
+          "name": "Вид профиля штакетника",
+          "value": "М-образный"
+        },
+        {
+          "name": "Тип покраски",
+          "value": "Двусторонний"
+        },
+        {
+          "name": "Длина",
+          "value": "2 м"
+        },
+        {
+          "name": "Срез",
+          "value": "Прямой"
+        },
+        {
+          "name": "Покрытие",
+          "value": "Полимерное"
+        }
+      ]
+    },
+    {
+      "id": "catalog-shtaketnik-m-obraznyy-100x0-45mm-1-8m-ral7024-dvustoronniy",
+      "categoryId": "catalog-cat-shtaketnik",
+      "subcategoryId": "catalog-sub-shtaketnik-shtaketnik",
+      "productTypeId": "type-catalog-sub-shtaketnik-shtaketnik",
+      "name": "Штакетник М-образный 100 × 0,45 мм, 1,8 м, RAL 7024, двусторонний",
+      "slug": "catalog-shtaketnik-m-obraznyy-100x0-45mm-1-8m-ral7024-dvustoronniy",
+      "shortDescription": "",
+      "description": "",
+      "price": 209,
+      "priceQualifier": "exact",
+      "priceConfirmed": true,
+      "currency": "RUB",
+      "unit": "piece",
+      "priceUnit": "за штуку",
+      "material": "Оцинкованная сталь",
+      "standard": "",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "ralCode": "7024",
+      "imageUrls": [
+        "/images/catalog/shtaketnik/originals/picket-m-ral7024.jpg"
+      ],
+      "attributes": [
+        {
+          "key": "wallThickness",
+          "label": "Толщина",
+          "value": "0,45 мм"
+        },
+        {
+          "key": "length",
+          "label": "Длина",
+          "value": "1,8 м"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Толщина",
+          "value": "0,45 мм"
+        },
+        {
+          "name": "Ширина",
+          "value": "100 мм"
+        },
+        {
+          "name": "Код цвета",
+          "value": "7024 (графитовый серый)"
+        },
+        {
+          "name": "Вид профиля штакетника",
+          "value": "М-образный"
+        },
+        {
+          "name": "Тип покраски",
+          "value": "Двусторонний"
+        },
+        {
+          "name": "Длина",
+          "value": "1,8 м"
+        },
+        {
+          "name": "Срез",
+          "value": "Прямой"
+        },
+        {
+          "name": "Покрытие",
+          "value": "Полимерное"
+        }
+      ]
+    },
+    {
+      "id": "catalog-shtaketnik-m-obraznyy-100x0-45mm-2m-ral7024-dvustoronniy",
+      "categoryId": "catalog-cat-shtaketnik",
+      "subcategoryId": "catalog-sub-shtaketnik-shtaketnik",
+      "productTypeId": "type-catalog-sub-shtaketnik-shtaketnik",
+      "name": "Штакетник М-образный 100 × 0,45 мм, 2 м, RAL 7024, двусторонний",
+      "slug": "catalog-shtaketnik-m-obraznyy-100x0-45mm-2m-ral7024-dvustoronniy",
+      "shortDescription": "",
+      "description": "",
+      "price": 229,
+      "priceQualifier": "exact",
+      "priceConfirmed": true,
+      "currency": "RUB",
+      "unit": "piece",
+      "priceUnit": "за штуку",
+      "material": "Оцинкованная сталь",
+      "standard": "",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "ralCode": "7024",
+      "imageUrls": [
+        "/images/catalog/shtaketnik/originals/picket-m-ral7024.jpg"
+      ],
+      "attributes": [
+        {
+          "key": "wallThickness",
+          "label": "Толщина",
+          "value": "0,45 мм"
+        },
+        {
+          "key": "length",
+          "label": "Длина",
+          "value": "2 м"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Толщина",
+          "value": "0,45 мм"
+        },
+        {
+          "name": "Ширина",
+          "value": "100 мм"
+        },
+        {
+          "name": "Код цвета",
+          "value": "7024 (графитовый серый)"
+        },
+        {
+          "name": "Вид профиля штакетника",
+          "value": "М-образный"
+        },
+        {
+          "name": "Тип покраски",
+          "value": "Двусторонний"
+        },
+        {
+          "name": "Длина",
+          "value": "2 м"
+        },
+        {
+          "name": "Срез",
+          "value": "Прямой"
+        },
+        {
+          "name": "Покрытие",
+          "value": "Полимерное"
+        }
+      ]
     },
     {
       "id": "catalog-2235",

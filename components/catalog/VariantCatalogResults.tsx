@@ -1,5 +1,6 @@
 "use client";
 
+import type {ReactNode} from "react";
 import type {ProductVariant} from "@/types/product";
 import {referenceCategorySlugs, referenceProfileName} from "@/lib/variantCatalog";
 import {ProductOrderControls} from "./ProductOrderControls";
@@ -16,11 +17,13 @@ import {isSquareProfilePipe} from "@/lib/profilePipe";
 import {CatalogPositionDetails} from "./CatalogPositionDetails";
 import {CatalogStandardReference} from "./CatalogStandardReference";
 import {formatSpecification, storefrontPositionFields} from "./StorefrontPositionSpecifications";
+import {getVariantAttribute} from "@/lib/variantPresentation";
 
 const unverifiedOrderNote = "Укажите в заявке нужные размеры и документы на партию.";
+const picketColumnWidths = [11, 13, 9.5, 10.5, 7, 12.5, 11.5, 12, 13] as const;
 type TableSpecifications = {
   heading: string;
-  parameters: readonly (readonly [label: string, key: string, secondDimension?: string])[];
+  parameters: readonly (readonly [label: string, key: string])[];
 };
 
 const tableSpecs = {
@@ -34,7 +37,7 @@ const tableSpecs = {
     heading: "Ширина × толщина, мм", parameters: [["Длина", "Длина по каталогу"]],
   },
   shtaketnik: {
-    heading: "Цвет / окраска", parameters: [["Ширина × толщина", "Ширина", "Толщина"], ["Длина", "Длина"]],
+    heading: "Ширина × толщина, мм", parameters: [["Длина", "Длина"]],
   },
   "listovoy-prokat": {
     heading: "Толщина / исполнение", parameters: [["Формат", sheetFormatLabel]],
@@ -60,6 +63,8 @@ export function VariantCatalogResults({visible, categorySlug, unit, isSheetCatal
   const isAngle = categorySlug === "ugolok";
   const isSquare = categorySlug === "kvadrat";
   const isFlatSteel = categorySlug === "polosa";
+  const isPicket = categorySlug === "shtaketnik";
+  const quantityColSpan = isPicket ? 1 : undefined;
   const pieceSheetTitle = visible.length === 0 ? undefined
     : visible.every(isGalvanizedSheet) ? "Лист оцинкованный"
     : visible.every(isColdRolledSheet) ? "Лист холоднокатаный" : undefined;
@@ -72,7 +77,7 @@ export function VariantCatalogResults({visible, categorySlug, unit, isSheetCatal
     : tableSpecs[categorySlug as keyof typeof tableSpecs] ?? tableSpecs.armatura;
   const parameters = hasVerifiedSpecifications ? presentation.parameters : [];
   const specificationLabels = parameters.length
-    ? parameters.map(([label]) => hasMeasuredOrder && label === "Длина" ? "Длина, м" : label)
+    ? parameters.map(([label]) => label === "Длина" && (hasMeasuredOrder || isPicket) ? "Длина, м" : label)
     : ["Наличие"];
   function renderVariant(variant: ProductVariant, view: "table" | "card") {
     const unverified = isDemonstrationProduct(variant);
@@ -91,10 +96,11 @@ export function VariantCatalogResults({visible, categorySlug, unit, isSheetCatal
       const b = value(second);
       return a && b ? `${a.replace(/\s*мм$/u, "")} × ${b}` : a;
     };
-    const specifications = parameters.map(([label, key, secondDimension]) => ({
-      label, value: secondDimension ? pairedSize(key, secondDimension) : value(key),
-    }));
+    const specifications = parameters.map(([label, key]) => ({label, value: value(key)}));
     const availability = specifications.length === 0 ? <Availability availability={variant.availability}/> : null;
+    const tableValues: ReactNode[] = specifications.length ? specifications.map(({label, value}) =>
+      (label === "Длина" && (hasMeasuredOrder || isPicket) ? value?.replace(/\s*мм?$/u, "") : value) ?? "—")
+      : [availability];
     let tableName = formatSpecification(referenceProfileName(variant.name, categorySlug)).replace(/^№\s+(?=\d+ ×)/u, "");
     if (unverified && categorySlug === "truby-profilnye") {
       tableName = tableName.replace(/^Труба профильная (?:квадратная|прямоугольная)\s+(?=\d)/iu, "");
@@ -122,21 +128,22 @@ export function VariantCatalogResults({visible, categorySlug, unit, isSheetCatal
       cardName = `Квадрат стальной ${section}`;
     }
     if (isFlatSteel) tableName = pairedSize("Ширина", "Толщина")?.replace(/\s*мм$/u, "") ?? tableName;
-    if (categorySlug === "shtaketnik") {
-      const ral = variant.ralCode ?? variant.name.match(/\bRAL\s+(\d{4})\b/iu)?.[1];
-      const finish = value("Тип покраски");
-      const sides = finish === "Односторонний" ? "1 сторона" : finish === "Двухсторонний" ? "2 стороны" : finish;
-      const coating = [ral ? `RAL ${ral}` : value("Код цвета"), sides].filter(Boolean).join(" · ");
-      if (coating) {
-        tableName = coating;
-        cardName = `Штакетник ${coating}`;
-      }
+    if (isPicket) {
+      const size = pairedSize("Ширина", "Толщина");
+      const profile = getVariantAttribute(variant, "picketProfile");
+      const color = `RAL ${getVariantAttribute(variant, "picketColor")}`;
+      const paint = getVariantAttribute(variant, "picketPaint");
+      tableName = size?.replace(/\s*мм$/u, "") ?? "—";
+      cardName = `Штакетник ${profile === "Полукруглый" ? "полукруглый" : profile}`;
+      tableValues.unshift(<span className="block whitespace-nowrap">
+        <span className="font-medium">{color}</span>{" "}
+        <span className="mt-0.5 block text-xs text-slate-600 dark:text-slate-300">{paint}</span>
+      </span>, profile);
+      specifications.unshift({label: "Цвет", value: `${color} · ${paint}`}, {label: "Ширина × толщина", value: size});
     }
     return <CatalogVariantLayout key={variant.id} variant={variant} view={view}
       name={view === "table" ? tableName : cardName}
-      tableSpecifications={specifications.length ? specifications.map(({label, value}) =>
-        (hasMeasuredOrder && label === "Длина" ? value?.replace(/\s*м$/u, "") : value) ?? "—")
-        : [availability]}
+      tableSpecifications={tableValues}
       specifications={isUnverifiedSquarePipe ? <CatalogVariantSpecifications items={[{label: "Характеристики", value: "Уточняются"}]}/> : unverified
         ? <p className="text-sm text-slate-600 dark:text-slate-400">Характеристики требуют подтверждения перед заказом.</p>
         : availability ?? <CatalogVariantSpecifications items={specifications} stacked={isPieceSheetCatalog}/>}
@@ -144,7 +151,7 @@ export function VariantCatalogResults({visible, categorySlug, unit, isSheetCatal
         note={description && <CatalogDescription description={description}/>}/>}
       price={price}
       order={hasMeasuredOrder ? <MeterPricedOrderControls variant={variant} view={view}/>
-        : <ProductOrderControls variant={variant} view={view} showUnit={!unit} orderBySheet={hasSheetMassOrder}
+        : <ProductOrderControls variant={variant} view={view} showUnit={!unit} orderBySheet={hasSheetMassOrder} quantityColSpan={quantityColSpan}
           startEmpty={isPieceSheetCatalog || hasSheetMassOrder}/>}/>;
   }
   return (
@@ -175,9 +182,10 @@ export function VariantCatalogResults({visible, categorySlug, unit, isSheetCatal
             от 4 мм — <CatalogStandardReference>{hotRolledSheetSupply.thickSheetStandard}</CatalogStandardReference>.
             {hasSheetMassOrder && <> При заказе по массе округляем количество вверх до целых листов.</>}
           </CatalogTableNote>}
-          <CatalogVariantTable designation={presentation.heading} specifications={specificationLabels}
+          <CatalogVariantTable designation={presentation.heading} specifications={isPicket ? ["Цвет", "Профиль", ...specificationLabels] : specificationLabels}
+            columnWidths={isPicket ? picketColumnWidths : undefined}
             specificationWidths={isAngle && parameters.length === 2 ? [12, 6] : undefined}
-            unit={unit} quantity={hasMeasuredOrder ? "Заказ, м" : hasSheetMassOrder ? "Заказ, шт." : undefined}
+            unit={unit} quantity={hasMeasuredOrder ? "Заказ, м" : hasSheetMassOrder ? "Заказ, шт." : undefined} quantityColSpan={quantityColSpan}
             secondaryQuantity={hasMeasuredOrder || hasSheetMassOrder ? "Заказ, т" : undefined}>
             {visible.map(variant => renderVariant(variant, "table"))}
           </CatalogVariantTable>

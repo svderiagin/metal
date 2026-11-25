@@ -4,9 +4,11 @@ import {beamProfile, beamSeries, type BeamSeries} from "@/lib/beam";
 import {getSheetParameters, isPlainHotRolledSheet} from "@/lib/sheetPresentation";
 import {isMeasuredElectroweldedVariant} from "@/lib/pipeFamily";
 import {a240SubcategoryId, a40025g2sSubcategoryId} from "@/lib/rebar";
+import {getVariantAttribute} from "@/lib/variantPresentation";
 
 const number = "\\d+(?:\\.\\d+)?";
 const dimensionPattern = new RegExp(`(?<![а-яa-z\\d.])${number}(?:x${number})+(?![а-яa-z\\d.])`, "g");
+const ralPattern = /(?<![а-яa-z\d])ral\s*(\d{4})(?![а-яa-z\d])/g;
 export const canonicalNumber = (value: string) => String(Number(value.replace(",", ".").replace(/\s/g, "")));
 export function canonicalIdentifier(value: string): string {
   const text = normalizeText(value);
@@ -37,6 +39,14 @@ export function buildTechnicalDocument(product: ProductVariant): TechnicalDocume
   }
   for (const spec of specs.filter(s => /профил|размер|сечение/i.test(s.name))) chains.push(...dimensions(spec.value));
   const primary = new Set(chains.map(chain => chain[0]));
+  if (product.categoryId === "catalog-cat-shtaketnik") {
+    const dimensions = (["width", "wallThickness", "length"] as const)
+      .map(key => canonicalNumber(getVariantAttribute(product, key)));
+    if (dimensions.every(value => Number(value) > 0)) {
+      chains.push(dimensions);
+      for (const value of dimensions) primary.add(value);
+    }
+  }
   if (product.diameterMm !== undefined) primary.add(String(product.diameterMm));
   if (isPlainHotRolledSheet(product)) {
     const thickness = getSheetParameters(product)?.thickness;
@@ -50,6 +60,8 @@ export function buildTechnicalDocument(product: ProductVariant): TechnicalDocume
     const match = normalizeText(attr.value).match(/^(\d+(?:\.\d+)?)\s*(?:мм)?$/);if (match) primary.add(canonicalNumber(match[1]));
   }
   const grades = new Set([...identifiers(gradeText), ...identifiers(`${product.name} ${offerName}`).filter(t => !/^[\d.]+х[\dх.]+$/.test(t))]);
+  const ral = product.ralCode || Array.from(normalizeText(product.name).matchAll(ralPattern))[0]?.[1];
+  if (ral) grades.add(canonicalIdentifier(`ral${ral}`));
   if (electrowelded && /^\d{1,2}$/.test(product.steelGrade ?? "")) grades.add(`ст${product.steelGrade}`);
   if (product.categoryId === "cat-bal") {
     const profile = beamProfile(product);
@@ -74,6 +86,7 @@ export function buildTechnicalDocument(product: ProductVariant): TechnicalDocume
     for (const match of normalizeText(product.standard).matchAll(/;\s*(\d+(?:\.\d+)*(?:-\d+)?)/g)) standardSet.add(match[1]);
   }
   const numbers = new Set([...primary, ...chains.flat(), ...[...standardSet].flatMap(s => [s, s.split("-")[0]])]);
+  if (ral) numbers.add(ral);
   return {dimensions: chains, primary, numbers, grades, standards: standardSet};
 }
 
@@ -93,6 +106,10 @@ export function parseTechnicalQuery(input: string): TechnicalQuery {
     }
   }
   text = text.replace(/гост\s*(?:р\s*)?(\d+(?:\.\d+)*(?:-\d+)?)/g, (_, value: string) => {query.standards.push(value);return " ";});
+  text = text.replace(ralPattern, (_, value: string) => {
+    query.grades.push(canonicalIdentifier(`ral${value}`));
+    return " ";
+  });
   text = text.replace(/(^|[^а-яa-z])ду\s*(\d+(?:\.\d+)?)/g, (_, prefix: string, value: string) => {query.nominalBore = canonicalNumber(value);return prefix + value;});
   text = text.replace(/(?:[øØ⌀ф]\s*|диаметр(?:ом)?\s*)(\d+(?:\.\d+)?)/g, (_, value: string) => {query.diameter = canonicalNumber(value);return " ";});
   text = text.replace(/толщин(?:а|ой|у)\s*(\d+(?:\.\d+)?)/g, (_, value: string) => {query.thickness = canonicalNumber(value);return " ";});

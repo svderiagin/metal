@@ -23,6 +23,7 @@ export function GenericProductVariantCatalog({
   categorySlug: string;
 }) {
   const isSheetCatalog = variants.length > 0 && variants.every(isIllustratedSheet);
+  const isPicket = categorySlug === "shtaketnik";
   const hasMeasuredOrder = variants.length > 0 && variants.every(isMeterPricedSection);
   const filterKeys = isSheetCatalog ? sheetFilterKeys : getVariantFilterKeys(categorySlug);
   const [filters, setFilters] = useState<Partial<Record<VariantFilterKey, string>>>({});
@@ -51,9 +52,9 @@ export function GenericProductVariantCatalog({
   const results = useMemo(() => selectVariants(deferredQuery.trim() ? search.hits.map(hit => hit.product) : variants,
     {filters, filterKeys, stockOnly, minimumPrice, maximumPrice, sort}),
     [deferredQuery, search, variants, filters, filterKeys, stockOnly, minimumPrice, maximumPrice, sort]);
-  const pages = Math.max(1, Math.ceil(results.length / 40));
+  const pages = isPicket ? 1 : Math.max(1, Math.ceil(results.length / 40));
   const currentPage = Math.min(page, pages);
-  const visible = results.slice((currentPage - 1) * 40, currentPage * 40);
+  const visible = isPicket ? results : results.slice((currentPage - 1) * 40, currentPage * 40);
   function setFilter(key: VariantFilterKey, value: string) {
     setFilters((current) => ({...current, [key]: value}));
     setPage(1);
@@ -71,6 +72,7 @@ export function GenericProductVariantCatalog({
   return (
     <>
       <FilterPanel className="lg:col-start-2" query={query}
+        queryPlaceholder={isPicket ? "Профиль, размер или RAL" : undefined}
         activeFilters={Object.values(filters).filter(Boolean).length + Number(stockOnly) + [minimumPrice, maximumPrice].filter(Boolean).length}
         onQueryChange={value => {setQuery(value);setSort(value.trim() ? "relevance" : "name");setPage(1);}} onReset={reset}
         resultCount={{visible: results.length, total: variants.length, pending: resultsPending}}
@@ -113,7 +115,7 @@ export function GenericProductVariantCatalog({
               </Select>
             </label>
           ))}
-          <PriceRangeInputs range={priceRange} unit={hasMeasuredOrder ? "метр" : undefined}/>
+          <PriceRangeInputs range={priceRange} unit={hasMeasuredOrder ? "метр" : isPicket ? "штуку" : undefined}/>
       </FilterPanel>
 
       <VariantCatalogResults visible={visible} categorySlug={categorySlug} isSheetCatalog={isSheetCatalog} resultsCount={results.length}
