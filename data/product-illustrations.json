@@ -1758,5 +1758,40 @@
     "imageUrl": "/images/catalog/balka/balka-normalnaya/measurement/balka-16b1-s255-6m.webp",
     "photoUrl": "/images/catalog/balka/balka-normalnaya/originals/balka_normalnaya_2400_1800_marked.jpg",
     "signature": "b8361d6b"
+  },
+  "catalog-polosa-20x3-6m": {
+    "imageUrl": "/images/catalog/polosa/measurement/polosa-stalnaya-20x3mm-6m.webp",
+    "photoUrl": "/images/catalog/polosa/originals/polosa_stalnaya_1448_1086_original.png",
+    "signature": "2f657ce6"
+  },
+  "catalog-polosa-25x3-6m": {
+    "imageUrl": "/images/catalog/polosa/measurement/polosa-stalnaya-25x3mm-6m.webp",
+    "photoUrl": "/images/catalog/polosa/originals/polosa_stalnaya_1448_1086_original.png",
+    "signature": "bef68e87"
+  },
+  "catalog-polosa-30x3-6m": {
+    "imageUrl": "/images/catalog/polosa/measurement/polosa-stalnaya-30x3mm-6m.webp",
+    "photoUrl": "/images/catalog/polosa/originals/polosa_stalnaya_1448_1086_original.png",
+    "signature": "0409e21a"
+  },
+  "catalog-polosa-40x6-6m": {
+    "imageUrl": "/images/catalog/polosa/measurement/polosa-stalnaya-40x6mm-6m.webp",
+    "photoUrl": "/images/catalog/polosa/originals/polosa_stalnaya_1448_1086_original.png",
+    "signature": "073a2430"
+  },
+  "catalog-polosa-50x6-6m": {
+    "imageUrl": "/images/catalog/polosa/measurement/polosa-stalnaya-50x6mm-6m.webp",
+    "photoUrl": "/images/catalog/polosa/originals/polosa_stalnaya_1448_1086_original.png",
+    "signature": "70df0678"
+  },
+  "catalog-polosa-50x8-6m": {
+    "imageUrl": "/images/catalog/polosa/measurement/polosa-stalnaya-50x8mm-6m.webp",
+    "photoUrl": "/images/catalog/polosa/originals/polosa_stalnaya_1448_1086_original.png",
+    "signature": "7ed4339e"
+  },
+  "catalog-polosa-60x4-6m": {
+    "imageUrl": "/images/catalog/polosa/measurement/polosa-stalnaya-60x4mm-6m.webp",
+    "photoUrl": "/images/catalog/polosa/originals/polosa_stalnaya_1448_1086_original.png",
+    "signature": "1e568870"
   }
 }

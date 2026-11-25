@@ -2,6 +2,7 @@ const meganorm = "https://meganorm.ru/";
 const documents = meganorm + "mega_doc/norm/gost_gosudarstvennyj-standart/";
 
 export const catalogStandards: Readonly<Record<string, {year: string; href: string}>> = {
+  "103": {year: "2006", href: meganorm + "Data2/1/4293831/4293831161.htm"},
   "2590": {year: "2006", href: meganorm + "Data1/54/54160/index.htm"},
   "2591": {year: "2006", href: meganorm + "Data1/54/54522/index.htm"},
   "3262": {year: "75", href: documents + "5/gost_3262-75_gosudarstvennyy_standart_soyuza_ssr_truby.html"},
@@ -26,6 +27,7 @@ export const catalogStandards: Readonly<Record<string, {year: string; href: stri
 
 const channelStandardPdf = meganorm + "Data2/1/4294847/4294847929.pdf";
 const catalogStandardTables: Record<string, Partial<Record<number, string>>> = {
+  "103-2006": {1: catalogStandards["103"].href + "#i64102"},
   "2591-2006": {1: meganorm + "Data/476/47679.pdf#page=4"},
   "3262-75": {1: meganorm + "Data2/1/4294852/4294852785.htm#i95506"},
   "5781-82": {

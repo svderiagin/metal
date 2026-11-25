@@ -40,6 +40,11 @@ export function variantFilterLabel(variants: ProductVariant[], key: VariantFilte
     if (key === "size") return "Номер профиля";
     if (key === "length") return "Длина по каталогу";
   }
+  if (category === "catalog-cat-polosa") {
+    if (key === "width") return "Ширина, мм";
+    if (key === "wallThickness") return "Толщина, мм";
+    if (key === "length") return "Длина, м";
+  }
   return variants.flatMap(variant => variant.attributes).find(attribute => attribute.key === key)?.label ?? key;
 }
 

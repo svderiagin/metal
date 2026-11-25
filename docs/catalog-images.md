@@ -204,25 +204,24 @@ source tables, preview and write commands, and treatment of incomplete records.
 
 ## Steel strip product illustrations
 
-The 19 «Полоса стальная» rows use the owner's 20×4 mm marked reference and
+The «Полоса стальная» rows use the owner's 20×4 mm marked reference and
 clean photograph from `public/images/catalog/polosa/originals/`. Each row shows its
 width below the cut face and its thickness on the left. The length comes
 from the product specifications, including the 5,85–6 м range for 100×4 mm.
 
-All 19 supplier cards were checked on 21.11.2026. Their source URLs, page
-hashes, dimensions, delivery lengths and mass discrepancies are recorded in
-`data/flat-steel-specifications.json`. Seven masses differ substantially from
-the nominal calculation and two differ by 0.01 kg/m. The public catalog applies
-these verified parameters by ID, source URL and section through `lib/flatSteel.ts`.
-It also supplies the mass to the compact cart catalog. The image renderer reads
-the same mass, rounding its label to two decimals. Product characteristics keep
-three-decimal precision, matching the standard's tables.
+The original 19 positions were checked on 21.11.2026. Their dimensions, delivery
+lengths and mass discrepancies are recorded in `data/flat-steel-specifications.json`.
+The public catalog applies those parameters by ID and section through `lib/flatSteel.ts`.
+The seven 6 m positions added in November 2026 are maintained directly in
+`data/additional-catalog.json` with the full nominal mass for calculations.
+The cart projection uses the catalog mass. Product details show up to three
+decimal places and the image renderer shows up to two.
 
 The nominal formula is `width × thickness × 0.00785` kg/m for dimensions in
 millimetres. The density convention (7 850 kg/m³) comes from
 ГОСТ 103-2006, Table 1, Note 1.
-40×3 lies outside this standard's thickness scope and uses a geometric mass
-calculation. Clause 2.3 covers 80×4 and 100×4 by agreed specification.
+The 3 mm positions use a geometric mass calculation. Clause 2.3 covers
+80×4 and 100×4 by agreed specification.
 The public descriptions use each product's confirmed dimensions and remove
 copied sizes and obsolete ГОСТ 103-76 claims. Steel grade, manufacturing method,
 accuracy class and the shipment's actual standard require supplier documentation.

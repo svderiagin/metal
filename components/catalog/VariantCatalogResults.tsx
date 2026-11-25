@@ -31,7 +31,7 @@ const tableSpecs = {
     heading: "Сечение, мм", parameters: [["Длина", "Длина по каталогу"]],
   },
   polosa: {
-    heading: "Сечение, мм", parameters: [["Длина", "Длина по каталогу"]],
+    heading: "Ширина × толщина, мм", parameters: [["Длина", "Длина по каталогу"]],
   },
   shtaketnik: {
     heading: "Цвет / окраска", parameters: [["Ширина × толщина", "Ширина", "Толщина"], ["Длина", "Длина"]],
@@ -50,15 +50,16 @@ const tableSpecs = {
   },
 } satisfies Record<string, TableSpecifications>;
 
-export function VariantCatalogResults({visible, categorySlug, unit, isSheetCatalog, hasVerifiedSpecifications, resultsCount, currentPage = 1, pages = 1, onPageChange, onReset}: {
+export function VariantCatalogResults({visible, categorySlug, unit, isSheetCatalog, hasMeasuredOrder, hasVerifiedSpecifications, resultsCount, currentPage = 1, pages = 1, onPageChange, onReset}: {
   unit?: string;
-  visible: ProductVariant[]; categorySlug: string; isSheetCatalog: boolean; hasVerifiedSpecifications: boolean; resultsCount: number; currentPage?: number; pages?: number;
+  visible: ProductVariant[]; categorySlug: string; isSheetCatalog: boolean; hasMeasuredOrder: boolean; hasVerifiedSpecifications: boolean; resultsCount: number; currentPage?: number; pages?: number;
   onPageChange?: (page: number) => void; onReset: () => void;
 }) {
   const hasUnverified = visible.some(isDemonstrationProduct);
   const hasMetreQuantities = referenceCategorySlugs.some(slug => slug === categorySlug);
   const isAngle = categorySlug === "ugolok";
   const isSquare = categorySlug === "kvadrat";
+  const isFlatSteel = categorySlug === "polosa";
   const pieceSheetTitle = visible.length === 0 ? undefined
     : visible.every(isGalvanizedSheet) ? "Лист оцинкованный"
     : visible.every(isColdRolledSheet) ? "Лист холоднокатаный" : undefined;
@@ -66,7 +67,6 @@ export function VariantCatalogResults({visible, categorySlug, unit, isSheetCatal
   const isTreadPlateCatalog = isSheetCatalog && visible.every(isTreadPlate);
   const isHotRolledSheetCatalog = isSheetCatalog && visible.every(isPlainHotRolledSheet);
   const hasSheetMassOrder = isSheetCatalog && visible.length > 0 && visible.every(variant => variant.sheetOrder);
-  const hasMeasuredOrder = isAngle || isSquare;
   const presentation: TableSpecifications = isPieceSheetCatalog || isTreadPlateCatalog || isHotRolledSheetCatalog ? tableSpecs.pieceSheet
     : isSheetCatalog ? tableSpecs["listovoy-prokat"]
     : tableSpecs[categorySlug as keyof typeof tableSpecs] ?? tableSpecs.armatura;
@@ -80,7 +80,10 @@ export function VariantCatalogResults({visible, categorySlug, unit, isSheetCatal
     const price = variant.quoteOnly ? (isUnverifiedSquarePipe ? "По запросу" : "Цена по запросу")
       : `${variant.priceQualifier === "from" ? "от " : ""}${formatUnitPrice(variant.price, variant.priceUnit)}`;
     const fields = storefrontPositionFields(variant);
-    const description = !unverified && !hasMetreQuantities && !isSheetCatalog && categorySlug !== "polosa"
+    const detailFields = isFlatSteel
+      ? fields.filter(({label}) => !["Ширина", "Толщина", "Длина по каталогу"].includes(label))
+      : fields;
+    const description = !unverified && !hasMetreQuantities && !isSheetCatalog && !isFlatSteel
       ? variant.description : undefined;
     const value = (label: string) => fields.find(field => field.label === label)?.value;
     const pairedSize = (first: string, second: string) => {
@@ -118,7 +121,7 @@ export function VariantCatalogResults({visible, categorySlug, unit, isSheetCatal
       tableName = section.replace(/\s*мм$/u, "");
       cardName = `Квадрат стальной ${section}`;
     }
-    if (categorySlug === "polosa") tableName = pairedSize("Ширина", "Толщина")?.replace(/\s*мм$/u, "") ?? tableName;
+    if (isFlatSteel) tableName = pairedSize("Ширина", "Толщина")?.replace(/\s*мм$/u, "") ?? tableName;
     if (categorySlug === "shtaketnik") {
       const ral = variant.ralCode ?? variant.name.match(/\bRAL\s+(\d{4})\b/iu)?.[1];
       const finish = value("Тип покраски");
@@ -137,7 +140,7 @@ export function VariantCatalogResults({visible, categorySlug, unit, isSheetCatal
       specifications={isUnverifiedSquarePipe ? <CatalogVariantSpecifications items={[{label: "Характеристики", value: "Уточняются"}]}/> : unverified
         ? <p className="text-sm text-slate-600 dark:text-slate-400">Характеристики требуют подтверждения перед заказом.</p>
         : availability ?? <CatalogVariantSpecifications items={specifications} stacked={isPieceSheetCatalog}/>}
-      details={(fields.length > 0 || description) && <CatalogPositionDetails productName={variant.name} fields={fields}
+      details={(detailFields.length > 0 || description) && <CatalogPositionDetails productName={variant.name} fields={detailFields}
         note={description && <CatalogDescription description={description}/>}/>}
       price={price}
       order={hasMeasuredOrder ? <MeterPricedOrderControls variant={variant} view={view}/>
@@ -157,6 +160,10 @@ export function VariantCatalogResults({visible, categorySlug, unit, isSheetCatal
           {isSquare && hasVerifiedSpecifications && <CatalogTableNote>
             Размеры и теоретическая масса 1 м горячекатаного квадрата приведены в{" "}
             <CatalogStandardReference>таблице 1 ГОСТ 2591-2006</CatalogStandardReference>.
+          </CatalogTableNote>}
+          {isFlatSteel && hasVerifiedSpecifications && <CatalogTableNote>
+            Сумма рассчитывается по метражу, масса — по номинальным размерам полосы. Справочный сортамент горячекатаной полосы приведён в{" "}
+            <CatalogStandardReference>таблице 1 ГОСТ 103-2006</CatalogStandardReference>.
           </CatalogTableNote>}
           {isTreadPlateCatalog && <CatalogTableNote>
             Рифление — «чечевица». Толщина указана по основанию листа. Для заказа по массе используем теоретическую массу с учётом рифления из{" "}

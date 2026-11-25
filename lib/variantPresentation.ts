@@ -3,13 +3,14 @@ import {getAngleProductSpecifications} from "./anglePresentation";
 import {getSquareProductParameters} from "./squarePresentation";
 import {getSheetParameters} from "./sheetPresentation";
 
-export type VariantFilterKey = ProductAttributeKey | "angleType";
+export type VariantFilterKey = ProductAttributeKey | "angleType" | "width";
 
 const defaultFilterKeys: VariantFilterKey[] = ["material", "standard", "size", "grade", "length"];
 const filterKeysByCategory: Record<string, VariantFilterKey[]> = {
   armatura: ["material", "standard", "size", "class", "grade", "length"],
   "setka-metallicheskaya": ["material", "size", "wallThickness", "length"],
   kvadrat: ["size", "length"],
+  polosa: ["width", "wallThickness", "length"],
   shveller: ["size", "length"],
   ugolok: ["angleType", "size", "wallThickness", "length"],
 };
@@ -34,6 +35,10 @@ export function getVariantAttribute(
   if (variant.categoryId === "catalog-cat-kvadrat" && (key === "size" || key === "length")) {
     const square = getSquareProductParameters(variant);
     if (square) return key === "size" ? square.section : square.length;
+  }
+  if (variant.categoryId === "catalog-cat-polosa") {
+    if (key === "width") return specification(variant, ["Ширина"]);
+    if (key === "wallThickness") return specification(variant, ["Толщина"]);
   }
   if (key === "size" || key === "wallThickness") {
     const sheet = getSheetParameters(variant);

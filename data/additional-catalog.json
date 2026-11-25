@@ -10756,6 +10756,62 @@
       ]
     },
     {
+      "id": "catalog-polosa-20x3-6m",
+      "categoryId": "catalog-cat-polosa",
+      "subcategoryId": "catalog-sub-polosa-polosa",
+      "productTypeId": "type-catalog-sub-polosa-polosa",
+      "name": "Полоса стальная 20×3 мм",
+      "slug": "polosa-stalnaya-20x3mm-6m",
+      "shortDescription": "Стальная полоса прямоугольного сечения. Ширина 20 мм, толщина 3 мм, длина 6 м.",
+      "description": "Стальная полоса прямоугольного сечения. Ширина 20 мм, толщина 3 мм, длина 6 м.",
+      "price": 60,
+      "priceQualifier": "exact",
+      "currency": "RUB",
+      "unit": "meter",
+      "priceUnit": "за метр",
+      "material": "Сталь",
+      "standard": "",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "lengthMeters": 6,
+      "weightPerMeterKg": 0.471,
+      "weightConfirmed": true,
+      "imageUrls": [
+        "/images/catalog/polosa/measurement/polosa-stalnaya-20x3mm-6m.webp"
+      ],
+      "attributes": [
+        {
+          "key": "size",
+          "label": "Сечение",
+          "value": "20×3 мм"
+        },
+        {
+          "key": "length",
+          "label": "Длина по каталогу",
+          "value": "6 м"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Ширина",
+          "value": "20 мм"
+        },
+        {
+          "name": "Толщина",
+          "value": "3 мм"
+        },
+        {
+          "name": "Длина по каталогу",
+          "value": "6 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "0,471 кг/м"
+        }
+      ]
+    },
+    {
       "id": "catalog-2168",
       "categoryId": "catalog-cat-polosa",
       "subcategoryId": "catalog-sub-polosa-polosa",
@@ -10806,6 +10862,62 @@
       "sourceProductName": "Полоса № 20х4"
     },
     {
+      "id": "catalog-polosa-25x3-6m",
+      "categoryId": "catalog-cat-polosa",
+      "subcategoryId": "catalog-sub-polosa-polosa",
+      "productTypeId": "type-catalog-sub-polosa-polosa",
+      "name": "Полоса стальная 25×3 мм",
+      "slug": "polosa-stalnaya-25x3mm-6m",
+      "shortDescription": "Стальная полоса прямоугольного сечения. Ширина 25 мм, толщина 3 мм, длина 6 м.",
+      "description": "Стальная полоса прямоугольного сечения. Ширина 25 мм, толщина 3 мм, длина 6 м.",
+      "price": 70,
+      "priceQualifier": "exact",
+      "currency": "RUB",
+      "unit": "meter",
+      "priceUnit": "за метр",
+      "material": "Сталь",
+      "standard": "",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "lengthMeters": 6,
+      "weightPerMeterKg": 0.58875,
+      "weightConfirmed": true,
+      "imageUrls": [
+        "/images/catalog/polosa/measurement/polosa-stalnaya-25x3mm-6m.webp"
+      ],
+      "attributes": [
+        {
+          "key": "size",
+          "label": "Сечение",
+          "value": "25×3 мм"
+        },
+        {
+          "key": "length",
+          "label": "Длина по каталогу",
+          "value": "6 м"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Ширина",
+          "value": "25 мм"
+        },
+        {
+          "name": "Толщина",
+          "value": "3 мм"
+        },
+        {
+          "name": "Длина по каталогу",
+          "value": "6 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "0,589 кг/м"
+        }
+      ]
+    },
+    {
       "id": "catalog-2169",
       "categoryId": "catalog-cat-polosa",
       "subcategoryId": "catalog-sub-polosa-polosa",
@@ -10854,6 +10966,62 @@
         }
       ],
       "sourceProductName": "Полоса № 25х4"
+    },
+    {
+      "id": "catalog-polosa-30x3-6m",
+      "categoryId": "catalog-cat-polosa",
+      "subcategoryId": "catalog-sub-polosa-polosa",
+      "productTypeId": "type-catalog-sub-polosa-polosa",
+      "name": "Полоса стальная 30×3 мм",
+      "slug": "polosa-stalnaya-30x3mm-6m",
+      "shortDescription": "Стальная полоса прямоугольного сечения. Ширина 30 мм, толщина 3 мм, длина 6 м.",
+      "description": "Стальная полоса прямоугольного сечения. Ширина 30 мм, толщина 3 мм, длина 6 м.",
+      "price": 79,
+      "priceQualifier": "exact",
+      "currency": "RUB",
+      "unit": "meter",
+      "priceUnit": "за метр",
+      "material": "Сталь",
+      "standard": "",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "lengthMeters": 6,
+      "weightPerMeterKg": 0.7065,
+      "weightConfirmed": true,
+      "imageUrls": [
+        "/images/catalog/polosa/measurement/polosa-stalnaya-30x3mm-6m.webp"
+      ],
+      "attributes": [
+        {
+          "key": "size",
+          "label": "Сечение",
+          "value": "30×3 мм"
+        },
+        {
+          "key": "length",
+          "label": "Длина по каталогу",
+          "value": "6 м"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Ширина",
+          "value": "30 мм"
+        },
+        {
+          "name": "Толщина",
+          "value": "3 мм"
+        },
+        {
+          "name": "Длина по каталогу",
+          "value": "6 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "0,707 кг/м"
+        }
+      ]
     },
     {
       "id": "catalog-2170",
@@ -11061,6 +11229,85 @@
       "sourceProductName": "Полоса № 40х5"
     },
     {
+      "id": "catalog-polosa-40x6-6m",
+      "categoryId": "catalog-cat-polosa",
+      "subcategoryId": "catalog-sub-polosa-polosa",
+      "productTypeId": "type-catalog-sub-polosa-polosa",
+      "name": "Полоса стальная 40×6 мм",
+      "slug": "polosa-stalnaya-40x6mm-6m",
+      "shortDescription": "Горячекатаная полоса из стали Ст3. Ширина 40 мм, толщина 6 мм, длина 6 м.",
+      "description": "Горячекатаная полоса из стали Ст3. Ширина 40 мм, толщина 6 мм, длина 6 м.",
+      "price": 175,
+      "priceQualifier": "exact",
+      "currency": "RUB",
+      "unit": "meter",
+      "priceUnit": "за метр",
+      "material": "Сталь",
+      "standard": "ГОСТ 103-2006",
+      "steelGrade": "Ст3",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "lengthMeters": 6,
+      "weightPerMeterKg": 1.884,
+      "weightConfirmed": true,
+      "imageUrls": [
+        "/images/catalog/polosa/measurement/polosa-stalnaya-40x6mm-6m.webp"
+      ],
+      "attributes": [
+        {
+          "key": "size",
+          "label": "Сечение",
+          "value": "40×6 мм"
+        },
+        {
+          "key": "length",
+          "label": "Длина по каталогу",
+          "value": "6 м"
+        },
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "Ст3"
+        },
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 103-2006"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Ширина",
+          "value": "40 мм"
+        },
+        {
+          "name": "Толщина",
+          "value": "6 мм"
+        },
+        {
+          "name": "Длина по каталогу",
+          "value": "6 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "1,884 кг/м"
+        },
+        {
+          "name": "Марка стали",
+          "value": "Ст3"
+        },
+        {
+          "name": "Способ изготовления",
+          "value": "Горячая прокатка"
+        },
+        {
+          "name": "Стандарт",
+          "value": "ГОСТ 103-2006"
+        }
+      ]
+    },
+    {
       "id": "catalog-2172",
       "categoryId": "catalog-cat-polosa",
       "subcategoryId": "catalog-sub-polosa-polosa",
@@ -11159,6 +11406,243 @@
         }
       ],
       "sourceProductName": "Полоса № 50х5"
+    },
+    {
+      "id": "catalog-polosa-50x6-6m",
+      "categoryId": "catalog-cat-polosa",
+      "subcategoryId": "catalog-sub-polosa-polosa",
+      "productTypeId": "type-catalog-sub-polosa-polosa",
+      "name": "Полоса стальная 50×6 мм",
+      "slug": "polosa-stalnaya-50x6mm-6m",
+      "shortDescription": "Горячекатаная полоса из стали Ст3. Ширина 50 мм, толщина 6 мм, длина 6 м.",
+      "description": "Горячекатаная полоса из стали Ст3. Ширина 50 мм, толщина 6 мм, длина 6 м.",
+      "price": 210,
+      "priceQualifier": "exact",
+      "currency": "RUB",
+      "unit": "meter",
+      "priceUnit": "за метр",
+      "material": "Сталь",
+      "standard": "ГОСТ 103-2006",
+      "steelGrade": "Ст3",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "lengthMeters": 6,
+      "weightPerMeterKg": 2.355,
+      "weightConfirmed": true,
+      "imageUrls": [
+        "/images/catalog/polosa/measurement/polosa-stalnaya-50x6mm-6m.webp"
+      ],
+      "attributes": [
+        {
+          "key": "size",
+          "label": "Сечение",
+          "value": "50×6 мм"
+        },
+        {
+          "key": "length",
+          "label": "Длина по каталогу",
+          "value": "6 м"
+        },
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "Ст3"
+        },
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 103-2006"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Ширина",
+          "value": "50 мм"
+        },
+        {
+          "name": "Толщина",
+          "value": "6 мм"
+        },
+        {
+          "name": "Длина по каталогу",
+          "value": "6 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "2,355 кг/м"
+        },
+        {
+          "name": "Марка стали",
+          "value": "Ст3"
+        },
+        {
+          "name": "Способ изготовления",
+          "value": "Горячая прокатка"
+        },
+        {
+          "name": "Стандарт",
+          "value": "ГОСТ 103-2006"
+        }
+      ]
+    },
+    {
+      "id": "catalog-polosa-50x8-6m",
+      "categoryId": "catalog-cat-polosa",
+      "subcategoryId": "catalog-sub-polosa-polosa",
+      "productTypeId": "type-catalog-sub-polosa-polosa",
+      "name": "Полоса стальная 50×8 мм",
+      "slug": "polosa-stalnaya-50x8mm-6m",
+      "shortDescription": "Горячекатаная полоса из стали Ст3. Ширина 50 мм, толщина 8 мм, длина 6 м.",
+      "description": "Горячекатаная полоса из стали Ст3. Ширина 50 мм, толщина 8 мм, длина 6 м.",
+      "price": 240,
+      "priceQualifier": "exact",
+      "currency": "RUB",
+      "unit": "meter",
+      "priceUnit": "за метр",
+      "material": "Сталь",
+      "standard": "ГОСТ 103-2006",
+      "steelGrade": "Ст3",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "lengthMeters": 6,
+      "weightPerMeterKg": 3.14,
+      "weightConfirmed": true,
+      "imageUrls": [
+        "/images/catalog/polosa/measurement/polosa-stalnaya-50x8mm-6m.webp"
+      ],
+      "attributes": [
+        {
+          "key": "size",
+          "label": "Сечение",
+          "value": "50×8 мм"
+        },
+        {
+          "key": "length",
+          "label": "Длина по каталогу",
+          "value": "6 м"
+        },
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "Ст3"
+        },
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 103-2006"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Ширина",
+          "value": "50 мм"
+        },
+        {
+          "name": "Толщина",
+          "value": "8 мм"
+        },
+        {
+          "name": "Длина по каталогу",
+          "value": "6 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "3,14 кг/м"
+        },
+        {
+          "name": "Марка стали",
+          "value": "Ст3"
+        },
+        {
+          "name": "Способ изготовления",
+          "value": "Горячая прокатка"
+        },
+        {
+          "name": "Стандарт",
+          "value": "ГОСТ 103-2006"
+        }
+      ]
+    },
+    {
+      "id": "catalog-polosa-60x4-6m",
+      "categoryId": "catalog-cat-polosa",
+      "subcategoryId": "catalog-sub-polosa-polosa",
+      "productTypeId": "type-catalog-sub-polosa-polosa",
+      "name": "Полоса стальная 60×4 мм",
+      "slug": "polosa-stalnaya-60x4mm-6m",
+      "shortDescription": "Горячекатаная полоса из стали Ст3. Ширина 60 мм, толщина 4 мм, длина 6 м.",
+      "description": "Горячекатаная полоса из стали Ст3. Ширина 60 мм, толщина 4 мм, длина 6 м.",
+      "price": 190,
+      "priceQualifier": "exact",
+      "currency": "RUB",
+      "unit": "meter",
+      "priceUnit": "за метр",
+      "material": "Сталь",
+      "standard": "ГОСТ 103-2006",
+      "steelGrade": "Ст3",
+      "availability": "IN_STOCK",
+      "inStock": true,
+      "featured": false,
+      "lengthMeters": 6,
+      "weightPerMeterKg": 1.884,
+      "weightConfirmed": true,
+      "imageUrls": [
+        "/images/catalog/polosa/measurement/polosa-stalnaya-60x4mm-6m.webp"
+      ],
+      "attributes": [
+        {
+          "key": "size",
+          "label": "Сечение",
+          "value": "60×4 мм"
+        },
+        {
+          "key": "length",
+          "label": "Длина по каталогу",
+          "value": "6 м"
+        },
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "Ст3"
+        },
+        {
+          "key": "standard",
+          "label": "Стандарт",
+          "value": "ГОСТ 103-2006"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Ширина",
+          "value": "60 мм"
+        },
+        {
+          "name": "Толщина",
+          "value": "4 мм"
+        },
+        {
+          "name": "Длина по каталогу",
+          "value": "6 м"
+        },
+        {
+          "name": "Теоретическая масса",
+          "value": "1,884 кг/м"
+        },
+        {
+          "name": "Марка стали",
+          "value": "Ст3"
+        },
+        {
+          "name": "Способ изготовления",
+          "value": "Горячая прокатка"
+        },
+        {
+          "name": "Стандарт",
+          "value": "ГОСТ 103-2006"
+        }
+      ]
     },
     {
       "id": "catalog-2173",
@@ -11327,8 +11811,8 @@
       "priceUnit": "за метр",
       "material": "",
       "standard": "",
-      "availability": "IN_STOCK",
-      "inStock": true,
+      "availability": "ON_ORDER",
+      "inStock": false,
       "featured": false,
       "imageUrls": [
         "/images/catalog/polosa/measurement/polosa-stalnaya-80x5mm-6m.webp"
@@ -11477,8 +11961,8 @@
       "priceUnit": "за метр",
       "material": "",
       "standard": "",
-      "availability": "IN_STOCK",
-      "inStock": true,
+      "availability": "ON_ORDER",
+      "inStock": false,
       "featured": false,
       "imageUrls": [
         "/images/catalog/polosa/measurement/polosa-stalnaya-80x10mm-6m.webp"
@@ -11527,8 +12011,8 @@
       "priceUnit": "за метр",
       "material": "",
       "standard": "",
-      "availability": "IN_STOCK",
-      "inStock": true,
+      "availability": "ON_ORDER",
+      "inStock": false,
       "featured": false,
       "imageUrls": [
         "/images/catalog/polosa/measurement/polosa-stalnaya-100x4mm-l5-85-6m.webp"
@@ -11677,8 +12161,8 @@
       "priceUnit": "за метр",
       "material": "",
       "standard": "",
-      "availability": "IN_STOCK",
-      "inStock": true,
+      "availability": "ON_ORDER",
+      "inStock": false,
       "featured": false,
       "imageUrls": [
         "/images/catalog/polosa/measurement/polosa-stalnaya-100x10mm-6m.webp"

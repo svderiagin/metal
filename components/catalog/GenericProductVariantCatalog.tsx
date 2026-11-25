@@ -13,6 +13,7 @@ import type {ProductVariant} from "@/types/product";
 import {VariantCatalogResults} from "./VariantCatalogResults";
 import {formatSpecification} from "./StorefrontPositionSpecifications";
 import {isDemonstrationProduct} from "@/lib/catalogOffer";
+import {isMeterPricedSection} from "@/lib/orderMeasurement";
 
 export function GenericProductVariantCatalog({
   variants,
@@ -22,7 +23,7 @@ export function GenericProductVariantCatalog({
   categorySlug: string;
 }) {
   const isSheetCatalog = variants.length > 0 && variants.every(isIllustratedSheet);
-  const isMeterPricedSection = categorySlug === "ugolok" || categorySlug === "kvadrat";
+  const hasMeasuredOrder = variants.length > 0 && variants.every(isMeterPricedSection);
   const filterKeys = isSheetCatalog ? sheetFilterKeys : getVariantFilterKeys(categorySlug);
   const [filters, setFilters] = useState<Partial<Record<VariantFilterKey, string>>>({});
   const [stockOnly, setStockOnly] = useState(false);
@@ -107,15 +108,16 @@ export function GenericProductVariantCatalog({
               >
                 <option value="">Все значения</option>
                 {(filterOptions.get(key) ?? []).map((value) => (
-                  <option key={value} value={value}>{isMeterPricedSection ? formatSpecification(value).replace(/\s+(?:мм|м)$/u, "") : value}</option>
+                  <option key={value} value={value}>{hasMeasuredOrder ? formatSpecification(value).replace(/\s+(?:мм|м)$/u, "") : value}</option>
                 ))}
               </Select>
             </label>
           ))}
-          <PriceRangeInputs range={priceRange} unit={isMeterPricedSection ? "метр" : undefined}/>
+          <PriceRangeInputs range={priceRange} unit={hasMeasuredOrder ? "метр" : undefined}/>
       </FilterPanel>
 
       <VariantCatalogResults visible={visible} categorySlug={categorySlug} isSheetCatalog={isSheetCatalog} resultsCount={results.length}
+        hasMeasuredOrder={hasMeasuredOrder}
         unit={commonQuantityUnit(variants)}
         hasVerifiedSpecifications={variants.some(variant => !isDemonstrationProduct(variant))}
         currentPage={currentPage} pages={pages} onPageChange={setPage} onReset={reset}/>

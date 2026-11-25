@@ -10,6 +10,11 @@ export function requiresWholeLengthOrder(product: ProductVariant): boolean {
     && product.lengthMeters !== undefined && isPositiveFinite(product.lengthMeters));
 }
 
+export function isMeterPricedSection(product: Pick<ProductVariant, "categoryId" | "unit">) {
+  return product.unit === "meter"
+    && ["catalog-cat-ugolok", "catalog-cat-kvadrat", "catalog-cat-polosa"].includes(product.categoryId);
+}
+
 export function wholeLengthMeters(pieces: number, lengthMeters: number) {
   // Whole-millimetre catalog lengths can be multiplied exactly before converting
   // back to metres. This matters when a whole order costs exactly half a kopeck.
@@ -74,7 +79,7 @@ export function getSimpleOrderQuantityOptions(product?: ProductVariant): {
   decimalPlaces?: number;
 } {
   if (product?.sheetOrder) return {maximum: maxOrderSheets * product.sheetOrder.quantityPerSheet};
-  return product?.unit === "meter" && (product.categoryId === "catalog-cat-ugolok" || product.categoryId === "catalog-cat-kvadrat")
+  return product && isMeterPricedSection(product)
     ? getMeasurementQuantityOptions(product, "meter")
     : {maximum: 999};
 }
