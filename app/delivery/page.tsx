@@ -93,7 +93,6 @@ const sitePoints = [
 const mutedText = "text-slate-600 dark:text-slate-300";
 const panel = "min-w-0 rounded-lg border border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-900";
 const rule = "border-slate-200 dark:border-slate-700";
-const caption = "mt-2 text-xs text-slate-600 dark:text-slate-300";
 const mailHref = `mailto:${companyDetails.salesEmail}`;
 
 export default function DeliveryPage() {
@@ -210,7 +209,6 @@ export default function DeliveryPage() {
                 sizes="(min-width: 1360px) 330px, (min-width: 1024px) 25vw, (min-width: 640px) 50vw, calc(100vw - 32px)"
                 className="block h-auto w-full rounded-lg border border-slate-200 bg-slate-100 dark:border-slate-700 dark:bg-slate-800"
               />
-              <figcaption className={caption}>Иллюстрация площадки для разгрузки</figcaption>
             </figure>
           </div>
         </div>
@@ -251,7 +249,7 @@ function ReceivingOption({title, icon, image, alt, children}: {
         </h3>
         <p className={`mt-2 ${mutedText}`}>{children}</p>
       </div>
-      <div className="min-w-0 px-4 pb-4 sm:px-5 sm:pb-5 lg:self-center lg:py-4 lg:pl-0 lg:pr-4">
+      <div className="min-w-0 px-4 pb-4 sm:px-5 sm:pb-5 lg:self-center lg:py-5 lg:pl-0">
         <Image
           src={image}
           alt={alt}

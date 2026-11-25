@@ -3,7 +3,9 @@
   grid-template-areas: "heading" "description" "actions";
   gap: 0.75rem 1rem;
   align-items: start;
+  padding: var(--catalog-content-inset);
 }
+.content { display: contents; }
 .heading { grid-area: heading; min-width: 0; }
 .description { grid-area: description; min-width: 0; }
 .gallery { grid-area: photo; min-width: 0; }
@@ -29,5 +31,48 @@
   .gallery { align-self: center; }
 }
 @media (min-width: 64rem) {
-  .withImage { grid-template-columns: minmax(0, 1fr) 24rem; }
+  .withImage {
+    grid-template-areas: "content photo";
+    grid-template-columns: minmax(0, 1fr) clamp(18rem, 31%, 24rem);
+    align-items: stretch;
+    gap: 0;
+    padding: 0;
+  }
+
+  .withImage .content {
+    grid-area: content;
+    display: flex;
+    min-inline-size: 0;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: var(--catalog-content-inset);
+  }
+
+  .withImage .gallery {
+    position: relative;
+    align-self: stretch;
+    min-block-size: 13.5rem;
+  }
+
+  .cover {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    border-start-end-radius: calc(var(--radius-xl) - 1px);
+    border-end-end-radius: calc(var(--radius-xl) - 1px);
+  }
+
+  .cover > button:focus-visible {
+    outline: none;
+  }
+
+  .cover > button:focus-visible::after {
+    position: absolute;
+    inset: 3px;
+    border: 2px solid white;
+    border-radius: 2px;
+    box-shadow: 0 0 0 1px var(--color-slate-950), inset 0 0 0 1px var(--color-slate-950);
+    content: "";
+    pointer-events: none;
+  }
 }

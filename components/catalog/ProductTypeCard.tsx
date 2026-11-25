@@ -30,12 +30,12 @@ export function ProductTypeCard({
     : formatUnitPrice(minimumPrice, priceUnit).replace(/,00(?=\s*₽)/u, "").split(/\s+(?=₽)/u);
 
   return (
-    <article className={`${styles.card} @container relative flex h-full min-w-0 flex-col rounded-xl border border-slate-200 bg-white p-4 transition-colors sm:p-5 dark:border-slate-700 dark:bg-slate-900`}>
+    <article className={`${styles.card} ${styles.contentInset} ${styles.body} @container relative flex h-full min-w-0 flex-col rounded-xl border border-slate-200 bg-white transition-colors dark:border-slate-700 dark:bg-slate-900`}>
       <div className="flex min-w-0 flex-1 flex-col">
         <div className={styles.typeIntro}>
           {productType.imageUrl && <div className={`${styles.typePhoto} relative aspect-[4/3] overflow-hidden rounded-lg bg-white`}>
             <PreparedPhoto src={catalogImageUrl(productType.imageUrl)} alt="" fill
-              sizes="(min-width: 640px) 192px, 160px"
+              sizes="auto, (min-width: 1024px) 176px, (min-width: 768px) 144px, (min-width: 640px) 176px, 120px"
               className="object-cover object-center"/>
           </div>}
           <div className={`${styles.typeText} min-w-0`}>
