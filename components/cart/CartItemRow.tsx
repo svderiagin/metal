@@ -9,7 +9,7 @@ import {Button} from "@/components/ui/Button";
 import {Icon} from "@/components/ui/Icon";
 import {QuantitySelector} from "./QuantitySelector";
 import {getProductVariantById} from "@/lib/cartCatalog";
-import {calculateLineTotal, calculateMeasuredLineTotal, getCartMeasurementQuantityOptions, getSimpleOrderQuantityOptions, requiresWholeLengthOrder, tonsToMeters, wholeLengthOrder} from "@/lib/orderMeasurement";
+import {calculateLineTotal, calculateMeasuredLineTotal, getCartMeasurementQuantityOptions, getSimpleOrderQuantityOptions, metersToTons, requiresWholeLengthOrder, tonsToMeters, wholeLengthOrder} from "@/lib/orderMeasurement";
 import {MAX_ORDER_PIECES} from "@/lib/constants";
 import {hasSheetOrderMass, sheetsForOrderTons, sheetTonDecimals, sheetOrderTons} from "@/lib/sheetOrder";
 import {getTreadPlateExecution} from "@/lib/sheetPresentation";
@@ -17,10 +17,20 @@ import {formatCartQuantity, formatMeasuredQuantity, formatQuantityForInput, form
   measuredTonFractionDigits, productOrderFractionDigits, rebarMinimumMeterEntry, rebarMinimumTonEntry, rebarTonFractionDigits} from "@/lib/cartQuantityInput";
 import {isVgpVariant, isWholePipeVariant} from "@/lib/pipeFamily";
 import {isDemonstrationProduct} from "@/lib/catalogOffer";
-import {profilePipeMaximumPieces} from "@/lib/profilePipe";
+import {profilePipeMassPerMeter, profilePipeMaximumPieces} from "@/lib/profilePipe";
 import {CartAmount} from "./CartAmount";
 import catalogStyles from "../catalog/FilterPanel.module.css";
 import styles from "./CartItemRow.module.css";
+
+function additionalSteelGrade(name: string, grade: string | undefined) {
+  if (!grade || grade === "—") return;
+  if (grade === "3сп(пс)") return "Ст3сп или Ст3пс (по партии)";
+  const tokens = name.toUpperCase().replaceAll("C", "С").split(/[^\p{L}\p{N}]+/u);
+  const isInName = /^\d+$/u.test(grade)
+    ? tokens.some((token, index) => token === `СТ${grade}` || (token === grade && tokens[index - 1] === "СТАЛЬ"))
+    : tokens.includes(grade.toUpperCase().replaceAll("C", "С"));
+  return isInName ? undefined : grade;
+}
 
 export function CartItemRow({line, onRemove}: {line: CartLine; onRemove: () => void}) {
   const {updateQuantity, updatePieceOrder} = useCart();
@@ -48,10 +58,13 @@ export function CartItemRow({line, onRemove}: {line: CartLine; onRemove: () => v
     : undefined;
   const maximumPieces = product && pieceOrder
     ? profilePipeMaximumPieces(product, pieceOrder.lengthMeters) ?? undefined : undefined;
+  const pipeMassPerMeter = product && pieceOrder && !line.invalidReason ? profilePipeMassPerMeter(product) : null;
+  const pipeOrderTons = pipeMassPerMeter === null ? null : metersToTons(line.quantity, pipeMassPerMeter);
   const sheetOrder = product?.sheetOrder;
   const sheetCount = sheetOrder ? line.quantity / sheetOrder.quantityPerSheet : 0;
   const sheetExecution = product ? getTreadPlateExecution(product) : undefined;
   const productName = sheetExecution ? `${line.name} · ${sheetExecution}` : line.name;
+  const steelGrade = additionalSteelGrade(productName, product?.steelGrade);
 
   function updatePipeLength(length: number) {
     if (!pieceOrder) return;
@@ -69,6 +82,10 @@ export function CartItemRow({line, onRemove}: {line: CartLine; onRemove: () => v
             className="rounded-sm transition-colors hover:text-brand-700 hover:underline dark:hover:text-brand-300"
           >{productName}</Link> : productName}
         </h2>
+        {product?.sheetFormat && <p className="text-sm text-slate-600 dark:text-slate-300">
+          Размер листа {product.sheetFormat}
+        </p>}
+        {steelGrade && <p className="text-sm text-slate-600 dark:text-slate-300">Сталь {steelGrade}</p>}
         {product && <p className="text-sm text-slate-600 dark:text-slate-400">
           {priceRequiresQuote ? "Цена по запросу" : <CartAmount>{formatUnitPrice(line.price, line.priceUnit)}</CartAmount>}
         </p>}
@@ -92,6 +109,9 @@ export function CartItemRow({line, onRemove}: {line: CartLine; onRemove: () => v
             onChange={updatePipeLength}/>}
           <p className={styles.orderDetail}>
             {formatCartQuantity(pieceOrder.pieces)} шт. × {formatNumber(pieceOrder.lengthMeters)} м = {formatCartQuantity(line.quantity)} м
+            {pipeOrderTons !== null && <span className="block">
+              Общая масса {formatMeasuredQuantity(pipeOrderTons, "ton", true)}&nbsp;т
+            </span>}
           </p>
         </>
       ) : measurement ? (
@@ -134,6 +154,9 @@ export function CartItemRow({line, onRemove}: {line: CartLine; onRemove: () => v
             formatValue={(tons, grouped) => formatQuantityForInput(tons, grouped, sheetTonDecimals)}
             normalizeQuantity={tons => ({value: sheetOrderTons(sheetOrder, sheetsForOrderTons(sheetOrder, tons))})}
             onChange={tons => updateQuantity(line.productId, sheetsForOrderTons(sheetOrder, tons) * sheetOrder.quantityPerSheet)}/>}
+          {product?.unit === "square_meter" && <p className={styles.orderDetail}>
+            Общая площадь {formatCartQuantity(line.quantity)}&nbsp;м²
+          </p>}
         </>
       ) : (
         <QuantitySelector fieldLabel={product?.unit === "ton" || product?.unit === "kg" ? "Масса"
