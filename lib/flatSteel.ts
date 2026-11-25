@@ -23,8 +23,11 @@ export function applyFlatSteelSpecifications(product: ProductVariant): ProductVa
   const format = (value: number) => value.toLocaleString("ru-RU", {maximumFractionDigits: 3});
   const length = minimum === maximum ? `${format(minimum)} м` : `${format(minimum)}–${format(maximum)} м`;
   const mass = `${format(record.theoreticalMassKgPerMeter)} кг/м`;
-  const shortDescription = `Стальная полоса прямоугольного сечения шириной ${section.width} мм и толщиной ${section.thickness} мм. Длина по каталогу ${length}.`;
-  const description = `${shortDescription}\n\nТеоретическая масса 1 м составляет ${mass}. Расчёт выполнен по номинальным размерам сечения при плотности стали 7 850 кг/м³.\n\nПолосу используют для заготовок, накладок, крепёжных деталей и элементов металлоконструкций. Марку стали, способ изготовления и стандарт поставки уточняют по документам на партию.`;
+  const hotRolled = product.specifications.some(({name, value}) => name === "Способ изготовления" && value === "Горячая прокатка");
+  const type = hotRolled ? "Горячекатаная полоса" : "Стальная полоса";
+  const grade = product.steelGrade ? ` из стали ${product.steelGrade}` : "";
+  const shortDescription = `${type}${grade} прямоугольного сечения шириной ${section.width} мм и толщиной ${section.thickness} мм. Длина по каталогу ${length}.`;
+  const description = `${shortDescription}\n\nТеоретическая масса 1 м составляет ${mass}. Расчёт выполнен по номинальным размерам сечения при плотности стали 7 850 кг/м³.\n\nПолосу используют для заготовок, накладок, крепёжных деталей и элементов металлоконструкций. Стандарт поставки и допуски уточняют по документам на партию.`;
   const technicalNames = new Set(["Размер", "Вес", "Ширина", "Толщина", "Длина", "Длина по каталогу", "Теоретическая масса"]);
   return {
     ...named, shortDescription, description,

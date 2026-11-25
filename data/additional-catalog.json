@@ -10762,8 +10762,8 @@
       "productTypeId": "type-catalog-sub-polosa-polosa",
       "name": "Полоса стальная 20×3 мм",
       "slug": "polosa-stalnaya-20x3mm-6m",
-      "shortDescription": "Стальная полоса прямоугольного сечения. Ширина 20 мм, толщина 3 мм, длина 6 м.",
-      "description": "Стальная полоса прямоугольного сечения. Ширина 20 мм, толщина 3 мм, длина 6 м.",
+      "shortDescription": "Горячекатаная полоса из стали Ст3. Ширина 20 мм, толщина 3 мм, длина 6 м.",
+      "description": "Горячекатаная полоса из стали Ст3. Ширина 20 мм, толщина 3 мм, длина 6 м.",
       "price": 60,
       "priceQualifier": "exact",
       "currency": "RUB",
@@ -10790,6 +10790,11 @@
           "key": "length",
           "label": "Длина по каталогу",
           "value": "6 м"
+        },
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "Ст3"
         }
       ],
       "specifications": [
@@ -10808,8 +10813,17 @@
         {
           "name": "Теоретическая масса",
           "value": "0,471 кг/м"
+        },
+        {
+          "name": "Марка стали",
+          "value": "Ст3"
+        },
+        {
+          "name": "Способ изготовления",
+          "value": "Горячая прокатка"
         }
-      ]
+      ],
+      "steelGrade": "Ст3"
     },
     {
       "id": "catalog-2168",
@@ -10826,7 +10840,7 @@
       "imported": true,
       "unit": "meter",
       "priceUnit": "за метр",
-      "material": "",
+      "material": "Сталь",
       "standard": "",
       "availability": "IN_STOCK",
       "inStock": true,
@@ -10839,6 +10853,11 @@
           "key": "size",
           "label": "Размер",
           "value": "6 м"
+        },
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "Ст3"
         }
       ],
       "specifications": [
@@ -10857,9 +10876,18 @@
         {
           "name": "Условия оплаты",
           "value": "Акция действует только при наличной оплате"
+        },
+        {
+          "name": "Марка стали",
+          "value": "Ст3"
+        },
+        {
+          "name": "Способ изготовления",
+          "value": "Горячая прокатка"
         }
       ],
-      "sourceProductName": "Полоса № 20х4"
+      "sourceProductName": "Полоса № 20х4",
+      "steelGrade": "Ст3"
     },
     {
       "id": "catalog-polosa-25x3-6m",
@@ -10868,8 +10896,8 @@
       "productTypeId": "type-catalog-sub-polosa-polosa",
       "name": "Полоса стальная 25×3 мм",
       "slug": "polosa-stalnaya-25x3mm-6m",
-      "shortDescription": "Стальная полоса прямоугольного сечения. Ширина 25 мм, толщина 3 мм, длина 6 м.",
-      "description": "Стальная полоса прямоугольного сечения. Ширина 25 мм, толщина 3 мм, длина 6 м.",
+      "shortDescription": "Горячекатаная полоса из стали Ст3. Ширина 25 мм, толщина 3 мм, длина 6 м.",
+      "description": "Горячекатаная полоса из стали Ст3. Ширина 25 мм, толщина 3 мм, длина 6 м.",
       "price": 70,
       "priceQualifier": "exact",
       "currency": "RUB",
@@ -10896,6 +10924,11 @@
           "key": "length",
           "label": "Длина по каталогу",
           "value": "6 м"
+        },
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "Ст3"
         }
       ],
       "specifications": [
@@ -10914,8 +10947,17 @@
         {
           "name": "Теоретическая масса",
           "value": "0,589 кг/м"
+        },
+        {
+          "name": "Марка стали",
+          "value": "Ст3"
+        },
+        {
+          "name": "Способ изготовления",
+          "value": "Горячая прокатка"
         }
-      ]
+      ],
+      "steelGrade": "Ст3"
     },
     {
       "id": "catalog-2169",
@@ -10932,7 +10974,7 @@
       "imported": true,
       "unit": "meter",
       "priceUnit": "за метр",
-      "material": "",
+      "material": "Сталь",
       "standard": "",
       "availability": "IN_STOCK",
       "inStock": true,
@@ -10945,6 +10987,11 @@
           "key": "size",
           "label": "Размер",
           "value": "6 м"
+        },
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "Ст3"
         }
       ],
       "specifications": [
@@ -10963,9 +11010,18 @@
         {
           "name": "Условия оплаты",
           "value": "Акция действует только при наличной оплате"
+        },
+        {
+          "name": "Марка стали",
+          "value": "Ст3"
+        },
+        {
+          "name": "Способ изготовления",
+          "value": "Горячая прокатка"
         }
       ],
-      "sourceProductName": "Полоса № 25х4"
+      "sourceProductName": "Полоса № 25х4",
+      "steelGrade": "Ст3"
     },
     {
       "id": "catalog-polosa-30x3-6m",
@@ -10974,8 +11030,8 @@
       "productTypeId": "type-catalog-sub-polosa-polosa",
       "name": "Полоса стальная 30×3 мм",
       "slug": "polosa-stalnaya-30x3mm-6m",
-      "shortDescription": "Стальная полоса прямоугольного сечения. Ширина 30 мм, толщина 3 мм, длина 6 м.",
-      "description": "Стальная полоса прямоугольного сечения. Ширина 30 мм, толщина 3 мм, длина 6 м.",
+      "shortDescription": "Горячекатаная полоса из стали Ст3. Ширина 30 мм, толщина 3 мм, длина 6 м.",
+      "description": "Горячекатаная полоса из стали Ст3. Ширина 30 мм, толщина 3 мм, длина 6 м.",
       "price": 79,
       "priceQualifier": "exact",
       "currency": "RUB",
@@ -11002,6 +11058,11 @@
           "key": "length",
           "label": "Длина по каталогу",
           "value": "6 м"
+        },
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "Ст3"
         }
       ],
       "specifications": [
@@ -11020,8 +11081,17 @@
         {
           "name": "Теоретическая масса",
           "value": "0,707 кг/м"
+        },
+        {
+          "name": "Марка стали",
+          "value": "Ст3"
+        },
+        {
+          "name": "Способ изготовления",
+          "value": "Горячая прокатка"
         }
-      ]
+      ],
+      "steelGrade": "Ст3"
     },
     {
       "id": "catalog-2170",
@@ -11038,7 +11108,7 @@
       "imported": true,
       "unit": "meter",
       "priceUnit": "за метр",
-      "material": "",
+      "material": "Сталь",
       "standard": "",
       "availability": "IN_STOCK",
       "inStock": true,
@@ -11051,6 +11121,11 @@
           "key": "size",
           "label": "Размер",
           "value": "6 м"
+        },
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "Ст3"
         }
       ],
       "specifications": [
@@ -11069,9 +11144,18 @@
         {
           "name": "Условия оплаты",
           "value": "Акция действует только при наличной оплате"
+        },
+        {
+          "name": "Марка стали",
+          "value": "Ст3"
+        },
+        {
+          "name": "Способ изготовления",
+          "value": "Горячая прокатка"
         }
       ],
-      "sourceProductName": "Полоса № 30х4"
+      "sourceProductName": "Полоса № 30х4",
+      "steelGrade": "Ст3"
     },
     {
       "id": "catalog-29037",
@@ -11088,7 +11172,7 @@
       "imported": true,
       "unit": "meter",
       "priceUnit": "за метр",
-      "material": "",
+      "material": "Сталь",
       "standard": "",
       "availability": "IN_STOCK",
       "inStock": true,
@@ -11106,6 +11190,11 @@
           "key": "wallThickness",
           "label": "Толщина",
           "value": "3 мм"
+        },
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "Ст3"
         }
       ],
       "specifications": [
@@ -11124,9 +11213,18 @@
         {
           "name": "Условия цены",
           "value": "Только при оплате наличными"
+        },
+        {
+          "name": "Марка стали",
+          "value": "Ст3"
+        },
+        {
+          "name": "Способ изготовления",
+          "value": "Горячая прокатка"
         }
       ],
-      "sourceProductName": "Полоса № 40х3"
+      "sourceProductName": "Полоса № 40х3",
+      "steelGrade": "Ст3"
     },
     {
       "id": "catalog-2171",
@@ -11143,7 +11241,7 @@
       "imported": true,
       "unit": "meter",
       "priceUnit": "за метр",
-      "material": "",
+      "material": "Сталь",
       "standard": "",
       "availability": "IN_STOCK",
       "inStock": true,
@@ -11156,6 +11254,11 @@
           "key": "size",
           "label": "Размер",
           "value": "6 м"
+        },
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "Ст3"
         }
       ],
       "specifications": [
@@ -11174,9 +11277,18 @@
         {
           "name": "Условия оплаты",
           "value": "Акция действует только при наличной оплате"
+        },
+        {
+          "name": "Марка стали",
+          "value": "Ст3"
+        },
+        {
+          "name": "Способ изготовления",
+          "value": "Горячая прокатка"
         }
       ],
-      "sourceProductName": "Полоса № 40х4"
+      "sourceProductName": "Полоса № 40х4",
+      "steelGrade": "Ст3"
     },
     {
       "id": "catalog-28942",
@@ -11193,7 +11305,7 @@
       "imported": true,
       "unit": "meter",
       "priceUnit": "за метр",
-      "material": "",
+      "material": "Сталь",
       "standard": "",
       "availability": "IN_STOCK",
       "inStock": true,
@@ -11206,6 +11318,11 @@
           "key": "size",
           "label": "Размер",
           "value": "6 м"
+        },
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "Ст3"
         }
       ],
       "specifications": [
@@ -11224,9 +11341,18 @@
         {
           "name": "Условия оплаты",
           "value": "Акция действует только при наличной оплате"
+        },
+        {
+          "name": "Марка стали",
+          "value": "Ст3"
+        },
+        {
+          "name": "Способ изготовления",
+          "value": "Горячая прокатка"
         }
       ],
-      "sourceProductName": "Полоса № 40х5"
+      "sourceProductName": "Полоса № 40х5",
+      "steelGrade": "Ст3"
     },
     {
       "id": "catalog-polosa-40x6-6m",
@@ -11322,7 +11448,7 @@
       "imported": true,
       "unit": "meter",
       "priceUnit": "за метр",
-      "material": "",
+      "material": "Сталь",
       "standard": "",
       "availability": "IN_STOCK",
       "inStock": true,
@@ -11335,6 +11461,11 @@
           "key": "size",
           "label": "Размер",
           "value": "6 м"
+        },
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "Ст3"
         }
       ],
       "specifications": [
@@ -11353,9 +11484,18 @@
         {
           "name": "Условия оплаты",
           "value": "Акция действует только при наличной оплате"
+        },
+        {
+          "name": "Марка стали",
+          "value": "Ст3"
+        },
+        {
+          "name": "Способ изготовления",
+          "value": "Горячая прокатка"
         }
       ],
-      "sourceProductName": "Полоса № 50х4"
+      "sourceProductName": "Полоса № 50х4",
+      "steelGrade": "Ст3"
     },
     {
       "id": "catalog-16727",
@@ -11372,7 +11512,7 @@
       "imported": true,
       "unit": "meter",
       "priceUnit": "за метр",
-      "material": "",
+      "material": "Сталь",
       "standard": "",
       "availability": "IN_STOCK",
       "inStock": true,
@@ -11385,6 +11525,11 @@
           "key": "size",
           "label": "Размер",
           "value": "6 м"
+        },
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "Ст3"
         }
       ],
       "specifications": [
@@ -11403,9 +11548,18 @@
         {
           "name": "Условия оплаты",
           "value": "Акция действует только при наличной оплате"
+        },
+        {
+          "name": "Марка стали",
+          "value": "Ст3"
+        },
+        {
+          "name": "Способ изготовления",
+          "value": "Горячая прокатка"
         }
       ],
-      "sourceProductName": "Полоса № 50х5"
+      "sourceProductName": "Полоса № 50х5",
+      "steelGrade": "Ст3"
     },
     {
       "id": "catalog-polosa-50x6-6m",
@@ -11659,7 +11813,7 @@
       "imported": true,
       "unit": "meter",
       "priceUnit": "за метр",
-      "material": "",
+      "material": "Сталь",
       "standard": "",
       "availability": "IN_STOCK",
       "inStock": true,
@@ -11672,6 +11826,11 @@
           "key": "size",
           "label": "Размер",
           "value": "6 м"
+        },
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "Ст3"
         }
       ],
       "specifications": [
@@ -11690,9 +11849,18 @@
         {
           "name": "Условия оплаты",
           "value": "Акция действует только при наличной оплате"
+        },
+        {
+          "name": "Марка стали",
+          "value": "Ст3"
+        },
+        {
+          "name": "Способ изготовления",
+          "value": "Горячая прокатка"
         }
       ],
-      "sourceProductName": "Полоса № 60х5"
+      "sourceProductName": "Полоса № 60х5",
+      "steelGrade": "Ст3"
     },
     {
       "id": "catalog-2174",
@@ -11709,7 +11877,7 @@
       "imported": true,
       "unit": "meter",
       "priceUnit": "за метр",
-      "material": "",
+      "material": "Сталь",
       "standard": "",
       "availability": "IN_STOCK",
       "inStock": true,
@@ -11722,6 +11890,11 @@
           "key": "size",
           "label": "Размер",
           "value": "6 м"
+        },
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "Ст3"
         }
       ],
       "specifications": [
@@ -11740,9 +11913,18 @@
         {
           "name": "Условия оплаты",
           "value": "Акция действует только при наличной оплате"
+        },
+        {
+          "name": "Марка стали",
+          "value": "Ст3"
+        },
+        {
+          "name": "Способ изготовления",
+          "value": "Горячая прокатка"
         }
       ],
-      "sourceProductName": "Полоса № 60х6"
+      "sourceProductName": "Полоса № 60х6",
+      "steelGrade": "Ст3"
     },
     {
       "id": "catalog-28974",
@@ -11759,7 +11941,7 @@
       "imported": true,
       "unit": "meter",
       "priceUnit": "за метр",
-      "material": "",
+      "material": "Сталь",
       "standard": "",
       "availability": "IN_STOCK",
       "inStock": true,
@@ -11772,6 +11954,11 @@
           "key": "size",
           "label": "Размер",
           "value": "6 м"
+        },
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "Ст3"
         }
       ],
       "specifications": [
@@ -11790,9 +11977,18 @@
         {
           "name": "Условия оплаты",
           "value": "Акция действует только при наличной оплате"
+        },
+        {
+          "name": "Марка стали",
+          "value": "Ст3"
+        },
+        {
+          "name": "Способ изготовления",
+          "value": "Горячая прокатка"
         }
       ],
-      "sourceProductName": "Полоса № 80х4"
+      "sourceProductName": "Полоса № 80х4",
+      "steelGrade": "Ст3"
     },
     {
       "id": "catalog-28975",
@@ -11809,7 +12005,7 @@
       "imported": true,
       "unit": "meter",
       "priceUnit": "за метр",
-      "material": "",
+      "material": "Сталь",
       "standard": "",
       "availability": "ON_ORDER",
       "inStock": false,
@@ -11822,6 +12018,11 @@
           "key": "size",
           "label": "Размер",
           "value": "6 м"
+        },
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "Ст3"
         }
       ],
       "specifications": [
@@ -11840,9 +12041,18 @@
         {
           "name": "Условия оплаты",
           "value": "Акция действует только при наличной оплате"
+        },
+        {
+          "name": "Марка стали",
+          "value": "Ст3"
+        },
+        {
+          "name": "Способ изготовления",
+          "value": "Горячая прокатка"
         }
       ],
-      "sourceProductName": "Полоса № 80х5"
+      "sourceProductName": "Полоса № 80х5",
+      "steelGrade": "Ст3"
     },
     {
       "id": "catalog-2175",
@@ -11859,7 +12069,7 @@
       "imported": true,
       "unit": "meter",
       "priceUnit": "за метр",
-      "material": "",
+      "material": "Сталь",
       "standard": "",
       "availability": "IN_STOCK",
       "inStock": true,
@@ -11872,6 +12082,11 @@
           "key": "size",
           "label": "Размер",
           "value": "6 м"
+        },
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "Ст3"
         }
       ],
       "specifications": [
@@ -11890,9 +12105,18 @@
         {
           "name": "Условия оплаты",
           "value": "Акция действует только при наличной оплате"
+        },
+        {
+          "name": "Марка стали",
+          "value": "Ст3"
+        },
+        {
+          "name": "Способ изготовления",
+          "value": "Горячая прокатка"
         }
       ],
-      "sourceProductName": "Полоса № 80х6"
+      "sourceProductName": "Полоса № 80х6",
+      "steelGrade": "Ст3"
     },
     {
       "id": "catalog-19707",
@@ -11909,7 +12133,7 @@
       "imported": true,
       "unit": "meter",
       "priceUnit": "за метр",
-      "material": "",
+      "material": "Сталь",
       "standard": "",
       "availability": "IN_STOCK",
       "inStock": true,
@@ -11922,6 +12146,11 @@
           "key": "size",
           "label": "Размер",
           "value": "6 м"
+        },
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "Ст3"
         }
       ],
       "specifications": [
@@ -11940,9 +12169,18 @@
         {
           "name": "Условия оплаты",
           "value": "Акция действует только при наличной оплате"
+        },
+        {
+          "name": "Марка стали",
+          "value": "Ст3"
+        },
+        {
+          "name": "Способ изготовления",
+          "value": "Горячая прокатка"
         }
       ],
-      "sourceProductName": "Полоса № 80х8"
+      "sourceProductName": "Полоса № 80х8",
+      "steelGrade": "Ст3"
     },
     {
       "id": "catalog-19708",
@@ -11959,7 +12197,7 @@
       "imported": true,
       "unit": "meter",
       "priceUnit": "за метр",
-      "material": "",
+      "material": "Сталь",
       "standard": "",
       "availability": "ON_ORDER",
       "inStock": false,
@@ -11972,6 +12210,11 @@
           "key": "size",
           "label": "Размер",
           "value": "6 м"
+        },
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "Ст3"
         }
       ],
       "specifications": [
@@ -11990,9 +12233,18 @@
         {
           "name": "Условия оплаты",
           "value": "Акция действует только при наличной оплате"
+        },
+        {
+          "name": "Марка стали",
+          "value": "Ст3"
+        },
+        {
+          "name": "Способ изготовления",
+          "value": "Горячая прокатка"
         }
       ],
-      "sourceProductName": "Полоса № 80х10"
+      "sourceProductName": "Полоса № 80х10",
+      "steelGrade": "Ст3"
     },
     {
       "id": "catalog-12050",
@@ -12009,7 +12261,7 @@
       "imported": true,
       "unit": "meter",
       "priceUnit": "за метр",
-      "material": "",
+      "material": "Сталь",
       "standard": "",
       "availability": "ON_ORDER",
       "inStock": false,
@@ -12022,6 +12274,11 @@
           "key": "size",
           "label": "Размер",
           "value": "5,85-6 м"
+        },
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "Ст3"
         }
       ],
       "specifications": [
@@ -12040,9 +12297,18 @@
         {
           "name": "Условия оплаты",
           "value": "Акция действует только при наличной оплате"
+        },
+        {
+          "name": "Марка стали",
+          "value": "Ст3"
+        },
+        {
+          "name": "Способ изготовления",
+          "value": "Горячая прокатка"
         }
       ],
-      "sourceProductName": "Полоса № 100х4"
+      "sourceProductName": "Полоса № 100х4",
+      "steelGrade": "Ст3"
     },
     {
       "id": "catalog-2177",
@@ -12059,7 +12325,7 @@
       "imported": true,
       "unit": "meter",
       "priceUnit": "за метр",
-      "material": "",
+      "material": "Сталь",
       "standard": "",
       "availability": "IN_STOCK",
       "inStock": true,
@@ -12072,6 +12338,11 @@
           "key": "size",
           "label": "Размер",
           "value": "6 м"
+        },
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "Ст3"
         }
       ],
       "specifications": [
@@ -12090,9 +12361,18 @@
         {
           "name": "Условия оплаты",
           "value": "Акция действует только при наличной оплате"
+        },
+        {
+          "name": "Марка стали",
+          "value": "Ст3"
+        },
+        {
+          "name": "Способ изготовления",
+          "value": "Горячая прокатка"
         }
       ],
-      "sourceProductName": "Полоса № 100х8"
+      "sourceProductName": "Полоса № 100х8",
+      "steelGrade": "Ст3"
     },
     {
       "id": "catalog-2176",
@@ -12109,7 +12389,7 @@
       "imported": true,
       "unit": "meter",
       "priceUnit": "за метр",
-      "material": "",
+      "material": "Сталь",
       "standard": "",
       "availability": "IN_STOCK",
       "inStock": true,
@@ -12122,6 +12402,11 @@
           "key": "size",
           "label": "Размер",
           "value": "6 м"
+        },
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "Ст3"
         }
       ],
       "specifications": [
@@ -12140,9 +12425,18 @@
         {
           "name": "Условия оплаты",
           "value": "Акция действует только при наличной оплате"
+        },
+        {
+          "name": "Марка стали",
+          "value": "Ст3"
+        },
+        {
+          "name": "Способ изготовления",
+          "value": "Горячая прокатка"
         }
       ],
-      "sourceProductName": "Полоса № 100х6"
+      "sourceProductName": "Полоса № 100х6",
+      "steelGrade": "Ст3"
     },
     {
       "id": "catalog-2178",
@@ -12159,7 +12453,7 @@
       "imported": true,
       "unit": "meter",
       "priceUnit": "за метр",
-      "material": "",
+      "material": "Сталь",
       "standard": "",
       "availability": "ON_ORDER",
       "inStock": false,
@@ -12172,6 +12466,11 @@
           "key": "size",
           "label": "Размер",
           "value": "6 м"
+        },
+        {
+          "key": "grade",
+          "label": "Марка стали",
+          "value": "Ст3"
         }
       ],
       "specifications": [
@@ -12190,9 +12489,18 @@
         {
           "name": "Условия оплаты",
           "value": "Акция действует только при наличной оплате"
+        },
+        {
+          "name": "Марка стали",
+          "value": "Ст3"
+        },
+        {
+          "name": "Способ изготовления",
+          "value": "Горячая прокатка"
         }
       ],
-      "sourceProductName": "Полоса № 100х10"
+      "sourceProductName": "Полоса № 100х10",
+      "steelGrade": "Ст3"
     }
   ]
 }

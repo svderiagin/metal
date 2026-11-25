@@ -222,9 +222,9 @@ millimetres. The density convention (7 850 kg/m³) comes from
 ГОСТ 103-2006, Table 1, Note 1.
 The 3 mm positions use a geometric mass calculation. Clause 2.3 covers
 80×4 and 100×4 by agreed specification.
-The public descriptions use each product's confirmed dimensions and remove
-copied sizes and obsolete ГОСТ 103-76 claims. Steel grade, manufacturing method,
-accuracy class and the shipment's actual standard require supplier documentation.
+The catalog lists hot-rolled Ст3 for these positions. The product-table note
+links to the reference assortment. Check the actual standard and tolerances
+against the shipment documentation.
 
 Preview the 100×4 mm image with
 `node scripts/render-flat-steel-images.mjs --preview catalog-12050`.

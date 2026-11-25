@@ -81,7 +81,7 @@ export function VariantCatalogResults({visible, categorySlug, unit, isSheetCatal
       : `${variant.priceQualifier === "from" ? "от " : ""}${formatUnitPrice(variant.price, variant.priceUnit)}`;
     const fields = storefrontPositionFields(variant);
     const detailFields = isFlatSteel
-      ? fields.filter(({label}) => !["Ширина", "Толщина", "Длина по каталогу"].includes(label))
+      ? fields.filter(({label}) => !["Ширина", "Толщина", "Длина по каталогу", "Стандарт"].includes(label))
       : fields;
     const description = !unverified && !hasMetreQuantities && !isSheetCatalog && !isFlatSteel
       ? variant.description : undefined;
