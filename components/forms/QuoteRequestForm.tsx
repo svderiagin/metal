@@ -133,29 +133,29 @@ export function QuoteRequestForm({descriptionPlaceholder = "Арматура р�
   }
   return <form method="post" onSubmit={submit} onBlur={validateOnBlur} onChange={clearResolvedError} noValidate aria-busy={submitting} className={`${styles.form} grid items-start gap-4 sm:grid-cols-2`}>
     <div className="min-w-0"><label className="block text-sm font-semibold">Имя *
-      <Input name="name" required maxLength={QUOTE_LIMITS.name} className="mt-1" autoComplete="name" {...validationProps("name")}/>
+      <Input name="name" required maxLength={QUOTE_LIMITS.name} className="mt-1.5" autoComplete="name" {...validationProps("name")}/>
       </label>
       {fieldError("name")}
     </div>
     <div className="min-w-0"><label className="block text-sm font-semibold">Телефон *
-      <PhoneInput name="phone" required className="mt-1" {...validationProps("phone")}/>
+      <PhoneInput name="phone" required className="mt-1.5" {...validationProps("phone")}/>
       </label>
       {fieldError("phone")}
     </div>
     <div className="min-w-0"><label className="block text-sm font-semibold">Электронная почта *
-      <Input name="email" type="email" required maxLength={QUOTE_LIMITS.email} className="mt-1" autoComplete="email" {...validationProps("email")}/>
+      <Input name="email" type="email" required maxLength={QUOTE_LIMITS.email} className="mt-1.5" autoComplete="email" {...validationProps("email")}/>
       </label>
       {fieldError("email")}
     </div>
     <div className="min-w-0"><label className="block text-sm font-semibold">Компания
-      <Input name="company" maxLength={QUOTE_LIMITS.company} className="mt-1" autoComplete="organization" {...validationProps("company")}/>
+      <Input name="company" maxLength={QUOTE_LIMITS.company} className="mt-1.5" autoComplete="organization" {...validationProps("company")}/>
       </label>
       {fieldError("company")}
     </div>
     <div className="min-w-0 sm:col-span-2"><label className="block text-sm font-semibold">Что требуется рассчитать? *
       <Textarea name="message" required maxLength={QUOTE_LIMITS.message} rows={4} value={message}
         placeholder={descriptionPlaceholder}
-        onChange={event => setMessage(event.target.value.slice(0, QUOTE_LIMITS.message))} className="mt-1 block" {...validationProps("message")}/>
+        onChange={event => setMessage(event.target.value.slice(0, QUOTE_LIMITS.message))} className="mt-1.5 block" {...validationProps("message")}/>
       </label>
       <span className={styles.messageMeta}>
         {fieldError("message", "")}
@@ -166,8 +166,8 @@ export function QuoteRequestForm({descriptionPlaceholder = "Арматура р�
       <Input name="website" maxLength={QUOTE_LIMITS.website} tabIndex={-1} autoComplete="off"/>
     </label>
     <div className="sm:col-span-2">
-      <label className="flex items-start gap-2 text-sm">
-        <input name="consent" type="checkbox" required className="mt-1 size-4 shrink-0 accent-brand-700 dark:accent-brand-300" {...validationProps("consent")}/>
+      <label className="flex cursor-pointer items-start gap-2.5 text-sm">
+        <input name="consent" type="checkbox" required className="mt-0.5 size-5 shrink-0 cursor-pointer accent-brand-700 dark:accent-brand-300" {...validationProps("consent")}/>
         <span>Я согласен на обработку персональных данных для ответа на заявку в соответствии с <Link href="/privacy" className="font-semibold text-brand-700 dark:text-brand-300 underline underline-offset-2">Политикой обработки персональных данных</Link>.</span>
       </label>
       {fieldError("consent")}

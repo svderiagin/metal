@@ -11,6 +11,7 @@
 }
 
 .table {
+  --control-border: var(--table-control-border);
   --cell-padding-x: 0.5rem;
   --heading-padding-y: 0.5rem;
   --cell-padding-y: 0.75rem;
@@ -70,7 +71,8 @@
 }
 
 .table > tbody > tr:where(:nth-child(even of :not(.detailsRow))) > :is(th, td) { background: var(--table-stripe); }
-.table > tbody > tr:not(:where(.detailsRow, :has(+ .detailsRow:not([hidden])))):is(:hover, :focus-within) > :is(th, td) {
+.table > tbody > tr:where(:has(+ .detailsRow:not([hidden]))) > :is(th, td) { background: var(--table-expanded); }
+.table > tbody > tr:not(.detailsRow):is(:hover, :focus-within) > :is(th, td) {
   background: var(--table-hover);
 }
 

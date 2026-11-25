@@ -129,10 +129,10 @@ export function ContactForm() {
         </label>
         <div>
           <div className="flex items-start gap-2.5">
-            <input type="checkbox" required className="mt-0.5 size-5 shrink-0 accent-brand-700 dark:accent-brand-300"
+            <input type="checkbox" required className="mt-0.5 size-5 shrink-0 cursor-pointer accent-brand-700 dark:accent-brand-300"
               {...fieldProps("consent")}/>
             <div className="min-w-0 text-sm">
-              <label htmlFor={`${formId}-consent`}>Согласен на обработку персональных данных *</label>
+              <label htmlFor={`${formId}-consent`} className="cursor-pointer">Согласен на обработку персональных данных *</label>
               <Link href="/privacy" className="mt-0.5 block w-fit font-semibold text-brand-700 underline underline-offset-2 dark:text-brand-300">
                 Политика обработки персональных данных
               </Link>

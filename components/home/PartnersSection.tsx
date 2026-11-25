@@ -218,12 +218,12 @@ export function PartnersSection() {
           className="grid auto-cols-[min(68%,12rem)] grid-flow-col gap-2.5 overflow-x-auto overscroll-x-contain py-2 [mask-image:linear-gradient(to_right,transparent,#000_14px,#000_calc(100%_-_14px),transparent)] [scrollbar-width:none] sm:auto-cols-[14rem] sm:gap-3 lg:auto-cols-[15rem] [&::-webkit-scrollbar]:hidden">
           {[0, 1, 2].flatMap(copy => partners.map(({name, logo, description, lightLogo}) => (
             <li key={`${copy}-${name}`} aria-hidden={copy !== 1 || undefined}
-              className="flex min-w-0 flex-col items-center px-3 py-2.5 text-center sm:px-4 sm:py-3">
+              className="flex min-w-0 flex-col items-center px-3 py-2.5 text-center sm:px-4 sm:py-3 lg:py-2">
               <div className={`h-12 w-full max-w-44 rounded-md px-2.5 py-1.5 sm:h-14 ${lightLogo ? "bg-slate-950" : "bg-white"}`}>
                 <Image src={logo} alt="" unoptimized loading={loadLogos ? "eager" : "lazy"} fetchPriority="low"
                   className="h-full w-full object-contain"/>
               </div>
-              <h3 className="mt-4 text-sm font-semibold sm:mt-5">{name}</h3>
+              <h3 className="mt-4 text-sm font-semibold sm:mt-5 lg:min-h-10 lg:leading-5">{name}</h3>
               <p className="mt-0.5 text-xs text-slate-600 dark:text-slate-300">{description}</p>
             </li>
           )))}

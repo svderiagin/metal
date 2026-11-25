@@ -50,7 +50,9 @@
   --table-header: #e7edef;
   --table-header-text: #283d49;
   --table-stripe: #fafbfc;
+  --table-expanded: #f4f7f8;
   --table-hover: #eff5f7;
+  --table-control-border: #788a96;
   --success-background: #dcfce7;
   --success-text: #166534;
   --update-background: #eff5f7;
@@ -82,7 +84,9 @@
   --table-header: #303e49;
   --table-header-text: #edf0f2;
   --table-stripe: #232f39;
-  --table-hover: #293c47;
+  --table-expanded: #25323c;
+  --table-hover: #263640;
+  --table-control-border: #7b8d99;
   --success-background: #052e16;
   --success-text: #86efac;
   --update-background: #173543;

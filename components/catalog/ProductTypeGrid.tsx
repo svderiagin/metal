@@ -9,7 +9,7 @@ export function ProductTypeGrid({
   variants: ProductVariant[];
 }) {
   return (
-    <div className="grid auto-rows-fr gap-4 md:grid-cols-2">
+    <div className="grid gap-4 md:auto-rows-fr md:grid-cols-2">
       {productTypes.map((productType) => (
         <ProductTypeCard
           key={productType.id}

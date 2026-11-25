@@ -138,7 +138,7 @@ export function CheckoutForm({onOrderCreated, revisedTotals, onPriceChanged}: {
       <CheckoutFields form={form} onChange={updateField} onBlur={blurField} errors={fieldErrors} formId={formId}
         canReuseRegistrationAddress={form.customerType === "COMPANY" && !errors.legalAddress}/>
       <div className="border-t border-slate-200 pt-5 dark:border-slate-700 sm:pt-6">
-        <div className="flex items-start gap-3">
+        <div className="flex items-start gap-2.5">
           <input type="checkbox" id={`${formId}-consentAccepted`} name="consentAccepted" required checked={form.consentAccepted}
             onChange={event => updateField("consentAccepted", event.target.checked)}
             aria-invalid={!!fieldErrors.consentAccepted || undefined}

@@ -31,29 +31,33 @@ export function ProductTypeCard({
 
   return (
     <article className={`${styles.card} @container relative flex h-full min-w-0 flex-col rounded-xl border border-slate-200 bg-white p-4 transition-colors sm:p-5 dark:border-slate-700 dark:bg-slate-900`}>
-      <div className="grid min-w-0 flex-1 grid-cols-[minmax(0,1fr)_clamp(104px,32%,120px)] items-start gap-x-4 sm:grid-cols-[minmax(0,1fr)_clamp(120px,30%,144px)] @min-[25rem]:grid-rows-[auto_1fr_auto]">
-          <h2 className={`text-card-title text-slate-950 dark:text-slate-100 ${productType.imageUrl ? "" : "col-span-2"}`}>
-            <Link href={`/catalog/${categorySlug}/${subcategorySlug}/${productType.slug}`}
-              className={`${styles.stretchedLink} cursor-pointer after:absolute after:inset-0 after:z-[1] after:rounded-xl`}>
-              {productType.name}
-            </Link>
-          </h2>
-          {productType.imageUrl && <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-white @min-[25rem]:row-span-2">
+      <div className="flex min-w-0 flex-1 flex-col">
+        <div className={styles.typeIntro}>
+          {productType.imageUrl && <div className={`${styles.typePhoto} relative aspect-[4/3] overflow-hidden rounded-lg bg-white`}>
             <PreparedPhoto src={catalogImageUrl(productType.imageUrl)} alt="" fill
               sizes="(min-width: 640px) 192px, 160px"
               className="object-cover object-center"/>
           </div>}
-          <p className={`col-span-2 col-start-1 mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300 ${productType.imageUrl ? "@min-[25rem]:col-span-1" : ""}`}>
-            {catalogDescriptionCopy[productType.subcategoryId]?.intro ?? productType.shortDescription}
-          </p>
-          {standard !== "Уточняется" && <div className="col-span-2 mt-3 flex items-center gap-1 text-xs leading-6 text-slate-600 dark:text-slate-300">
-            <span className="min-w-0 [&_a]:relative [&_a]:z-10">
-              {isA40025g2sReference
-                ? <CatalogStandardLink href={catalogStandards["5781"].href}>Справочный {standard}</CatalogStandardLink>
-                : <CatalogStandardReference>{standard}</CatalogStandardReference>}
-            </span>
-            {categorySlug === "armatura" && <RebarStandardHelp standard={standard}/>}
-          </div>}
+          <div className={`${styles.typeText} min-w-0`}>
+            <h2 className="text-card-title text-slate-950 dark:text-slate-100">
+              <Link href={`/catalog/${categorySlug}/${subcategorySlug}/${productType.slug}`}
+                className={`${styles.stretchedLink} cursor-pointer after:absolute after:inset-0 after:z-[1] after:rounded-xl`}>
+                {productType.name}
+              </Link>
+            </h2>
+            <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
+              {catalogDescriptionCopy[productType.subcategoryId]?.intro ?? productType.shortDescription}
+            </p>
+          </div>
+        </div>
+        {standard !== "Уточняется" && <div className="mt-auto flex items-center gap-1 pt-3 text-xs leading-6 text-slate-600 dark:text-slate-300">
+          <span className="min-w-0 [&_a]:relative [&_a]:z-10">
+            {isA40025g2sReference
+              ? <CatalogStandardLink href={catalogStandards["5781"].href}>Справочный {standard}</CatalogStandardLink>
+              : <CatalogStandardReference>{standard}</CatalogStandardReference>}
+          </span>
+          {categorySlug === "armatura" && <RebarStandardHelp standard={standard}/>}
+        </div>}
       </div>
         <div className="mt-4 flex flex-wrap items-center justify-between gap-2 border-t border-slate-200 pt-3 dark:border-slate-700">
           <div className="flex items-baseline gap-1 whitespace-nowrap tabular-nums">

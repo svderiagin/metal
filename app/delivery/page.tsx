@@ -100,7 +100,7 @@ export default function DeliveryPage() {
   return (
     <PageContainer withBreadcrumbs className="pb-8 sm:pb-10 lg:pb-12">
       <Breadcrumbs items={[{label: "Доставка"}]}/>
-      <header className="grid items-center gap-6 sm:gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:gap-12">
+      <header className="grid items-start gap-6 sm:gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:gap-12">
         <div>
           <h1 className="max-w-xl text-page-title">Доставка и самовывоз металлопроката</h1>
           <p className={`mt-4 max-w-xl ${mutedText}`}>
