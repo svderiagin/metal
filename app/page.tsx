@@ -2,6 +2,7 @@ import type {Metadata} from "next";
 import {HeroSection} from "@/components/home/HeroSection";
 import {CatalogSection} from "@/components/home/CatalogSection";
 import {OrderGuideSection} from "@/components/home/OrderGuideSection";
+import {PartnersSection} from "@/components/home/PartnersSection";
 import {RequestQuoteSection} from "@/components/home/RequestQuoteSection";
 import {PageContainer} from "@/components/layout/PageContainer";
 import {companyDetails} from "@/lib/companyDetails";
@@ -18,6 +19,7 @@ export default function Home() {
       <PageContainer className="space-y-10 pt-5 pb-10 sm:space-y-12 sm:pt-7 sm:pb-12 lg:space-y-14 lg:pt-8 lg:pb-14">
         <CatalogSection/>
         <OrderGuideSection/>
+        <PartnersSection/>
         <RequestQuoteSection appearance="home"/>
       </PageContainer>
     </>
