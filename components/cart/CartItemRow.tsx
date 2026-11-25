@@ -5,6 +5,7 @@ import type {CartLine, OrderInputMode} from "@/types/cart";
 import {useCart} from "@/hooks/useCart";
 import {formatCurrency, formatUnitPrice} from "@/lib/currency";
 import {formatNumber} from "@/lib/numberFormat";
+import {Button} from "@/components/ui/Button";
 import {Icon} from "@/components/ui/Icon";
 import {QuantitySelector} from "./QuantitySelector";
 import {getProductVariantById} from "@/lib/cartCatalog";
@@ -17,6 +18,7 @@ import {isVgpVariant} from "@/lib/pipeFamily";
 import {isDemonstrationProduct} from "@/lib/catalogOffer";
 import {profilePipeMaximumPieces} from "@/lib/profilePipe";
 import {CartAmount} from "./CartAmount";
+import catalogStyles from "../catalog/FilterPanel.module.css";
 import styles from "./CartItemRow.module.css";
 
 export function CartItemRow({line, onRemove}: {line: CartLine; onRemove: () => void}) {
@@ -146,20 +148,17 @@ export function CartItemRow({line, onRemove}: {line: CartLine; onRemove: () => v
           disabled={quantityDisabled} value={line.quantity} onChange={(value) => updateQuantity(line.productId, value)}/>
       )}</div>
       <div className={styles.price}>
-        <div className={styles.subtotal}>
-          <span className={styles.orderDetail}>Сумма позиции</span>
-          <strong className={styles.total}>{line.invalidReason ? "Требует проверки" : priceRequiresQuote ? "По запросу"
-            : <CartAmount>{formatCurrency(line.estimatedTotal)}</CartAmount>}</strong>
-        </div>
-        <button
+        <strong className={styles.total}>{line.invalidReason ? "Требует проверки" : priceRequiresQuote ? "По запросу"
+          : <CartAmount>{formatCurrency(line.estimatedTotal)}</CartAmount>}</strong>
+        <Button
           type="button"
           id={`cart-remove-${line.productId}`}
           aria-label={`Удалить ${line.name} из корзины`}
           onClick={onRemove}
-          className={styles.remove}
+          className={`${catalogStyles.removeCartButton} ${styles.remove}`}
         >
           Удалить
-        </button>
+        </Button>
       </div>
     </article>
   );

@@ -1,8 +1,9 @@
 .editor {
   display: grid;
-  grid-template-columns: minmax(4.625rem, 1fr) minmax(0, 13rem);
+  grid-column: 1 / -1;
+  grid-template-columns: var(--cart-quantity-columns);
   align-items: center;
-  column-gap: 0.5rem;
+  column-gap: var(--cart-quantity-column-gap);
 }
 
 .label {
@@ -19,6 +20,17 @@
   color: var(--counter-text);
   font-weight: 500;
   white-space: nowrap;
+}
+
+.editor[data-whole] .label {
+  flex-wrap: nowrap;
+  white-space: nowrap;
+}
+
+@container cart-items (max-width: 22rem) {
+  .editor[data-whole] {
+    grid-template-columns: minmax(max-content, 1fr) minmax(0, var(--cart-quantity-controls));
+  }
 }
 
 .controls {

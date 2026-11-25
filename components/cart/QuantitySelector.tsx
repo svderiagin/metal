@@ -164,7 +164,7 @@ export function QuantitySelector({value, onChange, whole = false, productName, u
       : `Введите количество больше 0 и не больше ${formatValue(maximum, true)}.`;
 
   const transfers = quantityTransferHandlers();
-  return <div className={styles.editor}>
+  return <div className={styles.editor} data-quantity-editor="" data-whole={whole || undefined}>
     <label htmlFor={inputId} className={styles.label}>
       <span>{fieldLabel}</span>{unit && <span className={styles.unit}>{unit}</span>}
     </label>

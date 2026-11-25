@@ -54,9 +54,7 @@ export function CartPageContent() {
           <CartItemRow key={line.productId} line={line} onRemove={() => removeLine(line.productId)}/>
         ))}
       </section>
-      <div className="xl:sticky xl:top-6">
-        <CartSummary canRequestPrice={canRequestPrice} onClear={removeAll}/>
-      </div>
+      <CartSummary canRequestPrice={canRequestPrice} onClear={removeAll}/>
       {canRequestPrice && <div className="xl:col-span-2"><RequestQuoteSection/></div>}
     </div></QuoteRequestProvider>
   );
