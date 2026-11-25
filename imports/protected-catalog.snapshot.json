@@ -4546,7 +4546,7 @@
       "priceQualifier": "exact",
       "priceConfirmed": true,
       "inStock": false,
-      "availability": "UNKNOWN",
+      "availability": "ON_ORDER",
       "featured": false,
       "imageUrls": [
         "/images/catalog/profnastil-card.jpg"
@@ -4625,8 +4625,8 @@
       "priceUnit": "за штуку",
       "priceQualifier": "exact",
       "priceConfirmed": true,
-      "inStock": false,
-      "availability": "UNKNOWN",
+      "inStock": true,
+      "availability": "IN_STOCK",
       "featured": false,
       "imageUrls": [
         "/images/catalog/profnastil-card.jpg"
@@ -4705,8 +4705,8 @@
       "priceUnit": "за штуку",
       "priceQualifier": "exact",
       "priceConfirmed": true,
-      "inStock": false,
-      "availability": "UNKNOWN",
+      "inStock": true,
+      "availability": "IN_STOCK",
       "featured": false,
       "imageUrls": [
         "/images/catalog/profnastil-card.jpg"
@@ -4785,8 +4785,8 @@
       "priceUnit": "за штуку",
       "priceQualifier": "exact",
       "priceConfirmed": true,
-      "inStock": false,
-      "availability": "UNKNOWN",
+      "inStock": true,
+      "availability": "IN_STOCK",
       "featured": false,
       "imageUrls": [
         "/images/catalog/profnastil-card.jpg"
@@ -4856,7 +4856,7 @@
       "priceQualifier": "exact",
       "priceConfirmed": true,
       "inStock": false,
-      "availability": "UNKNOWN",
+      "availability": "ON_ORDER",
       "featured": false,
       "imageUrls": [
         "/images/catalog/profnastil-card.jpg"
@@ -4924,6 +4924,226 @@
       "standard": ""
     },
     {
+      "id": "profnastil-c8-04-galvanized",
+      "categoryId": "cat-pnf",
+      "subcategoryId": "cat-pnf-sub-1",
+      "name": "Профнастил С8 оцинкованный, 0,4 мм, 1,2×2 м",
+      "slug": "profnastil-c8-04-galvanized",
+      "shortDescription": "Профнастил С8 оцинкованный, 0,4 мм, 1,2×2 м. Цена указана за один лист.",
+      "description": "Профнастил С8 оцинкованный, 0,4 мм, 1,2×2 м. Цена указана за один лист.",
+      "price": 990,
+      "priceUnit": "за штуку",
+      "priceQualifier": "exact",
+      "priceConfirmed": true,
+      "inStock": true,
+      "availability": "IN_STOCK",
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/profnastil-card.jpg"
+      ],
+      "profileMark": "С8",
+      "wallThicknessMm": 0.4,
+      "sheetSizeMeters": "1,2×2",
+      "coatingType": "galvanized",
+      "attributes": [
+        {
+          "key": "class",
+          "label": "Марка профиля",
+          "value": "С8"
+        },
+        {
+          "key": "wallThickness",
+          "label": "Толщина металла, мм",
+          "value": "0,4"
+        },
+        {
+          "key": "size",
+          "label": "Размер листа, м",
+          "value": "1,2×2"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Марка профиля",
+          "value": "С8"
+        },
+        {
+          "name": "Толщина металла, мм",
+          "value": "0,4"
+        },
+        {
+          "name": "Цвет / покрытие",
+          "value": "Оцинкованный"
+        },
+        {
+          "name": "Тип покрытия",
+          "value": "Оцинкованный"
+        },
+        {
+          "name": "Размер листа, м",
+          "value": "1,2×2"
+        },
+        {
+          "name": "Единица продажи",
+          "value": "Штука"
+        }
+      ],
+      "productTypeId": "type-cat-pnf-sub-1",
+      "unit": "piece",
+      "material": "",
+      "standard": ""
+    },
+    {
+      "id": "profnastil-c8-045-galvanized",
+      "categoryId": "cat-pnf",
+      "subcategoryId": "cat-pnf-sub-1",
+      "name": "Профнастил С8 оцинкованный, 0,45 мм, 1,2×2 м",
+      "slug": "profnastil-c8-045-galvanized",
+      "shortDescription": "Профнастил С8 оцинкованный, 0,45 мм, 1,2×2 м. Цена указана за один лист.",
+      "description": "Профнастил С8 оцинкованный, 0,45 мм, 1,2×2 м. Цена указана за один лист.",
+      "price": 1050,
+      "priceUnit": "за штуку",
+      "priceQualifier": "exact",
+      "priceConfirmed": true,
+      "inStock": true,
+      "availability": "IN_STOCK",
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/profnastil-card.jpg"
+      ],
+      "profileMark": "С8",
+      "wallThicknessMm": 0.45,
+      "sheetSizeMeters": "1,2×2",
+      "coatingType": "galvanized",
+      "attributes": [
+        {
+          "key": "class",
+          "label": "Марка профиля",
+          "value": "С8"
+        },
+        {
+          "key": "wallThickness",
+          "label": "Толщина металла, мм",
+          "value": "0,45"
+        },
+        {
+          "key": "size",
+          "label": "Размер листа, м",
+          "value": "1,2×2"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Марка профиля",
+          "value": "С8"
+        },
+        {
+          "name": "Толщина металла, мм",
+          "value": "0,45"
+        },
+        {
+          "name": "Цвет / покрытие",
+          "value": "Оцинкованный"
+        },
+        {
+          "name": "Тип покрытия",
+          "value": "Оцинкованный"
+        },
+        {
+          "name": "Размер листа, м",
+          "value": "1,2×2"
+        },
+        {
+          "name": "Единица продажи",
+          "value": "Штука"
+        }
+      ],
+      "productTypeId": "type-cat-pnf-sub-1",
+      "unit": "piece",
+      "material": "",
+      "standard": ""
+    },
+    {
+      "id": "profnastil-c8-045-ral-3005",
+      "categoryId": "cat-pnf",
+      "subcategoryId": "cat-pnf-sub-1",
+      "name": "Профнастил С8, 0,45 мм, RAL 3005 (вишня), 1,2×2 м",
+      "slug": "profnastil-c8-045-ral-3005",
+      "shortDescription": "Профнастил С8, 0,45 мм, RAL 3005 (вишня), 1,2×2 м. Цена указана за один лист.",
+      "description": "Профнастил С8, 0,45 мм, RAL 3005 (вишня), 1,2×2 м. Цена указана за один лист.",
+      "price": 1200,
+      "priceUnit": "за штуку",
+      "priceQualifier": "exact",
+      "priceConfirmed": true,
+      "inStock": true,
+      "availability": "IN_STOCK",
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/profnastil-card.jpg"
+      ],
+      "profileMark": "С8",
+      "wallThicknessMm": 0.45,
+      "sheetSizeMeters": "1,2×2",
+      "colorName": "вишня",
+      "ralCode": "3005",
+      "coatingType": "painted",
+      "attributes": [
+        {
+          "key": "class",
+          "label": "Марка профиля",
+          "value": "С8"
+        },
+        {
+          "key": "wallThickness",
+          "label": "Толщина металла, мм",
+          "value": "0,45"
+        },
+        {
+          "key": "size",
+          "label": "Размер листа, м",
+          "value": "1,2×2"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Марка профиля",
+          "value": "С8"
+        },
+        {
+          "name": "Толщина металла, мм",
+          "value": "0,45"
+        },
+        {
+          "name": "Цвет / покрытие",
+          "value": "RAL 3005 (вишня)"
+        },
+        {
+          "name": "Цвет",
+          "value": "Вишня"
+        },
+        {
+          "name": "Код RAL",
+          "value": "3005"
+        },
+        {
+          "name": "Тип покрытия",
+          "value": "Окрашенный"
+        },
+        {
+          "name": "Размер листа, м",
+          "value": "1,2×2"
+        },
+        {
+          "name": "Единица продажи",
+          "value": "Штука"
+        }
+      ],
+      "productTypeId": "type-cat-pnf-sub-1",
+      "unit": "piece",
+      "material": "",
+      "standard": ""
+    },
+    {
       "id": "profnastil-c8-045-ral-6005",
       "categoryId": "cat-pnf",
       "subcategoryId": "cat-pnf-sub-1",
@@ -4935,8 +5155,8 @@
       "priceUnit": "за штуку",
       "priceQualifier": "exact",
       "priceConfirmed": true,
-      "inStock": false,
-      "availability": "UNKNOWN",
+      "inStock": true,
+      "availability": "IN_STOCK",
       "featured": false,
       "imageUrls": [
         "/images/catalog/profnastil-card.jpg"
@@ -5015,8 +5235,8 @@
       "priceUnit": "за штуку",
       "priceQualifier": "exact",
       "priceConfirmed": true,
-      "inStock": false,
-      "availability": "UNKNOWN",
+      "inStock": true,
+      "availability": "IN_STOCK",
       "featured": false,
       "imageUrls": [
         "/images/catalog/profnastil-card.jpg"
@@ -5095,8 +5315,8 @@
       "priceUnit": "за штуку",
       "priceQualifier": "exact",
       "priceConfirmed": true,
-      "inStock": false,
-      "availability": "UNKNOWN",
+      "inStock": true,
+      "availability": "IN_STOCK",
       "featured": false,
       "imageUrls": [
         "/images/catalog/profnastil-card.jpg"
@@ -5164,6 +5384,156 @@
       "standard": ""
     },
     {
+      "id": "profnastil-c8-05-galvanized",
+      "categoryId": "cat-pnf",
+      "subcategoryId": "cat-pnf-sub-1",
+      "name": "Профнастил С8 оцинкованный, 0,5 мм, 1,2×2 м",
+      "slug": "profnastil-c8-05-galvanized",
+      "shortDescription": "Профнастил С8 оцинкованный, 0,5 мм, 1,2×2 м. Цена указана за один лист.",
+      "description": "Профнастил С8 оцинкованный, 0,5 мм, 1,2×2 м. Цена указана за один лист.",
+      "price": 1090,
+      "priceUnit": "за штуку",
+      "priceQualifier": "exact",
+      "priceConfirmed": true,
+      "inStock": true,
+      "availability": "IN_STOCK",
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/profnastil-card.jpg"
+      ],
+      "profileMark": "С8",
+      "wallThicknessMm": 0.5,
+      "sheetSizeMeters": "1,2×2",
+      "coatingType": "galvanized",
+      "attributes": [
+        {
+          "key": "class",
+          "label": "Марка профиля",
+          "value": "С8"
+        },
+        {
+          "key": "wallThickness",
+          "label": "Толщина металла, мм",
+          "value": "0,5"
+        },
+        {
+          "key": "size",
+          "label": "Размер листа, м",
+          "value": "1,2×2"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Марка профиля",
+          "value": "С8"
+        },
+        {
+          "name": "Толщина металла, мм",
+          "value": "0,5"
+        },
+        {
+          "name": "Цвет / покрытие",
+          "value": "Оцинкованный"
+        },
+        {
+          "name": "Тип покрытия",
+          "value": "Оцинкованный"
+        },
+        {
+          "name": "Размер листа, м",
+          "value": "1,2×2"
+        },
+        {
+          "name": "Единица продажи",
+          "value": "Штука"
+        }
+      ],
+      "productTypeId": "type-cat-pnf-sub-1",
+      "unit": "piece",
+      "material": "",
+      "standard": ""
+    },
+    {
+      "id": "profnastil-c8-05-ral-8017",
+      "categoryId": "cat-pnf",
+      "subcategoryId": "cat-pnf-sub-1",
+      "name": "Профнастил С8, 0,5 мм, RAL 8017 (коричневый), 1,2×2 м",
+      "slug": "profnastil-c8-05-ral-8017",
+      "shortDescription": "Профнастил С8, 0,5 мм, RAL 8017 (коричневый), 1,2×2 м. Цена указана за один лист.",
+      "description": "Профнастил С8, 0,5 мм, RAL 8017 (коричневый), 1,2×2 м. Цена указана за один лист.",
+      "price": 1290,
+      "priceUnit": "за штуку",
+      "priceQualifier": "exact",
+      "priceConfirmed": true,
+      "inStock": true,
+      "availability": "IN_STOCK",
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/profnastil-card.jpg"
+      ],
+      "profileMark": "С8",
+      "wallThicknessMm": 0.5,
+      "sheetSizeMeters": "1,2×2",
+      "colorName": "коричневый",
+      "ralCode": "8017",
+      "coatingType": "painted",
+      "attributes": [
+        {
+          "key": "class",
+          "label": "Марка профиля",
+          "value": "С8"
+        },
+        {
+          "key": "wallThickness",
+          "label": "Толщина металла, мм",
+          "value": "0,5"
+        },
+        {
+          "key": "size",
+          "label": "Размер листа, м",
+          "value": "1,2×2"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Марка профиля",
+          "value": "С8"
+        },
+        {
+          "name": "Толщина металла, мм",
+          "value": "0,5"
+        },
+        {
+          "name": "Цвет / покрытие",
+          "value": "RAL 8017 (коричневый)"
+        },
+        {
+          "name": "Цвет",
+          "value": "Коричневый"
+        },
+        {
+          "name": "Код RAL",
+          "value": "8017"
+        },
+        {
+          "name": "Тип покрытия",
+          "value": "Окрашенный"
+        },
+        {
+          "name": "Размер листа, м",
+          "value": "1,2×2"
+        },
+        {
+          "name": "Единица продажи",
+          "value": "Штука"
+        }
+      ],
+      "productTypeId": "type-cat-pnf-sub-1",
+      "unit": "piece",
+      "material": "",
+      "standard": ""
+    },
+    {
       "id": "profnastil-c20-03-ral-3005",
       "categoryId": "cat-pnf",
       "subcategoryId": "cat-pnf-sub-2",
@@ -5176,7 +5546,7 @@
       "priceQualifier": "exact",
       "priceConfirmed": true,
       "inStock": false,
-      "availability": "UNKNOWN",
+      "availability": "ON_ORDER",
       "featured": false,
       "imageUrls": [
         "/images/catalog/profnastil/profnastil-s20-card.jpg"
@@ -5256,7 +5626,7 @@
       "priceQualifier": "exact",
       "priceConfirmed": true,
       "inStock": false,
-      "availability": "UNKNOWN",
+      "availability": "ON_ORDER",
       "featured": false,
       "imageUrls": [
         "/images/catalog/profnastil/profnastil-s20-card.jpg"
@@ -5335,8 +5705,8 @@
       "priceUnit": "за штуку",
       "priceQualifier": "exact",
       "priceConfirmed": true,
-      "inStock": false,
-      "availability": "UNKNOWN",
+      "inStock": true,
+      "availability": "IN_STOCK",
       "featured": false,
       "imageUrls": [
         "/images/catalog/profnastil/profnastil-s20-card.jpg"
@@ -5415,8 +5785,8 @@
       "priceUnit": "за штуку",
       "priceQualifier": "exact",
       "priceConfirmed": true,
-      "inStock": false,
-      "availability": "UNKNOWN",
+      "inStock": true,
+      "availability": "IN_STOCK",
       "featured": false,
       "imageUrls": [
         "/images/catalog/profnastil/profnastil-s20-card.jpg"
@@ -5474,6 +5844,226 @@
       "standard": ""
     },
     {
+      "id": "profnastil-c20-04-galvanized",
+      "categoryId": "cat-pnf",
+      "subcategoryId": "cat-pnf-sub-2",
+      "name": "Профнастил С20 оцинкованный, 0,4 мм, 1,15×2 м",
+      "slug": "profnastil-c20-04-galvanized",
+      "shortDescription": "Профнастил С20 оцинкованный, 0,4 мм, 1,15×2 м. Цена указана за один лист.",
+      "description": "Профнастил С20 оцинкованный, 0,4 мм, 1,15×2 м. Цена указана за один лист.",
+      "price": 1090,
+      "priceUnit": "за штуку",
+      "priceQualifier": "exact",
+      "priceConfirmed": true,
+      "inStock": true,
+      "availability": "IN_STOCK",
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/profnastil/profnastil-s20-card.jpg"
+      ],
+      "profileMark": "С20",
+      "wallThicknessMm": 0.4,
+      "sheetSizeMeters": "1,15×2",
+      "coatingType": "galvanized",
+      "attributes": [
+        {
+          "key": "class",
+          "label": "Марка профиля",
+          "value": "С20"
+        },
+        {
+          "key": "wallThickness",
+          "label": "Толщина металла, мм",
+          "value": "0,4"
+        },
+        {
+          "key": "size",
+          "label": "Размер листа, м",
+          "value": "1,15×2"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Марка профиля",
+          "value": "С20"
+        },
+        {
+          "name": "Толщина металла, мм",
+          "value": "0,4"
+        },
+        {
+          "name": "Цвет / покрытие",
+          "value": "Оцинкованный"
+        },
+        {
+          "name": "Тип покрытия",
+          "value": "Оцинкованный"
+        },
+        {
+          "name": "Размер листа, м",
+          "value": "1,15×2"
+        },
+        {
+          "name": "Единица продажи",
+          "value": "Штука"
+        }
+      ],
+      "productTypeId": "type-cat-pnf-sub-2",
+      "unit": "piece",
+      "material": "",
+      "standard": ""
+    },
+    {
+      "id": "profnastil-c20-045-galvanized",
+      "categoryId": "cat-pnf",
+      "subcategoryId": "cat-pnf-sub-2",
+      "name": "Профнастил С20 оцинкованный, 0,45 мм, 1,15×2 м",
+      "slug": "profnastil-c20-045-galvanized",
+      "shortDescription": "Профнастил С20 оцинкованный, 0,45 мм, 1,15×2 м. Цена указана за один лист.",
+      "description": "Профнастил С20 оцинкованный, 0,45 мм, 1,15×2 м. Цена указана за один лист.",
+      "price": 1190,
+      "priceUnit": "за штуку",
+      "priceQualifier": "exact",
+      "priceConfirmed": true,
+      "inStock": true,
+      "availability": "IN_STOCK",
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/profnastil/profnastil-s20-card.jpg"
+      ],
+      "profileMark": "С20",
+      "wallThicknessMm": 0.45,
+      "sheetSizeMeters": "1,15×2",
+      "coatingType": "galvanized",
+      "attributes": [
+        {
+          "key": "class",
+          "label": "Марка профиля",
+          "value": "С20"
+        },
+        {
+          "key": "wallThickness",
+          "label": "Толщина металла, мм",
+          "value": "0,45"
+        },
+        {
+          "key": "size",
+          "label": "Размер листа, м",
+          "value": "1,15×2"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Марка профиля",
+          "value": "С20"
+        },
+        {
+          "name": "Толщина металла, мм",
+          "value": "0,45"
+        },
+        {
+          "name": "Цвет / покрытие",
+          "value": "Оцинкованный"
+        },
+        {
+          "name": "Тип покрытия",
+          "value": "Оцинкованный"
+        },
+        {
+          "name": "Размер листа, м",
+          "value": "1,15×2"
+        },
+        {
+          "name": "Единица продажи",
+          "value": "Штука"
+        }
+      ],
+      "productTypeId": "type-cat-pnf-sub-2",
+      "unit": "piece",
+      "material": "",
+      "standard": ""
+    },
+    {
+      "id": "profnastil-c20-045-ral-3005",
+      "categoryId": "cat-pnf",
+      "subcategoryId": "cat-pnf-sub-2",
+      "name": "Профнастил С20, 0,45 мм, RAL 3005 (вишня), 1,15×2 м",
+      "slug": "profnastil-c20-045-ral-3005",
+      "shortDescription": "Профнастил С20, 0,45 мм, RAL 3005 (вишня), 1,15×2 м. Цена указана за один лист.",
+      "description": "Профнастил С20, 0,45 мм, RAL 3005 (вишня), 1,15×2 м. Цена указана за один лист.",
+      "price": 1200,
+      "priceUnit": "за штуку",
+      "priceQualifier": "exact",
+      "priceConfirmed": true,
+      "inStock": true,
+      "availability": "IN_STOCK",
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/profnastil/profnastil-s20-card.jpg"
+      ],
+      "profileMark": "С20",
+      "wallThicknessMm": 0.45,
+      "sheetSizeMeters": "1,15×2",
+      "colorName": "вишня",
+      "ralCode": "3005",
+      "coatingType": "painted",
+      "attributes": [
+        {
+          "key": "class",
+          "label": "Марка профиля",
+          "value": "С20"
+        },
+        {
+          "key": "wallThickness",
+          "label": "Толщина металла, мм",
+          "value": "0,45"
+        },
+        {
+          "key": "size",
+          "label": "Размер листа, м",
+          "value": "1,15×2"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Марка профиля",
+          "value": "С20"
+        },
+        {
+          "name": "Толщина металла, мм",
+          "value": "0,45"
+        },
+        {
+          "name": "Цвет / покрытие",
+          "value": "RAL 3005 (вишня)"
+        },
+        {
+          "name": "Цвет",
+          "value": "Вишня"
+        },
+        {
+          "name": "Код RAL",
+          "value": "3005"
+        },
+        {
+          "name": "Тип покрытия",
+          "value": "Окрашенный"
+        },
+        {
+          "name": "Размер листа, м",
+          "value": "1,15×2"
+        },
+        {
+          "name": "Единица продажи",
+          "value": "Штука"
+        }
+      ],
+      "productTypeId": "type-cat-pnf-sub-2",
+      "unit": "piece",
+      "material": "",
+      "standard": ""
+    },
+    {
       "id": "profnastil-c20-045-ral-7024",
       "categoryId": "cat-pnf",
       "subcategoryId": "cat-pnf-sub-2",
@@ -5485,8 +6075,8 @@
       "priceUnit": "за штуку",
       "priceQualifier": "exact",
       "priceConfirmed": true,
-      "inStock": false,
-      "availability": "UNKNOWN",
+      "inStock": true,
+      "availability": "IN_STOCK",
       "featured": false,
       "imageUrls": [
         "/images/catalog/profnastil/profnastil-s20-card.jpg"
@@ -5565,8 +6155,8 @@
       "priceUnit": "за штуку",
       "priceQualifier": "exact",
       "priceConfirmed": true,
-      "inStock": false,
-      "availability": "UNKNOWN",
+      "inStock": true,
+      "availability": "IN_STOCK",
       "featured": false,
       "imageUrls": [
         "/images/catalog/profnastil/profnastil-s20-card.jpg"
@@ -5645,8 +6235,8 @@
       "priceUnit": "за штуку",
       "priceQualifier": "exact",
       "priceConfirmed": true,
-      "inStock": false,
-      "availability": "UNKNOWN",
+      "inStock": true,
+      "availability": "IN_STOCK",
       "featured": false,
       "imageUrls": [
         "/images/catalog/profnastil/profnastil-s20-card.jpg"
@@ -5714,19 +6304,173 @@
       "standard": ""
     },
     {
+      "id": "profnastil-c20-05-galvanized",
+      "categoryId": "cat-pnf",
+      "subcategoryId": "cat-pnf-sub-2",
+      "name": "Профнастил С20 оцинкованный, 0,5 мм, 1,15×2 м",
+      "slug": "profnastil-c20-05-galvanized",
+      "shortDescription": "Профнастил С20 оцинкованный, 0,5 мм, 1,15×2 м. Цена указана за один лист.",
+      "description": "Профнастил С20 оцинкованный, 0,5 мм, 1,15×2 м. Цена указана за один лист.",
+      "price": 1290,
+      "priceUnit": "за штуку",
+      "priceQualifier": "exact",
+      "priceConfirmed": true,
+      "inStock": true,
+      "availability": "IN_STOCK",
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/profnastil/profnastil-s20-card.jpg"
+      ],
+      "profileMark": "С20",
+      "wallThicknessMm": 0.5,
+      "sheetSizeMeters": "1,15×2",
+      "coatingType": "galvanized",
+      "attributes": [
+        {
+          "key": "class",
+          "label": "Марка профиля",
+          "value": "С20"
+        },
+        {
+          "key": "wallThickness",
+          "label": "Толщина металла, мм",
+          "value": "0,5"
+        },
+        {
+          "key": "size",
+          "label": "Размер листа, м",
+          "value": "1,15×2"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Марка профиля",
+          "value": "С20"
+        },
+        {
+          "name": "Толщина металла, мм",
+          "value": "0,5"
+        },
+        {
+          "name": "Цвет / покрытие",
+          "value": "Оцинкованный"
+        },
+        {
+          "name": "Тип покрытия",
+          "value": "Оцинкованный"
+        },
+        {
+          "name": "Размер листа, м",
+          "value": "1,15×2"
+        },
+        {
+          "name": "Единица продажи",
+          "value": "Штука"
+        }
+      ],
+      "productTypeId": "type-cat-pnf-sub-2",
+      "unit": "piece",
+      "material": "",
+      "standard": ""
+    },
+    {
+      "id": "profnastil-c20-05-3m-ral-8017",
+      "categoryId": "cat-pnf",
+      "subcategoryId": "cat-pnf-sub-2",
+      "name": "Профнастил С20, 0,5 мм, RAL 8017 (коричневый), 1,15×3 м",
+      "slug": "profnastil-c20-05-3m-ral-8017",
+      "shortDescription": "Профнастил С20, 0,5 мм, RAL 8017 (коричневый), 1,15×3 м. Цена указана за один лист.",
+      "description": "Профнастил С20, 0,5 мм, RAL 8017 (коричневый), 1,15×3 м. Цена указана за один лист.",
+      "price": 2190,
+      "priceUnit": "за штуку",
+      "priceQualifier": "exact",
+      "priceConfirmed": true,
+      "inStock": true,
+      "availability": "IN_STOCK",
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/profnastil/profnastil-s20-card.jpg"
+      ],
+      "profileMark": "С20",
+      "wallThicknessMm": 0.5,
+      "sheetSizeMeters": "1,15×3",
+      "colorName": "коричневый",
+      "ralCode": "8017",
+      "coatingType": "painted",
+      "attributes": [
+        {
+          "key": "class",
+          "label": "Марка профиля",
+          "value": "С20"
+        },
+        {
+          "key": "wallThickness",
+          "label": "Толщина металла, мм",
+          "value": "0,5"
+        },
+        {
+          "key": "size",
+          "label": "Размер листа, м",
+          "value": "1,15×3"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Марка профиля",
+          "value": "С20"
+        },
+        {
+          "name": "Толщина металла, мм",
+          "value": "0,5"
+        },
+        {
+          "name": "Цвет / покрытие",
+          "value": "RAL 8017 (коричневый)"
+        },
+        {
+          "name": "Цвет",
+          "value": "Коричневый"
+        },
+        {
+          "name": "Код RAL",
+          "value": "8017"
+        },
+        {
+          "name": "Тип покрытия",
+          "value": "Окрашенный"
+        },
+        {
+          "name": "Тип покраски",
+          "value": "Односторонний гладкий полиэстер"
+        },
+        {
+          "name": "Размер листа, м",
+          "value": "1,15×3"
+        },
+        {
+          "name": "Единица продажи",
+          "value": "Штука"
+        }
+      ],
+      "productTypeId": "type-cat-pnf-sub-2",
+      "unit": "piece",
+      "material": "",
+      "standard": ""
+    },
+    {
       "id": "profnastil-h75-05-galvanized",
       "categoryId": "cat-pnf",
       "subcategoryId": "cat-pnf-sub-3",
-      "name": "Профнастил Н75 оцинкованный, 0,5 мм, 0,75×6 м",
+      "name": "Профнастил Н75 оцинкованный, 0,5 мм, 6 м (рабочая ширина 0,75 м)",
       "slug": "profnastil-h75-05-galvanized",
-      "shortDescription": "Профнастил Н75 оцинкованный, 0,5 мм, 0,75×6 м. Цена указана за один лист.",
-      "description": "Профнастил Н75 оцинкованный, 0,5 мм, 0,75×6 м. Цена указана за один лист.",
+      "shortDescription": "Профнастил Н75 оцинкованный, 0,5 мм, 6 м (рабочая ширина 0,75 м). Цена указана за один лист.",
+      "description": "Профнастил Н75 оцинкованный, 0,5 мм, 6 м (рабочая ширина 0,75 м). Цена указана за один лист.",
       "price": 4300,
       "priceUnit": "за штуку",
       "priceQualifier": "exact",
       "priceConfirmed": true,
       "inStock": false,
-      "availability": "UNKNOWN",
+      "availability": "ON_ORDER",
       "featured": false,
       "imageUrls": [
         "/images/catalog/profnastil/profnastil-n75-card.jpg"
@@ -5748,7 +6492,7 @@
         },
         {
           "key": "size",
-          "label": "Размер листа, м",
+          "label": "Рабочая ширина × длина, м",
           "value": "0,75×6"
         }
       ],
@@ -5770,8 +6514,86 @@
           "value": "Оцинкованный"
         },
         {
-          "name": "Размер листа, м",
-          "value": "0,75×6"
+          "name": "Рабочая ширина",
+          "value": "0,75 м"
+        },
+        {
+          "name": "Длина листа",
+          "value": "6 м"
+        },
+        {
+          "name": "Единица продажи",
+          "value": "Штука"
+        }
+      ],
+      "productTypeId": "type-cat-pnf-sub-3",
+      "unit": "piece",
+      "material": "",
+      "standard": ""
+    },
+    {
+      "id": "profnastil-h75-07-3m-galvanized",
+      "categoryId": "cat-pnf",
+      "subcategoryId": "cat-pnf-sub-3",
+      "name": "Профнастил Н75 оцинкованный, 0,7 мм, 3 м (рабочая ширина 0,75 м)",
+      "slug": "profnastil-h75-07-3m-galvanized",
+      "shortDescription": "Профнастил Н75 оцинкованный, 0,7 мм, 3 м (рабочая ширина 0,75 м). Цена указана за один лист.",
+      "description": "Профнастил Н75 оцинкованный, 0,7 мм, 3 м (рабочая ширина 0,75 м). Цена указана за один лист.",
+      "price": 2690,
+      "priceUnit": "за штуку",
+      "priceQualifier": "exact",
+      "priceConfirmed": true,
+      "inStock": true,
+      "availability": "IN_STOCK",
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/profnastil/profnastil-n75-card.jpg"
+      ],
+      "profileMark": "Н75",
+      "wallThicknessMm": 0.7,
+      "sheetSizeMeters": "0,75×3",
+      "coatingType": "galvanized",
+      "attributes": [
+        {
+          "key": "class",
+          "label": "Марка профиля",
+          "value": "Н75"
+        },
+        {
+          "key": "wallThickness",
+          "label": "Толщина металла, мм",
+          "value": "0,7"
+        },
+        {
+          "key": "size",
+          "label": "Рабочая ширина × длина, м",
+          "value": "0,75×3"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Марка профиля",
+          "value": "Н75"
+        },
+        {
+          "name": "Толщина металла, мм",
+          "value": "0,7"
+        },
+        {
+          "name": "Цвет / покрытие",
+          "value": "Оцинкованный"
+        },
+        {
+          "name": "Тип покрытия",
+          "value": "Оцинкованный"
+        },
+        {
+          "name": "Рабочая ширина",
+          "value": "0,75 м"
+        },
+        {
+          "name": "Длина листа",
+          "value": "3 м"
         },
         {
           "name": "Единица продажи",
@@ -5787,16 +6609,16 @@
       "id": "profnastil-h75-07-galvanized",
       "categoryId": "cat-pnf",
       "subcategoryId": "cat-pnf-sub-3",
-      "name": "Профнастил Н75 оцинкованный, 0,7 мм, 0,75×6 м",
+      "name": "Профнастил Н75 оцинкованный, 0,7 мм, 6 м (рабочая ширина 0,75 м)",
       "slug": "profnastil-h75-07-galvanized",
-      "shortDescription": "Профнастил Н75 оцинкованный, 0,7 мм, 0,75×6 м. Цена указана за один лист.",
-      "description": "Профнастил Н75 оцинкованный, 0,7 мм, 0,75×6 м. Цена указана за один лист.",
+      "shortDescription": "Профнастил Н75 оцинкованный, 0,7 мм, 6 м (рабочая ширина 0,75 м). Цена указана за один лист.",
+      "description": "Профнастил Н75 оцинкованный, 0,7 мм, 6 м (рабочая ширина 0,75 м). Цена указана за один лист.",
       "price": 5100,
       "priceUnit": "за штуку",
       "priceQualifier": "exact",
       "priceConfirmed": true,
-      "inStock": false,
-      "availability": "UNKNOWN",
+      "inStock": true,
+      "availability": "IN_STOCK",
       "featured": false,
       "imageUrls": [
         "/images/catalog/profnastil/profnastil-n75-card.jpg"
@@ -5818,7 +6640,7 @@
         },
         {
           "key": "size",
-          "label": "Размер листа, м",
+          "label": "Рабочая ширина × длина, м",
           "value": "0,75×6"
         }
       ],
@@ -5840,8 +6662,234 @@
           "value": "Оцинкованный"
         },
         {
-          "name": "Размер листа, м",
+          "name": "Рабочая ширина",
+          "value": "0,75 м"
+        },
+        {
+          "name": "Длина листа",
+          "value": "6 м"
+        },
+        {
+          "name": "Единица продажи",
+          "value": "Штука"
+        }
+      ],
+      "productTypeId": "type-cat-pnf-sub-3",
+      "unit": "piece",
+      "material": "",
+      "standard": ""
+    },
+    {
+      "id": "profnastil-h75-08-3m-galvanized",
+      "categoryId": "cat-pnf",
+      "subcategoryId": "cat-pnf-sub-3",
+      "name": "Профнастил Н75 оцинкованный, 0,8 мм, 3 м (рабочая ширина 0,75 м)",
+      "slug": "profnastil-h75-08-3m-galvanized",
+      "shortDescription": "Профнастил Н75 оцинкованный, 0,8 мм, 3 м (рабочая ширина 0,75 м). Цена указана за один лист.",
+      "description": "Профнастил Н75 оцинкованный, 0,8 мм, 3 м (рабочая ширина 0,75 м). Цена указана за один лист.",
+      "price": 2990,
+      "priceUnit": "за штуку",
+      "priceQualifier": "exact",
+      "priceConfirmed": true,
+      "inStock": true,
+      "availability": "IN_STOCK",
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/profnastil/profnastil-n75-card.jpg"
+      ],
+      "profileMark": "Н75",
+      "wallThicknessMm": 0.8,
+      "sheetSizeMeters": "0,75×3",
+      "coatingType": "galvanized",
+      "attributes": [
+        {
+          "key": "class",
+          "label": "Марка профиля",
+          "value": "Н75"
+        },
+        {
+          "key": "wallThickness",
+          "label": "Толщина металла, мм",
+          "value": "0,8"
+        },
+        {
+          "key": "size",
+          "label": "Рабочая ширина × длина, м",
+          "value": "0,75×3"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Марка профиля",
+          "value": "Н75"
+        },
+        {
+          "name": "Толщина металла, мм",
+          "value": "0,8"
+        },
+        {
+          "name": "Цвет / покрытие",
+          "value": "Оцинкованный"
+        },
+        {
+          "name": "Тип покрытия",
+          "value": "Оцинкованный"
+        },
+        {
+          "name": "Рабочая ширина",
+          "value": "0,75 м"
+        },
+        {
+          "name": "Длина листа",
+          "value": "3 м"
+        },
+        {
+          "name": "Единица продажи",
+          "value": "Штука"
+        }
+      ],
+      "productTypeId": "type-cat-pnf-sub-3",
+      "unit": "piece",
+      "material": "",
+      "standard": ""
+    },
+    {
+      "id": "profnastil-h75-08-6m-galvanized",
+      "categoryId": "cat-pnf",
+      "subcategoryId": "cat-pnf-sub-3",
+      "name": "Профнастил Н75 оцинкованный, 0,8 мм, 6 м (рабочая ширина 0,75 м)",
+      "slug": "profnastil-h75-08-6m-galvanized",
+      "shortDescription": "Профнастил Н75 оцинкованный, 0,8 мм, 6 м (рабочая ширина 0,75 м). Цена указана за один лист.",
+      "description": "Профнастил Н75 оцинкованный, 0,8 мм, 6 м (рабочая ширина 0,75 м). Цена указана за один лист.",
+      "price": 5990,
+      "priceUnit": "за штуку",
+      "priceQualifier": "exact",
+      "priceConfirmed": true,
+      "inStock": true,
+      "availability": "IN_STOCK",
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/profnastil/profnastil-n75-card.jpg"
+      ],
+      "profileMark": "Н75",
+      "wallThicknessMm": 0.8,
+      "sheetSizeMeters": "0,75×6",
+      "coatingType": "galvanized",
+      "attributes": [
+        {
+          "key": "class",
+          "label": "Марка профиля",
+          "value": "Н75"
+        },
+        {
+          "key": "wallThickness",
+          "label": "Толщина металла, мм",
+          "value": "0,8"
+        },
+        {
+          "key": "size",
+          "label": "Рабочая ширина × длина, м",
           "value": "0,75×6"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Марка профиля",
+          "value": "Н75"
+        },
+        {
+          "name": "Толщина металла, мм",
+          "value": "0,8"
+        },
+        {
+          "name": "Цвет / покрытие",
+          "value": "Оцинкованный"
+        },
+        {
+          "name": "Тип покрытия",
+          "value": "Оцинкованный"
+        },
+        {
+          "name": "Рабочая ширина",
+          "value": "0,75 м"
+        },
+        {
+          "name": "Длина листа",
+          "value": "6 м"
+        },
+        {
+          "name": "Единица продажи",
+          "value": "Штука"
+        }
+      ],
+      "productTypeId": "type-cat-pnf-sub-3",
+      "unit": "piece",
+      "material": "",
+      "standard": ""
+    },
+    {
+      "id": "profnastil-h75-09-6m-galvanized",
+      "categoryId": "cat-pnf",
+      "subcategoryId": "cat-pnf-sub-3",
+      "name": "Профнастил Н75 оцинкованный, 0,9 мм, 6 м (рабочая ширина 0,75 м)",
+      "slug": "profnastil-h75-09-6m-galvanized",
+      "shortDescription": "Профнастил Н75 оцинкованный, 0,9 мм, 6 м (рабочая ширина 0,75 м). Цена указана за один лист.",
+      "description": "Профнастил Н75 оцинкованный, 0,9 мм, 6 м (рабочая ширина 0,75 м). Цена указана за один лист.",
+      "price": 7090,
+      "priceUnit": "за штуку",
+      "priceQualifier": "exact",
+      "priceConfirmed": true,
+      "inStock": true,
+      "availability": "IN_STOCK",
+      "featured": false,
+      "imageUrls": [
+        "/images/catalog/profnastil/profnastil-n75-card.jpg"
+      ],
+      "profileMark": "Н75",
+      "wallThicknessMm": 0.9,
+      "sheetSizeMeters": "0,75×6",
+      "coatingType": "galvanized",
+      "attributes": [
+        {
+          "key": "class",
+          "label": "Марка профиля",
+          "value": "Н75"
+        },
+        {
+          "key": "wallThickness",
+          "label": "Толщина металла, мм",
+          "value": "0,9"
+        },
+        {
+          "key": "size",
+          "label": "Рабочая ширина × длина, м",
+          "value": "0,75×6"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Марка профиля",
+          "value": "Н75"
+        },
+        {
+          "name": "Толщина металла, мм",
+          "value": "0,9"
+        },
+        {
+          "name": "Цвет / покрытие",
+          "value": "Оцинкованный"
+        },
+        {
+          "name": "Тип покрытия",
+          "value": "Оцинкованный"
+        },
+        {
+          "name": "Рабочая ширина",
+          "value": "0,75 м"
+        },
+        {
+          "name": "Длина листа",
+          "value": "6 м"
         },
         {
           "name": "Единица продажи",

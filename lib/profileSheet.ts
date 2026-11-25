@@ -20,3 +20,13 @@ export function profileSheetCoatingLabel(variant: ProfileSheetVariant) {
     ? `RAL ${variant.ralCode} (${variant.colorName ?? "цветной"})`
     : variant.colorName ?? "Окрашенный";
 }
+
+export function profileSheetDimensions(size: string) {
+  const match = /^(\d+(?:[.,]\d+)?)\s*[×xх]\s*(\d+(?:[.,]\d+)?)$/iu.exec(size);
+  if (!match) return;
+  const width = Number(match[1].replace(",", "."));
+  const length = Number(match[2].replace(",", "."));
+  if (width > 0 && length > 0 && Number.isFinite(width) && Number.isFinite(length)) {
+    return {width, length};
+  }
+}

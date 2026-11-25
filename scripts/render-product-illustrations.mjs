@@ -118,7 +118,8 @@ async function render(product) {
     return rendered.info.height;
   }
   const titleWidth = 1710;
-  const title = product.name.replace(/№\s*/gu, '');
+  const name = product.name.replace(/№\s*/gu, '');
+  const title = product.categoryId === "cat-pnf" ? name.replace(/(\d) (мм|м)(?=[,.)\s]|$)/gu, "$1\u00a0$2") : name;
   const largeTitle = await ink(title, 76, 700, titleWidth);
   const titleHeight = await place(title, largeTitle.info.height <= 254 ? 76 : 63, 700, titleWidth, 128, 124);
   assert(titleHeight <= 254, `${product.id}: oversized heading`);
