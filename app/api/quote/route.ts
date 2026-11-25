@@ -18,6 +18,6 @@ export async function POST(request: Request) {
     await notificationService.sendQuoteRequest(quote);
     return Response.json({ok: true});
   } catch {
-    return Response.json({ok: false, error: "Отправка временно недоступна. Свяжитесь с нами по телефону."}, {status: 503});
+    return Response.json({ok: false, error: "Форма заявки временно недоступна."}, {status: 503});
   }
 }

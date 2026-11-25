@@ -26,7 +26,7 @@ export function Header() {
             ООО <span className="brand-wordmark">РВБ</span>
           </span>
           <span className="hidden text-xs text-slate-400 sm:block">
-            Металлоконструкции и металлопрокат
+            Поставка металлопроката
           </span>
         </Link>
         <div className={`${headerStyles.actions} ml-auto flex max-w-full flex-wrap items-center gap-2 sm:gap-3`}>

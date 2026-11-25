@@ -58,7 +58,7 @@ export function Footer() {
       </PageContainer>
       <div className="border-t border-slate-800">
         <PageContainer className="flex flex-col gap-3 py-5 text-xs sm:flex-row sm:items-center sm:justify-between">
-          <p>© 2024 ООО РВБ — Металлоконструкции и металлопрокат</p>
+          <p>© 2024 {companyDetails.shortName}</p>
           <div className="flex flex-wrap gap-x-5 gap-y-2">
             <Link className={utilityLinkClass} href="/privacy">Политика обработки персональных данных</Link>
           </div>

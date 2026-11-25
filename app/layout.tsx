@@ -6,6 +6,7 @@ import {Header} from "@/components/layout/Header";
 import {Footer} from "@/components/layout/Footer";
 import {themeInitScript} from "@/lib/theme";
 import {FocusVisibility} from "@/components/ui/FocusVisibility";
+import {companyDetails} from "@/lib/companyDetails";
 
 const inter = localFont({
   src: "./fonts/InterVariable.woff2",
@@ -18,9 +19,10 @@ const inter = localFont({
 
 export const metadata: Metadata = {
   title: {
-    default: "ООО «РВБ» — Металлоконструкции и металлопрокат",
-    template: "%s | ООО «РВБ»"
-  }, description: "Каталог металлоконструкций и металлопроката: подбор продукции и запрос расчёта поставки."
+    default: `Каталог металлопроката | ${companyDetails.brandName}`,
+    template: `%s | ${companyDetails.brandName}`,
+  },
+  description: "Каталог металлопроката. Размеры и цены, заказ с оплатой по счёту и расчёт поставки по спецификации.",
 };
 export default function RootLayout({children}: Readonly<{ children: React.ReactNode }>) {
   return <html lang="ru" className={inter.variable} suppressHydrationWarning>

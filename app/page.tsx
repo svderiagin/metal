@@ -1,36 +1,23 @@
 import type {Metadata} from "next";
 import {HeroSection} from "@/components/home/HeroSection";
 import {CatalogSection} from "@/components/home/CatalogSection";
-import {AdvantagesSection} from "@/components/home/AdvantagesSection";
+import {OrderGuideSection} from "@/components/home/OrderGuideSection";
 import {RequestQuoteSection} from "@/components/home/RequestQuoteSection";
 import {PageContainer} from "@/components/layout/PageContainer";
-import {ProductTypeCard} from "@/components/catalog/ProductTypeCard";
-import {getAllProductVariants, getFeaturedProductTypes} from "@/lib/catalog";
-import {getPreparedPhoto} from "@/lib/server/preparedPhotos";
+import {companyDetails} from "@/lib/companyDetails";
 
-export const metadata: Metadata = {title: {absolute: "ООО РВБ — Металлоконструкции и металлопрокат"}};
+export const metadata: Metadata = {
+  title: {absolute: `Металлопрокат с доставкой | ${companyDetails.brandName}`},
+  description: "Арматура, трубы, балки и листовой прокат. Сравните размеры и цены в каталоге или запросите расчёт по спецификации. Оплата по счёту, доставка и самовывоз.",
+};
+
 export default function Home() {
-  const variants = getAllProductVariants();
-  const featuredProducts = getFeaturedProductTypes();
   return (
     <>
       <HeroSection/>
-      <PageContainer className="space-y-9 py-7 sm:space-y-10 sm:py-8 lg:space-y-12 lg:py-10">
+      <PageContainer className="space-y-10 pt-5 pb-10 sm:space-y-12 sm:pt-7 sm:pb-12 lg:space-y-14 lg:pt-8 lg:pb-14">
         <CatalogSection/>
-        <section aria-labelledby="home-products-heading">
-          <div className="mb-5">
-            <p className="mb-1 text-eyebrow uppercase text-slate-500 dark:text-slate-400">Подбор продукции</p>
-            <h2 id="home-products-heading" className="text-section-title">Размеры и цены</h2>
-            <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">Характеристики и расчёт количества — в таблице выбранного типа продукции.</p>
-          </div>
-          <div className="grid auto-rows-fr gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {featuredProducts.map(productType => <ProductTypeCard key={productType.id} productType={productType}
-              variants={variants.filter(variant => variant.productTypeId === productType.id)}
-              photo={getPreparedPhoto(productType.imageUrl)}
-              categorySlug={productType.categorySlug} subcategorySlug={productType.subcategorySlug} appearance="home"/>)}
-          </div>
-        </section>
-        <AdvantagesSection/>
+        <OrderGuideSection/>
         <RequestQuoteSection appearance="home"/>
       </PageContainer>
     </>

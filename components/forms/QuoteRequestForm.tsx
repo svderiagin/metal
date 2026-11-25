@@ -12,6 +12,8 @@ import {buildQuoteMessage} from "@/lib/quoteRequest";
 import {isApiSuccess, readApiError} from "@/lib/apiResponse";
 import {companyDetails} from "@/lib/companyDetails";
 
+const fallbackError = "Не удалось отправить заявку. Попробуйте ещё раз.";
+
 export function QuoteRequestForm({descriptionPlaceholder = "Арматура рифлёная А500С, 12 мм, 100 м. Доставка в Истринский округ, СНТ «Берёзка», участок 10."}: {
   descriptionPlaceholder?: string;
 } = {}) {
@@ -21,14 +23,17 @@ export function QuoteRequestForm({descriptionPlaceholder = "Арматура р�
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [localMessage, setLocalMessage] = useState("");
+  const sending = useRef(false);
   const confirmation = useRef<HTMLDivElement>(null);
+  const failure = useRef<HTMLDivElement>(null);
   const quote = useQuoteRequest();
   const message = quote?.message ?? localMessage;
   const setMessage = quote?.setMessage ?? setLocalMessage;
   const requestVersion = quote?.requestVersion ?? 0;
   useEffect(() => {
     if (success) confirmation.current?.focus();
-  }, [success]);
+    else if (error) failure.current?.focus();
+  }, [success, error]);
   useEffect(() => {
     if (!requestVersion) return;
     const timer = window.setTimeout(() => {setSuccess(false); setError(""); setFieldErrors({});}, 0);
@@ -71,7 +76,7 @@ export function QuoteRequestForm({descriptionPlaceholder = "Арматура р�
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (submitting) return;
+    if (sending.current) return;
     const form = event.currentTarget;
     const data = new FormData(form);
     const payload = {
@@ -88,6 +93,7 @@ export function QuoteRequestForm({descriptionPlaceholder = "Арматура р�
       if (field instanceof HTMLElement) field.focus();
       return;
     }
+    sending.current = true;
     setSubmitting(true);
     try {
       const response = await fetch("/api/quote", {
@@ -95,15 +101,19 @@ export function QuoteRequestForm({descriptionPlaceholder = "Арматура р�
         headers: {"content-type": "application/json"},
         body: JSON.stringify(payload)
       });
-      const result: unknown = await response.json();
-      if (!response.ok || !isApiSuccess(result)) throw new Error(readApiError(result, "Не удалось отправить заявку."));
+      const result: unknown = await response.json().catch(() => undefined);
+      if (!response.ok || !isApiSuccess(result)) {
+        setError(readApiError(result, fallbackError) || fallbackError);
+        return;
+      }
       setMessage("");
       setSuccess(true);
       form.reset();
-    } catch (caught) {
-      setError(caught instanceof Error ? caught.message : "Не удалось отправить заявку.")
+    } catch {
+      setError(fallbackError);
     } finally {
-      setSubmitting(false)
+      sending.current = false;
+      setSubmitting(false);
     }
   }
 
@@ -121,7 +131,7 @@ export function QuoteRequestForm({descriptionPlaceholder = "Арматура р�
   function fieldError(field: QuoteField, spacing = "mt-1") {
     return fieldErrors[field] && <span id={`${formId}-${field}-error`} className={`${styles.error} ${spacing}`} aria-live="polite">{fieldErrors[field]}</span>;
   }
-  return <form onSubmit={submit} onBlur={validateOnBlur} onChange={clearResolvedError} noValidate aria-busy={submitting} className={`${styles.form} grid items-start gap-4 sm:grid-cols-2`}>
+  return <form method="post" onSubmit={submit} onBlur={validateOnBlur} onChange={clearResolvedError} noValidate aria-busy={submitting} className={`${styles.form} grid items-start gap-4 sm:grid-cols-2`}>
     <div className="min-w-0"><label className="block text-sm font-semibold">Имя *
       <Input name="name" required maxLength={QUOTE_LIMITS.name} className="mt-1" autoComplete="name" {...validationProps("name")}/>
       </label>
@@ -162,7 +172,7 @@ export function QuoteRequestForm({descriptionPlaceholder = "Арматура р�
       </label>
       {fieldError("consent")}
     </div>
-    {error && <div role="alert" className="text-sm text-red-700 dark:text-red-400 sm:col-span-2"><p className="font-semibold">{error}</p>
+    {error && <div ref={failure} role="alert" tabIndex={-1} className="text-sm text-red-700 dark:text-red-400 sm:col-span-2"><p className="font-semibold">{error}</p>
       <p className="mt-2">Отправьте заявку на <a href={`mailto:${companyDetails.salesEmail}`} className="underline underline-offset-2">{companyDetails.salesEmail}</a>. Введённые данные сохранены в форме.</p></div>}
     <Button type="submit" disabled={submitting} className="sm:w-fit" onMouseDown={event => {
       // Showing a blur error can move the button before the click reaches it.

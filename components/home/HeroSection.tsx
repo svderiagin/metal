@@ -20,21 +20,16 @@ export function HeroSection() {
   return (
     <HeroCarousel slides={slides}>
         <div>
-          <p className={`${styles.eyebrow} text-eyebrow uppercase`}>
-            Поставка по спецификации
-          </p>
-          <h1 id="home-hero-title" className={`${styles.title} mt-2`}>
-            Металлопрокат<br/>и металлоконструкции
+          <h1 id="home-hero-title" className={styles.title}>
+            Металлопрокат с доставкой
           </h1>
-          <p className={`${styles.intro} mt-4 max-w-xl`}>
-            Арматура, трубы, листовой и сортовой прокат для застройщиков,
-            строительных бригад и компаний.
+          <p className={`${styles.intro} mt-2 max-w-lg sm:mt-3`}>
+            Арматура, трубы, балки, листовой и сортовой прокат.
           </p>
-          <div className="mt-5 grid gap-3 min-[380px]:grid-cols-2 sm:flex sm:flex-wrap">
-            <ButtonLink href="/catalog" className={styles.primaryAction}>Каталог <Icon name="arrow-right"/></ButtonLink>
-            <ButtonLink href="/#request" variant="secondary" className={styles.secondaryAction}>Расчёт заказа</ButtonLink>
+          <div className="mt-3 grid gap-2 sm:mt-4 sm:flex sm:flex-wrap sm:gap-3">
+            <ButtonLink href="/catalog" className={styles.primaryAction}>Перейти в каталог <Icon name="arrow-right"/></ButtonLink>
+            <ButtonLink href="#request" nativeNavigation variant="secondary" className={styles.secondaryAction}>Запросить расчёт</ButtonLink>
           </div>
-          <p className={`${styles.terms} mt-4 border-t pt-3 text-sm`}>Со склада и под заказ. Стоимость и сроки согласуем по спецификации.</p>
         </div>
     </HeroCarousel>
   );

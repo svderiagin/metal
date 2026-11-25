@@ -5,7 +5,7 @@ import path from "node:path";
 import sharp from "sharp";
 import {catalogCoverGalleries} from "../data/catalog-cover-galleries";
 import {HERO_SLIDES} from "../data/hero-slides";
-import {getAllCategories, getFeaturedProductTypes} from "../lib/catalog";
+import {getAllCategories} from "../lib/catalog";
 import type {PreparedPhoto} from "../lib/server/preparedPhotos";
 
 const heroWidths = [384, 480, 640, 750, 828, 1080, 1440, 1920, 2560];
@@ -27,10 +27,9 @@ function schedule(src: string | undefined, widths: number[]) {
 for (const slide of HERO_SLIDES) schedule(slide.src, heroWidths);
 for (const category of getAllCategories()) {
   const cover = catalogCoverGalleries[category.id]?.cover ?? category.imageUrl;
-  schedule(category.imageUrl, categoryWidths);
+  schedule(category.imageUrl, [...thumbnailWidths, ...categoryWidths]);
   schedule(cover, [...thumbnailWidths, 480, 640, 750, 828, 1080]);
 }
-for (const type of getFeaturedProductTypes()) schedule(type.imageUrl, thumbnailWidths);
 
 async function prepare(src: string, requestedWidths: Set<number>): Promise<PreparedPhoto> {
   const input = await readFile(`public${src}`);

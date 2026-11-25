@@ -6,7 +6,7 @@ export interface HeroSlide {
 }
 
 // Интервал смены фотографий; не связан с длительностью плавного перехода.
-export const AUTO_ROTATE_MS = 2000;
+export const AUTO_ROTATE_MS = 6000;
 
 export const HERO_SLIDES: HeroSlide[] = [
   {id: "hero-01", src: "/images/hero/1.jpg", desktopPosition: "50% 65%", mobilePosition: "70% 65%"},

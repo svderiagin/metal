@@ -1,86 +1,113 @@
 "use client";
 
-import {type CSSProperties, type ReactNode, useEffect, useMemo, useRef, useState} from "react";
+import {type CSSProperties, type ReactNode, useEffect, useRef, useState} from "react";
 import {PageContainer} from "@/components/layout/PageContainer";
 import {Icon} from "@/components/ui/Icon";
 import {PreparedPhoto} from "@/components/ui/PreparedPhoto";
 import {AUTO_ROTATE_MS, type HeroSlide} from "@/data/hero-slides";
+import {coverGalleryIndex} from "@/lib/catalogCoverGallery";
 import type {PreparedPhoto as Photo} from "@/lib/server/preparedPhotos";
 import styles from "./HeroCarousel.module.css";
 
 type ImageStatus = "ready" | "failed";
+type Direction = -1 | 1;
+type Navigation = {
+  active: string;
+  pending: string | null;
+  direction: Direction;
+  status: Record<string, ImageStatus>;
+};
+
+function selectNext(slides: readonly HeroSlide[], state: Navigation, direction: Direction, from = state.pending ?? state.active): Navigation {
+  const start = slides.findIndex(slide => slide.id === from);
+  for (let offset = 1; offset <= slides.length; offset++) {
+    const {id} = slides[coverGalleryIndex(start, direction * offset, slides.length)];
+    if (state.status[id] === "failed") continue;
+    if (id === state.active || state.status[id] === "ready") {
+      return {...state, active: id, pending: null, direction};
+    }
+    return {...state, pending: id, direction};
+  }
+  return {...state, pending: null};
+}
 
 export function HeroCarousel({slides, children}: {slides: (HeroSlide & {photo?: Photo})[]; children: ReactNode}) {
   const hero = useRef<HTMLElement>(null);
-  const mounted = useRef(true);
   const gesture = useRef<{x: number; y: number} | null>(null);
   const decoding = useRef(new WeakMap<HTMLImageElement, string>());
-  // Первый элемент должен монтироваться и после обновления из пустого списка.
-  const [requested, setRequested] = useState(1);
-  const [status, setStatus] = useState<Record<string, ImageStatus>>({});
-  const [current, setCurrent] = useState(slides[0]?.id ?? "");
+  // Первый кадр доступен в серверной разметке до гидратации.
+  const [navigation, setNavigation] = useState<Navigation>(() => ({
+    active: slides[0]?.id ?? "",
+    pending: null,
+    direction: 1,
+    status: {},
+  }));
   const [enabled, setEnabled] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
   const [visible, setVisible] = useState(false);
   const [tabVisible, setTabVisible] = useState(false);
   const [hovered, setHovered] = useState(false);
-  const [focused, setFocused] = useState(false);
-  const usable = useMemo(() => slides.filter(slide => status[slide.id] === "ready"), [slides, status]);
-  // Показываем первый кадр из серверной разметки, не ожидая гидратации.
-  const active = usable.find(slide => slide.id === current) ?? usable[0]
-    ?? slides.find(slide => status[slide.id] !== "failed");
-  const canRotate = usable.length > 1;
+  const {active, pending, status} = navigation;
+  const canNavigate = slides.filter(slide => status[slide.id] !== "failed").length > 1;
+  const requested = slides.filter(({id}) => status[id] !== "failed"
+    && (id === active || id === pending || status[id] === "ready"));
 
   useEffect(() => {
-    mounted.current = true;
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const initialize = window.setTimeout(() => setEnabled(!motion.matches), 0);
-    const onMotion = () => {if (motion.matches) setEnabled(false);};
+    const onMotion = () => {
+      setReducedMotion(motion.matches);
+      if (motion.matches) setEnabled(false);
+    };
     const onVisibility = () => setTabVisible(!document.hidden);
     motion.addEventListener("change", onMotion);
     document.addEventListener("visibilitychange", onVisibility);
+    onMotion();
     onVisibility();
     const observer = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting && entry.intersectionRatio > 0), {threshold: 0});
     if (hero.current) observer.observe(hero.current);
     return () => {
-      mounted.current = false;
-      window.clearTimeout(initialize);
       observer.disconnect();
       motion.removeEventListener("change", onMotion);
       document.removeEventListener("visibilitychange", onVisibility);
     };
   }, []);
 
-  // Следующий запрос откладывается, но зависший запрос не блокирует остальные.
-  // Первый кадр присутствует в серверной HTML-разметке и загружается без lazy-loading.
   useEffect(() => {
-    const last = slides[requested - 1];
-    const activeIndex = slides.findIndex(slide => slide.id === active?.id);
-    // Готовим один следующий кадр, не загружая всю невидимую карусель.
-    if (requested >= slides.length || !last || !visible || !tabVisible
-      || (activeIndex < requested - 1 && status[last.id] !== "failed")) return;
-    const timer = window.setTimeout(() => setRequested(n => Math.min(n + 1, slides.length)), status[last.id] ? 250 : 5000);
-    return () => window.clearTimeout(timer);
-  }, [requested, slides, status, active, visible, tabVisible]);
-
-  useEffect(() => {
-    if (!enabled || !canRotate || !active || !visible || !tabVisible || hovered || focused) return;
+    if (!enabled || reducedMotion || !canNavigate || pending || !visible || !tabVisible || hovered) return;
     const timer = window.setTimeout(() => {
-      const position = usable.findIndex(slide => slide.id === active.id);
-      setCurrent(usable[(position + 1) % usable.length].id);
+      setNavigation(previous => selectNext(slides, previous, 1));
     }, AUTO_ROTATE_MS);
     return () => window.clearTimeout(timer);
-  }, [enabled, canRotate, active, usable, visible, tabVisible, hovered, focused]);
+  }, [enabled, reducedMotion, canNavigate, active, pending, slides, visible, tabVisible, hovered]);
 
-  function move(direction: number) {
-    if (!canRotate) return;
-    setCurrent(previous => {
-      const position = Math.max(0, usable.findIndex(slide => slide.id === previous));
-      return usable[(position + direction + usable.length) % usable.length].id;
-    });
+  function move(direction: Direction) {
+    if (!canNavigate) return;
+    setEnabled(false);
+    setNavigation(previous => selectNext(slides, previous, direction));
+  }
+
+  function togglePlayback() {
+    if (enabled) {
+      setEnabled(false);
+    } else if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      // Явный запуск действует даже с курсором или фокусом на кнопке запуска.
+      setHovered(false);
+      setEnabled(true);
+    }
   }
 
   function markImage(id: string, state: ImageStatus) {
-    if (mounted.current) setStatus(previous => previous[id] === state ? previous : {...previous, [id]: state});
+    setNavigation(previous => {
+      if (previous.status[id] === state) return previous;
+      const next = {...previous, status: {...previous.status, [id]: state}};
+      if (state === "ready" && previous.pending === id) {
+        return {...next, active: id, pending: null};
+      }
+      if (state === "failed" && (previous.pending === id || (!previous.pending && previous.active === id))) {
+        return selectNext(slides, next, previous.direction, id);
+      }
+      return next;
+    });
   }
 
   function decodeImage(image: HTMLImageElement, id: string) {
@@ -88,21 +115,16 @@ export function HeroCarousel({slides, children}: {slides: (HeroSlide & {photo?: 
     if (decoding.current.get(image) === source) return;
     decoding.current.set(image, source);
     void image.decode().then(() => {
-      if (image.currentSrc === source) markImage(id, "ready");
+      if (image.isConnected && image.currentSrc === source) markImage(id, "ready");
     }).catch(() => {
-      if (image.currentSrc === source) markImage(id, "failed");
+      if (image.isConnected && image.currentSrc === source) markImage(id, "failed");
     });
   }
 
   const circle = styles.control;
 
-  return <section ref={hero} className={styles.hero} aria-labelledby="home-hero-title" aria-roledescription={canRotate ? "карусель" : undefined}
-    onFocusCapture={event => {
-      if (!(event.relatedTarget instanceof Node) || !event.currentTarget.contains(event.relatedTarget)) setFocused(true);
-    }}
-    onBlurCapture={event => {
-      if (!(event.relatedTarget instanceof Node) || !event.currentTarget.contains(event.relatedTarget)) setFocused(false);
-    }}
+  return <section ref={hero} className={styles.hero} aria-labelledby="home-hero-title" aria-roledescription={canNavigate ? "карусель" : undefined}
+    onFocusCapture={event => {if (event.target.matches(":focus-visible")) setEnabled(false);}}
     onPointerEnter={event => {if (event.pointerType === "mouse" && window.matchMedia("(hover: hover)").matches) setHovered(true);}}
     onPointerLeave={() => setHovered(false)}
     onTouchStart={event => {
@@ -120,9 +142,9 @@ export function HeroCarousel({slides, children}: {slides: (HeroSlide & {photo?: 
     <PageContainer>
       <div className={styles.stage}>
         <div className={styles.imageFrame} aria-hidden="true">
-          {slides.slice(0, requested).filter(slide => status[slide.id] !== "failed").map((slide, i) => <PreparedPhoto key={slide.id}
-            photo={slide.photo} src={slide.src} alt="" fill sizes="(min-width: 1360px) 1312px, (min-width: 1024px) calc(100vw - 48px), (min-width: 640px) calc(100vw - 40px), calc(100vw - 32px)" loading="eager" fetchPriority={i === 0 ? "high" : "low"}
-            className={styles.photograph} data-active={active?.id === slide.id}
+          {requested.map(slide => <PreparedPhoto key={slide.id}
+            photo={slide.photo} src={slide.src} alt="" fill sizes="(min-width: 1360px) 1312px, (min-width: 1024px) calc(100vw - 48px), (min-width: 640px) calc(100vw - 40px), calc(100vw - 32px)" loading="eager" fetchPriority={slide.id === slides[0]?.id ? "high" : "auto"}
+            className={styles.photograph} data-active={active === slide.id}
             style={{"--position-desktop": slide.desktopPosition, "--position-mobile": slide.mobilePosition} as CSSProperties}
             ref={image => {
               // A cached image can complete before React attaches the load listener.
@@ -135,9 +157,9 @@ export function HeroCarousel({slides, children}: {slides: (HeroSlide & {photo?: 
         <div className={styles.layout}>
           <div className={styles.content}>{children}</div>
           <div className={styles.controls}>
-            {canRotate && <div className="flex items-center gap-2" role="group" aria-label="Управление фотографиями">
+            {canNavigate && <div className="flex items-center gap-2" role="group" aria-label="Управление фотографиями">
               <button type="button" className={circle} aria-label={enabled ? "Приостановить слайд-шоу" : "Запустить слайд-шоу"}
-                onClick={() => setEnabled(value => !value)}>
+                disabled={reducedMotion} onClick={togglePlayback}>
                 <Icon name={enabled ? "pause" : "play"}/>
               </button>
               <button type="button" className={circle} aria-label="Предыдущая фотография" onClick={() => move(-1)}><Icon name="arrow-left"/></button>
