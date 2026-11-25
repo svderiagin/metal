@@ -37,6 +37,7 @@ export function CartPageContent() {
   if (!lines.length) {
     return (
       <EmptyState
+        compact
         title="Корзина пуста"
         description="Добавьте металлопрокат из каталога, чтобы оформить заказ без регистрации."
         headingRef={emptyHeading}
@@ -55,7 +56,7 @@ export function CartPageContent() {
         ))}
       </section>
       <CartSummary canRequestPrice={canRequestPrice} onClear={removeAll}/>
-      {canRequestPrice && <div className="xl:col-span-2"><RequestQuoteSection/></div>}
+      {canRequestPrice && <div className="xl:col-span-2"><RequestQuoteSection appearance="cart"/></div>}
     </div></QuoteRequestProvider>
   );
 }

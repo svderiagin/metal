@@ -42,6 +42,7 @@ export function CartItemRow({line, onRemove}: {line: CartLine; onRemove: () => v
   const simpleOptions = getSimpleOrderQuantityOptions(product);
   const simplePrecision = simpleOptions.decimalPlaces;
   const priceRequiresQuote = !product || line.priceRequiresQuote;
+  const priceStatus = line.invalidReason ? "Требует проверки" : priceRequiresQuote ? "По запросу" : undefined;
   const quantityDisabled = !product || (priceRequiresQuote && !line.deliveryEstimate);
   const pieceOrder = line.pieceOrder;
   const maximumPieces = product && pieceOrder
@@ -59,7 +60,7 @@ export function CartItemRow({line, onRemove}: {line: CartLine; onRemove: () => v
   return (
     <article data-cart-row={line.productId} className={`${styles.row} rounded-xl border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-900`}>
       <div className={styles.product}>
-        <h2 className="text-base font-semibold leading-snug">
+        <h2 className="text-card-title">
           {line.slug ? <Link
             href={catalogProductPath(line.categorySlug, line.subcategorySlug, line.productTypeSlug, line.productId)}
             className="rounded-sm transition-colors hover:text-brand-700 hover:underline dark:hover:text-brand-300"
@@ -148,8 +149,10 @@ export function CartItemRow({line, onRemove}: {line: CartLine; onRemove: () => v
           disabled={quantityDisabled} value={line.quantity} onChange={(value) => updateQuantity(line.productId, value)}/>
       )}</div>
       <div className={styles.price}>
-        <strong className={styles.total}>{line.invalidReason ? "Требует проверки" : priceRequiresQuote ? "По запросу"
-          : <CartAmount>{formatCurrency(line.estimatedTotal)}</CartAmount>}</strong>
+        {priceStatus ? <p className="min-w-0 text-sm font-medium text-slate-600 dark:text-slate-300">{priceStatus}</p>
+          : <strong className="min-w-0 text-lg font-bold leading-6">
+            <CartAmount>{formatCurrency(line.estimatedTotal)}</CartAmount>
+          </strong>}
         <Button
           type="button"
           id={`cart-remove-${line.productId}`}

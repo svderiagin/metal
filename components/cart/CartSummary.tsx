@@ -12,6 +12,7 @@ import {CartAmount} from "./CartAmount";
 export function CartSummary({canRequestPrice, onClear}: {canRequestPrice: boolean; onClear: () => void}) {
   const {lineItemCount, totalAmount, lines} = useCart();
   const invalid = lines.some(line => line.invalidReason);
+  const totalNeedsClarification = invalid || canRequestPrice;
   const quote = useQuoteRequest();
   const confirmation = useRef<HTMLDialogElement>(null);
   const titleId = useId();
@@ -50,7 +51,7 @@ export function CartSummary({canRequestPrice, onClear}: {canRequestPrice: boolea
   }
   return (
     <aside className="min-w-0 rounded-xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-900 sm:p-6" aria-labelledby={titleId + "-summary"}>
-      <h2 id={titleId + "-summary"} className="text-section-title">Итого</h2>
+      <h2 id={titleId + "-summary"} className="text-card-title">Итого</h2>
       <dl className="mt-4 space-y-3 text-sm">
         <div className="flex justify-between gap-4 text-slate-600 dark:text-slate-300">
           <dt>Позиций</dt>
@@ -62,8 +63,11 @@ export function CartSummary({canRequestPrice, onClear}: {canRequestPrice: boolea
         </div>
         <div className="flex min-w-0 flex-wrap items-baseline justify-between gap-x-3 gap-y-1 border-t border-slate-200 pt-3 dark:border-slate-700">
           <dt className="font-semibold">Сумма</dt>
-          <dd className="ml-auto min-w-0 text-right text-lg font-bold sm:text-xl">{invalid || canRequestPrice ? "Требует уточнения"
-            : <CartAmount>{formatCurrency(totalAmount)}</CartAmount>}</dd>
+          <dd className={`ml-auto min-w-0 text-right ${totalNeedsClarification
+            ? "font-medium text-slate-600 dark:text-slate-300"
+            : "text-lg font-bold leading-6"}`}>
+            {totalNeedsClarification ? "Требует уточнения" : <CartAmount>{formatCurrency(totalAmount)}</CartAmount>}
+          </dd>
         </div>
       </dl>
       <p className="mt-3 text-xs leading-5 text-slate-600 dark:text-slate-400">
@@ -84,7 +88,7 @@ export function CartSummary({canRequestPrice, onClear}: {canRequestPrice: boolea
       </div>
       <dialog ref={confirmation} aria-labelledby={titleId} aria-describedby={descriptionId}
         className="m-auto w-[calc(100%-2rem)] max-w-sm rounded-xl border border-slate-200 bg-white p-5 text-slate-900 shadow-xl backdrop:bg-slate-950/60 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 sm:p-6">
-        <h2 id={titleId} className="text-xl font-bold">Очистить корзину?</h2>
+        <h2 id={titleId} className="text-card-title">Очистить корзину?</h2>
         <p id={descriptionId} className="mt-2 text-sm text-slate-600 dark:text-slate-300">Все позиции будут удалены из корзины.</p>
         <form method="dialog" className="mt-5 grid grid-cols-[repeat(auto-fit,minmax(min(100%,8rem),1fr))] gap-3">
           <Button type="submit" variant="secondary">Отмена</Button>

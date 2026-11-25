@@ -49,13 +49,6 @@
   padding-block-start: 8px;
 }
 
-.total {
-  min-width: 0;
-  font-size: 1.125rem;
-  font-weight: 650;
-  line-height: 1.35;
-}
-
 .remove {
   min-width: 6.25rem;
   flex-shrink: 0;
