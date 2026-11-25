@@ -30,20 +30,20 @@ export function ProductTypeCard({
     : formatUnitPrice(minimumPrice, priceUnit).replace(/,00(?=\s*₽)/u, "").split(/\s+(?=₽)/u);
 
   return (
-    <article className={`${styles.card} relative flex h-full min-w-0 flex-col rounded-xl border border-slate-200 bg-white p-4 transition-colors sm:p-5 dark:border-slate-700 dark:bg-slate-900`}>
-      <div className="grid min-w-0 flex-1 grid-cols-[minmax(0,1fr)_96px] items-start gap-x-4 sm:grid-cols-[minmax(0,1fr)_112px]">
+    <article className={`${styles.card} @container relative flex h-full min-w-0 flex-col rounded-xl border border-slate-200 bg-white p-4 transition-colors sm:p-5 dark:border-slate-700 dark:bg-slate-900`}>
+      <div className="grid min-w-0 flex-1 grid-cols-[minmax(0,1fr)_clamp(104px,32%,120px)] items-start gap-x-4 sm:grid-cols-[minmax(0,1fr)_clamp(120px,30%,144px)] @min-[25rem]:grid-rows-[auto_1fr_auto]">
           <h2 className={`text-card-title text-slate-950 dark:text-slate-100 ${productType.imageUrl ? "" : "col-span-2"}`}>
             <Link href={`/catalog/${categorySlug}/${subcategorySlug}/${productType.slug}`}
               className={`${styles.stretchedLink} cursor-pointer after:absolute after:inset-0 after:z-[1] after:rounded-xl`}>
               {productType.name}
             </Link>
           </h2>
-          {productType.imageUrl && <div className="relative row-span-1 aspect-[4/3] overflow-hidden rounded-lg bg-white sm:row-span-2">
+          {productType.imageUrl && <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-white @min-[25rem]:row-span-2">
             <PreparedPhoto src={catalogImageUrl(productType.imageUrl)} alt="" fill
-              sizes="(min-width: 640px) 112px, 96px"
+              sizes="(min-width: 640px) 192px, 160px"
               className="object-cover object-center"/>
           </div>}
-          <p className={`col-start-1 mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300 ${productType.imageUrl ? "col-span-2 sm:col-span-1" : "col-span-2"}`}>
+          <p className={`col-span-2 col-start-1 mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300 ${productType.imageUrl ? "@min-[25rem]:col-span-1" : ""}`}>
             {catalogDescriptionCopy[productType.subcategoryId]?.intro ?? productType.shortDescription}
           </p>
           {standard !== "Уточняется" && <div className="col-span-2 mt-3 flex items-center gap-1 text-xs leading-6 text-slate-600 dark:text-slate-300">

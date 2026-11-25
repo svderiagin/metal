@@ -9,7 +9,7 @@
 .gallery { grid-area: photo; min-width: 0; }
 .actions { grid-area: actions; }
 .withImage {
-  grid-template-columns: minmax(0, 1fr) 5.5rem;
+  grid-template-columns: minmax(0, 1fr) clamp(6rem, 26vw, 7rem);
   grid-template-areas: "heading heading" "description description" "actions photo";
 }
 .gallery { align-self: center; }
@@ -17,16 +17,17 @@
   .guideLink { padding-inline: 0.75rem; }
 }
 @media (max-width: 22rem) {
+  .withImage { column-gap: 0.5rem; }
   .heading h1 { font-size: calc(var(--text-page-title) * 0.9); }
 }
 @media (min-width: 40rem) {
   .withImage {
-    grid-template-columns: minmax(0, 1fr) 12.5rem;
+    grid-template-columns: minmax(0, 1fr) 14rem;
     grid-template-areas: "heading photo" "description photo" "actions photo";
     column-gap: 1.5rem;
   }
   .gallery { align-self: center; }
 }
 @media (min-width: 64rem) {
-  .withImage { grid-template-columns: minmax(0, 1fr) 20rem; }
+  .withImage { grid-template-columns: minmax(0, 1fr) 24rem; }
 }

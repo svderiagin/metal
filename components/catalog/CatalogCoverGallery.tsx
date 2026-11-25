@@ -15,7 +15,7 @@ type Layout = "banner" | "wide" | "compact";
 const imageSizes: Record<Layout, string> = {
   banner: "(min-width: 1360px) 1004px, (min-width: 1024px) calc(100vw - 356px), (min-width: 640px) calc(100vw - 40px), calc(100vw - 32px)",
   wide: "(min-width: 1360px) 938px, (min-width: 1024px) calc(100vw - 422px), (min-width: 640px) calc(100vw - 90px), calc(100vw - 74px)",
-  compact: "(min-width: 1024px) 320px, (min-width: 640px) 200px, 88px",
+  compact: "(min-width: 1024px) 384px, (min-width: 640px) 224px, 112px",
 };
 
 export function CatalogCoverGallery({images, name, layout = "wide", className = "", coverPhoto}: {

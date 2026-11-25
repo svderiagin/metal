@@ -24,10 +24,11 @@
 
   .withImage {
     grid-template-rows: auto;
-    grid-template-columns: clamp(72px, 30%, 112px) minmax(0, 1fr);
+    grid-template-columns: clamp(88px, 37%, 112px) minmax(0, 1fr);
   }
 
   .picture {
+    align-self: stretch;
     aspect-ratio: 4 / 3;
   }
 }

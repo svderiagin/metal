@@ -42,7 +42,7 @@ export function CatalogSection() {
             <Link href={`/catalog/${category.slug}`} className={`${cardStyles.card} ${styles.tile} ${hasImage ? styles.withImage : ""} group h-full rounded-lg border border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-900`}>
               {hasImage && <div className={`${styles.picture} rounded-t-lg bg-slate-100 sm:rounded-md dark:bg-slate-800`}>
                 <PreparedPhoto photo={getPreparedPhoto(src)} src={catalogImageUrl(src)} alt="" fill
-                  sizes="auto, (min-width: 640px) 112px, calc((100vw - 46px) / 2)" className="object-cover object-center"/>
+                  sizes="(min-width: 640px) 192px, calc((100vw - 46px) / 2)" className="object-cover object-center"/>
               </div>}
               <div className="min-w-0 p-2.5 sm:p-0">
                 <h3 className="text-sm font-semibold leading-snug group-hover:text-brand-700 dark:group-hover:text-brand-300 sm:text-card-title sm:leading-snug">{category.name}</h3>
