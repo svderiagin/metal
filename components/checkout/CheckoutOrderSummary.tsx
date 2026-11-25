@@ -10,7 +10,7 @@ import {formatCartQuantity, formatMeasuredQuantity, formatQuantityForInput, form
 import {getProductVariantById} from "@/lib/cartCatalog";
 import {isVgpVariant} from "@/lib/pipeFamily";
 import {metersToTons, sameMeasuredQuantity} from "@/lib/orderMeasurement";
-import {sheetOrderTons, sheetTonDecimals} from "@/lib/sheetOrder";
+import {hasSheetOrderMass, sheetOrderTons, sheetTonDecimals} from "@/lib/sheetOrder";
 import {BACKORDER_DELIVERY_ESTIMATE} from "@/lib/catalogOffer";
 
 function orderQuantityParts(line: CartLine, product: ProductVariant | undefined) {
@@ -42,7 +42,9 @@ function orderQuantityParts(line: CartLine, product: ProductVariant | undefined)
     if (Number.isInteger(sheets)) {
       const parts = [`${formatCartQuantity(sheets)}\u00a0шт.`];
       if (product.unit === "square_meter") parts.push(`${formatCartQuantity(line.quantity)}\u00a0м²`);
-      parts.push(`${formatQuantityForInput(sheetOrderTons(product.sheetOrder, sheets), true, sheetTonDecimals)}\u00a0т`);
+      if (hasSheetOrderMass(product.sheetOrder)) {
+        parts.push(`${formatQuantityForInput(sheetOrderTons(product.sheetOrder, sheets), true, sheetTonDecimals)}\u00a0т`);
+      }
       return parts;
     }
   }

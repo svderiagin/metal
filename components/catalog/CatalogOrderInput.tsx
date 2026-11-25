@@ -1,4 +1,5 @@
 import {Input} from "@/components/ui/Input";
+import {useCart} from "@/hooks/useCart";
 import type {OrderInputMode} from "@/types/cart";
 import {normalizeCartQuantityDraft, quantityTransferHandlers} from "@/lib/cartQuantityInput";
 import filterStyles from "./FilterPanel.module.css";
@@ -22,10 +23,11 @@ export function CatalogOrderInput({
   keepPlaceholderOnFocus?: boolean;
   className?: string;
 }) {
+  const {hydrated} = useCart();
   const measurementStyle = mode === "ton" ? tableStyles.tonInput : mode === "meter" ? tableStyles.meterInput : "";
   const placeholderStyle = keepPlaceholderOnFocus ? "" : "focus:placeholder:text-transparent";
   const field = <Input aria-label={label} aria-invalid={invalid || undefined} aria-describedby={statusId} type="text" inputMode={inputMode}
-    disabled={disabled} value={value} data-long-value={mode === "ton" && value.length >= 10 || undefined} onChange={event => {
+    disabled={disabled || !hydrated} value={value} data-long-value={mode === "ton" && value.length >= 10 || undefined} onChange={event => {
       const input = event.currentTarget;
       const attempted = input.value;
       const next = normalizeCartQuantityDraft(attempted, input.selectionStart, input.selectionEnd);

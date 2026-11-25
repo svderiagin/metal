@@ -1,0 +1,9 @@
+.loading {
+  min-height: 100vh;
+  min-height: 100svh;
+}
+
+/* The footer enters the layout once the height of the restored content is known. */
+:global(main):has(.loading) + :global(footer) {
+  display: none;
+}

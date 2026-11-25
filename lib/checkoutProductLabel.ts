@@ -5,7 +5,7 @@ import {isMetalMeshVariant, metalMeshFormat, metalMeshSpecification} from "./met
 import {formatNumber} from "./numberFormat";
 import {isVgpVariant} from "./pipeFamily";
 import {isProfileSheetVariant, profileSheetCoatingLabel, profileSheetDimensions} from "./profileSheet";
-import {getSheetParameters} from "./sheetPresentation";
+import {getSheetParameters, getTreadPlateExecution} from "./sheetPresentation";
 import {getVariantAttribute} from "./variantPresentation";
 
 export interface CheckoutProductLabel {
@@ -107,6 +107,11 @@ export function getCheckoutProductLabel(product: ProductVariant, typeName: strin
 
   const sheet = getSheetParameters(product);
   if (sheet) {
+    const execution = getTreadPlateExecution(product);
+    if (execution) return {
+      ...withDetails(`${typeName} ${sheet.thickness}\u00a0мм`, dimensionsLabel(sheet.format), product.steelGrade),
+      titleDetails: execution,
+    };
     const mass = sharedName && sheet.mass ? dimensionsLabel(sheet.mass.replace(/кг\/шт\.?$/u, "кг/лист")) : undefined;
     return withDetails(`${typeName} ${sheet.thickness}\u00a0мм`, dimensionsLabel(sheet.format), product.steelGrade,
       mass, sharedName ? product.standard : undefined);

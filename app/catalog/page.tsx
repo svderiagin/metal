@@ -13,7 +13,7 @@ import {catalogDescriptionCopy} from "@/data/catalog-description-copy";
 
 export const metadata: Metadata = {
   title: "Каталог металлопроката",
-  description: "Трубы, листовой и сортовой прокат, нержавеющая сталь, метизы и цветные металлы."
+  description: "Арматура, стальные трубы, балки, листовой и сортовой прокат, профнастил, сетка и штакетник. Размеры, цены и наличие."
 };
 export default function CatalogPage() {
   return <PageContainer className="pt-5 pb-8 sm:pt-6 lg:pt-7 lg:pb-10">

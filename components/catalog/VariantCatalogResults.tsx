@@ -8,7 +8,8 @@ import {MeterPricedOrderControls} from "./MeasuredVariantItem";
 import {CatalogDescription} from "./CatalogDescription";
 import {CatalogTableNote} from "./CatalogTableNote";
 import {formatUnitPrice} from "@/lib/currency";
-import {getSheetParameters, getSheetTableDesignation, hotRolledSheetSupply, hotRolledSheetTitle, isColdRolledSheet, isGalvanizedSheet, isPlainHotRolledSheet, isTreadPlate, sheetFormatLabel, treadPlateTitle} from "@/lib/sheetPresentation";
+import {getSheetParameters, getSheetTableDesignation, getTreadPlateExecution, hotRolledSheetSupply, hotRolledSheetTitle, isColdRolledSheet, isGalvanizedSheet, isPlainHotRolledSheet, isTreadPlate, sheetFormatLabel, treadPlateStandard, treadPlateTitle} from "@/lib/sheetPresentation";
+import {hasSheetOrderMass} from "@/lib/sheetOrder";
 import {Button} from "@/components/ui/Button";
 import {ResetFiltersButton} from "./ResetFiltersButton";
 import {CatalogVariantLayout, CatalogVariantSpecifications, CatalogVariantTable} from "./CatalogVariantLayout";
@@ -71,7 +72,8 @@ export function VariantCatalogResults({visible, categorySlug, unit, isSheetCatal
   const isPieceSheetCatalog = pieceSheetTitle !== undefined;
   const isTreadPlateCatalog = isSheetCatalog && visible.every(isTreadPlate);
   const isHotRolledSheetCatalog = isSheetCatalog && visible.every(isPlainHotRolledSheet);
-  const hasSheetMassOrder = isSheetCatalog && visible.length > 0 && visible.every(variant => variant.sheetOrder);
+  const hasSheetOrder = isSheetCatalog && visible.length > 0 && visible.every(variant => variant.sheetOrder);
+  const hasSheetMassOrder = hasSheetOrder && visible.some(variant => hasSheetOrderMass(variant.sheetOrder));
   const presentation: TableSpecifications = isPieceSheetCatalog || isTreadPlateCatalog || isHotRolledSheetCatalog ? tableSpecs.pieceSheet
     : isSheetCatalog ? tableSpecs["listovoy-prokat"]
     : tableSpecs[categorySlug as keyof typeof tableSpecs] ?? tableSpecs.armatura;
@@ -143,6 +145,7 @@ export function VariantCatalogResults({visible, categorySlug, unit, isSheetCatal
     }
     return <CatalogVariantLayout key={variant.id} variant={variant} view={view}
       name={view === "table" ? tableName : cardName}
+      nameNote={getTreadPlateExecution(variant)}
       tableSpecifications={tableValues}
       specifications={isUnverifiedSquarePipe ? <CatalogVariantSpecifications items={[{label: "Характеристики", value: "Уточняются"}]}/> : unverified
         ? <p className="text-sm text-slate-600 dark:text-slate-400">Характеристики требуют подтверждения перед заказом.</p>
@@ -151,7 +154,8 @@ export function VariantCatalogResults({visible, categorySlug, unit, isSheetCatal
         note={description && <CatalogDescription description={description}/>}/>}
       price={price}
       order={hasMeasuredOrder ? <MeterPricedOrderControls variant={variant} view={view}/>
-        : <ProductOrderControls variant={variant} view={view} showUnit={!unit} orderBySheet={hasSheetMassOrder}
+        : <ProductOrderControls variant={variant} view={view} showUnit={!unit} orderBySheet={hasSheetOrder}
+          showSheetMassColumn={hasSheetMassOrder}
           quantityColSpan={quantityColSpan}/>}/>;
   }
   return (
@@ -173,8 +177,12 @@ export function VariantCatalogResults({visible, categorySlug, unit, isSheetCatal
             <CatalogStandardReference>таблице 1 ГОСТ 103-2006</CatalogStandardReference>.
           </CatalogTableNote>}
           {isTreadPlateCatalog && <CatalogTableNote>
-            Рифление — «чечевица». Толщина указана по основанию листа. Для заказа по массе используем теоретическую массу с учётом рифления из{" "}
-            <CatalogStandardReference>ГОСТ 8568-77</CatalogStandardReference> и округляем количество вверх до целых листов.
+            Рифление — «чечевица». Толщина указана по основанию листа.
+            {hasSheetMassOrder && <> Листы по <CatalogStandardReference>{treadPlateStandard}</CatalogStandardReference> можно заказать
+              по теоретической массе с учётом рифления. Количество округляем вверх до целых листов.</>}
+            {visible.some(variant => variant.sheetOrder && !hasSheetOrderMass(variant.sheetOrder)) && <>
+              {" "}Если масса готового листа уточняется, заказать позицию можно в штуках.
+            </>}
           </CatalogTableNote>}
           {isHotRolledSheetCatalog && <CatalogTableNote>
             Марка стали — {hotRolledSheetSupply.grade}. Сортамент — <CatalogStandardReference>{hotRolledSheetSupply.assortment}</CatalogStandardReference>.{" "}
@@ -185,7 +193,7 @@ export function VariantCatalogResults({visible, categorySlug, unit, isSheetCatal
           <CatalogVariantTable designation={presentation.heading} specifications={isPicket ? ["Цвет", "Профиль", ...specificationLabels] : specificationLabels}
             columnWidths={isPicket ? picketColumnWidths : undefined}
             specificationWidths={isAngle && parameters.length === 2 ? [12, 6] : undefined}
-            unit={unit} quantity={hasMeasuredOrder ? "Заказ, м" : hasSheetMassOrder ? "Заказ, шт." : undefined} quantityColSpan={quantityColSpan}
+            unit={unit} quantity={hasMeasuredOrder ? "Заказ, м" : hasSheetOrder ? "Заказ, шт." : undefined} quantityColSpan={quantityColSpan}
             secondaryQuantity={hasMeasuredOrder || hasSheetMassOrder ? "Заказ, т" : undefined}>
             {visible.map(variant => renderVariant(variant, "table"))}
           </CatalogVariantTable>

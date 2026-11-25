@@ -1,9 +1,10 @@
 import type {ProductVariant} from "@/types/product";
 import {MAX_ORDER_PIECES} from "./constants";
 import {wholeLengthPieces} from "./orderMeasurement";
-import {getSheetParameters, getTreadPlatePattern, isPlainHotRolledSheet, isTreadPlate} from "./sheetPresentation";
+import {getSheetParameters, getTreadPlatePattern, isPlainHotRolledSheet, isTreadPlate, treadPlateStandard} from "./sheetPresentation";
 
 type SheetOrder = NonNullable<ProductVariant["sheetOrder"]>;
+type SheetOrderByMass = SheetOrder & {kilogramsPerSheet: number};
 
 // ГОСТ 8568-77, чечевичное рифление. Значения в десятых долях кг/м².
 const kilogramsPerSquareMeterTenths: Partial<Record<string, number>> = {
@@ -18,10 +19,12 @@ export function getSheetOrderParameters(product: ProductVariant): SheetOrder | u
   const areaMm2 = Number(sheet.width) * Number(sheet.length);
   const area = areaMm2 / 1e6;
   if (!Number.isFinite(area) || area <= 0) return;
+  const quantityPerSheet = product.unit === "square_meter" ? area : 1;
+  if (treadPlate && product.standard !== treadPlateStandard) return {quantityPerSheet};
   const kilogramsPerSheet = treadPlate ? (kilogramsPerSquareMeterTenths[sheet.thickness] ?? 0) * areaMm2 / 1e7
     : getCatalogSheetMass(product, area);
   if (!Number.isFinite(kilogramsPerSheet) || kilogramsPerSheet <= 0) return;
-  return {kilogramsPerSheet, quantityPerSheet: product.unit === "square_meter" ? area : 1};
+  return {kilogramsPerSheet, quantityPerSheet};
 }
 
 function getCatalogSheetMass(product: ProductVariant, areaSquareMeters: number) {
@@ -33,11 +36,15 @@ function getCatalogSheetMass(product: ProductVariant, areaSquareMeters: number) 
   return match[2].startsWith("м") ? value * areaSquareMeters : value;
 }
 
-export function sheetOrderTons(order: SheetOrder, sheets: number) {
+export function hasSheetOrderMass(order: SheetOrder | undefined): order is SheetOrderByMass {
+  return order?.kilogramsPerSheet !== undefined;
+}
+
+export function sheetOrderTons(order: SheetOrderByMass, sheets: number) {
   return Number((sheets * order.kilogramsPerSheet / 1000).toPrecision(15));
 }
 
-export function sheetsForOrderTons(order: SheetOrder, tons: number) {
+export function sheetsForOrderTons(order: SheetOrderByMass, tons: number) {
   return Math.min(MAX_ORDER_PIECES, wholeLengthPieces(tons, sheetOrderTons(order, 1)));
 }
 

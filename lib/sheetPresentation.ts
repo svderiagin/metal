@@ -5,6 +5,7 @@ export const galvanizedSheetSubcategoryId = "catalog-sub-listovoy-prokat-galvani
 export const coldRolledSheetSubcategoryId = "catalog-sub-listovoy-prokat-list-ocynkovannyj";
 export const hotRolledSheetSubcategoryId = "catalog-sub-listovoy-prokat-list-goryachekatanyj";
 export const treadPlateTitle = "Лист рифлёный";
+export const treadPlateStandard = "ГОСТ 8568-77";
 export const hotRolledSheetTitle = "Лист горячекатаный";
 export const hotRolledSheetSupply = {
   grade: "Ст3сп",
@@ -44,6 +45,12 @@ export function isTreadPlate(variant: ProductVariant) {
 
 export function getTreadPlatePattern(variant: ProductVariant) {
   return variant.specifications.find(item => item.name === "Рисунок рифления")?.value;
+}
+
+export function getTreadPlateExecution(variant: Pick<ProductVariant, "id">) {
+  // These two offers share the same thickness, pattern and format.
+  if (variant.id === "catalog-28952") return "По ТУ";
+  if (variant.id === "catalog-list-rif-3x1250x2500-chechevitsa") return treadPlateStandard;
 }
 
 export function isGalvanizedSheet(variant: ProductVariant) {
@@ -118,6 +125,8 @@ export function getSheetSpecifications(variant: ProductVariant) {
     {name: "Толщина", value: `${parameters.thickness} мм`},
     {name: sheetFormatLabel, value: parameters.format},
     ...(parameters.mass ? [{name: massLabel, value: parameters.mass}] : []),
+    ...(treadPlate && variant.sheetOrder && !variant.sheetOrder.kilogramsPerSheet
+      ? [{name: "Масса готового листа", value: "Уточняется при заказе"}] : []),
     ...(designation ? [{name: "Исполнение", value: designation}] : []),
     ...additional,
   ];

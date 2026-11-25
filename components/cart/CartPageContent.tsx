@@ -7,6 +7,9 @@ import {EmptyState} from "@/components/ui/EmptyState";
 import {QuoteRequestProvider} from "@/components/forms/QuoteRequestContext";
 import {RequestQuoteSection} from "@/components/home/RequestQuoteSection";
 import styles from "./CartPageContent.module.css";
+import restoreStyles from "./CartRestore.module.css";
+
+const cartLayout = "grid items-start gap-6 xl:grid-cols-[minmax(0,1fr)_22rem] xl:gap-8";
 
 export function CartPageContent() {
   const {lines, hydrated, removeItem, clearCart} = useCart();
@@ -33,7 +36,16 @@ export function CartPageContent() {
     clearCart();
   }
 
-  if (!hydrated) return <div role="status" className="h-40 animate-pulse rounded-xl bg-slate-200 motion-reduce:animate-none dark:bg-slate-700"><span className="sr-only">Загружаем корзину…</span></div>;
+  if (!hydrated) return (
+    <div role="status" className={`${cartLayout} ${restoreStyles.loading} content-start`}>
+      <span className="sr-only">Загружаем корзину…</span>
+      <div aria-hidden="true" className={`${styles.items} motion-safe:animate-pulse`}>
+        <div className="h-44 rounded-xl bg-slate-200 dark:bg-slate-700 sm:h-36"/>
+        <div className="h-44 rounded-xl bg-slate-200 dark:bg-slate-700 sm:h-36"/>
+      </div>
+      <div aria-hidden="true" className="h-64 rounded-xl bg-slate-200 motion-safe:animate-pulse dark:bg-slate-700"/>
+    </div>
+  );
   if (!lines.length) {
     return (
       <EmptyState
@@ -46,7 +58,7 @@ export function CartPageContent() {
   }
 
   return (
-    <QuoteRequestProvider><div className="grid items-start gap-6 xl:grid-cols-[minmax(0,1fr)_22rem] xl:gap-8">
+    <QuoteRequestProvider><div className={cartLayout}>
       <section
         className={styles.items}
         aria-label="Товары в корзине"

@@ -11,7 +11,8 @@ import {QuantitySelector} from "./QuantitySelector";
 import {getProductVariantById} from "@/lib/cartCatalog";
 import {calculateLineTotal, calculateMeasuredLineTotal, getCartMeasurementQuantityOptions, getSimpleOrderQuantityOptions, requiresWholeLengthOrder, tonsToMeters, wholeLengthOrder} from "@/lib/orderMeasurement";
 import {MAX_ORDER_PIECES} from "@/lib/constants";
-import {sheetsForOrderTons, sheetTonDecimals, sheetOrderTons} from "@/lib/sheetOrder";
+import {hasSheetOrderMass, sheetsForOrderTons, sheetTonDecimals, sheetOrderTons} from "@/lib/sheetOrder";
+import {getTreadPlateExecution} from "@/lib/sheetPresentation";
 import {formatCartQuantity, formatMeasuredQuantity, formatQuantityForInput, formatRebarOrderTons, formatStockLengthBreakdown,
   measuredTonFractionDigits, productOrderFractionDigits, rebarMinimumMeterEntry, rebarMinimumTonEntry, rebarTonFractionDigits} from "@/lib/cartQuantityInput";
 import {isVgpVariant} from "@/lib/pipeFamily";
@@ -50,6 +51,8 @@ export function CartItemRow({line, onRemove}: {line: CartLine; onRemove: () => v
     ? profilePipeMaximumPieces(product, pieceOrder.lengthMeters) ?? undefined : undefined;
   const sheetOrder = product?.sheetOrder;
   const sheetCount = sheetOrder ? line.quantity / sheetOrder.quantityPerSheet : 0;
+  const sheetExecution = product ? getTreadPlateExecution(product) : undefined;
+  const productName = sheetExecution ? `${line.name} · ${sheetExecution}` : line.name;
 
   function updatePipeLength(length: number) {
     if (!pieceOrder) return;
@@ -65,7 +68,7 @@ export function CartItemRow({line, onRemove}: {line: CartLine; onRemove: () => v
           {line.slug ? <Link
             href={catalogProductPath(line.categorySlug, line.subcategorySlug, line.productTypeSlug, line.productId)}
             className="rounded-sm transition-colors hover:text-brand-700 hover:underline dark:hover:text-brand-300"
-          >{line.name}</Link> : line.name}
+          >{productName}</Link> : productName}
         </h2>
         {product && <p className="text-sm text-slate-600 dark:text-slate-400">
           {priceRequiresQuote ? "Цена по запросу" : <CartAmount>{formatUnitPrice(line.price, line.priceUnit)}</CartAmount>}
@@ -80,7 +83,7 @@ export function CartItemRow({line, onRemove}: {line: CartLine; onRemove: () => v
       </div>
       <div className={styles.order}>{pieceOrder ? (
         <>
-          <QuantitySelector whole fieldLabel="Количество" productName={line.name} unit="шт." disabled={quantityDisabled}
+          <QuantitySelector whole fieldLabel="Количество" productName={productName} unit="шт." disabled={quantityDisabled}
             value={pieceOrder.pieces} maximum={maximumPieces}
             onChange={pieces => updatePieceOrder(line.productId, pieces, pieceOrder.lengthMeters)}/>
           {product?.lengthRangeMeters && <QuantitySelector fieldLabel="Длина трубы" productName={line.name} unit="м"
@@ -125,13 +128,13 @@ export function CartItemRow({line, onRemove}: {line: CartLine; onRemove: () => v
           <QuantitySelector whole fieldLabel="Количество" productName={line.name} unit="шт." disabled={quantityDisabled}
             value={sheetCount} maximum={MAX_ORDER_PIECES}
             onChange={pieces => updateQuantity(line.productId, pieces * sheetOrder.quantityPerSheet)}/>
-          <QuantitySelector fieldLabel="Масса" productName={line.name} unit="т" disabled={quantityDisabled}
+          {hasSheetOrderMass(sheetOrder) && <QuantitySelector fieldLabel="Масса" productName={productName} unit="т" disabled={quantityDisabled}
             value={sheetOrderTons(sheetOrder, sheetCount)} minimum={sheetOrderTons(sheetOrder, 1)}
             maximum={sheetOrderTons(sheetOrder, MAX_ORDER_PIECES)} step={sheetOrderTons(sheetOrder, 1)}
             precision={sheetTonDecimals}
             formatValue={(tons, grouped) => formatQuantityForInput(tons, grouped, sheetTonDecimals)}
             normalizeQuantity={tons => ({value: sheetOrderTons(sheetOrder, sheetsForOrderTons(sheetOrder, tons))})}
-            onChange={tons => updateQuantity(line.productId, sheetsForOrderTons(sheetOrder, tons) * sheetOrder.quantityPerSheet)}/>
+            onChange={tons => updateQuantity(line.productId, sheetsForOrderTons(sheetOrder, tons) * sheetOrder.quantityPerSheet)}/>}
         </>
       ) : (
         <QuantitySelector fieldLabel={product?.unit === "ton" || product?.unit === "kg" ? "Масса"
@@ -154,7 +157,7 @@ export function CartItemRow({line, onRemove}: {line: CartLine; onRemove: () => v
         <Button
           type="button"
           id={`cart-remove-${line.productId}`}
-          aria-label={`Удалить ${line.name} из корзины`}
+          aria-label={`Удалить ${productName} из корзины`}
           onClick={onRemove}
           className={`${catalogStyles.removeCartButton} ${styles.remove}`}
         >

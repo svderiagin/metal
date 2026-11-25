@@ -1,6 +1,7 @@
 import {createHash} from "node:crypto";
 import {after} from "next/server";
 import {readJsonBody} from "@/lib/server/request";
+import {hasDeliveryAddressDetails, incompleteDeliveryAddressMessage} from "@/lib/checkout";
 import {notificationService} from "@/lib/server/notifications";
 import {createTrustedOrder, orderRepository} from "@/lib/server/orders";
 import {parseCreateOrderInput} from "@/lib/server/validation";
@@ -45,7 +46,8 @@ async function sendInvoice(order: Order) {
 export async function POST(request: Request) {
   const parsed = await readJsonBody(request);
   if (!parsed.ok) return parsed.response;
-  const input = parseCreateOrderInput(parsed.value);
+  // An in-flight request from an older checkout can still replay its issued invoice.
+  const input = parseCreateOrderInput(parsed.value, {allowLegacyDeliveryAddress: true});
   const key = request.headers.get("idempotency-key");
   const expected = (parsed.value as {expectedLineTotals?: unknown} | null)?.expectedLineTotals;
   if (!input || !key || !/^[a-f0-9]{64}$/.test(key)
@@ -69,6 +71,7 @@ export async function POST(request: Request) {
         if (existing?.checkout?.keyHash === keyHash) return replay(existing);
         if (existing) continue;
 
+        if (!hasDeliveryAddressDetails(input.delivery.address)) return error(incompleteDeliveryAddressMessage, 400);
         const order = createTrustedOrder(input);
         if (!order) return error("Проверьте количество и состав заказа. Один или несколько товаров недоступны для оформления.", 400);
         const lineTotals = order.items.map(item => Math.round(item.subtotal * 100));

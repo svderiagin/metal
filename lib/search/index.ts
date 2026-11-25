@@ -4,7 +4,8 @@ import {normalizeText, russianStem, textWords} from "./russian";
 import {ALIASES_BY_STEM, expandCompoundQuery, STOP_WORDS} from "./terminology";
 import {buildTechnicalDocument, parseTechnicalQuery, technicalMatch} from "./technical";
 import {beamKind} from "@/lib/beam";
-import {hotRolledSheetTitle, isPlainHotRolledSheet} from "@/lib/sheetPresentation";
+import {coldRolledSheetSubcategoryId, galvanizedSheetSubcategoryId, hotRolledSheetSubcategoryId, hotRolledSheetTitle,
+  isPlainHotRolledSheet, treadPlateSubcategoryId} from "@/lib/sheetPresentation";
 
 interface Field {words: Set<string>; stems: Set<string>; weight: number}
 interface Document {product: ProductVariant; name: string; fields: Field[]; technical: ReturnType<typeof buildTechnicalDocument>}
@@ -13,6 +14,21 @@ export interface SearchHit {product: ProductVariant; score: number}
 export type SearchCategory = Pick<Category, "id" | "name" | "description">;
 export interface SearchOptions {categoryId?: string; inStock?: boolean; material?: string; standard?: string; offset?: number; limit?: number}
 export interface SearchResult {hits: SearchHit[]; total: number; correctedQuery?: string}
+
+const sheetFamilyByStem = new Map([
+  [russianStem("оцинкованный"), galvanizedSheetSubcategoryId],
+  [russianStem("холоднокатаный"), coldRolledSheetSubcategoryId],
+  [russianStem("горячекатаный"), hotRolledSheetSubcategoryId],
+  [russianStem("рифлёный"), treadPlateSubcategoryId],
+]);
+const sheetStem = russianStem("лист");
+const steelStem = russianStem("стальной");
+
+function namedSheetFamily(words: string[]) {
+  const [first, second] = words.map(russianStem).filter(stem => stem !== steelStem);
+  if (first === sheetStem) return sheetFamilyByStem.get(second);
+  if (second === sheetStem) return sheetFamilyByStem.get(first);
+}
 
 function field(text: string, weight: number): Field {
   const words = new Set(textWords(text).filter(w => !STOP_WORDS.has(w)));
@@ -72,13 +88,14 @@ export function createCatalogSearchIndex(products: ProductVariant[], types: Prod
     for (const f of fields.slice(0, 4)) for (const word of f.words) if (/^[а-я]{4,}$/.test(word)) vocabulary.set(word, (vocabulary.get(word) ?? 0) + 1);
     return {product, name: normalizeText(product.name), fields, technical};
   });
-  const compiled = new Map<string, {terms: Term[]; technical: ReturnType<typeof parseTechnicalQuery>; correctedQuery?: string}>();
+  const compiled = new Map<string, {terms: Term[]; technical: ReturnType<typeof parseTechnicalQuery>; sheetFamily?: string; correctedQuery?: string}>();
 
   function compile(input: string) {
     const cached = compiled.get(input);if (cached) return cached;
     const expanded = expandCompoundQuery(normalizeText(input));
     const technical = parseTechnicalQuery(expanded);
     const words = textWords(technical.wordsText).filter(w => !STOP_WORDS.has(w));
+    const sheetFamily = namedSheetFamily(words);
     let correctedQuery = normalizeText(input);
     const uniqueWords = [...new Set(words)];
     const terms = uniqueWords.map((word, i): Term => {
@@ -100,7 +117,7 @@ export function createCatalogSearchIndex(products: ProductVariant[], types: Prod
       correctedQuery = correctedQuery.replace(word, corrected);
       return {word, stem: russianStem(corrected), prefix: false, corrected};
     });
-    const value = {terms, technical, correctedQuery: correctedQuery !== normalizeText(input) ? correctedQuery : undefined};
+    const value = {terms, technical, sheetFamily, correctedQuery: correctedQuery !== normalizeText(input) ? correctedQuery : undefined};
     if (compiled.size > 200) compiled.clear();compiled.set(input, value);return value;
   }
 
@@ -120,7 +137,7 @@ export function createCatalogSearchIndex(products: ProductVariant[], types: Prod
 
   function search(input: string, options: SearchOptions = {}): SearchResult {
     const query = input.trim().slice(0, 250);
-    const {terms, technical, correctedQuery} = compile(query);
+    const {terms, technical, sheetFamily, correctedQuery} = compile(query);
     const normalizedQuery = normalizeText(query);
     const hasTechnical = technical.dimensions.length || technical.numbers.length || technical.grades.length || technical.standards.length || technical.nominalBore || technical.diameter || technical.thickness;
     if (query && !terms.length && !hasTechnical) return {hits: [], total: 0};
@@ -132,6 +149,7 @@ export function createCatalogSearchIndex(products: ProductVariant[], types: Prod
       if (options.material && !p.attributes.some(a => a.key === "material" && a.value === options.material)) continue;
       if (options.standard && p.standard !== options.standard) continue;
       const exactName = normalizedQuery === doc.name;
+      if (!exactName && sheetFamily && p.subcategoryId !== sheetFamily) continue;
       if (!exactName && !technicalMatch(technical, doc.technical, p)) continue;
       const scores = terms.map(term => termScore(term, doc));
       if (!exactName && scores.some(score => !score)) continue;

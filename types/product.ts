@@ -80,7 +80,7 @@ export interface ProductVariant {
   pricePerTon?: number;
   weightPerMeterKg?: number;
   lengthMeters?: number;
-  sheetOrder?: {kilogramsPerSheet: number; quantityPerSheet: number};
+  sheetOrder?: {quantityPerSheet: number; kilogramsPerSheet?: number};
   sourceProductName?: string;
   availability: "IN_STOCK" | "ON_ORDER" | "UNKNOWN";
   inStock: boolean;

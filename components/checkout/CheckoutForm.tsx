@@ -70,7 +70,9 @@ export function CheckoutForm({onOrderCreated, revisedTotals, onPriceChanged}: {
   function blurField(key: CheckoutTextField, value: string) {
     const formatted = formatCheckoutField(key, value);
     if (formatted !== value) setForm(current => ({...current, [key]: formatted}));
-    if (formatted.trim()) setVisited(current => ({...current, [key]: true}));
+    // The address error can shift the consent checkbox while the pointer is pressed.
+    // Validate the address on submit and update its message as the customer edits it.
+    if (key !== "deliveryAddress" && formatted.trim()) setVisited(current => ({...current, [key]: true}));
   }
   function updateField<Key extends keyof CheckoutFormData>(key: Key, value: CheckoutFormData[Key]) {
     setForm(current => ({...current, [key]: value}));

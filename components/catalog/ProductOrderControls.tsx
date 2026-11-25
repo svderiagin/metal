@@ -12,7 +12,7 @@ import {constrainOrderQuantityInput, correctOrderQuantity, parseOrderQuantity} f
 import {correctDraftPrecision, formatQuantityForInput, productOrderFractionDigits} from "@/lib/cartQuantityInput";
 import {calculateLineTotal, getSimpleOrderQuantityOptions} from "@/lib/orderMeasurement";
 import {MAX_ORDER_PIECES} from "@/lib/constants";
-import {sheetsForOrderTons, sheetTonDecimals, sheetOrderTons} from "@/lib/sheetOrder";
+import {hasSheetOrderMass, sheetsForOrderTons, sheetTonDecimals, sheetOrderTons} from "@/lib/sheetOrder";
 import {formatCurrency} from "@/lib/currency";
 import {requiresCatalogPriceQuote, storefrontAvailability} from "@/lib/catalogOffer";
 import {CatalogOrderInput} from "./CatalogOrderInput";
@@ -23,9 +23,10 @@ import {orderQuantityHintDuration, useOrderDraft} from "./OrderDraftProvider";
 
 type QuantityDraft = string | {text: string; exactTons?: number};
 
-export function ProductOrderControls({variant, view, showUnit = true, startEmpty = false, orderBySheet = false, quantityColSpan,
+export function ProductOrderControls({variant, view, showUnit = true, startEmpty = false, orderBySheet = false, showSheetMassColumn, quantityColSpan,
   wholeQuantity = orderBySheet || requiresWholeCatalogQuantity(variant)}: {
   orderBySheet?: boolean;
+  showSheetMassColumn?: boolean;
   quantityColSpan?: 1 | 2;
   variant: ProductVariant; view: "table" | "card"; showUnit?: boolean; wholeQuantity?: boolean; startEmpty?: boolean;
 }) {
@@ -34,6 +35,7 @@ export function ProductOrderControls({variant, view, showUnit = true, startEmpty
   const {draft, setDraft, message: correction, setMessage: setCorrection} = useOrderDraft<QuantityDraft>(variant.id, "quantity", "");
   const [removed, setRemoved] = useState(false);
   const sheetOrder = orderBySheet ? variant.sheetOrder : undefined;
+  const sheetMassOrder = hasSheetOrderMass(sheetOrder) ? sheetOrder : undefined;
   const quantityPerSheet = sheetOrder?.quantityPerSheet ?? 1;
   const maximum = sheetOrder ? MAX_ORDER_PIECES : getSimpleOrderQuantityOptions(variant).maximum;
   const savedQuantity = line ? line.quantity / quantityPerSheet : undefined;
@@ -41,8 +43,8 @@ export function ProductOrderControls({variant, view, showUnit = true, startEmpty
   const savedValue = savedQuantity === undefined ? initialValue : formatQuantityForInput(savedQuantity);
   const massDraft = typeof draft === "string" ? null : draft;
   const enteredTons = massDraft ? massDraft.exactTons ?? parseCompleteQuantity(massDraft.text) : null;
-  const value = sheetOrder && massDraft
-    ? enteredTons === null ? "" : String(sheetsForOrderTons(sheetOrder, enteredTons))
+  const value = sheetMassOrder && massDraft
+    ? enteredTons === null ? "" : String(sheetsForOrderTons(sheetMassOrder, enteredTons))
     : typeof draft === "string" ? draft : savedValue;
   const enteredQuantity = chosenQuantity(value);
   const corrected = correctQuantityValue(value);
@@ -60,7 +62,7 @@ export function ProductOrderControls({variant, view, showUnit = true, startEmpty
   const total = !variant.quoteOnly && variant.price !== null && (valid || shouldRemove)
     ? calculateLineTotal(pricingQuantity(quantity), variant.price) : null;
   const quantityUnit = sheetOrder ? "шт." : getQuantityUnit(variant);
-  const orderTons = sheetOrder && quantity !== null ? sheetOrderTons(sheetOrder, quantity) : null;
+  const orderTons = sheetMassOrder && quantity !== null ? sheetOrderTons(sheetMassOrder, quantity) : null;
 
   function acceptsQuantity(amount: number) {
     // A legacy area-priced cart line can retain its original area until edited.
@@ -135,16 +137,16 @@ export function ProductOrderControls({variant, view, showUnit = true, startEmpty
   }
 
   function changeTons(text: string) {
-    if (!sheetOrder) return;
-    const minimum = sheetOrderTons(sheetOrder, 1);
-    const maximum = sheetOrderTons(sheetOrder, MAX_ORDER_PIECES);
+    if (!sheetMassOrder) return;
+    const minimum = sheetOrderTons(sheetMassOrder, 1);
+    const maximum = sheetOrderTons(sheetMassOrder, MAX_ORDER_PIECES);
     const constrained = constrainOrderQuantityInput(text, maximum, formatSheetTons);
     const shown = massDraft?.text ?? (orderTons === null ? "" : formatSheetTons(orderTons));
     const parsed = parseCompleteQuantity(constrained.value);
     const sameDisplay = parsed !== null && parsed > 0 && parsed === parseCompleteQuantity(shown);
     const exactTons = sameDisplay ? (massDraft ? massDraft.exactTons : orderTons ?? undefined) : undefined;
     const correction = correctDraftPrecision(constrained.value, sheetTonDecimals, {minimum, maximum},
-      tons => sheetOrderTons(sheetOrder, sheetsForOrderTons(sheetOrder, tons)));
+      tons => sheetOrderTons(sheetMassOrder, sheetsForOrderTons(sheetMassOrder, tons)));
     setDraft({text: correction?.text ?? constrained.value,
       exactTons: exactTons ?? (constrained.capped ? maximum : correction?.exactQuantity)});
     setCorrection("");
@@ -193,11 +195,12 @@ export function ProductOrderControls({variant, view, showUnit = true, startEmpty
     onBlur={correctQuantity}
     className={unitInsideField ? "pl-2 pr-10" : undefined}/>;
   const quantityField = unitInsideField ? <CatalogVariantQuantity unit={quantityUnit}>{quantityInput}</CatalogVariantQuantity> : quantityInput;
-  const massField = sheetOrder && <CatalogOrderInput mode="ton" value={massDraft?.text ?? (orderTons === null ? "" : formatSheetTons(orderTons))}
+  const massField = sheetMassOrder ? <CatalogOrderInput mode="ton" value={massDraft?.text ?? (orderTons === null ? "" : formatSheetTons(orderTons))}
     label={`Масса ${variant.name}, т`} visibleLabel={view === "card" ? "Заказ, т" : undefined}
     invalid={quantityError && !!massDraft} statusId={statusId} onChange={changeTons} onBlur={() => {
       if (massDraft) setDraft(line && massDraft.text === "" ? "0" : enteredTons === null ? line ? null : "" : value);
-    }}/>;
+    }}/> : view === "table" && showSheetMassColumn
+      ? <span className="text-xs text-slate-500 dark:text-slate-400">Уточняется</span> : undefined;
   const totalOutput = <output data-price={total !== null || undefined}
     data-long-value={!!sheetOrder && total !== null && total >= 1_000_000_000 || undefined}
     aria-label={`Сумма заказа для ${variant.name}`} aria-live="polite"

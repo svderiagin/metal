@@ -8,6 +8,8 @@ export const CHECKOUT_LIMITS = {fullName: 120, email: 254, phone: MAX_CHECKOUT_P
   taxNumber: 12, legalAddress: 300, deliveryAddress: 300, comment: 1000} as const;
 export type CheckoutFieldErrors = Partial<Record<keyof CheckoutFormData, string>>;
 export type CheckoutTextField = keyof typeof CHECKOUT_LIMITS;
+type CheckoutValidationOptions = {allowLegacyDeliveryAddress?: boolean};
+export const incompleteDeliveryAddressMessage = "Уточните адрес доставки. Добавьте улицу и дом или название объекта.";
 const companyFields = new Set<keyof CheckoutFormData>(["companyName", "taxNumber", "legalAddress"]);
 const singleLine = (value: string) => value.trim().replace(/\s+/g, " ");
 const containsLetter = (value: string) => /\p{L}/u.test(value);
@@ -45,6 +47,48 @@ function hasAddressDetails(value: string) {
   return containsLetter(address) && (parts?.length ?? 0) >= 2;
 }
 
+const buildingNumber = String.raw`\d{1,5}(?:[а-яa-z])?(?:[-/]\d{1,5}[а-яa-z]?)?`;
+const buildingLabel = new RegExp(String.raw`(?:^|[\s,;])(?:дом|д|владение|вл|участок|уч|здание|строение|стр|корпус|корп|бокс|ангар)(?:\.\s*|\s+|(?=№))№?\s*${buildingNumber}(?=$|[\s,;]|(?:к|стр)\d)`, "iu");
+const officeSuffix = /[\s,;]+(?:квартира|кв|офис|оф|этаж|помещение|пом|подъезд)(?:\.\s*|\s+).+$/iu;
+const streetLabel = /(?:^|[\s,;])(?:улица|ул|проспект|просп|пр-кт|пр-т|переулок|пер|проезд|пр-д|шоссе|ш|набережная|наб|бульвар|бул|б-р|площадь|пл|дорога|тракт|тупик|туп|линия|территория|тер|микрорайон|мкр|квартал|кв-л|км)(?:[\s,;.]|$)/iu;
+const ruralPlace = /(?:^|[\s,;])(?:село|с|деревня|д|пос[её]лок|пос|хутор|х|станица|ст-ца)(?:\.\s*|\s+)\p{L}{2,}/iu;
+const administrativeLabel = /(?:^|[\s,;])(?:городской округ|город|г\.\s*о|г|область|обл|край|район|р-н|округ|республика|респ)(?:\.\s*|[\s,;]+|$)/giu;
+const deliveryObject = /(?:^|[\s,;])(?:объект|склад|стройплощадка|база|завод|терминал|снт|днт|гск|жк|бц|тк|трц|рц|логистический центр|индустриальный парк)[\s:]+((?:[«"„№]\s*)?[\p{L}\p{N}][^,;]*)/iu;
+const trailingBuilding = new RegExp(String.raw`(?:^|[\s,;№])${buildingNumber}(?:\s*(?:к(?:орп(?:ус)?)?|стр(?:оение)?|лит(?:ера)?)\.?\s*[\p{L}\p{N}]+)?$`, "iu");
+
+export function hasDeliveryAddressDetails(value: string) {
+  const address = value.replace(/^\d{6}[\s,;]+|[\s,;]+\d{6}$/gu, "").replace(officeSuffix, "").trim();
+  const object = deliveryObject.exec(address);
+  if (object) {
+    const name = object[1].trim();
+    if (/(?:\p{L}{2,}|№\s*\d)/u.test(name)
+      && !/^(?:ул(?:ица)?|д(?:ом)?|г(?:ород)?|строение|корпус|адрес|объект|склад)(?:[\s.]|$)/iu.test(name)) return true;
+  }
+
+  const number = buildingLabel.exec(address) ?? trailingBuilding.exec(address);
+  if (!number) return false;
+  const prefix = address.slice(0, number.index).replace(/[\s,;]+$/u, "");
+  const street = streetLabel.exec(prefix);
+  if (street) {
+    if (containsLetter(prefix.slice(street.index + street[0].length))) return true;
+    // «Тверская улица» can have the street designation after its name.
+    const before = prefix.slice(0, street.index).trimEnd();
+    // «Набережная» can also be the full name, without a qualifier.
+    if (street[0].trim().toLowerCase() === "набережная" && containsLetter(before)) return true;
+    const segments = before.split(/[,;]/u);
+    if (segments.length > 1) return containsLetter(segments.at(-1) ?? "");
+    return hasUnnamedStreet(before);
+  }
+  if (/(?:^|\s)(?:область|обл\.?|край|республика|район|р-н|округ)\s*$/iu.test(prefix)) return false;
+  // Villages can have house numbers without a street. Street names may also appear without «ул.».
+  return ruralPlace.test(prefix) || hasUnnamedStreet(prefix);
+}
+
+function hasUnnamedStreet(value: string) {
+  const names = value.replace(administrativeLabel, " ").match(/\p{L}{2,}(?:[-\u2010\u2011]\p{L}{2,})*/gu);
+  return (names?.length ?? 0) >= 2;
+}
+
 export function formatCheckoutField(field: CheckoutTextField, value: string) {
   if (unsupportedControls.test(value)) return value;
   if (field === "phone") {
@@ -61,11 +105,11 @@ export function isCheckoutPaymentAvailable(method: unknown): method is "INVOICE"
   return method === "INVOICE";
 }
 
-export function isCheckoutFormValid(form: CheckoutFormData): boolean {
-  return Object.keys(getCheckoutFieldErrors(form)).length === 0;
+export function isCheckoutFormValid(form: CheckoutFormData, options?: CheckoutValidationOptions): boolean {
+  return Object.keys(getCheckoutFieldErrors(form, options)).length === 0;
 }
 
-export function getCheckoutFieldErrors(form: CheckoutFormData): CheckoutFieldErrors {
+export function getCheckoutFieldErrors(form: CheckoutFormData, {allowLegacyDeliveryAddress = false}: CheckoutValidationOptions = {}): CheckoutFieldErrors {
   const errors: CheckoutFieldErrors = {};
   for (const [key, maximum] of Object.entries(CHECKOUT_LIMITS)) {
     const field = key as keyof typeof CHECKOUT_LIMITS;
@@ -107,7 +151,9 @@ export function getCheckoutFieldErrors(form: CheckoutFormData): CheckoutFieldErr
         if (!hasAddressDetails(value)) message = "Укажите адрес регистрации целиком.";
         break;
       case "deliveryAddress":
-        if (!hasAddressDetails(value)) message = "Уточните адрес доставки. Добавьте улицу и дом или название объекта.";
+        if (!hasDeliveryAddressDetails(value) && !(allowLegacyDeliveryAddress && hasAddressDetails(value))) {
+          message = incompleteDeliveryAddressMessage;
+        }
         break;
     }
     if (message) errors[field] = message;

@@ -17,7 +17,9 @@ const singleLine = (value: unknown) => stringField(value).trim().replace(/\s+/g,
 const isCustomerType = (value: unknown): value is CustomerType =>
   value === "INDIVIDUAL" || value === "COMPANY";
 
-export function parseCreateOrderInput(value: unknown): CreateOrderInput | null {
+export function parseCreateOrderInput(value: unknown, {allowLegacyDeliveryAddress = false}: {
+  allowLegacyDeliveryAddress?: boolean;
+} = {}): CreateOrderInput | null {
   if (!isRecord(value) || !Array.isArray(value.items) || !isRecord(value.customer) || !isRecord(value.delivery)) return null;
   if (value.consent !== true || value.items.length < 1 || value.items.length > MAX_CHECKOUT_ITEMS) return null;
   const items: CreateOrderInput["items"] = [];
@@ -54,7 +56,7 @@ export function parseCreateOrderInput(value: unknown): CreateOrderInput | null {
     deliveryAddress: stringField(value.delivery.address),
     comment: stringField(value.delivery.comment),
   };
-  return isCheckoutFormValid(form) ? createOrderInput(form, items) : null;
+  return isCheckoutFormValid(form, {allowLegacyDeliveryAddress}) ? createOrderInput(form, items) : null;
 }
 
 function parseMeasurement(value: unknown): CreateOrderInput["items"][number]["measurement"] | null {
