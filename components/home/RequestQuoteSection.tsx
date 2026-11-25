@@ -1,8 +1,10 @@
 import {QuoteRequestForm} from "@/components/forms/QuoteRequestForm";
 import {companyDetails} from "@/lib/companyDetails";
+import {HomeRequestAnchor} from "./HomeRequestAnchor";
 
 export function RequestQuoteSection({appearance = "default"}: {appearance?: "default" | "home" | "cart"}) {
   if (appearance === "home") return <section id="request" tabIndex={-1} aria-labelledby="home-request-heading" className="scroll-mt-6 overflow-hidden rounded-lg border border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-900">
+    <HomeRequestAnchor/>
     <div className="grid lg:grid-cols-[.85fr_1.15fr]">
       <div className="border-b border-slate-200 bg-slate-50 p-5 dark:border-slate-700 dark:bg-slate-950 sm:p-6 lg:border-b-0 lg:border-r lg:p-7">
         <p className="text-eyebrow uppercase text-slate-500 dark:text-slate-400">Расчёт заказа</p>

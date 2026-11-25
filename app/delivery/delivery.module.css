@@ -1,0 +1,167 @@
+.textLink {
+  color: var(--color-brand-700);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.textLink:hover {
+  color: var(--color-brand-900);
+}
+
+.textLink:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+:global([data-theme="dark"]) .textLink {
+  color: var(--color-brand-300);
+}
+
+:global([data-theme="dark"]) .textLink:hover {
+  color: var(--color-brand-100);
+}
+
+.stepMarker {
+  display: inline-grid;
+  flex: none;
+  place-items: center;
+  width: 1.875rem;
+  height: 1.875rem;
+  border-radius: 50%;
+  background: var(--color-brand-100);
+  color: var(--color-brand-800);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+:global([data-theme="dark"]) .stepMarker {
+  background: var(--color-brand-800);
+  color: var(--color-brand-100);
+}
+
+.siteMap {
+  --yard: var(--color-slate-50);
+  --boundary: var(--color-slate-400);
+  --route: var(--color-brand-700);
+  --building: var(--color-slate-200);
+  --unloading: var(--color-brand-100);
+  position: relative;
+  isolation: isolate;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: calc(var(--radius-lg) - 1px) calc(var(--radius-lg) - 1px) 0 0;
+  border-bottom: 1px solid var(--color-slate-200);
+  background: var(--color-slate-100);
+}
+
+:global([data-theme="dark"]) .siteMap {
+  --yard: var(--color-slate-950);
+  --boundary: var(--color-slate-500);
+  --route: var(--color-brand-300);
+  --building: var(--color-slate-800);
+  --unloading: var(--color-brand-900);
+  border-bottom-color: var(--color-slate-700);
+  background: var(--color-slate-800);
+}
+
+.siteMap > span {
+  position: absolute;
+}
+
+.road {
+  inset-block: 0;
+  inset-inline-start: 9%;
+  border-inline-start: 2px dashed var(--boundary);
+}
+
+.yard {
+  inset: 11% 7% 11% 20%;
+  border: 1px solid var(--boundary);
+  border-radius: 0.375rem;
+  background: var(--yard);
+}
+
+.gate {
+  inset-block-start: 45%;
+  inset-inline-start: 17%;
+  width: 7%;
+  height: 31%;
+  border-block: 2px solid var(--route);
+  background: var(--yard);
+}
+
+.maneuverArea {
+  inset-block-start: 28%;
+  inset-inline-start: 31%;
+  width: 31%;
+  height: 55%;
+  border: 1px dashed var(--boundary);
+  border-radius: 24%;
+}
+
+.building {
+  inset-block-start: 11%;
+  inset-inline-end: 7%;
+  width: 24%;
+  height: 32%;
+  border: 1px solid var(--boundary);
+  border-radius: 0 0.375rem 0 0;
+  background: repeating-linear-gradient(
+    135deg,
+    var(--building) 0 5px,
+    var(--yard) 5px 7px
+  );
+}
+
+.unloadingArea {
+  inset-block-start: 43%;
+  inset-inline-end: 9%;
+  width: 20%;
+  height: 35%;
+  border: 1px dashed var(--route);
+  border-radius: 0 0 0.25rem 0.25rem;
+  background: var(--unloading);
+}
+
+.routeLine {
+  inset-block-start: 60%;
+  inset-inline: 9% 15%;
+  border-block-start: 2px dashed var(--route);
+}
+
+.routeLine::after {
+  position: absolute;
+  inset: -0.32rem 0 auto auto;
+  width: 0.55rem;
+  height: 0.55rem;
+  transform: rotate(45deg);
+  border-block-start: 2px solid var(--route);
+  border-inline-end: 2px solid var(--route);
+  content: "";
+}
+
+.mapPoint {
+  inset-block-start: 60%;
+  transform: translate(-50%, -50%);
+  background: var(--color-brand-700);
+  color: white;
+}
+
+:global([data-theme="dark"]) .mapPoint {
+  background: var(--color-brand-300);
+  color: var(--color-brand-950);
+}
+
+.entryPoint {
+  inset-inline-start: 20%;
+}
+
+.turnPoint {
+  inset-inline-start: 46.5%;
+}
+
+.unloadPoint {
+  inset-inline-start: 76%;
+}

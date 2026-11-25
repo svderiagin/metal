@@ -19,14 +19,15 @@ export function Button({className = "", variant = "primary", ...props}: ButtonHT
   return <button className={`${styles} ${variants[variant]} ${className}`} {...props} />;
 }
 
-export function ButtonLink({href, children, variant = "primary", className = "", onClick}: {
+export function ButtonLink({href, children, variant = "primary", className = "", onClick, nativeNavigation = false}: {
   href: string;
   children: ReactNode;
   variant?: ButtonVariant;
   className?: string;
   onClick?: MouseEventHandler<HTMLAnchorElement>;
+  nativeNavigation?: boolean;
 }) {
-  const Anchor = href.startsWith("#") ? "a" : Link;
+  const Anchor = nativeNavigation || href.startsWith("#") ? "a" : Link;
   return (
     <Anchor
       href={href}
