@@ -71,7 +71,9 @@ function measurementName(product, subcategory) {
     }
     case 'cat-mesh': {
       const packageSize = fact(product, 'Размер рулона') ?? fact(product, 'Размер карты');
-      return parts('setka', meshKinds[slug], section(digits(fact(product, 'Размер ячейки')), 'mm'),
+      const type = fact(product, 'Тип');
+      const kind = product.unit === 'meter' ? filenameToken(type?.replace(/ сетка$/u, '')) : meshKinds[slug];
+      return parts('setka', kind, section(digits(fact(product, 'Размер ячейки')), 'mm'),
         unit(digits(fact(product, 'Диаметр проволоки'))[0], 'mm'), section(digits(packageSize), 'm'), filenameToken(fact(product, 'Покрытие')));
     }
     case 'catalog-cat-shveller':

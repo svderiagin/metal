@@ -4,25 +4,34 @@ import {useMemo, useState} from "react";
 import {Select} from "@/components/ui/Select";
 import {useLinkedVariant} from "@/hooks/useLinkedVariant";
 import {comparePrices} from "@/lib/catalogFilters";
+import {storefrontAvailability} from "@/lib/catalogOffer";
 import {normalizeText} from "@/lib/search/russian";
 import {formatUnitPrice} from "@/lib/currency";
-import {
-  metalMeshFormat,
-  metalMeshSpecification,
-  type MetalMeshVariant,
-} from "@/lib/metalMesh";
-import {commonQuantityUnit, requiresWholeMetalMeshQuantity} from "@/lib/variantPresentation";
+import {formatNumber} from "@/lib/numberFormat";
+import {metalMeshFormat, metalMeshPackageArea, metalMeshSpecification, type MetalMeshVariant} from "@/lib/metalMesh";
+import {getQuantityUnit, requiresWholeMetalMeshQuantity} from "@/lib/variantPresentation";
 import {ProductOrderControls} from "./ProductOrderControls";
 import {FilterPanel} from "./FilterPanel";
 import {ResetFiltersButton} from "./ResetFiltersButton";
 import {CatalogVariantLayout, CatalogVariantSpecifications, CatalogVariantTable} from "./CatalogVariantLayout";
 import {CatalogPositionDetails} from "./CatalogPositionDetails";
-import {formatSpecification, storefrontPositionFields} from "./StorefrontPositionSpecifications";
+import {CatalogTableNote} from "./CatalogTableNote";
+import {formatSpecification} from "./StorefrontPositionSpecifications";
 
-type SortMode = "name" | "cell-asc" | "price-asc" | "price-desc";
+type SortMode = "size-asc" | "size-desc" | "price-asc" | "price-desc";
 
-function formatLabel(variant: MetalMeshVariant) {
-  return variant.specifications.some(spec => spec.name === "Размер карты") ? "Размер карты" : "Размер рулона";
+const cellSpec = "Размер ячейки";
+const wireSpec = "Диаметр проволоки";
+const coatingSpec = "Покрытие";
+const unlistedCoating = "Не указано";
+
+function meshCoating(variant: MetalMeshVariant) {
+  const coating = metalMeshSpecification(variant, coatingSpec);
+  return coating === "—" ? unlistedCoating : coating;
+}
+
+function meshTableValue(value: string) {
+  return formatSpecification(value).replace(/\s*мм?\.?$/iu, "");
 }
 
 export function MetalMeshVariantCatalog({variants}: {variants: MetalMeshVariant[]}) {
@@ -30,113 +39,167 @@ export function MetalMeshVariantCatalog({variants}: {variants: MetalMeshVariant[
   const [cellSize, setCellSize] = useState("");
   const [wireDiameter, setWireDiameter] = useState("");
   const [format, setFormat] = useState("");
-  const [sort, setSort] = useState<SortMode>("name");
+  const [coating, setCoating] = useState("");
+  const [availability, setAvailability] = useState("");
+  const [sort, setSort] = useState<SortMode>("size-asc");
   useLinkedVariant(variants, (variant) => { reset(); setQuery(variant.name); });
 
-  const cellSizes = useMemo(() => uniqueValues(variants, "Размер ячейки"), [variants]);
-  const wireDiameters = useMemo(() => uniqueValues(variants, "Диаметр проволоки"), [variants]);
-  const formatLabels = new Set(variants.map(formatLabel));
-  const packageLabel = formatLabels.size === 1 ? formatLabel(variants[0]) : "Формат поставки";
-  const unit = commonQuantityUnit(variants);
-  const formats = useMemo(() => [...new Set(variants.map(metalMeshFormat))]
-    .filter((value) => value !== "—")
-    .sort(numericCompare), [variants]);
+  const card = variants[0].subcategoryId === "cat-mesh-sub-3";
+  const chainLink = variants[0].subcategoryId === "cat-mesh-sub-1";
+  const packageLabel = card ? "Размер карты" : "Размер рулона";
+  const formatOptions = useMemo(() => meshOptions(variants.map(metalMeshFormat)), [variants]);
+  const cellOptions = useMemo(() => meshOptions(variants.map((variant) => metalMeshSpecification(variant, cellSpec))), [variants]);
+  const wireOptions = useMemo(() => meshOptions(variants.map((variant) => metalMeshSpecification(variant, wireSpec))), [variants]);
+  const coatings = useMemo(() => meshOptions(variants.map(meshCoating)), [variants]);
+  const showCoating = coatings.length > 1;
+  const availabilityOptions = new Set(variants.map((variant) => storefrontAvailability(variant.availability)));
   const results = useMemo(() => {
-    const needle = normalizeText(query);
+    const terms = normalizeText(query).split(" ").filter(Boolean);
     return variants.filter((variant) => {
-      const cell = metalMeshSpecification(variant, "Размер ячейки");
-      const wire = metalMeshSpecification(variant, "Диаметр проволоки");
+      const cell = metalMeshSpecification(variant, cellSpec);
+      const wire = metalMeshSpecification(variant, wireSpec);
       const productFormat = metalMeshFormat(variant);
-      const searchable = normalizeText(`${variant.name} ${cell} ${wire} ${productFormat}`);
-      return (!needle || searchable.includes(needle))
+      const surface = meshCoating(variant);
+      const sizeAndWire = `${meshTableValue(cell)} × ${meshTableValue(wire)}`;
+      const searchable = normalizeText(`${variant.name} ${cell} ${wire} ${productFormat} ${sizeAndWire} ${surface} ${metalMeshSpecification(variant, "Тип")}`);
+      return terms.every(term => searchable.includes(term))
         && (!cellSize || cell === cellSize)
         && (!wireDiameter || wire === wireDiameter)
-        && (!format || productFormat === format);
+        && (!format || productFormat === format)
+        && (!coating || surface === coating)
+        && (!availability || storefrontAvailability(variant.availability) === availability);
     }).sort((left, right) => {
       if (sort === "price-asc" || sort === "price-desc") {
         return comparePrices(left.price, right.price, sort === "price-desc");
       }
-      if (sort === "cell-asc") {
-        return numericCompare(
-          metalMeshSpecification(left, "Размер ячейки"),
-          metalMeshSpecification(right, "Размер ячейки"),
-        ) || numericCompare(
-          metalMeshSpecification(left, "Диаметр проволоки"),
-          metalMeshSpecification(right, "Диаметр проволоки"),
-        );
-      }
-      return left.name.localeCompare(right.name, "ru", {numeric: true});
+      const dimensions = numericCompare(metalMeshSpecification(left, cellSpec), metalMeshSpecification(right, cellSpec))
+        || numericCompare(metalMeshSpecification(left, wireSpec), metalMeshSpecification(right, wireSpec))
+        || numericCompare(metalMeshFormat(left), metalMeshFormat(right));
+      return sort === "size-desc" ? -dimensions : dimensions;
     });
-  }, [cellSize, format, query, sort, variants, wireDiameter]);
+  }, [availability, cellSize, coating, format, query, sort, variants, wireDiameter]);
 
   function reset() {
     setQuery("");
     setCellSize("");
     setWireDiameter("");
     setFormat("");
-    setSort("name");
+    setCoating("");
+    setAvailability("");
+    setSort("size-asc");
   }
 
+  const metered = results.filter(variant => variant.unit === "meter");
+  const packaged = results.filter(variant => variant.unit !== "meter");
   return <>
-    <FilterPanel className="lg:col-start-2" query={query}
-      activeFilters={[cellSize, wireDiameter, format].filter(Boolean).length}
+    <FilterPanel query={query} queryPlaceholder="Ячейка, проволока или формат"
+      activeFilters={[cellSize, wireDiameter, format, coating, availability].filter(Boolean).length}
       onQueryChange={setQuery} onReset={reset} resultCount={{visible: results.length, total: variants.length}}
       sorting={<label className="text-sm font-semibold">
         Сортировка
         <Select value={sort} onChange={(event) => setSort(event.target.value as SortMode)} className="mt-1">
-          <option value="name">По наименованию</option>
-          <option value="cell-asc">По размеру ячейки</option>
+          <option value="size-asc">Ячейка: по возрастанию</option>
+          <option value="size-desc">Ячейка: по убыванию</option>
           <option value="price-asc">Цена: по возрастанию</option>
           <option value="price-desc">Цена: по убыванию</option>
         </Select>
       </label>}>
-      <MeshFilter label="Размер ячейки" value={cellSize} values={cellSizes} onChange={setCellSize}/>
-      <MeshFilter label="Диаметр проволоки" value={wireDiameter} values={wireDiameters} onChange={setWireDiameter}/>
-      <MeshFilter label={packageLabel} value={format} values={formats} onChange={setFormat}/>
+      <MeshFilter label="Ячейка, мм" value={cellSize} values={cellOptions} onChange={setCellSize}/>
+      <MeshFilter label="Проволока, мм" value={wireDiameter} values={wireOptions} onChange={setWireDiameter}/>
+      <MeshFilter label={`${packageLabel}, м`} value={format} values={formatOptions} onChange={setFormat}/>
+      {showCoating && <MeshFilter label="Покрытие" value={coating} values={coatings} onChange={setCoating}/>}
+      {availabilityOptions.size > 1 && <label className="text-sm font-semibold">
+        Наличие
+        <Select value={availability} onChange={event => setAvailability(event.target.value)}>
+          <option value="">Все позиции</option>
+          <option value="IN_STOCK">В наличии</option>
+          <option value="ON_ORDER">Под заказ</option>
+        </Select>
+      </label>}
     </FilterPanel>
 
-    <section className="min-w-0 lg:col-span-2" aria-label="Сетка металлическая">
-      {results.length ? <>
-        <CatalogVariantTable designation="Ячейка" specifications={["Проволока", packageLabel]} unit={unit}>
-          {results.map(variant => <MetalMeshItem key={variant.id} variant={variant} view="table" showUnit={!unit}/>)}
-        </CatalogVariantTable>
-        <div className="grid gap-4 sm:grid-cols-2 xl:hidden">
-          {results.map((variant) => <MetalMeshItem key={variant.id} variant={variant} view="card"/>)}
-        </div>
-      </> : <div className="rounded-xl border border-dashed border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 p-8 text-center">
+    <div className="min-w-0">
+      <CatalogTableNote>
+        {card ? "Цена указана за карту. Для заказа введите количество карт."
+          : chainLink ? "Рабица продаётся целыми рулонами. Размер указан как высота полотна × длина."
+            : "Сварная сетка продаётся целыми рулонами. Штукатурную и тканую сетку можно заказать погонными метрами."}
+        {coatings.length === 1 && coatings[0] === "Оцинкованная" && <> Покрытие — цинковое.</>}
+      </CatalogTableNote>
+
+      {packaged.length > 0 && <MeshResults variants={packaged} packageLabel={packageLabel}
+        card={card} showCoating={showCoating}/>}
+      {metered.length > 0 && <MeshResults variants={metered} packageLabel={packageLabel}
+        card={false} showCoating={showCoating} metered/>}
+      {results.length === 0 && <div className="rounded-xl border border-dashed border-slate-300 bg-white p-8 text-center dark:border-slate-600 dark:bg-slate-900">
         <strong className="text-lg">Варианты не найдены</strong>
         <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">Измените или сбросьте фильтры.</p>
         <div className="mt-4"><ResetFiltersButton onClick={reset}/></div>
       </div>}
-    </section>
+    </div>
   </>;
 }
 
-function MetalMeshItem({variant, view, showUnit}: {variant: MetalMeshVariant; view: "table" | "card"; showUnit?: boolean}) {
-  const cell = formatSpecification(metalMeshSpecification(variant, "Размер ячейки"));
-  const wire = formatSpecification(metalMeshSpecification(variant, "Диаметр проволоки"));
-  const format = formatSpecification(metalMeshFormat(variant));
-  const coating = metalMeshSpecification(variant, "Покрытие");
-  const packageLabel = formatLabel(variant);
-  const meshKind = variant.name.match(/штукатурная|тканая/iu)?.[0];
-  const cellLabel = meshKind ? `${cell}, ${meshKind.toLocaleLowerCase("ru")}` : cell;
+function MeshResults({variants, packageLabel, card, showCoating, metered = false}: {
+  variants: MetalMeshVariant[];
+  packageLabel: string;
+  card: boolean;
+  showCoating: boolean;
+  metered?: boolean;
+}) {
+  return <section className={metered ? "min-w-0 space-y-4 not-first:mt-8" : "min-w-0"}
+    aria-label={metered ? "Штукатурная и тканая сетка" : card ? "Сетка в картах" : "Сетка в рулонах"}>
+    {metered && <div>
+      <h2 className="text-section-title">Штукатурная и тканая сетка</h2>
+      <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">Размер рулона указан как ширина × длина. Если ширина не указана, в таблице приведена длина рулона.</p>
+    </div>}
+    <CatalogVariantTable designation="Ячейка, мм" specifications={["Проволока, мм", card ? "Карта, м" : "Рулон, м"]}
+      unit={getQuantityUnit(variants[0])}>
+      {variants.map(variant => <MetalMeshItem key={variant.id} variant={variant} view="table"
+        packageLabel={packageLabel} showCoating={showCoating} metered={metered}/>)}
+    </CatalogVariantTable>
+    <div className="grid gap-4 sm:grid-cols-2 xl:hidden">
+      {variants.map(variant => <MetalMeshItem key={variant.id} variant={variant} view="card"
+        packageLabel={packageLabel} showCoating={showCoating} metered={metered}/>)}
+    </div>
+  </section>;
+}
+
+function MetalMeshItem({variant, view, packageLabel, showCoating, metered}: {
+  variant: MetalMeshVariant;
+  view: "table" | "card";
+  packageLabel: string;
+  showCoating: boolean;
+  metered: boolean;
+}) {
+  const cell = metalMeshSpecification(variant, cellSpec);
+  const wire = metalMeshSpecification(variant, wireSpec);
+  const format = metalMeshFormat(variant);
+  const coating = meshCoating(variant);
+  const area = metalMeshPackageArea(variant);
+  const kind = metalMeshSpecification(variant, "Тип").replace(/ сетка$/u, "");
   const fields = [
-    {label: "Диаметр проволоки", value: wire === "—" ? undefined : wire},
-    {label: packageLabel, value: format},
-    ...(coating !== "—" ? [{label: "Покрытие", value: coating}] : []),
+    {label: wireSpec, value: wire === "—" ? undefined : wire},
+    {label: metered && area === undefined ? "Длина рулона" : packageLabel, value: formatSpecification(format)},
+    ...(showCoating ? [{label: coatingSpec, value: coating}] : []),
   ];
-  const detailsFields = storefrontPositionFields(variant).filter(field => field.label !== "Тип")
-    .map(field => field.label === packageLabel ? {...field, value: format} : field);
+  const details = [
+    {label: "Материал", value: "Сталь"},
+    {label: "Площадь полотна", value: area === undefined ? undefined : `${formatNumber(area)} м²`},
+  ];
 
   return <CatalogVariantLayout view={view} variant={variant}
-    name={cell === "—" ? variant.name : view === "table" ? cellLabel : `Ячейка ${cellLabel}`}
-    tableSpecifications={[<span key="wire">{wire}{coating !== "—" && <span className="block text-xs text-slate-600 dark:text-slate-400">
-        {coating === "Оцинкованная" ? "Цинк" : coating}
-      </span>}</span>, format]}
+    name={view === "table" ? meshTableValue(cell) : `Ячейка ${formatSpecification(cell)}`}
+    nameNote={metered ? kind : undefined}
+    tableSpecifications={[
+      <span key="wire">{meshTableValue(wire)}{showCoating && <span className="mt-0.5 block text-xs text-slate-600 dark:text-slate-400">
+        {coating === "Оцинкованная" ? "Оцинк." : coating}
+      </span>}</span>,
+      meshTableValue(format),
+    ]}
     specifications={<CatalogVariantSpecifications items={fields}/>}
-    details={<CatalogPositionDetails productName={variant.name} fields={detailsFields}/>}
+    details={<CatalogPositionDetails productName={variant.name} fields={details}/>}
     price={formatUnitPrice(variant.price, variant.priceUnit)}
-    order={<ProductOrderControls view={view} variant={variant} showUnit={showUnit} wholeQuantity={requiresWholeMetalMeshQuantity(variant)}/>}/>;
+    order={<ProductOrderControls view={view} variant={variant} showUnit={false} startEmpty wholeQuantity={requiresWholeMetalMeshQuantity(variant)}/>}/>;
 }
 
 function MeshFilter({label, value, values, onChange}: {
@@ -149,17 +212,16 @@ function MeshFilter({label, value, values, onChange}: {
     {label}
     <Select value={value} onChange={(event) => onChange(event.target.value)}>
       <option value="">Все значения</option>
-      {values.map((option) => <option key={option} value={option}>{formatSpecification(option)}</option>)}
+      {values.map((option) => <option key={option} value={option}>{meshTableValue(option)}</option>)}
     </Select>
   </label>;
 }
 
-function uniqueValues(variants: MetalMeshVariant[], specification: string) {
-  return [...new Set(variants.map((variant) => metalMeshSpecification(variant, specification)))]
-    .filter((value) => value !== "—")
-    .sort(numericCompare);
+function meshOptions(values: string[]) {
+  return [...new Set(values)].filter((value) => value !== "—").sort(numericCompare);
 }
 
 function numericCompare(left: string, right: string) {
-  return left.localeCompare(right, "ru", {numeric: true});
+  const firstDimension = (value: string) => parseFloat(value.replace(",", "."));
+  return (firstDimension(left) - firstDimension(right)) || left.localeCompare(right, "ru", {numeric: true});
 }

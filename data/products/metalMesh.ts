@@ -102,7 +102,7 @@ export const metalMeshProducts: ProductVariantSource[] = rows.map((row) => {
     sourceProductName: row.name,
     attributes,
     specifications: [
-      {name: "Тип", value: kindByGroup[row.group]},
+      {name: "Тип", value: meshKind(row)},
       ...(dimensions.cell ? [{name: "Размер ячейки", value: dimensions.cell}] : []),
       ...(dimensions.wire ? [{name: "Диаметр проволоки", value: dimensions.wire}] : []),
       ...(coating ? [{name: "Покрытие", value: coating}] : []),
@@ -124,9 +124,16 @@ function meshDimensions(name: string) {
 
 function productFormat(name: string) {
   const parenthesized = name.match(/\((\d+(?:[.,]\d+)?)\s*[хx]\s*(\d+(?:[.,]\d+)?)\s*м?\.?\)/iu);
-  const roll = name.match(/(?:рулон\s+)?(\d+(?:[.,]\d+)?)\s*[хx]\s*(\d+(?:[.,]\d+)?)\s*м\b/iu);
+  const roll = name.match(/рулон\s+(\d+(?:[.,]\d+)?)\s*[хx]\s*(\d+(?:[.,]\d+)?)(?:\s*м)?\.?$/iu);
   const match = parenthesized ?? roll;
   return match ? `${decimal(match[1])}×${decimal(match[2])} м` : undefined;
+}
+
+function meshKind(row: MeshRow) {
+  if (/тканая/iu.test(row.name)) return "Тканая сетка";
+  if (/плет[её]ная/iu.test(row.name)) return "Плетёная штукатурная сетка";
+  if (/штукатурная/iu.test(row.name)) return "Штукатурная сетка";
+  return kindByGroup[row.group];
 }
 
 function coatingLabel(name: string) {
