@@ -3,7 +3,6 @@ import {catalogMeasurementUrl} from './catalog-measurement-path.mjs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {readProjectData} from './project-data.mjs';
-import {removeImageNumberSign} from './image-number-sign.mjs';
 
 const directory = 'public/images/catalog/listovoy-prokat/list-goryachekatanyj';
 const temporaryDirectory = path.resolve('.tmp/hot-rolled-sheet-catalog');
@@ -16,10 +15,9 @@ process.env.FONTCONFIG_FILE = fontConfiguration;
 process.env.PANGOCAIRO_BACKEND = 'fontconfig';
 const {default: sharp} = await import('sharp');
 
-const {isPlainHotRolledSheet, getHotRolledSheetNumber, getSheetParameters} = readProjectData('lib/sheetPresentation.ts');
+const {isPlainHotRolledSheet, getSheetDesignation, getSheetParameters} = readProjectData('lib/sheetPresentation.ts');
 const {products} = JSON.parse(await fs.readFile('data/additional-catalog.json', 'utf8'));
 const sheets = products.filter(isPlainHotRolledSheet);
-assert.equal(sheets.length, 13, 'Review the current smooth hot-rolled sheet range before regenerating');
 const referenceProduct = sheets.find(({id}) => id === 'catalog-2187');
 const referenceValues = {...getSheetParameters(referenceProduct)};
 assert.deepEqual(referenceValues, {
@@ -35,9 +33,9 @@ for (const file of [marked, clean]) {
 }
 const referencePixels = await sharp(marked).removeAlpha().raw().toBuffer();
 
-// Preserve the supplied title words, dimension arrows and millimetre unit glyphs.
+// Preserve the supplied dimension arrows and millimetre unit glyphs.
 const fields = {
-  designation: {box: {left: 1112, top: 112, width: 338, height: 106}, left: 1126, top: 126, size: 84, weight: 700},
+  designation: {box: {left: 116, top: 112, width: 1334, height: 106}, left: 132, top: 126, size: 84, weight: 700},
   thickness: {box: {left: 501, top: 1004, width: 104, height: 70}, right: 593, top: 1017, size: 56, weight: 500},
   width: {box: {left: 1047, top: 1270, width: 137, height: 62}, center: 1115, top: 1280, size: 56, weight: 500},
   length: {box: {left: 1091, top: 464, width: 153, height: 63}, center: 1168, top: 474, size: 56, weight: 500},
@@ -45,12 +43,14 @@ const fields = {
 };
 
 const write = process.argv.includes('--write');
+const previewId = process.argv.find(argument => argument.startsWith('--preview='))?.slice('--preview='.length);
+assert.ok(!previewId || (!write && sheets.some(({id}) => id === previewId)), 'Use --write or --preview=PRODUCT_ID');
 const outputs = [];
-for (const product of sheets) {
+for (const product of sheets.filter(({id}) => !previewId || id === previewId)) {
   const values = getSheetParameters(product);
   assert.ok(values, `${product.id}: missing thickness, format or mass`);
   assert.match(values.mass, /^\d+(?:,\d+)? кг\/(?:шт|м²)$/u, `${product.id}: unexpected mass unit`);
-  const labels = {...values, designation: getHotRolledSheetNumber(product, values.thickness)};
+  const labels = {...values, designation: getSheetDesignation(product)};
   const referenceLabels = {...referenceValues, designation: referenceValues.thickness};
   const background = [], text = [], changedBoxes = [];
   for (const [key, field] of Object.entries(fields)) {
@@ -84,7 +84,7 @@ for (const product of sheets) {
   }
   assert.ok(expectedPixels.equals(pixels), `${product.id}: pixels changed outside label patches`);
   const file = `public${catalogMeasurementUrl(product)}`;
-  outputs.push({product, file, image: await removeImageNumberSign(sharp, image, product.id)});
+  outputs.push({product, file, image});
 }
 
 for (const {file, image} of outputs) {

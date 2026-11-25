@@ -407,11 +407,10 @@ including the two unequal-leg profiles; they are not scaled manufacturing drawin
 ## Tread plate product illustrations
 
 The active 2400 × 1800 templates are the owner's marked and clean JPGs in
-`public/images/catalog/listovoy-prokat/list-riflennyj/originals/`. The marked JPG serves
-«Лист № 3 ТУ» unchanged. `node scripts/render-tread-plate-images.mjs --write`
-renders the other three products as lossless WebP and records their associations
-in `data/tread-plate-images.json`. Run without `--write` for previews under
-`.tmp/list-refleniy-qa/`.
+`public/images/catalog/listovoy-prokat/list-riflennyj/originals/`. Run
+`node scripts/render-tread-plate-images.mjs --write` to generate the lossless WebP
+files and `data/tread-plate-images.json`. Use `--preview=PRODUCT_ID` without
+`--write` for a single preview under `.tmp/list-refleniy-qa/`.
 
 The [original user-supplied source and notes](../imports/list-rifleniy-image-template/README.md)
 document the earlier composition. The current dimensions come from the product specifications.
@@ -419,13 +418,13 @@ document the earlier composition. The current dimensions come from the product s
 The renderer uses clean photo patches and bundled Inter only for changed labels.
 It verifies that all pixels outside those patches match the marked reference.
 Arrows, unit glyphs, and the plate composition stay in place. Width, length,
-thickness, and mass come from the saved catalog. The № 4 and № 5 illustrations
-label the supplied kg/m² value as «Масса по каталогу». The four images share one
-illustrative plate shape and tread pattern, with nominal dimensions for each product.
+thickness, and mass come from the saved catalog. Illustrations for offers
+under ГОСТ 8568-77 show the theoretical mass of the whole sheet. The other
+three offers display the calculated mass of the base. The heading shows the
+sheet type and nominal thickness in millimetres.
 
 The product table and mobile cards reuse the profile thumbnails and viewer.
-Quantity units remain specific to each row, and the cash-only price condition
-appears next to the corresponding price.
+Quantity units remain specific to each row.
 
 ## Galvanized sheet product illustrations
 
@@ -464,14 +463,16 @@ Pixels outside the edited labels match the reference. The storefront uses the ti
 
 The marked and clean 2400 × 1800 JPGs are in
 `public/images/catalog/listovoy-prokat/list-goryachekatanyj/originals/`.
-The marked № 2 source supplies the composition for the 13 smooth variants.
-The product images use saved thicknesses, nominal sheet formats and masses,
-including kg per piece for the smaller format and kg per square metre for the
-larger format. The 3 mm illustrations distinguish «ТУ» and «ГОСТ».
+The marked № 2 source supplies the composition for the smooth variants.
+The product images use saved thicknesses, nominal sheet formats and masses.
+New sizes display the theoretical mass of the whole sheet. The heading shows
+the sheet type and nominal thickness in millimetres.
 
 Run `node scripts/render-hot-rolled-sheet-images.mjs --write` to regenerate
-the lossless WebP files and `data/hot-rolled-sheet-images.json`. The renderer
-checks that the photo pixels outside the changed labels match the marked source.
+the lossless WebP files and `data/hot-rolled-sheet-images.json`. Use
+`--preview=PRODUCT_ID` for a single preview under `.tmp/hot-rolled-sheet-catalog/`.
+The renderer checks that the photo pixels outside the changed labels match the
+marked source.
 
 ## Shared product image viewer
 

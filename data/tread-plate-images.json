@@ -11,6 +11,33 @@
     },
     "catalog-2203": {
       "imageUrl": "/images/catalog/listovoy-prokat/list-riflennyj/measurement/list-riflenyy-5x1500x6000mm.webp"
+    },
+    "catalog-list-rif-2-5x1250x2500-chechevitsa": {
+      "imageUrl": "/images/catalog/listovoy-prokat/list-riflennyj/measurement/list-riflenyy-2-5x1250x2500mm-chechevitsa.webp"
+    },
+    "catalog-list-rif-3x1250x2500-chechevitsa": {
+      "imageUrl": "/images/catalog/listovoy-prokat/list-riflennyj/measurement/list-riflenyy-3x1250x2500mm-chechevitsa.webp"
+    },
+    "catalog-list-rif-3x1500x6000-chechevitsa": {
+      "imageUrl": "/images/catalog/listovoy-prokat/list-riflennyj/measurement/list-riflenyy-3x1500x6000mm-chechevitsa.webp"
+    },
+    "catalog-list-rif-4x1500x3000-chechevitsa": {
+      "imageUrl": "/images/catalog/listovoy-prokat/list-riflennyj/measurement/list-riflenyy-4x1500x3000mm-chechevitsa.webp"
+    },
+    "catalog-list-rif-5x1500x3000-chechevitsa": {
+      "imageUrl": "/images/catalog/listovoy-prokat/list-riflennyj/measurement/list-riflenyy-5x1500x3000mm-chechevitsa.webp"
+    },
+    "catalog-list-rif-6x1500x6000-chechevitsa": {
+      "imageUrl": "/images/catalog/listovoy-prokat/list-riflennyj/measurement/list-riflenyy-6x1500x6000mm-chechevitsa.webp"
+    },
+    "catalog-list-rif-8x1500x6000-chechevitsa": {
+      "imageUrl": "/images/catalog/listovoy-prokat/list-riflennyj/measurement/list-riflenyy-8x1500x6000mm-chechevitsa.webp"
+    },
+    "catalog-list-rif-10x1500x6000-chechevitsa": {
+      "imageUrl": "/images/catalog/listovoy-prokat/list-riflennyj/measurement/list-riflenyy-10x1500x6000mm-chechevitsa.webp"
+    },
+    "catalog-list-rif-12x1500x6000-chechevitsa": {
+      "imageUrl": "/images/catalog/listovoy-prokat/list-riflennyj/measurement/list-riflenyy-12x1500x6000mm-chechevitsa.webp"
     }
   }
 }

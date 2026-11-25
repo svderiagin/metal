@@ -7,7 +7,7 @@ const {subcategories} = readProjectData('data/subcategories.ts', cache);
 const {productVariants} = readProjectData('data/products/index.ts', cache);
 const {beamProfile} = readProjectData('lib/beam.ts', cache);
 const {flatSteelDimensions} = readProjectData('lib/flatSteel.ts', cache);
-const {getSheetParameters} = readProjectData('lib/sheetPresentation.ts', cache);
+const {getSheetParameters, getTreadPlatePattern} = readProjectData('lib/sheetPresentation.ts', cache);
 
 const transliteration = {
   а: 'a', б: 'b', в: 'v', г: 'g', д: 'd', е: 'e', ё: 'e', ж: 'zh', з: 'z',
@@ -90,7 +90,9 @@ function measurementName(product, subcategory) {
     }
     case 'catalog-cat-listovoy-prokat': {
       const dimensions = getSheetParameters(product);
-      const qualifier = product.name.match(/\s(ТУ|ГОСТ|Ф)(?:\s+рифл[её]ный)?$/u)?.[1];
+      const originalName = slug === 'list-riflennyj' || slug === 'list-goryachekatanyj' ? product.sourceProductName : undefined;
+      const qualifier = (originalName ?? product.name).match(/\s(ТУ|ГОСТ|Ф)(?:\s+рифл[её]ный)?$/u)?.[1]
+        ?? (originalName ? undefined : getTreadPlatePattern(product));
       return dimensions ? parts('list', sheetKinds[slug], section([dimensions.thickness, dimensions.width, dimensions.length], 'mm'), filenameToken(qualifier)) : filenameToken(product.name);
     }
     case 'catalog-cat-shtaketnik':

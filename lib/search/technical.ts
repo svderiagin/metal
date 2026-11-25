@@ -28,7 +28,7 @@ export interface TechnicalQuery {dimensions: string[][]; numbers: string[]; grad
 export function buildTechnicalDocument(product: ProductVariant): TechnicalDocument {
   const specs = product.specifications;
   const gradeText = [product.steelGrade ?? "", ...product.attributes.filter(a => a.key === "grade" || a.key === "class").map(a => a.value), ...specs.filter(s => /марка|класс/i.test(s.name)).map(s => s.value)].join(" ");
-  const stdText = [product.standard, product.name, ...specs.filter(s => /стандарт|гост/i.test(s.name)).map(s => s.value)].join(" ");
+  const stdText = [product.standard, product.name, ...specs.filter(s => /стандарт|гост|^технические условия$/i.test(s.name)).map(s => s.value)].join(" ");
   const electrowelded = isMeasuredElectroweldedVariant(product);
   const offerName = electrowelded ? product.sourceProductName ?? "" : "";
   const chains = dimensions(`${product.name} ${offerName}`);

@@ -31,7 +31,7 @@ export function ProductTypeCard({
 }) {
   const isHome = appearance === "home";
   const Heading = isHome ? "h3" : "h2";
-  const {standard, hasPrices, minimumPrice, priceUnit} = getProductTypeSummary(productType, variants);
+  const {standard, minimumPrice, priceUnit} = getProductTypeSummary(productType, variants);
   const isA40025g2sReference = productType.subcategoryId === a40025g2sSubcategoryId && standard === "ГОСТ 5781-82";
   const [priceAmount, priceUnitLabel] = minimumPrice === null
     ? []
@@ -72,7 +72,7 @@ export function ProductTypeCard({
                 <span className="text-sm font-medium text-slate-500 dark:text-slate-400">{priceUnitLabel}</span>
               </>
             )}
-            {minimumPrice === null && <strong className="text-base">{hasPrices ? "Цены в каталоге" : "Цена по запросу"}</strong>}
+            {minimumPrice === null && <strong className="text-base">Цена по запросу</strong>}
           </div>
           <span aria-hidden="true" className="inline-flex items-center gap-1 text-sm font-semibold text-brand-700 dark:text-brand-300">Размеры и цены <Icon name="arrow-right"/></span>
           <p className="w-full text-xs text-slate-500 dark:text-slate-400">Позиций: {variants.length}</p>

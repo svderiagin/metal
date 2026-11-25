@@ -9,6 +9,7 @@ import {applyFlatSteelSpecifications, flatSteelCategoryId} from "./flatSteel";
 import {applySectionSpecifications} from "./sectionSpecifications";
 import {channelCategoryId, normalizeChannelVariant} from "./channel";
 import {coldRolledSheetSubcategoryId, galvanizedSheetSubcategoryId, hotRolledSheetSubcategoryId, treadPlateSubcategoryId} from "./sheetPresentation";
+import {getSheetOrderParameters} from "./sheetOrder";
 
 type ImageOverride = {imageUrl: string};
 const sheetImageOverrides = new Map<string, Record<string, ImageOverride>>([
@@ -25,7 +26,8 @@ export function applyCatalogOverrides(product: ProductVariant): ProductVariant {
   const sheetImages = sheetImageOverrides.get(product.subcategoryId);
   if (sheetImages) {
     const image = sheetImages[product.id];
-    return image ? {...product, imageUrls: [image.imageUrl]} : product;
+    const sheetOrder = getSheetOrderParameters(product);
+    return {...product, ...(image && {imageUrls: [image.imageUrl]}), ...(sheetOrder && {sheetOrder})};
   }
   if (product.categoryId === "catalog-cat-kvadrat") {
     const image = (squareImages.products as Record<string, ImageOverride>)[product.id];

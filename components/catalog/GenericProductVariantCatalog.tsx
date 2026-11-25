@@ -71,7 +71,7 @@ export function GenericProductVariantCatalog({
     <>
       <FilterPanel className="lg:col-start-2" query={query}
         activeFilters={Object.values(filters).filter(Boolean).length + Number(stockOnly) + [minimumPrice, maximumPrice].filter(Boolean).length}
-        onQueryChange={value => {setQuery(value);setSort("relevance");setPage(1);}} onReset={reset}
+        onQueryChange={value => {setQuery(value);setSort(value.trim() ? "relevance" : "name");setPage(1);}} onReset={reset}
         resultCount={{visible: results.length, total: variants.length, pending: resultsPending}}
         sorting={
           <label className="text-sm font-semibold">

@@ -8,7 +8,8 @@ import {formatNumber} from "@/lib/numberFormat";
 import {Icon} from "@/components/ui/Icon";
 import {QuantitySelector} from "./QuantitySelector";
 import {getProductVariantById} from "@/lib/cartCatalog";
-import {calculateLineTotal, calculateMeasuredLineTotal, getCartMeasurementQuantityOptions, getSimpleOrderQuantityOptions, requiresWholeLengthOrder, tonsToMeters, wholeLengthOrder} from "@/lib/orderMeasurement";
+import {calculateLineTotal, calculateMeasuredLineTotal, getCartMeasurementQuantityOptions, getSimpleOrderQuantityOptions, maxOrderSheets, requiresWholeLengthOrder, tonsToMeters, wholeLengthOrder} from "@/lib/orderMeasurement";
+import {sheetsForOrderTons, sheetTonDecimals, sheetOrderTons} from "@/lib/sheetOrder";
 import {formatCartQuantity, formatMeasuredQuantity, formatQuantityForInput, formatRebarOrderTons,
   measuredTonFractionDigits, productOrderFractionDigits, rebarMinimumMeterEntry, rebarMinimumTonEntry, rebarTonFractionDigits} from "@/lib/cartQuantityInput";
 import {isVgpVariant} from "@/lib/pipeFamily";
@@ -42,6 +43,8 @@ export function CartItemRow({line, onRemove}: {line: CartLine; onRemove: () => v
   const squarePipe = product && isSquareProfilePipe(product) ? product : undefined;
   const maximumPieces = squarePipe && pieceOrder
     ? profilePipeMaximumPieces(squarePipe, pieceOrder.lengthMeters) ?? undefined : undefined;
+  const sheetOrder = product?.sheetOrder;
+  const sheetCount = sheetOrder ? line.quantity / sheetOrder.quantityPerSheet : 0;
 
   function updatePipeLength(length: number) {
     if (!pieceOrder) return;
@@ -114,6 +117,19 @@ export function CartItemRow({line, onRemove}: {line: CartLine; onRemove: () => v
           {wholeLengths && product?.lengthMeters ? <p className="max-w-64 text-xs text-slate-600 dark:text-slate-400">
             {bars ? `${bars.pieces} шт.` : isBar ? "Целыми прутками" : "Целыми трубами"} по {formatCartQuantity(product.lengthMeters)} м
           </p> : null}
+        </div>
+      ) : sheetOrder && Number.isInteger(sheetCount) ? (
+        <div className="space-y-3">
+          <QuantitySelector whole fieldLabel="Количество" productName={line.name} unit="шт." disabled={quantityDisabled}
+            value={sheetCount} maximum={maxOrderSheets}
+            onChange={pieces => updateQuantity(line.productId, pieces * sheetOrder.quantityPerSheet)}/>
+          <QuantitySelector fieldLabel="Масса" productName={line.name} unit="т" disabled={quantityDisabled}
+            value={sheetOrderTons(sheetOrder, sheetCount)} minimum={sheetOrderTons(sheetOrder, 1)}
+            maximum={sheetOrderTons(sheetOrder, maxOrderSheets)} step={sheetOrderTons(sheetOrder, 1)}
+            precision={sheetTonDecimals} wideInput
+            formatValue={(tons, grouped) => formatQuantityForInput(tons, grouped, sheetTonDecimals)}
+            normalizeQuantity={tons => ({value: sheetOrderTons(sheetOrder, sheetsForOrderTons(sheetOrder, tons))})}
+            onChange={tons => updateQuantity(line.productId, sheetsForOrderTons(sheetOrder, tons) * sheetOrder.quantityPerSheet)}/>
         </div>
       ) : (
         <QuantitySelector fieldLabel={product?.unit === "ton" || product?.unit === "kg" ? "Масса"

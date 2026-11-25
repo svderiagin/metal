@@ -145,6 +145,7 @@
 }
 
 .table .sumColumn output[data-price] { white-space: nowrap; }
+.table .sumColumn output[data-long-value] { font-size: var(--text-xs); }
 
 .table > tbody > tr:not(.detailsRow) > .actionCell {
   padding-block: 0.375rem;

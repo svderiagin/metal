@@ -38,6 +38,30 @@
     },
     "catalog-2200": {
       "imageUrl": "/images/catalog/listovoy-prokat/list-goryachekatanyj/measurement/list-goryachekatanyy-20x1500x6000mm.webp"
+    },
+    "catalog-list-gk-2x1000x2000": {
+      "imageUrl": "/images/catalog/listovoy-prokat/list-goryachekatanyj/measurement/list-goryachekatanyy-2x1000x2000mm.webp"
+    },
+    "catalog-list-gk-3x1500x6000": {
+      "imageUrl": "/images/catalog/listovoy-prokat/list-goryachekatanyj/measurement/list-goryachekatanyy-3x1500x6000mm.webp"
+    },
+    "catalog-list-gk-4x1500x3000": {
+      "imageUrl": "/images/catalog/listovoy-prokat/list-goryachekatanyj/measurement/list-goryachekatanyy-4x1500x3000mm.webp"
+    },
+    "catalog-list-gk-5x1500x3000": {
+      "imageUrl": "/images/catalog/listovoy-prokat/list-goryachekatanyj/measurement/list-goryachekatanyy-5x1500x3000mm.webp"
+    },
+    "catalog-list-gk-6x1500x3000": {
+      "imageUrl": "/images/catalog/listovoy-prokat/list-goryachekatanyj/measurement/list-goryachekatanyy-6x1500x3000mm.webp"
+    },
+    "catalog-list-gk-18x1500x6000": {
+      "imageUrl": "/images/catalog/listovoy-prokat/list-goryachekatanyj/measurement/list-goryachekatanyy-18x1500x6000mm.webp"
+    },
+    "catalog-list-gk-25x1500x6000": {
+      "imageUrl": "/images/catalog/listovoy-prokat/list-goryachekatanyj/measurement/list-goryachekatanyy-25x1500x6000mm.webp"
+    },
+    "catalog-list-gk-30x1500x6000": {
+      "imageUrl": "/images/catalog/listovoy-prokat/list-goryachekatanyj/measurement/list-goryachekatanyy-30x1500x6000mm.webp"
     }
   }
 }

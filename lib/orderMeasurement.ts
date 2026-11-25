@@ -66,11 +66,14 @@ export function getCartMeasurementQuantityOptions(product: ProductVariant, mode:
   return getMeasurementQuantityOptions(product, mode);
 }
 
+export const maxOrderSheets = 9999;
+
 export function getSimpleOrderQuantityOptions(product?: ProductVariant): {
   maximum: number;
   minimum?: number;
   decimalPlaces?: number;
 } {
+  if (product?.sheetOrder) return {maximum: maxOrderSheets * product.sheetOrder.quantityPerSheet};
   return product?.unit === "meter" && (product.categoryId === "catalog-cat-ugolok" || product.categoryId === "catalog-cat-kvadrat")
     ? getMeasurementQuantityOptions(product, "meter")
     : {maximum: 999};

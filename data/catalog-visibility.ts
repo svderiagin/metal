@@ -17,6 +17,10 @@ const hiddenProductIds = new Set([
   "local-302",
   // The 40Б1 С255 offer with documented section dimensions is local-116009.
   "local-65599",
+  // The 3 mm tread plate marked «Ф» has no distinct verified specification.
+  "catalog-2201",
+  // The alternative 3 × 1250 × 2500 mm hot-rolled sheet has no identified TU.
+  "catalog-28951",
 ]);
 export function isPublicProduct(product: {id: string}): boolean {
   return !hiddenProductIds.has(product.id);
