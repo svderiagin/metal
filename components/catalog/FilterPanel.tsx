@@ -8,6 +8,7 @@ import styles from "./FilterPanel.module.css";
 
 type Props = {
   query: string;
+  queryPlaceholder?: string;
   onQueryChange: (value: string) => void;
   onReset: () => void;
   children: ReactNode;
@@ -18,7 +19,8 @@ type Props = {
   activeFilters?: number;
 };
 
-export function FilterPanel({query, onQueryChange, onReset, children, sorting, resultCount, extraControls, className = "", activeFilters = 0}: Props) {
+export function FilterPanel({query, queryPlaceholder = "Название, размер или марка стали", onQueryChange, onReset,
+  children, sorting, resultCount, extraControls, className = "", activeFilters = 0}: Props) {
   const [expanded, setExpanded] = useState(false);
   const parametersId = useId();
   const selectedCount = activeFilters > 0 && <span className="whitespace-nowrap rounded-full bg-slate-200 px-2 py-0.5 text-xs tabular-nums dark:bg-slate-700">Выбрано: {activeFilters}</span>;
@@ -30,7 +32,7 @@ export function FilterPanel({query, onQueryChange, onReset, children, sorting, r
         <label className="block min-w-0 text-sm font-semibold">
           Поиск товаров
           <Input type="search" value={query} onChange={event => onQueryChange(event.target.value)}
-            className="mt-1" placeholder="Название, размер или марка стали"/>
+            className="mt-1" placeholder={queryPlaceholder}/>
         </label>
         <div className="min-w-0 [&>label]:block">{sorting}</div>
       </div>

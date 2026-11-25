@@ -9,7 +9,8 @@ import {createCatalogSearchIndex} from "@/lib/search";
 import {requiresCatalogPriceQuote} from "@/lib/catalogOffer";
 import {formatUnitPrice} from "@/lib/currency";
 import {formatNumber} from "@/lib/numberFormat";
-import {profileSheetCoatingLabel, profileSheetDimensions, type ProfileSheetVariant} from "@/lib/profileSheet";
+import {h75Reference, parseProfileSheetQuery, profileSheetCoatingLabel, profileSheetDimensions, type ProfileSheetVariant} from "@/lib/profileSheet";
+import {h75StandardReferenceHref} from "@/lib/catalogStandards";
 import {ProductOrderControls} from "./ProductOrderControls";
 import {FilterPanel} from "./FilterPanel";
 import {PriceRangeFeedback, PriceRangeInputs, useCatalogPriceRange} from "./PriceInput";
@@ -17,15 +18,13 @@ import {ResetFiltersButton} from "./ResetFiltersButton";
 import {CatalogVariantLayout, CatalogVariantSpecifications, CatalogVariantTable} from "./CatalogVariantLayout";
 import {CatalogPositionDetails} from "./CatalogPositionDetails";
 import {CatalogTableNote} from "./CatalogTableNote";
-import {CatalogStandardReference} from "./CatalogStandardReference";
+import {CatalogStandardLink, CatalogStandardReference} from "./CatalogStandardReference";
 import {formatSpecification} from "./StorefrontPositionSpecifications";
 
 type SortMode = "thickness-asc" | "thickness-desc" | "price-asc" | "price-desc";
-type SharedSheetProperties = {profile?: string; width?: number; coating?: string; widthLabel: string};
-
-function sheetSpecifications(shared: SharedSheetProperties, coating: string, dimensions: string) {
-  return shared.coating ? [dimensions] : [coating, dimensions];
-}
+type SharedSheetProperties = {profile?: string; width?: number; zincCoating: boolean; widthLabel: string};
+const coatingHeading = "Покрытие и цвет";
+const detailSpecifications = new Set(["Площадь по габаритам", "Площадь по рабочей ширине", "Справочная масса листа"]);
 
 export function ProfileSheetVariantCatalog({variants}: {variants: ProfileSheetVariant[]}) {
   const [query, setQuery] = useState("");
@@ -52,19 +51,23 @@ export function ProfileSheetVariantCatalog({variants}: {variants: ProfileSheetVa
   const shared: SharedSheetProperties = {
     profile: variants.every(p => p.profileMark === first?.profileMark) ? first?.profileMark : undefined,
     width: variants.every(p => profileSheetDimensions(p.sheetSizeMeters)?.width === firstWidth) ? firstWidth : undefined,
-    coating: coatings.length === 1 ? coatings[0] : undefined,
+    zincCoating: variants.every(p => p.coatingType === "galvanized"),
     widthLabel: first?.profileMark === "Н75" ? "Рабочая ширина" : "Габаритная ширина",
   };
+  const referenceH75 = shared.profile === "Н75" && shared.width === h75Reference.workingWidthMeters;
   const dimensionsHeading = shared.width !== undefined ? "Длина, м"
     : first?.profileMark === "Н75" ? "Рабочая ширина × длина, м" : "Формат, м";
   const searchIndex = useMemo(() => createCatalogSearchIndex(variants), [variants]);
   const results = useMemo(() => {
     const needle = normalizeText(query);
-    const hits = needle ? new Set(searchIndex.search(query).hits.map(hit => hit.product.id)) : undefined;
+    const {text, matches} = parseProfileSheetQuery(needle);
+    const hits = text ? new Set(searchIndex.search(text).hits.map(hit => hit.product.id)) : undefined;
     return variants.filter((variant) => {
-      const searchable = normalizeText(`${variant.name} ${profileSheetCoatingLabel(variant)} ${variant.sheetSizeMeters}`);
+      const name = normalizeText(variant.name);
+      const searchable = normalizeText(`${name} ${profileSheetCoatingLabel(variant)} ${variant.sheetSizeMeters}`);
+      const matchesQuery = needle === name || matches(variant) && (!text || searchable.includes(text) || hits?.has(variant.id));
       const hasPrice = !requiresCatalogPriceQuote(variant);
-      return (!needle || searchable.includes(needle) || hits?.has(variant.id))
+      return matchesQuery
         && (!thickness || variant.wallThicknessMm === Number(thickness))
         && (!coating || profileSheetCoatingLabel(variant) === coating)
         && (!length || profileSheetDimensions(variant.sheetSizeMeters)?.length === Number(length))
@@ -95,6 +98,7 @@ export function ProfileSheetVariantCatalog({variants}: {variants: ProfileSheetVa
 
   return <>
     <FilterPanel className="lg:col-start-2" query={query}
+      queryPlaceholder={shared.zincCoating ? "Профиль, толщина или длина" : "Профиль, размер или RAL"}
       activeFilters={[thickness, coating, length, stockOnly, priceRange.minimumPrice, priceRange.maximumPrice].filter(Boolean).length}
       extraControls={<>
         {variants.some(variant => variant.inStock) && variants.some(variant => !variant.inStock) && <label className="flex min-h-11 cursor-pointer items-center gap-3 text-sm font-semibold">
@@ -122,7 +126,7 @@ export function ProfileSheetVariantCatalog({variants}: {variants: ProfileSheetVa
         </Select>
       </label>
       {coatings.length > 1 && <label className="text-sm font-semibold">
-        Цвет / покрытие
+        {coatingHeading}
         <Select className="mt-1" value={coating} onChange={(event) => setCoating(event.target.value)}>
           <option value="">Все значения</option>
           {coatings.map((value) => <option key={value} value={value}>{value}</option>)}
@@ -142,12 +146,18 @@ export function ProfileSheetVariantCatalog({variants}: {variants: ProfileSheetVa
       {results.length ? <>
         <CatalogTableNote>
           {shared.width !== undefined && <>{shared.widthLabel} — {formatNumber(shared.width)} м.{" "}</>}
-          {shared.coating && <>Покрытие — {shared.coating === "Оцинкованный" ? "цинковое" : shared.coating}.{" "}</>}
-          <CatalogStandardReference>ГОСТ 24045-2016</CatalogStandardReference> устанавливает требования для профилей с толщиной основы от 0,5 до 1,5 мм.{" "}
-          {variants.some(variant => variant.wallThicknessMm < 0.5) && <>Для более тонких листов сверяйте документацию исполнения.</>}
+          {shared.zincCoating && <>Покрытие — цинковое.{" "}</>}
+          {referenceH75 ? <>
+            Высота гофры — {h75Reference.heightMm} мм, габаритная ширина — {h75Reference.overallWidthMm} мм.
+            {" "}Справочные размеры и масса Н75-750 приведены в{" "}
+            <CatalogStandardLink href={h75StandardReferenceHref}>приложении Б ГОСТ 24045-2016</CatalogStandardLink>.
+          </> : <>
+            <CatalogStandardReference>ГОСТ 24045-2016</CatalogStandardReference> указывает толщину основы от 0,5 до 1,5 мм.
+            {" "}{variants.some(variant => variant.wallThicknessMm < 0.5) && <>Для более тонких листов параметры уточняют по документации изделия.</>}
+          </>}
         </CatalogTableNote>
         <CatalogVariantTable designation={shared.profile ? "Толщина, мм" : "Профиль / толщина"}
-          specifications={sheetSpecifications(shared, "Цвет / покрытие", dimensionsHeading)}
+          specifications={shared.zincCoating ? [dimensionsHeading] : [coatingHeading, dimensionsHeading]}
           unit="шт.">
           {results.map(variant => <ProfileSheetItem key={variant.id} variant={variant} shared={shared} view="table"/>)}
         </CatalogVariantTable>
@@ -165,30 +175,42 @@ export function ProfileSheetVariantCatalog({variants}: {variants: ProfileSheetVa
 
 function ProfileSheetItem({variant, shared, view}: {variant: ProfileSheetVariant; shared: SharedSheetProperties; view: "table" | "card"}) {
   const coating = profileSheetCoatingLabel(variant);
+  const coatingCell = variant.coatingType === "painted" && variant.ralCode
+    ? <span className="block">
+      <span className="block font-medium whitespace-nowrap">RAL {variant.ralCode}</span>
+      {variant.colorName && <span className="mt-0.5 block text-xs text-slate-600 dark:text-slate-300">{variant.colorName}</span>}
+    </span>
+    : coating;
   const size = formatSpecification(variant.sheetSizeMeters);
   const dimensions = profileSheetDimensions(variant.sheetSizeMeters);
   const length = dimensions ? formatNumber(dimensions.length) : undefined;
   const displaySize = shared.width !== undefined && length !== undefined ? length : size;
   const thickness = formatNumber(variant.wallThicknessMm);
-  const specifications = [
-    ...(!shared.coating ? [{label: "Цвет / покрытие", value: coating}] : []),
+  const dimensionsFields = [
     {label: "Длина листа", value: length !== undefined ? `${length} м` : undefined},
     ...(shared.width === undefined && dimensions ? [{label: shared.widthLabel, value: `${formatNumber(dimensions.width)} м`}] : []),
   ];
+  const workingWidth = variant.profileMark === "Н75";
+  const specificCoating = variant.coatingType === "painted"
+    ? variant.specifications.find(({name, value}) => name === "Покрытие" && value !== "Окрашенное")
+    : undefined;
   const fields = [
-    {label: "Толщина по каталогу", value: `${thickness} мм`},
-    ...specifications.filter(({label}) => label !== "Цвет / покрытие"),
-    ...(variant.coatingType === "painted" ? [
-      {label: "Покрытие", value: variant.specifications.find(({name}) => name === "Тип покраски")?.value ?? "Окрашенное"},
-      {label: "Код RAL", value: variant.ralCode},
-    ] : []),
+    {label: workingWidth ? "Рабочая ширина × длина" : "Габариты листа", value: dimensions ? `${size} м` : undefined},
+    ...variant.specifications.filter(({name}) => detailSpecifications.has(name)).map(({name, value}) => ({label: name, value})),
+    ...(specificCoating ? [{label: specificCoating.name, value: specificCoating.value}] : []),
   ];
+  const needsSectionData = workingWidth && dimensions?.width === h75Reference.workingWidthMeters
+    && !h75Reference.massPerMeter.has(variant.wallThicknessMm);
 
   return <CatalogVariantLayout view={view} variant={variant}
-    name={view === "table" && shared.profile ? thickness : `${variant.profileMark} · ${thickness} мм`}
-    tableSpecifications={sheetSpecifications(shared, coating, displaySize)}
-    specifications={<CatalogVariantSpecifications items={specifications}/>}
-    details={<CatalogPositionDetails productName={variant.name} fields={fields}/>}
+    name={view === "card" ? `Профнастил ${variant.profileMark} · ${thickness} мм` : shared.profile ? thickness : `${variant.profileMark} · ${thickness} мм`}
+    tableSpecifications={shared.zincCoating ? [displaySize] : [coatingCell, displaySize]}
+    specifications={<CatalogVariantSpecifications items={[
+      ...(!shared.zincCoating ? [{label: coatingHeading, value: coating}] : []),
+      ...dimensionsFields,
+    ]}/>}
+    details={fields.some(({value}) => value) && <CatalogPositionDetails productName={variant.name} fields={fields}
+      note={needsSectionData ? `Для несущего настила из листа ${thickness} мм используйте характеристики сечения из документации на это исполнение. В справочной таблице Б.2 приведены значения для толщин 0,7–0,9 мм.` : undefined}/>}
     price={variant.quoteOnly ? "Цена по запросу"
       : `${variant.priceQualifier === "from" ? "от " : ""}${formatUnitPrice(variant.price, variant.priceUnit)}`}
     order={<ProductOrderControls view={view} variant={variant} wholeQuantity startEmpty showUnit={false}/>}/>;

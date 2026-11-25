@@ -127,7 +127,8 @@ async function render(product) {
   let row = top;
   for (const {name, value} of facts) {
     const labelHeight = await place(name, 45, 500, 855, 128, row);
-    const valueHeight = await place(value, 57, 750, 855, 128, row + labelHeight + 12);
+    const displayValue = product.categoryId === "cat-pnf" && name === "Цвет" ? value.replace(" · ", "\n") : value;
+    const valueHeight = await place(displayValue, 57, 750, 855, 128, row + labelHeight + 12);
     row += labelHeight + valueHeight + 48;
   }
   const diagram = sectionDiagram(product);

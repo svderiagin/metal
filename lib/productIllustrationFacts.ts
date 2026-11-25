@@ -65,7 +65,8 @@ export function productIllustrationFacts(product: ProductVariant): ProductSpecif
     add("Толщина", `${flat.thickness} мм`);
   }
   for (const {name, value} of product.specifications) {
-    const label = name === "Размер" && flat ? "Длина"
+    const label = name === "Цвет" && product.categoryId === "cat-pnf" ? name
+      : name === "Размер" && flat ? "Длина"
       : name === "Теоретическая масса" && flat ? "Масса погонного метра" : displayLabels[name];
     if (!label || (name === "Размер" && (profileWidth || product.diameterMm))
       || (name === "Диаметр, мм" && product.diameterMm)) continue;

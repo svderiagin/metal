@@ -26,6 +26,7 @@ export const catalogStandards: Readonly<Record<string, {year: string; href: stri
 };
 
 const channelStandardPdf = meganorm + "Data2/1/4294847/4294847929.pdf";
+export const h75StandardReferenceHref = meganorm + "Data2/1/4293750/4293750590.pdf#page=14";
 const catalogStandardTables: Record<string, Partial<Record<number, string>>> = {
   "103-2006": {1: catalogStandards["103"].href + "#i64102"},
   "2591-2006": {1: meganorm + "Data/476/47679.pdf#page=4"},
