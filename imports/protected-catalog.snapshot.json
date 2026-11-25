@@ -6862,8 +6862,8 @@
       "priceQualifier": "exact",
       "priceConfirmed": true,
       "imported": true,
-      "inStock": false,
-      "availability": "UNKNOWN",
+      "inStock": true,
+      "availability": "IN_STOCK",
       "featured": false,
       "imageUrls": [
         "/images/catalog/setka-metallicheskaya/setka-rabitsa-card.jpg"
@@ -6939,8 +6939,8 @@
       "priceQualifier": "exact",
       "priceConfirmed": true,
       "imported": true,
-      "inStock": false,
-      "availability": "UNKNOWN",
+      "inStock": true,
+      "availability": "IN_STOCK",
       "featured": false,
       "imageUrls": [
         "/images/catalog/setka-metallicheskaya/setka-rabitsa-card.jpg"
@@ -7016,8 +7016,8 @@
       "priceQualifier": "exact",
       "priceConfirmed": true,
       "imported": true,
-      "inStock": false,
-      "availability": "UNKNOWN",
+      "inStock": true,
+      "availability": "IN_STOCK",
       "featured": false,
       "imageUrls": [
         "/images/catalog/setka-metallicheskaya/setka-rabitsa-card.jpg"
@@ -7093,8 +7093,8 @@
       "priceQualifier": "exact",
       "priceConfirmed": true,
       "imported": true,
-      "inStock": false,
-      "availability": "UNKNOWN",
+      "inStock": true,
+      "availability": "IN_STOCK",
       "featured": false,
       "imageUrls": [
         "/images/catalog/setka-metallicheskaya/setka-rabitsa-card.jpg"
@@ -7170,8 +7170,8 @@
       "priceQualifier": "exact",
       "priceConfirmed": true,
       "imported": true,
-      "inStock": false,
-      "availability": "UNKNOWN",
+      "inStock": true,
+      "availability": "IN_STOCK",
       "featured": false,
       "imageUrls": [
         "/images/catalog/setka-metallicheskaya/setka-rabitsa-card.jpg"
@@ -7248,7 +7248,7 @@
       "priceConfirmed": true,
       "imported": true,
       "inStock": false,
-      "availability": "UNKNOWN",
+      "availability": "ON_ORDER",
       "featured": false,
       "imageUrls": [
         "/images/catalog/setka-metallicheskaya/setka-rabitsa-card.jpg"
@@ -7324,8 +7324,8 @@
       "priceQualifier": "exact",
       "priceConfirmed": true,
       "imported": true,
-      "inStock": false,
-      "availability": "UNKNOWN",
+      "inStock": true,
+      "availability": "IN_STOCK",
       "featured": false,
       "imageUrls": [
         "/images/catalog/setka-metallicheskaya/setka-rabitsa-card.jpg"
@@ -7402,7 +7402,7 @@
       "priceConfirmed": true,
       "imported": true,
       "inStock": false,
-      "availability": "UNKNOWN",
+      "availability": "ON_ORDER",
       "featured": false,
       "imageUrls": [
         "/images/catalog/setka-metallicheskaya/setka-svarnaya-v-rulonah-card.jpg"
@@ -7469,8 +7469,8 @@
       "priceQualifier": "exact",
       "priceConfirmed": true,
       "imported": true,
-      "inStock": false,
-      "availability": "UNKNOWN",
+      "inStock": true,
+      "availability": "IN_STOCK",
       "featured": false,
       "imageUrls": [
         "/images/catalog/setka-metallicheskaya/setka-svarnaya-v-rulonah-card.jpg"
@@ -7542,8 +7542,8 @@
       "priceQualifier": "exact",
       "priceConfirmed": true,
       "imported": true,
-      "inStock": false,
-      "availability": "UNKNOWN",
+      "inStock": true,
+      "availability": "IN_STOCK",
       "featured": false,
       "imageUrls": [
         "/images/catalog/setka-metallicheskaya/setka-svarnaya-v-rulonah-card.jpg"
@@ -7619,8 +7619,8 @@
       "priceQualifier": "exact",
       "priceConfirmed": true,
       "imported": true,
-      "inStock": false,
-      "availability": "UNKNOWN",
+      "inStock": true,
+      "availability": "IN_STOCK",
       "featured": false,
       "imageUrls": [
         "/images/catalog/setka-metallicheskaya/setka-svarnaya-v-rulonah-card.jpg"
@@ -7696,8 +7696,8 @@
       "priceQualifier": "exact",
       "priceConfirmed": true,
       "imported": true,
-      "inStock": false,
-      "availability": "UNKNOWN",
+      "inStock": true,
+      "availability": "IN_STOCK",
       "featured": false,
       "imageUrls": [
         "/images/catalog/setka-metallicheskaya/setka-svarnaya-v-rulonah-card.jpg"
@@ -7773,8 +7773,8 @@
       "priceQualifier": "exact",
       "priceConfirmed": true,
       "imported": true,
-      "inStock": false,
-      "availability": "UNKNOWN",
+      "inStock": true,
+      "availability": "IN_STOCK",
       "featured": false,
       "imageUrls": [
         "/images/catalog/setka-metallicheskaya/setka-svarnaya-v-rulonah-card.jpg"
@@ -7850,8 +7850,8 @@
       "priceQualifier": "exact",
       "priceConfirmed": true,
       "imported": true,
-      "inStock": false,
-      "availability": "UNKNOWN",
+      "inStock": true,
+      "availability": "IN_STOCK",
       "featured": false,
       "imageUrls": [
         "/images/catalog/setka-metallicheskaya/setka-svarnaya-v-rulonah-card.jpg"
@@ -7927,8 +7927,8 @@
       "priceQualifier": "exact",
       "priceConfirmed": true,
       "imported": true,
-      "inStock": false,
-      "availability": "UNKNOWN",
+      "inStock": true,
+      "availability": "IN_STOCK",
       "featured": false,
       "imageUrls": [
         "/images/catalog/setka-metallicheskaya/setka-svarnaya-v-rulonah-card.jpg"
@@ -8000,8 +8000,8 @@
       "priceQualifier": "exact",
       "priceConfirmed": true,
       "imported": true,
-      "inStock": false,
-      "availability": "UNKNOWN",
+      "inStock": true,
+      "availability": "IN_STOCK",
       "featured": false,
       "imageUrls": [
         "/images/catalog/setka-metallicheskaya/setka-svarnaya-v-rulonah-card.jpg"
@@ -8077,8 +8077,8 @@
       "priceQualifier": "exact",
       "priceConfirmed": true,
       "imported": true,
-      "inStock": false,
-      "availability": "UNKNOWN",
+      "inStock": true,
+      "availability": "IN_STOCK",
       "featured": false,
       "imageUrls": [
         "/images/catalog/setka-metallicheskaya/setka-svarnaya-v-rulonah-card.jpg"
@@ -8154,8 +8154,8 @@
       "priceQualifier": "exact",
       "priceConfirmed": true,
       "imported": true,
-      "inStock": false,
-      "availability": "UNKNOWN",
+      "inStock": true,
+      "availability": "IN_STOCK",
       "featured": false,
       "imageUrls": [
         "/images/catalog/setka-metallicheskaya/setka-svarnaya-v-rulonah-card.jpg"
@@ -8231,8 +8231,8 @@
       "priceQualifier": "exact",
       "priceConfirmed": true,
       "imported": true,
-      "inStock": false,
-      "availability": "UNKNOWN",
+      "inStock": true,
+      "availability": "IN_STOCK",
       "featured": false,
       "imageUrls": [
         "/images/catalog/setka-metallicheskaya/setka-svarnaya-v-rulonah-card.jpg"
@@ -8309,7 +8309,7 @@
       "priceConfirmed": true,
       "imported": true,
       "inStock": false,
-      "availability": "UNKNOWN",
+      "availability": "ON_ORDER",
       "featured": false,
       "imageUrls": [
         "/images/catalog/setka-metallicheskaya/setka-svarnaya-v-rulonah-card.jpg"
@@ -8386,7 +8386,7 @@
       "priceConfirmed": true,
       "imported": true,
       "inStock": false,
-      "availability": "UNKNOWN",
+      "availability": "ON_ORDER",
       "featured": false,
       "imageUrls": [
         "/images/catalog/setka-metallicheskaya/setka-svarnaya-v-rulonah-card.jpg"
@@ -8458,8 +8458,8 @@
       "priceQualifier": "exact",
       "priceConfirmed": true,
       "imported": true,
-      "inStock": false,
-      "availability": "UNKNOWN",
+      "inStock": true,
+      "availability": "IN_STOCK",
       "featured": false,
       "imageUrls": [
         "/images/catalog/setka-metallicheskaya/setka-svarnaya-v-rulonah-card.jpg"
@@ -8531,8 +8531,8 @@
       "priceQualifier": "exact",
       "priceConfirmed": true,
       "imported": true,
-      "inStock": false,
-      "availability": "UNKNOWN",
+      "inStock": true,
+      "availability": "IN_STOCK",
       "featured": false,
       "imageUrls": [
         "/images/catalog/setka-metallicheskaya/setka-svarnaya-v-rulonah-card.jpg"
@@ -8604,8 +8604,8 @@
       "priceQualifier": "exact",
       "priceConfirmed": true,
       "imported": true,
-      "inStock": false,
-      "availability": "UNKNOWN",
+      "inStock": true,
+      "availability": "IN_STOCK",
       "featured": false,
       "imageUrls": [
         "/images/catalog/setka-metallicheskaya/setka-svarnaya-v-rulonah-card.jpg"
@@ -8677,8 +8677,8 @@
       "priceQualifier": "exact",
       "priceConfirmed": true,
       "imported": true,
-      "inStock": false,
-      "availability": "UNKNOWN",
+      "inStock": true,
+      "availability": "IN_STOCK",
       "featured": false,
       "imageUrls": [
         "/images/catalog/setka-metallicheskaya/setka-svarnaya-v-rulonah-card.jpg"
@@ -8750,8 +8750,8 @@
       "priceQualifier": "exact",
       "priceConfirmed": true,
       "imported": true,
-      "inStock": false,
-      "availability": "UNKNOWN",
+      "inStock": true,
+      "availability": "IN_STOCK",
       "featured": false,
       "imageUrls": [
         "/images/catalog/setka-metallicheskaya/setka-svarnaya-v-rulonah-card.jpg"
@@ -8823,8 +8823,8 @@
       "priceQualifier": "exact",
       "priceConfirmed": true,
       "imported": true,
-      "inStock": false,
-      "availability": "UNKNOWN",
+      "inStock": true,
+      "availability": "IN_STOCK",
       "featured": false,
       "imageUrls": [
         "/images/catalog/setka-metallicheskaya/setka-svarnaya-v-rulonah-card.jpg"
@@ -8900,8 +8900,8 @@
       "priceQualifier": "exact",
       "priceConfirmed": true,
       "imported": true,
-      "inStock": false,
-      "availability": "UNKNOWN",
+      "inStock": true,
+      "availability": "IN_STOCK",
       "featured": false,
       "imageUrls": [
         "/images/catalog/setka-metallicheskaya/setka-svarnaya-v-rulonah-card.jpg"
@@ -8977,8 +8977,8 @@
       "priceQualifier": "exact",
       "priceConfirmed": true,
       "imported": true,
-      "inStock": false,
-      "availability": "UNKNOWN",
+      "inStock": true,
+      "availability": "IN_STOCK",
       "featured": false,
       "imageUrls": [
         "/images/catalog/setka-metallicheskaya/setka-svarnaya-v-rulonah-card.jpg"
@@ -9054,8 +9054,8 @@
       "priceQualifier": "exact",
       "priceConfirmed": true,
       "imported": true,
-      "inStock": false,
-      "availability": "UNKNOWN",
+      "inStock": true,
+      "availability": "IN_STOCK",
       "featured": false,
       "imageUrls": [
         "/images/catalog/setka-metallicheskaya/setka-svarnaya-v-kartah-card.jpg"
@@ -9127,8 +9127,8 @@
       "priceQualifier": "exact",
       "priceConfirmed": true,
       "imported": true,
-      "inStock": false,
-      "availability": "UNKNOWN",
+      "inStock": true,
+      "availability": "IN_STOCK",
       "featured": false,
       "imageUrls": [
         "/images/catalog/setka-metallicheskaya/setka-svarnaya-v-kartah-card.jpg"
@@ -9200,8 +9200,8 @@
       "priceQualifier": "exact",
       "priceConfirmed": true,
       "imported": true,
-      "inStock": false,
-      "availability": "UNKNOWN",
+      "inStock": true,
+      "availability": "IN_STOCK",
       "featured": false,
       "imageUrls": [
         "/images/catalog/setka-metallicheskaya/setka-svarnaya-v-kartah-card.jpg"
@@ -9273,8 +9273,8 @@
       "priceQualifier": "exact",
       "priceConfirmed": true,
       "imported": true,
-      "inStock": false,
-      "availability": "UNKNOWN",
+      "inStock": true,
+      "availability": "IN_STOCK",
       "featured": false,
       "imageUrls": [
         "/images/catalog/setka-metallicheskaya/setka-svarnaya-v-kartah-card.jpg"
@@ -9347,7 +9347,7 @@
       "priceConfirmed": true,
       "imported": true,
       "inStock": false,
-      "availability": "UNKNOWN",
+      "availability": "ON_ORDER",
       "featured": false,
       "imageUrls": [
         "/images/catalog/setka-metallicheskaya/setka-svarnaya-v-kartah-card.jpg"
@@ -9419,8 +9419,8 @@
       "priceQualifier": "exact",
       "priceConfirmed": true,
       "imported": true,
-      "inStock": false,
-      "availability": "UNKNOWN",
+      "inStock": true,
+      "availability": "IN_STOCK",
       "featured": false,
       "imageUrls": [
         "/images/catalog/setka-metallicheskaya/setka-svarnaya-v-kartah-card.jpg"
@@ -9492,8 +9492,8 @@
       "priceQualifier": "exact",
       "priceConfirmed": true,
       "imported": true,
-      "inStock": false,
-      "availability": "UNKNOWN",
+      "inStock": true,
+      "availability": "IN_STOCK",
       "featured": false,
       "imageUrls": [
         "/images/catalog/setka-metallicheskaya/setka-svarnaya-v-kartah-card.jpg"
@@ -9566,7 +9566,7 @@
       "priceConfirmed": true,
       "imported": true,
       "inStock": false,
-      "availability": "UNKNOWN",
+      "availability": "ON_ORDER",
       "featured": false,
       "imageUrls": [
         "/images/catalog/setka-metallicheskaya/setka-svarnaya-v-kartah-card.jpg"
@@ -9638,8 +9638,8 @@
       "priceQualifier": "exact",
       "priceConfirmed": true,
       "imported": true,
-      "inStock": false,
-      "availability": "UNKNOWN",
+      "inStock": true,
+      "availability": "IN_STOCK",
       "featured": false,
       "imageUrls": [
         "/images/catalog/setka-metallicheskaya/setka-svarnaya-v-kartah-card.jpg"

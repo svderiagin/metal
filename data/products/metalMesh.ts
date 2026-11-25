@@ -10,6 +10,7 @@ type MeshRow = {
   size: string;
   price: number;
   priceBasis: PriceBasis;
+  onOrder?: true;
 };
 
 const rows: MeshRow[] = [
@@ -18,9 +19,9 @@ const rows: MeshRow[] = [
   {sourceId: "2251", group: "chain-link", name: "Сетка рабица оцинк. 55х55х1.6мм (2х10м)", size: "10 м", price: 1350, priceBasis: "roll"},
   {sourceId: "2252", group: "chain-link", name: "Сетка рабица оцинк. 55х55х2.3мм (1.5х10м)", size: "10 м", price: 2650, priceBasis: "roll"},
   {sourceId: "2253", group: "chain-link", name: "Сетка рабица оцинк. 55х55х2.3мм (1.8х10м)", size: "10 м", price: 2850, priceBasis: "roll"},
-  {sourceId: "2254", group: "chain-link", name: "Сетка рабица оцинк. 55х55х2.3мм (2х10м)", size: "10 м", price: 3100, priceBasis: "roll"},
+  {sourceId: "2254", group: "chain-link", name: "Сетка рабица оцинк. 55х55х2.3мм (2х10м)", size: "10 м", price: 3100, priceBasis: "roll", onOrder: true},
   {sourceId: "2255", group: "chain-link", name: "Сетка рабица оцинк. 25х25х1.4мм (1х10м)", size: "10 м", price: 1950, priceBasis: "roll"},
-  {sourceId: "21517", group: "welded-roll", name: "Сетка штукатурная черная 2х2мм", size: "80 м", price: 205, priceBasis: "meter"},
+  {sourceId: "21517", group: "welded-roll", name: "Сетка штукатурная черная 2х2мм", size: "80 м", price: 205, priceBasis: "meter", onOrder: true},
   {sourceId: "2264", group: "welded-roll", name: "Сетка тканая 5х5х0.7мм", size: "80 м", price: 190, priceBasis: "meter"},
   {sourceId: "2267", group: "welded-roll", name: "Сетка оцинкованная 6х6х0,6мм рулон 1х15м", size: "15 м", price: 1650, priceBasis: "roll"},
   {sourceId: "28997", group: "welded-roll", name: "Сетка сварная оцинкованная 15х15х0.7мм, рулон 1х15м", size: "15 м", price: 750, priceBasis: "roll"},
@@ -32,8 +33,8 @@ const rows: MeshRow[] = [
   {sourceId: "2265", group: "welded-roll", name: "Сетка сварная оцинк. 25х25х0.8 рулон 1х25м", size: "25 м", price: 1650, priceBasis: "roll"},
   {sourceId: "20179", group: "welded-roll", name: "Сетка сварная оцинк. 25х25х1.5 рулон 1х25м", size: "25 м", price: 3600, priceBasis: "roll"},
   {sourceId: "2262", group: "welded-roll", name: "Сетка сварная оцинк. 25х25х1.3 рулон 1.5х25м", size: "25 м.", price: 5300, priceBasis: "roll"},
-  {sourceId: "2259", group: "welded-roll", name: "Сетка сварная 30х30х1,6 (1х40м.) оцинк.", size: "40 м", price: 5790, priceBasis: "roll"},
-  {sourceId: "20182", group: "welded-roll", name: "Сетка сварная 50х50х1.6 рулон 0.2х50м", size: "50 м", price: 700, priceBasis: "roll"},
+  {sourceId: "2259", group: "welded-roll", name: "Сетка сварная 30х30х1,6 (1х40м.) оцинк.", size: "40 м", price: 5790, priceBasis: "roll", onOrder: true},
+  {sourceId: "20182", group: "welded-roll", name: "Сетка сварная 50х50х1.6 рулон 0.2х50м", size: "50 м", price: 700, priceBasis: "roll", onOrder: true},
   {sourceId: "28918", group: "welded-roll", name: "Сетка сварная 50х50х1.6 рулон 0.30х50м", size: "50 м", price: 875, priceBasis: "roll"},
   {sourceId: "20209", group: "welded-roll", name: "Сетка сварная 50х50х1.6 рулон 0.35х50м", size: "50 м", price: 1200, priceBasis: "roll"},
   {sourceId: "20210", group: "welded-roll", name: "Сетка сварная 50х50х1.6 рулон 0.5х50м", size: "50 м", price: 1700, priceBasis: "roll"},
@@ -46,10 +47,10 @@ const rows: MeshRow[] = [
   {sourceId: "2274", group: "welded-sheet", name: "Сетка сварная (в картах) 55х55х2,5мм (2х1м)", size: "2х1 м", price: 260, priceBasis: "piece"},
   {sourceId: "2276", group: "welded-sheet", name: "Сетка сварная (в картах) 55х55х3,5 мм (0,5х2м)", size: "0,5х2 м", price: 235, priceBasis: "piece"},
   {sourceId: "2275", group: "welded-sheet", name: "Сетка сварная (в картах) 55х55х3,5мм (2х1м)", size: "2х1 м", price: 490, priceBasis: "piece"},
-  {sourceId: "20183", group: "welded-sheet", name: "Сетка сварная (в картах) 55х55х5мм (0.5х2м)", size: "0,5х2 м", price: 470, priceBasis: "piece"},
+  {sourceId: "20183", group: "welded-sheet", name: "Сетка сварная (в картах) 55х55х5мм (0.5х2м)", size: "0,5х2 м", price: 470, priceBasis: "piece", onOrder: true},
   {sourceId: "29073", group: "welded-sheet", name: "Сетка сварная (в картах) 110х110х2,5мм (2x3м)", size: "2х3 м", price: 600, priceBasis: "piece"},
   {sourceId: "29074", group: "welded-sheet", name: "Сетка сварная (в картах) 110х110х3,5мм (2x3м)", size: "2х3 м", price: 850, priceBasis: "piece"},
-  {sourceId: "29075", group: "welded-sheet", name: "Сетка сварная (в картах) 110х110х4,5мм (2x3м)", size: "2х3 м", price: 1390, priceBasis: "piece"},
+  {sourceId: "29075", group: "welded-sheet", name: "Сетка сварная (в картах) 110х110х4,5мм (2x3м)", size: "2х3 м", price: 1390, priceBasis: "piece", onOrder: true},
   {sourceId: "29076", group: "welded-sheet", name: "Сетка сварная (в картах)150х150х4,5мм (2х3м)", size: "2х3 м", price: 890, priceBasis: "piece"},
 ];
 
@@ -95,8 +96,8 @@ export const metalMeshProducts: ProductVariantSource[] = rows.map((row) => {
     priceQualifier: "exact",
     priceConfirmed: true,
     imported: true,
-    inStock: false,
-    availability: "UNKNOWN",
+    inStock: !row.onOrder,
+    availability: row.onOrder ? "ON_ORDER" : "IN_STOCK",
     featured: false,
     imageUrls: [],
     sourceProductName: row.name,
