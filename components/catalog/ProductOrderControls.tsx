@@ -37,7 +37,8 @@ export function ProductOrderControls({variant, view, showUnit = true, startEmpty
   const quantityPerSheet = sheetOrder?.quantityPerSheet ?? 1;
   const maximum = sheetOrder ? MAX_ORDER_PIECES : getSimpleOrderQuantityOptions(variant).maximum;
   const savedQuantity = line ? line.quantity / quantityPerSheet : undefined;
-  const savedValue = savedQuantity !== undefined ? formatQuantityForInput(savedQuantity) : startEmpty ? "" : "1";
+  const initialValue = startEmpty || wholeQuantity || variant.unit === "piece" || variant.unit === "sheet" ? "" : "1";
+  const savedValue = savedQuantity === undefined ? initialValue : formatQuantityForInput(savedQuantity);
   const massDraft = typeof draft === "string" ? null : draft;
   const enteredTons = massDraft ? massDraft.exactTons ?? parseCompleteQuantity(massDraft.text) : null;
   const value = sheetOrder && massDraft
@@ -50,7 +51,7 @@ export function ProductOrderControls({variant, view, showUnit = true, startEmpty
   const needsQuote = requiresCatalogPriceQuote(variant);
   const madeToOrder = storefrontAvailability(variant.availability) === "ON_ORDER";
   const canAdd = madeToOrder || !needsQuote;
-  const canPromptForQuantity = !line && (value === "" || (startEmpty && quantity === 0));
+  const canPromptForQuantity = !line && (value === "" || (initialValue === "" && quantity === 0));
   const enteringFraction = (massDraft?.text ?? value) === "0,";
   const shouldRemove = !!line && quantity === 0;
   const saved = !!line && !line.invalidReason && quantity === savedQuantity;
@@ -124,6 +125,10 @@ export function ProductOrderControls({variant, view, showUnit = true, startEmpty
 
   function correctQuantity() {
     if (typeof draft !== "string") return;
+    if (line && draft === "") {
+      setDraft("0");
+      return;
+    }
     const next = correctQuantityValue(draft);
     if (next.value !== draft) setDraft(next.value);
     if (next.message) setCorrection(next.message);
@@ -170,7 +175,7 @@ export function ProductOrderControls({variant, view, showUnit = true, startEmpty
         order={{product: formatQuoteProductName(variant), quantity: quoteQuantity, unit: quantityUnit, tons: quoteTons}}
         className={quoteClassName}/>
   ) : (
-    <Button type="button" aria-describedby={deliveryId} onClick={submit}
+    <Button key={shouldRemove ? "remove" : "order"} type="button" aria-describedby={deliveryId} onClick={submit}
       disabled={!hydrated || saved || removed
         || (!shouldRemove && (!canAdd || (!canPromptForQuantity && (enteringFraction || !canSubmitQuantity(correctedQuantity)))))}
       className={`${stateClass} ${actionClass}`}>{label}</Button>
@@ -191,7 +196,7 @@ export function ProductOrderControls({variant, view, showUnit = true, startEmpty
   const massField = sheetOrder && <CatalogOrderInput mode="ton" value={massDraft?.text ?? (orderTons === null ? "" : formatSheetTons(orderTons))}
     label={`Масса ${variant.name}, т`} visibleLabel={view === "card" ? "Заказ, т" : undefined}
     invalid={quantityError && !!massDraft} statusId={statusId} onChange={changeTons} onBlur={() => {
-      if (massDraft) setDraft(enteredTons === null ? line ? null : "" : value);
+      if (massDraft) setDraft(line && massDraft.text === "" ? "0" : enteredTons === null ? line ? null : "" : value);
     }}/>;
   const totalOutput = <output data-price={total !== null || undefined}
     data-long-value={!!sheetOrder && total !== null && total >= 1_000_000_000 || undefined}

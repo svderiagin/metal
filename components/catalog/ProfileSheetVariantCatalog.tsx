@@ -213,5 +213,5 @@ function ProfileSheetItem({variant, shared, view}: {variant: ProfileSheetVariant
       note={needsSectionData ? `Для несущего настила из листа ${thickness} мм используйте характеристики сечения из документации на это исполнение. В справочной таблице Б.2 приведены значения для толщин 0,7–0,9 мм.` : undefined}/>}
     price={variant.quoteOnly ? "Цена по запросу"
       : `${variant.priceQualifier === "from" ? "от " : ""}${formatUnitPrice(variant.price, variant.priceUnit)}`}
-    order={<ProductOrderControls view={view} variant={variant} wholeQuantity startEmpty showUnit={false}/>}/>;
+    order={<ProductOrderControls view={view} variant={variant} wholeQuantity showUnit={false}/>}/>;
 }

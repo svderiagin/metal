@@ -252,9 +252,7 @@ function MeasuredOrderItem({
     const previousExact = mode === "meter" ? parsedMeters : parsedTons;
     const sameDisplayedQuantity = substitutedMinimum === undefined && unroundedQuantity === undefined
       && entered !== null && entered === parseDraftQuantity(previousValue);
-    if (cartLine && !value.trim()) {
-      showEnterQuantityHint();
-    } else if (substitutedMinimum !== undefined && mode === "meter" && !roundToWholeLengths) {
+    if (substitutedMinimum !== undefined && mode === "meter" && !roundToWholeLengths) {
       setMessage({kind: "correction", text: `Значение увеличено до минимума ${formatMeasuredQuantity(substitutedMinimum, mode, true)}.`});
     } else if (!sameDisplayedQuantity || constrained.capped || message?.kind === "error") setMessage(null);
     if (!constrained.capped && sameDisplayedQuantity && mode !== inputMode && previousExact !== null) {
@@ -277,9 +275,10 @@ function MeasuredOrderItem({
     }
   }
 
-  function resolvedOrder(mode: OrderInputMode) {
+  function resolvedOrder(mode: OrderInputMode, confirmEmpty = false) {
     const options = quantityOptions(mode);
-    const raw = mode === "meter" ? meters : tons;
+    const text = mode === "meter" ? meters : tons;
+    const raw = confirmEmpty && cartLine && text === "" ? "0" : text;
     const exact = draft?.inputMode === mode ? draft.exactQuantity : undefined;
     const entered = exact ?? parseDraftQuantity(raw);
     if (entered === null || (entered === 0 && !cartLine)) return null;
@@ -303,7 +302,7 @@ function MeasuredOrderItem({
 
   function settleQuantity(mode: OrderInputMode) {
     if (draft?.inputMode !== mode) return;
-    const next = resolvedOrder(mode);
+    const next = resolvedOrder(mode, true);
     if (!next) {
       if (pricedByMeter && cartLine) {
         setDraft(null);
@@ -378,7 +377,8 @@ function MeasuredOrderItem({
           ...(inquiryPieces !== undefined ? {quantity: inquiryPieces, unit: "шт."} : {})}}
         className={quoteClass}/>
   ) : (
-    <Button type="button" aria-describedby={deliveryId} disabled={!hydrated || isSaved || removed || !usableDraft || (!canAdd && !shouldRemove)} onClick={addToCart}
+    <Button key={shouldRemove ? "remove" : "order"} type="button" aria-describedby={deliveryId}
+      disabled={!hydrated || isSaved || removed || !usableDraft || (!canAdd && !shouldRemove)} onClick={addToCart}
       className={`${buttonClassName} ${actionSizeClassName} whitespace-nowrap px-3`}>
       {shouldRemove ? "Удалить" : buttonLabel}
     </Button>

@@ -1,5 +1,6 @@
 import {formatCatalogNumber} from "./catalogNumberInput";
 import {MAX_ORDER_TONS} from "./constants";
+import {sameMeasuredQuantity, wholeLengthMeters, wholeLengthPiecesAtMost} from "./orderMeasurement";
 import type {OrderInputMode} from "@/types/cart";
 
 const quantityFormatter = new Intl.NumberFormat("ru-RU", {
@@ -38,6 +39,18 @@ export function formatMeasuredQuantity(value: number, mode: OrderInputMode, grou
   // A rounded display of 999 would make it impossible to explicitly enter the limit.
   const display = value < MAX_ORDER_TONS ? Math.min(value, MAX_ORDER_TONS - 0.000001) : value;
   return formatQuantityForInput(display, grouped, measuredTonFractionDigits(value));
+}
+
+export function formatStockLengthBreakdown(meters: number | undefined, stockLength: number | undefined) {
+  if (!meters || !stockLength || !Number.isFinite(meters) || !Number.isFinite(stockLength) || meters < 0 || stockLength < 0) return;
+  const pieces = wholeLengthPiecesAtMost(meters, stockLength);
+  if (!Number.isSafeInteger(pieces)) return;
+  const length = `${formatCartQuantity(stockLength)}\u00a0м`;
+  if (pieces === 0) return `< 1\u00a0шт. по ${length}`;
+  const fullMeters = wholeLengthMeters(pieces, stockLength);
+  const fullLengths = `${formatCartQuantity(pieces)}\u00a0шт. по ${length}`;
+  if (sameMeasuredQuantity(meters, fullMeters)) return fullLengths;
+  return `${fullLengths} + ${formatMeasuredQuantity(meters - fullMeters, "meter", true)}\u00a0м`;
 }
 
 export const rebarMinimumMeterEntry = 0.01;

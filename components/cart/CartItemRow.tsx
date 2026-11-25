@@ -12,7 +12,7 @@ import {getProductVariantById} from "@/lib/cartCatalog";
 import {calculateLineTotal, calculateMeasuredLineTotal, getCartMeasurementQuantityOptions, getSimpleOrderQuantityOptions, requiresWholeLengthOrder, tonsToMeters, wholeLengthOrder} from "@/lib/orderMeasurement";
 import {MAX_ORDER_PIECES} from "@/lib/constants";
 import {sheetsForOrderTons, sheetTonDecimals, sheetOrderTons} from "@/lib/sheetOrder";
-import {formatCartQuantity, formatMeasuredQuantity, formatQuantityForInput, formatRebarOrderTons,
+import {formatCartQuantity, formatMeasuredQuantity, formatQuantityForInput, formatRebarOrderTons, formatStockLengthBreakdown,
   measuredTonFractionDigits, productOrderFractionDigits, rebarMinimumMeterEntry, rebarMinimumTonEntry, rebarTonFractionDigits} from "@/lib/cartQuantityInput";
 import {isVgpVariant} from "@/lib/pipeFamily";
 import {isDemonstrationProduct} from "@/lib/catalogOffer";
@@ -35,8 +35,6 @@ export function CartItemRow({line, onRemove}: {line: CartLine; onRemove: () => v
   const tonPrecision = isRebar ? rebarTonFractionDigits : isVgp ? 3 : measuredTonFractionDigits;
   const simpleRebarMass = isRebar && product.unit === "ton";
   const isBar = isRebar && wholeLengths;
-  const wholeOrder = product && wholeLengths && measurement && !line.invalidReason
-    ? wholeLengthOrder(product, measurement.meters, "meter") : null;
   const meterOptions = product && measurement ? getCartMeasurementQuantityOptions(product, "meter") : undefined;
   const tonOptions = product && measurement ? getCartMeasurementQuantityOptions(product, "ton") : undefined;
   const simpleOptions = getSimpleOrderQuantityOptions(product);
@@ -45,6 +43,9 @@ export function CartItemRow({line, onRemove}: {line: CartLine; onRemove: () => v
   const priceStatus = line.invalidReason ? "Требует проверки" : priceRequiresQuote ? "По запросу" : undefined;
   const quantityDisabled = !product || (priceRequiresQuote && !line.deliveryEstimate);
   const pieceOrder = line.pieceOrder;
+  const stockLengthBreakdown = !pieceOrder && !line.invalidReason
+    ? formatStockLengthBreakdown(measurement?.meters ?? (product?.unit === "meter" ? line.quantity : undefined), product?.lengthMeters)
+    : undefined;
   const maximumPieces = product && pieceOrder
     ? profilePipeMaximumPieces(product, pieceOrder.lengthMeters) ?? undefined : undefined;
   const sheetOrder = product?.sheetOrder;
@@ -118,9 +119,6 @@ export function CartItemRow({line, onRemove}: {line: CartLine; onRemove: () => v
                 return {value: exact};
               } : undefined}/>;
           })}
-          {wholeOrder && product?.lengthMeters && <p className={styles.orderDetail}>
-            {formatCartQuantity(wholeOrder.pieces)} шт. по {formatCartQuantity(product.lengthMeters)} м
-          </p>}
         </>
       ) : sheetOrder && Number.isInteger(sheetCount) ? (
         <>
@@ -147,7 +145,7 @@ export function CartItemRow({line, onRemove}: {line: CartLine; onRemove: () => v
           step={!line.wholeQuantity && product?.unit === "ton" ? 0.001 : 1}
           hasPositiveTotal={priceRequiresQuote ? undefined : quantity => calculateLineTotal(quantity, product!.price!) !== null}
           disabled={quantityDisabled} value={line.quantity} onChange={(value) => updateQuantity(line.productId, value)}/>
-      )}</div>
+      )}{stockLengthBreakdown && <p className={styles.orderDetail}>{stockLengthBreakdown}</p>}</div>
       <div className={styles.price}>
         {priceStatus ? <p className="min-w-0 text-sm font-medium text-slate-600 dark:text-slate-300">{priceStatus}</p>
           : <strong className="min-w-0 text-lg font-bold leading-6">

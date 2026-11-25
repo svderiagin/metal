@@ -151,8 +151,8 @@ export function VariantCatalogResults({visible, categorySlug, unit, isSheetCatal
         note={description && <CatalogDescription description={description}/>}/>}
       price={price}
       order={hasMeasuredOrder ? <MeterPricedOrderControls variant={variant} view={view}/>
-        : <ProductOrderControls variant={variant} view={view} showUnit={!unit} orderBySheet={hasSheetMassOrder} quantityColSpan={quantityColSpan}
-          startEmpty={isPieceSheetCatalog || hasSheetMassOrder}/>}/>;
+        : <ProductOrderControls variant={variant} view={view} showUnit={!unit} orderBySheet={hasSheetMassOrder}
+          quantityColSpan={quantityColSpan}/>}/>;
   }
   return (
       <section className="min-w-0 lg:col-span-2" aria-label="Продукция">

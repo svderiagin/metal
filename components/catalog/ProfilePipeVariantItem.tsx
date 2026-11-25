@@ -189,7 +189,8 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
       requested: quoteOrder && quantity !== null
         ? {quantity, unit: orderUnits[inputUnit]} : undefined}}
     className={quoteClassName}/>
-    : <Button type="button" aria-describedby={square ? [statusId, deliveryId].filter(Boolean).join(" ") : deliveryId} onClick={submit}
+    : <Button key={shouldRemove ? "remove" : "order"} type="button"
+      aria-describedby={square ? [statusId, deliveryId].filter(Boolean).join(" ") : deliveryId} onClick={submit}
       disabled={!hydrated || saved || removed || (!shouldRemove && !canAddOrder && !canPromptForQuantity)}
       className={`${buttonClass} ${actionSize} px-3`}>{label}</Button>;
 
@@ -233,7 +234,11 @@ export function ProfilePipeVariantItem({variant, view}: {variant: ProductVariant
       placeholder={disabled ? "—" : "0"} disabled={disabled}
       invalid={quantityError && mode === inputUnit} statusId={statusId}
       onChange={value => updateMeasuredQuantity(mode, value)}
-      onBlur={() => {if (draft && inputUnit === mode && !draft.settled) setDraft({...nextDraft, settled: true});}}/>;
+      onBlur={() => {
+        if (draft && inputUnit === mode && !draft.settled) {
+          setDraft({...nextDraft, quantity: line && quantityText === "" ? "0" : quantityText, settled: true});
+        }
+      }}/>;
   }
 
   const cardFields = [
