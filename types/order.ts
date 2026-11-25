@@ -33,7 +33,7 @@ export interface CreateOrderInput {
     address: string;
     comment?: string;
   };
-  paymentMethod: PaymentMethod;
+  paymentMethod: "INVOICE";
 }
 
 export interface OrderItem extends OrderItemInput {
@@ -42,6 +42,7 @@ export interface OrderItem extends OrderItemInput {
   priceUnit: string;
   subtotal: number;
   weightPerMeterKg?: number;
+  deliveryEstimate?: string;
 }
 
 export interface Order {
@@ -55,6 +56,7 @@ export interface Order {
   paymentStatus: PaymentStatus;
   createdAt: string;
   pricingVersion?: "decimal";
+  checkout?: {keyHash: string; fingerprint: string};
   invoice?: StoredInvoice;
 }
 
@@ -63,14 +65,9 @@ export interface CreateOrderResponse {
   order: {
     reference: string;
     totalAmount: number;
-    paymentMethod: PaymentMethod;
+    paymentMethod: "INVOICE";
     invoice?: InvoiceReceipt;
   };
-}
-
-export interface CreatePaymentResponse {
-  ok: true;
-  redirectUrl: string;
 }
 
 export interface CheckoutFormData {
@@ -83,12 +80,13 @@ export interface CheckoutFormData {
   legalAddress: string;
   deliveryAddress: string;
   comment: string;
-  paymentMethod: PaymentMethod;
+  paymentMethod: "INVOICE";
   consentAccepted: boolean;
 }
 
 export interface OrderConfirmation {
   orderNumber: string;
+  totalAmount?: number;
   paymentMethod: PaymentMethod;
   email: string;
   paymentPending: boolean;

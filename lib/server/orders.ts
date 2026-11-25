@@ -3,6 +3,7 @@ import {getProductVariantById} from "@/lib/catalog";
 import {revalidateCartPrice} from "@/lib/cartPricing";
 import {requiresWholeLengthOrder} from "@/lib/orderMeasurement";
 import {FIRST_INVOICE_NUMBER} from "@/lib/invoiceNumber";
+import {BACKORDER_DELIVERY_ESTIMATE, storefrontAvailability} from "@/lib/catalogOffer";
 import type {CreateOrderInput, Order, OrderItem, PaymentStatus} from "@/types/order";
 import type {InvoiceEmailStatus} from "@/types/invoice";
 import {FileOrderRepository} from "./fileOrderRepository";
@@ -96,27 +97,17 @@ function newOrderReference() {
   return String(randomInt(1_000_000_000, 10_000_000_000));
 }
 
-export async function saveNewOrder(order: Order) {
-  for (let attempt = 0; ; attempt++) {
-    try {
-      await orderRepository.save(order);
-      return;
-    } catch (error) {
-      const code = (error as {code?: string} | undefined)?.code;
-      if (attempt >= 3 || (code !== "EEXIST" && code !== "23505")) throw error;
-      order.reference = newOrderReference();
-    }
-  }
-}
-
 export function createTrustedOrder(input: CreateOrderInput, lookupProduct = getProductVariantById): Order | null {
   if (input.consent !== true) return null;
   const items: OrderItem[] = [];
+  const productIds = new Set<string>();
   for (const item of input.items) {
     const product = lookupProduct(item.productId);
-    if (!product) return null;
+    if (!product || productIds.has(product.id)) return null;
+    productIds.add(product.id);
     const {measurement, pieceOrder, estimatedTotal: subtotal, invalidReason, priceRequiresQuote} = revalidateCartPrice(product, item);
     if (invalidReason || priceRequiresQuote) return null;
+    const deliveryEstimate = storefrontAvailability(product.availability) === "ON_ORDER" ? BACKORDER_DELIVERY_ESTIMATE : undefined;
     if (measurement) {
       const {meters, weightTons} = measurement;
       items.push({
@@ -128,6 +119,7 @@ export function createTrustedOrder(input: CreateOrderInput, lookupProduct = getP
         unitPrice: measurement.pricePerTon,
         priceUnit: product.priceUnit,
         subtotal,
+        deliveryEstimate,
       });
       continue;
     }
@@ -139,6 +131,7 @@ export function createTrustedOrder(input: CreateOrderInput, lookupProduct = getP
       unitPrice: product.price!,
       priceUnit: product.priceUnit,
       subtotal,
+      deliveryEstimate,
     });
   }
   const totalAmount = items.reduce((sum, item) => sum + Math.round(item.subtotal * 100), 0) / 100;

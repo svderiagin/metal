@@ -1,6 +1,6 @@
 import type {ContactRequest, QuoteRequest} from "@/types/forms";
 import type {CheckoutFormData, CreateOrderInput, CustomerType} from "@/types/order";
-import {createOrderInput, isCheckoutFormValid, isCheckoutPaymentAvailable} from "@/lib/checkout";
+import {createOrderInput, isCheckoutFormValid, isCheckoutPaymentAvailable, MAX_CHECKOUT_ITEMS} from "@/lib/checkout";
 import {validateContactFields} from "@/lib/contactValidation";
 import {validateQuoteFields} from "@/lib/quoteValidation";
 import {normalizePieceOrder} from "@/lib/profilePipe";
@@ -19,7 +19,7 @@ const isCustomerType = (value: unknown): value is CustomerType =>
 
 export function parseCreateOrderInput(value: unknown): CreateOrderInput | null {
   if (!isRecord(value) || !Array.isArray(value.items) || !isRecord(value.customer) || !isRecord(value.delivery)) return null;
-  if (value.consent !== true || value.items.length < 1 || value.items.length > 100) return null;
+  if (value.consent !== true || value.items.length < 1 || value.items.length > MAX_CHECKOUT_ITEMS) return null;
   const items: CreateOrderInput["items"] = [];
   const productIds = new Set<string>();
   for (const item of value.items) {

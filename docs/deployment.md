@@ -13,11 +13,10 @@ build command `npm run build`, run command `npm run start` и Node.js 22.x из 
 подключите постоянную базу PostgreSQL в том же проекте и задайте переменные
 уровня Web Service с областью `RUN_TIME`:
 
-| Переменная | Значение для компонента базы `orders-db` |
+| Переменная | Значение |
 | --- | --- |
 | `ORDER_DATABASE_URL` | `${orders-db.DATABASE_URL}` |
 | `ORDER_DATABASE_CA` | `${orders-db.CA_CERT}` |
-| `INVOICE_MODE` | `live` |
 | `INVOICE_BANK_ACCOUNT` | Расчётный счёт магазина из банковской карточки реквизитов |
 | `INVOICE_VAT_RATE` | `22` |
 | `INVOICE_PRICES_INCLUDE_VAT` | `true` |

@@ -1,18 +1,18 @@
 "use client";
-import {type FormEvent, useId, useState} from "react";
+import {type FormEvent, useId, useLayoutEffect, useRef, useState} from "react";
 import Link from "next/link";
 import {useRouter} from "next/navigation";
 import {useCart} from "@/hooks/useCart";
-import type {CheckoutFormData, CustomerType, OrderConfirmation, PaymentMethod} from "@/types/order";
+import type {CheckoutFormData} from "@/types/order";
 import {Button} from "@/components/ui/Button";
 import {formatCurrency} from "@/lib/currency";
 import {CustomerTypeSelector} from "./CustomerTypeSelector";
-import {PaymentMethodSelector} from "./PaymentMethodSelector";
-import {createOrderInput, formatCheckoutField, getCheckoutFieldErrors, type CheckoutFieldErrors, type CheckoutTextField} from "@/lib/checkout";
-import {createOrder, createPayment} from "@/lib/checkoutClient";
+import {createOrderInput, formatCheckoutField, getCheckoutFieldErrors, MAX_CHECKOUT_ITEMS, type CheckoutFieldErrors, type CheckoutTextField} from "@/lib/checkout";
+import {CheckoutInvoiceTextError, CheckoutPriceChanged, createOrder} from "@/lib/checkoutClient";
 import {rememberOrderConfirmation} from "@/lib/orderConfirmation";
 import {CheckoutFields} from "./CheckoutFields";
 import {companyDetails} from "@/lib/companyDetails";
+import {isCheckoutPhoneReadyForValidation} from "@/lib/checkoutPhone";
 
 const initial: CheckoutFormData = {
   customerType: "INDIVIDUAL",
@@ -28,49 +28,74 @@ const initial: CheckoutFormData = {
   consentAccepted: false
 };
 
-export function CheckoutForm() {
+export function CheckoutForm({onOrderCreated, revisedTotals, onPriceChanged}: {
+  onOrderCreated: () => void;
+  revisedTotals?: number[];
+  onPriceChanged: (totals: number[]) => void;
+}) {
   const formId = useId();
   const [form, setForm] = useState(initial);
   const [error, setError] = useState("");
-  const [submissionFailed, setSubmissionFailed] = useState(false);
-  const [attempted, setAttempted] = useState(false);
+  const [invoiceTextError, setInvoiceTextError] = useState<CheckoutInvoiceTextError>();
+  const [validationAttempts, setValidationAttempts] = useState(0);
   const [visited, setVisited] = useState<Partial<Record<CheckoutTextField, true>>>({});
   const [submitting, setSubmitting] = useState(false);
-  const {clearCart, totalAmount, lines} = useCart();
+  const submissionLock = useRef(false);
+  const formElement = useRef<HTMLFormElement>(null);
+  const submissionError = useRef<HTMLDivElement>(null);
+  const submitActions = useRef<HTMLDivElement>(null);
+  const {items, removeOrderedItems, totalAmount, lines} = useCart();
+  const reviewedTotal = revisedTotals ? revisedTotals.reduce((sum, amount) => sum + amount, 0) / 100 : totalAmount;
   const router = useRouter();
   const errors = getCheckoutFieldErrors(form);
-  const fieldErrors: CheckoutFieldErrors = attempted ? errors
-    : Object.fromEntries(Object.entries(errors).filter(([key]) => visited[key as CheckoutTextField]));
+  if (invoiceTextError) errors[invoiceTextError.field] = invoiceTextError.message;
+  const fieldErrors: CheckoutFieldErrors = validationAttempts ? errors
+    : Object.fromEntries(Object.entries(errors).filter(([key]) => visited[key as CheckoutTextField]
+      || key === "phone" && isCheckoutPhoneReadyForValidation(form.phone)
+      || key === "taxNumber" && form.taxNumber.length === 12));
+
+  useLayoutEffect(() => {
+    if (!validationAttempts) return;
+    const field = formElement.current?.querySelector<HTMLElement>('[aria-invalid="true"]');
+    field?.focus({preventScroll: true});
+    field?.scrollIntoView({block: "center", behavior: "instant"});
+  }, [validationAttempts]);
+
+  useLayoutEffect(() => {
+    if (!error) return;
+    submissionError.current?.focus({preventScroll: true});
+    submitActions.current?.scrollIntoView({block: "nearest", behavior: "instant"});
+  }, [error]);
+
   function blurField(key: CheckoutTextField, value: string) {
     const formatted = formatCheckoutField(key, value);
     if (formatted !== value) setForm(current => ({...current, [key]: formatted}));
-    if (value.trim()) setVisited(current => ({...current, [key]: true}));
+    if (formatted.trim()) setVisited(current => ({...current, [key]: true}));
   }
-  function updateField(key: keyof CheckoutFormData, value: string | boolean) {
-    setForm((currentForm) => ({...currentForm, [key]: value}));
+  function updateField<Key extends keyof CheckoutFormData>(key: Key, value: CheckoutFormData[Key]) {
+    setForm(current => ({...current, [key]: value}));
+    if (key === "customerType" || key === invoiceTextError?.field) setInvoiceTextError(undefined);
     setError("");
-    setSubmissionFailed(false);
   }
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (submitting) return;
-    setSubmissionFailed(false);
+    if (submissionLock.current) return;
+    if (lines.length > MAX_CHECKOUT_ITEMS) {
+      setError(`В одном заказе может быть до ${MAX_CHECKOUT_ITEMS} позиций. Сократите список в корзине.`);
+      return;
+    }
     if (!lines.length || totalAmount <= 0 || lines.some(line => line.invalidReason || line.priceRequiresQuote)) {
       setError("Проверьте корзину: часть позиций требует уточнения цены или характеристик.");
       return;
     }
-    const errors = getCheckoutFieldErrors(form);
-    const firstInvalid = Object.keys(errors)[0];
-    if (firstInvalid) {
-      setAttempted(true);
-      setError("Проверьте обязательные поля, контактные данные и согласие.");
-      const field = event.currentTarget.elements.namedItem(firstInvalid);
-      if (field instanceof HTMLElement) field.focus();
-      return
+    if (Object.keys(errors).length) {
+      setError("");
+      setValidationAttempts(current => current + 1);
+      return;
     }
+    submissionLock.current = true;
     setSubmitting(true);
-    setError("");
     try {
       const orderInput = createOrderInput(form, lines.map(({productId, quantity, measurement, pieceOrder}) => ({
         productId, quantity,
@@ -78,45 +103,74 @@ export function CheckoutForm() {
           weightTons: measurement.weightTons}} : {}),
         ...(pieceOrder ? {pieceOrder: {pieces: pieceOrder.pieces, lengthMeters: pieceOrder.lengthMeters}} : {}),
       })));
-      const result = await createOrder(orderInput);
-      const confirmation: OrderConfirmation = {
+      const result = await createOrder(orderInput, revisedTotals ?? lines.map(line => Math.round(line.estimatedTotal * 100)));
+      rememberOrderConfirmation({
         orderNumber: result.order.reference,
+        totalAmount: result.order.totalAmount,
         paymentMethod: form.paymentMethod,
-        email: form.email,
-        paymentPending: form.paymentMethod === "CARD",
-        ...(result.order.invoice ? {invoice: result.order.invoice} : {})
-      };
-      rememberOrderConfirmation(confirmation);
-      if (form.paymentMethod === "INVOICE") {
-        clearCart();
-        router.push("/order/success");
-        return
-      }
-      const payment = await createPayment(result.order.reference, window.location.origin);
-      clearCart();
-      window.location.assign(payment.redirectUrl);
+        email: orderInput.customer.email,
+        paymentPending: false,
+        ...(result.order.invoice ? {invoice: result.order.invoice} : {}),
+      });
     } catch (caught) {
-      setSubmissionFailed(true);
-      setError(caught instanceof Error ? caught.message : "Не удалось оформить заказ.")
-    } finally {
-      setSubmitting(false)
+      if (caught instanceof CheckoutPriceChanged) onPriceChanged(caught.lineTotals);
+      submissionLock.current = false;
+      setSubmitting(false);
+      if (caught instanceof CheckoutInvoiceTextError) {
+        setInvoiceTextError(caught);
+        setValidationAttempts(current => current + 1);
+        setError("");
+      } else {
+        setError(caught instanceof Error ? caught.message : "Не удалось оформить заказ.");
+      }
+      return;
     }
+    onOrderCreated();
+    removeOrderedItems(items);
+    router.replace("/order/success");
   }
 
-  return <form onSubmit={submit} noValidate aria-busy={submitting} className="space-y-7"><CustomerTypeSelector value={form.customerType}
-                                                                                        onChange={(v: CustomerType) => updateField("customerType", v)}/>
-    <CheckoutFields form={form} onChange={updateField} onBlur={blurField} errors={fieldErrors} formId={formId}/>
-    <PaymentMethodSelector value={form.paymentMethod}
-                           onChange={(v: PaymentMethod) => updateField("paymentMethod", v)}/><div><label
-      className="flex items-start gap-2 text-sm"><input type="checkbox" name="consentAccepted" checked={form.consentAccepted}
-                                                        onChange={e => updateField("consentAccepted", e.target.checked)}
-                                                        aria-invalid={!!fieldErrors.consentAccepted || undefined}
-                                                        aria-describedby={fieldErrors.consentAccepted ? `${formId}-consent-error` : undefined}
-                                                        className="mt-1 size-4 shrink-0 accent-brand-700 dark:accent-brand-300"/><span>Согласен на обработку персональных данных в соответствии с <Link href="/privacy" className="font-semibold text-brand-700 dark:text-brand-300 underline underline-offset-2">Политикой обработки персональных данных</Link> и подтверждаю корректность информации.</span></label>
-      {fieldErrors.consentAccepted && <p id={`${formId}-consent-error`} className="mt-1 text-xs text-red-700 dark:text-red-400">{fieldErrors.consentAccepted}</p>}
-    </div>{error &&
-      <div role="alert" className="text-red-700 dark:text-red-400"><p className="font-semibold">{error}</p>
-        {submissionFailed && <p className="mt-2 text-sm">Для согласования заказа напишите на <a href={`mailto:${companyDetails.salesEmail}`} className="underline underline-offset-2">{companyDetails.salesEmail}</a>. Корзина и введённые данные сохранены.</p>}</div>}<Button type="submit"
-                                                                                 disabled={submitting} className="w-full sm:w-auto">{submitting ? "Создаём заказ…" : `Создать заказ на ${formatCurrency(totalAmount)}`}</Button>
+  return <form ref={formElement} onSubmit={submit} noValidate aria-busy={submitting}>
+    <fieldset disabled={submitting} className="min-w-0 space-y-6">
+      <CustomerTypeSelector id={`${formId}-customerType`} value={form.customerType} onChange={value => updateField("customerType", value)}/>
+      <CheckoutFields form={form} onChange={updateField} onBlur={blurField} errors={fieldErrors} formId={formId}
+        canReuseRegistrationAddress={form.customerType === "COMPANY" && !errors.legalAddress}/>
+      <div className="border-t border-slate-200 pt-5 dark:border-slate-700 sm:pt-6">
+        <div className="flex items-start gap-3">
+          <input type="checkbox" id={`${formId}-consentAccepted`} name="consentAccepted" required checked={form.consentAccepted}
+            onChange={event => updateField("consentAccepted", event.target.checked)}
+            aria-invalid={!!fieldErrors.consentAccepted || undefined}
+            aria-describedby={fieldErrors.consentAccepted ? `${formId}-consent-error` : undefined}
+            className="mt-0.5 size-5 shrink-0 cursor-pointer accent-brand-700 dark:accent-brand-300"/>
+          <div className="min-w-0 flex-1">
+            <label htmlFor={`${formId}-consentAccepted`} className="block cursor-pointer text-sm">
+              Согласен на обработку персональных данных в соответствии с политикой и подтверждаю корректность информации. *
+            </label>
+            <Link href="/privacy" target="_blank" rel="noopener noreferrer"
+              className="mt-1 inline-block text-xs font-medium text-brand-700 underline underline-offset-4 dark:text-brand-300">
+              Политика обработки персональных данных
+            </Link>
+            {fieldErrors.consentAccepted && <p id={`${formId}-consent-error`} className="mt-1.5 text-xs text-[var(--danger-text)]">{fieldErrors.consentAccepted}</p>}
+          </div>
+        </div>
+      </div>
+      <div ref={submitActions} className="scroll-mb-5 space-y-3 border-t border-slate-200 pt-4 dark:border-slate-700">
+        <dl className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+          <dt className="text-sm font-semibold">Итого</dt>
+          <dd className="ml-auto text-right text-lg font-bold leading-6 tabular-nums">{formatCurrency(reviewedTotal)}</dd>
+        </dl>
+        <p id={`${formId}-invoice-hint`} className="text-xs text-slate-600 dark:text-slate-300">
+          После оформления PDF скачается автоматически. Копию платёжного счёта отправим на указанную электронную почту.
+        </p>
+        <Button type="submit" disabled={submitting} aria-describedby={`${formId}-invoice-hint`} className="w-full" onMouseDown={event => {
+          // Inline errors on blur can change the submit button's position before the click.
+          if (event.currentTarget.form?.contains(document.activeElement)) event.preventDefault();
+        }}>{submitting ? "Оформляем заказ…" : revisedTotals ? "Подтвердить сумму и оформить" : "Оформить заказ"}</Button>
+        {error && <div ref={submissionError} tabIndex={-1} role="alert" className="rounded-lg border border-[var(--error-border)] bg-[var(--danger-background)] p-4 text-sm text-[var(--danger-text)]">
+          <p className="font-semibold">{error}</p>
+          <p className="mt-2">Данные заказа сохранены в форме. Для помощи напишите на <a href={`mailto:${companyDetails.salesEmail}`} className="font-medium underline underline-offset-2">{companyDetails.salesEmail}</a>.</p>
+        </div>}
+      </div>
+    </fieldset>
   </form>
 }

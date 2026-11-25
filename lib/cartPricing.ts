@@ -51,11 +51,14 @@ export function revalidateCartPrice(product: ProductVariant, item: PriceInput) {
   const legacyMeasuredTons = !item.measurement && !legacyChannelMeters && product.unit === "ton" && !isDemonstrationProduct(product)
     && product.weightPerMeterKg !== undefined && Number.isFinite(product.weightPerMeterKg) && product.weightPerMeterKg > 0;
   const wholeLength = requiresWholeLengthOrder(product);
+  const {minimum: simpleMinimum = 0, maximum: simpleMaximum} = getSimpleOrderQuantityOptions(product);
   let estimatedTotal = priceRequiresQuote ? 0 : calculateLineTotal(item.quantity, product.price!);
   if (!Number.isFinite(item.quantity) || item.quantity <= 0) {
     invalidReason = "Не удалось пересчитать количество.";
-  } else if (!item.measurement && item.quantity > getSimpleOrderQuantityOptions(product).maximum) {
+  } else if (!item.measurement && item.quantity > simpleMaximum) {
     invalidReason = "Объём превышает допустимое значение. Измените количество.";
+  } else if (!item.measurement && item.quantity < simpleMinimum) {
+    invalidReason = "Объём меньше минимального. Увеличьте количество.";
   }
   // Older rebar clients sent only tonnes. Validate that original quantity
   // against the stock length just as we do for an explicitly measured line.
@@ -71,11 +74,13 @@ export function revalidateCartPrice(product: ProductVariant, item: PriceInput) {
       const entered = item.measurement
         ? inputMode === "meter" ? item.measurement.meters : item.measurement.weightTons
         : item.quantity;
-      const {maximum} = getMeasurementQuantityOptions(product, inputMode);
+      const {minimum, maximum} = getMeasurementQuantityOptions(product, inputMode);
       // Converted weight may carry floating-point noise at the last whole stock length.
       const tolerance = wholeLength && inputMode === "ton" ? conversionTolerance(maximum) : 0;
       if (entered > maximum + tolerance) {
         invalidReason = "Объём превышает допустимое значение. Измените количество.";
+      } else if (entered < minimum - (inputMode === "ton" ? conversionTolerance(minimum) : 0)) {
+        invalidReason = "Объём меньше минимального. Увеличьте количество.";
       }
       const meters = inputMode === "meter" ? entered : tonsToMeters(entered, product.weightPerMeterKg);
       const weightTons = inputMode === "ton" ? entered : metersToTons(entered, product.weightPerMeterKg);

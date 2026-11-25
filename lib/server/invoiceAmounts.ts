@@ -30,7 +30,9 @@ export function amountInWords(amount: number): string {
   return text[0].toUpperCase() + text.slice(1);
 }
 
-// Prices and line totals already include VAT. Extract per line to retain cent agreement.
-export function includedVat(subtotals: number[], rate: number): number {
-  return subtotals.reduce((sum, amount) => sum + Math.round(Math.round(amount * 100) * rate / (100 + rate)), 0) / 100;
+// The invoice requests a single advance payment at one tax rate.
+export function includedVat(total: number, rate: number): number {
+  const divisor = BigInt(100 + rate);
+  const numerator = BigInt(Math.round(total * 100)) * BigInt(rate);
+  return Number((numerator + divisor / BigInt(2)) / divisor) / 100;
 }

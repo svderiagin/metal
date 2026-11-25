@@ -49,7 +49,7 @@ function orderQuantityParts(line: CartLine, product: ProductVariant | undefined)
   return [`${formatCartQuantity(line.quantity)}\u00a0${line.quantityUnit}`];
 }
 
-function CheckoutOrderItem({line}: {line: CartLine}) {
+function CheckoutOrderItem({line, revisedTotal}: {line: CartLine; revisedTotal?: number}) {
   const product = getProductVariantById(line.productId);
   const label = product?.checkoutLabel;
   return <li className="py-3 last:pb-0">
@@ -63,11 +63,16 @@ function CheckoutOrderItem({line}: {line: CartLine}) {
         Под заказ · доставка <span className="whitespace-nowrap">{line.deliveryEstimate}</span>
       </p>}
     </div>
-    <p className="mt-1.5 text-right font-semibold tabular-nums">{formatCurrency(line.estimatedTotal)}</p>
+    <p className="mt-1.5 flex flex-wrap items-baseline justify-end gap-x-2 text-right font-semibold tabular-nums">
+      {revisedTotal !== undefined && revisedTotal !== line.estimatedTotal && <span className="text-xs font-normal text-slate-600 dark:text-slate-300">
+        Было {formatCurrency(line.estimatedTotal)}
+      </span>}
+      <span>{formatCurrency(revisedTotal ?? line.estimatedTotal)}</span>
+    </p>
   </li>;
 }
 
-export function CheckoutOrderSummary({lines, totalAmount}: {lines: CartLine[]; totalAmount: number}) {
+export function CheckoutOrderSummary({lines, totalAmount, revisedTotals}: {lines: CartLine[]; totalAmount: number; revisedTotals?: number[]}) {
   const [expanded, setExpanded] = useState(false);
   const headingId = useId();
   const itemsId = useId();
@@ -88,7 +93,8 @@ export function CheckoutOrderSummary({lines, totalAmount}: {lines: CartLine[]; t
       Состав заказа ({lines.length}) <Icon name="chevron-down" className={expanded ? "rotate-180" : ""}/>
     </button>
     <ul id={itemsId} className={`divide-y divide-slate-200 text-sm dark:divide-slate-700 lg:mt-4 lg:border-t lg:border-slate-200 dark:lg:border-slate-700 ${expanded ? "" : "hidden lg:block"}`}>
-      {lines.map(line => <CheckoutOrderItem key={line.productId} line={line}/>)}
+      {lines.map((line, index) => <CheckoutOrderItem key={line.productId} line={line}
+        revisedTotal={revisedTotals ? revisedTotals[index] / 100 : undefined}/>)}
     </ul>
     {!expanded && backorderCount > 0 && <p className="flex items-start gap-2 text-xs text-slate-600 dark:text-slate-300 lg:hidden">
       <Icon name="truck" className="size-4 shrink-0"/>

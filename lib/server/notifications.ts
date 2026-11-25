@@ -1,8 +1,8 @@
 import type {ContactRequest, QuoteRequest} from "@/types/forms";
 import type {Order} from "@/types/order";
 import {readSmtpConfig, smtpMailer} from "./smtp";
-import {formatCurrency} from "@/lib/currency";
 import {companyDetails} from "@/lib/companyDetails";
+import {buildOrderEmail} from "./orderEmail";
 
 export interface NotificationService {
   sendContactRequest(request: ContactRequest): Promise<void>;
@@ -24,10 +24,8 @@ export const notificationService: NotificationService = {
   async sendOrderNotification(order) {
     const config = readSmtpConfig();
     await smtpMailer.send({to: order.customer.email, bcc: config.recipient,
-      subject: order.invoice ? `${order.invoice.isPreview ? "Образец счёта" : "Счёт на оплату"} № ${order.invoice.number} — ${companyDetails.brandName}`
-        : `Заказ ${order.reference} — ${companyDetails.brandName}`,
-      text: `${order.customer.fullName}, ваш заказ ${order.reference} создан.\nСумма: ${formatCurrency(order.totalAmount)}.\nДоставка бесплатная.\n\n${order.invoice?.isPreview ? "К письму приложен образец счёта PDF. Реквизиты и ставка НДС пока не подтверждены. Образец не предназначен для оплаты." : order.invoice ? "Счёт на оплату приложен к письму в формате PDF. Для оплаты используйте реквизиты и назначение платежа из счёта." : "Информация об оплате будет предоставлена отдельно."}\n\nПо вопросам заказа ответьте на это письмо.`,
-      replyTo: config.recipient,
+      ...buildOrderEmail(order),
+      replyTo: companyDetails.salesEmail,
       ...(order.invoice ? {attachments: [{filename: order.invoice.fileName,
         content: Buffer.from(order.invoice.pdfBase64, "base64"), contentType: "application/pdf"}]} : {}),
     });

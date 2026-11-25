@@ -17,6 +17,7 @@ interface CartContextValue {
   updateQuantity: (id: string, q: number, mode?: OrderInputMode) => void;
   updatePieceOrder: (id: string, pieces: number, lengthMeters: number) => void;
   removeItem: (id: string) => void;
+  removeOrderedItems: (orderedItems: readonly CartItem[]) => void;
   clearCart: () => void;
 }
 
@@ -90,6 +91,13 @@ export function CartProvider({children}: { children: ReactNode }) {
   const removeItem = useCallback((productId: string) => {
     changeCart(previous => previous.filter(item => item.productId !== productId));
   }, [changeCart]);
+  const removeOrderedItems = useCallback((orderedItems: readonly CartItem[]) => {
+    const snapshot = new Map(orderedItems.map(item => [item.productId, JSON.stringify(item)]));
+    changeCart(current => {
+      const remaining = current.filter(item => snapshot.get(item.productId) !== JSON.stringify(item));
+      return remaining.length === current.length ? current : remaining;
+    });
+  }, [changeCart]);
   const clearCart = useCallback(() => changeCart(() => []), [changeCart]);
   const lines = useMemo(() => createCartLines(items), [items]);
   const lineItemCount = lines.length;
@@ -104,8 +112,9 @@ export function CartProvider({children}: { children: ReactNode }) {
     updateQuantity,
     updatePieceOrder,
     removeItem,
+    removeOrderedItems,
     clearCart
-  }), [items, lines, hydrated, lineItemCount, totalAmount, addItem, updateQuantity, updatePieceOrder, removeItem, clearCart]);
+  }), [items, lines, hydrated, lineItemCount, totalAmount, addItem, updateQuantity, updatePieceOrder, removeItem, removeOrderedItems, clearCart]);
   return <CartContext value={value}>{children}</CartContext>
 }
 
