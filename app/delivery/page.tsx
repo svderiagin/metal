@@ -98,7 +98,7 @@ const mailHref = `mailto:${companyDetails.salesEmail}`;
 
 export default function DeliveryPage() {
   return (
-    <PageContainer className="py-8 sm:py-10 lg:py-12">
+    <PageContainer withBreadcrumbs className="pb-8 sm:pb-10 lg:pb-12">
       <Breadcrumbs items={[{label: "Доставка"}]}/>
       <header className="grid items-center gap-6 sm:gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:gap-12">
         <div>

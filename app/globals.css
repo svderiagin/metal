@@ -102,6 +102,10 @@
 html { scroll-behavior: smooth; }
 body { margin: 0; background: var(--background); color: var(--foreground); text-rendering: optimizeLegibility; }
 :focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+/* Page destinations and feedback panels can receive focus without a ring around the block. */
+:is(main, section, h2, [data-quote-fields], [role="status"], [role="alert"])[tabindex="-1"]:focus-visible {
+  outline: none;
+}
 html:not([data-keyboard-navigation]) :is(input, textarea, select):focus {
   outline: none;
 }

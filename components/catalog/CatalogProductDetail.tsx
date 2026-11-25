@@ -16,7 +16,7 @@ export function CatalogProductDetail({category, variant}: {category: Category; v
   const [introduction, , selection] = getChannelProductDescription(variant).split("\n\n");
   const fields = storefrontPositionFields(variant);
 
-  return <PageContainer className="pt-5 pb-8 sm:pt-6 lg:pt-7 lg:pb-10">
+  return <PageContainer withBreadcrumbs className="pb-8 lg:pb-10">
     <Breadcrumbs items={[
       {label: "Каталог", href: "/catalog"},
       {label: category.name, href: `/catalog/${category.slug}`},

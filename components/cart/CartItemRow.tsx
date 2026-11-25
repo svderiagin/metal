@@ -15,7 +15,7 @@ import {hasSheetOrderMass, sheetsForOrderTons, sheetTonDecimals, sheetOrderTons}
 import {getTreadPlateExecution} from "@/lib/sheetPresentation";
 import {formatCartQuantity, formatMeasuredQuantity, formatQuantityForInput, formatRebarOrderTons, formatStockLengthBreakdown,
   measuredTonFractionDigits, productOrderFractionDigits, rebarMinimumMeterEntry, rebarMinimumTonEntry, rebarTonFractionDigits} from "@/lib/cartQuantityInput";
-import {isVgpVariant} from "@/lib/pipeFamily";
+import {isVgpVariant, isWholePipeVariant} from "@/lib/pipeFamily";
 import {isDemonstrationProduct} from "@/lib/catalogOffer";
 import {profilePipeMaximumPieces} from "@/lib/profilePipe";
 import {CartAmount} from "./CartAmount";
@@ -35,7 +35,6 @@ export function CartItemRow({line, onRemove}: {line: CartLine; onRemove: () => v
   const isVgp = product && isVgpVariant(product);
   const tonPrecision = isRebar ? rebarTonFractionDigits : isVgp ? 3 : measuredTonFractionDigits;
   const simpleRebarMass = isRebar && product.unit === "ton";
-  const isBar = isRebar && wholeLengths;
   const meterOptions = product && measurement ? getCartMeasurementQuantityOptions(product, "meter") : undefined;
   const tonOptions = product && measurement ? getCartMeasurementQuantityOptions(product, "ton") : undefined;
   const simpleOptions = getSimpleOrderQuantityOptions(product);
@@ -116,7 +115,7 @@ export function CartItemRow({line, onRemove}: {line: CartLine; onRemove: () => v
                 const order = wholeLengthOrder(product, quantity, mode);
                 if (!order) return null;
                 const exact = mode === "meter" ? order.meters : order.weightTons;
-                if (!isBar && Math.abs(exact - quantity) > Math.max(1, quantity) * 1e-9) {
+                if (isWholePipeVariant(product) && Math.abs(exact - quantity) > Math.max(1, quantity) * 1e-9) {
                   return {value: exact, message: `Объём округлён вверх до целых труб · ${order.pieces} шт.`};
                 }
                 return {value: exact};

@@ -21,7 +21,7 @@ export function CatalogListingPage({category, typeId, title, coverName, label, i
   guide?: {title: string; description: string | readonly CatalogGuideSection[]};
 }) {
   const guideId = typeId ? "product-type-details-heading" : `${category.id}-details-heading`;
-  return <PageContainer className="pt-5 pb-8 sm:pt-6 lg:pt-7 lg:pb-10">
+  return <PageContainer withBreadcrumbs className="pb-8 lg:pb-10">
     <Breadcrumbs items={[
       {label: "Каталог", href: "/catalog"},
       ...(typeId ? [{label: category.name, href: `/catalog/${category.slug}`}] : []),

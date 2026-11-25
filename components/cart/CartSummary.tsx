@@ -4,6 +4,7 @@ import {useCart} from "@/hooks/useCart";
 import {formatCurrency} from "@/lib/currency";
 import {Button, ButtonLink} from "@/components/ui/Button";
 import {useQuoteRequest} from "@/components/forms/QuoteRequestContext";
+import {revealQuoteRequest} from "@/components/home/revealQuoteRequest";
 import {formatCartQuantity} from "@/lib/cartQuantityInput";
 import {getProductVariantById} from "@/lib/cartCatalog";
 import {QUOTE_LIMITS} from "@/lib/quoteValidation";
@@ -45,9 +46,7 @@ export function CartSummary({canRequestPrice, onClear}: {canRequestPrice: boolea
       message += position;
     }
     quote?.request(message);
-    const section = document.getElementById("request");
-    section?.focus({preventScroll: true});
-    section?.scrollIntoView({block: "start"});
+    revealQuoteRequest();
   }
   return (
     <aside className="min-w-0 rounded-xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-900 sm:p-6" aria-labelledby={titleId + "-summary"}>

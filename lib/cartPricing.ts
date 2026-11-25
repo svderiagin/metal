@@ -51,6 +51,7 @@ export function revalidateCartPrice(product: ProductVariant, item: PriceInput) {
   const legacyMeasuredTons = !item.measurement && !legacyChannelMeters && product.unit === "ton" && !isDemonstrationProduct(product)
     && product.weightPerMeterKg !== undefined && Number.isFinite(product.weightPerMeterKg) && product.weightPerMeterKg > 0;
   const wholeLength = requiresWholeLengthOrder(product);
+  const beam = product.categoryId === "cat-bal";
   const {minimum: simpleMinimum = 0, maximum: simpleMaximum} = getSimpleOrderQuantityOptions(product);
   let estimatedTotal = priceRequiresQuote ? 0 : calculateLineTotal(item.quantity, product.price!);
   if (!Number.isFinite(item.quantity) || item.quantity <= 0) {
@@ -60,10 +61,9 @@ export function revalidateCartPrice(product: ProductVariant, item: PriceInput) {
   } else if (!item.measurement && item.quantity < simpleMinimum) {
     invalidReason = "Объём меньше минимального. Увеличьте количество.";
   }
-  // Older rebar clients sent only tonnes. Validate that original quantity
-  // against the stock length just as we do for an explicitly measured line.
-  const legacyBar = legacyMeasuredTons && wholeLength && product.categoryId === "cat-arm";
-  if (item.measurement || legacyBar || legacyChannelMeters) {
+  // Older section orders can store tonnes without an explicit measurement.
+  const legacyWholeSection = legacyMeasuredTons && wholeLength && (beam || product.categoryId === "cat-arm");
+  if (item.measurement || legacyWholeSection || legacyChannelMeters) {
     const inputMode = item.measurement?.inputMode ?? (legacyChannelMeters ? "meter" : "ton");
     if (inputMode !== "meter" && inputMode !== "ton") {
       invalidReason = "Не удалось определить единицу измерения.";
@@ -79,7 +79,7 @@ export function revalidateCartPrice(product: ProductVariant, item: PriceInput) {
       const tolerance = wholeLength && inputMode === "ton" ? conversionTolerance(maximum) : 0;
       if (entered > maximum + tolerance) {
         invalidReason = "Объём превышает допустимое значение. Измените количество.";
-      } else if (entered < minimum - (inputMode === "ton" ? conversionTolerance(minimum) : 0)) {
+      } else if (!beam && entered < minimum - (inputMode === "ton" ? conversionTolerance(minimum) : 0)) {
         invalidReason = "Объём меньше минимального. Увеличьте количество.";
       }
       const meters = inputMode === "meter" ? entered : tonsToMeters(entered, product.weightPerMeterKg);
@@ -98,7 +98,8 @@ export function revalidateCartPrice(product: ProductVariant, item: PriceInput) {
   if (wholeLength) {
     const whole = measurement && wholeLengthOrder(product, measurement.meters, "meter");
     if (!measurement || !whole || !sameMeasuredQuantity(measurement.meters, whole.meters)) {
-      invalidReason ??= product.categoryId === "cat-arm"
+      invalidReason ??= beam ? "Укажите объём целыми балками каталожной длины."
+        : product.categoryId === "cat-arm"
         ? "Измените объём заказа до целого числа прутков."
         : "Выберите объём целыми трубами в таблице товара.";
     } else {

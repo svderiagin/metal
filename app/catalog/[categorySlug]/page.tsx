@@ -58,7 +58,7 @@ export default async function CategoryPage({params}: Props) {
   }
 
   return (
-    <PageContainer className="pt-5 pb-8 sm:pt-6 lg:pt-7 lg:pb-10">
+    <PageContainer withBreadcrumbs className="pb-8 lg:pb-10">
       <Breadcrumbs items={[{label: "Каталог", href: "/catalog"}, {label: category.name}]}/>
       <div className="flex min-w-0 flex-col gap-10">
         <div className="flex min-w-0 flex-col gap-6 lg:gap-8">

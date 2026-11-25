@@ -116,7 +116,7 @@ function MeasuredOrderItem({
   const needsQuote = unitPrice === undefined || requiresCatalogPriceQuote(variant)
     || (wholeLengths && !roundToWholeLengths) || (!pricedByMeter && !hasMass && enteredMeters !== null && enteredMeters > 0);
   const madeToOrder = storefrontAvailability(variant.availability) === "ON_ORDER";
-  const canAdd = madeToOrder || !needsQuote;
+  const canAdd = (kind !== "beam" || roundToWholeLengths) && (madeToOrder || !needsQuote);
   const requiresTonnage = madeToOrder && !hasMass && !pricedByMeter;
   const estimatedTotal = variant.quoteOnly ? null
     : referenceMass !== undefined && parsedMeters !== null && pricePerTon !== undefined ? calculateMeasuredLineTotal(parsedMeters, referenceMass, pricePerTon)
@@ -149,11 +149,12 @@ function MeasuredOrderItem({
     ((hasMass && (!parsedMeters || !parsedTons)) || (!needsQuote && orderQuantity !== null && estimatedTotal === null));
   const invalidDraft = draft !== null && !enteringFraction && activeValue.trim() !== ""
     && (enteredQuantity === null || (enteredQuantity === 0 && !shouldRemove) || cannotCalculate);
+  const correctedSavedBeam = kind === "beam" && draft === null && cartLine?.invalidReason ? wholeOrder : null;
   const tinyMeters = compactTonInput && parsedMeters !== null && parsedMeters > 0 && parsedMeters < rebarMinimumMeterEntry / 2;
-  const displayedMeters = tinyMeters ? "" : meters;
+  const displayedMeters = correctedSavedBeam ? displayQuantity(correctedSavedBeam.meters, "meter") : tinyMeters ? "" : meters;
   const showRoundedTons = (isVgp || compactTonInput) && !editingTons && !invalidDraft && parsedTons !== null;
   const tinyTons = showRoundedTons && compactTonInput && parsedTons > 0 && parsedTons < rebarMinimumTonEntry / 2;
-  const displayedTons = !showRoundedTons ? tons : compactTonInput
+  const displayedTons = correctedSavedBeam ? displayQuantity(correctedSavedBeam.weightTons, "ton") : !showRoundedTons ? tons : compactTonInput
     ? tinyTons ? "" : formatRebarOrderTons(parsedTons, true) : formatQuantityForInput(parsedTons, false, 3);
   const buttonLabel = removed ? "Удалено" : shouldRemove ? "Удалить" : isSaved
     ? <><Icon name="check"/><span className="whitespace-nowrap">В корзине</span></> : hasChanges ? "Обновить" : madeToOrder ? "Заказать" : "В корзину";

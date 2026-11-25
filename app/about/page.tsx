@@ -5,9 +5,14 @@ import {Breadcrumbs} from "@/components/catalog/Breadcrumbs";
 import {PageContainer} from "@/components/layout/PageContainer";
 import {ButtonLink} from "@/components/ui/Button";
 import {Icon} from "@/components/ui/Icon";
+import {PhotoGallery} from "@/components/ui/PhotoGallery";
 import {getCategoryBySlug} from "@/lib/catalog";
 import {companyDetails} from "@/lib/companyDetails";
 import assortmentImage from "../../public/images/about/steel-assortment.webp";
+import warehouseSheets from "../../public/images/about/warehouse-steel-sheets.webp";
+import stockSteelBundles from "../../public/images/about/stock-steel-bundles.webp";
+import warehousePipeRacks from "../../public/images/about/warehouse-pipe-racks.webp";
+import warehousePipes from "../../public/images/about/warehouse-pipes.webp";
 import specificationImage from "../../public/images/about/specification-check.webp";
 import rebarImage from "../../public/images/catalog/armatura-card.webp";
 import beamImage from "../../public/images/catalog/balka-card.jpg";
@@ -19,6 +24,14 @@ export const metadata: Metadata = {
   title: "О компании РВБ",
   description: "РВБ-МЕТАЛЛ — проект ООО «РВБ». Металлопрокат для строительства, производства и частных проектов. Каталог, комплектация по спецификации и реквизиты продавца.",
 };
+
+const companyPhotos = [
+  {src: assortmentImage, alt: "Пачки рифлёной арматуры, прямоугольных труб и листовой стали"},
+  {src: warehouseSheets, alt: "Штабели металлопроката в складском пролёте"},
+  {src: stockSteelBundles, alt: "Пачки стального проката на открытой складской площадке"},
+  {src: warehousePipeRacks, alt: "Пачки металлических труб на стеллажах"},
+  {src: warehousePipes, alt: "Складской пролёт с металлическими трубами"},
+] as const;
 
 const catalogGroups = [
   {slug: "armatura", image: rebarImage, guide: "Класс, диаметр и форма поставки"},
@@ -53,14 +66,13 @@ const specificationSteps = [
 const mutedText = "text-slate-600 dark:text-slate-300";
 const panel = "min-w-0 rounded-lg border border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-900";
 const photo = "block h-auto w-full rounded-lg border border-slate-200 bg-slate-100 dark:border-slate-700 dark:bg-slate-800";
-const caption = "mt-2 text-xs text-slate-600 dark:text-slate-300";
 const sectionSpacing = "mt-9 sm:mt-12 lg:mt-14";
 const textLink = "rounded-sm font-semibold text-brand-700 underline underline-offset-4 hover:text-brand-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current dark:text-brand-300 dark:hover:text-brand-100";
 const mailHref = `mailto:${companyDetails.salesEmail}`;
 
 export default function AboutPage() {
   return (
-    <PageContainer className="py-8 sm:py-10 lg:py-12">
+    <PageContainer withBreadcrumbs className="pb-8 sm:pb-10 lg:pb-12">
       <Breadcrumbs items={[{label: "О компании"}]}/>
       <header className="grid items-center gap-6 sm:gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:gap-12">
         <div>
@@ -76,17 +88,13 @@ export default function AboutPage() {
             <ButtonLink href="/catalog" variant="secondary">Перейти в каталог</ButtonLink>
           </div>
         </div>
-        <figure className="min-w-0">
-          <Image
-            src={assortmentImage}
-            alt="Пачки рифлёной арматуры, прямоугольных труб и листовой стали"
-            sizes="(min-width: 1360px) 676px, (min-width: 768px) 50vw, (min-width: 640px) calc(100vw - 40px), calc(100vw - 32px)"
-            loading="eager"
-            fetchPriority="high"
-            className={photo}
-          />
-          <figcaption className={caption}>Иллюстрация ассортимента</figcaption>
-        </figure>
+        <PhotoGallery
+          photos={companyPhotos}
+          label="Фотографии металлопроката и склада"
+          sizes="(min-width: 1360px) 676px, (min-width: 768px) 50vw, (min-width: 640px) calc(100vw - 40px), calc(100vw - 32px)"
+          frameClassName="aspect-[4/3] rounded-lg border border-slate-200 dark:border-slate-700"
+          prioritizeFirst
+        />
       </header>
 
       <section className={sectionSpacing} aria-labelledby="about-catalog-heading">
@@ -141,15 +149,17 @@ export default function AboutPage() {
         <div className="mt-5 grid items-start gap-4 md:grid-cols-[minmax(0,1fr)_minmax(0,0.85fr)] lg:gap-6">
           <div className="min-w-0 rounded-lg border border-slate-200 bg-slate-100 p-4 sm:p-6 dark:border-slate-700 dark:bg-slate-800">
             <h3 className="text-card-title">Что указать в заявке</h3>
-            <p className={`mt-2 ${mutedText}`}>Укажите название и размер позиции, необходимое количество и единицу измерения. Добавьте марку стали или стандарт, если они заданы проектом.</p>
-            <div className="mt-4 rounded-lg border border-slate-200 bg-white p-4 dark:border-slate-700 dark:bg-slate-900">
-              <p className={`text-sm ${mutedText}`}>Пример позиции</p>
-              <p className="mt-1 font-semibold">Труба профильная прямоугольная 60 × 40 × 2 мм</p>
-              <p className={mutedText}>Длина трубы 6 м · 20 шт. · всего 120 м</p>
-            </div>
-            <p className={`mt-4 ${mutedText}`}>
-              Для доставки добавьте адрес объекта. Ведомость или чертёж можно отправить на <a href={mailHref} className={textLink}>{companyDetails.salesEmail}</a>.
+            <p className={`mt-2 ${mutedText}`}>
+              Для каждой позиции укажите название, размеры и количество с единицей измерения. Добавьте марку стали или стандарт, если они указаны в проекте.
             </p>
+            <p className={`mt-2 ${mutedText}`}>
+              Если нужна доставка, укажите адрес объекта. Ведомость или чертёж можно отправить на <a href={mailHref} className={textLink}>{companyDetails.salesEmail}</a>.
+            </p>
+            <div className="mt-4 border-t border-slate-200 pt-4 dark:border-slate-700">
+              <p className={`text-sm ${mutedText}`}>Пример строки заявки</p>
+              <p className="mt-1 font-semibold">Труба профильная прямоугольная <span className="whitespace-nowrap">60 × 40 × 2 мм</span></p>
+              <p className={`mt-0.5 text-sm ${mutedText}`}>20&nbsp;шт. по 6&nbsp;м · всего 120&nbsp;м</p>
+            </div>
           </div>
           <figure className="min-w-0">
             <Image

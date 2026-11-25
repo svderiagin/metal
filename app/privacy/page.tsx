@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 const listClass = "mt-3 list-disc space-y-2 pl-5 text-slate-600 dark:text-slate-300 marker:text-brand-700 dark:marker:text-brand-400";
 
 export default function PrivacyPage() {
-  return <PageContainer className="py-8 sm:py-10 lg:py-12">
+  return <PageContainer withBreadcrumbs className="pb-8 sm:pb-10 lg:pb-12">
     <Breadcrumbs items={[{label: "Политика обработки персональных данных"}]}/>
     <article className="max-w-4xl rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-5 shadow-sm sm:p-7 lg:p-9">
       <p className="text-eyebrow uppercase text-brand-700 dark:text-brand-400">Правовая информация</p>

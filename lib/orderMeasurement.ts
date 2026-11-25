@@ -5,7 +5,7 @@ import {MAX_ORDER_PIECES, MAX_ORDER_TONS} from "./constants";
 import {isWholePipeVariant} from "./pipeFamily";
 
 export function requiresWholeLengthOrder(product: ProductVariant): boolean {
-  return isWholePipeVariant(product) || (product.categoryId === "cat-arm" && product.form === "bar"
+  return product.categoryId === "cat-bal" || isWholePipeVariant(product) || (product.categoryId === "cat-arm" && product.form === "bar"
     && !isDemonstrationProduct(product) && product.lengthRangeMeters === undefined
     && product.lengthMeters !== undefined && isPositiveFinite(product.lengthMeters));
 }

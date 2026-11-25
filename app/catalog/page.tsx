@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   description: "Арматура, стальные трубы, балки, листовой и сортовой прокат, профнастил, сетка и штакетник. Размеры, цены и наличие."
 };
 export default function CatalogPage() {
-  return <PageContainer className="pt-5 pb-8 sm:pt-6 lg:pt-7 lg:pb-10">
+  return <PageContainer withBreadcrumbs className="pb-8 lg:pb-10">
     <Breadcrumbs items={[{label: "Каталог"}]}/>
     <h1 className="text-page-title">Каталог металлопроката</h1>
     <div className="mt-5 grid gap-4 lg:mt-7 lg:grid-cols-[250px_minmax(0,1fr)] lg:gap-7"><CatalogSidebar/>

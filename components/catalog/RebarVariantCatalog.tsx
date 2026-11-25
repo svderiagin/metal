@@ -307,7 +307,10 @@ function MeasuredVariantCatalog({variants, kind = "rebar", names}: {
       <section className="min-w-0 lg:col-span-2" aria-label="Продукция">
       {results.length ? (
         <>
-        {isChannel ? <ChannelSpecificationNote steelGrade={sharedSteelGrade}/> : orderNote && <CatalogTableNote>{orderNote}</CatalogTableNote>}
+        {isChannel ? <ChannelSpecificationNote steelGrade={sharedSteelGrade}/> : (isBeam || orderNote) && <CatalogTableNote>
+          {isBeam && <span className="block">Балки продаются целыми изделиями каталожной длины. При вводе метров или тонн объём округляется вверх до целой балки.</span>}
+          {orderNote}
+        </CatalogTableNote>}
         <CatalogVariantTable designation={headers.designation} specifications={specifications} specificationWidths={isSection ? [12.5, 5.5] : undefined}
           unit="т" quantity="Заказ, м" secondaryQuantity="Заказ, т">
           {results.map(variant => <MeasuredVariantItem key={variant.id} variant={variant} name={names?.get(variant.id)}
