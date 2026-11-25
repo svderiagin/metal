@@ -1,6 +1,6 @@
 "use client";
 
-import {type FormEvent, useId, useState} from "react";
+import {type FormEvent, useEffect, useId, useRef, useState} from "react";
 import Link from "next/link";
 import {Button} from "@/components/ui/Button";
 import {Input} from "@/components/ui/Input";
@@ -9,6 +9,11 @@ import {isApiSuccess, readApiError} from "@/lib/apiResponse";
 import {companyDetails} from "@/lib/companyDetails";
 import {CONTACT_LIMITS, type ContactField, type ContactFieldErrors, validateContactFields} from "@/lib/contactValidation";
 
+const visibleFields = ["name", "email", "phone", "message", "consent"] as const;
+const fallbackError = "Не удалось отправить сообщение. Попробуйте ещё раз.";
+const labelClass = "mb-1.5 block text-sm font-semibold";
+type ContactResult = {kind: "success"} | {kind: "error"; message: string};
+
 function readFields(form: HTMLFormElement) {
   const data = new FormData(form);
   return {...Object.fromEntries(data), consent: data.get("consent") === "on"};
@@ -16,27 +21,33 @@ function readFields(form: HTMLFormElement) {
 
 export function ContactForm() {
   const formId = useId();
-  const [sent, setSent] = useState(false);
-  const [error, setError] = useState("");
+  const [result, setResult] = useState<ContactResult | null>(null);
   const [fieldErrors, setFieldErrors] = useState<ContactFieldErrors>({});
   const [submitting, setSubmitting] = useState(false);
+  const sending = useRef(false);
+  const resultPanel = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (result) resultPanel.current?.focus();
+  }, [result]);
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (submitting) return;
-    setSent(false);
-    setError("");
+    if (sending.current) return;
+    setResult(null);
     const form = event.currentTarget;
     const payload = readFields(form);
     const errors = validateContactFields(payload);
     setFieldErrors(errors);
-    const firstInvalid = Object.keys(errors)[0];
-    if (firstInvalid) {
-      const field = form.elements.namedItem(firstInvalid);
+    if (Object.keys(errors).length) {
+      const firstInvalid = visibleFields.find(field => errors[field]);
+      const field = firstInvalid ? form.elements.namedItem(firstInvalid) : null;
       if (field instanceof HTMLElement) field.focus();
+      else setResult({kind: "error", message: "Проверьте данные формы."});
       return;
     }
 
+    sending.current = true;
     setSubmitting(true);
     try {
       const response = await fetch("/api/contact", {
@@ -44,73 +55,109 @@ export function ContactForm() {
         headers: {"content-type": "application/json"},
         body: JSON.stringify(payload),
       });
-      const result: unknown = await response.json();
-      if (!response.ok || !isApiSuccess(result)) throw new Error(readApiError(result, "Не удалось отправить сообщение."));
-      setSent(true);
+      const responseBody: unknown = await response.json().catch(() => undefined);
+      if (!response.ok || !isApiSuccess(responseBody)) {
+        setResult({kind: "error", message: readApiError(responseBody, fallbackError) || fallbackError});
+        return;
+      }
       form.reset();
-    } catch (caught) {
-      setError(caught instanceof Error ? caught.message : "Не удалось отправить сообщение.");
+      setResult({kind: "success"});
+    } catch {
+      setResult({kind: "error", message: fallbackError});
     } finally {
+      sending.current = false;
       setSubmitting(false);
     }
   }
 
   function fieldProps(field: ContactField) {
-    return {name: field, "aria-invalid": !!fieldErrors[field] || undefined,
-      "aria-describedby": fieldErrors[field] ? `${formId}-${field}-error` : undefined};
+    return {
+      id: `${formId}-${field}`,
+      name: field,
+      "aria-invalid": !!fieldErrors[field] || undefined,
+      "aria-describedby": fieldErrors[field] ? `${formId}-${field}-error` : undefined,
+    };
   }
 
   function fieldError(field: ContactField) {
-    return fieldErrors[field] && <span id={`${formId}-${field}-error`}
-      className="mt-1 block text-xs text-red-700 dark:text-red-400" aria-live="polite">{fieldErrors[field]}</span>;
+    return fieldErrors[field] && <p id={`${formId}-${field}-error`}
+      className="mt-1.5 text-xs text-[var(--danger-text)]">{fieldErrors[field]}</p>;
   }
 
   return (
-    <form onSubmit={submit} onChange={event => {
-      if (Object.keys(fieldErrors).length) setFieldErrors(validateContactFields(readFields(event.currentTarget)));
-    }} noValidate aria-label="Связаться с нами" aria-busy={submitting} className="min-w-0 space-y-5">
-      <div>
-        <label className="block text-sm font-semibold">Имя *
-          <Input required maxLength={CONTACT_LIMITS.name} autoComplete="name" className="mt-1" {...fieldProps("name")}/>
+    <form
+      method="post"
+      noValidate
+      aria-label="Напишите нам"
+      aria-busy={submitting}
+      className="@container min-w-0"
+      onSubmit={submit}
+      onChange={event => {
+        if (result?.kind === "success") setResult(null);
+        if (Object.keys(fieldErrors).length) setFieldErrors(validateContactFields(readFields(event.currentTarget)));
+      }}
+    >
+      <fieldset disabled={submitting} className="min-w-0 space-y-4">
+        <div className="grid items-start gap-4 @min-[27rem]:grid-cols-2">
+          <div className="min-w-0">
+            <label htmlFor={`${formId}-name`} className={labelClass}>Имя *</label>
+            <Input required maxLength={CONTACT_LIMITS.name} autoComplete="name" autoCapitalize="words"
+              spellCheck={false} {...fieldProps("name")}/>
+            {fieldError("name")}
+          </div>
+          <div className="min-w-0">
+            <label htmlFor={`${formId}-email`} className={labelClass}>Электронная почта *</label>
+            <Input required type="email" maxLength={CONTACT_LIMITS.email} autoComplete="email" autoCapitalize="none"
+              spellCheck={false} {...fieldProps("email")}/>
+            {fieldError("email")}
+          </div>
+        </div>
+        <div>
+          <label htmlFor={`${formId}-phone`} className="mb-1.5 flex flex-wrap items-baseline gap-x-2 text-sm font-semibold">
+            Телефон <span className="text-xs font-normal text-slate-600 dark:text-slate-300">(необязательно)</span>
+          </label>
+          <Input type="tel" inputMode="tel" maxLength={CONTACT_LIMITS.phone} autoComplete="tel" {...fieldProps("phone")}/>
+          {fieldError("phone")}
+        </div>
+        <div>
+          <label htmlFor={`${formId}-message`} className={labelClass}>Сообщение *</label>
+          <Textarea required rows={5} maxLength={CONTACT_LIMITS.message} {...fieldProps("message")}/>
+          {fieldError("message")}
+        </div>
+        <label className="sr-only" aria-hidden="true">Сайт
+          <Input name="website" maxLength={CONTACT_LIMITS.website} tabIndex={-1} autoComplete="off"/>
         </label>
-        {fieldError("name")}
-      </div>
-      <div>
-        <label className="block text-sm font-semibold">Электронная почта *
-          <Input required type="email" maxLength={CONTACT_LIMITS.email} autoComplete="email" className="mt-1" {...fieldProps("email")}/>
-        </label>
-        {fieldError("email")}
-      </div>
-      <div>
-        <label className="block text-sm font-semibold">Телефон
-          <Input type="tel" autoComplete="tel" className="mt-1" {...fieldProps("phone")}/>
-        </label>
-        {fieldError("phone")}
-      </div>
-      <div>
-        <label className="block text-sm font-semibold">Сообщение *
-          <Textarea required rows={5} maxLength={CONTACT_LIMITS.message} className="mt-1" {...fieldProps("message")}/>
-        </label>
-        {fieldError("message")}
-      </div>
-      <label className="absolute -left-[10000px]" aria-hidden>Сайт
-        <Input name="website" maxLength={CONTACT_LIMITS.website} tabIndex={-1} autoComplete="off"/>
-      </label>
-      <div>
-        <label className="flex items-start gap-2 text-sm">
-          <input type="checkbox" required className="mt-1 size-4 shrink-0 accent-brand-700 dark:accent-brand-300" {...fieldProps("consent")}/>
-          <span>Я согласен на обработку персональных данных в соответствии с <Link href="/privacy"
-            className="font-semibold text-brand-700 dark:text-brand-300 underline underline-offset-2">Политикой обработки персональных данных</Link>.</span>
-        </label>
-        {fieldError("consent")}
-      </div>
-      {sent && <p role="status" className="text-sm font-semibold text-green-700 dark:text-green-300">Сообщение принято.</p>}
-      {error && <div role="alert" className="text-sm text-red-700 dark:text-red-400">
-        <p className="font-semibold">{error}</p>
-        <p className="mt-2">Отправьте сообщение на <a href={`mailto:${companyDetails.salesEmail}`}
-          className="underline underline-offset-2">{companyDetails.salesEmail}</a>.</p>
+        <div>
+          <div className="flex items-start gap-2.5">
+            <input type="checkbox" required className="mt-0.5 size-5 shrink-0 accent-brand-700 dark:accent-brand-300"
+              {...fieldProps("consent")}/>
+            <div className="min-w-0 text-sm">
+              <label htmlFor={`${formId}-consent`}>Согласен на обработку персональных данных *</label>
+              <Link href="/privacy" className="mt-0.5 block w-fit font-semibold text-brand-700 underline underline-offset-2 dark:text-brand-300">
+                Политика обработки персональных данных
+              </Link>
+            </div>
+          </div>
+          {fieldError("consent")}
+        </div>
+        <Button type="submit" className="w-full sm:w-auto" disabled={submitting}>
+          {submitting ? "Отправляем…" : "Отправить сообщение"}
+        </Button>
+      </fieldset>
+      {result && <div
+        ref={resultPanel}
+        role={result.kind === "success" ? "status" : "alert"}
+        tabIndex={-1}
+        className={`mt-4 rounded-lg border border-current px-4 py-3 text-sm ${result.kind === "success"
+          ? "bg-[var(--success-background)] text-[var(--success-text)]"
+          : "bg-[var(--danger-background)] text-[var(--danger-text)]"}`}
+      >
+        {result.kind === "success" ? <p className="font-semibold">Сообщение отправлено.</p> : <>
+          <p className="font-semibold">{result.message}</p>
+          <p className="mt-1">Можно написать на <a href={`mailto:${companyDetails.salesEmail}`}
+            className="break-words underline underline-offset-2">{companyDetails.salesEmail}</a>.</p>
+        </>}
       </div>}
-      <Button type="submit" disabled={submitting}>{submitting ? "Отправляем…" : "Отправить"}</Button>
     </form>
   );
 }

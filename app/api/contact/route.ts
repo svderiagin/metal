@@ -13,6 +13,6 @@ export async function POST(request: Request) {
     await notificationService.sendContactRequest(contact);
     return Response.json({ok: true});
   } catch {
-    return Response.json({ok: false, error: "Отправка временно недоступна. Свяжитесь с нами по телефону."}, {status: 503});
+    return Response.json({ok: false, error: "Форма связи временно недоступна."}, {status: 503});
   }
 }
