@@ -6,11 +6,19 @@ import {readProjectData} from './project-data.mjs';
 export function updateCartCatalog() {
   const cache=new Map();
   const {projectCartProduct}=readProjectData('lib/cartProjection.ts',cache);
+  const {getCheckoutProductLabel}=readProjectData('lib/checkoutProductLabel.ts',cache);
   const {productVariants}=readProjectData('data/products/index.ts',cache);
   const {categories}=readProjectData('data/categories.ts',cache);
   const {subcategories}=readProjectData('data/subcategories.ts',cache);
   const {productTypes}=readProjectData('data/productTypes.ts',cache);
-  const value={products:productVariants.map(projectCartProduct),
+  const names=new Map();
+  for(const product of productVariants)names.set(product.name,(names.get(product.name)??0)+1);
+  const typeNames=new Map(productTypes.map(({id,name})=>[id,name]));
+  const value={products:productVariants.map(product=>{
+      const projected=projectCartProduct(product);
+      const checkoutLabel=getCheckoutProductLabel(product,typeNames.get(product.productTypeId),names.get(product.name)>1);
+      return checkoutLabel?{...projected,checkoutLabel}:projected;
+    }),
     categories:categories.map(({id,slug})=>({id,slug})),
     subcategories:subcategories.map(({id,slug})=>({id,slug})),
     types:productTypes.map(({id,slug})=>({id,slug}))};

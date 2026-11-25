@@ -8,7 +8,11 @@ export const metadata: Metadata = {
   description: "Оформление заказа без регистрации с согласованием оплаты по счёту."
 };
 export default function CheckoutPage() {
-  return <PageContainer className="py-8 sm:py-10 lg:py-12"><Breadcrumbs
-    items={[{label: "Корзина", href: "/cart"}, {label: "Оформление"}]}/><h1
-    className="mb-7 text-page-title">Оформление заказа</h1><CheckoutPageContent/></PageContainer>
+  return <PageContainer className="py-8 sm:py-10 lg:py-12">
+    <Breadcrumbs items={[{label: "Корзина", href: "/cart"}, {label: "Оформление"}]}/>
+    <div className="mx-auto max-w-[68rem]">
+      <h1 className="mb-6 text-page-title">Оформление заказа</h1>
+      <CheckoutPageContent/>
+    </div>
+  </PageContainer>;
 }
