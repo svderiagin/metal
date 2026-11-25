@@ -22,7 +22,7 @@ Use the current visual language from [docs/theme.md](../../../docs/theme.md): gr
 | Generic product rows/cards | `VariantCatalogResults.tsx`; filters: `GenericProductVariantCatalog.tsx` and `lib/variantCatalog.ts` |
 | Category layout | `app/catalog/[categorySlug]/page.tsx`; contains special layout branches. Table/card markup lives in `components/catalog/`. |
 | Product-listing layout | [Ordinary VGP reference](../../../docs/catalog-product-pages-prompt.md#2-общая-композиция-страницы); see the relevant section for spacing, navigation, tables, cards, or buying guidance. |
-| About/delivery/services/contacts/privacy | Corresponding `app/<route>/page.tsx`; form behavior is covered by the orders skill |
+| About, delivery, contacts and privacy | Use the corresponding `app/<route>/page.tsx`. See the orders skill for form behavior. |
 
 ## Non-obvious constraints
 

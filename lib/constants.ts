@@ -4,7 +4,6 @@ export const MAX_ORDER_TONS = 999;
 export const MAX_ORDER_PIECES = 9_999;
 export const mainNavigation = [
   {label: "Каталог", href: "/catalog"},
-  {label: "Услуги", href: "/services"},
   {label: "Доставка", href: "/delivery"},
   {label: "О компании", href: "/about"}, {label: "Контакты", href: "/contacts"},
 ] as const;

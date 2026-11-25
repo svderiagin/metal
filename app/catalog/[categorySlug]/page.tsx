@@ -76,7 +76,7 @@ export default async function CategoryPage({params}: Props) {
           description={detailedDescription} marginClassName=""/>}
         <div className="rounded-xl bg-slate-900 p-5 text-white sm:p-6">
           <h2 className="text-section-title">Нужна комплектация по спецификации?</h2>
-          <p className="mt-2 text-slate-300">Опишите позиции и необходимые услуги — подготовим единый расчёт.</p>
+          <p className="mt-2 text-slate-300">Укажите позиции и количество. Подготовим расчёт поставки.</p>
           <ButtonLink href="/#request" className="mt-5">Запросить расчёт</ButtonLink>
         </div>
       </div>

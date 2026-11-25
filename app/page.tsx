@@ -2,7 +2,6 @@ import type {Metadata} from "next";
 import {HeroSection} from "@/components/home/HeroSection";
 import {CatalogSection} from "@/components/home/CatalogSection";
 import {AdvantagesSection} from "@/components/home/AdvantagesSection";
-import {ServicesSection} from "@/components/home/ServicesSection";
 import {RequestQuoteSection} from "@/components/home/RequestQuoteSection";
 import {PageContainer} from "@/components/layout/PageContainer";
 import {ProductTypeCard} from "@/components/catalog/ProductTypeCard";
@@ -32,7 +31,6 @@ export default function Home() {
           </div>
         </section>
         <AdvantagesSection/>
-        <ServicesSection/>
         <RequestQuoteSection appearance="home"/>
       </PageContainer>
     </>

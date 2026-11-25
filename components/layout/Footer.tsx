@@ -16,8 +16,7 @@ export function Footer() {
             ООО <span className="brand-wordmark">РВБ</span>
           </p>
           <p className="mt-4 text-sm leading-6">
-            Металлопрокат для производства, строительства и частных проектов. Комплектация,
-            обработка и доставка.
+            Металлопрокат для производства, строительства и частных проектов. Комплектация и доставка.
           </p>
           <p className="mt-4 text-sm leading-6 text-slate-400">
             <a href={`mailto:${companyDetails.salesEmail}`} className={`${utilityLinkClass} text-slate-200`}>{companyDetails.salesEmail}</a><br/>
@@ -41,7 +40,6 @@ export function Footer() {
           <h2 className="font-bold text-white">Компания</h2>
           <ul className="mt-3 text-sm">
             <li><Link href="/about" className={footerLinkClass}>О компании</Link></li>
-            <li><Link href="/services" className={footerLinkClass}>Услуги</Link></li>
             <li><Link href="/delivery" className={footerLinkClass}>Доставка</Link></li>
             <li><Link href="/contacts" className={footerLinkClass}>Контакты</Link></li>
             <li><Link href="/contacts#details" className={footerLinkClass}>Реквизиты</Link></li>

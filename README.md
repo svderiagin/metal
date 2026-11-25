@@ -228,7 +228,6 @@ CartProvider
 
 - `categories.ts` — 16 категорий;
 - `subcategories.ts` — 62 подкатегории;
-- `services.ts` — 4 услуги;
 - `products/*.ts` — 124 товара;
 - `products/index.ts` — объединение товарных массивов.
 
@@ -255,8 +254,7 @@ TypeScript-типы:
 - `category.ts`;
 - `forms.ts`;
 - `order.ts`;
-- `product.ts`;
-- `service.ts`.
+- `product.ts`.
 
 Они описывают форму данных во время проверки TypeScript. Во время исполнения интерфейсы исчезают.
 
@@ -620,7 +618,6 @@ data/categories.ts       16 категорий
 data/subcategories.ts    62 подкатегории
 data/products/*.ts       124 товара
 data/products/index.ts   единый массив products
-data/services.ts         4 услуги
 ```
 
 Связи построены через `categoryId` и `subcategoryId`, как foreign keys, но база данных их не контролирует.
@@ -2442,7 +2439,6 @@ metal-frontend/
 ├── data/
 │   ├── categories.ts
 │   ├── subcategories.ts
-│   ├── services.ts
 │   └── products/                124 product objects
 │
 ├── lib/
