@@ -12,7 +12,7 @@ import {getProductVariantById} from "@/lib/cartCatalog";
 import {calculateLineTotal, calculateMeasuredLineTotal, getCartMeasurementQuantityOptions, getSimpleOrderQuantityOptions, metersToTons, requiresWholeLengthOrder, tonsToMeters, wholeLengthOrder} from "@/lib/orderMeasurement";
 import {MAX_ORDER_PIECES} from "@/lib/constants";
 import {hasSheetOrderMass, sheetsForOrderTons, sheetTonDecimals, sheetOrderTons} from "@/lib/sheetOrder";
-import {getTreadPlateExecution} from "@/lib/sheetPresentation";
+import {getProductNameWithSheetExecution} from "@/lib/sheetPresentation";
 import {formatCartQuantity, formatMeasuredQuantity, formatQuantityForInput, formatRebarOrderTons, formatStockLengthBreakdown,
   measuredTonFractionDigits, productOrderFractionDigits, rebarMinimumMeterEntry, rebarMinimumTonEntry, rebarTonFractionDigits} from "@/lib/cartQuantityInput";
 import {isVgpVariant, isWholePipeVariant} from "@/lib/pipeFamily";
@@ -62,8 +62,7 @@ export function CartItemRow({line, onRemove}: {line: CartLine; onRemove: () => v
   const pipeOrderTons = pipeMassPerMeter === null ? null : metersToTons(line.quantity, pipeMassPerMeter);
   const sheetOrder = product?.sheetOrder;
   const sheetCount = sheetOrder ? line.quantity / sheetOrder.quantityPerSheet : 0;
-  const sheetExecution = product ? getTreadPlateExecution(product) : undefined;
-  const productName = sheetExecution ? `${line.name} · ${sheetExecution}` : line.name;
+  const productName = product ? getProductNameWithSheetExecution(product) : line.name;
   const steelGrade = additionalSteelGrade(productName, product?.steelGrade);
 
   function updatePipeLength(length: number) {

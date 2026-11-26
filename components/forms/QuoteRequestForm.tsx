@@ -1,5 +1,5 @@
 "use client";
-import {type FocusEvent, type FormEvent, useEffect, useId, useRef, useState} from "react";
+import {type FocusEvent, type FormEvent, useEffect, useId, useLayoutEffect, useRef, useState} from "react";
 import Link from "next/link";
 import {Button} from "@/components/ui/Button";
 import {Input} from "@/components/ui/Input";
@@ -30,6 +30,8 @@ export function QuoteRequestForm({descriptionPlaceholder = "Арматура р�
   const message = quote?.message ?? localMessage;
   const setMessage = quote?.setMessage ?? setLocalMessage;
   const requestVersion = quote?.requestVersion ?? 0;
+  const latestRequest = useRef(requestVersion);
+  useLayoutEffect(() => {latestRequest.current = requestVersion;}, [requestVersion]);
   useEffect(() => {
     if (success) confirmation.current?.focus();
     else if (error) failure.current?.focus();
@@ -46,6 +48,7 @@ export function QuoteRequestForm({descriptionPlaceholder = "Арматура р�
   }, [setMessage]);
 
   function validateOnBlur(event: FocusEvent<HTMLFormElement>) {
+    if (sending.current) return;
     const input = event.target;
     if (!(input instanceof HTMLInputElement || input instanceof HTMLTextAreaElement)) return;
     const field = input.name as QuoteField;
@@ -102,6 +105,7 @@ export function QuoteRequestForm({descriptionPlaceholder = "Арматура р�
         body: JSON.stringify(payload)
       });
       const result: unknown = await response.json().catch(() => undefined);
+      if (latestRequest.current !== requestVersion) return;
       if (!response.ok || !isApiSuccess(result)) {
         setError(readApiError(result, fallbackError) || fallbackError);
         return;
@@ -110,7 +114,7 @@ export function QuoteRequestForm({descriptionPlaceholder = "Арматура р�
       setSuccess(true);
       form.reset();
     } catch {
-      setError(fallbackError);
+      if (latestRequest.current === requestVersion) setError(fallbackError);
     } finally {
       sending.current = false;
       setSubmitting(false);
@@ -131,52 +135,54 @@ export function QuoteRequestForm({descriptionPlaceholder = "Арматура р�
   function fieldError(field: QuoteField, spacing = "mt-1") {
     return fieldErrors[field] && <span id={`${formId}-${field}-error`} className={`${styles.error} ${spacing}`} aria-live="polite">{fieldErrors[field]}</span>;
   }
-  return <form method="post" onSubmit={submit} onBlur={validateOnBlur} onChange={clearResolvedError} noValidate aria-busy={submitting} className={`${styles.form} grid items-start gap-4 sm:grid-cols-2`}>
-    <div className="min-w-0"><label className="block text-sm font-semibold">Имя *
-      <Input name="name" required maxLength={QUOTE_LIMITS.name} className="mt-1.5" autoComplete="name" {...validationProps("name")}/>
+  return <form method="post" onSubmit={submit} onBlur={validateOnBlur} onChange={clearResolvedError} noValidate aria-busy={submitting} className={styles.form}>
+    <fieldset disabled={submitting} className="grid min-w-0 items-start gap-4 sm:grid-cols-2">
+      <div className="min-w-0"><label className="block text-sm font-semibold">Имя *
+        <Input name="name" required maxLength={QUOTE_LIMITS.name} className="mt-1.5" autoComplete="name" {...validationProps("name")}/>
+        </label>
+        {fieldError("name")}
+      </div>
+      <div className="min-w-0"><label className="block text-sm font-semibold">Телефон *
+        <PhoneInput name="phone" required className="mt-1.5" {...validationProps("phone")}/>
+        </label>
+        {fieldError("phone")}
+      </div>
+      <div className="min-w-0"><label className="block text-sm font-semibold">Электронная почта *
+        <Input name="email" type="email" required maxLength={QUOTE_LIMITS.email} className="mt-1.5" autoComplete="email" {...validationProps("email")}/>
+        </label>
+        {fieldError("email")}
+      </div>
+      <div className="min-w-0"><label className="block text-sm font-semibold">Компания
+        <Input name="company" maxLength={QUOTE_LIMITS.company} className="mt-1.5" autoComplete="organization" {...validationProps("company")}/>
+        </label>
+        {fieldError("company")}
+      </div>
+      <div className="min-w-0 sm:col-span-2"><label className="block text-sm font-semibold">Что требуется рассчитать? *
+        <Textarea name="message" required maxLength={QUOTE_LIMITS.message} rows={4} value={message}
+          placeholder={descriptionPlaceholder}
+          onChange={event => setMessage(event.target.value.slice(0, QUOTE_LIMITS.message))} className="mt-1.5 block" {...validationProps("message")}/>
+        </label>
+        <span className={styles.messageMeta}>
+          {fieldError("message", "")}
+          <span className={styles.counter}>{message.length} / {QUOTE_LIMITS.message}</span>
+        </span>
+      </div>
+      <label className="absolute -left-[10000px]" aria-hidden>Сайт
+        <Input name="website" maxLength={QUOTE_LIMITS.website} tabIndex={-1} autoComplete="off"/>
       </label>
-      {fieldError("name")}
-    </div>
-    <div className="min-w-0"><label className="block text-sm font-semibold">Телефон *
-      <PhoneInput name="phone" required className="mt-1.5" {...validationProps("phone")}/>
-      </label>
-      {fieldError("phone")}
-    </div>
-    <div className="min-w-0"><label className="block text-sm font-semibold">Электронная почта *
-      <Input name="email" type="email" required maxLength={QUOTE_LIMITS.email} className="mt-1.5" autoComplete="email" {...validationProps("email")}/>
-      </label>
-      {fieldError("email")}
-    </div>
-    <div className="min-w-0"><label className="block text-sm font-semibold">Компания
-      <Input name="company" maxLength={QUOTE_LIMITS.company} className="mt-1.5" autoComplete="organization" {...validationProps("company")}/>
-      </label>
-      {fieldError("company")}
-    </div>
-    <div className="min-w-0 sm:col-span-2"><label className="block text-sm font-semibold">Что требуется рассчитать? *
-      <Textarea name="message" required maxLength={QUOTE_LIMITS.message} rows={4} value={message}
-        placeholder={descriptionPlaceholder}
-        onChange={event => setMessage(event.target.value.slice(0, QUOTE_LIMITS.message))} className="mt-1.5 block" {...validationProps("message")}/>
-      </label>
-      <span className={styles.messageMeta}>
-        {fieldError("message", "")}
-        <span className={styles.counter}>{message.length} / {QUOTE_LIMITS.message}</span>
-      </span>
-    </div>
-    <label className="absolute -left-[10000px]" aria-hidden>Сайт
-      <Input name="website" maxLength={QUOTE_LIMITS.website} tabIndex={-1} autoComplete="off"/>
-    </label>
-    <div className="sm:col-span-2">
-      <label className="flex cursor-pointer items-start gap-2.5 text-sm">
-        <input name="consent" type="checkbox" required className="mt-0.5 size-5 shrink-0 cursor-pointer accent-brand-700 dark:accent-brand-300" {...validationProps("consent")}/>
-        <span>Я согласен на обработку персональных данных для ответа на заявку в соответствии с <Link href="/privacy" className="font-semibold text-brand-700 dark:text-brand-300 underline underline-offset-2">Политикой обработки персональных данных</Link>.</span>
-      </label>
-      {fieldError("consent")}
-    </div>
-    {error && <div ref={failure} role="alert" tabIndex={-1} className="text-sm text-red-700 dark:text-red-400 sm:col-span-2"><p className="font-semibold">{error}</p>
-      <p className="mt-2">Отправьте заявку на <a href={`mailto:${companyDetails.salesEmail}`} className="underline underline-offset-2">{companyDetails.salesEmail}</a>. Введённые данные сохранены в форме.</p></div>}
-    <Button type="submit" disabled={submitting} className="sm:w-fit" onMouseDown={event => {
-      // Showing a blur error can move the button before the click reaches it.
-      if (event.currentTarget.form?.contains(document.activeElement)) event.preventDefault();
-    }}>{submitting ? "Отправляем…" : "Отправить заявку"}</Button>
+      <div className="sm:col-span-2">
+        <label className="flex cursor-pointer items-start gap-2.5 text-sm">
+          <input name="consent" type="checkbox" required className="mt-0.5 size-5 shrink-0 cursor-pointer accent-brand-700 dark:accent-brand-300" {...validationProps("consent")}/>
+          <span>Я согласен на обработку персональных данных для ответа на заявку в соответствии с <Link href="/privacy" className="font-semibold text-brand-700 dark:text-brand-300 underline underline-offset-2">Политикой обработки персональных данных</Link>.</span>
+        </label>
+        {fieldError("consent")}
+      </div>
+      {error && <div ref={failure} role="alert" tabIndex={-1} className="text-sm text-red-700 dark:text-red-400 sm:col-span-2"><p className="font-semibold">{error}</p>
+        <p className="mt-2">Отправьте заявку на <a href={`mailto:${companyDetails.salesEmail}`} className="underline underline-offset-2">{companyDetails.salesEmail}</a>. Введённые данные сохранены в форме.</p></div>}
+      <Button type="submit" disabled={submitting} className="sm:w-fit" onMouseDown={event => {
+        // Showing a blur error can move the button before the click reaches it.
+        if (event.currentTarget.form?.contains(document.activeElement)) event.preventDefault();
+      }}>{submitting ? "Отправляем…" : "Отправить заявку"}</Button>
+    </fieldset>
   </form>;
 }

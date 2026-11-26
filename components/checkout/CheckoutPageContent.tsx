@@ -4,7 +4,7 @@ import {useCart} from "@/hooks/useCart";
 import {EmptyState} from "@/components/ui/EmptyState";
 import {CheckoutForm} from "./CheckoutForm";
 import {ButtonLink} from "@/components/ui/Button";
-import {MAX_CHECKOUT_ITEMS} from "@/lib/checkout";
+import {checkoutItemLimitMessage, MAX_CHECKOUT_ITEMS} from "@/lib/checkout";
 import {CheckoutOrderSummary} from "./CheckoutOrderSummary";
 import type {CartLine} from "@/types/cart";
 import restoreStyles from "@/components/cart/CartRestore.module.css";
@@ -16,9 +16,12 @@ const formPanel = "min-w-0 rounded-xl border border-slate-200 bg-white p-4 shado
 export function CheckoutPageContent() {
   const {lines, totalAmount, hydrated} = useCart();
   const [orderCreated, setOrderCreated] = useState(false);
+  const [hasDraft, setHasDraft] = useState(false);
+  const [submittedCart, setSubmittedCart] = useState<{lines: CartLine[]; totalAmount: number}>();
   const [priceReview, setPriceReview] = useState<{lines: CartLine[]; totals: number[]}>();
-  const revisedTotals = priceReview?.lines === lines ? priceReview.totals : undefined;
-  const reviewedTotal = revisedTotals ? revisedTotals.reduce((sum, amount) => sum + amount, 0) / 100 : totalAmount;
+  const shownLines = submittedCart?.lines ?? lines;
+  const revisedTotals = priceReview?.lines === shownLines ? priceReview.totals : undefined;
+  const reviewedTotal = revisedTotals ? revisedTotals.reduce((sum, amount) => sum + amount, 0) / 100 : submittedCart?.totalAmount ?? totalAmount;
   if (orderCreated) return <p role="status" className="rounded-xl border border-slate-200 bg-white p-5 text-sm dark:border-slate-700 dark:bg-slate-900">
     Заказ создан. Открываем подтверждение…
   </p>;
@@ -37,35 +40,33 @@ export function CheckoutPageContent() {
       </div>
     </div>
   );
-  if (!lines.length) {
-    return (
-      <EmptyState
-        compact
-        title="Нечего оформлять"
-        description="Корзина пуста. Выберите товары, затем вернитесь к оформлению."
-      />
-    );
-  }
+  const empty = lines.length === 0;
   const overLimit = lines.length > MAX_CHECKOUT_ITEMS;
-  if (overLimit || lines.some(line => line.invalidReason || line.priceRequiresQuote)) {
-    return <section className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-900 sm:p-6">
-      <h2 className="text-card-title">{overLimit ? "Слишком много позиций в заказе" : "Расчёт заказа требует уточнения"}</h2>
-      <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">{overLimit
-        ? `В одном заказе может быть до ${MAX_CHECKOUT_ITEMS} позиций. Сократите список в корзине.`
-        : "Откройте корзину, чтобы проверить объём и цены отмеченных позиций."}</p>
-      <ButtonLink href="/cart" className="mt-5">Вернуться в корзину</ButtonLink>
-    </section>;
-  }
+  const needsReview = lines.some(line => line.invalidReason || line.priceRequiresQuote);
+  const blocked = empty || overLimit || needsReview;
+  const showIssue = blocked && !submittedCart;
 
-  return (
-    <div className={checkoutLayout}>
-      <div className={summaryPosition}>
-        <CheckoutOrderSummary lines={lines} totalAmount={reviewedTotal} revisedTotals={revisedTotals}/>
-      </div>
+  return <>
+    {showIssue && (empty ? <EmptyState compact title="Нечего оформлять"
+      description={hasDraft ? "Корзина пуста. Введённые данные сохранены в форме. Добавьте товары, чтобы продолжить оформление."
+        : "Корзина пуста. Выберите товары, затем вернитесь к оформлению."}/>
+      : <section className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-900 sm:p-6">
+        <h2 className="text-card-title">{overLimit ? "Слишком много позиций в заказе" : "Расчёт заказа требует уточнения"}</h2>
+        <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">{overLimit
+          ? checkoutItemLimitMessage
+          : "Откройте корзину, чтобы проверить объём и цены отмеченных позиций."}</p>
+        <ButtonLink href="/cart" className="mt-5">Вернуться в корзину</ButtonLink>
+      </section>)}
+    {(!showIssue || hasDraft) && <div className={`${checkoutLayout}${showIssue ? " mt-5" : ""}`}>
+      {!showIssue && <div className={summaryPosition}>
+        <CheckoutOrderSummary lines={shownLines} totalAmount={reviewedTotal} revisedTotals={revisedTotals}/>
+      </div>}
       <div className={formPanel}>
         <CheckoutForm onOrderCreated={() => setOrderCreated(true)} revisedTotals={revisedTotals}
-          onPriceChanged={totals => setPriceReview({lines, totals})}/>
+          reviewedTotal={reviewedTotal} checkoutBlocked={blocked} onDraftChange={() => setHasDraft(true)}
+          onSubmissionChange={sending => setSubmittedCart(sending ? {lines, totalAmount} : undefined)}
+          onPriceChanged={totals => setPriceReview({lines: shownLines, totals})}/>
       </div>
-    </div>
-  );
+    </div>}
+  </>;
 }

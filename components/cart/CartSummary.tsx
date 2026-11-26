@@ -8,11 +8,14 @@ import {revealQuoteRequest} from "@/components/home/revealQuoteRequest";
 import {formatCartQuantity} from "@/lib/cartQuantityInput";
 import {getProductVariantById} from "@/lib/cartCatalog";
 import {QUOTE_LIMITS} from "@/lib/quoteValidation";
+import {checkoutItemLimitMessage, MAX_CHECKOUT_ITEMS} from "@/lib/checkout";
+import {getProductNameWithSheetExecution} from "@/lib/sheetPresentation";
 import {CartAmount} from "./CartAmount";
 
 export function CartSummary({canRequestPrice, onClear}: {canRequestPrice: boolean; onClear: () => void}) {
   const {lineItemCount, totalAmount, lines} = useCart();
   const invalid = lines.some(line => line.invalidReason);
+  const overLimit = lines.length > MAX_CHECKOUT_ITEMS;
   const totalNeedsClarification = invalid || canRequestPrice;
   const quote = useQuoteRequest();
   const confirmation = useRef<HTMLDialogElement>(null);
@@ -22,7 +25,9 @@ export function CartSummary({canRequestPrice, onClear}: {canRequestPrice: boolea
   function requestPrice() {
     const positions = lines.filter(line => !line.invalidReason);
     const details = positions.map(line => {
-      const sheetOrder = getProductVariantById(line.productId)?.sheetOrder;
+      const product = getProductVariantById(line.productId);
+      const name = product ? getProductNameWithSheetExecution(product) : line.name;
+      const sheetOrder = product?.sheetOrder;
       const sheets = sheetOrder ? line.quantity / sheetOrder.quantityPerSheet : undefined;
       let amount = `${formatCartQuantity(line.quantity)} ${line.quantityUnit}`;
       if (line.pieceOrder) {
@@ -33,7 +38,7 @@ export function CartSummary({canRequestPrice, onClear}: {canRequestPrice: boolea
       } else if (sheets !== undefined && Number.isInteger(sheets)) {
         amount = `${formatCartQuantity(sheets)} шт.`;
       }
-      return `\n• ${line.name} — ${amount}`;
+      return `\n• ${name} — ${amount}`;
     });
     let message = "Прошу рассчитать стоимость и доставку товаров из корзины.";
     for (const [index, position] of details.entries()) {
@@ -73,10 +78,11 @@ export function CartSummary({canRequestPrice, onClear}: {canRequestPrice: boolea
         Дату и условия подъезда согласуем при подтверждении заказа.
       </p>
       {invalid && <p className="mt-3 text-sm text-[var(--danger-text)]">Проверьте отмеченные позиции перед оформлением.</p>}
+      {overLimit && <p role="status" className="mt-3 text-sm text-[var(--danger-text)]">{checkoutItemLimitMessage}</p>}
       <div className="mt-5 grid gap-2.5">
         {canRequestPrice ? <Button type="button" onClick={requestPrice}>Запросить расчёт</Button>
           : invalid ? <ButtonLink href="/#request">Запросить расчёт</ButtonLink>
-            : <ButtonLink href="/checkout">Перейти к оформлению</ButtonLink>}
+            : !overLimit && <ButtonLink href="/checkout">Перейти к оформлению</ButtonLink>}
         <ButtonLink href="/catalog" variant="secondary">Продолжить покупки</ButtonLink>
       </div>
       <div className="mt-2 flex justify-center">

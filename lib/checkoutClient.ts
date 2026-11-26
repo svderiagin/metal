@@ -6,28 +6,43 @@ import {isOrderReference} from "./orderReference";
 
 const checkoutAttemptKey = "metal-store-checkout-attempt-v1";
 type CheckoutAttempt = {fingerprint: string; key: string};
-let checkoutAttempt: CheckoutAttempt | null | undefined;
+const sha256Hex = /^[a-f0-9]{64}$/u;
+let checkoutAttempts: Map<string, CheckoutAttempt> | undefined;
 
-function readCheckoutAttempt(): CheckoutAttempt | undefined {
-  if (checkoutAttempt !== undefined) return checkoutAttempt ?? undefined;
+function readCheckoutAttempts() {
+  if (checkoutAttempts) return checkoutAttempts;
+  const attempts = new Map<string, CheckoutAttempt>();
   try {
-    const attempt = JSON.parse(window.sessionStorage.getItem(checkoutAttemptKey) ?? "null") as CheckoutAttempt | null;
-    if (attempt && /^[a-f0-9]{64}$/.test(attempt.key) && /^[a-f0-9]{64}$/.test(attempt.fingerprint)) {
-      checkoutAttempt = attempt;
-      return attempt;
+    const saved: unknown = JSON.parse(window.sessionStorage.getItem(checkoutAttemptKey) ?? "null");
+    for (const value of Array.isArray(saved) ? saved : [saved]) {
+      const attempt = value as Partial<CheckoutAttempt> | null;
+      if (typeof attempt?.key === "string" && sha256Hex.test(attempt.key)
+        && typeof attempt.fingerprint === "string" && sha256Hex.test(attempt.fingerprint)) {
+        attempts.set(attempt.fingerprint, {key: attempt.key, fingerprint: attempt.fingerprint});
+      }
     }
   } catch { /* The current attempt also stays in memory if storage is unavailable. */ }
+  checkoutAttempts = attempts;
+  return attempts;
+}
+
+function saveCheckoutAttempts(attempts: Map<string, CheckoutAttempt>) {
+  try {window.sessionStorage.setItem(checkoutAttemptKey, JSON.stringify([...attempts.values()]));}
+  catch { /* In-memory retry remains available. */ }
 }
 
 const toHex = (bytes: Uint8Array) => Array.from(bytes, byte => byte.toString(16).padStart(2, "0")).join("");
 
-async function checkoutKey(input: CreateOrderInput) {
+async function getCheckoutAttempt(input: CreateOrderInput) {
   const fingerprint = toHex(new Uint8Array(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(JSON.stringify(input)))));
-  const previous = readCheckoutAttempt();
-  if (previous?.fingerprint === fingerprint) return previous.key;
-  checkoutAttempt = {fingerprint, key: toHex(crypto.getRandomValues(new Uint8Array(32)))};
-  try {window.sessionStorage.setItem(checkoutAttemptKey, JSON.stringify(checkoutAttempt));} catch { /* In-memory retry remains available. */ }
-  return checkoutAttempt.key;
+  const attempts = readCheckoutAttempts();
+  const previous = attempts.get(fingerprint);
+  if (previous) return previous;
+  // An edited checkout must keep the original attempt available in case its response was lost.
+  const attempt = {fingerprint, key: toHex(crypto.getRandomValues(new Uint8Array(32)))};
+  attempts.set(fingerprint, attempt);
+  saveCheckoutAttempts(attempts);
+  return attempt;
 }
 
 export class CheckoutPriceChanged extends Error {
@@ -44,7 +59,7 @@ export class CheckoutInvoiceTextError extends Error {
 
 export async function createOrder(input: CreateOrderInput, expectedLineTotals: number[]): Promise<CreateOrderResponse> {
   const fallback = "Не удалось создать заказ.";
-  const key = await checkoutKey(input);
+  const {key, fingerprint} = await getCheckoutAttempt(input);
   const response = await fetch("/api/orders", {method: "POST", headers: {"content-type": "application/json", "Idempotency-Key": key},
     body: JSON.stringify({...input, expectedLineTotals})})
     .catch(() => {throw new Error("Не удалось получить подтверждение заказа. Повторите отправку с теми же данными.");});
@@ -59,8 +74,11 @@ export async function createOrder(input: CreateOrderInput, expectedLineTotals: n
   }
   if (!response.ok || !isApiSuccess(result)) throw new Error(readApiError(result, fallback));
   if (!("order" in result) || !isOrderResult(result.order)) throw new Error("Не удалось подтвердить создание заказа.");
-  checkoutAttempt = null;
-  try {window.sessionStorage.removeItem(checkoutAttemptKey);} catch { /* The response already contains the confirmed order. */ }
+  const attempts = readCheckoutAttempts();
+  if (attempts.get(fingerprint)?.key === key) {
+    attempts.delete(fingerprint);
+    saveCheckoutAttempts(attempts);
+  }
   return result as unknown as CreateOrderResponse;
 }
 

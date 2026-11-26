@@ -53,6 +53,11 @@ export function getTreadPlateExecution(variant: Pick<ProductVariant, "id">) {
   if (variant.id === "catalog-list-rif-3x1250x2500-chechevitsa") return treadPlateStandard;
 }
 
+export function getProductNameWithSheetExecution(variant: Pick<ProductVariant, "id" | "name">) {
+  const execution = getTreadPlateExecution(variant);
+  return execution ? `${variant.name} · ${execution}` : variant.name;
+}
+
 export function isGalvanizedSheet(variant: ProductVariant) {
   return variant.subcategoryId === galvanizedSheetSubcategoryId;
 }

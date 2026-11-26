@@ -4,6 +4,7 @@ import {formatCheckoutPhoneDraft, isCheckoutPhonePrefix, MAX_CHECKOUT_PHONE_LENG
 import {isInvoiceBuyerField} from "./invoiceReceipt";
 
 export const MAX_CHECKOUT_ITEMS = 100;
+export const checkoutItemLimitMessage = `В одном заказе может быть до ${MAX_CHECKOUT_ITEMS} позиций. Сократите список в корзине.`;
 export const CHECKOUT_LIMITS = {fullName: 120, email: 254, phone: MAX_CHECKOUT_PHONE_LENGTH, companyName: 180,
   taxNumber: 12, legalAddress: 300, deliveryAddress: 300, comment: 1000} as const;
 export type CheckoutFieldErrors = Partial<Record<keyof CheckoutFormData, string>>;
@@ -47,12 +48,15 @@ function hasAddressDetails(value: string) {
   return containsLetter(address) && (parts?.length ?? 0) >= 2;
 }
 
-const buildingNumber = String.raw`\d{1,5}(?:[а-яa-z])?(?:[-/]\d{1,5}[а-яa-z]?)?`;
+const buildingNumber = String.raw`\d{1,5}(?:[а-яa-z])?(?:[-/]\d{1,5}[а-яa-z]?)?(?:[кс]\d{1,5}[а-яa-z]?)?`;
 const buildingLabel = new RegExp(String.raw`(?:^|[\s,;])(?:дом|д|владение|вл|участок|уч|здание|строение|стр|корпус|корп|бокс|ангар)(?:\.\s*|\s+|(?=№))№?\s*${buildingNumber}(?=$|[\s,;]|(?:к|стр)\d)`, "iu");
 const officeSuffix = /[\s,;]+(?:квартира|кв|офис|оф|этаж|помещение|пом|подъезд)(?:\.\s*|\s+).+$/iu;
 const streetLabel = /(?:^|[\s,;])(?:улица|ул|проспект|просп|пр-кт|пр-т|переулок|пер|проезд|пр-д|шоссе|ш|набережная|наб|бульвар|бул|б-р|площадь|пл|дорога|тракт|тупик|туп|линия|территория|тер|микрорайон|мкр|квартал|кв-л|км)(?:[\s,;.]|$)/iu;
 const ruralPlace = /(?:^|[\s,;])(?:село|с|деревня|д|пос[её]лок|пос|хутор|х|станица|ст-ца)(?:\.\s*|\s+)\p{L}{2,}/iu;
 const administrativeLabel = /(?:^|[\s,;])(?:городской округ|город|г\.\s*о|г|область|обл|край|район|р-н|округ|республика|респ)(?:\.\s*|[\s,;]+|$)/giu;
+const regionOrDistrict = /(?:^|\s)(?:область|обл|край|район|р-н|округ|республика|респ|г\.\s*о)(?=$|[\s.])/iu;
+const explicitCity = /^(?:город|г)(?=[\s.])/iu;
+const country = /^(?:Россия|РФ|Российская Федерация)$/iu;
 const deliveryObject = /(?:^|[\s,;])(?:объект|склад|стройплощадка|база|завод|терминал|снт|днт|гск|жк|бц|тк|трц|рц|логистический центр|индустриальный парк)[\s:]+((?:[«"„№]\s*)?[\p{L}\p{N}][^,;]*)/iu;
 const trailingBuilding = new RegExp(String.raw`(?:^|[\s,;№])${buildingNumber}(?:\s*(?:к(?:орп(?:ус)?)?|стр(?:оение)?|лит(?:ера)?)\.?\s*[\p{L}\p{N}]+)?$`, "iu");
 
@@ -85,6 +89,12 @@ export function hasDeliveryAddressDetails(value: string) {
 }
 
 function hasUnnamedStreet(value: string) {
+  const parts = value.split(/[,;]/u).map(part => part.trim()).filter(Boolean);
+  if (parts.length > 1) {
+    const candidate = parts[parts.length - 1];
+    return containsLetter(candidate) && !country.test(candidate) && !explicitCity.test(candidate) && !regionOrDistrict.test(candidate)
+      && parts.slice(0, -1).some(part => !country.test(part) && !regionOrDistrict.test(part));
+  }
   const names = value.replace(administrativeLabel, " ").match(/\p{L}{2,}(?:[-\u2010\u2011]\p{L}{2,})*/gu);
   return (names?.length ?? 0) >= 2;
 }

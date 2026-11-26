@@ -7,7 +7,7 @@ import type {CheckoutFormData} from "@/types/order";
 import {Button} from "@/components/ui/Button";
 import {formatCurrency} from "@/lib/currency";
 import {CustomerTypeSelector} from "./CustomerTypeSelector";
-import {createOrderInput, formatCheckoutField, getCheckoutFieldErrors, MAX_CHECKOUT_ITEMS, type CheckoutFieldErrors, type CheckoutTextField} from "@/lib/checkout";
+import {checkoutItemLimitMessage, createOrderInput, formatCheckoutField, getCheckoutFieldErrors, MAX_CHECKOUT_ITEMS, type CheckoutFieldErrors, type CheckoutTextField} from "@/lib/checkout";
 import {CheckoutInvoiceTextError, CheckoutPriceChanged, createOrder} from "@/lib/checkoutClient";
 import {rememberOrderConfirmation} from "@/lib/orderConfirmation";
 import {CheckoutFields} from "./CheckoutFields";
@@ -28,9 +28,13 @@ const initial: CheckoutFormData = {
   consentAccepted: false
 };
 
-export function CheckoutForm({onOrderCreated, revisedTotals, onPriceChanged}: {
+export function CheckoutForm({onOrderCreated, revisedTotals, reviewedTotal, checkoutBlocked, onDraftChange, onSubmissionChange, onPriceChanged}: {
   onOrderCreated: () => void;
   revisedTotals?: number[];
+  reviewedTotal: number;
+  checkoutBlocked: boolean;
+  onDraftChange: () => void;
+  onSubmissionChange: (sending: boolean) => void;
   onPriceChanged: (totals: number[]) => void;
 }) {
   const formId = useId();
@@ -45,7 +49,6 @@ export function CheckoutForm({onOrderCreated, revisedTotals, onPriceChanged}: {
   const submissionError = useRef<HTMLDivElement>(null);
   const submitActions = useRef<HTMLDivElement>(null);
   const {items, removeOrderedItems, totalAmount, lines} = useCart();
-  const reviewedTotal = revisedTotals ? revisedTotals.reduce((sum, amount) => sum + amount, 0) / 100 : totalAmount;
   const router = useRouter();
   const errors = getCheckoutFieldErrors(form);
   if (invoiceTextError) errors[invoiceTextError.field] = invoiceTextError.message;
@@ -75,6 +78,7 @@ export function CheckoutForm({onOrderCreated, revisedTotals, onPriceChanged}: {
     if (key !== "deliveryAddress" && formatted.trim()) setVisited(current => ({...current, [key]: true}));
   }
   function updateField<Key extends keyof CheckoutFormData>(key: Key, value: CheckoutFormData[Key]) {
+    onDraftChange();
     setForm(current => ({...current, [key]: value}));
     if (key === "customerType" || key === invoiceTextError?.field) setInvoiceTextError(undefined);
     setError("");
@@ -84,7 +88,7 @@ export function CheckoutForm({onOrderCreated, revisedTotals, onPriceChanged}: {
     event.preventDefault();
     if (submissionLock.current) return;
     if (lines.length > MAX_CHECKOUT_ITEMS) {
-      setError(`В одном заказе может быть до ${MAX_CHECKOUT_ITEMS} позиций. Сократите список в корзине.`);
+      setError(checkoutItemLimitMessage);
       return;
     }
     if (!lines.length || totalAmount <= 0 || lines.some(line => line.invalidReason || line.priceRequiresQuote)) {
@@ -98,6 +102,7 @@ export function CheckoutForm({onOrderCreated, revisedTotals, onPriceChanged}: {
     }
     submissionLock.current = true;
     setSubmitting(true);
+    onSubmissionChange(true);
     try {
       const orderInput = createOrderInput(form, lines.map(({productId, quantity, measurement, pieceOrder}) => ({
         productId, quantity,
@@ -118,6 +123,7 @@ export function CheckoutForm({onOrderCreated, revisedTotals, onPriceChanged}: {
       if (caught instanceof CheckoutPriceChanged) onPriceChanged(caught.lineTotals);
       submissionLock.current = false;
       setSubmitting(false);
+      onSubmissionChange(false);
       if (caught instanceof CheckoutInvoiceTextError) {
         setInvoiceTextError(caught);
         setValidationAttempts(current => current + 1);
@@ -157,14 +163,14 @@ export function CheckoutForm({onOrderCreated, revisedTotals, onPriceChanged}: {
         </div>
       </div>
       <div ref={submitActions} className="scroll-mb-5 space-y-3 border-t border-slate-200 pt-4 dark:border-slate-700">
-        <dl className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+        {(!checkoutBlocked || submitting) && <dl className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
           <dt className="text-sm font-semibold">Итого</dt>
           <dd className="ml-auto text-right text-lg font-bold leading-6 tabular-nums">{formatCurrency(reviewedTotal)}</dd>
-        </dl>
+        </dl>}
         <p id={`${formId}-invoice-hint`} className="text-xs text-slate-600 dark:text-slate-300">
           После оформления PDF скачается автоматически. Копию платёжного счёта отправим на указанную электронную почту.
         </p>
-        <Button type="submit" disabled={submitting} aria-describedby={`${formId}-invoice-hint`} className="w-full" onMouseDown={event => {
+        <Button type="submit" disabled={submitting || checkoutBlocked} aria-describedby={`${formId}-invoice-hint`} className="w-full" onMouseDown={event => {
           // Inline errors on blur can change the submit button's position before the click.
           if (event.currentTarget.form?.contains(document.activeElement)) event.preventDefault();
         }}>{submitting ? "Оформляем заказ…" : revisedTotals ? "Подтвердить сумму и оформить" : "Оформить заказ"}</Button>
