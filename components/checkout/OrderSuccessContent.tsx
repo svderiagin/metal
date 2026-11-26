@@ -6,9 +6,11 @@ import {ButtonLink} from "@/components/ui/Button";
 import {InvoiceDownload} from "./InvoiceDownload";
 import {Icon} from "@/components/ui/Icon";
 import {formatCurrency} from "@/lib/currency";
+import {companyDetails} from "@/lib/companyDetails";
 
 export function OrderSuccessContent() {
   const [order, setOrder] = useState<OrderConfirmation | null | undefined>(undefined);
+  const title = order ? "Заказ создан" : "Информация о заказе";
   useEffect(() => {
     const timer = window.setTimeout(() => {
       setOrder(readOrderConfirmation());
@@ -16,12 +18,13 @@ export function OrderSuccessContent() {
     return () => window.clearTimeout(timer)
   }, []);
   return <section aria-labelledby="order-confirmation-title" className="mx-auto max-w-2xl rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-4 py-6 text-center sm:px-6 md:p-10">
+    <title>{`${title} | ${companyDetails.brandName}`}</title>
     <div className={`mx-auto flex size-16 items-center justify-center rounded-full ${order
       ? "bg-green-100 text-green-700 dark:bg-green-950/60 dark:text-green-300"
       : "bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300"}`} aria-hidden>
       <Icon name={order ? "check" : "help"} className="!size-8"/>
     </div>
-    <h1 id="order-confirmation-title" className="mt-5 text-page-title">{order ? "Заказ создан" : "Информация о заказе"}</h1>
+    <h1 id="order-confirmation-title" className="mt-5 text-page-title">{title}</h1>
     {order === undefined ? <p role="status" className="mt-3 text-slate-600 dark:text-slate-300">Загружаем данные заказа…</p>
       : order ? <>
         <dl className="mt-6 space-y-3 rounded-lg border border-slate-200 bg-slate-50 p-4 text-left text-sm dark:border-slate-700 dark:bg-slate-800/50 sm:p-5">

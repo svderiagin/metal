@@ -11,6 +11,7 @@ import styles from "./QuoteRequestForm.module.css";
 import {buildQuoteMessage} from "@/lib/quoteRequest";
 import {isApiSuccess, readApiError} from "@/lib/apiResponse";
 import {companyDetails} from "@/lib/companyDetails";
+import {useFormReady} from "./useFormReady";
 
 const fallbackError = "Не удалось отправить заявку. Попробуйте ещё раз.";
 
@@ -18,6 +19,7 @@ export function QuoteRequestForm({descriptionPlaceholder = "Арматура р�
   descriptionPlaceholder?: string;
 } = {}) {
   const formId = useId();
+  const ready = useFormReady();
   const [fieldErrors, setFieldErrors] = useState<QuoteErrors>({});
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
@@ -135,8 +137,8 @@ export function QuoteRequestForm({descriptionPlaceholder = "Арматура р�
   function fieldError(field: QuoteField, spacing = "mt-1") {
     return fieldErrors[field] && <span id={`${formId}-${field}-error`} className={`${styles.error} ${spacing}`} aria-live="polite">{fieldErrors[field]}</span>;
   }
-  return <form method="post" onSubmit={submit} onBlur={validateOnBlur} onChange={clearResolvedError} noValidate aria-busy={submitting} className={styles.form}>
-    <fieldset disabled={submitting} className="grid min-w-0 items-start gap-4 sm:grid-cols-2">
+  return <form method="post" onSubmit={submit} onBlur={validateOnBlur} onChange={clearResolvedError} noValidate aria-busy={!ready || submitting} className={styles.form}>
+    <fieldset disabled={!ready || submitting} className="grid min-w-0 items-start gap-4 sm:grid-cols-2">
       <div className="min-w-0"><label className="block text-sm font-semibold">Имя *
         <Input name="name" required maxLength={QUOTE_LIMITS.name} className="mt-1.5" autoComplete="name" {...validationProps("name")}/>
         </label>
@@ -182,7 +184,9 @@ export function QuoteRequestForm({descriptionPlaceholder = "Арматура р�
       <Button type="submit" disabled={submitting} className="sm:w-fit" onMouseDown={event => {
         // Showing a blur error can move the button before the click reaches it.
         if (event.currentTarget.form?.contains(document.activeElement)) event.preventDefault();
-      }}>{submitting ? "Отправляем…" : "Отправить заявку"}</Button>
+      }}>{!ready ? "Загружаем форму…" : submitting ? "Отправляем…" : "Отправить заявку"}</Button>
     </fieldset>
+    <noscript><p className="mt-3 text-sm">Включите JavaScript или напишите на <a href={`mailto:${companyDetails.salesEmail}`}
+      className="underline underline-offset-2">{companyDetails.salesEmail}</a>.</p></noscript>
   </form>;
 }

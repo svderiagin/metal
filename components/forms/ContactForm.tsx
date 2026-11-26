@@ -8,6 +8,7 @@ import {Textarea} from "@/components/ui/Textarea";
 import {isApiSuccess, readApiError} from "@/lib/apiResponse";
 import {companyDetails} from "@/lib/companyDetails";
 import {CONTACT_LIMITS, type ContactField, type ContactFieldErrors, validateContactFields} from "@/lib/contactValidation";
+import {useFormReady} from "./useFormReady";
 
 const visibleFields = ["name", "email", "phone", "message", "consent"] as const;
 const fallbackError = "Не удалось отправить сообщение. Попробуйте ещё раз.";
@@ -21,6 +22,7 @@ function readFields(form: HTMLFormElement) {
 
 export function ContactForm() {
   const formId = useId();
+  const ready = useFormReady();
   const [result, setResult] = useState<ContactResult | null>(null);
   const [fieldErrors, setFieldErrors] = useState<ContactFieldErrors>({});
   const [submitting, setSubmitting] = useState(false);
@@ -89,7 +91,7 @@ export function ContactForm() {
       method="post"
       noValidate
       aria-label="Напишите нам"
-      aria-busy={submitting}
+      aria-busy={!ready || submitting}
       className="@container min-w-0"
       onSubmit={submit}
       onChange={event => {
@@ -97,7 +99,7 @@ export function ContactForm() {
         if (Object.keys(fieldErrors).length) setFieldErrors(validateContactFields(readFields(event.currentTarget)));
       }}
     >
-      <fieldset disabled={submitting} className="min-w-0 space-y-4">
+      <fieldset disabled={!ready || submitting} className="min-w-0 space-y-4">
         <div className="grid items-start gap-4 @min-[27rem]:grid-cols-2">
           <div className="min-w-0">
             <label htmlFor={`${formId}-name`} className={labelClass}>Имя *</label>
@@ -141,9 +143,11 @@ export function ContactForm() {
           {fieldError("consent")}
         </div>
         <Button type="submit" className="w-full sm:w-auto" disabled={submitting}>
-          {submitting ? "Отправляем…" : "Отправить сообщение"}
+          {!ready ? "Загружаем форму…" : submitting ? "Отправляем…" : "Отправить сообщение"}
         </Button>
       </fieldset>
+      <noscript><p className="mt-3 text-sm">Включите JavaScript или напишите на <a href={`mailto:${companyDetails.salesEmail}`}
+        className="underline underline-offset-2">{companyDetails.salesEmail}</a>.</p></noscript>
       {result && <div
         ref={resultPanel}
         role={result.kind === "success" ? "status" : "alert"}
