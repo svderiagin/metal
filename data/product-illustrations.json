@@ -664,11 +664,6 @@
     "photoUrl": "/images/catalog/armatura/originals/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
     "signature": "26d50aa1"
   },
-  "local--684": {
-    "imageUrl": "/images/catalog/armatura/armatura-a500s/measurement/armatura-riflenaya-a500s-16mm-prutok-11-7m.webp",
-    "photoUrl": "/images/catalog/armatura/originals/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
-    "signature": "29d3c0bb"
-  },
   "local-258": {
     "imageUrl": "/images/catalog/truba-kruglaya/truba-vodogazoprovodnaya/measurement/truba-vgp-du15x2-8mm-6m.webp",
     "photoUrl": "/images/catalog/truba-kruglaya/truba-vodogazoprovodnaya/originals/truba_vgp_2400_1800_original.jpg",
@@ -729,21 +724,6 @@
     "photoUrl": "/images/catalog/truba-kruglaya/truba-vodogazoprovodnaya-otsinkovannaya/originals/truba_vgp_ocinkovannaya_2400_1800_original.jpg",
     "signature": "b89a54b9"
   },
-  "local-1421": {
-    "imageUrl": "/images/catalog/armatura/armatura-a500s/measurement/armatura-riflenaya-a500s-12mm-prutok-11-7m.webp",
-    "photoUrl": "/images/catalog/armatura/originals/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
-    "signature": "831932ba"
-  },
-  "local-1555": {
-    "imageUrl": "/images/catalog/armatura/armatura-a500s/measurement/armatura-riflenaya-a500s-8mm-bunt.webp",
-    "photoUrl": "/images/catalog/armatura/originals/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
-    "signature": "e6050bfb"
-  },
-  "local-1758": {
-    "imageUrl": "/images/catalog/armatura/armatura-a500s/measurement/armatura-riflenaya-a500s-28mm-prutok-11-7m.webp",
-    "photoUrl": "/images/catalog/armatura/originals/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
-    "signature": "1cc97547"
-  },
   "local-2000": {
     "imageUrl": "/images/catalog/armatura/armatura-a500s/measurement/armatura-riflenaya-a500s-10mm-prutok-11-7m.webp",
     "photoUrl": "/images/catalog/armatura/originals/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
@@ -769,26 +749,6 @@
     "photoUrl": "/images/catalog/armatura/originals/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
     "signature": "bc563a45"
   },
-  "local-6340": {
-    "imageUrl": "/images/catalog/armatura/armatura-a500s/measurement/armatura-riflenaya-a500s-14mm-prutok-11-7m.webp",
-    "photoUrl": "/images/catalog/armatura/originals/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
-    "signature": "5fe845f5"
-  },
-  "local-6346": {
-    "imageUrl": "/images/catalog/armatura/armatura-a500s/measurement/armatura-riflenaya-a500s-18mm-prutok-11-7m.webp",
-    "photoUrl": "/images/catalog/armatura/originals/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
-    "signature": "be136e55"
-  },
-  "local-6352": {
-    "imageUrl": "/images/catalog/armatura/armatura-a500s/measurement/armatura-riflenaya-a500s-20mm-prutok-11-7m.webp",
-    "photoUrl": "/images/catalog/armatura/originals/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
-    "signature": "91c7ffc0"
-  },
-  "local-6359": {
-    "imageUrl": "/images/catalog/armatura/armatura-a500s/measurement/armatura-riflenaya-a500s-25mm-prutok-11-7m.webp",
-    "photoUrl": "/images/catalog/armatura/originals/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
-    "signature": "e5221991"
-  },
   "local-7483": {
     "imageUrl": "/images/catalog/armatura/armatura-a500s/measurement/armatura-riflenaya-a500s-12mm-prutok-6m.webp",
     "photoUrl": "/images/catalog/armatura/originals/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
@@ -799,21 +759,6 @@
     "photoUrl": "/images/catalog/truba-kruglaya/truba-elektrosvarnaya/originals/truba_elektrosvarnaya_2400_1800_original.jpg",
     "signature": "eb2030ec"
   },
-  "local-17091": {
-    "imageUrl": "/images/catalog/armatura/armatura-a500s/measurement/armatura-riflenaya-a500s-8mm-prutok-6m.webp",
-    "photoUrl": "/images/catalog/armatura/originals/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
-    "signature": "dfdb5af5"
-  },
-  "local-17412": {
-    "imageUrl": "/images/catalog/armatura/armatura-a500s/measurement/armatura-riflenaya-a500s-22mm-prutok-11-7m.webp",
-    "photoUrl": "/images/catalog/armatura/originals/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
-    "signature": "5d68616d"
-  },
-  "local-17482": {
-    "imageUrl": "/images/catalog/armatura/armatura-a500s/measurement/armatura-riflenaya-a500s-32mm-prutok-11-7m.webp",
-    "photoUrl": "/images/catalog/armatura/originals/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
-    "signature": "a74ce8c7"
-  },
   "local-40706": {
     "imageUrl": "/images/catalog/truba-kruglaya/truba-elektrosvarnaya/measurement/truba-elektrosvarnaya-219x5mm-12m.jpg",
     "photoUrl": "/images/catalog/truba-kruglaya/truba-elektrosvarnaya/originals/truba_elektrosvarnaya_2400_1800_original.jpg",
@@ -823,11 +768,6 @@
     "imageUrl": "/images/catalog/truba-kruglaya/truba-elektrosvarnaya/measurement/truba-elektrosvarnaya-219x6mm-12m.jpg",
     "photoUrl": "/images/catalog/truba-kruglaya/truba-elektrosvarnaya/originals/truba_elektrosvarnaya_2400_1800_original.jpg",
     "signature": "a5ff54ce"
-  },
-  "local-44188": {
-    "imageUrl": "/images/catalog/armatura/armatura-a500s/measurement/armatura-riflenaya-a500s-6mm-prutok-6m.webp",
-    "photoUrl": "/images/catalog/armatura/originals/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
-    "signature": "7f811f3a"
   },
   "local-52334": {
     "imageUrl": "/images/catalog/truba-kruglaya/truba-elektrosvarnaya/measurement/truba-elektrosvarnaya-273x6mm-12m.jpg",
@@ -864,20 +804,10 @@
     "photoUrl": "/images/catalog/truba-kruglaya/truba-elektrosvarnaya/originals/truba_elektrosvarnaya_2400_1800_original.jpg",
     "signature": "e0b2d021"
   },
-  "local-61299": {
-    "imageUrl": "/images/catalog/armatura/armatura-a500s/measurement/armatura-riflenaya-a500s-36mm-prutok-11-7m.webp",
-    "photoUrl": "/images/catalog/armatura/originals/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
-    "signature": "03eabc07"
-  },
   "local-62388": {
     "imageUrl": "/images/catalog/truba-kruglaya/truba-elektrosvarnaya/measurement/truba-elektrosvarnaya-57x3mm-12m.jpg",
     "photoUrl": "/images/catalog/truba-kruglaya/truba-elektrosvarnaya/originals/truba_elektrosvarnaya_2400_1800_original.jpg",
     "signature": "5974c00a"
-  },
-  "local-65599": {
-    "imageUrl": "/images/catalog/balka/balka-normalnaya/measurement/balka-40b1-s255-12m.webp",
-    "photoUrl": "/images/catalog/balka/balka-normalnaya/originals/balka_normalnaya_2400_1800_marked.jpg",
-    "signature": "43b7cb9f"
   },
   "local-67138": {
     "imageUrl": "/images/catalog/balka/balka-normalnaya/measurement/balka-20b2-s255-12m.webp",
@@ -903,11 +833,6 @@
     "imageUrl": "/images/catalog/balka/balka-normalnaya/measurement/balka-55b1-s255-12m.webp",
     "photoUrl": "/images/catalog/balka/balka-normalnaya/originals/balka_normalnaya_2400_1800_marked.jpg",
     "signature": "f75b5d71"
-  },
-  "local-73160": {
-    "imageUrl": "/images/catalog/armatura/armatura-a500s/measurement/armatura-riflenaya-a500s-10mm-prutok-6m.webp",
-    "photoUrl": "/images/catalog/armatura/originals/riflenaya/armatura_reflenaya_1448_1086_original.jpg",
-    "signature": "2552a3e4"
   },
   "local-73573": {
     "imageUrl": "/images/catalog/balka/balka-shirokopolochnaya/measurement/balka-20sh2-s255-12m.webp",
