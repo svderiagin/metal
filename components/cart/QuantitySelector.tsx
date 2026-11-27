@@ -5,7 +5,7 @@ import {Input} from "@/components/ui/Input";
 import {Icon} from "@/components/ui/Icon";
 import {MAX_ORDER_PIECES} from "@/lib/constants";
 import {correctOrderQuantity, formatCatalogNumber, parseCatalogNumber, parseOrderQuantity} from "@/lib/catalogNumberInput";
-import {cartMaximumMessage, correctDraftPrecision, formatQuantityForInput, normalizeCartQuantityDraft, normalizeCartQuantityText, quantityTransferHandlers, stepCartQuantity, type DraftPrecision} from "@/lib/cartQuantityInput";
+import {correctDraftPrecision, formatQuantityForInput, normalizeCartQuantityDraft, normalizeCartQuantityText, quantityTransferHandlers, stepCartQuantity, type DraftPrecision} from "@/lib/cartQuantityInput";
 import {sameMeasuredQuantity} from "@/lib/orderMeasurement";
 import styles from "./QuantitySelector.module.css";
 
@@ -102,7 +102,7 @@ export function QuantitySelector({value, onChange, whole = false, productName, u
     selection.current = {start, end, direction};
     const nextDraft = {text: nextText, capped, exact};
     setDraft(nextDraft);
-    setMessage(next.message ?? "");
+    setMessage("");
     return nextDraft;
   }
 
@@ -127,9 +127,7 @@ export function QuantitySelector({value, onChange, whole = false, productName, u
       ...options, decimalPlaces: candidate?.exact !== undefined ? undefined : decimalPlaces, fallback: value,
     });
     let next = parseOrderQuantity(corrected.value);
-    const feedbackFor = (result: {message?: string; capped?: boolean}) =>
-      result.capped ? cartMaximumMessage(maximum, formatValue(maximum, true)) ?? "" : result.message ?? "";
-    let feedback = feedbackFor(corrected);
+    let feedback = corrected.message ?? "";
     if (next === null || next <= 0) {
       next = value;
       feedback = `Восстановлено количество ${formatValue(value, true)}.`;
@@ -139,7 +137,7 @@ export function QuantitySelector({value, onChange, whole = false, productName, u
         ...options, decimalPlaces: undefined, fallback: value,
       });
       next = parseOrderQuantity(stepped.value) ?? value;
-      feedback = feedbackFor(stepped);
+      feedback = stepped.message ?? "";
     }
     const normalized = normalizeQuantity?.(next);
     if (normalizeQuantity && !normalized) {
@@ -153,7 +151,7 @@ export function QuantitySelector({value, onChange, whole = false, productName, u
       setMessage("Увеличьте количество. Сумма позиции должна быть больше 0 ₽. Прежнее количество сохранено.");
       return;
     }
-    setMessage(normalized?.message ?? (feedback || (candidate?.capped ? message : "")), quantity);
+    setMessage(normalized?.message ?? feedback, quantity);
     if (quantity !== value) onChange(quantity);
   }
 

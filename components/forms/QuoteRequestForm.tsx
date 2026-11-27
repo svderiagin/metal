@@ -134,7 +134,7 @@ export function QuoteRequestForm({descriptionPlaceholder = "Арматура р�
       "aria-describedby": fieldErrors[field] ? `${formId}-${field}-error` : undefined,
     };
   }
-  function fieldError(field: QuoteField, spacing = "mt-1") {
+  function fieldError(field: QuoteField, spacing = "mt-1.5") {
     return fieldErrors[field] && <span id={`${formId}-${field}-error`} className={`${styles.error} ${spacing}`} aria-live="polite">{fieldErrors[field]}</span>;
   }
   return <form method="post" onSubmit={submit} onBlur={validateOnBlur} onChange={clearResolvedError} noValidate aria-busy={!ready || submitting} className={styles.form}>

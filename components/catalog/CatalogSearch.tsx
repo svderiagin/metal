@@ -10,6 +10,7 @@ import {catalogProductPath} from "@/lib/catalogLinks";
 import {getProductNameWithSheetExecution} from "@/lib/sheetPresentation";
 import {ProductTypeGrid} from "./ProductTypeGrid";
 import type {ProductType, ProductVariant} from "@/types/product";
+import cardStyles from "./CatalogCard.module.css";
 import focusStyles from "./CatalogFocus.module.css";
 
 const queryLimit = 250;
@@ -71,7 +72,7 @@ export function CatalogSearch({
 
   return (
     <section aria-labelledby="catalog-search-heading">
-      <div className="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-5 shadow-sm sm:p-6">
+      <div className={`${cardStyles.contentInset} ${cardStyles.body} rounded-xl border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-900`}>
         <h2 id="catalog-search-heading" className="text-xl font-bold">Поиск по каталогу</h2>
         <form ref={formRef} onSubmit={submit} role="search" className="mt-4 grid grid-cols-2 gap-3 sm:flex">
           <label className="col-span-2 min-w-0 sm:flex-1">

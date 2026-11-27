@@ -4,6 +4,7 @@ import {type ReactNode, useId, useState} from "react";
 import {Input} from "@/components/ui/Input";
 import {Icon} from "@/components/ui/Icon";
 import {ResetFiltersButton} from "./ResetFiltersButton";
+import cardStyles from "./CatalogCard.module.css";
 import styles from "./FilterPanel.module.css";
 
 type Props = {
@@ -26,7 +27,7 @@ export function FilterPanel({query, queryPlaceholder = "Название, раз
   const selectedCount = activeFilters > 0 && <span className="whitespace-nowrap rounded-full bg-slate-200 px-2 py-0.5 text-xs tabular-nums dark:bg-slate-700">Выбрано: {activeFilters}</span>;
 
   return (
-    <div className={`${styles.panel} w-full min-w-0 self-start rounded-xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-900 sm:p-5 ${className}`}>
+    <div className={`${styles.panel} ${cardStyles.contentInset} ${cardStyles.body} w-full min-w-0 self-start rounded-xl border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-900 ${className}`}>
       <h2 className="sr-only">Фильтры</h2>
       <div className={styles.toolbar}>
         <label className="block min-w-0 text-sm font-semibold">

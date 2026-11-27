@@ -3,7 +3,6 @@
   display: grid;
   min-width: 0;
   gap: 16px;
-  padding: 16px;
 }
 
 :global(html[data-theme="dark"]) .row {
@@ -64,7 +63,6 @@
   .row {
     grid-template-columns: minmax(0, 1fr) 19rem;
     column-gap: 24px;
-    padding: 24px;
   }
 
   .order:has(> [data-quantity-editor]):not(:has(> [data-quantity-editor] ~ [data-quantity-editor])) {

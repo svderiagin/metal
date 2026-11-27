@@ -50,7 +50,7 @@ const handlingPhotos = [
   },
   {
     image: loadingBayImage,
-    alt: "Мостовой кран над подготовленными пачками труб и пустой грузовой платформой",
+    alt: "Паллеты на открытом полуприцепе рядом с погрузчиком",
     label: "Площадка погрузки",
   },
   {
@@ -124,12 +124,12 @@ export default function DeliveryPage() {
 
       <section className="mt-9 sm:mt-12 lg:mt-14" aria-labelledby="receiving-heading">
         <h2 id="receiving-heading" className="text-section-title">Способы получения и сроки</h2>
-        <div className="mt-4 grid gap-3 md:grid-cols-2">
+        <div className="mt-4 grid gap-3 lg:grid-cols-2">
           <ReceivingOption
             title="Доставка на объект"
             icon="truck"
             image={transportImage}
-            alt="Грузовик с закреплённым металлопрокатом на дороге в промзоне"
+            alt="Стальные трубы большого диаметра, закреплённые цепями на полуприцепе"
           >
             Согласуем возможность доставки по вашему адресу, время прибытия машины и условия разгрузки.
           </ReceivingOption>
@@ -137,7 +137,7 @@ export default function DeliveryPage() {
             title="Самовывоз"
             icon="layers"
             image={pickupImage}
-            alt="Бортовая машина у склада, где к выдаче подготовлены пачки профильных труб"
+            alt="Паллеты в чёрной плёнке на бортовой платформе рядом со складом"
           >
             Перед поездкой <a href={mailHref} className={styles.textLink}>напишите в отдел продаж</a>. Сообщим адрес склада, согласуем время погрузки и подскажем, какие данные нужны для въезда.
           </ReceivingOption>
@@ -241,7 +241,7 @@ function ReceivingOption({title, icon, image, alt, children}: {
   children: ReactNode;
 }) {
   return (
-    <div className={`${panel} grid grid-rows-[1fr_auto] lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:grid-rows-1`}>
+    <div className={`${panel} grid items-start sm:max-lg:grid-cols-[minmax(0,1fr)_min(45%,22rem)] lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]`}>
       <div className="p-4 sm:p-5">
         <h3 className="flex items-center gap-2.5 text-card-title">
           <Icon name={icon} className="shrink-0 text-brand-700 dark:text-brand-400"/>
@@ -249,11 +249,11 @@ function ReceivingOption({title, icon, image, alt, children}: {
         </h3>
         <p className={`mt-2 ${mutedText}`}>{children}</p>
       </div>
-      <div className="min-w-0 px-4 pb-4 sm:px-5 sm:pb-5 lg:self-center lg:py-5 lg:pl-0">
+      <div className="min-w-0 px-4 pb-4 sm:py-5 sm:pl-0 sm:pr-5">
         <Image
           src={image}
           alt={alt}
-          sizes="auto, (min-width: 1360px) 293px, (min-width: 1024px) 24vw, (min-width: 768px) 50vw, 100vw"
+          sizes="auto, (min-width: 1360px) 293px, (min-width: 1024px) 24vw, (min-width: 640px) min(45vw, 352px), calc(100vw - 66px)"
           className="block h-auto w-full rounded-md border border-slate-200 bg-slate-100 dark:border-slate-700 dark:bg-slate-800"
         />
       </div>

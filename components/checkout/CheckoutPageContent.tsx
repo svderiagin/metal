@@ -11,7 +11,7 @@ import restoreStyles from "@/components/cart/CartRestore.module.css";
 
 const checkoutLayout = "grid items-start gap-5 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] lg:gap-8";
 const summaryPosition = "min-w-0 lg:col-start-2 lg:row-start-1";
-const formPanel = "min-w-0 rounded-xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-900 sm:p-6 md:p-8 lg:col-start-1 lg:row-start-1";
+const formPanel = "min-w-0 rounded-xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-900 sm:p-6 lg:col-start-1 lg:row-start-1 lg:p-8";
 
 export function CheckoutPageContent() {
   const {lines, totalAmount, hydrated} = useCart();

@@ -73,7 +73,7 @@ export function CartItemRow({line, onRemove}: {line: CartLine; onRemove: () => v
   }
 
   return (
-    <article data-cart-row={line.productId} className={`${styles.row} rounded-xl border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-900`}>
+    <article data-cart-row={line.productId} className={`${styles.row} rounded-xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6 dark:border-slate-700 dark:bg-slate-900`}>
       <div className={styles.product}>
         <h2 className="text-card-title">
           {line.slug ? <Link

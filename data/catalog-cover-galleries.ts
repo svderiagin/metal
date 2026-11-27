@@ -87,7 +87,6 @@ export const catalogCoverGalleries: Partial<Record<string, {cover?: string; addi
   "type-cat-trk-sub-4": {
     additional: [
       "/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/gallery/galvanized-welded-pipe-stock.jpg",
-      "/images/catalog/truba-kruglaya/truba-elektrosvarnaya-otsinkovannaya/gallery/galvanized-pipe-welded-seam.webp",
     ],
   },
   "cat-pnf": {

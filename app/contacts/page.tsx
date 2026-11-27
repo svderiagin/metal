@@ -104,8 +104,8 @@ export default function ContactsPage() {
             </div>
           </div>
           <div className={detailsPanel}>
-            <div className="flex flex-wrap items-center justify-between gap-x-1 self-start md:items-start lg:[&>button]:-my-2">
-              <h3 className="text-card-title">Банковские реквизиты</h3>
+            <div className="flex flex-wrap items-start gap-x-2 self-start">
+              <h3 className="min-w-0 flex-1 text-card-title">Банковские реквизиты</h3>
               <CopyCompanyDetails details={companyDetailsText}/>
             </div>
             <dl className="mt-4 space-y-3 md:mt-0">

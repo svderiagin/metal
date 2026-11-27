@@ -41,7 +41,7 @@ export function MobileNavigation() {
         aria-expanded={open}
         aria-controls={navigationId}
         onClick={() => setOpenPath(open ? null : pathname)}
-        className="flex min-h-12 w-full cursor-pointer items-center justify-between px-4 font-bold text-white transition-colors hover:bg-slate-900 sm:px-6"
+        className="flex min-h-12 w-full cursor-pointer items-center justify-between px-4 font-bold text-white transition-colors hover:bg-slate-900 sm:px-5"
       >
         Меню
         <Icon name={open ? "close" : "menu"}/>
